@@ -36,10 +36,26 @@
   "contributes": {
     "commands": [
       {
-        "command": "JT-View-Exports-SVG.helloWorld",
-        "title": "Hello World"
+        "command": "JT-View-Exports-SVG.showMenu",
+        "title": "View Exports SVG"
       }
-    ]
+    ],
+    "menus": {
+      "explorer/context": [
+        {
+          "command": "JT-View-Exports-SVG.showMenu",
+          "when": "resourceLangId == javascript || resourceLangId == typescript || resourceLangId == javascriptreact || resourceLangId == typescriptreact",
+          "group": "navigation"
+        }
+      ],
+      "editor/context": [
+        {
+          "command": "JT-View-Exports-SVG.showMenu",
+          "when": "resourceLangId == javascript || resourceLangId == typescript || resourceLangId == javascriptreact || resourceLangId == typescriptreact",
+          "group": "navigation"
+        }
+      ]
+    }
   },
   "scripts": {
     "vscode:prepublish": "npm run package",
