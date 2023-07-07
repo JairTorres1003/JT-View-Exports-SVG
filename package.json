@@ -37,22 +37,24 @@
     "commands": [
       {
         "command": "JT-View-Exports-SVG.showMenu",
-        "title": "View Exports SVG"
+        "title": "View Exports SVG 🔍",
+        "icon": {
+          "dark": "./src/assets/JT View Exports SVG - ICON.svg",
+          "light": "./src/assets/JT View Exports SVG - ICON.svg"
+        }
       }
     ],
     "menus": {
       "explorer/context": [
         {
           "command": "JT-View-Exports-SVG.showMenu",
-          "when": "resourceLangId == javascript || resourceLangId == typescript || resourceLangId == javascriptreact || resourceLangId == typescriptreact",
-          "group": "navigation"
+          "when": "resourceLangId == javascript || resourceLangId == typescript || resourceLangId == javascriptreact || resourceLangId == typescriptreact"
         }
       ],
       "editor/context": [
         {
           "command": "JT-View-Exports-SVG.showMenu",
-          "when": "resourceLangId == javascript || resourceLangId == typescript || resourceLangId == javascriptreact || resourceLangId == typescriptreact",
-          "group": "navigation"
+          "when": "resourceLangId == javascript || resourceLangId == typescript || resourceLangId == javascriptreact || resourceLangId == typescriptreact"
         }
       ]
     }
