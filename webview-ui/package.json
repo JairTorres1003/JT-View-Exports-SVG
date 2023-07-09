@@ -1,0 +1,40 @@
+{
+  "name": "webview-ui-jt-view-exports-svg",
+  "displayName": "WebView UI - View Exports SVG",
+  "description": "",
+  "keywords": [
+    "SVG icons",
+    "TypeScript",
+    "TSX",
+    "icon management",
+    "icon assets",
+    "UI"
+  ],
+  "private": true,
+  "license": "MIT",
+  "author": "Jair Torres",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/JairTorres1003/JT-View-Exports-SVG.git"
+  },
+  "bugs": {
+    "url": "https://github.com/JairTorres1003/JT-View-Exports-SVG/issues"
+  },
+  "homepage": "https://github.com/JairTorres1003/JT-View-Exports-SVG/tree/main/webview-ui#readme",
+  "scripts": {
+    "dev": "vite",
+    "build": "tsc && vite build",
+    "preview": "vite preview"
+  },
+  "dependencies": {
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0"
+  },
+  "devDependencies": {
+    "@types/react": "^18.2.14",
+    "@types/react-dom": "^18.2.6",
+    "@vitejs/plugin-react": "^4.0.1",
+    "typescript": "^5.0.2",
+    "vite": "^4.4.0"
+  }
+}

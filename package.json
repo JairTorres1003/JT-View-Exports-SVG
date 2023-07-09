@@ -6,8 +6,6 @@
     "Visual Studio Code",
     "extension",
     "SVG icons",
-    "JavaScript",
-    "JSX",
     "TypeScript",
     "TSX",
     "icon management",
@@ -60,6 +58,9 @@
     }
   },
   "scripts": {
+    "install:all": "npm install && cd webview-ui && npm install",
+    "start:webview": "cd webview-ui && npm run dev",
+    "build:webview": "cd webview-ui && npm run build",
     "vscode:prepublish": "npm run compile",
     "compile": "tsc -p ./",
     "watch": "tsc -watch -p ./",
