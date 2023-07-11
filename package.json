@@ -37,8 +37,8 @@
         "command": "JT-View-Exports-SVG.showMenu",
         "title": "View Exports SVG 🔍",
         "icon": {
-          "dark": "./src/assets/JT View Exports SVG - ICON.svg",
-          "light": "./src/assets/JT View Exports SVG - ICON.svg"
+          "dark": "./assets/JT View Exports SVG - ICON.svg",
+          "light": "./assets/JT View Exports SVG - ICON.svg"
         }
       }
     ],
