@@ -68,6 +68,10 @@
     "lint": "eslint src --ext ts"
   },
   "devDependencies": {
+    "@babel/parser": "^7.22.7",
+    "@babel/traverse": "^7.22.8",
+    "@babel/types": "^7.22.5",
+    "@types/babel__traverse": "^7.20.1",
     "@types/glob": "^8.1.0",
     "@types/node": "20.2.5",
     "@types/vscode": "^1.80.0",

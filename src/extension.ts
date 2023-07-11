@@ -1,5 +1,6 @@
 import { ExtensionContext, commands } from "vscode";
 import { ViewExportsSVGPanel } from "./panels/ViewExportsSVGPanel";
+import { extractReactComponentNames, extractSVGComponentExports } from "./utilities/exportParser";
 
 /**
  * Run the command and create or show the webview panel.
@@ -26,7 +27,21 @@ const runCommand = async (context: ExtensionContext, item: any, items: any[]) =>
     }
   }
 
-  console.log(selectedFiles);
+  // Extract the exports from selected files
+  const exportsData = await Promise.all(
+    selectedFiles.map(async (filePath) => {
+      try {
+        const svgExports = await extractSVGComponentExports(filePath);
+        const reactComponents = await extractReactComponentNames(filePath);
+        return { filePath, svgExports, reactComponents };
+      } catch (error) {
+        console.error(`Error parsing file ${filePath}: ${error}`);
+        return { filePath, exports: [] };
+      }
+    })
+  ).finally(() => console.log("FINALIZO"));
+
+  console.log(exportsData);
 
   // Create or show the webview panel
   ViewExportsSVGPanel.render(context.extensionUri);
