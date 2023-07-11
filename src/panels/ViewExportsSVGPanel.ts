@@ -65,6 +65,7 @@ export class ViewExportsSVGPanel {
         ],
       }
     );
+    panel.iconPath = Uri.joinPath(extensionUri, "assets", "JT View Exports SVG - ICON.svg");
 
     ViewExportsSVGPanel.currentPanel = new ViewExportsSVGPanel(panel, extensionUri);
   }
