@@ -4,6 +4,24 @@ export const sumar = (a, b) => {
   return a + b;
 };
 
+export const sendData = () => {
+  console.log("sendData: No retorna nada")
+}
+
+export const variableNumero = 10;
+
+export const IconArrowBreadcrumb = (
+  <svg
+    width="10"
+    height="10"
+    viewBox="0 0 8 8"
+    fill="none"
+    xmlns="http://www.w3.org/2000/svg"
+  >
+    <path d="M8 4L0 8L4.03789e-07 0L8 4Z" fill="#9D9D9D" />
+  </svg>
+);
+
 export const FcBinoculars = () => {
   return (
     <svg
