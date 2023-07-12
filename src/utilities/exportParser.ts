@@ -15,45 +15,26 @@ function parseFileContent(fileContent: string): any {
 }
 
 /**
- * Extracts the exports from a given file.
- * @param filePath The path to the file.
- * @returns A promise that resolves to an array of export names.
+ * Checks if the given JSXOpeningElement represents a component of type SVG.
+ * @param path The path to the JSXOpeningElement node.
+ * @returns True if the JSXOpeningElement represents an SVG component, false otherwise.
  */
-export function extractSVGComponentExports(filePath: string): Promise<string[]> {
-  return new Promise((resolve, reject) => {
-    const fileContent = fs.readFileSync(filePath, "utf8");
-    const ast = parseFileContent(fileContent);
-    const exports: string[] = [];
+function isSVGComponent(path: any): boolean {
+  const { node } = path;
+  const attributes = node.attributes;
 
+  for (const attribute of attributes) {
+    if (
+      attribute.type === "JSXAttribute" &&
+      attribute.name.name === "xmlns" &&
+      attribute.value?.type === "StringLiteral" &&
+      attribute.value.value === "http://www.w3.org/2000/svg"
+    ) {
+      return true;
+    }
+  }
 
-    traverse(ast, {
-      ExportNamedDeclaration(path) {
-        const { node } = path;
-        if (node.declaration) {
-          if (node.declaration.type === "FunctionDeclaration") {
-            // Exported function declaration 'export function functionName() {}'
-            exports.push(node.declaration.id?.name as string);
-          } else if (node.declaration.type === "VariableDeclaration") {
-            // Exported variable declaration(s) 'export const variableName = value;'
-            node.declaration.declarations.forEach((declaration) => {
-              if (declaration.id.type === "Identifier") {
-                exports.push(declaration.id.name);
-              }
-            });
-          }
-        } else if (node.specifiers.length > 0) {
-          // Exported named specifiers 'export { exportedName } from "module";'
-          node.specifiers.forEach((specifier) => {
-            if (specifier.exported.type === "Identifier") {
-              exports.push(specifier.exported.name);
-            }
-          });
-        }
-      },
-    });
-
-    resolve(exports);
-  });
+  return false;
 }
 
 /**
@@ -61,7 +42,7 @@ export function extractSVGComponentExports(filePath: string): Promise<string[]> 
  * @param filePath The path to the file.
  * @returns A promise that resolves to an array of React component names.
  */
-export function extractReactComponentNames(filePath: string): Promise<string[]> {
+export function extractSVGComponentExports(filePath: string): Promise<string[]> {
   return new Promise((resolve, reject) => {
     const fileContent = fs.readFileSync(filePath, "utf8");
     const ast = parseFileContent(fileContent);
@@ -72,7 +53,10 @@ export function extractReactComponentNames(filePath: string): Promise<string[]> 
         const { node } = path;
         if (node.name.type === "JSXIdentifier") {
           const componentName = node.name.name;
-          componentNames.push(componentName);
+
+          if (isSVGComponent(path)) {
+            componentNames.push(componentName);
+          }
         }
       },
     });
