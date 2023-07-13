@@ -19,48 +19,91 @@ function parseFileContent(fileContent: string): any {
  * @param path The path to the JSXOpeningElement node.
  * @returns True if the JSXOpeningElement represents an SVG component, false otherwise.
  */
-function isSVGComponent(path: any): boolean {
-  const { node } = path;
-  const attributes = node.attributes;
+function isSVGComponent(node: any): boolean {
+  if (node) {
+    const attributes = node.attributes;
 
-  for (const attribute of attributes) {
-    if (
-      attribute.type === "JSXAttribute" &&
-      attribute.name.name === "xmlns" &&
-      attribute.value?.type === "StringLiteral" &&
-      attribute.value.value === "http://www.w3.org/2000/svg"
-    ) {
-      return true;
+    for (const attribute of attributes) {
+      if (
+        attribute.type === "JSXAttribute" &&
+        attribute.name.name === "xmlns" &&
+        attribute.value?.type === "StringLiteral" &&
+        attribute.value.value === "http://www.w3.org/2000/svg"
+      ) {
+        return true;
+      }
     }
   }
 
   return false;
 }
 
-/**
- * Extracts the React component names from a given file.
- * @param filePath The path to the file.
- * @returns A promise that resolves to an array of React component names.
- */
-export function extractSVGComponentExports(filePath: string): Promise<string[]> {
+function analyzeExportType(node: any): any {
+  let { body, openingElement, type } = node;
+
+  if (
+    type === "ArrowFunctionExpression" &&
+    body?.type === "BlockStatement" &&
+    body?.body[0] &&
+    body?.body[0].type === "ReturnStatement"
+  ) {
+    openingElement = body.body[0].argument?.openingElement;
+    type = body.body[0].argument?.type;
+  }
+
+  if (type === "JSXElement" && openingElement.name.type === "JSXIdentifier") {
+    return openingElement;
+  }
+
+  return undefined;
+}
+
+export function extractSVGComponentExports(filePath: string): Promise<any[]> {
   return new Promise((resolve, reject) => {
     const fileContent = fs.readFileSync(filePath, "utf8");
     const ast = parseFileContent(fileContent);
-    const componentNames: string[] = [];
+    const exports: any[] = [];
 
     traverse(ast, {
-      JSXOpeningElement(path) {
+      ExportNamedDeclaration(path) {
         const { node } = path;
-        if (node.name.type === "JSXIdentifier") {
-          const componentName = node.name.name;
+        if (node.declaration) {
+          if (node.declaration.type === "FunctionDeclaration") {
+            // Exported function declaration 'export function functionName() {}'
+            exports.push({
+              name: node.declaration.id?.name as string,
+              typeExport: "function",
+              typeData: node.declaration.type,
+            });
+          } else if (node.declaration.type === "VariableDeclaration") {
+            // Exported variable declaration(s) 'export const variableName = value;'
+            node.declaration.declarations.forEach((declaration) => {
+              if (declaration.id.type === "Identifier") {
+                const nodeAnalyze = analyzeExportType(declaration.init);
 
-          if (isSVGComponent(path)) {
-            componentNames.push(componentName);
+                exports.push({
+                  name: declaration.id.name,
+                  typeExport: "variable",
+                  element: isSVGComponent(nodeAnalyze),
+                });
+              }
+            });
           }
+        } else if (node.specifiers.length > 0) {
+          // Exported named specifiers 'export { exportedName } from "module";'
+          node.specifiers.forEach((specifier) => {
+            if (specifier.exported.type === "Identifier") {
+              exports.push({
+                name: specifier.exported.name,
+                typeExport: "specifier",
+                typeData: specifier.exported.type,
+              });
+            }
+          });
         }
       },
     });
 
-    resolve(componentNames);
+    resolve(exports);
   });
 }

@@ -35,7 +35,7 @@ const runCommand = async (context: ExtensionContext, item: any, items: any[]) =>
         return { filePath, svgExports };
       } catch (error) {
         console.error(`Error parsing file ${filePath}: ${error}`);
-        return { filePath, exports: [] };
+        return { filePath, svgExports: [] };
       }
     })
   ).finally(() => console.log("FINALIZO"));
