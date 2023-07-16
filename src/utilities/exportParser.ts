@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/naming-convention */
 import * as fs from "fs";
 import * as babelParser from "@babel/parser";
 import traverse from "@babel/traverse";
@@ -19,38 +20,97 @@ function parseFileContent(filePath: string): any {
 }
 
 /**
- * Check if a given node represents an SVG component.
- * @param node The node to check.
- * @returns True if the node is an SVG component, false otherwise.
+ * Extract attributes and child components from an array of JSX children.
+ * @param children The array of JSX children.
+ * @returns An array of objects representing the child components and their attributes.
  */
-function isSVGComponent(node: any): boolean {
-  if (node) {
-    const attributes = node.attributes;
+function getChildAttributes(children: any[]) {
+  const components: any[] = [];
 
-    for (const attribute of attributes) {
+  children.forEach((child: any) => {
+    const { openingElement, type } = child;
+
+    // Check if the child is a JSX element
+    if (type === "JSXElement" && openingElement) {
+      const props: { [key: string]: string } = {};
+
+      // Extract attributes from the opening element
+      openingElement.attributes.forEach((attr: any) => {
+        const { name, value } = attr;
+        props[name.name] = value.value;
+      });
+
+      // Recursively extract child components
+      const childComponents = getChildAttributes(child.children);
+
+      // Add the child component to the components array
+      components.push({
+        componentName: openingElement.name.name,
+        children: childComponents.length > 0 ? childComponents : [],
+        props,
+      });
+    }
+  });
+
+  return components;
+}
+
+/**
+ * Check if the JSX node represents an SVG component and extract its attributes and child components.
+ * @param node The JSX node to check.
+ * @returns An object containing a boolean flag indicating if it's an SVG component and the extracted component data.
+ */
+function isSVGComponent(node: any): any {
+  let validate: boolean = false;
+  let component: object | undefined = undefined;
+  const { openingElement, children } = node;
+  const childrens: any[] = [];
+
+  // Check if the node has an opening element
+  if (openingElement) {
+    const attributes = openingElement.attributes;
+    const svgProps: { [key: string]: string } = {};
+
+    // Iterate over the attributes of the opening element
+    attributes.forEach((attr: any) => {
+      const { name, type, value } = attr;
+      svgProps[name.name] = value.value;
+
+      // Check if the attribute is 'xmlns' and its value is 'http://www.w3.org/2000/svg'
       if (
-        attribute.type === "JSXAttribute" &&
-        attribute.name.name === "xmlns" &&
-        attribute.value?.type === "StringLiteral" &&
-        attribute.value.value === "http://www.w3.org/2000/svg"
+        type === "JSXAttribute" &&
+        name.name === "xmlns" &&
+        value?.type === "StringLiteral" &&
+        value.value === "http://www.w3.org/2000/svg"
       ) {
-        // If the attribute value matches the SVG namespace, return true
-        return true;
+        validate = true;
       }
+    });
+
+    // If it's a valid SVG component with children
+    if (validate && children.length > 0) {
+      childrens.push(getChildAttributes(children));
+
+      // Create the component object with the component name, children, and props
+      component = {
+        componentName: openingElement.name.name,
+        children: childrens,
+        props: svgProps,
+      };
     }
   }
 
-  // If no matching attribute is found, return false
-  return false;
+  return { validate, component };
 }
 
 /**
  * Analyze the export type of a given node.
  * @param node The node to analyze.
- * @returns The opening element of the JSX element if the export type is JSXElement, otherwise undefined.
+ * @returns The extracted JSXElement if the node represents an export of a JSX component, otherwise undefined.
  */
 function analyzeExportType(node: any): any {
-  let { body, openingElement, type } = node;
+  let { body, type } = node;
+  let dataNode = node;
 
   // Check if the node represents an arrow function or function declaration with a block statement body
   if (
@@ -64,15 +124,15 @@ function analyzeExportType(node: any): any {
 
       // Check if the statement is a ReturnStatement and the argument is not an Identifier
       if (nodeItem.type === "ReturnStatement" && type !== "Identifier") {
-        openingElement = nodeItem.argument?.openingElement;
+        dataNode = nodeItem.argument;
         break;
       }
     }
   }
 
   // Check if the export type is JSXElement and the opening element's name is JSXIdentifier
-  if (type === "JSXElement" && openingElement?.name.type === "JSXIdentifier") {
-    return openingElement;
+  if (type === "JSXElement" && dataNode?.openingElement?.name.type === "JSXIdentifier") {
+    return dataNode;
   }
 
   // Return undefined if the export type is not JSXElement
@@ -99,26 +159,32 @@ export function extractSVGComponentExports(filePath: string): Promise<any[]> {
           if (node.declaration.type === "FunctionDeclaration") {
             // Exported function declaration 'export function functionName() {}'
             const nodeAnalyze = analyzeExportType(node.declaration);
+            if (nodeAnalyze) {
+              const SVGomponent = isSVGComponent(nodeAnalyze);
 
-            if (isSVGComponent(nodeAnalyze)) {
-              exports.push({
-                name: node.declaration.id?.name as string,
-                typeExport: "function",
-                Element: nodeAnalyze,
-              });
+              if (SVGomponent.validate) {
+                exports.push({
+                  name: node.declaration.id?.name as string,
+                  typeExport: "function",
+                  component: SVGomponent.component,
+                });
+              }
             }
           } else if (node.declaration.type === "VariableDeclaration") {
             // Exported variable declaration(s) 'export const variableName = value;'
             node.declaration.declarations.forEach((declaration) => {
               if (declaration.id.type === "Identifier") {
                 const nodeAnalyze = analyzeExportType(declaration.init);
+                if (nodeAnalyze) {
+                  const SVGomponent = isSVGComponent(nodeAnalyze);
 
-                if (isSVGComponent(nodeAnalyze)) {
-                  exports.push({
-                    name: declaration.id.name,
-                    typeExport: "variable",
-                    Element: nodeAnalyze,
-                  });
+                  if (SVGomponent.validate) {
+                    exports.push({
+                      name: declaration.id.name,
+                      typeExport: "variable",
+                      component: SVGomponent.component,
+                    });
+                  }
                 }
               }
             });
