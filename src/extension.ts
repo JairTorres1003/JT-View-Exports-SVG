@@ -1,6 +1,8 @@
-import { ExtensionContext, commands, window, ProgressLocation } from "vscode";
+import { commands, ExtensionContext, ProgressLocation, ProgressOptions, window } from "vscode";
 import { ViewExportsSVGPanel } from "./panels/ViewExportsSVGPanel";
 import { extractSVGComponentExports } from "./utilities/exportParser";
+import { getWorkspaceFolder } from "./utilities/getWorkspaceFolder";
+import * as path from "path";
 
 /**
  * Run the command and create or show the webview panel.
@@ -10,8 +12,9 @@ import { extractSVGComponentExports } from "./utilities/exportParser";
  */
 const runCommand = async (context: ExtensionContext, item: any, items: any[]) => {
   const selectedFiles: any[] = [];
+  const workspaceFolder: string = getWorkspaceFolder();
   const REGEX_FILE = /\.(js|jsx|ts|tsx)$/i;
-  const progressOptions = {
+  const progressOptions: ProgressOptions = {
     location: ProgressLocation.Notification,
     title: "Extracting SVG exports...",
     cancellable: false,
@@ -24,25 +27,27 @@ const runCommand = async (context: ExtensionContext, item: any, items: any[]) =>
       items.forEach((file) => {
         // Check if the item is a file with a supported extension
         if (REGEX_FILE.test(file.fsPath.slice(-4)) && file.scheme === "file") {
-          selectedFiles.push(file.fsPath);
+          const relativePath: string = path.relative(workspaceFolder, item.fsPath);
+          selectedFiles.push({ absolutePath: item.fsPath, relativePath });
         }
       });
     } else {
       // Check if the selected item is a file with a supported extension
       if (REGEX_FILE.test(item.fsPath.slice(-4)) && item.scheme === "file") {
-        selectedFiles.push(item.fsPath);
+        const relativePath: string = path.relative(workspaceFolder, item.fsPath);
+        selectedFiles.push({ absolutePath: item.fsPath, relativePath });
       }
     }
 
     // Extract the exports from selected files
     const svgComponents = await Promise.all(
-      selectedFiles.map(async (filePath) => {
+      selectedFiles.map(async (file) => {
         try {
-          const svgExports = await extractSVGComponentExports(filePath);
-          return { filePath, svgExports };
+          const svgExports = await extractSVGComponentExports(file.absolutePath);
+          return { file, svgExports };
         } catch (error) {
-          console.error(`Error parsing file ${filePath}: ${error}`);
-          return { filePath, svgExports: [] };
+          console.error(`Error parsing file ${file.absolutePath}: ${error}`);
+          return { file, svgExports: [] };
         }
       })
     );
