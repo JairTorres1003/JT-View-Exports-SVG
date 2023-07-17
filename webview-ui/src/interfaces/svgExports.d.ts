@@ -46,7 +46,7 @@ export interface SvgComponentDetails {
   /**
    * The name of the component.
    */
-  componentName: string;
+  componentName: keyof JSX.IntrinsicElements;
   /**
    * An array of child SvgComponentDetails objects representing nested components.
    */
