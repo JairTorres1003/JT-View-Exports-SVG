@@ -1,15 +1,243 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { VSCodeButton } from "@vscode/webview-ui-toolkit/react";
+import { SvgExport } from "./interfaces/svgExports";
+// import { vscode } from "./utilities/vscode";
 import "./App.css";
+import SvgComponetExport from "./components/SvgComponetExport";
 
 function App() {
-  const [value, setValue] = useState<number>(0);
+  const [svgComponents, setSvgComponents] = useState<SvgExport[]>(firstData);
+
+  // const handleSvgComponents = (data: any) => {
+  //   setSvgComponents(JSON.parse(data));
+  // };
+
+  // useEffect(() => {
+  //   vscode.postMessage("requestSvgComponents", {});
+  //   vscode.onMessage("svgComponents", handleSvgComponents);
+
+  //   return () => {
+  //     vscode.removeMessageHandler("svgComponents", handleSvgComponents);
+  //   };
+  // }, []);
+
   return (
     <main>
-      <h1>Count: {value}</h1>
-      <VSCodeButton onClick={() => setValue(value + 1)}>Howdy!</VSCodeButton>
+      {svgComponents.map((item, index) => (
+        <SvgComponetExport {...item} key={index} />
+      ))}
     </main>
   );
 }
 
 export default App;
+
+const firstData: SvgExport[] = [
+  {
+    file: {
+      absolutePath:
+        "c:\\Users\\Jairtorres\\Documents\\git_projects\\JT-View-Exports-SVG\\webview-ui\\src\\FilesTest\\Two.jsx",
+      relativePath: "Two.jsx",
+    },
+    svgExports: [
+      {
+        name: "IconArrowBreadcrumb",
+        typeExport: "variable",
+        component: {
+          componentName: "svg",
+          children: [
+            {
+              componentName: "path",
+              children: [],
+              props: {
+                d: "M8 4L0 8L4.03789e-07 0L8 4Z",
+                fill: "#9D9D9D",
+              },
+            },
+          ],
+          props: {
+            width: "10",
+            height: "10",
+            viewBox: "0 0 8 8",
+            fill: "none",
+            xmlns: "http://www.w3.org/2000/svg",
+          },
+        },
+      },
+      {
+        name: "FcBinoculars",
+        typeExport: "variable",
+        component: {
+          componentName: "svg",
+          children: [
+            {
+              componentName: "g",
+              children: [
+                {
+                  componentName: "circle",
+                  children: [],
+                  props: {
+                    cx: "33",
+                    cy: "16",
+                    r: "6",
+                  },
+                },
+                {
+                  componentName: "circle",
+                  children: [],
+                  props: {
+                    cx: "15",
+                    cy: "16",
+                    r: "6",
+                  },
+                },
+                {
+                  componentName: "path",
+                  children: [],
+                  props: {
+                    d: "M46.7,25l-15.3,3H16.7L1.4,25l4.3-7.9c1.1-1.9,3.1-3.1,5.3-3.1h26.2c2.2,0,4.2,1.2,5.3,3.1L46.7,25z",
+                  },
+                },
+                {
+                  componentName: "circle",
+                  children: [],
+                  props: {
+                    cx: "38",
+                    cy: "30",
+                    r: "10",
+                  },
+                },
+                {
+                  componentName: "circle",
+                  children: [],
+                  props: {
+                    cx: "10",
+                    cy: "30",
+                    r: "10",
+                  },
+                },
+                {
+                  componentName: "circle",
+                  children: [],
+                  props: {
+                    cx: "24",
+                    cy: "28",
+                    r: "5",
+                  },
+                },
+              ],
+              props: {
+                fill: "#37474F",
+              },
+            },
+            {
+              componentName: "circle",
+              children: [],
+              props: {
+                fill: "#546E7A",
+                cx: "24",
+                cy: "28",
+                r: "2",
+              },
+            },
+            {
+              componentName: "g",
+              children: [
+                {
+                  componentName: "circle",
+                  children: [],
+                  props: {
+                    cx: "38",
+                    cy: "30",
+                    r: "7",
+                  },
+                },
+                {
+                  componentName: "circle",
+                  children: [],
+                  props: {
+                    cx: "10",
+                    cy: "30",
+                    r: "7",
+                  },
+                },
+              ],
+              props: {
+                fill: "#a0f",
+              },
+            },
+            {
+              componentName: "g",
+              children: [
+                {
+                  componentName: "path",
+                  children: [],
+                  props: {
+                    d: "M41.7,27.7c-1-1.1-2.3-1.7-3.7-1.7s-2.8,0.6-3.7,1.7c-0.4,0.4-0.3,1,0.1,1.4c0.4,0.4,1,0.3,1.4-0.1 c1.2-1.3,3.3-1.3,4.5,0c0.2,0.2,0.5,0.3,0.7,0.3c0.2,0,0.5-0.1,0.7-0.3C42.1,28.7,42.1,28.1,41.7,27.7z",
+                  },
+                },
+                {
+                  componentName: "path",
+                  children: [],
+                  props: {
+                    d: "M10,26c-1.4,0-2.8,0.6-3.7,1.7c-0.4,0.4-0.3,1,0.1,1.4c0.4,0.4,1,0.3,1.4-0.1c1.2-1.3,3.3-1.3,4.5,0 c0.2,0.2,0.5,0.3,0.7,0.3c0.2,0,0.5-0.1,0.7-0.3c0.4-0.4,0.4-1,0.1-1.4C12.8,26.6,11.4,26,10,26z",
+                  },
+                },
+              ],
+              props: {
+                fill: "#CE93D8",
+              },
+            },
+          ],
+          props: {
+            stroke: "currentColor",
+            fill: "currentColor",
+            strokeWidth: "0",
+            version: "1",
+            viewBox: "0 0 48 48",
+            enableBackground: "new 0 0 48 48",
+            height: "1em",
+            width: "1em",
+            xmlns: "http://www.w3.org/2000/svg",
+          },
+        },
+      },
+      {
+        name: "FcBiohazard",
+        typeExport: "function",
+        component: {
+          componentName: "svg",
+          children: [
+            {
+              componentName: "path",
+              children: [],
+              props: {
+                fill: "#00A344",
+                d: "M24,13c-7.2,0-13,5.8-13,13s5.8,13,13,13s13-5.8,13-13S31.2,13,24,13z M24,35c-5,0-9-4-9-9s4-9,9-9s9,4,9,9 S29,35,24,35z",
+              },
+            },
+            {
+              componentName: "path",
+              children: [],
+              props: {
+                fill: "#00C853",
+                d: "M8.5,25.4c4-2.2,9-1.1,11.5,2.5c0.1,0.1,0.2,0.1,0.3,0.1l1.2-0.7c0.1-0.1,0.2-0.2,0.1-0.3 c0-0.2-0.1-0.4-0.1-0.6c0,0,0,0,0,0c0-0.1,0-0.1,0-0.2c0,0,0,0,0,0c0-0.1,0-0.1,0-0.2c0,0,0,0,0,0c0-0.1,0-0.1,0-0.2l0,0 c0-0.1,0-0.1,0.1-0.2c0,0,0,0,0,0c0-0.1,0-0.1,0.1-0.2c0,0,0,0,0,0c0,0,0-0.1,0.1-0.1c0,0,0-0.1,0.1-0.1c0,0,0-0.1,0.1-0.1 c0,0,0.1-0.1,0.1-0.1c0,0,0,0,0,0c0,0,0.1-0.1,0.1-0.1c0,0,0,0,0,0c0,0,0.1-0.1,0.1-0.1c0,0,0,0,0,0c0,0,0.1-0.1,0.1-0.1 c0,0,0,0,0,0c0,0,0.1-0.1,0.1-0.1c0,0,0,0,0.1,0c0.2-0.1,0.4-0.2,0.5-0.2c0.1,0,0.2-0.1,0.2-0.3v-1.3c0-0.1-0.1-0.2-0.2-0.2 c-4.5-0.4-8-4.1-8-8.6c0-4.1,3-7.6,6.9-8.4c0.1,0,0.2-0.1,0.2-0.3V4.8c0-0.1-0.1-0.2-0.2-0.2C16.4,5.5,12,10.4,12,16.3 c0,1.3,0.2,2.6,0.6,3.8c-1.2,0.2-2.5,0.7-3.6,1.3c-5.2,3-7.3,9.2-5.2,14.5C3.9,36,4,36,4.1,36l0.3-0.2c0.1-0.1,0.2-0.2,0.1-0.3 C3.3,31.7,4.8,27.4,8.5,25.4L8.5,25.4z M39,21.4c-1.2-0.7-2.4-1.1-3.6-1.3c0.4-1.2,0.6-2.4,0.6-3.8c0-5.9-4.4-10.8-10.2-11.7 c-0.1,0-0.2,0.1-0.2,0.2v0.4c0,0.1,0.1,0.2,0.2,0.3c4,0.8,6.9,4.3,6.9,8.4c0,4.5-3.5,8.2-8,8.6c-0.1,0-0.2,0.1-0.2,0.2v1.3 c0,0.1,0.1,0.2,0.2,0.3c0.2,0.1,0.4,0.1,0.6,0.2c0,0,0,0,0,0c0,0,0.1,0.1,0.1,0.1c0,0,0,0,0,0c0.1,0,0.1,0.1,0.1,0.1c0,0,0,0,0,0 c0.1,0.1,0.2,0.2,0.3,0.3c0,0,0,0,0,0c0,0,0.1,0.1,0.1,0.1c0,0,0,0,0,0c0,0,0.1,0.1,0.1,0.1c0,0,0,0.1,0,0.1c0,0,0,0.1,0,0.1 c0,0,0,0.1,0.1,0.1c0,0,0,0,0,0c0,0.1,0,0.1,0.1,0.2c0,0,0,0,0,0c0,0.1,0,0.1,0,0.2c0,0,0,0,0,0c0,0.1,0,0.1,0,0.2c0,0,0,0,0,0.1 c0,0,0,0.1,0,0.1c0,0,0,0,0,0.1c0,0.2,0,0.4-0.1,0.6c0,0.1,0,0.2,0.1,0.3l1.2,0.7c0.1,0.1,0.2,0,0.3-0.1c2.6-3.6,7.6-4.8,11.5-2.5 c3.6,2.1,5.2,6.3,3.9,10.1c0,0.1,0,0.2,0.1,0.3l0.3,0.2c0.1,0.1,0.2,0,0.3-0.1C46.3,30.5,44.2,24.3,39,21.4L39,21.4z M30.8,40.3 c-4-2.2-5.5-7.1-3.5-11.1c0.1-0.1,0-0.2-0.1-0.3L26,28.2c-0.1-0.1-0.2,0-0.3,0c-0.2,0.1-0.3,0.3-0.5,0.3c0,0,0,0,0,0 c-0.1,0-0.1,0.1-0.2,0.1c0,0,0,0,0,0c-0.1,0-0.1,0-0.2,0.1c0,0,0,0,0,0c-0.1,0-0.3,0.1-0.4,0.1c0,0,0,0,0,0c-0.1,0-0.1,0-0.2,0 c0,0,0,0-0.1,0c0,0-0.1,0-0.1,0c0,0-0.1,0-0.1,0c0,0-0.1,0-0.1,0c0,0-0.1,0-0.1,0c0,0,0,0-0.1,0c-0.1,0-0.1,0-0.2,0c0,0,0,0,0,0 c-0.1,0-0.1,0-0.2,0c0,0,0,0,0,0c-0.1,0-0.1,0-0.2-0.1c0,0,0,0,0,0c0,0-0.1,0-0.1-0.1c0,0,0,0-0.1,0c-0.2-0.1-0.3-0.2-0.5-0.3 c-0.1-0.1-0.2-0.1-0.3,0l-1.2,0.7c-0.1,0.1-0.1,0.2-0.1,0.3c1.9,4,0.4,8.8-3.5,11.1c-3.6,2.1-8.2,1.3-10.9-1.7 c-0.1-0.1-0.2-0.1-0.3-0.1l-0.3,0.2c-0.1,0.1-0.1,0.2-0.1,0.3c3.6,4.5,10.2,5.8,15.4,2.8c1.2-0.7,2.2-1.5,3-2.4 c0.8,0.9,1.8,1.8,3,2.4c5.2,3,11.7,1.6,15.4-2.8c0.1-0.1,0-0.2-0.1-0.3L42,38.5c-0.1-0.1-0.2,0-0.3,0.1C39,41.5,34.4,42.3,30.8,40.3 L30.8,40.3z",
+              },
+            },
+          ],
+          props: {
+            stroke: "currentColor",
+            fill: "currentColor",
+            strokeWidth: "0",
+            version: "1",
+            viewBox: "0 0 48 48",
+            enableBackground: "new 0 0 48 48",
+            height: "1em",
+            width: "1em",
+            xmlns: "http://www.w3.org/2000/svg",
+          },
+        },
+      },
+    ],
+  },
+];
