@@ -2,6 +2,7 @@
 import * as fs from "fs";
 import * as babelParser from "@babel/parser";
 import traverse from "@babel/traverse";
+import { camelCase } from "lodash";
 
 /**
  * Parse the content of a file using Babel parser.
@@ -37,7 +38,7 @@ function getChildAttributes(children: any[]) {
       // Extract attributes from the opening element
       openingElement.attributes.forEach((attr: any) => {
         const { name, value } = attr;
-        props[name.name] = value.value;
+        props[camelCase(name.name)] = value.value;
       });
 
       // Recursively extract child components
@@ -74,7 +75,7 @@ function isSVGComponent(node: any): any {
     // Iterate over the attributes of the opening element
     attributes.forEach((attr: any) => {
       const { name, type, value } = attr;
-      svgProps[name.name] = value.value;
+      svgProps[camelCase(name.name)] = value.value;
 
       // Check if the attribute is 'xmlns' and its value is 'http://www.w3.org/2000/svg'
       if (
