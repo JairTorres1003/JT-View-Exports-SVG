@@ -35,7 +35,7 @@ const runCommand = async (context: ExtensionContext, item: any, items: any[]) =>
     }
 
     // Extract the exports from selected files
-    const exportsData = await Promise.all(
+    const svgComponents = await Promise.all(
       selectedFiles.map(async (filePath) => {
         try {
           const svgExports = await extractSVGComponentExports(filePath);
@@ -45,14 +45,12 @@ const runCommand = async (context: ExtensionContext, item: any, items: any[]) =>
           return { filePath, svgExports: [] };
         }
       })
-    ).finally(() => console.log("FINALIZO"));
-
-    console.log(exportsData);
+    );
 
     // Create or show the webview panel
-    ViewExportsSVGPanel.render(context.extensionUri);
+    ViewExportsSVGPanel.render(context.extensionUri, svgComponents);
 
-    return exportsData;
+    return svgComponents;
   });
 
   // Hide the loader message

@@ -64,7 +64,7 @@ function isSVGComponent(node: any): any {
   let validate: boolean = false;
   let component: object | undefined = undefined;
   const { openingElement, children } = node;
-  const childrens: any[] = [];
+  let childrens: any[] = [];
 
   // Check if the node has an opening element
   if (openingElement) {
@@ -89,7 +89,7 @@ function isSVGComponent(node: any): any {
 
     // If it's a valid SVG component with children
     if (validate && children.length > 0) {
-      childrens.push(getChildAttributes(children));
+      childrens = getChildAttributes(children);
 
       // Create the component object with the component name, children, and props
       component = {
