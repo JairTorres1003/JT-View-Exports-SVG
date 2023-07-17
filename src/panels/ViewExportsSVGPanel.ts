@@ -126,7 +126,7 @@ export class ViewExportsSVGPanel {
       (message: { command: string; data: any }) => {
         if (message.command === "requestSvgComponents") {
           const svgComponentsJson = JSON.stringify(this.svgComponents);
-          webview.postMessage({ command: "svgComponents", data: svgComponentsJson });
+          this._panel.webview.postMessage({ command: "svgComponents", data: svgComponentsJson });
         }
       },
       undefined,

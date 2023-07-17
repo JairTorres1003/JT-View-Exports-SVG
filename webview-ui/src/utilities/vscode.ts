@@ -14,10 +14,10 @@ class VSCodeAPIWrapper {
       this.vsCodeApi = acquireVsCodeApi();
     }
 
-    // Escucha el evento `message` para recibir mensajes del webview
     window.addEventListener("message", (event) => {
       const message: MessageData = event.data;
       const handlers = this.messageHandlers[message.command];
+
       if (handlers) {
         handlers.forEach((handler) => handler(message.data));
       }
