@@ -26,17 +26,21 @@ export interface SvgExport {
  */
 export interface SvgComponent {
   /**
+   * An object representing the SVG component details.
+   */
+  component: SvgComponentDetails | undefined;
+  /**
    * The name of the SVG component.
    */
   name: string;
   /**
+   * The location of the SVG component in the file.
+   */
+  location: { column: number; line: number } | undefined;
+  /**
    * The type of export for the SVG component.
    */
-  typeExport: string;
-  /**
-   * An object representing the SVG component details.
-   */
-  component: SvgComponentDetails;
+  typeExport: "function" | "variable";
 }
 
 /**
@@ -56,6 +60,6 @@ export interface SvgComponentDetails {
    * and the values are the prop values.
    */
   props: {
-    [key: string]: string;
+    [key: string]: any;
   };
 }
