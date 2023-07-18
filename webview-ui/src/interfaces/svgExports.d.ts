@@ -5,16 +5,7 @@ export interface SvgExport {
   /**
    * The file object containing the absolute and relative paths of the SVG file.
    */
-  file: {
-    /**
-     * The absolute path of the SVG file.
-     */
-    absolutePath: string;
-    /**
-     * The relative path of the SVG file.
-     */
-    relativePath: string;
-  };
+  file: SvgFile;
   /**
    * An array of SvgComponent objects representing the exported SVG components.
    */
@@ -62,4 +53,18 @@ export interface SvgComponentDetails {
   props: {
     [key: string]: any;
   };
+}
+
+/**
+ * Represents an SVG file.
+ */
+export interface SvgFile {
+  /**
+   * The absolute path of the SVG file.
+   */
+  absolutePath: string;
+  /**
+   * The relative path of the SVG file.
+   */
+  relativePath: string;
 }

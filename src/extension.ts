@@ -1,4 +1,5 @@
-import { commands, ExtensionContext, ProgressLocation, ProgressOptions, window } from "vscode";
+import { commands, ExtensionContext, ProgressLocation, ProgressOptions, Uri, window } from "vscode";
+import { SvgFile } from "./interfaces/svgExports";
 import { ViewExportsSVGPanel } from "./panels/ViewExportsSVGPanel";
 import { extractSVGComponentExports } from "./utilities/exportParser";
 import { getWorkspaceFolder } from "./utilities/getWorkspaceFolder";
@@ -10,10 +11,10 @@ import * as path from "path";
  * @param item The selected item.
  * @param items The list of items.
  */
-const runCommand = async (context: ExtensionContext, item: any, items: any[]) => {
-  const selectedFiles: any[] = [];
+const runCommand = async (context: ExtensionContext, item: Uri, items: Uri[]) => {
+  const selectedFiles: SvgFile[] = [];
   const workspaceFolder: string = getWorkspaceFolder();
-  const REGEX_FILE = /\.(js|jsx|ts|tsx)$/i;
+  const REGEX_FILE: RegExp = /\.(js|jsx|ts|tsx)$/i;
   const progressOptions: ProgressOptions = {
     location: ProgressLocation.Notification,
     title: "Extracting SVG exports...",

@@ -1,6 +1,7 @@
 import { Disposable, Uri, ViewColumn, Webview, WebviewPanel, window } from "vscode";
 import { getUri } from "../utilities/getUri";
 import { getNonce } from "../utilities/getNonce";
+import { SvgExport } from "../interfaces/svgExports";
 
 /**
  * Webview panel for displaying SVG exports.
@@ -13,7 +14,7 @@ export class ViewExportsSVGPanel {
 
   public static readonly viewType = "JT-View-Exports-SVG";
 
-  private readonly svgComponents: any[];
+  private readonly svgComponents: SvgExport[];
   private readonly _panel: WebviewPanel;
   private _disposables: Disposable[] = [];
 
@@ -21,8 +22,9 @@ export class ViewExportsSVGPanel {
    * Create a new instance of the ViewExportsSVGPanel class.
    * @param panel The webview panel.
    * @param extensionUri The extension URI.
+   * @param svgComponents The array of SVG exports.
    */
-  private constructor(panel: WebviewPanel, extensionUri: Uri, svgComponents: any[]) {
+  private constructor(panel: WebviewPanel, extensionUri: Uri, svgComponents: SvgExport[]) {
     this.svgComponents = svgComponents;
     this._panel = panel;
 
@@ -38,11 +40,12 @@ export class ViewExportsSVGPanel {
   }
 
   /**
-   * Renders the current webview panel if it exists otherwise a new webview panel
+   * Renders the current webview panel if it exists, otherwise a new webview panel
    * will be created and displayed.
    * @param extensionUri The URI of the directory containing the extension.
+   * @param svgComponents The array of SVG exports.
    */
-  public static render(extensionUri: Uri, exportsData: any[]) {
+  public static render(extensionUri: Uri, svgComponents: SvgExport[]) {
     const column = window.activeTextEditor ? window.activeTextEditor.viewColumn : undefined;
 
     // If we already have a panel, show it
@@ -69,7 +72,7 @@ export class ViewExportsSVGPanel {
     );
     panel.iconPath = Uri.joinPath(extensionUri, "assets", "JT View Exports SVG - ICON.svg");
 
-    ViewExportsSVGPanel.currentPanel = new ViewExportsSVGPanel(panel, extensionUri, exportsData);
+    ViewExportsSVGPanel.currentPanel = new ViewExportsSVGPanel(panel, extensionUri, svgComponents);
   }
 
   /**
@@ -90,15 +93,21 @@ export class ViewExportsSVGPanel {
   }
 
   /**
-   *
+   * Gets the HTML content for the webview panel.
+   * @param webview The webview instance.
+   * @param extensionUri The URI of the directory containing the extension.
+   * @returns The HTML content for the webview panel.
    */
   private _getWebviewContent(webview: Webview, extensionUri: Uri) {
+    // Get the URIs for the required assets
     const icoUri = getUri(webview, extensionUri, ["webview-ui", "build", "assets", "favico.ico"]);
     const stylesUri = getUri(webview, extensionUri, ["webview-ui", "build", "assets", "index.css"]);
     const scriptUri = getUri(webview, extensionUri, ["webview-ui", "build", "assets", "index.js"]);
 
+    // Generate a nonce for script elements
     const nonce = getNonce();
 
+    // Return the HTML content for the webview panel
     return `
       <!DOCTYPE html>
       <html lang="en">
@@ -119,12 +128,14 @@ export class ViewExportsSVGPanel {
   }
 
   /**
-   *
+   * Sets up a message listener for the webview panel.
+   * @param webview The webview instance.
    */
   private _setWebviewMessageListener(webview: Webview) {
     webview.onDidReceiveMessage(
       (message: { command: string; data: any }) => {
         if (message.command === "requestSvgComponents") {
+          // Send the SVG components data to the webview
           const svgComponentsJson = JSON.stringify(this.svgComponents);
           this._panel.webview.postMessage({ command: "svgComponents", data: svgComponentsJson });
         }
