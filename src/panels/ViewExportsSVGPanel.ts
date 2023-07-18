@@ -13,6 +13,7 @@ export class ViewExportsSVGPanel {
 
   public static readonly viewType = "JT-View-Exports-SVG";
 
+  private readonly svgComponents: any[];
   private readonly _panel: WebviewPanel;
   private _disposables: Disposable[] = [];
 
@@ -21,7 +22,8 @@ export class ViewExportsSVGPanel {
    * @param panel The webview panel.
    * @param extensionUri The extension URI.
    */
-  private constructor(panel: WebviewPanel, extensionUri: Uri) {
+  private constructor(panel: WebviewPanel, extensionUri: Uri, svgComponents: any[]) {
+    this.svgComponents = svgComponents;
     this._panel = panel;
 
     // Listen for when the panel is disposed
@@ -40,7 +42,7 @@ export class ViewExportsSVGPanel {
    * will be created and displayed.
    * @param extensionUri The URI of the directory containing the extension.
    */
-  public static render(extensionUri: Uri) {
+  public static render(extensionUri: Uri, exportsData: any[]) {
     const column = window.activeTextEditor ? window.activeTextEditor.viewColumn : undefined;
 
     // If we already have a panel, show it
@@ -67,7 +69,7 @@ export class ViewExportsSVGPanel {
     );
     panel.iconPath = Uri.joinPath(extensionUri, "assets", "JT View Exports SVG - ICON.svg");
 
-    ViewExportsSVGPanel.currentPanel = new ViewExportsSVGPanel(panel, extensionUri);
+    ViewExportsSVGPanel.currentPanel = new ViewExportsSVGPanel(panel, extensionUri, exportsData);
   }
 
   /**
@@ -119,5 +121,16 @@ export class ViewExportsSVGPanel {
   /**
    *
    */
-  private _setWebviewMessageListener(webview: Webview) {}
+  private _setWebviewMessageListener(webview: Webview) {
+    webview.onDidReceiveMessage(
+      (message: { command: string; data: any }) => {
+        if (message.command === "requestSvgComponents") {
+          const svgComponentsJson = JSON.stringify(this.svgComponents);
+          this._panel.webview.postMessage({ command: "svgComponents", data: svgComponentsJson });
+        }
+      },
+      undefined,
+      this._disposables
+    );
+  }
 }
