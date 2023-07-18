@@ -2,14 +2,17 @@
 import * as fs from "fs";
 import * as babelParser from "@babel/parser";
 import traverse from "@babel/traverse";
+import { JSXElement, Node } from "@babel/types";
+import { ExportType, ExportTypeNode, IsSVGComponent } from "../interfaces/exportParser";
+import { SvgComponent, SvgComponentDetails } from "../interfaces/svgExports";
 import { camelCase } from "lodash";
 
 /**
- * Parse the content of a file using Babel parser.
+ * Parse the content of a file and return the AST (Abstract Syntax Tree).
  * @param filePath The path to the file.
- * @returns The parsed file content.
+ * @returns The AST representing the file content.
  */
-function parseFileContent(filePath: string): any {
+function parseFileContent(filePath: string): Node {
   // Read the file content synchronously
   const fileContent = fs.readFileSync(filePath, "utf8");
 
@@ -21,31 +24,40 @@ function parseFileContent(filePath: string): any {
 }
 
 /**
- * Extract attributes and child components from an array of JSX children.
- * @param children The array of JSX children.
- * @returns An array of objects representing the child components and their attributes.
+ * Recursively extract attributes from JSXElement children.
+ * @param children The children of the JSXElement.
+ * @param properties The properties of the export type.
+ * @returns An array of extracted child components.
  */
-function getChildAttributes(children: any[], properties: any) {
-  const components: any[] = [];
+function getChildAttributes(
+  children: JSXElement["children"],
+  properties: ExportType["properties"]
+): SvgComponentDetails[] {
+  const components: SvgComponentDetails[] = [];
 
-  children.forEach((child: any) => {
-    const { openingElement, type } = child;
-
-    // Check if the child is a JSX element
-    if (type === "JSXElement" && openingElement) {
+  children.forEach((child) => {
+    if (child.type === "JSXElement") {
+      const openingElement = child.openingElement;
       const props: { [key: string]: string } = {};
 
       // Extract attributes from the opening element
-      openingElement.attributes.forEach((attr: any) => {
-        const { name, value } = attr;
+      openingElement.attributes.forEach((attr) => {
+        if (attr.type === "JSXAttribute") {
+          const { name, value } = attr;
+          let valueAux: any = "";
 
-        if (attr.type !== "JSXSpreadAttribute") {
-          let valueAux =
-            value.type === "JSXExpressionContainer"
-              ? properties[value?.expression?.name]?.value
-              : value?.value;
+          // Check the value type of the attribute
+          if (value?.type === "JSXExpressionContainer") {
+            // If the value is an expression container, extract the value from the properties
+            const keyExpression =
+              value?.expression.type === "Identifier" ? value?.expression.name : "";
+            valueAux = properties[keyExpression]?.value;
+          } else if (value?.type === "StringLiteral") {
+            valueAux = value.value;
+          }
 
-          props[camelCase(name.name)] = valueAux;
+          // Store the attribute value in the props object using camelCase format for the attribute name
+          props[camelCase(name.name?.toString())] = valueAux;
         }
       });
 
@@ -54,26 +66,31 @@ function getChildAttributes(children: any[], properties: any) {
 
       // Add the child component to the components array
       components.push({
-        componentName: openingElement.name.name,
+        componentName: openingElement.name.type === "JSXIdentifier" ? openingElement.name.name : "",
         children: childComponents.length > 0 ? childComponents : [],
         props,
       });
     }
   });
 
+  // Return the array of extracted components
   return components;
 }
 
 /**
- * Check if the JSX node represents an SVG component and extract its attributes and child components.
- * @param node The JSX node to check.
- * @returns An object containing a boolean flag indicating if it's an SVG component and the extracted component data.
+ * Check if a JSXElement represents an SVG component and extract relevant information.
+ * @param argument The JSXElement to check.
+ * @param properties The properties of the export type.
+ * @returns An object indicating whether the JSXElement is an SVG component and the extracted component details.
  */
-function isSVGComponent(argument: any, properties: any): any {
+function isSVGComponent(
+  argument: JSXElement,
+  properties: ExportType["properties"]
+): IsSVGComponent {
   let validate: boolean = false;
-  let component: object | undefined = undefined;
+  let component: IsSVGComponent["component"] = undefined;
   const { openingElement, children } = argument;
-  let childrens: any[] = [];
+  let childrens: SvgComponentDetails[] = [];
 
   // Check if the node has an opening element
   if (openingElement) {
@@ -81,16 +98,22 @@ function isSVGComponent(argument: any, properties: any): any {
     const svgProps: { [key: string]: any } = {};
 
     // Iterate over the attributes of the opening element
-    attributes.forEach((attr: any) => {
-      const { name, type, value } = attr;
+    attributes.forEach((attr) => {
+      if (attr.type === "JSXAttribute") {
+        const { name, type, value } = attr;
+        let valueAux: any = "";
 
-      if (type !== "JSXSpreadAttribute") {
-        let valueAux =
-          value.type === "JSXExpressionContainer"
-            ? properties[value?.expression?.name]?.value
-            : value?.value;
+        // Check the value type of the attribute
+        if (value?.type === "JSXExpressionContainer") {
+          // If the value is an expression container, extract the value from the properties
+          let keyExpression = value?.expression.type === "Identifier" ? value?.expression.name : "";
+          valueAux = properties[keyExpression]?.value;
+        } else if (value?.type === "StringLiteral") {
+          valueAux = value.value;
+        }
 
-        svgProps[camelCase(name.name)] = valueAux;
+        // Store the attribute value in the svgProps object using camelCase format for the attribute name
+        svgProps[camelCase(name.name?.toString())] = valueAux;
 
         // Check if the attribute is 'xmlns' and its value is 'http://www.w3.org/2000/svg'
         if (
@@ -99,6 +122,7 @@ function isSVGComponent(argument: any, properties: any): any {
           value?.type === "StringLiteral" &&
           value?.value === "http://www.w3.org/2000/svg"
         ) {
+          // Set the validation flag to true
           validate = true;
         }
       }
@@ -106,53 +130,60 @@ function isSVGComponent(argument: any, properties: any): any {
 
     // If it's a valid SVG component with children
     if (validate && children.length > 0) {
+      // Recursively extract child attributes
       childrens = getChildAttributes(children, properties);
 
       // Create the component object with the component name, children, and props
       component = {
-        componentName: openingElement.name.name,
+        componentName: openingElement.name.type === "JSXIdentifier" ? openingElement.name.name : "",
         children: childrens,
         props: svgProps,
       };
     }
   }
 
+  // Return the result indicating whether it's an SVG component and the extracted component details
   return { validate, component };
 }
 
 /**
- * Analyze the export type of a given node.
- * @param node The node to analyze.
- * @returns The extracted JSXElement if the node represents an export of a JSX component, otherwise undefined.
+ * Analyze the export type of a node and extract relevant information.
+ * @param node The export type node to analyze.
+ * @returns An object representing the analyzed export type, or undefined if the export type is not JSXElement.
  */
-function analyzeExportType(node: any): any {
-  let { body, params, type } = node;
-  const properties: { [key: string]: { value: any; type: string } } = {};
-  let argument = node;
+function analyzeExportType(node: ExportTypeNode): ExportType | undefined {
+  // Initialize variables
+  const properties: ExportType["properties"] = {};
+  let argument = node as JSXElement;
+  let type = node?.type;
 
   // Check if the node represents an arrow function or function declaration with a block statement body
   if (
-    (type === "ArrowFunctionExpression" || type === "FunctionDeclaration") &&
-    body?.type === "BlockStatement" &&
-    body.body
+    node &&
+    (node.type === "ArrowFunctionExpression" || node.type === "FunctionDeclaration") &&
+    node.body?.type === "BlockStatement" &&
+    node.body.body
   ) {
     // Reverse iterate over the body statements
-    for (const nodeItem of [...body.body].reverse()) {
-      type = nodeItem.argument?.type;
+    const body = [...node.body.body].reverse();
 
+    for (const nodeItem of body) {
       // Check if the statement is a ReturnStatement and the argument is not an Identifier
       if (nodeItem.type === "ReturnStatement" && type !== "Identifier") {
-        argument = nodeItem.argument;
+        type = nodeItem.argument?.type;
+        argument = nodeItem.argument as JSXElement;
         break;
       }
     }
 
-    if (params && params.length > 0) {
-      params.forEach((param: any) => {
+    // Check if there are parameters with object patterns
+    if (node.params && node.params.length > 0) {
+      node.params.forEach((param: any) => {
         if (param.type === "ObjectPattern" && param.properties) {
           param.properties.forEach((property: any) => {
             const { key, value } = property;
             if (property.type === "ObjectProperty") {
+              // Add the property to the properties object
               properties[key.name] = {
                 value: value?.right?.value,
                 type: value?.right?.type,
@@ -178,11 +209,11 @@ function analyzeExportType(node: any): any {
  * @param filePath The path to the file.
  * @returns A promise that resolves to an array of SVG component exports.
  */
-export function extractSVGComponentExports(filePath: string): Promise<any[]> {
+export function extractSVGComponentExports(filePath: string): Promise<SvgComponent[]> {
   return new Promise((resolve, reject) => {
     // Parse the file content into an AST (Abstract Syntax Tree)
     const ast = parseFileContent(filePath);
-    const exports: any[] = [];
+    const exports: SvgComponent[] = [];
 
     // Traverse the AST to find export declarations
     traverse(ast, {
@@ -192,11 +223,10 @@ export function extractSVGComponentExports(filePath: string): Promise<any[]> {
         if (node.declaration) {
           if (node.declaration.type === "FunctionDeclaration") {
             // Exported function declaration 'export function functionName() {}'
-            let component: any | undefined = undefined;
+            let component: SvgComponent["component"] = undefined;
             let name: string = node.declaration.id?.name as string;
-            let location: { column: number; line: number } | undefined =
-              node.declaration.id?.loc?.start;
-            let typeExport: string = "function";
+            let location: SvgComponent["location"] = node.declaration.id?.loc?.start;
+            let typeExport: SvgComponent["typeExport"] = "function";
 
             try {
               const nodeAnalyze = analyzeExportType(node.declaration);
@@ -217,11 +247,10 @@ export function extractSVGComponentExports(filePath: string): Promise<any[]> {
             // Exported variable declaration(s) 'export const variableName = value;'
             node.declaration.declarations.forEach((declaration) => {
               if (declaration.id.type === "Identifier") {
-                let component: any | undefined = undefined;
+                let component: SvgComponent["component"] = undefined;
                 let name: string = declaration.id.name;
-                let location: { column: number; line: number } | undefined =
-                  declaration.id.loc?.start;
-                let typeExport: string = "variable";
+                let location: SvgComponent["location"] = declaration.id.loc?.start;
+                let typeExport: SvgComponent["typeExport"] = "variable";
 
                 try {
                   const nodeAnalyze = analyzeExportType(declaration.init);
