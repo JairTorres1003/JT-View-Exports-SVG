@@ -45,16 +45,17 @@ const runCommand = async (context: ExtensionContext, item: Uri, items: Uri[]) =>
       selectedFiles.map(async (file) => {
         try {
           const svgExports = await extractSVGComponentExports(file.absolutePath);
-          return { file, svgExports };
+          return { file, svgComponents: svgExports };
         } catch (error) {
           console.error(`Error parsing file ${file.absolutePath}: ${error}`);
-          return { file, svgExports: [] };
+          return { file, svgComponents: [] };
         }
       })
     );
 
     // Create or show the webview panel
     ViewExportsSVGPanel.render(context.extensionUri, svgComponents);
+    console.log([{file: svgComponents[0].file, svgComponents: svgComponents[0].svgComponents.slice(0, 20)}]);
 
     return svgComponents;
   });

@@ -11,7 +11,7 @@ export interface SvgExport {
   /**
    * An array of SvgComponent objects representing the exported SVG components.
    */
-  svgExports: SvgComponent[];
+  svgComponents: SvgComponent[];
 }
 
 /**
@@ -29,7 +29,13 @@ export interface SvgComponent {
   /**
    * The location of the SVG component in the file.
    */
-  location: { column: number; line: number } | undefined;
+  location:
+    | {
+        column: number;
+        line: number;
+        index?: number | undefined;
+      }
+    | undefined;
   /**
    * The type of export for the SVG component.
    */
