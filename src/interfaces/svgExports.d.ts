@@ -1,3 +1,5 @@
+import { JSXIdentifier } from "@babel/types";
+
 /**
  * Represents the exported SVG components from a file.
  */
@@ -41,7 +43,7 @@ export interface SvgComponentDetails {
   /**
    * The name of the component.
    */
-  componentName: keyof JSX.IntrinsicElements;
+  componentName: keyof JSXIdentifier | string;
   /**
    * An array of child SvgComponentDetails objects representing nested components.
    */

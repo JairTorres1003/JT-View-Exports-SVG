@@ -1,6 +1,7 @@
 import { FunctionComponent } from "react";
 import { SvgExport } from "../interfaces/svgExports";
 import RenderSVG from "./RenderSvg";
+import FailExport from "../icons/FailExport.svg";
 
 const SvgComponetExport: FunctionComponent<SvgExport> = (props) => {
   const { file, svgExports } = props;
@@ -11,9 +12,7 @@ const SvgComponetExport: FunctionComponent<SvgExport> = (props) => {
       <div>
         {svgExports.map((item, index) => (
           <div key={index}>
-            <div>
-              <RenderSVG {...item.component} />
-            </div>
+            <div>{item.component ? <RenderSVG {...item.component} /> : <FailExport />}</div>
             <h5>{item.name}</h5>
           </div>
         ))}
