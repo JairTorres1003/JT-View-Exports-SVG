@@ -2,10 +2,9 @@ import { useEffect, useMemo, useState } from "react";
 import { SvgExport } from "../interfaces/svgExports";
 import { vscode } from "../utilities/vscode";
 import { createTheme } from "@mui/material";
-import { DataFirts } from "../FilesTest/test";
 
 const useApp = () => {
-  const [svgComponents, setSvgComponents] = useState<SvgExport[]>(DataFirts);
+  const [svgComponents, setSvgComponents] = useState<SvgExport[]>([]);
   const [currentTheme, setCurrentTheme] = useState<"dark" | "light">("light");
 
   /**
