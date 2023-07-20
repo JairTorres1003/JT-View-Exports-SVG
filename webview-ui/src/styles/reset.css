@@ -53,10 +53,13 @@ select:-webkit-autofill:focus {
 }
 
 #root {
-  padding: 2rem;
+  padding: 2rem 1.5rem;
 }
 
 main {
   min-height: 100vh;
   width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
 }
