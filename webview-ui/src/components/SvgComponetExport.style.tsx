@@ -41,7 +41,7 @@ export const AccordionSummary = styled((props: AccordionSummaryProps | PaperProp
   },
   "& .MuiAccordionSummary-expandIconWrapper.Mui-expanded": {
     transform: "rotate(90deg)",
-    fill: "var(--color-JT-view-export-svg)",
+    fill: "rgb(var(--color-JT-view-export-svg))",
   },
   "& .MuiAccordionSummary-content, & .MuiAccordionSummary-content.Mui-expanded": {
     "margin": 0,
@@ -74,6 +74,7 @@ export const Paper = styled(PaperMui)(() => ({
   justifyContent: "center",
   alignItems: "center",
   textAlign: "center",
+  background: "#fff",
 }));
 
 export const Typography = styled(TypographyMui)(() => ({

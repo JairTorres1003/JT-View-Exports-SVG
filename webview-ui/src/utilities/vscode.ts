@@ -37,7 +37,7 @@ class VSCodeAPIWrapper {
    * @param command The command associated with the message.
    * @param data The data payload of the message.
    */
-  public postMessage(command: postMessageCommand, data: any) {
+  public postMessage(command: postMessageCommand, data?: any) {
     if (this.vsCodeApi) {
       this.vsCodeApi.postMessage({ command, data });
     } else {

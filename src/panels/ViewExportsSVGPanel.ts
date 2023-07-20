@@ -2,6 +2,8 @@ import { Disposable, Uri, ViewColumn, Webview, WebviewPanel, window } from "vsco
 import { getUri } from "../utilities/getUri";
 import { getNonce } from "../utilities/getNonce";
 import { SvgExport } from "../interfaces/svgExports";
+import { getCurrentTheme } from "../utilities/getTheme";
+import { ReciveMessageData, postMessageCommand } from "../interfaces/vscode";
 
 /**
  * Webview panel for displaying SVG exports.
@@ -133,15 +135,27 @@ export class ViewExportsSVGPanel {
    */
   private _setWebviewMessageListener(webview: Webview) {
     webview.onDidReceiveMessage(
-      (message: { command: string; data: any }) => {
+      (message: ReciveMessageData) => {
         if (message.command === "requestSvgComponents") {
-          // Send the SVG components data to the webview
           const svgComponentsJson = JSON.stringify(this.svgComponents);
-          this._panel.webview.postMessage({ command: "svgComponents", data: svgComponentsJson });
+          this._postMessage("svgComponents", svgComponentsJson);
+        }
+        if (message.command === "getCurrentTheme") {
+          const theme = getCurrentTheme();
+          this._postMessage("currentTheme", theme);
         }
       },
       undefined,
       this._disposables
     );
+  }
+
+  /**
+   * Sends a message to the webview.
+   * @param command The command to be included in the message.
+   * @param data An optional parameter representing the data payload of the message.
+   */
+  private _postMessage(command: postMessageCommand, data?: any) {
+    this._panel.webview.postMessage({ command, data });
   }
 }

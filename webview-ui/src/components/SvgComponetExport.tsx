@@ -17,7 +17,11 @@ const SvgComponetExport: FunctionComponent<SvgExport> = (props) => {
   const [isExpanded, setIsExpanded] = useState<boolean>(true);
 
   return (
-    <Accordion elevation={0} expanded={isExpanded} onChange={() => setIsExpanded(!isExpanded)}>
+    <Accordion
+      elevation={0}
+      expanded={isExpanded}
+      onChange={() => setIsExpanded(!isExpanded)}
+      TransitionProps={{ timeout: { enter: 300, exit: 100 } }}>
       <AccordionSummary elevation={isExpanded ? 0 : 3}>
         <Typography noWrap>{file.relativePath}</Typography>
       </AccordionSummary>

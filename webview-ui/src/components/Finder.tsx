@@ -3,7 +3,6 @@ import { FunctionComponent, useEffect, useState } from "react";
 import { FinderProps } from "../interfaces/Finder";
 import useDebounce from "../hooks/useDebounce";
 import { vscode } from "../utilities/vscode";
-import Lupe from "../icons/Lupe.svg";
 
 export const Finder: FunctionComponent<FinderProps> = (props) => {
   const [value, setValue] = useState<string>("");
@@ -36,8 +35,11 @@ export const Finder: FunctionComponent<FinderProps> = (props) => {
         id="finder-svg"
         variant="outlined"
         label="Search icons"
-        sx={{ maxWidth: 600 }}
         onChange={(val) => setValue(val.target.value)}
+        sx={{
+          "maxWidth": 600,
+          "& fieldset": { borderColor: "rgba(var(--color-JT-view-export-svg), 0.23)" },
+        }}
         InputProps={{
           endAdornment: <LupeIcon />,
         }}

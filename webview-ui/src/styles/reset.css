@@ -52,6 +52,17 @@ select:-webkit-autofill:focus {
   caret-color: inherit !important;
 }
 
+body,
+body[data-vscode-theme-kind="vscode-light"],
+body[data-vscode-theme-kind="vscode-high-contrast-light"] {
+  --color-JT-view-export-svg: 0, 0, 0;
+}
+
+body[data-vscode-theme-kind="vscode-dark"],
+body[data-vscode-theme-kind="vscode-high-contrast"] {
+  --color-JT-view-export-svg: 255, 255, 255;
+}
+
 #root {
   padding: 2rem 1.5rem;
 }
