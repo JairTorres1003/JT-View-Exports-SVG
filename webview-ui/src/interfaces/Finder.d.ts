@@ -10,4 +10,10 @@ export interface FinderProps {
    * @param components An array of SVG exports.
    */
   setSvgComponents: Dispatch<SetStateAction<SvgExport[]>>;
+
+  /**
+   * Function to set the message to show.
+   * @param message The message to be shown or null if no message should be displayed.
+   */
+  setShowMessage: Dispatch<SetStateAction<string | null>>;
 }

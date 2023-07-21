@@ -1,18 +1,22 @@
-import { ThemeProvider } from "@mui/material";
+import { Box, ThemeProvider, Typography } from "@mui/material";
 import { Finder } from "./components/Finder";
 import SvgComponetExport from "./components/SvgComponetExport";
 import useApp from "./hooks/useApp";
 
 function App() {
-  const { setSvgComponents, svgComponents, theme } = useApp();
+  const { setShowMessage, setSvgComponents, showMessage, svgComponents, theme } = useApp();
 
   return (
     <ThemeProvider theme={theme}>
       <main>
-        <Finder setSvgComponents={setSvgComponents} />
-        {svgComponents.map((item, index) => (
-          <SvgComponetExport {...item} key={index} />
-        ))}
+        <Finder setSvgComponents={setSvgComponents} setShowMessage={setShowMessage} />
+        {showMessage ? (
+          <Box>
+            <Typography variant="h1" fontSize={20}>{showMessage}</Typography>
+          </Box>
+        ) : (
+          svgComponents.map((item, index) => <SvgComponetExport {...item} key={index} />)
+        )}
       </main>
     </ThemeProvider>
   );

@@ -5,6 +5,7 @@ import { createTheme } from "@mui/material";
 
 const useApp = () => {
   const [svgComponents, setSvgComponents] = useState<SvgExport[]>([]);
+  const [showMessage, setShowMessage] = useState<string | null>(null);
   const [currentTheme, setCurrentTheme] = useState<"dark" | "light">("light");
 
   /**
@@ -12,7 +13,14 @@ const useApp = () => {
    * @param data The SVG components data.
    */
   const handleSvgComponents = (data: any) => {
-    setSvgComponents(JSON.parse(data));
+    const response = JSON.parse(data);
+
+    if (response.messageError) {
+      setShowMessage(response.messageError);
+    } else {
+      setShowMessage(null);
+      setSvgComponents(response);
+    }
   };
 
   /**
@@ -55,7 +63,9 @@ const useApp = () => {
   }, []);
 
   return {
+    setShowMessage,
     setSvgComponents,
+    showMessage,
     svgComponents,
     theme,
   };
