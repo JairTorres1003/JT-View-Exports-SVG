@@ -147,6 +147,40 @@ function isSVGComponent(
 }
 
 /**
+ * Get the first JSX element or fragment from the given children array.
+ * @param children The array of JSX elements and fragments to search in.
+ * @returns The first JSX element or fragment found, or null if multiple elements are found or none is found.
+ */
+function getChildFragments(children: JSXElement["children"]): JSXElement | null {
+  let countJsxElements: number = 0;
+  let argument: JSXElement | null = null;
+
+  for (const child of children) {
+    if (child.type === "JSXElement") {
+      // If no JSX element or fragment has been found yet, store this as the argument
+      if (countJsxElements === 0) {
+        argument = child;
+      } else {
+        argument = null;
+        break;
+      }
+      countJsxElements++;
+    } else if (child.type === "JSXFragment") {
+      // If no JSX element or fragment has been found yet, recursively search in the child fragments
+      if (countJsxElements === 0) {
+        argument = getChildFragments(child.children);
+      } else {
+        argument = null;
+        break;
+      }
+      countJsxElements++;
+    }
+  }
+
+  return argument;
+}
+
+/**
  * Analyze the export type of a node and extract relevant information.
  * @param node The export type node to analyze.
  * @returns An object representing the analyzed export type, or undefined if the export type is not JSXElement.
@@ -170,8 +204,16 @@ function analyzeExportType(node: ExportTypeNode): ExportType | undefined {
     for (const nodeItem of body) {
       // Check if the statement is a ReturnStatement and the argument is not an Identifier
       if (nodeItem.type === "ReturnStatement" && type !== "Identifier") {
-        type = nodeItem.argument?.type;
-        argument = nodeItem.argument as JSXElement;
+        if (nodeItem.argument?.type === "JSXFragment") {
+          const childFragment = getChildFragments(nodeItem.argument.children);
+          if (childFragment) {
+            argument = childFragment;
+            type = childFragment.type;
+          }
+        } else {
+          argument = nodeItem.argument as JSXElement;
+          type = nodeItem.argument?.type;
+        }
         break;
       }
     }
