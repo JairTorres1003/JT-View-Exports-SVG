@@ -52,10 +52,27 @@ select:-webkit-autofill:focus {
   caret-color: inherit !important;
 }
 
+/* clears the 'X' from Internet Explorer */
+input[type="search"]::-ms-clear,
+input[type="search"]::-ms-reveal {
+  display: none;
+  width: 0;
+  height: 0;
+}
+
+/* clears the 'X' from Chrome */
+input[type="search"]::-webkit-search-decoration,
+input[type="search"]::-webkit-search-cancel-button,
+input[type="search"]::-webkit-search-results-button,
+input[type="search"]::-webkit-search-results-decoration {
+  display: none;
+}
+
 body,
 body[data-vscode-theme-kind="vscode-light"],
 body[data-vscode-theme-kind="vscode-high-contrast-light"] {
   --color-JT-view-export-svg: 0, 0, 0;
+  padding: 0 10px;
 }
 
 body[data-vscode-theme-kind="vscode-dark"],

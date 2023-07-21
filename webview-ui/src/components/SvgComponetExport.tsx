@@ -1,7 +1,6 @@
 import { FunctionComponent, useState } from "react";
 import { SvgExport } from "../interfaces/svgExports";
 import RenderSVG from "./RenderSvg";
-import FailExport from "../icons/FailExport.svg";
 import {
   Accordion,
   AccordionSummary,
@@ -11,6 +10,7 @@ import {
   Typography,
 } from "./SvgComponetExport.style";
 import { AccordionDetails } from "@mui/material";
+import { IconFailExport } from "../icons/IconFailExport";
 
 const SvgComponetExport: FunctionComponent<SvgExport> = (props) => {
   const { file, svgComponents } = props;
@@ -30,7 +30,7 @@ const SvgComponetExport: FunctionComponent<SvgExport> = (props) => {
           {svgComponents.map((item, index) => (
             <GridItem key={index}>
               <Paper elevation={3}>
-                {item.component ? <RenderSVG {...item.component} /> : <FailExport />}
+                {item.component ? <RenderSVG {...item.component} /> : <IconFailExport />}
               </Paper>
               <Typography noWrap>{item.name}</Typography>
             </GridItem>

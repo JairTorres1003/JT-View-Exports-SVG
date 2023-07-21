@@ -8,12 +8,7 @@ import {
   PaperProps,
 } from "@mui/material";
 import GridMui from "@mui/material/Unstable_Grid2";
-
-const ArrowForwardIcon = () => (
-  <svg focusable="false" aria-hidden="true" viewBox="0 0 24 24" width={17}>
-    <path d="M6.23 20.23 8 22l10-10L8 2 6.23 3.77 14.46 12z"></path>
-  </svg>
-);
+import { ArrowForwardIcon } from "../icons/ArrowForwardIcon";
 
 export const Accordion = styled(AccordionMui)(() => ({
   "backgroundColor": "inherit",
