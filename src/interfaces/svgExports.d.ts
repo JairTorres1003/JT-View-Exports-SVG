@@ -76,3 +76,13 @@ export interface SvgFile {
    */
   relativePath: string;
 }
+
+/**
+ * Represents errors related to SVG exports.
+ */
+export interface SvgExportErrors {
+  /**
+   * The error message describing the issue with SVG exports.
+   */
+  messageError: string;
+}

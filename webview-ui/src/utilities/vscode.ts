@@ -1,14 +1,22 @@
 import type { WebviewApi } from "vscode-webview";
+import { MessageData, onMessageCommand, postMessageCommand } from "../interfaces/vscode";
 
-interface MessageData {
-  command: string;
-  data: any;
-}
-
+/**
+ * Wrapper class for the VSCode API, providing methods for communication between the webview and the extension.
+ */
 class VSCodeAPIWrapper {
+  /**
+   * The VSCode API instance obtained from `acquireVsCodeApi`.
+   */
   private readonly vsCodeApi: WebviewApi<unknown> | undefined;
+  /**
+   * Mapping of message commands to their corresponding handlers.
+   */
   private messageHandlers: Record<string, Function[]> = {};
 
+  /**
+   * Creates an instance of `VSCodeAPIWrapper`.
+   */
   constructor() {
     if (typeof acquireVsCodeApi === "function") {
       this.vsCodeApi = acquireVsCodeApi();
@@ -24,7 +32,12 @@ class VSCodeAPIWrapper {
     });
   }
 
-  public postMessage(command: string, data: any) {
+  /**
+   * Sends a message to the extension.
+   * @param command The command associated with the message.
+   * @param data The data payload of the message.
+   */
+  public postMessage(command: postMessageCommand, data?: any) {
     if (this.vsCodeApi) {
       this.vsCodeApi.postMessage({ command, data });
     } else {
@@ -32,14 +45,24 @@ class VSCodeAPIWrapper {
     }
   }
 
-  public onMessage(command: string, handler: Function) {
+  /**
+   * Registers a message handler for a specific command.
+   * @param command The command associated with the message.
+   * @param handler The handler function to be called when the message is received.
+   */
+  public onMessage(command: onMessageCommand, handler: Function) {
     if (!this.messageHandlers[command]) {
       this.messageHandlers[command] = [];
     }
     this.messageHandlers[command].push(handler);
   }
 
-  public removeMessageHandler(command: string, handler: Function) {
+  /**
+   * Removes a message handler for a specific command.
+   * @param command The command associated with the message.
+   * @param handler The handler function to be removed.
+   */
+  public removeMessageHandler(command: onMessageCommand, handler: Function) {
     const handlers = this.messageHandlers[command];
     if (handlers) {
       const index = handlers.indexOf(handler);
@@ -50,4 +73,7 @@ class VSCodeAPIWrapper {
   }
 }
 
+/**
+ * Wrapper instance for the VSCode API.
+ */
 export const vscode = new VSCodeAPIWrapper();

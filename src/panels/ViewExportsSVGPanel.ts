@@ -1,7 +1,10 @@
 import { Disposable, Uri, ViewColumn, Webview, WebviewPanel, window } from "vscode";
 import { getUri } from "../utilities/getUri";
 import { getNonce } from "../utilities/getNonce";
-import { SvgExport } from "../interfaces/svgExports";
+import { SvgExport, SvgExportErrors } from "../interfaces/svgExports";
+import { getCurrentTheme } from "../utilities/getTheme";
+import { ReciveMessageData, postMessageCommand } from "../interfaces/vscode";
+import { filterSvgComponents } from "../utilities/filterSvgComponents";
 
 /**
  * Webview panel for displaying SVG exports.
@@ -14,7 +17,7 @@ export class ViewExportsSVGPanel {
 
   public static readonly viewType = "JT-View-Exports-SVG";
 
-  private readonly svgComponents: SvgExport[];
+  private readonly svgComponents: SvgExport[] | SvgExportErrors;
   private readonly _panel: WebviewPanel;
   private _disposables: Disposable[] = [];
 
@@ -22,9 +25,13 @@ export class ViewExportsSVGPanel {
    * Create a new instance of the ViewExportsSVGPanel class.
    * @param panel The webview panel.
    * @param extensionUri The extension URI.
-   * @param svgComponents The array of SVG exports.
+   * @param svgComponents The array of SVG exports or an SvgExportErrors object.
    */
-  private constructor(panel: WebviewPanel, extensionUri: Uri, svgComponents: SvgExport[]) {
+  private constructor(
+    panel: WebviewPanel,
+    extensionUri: Uri,
+    svgComponents: SvgExport[] | SvgExportErrors
+  ) {
     this.svgComponents = svgComponents;
     this._panel = panel;
 
@@ -43,9 +50,9 @@ export class ViewExportsSVGPanel {
    * Renders the current webview panel if it exists, otherwise a new webview panel
    * will be created and displayed.
    * @param extensionUri The URI of the directory containing the extension.
-   * @param svgComponents The array of SVG exports.
+   * @param svgComponents The array of SVG exports or an SvgExportErrors object.
    */
-  public static render(extensionUri: Uri, svgComponents: SvgExport[]) {
+  public static render(extensionUri: Uri, svgComponents: SvgExport[] | SvgExportErrors) {
     const column = window.activeTextEditor ? window.activeTextEditor.viewColumn : undefined;
 
     // If we already have a panel, show it
@@ -115,7 +122,7 @@ export class ViewExportsSVGPanel {
           <meta charset="UTF-8" />
           <link rel="icon" type="ico" href="${icoUri}" />
           <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-          <meta http-equiv="Content-Security-Policy" content="default-src 'none'; style-src ${webview.cspSource}; script-src 'nonce-${nonce}';">
+          <meta http-equiv="Content-Security-Policy" content="default-src 'none'; style-src 'unsafe-inline' ${webview.cspSource}; script-src 'nonce-${nonce}';">
           <link rel="stylesheet" type="text/css" href="${stylesUri}">
           <title>View Exports SVG</title>
         </head>
@@ -133,15 +140,34 @@ export class ViewExportsSVGPanel {
    */
   private _setWebviewMessageListener(webview: Webview) {
     webview.onDidReceiveMessage(
-      (message: { command: string; data: any }) => {
+      (message: ReciveMessageData) => {
         if (message.command === "requestSvgComponents") {
-          // Send the SVG components data to the webview
           const svgComponentsJson = JSON.stringify(this.svgComponents);
-          this._panel.webview.postMessage({ command: "svgComponents", data: svgComponentsJson });
+          this._postMessage("svgComponents", svgComponentsJson);
+        }
+        if (message.command === "getCurrentTheme") {
+          const theme = getCurrentTheme();
+          this._postMessage("currentTheme", theme);
+        }
+        if (message.command === "searchSvgComponents") {
+          const filter = message.data;
+
+          const svgComponents = filterSvgComponents(this.svgComponents as SvgExport[], filter);
+          const svgComponentsJson = JSON.stringify(svgComponents);
+          this._postMessage("filteredSvgComponents", svgComponentsJson);
         }
       },
       undefined,
       this._disposables
     );
+  }
+
+  /**
+   * Sends a message to the webview.
+   * @param command The command to be included in the message.
+   * @param data An optional parameter representing the data payload of the message.
+   */
+  private _postMessage(command: postMessageCommand, data?: any) {
+    this._panel.webview.postMessage({ command, data });
   }
 }
