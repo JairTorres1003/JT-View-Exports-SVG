@@ -1,5 +1,5 @@
 import { FunctionComponent, useState } from "react";
-import { SvgExport } from "../interfaces/svgExports";
+import { SvgExport } from "../../interfaces/svgExports";
 import RenderSVG from "./RenderSvg";
 import {
   Accordion,
@@ -10,7 +10,7 @@ import {
   Typography,
 } from "./SvgComponetExport.style";
 import { AccordionDetails } from "@mui/material";
-import { IconFailExport } from "../icons/IconFailExport";
+import { IconFailExport } from "../../icons/IconFailExport";
 
 const SvgComponetExport: FunctionComponent<SvgExport> = (props) => {
   const { file, svgComponents } = props;

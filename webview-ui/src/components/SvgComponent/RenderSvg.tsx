@@ -1,5 +1,5 @@
 import { FunctionComponent } from "react";
-import { SvgComponentDetails } from "../interfaces/svgExports";
+import { SvgComponentDetails } from "../../interfaces/svgExports";
 
 const RenderSVG: FunctionComponent<SvgComponentDetails> = ({ children, componentName, props }) => {
   const Component = componentName;

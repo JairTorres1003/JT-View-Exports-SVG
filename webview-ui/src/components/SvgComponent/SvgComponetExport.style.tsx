@@ -8,7 +8,7 @@ import {
   PaperProps,
 } from "@mui/material";
 import GridMui from "@mui/material/Unstable_Grid2";
-import { ArrowForwardIcon } from "../icons/ArrowForwardIcon";
+import { ArrowForwardIcon } from "../../icons/ArrowForwardIcon";
 
 export const Accordion = styled(AccordionMui)(() => ({
   "backgroundColor": "inherit",

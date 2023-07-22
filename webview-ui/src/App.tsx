@@ -1,6 +1,6 @@
 import { Box, ThemeProvider, Typography } from "@mui/material";
-import { Finder } from "./components/Finder";
-import SvgComponetExport from "./components/SvgComponetExport";
+import { Finder } from "./components/Finder/Finder";
+import SvgComponetExport from "./components/SvgComponent/SvgComponetExport";
 import useApp from "./hooks/useApp";
 
 function App() {
