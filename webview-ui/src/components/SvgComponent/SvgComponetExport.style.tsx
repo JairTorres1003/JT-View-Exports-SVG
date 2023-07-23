@@ -70,6 +70,10 @@ export const Paper = styled(PaperMui)(() => ({
   alignItems: "center",
   textAlign: "center",
   background: "#fff",
+  svg: {
+    maxWidth: "96%",
+    maxHeight: "96%",
+  },
 }));
 
 export const Typography = styled(TypographyMui)(() => ({
