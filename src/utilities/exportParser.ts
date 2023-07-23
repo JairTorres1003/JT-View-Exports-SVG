@@ -4,8 +4,8 @@ import * as babelParser from "@babel/parser";
 import traverse from "@babel/traverse";
 import { JSXElement, Node } from "@babel/types";
 import { ExportType, ExportTypeNode, IsSVGComponent } from "../interfaces/exportParser";
-import { SvgComponent, SvgComponentDetails } from "../interfaces/svgExports";
-import { camelCase } from "lodash";
+import { HasInvalidChild, SvgComponent, SvgComponentDetails } from "../interfaces/svgExports";
+import { camelCase, isArray } from "lodash";
 
 /**
  * Parse the content of a file and return the AST (Abstract Syntax Tree).
@@ -32,8 +32,9 @@ function parseFileContent(filePath: string): Node {
 function getChildAttributes(
   children: JSXElement["children"],
   properties: ExportType["properties"]
-): SvgComponentDetails[] {
+): SvgComponentDetails[] | HasInvalidChild {
   const components: SvgComponentDetails[] = [];
+  let hasInvalidChild: HasInvalidChild | null = null;
 
   children.forEach((child) => {
     if (child.type === "JSXElement") {
@@ -63,15 +64,46 @@ function getChildAttributes(
 
       // Recursively extract child components
       const childComponents = getChildAttributes(child.children, properties);
+      let componentName: string = "";
+
+      // Extract the component name from the JSX element's opening tag
+      if (openingElement.name.type === "JSXIdentifier") {
+        componentName = openingElement.name.name;
+      } else if (openingElement.name.type === "JSXMemberExpression") {
+        const { object, property } = openingElement.name;
+        if (object.type === "JSXIdentifier") {
+          componentName = `${object.name}.${property.name}`;
+        }
+      } else {
+        if (hasInvalidChild === null) {
+          // Handle the case of an invalid child component
+          hasInvalidChild = { error: "HasInvalidChild", location: openingElement.name.loc?.start };
+        }
+        return;
+      }
+
+      // Check if childComponents is an array or contains an error
+      if (!Array.isArray(childComponents) && childComponents.error) {
+        // Handle the case of an invalid child component
+        if (hasInvalidChild === null) {
+          hasInvalidChild = { error: "HasInvalidChild", location: child.loc?.start };
+        }
+        return;
+      }
 
       // Add the child component to the components array
       components.push({
-        componentName: openingElement.name.type === "JSXIdentifier" ? openingElement.name.name : "",
-        children: childComponents.length > 0 ? childComponents : [],
+        componentName,
+        children: childComponents,
         props,
       });
     }
   });
+
+  // Return the error
+  if (hasInvalidChild) {
+    return hasInvalidChild;
+  }
 
   // Return the array of extracted components
   return components;
@@ -90,7 +122,7 @@ function isSVGComponent(
   let validate: boolean = false;
   let component: IsSVGComponent["component"] = undefined;
   const { openingElement, children } = argument;
-  let childrens: SvgComponentDetails[] = [];
+  let childrens: SvgComponentDetails[] | HasInvalidChild = [];
 
   // Check if the node has an opening element
   if (openingElement) {
