@@ -27,13 +27,7 @@ export interface SvgComponent {
   /**
    * The location of the SVG component in the file.
    */
-  location:
-    | {
-        column: number;
-        line: number;
-        index?: number | undefined;
-      }
-    | undefined;
+  location: Location | undefined;
   /**
    * The type of export for the SVG component.
    */
@@ -51,10 +45,9 @@ export interface SvgComponentDetails {
   /**
    * An array of child SvgComponentDetails objects representing nested components.
    */
-  children: SvgComponentDetails[] | [];
+  children: SvgComponentDetails[] | [] | HasInvalidChild;
   /**
-   * An object containing the props of the component, where the keys are the prop names
-   * and the values are the prop values.
+   * An object containing the props of the component.
    */
   props: {
     [key: string]: any;
@@ -73,4 +66,36 @@ export interface SvgFile {
    * The relative path of the SVG file.
    */
   relativePath: string;
+}
+
+/**
+ * Represents a location in the source code.
+ */
+interface Location {
+  /**
+   * The column number in the source code.
+   */
+  column: number;
+  /**
+   * The line number in the source code.
+   */
+  line: number;
+  /**
+   * The optional index number in the source code.
+   */
+  index?: number | undefined;
+}
+
+/**
+ * Represents an object with an error for having an invalid child.
+ */
+export interface HasInvalidChild {
+  /**
+   * The error type indicating the presence of an invalid child.
+   */
+  error: "HasInvalidChild";
+  /**
+   * The location of the invalid child in the source code.
+   */
+  location: Location | undefined;
 }
