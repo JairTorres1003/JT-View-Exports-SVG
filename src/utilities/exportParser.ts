@@ -2,10 +2,10 @@
 import * as fs from "fs";
 import * as babelParser from "@babel/parser";
 import traverse from "@babel/traverse";
-import { JSXElement, Node } from "@babel/types";
+import { Declaration, Identifier, JSXElement, Node } from "@babel/types";
 import { ExportType, ExportTypeNode, IsSVGComponent } from "../interfaces/exportParser";
 import { HasInvalidChild, SvgComponent, SvgComponentDetails } from "../interfaces/svgExports";
-import { camelCase, isArray } from "lodash";
+import { camelCase } from "lodash";
 
 /**
  * Parse the content of a file and return the AST (Abstract Syntax Tree).
@@ -279,12 +279,52 @@ function analyzeExportType(node: ExportTypeNode): ExportType | undefined {
 }
 
 /**
- * Extract SVG component exports from a file.
- * @param filePath The path to the file.
- * @returns A promise that resolves to an array of SVG component exports.
+ * Extracts SVG component details from the provided node.
+ * @param {Node} node - The AST node representing the function declaration or variable declarator.
+ * @param {SvgComponent["typeExport"]} typeExport - The type of export (function or variable).
+ * @returns {Promise<SvgComponent | undefined>} A promise that resolves to the extracted SVG component object or undefined if no SVG component is found.
  */
-export function extractSVGComponentExports(filePath: string): Promise<SvgComponent[]> {
-  return new Promise((resolve, reject) => {
+async function extractSvgComponentFromNode(
+  node: Node,
+  typeExport: SvgComponent["typeExport"]
+): Promise<SvgComponent | undefined> {
+  let component: SvgComponent["component"] = undefined;
+  let name: string = "";
+  let location: SvgComponent["location"] | undefined;
+
+  if (node.type === "FunctionDeclaration" || node.type === "VariableDeclarator") {
+    // Extract the name and location of the function or variable.
+    name = (node.id as Identifier).name || "";
+    location = node.id?.loc?.start;
+
+    try {
+      // Analyze the export type and check if it's a valid SVG component.
+      const nodeAnalyze = analyzeExportType(node.type === "FunctionDeclaration" ? node : node.init);
+      if (nodeAnalyze) {
+        const SVGComponent = isSVGComponent(nodeAnalyze.argument, nodeAnalyze.properties);
+        if (SVGComponent.validate) {
+          component = SVGComponent.component;
+        }
+      }
+    } catch (error) {
+      console.error(`Error reading ${typeExport}: ${name}`);
+    }
+  }
+
+  if (component) {
+    return { component, name, location, typeExport };
+  } else {
+    return undefined;
+  }
+}
+
+/**
+ * Extract SVG component exports from a file.
+ * @param {string} filePath - The file path of the TypeScript/JavaScript file to parse.
+ * @returns {Promise<SvgComponent[]>} A promise that resolves to an array of extracted SVG component exports.
+ */
+export async function extractSVGComponentExports(filePath: string): Promise<SvgComponent[]> {
+  try {
     // Parse the file content into an AST (Abstract Syntax Tree)
     const ast = parseFileContent(filePath);
     const exports: SvgComponent[] = [];
@@ -297,52 +337,23 @@ export function extractSVGComponentExports(filePath: string): Promise<SvgCompone
         if (node.declaration) {
           if (node.declaration.type === "FunctionDeclaration") {
             // Exported function declaration 'export function functionName() {}'
-            let component: SvgComponent["component"] = undefined;
-            let name: string = node.declaration.id?.name as string;
-            let location: SvgComponent["location"] = node.declaration.id?.loc?.start;
-            let typeExport: SvgComponent["typeExport"] = "function";
-
-            try {
-              const nodeAnalyze = analyzeExportType(node.declaration);
-
-              if (nodeAnalyze) {
-                const SVGomponent = isSVGComponent(nodeAnalyze.argument, nodeAnalyze.properties);
-
-                if (SVGomponent.validate) {
-                  component = SVGomponent.component;
-                  exports.push({ component, name, location, typeExport });
-                }
+            const extract = async () => {
+              const svgComponent = await extractSvgComponentFromNode(
+                node.declaration as Declaration,
+                "function"
+              );
+              if (svgComponent) {
+                exports.push(svgComponent);
               }
-            } catch (error) {
-              console.error(`Error reading ${typeExport}: ${name}`);
-              exports.push({ component, name, location, typeExport });
-            }
+            };
+            extract();
           } else if (node.declaration.type === "VariableDeclaration") {
             // Exported variable declaration(s) 'export const variableName = value;'
-            node.declaration.declarations.forEach((declaration) => {
+            node.declaration.declarations.forEach(async (declaration) => {
               if (declaration.id.type === "Identifier") {
-                let component: SvgComponent["component"] = undefined;
-                let name: string = declaration.id.name;
-                let location: SvgComponent["location"] = declaration.id.loc?.start;
-                let typeExport: SvgComponent["typeExport"] = "variable";
-
-                try {
-                  const nodeAnalyze = analyzeExportType(declaration.init);
-
-                  if (nodeAnalyze) {
-                    const SVGomponent = isSVGComponent(
-                      nodeAnalyze.argument,
-                      nodeAnalyze.properties
-                    );
-
-                    if (SVGomponent.validate) {
-                      component = SVGomponent.component;
-                      exports.push({ component, name, location, typeExport });
-                    }
-                  }
-                } catch (error) {
-                  console.error(`Error reading ${typeExport}: ${name}`);
-                  exports.push({ component, name, location, typeExport });
+                const svgComponent = await extractSvgComponentFromNode(declaration, "variable");
+                if (svgComponent) {
+                  exports.push(svgComponent);
                 }
               }
             });
@@ -351,6 +362,9 @@ export function extractSVGComponentExports(filePath: string): Promise<SvgCompone
       },
     });
 
-    resolve(exports);
-  });
+    return exports;
+  } catch (error) {
+    console.error("Error during extraction:", error);
+    return [];
+  }
 }
