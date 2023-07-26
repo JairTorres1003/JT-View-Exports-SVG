@@ -2,7 +2,7 @@
 import * as fs from "fs";
 import * as babelParser from "@babel/parser";
 import traverse from "@babel/traverse";
-import { Declaration, Identifier, JSXElement, Node } from "@babel/types";
+import { Declaration, Identifier, JSXElement, JSXIdentifier, Node } from "@babel/types";
 import { ExportType, ExportTypeNode, IsSVGComponent } from "../interfaces/exportParser";
 import { HasInvalidChild, SvgComponent, SvgComponentDetails } from "../interfaces/svgExports";
 import { camelCase } from "lodash";
@@ -180,36 +180,49 @@ function isSVGComponent(
 
 /**
  * Get the first JSX element or fragment from the given children array.
- * @param children The array of JSX elements and fragments to search in.
- * @returns The first JSX element or fragment found, or null if multiple elements are found or none is found.
+ * @param {JSXElement["children"]} children - The array of JSX elements and fragments to search in.
+ * @returns {JSXElement | null} The first JSX element or fragment found, or null if multiple elements are found or none is found.
  */
 function getChildFragments(children: JSXElement["children"]): JSXElement | null {
-  let countJsxElements: number = 0;
-  let argument: JSXElement | null = null;
+  if (!children) {
+    return null;
+  }
+
+  let jsxElementsCount: number = 0;
+  let jsxElement: JSXElement | null = null;
 
   for (const child of children) {
-    if (child.type === "JSXElement") {
-      // If no JSX element or fragment has been found yet, store this as the argument
-      if (countJsxElements === 0) {
-        argument = child;
+    // If more than one JSX element is found, set jsxElement to null and break the loop.
+    if (jsxElementsCount > 1) {
+      jsxElement = null;
+      break;
+    }
+
+    // Check if the child is a JSX element with children.
+    if (child.type === "JSXElement" && child.children.length > 0) {
+      // Check if the JSX element is a React.Fragment.
+      if (child.openingElement.name.type === "JSXMemberExpression") {
+        const objectName = (child.openingElement.name.object as JSXIdentifier).name;
+        const propertyName = child.openingElement.name.property.name;
+        if (jsxElementsCount === 0 && `${objectName}.${propertyName}` === "React.Fragment") {
+          jsxElement = getChildFragments(child.children);
+        }
       } else {
-        argument = null;
-        break;
+        if (jsxElementsCount === 0) {
+          const nameElement = child.openingElement.name.name;
+          jsxElement = nameElement === "Fragment" ? getChildFragments(child.children) : child;
+        }
       }
-      countJsxElements++;
-    } else if (child.type === "JSXFragment") {
-      // If no JSX element or fragment has been found yet, recursively search in the child fragments
-      if (countJsxElements === 0) {
-        argument = getChildFragments(child.children);
-      } else {
-        argument = null;
-        break;
+      jsxElementsCount++;
+    } else if (child.type === "JSXFragment" && child.children.length > 0) {
+      if (jsxElementsCount === 0) {
+        jsxElement = getChildFragments(child.children);
       }
-      countJsxElements++;
+      jsxElementsCount++;
     }
   }
 
-  return argument;
+  return jsxElement;
 }
 
 /**
@@ -242,9 +255,12 @@ function analyzeExportType(node: ExportTypeNode): ExportType | undefined {
             argument = childFragment;
             type = childFragment.type;
           }
-        } else {
-          argument = nodeItem.argument as JSXElement;
-          type = nodeItem.argument?.type;
+        } else if (nodeItem.argument?.type === "JSXElement") {
+          const childFragment = getChildFragments([nodeItem.argument]);
+          if (childFragment) {
+            argument = childFragment;
+            type = childFragment.type;
+          }
         }
         break;
       }
