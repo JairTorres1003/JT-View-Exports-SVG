@@ -6,7 +6,8 @@ import { IconFailExport } from "../../icons/IconFailExport";
 
 const RenderSVG: FunctionComponent<SvgComponentDetails> = ({ children, componentName, props }) => {
   const svgRef = useRef<HTMLElement>(null);
-  const isSvg = componentName.includes("svg");
+  const isValidChild = typeof componentName === "string";
+  const isSvg = isValidChild && componentName.includes("svg");
 
   useEffect(() => {
     if (svgRef.current) {
@@ -25,7 +26,7 @@ const RenderSVG: FunctionComponent<SvgComponentDetails> = ({ children, component
     }
   }, []);
 
-  if (isArray(children)) {
+  if (isArray(children) && isValidChild) {
     let Component: any = componentName;
 
     if (componentName.includes("motion")) {
