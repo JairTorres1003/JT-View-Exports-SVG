@@ -3,12 +3,7 @@ import { SvgComponentDetails } from "./svgExports";
 
 export interface ExportType {
   argument: JSXElement;
-  properties: { [key: string]: Property };
-}
-
-export interface Property {
-  value: any;
-  type: string;
+  properties: { [key: string]: any };
 }
 
 export type ExportTypeNode = Expression | FunctionDeclaration | JSXElement | null | undefined;
