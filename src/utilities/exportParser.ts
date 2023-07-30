@@ -35,7 +35,7 @@ function parseFileContent(filePath: string): t.Node {
  * @param {ExportType["properties"]} properties - An object containing properties from the export type.
  * @returns {any | undefined} The extracted property value, or undefined if the value node type is not recognized.
  */
-export function getPropertyValues(
+function getPropertyValues(
   value: Value,
   properties: ExportType["properties"]
 ): any | undefined {
