@@ -2,40 +2,37 @@ import { SvgExport, SvgExportErrors } from "../interfaces/svgExports";
 
 /**
  * Filters an array of SvgExport objects based on a given filter string.
- * @param svgComponents - The array of SvgExport objects to filter.
- * @param filter - The filter string to apply to the component names.
- * @returns An array of SvgExport objects with components filtered based on the filter,
+ * @param {SvgExport[]} svgComponents - The array of SvgExport objects to filter.
+ * @param {string} filter - The filter string to apply to the component names.
+ * @returns {SvgExport[] | SvgExportErrors} An array of SvgExport objects with components filtered based on the filter,
  * or an SvgExportErrors object if there are errors.
  */
 export function filterSvgComponents(
   svgComponents: SvgExport[],
   filter: string
 ): SvgExport[] | SvgExportErrors {
+  const filterString = filter.toLowerCase().trim();
+
   // If the filter string is empty, return the original array without filtering.
-  if (filter.trim().length === 0) {
+  if (filterString.length === 0) {
     return svgComponents;
   }
 
   // If the filter string has less than 3 characters, return an empty array (no matches).
-  if (filter.trim().length < 3) {
+  if (filterString.length < 3) {
     return { messageError: "Please enter at least 3 characters to search..." };
   }
 
-  // Map through the SvgExport objects and filter their svgComponents based on the filter string.
-  const filteredExport = svgComponents
-    .map((svg) => {
-      let { file, svgComponents } = svg;
-      const filteredSvg = svgComponents.filter((component) =>
-        component.name.toLowerCase().includes(filter.toLowerCase().trim())
-      );
+  // Filter and flatten the array in a single step using flatMap.
+  const filteredExport = svgComponents.flatMap((svg) => {
+    const filteredSvgComponents = svg.svgComponents.filter((component) =>
+      component.name.toLowerCase().includes(filterString)
+    );
 
-      if (filteredSvg.length > 0) {
-        return { file, svgComponents: filteredSvg };
-      }
-
-      return [];
-    })
-    .flat();
+    return filteredSvgComponents.length > 0
+      ? [{ file: svg.file, svgComponents: filteredSvgComponents }]
+      : [];
+  });
 
   // If there are matches, return the filtered array, otherwise return an error message.
   return filteredExport.length > 0 ? filteredExport : { messageError: "No icons found" };

@@ -23,7 +23,7 @@ const SvgComponetExport: FunctionComponent<SvgExport> = (props) => {
       onChange={() => setIsExpanded(!isExpanded)}
       TransitionProps={{ timeout: { enter: 300, exit: 100 } }}>
       <AccordionSummary elevation={isExpanded ? 0 : 3}>
-        <Typography noWrap>{file.relativePath}</Typography>
+        <Typography noWrap>{file && file.relativePath}</Typography>
       </AccordionSummary>
       <AccordionDetails>
         <Grid container spacing={2}>
