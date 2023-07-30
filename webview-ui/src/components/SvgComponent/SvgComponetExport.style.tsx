@@ -49,7 +49,9 @@ export const AccordionSummary = styled((props: AccordionSummaryProps | PaperProp
 
 export const Grid = styled(GridMui)(() => ({
   display: "grid",
-  gridTemplateColumns: "repeat(auto-fit, minmax(110px, 1fr))",
+  gridAutoRows: "auto",
+  gridAutoColumns: "max-content",
+  gridTemplateColumns: "repeat(auto-fill, minmax(100px, 1fr))",
 }));
 
 export const GridItem = styled(GridMui)(() => ({
@@ -57,7 +59,7 @@ export const GridItem = styled(GridMui)(() => ({
   flexDirection: "column",
   gap: "5px",
   flex: "1 0 100px",
-  minWidth: "80px",
+  minWidth: "90px",
 }));
 
 export const Paper = styled(PaperMui)(() => ({

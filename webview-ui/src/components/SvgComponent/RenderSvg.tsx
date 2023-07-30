@@ -17,7 +17,7 @@ const RenderSVG: FunctionComponent<SvgComponentDetails> = ({ children, component
       const minWidthFather = 94;
       const maxHeightFather = 65;
 
-      width = width > minWidthFather ? width - minWidthFather : width;
+      width = width > minWidthFather ? width % minWidthFather : Math.round(minWidthFather / width);
 
       const maxWidthScale = (minWidthFather - padding) / (width + padding);
       const maxHeightScale = (maxHeightFather - padding) / (height + padding);
