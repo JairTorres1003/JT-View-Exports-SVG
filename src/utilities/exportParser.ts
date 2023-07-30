@@ -3,7 +3,7 @@ import * as fs from "fs";
 import * as babelParser from "@babel/parser";
 import traverse from "@babel/traverse";
 import * as t from "@babel/types";
-import { ExportType, ExportTypeNode, IsSVGComponent } from "../interfaces/exportParser";
+import { ExportType, ExportTypeNode, IsSVGComponent, Value } from "../interfaces/exportParser";
 import {
   HasInvalidChild,
   SvgComponent,
@@ -29,50 +29,57 @@ function parseFileContent(filePath: string): t.Node {
   });
 }
 
-export function getPropertyValues(value: t.JSXAttribute["value"] | t.Expression | t.PatternLike) {
-  if (value?.type === "StringLiteral" || value?.type === "NumericLiteral") {
-    return value.value;
+/**
+ * Extracts property values from a given value node.
+ * @param {Value} value - The value node to extract the property from.
+ * @param {ExportType["properties"]} properties - An object containing properties from the export type.
+ * @returns {any | undefined} The extracted property value, or undefined if the value node type is not recognized.
+ */
+export function getPropertyValues(
+  value: Value,
+  properties: ExportType["properties"]
+): any | undefined {
+  if (!value) {
+    return;
   }
 
-  if (value?.type === "JSXExpressionContainer") {
-    if (value.expression.type === "ObjectExpression") {
-      const objectProps: { [key: string]: any } = {};
-      value.expression.properties.forEach((property) => {
-        if (property.type === "ObjectProperty" && property.key.type === "Identifier") {
-          if (property.value.type === "ArrayExpression") {
-            objectProps[property.key.name] = getPropertyValues(property.value);
+  switch (value.type) {
+    case "NumericLiteral":
+      return value.value;
+    case "StringLiteral":
+      return value.value;
+    case "Identifier":
+      return properties[value.name];
+    case "JSXExpressionContainer":
+      if (t.isObjectExpression(value.expression)) {
+        const objectProps: { [key: string]: any } = {};
+        value.expression.properties.forEach((property) => {
+          if (t.isObjectProperty(property) && t.isIdentifier(property.key)) {
+            objectProps[property.key.name] = getPropertyValues(property.value, properties);
           }
+        });
+        return objectProps;
+      } else {
+        return getPropertyValues(value.expression, properties);
+      }
+    case "ArrayExpression":
+      const arrayProps: any[] = [];
+
+      value.elements.forEach((element) => {
+        if (t.isUnaryExpression(element) && t.isNumericLiteral(element.argument)) {
+          const val = parseInt(element.operator + (element.argument?.value || ""));
+          if (val) arrayProps.push(val);
+        } else {
+          arrayProps.push(getPropertyValues(element, properties));
         }
       });
-      return objectProps;
-    } else if (
-      value.expression.type === "StringLiteral" ||
-      value.expression.type === "NumericLiteral"
-    ) {
-      return value.expression.value;
-    }
+
+      return arrayProps;
+    case "AssignmentPattern":
+      return getPropertyValues(value.right, properties);
+    default:
+      return undefined;
   }
-
-  if (value?.type === "ArrayExpression") {
-    const arrayProps: any[] = [];
-
-    value.elements.forEach((element) => {
-      if (element?.type === "UnaryExpression" && element.argument.type === "NumericLiteral") {
-        const val = parseInt(element.operator + (element.argument?.value || ""));
-        if (val) arrayProps.push(val);
-      } else if (element?.type === "NumericLiteral" || element?.type === "StringLiteral") {
-        arrayProps.push(element.value);
-      }
-    });
-
-    return arrayProps;
-  }
-
-  if (value?.type === "AssignmentPattern") {
-    return getPropertyValues(value.right);
-  }
-
-  return undefined;
 }
 
 /**
@@ -98,9 +105,11 @@ function getChildAttributes(
       openingElement.attributes.forEach((attr) => {
         if (t.isJSXAttribute(attr)) {
           const { name, value } = attr;
-
+          if (name.name === "transition") {
+            console.log("pause");
+          }
           // Store the attribute value in the props object using camelCase format for the attribute name
-          props[camelCase(name.name?.toString() || "")] = getPropertyValues(value);
+          props[camelCase(name.name?.toString() || "")] = getPropertyValues(value, properties);
         }
       });
 
@@ -200,7 +209,7 @@ function isSVGComponent(
         const { name, value } = attr;
 
         // Store the attribute value in the svgProps object using camelCase format for the attribute name
-        svgProps[camelCase(name.name?.toString() || "")] = getPropertyValues(value);
+        svgProps[camelCase(name.name?.toString() || "")] = getPropertyValues(value, properties);
 
         // Check if the attribute is 'xmlns' and its value is 'http://www.w3.org/2000/svg'
         if (svgProps.xmlns === "http://www.w3.org/2000/svg") {
@@ -319,7 +328,7 @@ function analyzeExportType(node: ExportTypeNode): ExportType | undefined {
 
               if (t.isIdentifier(key)) {
                 // Add the property to the properties object
-                properties[key.name] = getPropertyValues(value);
+                properties[key.name] = getPropertyValues(value, {});
               }
             }
           });
