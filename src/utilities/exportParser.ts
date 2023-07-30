@@ -68,7 +68,9 @@ export function getPropertyValues(
       value.elements.forEach((element) => {
         if (t.isUnaryExpression(element) && t.isNumericLiteral(element.argument)) {
           const val = parseInt(element.operator + (element.argument?.value || ""));
-          if (val) arrayProps.push(val);
+          if (val) {
+            arrayProps.push(val);
+          }
         } else {
           arrayProps.push(getPropertyValues(element, properties));
         }
@@ -337,8 +339,12 @@ function analyzeExportType(node: ExportTypeNode): ExportType | undefined {
     }
   }
 
-  // Check if the export type is JSXElement and the opening element's name is JSXIdentifier
-  if (type === "JSXElement" && argument?.openingElement?.name.type === "JSXIdentifier") {
+  // Check if the export type is JSXElement and the opening element's name is JSXIdentifier or JSXMemberExpression
+  if (
+    type === "JSXElement" &&
+    (t.isJSXIdentifier(argument?.openingElement?.name) ||
+      t.isJSXMemberExpression(argument?.openingElement?.name))
+  ) {
     return { argument, properties };
   }
 
