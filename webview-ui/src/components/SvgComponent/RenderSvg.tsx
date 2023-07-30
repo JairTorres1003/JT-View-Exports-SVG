@@ -11,11 +11,13 @@ const RenderSVG: FunctionComponent<SvgComponentDetails> = ({ children, component
 
   useEffect(() => {
     if (svgRef.current) {
-      const width = svgRef.current.clientWidth;
+      let width = svgRef.current.clientWidth;
       const height = svgRef.current.clientHeight;
       const padding = 20; // 20px: 10px padding on each side
       const minWidthFather = 94;
       const maxHeightFather = 65;
+
+      width = width > minWidthFather ? width - minWidthFather : width;
 
       const maxWidthScale = (minWidthFather - padding) / (width + padding);
       const maxHeightScale = (maxHeightFather - padding) / (height + padding);
@@ -31,6 +33,9 @@ const RenderSVG: FunctionComponent<SvgComponentDetails> = ({ children, component
 
     if (componentName.includes("motion")) {
       Component = motion(componentName.split(".")[1]);
+      const transition: { [key: string]: any } = { ...props.transition };
+      transition.repeat = Infinity;
+      props = { ...props, transition };
     }
 
     if (children.length > 0) {
