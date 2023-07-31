@@ -1,4 +1,4 @@
-import { Disposable, Uri, ViewColumn, Webview, WebviewPanel, window } from "vscode";
+import { Disposable, Uri, ViewColumn, Webview, WebviewPanel, env, window } from "vscode";
 import { getUri } from "../utilities/getUri";
 import { getNonce } from "../utilities/getNonce";
 import { SvgExport, SvgExportErrors } from "../interfaces/svgExports";
@@ -159,6 +159,10 @@ export class ViewExportsSVGPanel {
           const svgComponents = filterSvgComponents(this.svgComponents as SvgExport[], filter);
           const svgComponentsJson = JSON.stringify(svgComponents);
           this._postMessage("filteredSvgComponents", svgComponentsJson);
+        }
+        if (message.command === "getTranslations") {
+          const language = env.language || "en";
+          this._postMessage("language", language);
         }
       },
       undefined,
