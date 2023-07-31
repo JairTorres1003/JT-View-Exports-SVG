@@ -72,6 +72,7 @@ export const Paper = styled(PaperMui)(() => ({
   alignItems: "center",
   textAlign: "center",
   background: "#fff",
+  cursor: "pointer",
   svg: {
     maxWidth: "96%",
     maxHeight: "96%",

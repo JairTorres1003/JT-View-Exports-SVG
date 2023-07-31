@@ -6,6 +6,10 @@ import { createTheme } from "@mui/material";
 const useApp = () => {
   const [svgComponents, setSvgComponents] = useState<SvgExport[]>([]);
   const [showMessage, setShowMessage] = useState<string | null>(null);
+  const [snackbar, setSnackbar] = useState<{ open: boolean; name?: string }>({
+    open: false,
+    name: "",
+  });
   const [currentTheme, setCurrentTheme] = useState<"dark" | "light">("light");
 
   /**
@@ -64,8 +68,10 @@ const useApp = () => {
 
   return {
     setShowMessage,
+    setSnackbar,
     setSvgComponents,
     showMessage,
+    snackbar,
     svgComponents,
     theme,
   };
