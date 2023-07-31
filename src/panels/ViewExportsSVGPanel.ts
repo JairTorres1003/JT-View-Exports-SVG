@@ -5,6 +5,7 @@ import { SvgExport, SvgExportErrors } from "../interfaces/svgExports";
 import { getCurrentTheme } from "../utilities/getTheme";
 import { ReciveMessageData, postMessageCommand } from "../interfaces/vscode";
 import { filterSvgComponents } from "../utilities/filterSvgComponents";
+import { getTranslations } from "../utilities/getLocaleLanguage";
 
 /**
  * Webview panel for displaying SVG exports.
@@ -54,6 +55,7 @@ export class ViewExportsSVGPanel {
    */
   public static render(extensionUri: Uri, svgComponents: SvgExport[] | SvgExportErrors) {
     const column = window.activeTextEditor ? window.activeTextEditor.viewColumn : undefined;
+    const i18n = getTranslations();
 
     // If we already have a panel, show it
     if (ViewExportsSVGPanel.currentPanel) {
@@ -65,7 +67,7 @@ export class ViewExportsSVGPanel {
     // Otherwise, create a new panel
     const panel = window.createWebviewPanel(
       ViewExportsSVGPanel.viewType,
-      "View Exports SVG",
+      i18n.panelTitle,
       column || ViewColumn.One,
       {
         // Enable JavaScript in the webview
@@ -107,6 +109,7 @@ export class ViewExportsSVGPanel {
    * @returns The HTML content for the webview panel.
    */
   private _getWebviewContent(webview: Webview, extensionUri: Uri) {
+    const i18n = getTranslations();
     // Get the URIs for the required assets
     const icoUri = getUri(webview, extensionUri, ["webview-ui", "build", "assets", "favico.ico"]);
     const stylesUri = getUri(webview, extensionUri, ["webview-ui", "build", "assets", "index.css"]);
@@ -125,7 +128,7 @@ export class ViewExportsSVGPanel {
           <meta name="viewport" content="width=device-width, initial-scale=1.0" />
           <meta http-equiv="Content-Security-Policy" content="default-src 'none'; style-src 'unsafe-inline' ${webview.cspSource}; script-src 'nonce-${nonce}';">
           <link rel="stylesheet" type="text/css" href="${stylesUri}">
-          <title>View Exports SVG</title>
+          <title>${i18n.panelTitle}</title>
         </head>
         <body>
           <div id="root"></div>

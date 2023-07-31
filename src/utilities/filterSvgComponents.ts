@@ -1,4 +1,5 @@
 import { SvgExport, SvgExportErrors } from "../interfaces/svgExports";
+import { getTranslations } from "./getLocaleLanguage";
 
 /**
  * Filters an array of SvgExport objects based on a given filter string.
@@ -12,6 +13,7 @@ export function filterSvgComponents(
   filter: string
 ): SvgExport[] | SvgExportErrors {
   const filterString = filter.toLowerCase().trim();
+  const i18n = getTranslations();
 
   // If the filter string is empty, return the original array without filtering.
   if (filterString.length === 0) {
@@ -20,7 +22,7 @@ export function filterSvgComponents(
 
   // If the filter string has less than 3 characters, return an empty array (no matches).
   if (filterString.length < 3) {
-    return { messageError: "Please enter at least 3 characters to search..." };
+    return { messageError: i18n.PleaseSearch };
   }
 
   // Filter and flatten the array in a single step using flatMap.
@@ -35,5 +37,5 @@ export function filterSvgComponents(
   });
 
   // If there are matches, return the filtered array, otherwise return an error message.
-  return filteredExport.length > 0 ? filteredExport : { messageError: "No icons found" };
+  return filteredExport.length > 0 ? filteredExport : { messageError: i18n.NoIconsFound };
 }

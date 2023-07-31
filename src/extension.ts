@@ -3,6 +3,7 @@ import { SvgExport, SvgFile } from "./interfaces/svgExports";
 import { ViewExportsSVGPanel } from "./panels/ViewExportsSVGPanel";
 import { extractSVGComponentExports } from "./utilities/exportParser";
 import { getWorkspaceFolder } from "./utilities/getWorkspaceFolder";
+import { getTranslations, loadLanguage } from "./utilities/getLocaleLanguage";
 import * as path from "path";
 
 /**
@@ -12,12 +13,13 @@ import * as path from "path";
  * @param {Uri[]} items The list of items.
  */
 const runCommand = async (context: ExtensionContext, item: Uri, items: Uri[]) => {
+  const i18n = getTranslations();
   const selectedFiles: SvgFile[] = [];
   const workspaceFolder: string = getWorkspaceFolder();
   const REGEX_FILE: RegExp = /\.(js|jsx|ts|tsx)$/i;
   const progressOptions: ProgressOptions = {
     location: ProgressLocation.Notification,
-    title: "Extracting SVG exports...",
+    title: i18n.progressTitle,
     cancellable: false,
   };
 
@@ -58,7 +60,7 @@ const runCommand = async (context: ExtensionContext, item: Uri, items: Uri[]) =>
     // Create or show the webview panel
     ViewExportsSVGPanel.render(
       context.extensionUri,
-      svgComponents.length > 0 ? svgComponents : { messageError: "No icons found" }
+      svgComponents.length > 0 ? svgComponents : { messageError: i18n.NoIconsFound }
     );
     console.log(`length svg: ${svgComponents[0].lengthSvg}/${svgComponents[0].lengthExports}`);
 
@@ -75,6 +77,9 @@ const runCommand = async (context: ExtensionContext, item: Uri, items: Uri[]) =>
  * @param {ExtensionContext} context The extension context.
  */
 export function activate(context: ExtensionContext) {
+  // Load the local language
+  loadLanguage(context.extensionUri);
+
   context.subscriptions.push(
     commands.registerCommand("JT-View-Exports-SVG.showMenu", (item: any, items: any[]) =>
       runCommand(context, item, items)

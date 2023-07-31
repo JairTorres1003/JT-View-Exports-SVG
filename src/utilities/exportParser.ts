@@ -104,9 +104,7 @@ function getChildAttributes(
       openingElement.attributes.forEach((attr) => {
         if (t.isJSXAttribute(attr)) {
           const { name, value } = attr;
-          if (name.name === "transition") {
-            console.log("pause");
-          }
+
           // Store the attribute value in the props object using camelCase format for the attribute name
           props[camelCase(name.name?.toString() || "")] = getPropertyValues(value, properties);
         }
