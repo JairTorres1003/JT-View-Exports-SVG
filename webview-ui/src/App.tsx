@@ -1,6 +1,7 @@
 import { Alert, Box, Snackbar, ThemeProvider, Typography } from "@mui/material";
 import { Finder } from "./components/Finder/Finder";
 import SvgComponetExport from "./components/SvgComponent/SvgComponetExport";
+import { useTranslation } from "react-i18next";
 import useApp from "./hooks/useApp";
 
 function App() {
@@ -13,6 +14,7 @@ function App() {
     svgComponents,
     theme,
   } = useApp();
+  const { t } = useTranslation();
 
   return (
     <ThemeProvider theme={theme}>
@@ -37,7 +39,7 @@ function App() {
           anchorOrigin={{ vertical: "bottom", horizontal: "center" }}>
           <Alert severity="success">
             <Typography fontSize={12}>
-              Copied {snackbar.name && `'${snackbar.name}' `}to clipboard
+              {`${t("Copied")} ${snackbar.name && `'${snackbar.name}' `}${t("ToClipboard")}`}
             </Typography>
           </Alert>
         </Snackbar>

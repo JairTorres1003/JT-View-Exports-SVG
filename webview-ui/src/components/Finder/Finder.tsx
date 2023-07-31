@@ -4,10 +4,12 @@ import { FinderProps } from "../../interfaces/Finder";
 import { IconLupe } from "../../icons/IconLupe";
 import { IconClose } from "../../icons/IconClose";
 import { BoxFinder, TextField } from "./Finder.style";
+import { useTranslation } from "react-i18next";
 import useFinder from "../../hooks/useFinder";
 
 export const Finder: FunctionComponent<FinderProps> = (props) => {
   const { handleClearValue, setValue, value } = useFinder(props);
+  const { t } = useTranslation();
 
   return (
     <BoxFinder>
@@ -21,13 +23,13 @@ export const Finder: FunctionComponent<FinderProps> = (props) => {
         label={
           <Box className="MuiFormLabel-finder">
             <IconLupe />
-            <Typography>Search icons</Typography>
+            <Typography>{t("Label.SearchIcons")}</Typography>
           </Box>
         }
         onChange={(val) => setValue(val.target.value.trimStart())}
         InputProps={{
           endAdornment: (
-            <IconButton size="small" onClick={handleClearValue}>
+            <IconButton size="small" onClick={handleClearValue} title={t("Label.Clear")}>
               <IconClose />
             </IconButton>
           ),

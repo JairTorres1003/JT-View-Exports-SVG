@@ -2,6 +2,7 @@ import { useEffect, useMemo, useState } from "react";
 import { SvgExport } from "../interfaces/svgExports";
 import { vscode } from "../utilities/vscode";
 import { createTheme } from "@mui/material";
+import i18n from "../i18n";
 
 const useApp = () => {
   const [svgComponents, setSvgComponents] = useState<SvgExport[]>([]);
@@ -11,7 +12,6 @@ const useApp = () => {
     name: "",
   });
   const [currentTheme, setCurrentTheme] = useState<"dark" | "light">("light");
-  const [language, setLanguage] = useState<string>("en");
 
   /**
    * Handle the SVG components data received from the webview.
@@ -41,7 +41,7 @@ const useApp = () => {
    * @param {string} lang - The language code of the selected language.
    */
   const handleLanguage = (lang: string) => {
-    setLanguage(lang);
+    i18n.changeLanguage(lang);
   };
 
   const theme = useMemo(
