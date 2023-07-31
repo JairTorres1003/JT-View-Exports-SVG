@@ -35,10 +35,7 @@ function parseFileContent(filePath: string): t.Node {
  * @param {ExportType["properties"]} properties - An object containing properties from the export type.
  * @returns {any | undefined} The extracted property value, or undefined if the value node type is not recognized.
  */
-function getPropertyValues(
-  value: Value,
-  properties: ExportType["properties"]
-): any | undefined {
+function getPropertyValues(value: Value, properties: ExportType["properties"]): any | undefined {
   if (!value) {
     return;
   }
@@ -141,7 +138,7 @@ function getChildAttributes(
 
       // Add the child component to the components array
       components.push({
-        componentName,
+        tag: componentName,
         children: childComponents,
         props,
       });
@@ -228,7 +225,7 @@ function isSVGComponent(
 
       // Create the component object with the component name, children, and props
       component = {
-        componentName: getComponentName(openingElement),
+        tag: getComponentName(openingElement),
         children: childrenDetails,
         props: svgProps,
       };

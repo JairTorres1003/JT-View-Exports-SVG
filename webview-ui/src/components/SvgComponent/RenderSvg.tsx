@@ -4,10 +4,10 @@ import { isArray } from "lodash";
 import { motion } from "framer-motion";
 import { IconFailExport } from "../../icons/IconFailExport";
 
-const RenderSVG: FunctionComponent<SvgComponentDetails> = ({ children, componentName, props }) => {
+const RenderSVG: FunctionComponent<SvgComponentDetails> = ({ children, tag, props }) => {
   const svgRef = useRef<HTMLElement>(null);
-  const isValidChild = typeof componentName === "string";
-  const isSvg = isValidChild && componentName.includes("svg");
+  const isValidChild = typeof tag === "string";
+  const isSvg = isValidChild && tag.includes("svg");
 
   useEffect(() => {
     if (svgRef.current) {
@@ -29,10 +29,10 @@ const RenderSVG: FunctionComponent<SvgComponentDetails> = ({ children, component
   }, []);
 
   if (isArray(children) && isValidChild) {
-    let Component: any = componentName;
+    let Component: any = tag;
 
-    if (componentName.includes("motion")) {
-      Component = motion(componentName.split(".")[1]);
+    if (tag.includes("motion")) {
+      Component = motion(tag.split(".")[1]);
       const transition: { [key: string]: any } = { ...props.transition };
       transition.repeat = Infinity;
       props = { ...props, transition };

@@ -49,7 +49,7 @@ export interface SvgComponentDetails {
   /**
    * The name of the component.
    */
-  componentName: keyof JSX.IntrinsicElements | string | HasInvalidChild;
+  tag: keyof JSX.IntrinsicElements | string | HasInvalidChild;
   /**
    * An array of child SvgComponentDetails objects representing nested components.
    */

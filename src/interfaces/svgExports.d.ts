@@ -51,7 +51,7 @@ export interface SvgComponentDetails {
   /**
    * The name of the component.
    */
-  componentName: keyof JSXIdentifier | string | HasInvalidChild;
+  tag: keyof JSXIdentifier | string | HasInvalidChild;
   /**
    * An array of child SvgComponentDetails objects representing nested components.
    */
