@@ -17,7 +17,7 @@ export class ViewExportsSVGPanel {
 
   public static readonly viewType = "JT-View-Exports-SVG";
 
-  private readonly svgComponents: SvgExport[] | SvgExportErrors;
+  private svgComponents: SvgExport[] | SvgExportErrors;
   private readonly _panel: WebviewPanel;
   private _disposables: Disposable[] = [];
 
@@ -57,6 +57,7 @@ export class ViewExportsSVGPanel {
 
     // If we already have a panel, show it
     if (ViewExportsSVGPanel.currentPanel) {
+      ViewExportsSVGPanel.currentPanel.svgComponents = svgComponents;
       ViewExportsSVGPanel.currentPanel._panel.reveal(column);
       return;
     }
