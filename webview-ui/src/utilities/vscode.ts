@@ -1,5 +1,5 @@
 import type { WebviewApi } from "vscode-webview";
-import { MessageData, onMessageCommand, postMessageCommand } from "../interfaces/vscode";
+import { MessageData, OnMessageCommand, PostMessageCommand } from "../interfaces/vscode";
 
 /**
  * Wrapper class for the VSCode API, providing methods for communication between the webview and the extension.
@@ -37,7 +37,7 @@ class VSCodeAPIWrapper {
    * @param command The command associated with the message.
    * @param data The data payload of the message.
    */
-  public postMessage(command: postMessageCommand, data?: any) {
+  public postMessage(command: PostMessageCommand, data?: any) {
     if (this.vsCodeApi) {
       this.vsCodeApi.postMessage({ command, data });
     } else {
@@ -50,7 +50,7 @@ class VSCodeAPIWrapper {
    * @param command The command associated with the message.
    * @param handler The handler function to be called when the message is received.
    */
-  public onMessage(command: onMessageCommand, handler: Function) {
+  public onMessage(command: OnMessageCommand, handler: Function) {
     if (!this.messageHandlers[command]) {
       this.messageHandlers[command] = [];
     }
@@ -62,7 +62,7 @@ class VSCodeAPIWrapper {
    * @param command The command associated with the message.
    * @param handler The handler function to be removed.
    */
-  public removeMessageHandler(command: onMessageCommand, handler: Function) {
+  public removeMessageHandler(command: OnMessageCommand, handler: Function) {
     const handlers = this.messageHandlers[command];
     if (handlers) {
       const index = handlers.indexOf(handler);
