@@ -1,9 +1,13 @@
 export type receiveMessageCommand =
   | "getCurrentTheme"
+  | "getTranslations"
   | "requestSvgComponents"
   | "searchSvgComponents";
-export type postMessageCommand = "currentTheme" | "filteredSvgComponents" | "svgComponents";
-
+export type postMessageCommand =
+  | "currentTheme"
+  | "filteredSvgComponents"
+  | "language"
+  | "svgComponents";
 /**
  * Data structure representing a message received by the webview.
  */

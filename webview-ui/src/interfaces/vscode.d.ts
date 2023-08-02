@@ -1,5 +1,13 @@
-export type postMessageCommand = "getCurrentTheme" | "requestSvgComponents" | "searchSvgComponents";
-export type onMessageCommand = "currentTheme" | "filteredSvgComponents" | "svgComponents";
+export type postMessageCommand =
+  | "getCurrentTheme"
+  | "getTranslations"
+  | "requestSvgComponents"
+  | "searchSvgComponents";
+export type onMessageCommand =
+  | "currentTheme"
+  | "filteredSvgComponents"
+  | "language"
+  | "svgComponents";
 
 /**
  * Data structure representing a message sent between the webview and the extension.

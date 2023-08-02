@@ -2,10 +2,15 @@ import { useEffect, useMemo, useState } from "react";
 import { SvgExport } from "../interfaces/svgExports";
 import { vscode } from "../utilities/vscode";
 import { createTheme } from "@mui/material";
+import i18n from "../i18n";
 
 const useApp = () => {
   const [svgComponents, setSvgComponents] = useState<SvgExport[]>([]);
   const [showMessage, setShowMessage] = useState<string | null>(null);
+  const [snackbar, setSnackbar] = useState<{ open: boolean; name?: string }>({
+    open: false,
+    name: "",
+  });
   const [currentTheme, setCurrentTheme] = useState<"dark" | "light">("light");
 
   /**
@@ -31,6 +36,14 @@ const useApp = () => {
     setCurrentTheme(theme);
   };
 
+  /**
+   * Handles the selection of a language and sets the chosen language in the state.
+   * @param {string} lang - The language code of the selected language.
+   */
+  const handleLanguage = (lang: string) => {
+    i18n.changeLanguage(lang);
+  };
+
   const theme = useMemo(
     () =>
       createTheme({
@@ -50,22 +63,27 @@ const useApp = () => {
     // Request the extension
     vscode.postMessage("requestSvgComponents");
     vscode.postMessage("getCurrentTheme");
+    vscode.postMessage("getTranslations");
 
     // Listen for messages
     vscode.onMessage("svgComponents", handleSvgComponents);
     vscode.onMessage("currentTheme", handleCurrentTheme);
+    vscode.onMessage("language", handleLanguage);
 
     // Clean up by removing the message handlers when the component is unmounted
     return () => {
       vscode.removeMessageHandler("svgComponents", handleSvgComponents);
       vscode.removeMessageHandler("currentTheme", handleCurrentTheme);
+      vscode.removeMessageHandler("language", handleLanguage);
     };
   }, []);
 
   return {
     setShowMessage,
+    setSnackbar,
     setSvgComponents,
     showMessage,
+    snackbar,
     svgComponents,
     theme,
   };

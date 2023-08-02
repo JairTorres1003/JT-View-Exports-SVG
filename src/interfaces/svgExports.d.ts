@@ -7,7 +7,15 @@ export interface SvgExport {
   /**
    * The file object containing the absolute and relative paths of the SVG file.
    */
-  file: SvgFile;
+  file?: SvgFile;
+  /**
+   * The number of exports (SVG components) present in the file.
+   */
+  lengthExports?: number;
+  /**
+   * The number of SVG elements found in the file.
+   */
+  lengthSvg?: number;
   /**
    * An array of SvgComponent objects representing the exported SVG components.
    */
@@ -43,7 +51,7 @@ export interface SvgComponentDetails {
   /**
    * The name of the component.
    */
-  componentName: keyof JSXIdentifier | string;
+  tag: keyof JSXIdentifier | string | HasInvalidChild;
   /**
    * An array of child SvgComponentDetails objects representing nested components.
    */

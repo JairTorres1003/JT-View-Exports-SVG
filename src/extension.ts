@@ -1,23 +1,25 @@
 import { commands, ExtensionContext, ProgressLocation, ProgressOptions, Uri, window } from "vscode";
-import { SvgFile } from "./interfaces/svgExports";
+import { SvgExport, SvgFile } from "./interfaces/svgExports";
 import { ViewExportsSVGPanel } from "./panels/ViewExportsSVGPanel";
-import { extractSVGComponentExports } from "./utilities/exportParser";
+import { extractSVGComponentExports } from "./utilities/svg/exportParser";
 import { getWorkspaceFolder } from "./utilities/getWorkspaceFolder";
+import { getTranslations, loadLanguage } from "./utilities/getLocaleLanguage";
 import * as path from "path";
 
 /**
  * Run the command and create or show the webview panel.
- * @param context The extension context.
- * @param item The selected item.
- * @param items The list of items.
+ * @param {ExtensionContext} context The extension context.
+ * @param {Uri} item The selected item.
+ * @param {Uri[]} items The list of items.
  */
 const runCommand = async (context: ExtensionContext, item: Uri, items: Uri[]) => {
+  const i18n = getTranslations();
   const selectedFiles: SvgFile[] = [];
   const workspaceFolder: string = getWorkspaceFolder();
   const REGEX_FILE: RegExp = /\.(js|jsx|ts|tsx)$/i;
   const progressOptions: ProgressOptions = {
     location: ProgressLocation.Notification,
-    title: "Extracting SVG exports...",
+    title: i18n.progressTitle,
     cancellable: false,
   };
 
@@ -43,14 +45,14 @@ const runCommand = async (context: ExtensionContext, item: Uri, items: Uri[]) =>
     }
 
     // Extract the exports from selected files
-    const svgComponents = await Promise.all(
+    const svgComponents: SvgExport[] = await Promise.all(
       selectedFiles.map(async (file) => {
         try {
           const svgExports = await extractSVGComponentExports(file.absolutePath);
-          return { file, svgComponents: svgExports };
+          return { ...svgExports, file, lengthSvg: svgExports.svgComponents.length };
         } catch (error) {
           console.error(`Error parsing file ${file.absolutePath}: ${error}`);
-          return { file, svgComponents: [] };
+          return { file, lengthExports: 0, lengthSvg: 0, svgComponents: [] };
         }
       })
     );
@@ -58,11 +60,9 @@ const runCommand = async (context: ExtensionContext, item: Uri, items: Uri[]) =>
     // Create or show the webview panel
     ViewExportsSVGPanel.render(
       context.extensionUri,
-      svgComponents.length > 0 ? svgComponents : { messageError: "No icons found" }
+      svgComponents.length > 0 ? svgComponents : { messageError: i18n.NoIconsFound }
     );
-    console.log([
-      { file: svgComponents[0].file, svgComponents: svgComponents[0].svgComponents.slice(0, 20) },
-    ]);
+    console.log(`length svg: ${svgComponents[0].lengthSvg}/${svgComponents[0].lengthExports}`);
 
     return svgComponents;
   });
@@ -74,9 +74,12 @@ const runCommand = async (context: ExtensionContext, item: Uri, items: Uri[]) =>
 
 /**
  * This method is called when your extension is activated.
- * @param context The extension context.
+ * @param {ExtensionContext} context The extension context.
  */
 export function activate(context: ExtensionContext) {
+  // Load the local language
+  loadLanguage(context.extensionUri);
+
   context.subscriptions.push(
     commands.registerCommand("JT-View-Exports-SVG.showMenu", (item: any, items: any[]) =>
       runCommand(context, item, items)
