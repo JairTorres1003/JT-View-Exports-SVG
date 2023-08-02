@@ -1,9 +1,9 @@
-export type postMessageCommand =
+export type PostMessageCommand =
   | "getCurrentTheme"
   | "getTranslations"
   | "requestSvgComponents"
   | "searchSvgComponents";
-export type onMessageCommand =
+export type OnMessageCommand =
   | "currentTheme"
   | "filteredSvgComponents"
   | "language"
@@ -16,7 +16,7 @@ interface MessageData {
   /**
    * The command associated with the message.
    */
-  command: onMessageCommand;
+  command: OnMessageCommand;
   /**
    * The data payload of the message.
    */

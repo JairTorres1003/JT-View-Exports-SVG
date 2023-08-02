@@ -24,7 +24,8 @@
   "scripts": {
     "dev": "vite",
     "build": "tsc && vite build",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "lint": "eslint src --ext ts"
   },
   "dependencies": {
     "@emotion/react": "^11.11.1",
@@ -43,7 +44,11 @@
     "@types/react": "^18.2.14",
     "@types/react-dom": "^18.2.6",
     "@types/vscode-webview": "^1.57.1",
+    "@typescript-eslint/eslint-plugin": "^6.2.1",
+    "@typescript-eslint/parser": "^6.2.1",
     "@vitejs/plugin-react": "^4.0.1",
+    "eslint": "^8.46.0",
+    "prettier": "^3.0.0",
     "typescript": "^5.0.2",
     "vite": "^4.4.0"
   }
