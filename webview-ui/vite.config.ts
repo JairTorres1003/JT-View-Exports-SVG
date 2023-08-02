@@ -6,6 +6,7 @@ export default defineConfig({
   plugins: [react()],
   build: {
     outDir: "build",
+    chunkSizeWarningLimit: 1000, // 1 MB (kilobytes)
     rollupOptions: {
       output: {
         entryFileNames: `assets/[name].js`,
