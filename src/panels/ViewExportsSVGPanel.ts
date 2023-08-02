@@ -3,7 +3,7 @@ import { getUri } from "../utilities/getUri";
 import { getNonce } from "../utilities/getNonce";
 import { SvgExport, SvgExportErrors } from "../interfaces/svgExports";
 import { getCurrentTheme } from "../utilities/getTheme";
-import { ReciveMessageData, postMessageCommand } from "../interfaces/vscode";
+import { ReciveMessageData, PostMessageCommand } from "../interfaces/vscode";
 import { filterSvgComponents } from "../utilities/svg/filterSvgComponents";
 import { getTranslations } from "../utilities/getLocaleLanguage";
 
@@ -175,7 +175,7 @@ export class ViewExportsSVGPanel {
    * @param command The command to be included in the message.
    * @param data An optional parameter representing the data payload of the message.
    */
-  private _postMessage(command: postMessageCommand, data?: any) {
+  private _postMessage(command: PostMessageCommand, data?: any) {
     this._panel.webview.postMessage({ command, data });
   }
 }

@@ -1,9 +1,9 @@
-export type receiveMessageCommand =
+export type ReceiveMessageCommand =
   | "getCurrentTheme"
   | "getTranslations"
   | "requestSvgComponents"
   | "searchSvgComponents";
-export type postMessageCommand =
+export type PostMessageCommand =
   | "currentTheme"
   | "filteredSvgComponents"
   | "language"
@@ -15,7 +15,7 @@ interface ReciveMessageData {
   /**
    * The command associated with the received message.
    */
-  command: receiveMessageCommand;
+  command: ReceiveMessageCommand;
 
   /**
    * The payload data of the received message.
