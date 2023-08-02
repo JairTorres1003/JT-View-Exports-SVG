@@ -1,3 +1,7 @@
+/**
+ * Mapping of SVG tag names to their corresponding string representations.
+ * This object provides a convenient way to access the string representations of various SVG tags.
+ */
 export const SVG_TAGS: { [tagKey: string]: string } = {
   svg: "svg",
   g: "g",

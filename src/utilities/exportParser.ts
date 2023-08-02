@@ -12,6 +12,7 @@ import {
 } from "../interfaces/svgExports";
 import { camelCase } from "lodash";
 import { SVG_TAGS } from "./svgTags";
+import { defaultProps } from "./defaultProps";
 
 /**
  * Parse the content of a file and return the AST (Abstract Syntax Tree).
@@ -46,7 +47,7 @@ function getPropertyValues(value: Value, properties: ExportType["properties"]): 
     case "StringLiteral":
       return value.value;
     case "Identifier":
-      return properties[value.name];
+      return properties[value.name] || defaultProps[value.name];
     case "JSXExpressionContainer":
       if (t.isObjectExpression(value.expression)) {
         const objectProps: { [key: string]: any } = {};
