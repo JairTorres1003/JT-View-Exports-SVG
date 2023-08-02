@@ -1,7 +1,7 @@
 import { commands, ExtensionContext, ProgressLocation, ProgressOptions, Uri, window } from "vscode";
 import { SvgExport, SvgFile } from "./interfaces/svgExports";
 import { ViewExportsSVGPanel } from "./panels/ViewExportsSVGPanel";
-import { extractSVGComponentExports } from "./utilities/exportParser";
+import { extractSVGComponentExports } from "./utilities/svg/exportParser";
 import { getWorkspaceFolder } from "./utilities/getWorkspaceFolder";
 import { getTranslations, loadLanguage } from "./utilities/getLocaleLanguage";
 import * as path from "path";

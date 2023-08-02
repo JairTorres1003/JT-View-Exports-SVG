@@ -4,7 +4,7 @@ import { getNonce } from "../utilities/getNonce";
 import { SvgExport, SvgExportErrors } from "../interfaces/svgExports";
 import { getCurrentTheme } from "../utilities/getTheme";
 import { ReciveMessageData, postMessageCommand } from "../interfaces/vscode";
-import { filterSvgComponents } from "../utilities/filterSvgComponents";
+import { filterSvgComponents } from "../utilities/svg/filterSvgComponents";
 import { getTranslations } from "../utilities/getLocaleLanguage";
 
 /**

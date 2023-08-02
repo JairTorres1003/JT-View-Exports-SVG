@@ -3,13 +3,13 @@ import * as fs from "fs";
 import * as babelParser from "@babel/parser";
 import traverse from "@babel/traverse";
 import * as t from "@babel/types";
-import { ExportType, ExportTypeNode, IsSVGComponent, Value } from "../interfaces/exportParser";
+import { ExportType, ExportTypeNode, IsSVGComponent, Value } from "../../interfaces/exportParser";
 import {
   HasInvalidChild,
   SvgComponent,
   SvgComponentDetails,
   SvgExport,
-} from "../interfaces/svgExports";
+} from "../../interfaces/svgExports";
 import { camelCase } from "lodash";
 import { SVG_TAGS } from "./svgTags";
 import { defaultProps } from "./defaultProps";

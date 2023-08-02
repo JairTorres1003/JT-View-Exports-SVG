@@ -1,5 +1,5 @@
-import { SvgExport, SvgExportErrors } from "../interfaces/svgExports";
-import { getTranslations } from "./getLocaleLanguage";
+import { SvgExport, SvgExportErrors } from "../../interfaces/svgExports";
+import { getTranslations } from "../getLocaleLanguage";
 
 /**
  * Filters an array of SvgExport objects based on a given filter string.
