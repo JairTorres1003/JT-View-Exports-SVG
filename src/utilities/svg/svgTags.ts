@@ -29,4 +29,5 @@ export const SVG_TAGS: { [tagKey: string]: string } = {
   metadata: "metadata",
   desc: "desc",
   title: "title",
+  stop: "stop",
 };

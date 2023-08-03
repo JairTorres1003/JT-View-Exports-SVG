@@ -1,71 +1,63 @@
-# JT-View-Exports-SVG README
+# JT View Exports SVG
 
-This is the README for your extension "JT-View-Exports-SVG". After writing up a brief description, we recommend including the following sections.
+<img src="./assets/JT View Exports SVG - ICON.svg" alt="Logo JT View Exports SVG" width="180" height="180">
 
-## Features
+## Descripción
 
-Describe specific features of your extension including screenshots of your extension in action. Image paths are relative to this README file.
+'**JT View Exports SVG**' is a Visual Studio Code extension that provides a convenient way to view SVG icons exported from JavaScript, JSX, TypeScript, or TSX files. With this extension, you can easily explore and search for SVG icons within your project, making it effortless to find and utilize your icon assets.
 
-For example if there is an image subfolder under your extension project workspace:
+**Key features:**
 
-\!\[feature X\]\(images/feature-x.png\)
+- Seamlessly extract SVG icons from code files
+- Display a floating menu option for quick access
+- Open a dedicated window with a searchable list of all discovered icons
+- Efficient search functionality to locate specific icons
 
-> Tip: Many popular extensions utilize animations. This is an excellent way to show off your extension! We recommend short, focused animations that are easy to follow.
+Enhance your productivity and streamline your icon management workflow with the '**JT View Exports SVG**' extension for Visual Studio Code.
 
-## Requirements
+## Screenshots
 
-If you have any requirements or dependencies, add a section describing those and how to install and configure them.
+<img src="./assets/JT View Exports SVG - Demo.gif" alt="Demo JT View Exports SVG" width="auto" height="auto" style="max-height: 720px">
 
-## Extension Settings
+## Installation
 
-Include if your extension adds any VS Code settings through the `contributes.configuration` extension point.
+1. Open Visual Studio Code.
+2. Go to the Extensions view by clicking on the Extensions icon in the Activity Bar on the side of the window.
+3. Search for "View Exports SVG" in the Extensions view search box.
+4. Click the Install button for the "View Exports SVG" extension.
 
-For example:
+## usage
 
-This extension contributes the following settings:
+1. Select one or more files containing SVG icons in your Visual Studio Code workspace. ([See valid files](SeeValidFiles)).
+2. Right-click on the selected files.
+3. In the context menu, choose the "View SVG Exports 🔍" option.
+4. A panel will appear showing all the SVG icons found.
+5. Use the search bar in the panel to filter the icons by their names.
+6. Click the SVG icon to copy the name to the clipboard.
 
-* `myExtension.enable`: Enable/disable this extension.
-* `myExtension.thing`: Set to `blah` to do something.
+## Contribuciones
 
-## Known Issues
+Contributions are welcome! If you find any bugs or have suggestions for new features, please feel free to open an issue or submit a pull request.
 
-Calling out known issues can help limit users opening duplicate issues against your extension.
+## License
 
-## Release Notes
+This extension is available under the [MIT License](LICENSE).
 
-Users appreciate release notes as you update your extension.
+## Keywords
 
-### 1.0.0
+Visual Studio Code, Extension, SVG icons, React, Javascript, JSX, TypeScript, TSX, Icon management, Icon assets.
 
-Initial release of ...
+### Development
 
-### 1.0.1
+If you want to contribute to the development of this extension, follow the steps below:
 
-Fixed issue #.
+1. Clone the repository:
 
-### 1.1.0
+   ```bash
+   git clone https://github.com/JairTorres1003/JT-View-Exports-SVG.git
+   ```
 
-Added features X, Y, and Z.
-
----
-
-## Following extension guidelines
-
-Ensure that you've read through the extensions guidelines and follow the best practices for creating your extension.
-
-* [Extension Guidelines](https://code.visualstudio.com/api/references/extension-guidelines)
-
-## Working with Markdown
-
-You can author your README using Visual Studio Code. Here are some useful editor keyboard shortcuts:
-
-* Split the editor (`Cmd+\` on macOS or `Ctrl+\` on Windows and Linux).
-* Toggle preview (`Shift+Cmd+V` on macOS or `Shift+Ctrl+V` on Windows and Linux).
-* Press `Ctrl+Space` (Windows, Linux, macOS) to see a list of Markdown snippets.
-
-## For more information
-
-* [Visual Studio Code's Markdown Support](http://code.visualstudio.com/docs/languages/markdown)
-* [Markdown Syntax Reference](https://help.github.com/articles/markdown-basics/)
-
-**Enjoy!**
+2. Install dependencies: `npm run install:all`
+3. Build the webview-ui: `npm run build:webview`
+4. Build the extension: `npm run compile`
+5. Press F5 to start a new VS Code instance with the extension loaded.

@@ -76,6 +76,7 @@ export const Paper = styled(PaperMui)(() => ({
   svg: {
     maxWidth: "96%",
     maxHeight: "96%",
+    color: "#000",
   },
 }));
 
