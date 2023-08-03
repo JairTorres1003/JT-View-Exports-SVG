@@ -4,9 +4,13 @@
 # Ignore test files
 .vscode-test/**
 out/test/**
+out/utilities/saveResponseFiles.js
 
 # Ignore source code
 src/**
+!src/i18n
+webview-ui/**
+!webview-ui/build
 
 # Ignore Misc
 .yarnrc
