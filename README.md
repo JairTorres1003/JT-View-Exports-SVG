@@ -28,7 +28,7 @@ Enhance your productivity and streamline your icon management workflow with the 
 
 ## usage
 
-1. Select one or more files containing SVG icons in your Visual Studio Code workspace. ([SVG SUPPORT](SVG%20SUPPORT)).
+1. Select one or more files containing SVG icons in your Visual Studio Code workspace. ([SVG SUPPORT](SVG%20SUPPORT.md)).
 2. Right-click on the selected files.
 3. In the context menu, choose the "View SVG Exports 🔍" option.
 4. A panel will appear showing all the SVG icons found.
