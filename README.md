@@ -1,6 +1,6 @@
 # JT View Exports SVG
 
-<img src="./assets/JT View Exports SVG - ICON.svg" alt="Logo JT View Exports SVG" width="180" height="180">
+<img src="./assets/JT View Exports SVG - ICON.png" alt="Logo JT View Exports SVG" width="180" height="180">
 
 ## Descripción
 
@@ -28,7 +28,7 @@ Enhance your productivity and streamline your icon management workflow with the 
 
 ## usage
 
-1. Select one or more files containing SVG icons in your Visual Studio Code workspace. ([See valid files](SeeValidFiles.md)).
+1. Select one or more files containing SVG icons in your Visual Studio Code workspace. ([See valid files](SeeValidFiles)).
 2. Right-click on the selected files.
 3. In the context menu, choose the "View SVG Exports 🔍" option.
 4. A panel will appear showing all the SVG icons found.
