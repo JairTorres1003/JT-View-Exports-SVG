@@ -1,0 +1,55 @@
+{
+  "name": "webview-ui-jt-view-exports-svg",
+  "displayName": "WebView UI - View Exports SVG",
+  "description": "",
+  "keywords": [
+    "SVG icons",
+    "TypeScript",
+    "TSX",
+    "icon management",
+    "icon assets",
+    "UI"
+  ],
+  "private": true,
+  "license": "MIT",
+  "author": "Jair Torres",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/JairTorres1003/JT-View-Exports-SVG.git"
+  },
+  "bugs": {
+    "url": "https://github.com/JairTorres1003/JT-View-Exports-SVG/issues"
+  },
+  "homepage": "https://github.com/JairTorres1003/JT-View-Exports-SVG/tree/main/webview-ui#readme",
+  "scripts": {
+    "dev": "vite",
+    "build": "tsc && vite build",
+    "preview": "vite preview",
+    "lint": "eslint src --ext ts"
+  },
+  "dependencies": {
+    "@emotion/react": "^11.11.1",
+    "@emotion/styled": "^11.11.0",
+    "@mui/material": "^5.14.1",
+    "@vscode/webview-ui-toolkit": "^1.2.2",
+    "framer-motion": "^10.13.0",
+    "i18next": "^23.4.1",
+    "lodash": "^4.17.21",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "react-i18next": "^13.0.3"
+  },
+  "devDependencies": {
+    "@types/lodash": "^4.14.195",
+    "@types/react": "^18.2.14",
+    "@types/react-dom": "^18.2.6",
+    "@types/vscode-webview": "^1.57.1",
+    "@typescript-eslint/eslint-plugin": "^6.2.1",
+    "@typescript-eslint/parser": "^6.2.1",
+    "@vitejs/plugin-react": "^4.0.1",
+    "eslint": "^8.46.0",
+    "prettier": "^3.0.0",
+    "typescript": "^5.0.2",
+    "vite": "^4.4.0"
+  }
+}
