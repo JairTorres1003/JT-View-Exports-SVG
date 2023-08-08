@@ -1,7 +1,7 @@
 {
   "name": "jt-view-exports-svg",
   "displayName": "View Exports SVG",
-  "description": "A Visual Studio Code extension that provides a convenient way to view SVG icons exported from JavaScript, JSX, TypeScript, or TSX files. With this extension, you can easily explore and search for SVG icons within your project, making it effortless to find and utilize your icon assets.\\\\n\\\\nKey features:\\\\n- Seamlessly extract SVG icons from code files\\\\n- Display a floating menu option for quick access\\\\n- Open a dedicated window with a searchable list of all discovered icons\\\\n- Efficient search functionality to locate specific icons\\\\n\\\\nEnhance your productivity and streamline your icon management workflow with the View Exports SVG extension for Visual Studio Code.",
+  "description": "A Visual Studio Code extension that provides a convenient way to view SVG icons exported from JavaScript, JSX, TypeScript, or TSX files. With this extension, you can easily explore and search for SVG icons within your project, making it effortless to find and utilize your icon assets.",
   "keywords": [
     "Visual Studio Code",
     "Extension",
