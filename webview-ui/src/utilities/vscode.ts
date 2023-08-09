@@ -40,8 +40,6 @@ class VSCodeAPIWrapper {
   public postMessage(command: PostMessageCommand, data?: any) {
     if (this.vsCodeApi) {
       this.vsCodeApi.postMessage({ command, data });
-    } else {
-      console.log("Post message:", { command, data });
     }
   }
 
