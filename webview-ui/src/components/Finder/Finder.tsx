@@ -1,8 +1,7 @@
 import { Box, IconButton, Typography } from "@mui/material";
 import { FunctionComponent } from "react";
 import { FinderProps } from "../../interfaces/Finder";
-import { IconLupe } from "../../icons/IconLupe";
-import { IconClose } from "../../icons/IconClose";
+import { IconClose, IconLupe } from "../../icons";
 import { BoxFinder, TextField } from "./Finder.style";
 import { useTranslation } from "react-i18next";
 import useFinder from "../../hooks/useFinder";

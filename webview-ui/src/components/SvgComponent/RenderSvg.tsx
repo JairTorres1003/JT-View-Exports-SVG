@@ -2,7 +2,7 @@ import { FunctionComponent, useEffect, useRef } from "react";
 import { SvgComponentDetails } from "../../interfaces/svgExports";
 import { isArray } from "lodash";
 import { motion } from "framer-motion";
-import { IconFailExport } from "../../icons/IconFailExport";
+import { IconFailExport } from "../../icons";
 
 const RenderSVG: FunctionComponent<SvgComponentDetails> = ({ children, tag, props }) => {
   const svgRef = useRef<HTMLElement>(null);

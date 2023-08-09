@@ -10,7 +10,7 @@ import {
   Typography,
 } from "./SvgComponetExport.style";
 import { AccordionDetails } from "@mui/material";
-import { IconFailExport } from "../../icons/IconFailExport";
+import { IconFailExport } from "../../icons";
 
 const SvgComponetExport: FunctionComponent<
   SvgExport & { setSnackbar: Dispatch<SetStateAction<{ open: boolean; name?: string }>> }
