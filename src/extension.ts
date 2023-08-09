@@ -62,7 +62,6 @@ const runCommand = async (context: ExtensionContext, item: Uri, items: Uri[]) =>
       context.extensionUri,
       svgComponents.length > 0 ? svgComponents : { messageError: i18n.NoIconsFound }
     );
-    console.log(`length svg: ${svgComponents[0].lengthSvg}/${svgComponents[0].lengthExports}`);
 
     return svgComponents;
   });
