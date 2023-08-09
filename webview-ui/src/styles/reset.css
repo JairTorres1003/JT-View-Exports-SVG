@@ -27,15 +27,15 @@ button {
 }
 
 button {
-  background: transparent;
   border: 0;
   outline: 0;
+  background: transparent;
 }
 
 a {
   color: inherit;
-  -webkit-text-stroke: inherit;
   text-decoration: none;
+  -webkit-text-stroke: inherit;
 }
 
 input:-webkit-autofill,
@@ -47,17 +47,17 @@ textarea:-webkit-autofill:focus,
 select:-webkit-autofill,
 select:-webkit-autofill:hover,
 select:-webkit-autofill:focus {
-  transition: background-color 99999s ease-in-out 0s;
-  -webkit-text-fill-color: inherit !important;
   caret-color: inherit !important;
+  -webkit-text-fill-color: inherit !important;
+  transition: background-color 99999s ease-in-out 0s;
 }
 
 /* clears the 'X' from Internet Explorer */
 input[type="search"]::-ms-clear,
 input[type="search"]::-ms-reveal {
-  display: none;
   width: 0;
   height: 0;
+  display: none;
 }
 
 /* clears the 'X' from Chrome */
@@ -85,9 +85,9 @@ body[data-vscode-theme-kind="vscode-high-contrast"] {
 }
 
 main {
-  min-height: 100vh;
+  gap: 10px;
   width: 100%;
   display: flex;
+  min-height: 100vh;
   flex-direction: column;
-  gap: 10px;
 }

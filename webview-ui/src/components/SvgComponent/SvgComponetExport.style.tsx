@@ -1,38 +1,36 @@
 import {
+  AccordionSummaryProps,
   Accordion as AccordionMui,
   AccordionSummary as AccordionSummaryMui,
   Paper as PaperMui,
-  Typography as TypographyMui,
-  styled,
-  AccordionSummaryProps,
   PaperProps,
+  styled,
+  Typography as TypographyMui,
 } from "@mui/material";
 import GridMui from "@mui/material/Unstable_Grid2";
 import { ArrowForwardIcon } from "../../icons";
 
 export const Accordion = styled(AccordionMui)(() => ({
-  "backgroundColor": "inherit",
   "margin": "0 !important",
-  "&::before": {
-    display: "none",
-  },
+  "backgroundColor": "inherit",
+  "&::before": { display: "none" },
 }));
 
 export const AccordionSummary = styled((props: AccordionSummaryProps | PaperProps) => (
   <AccordionSummaryMui component={PaperMui} expandIcon={<ArrowForwardIcon />} {...props} />
 ))(({ theme }) => ({
-  "flexDirection": "row-reverse",
-  "minHeight": "60px !important",
-  "maxHeight": 60,
-  "backgroundColor": "#fff",
-  "borderRadius": 4,
-  "transition": "background-color 0.2s",
   "color": "#000",
+  "maxHeight": 60,
+  "borderRadius": 4,
+  "backgroundColor": "#fff",
+  "minHeight": "60px !important",
+  "flexDirection": "row-reverse",
+  "transition": "background-color 0.2s",
   "&.Mui-expanded": {
-    backgroundColor: "transparent",
-    borderBottom: "1px outset",
     borderRadius: 0,
     color: "inherit",
+    borderBottom: "1px outset",
+    backgroundColor: "transparent",
   },
   "& .MuiAccordionSummary-expandIconWrapper.Mui-expanded": {
     transform: "rotate(90deg)",
@@ -41,9 +39,7 @@ export const AccordionSummary = styled((props: AccordionSummaryProps | PaperProp
   "& .MuiAccordionSummary-content, & .MuiAccordionSummary-content.Mui-expanded": {
     "margin": 0,
     "marginLeft": theme.spacing(1),
-    "& .MuiTypography-root": {
-      fontSize: "16px",
-    },
+    "& .MuiTypography-root": { fontSize: "16px" },
   },
 }));
 
@@ -55,33 +51,29 @@ export const Grid = styled(GridMui)(() => ({
 }));
 
 export const GridItem = styled(GridMui)(() => ({
-  display: "flex",
-  flexDirection: "column",
   gap: "5px",
-  flex: "1 0 100px",
+  display: "flex",
   minWidth: "90px",
+  flex: "1 0 100px",
+  flexDirection: "column",
 }));
 
 export const Paper = styled(PaperMui)(() => ({
+  padding: 10,
+  minWidth: 65,
   minHeight: 65,
   maxHeight: 65,
-  minWidth: 65,
-  padding: 10,
   display: "flex",
-  justifyContent: "center",
-  alignItems: "center",
-  textAlign: "center",
-  background: "#fff",
   cursor: "pointer",
-  svg: {
-    maxWidth: "96%",
-    maxHeight: "96%",
-    color: "#000",
-  },
+  background: "#fff",
+  textAlign: "center",
+  alignItems: "center",
+  justifyContent: "center",
+  svg: { color: "#000", maxWidth: "96%", maxHeight: "96%" },
 }));
 
 export const Typography = styled(TypographyMui)(() => ({
   fontSize: 12,
-  textAlign: "center",
   color: "inherit",
+  textAlign: "center",
 }));
