@@ -1,6 +1,7 @@
 import { Box, TextField as TextFieldMui, styled } from "@mui/material";
 
 export const BoxFinder = styled(Box)(() => ({
+  width: "100%",
   display: "flex",
   marginBottom: 16,
   justifyContent: "center",
