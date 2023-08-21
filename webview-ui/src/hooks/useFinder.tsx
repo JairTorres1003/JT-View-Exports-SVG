@@ -5,6 +5,7 @@ import { FinderProps } from "../interfaces/Finder";
 
 const useFinder = (props: FinderProps) => {
   const [value, setValue] = useState<string>("");
+  const [stateAnimete, setStateAnimete] = useState(false);
   const debounce = useDebounce(value, 600);
 
   /**
@@ -31,6 +32,8 @@ const useFinder = (props: FinderProps) => {
     }
   };
 
+  const handleStateAnimate = () => setStateAnimete(!stateAnimete);
+
   useEffect(() => {
     props.setSvgComponents([]);
     // Request the extension
@@ -47,7 +50,9 @@ const useFinder = (props: FinderProps) => {
 
   return {
     handleClearValue,
+    handleStateAnimate,
     setValue,
+    stateAnimete,
     value,
   };
 };

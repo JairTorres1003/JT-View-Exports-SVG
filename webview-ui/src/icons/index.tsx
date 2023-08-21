@@ -1,3 +1,5 @@
+import { motion } from "framer-motion";
+
 export const ArrowForwardIcon = () => (
   <svg
     focusable="false"
@@ -133,15 +135,139 @@ export const IconLupe = () => {
   );
 };
 
-export const IconSettings = () => (
-  <svg
-    stroke="currentColor"
-    fill="currentColor"
-    stroke-width="0"
-    viewBox="0 0 512 512"
-    height="20"
-    width="20"
-    xmlns="http://www.w3.org/2000/svg">
-    <path d="M299.3 376c6.2-14.1 20.3-24 36.7-24s30.5 9.9 36.7 24H448c8.8 0 16 7.2 16 16s-7.2 16-16 16h-75.3c-6.2 14.1-20.3 24-36.7 24s-30.5-9.9-36.7-24H64c-8.8 0-16-7.2-16-16s7.2-16 16-16h235.3zM139.3 240c6.2-14.1 20.3-24 36.7-24s30.5 9.9 36.7 24H448c8.8 0 16 7.2 16 16s-7.2 16-16 16H212.7c-6.2 14.1-20.3 24-36.7 24s-30.5-9.9-36.7-24H64c-8.8 0-16-7.2-16-16s7.2-16 16-16h75.3zM299.3 104c6.2-14.1 20.3-24 36.7-24s30.5 9.9 36.7 24H448c8.8 0 16 7.2 16 16s-7.2 16-16 16h-75.3c-6.2 14.1-20.3 24-36.7 24s-30.5-9.9-36.7-24H64c-8.8 0-16-7.2-16-16s7.2-16 16-16h235.3z"></path>
-  </svg>
-);
+export const IconSettings = ({
+  size = 20,
+  color = "#000",
+  circleColor = "#000",
+  state = false,
+}) => {
+  return (
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      width={size}
+      height={size}
+      viewBox="0 0 20 20"
+      fill="none">
+      <motion.g
+        variants={{
+          active: {
+            translateY: 5.3,
+            rotate: -45,
+            transition: { type: "linear" },
+          },
+          inactive: {
+            translateY: 0,
+            rotate: 0,
+            transition: { type: "linear" },
+          },
+        }}
+        animate={state ? "active" : "inactive"}>
+        <line
+          x1="2.48001"
+          y1="4.69001"
+          x2="17.52"
+          y2="4.69001"
+          stroke={color}
+          strokeWidth="1.26"
+          strokeLinecap="round"
+        />
+        <motion.circle
+          cx="13.115"
+          cy="4.685"
+          r="1.565"
+          fill={circleColor}
+          variants={{
+            active: {
+              translateX: 9.99499 - 13.115,
+              scale: 0,
+              opacity: 0,
+              transition: { type: "linear" },
+            },
+            inactive: { opacity: 1 },
+          }}
+          animate={state ? "active" : "inactive"}
+        />
+      </motion.g>
+      <g>
+        <motion.line
+          x1="2.48001"
+          y1="10"
+          x2="17.52"
+          y2="10"
+          stroke={color}
+          strokeWidth="1.26"
+          strokeLinecap="round"
+          variants={{
+            active: {
+              opacity: 0,
+              scaleX: 0,
+              transition: { type: "linear" },
+            },
+            inactive: {
+              opacity: 1,
+              scaleX: 1,
+              transition: { type: "linear" },
+            },
+          }}
+          animate={state ? "active" : "inactive"}
+        />
+        <motion.circle
+          cx="6.86502"
+          cy="9.99499"
+          r="1.565"
+          fill={circleColor}
+          variants={{
+            active: {
+              translateX: 9.99499 - 6.86502,
+              scale: 0,
+              opacity: 0,
+              transition: { type: "linear" },
+            },
+            inactive: { opacity: 1 },
+          }}
+          animate={state ? "active" : "inactive"}
+        />
+      </g>
+      <motion.g
+        variants={{
+          active: {
+            translateY: -5.32,
+            rotate: 45,
+            transition: { type: "linear" },
+          },
+          inactive: {
+            translateY: 0,
+            rotate: 0,
+            transition: { type: "linear" },
+          },
+        }}
+        animate={state ? "active" : "inactive"}>
+        <line
+          x1="2.48001"
+          y1="15.32"
+          x2="17.52"
+          y2="15.32"
+          stroke={color}
+          strokeWidth="1.26"
+          strokeLinecap="round"
+        />
+        <motion.circle
+          cx="13.115"
+          cy="15.315"
+          r="1.565"
+          fill={circleColor}
+          variants={{
+            active: {
+              translateX: 9.99499 - 13.115,
+              scale: 0,
+              opacity: 0,
+              transition: { type: "linear" },
+            },
+            inactive: { opacity: 1 },
+          }}
+          animate={state ? "active" : "inactive"}
+        />
+      </motion.g>
+    </svg>
+  );
+};

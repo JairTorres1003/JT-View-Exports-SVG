@@ -7,7 +7,7 @@ import { useTranslation } from "react-i18next";
 import useFinder from "../../hooks/useFinder";
 
 export const Finder: FunctionComponent<FinderProps> = (props) => {
-  const { handleClearValue, setValue, value } = useFinder(props);
+  const { handleClearValue, handleStateAnimate, setValue, stateAnimete, value } = useFinder(props);
   const { t } = useTranslation();
 
   return (
@@ -41,8 +41,9 @@ export const Finder: FunctionComponent<FinderProps> = (props) => {
       <IconButton
         size="small"
         title={t("Label.Settings")}
+        onClick={handleStateAnimate}
         sx={{ mb: "16px", color: "rgba(var(--color-JT-view-export-svg))" }}>
-        <IconSettings />
+        <IconSettings state={stateAnimete} />
       </IconButton>
     </Box>
   );
