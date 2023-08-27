@@ -3,5 +3,14 @@
     "Label.Settings": "Settings",
     "Label.SearchIcons": "Search icons",
     "Copied": "Copied",
-    "ToClipboard": "to clipboard"
+    "ToClipboard": "to clipboard",
+    "DropHere": "Drop here",
+    "Upload": "Upload",
+    "OrDropFile": "or drop a file right here",
+    "SelectedFile": {
+        "Single": "Selected file",
+        "Multiple": "Selected files",
+        "None": "No files selected"
+    },
+    "ExtractIcons": "Extract Icons Svg"
 }

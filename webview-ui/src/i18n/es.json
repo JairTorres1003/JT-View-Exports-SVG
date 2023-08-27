@@ -3,5 +3,14 @@
     "Label.Settings": "Ajustes",
     "Label.SearchIcons": "Buscar íconos",
     "Copied": "Copiado",
-    "ToClipboard": "al portapapeles"
+    "ToClipboard": "al portapapeles",
+    "DropHere": "Suelta aquí",
+    "Upload": "Sube",
+    "OrDropFile": "o suelta un archivo aquí mismo",
+    "SelectedFile": {
+        "Single": "Archivo seleccionado",
+        "Multiple": "Archivos seleccionados",
+        "None": "Ningún archivo seleccionado"
+    },
+    "ExtractIcons": "Extraer íconos SVG"
 }
