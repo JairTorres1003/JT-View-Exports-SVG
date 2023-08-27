@@ -104,6 +104,10 @@ export interface SvgExportErrors {
    * The error message describing the issue with SVG exports.
    */
   messageError: string;
+  /**
+   * The optional number representing the selected file.
+   */
+  fileSelected?: number;
 }
 
 /**

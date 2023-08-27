@@ -59,8 +59,10 @@ export class ViewExportsSVGPanel {
 
     // If we already have a panel, show it
     if (ViewExportsSVGPanel.currentPanel) {
+      const svgComponentsJson = JSON.stringify(svgComponents);
       ViewExportsSVGPanel.currentPanel.svgComponents = svgComponents;
-      ViewExportsSVGPanel.currentPanel._panel.reveal(column);
+      ViewExportsSVGPanel.currentPanel._postMessage("svgComponents", svgComponentsJson);
+      ViewExportsSVGPanel.currentPanel._panel.reveal(ViewColumn.Active);
       return;
     }
 

@@ -1,5 +1,5 @@
 import { commands, ExtensionContext, ProgressLocation, ProgressOptions, Uri, window } from "vscode";
-import { SvgExport, SvgFile } from "./interfaces/svgExports";
+import { SvgExport, SvgExportErrors, SvgFile } from "./interfaces/svgExports";
 import { ViewExportsSVGPanel } from "./panels/ViewExportsSVGPanel";
 import { extractSVGComponentExports } from "./utilities/svg/exportParser";
 import { getWorkspaceFolder } from "./utilities/getWorkspaceFolder";
@@ -17,6 +17,7 @@ const runCommand = async (context: ExtensionContext, item: Uri, items: Uri[]) =>
   const selectedFiles: SvgFile[] = [];
   const workspaceFolder: string = getWorkspaceFolder();
   const REGEX_FILE: RegExp = /\.(js|jsx|ts|tsx)$/i;
+  const newError: SvgExportErrors = { messageError: "" };
   const progressOptions: ProgressOptions = {
     location: ProgressLocation.Notification,
     title: i18n.progressTitle,
@@ -36,12 +37,20 @@ const runCommand = async (context: ExtensionContext, item: Uri, items: Uri[]) =>
           selectedFiles.push({ absolutePath: file.fsPath, relativePath });
         }
       });
-    } else {
+    } else if (item) {
       // Check if the selected item is a file with a supported extension
       if (REGEX_FILE.test(item.fsPath.slice(-4)) && item.scheme === "file") {
         const relativePath: string = path.relative(workspaceFolder, item.fsPath);
         selectedFiles.push({ absolutePath: item.fsPath, relativePath });
       }
+    } else {
+      newError.messageError = i18n.NoFileSelected;
+      newError.fileSelected = 0;
+
+      // Create or show the webview panel
+      ViewExportsSVGPanel.render(context.extensionUri, newError);
+
+      return;
     }
 
     // Extract the exports from selected files
@@ -57,18 +66,25 @@ const runCommand = async (context: ExtensionContext, item: Uri, items: Uri[]) =>
       })
     );
 
+    if (svgComponents.length <= 0 && selectedFiles.length > 0) {
+      newError.messageError = i18n.NoIconsFound;
+      newError.fileSelected = selectedFiles.length;
+    }
+
     // Create or show the webview panel
     ViewExportsSVGPanel.render(
       context.extensionUri,
-      svgComponents.length > 0 ? svgComponents : { messageError: i18n.NoIconsFound }
+      svgComponents.length > 0 ? svgComponents : newError
     );
 
     return svgComponents;
   });
 
-  // Hide the loader message
-  progress.report({ increment: 100 });
-  progress.dispose();
+  if (progress) {
+    // Hide the loader message
+    progress.report({ increment: 100 });
+    progress.dispose();
+  }
 };
 
 /**
