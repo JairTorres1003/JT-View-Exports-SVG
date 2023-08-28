@@ -1,9 +1,11 @@
 import { Box, IconButton, Typography } from "@mui/material";
-import { FunctionComponent } from "react";
-import { FinderProps } from "../../interfaces/Finder";
-import { IconClose, IconLupe, IconSettings } from "../../icons";
-import { BoxFinder, TextField } from "./Finder.style";
 import { useTranslation } from "react-i18next";
+import { FunctionComponent } from "react";
+
+import { BoxFinder, TextField } from "./Finder.style";
+import { IconClose, IconLupe, IconSettings } from "../../icons";
+import { FinderProps } from "../../interfaces/Finder";
+
 import useFinder from "../../hooks/useFinder";
 
 export const Finder: FunctionComponent<FinderProps> = (props) => {

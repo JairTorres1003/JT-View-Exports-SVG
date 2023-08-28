@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+
 import { vscode } from "../utilities/vscode";
 import useDebounce from "./useDebounce";
 import { FinderProps } from "../interfaces/Finder";

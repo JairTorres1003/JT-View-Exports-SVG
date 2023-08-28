@@ -8,6 +8,7 @@ import {
   Typography as TypographyMui,
 } from "@mui/material";
 import GridMui from "@mui/material/Unstable_Grid2";
+
 import { ArrowForwardIcon } from "../../icons";
 
 export const Accordion = styled(AccordionMui)(() => ({

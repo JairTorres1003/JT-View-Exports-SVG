@@ -1,6 +1,10 @@
 import { Dispatch, FunctionComponent, SetStateAction, useState } from "react";
+import { AccordionDetails } from "@mui/material";
+
 import { SvgExport } from "../../interfaces/svgExports";
+import { IconFailExport } from "../../icons";
 import RenderSVG from "./RenderSvg";
+
 import {
   Accordion,
   AccordionSummary,
@@ -9,8 +13,6 @@ import {
   Paper,
   Typography,
 } from "./SvgComponetExport.style";
-import { AccordionDetails } from "@mui/material";
-import { IconFailExport } from "../../icons";
 
 const SvgComponetExport: FunctionComponent<
   SvgExport & { setSnackbar: Dispatch<SetStateAction<{ open: boolean; name?: string }>> }

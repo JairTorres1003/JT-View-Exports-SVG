@@ -1,12 +1,15 @@
 import { useEffect, useMemo, useState } from "react";
+import { createTheme } from "@mui/material";
+
 import { SvgExport } from "../interfaces/svgExports";
 import { vscode } from "../utilities/vscode";
-import { createTheme } from "@mui/material";
 import i18n from "../i18n";
 
 const useApp = () => {
   const [svgComponents, setSvgComponents] = useState<SvgExport[]>([]);
   const [showMessage, setShowMessage] = useState<string | null>(null);
+  const [isLoading, setIsLoading] = useState<boolean>(false);
+  const [fileSelected, setFileSelected] = useState<number | null | undefined>(0);
   const [snackbar, setSnackbar] = useState<{ open: boolean; name?: string }>({
     open: false,
     name: "",
@@ -22,10 +25,14 @@ const useApp = () => {
 
     if (response.messageError) {
       setShowMessage(response.messageError);
+      setFileSelected(response?.fileSelected);
     } else {
       setShowMessage(null);
       setSvgComponents(response);
+      setFileSelected(response?.length);
     }
+
+    setIsLoading(false);
   };
 
   /**
@@ -60,6 +67,7 @@ const useApp = () => {
   );
 
   useEffect(() => {
+    setIsLoading(true);
     // Request the extension
     vscode.postMessage("requestSvgComponents");
     vscode.postMessage("getCurrentTheme");
@@ -72,13 +80,14 @@ const useApp = () => {
 
     // Clean up by removing the message handlers when the component is unmounted
     return () => {
-      vscode.removeMessageHandler("svgComponents", handleSvgComponents);
       vscode.removeMessageHandler("currentTheme", handleCurrentTheme);
       vscode.removeMessageHandler("language", handleLanguage);
     };
   }, []);
 
   return {
+    fileSelected,
+    isLoading,
     setShowMessage,
     setSnackbar,
     setSvgComponents,
