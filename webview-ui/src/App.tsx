@@ -7,11 +7,13 @@ import SvgComponetExport from "./components/SvgComponent/SvgComponetExport";
 import { DropZone } from "./components/DropZone/DropZone";
 
 import useApp from "./hooks/useApp";
+import { Loading } from "./components/Loading/Loading";
 
 function App() {
   const {
     fileSelected,
     isLoading,
+    handleExtractIcons,
     setShowMessage,
     setSnackbar,
     setSvgComponents,
@@ -25,7 +27,9 @@ function App() {
   return (
     <ThemeProvider theme={theme}>
       <main>
-        {fileSelected && fileSelected > 0 ? (
+        {isLoading ? (
+          <Loading />
+        ) : fileSelected && fileSelected > 0 ? (
           <Fragment>
             <Finder setSvgComponents={setSvgComponents} setShowMessage={setShowMessage} />
             {showMessage ? (
@@ -53,7 +57,7 @@ function App() {
             </Snackbar>
           </Fragment>
         ) : (
-          <DropZone onExtractIcons={() => {}} />
+          <DropZone onExtractIcons={handleExtractIcons} />
         )}
       </main>
     </ThemeProvider>

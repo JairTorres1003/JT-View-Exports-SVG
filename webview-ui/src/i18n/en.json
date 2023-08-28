@@ -12,5 +12,6 @@
         "Multiple": "Selected files",
         "None": "No files selected"
     },
-    "ExtractIcons": "Extract Icons Svg"
+    "ExtractIcons": "Extract Icons Svg",
+    "progressTitle": "Extracting SVG exports..."
 }

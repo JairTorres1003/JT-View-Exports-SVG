@@ -36,6 +36,15 @@ const useApp = () => {
   };
 
   /**
+   * Handles the extraction of icons from a dropped file.
+   * @param file The dropped file to extract icons from.
+   */
+  const handleExtractIcons = (file: File | null) => {
+    setIsLoading(true);
+    vscode.postMessage("extractIconsFile", file);
+  };
+
+  /**
    * Handles the current theme and updates the application state.
    * @param theme The current theme ("dark" or "light").
    */
@@ -82,11 +91,13 @@ const useApp = () => {
     return () => {
       vscode.removeMessageHandler("currentTheme", handleCurrentTheme);
       vscode.removeMessageHandler("language", handleLanguage);
+      setIsLoading(false);
     };
   }, []);
 
   return {
     fileSelected,
+    handleExtractIcons,
     isLoading,
     setShowMessage,
     setSnackbar,
