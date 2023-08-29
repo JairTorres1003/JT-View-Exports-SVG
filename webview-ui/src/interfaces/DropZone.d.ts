@@ -8,7 +8,7 @@ export interface DropZoneProps {
   /**
    * A function to handle the extraction of icons from a dropped file.
    *
-   * @param file The dropped file to extract icons from.
+   * @param fileList The dropped file to extract icons from.
    */
-  onExtractIcons: (file: File | null) => void;
+  onExtractIcons: (fileList: FileList | null) => void;
 }

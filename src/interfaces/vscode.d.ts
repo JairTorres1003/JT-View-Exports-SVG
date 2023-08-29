@@ -1,4 +1,5 @@
 export type ReceiveMessageCommand =
+  | "extractIconsFile"
   | "getCurrentTheme"
   | "getTranslations"
   | "requestSvgComponents"
@@ -21,4 +22,15 @@ interface ReciveMessageData {
    * The payload data of the received message.
    */
   data: any;
+}
+
+/**
+ * Represents a handler for commands.
+ */
+interface CommandHandler {
+  /**
+   * A dictionary of command names and their corresponding handler functions.
+   * @param message The received message data.
+   */
+  [command: string]: (message: ReciveMessageData) => void;
 }

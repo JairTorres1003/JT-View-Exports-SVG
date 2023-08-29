@@ -332,6 +332,6 @@ export const MoreFilesIcon = ({ color = "#000", size = 20 }) => (
       strokeWidth="0.8"
       d="M10.5 17h-6a1 1 0 0 1-1-1V2.5a1 1 0 0 1 1-1h7m0 0 3.5 5m-3.5-5v4a1 1 0 0 0 1 1H15m0 0v6M12.5 16H14m1.5 0H14m0 0v1.5m0-1.5v-1.5"
     />
-    <circle cx="14" cy="16" r="2.7" stroke="#000" strokeWidth=".6" />
+    <circle cx="14" cy="16" r="2.7" stroke={color} strokeWidth=".6" />
   </svg>
 );

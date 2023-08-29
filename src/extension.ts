@@ -1,10 +1,12 @@
 import { commands, ExtensionContext, ProgressLocation, ProgressOptions, Uri, window } from "vscode";
+import * as path from "path";
+
 import { SvgExport, SvgExportErrors, SvgFile } from "./interfaces/svgExports";
 import { ViewExportsSVGPanel } from "./panels/ViewExportsSVGPanel";
-import { extractSVGComponentExports } from "./utilities/svg/exportParser";
-import { getWorkspaceFolder } from "./utilities/getWorkspaceFolder";
 import { getTranslations, loadLanguage } from "./utilities/getLocaleLanguage";
-import * as path from "path";
+import { getWorkspaceFolder } from "./utilities/getWorkspaceFolder";
+import { extractSVGComponentExports } from "./utilities/svg/exportParser";
+import { REGEX_FILE } from "./utilities/regex";
 
 /**
  * Run the command and create or show the webview panel.
@@ -16,7 +18,6 @@ const runCommand = async (context: ExtensionContext, item: Uri, items: Uri[]) =>
   const i18n = getTranslations();
   const selectedFiles: SvgFile[] = [];
   const workspaceFolder: string = getWorkspaceFolder();
-  const REGEX_FILE: RegExp = /\.(js|jsx|ts|tsx)$/i;
   const newError: SvgExportErrors = { messageError: "" };
   const progressOptions: ProgressOptions = {
     location: ProgressLocation.Notification,
