@@ -15,76 +15,73 @@ import { REGEX_FILE } from "./utilities/regex";
  * @param {Uri[]} items The list of items.
  */
 const runCommand = async (context: ExtensionContext, item: Uri, items: Uri[]) => {
-  const i18n = getTranslations();
-  const selectedFiles: SvgFile[] = [];
-  const workspaceFolder: string = getWorkspaceFolder();
-  const newError: SvgExportErrors = { messageError: "" };
-  const progressOptions: ProgressOptions = {
-    location: ProgressLocation.Notification,
-    title: i18n.progressTitle,
-    cancellable: false,
-  };
+  try {
+    const i18n = getTranslations();
+    const selectedFiles: SvgFile[] = [];
+    const workspaceFolder: string = getWorkspaceFolder();
+    const newError: SvgExportErrors = { messageError: "" };
+    const progressOptions: ProgressOptions = {
+      location: ProgressLocation.Notification,
+      title: i18n.progressTitle,
+      cancellable: false,
+    };
 
-  // Show loader message
-  const progress: any = await window.withProgress(progressOptions, async () => {
-    // Check if there are multiple items
-    if (items && items?.length > 1) {
-      items.sort((a, b) => a.fsPath.localeCompare(b.fsPath));
+    // Show loader message
+    const progress = await window.withProgress(progressOptions, async (progress) => {
+      if (!item && (!items || items.length === 0)) {
+        newError.messageError = i18n.NoFileSelected;
+        newError.fileSelected = 0;
 
-      items.forEach((file) => {
+        // Create or show the webview panel
+        ViewExportsSVGPanel.render(context.extensionUri, newError);
+        return;
+      }
+
+      const filesToProcess: Uri[] = items ? items : [item];
+
+      filesToProcess.sort((a, b) => a.fsPath.localeCompare(b.fsPath));
+
+      filesToProcess.forEach((file) => {
         // Check if the item is a file with a supported extension
         if (REGEX_FILE.test(file.fsPath.slice(-4)) && file.scheme === "file") {
           const relativePath: string = path.relative(workspaceFolder, file.fsPath);
           selectedFiles.push({ absolutePath: file.fsPath, relativePath });
         }
       });
-    } else if (item) {
-      // Check if the selected item is a file with a supported extension
-      if (REGEX_FILE.test(item.fsPath.slice(-4)) && item.scheme === "file") {
-        const relativePath: string = path.relative(workspaceFolder, item.fsPath);
-        selectedFiles.push({ absolutePath: item.fsPath, relativePath });
+
+      // Extract the exports from selected files
+      const svgComponents: SvgExport[] = await Promise.all(
+        selectedFiles.map(async (file) => {
+          try {
+            const svgExports = await extractSVGComponentExports(file.absolutePath);
+            return { ...svgExports, file, lengthSvg: svgExports.svgComponents.length };
+          } catch (error) {
+            console.error(`Error parsing file ${file.absolutePath}: ${error}`);
+            return { file, lengthExports: 0, lengthSvg: 0, svgComponents: [] };
+          }
+        })
+      );
+
+      if (svgComponents.length <= 0 && selectedFiles.length > 0) {
+        newError.messageError = i18n.NoIconsFound;
+        newError.fileSelected = selectedFiles.length;
       }
-    } else {
-      newError.messageError = i18n.NoFileSelected;
-      newError.fileSelected = 0;
 
       // Create or show the webview panel
-      ViewExportsSVGPanel.render(context.extensionUri, newError);
+      ViewExportsSVGPanel.render(
+        context.extensionUri,
+        svgComponents.length > 0 ? svgComponents : newError
+      );
 
-      return;
+      return progress;
+    });
+
+    if (progress) {
+      // Hide the loader message
+      progress.report({ increment: 100 });
     }
-
-    // Extract the exports from selected files
-    const svgComponents: SvgExport[] = await Promise.all(
-      selectedFiles.map(async (file) => {
-        try {
-          const svgExports = await extractSVGComponentExports(file.absolutePath);
-          return { ...svgExports, file, lengthSvg: svgExports.svgComponents.length };
-        } catch (error) {
-          console.error(`Error parsing file ${file.absolutePath}: ${error}`);
-          return { file, lengthExports: 0, lengthSvg: 0, svgComponents: [] };
-        }
-      })
-    );
-
-    if (svgComponents.length <= 0 && selectedFiles.length > 0) {
-      newError.messageError = i18n.NoIconsFound;
-      newError.fileSelected = selectedFiles.length;
-    }
-
-    // Create or show the webview panel
-    ViewExportsSVGPanel.render(
-      context.extensionUri,
-      svgComponents.length > 0 ? svgComponents : newError
-    );
-
-    return svgComponents;
-  });
-
-  if (progress) {
-    // Hide the loader message
-    progress.report({ increment: 100 });
-    progress.dispose();
+  } catch (error) {
+    console.error("An error occurred:", error);
   }
 };
 
