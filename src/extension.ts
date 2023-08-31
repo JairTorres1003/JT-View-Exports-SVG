@@ -1,12 +1,9 @@
-import { commands, ExtensionContext, ProgressLocation, ProgressOptions, Uri, window } from "vscode";
-import * as path from "path";
+import { commands, ExtensionContext, Uri } from "vscode";
 
-import { SvgExport, SvgExportErrors, SvgFile } from "./interfaces/svgExports";
+import { SvgExport, SvgExportErrors } from "./interfaces/svgExports";
 import { ViewExportsSVGPanel } from "./panels/ViewExportsSVGPanel";
-import { getTranslations, loadLanguage } from "./utilities/getLocaleLanguage";
-import { getWorkspaceFolder } from "./utilities/getWorkspaceFolder";
-import { extractSVGComponentExports } from "./utilities/svg/exportParser";
-import { REGEX_FILE } from "./utilities/regex";
+import { loadLanguage } from "./utilities/getLocaleLanguage";
+import { processFiles } from "./utilities/commonFunctions";
 
 /**
  * Run the command and create or show the webview panel.
@@ -15,74 +12,16 @@ import { REGEX_FILE } from "./utilities/regex";
  * @param {Uri[]} items The list of items.
  */
 const runCommand = async (context: ExtensionContext, item: Uri, items: Uri[]) => {
-  try {
-    const i18n = getTranslations();
-    const selectedFiles: SvgFile[] = [];
-    const workspaceFolder: string = getWorkspaceFolder();
-    const newError: SvgExportErrors = { messageError: "" };
-    const progressOptions: ProgressOptions = {
-      location: ProgressLocation.Notification,
-      title: i18n.progressTitle,
-      cancellable: false,
-    };
+  // Define the operation that will be executed after processing files
+  const operation = (result: SvgExport[] | SvgExportErrors) => {
+    // Create or show the webview panel
+    ViewExportsSVGPanel.render(context.extensionUri, result);
+  };
 
-    // Show loader message
-    const progress = await window.withProgress(progressOptions, async (progress) => {
-      if (!item && (!items || items.length === 0)) {
-        newError.messageError = i18n.NoFileSelected;
-        newError.fileSelected = 0;
+  // Determine the files to process
+  const filesToProcess: Uri[] | null = items ? items : item ? [item] : null;
 
-        // Create or show the webview panel
-        ViewExportsSVGPanel.render(context.extensionUri, newError);
-        return;
-      }
-
-      const filesToProcess: Uri[] = items ? items : [item];
-
-      filesToProcess.sort((a, b) => a.fsPath.localeCompare(b.fsPath));
-
-      filesToProcess.forEach((file) => {
-        // Check if the item is a file with a supported extension
-        if (REGEX_FILE.test(file.fsPath.slice(-4)) && file.scheme === "file") {
-          const relativePath: string = path.relative(workspaceFolder, file.fsPath);
-          selectedFiles.push({ absolutePath: file.fsPath, relativePath });
-        }
-      });
-
-      // Extract the exports from selected files
-      const svgComponents: SvgExport[] = await Promise.all(
-        selectedFiles.map(async (file) => {
-          try {
-            const svgExports = await extractSVGComponentExports(file.absolutePath);
-            return { ...svgExports, file, lengthSvg: svgExports.svgComponents.length };
-          } catch (error) {
-            console.error(`Error parsing file ${file.absolutePath}: ${error}`);
-            return { file, lengthExports: 0, lengthSvg: 0, svgComponents: [] };
-          }
-        })
-      );
-
-      if (svgComponents.length <= 0 && selectedFiles.length > 0) {
-        newError.messageError = i18n.NoIconsFound;
-        newError.fileSelected = selectedFiles.length;
-      }
-
-      // Create or show the webview panel
-      ViewExportsSVGPanel.render(
-        context.extensionUri,
-        svgComponents.length > 0 ? svgComponents : newError
-      );
-
-      return progress;
-    });
-
-    if (progress) {
-      // Hide the loader message
-      progress.report({ increment: 100 });
-    }
-  } catch (error) {
-    console.error("An error occurred:", error);
-  }
+  processFiles(filesToProcess, null, operation);
 };
 
 /**

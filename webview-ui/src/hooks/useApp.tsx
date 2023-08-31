@@ -8,7 +8,7 @@ import i18n from "../i18n";
 const useApp = () => {
   const [svgComponents, setSvgComponents] = useState<SvgExport[]>([]);
   const [showMessage, setShowMessage] = useState<string | null>(null);
-  const [isLoading, setIsLoading] = useState<boolean>(false);
+  const [isLoading, setIsLoading] = useState<boolean>(true);
   const [fileSelected, setFileSelected] = useState<number | null | undefined>(0);
   const [snackbar, setSnackbar] = useState<{ open: boolean; name?: string }>({
     open: false,
