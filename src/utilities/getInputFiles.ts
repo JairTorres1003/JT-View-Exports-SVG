@@ -1,5 +1,6 @@
-import { SvgExport, SvgExportErrors } from "../interfaces/svgExports";
 import { processFiles } from "./commonFunctions";
+import { SvgExport, SvgExportErrors } from "../interfaces/svgExports";
+import { ViewExportsSVGPanel } from "../panels/ViewExportsSVGPanel";
 
 /**
  * Get input files and start the process for the extraction of svg components.
@@ -8,7 +9,8 @@ import { processFiles } from "./commonFunctions";
 export async function getInputFiles(filesPath: string[] | null) {
   // Define the operation that will be executed after processing files
   const operation = (result: SvgExport[] | SvgExportErrors) => {
-    // Update interfaces...
+    // Update or show the webview panel
+    ViewExportsSVGPanel.update(result);
   };
 
   processFiles(null, filesPath, operation);

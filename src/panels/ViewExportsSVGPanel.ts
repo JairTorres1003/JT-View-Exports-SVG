@@ -61,10 +61,7 @@ export class ViewExportsSVGPanel {
 
     // If we already have a panel, show it
     if (ViewExportsSVGPanel.currentPanel) {
-      const svgComponentsJson = JSON.stringify(svgComponents);
-      ViewExportsSVGPanel.currentPanel.svgComponents = svgComponents;
-      ViewExportsSVGPanel.currentPanel._postMessage("svgComponents", svgComponentsJson);
-      ViewExportsSVGPanel.currentPanel._panel.reveal(ViewColumn.Active);
+      this.update(svgComponents);
       return;
     }
 
@@ -87,6 +84,20 @@ export class ViewExportsSVGPanel {
     panel.iconPath = Uri.joinPath(extensionUri, "assets", "JT View Exports SVG - ICON.svg");
 
     ViewExportsSVGPanel.currentPanel = new ViewExportsSVGPanel(panel, extensionUri, svgComponents);
+  }
+
+  /**
+   * Update the contents of the webview panel displaying SVG components.
+   * @param svgComponents - SVG components or error data to display.
+   */
+  public static update(svgComponents: SvgExport[] | SvgExportErrors) {
+    // If we already have a panel, show it
+    if (ViewExportsSVGPanel.currentPanel) {
+      const svgComponentsJson = JSON.stringify(svgComponents);
+      ViewExportsSVGPanel.currentPanel.svgComponents = svgComponents;
+      ViewExportsSVGPanel.currentPanel._postMessage("svgComponents", svgComponentsJson);
+      ViewExportsSVGPanel.currentPanel._panel.reveal(ViewColumn.Active);
+    }
   }
 
   /**
