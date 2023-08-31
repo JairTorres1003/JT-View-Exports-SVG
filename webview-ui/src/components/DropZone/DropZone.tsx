@@ -13,14 +13,25 @@ export const DropZone: FunctionComponent<DropZoneProps> = (props) => {
   const { onExtractIcons } = props;
 
   const { t } = useTranslation();
-  const [file, setFile] = useState<File | null>(null);
+  const [file, setFile] = useState<FileList | null>(null);
   const [message, setMessage] = useState<String>(t("SelectedFile.None"));
   const [isDrag, setIsDrag] = useState<Boolean>(false);
 
-  const handleChange = (newfiles: File) => {
-    const type = newfiles.length === 1 ? "Single" : "Multiple";
-    setMessage(t(`SelectedFile.${type}`));
-    setFile(newfiles);
+  /**
+   * Handles changes in selected files.
+   * @param newfiles An array of selected File objects.
+   */
+  const handleChange = (newfiles: FileList) => {
+    try {
+      // Check if there's only one file selected
+      const type = newfiles.length === 1 ? "Single" : "Multiple";
+
+      setMessage(t(`SelectedFile.${type}`));
+      setFile(newfiles);
+    } catch (error) {
+      setMessage(t("SelectedFile.None"));
+      setFile(null);
+    }
   };
 
   return (
