@@ -6,10 +6,11 @@ import {
   PaperProps,
   styled,
   Typography as TypographyMui,
+  Box,
 } from "@mui/material";
 import GridMui from "@mui/material/Unstable_Grid2";
 
-import { ArrowForwardIcon } from "../../icons";
+import { ArrowForwardIcon, MotionIcon } from "../../icons";
 
 export const Accordion = styled(AccordionMui)(() => ({
   "margin": "0 !important",
@@ -71,10 +72,31 @@ export const Paper = styled(PaperMui)(() => ({
   alignItems: "center",
   justifyContent: "center",
   svg: { color: "#000", maxWidth: "96%", maxHeight: "96%" },
+  position: "relative",
+  overflow: "hidden",
 }));
 
 export const Typography = styled(TypographyMui)(() => ({
   fontSize: 12,
   color: "inherit",
   textAlign: "center",
+}));
+
+export const BoxAnimated = styled((props) => (
+  <Box {...props}>
+    <MotionIcon size={18} color="#fff" />
+  </Box>
+))(() => ({
+  position: "absolute",
+  top: 0,
+  left: 0,
+  background: "orange",
+  color: "#fff",
+  display: "flex",
+  alignItems: "flex-start",
+  justifyContent: "flex-start",
+  borderRadius: "100% 0% 100% 0% / 0% 0% 100% 100%",
+  width: 25,
+  height: 25,
+  padding: "1px",
 }));

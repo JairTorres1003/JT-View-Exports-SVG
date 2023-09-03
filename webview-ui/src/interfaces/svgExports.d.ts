@@ -40,6 +40,10 @@ export interface SvgComponent {
    * The type of export for the SVG component.
    */
   typeExport: "function" | "variable";
+  /**
+   * Indicates whether the component is an SVG animation component.
+   */
+  isAnimated?: boolean;
 }
 
 /**
@@ -60,6 +64,10 @@ export interface SvgComponentDetails {
   props: {
     [key: string]: any;
   };
+  /**
+   * A flag indicating whether the component uses framer-motion
+   */
+  isMotion?: boolean;
 }
 
 /**

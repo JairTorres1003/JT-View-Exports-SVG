@@ -4,13 +4,14 @@ import * as babelParser from "@babel/parser";
 import traverse from "@babel/traverse";
 import * as t from "@babel/types";
 import { ExportType, ExportTypeNode, IsSVGComponent, Value } from "../../interfaces/exportParser";
+import { camelCase } from "lodash";
+
 import {
   HasInvalidChild,
   SvgComponent,
   SvgComponentDetails,
   SvgExport,
 } from "../../interfaces/svgExports";
-import { camelCase } from "lodash";
 import { SVG_TAGS } from "./svgTags";
 import { defaultProps } from "./defaultProps";
 
@@ -83,17 +84,18 @@ function getPropertyValues(value: Value, properties: ExportType["properties"]): 
 }
 
 /**
- * Recursively extract attributes from JSXElement children.
+ * Recursively extracts attributes from JSXElement children.
  * @param {t.JSXElement["children"]} children - The children of the JSXElement.
  * @param {ExportType["properties"]} properties - The properties of the export type.
- * @returns {SvgComponentDetails[] | HasInvalidChild} An array of extracted child components or a special object representing an error if an invalid child component is found.
+ * @returns {{ children: SvgComponentDetails["children"]; isAnimated: boolean }} An object with the extracted child components and a boolean flag indicating if animation is present.
  */
 function getChildAttributes(
   children: t.JSXElement["children"],
   properties: ExportType["properties"]
-): SvgComponentDetails[] | HasInvalidChild {
+): { children: SvgComponentDetails["children"]; isAnimated: boolean } {
   const components: SvgComponentDetails[] = [];
   let hasInvalidChild: HasInvalidChild | null = null;
+  let isAnimated: boolean = false;
 
   children.forEach((child) => {
     // Check if the child is a JSXElement
@@ -112,7 +114,7 @@ function getChildAttributes(
       });
 
       // Recursively extract child components
-      const childComponents = getChildAttributes(child.children, properties);
+      const childComponents = getChildAttributes(child.children, properties).children;
 
       // Check if childComponents is an array or contains an error
       if (!Array.isArray(childComponents) && childComponents.error) {
@@ -127,17 +129,21 @@ function getChildAttributes(
       const componentName = getComponentName(openingElement);
 
       // Check if the component name is a string (valid)
-      if (typeof componentName !== "string") {
+      if (typeof componentName.tag !== "string") {
         // Handle the case of an invalid child component
         if (hasInvalidChild === null) {
-          hasInvalidChild = componentName;
+          hasInvalidChild = componentName.tag;
         }
         return;
       }
 
+      if (componentName.isMotion) {
+        isAnimated = true;
+      }
+
       // Add the child component to the components array
       components.push({
-        tag: componentName,
+        ...componentName,
         children: childComponents,
         props,
       });
@@ -146,40 +152,43 @@ function getChildAttributes(
 
   // Return the error if an invalid child component is found
   if (hasInvalidChild) {
-    return hasInvalidChild;
+    return { children: hasInvalidChild, isAnimated };
   }
 
   // Return the array of extracted components
-  return components;
+  return { children: components, isAnimated };
 }
 
 /**
- * Get the name of the JSX component from its opening element.
- * @param {t.JSXOpeningElement} openingElement - The opening element of the JSX component.
- * @returns {string | HasInvalidChild} The name of the JSX component as a string or a special object representing an error if the opening element is invalid.
+ * Extracts the component tag name from a JSX opening element and checks if it's a motion component.
+ * @param {t.JSXOpeningElement} openingElement - The JSX opening element to analyze.
+ * @returns {{ tag: string | HasInvalidChild, isMotion: boolean }} An object containing the component tag name and a flag indicating if it's a motion component.
  */
-function getComponentName(openingElement: t.JSXOpeningElement): string | HasInvalidChild {
+function getComponentName(openingElement: t.JSXOpeningElement): {
+  tag: string | HasInvalidChild;
+  isMotion: boolean;
+} {
   // Create a special object representing an error
   const error: HasInvalidChild = {
     error: "HasInvalidChild",
     location: openingElement.name.loc?.start,
   };
-  let componentName: string | undefined = undefined;
+  let tag: string | undefined = undefined;
+  let isMotion: boolean = false;
 
   // Check if the opening element is a JSXIdentifier (for regular components)
   if (t.isJSXIdentifier(openingElement.name)) {
-    componentName = SVG_TAGS[camelCase(openingElement.name.name)];
+    tag = SVG_TAGS[camelCase(openingElement.name.name)];
   } else if (t.isJSXMemberExpression(openingElement.name)) {
     // Check if the opening element is a JSXMemberExpression (for components with namespaces)
     const objectName = (openingElement.name.object as t.JSXIdentifier).name || "";
     const propertyName = openingElement.name.property.name;
-    const tag = propertyName === "Fragment" ? "Fragment" : SVG_TAGS[camelCase(propertyName)];
 
-    // The full name in the format "objectName.tag" (e.g., "React.Fragment").
-    componentName = objectName !== "" && tag ? `${objectName}.${tag}` : undefined;
+    tag = propertyName === "Fragment" ? "Fragment" : SVG_TAGS[camelCase(propertyName)];
+    isMotion = objectName !== "" && objectName === "motion";
   }
 
-  return componentName ? componentName : error;
+  return { tag: tag ? tag : error, isMotion };
 }
 
 /**
@@ -194,8 +203,12 @@ function isSVGComponent(
 ): IsSVGComponent {
   let validate: boolean = false;
   let component: IsSVGComponent["component"] = undefined;
+  let isAnimated: boolean = false;
   const { openingElement, children } = argument;
-  let childrenDetails: SvgComponentDetails[] | HasInvalidChild = [];
+  let childrenDetails: { children: SvgComponentDetails["children"]; isAnimated: boolean } = {
+    children: [],
+    isAnimated: false,
+  };
 
   // Check if the node has an opening element
   if (openingElement) {
@@ -221,18 +234,20 @@ function isSVGComponent(
     if (validate && children.length > 0) {
       // Recursively extract child attributes
       childrenDetails = getChildAttributes(children, properties);
+      const componentName = getComponentName(openingElement);
+      isAnimated = childrenDetails.isAnimated || componentName.isMotion;
 
       // Create the component object with the component name, children, and props
       component = {
-        tag: getComponentName(openingElement),
-        children: childrenDetails,
+        ...componentName,
+        children: childrenDetails.children,
         props: svgProps,
       };
     }
   }
 
   // Return the result indicating whether it's an SVG component and the extracted component details
-  return { validate, component };
+  return { validate, component, isAnimated };
 }
 
 /**
@@ -260,8 +275,8 @@ function getChildFragments(children: t.JSXElement["children"] | undefined): t.JS
       const componentName = getComponentName(child.openingElement);
 
       if (jsxElementsCount === 0) {
-        // If it is the first JSX element found, check if it is a React.Fragment or Fragment
-        if (componentName === "React.Fragment" || componentName === "Fragment") {
+        // If it is the first JSX element found, check if it is a Fragment
+        if (componentName.tag === "Fragment") {
           jsxElement = getChildFragments(child.children);
         } else {
           jsxElement = child;
@@ -359,6 +374,7 @@ async function extractSvgComponentFromNode(
   typeExport: SvgComponent["typeExport"]
 ): Promise<SvgComponent | undefined> {
   let component: SvgComponent["component"] = undefined;
+  let isAnimated: boolean = false;
   let name: string = "";
   let location: SvgComponent["location"] = undefined;
 
@@ -374,6 +390,7 @@ async function extractSvgComponentFromNode(
         const SVGComponent = isSVGComponent(nodeAnalyze.argument, nodeAnalyze.properties);
         if (SVGComponent.validate) {
           component = SVGComponent.component;
+          isAnimated = SVGComponent.isAnimated;
         }
       }
     } catch (error) {
@@ -382,7 +399,7 @@ async function extractSvgComponentFromNode(
   }
 
   if (component) {
-    return { component, name, location, typeExport };
+    return { component, name, location, typeExport, isAnimated };
   } else {
     return undefined;
   }

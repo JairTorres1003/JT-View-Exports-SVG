@@ -8,6 +8,7 @@ import RenderSVG from "./RenderSvg";
 import {
   Accordion,
   AccordionSummary,
+  BoxAnimated,
   Grid,
   GridItem,
   Paper,
@@ -39,6 +40,7 @@ const SvgComponetExport: FunctionComponent<
           {svgComponents.map((item, index) => (
             <GridItem key={index} onClick={() => handleCopy(item.name)}>
               <Paper elevation={3}>
+                {item.isAnimated && <BoxAnimated />}
                 {item.component ? <RenderSVG {...item.component} /> : <IconFailExport />}
               </Paper>
               <Typography noWrap>{item.name}</Typography>

@@ -5,10 +5,10 @@ import { motion } from "framer-motion";
 import { IconFailExport } from "../../icons";
 import { SvgComponentDetails } from "../../interfaces/svgExports";
 
-const RenderSVG: FunctionComponent<SvgComponentDetails> = ({ children, tag, props }) => {
+const RenderSVG: FunctionComponent<SvgComponentDetails> = ({ children, tag, props, isMotion }) => {
   const svgRef = useRef<HTMLElement>(null);
   const isValidChild = typeof tag === "string";
-  const isSvg = isValidChild && tag.includes("svg");
+  const isSvg = isValidChild && tag === "svg";
 
   useEffect(() => {
     if (svgRef.current) {
@@ -32,8 +32,8 @@ const RenderSVG: FunctionComponent<SvgComponentDetails> = ({ children, tag, prop
   if (isArray(children) && isValidChild) {
     let Component: any = tag;
 
-    if (tag.includes("motion")) {
-      Component = motion(tag.split(".")[1]);
+    if (isMotion) {
+      Component = motion(tag);
       const transition: { [key: string]: any } = { ...props.transition };
       transition.repeat = Infinity;
       props = { ...props, transition };
