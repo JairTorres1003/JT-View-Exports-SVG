@@ -188,7 +188,20 @@ export const IconSettings = ({
           animate={state ? "active" : "inactive"}
         />
       </motion.g>
-      <g>
+      <motion.g
+        variants={{
+          active: {
+            rotate: 45,
+            opacity: 0,
+            transition: { type: "linear" },
+          },
+          inactive: {
+            rotate: 0,
+            opacity: 1,
+            transition: { type: "linear" },
+          },
+        }}
+        animate={state ? "active" : "inactive"}>
         <motion.line
           x1="2.48001"
           y1="10"
@@ -197,19 +210,6 @@ export const IconSettings = ({
           stroke={color}
           strokeWidth="1.26"
           strokeLinecap="round"
-          variants={{
-            active: {
-              opacity: 0,
-              scaleX: 0,
-              transition: { type: "linear" },
-            },
-            inactive: {
-              opacity: 1,
-              scaleX: 1,
-              transition: { type: "linear" },
-            },
-          }}
-          animate={state ? "active" : "inactive"}
         />
         <motion.circle
           cx="6.86502"
@@ -227,7 +227,7 @@ export const IconSettings = ({
           }}
           animate={state ? "active" : "inactive"}
         />
-      </g>
+      </motion.g>
       <motion.g
         variants={{
           active: {
