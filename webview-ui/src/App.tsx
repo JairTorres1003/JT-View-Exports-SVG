@@ -1,22 +1,28 @@
 import { Alert, Box, Snackbar, ThemeProvider, Typography } from "@mui/material";
 import { useTranslation } from "react-i18next";
 import { Fragment } from "react";
+import { Resizable } from "re-resizable";
 
 import { Finder } from "./components/Finder/Finder";
 import SvgComponetExport from "./components/SvgComponent/SvgComponetExport";
 import { DropZone } from "./components/DropZone/DropZone";
+import { Loading } from "./components/Loading/Loading";
 
 import useApp from "./hooks/useApp";
-import { Loading } from "./components/Loading/Loading";
+import PanelsSettings from "./components/Panels/PanelsSettings";
 
 function App() {
   const {
     fileSelected,
-    isLoading,
     handleExtractIcons,
-    setShowMessage,
+    handleOpenPanel,
+    handleResize,
+    handleResizeStop,
+    handleSvgComponents,
+    isLoading,
+    isPanelOpen,
+    resizableWidth,
     setSnackbar,
-    setSvgComponents,
     showMessage,
     snackbar,
     svgComponents,
@@ -31,18 +37,34 @@ function App() {
           <Loading />
         ) : fileSelected && fileSelected > 0 ? (
           <Fragment>
-            <Finder setSvgComponents={setSvgComponents} setShowMessage={setShowMessage} />
-            {showMessage ? (
-              <Box>
-                <Typography variant="h1" fontSize={20}>
-                  {showMessage}
-                </Typography>
-              </Box>
-            ) : (
-              svgComponents.map((item, index) => (
-                <SvgComponetExport {...item} key={index} setSnackbar={setSnackbar} />
-              ))
-            )}
+            <div className="BoxContainer">
+              <Resizable
+                defaultSize={{ width: "100%", height: "100%" }}
+                maxWidth="100%"
+                minWidth="150"
+                minHeight="100%"
+                maxHeight="100%"
+                enable={{ right: true }}
+                onResize={handleResize}
+                onResizeStop={handleResizeStop}
+                size={{ width: resizableWidth, height: "100%" }}>
+                <Box className="BoxContainer-gallery">
+                  <Finder handleSvgComponents={handleSvgComponents} />
+                  {showMessage ? (
+                    <Box>
+                      <Typography variant="h1" fontSize={20}>
+                        {showMessage}
+                      </Typography>
+                    </Box>
+                  ) : (
+                    svgComponents.map((item, index) => (
+                      <SvgComponetExport {...item} key={index} setSnackbar={setSnackbar} />
+                    ))
+                  )}
+                </Box>
+              </Resizable>
+              <PanelsSettings isOpenPanel={isPanelOpen} handleOpenPanel={handleOpenPanel} />
+            </div>
             <Snackbar
               key={snackbar.name}
               open={snackbar.open}

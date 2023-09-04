@@ -6,14 +6,8 @@ import { SvgExport } from "./svgExports";
  */
 export interface FinderProps {
   /**
-   * Function to set the SVG components.
-   * @param components An array of SVG exports.
+   * Handles the received SVG components data from the webview context.
+   * @param data The data received from the webview context.
    */
-  setSvgComponents: Dispatch<SetStateAction<SvgExport[]>>;
-
-  /**
-   * Function to set the message to show.
-   * @param message The message to be shown or null if no message should be displayed.
-   */
-  setShowMessage: Dispatch<SetStateAction<string | null>>;
+  handleSvgComponents: (data: any) => void;
 }

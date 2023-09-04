@@ -81,13 +81,29 @@ body[data-vscode-theme-kind="vscode-high-contrast"] {
 }
 
 #root {
-  padding: 2rem 1.5rem;
+  height: 100vh;
 }
 
 main {
   gap: 10px;
   width: 100%;
+  height: 100%;
   display: flex;
-  min-height: 100vh;
   flex-direction: column;
+}
+
+.BoxContainer {
+  display: flex;
+  justify-content: flex-start;
+  flex-direction: row;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+}
+
+.BoxContainer-gallery {
+  gap: 10px;
+  display: flex;
+  flex-direction: column;
+  padding: 2rem 1.5rem;
 }

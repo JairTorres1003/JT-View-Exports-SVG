@@ -7,6 +7,7 @@ export const BoxDropZone = styled(Box)(() => ({
   "alignItems": "center",
   "flexDirection": "column",
   "gap": 15,
+  "padding": "2rem 1.5rem",
   "& .file-uploader": {
     "width": "100%",
     "minWidth": 200,

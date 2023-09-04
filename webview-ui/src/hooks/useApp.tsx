@@ -15,6 +15,50 @@ const useApp = () => {
     name: "",
   });
   const [currentTheme, setCurrentTheme] = useState<"dark" | "light">("light");
+  const [isPanelOpen, setIsPanelOpen] = useState<boolean>(false);
+  const [resizableWidth, setResizableWidth] = useState<string>("100%");
+
+  /**
+   * Handle resizing of the panel.
+   * @param e - The resize event.
+   * @param direction - The resize direction (e.g., 'left', 'right').
+   * @param ref - The reference to the resizable element.
+   * @param d - The width and height changes during resizing.
+   */
+  const handleResize = (e: Event, direction: string, ref: HTMLElement, d: Object) => {
+    const newWidth = parseInt(ref.style.width, 10);
+
+    if (!isPanelOpen && newWidth <= 95) {
+      setIsPanelOpen(true);
+      setResizableWidth("65%");
+    } else if (isPanelOpen && newWidth < 80) {
+      setResizableWidth(`${newWidth}%`);
+    }
+  };
+
+  /**
+   * Handle the end of the resizing process.
+   * @param e - The resize event.
+   * @param direction - The resize direction (e.g., 'left', 'right').
+   * @param ref - The reference to the resizable element.
+   * @param d - The width and height changes during resizing.
+   */
+  const handleResizeStop = (e: Event, direction: string, ref: HTMLElement, d: Object) => {
+    const newWidth = parseInt(ref.style.width, 10);
+
+    if (isPanelOpen && newWidth >= 81) {
+      setIsPanelOpen(false);
+      setResizableWidth("100%");
+    }
+  };
+
+  /**
+   * Handle opening or closing the panel.
+   */
+  const handleOpenPanel = () => {
+    setIsPanelOpen(!isPanelOpen);
+    setResizableWidth(`${isPanelOpen ? 65 : 100}%`);
+  };
 
   /**
    * Handle the SVG components data received from the webview.
@@ -108,10 +152,14 @@ const useApp = () => {
   return {
     fileSelected,
     handleExtractIcons,
+    handleOpenPanel,
+    handleResize,
+    handleResizeStop,
+    handleSvgComponents,
     isLoading,
-    setShowMessage,
+    isPanelOpen,
+    resizableWidth,
     setSnackbar,
-    setSvgComponents,
     showMessage,
     snackbar,
     svgComponents,
