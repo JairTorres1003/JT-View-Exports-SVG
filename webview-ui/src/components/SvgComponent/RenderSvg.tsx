@@ -12,13 +12,11 @@ const RenderSVG: FunctionComponent<SvgComponentDetails> = ({ children, tag, prop
 
   useEffect(() => {
     if (svgRef.current) {
-      let width = svgRef.current.clientWidth;
+      const width = svgRef.current.clientWidth;
       const height = svgRef.current.clientHeight;
       const padding = 20; // 20px: 10px padding on each side
       const minWidthFather = 94;
       const maxHeightFather = 65;
-
-      width = width > minWidthFather ? width % minWidthFather : Math.round(minWidthFather / width);
 
       const maxWidthScale = (minWidthFather - padding) / (width + padding);
       const maxHeightScale = (maxHeightFather - padding) / (height + padding);
