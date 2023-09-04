@@ -6,7 +6,7 @@ import { defaultProps } from "./defaultProps";
 
 /**
  * Performs a unary expression operation based on the provided operator and given value.
- * @param operator The unary expression operator.
+ * @param operator The unary expression operator (e.g., "!", "-", "typeof").
  * @param value The value on which the operation will be applied.
  * @returns The result of the unary operation or undefined if the operator is not valid.
  */
@@ -33,7 +33,7 @@ function getUnaryExpression(operator: t.UnaryExpression["operator"], value: any)
 
 /**
  * Performs a binary expression operation based on the provided operator and the given left and right operands.
- * @param operator The binary expression operator.
+ * @param operator The binary expression operator (e.g., "+", "*", "==").
  * @param left The left operand.
  * @param right The right operand.
  * @returns The result of the binary operation or undefined if the operator is not valid.
@@ -92,6 +92,30 @@ function getBinaryExpression(operator: t.BinaryExpression["operator"], left: any
 }
 
 /**
+ * Performs a logical expression operation based on the provided operator and the given left and right operands.
+ * @param operator The logical expression operator (e.g., "||", "&&", "??").
+ * @param left The left operand.
+ * @param right The right operand.
+ * @returns The result of the logical operation or undefined if the operator is not valid.
+ */
+function getLogicalExpression(operator: t.LogicalExpression["operator"], left: any, right: any) {
+  try {
+    switch (operator) {
+      case "||":
+        return left || right;
+      case "&&":
+        return left && right;
+      case "??":
+        return left ?? right;
+      default:
+        break;
+    }
+  } catch (error) {
+    return undefined;
+  }
+}
+
+/**
  * Extracts property values from a given value node.
  * @param {Value} value - The value node to extract the property from.
  * @param {ExportType["properties"]} properties - An object containing properties from the export type.
@@ -125,6 +149,11 @@ export function getPropertyValues(
       const right = getPropertyValues(value.right, properties);
 
       return getBinaryExpression(value.operator, left, right);
+    case "LogicalExpression":
+      const leftValue = getPropertyValues(value.left, properties);
+      const rightValue = getPropertyValues(value.right, properties);
+
+      return getLogicalExpression(value.operator, leftValue, rightValue);
     case "ObjectExpression":
       const objectProps: { [key: string]: any } = {};
 
