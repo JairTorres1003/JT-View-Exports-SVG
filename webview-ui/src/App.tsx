@@ -22,6 +22,7 @@ function App() {
     isLoading,
     isPanelOpen,
     resizableWidth,
+    refPortalButton,
     setSnackbar,
     showMessage,
     snackbar,
@@ -49,7 +50,11 @@ function App() {
                 onResizeStop={handleResizeStop}
                 size={{ width: resizableWidth, height: "100%" }}>
                 <Box className="BoxContainer-gallery">
-                  <Finder handleSvgComponents={handleSvgComponents} />
+                  <Finder
+                    isOpenPanel={isPanelOpen}
+                    handleSvgComponents={handleSvgComponents}
+                    refPortalButton={refPortalButton}
+                  />
                   {showMessage ? (
                     <Box>
                       <Typography variant="h1" fontSize={20}>
@@ -63,7 +68,11 @@ function App() {
                   )}
                 </Box>
               </Resizable>
-              <PanelsSettings isOpenPanel={isPanelOpen} handleOpenPanel={handleOpenPanel} />
+              <PanelsSettings
+                isOpenPanel={isPanelOpen}
+                handleOpenPanel={handleOpenPanel}
+                refPortalButton={refPortalButton}
+              />
             </div>
             <Snackbar
               key={snackbar.name}

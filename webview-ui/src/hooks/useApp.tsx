@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import { createTheme } from "@mui/material";
 
 import { SvgExport } from "../interfaces/svgExports";
@@ -17,6 +17,7 @@ const useApp = () => {
   const [currentTheme, setCurrentTheme] = useState<"dark" | "light">("light");
   const [isPanelOpen, setIsPanelOpen] = useState<boolean>(false);
   const [resizableWidth, setResizableWidth] = useState<string>("100%");
+  const refPortalButton = useRef<HTMLElement>(null);
 
   /**
    * Handle resizing of the panel.
@@ -31,6 +32,8 @@ const useApp = () => {
     if (!isPanelOpen && newWidth <= 95) {
       setIsPanelOpen(true);
       setResizableWidth("65%");
+    } else if (isPanelOpen && newWidth > 95) {
+      setIsPanelOpen(false);
     } else if (isPanelOpen && newWidth < 80) {
       setResizableWidth(`${newWidth}%`);
     }
@@ -56,8 +59,8 @@ const useApp = () => {
    * Handle opening or closing the panel.
    */
   const handleOpenPanel = () => {
+    setResizableWidth(`${!isPanelOpen ? 65 : 100}%`);
     setIsPanelOpen(!isPanelOpen);
-    setResizableWidth(`${isPanelOpen ? 65 : 100}%`);
   };
 
   /**
@@ -159,6 +162,7 @@ const useApp = () => {
     isLoading,
     isPanelOpen,
     resizableWidth,
+    refPortalButton,
     setSnackbar,
     showMessage,
     snackbar,

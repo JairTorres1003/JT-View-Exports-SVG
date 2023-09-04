@@ -13,5 +13,7 @@
         "None": "No files selected"
     },
     "ExtractIcons": "Extract Icons Svg",
-    "progressTitle": "Extracting SVG exports..."
+    "progressTitle": "Extracting SVG exports...",
+    "Close": "Close",
+    "DeveloperTools": "Developer tools"
 }

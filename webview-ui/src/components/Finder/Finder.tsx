@@ -9,13 +9,19 @@ import { FinderProps } from "../../interfaces/Finder";
 import useFinder from "../../hooks/useFinder";
 
 export const Finder: FunctionComponent<FinderProps> = (props) => {
+  const { isOpenPanel, refPortalButton } = props;
   const { handleClearValue, handleStateAnimate, setValue, stateAnimete, value } = useFinder(props);
   const { t } = useTranslation();
 
   return (
     <Box
       display="flex"
-      sx={{ gap: "10px", width: "100%", alignItems: "center", justifyContent: "space-between" }}>
+      sx={{
+        gap: isOpenPanel ? 0 : "10px",
+        width: "100%",
+        alignItems: "center",
+        justifyContent: "space-between",
+      }}>
       <BoxFinder>
         <TextField
           fullWidth
@@ -40,13 +46,7 @@ export const Finder: FunctionComponent<FinderProps> = (props) => {
           }}
         />
       </BoxFinder>
-      <IconButton
-        size="small"
-        title={t("Label.Settings")}
-        onClick={handleStateAnimate}
-        sx={{ mb: "16px", color: "rgba(var(--color-JT-view-export-svg))" }}>
-        <IconSettings state={stateAnimete} />
-      </IconButton>
+      <div ref={refPortalButton} />
     </Box>
   );
 };
