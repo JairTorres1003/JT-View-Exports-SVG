@@ -14,6 +14,7 @@ import {
 import { ExportType, ExportTypeNode, IsSVGComponent } from "../../interfaces/exportParser";
 import { SVG_TAGS } from "./svgTags";
 import { getPropertyValues } from "./getPropertyValues";
+import { cssStringToObject } from "./cssStringToObject";
 
 /**
  * Parse the content of a file and return the AST (Abstract Syntax Tree).
@@ -60,6 +61,16 @@ function getChildAttributes(
           props[camelCase(name.name?.toString() || "")] = getPropertyValues(value, properties);
         }
       });
+
+      // Check if "style" property exists in props
+      if ("style" in props) {
+        if (typeof props.style === "string") {
+          // Convert the "style" string to an object
+          props.style = cssStringToObject(props.style);
+        } else if (!props.style) {
+          props.style = {};
+        }
+      }
 
       // Recursively extract child components
       const childComponents = getChildAttributes(child.children, properties).children;
@@ -169,14 +180,24 @@ function isSVGComponent(
 
         // Store the attribute value in the svgProps object using camelCase format for the attribute name
         svgProps[camelCase(name.name?.toString() || "")] = getPropertyValues(value, properties);
-
-        // Check if the attribute is 'xmlns' and its value is 'http://www.w3.org/2000/svg'
-        if (svgProps.xmlns === "http://www.w3.org/2000/svg") {
-          // Set the validation flag to true
-          validate = true;
-        }
       }
     });
+
+    // Check if the attribute is 'xmlns' and its value is 'http://www.w3.org/2000/svg'
+    if (svgProps.xmlns === "http://www.w3.org/2000/svg") {
+      // Set the validation flag to true
+      validate = true;
+    }
+
+    // Check if "style" property exists in svgProps
+    if ("style" in svgProps) {
+      if (typeof svgProps.style === "string") {
+        // Convert the "style" string to an object
+        svgProps.style = cssStringToObject(svgProps.style);
+      } else if (!svgProps.style) {
+        svgProps.style = {};
+      }
+    }
 
     // If it's a valid SVG component with children
     if (validate && children.length > 0) {
