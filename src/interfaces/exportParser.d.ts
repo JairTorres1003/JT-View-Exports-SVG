@@ -29,6 +29,8 @@ export type Value =
   | t.PatternLike
   | t.JSXEmptyExpression
   | t.SpreadElement
+  | t.PrivateName
+  | t.TSType
   | null;
 
 /**

@@ -3,7 +3,6 @@ import * as fs from "fs";
 import * as babelParser from "@babel/parser";
 import traverse from "@babel/traverse";
 import * as t from "@babel/types";
-import { ExportType, ExportTypeNode, IsSVGComponent, Value } from "../../interfaces/exportParser";
 import { camelCase } from "lodash";
 
 import {
@@ -12,8 +11,9 @@ import {
   SvgComponentDetails,
   SvgExport,
 } from "../../interfaces/svgExports";
+import { ExportType, ExportTypeNode, IsSVGComponent } from "../../interfaces/exportParser";
 import { SVG_TAGS } from "./svgTags";
-import { defaultProps } from "./defaultProps";
+import { getPropertyValues } from "./getPropertyValues";
 
 /**
  * Parse the content of a file and return the AST (Abstract Syntax Tree).
@@ -29,58 +29,6 @@ function parseFileContent(filePath: string): t.Node {
     sourceType: "module",
     plugins: ["jsx", "typescript"],
   });
-}
-
-/**
- * Extracts property values from a given value node.
- * @param {Value} value - The value node to extract the property from.
- * @param {ExportType["properties"]} properties - An object containing properties from the export type.
- * @returns {any | undefined} The extracted property value, or undefined if the value node type is not recognized.
- */
-function getPropertyValues(value: Value, properties: ExportType["properties"]): any | undefined {
-  if (!value) {
-    return;
-  }
-
-  switch (value.type) {
-    case "NumericLiteral":
-      return value.value;
-    case "StringLiteral":
-      return value.value;
-    case "Identifier":
-      return properties[value.name] || defaultProps[value.name];
-    case "JSXExpressionContainer":
-      if (t.isObjectExpression(value.expression)) {
-        const objectProps: { [key: string]: any } = {};
-        value.expression.properties.forEach((property) => {
-          if (t.isObjectProperty(property) && t.isIdentifier(property.key)) {
-            objectProps[property.key.name] = getPropertyValues(property.value, properties);
-          }
-        });
-        return objectProps;
-      } else {
-        return getPropertyValues(value.expression, properties);
-      }
-    case "ArrayExpression":
-      const arrayProps: any[] = [];
-
-      value.elements.forEach((element) => {
-        if (t.isUnaryExpression(element) && t.isNumericLiteral(element.argument)) {
-          const val = parseInt(element.operator + (element.argument?.value || ""));
-          if (val) {
-            arrayProps.push(val);
-          }
-        } else {
-          arrayProps.push(getPropertyValues(element, properties));
-        }
-      });
-
-      return arrayProps;
-    case "AssignmentPattern":
-      return getPropertyValues(value.right, properties);
-    default:
-      return undefined;
-  }
 }
 
 /**

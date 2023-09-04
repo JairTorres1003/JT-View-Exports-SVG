@@ -11,4 +11,5 @@ export const defaultProps: { [tagKey: string]: any } = {
   stroke: "rgb(0, 0, 0)",
   strokeColor: "rgb(0, 0, 0)",
   strokeWidth: 0.2,
+  state: false,
 };
