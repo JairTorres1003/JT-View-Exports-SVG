@@ -66,11 +66,9 @@ function getBinaryExpression(operator: t.BinaryExpression["operator"], left: any
       case "^":
         return left ^ right;
       case "==":
-        return left == right;
       case "===":
         return left === right;
       case "!=":
-        return left != right;
       case "!==":
         return left !== right;
       case "in":
