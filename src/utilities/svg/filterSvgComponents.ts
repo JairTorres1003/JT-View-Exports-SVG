@@ -14,6 +14,7 @@ export function filterSvgComponents(
 ): SvgExport[] | SvgExportErrors {
   const filterString = filter.toLowerCase().trim();
   const i18n = getTranslations();
+  const fileSelected = svgComponents?.length;
 
   // If the filter string is empty, return the original array without filtering.
   if (filterString.length === 0) {
@@ -22,7 +23,7 @@ export function filterSvgComponents(
 
   // If the filter string has less than 3 characters, return an empty array (no matches).
   if (filterString.length < 3) {
-    return { messageError: i18n.PleaseSearch };
+    return { messageError: i18n.PleaseSearch, fileSelected };
   }
 
   // Filter and flatten the array in a single step using flatMap.
@@ -37,5 +38,7 @@ export function filterSvgComponents(
   });
 
   // If there are matches, return the filtered array, otherwise return an error message.
-  return filteredExport.length > 0 ? filteredExport : { messageError: i18n.NoIconsFound };
+  return filteredExport.length > 0
+    ? filteredExport
+    : { messageError: i18n.NoIconsFound, fileSelected };
 }
