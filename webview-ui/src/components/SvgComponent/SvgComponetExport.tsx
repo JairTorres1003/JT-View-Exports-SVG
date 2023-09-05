@@ -14,12 +14,14 @@ import {
   Paper,
   Typography,
 } from "./SvgComponetExport.style";
+import { useSvg } from "../../provider/SvgProvider";
 
 const SvgComponetExport: FunctionComponent<
   SvgExport & { setSnackbar: Dispatch<SetStateAction<{ open: boolean; name?: string }>> }
 > = (props) => {
   const { file, svgComponents, setSnackbar } = props;
   const [isExpanded, setIsExpanded] = useState<boolean>(true);
+  const { dispatch } = useSvg();
 
   const handleCopy = (name: string) => {
     navigator.clipboard.writeText(name);
@@ -39,7 +41,7 @@ const SvgComponetExport: FunctionComponent<
         <Grid container spacing={2}>
           {svgComponents.map((item, index) => (
             <GridItem key={index} onClick={() => handleCopy(item.name)}>
-              <Paper elevation={3}>
+              <Paper elevation={3} onClick={() => dispatch({ type: "SELECTED", payload: item })}>
                 {item.isAnimated && <BoxAnimated />}
                 {item.component ? <RenderSVG {...item.component} /> : <IconFailExport />}
               </Paper>

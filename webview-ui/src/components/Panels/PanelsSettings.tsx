@@ -1,14 +1,19 @@
-import { FunctionComponent, useEffect, useRef } from "react";
+import { FunctionComponent, useRef } from "react";
 import { Divider, IconButton, Portal } from "@mui/material";
 import { useTranslation } from "react-i18next";
 
 import { PanelsSettingsProps } from "../../interfaces/PanelsSettings";
-import { EmptySelectionIcon, IconSettings } from "../../icons";
+import { EmptySelectionIcon, IconFailExport, IconSettings } from "../../icons";
 import { BoxDeveloper, BoxPanelsSettings, ContainerSvg, TitlePanel } from "./PanelsSettings.style";
+import { useSvg } from "../../provider/SvgProvider";
+import RenderSVG from "../SvgComponent/RenderSvg";
 
 const PanelsSettings: FunctionComponent<PanelsSettingsProps> = (props) => {
   const { isOpenPanel, handleOpenPanel, refPortalButton } = props;
   const { t } = useTranslation();
+  const {
+    state: { selectedSvg },
+  } = useSvg();
 
   const refContainerSvg = useRef<HTMLElement>(null);
 
@@ -38,7 +43,13 @@ const PanelsSettings: FunctionComponent<PanelsSettingsProps> = (props) => {
                 ? refContainerSvg?.current?.offsetWidth
                 : "max-content",
             }}>
-            <EmptySelectionIcon size="100%" className="empty-selection" />
+            {!selectedSvg ? (
+              <EmptySelectionIcon size="100%" className="empty-selection" />
+            ) : selectedSvg.component ? (
+              <RenderSVG {...selectedSvg.component} fullSize />
+            ) : (
+              <IconFailExport />
+            )}
           </ContainerSvg>
         </BoxDeveloper>
       )}

@@ -28,7 +28,7 @@ export const BoxDeveloper = styled(Box)(() => ({
   flexDirection: "column",
   width: "100%",
   height: "100%",
-  paddingTop: "8px",
+  paddingTop: "24px",
 }));
 
 export const ContainerSvg = styled(Box)(() => ({

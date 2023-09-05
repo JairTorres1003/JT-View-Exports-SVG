@@ -40,6 +40,22 @@ class VSCodeAPIWrapper {
   public postMessage(command: PostMessageCommand, data?: any) {
     if (this.vsCodeApi) {
       this.vsCodeApi.postMessage({ command, data });
+    } else {
+      if (command === "requestSvgComponents") {
+        fetch("../../responseFile.json")
+          .then((response) => response.json())
+          .then((data) => {
+            const resData = JSON.stringify(data);
+            const handlers = this.messageHandlers["svgComponents"];
+
+            if (handlers) {
+              handlers.forEach((handler) => handler(resData));
+            }
+          })
+          .catch((error) => {
+            console.error("Error load test data:", error);
+          });
+      }
     }
   }
 

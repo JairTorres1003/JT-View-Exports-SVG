@@ -5,13 +5,26 @@ import { motion } from "framer-motion";
 import { IconFailExport } from "../../icons";
 import { SvgComponentDetails } from "../../interfaces/svgExports";
 
-const RenderSVG: FunctionComponent<SvgComponentDetails> = ({ children, tag, props, isMotion }) => {
+const RenderSVG: FunctionComponent<SvgComponentDetails & { fullSize?: boolean }> = (properties) => {
+  const { children, fullSize, tag, isMotion } = properties;
+  let props = properties.props;
+
   const svgRef = useRef<HTMLElement>(null);
   const isValidChild = typeof tag === "string";
   const isSvg = isValidChild && tag === "svg";
 
+  const fullSizeProps = fullSize
+    ? {
+        width: "100%",
+        height: "100%",
+        style: {
+          transform: "scale(1)",
+        },
+      }
+    : {};
+
   useEffect(() => {
-    if (svgRef.current) {
+    if (svgRef.current && !fullSize) {
       const width = svgRef.current.clientWidth;
       const height = svgRef.current.clientHeight;
       const padding = 20; // 20px: 10px padding on each side
@@ -39,7 +52,7 @@ const RenderSVG: FunctionComponent<SvgComponentDetails> = ({ children, tag, prop
 
     if (children.length > 0) {
       return (
-        <Component {...props} ref={isSvg ? svgRef : null}>
+        <Component {...props} {...(isSvg ? fullSizeProps : {})} ref={isSvg ? svgRef : null}>
           {children.map((child, index) => (
             <RenderSVG {...child} key={index} />
           ))}
