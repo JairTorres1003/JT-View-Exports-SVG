@@ -21,6 +21,7 @@ export const TitlePanel = styled(Typography)(() => ({
   width: "100%",
   textAlign: "center",
   fontWeight: 600,
+  userSelect: "none",
 }));
 
 export const BoxDeveloper = styled(Box)(() => ({
@@ -31,12 +32,12 @@ export const BoxDeveloper = styled(Box)(() => ({
   paddingTop: "24px",
 }));
 
-export const ContainerSvg = styled(Box)(() => ({
+export const ContainerSvg = styled(Paper)(() => ({
   "width": "100%",
   "display": "flex",
   "justifyContent": "center",
   "alignItems": "center",
-  "border": "1px dashed rgba(var(--color-JT-view-export-svg), 0.8)",
+  "backgroundColor": "#fff",
   "borderRadius": 10,
   "padding": "14px",
   "& svg.empty-selection": { filter: "grayscale(0.75)" },
