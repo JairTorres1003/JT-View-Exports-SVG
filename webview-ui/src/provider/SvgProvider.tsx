@@ -5,10 +5,12 @@ import { SvgContextAction, SvgContextState } from "../interfaces/SvgContext";
 
 const initialState: SvgContextState = {
   selectedSvg: null,
+  snackbar: { open: false, text: null },
 };
 
 const actionHandlers: Record<string, (state: SvgContextState, payload?: any) => SvgContextState> = {
   SELECTED: (state, payload) => ({ ...state, selectedSvg: payload }),
+  SNACKBAR: (state, payload) => ({ ...state, snackbar: payload }),
 };
 
 /**
