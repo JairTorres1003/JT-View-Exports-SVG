@@ -58,25 +58,23 @@ export async function processFiles(
       arrayFiles.sort(sortingFunction);
 
       arrayFiles.forEach((file) => {
+        let filePath: string | null = null;
         if (items) {
           const f = file as Uri;
-          const extname = path.extname(f.fsPath);
-
-          // Check if the file has a supported extension and is a local file
-          if (f && REGEX_FILE.test(extname) && f.scheme === "file") {
-            const relativePath: string = path.relative(workspaceFolder, f.fsPath);
-            const basename = path.basename(f.fsPath);
-            selectedFiles.push({ absolutePath: f.fsPath, relativePath, basename });
-          }
+          filePath = f.scheme === "file" ? f.fsPath : null;
         } else if (filesPath) {
-          const f = file as string;
-          const extname = path.extname(f);
+          filePath = file as string;
+        }
 
-          // Check if the file is supported extension
-          if (f && REGEX_FILE.test(extname)) {
-            const relativePath: string = path.relative(workspaceFolder, f);
-            const basename = path.basename(f);
-            selectedFiles.push({ absolutePath: f, relativePath, basename });
+        if (filePath) {
+          const extname = path.extname(filePath);
+
+          if (filePath && REGEX_FILE.test(extname)) {
+            const basename = path.basename(filePath);
+            const dirname = path.dirname(filePath);
+            const relativePath: string = path.relative(workspaceFolder, filePath);
+
+            selectedFiles.push({ absolutePath: filePath, relativePath, basename, dirname });
           }
         }
       });

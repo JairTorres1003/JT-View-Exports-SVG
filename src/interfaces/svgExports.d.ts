@@ -77,6 +77,14 @@ export interface SvgComponentDetails {
  */
 export interface SvgFile {
   /**
+   * The basename of the SVG file.
+   */
+  basename: string;
+  /**
+   * The dirname of the SVG file.
+   */
+  dirname: string;
+  /**
    * The absolute path of the SVG file.
    */
   absolutePath: string;
@@ -84,10 +92,6 @@ export interface SvgFile {
    * The relative path of the SVG file.
    */
   relativePath: string;
-  /**
-   * The basename of the SVG file.
-   */
-  basename: string;
 }
 
 /**
