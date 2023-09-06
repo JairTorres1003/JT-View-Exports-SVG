@@ -4,20 +4,18 @@ import { createTheme } from "@mui/material";
 import { SvgExport } from "../interfaces/svgExports";
 import { vscode } from "../utilities/vscode";
 import i18n from "../i18n";
+import { useSvg } from "../provider/SvgProvider";
 
 const useApp = () => {
   const [svgComponents, setSvgComponents] = useState<SvgExport[]>([]);
   const [showMessage, setShowMessage] = useState<string | null>(null);
   const [isLoading, setIsLoading] = useState<boolean>(true);
   const [fileSelected, setFileSelected] = useState<number | null | undefined>(0);
-  const [snackbar, setSnackbar] = useState<{ open: boolean; name?: string }>({
-    open: false,
-    name: "",
-  });
   const [currentTheme, setCurrentTheme] = useState<"dark" | "light">("light");
   const [isPanelOpen, setIsPanelOpen] = useState<boolean>(false);
   const [resizableWidth, setResizableWidth] = useState<string>("100%");
   const refPortalButton = useRef<HTMLElement>(null);
+  const { dispatch } = useSvg();
 
   /**
    * Handle resizing of the panel.
@@ -88,6 +86,7 @@ const useApp = () => {
    */
   const handleExtractIcons = (fileList: FileList | null) => {
     setIsLoading(true);
+    dispatch({ type: "SELECTED", payload: null });
     let fullPaths = [];
 
     if (fileList && fileList.length > 0) {
@@ -163,9 +162,7 @@ const useApp = () => {
     isPanelOpen,
     resizableWidth,
     refPortalButton,
-    setSnackbar,
     showMessage,
-    snackbar,
     svgComponents,
     theme,
   };

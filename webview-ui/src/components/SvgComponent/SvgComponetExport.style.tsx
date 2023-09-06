@@ -28,6 +28,7 @@ export const AccordionSummary = styled((props: AccordionSummaryProps | PaperProp
   "minHeight": "60px !important",
   "flexDirection": "row-reverse",
   "transition": "background-color 0.2s",
+  "& .AccordionSummary-title": { whiteSpace: "nowrap", width: "100%" },
   "&.Mui-expanded": {
     "borderRadius": 0,
     "color": "inherit",
@@ -52,6 +53,7 @@ export const AccordionSummary = styled((props: AccordionSummaryProps | PaperProp
   "& .MuiAccordionSummary-content, & .MuiAccordionSummary-content.Mui-expanded": {
     "margin": 0,
     "marginLeft": theme.spacing(1),
+    "width": "100%",
     "& .MuiTypography-root": { fontSize: "16px" },
   },
 }));

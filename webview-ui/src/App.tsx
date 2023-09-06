@@ -1,4 +1,4 @@
-import { Alert, Box, Snackbar, ThemeProvider, Typography } from "@mui/material";
+import { Box, ThemeProvider, Typography } from "@mui/material";
 import { useTranslation } from "react-i18next";
 import { Fragment } from "react";
 import { Resizable } from "re-resizable";
@@ -7,9 +7,10 @@ import { Finder } from "./components/Finder/Finder";
 import SvgComponetExport from "./components/SvgComponent/SvgComponetExport";
 import { DropZone } from "./components/DropZone/DropZone";
 import { Loading } from "./components/Loading/Loading";
+import PanelsSettings from "./components/Panels/PanelsSettings";
+import { Snackbar } from "./components/Snackbar/Snackbar";
 
 import useApp from "./hooks/useApp";
-import PanelsSettings from "./components/Panels/PanelsSettings";
 
 function App() {
   const {
@@ -23,9 +24,7 @@ function App() {
     isPanelOpen,
     resizableWidth,
     refPortalButton,
-    setSnackbar,
     showMessage,
-    snackbar,
     svgComponents,
     theme,
   } = useApp();
@@ -64,7 +63,7 @@ function App() {
                       </Box>
                     ) : (
                       svgComponents.map((item, index) => (
-                        <SvgComponetExport {...item} key={index} setSnackbar={setSnackbar} />
+                        <SvgComponetExport {...item} key={index} />
                       ))
                     )}
                   </Box>
@@ -76,18 +75,7 @@ function App() {
                 refPortalButton={refPortalButton}
               />
             </div>
-            <Snackbar
-              key={snackbar.name}
-              open={snackbar.open}
-              autoHideDuration={2000}
-              onClose={() => setSnackbar({ open: false, name: "" })}
-              anchorOrigin={{ vertical: "bottom", horizontal: "center" }}>
-              <Alert severity="success">
-                <Typography fontSize={12}>
-                  {`${t("Copied")} ${snackbar.name && `'${snackbar.name}' `}${t("ToClipboard")}`}
-                </Typography>
-              </Alert>
-            </Snackbar>
+            <Snackbar />
           </Fragment>
         ) : (
           <DropZone onExtractIcons={handleExtractIcons} />
