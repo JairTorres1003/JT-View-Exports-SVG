@@ -60,17 +60,23 @@ export async function processFiles(
       arrayFiles.forEach((file) => {
         if (items) {
           const f = file as Uri;
+          const extname = path.extname(f.fsPath);
+
           // Check if the file has a supported extension and is a local file
-          if (f && REGEX_FILE.test(f.fsPath.slice(-4)) && f.scheme === "file") {
+          if (f && REGEX_FILE.test(extname) && f.scheme === "file") {
             const relativePath: string = path.relative(workspaceFolder, f.fsPath);
-            selectedFiles.push({ absolutePath: f.fsPath, relativePath });
+            const basename = path.basename(f.fsPath);
+            selectedFiles.push({ absolutePath: f.fsPath, relativePath, basename });
           }
         } else if (filesPath) {
           const f = file as string;
+          const extname = path.extname(f);
+
           // Check if the file is supported extension
-          if (f && REGEX_FILE.test(f.slice(-4))) {
+          if (f && REGEX_FILE.test(extname)) {
             const relativePath: string = path.relative(workspaceFolder, f);
-            selectedFiles.push({ absolutePath: f, relativePath });
+            const basename = path.basename(f);
+            selectedFiles.push({ absolutePath: f, relativePath, basename });
           }
         }
       });

@@ -84,6 +84,10 @@ export interface SvgFile {
    * The relative path of the SVG file.
    */
   relativePath: string;
+  /**
+   * The basename of the SVG file.
+   */
+  basename: string;
 }
 
 /**
