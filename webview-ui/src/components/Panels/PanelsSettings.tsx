@@ -15,7 +15,7 @@ const PanelsSettings: FunctionComponent<PanelsSettingsProps> = (props) => {
     state: { selectedSvg },
   } = useSvg();
 
-  const refContainerSvg = useRef<HTMLElement>(null);
+  const refContainerSvg = useRef<HTMLDivElement>(null);
 
   return (
     <BoxPanelsSettings elevation={isOpenPanel ? 3 : 0}>
@@ -37,6 +37,7 @@ const PanelsSettings: FunctionComponent<PanelsSettingsProps> = (props) => {
       {isOpenPanel && (
         <BoxDeveloper>
           <ContainerSvg
+            elevation={3}
             ref={refContainerSvg}
             style={{
               height: refContainerSvg?.current?.offsetWidth
