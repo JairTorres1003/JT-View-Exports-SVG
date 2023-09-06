@@ -71,7 +71,7 @@ export async function processFiles(
 
           if (filePath && REGEX_FILE.test(extname)) {
             const basename = path.basename(filePath);
-            const dirname = path.dirname(filePath);
+            const dirname = path.relative(workspaceFolder, path.dirname(filePath));
             const relativePath: string = path.relative(workspaceFolder, filePath);
 
             selectedFiles.push({ absolutePath: filePath, relativePath, basename, dirname });
