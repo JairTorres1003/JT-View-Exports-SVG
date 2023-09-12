@@ -2,10 +2,11 @@ import { FunctionComponent, useRef } from "react";
 import { Divider, IconButton, Portal } from "@mui/material";
 import { useTranslation } from "react-i18next";
 
+import { useSvg } from "../../provider/SvgProvider";
+
 import { PanelDeveloperToolsProps } from "../../interfaces/PanelDeveloperTools";
 import { EmptySelectionIcon, IconFailExport, IconSettings } from "../../icons";
 import { BoxDeveloper, BoxPanelDeveloperTools, ContainerSvg, TitlePanel } from "./PanelDeveloperTools.style";
-import { useSvg } from "../../provider/SvgProvider";
 import RenderSVG from "../SvgComponent/RenderSvg";
 
 const PanelDeveloperTools: FunctionComponent<PanelDeveloperToolsProps> = (props) => {
@@ -19,7 +20,7 @@ const PanelDeveloperTools: FunctionComponent<PanelDeveloperToolsProps> = (props)
 
   return (
     <BoxPanelDeveloperTools elevation={isOpenPanel ? 3 : 0}>
-      <div className="PapeerBox-title">
+      <div className="PaperBox-title">
         <Portal container={refPortalButton?.current} disablePortal={isOpenPanel}>
           <IconButton
             size="small"

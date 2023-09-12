@@ -1,10 +1,9 @@
 import { Box, ThemeProvider, Typography } from "@mui/material";
-import { useTranslation } from "react-i18next";
 import { Fragment } from "react";
 import { Resizable } from "re-resizable";
 
 import { Finder } from "./components/Finder/Finder";
-import SvgComponetExport from "./components/SvgComponent/SvgComponetExport";
+import SvgComponentExport from "./components/SvgComponent/SvgComponentExport";
 import { DropZone } from "./components/DropZone/DropZone";
 import { Loading } from "./components/Loading/Loading";
 import PanelDeveloperTools from "./components/Panels/PanelDeveloperTools";
@@ -28,7 +27,6 @@ function App() {
     svgComponents,
     theme,
   } = useApp();
-  const { t } = useTranslation();
 
   return (
     <ThemeProvider theme={theme}>
@@ -63,7 +61,7 @@ function App() {
                       </Box>
                     ) : (
                       svgComponents.map((item, index) => (
-                        <SvgComponetExport {...item} key={index} />
+                        <SvgComponentExport {...item} key={index} />
                       ))
                     )}
                   </Box>

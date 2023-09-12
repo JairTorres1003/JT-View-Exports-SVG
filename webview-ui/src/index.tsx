@@ -3,8 +3,8 @@ import { createRoot } from "react-dom/client";
 
 import App from "./App";
 import SvgProvider from "./provider/SvgProvider";
-import "./styles/reset.css";
 import "./i18n";
+import "./styles/reset.css";
 
 const container = document.getElementById("root");
 const root = createRoot(container!);
