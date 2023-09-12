@@ -101,6 +101,18 @@ main {
   overflow: hidden;
 }
 
+.Resizable-Box > div:not([class]) > div {
+  transition: background-color 0.1s ease-out;
+  width: var(--vscode-sash-size, 4px) !important;
+  right: calc(var(--vscode-sash-size, 4px) / 2) !important;
+}
+
+.Resizable-Box > div:not([class]) > div:hover {
+  background-color: var(--vscode-sash-hoverBorder, #3e4452);
+  width: var(--vscode-sash-hover-size, 4px) !important;
+  right: calc(var(--vscode-sash-hover-size, 4px) / 2) !important;
+}
+
 .BoxContainer-gallery {
   gap: 10px;
   display: flex;

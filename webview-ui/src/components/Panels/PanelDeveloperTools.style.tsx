@@ -42,5 +42,6 @@ export const ContainerSvg = styled(Paper)(() => ({
   "borderRadius": 10,
   "padding": "14px",
   "aspectRatio": 1,
+  "color": "rgb(0, 0, 0)",
   "& svg.empty-selection": { filter: "grayscale(0.75)" },
 }));

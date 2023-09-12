@@ -38,6 +38,7 @@ function App() {
             <div className="BoxContainer">
               <Resizable
                 defaultSize={{ width: "100%", height: "100%" }}
+                className="Resizable-Box"
                 maxWidth="100%"
                 minWidth="150"
                 minHeight="100%"
