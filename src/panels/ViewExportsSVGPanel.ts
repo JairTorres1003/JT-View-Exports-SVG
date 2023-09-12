@@ -1,7 +1,7 @@
 import { Disposable, Uri, ViewColumn, Webview, WebviewPanel, env, window } from "vscode";
 
 import { SvgExport, SvgExportErrors } from "../interfaces/svgExports";
-import { ReciveMessageData, PostMessageCommand, CommandHandler } from "../interfaces/vscode";
+import { ReceiveMessageData, PostMessageCommand, CommandHandler } from "../interfaces/vscode";
 import { getInputFiles } from "../utilities/getInputFiles";
 import { getTranslations } from "../utilities/getLocaleLanguage";
 import { getNonce } from "../utilities/getNonce";
@@ -126,7 +126,7 @@ export class ViewExportsSVGPanel {
   private _getWebviewContent(webview: Webview, extensionUri: Uri) {
     const i18n = getTranslations();
     // Get the URIs for the required assets
-    const icoUri = getUri(webview, extensionUri, ["webview-ui", "build", "assets", "favico.ico"]);
+    const icoUri = getUri(webview, extensionUri, ["webview-ui", "build", "assets", "favicon.ico"]);
     const stylesUri = getUri(webview, extensionUri, ["webview-ui", "build", "assets", "index.css"]);
     const scriptUri = getUri(webview, extensionUri, ["webview-ui", "build", "assets", "index.js"]);
 
@@ -157,7 +157,7 @@ export class ViewExportsSVGPanel {
    * Handles the request for SVG components.
    * @param message The received message data.
    */
-  private handleRequestSvgComponents(message: ReciveMessageData) {
+  private handleRequestSvgComponents(message: ReceiveMessageData) {
     const svgComponentsJson = JSON.stringify(this.svgComponents);
     this._postMessage("svgComponents", svgComponentsJson);
   }
@@ -166,7 +166,7 @@ export class ViewExportsSVGPanel {
    * Handles the request to get the current theme.
    * @param message The received message data.
    */
-  private handleGetCurrentTheme(message: ReciveMessageData) {
+  private handleGetCurrentTheme(message: ReceiveMessageData) {
     const theme = getCurrentTheme();
     this._postMessage("currentTheme", theme);
   }
@@ -175,7 +175,7 @@ export class ViewExportsSVGPanel {
    * Handles the search for SVG components based on a filter.
    * @param message The received message data.
    */
-  private handleSearchSvgComponents(message: ReciveMessageData) {
+  private handleSearchSvgComponents(message: ReceiveMessageData) {
     const filter = message.data;
 
     const svgComponents = filterSvgComponents(this.svgComponents as SvgExport[], filter);
@@ -196,7 +196,7 @@ export class ViewExportsSVGPanel {
    * Handles the extraction of icons from a dropped file.
    * @param message The received message data.
    */
-  private handleExtractIconsFile(message: ReciveMessageData) {
+  private handleExtractIconsFile(message: ReceiveMessageData) {
     getInputFiles(message.data);
   }
 
@@ -214,7 +214,7 @@ export class ViewExportsSVGPanel {
     };
 
     webview.onDidReceiveMessage(
-      (message: ReciveMessageData) => {
+      (message: ReceiveMessageData) => {
         const handler = commandHandlers[message.command];
         if (handler) {
           handler.call(this, message);

@@ -3,9 +3,9 @@ import { Box, Button, Typography } from "@mui/material";
 import { FileUploader } from "react-drag-drop-files";
 import { useTranslation } from "react-i18next";
 
-import { BoxDropZone, CustomFileUploader } from "./DropZone.style";
 import { DropFilesIcon, MoreFilesIcon } from "../../icons";
 import { DropZoneProps } from "../../interfaces/DropZone";
+import { BoxDropZone, CustomFileUploader } from "./DropZone.style";
 
 const fileTypes: string[] = ["JS", "JSX", "TS", "TSX"];
 
@@ -19,15 +19,15 @@ export const DropZone: FunctionComponent<DropZoneProps> = (props) => {
 
   /**
    * Handles changes in selected files.
-   * @param newfiles An array of selected File objects.
+   * @param newFiles An array of selected File objects.
    */
-  const handleChange = (newfiles: FileList) => {
+  const handleChange = (newFiles: FileList) => {
     try {
       // Check if there's only one file selected
-      const type = newfiles.length === 1 ? "Single" : "Multiple";
+      const type = newFiles.length === 1 ? "Single" : "Multiple";
 
       setMessage(t(`SelectedFile.${type}`));
-      setFile(newfiles);
+      setFile(newFiles);
     } catch (error) {
       setMessage(t("SelectedFile.None"));
       setFile(null);

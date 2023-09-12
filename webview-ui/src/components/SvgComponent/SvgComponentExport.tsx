@@ -2,10 +2,11 @@ import { FunctionComponent } from "react";
 import { AccordionDetails, Tooltip } from "@mui/material";
 import MiddleEllipsis from "react-middle-ellipsis";
 
+import useSvgComponentExport from "../../hooks/useSvgComponentExport";
+
 import { SvgExport } from "../../interfaces/svgExports";
 import { IconFailExport } from "../../icons";
 import RenderSVG from "./RenderSvg";
-
 import {
   Accordion,
   AccordionSummary,
@@ -14,12 +15,11 @@ import {
   GridItem,
   Paper,
   Typography,
-} from "./SvgComponetExport.style";
-import useSvgComponetExport from "../../hooks/useSvgComponetExport";
+} from "./SvgComponentExport.style";
 
-const SvgComponetExport: FunctionComponent<SvgExport> = (props) => {
+const SvgComponentExport: FunctionComponent<SvgExport> = (props) => {
   const { file, svgComponents } = props;
-  const { handleCopy, handleExpanded, handleSelected, isExpanded } = useSvgComponetExport();
+  const { handleCopy, handleExpanded, handleSelected, isExpanded } = useSvgComponentExport();
 
   return (
     <Accordion
@@ -53,4 +53,4 @@ const SvgComponetExport: FunctionComponent<SvgExport> = (props) => {
   );
 };
 
-export default SvgComponetExport;
+export default SvgComponentExport;

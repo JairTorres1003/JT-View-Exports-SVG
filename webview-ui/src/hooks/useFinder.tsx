@@ -1,12 +1,11 @@
 import { useEffect, useState } from "react";
 
+import { FinderProps } from "../interfaces/Finder";
 import { vscode } from "../utilities/vscode";
 import useDebounce from "./useDebounce";
-import { FinderProps } from "../interfaces/Finder";
 
 const useFinder = (props: FinderProps) => {
   const [value, setValue] = useState<string>("");
-  const [stateAnimete, setStateAnimete] = useState(false);
   const debounce = useDebounce(value, 600);
 
   /**
@@ -17,8 +16,6 @@ const useFinder = (props: FinderProps) => {
       setValue("");
     }
   };
-
-  const handleStateAnimate = () => setStateAnimete(!stateAnimete);
 
   useEffect(() => {
     // Request the extension
@@ -35,9 +32,7 @@ const useFinder = (props: FinderProps) => {
 
   return {
     handleClearValue,
-    handleStateAnimate,
     setValue,
-    stateAnimete,
     value,
   };
 };

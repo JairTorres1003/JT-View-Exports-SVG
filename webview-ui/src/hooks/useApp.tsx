@@ -1,10 +1,10 @@
-import { useEffect, useMemo, useRef, useState } from "react";
 import { createTheme } from "@mui/material";
+import { useEffect, useMemo, useRef, useState } from "react";
 
-import { SvgExport } from "../interfaces/svgExports";
-import { vscode } from "../utilities/vscode";
 import i18n from "../i18n";
+import { SvgExport } from "../interfaces/svgExports";
 import { useSvg } from "../provider/SvgProvider";
+import { vscode } from "../utilities/vscode";
 
 const useApp = () => {
   const [svgComponents, setSvgComponents] = useState<SvgExport[]>([]);

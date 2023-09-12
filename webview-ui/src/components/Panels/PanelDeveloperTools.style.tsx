@@ -8,7 +8,7 @@ export const BoxPanelDeveloperTools = styled(Paper)(() => ({
   "borderRadius": 0,
   "padding": "2rem 1.5rem",
   "background": "rgba(0 0 0 / 10%)",
-  "& .PapeerBox-title": {
+  "& .PaperBox-title": {
     minHeight: 56,
     display: "flex",
     justifyContent: "flex-start",
