@@ -2,13 +2,13 @@ import { FunctionComponent, useRef } from "react";
 import { Divider, IconButton, Portal } from "@mui/material";
 import { useTranslation } from "react-i18next";
 
-import { PanelsSettingsProps } from "../../interfaces/PanelsSettings";
+import { PanelDeveloperToolsProps } from "../../interfaces/PanelDeveloperTools";
 import { EmptySelectionIcon, IconFailExport, IconSettings } from "../../icons";
-import { BoxDeveloper, BoxPanelsSettings, ContainerSvg, TitlePanel } from "./PanelsSettings.style";
+import { BoxDeveloper, BoxPanelDeveloperTools, ContainerSvg, TitlePanel } from "./PanelDeveloperTools.style";
 import { useSvg } from "../../provider/SvgProvider";
 import RenderSVG from "../SvgComponent/RenderSvg";
 
-const PanelsSettings: FunctionComponent<PanelsSettingsProps> = (props) => {
+const PanelDeveloperTools: FunctionComponent<PanelDeveloperToolsProps> = (props) => {
   const { isOpenPanel, handleOpenPanel, refPortalButton } = props;
   const { t } = useTranslation();
   const {
@@ -18,7 +18,7 @@ const PanelsSettings: FunctionComponent<PanelsSettingsProps> = (props) => {
   const refContainerSvg = useRef<HTMLDivElement>(null);
 
   return (
-    <BoxPanelsSettings elevation={isOpenPanel ? 3 : 0}>
+    <BoxPanelDeveloperTools elevation={isOpenPanel ? 3 : 0}>
       <div className="PapeerBox-title">
         <Portal container={refPortalButton?.current} disablePortal={isOpenPanel}>
           <IconButton
@@ -54,8 +54,8 @@ const PanelsSettings: FunctionComponent<PanelsSettingsProps> = (props) => {
           </ContainerSvg>
         </BoxDeveloper>
       )}
-    </BoxPanelsSettings>
+    </BoxPanelDeveloperTools>
   );
 };
 
-export default PanelsSettings;
+export default PanelDeveloperTools;
