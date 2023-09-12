@@ -34,11 +34,13 @@ export const BoxDeveloper = styled(Box)(() => ({
 
 export const ContainerSvg = styled(Paper)(() => ({
   "width": "100%",
+  "height": "auto",
   "display": "flex",
   "justifyContent": "center",
   "alignItems": "center",
   "backgroundColor": "#fff",
   "borderRadius": 10,
   "padding": "14px",
+  "aspectRatio": 1,
   "& svg.empty-selection": { filter: "grayscale(0.75)" },
 }));

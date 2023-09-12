@@ -1,4 +1,4 @@
-import { FunctionComponent, useRef } from "react";
+import { FunctionComponent } from "react";
 import { Divider, IconButton, Portal } from "@mui/material";
 import { useTranslation } from "react-i18next";
 
@@ -21,8 +21,6 @@ const PanelDeveloperTools: FunctionComponent<PanelDeveloperToolsProps> = (props)
     state: { selectedSvg },
   } = useSvg();
 
-  const refContainerSvg = useRef<HTMLDivElement>(null);
-
   return (
     <BoxPanelDeveloperTools elevation={isOpenPanel ? 3 : 0}>
       <div className="PaperBox-title">
@@ -43,15 +41,7 @@ const PanelDeveloperTools: FunctionComponent<PanelDeveloperToolsProps> = (props)
       <Divider sx={{ mt: "-8px" }} />
       {isOpenPanel && (
         <BoxDeveloper>
-          <ContainerSvg
-            elevation={3}
-            ref={refContainerSvg}
-            style={{
-              height: refContainerSvg?.current?.offsetWidth
-                ? refContainerSvg?.current?.offsetWidth
-                : "max-content",
-            }}
-          >
+          <ContainerSvg elevation={3}>
             {!selectedSvg ? (
               <EmptySelectionIcon size="100%" className="empty-selection" />
             ) : selectedSvg.component ? (
