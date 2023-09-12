@@ -2,9 +2,9 @@ import { Dispatch, SetStateAction } from "react";
 import { SvgExport } from "./svgExports";
 
 /**
- * Props for the Playground component.
+ * Props for the PanelsSettings component.
  */
-export interface PlaygroundProps {
+export interface PanelsSettingsProps {
   /**
    * A boolean indicating whether the panel is open.
    * @default false

@@ -1,6 +1,6 @@
 import { Box, Paper, Typography, styled } from "@mui/material";
 
-export const BoxPlayground = styled(Paper)(() => ({
+export const BoxPanelsSettings = styled(Paper)(() => ({
   "width": "100%",
   "display": "flex",
   "flexDirection": "column",
