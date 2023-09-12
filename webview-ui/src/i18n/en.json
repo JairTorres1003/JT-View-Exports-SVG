@@ -15,5 +15,6 @@
     "ExtractIcons": "Extract Icons Svg",
     "progressTitle": "Extracting SVG exports...",
     "Close": "Close",
-    "DeveloperTools": "Developer tools"
+    "DeveloperTools": "Developer tools",
+    "playground": "Playground"
 }
