@@ -21,7 +21,8 @@ export const Snackbar: FunctionComponent = () => {
       open={snackbar.open}
       autoHideDuration={2000}
       onClose={onClose}
-      anchorOrigin={{ vertical: "bottom", horizontal: "center" }}>
+      anchorOrigin={{ vertical: "bottom", horizontal: "center" }}
+    >
       <Alert severity="success">
         <Typography fontSize={12}>
           {`${t("Copied")} ${snackbar.text && `'${snackbar.text}' `}${t("ToClipboard")}`}

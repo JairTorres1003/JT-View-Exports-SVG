@@ -21,7 +21,8 @@ export const Finder: FunctionComponent<FinderProps> = (props) => {
         width: "100%",
         alignItems: "center",
         justifyContent: "space-between",
-      }}>
+      }}
+    >
       <BoxFinder>
         <TextField
           fullWidth

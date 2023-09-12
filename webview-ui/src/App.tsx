@@ -45,7 +45,8 @@ function App() {
                 enable={{ right: true }}
                 onResize={handleResize}
                 onResizeStop={handleResizeStop}
-                size={{ width: resizableWidth, height: "100%" }}>
+                size={{ width: resizableWidth, height: "100%" }}
+              >
                 <Box className="BoxContainer-gallery">
                   <Finder
                     isOpenPanel={isPanelOpen}

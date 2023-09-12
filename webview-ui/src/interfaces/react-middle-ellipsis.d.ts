@@ -1,1 +1,1 @@
-declare module 'react-middle-ellipsis';
+declare module "react-middle-ellipsis";

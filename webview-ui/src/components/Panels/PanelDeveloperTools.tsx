@@ -6,7 +6,12 @@ import { useSvg } from "../../provider/SvgProvider";
 
 import { PanelDeveloperToolsProps } from "../../interfaces/PanelDeveloperTools";
 import { EmptySelectionIcon, IconFailExport, IconSettings } from "../../icons";
-import { BoxDeveloper, BoxPanelDeveloperTools, ContainerSvg, TitlePanel } from "./PanelDeveloperTools.style";
+import {
+  BoxDeveloper,
+  BoxPanelDeveloperTools,
+  ContainerSvg,
+  TitlePanel,
+} from "./PanelDeveloperTools.style";
 import RenderSVG from "../SvgComponent/RenderSvg";
 
 const PanelDeveloperTools: FunctionComponent<PanelDeveloperToolsProps> = (props) => {
@@ -26,7 +31,8 @@ const PanelDeveloperTools: FunctionComponent<PanelDeveloperToolsProps> = (props)
             size="small"
             title={t(`${isOpenPanel ? "Close" : "DeveloperTools"}`)}
             onClick={handleOpenPanel}
-            sx={{ mb: "16px", color: "rgba(var(--color-JT-view-export-svg))" }}>
+            sx={{ mb: "16px", color: "rgba(var(--color-JT-view-export-svg))" }}
+          >
             <IconSettings state={isOpenPanel} />
           </IconButton>
         </Portal>
@@ -44,7 +50,8 @@ const PanelDeveloperTools: FunctionComponent<PanelDeveloperToolsProps> = (props)
               height: refContainerSvg?.current?.offsetWidth
                 ? refContainerSvg?.current?.offsetWidth
                 : "max-content",
-            }}>
+            }}
+          >
             {!selectedSvg ? (
               <EmptySelectionIcon size="100%" className="empty-selection" />
             ) : selectedSvg.component ? (

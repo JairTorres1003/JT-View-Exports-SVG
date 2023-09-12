@@ -43,7 +43,8 @@ export const DropZone: FunctionComponent<DropZoneProps> = (props) => {
         types={fileTypes}
         multiple
         hoverTitle=" "
-        onDraggingStateChange={(newState: boolean) => setIsDrag(newState)}>
+        onDraggingStateChange={(newState: boolean) => setIsDrag(newState)}
+      >
         <CustomFileUploader>
           <Typography fontSize={16} component="h1">
             {file && file.length > 0 && file.length} {message}
@@ -73,7 +74,8 @@ export const DropZone: FunctionComponent<DropZoneProps> = (props) => {
         variant="outlined"
         color="success"
         disabled={!file || file?.length < 1}
-        onClick={() => onExtractIcons(file)}>
+        onClick={() => onExtractIcons(file)}
+      >
         {t("ExtractIcons")}
       </Button>
     </BoxDropZone>

@@ -26,7 +26,8 @@ const SvgComponentExport: FunctionComponent<SvgExport> = (props) => {
       elevation={0}
       expanded={isExpanded}
       onChange={handleExpanded}
-      TransitionProps={{ timeout: { enter: 300, exit: 100 } }}>
+      TransitionProps={{ timeout: { enter: 300, exit: 100 } }}
+    >
       <AccordionSummary elevation={isExpanded ? 0 : 3}>
         <div className="AccordionSummary-title">
           <MiddleEllipsis>
