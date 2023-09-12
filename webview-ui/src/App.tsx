@@ -7,7 +7,7 @@ import { Finder } from "./components/Finder/Finder";
 import SvgComponetExport from "./components/SvgComponent/SvgComponetExport";
 import { DropZone } from "./components/DropZone/DropZone";
 import { Loading } from "./components/Loading/Loading";
-import PanelsSettings from "./components/Panels/PanelsSettings";
+import Playground from "./components/Panels/Playground";
 import { Snackbar } from "./components/Snackbar/Snackbar";
 
 import useApp from "./hooks/useApp";
@@ -69,7 +69,7 @@ function App() {
                   </Box>
                 </Box>
               </Resizable>
-              <PanelsSettings
+              <Playground
                 isOpenPanel={isPanelOpen}
                 handleOpenPanel={handleOpenPanel}
                 refPortalButton={refPortalButton}

@@ -2,13 +2,13 @@ import { FunctionComponent, useRef } from "react";
 import { Divider, IconButton, Portal } from "@mui/material";
 import { useTranslation } from "react-i18next";
 
-import { PanelsSettingsProps } from "../../interfaces/PanelsSettings";
+import { PlaygroundProps } from "../../interfaces/Playground";
 import { EmptySelectionIcon, IconFailExport, IconSettings } from "../../icons";
-import { BoxDeveloper, BoxPanelsSettings, ContainerSvg, TitlePanel } from "./PanelsSettings.style";
+import { BoxDeveloper, BoxPlayground, ContainerSvg, TitlePanel } from "./Playground.style";
 import { useSvg } from "../../provider/SvgProvider";
 import RenderSVG from "../SvgComponent/RenderSvg";
 
-const PanelsSettings: FunctionComponent<PanelsSettingsProps> = (props) => {
+const Playground: FunctionComponent<PlaygroundProps> = (props) => {
   const { isOpenPanel, handleOpenPanel, refPortalButton } = props;
   const { t } = useTranslation();
   const {
@@ -18,19 +18,19 @@ const PanelsSettings: FunctionComponent<PanelsSettingsProps> = (props) => {
   const refContainerSvg = useRef<HTMLDivElement>(null);
 
   return (
-    <BoxPanelsSettings elevation={isOpenPanel ? 3 : 0}>
+    <BoxPlayground elevation={isOpenPanel ? 3 : 0}>
       <div className="PapeerBox-title">
         <Portal container={refPortalButton?.current} disablePortal={isOpenPanel}>
           <IconButton
             size="small"
-            title={t(`${isOpenPanel ? "Close" : "DeveloperTools"}`)}
+            title={t(`${isOpenPanel ? "Close" : "playground"}`)}
             onClick={handleOpenPanel}
             sx={{ mb: "16px", color: "rgba(var(--color-JT-view-export-svg))" }}>
             <IconSettings state={isOpenPanel} />
           </IconButton>
         </Portal>
         <TitlePanel noWrap fontSize={13} variant="h1">
-          {t("DeveloperTools")}
+          {t("playground")}
         </TitlePanel>
       </div>
       <Divider sx={{ mt: "-8px" }} />
@@ -54,8 +54,8 @@ const PanelsSettings: FunctionComponent<PanelsSettingsProps> = (props) => {
           </ContainerSvg>
         </BoxDeveloper>
       )}
-    </BoxPanelsSettings>
+    </BoxPlayground>
   );
 };
 
-export default PanelsSettings;
+export default Playground;
