@@ -384,36 +384,73 @@ export async function extractSVGComponentExports(filePath: string): Promise<SvgE
     // Parse the file content into an AST (Abstract Syntax Tree)
     const ast = parseFileContent(filePath);
     const exports: SvgComponent[] = [];
+    const notExports: SvgComponent[] = [];
+    const identifiers = new Set<string>();
     let lengthExports: number = 0;
 
     // Traverse the AST to find export declarations
     traverse(ast, {
-      ExportNamedDeclaration(path) {
-        const { node } = path;
+      Declaration(path) {
+        const { node, parent } = path;
 
-        if (node.declaration) {
-          if (t.isFunctionDeclaration(node.declaration)) {
-            lengthExports++;
-            // Exported function declaration 'export function functionName() {}'
-            const extract = async () => {
-              const svgComponent = await extractSvgComponentFromNode(
-                node.declaration as t.Declaration,
+        if (t.isProgram(parent) && node) {
+          let declaration: any = node;
+          let isExported = false;
+
+          if (
+            (t.isExportNamedDeclaration(node) || t.isExportDefaultDeclaration(node)) &&
+            node.declaration
+          ) {
+            declaration = node.declaration;
+            isExported = true;
+          }
+
+          if (t.isFunctionDeclaration(declaration)) {
+            const extractDeclaration = async () => {
+              const svgComponents = await extractSvgComponentFromNode(
+                declaration as t.Declaration,
                 "function"
               );
-              if (svgComponent) {
-                exports.push(svgComponent);
+              if (svgComponents) {
+                // Exported function declaration 'export function functionName() {}'
+                if (isExported || identifiers.has(svgComponents.name)) {
+                  lengthExports++;
+                  exports.push(svgComponents);
+                } else {
+                  // Function declaration 'function functionName() {}'
+                  notExports.push(svgComponents);
+                }
               }
             };
-            extract();
-          } else if (t.isVariableDeclaration(node.declaration)) {
-            lengthExports++;
-            // Exported variable declaration(s) 'export const variableName = value;'
-            node.declaration.declarations.forEach(async (declaration) => {
-              if (t.isIdentifier(declaration.id)) {
-                const svgComponent = await extractSvgComponentFromNode(declaration, "variable");
-                if (svgComponent) {
-                  exports.push(svgComponent);
+            extractDeclaration();
+          } else if (t.isVariableDeclaration(declaration)) {
+            declaration.declarations.forEach(async (d) => {
+              if (t.isIdentifier(d.id)) {
+                const svgComponents = await extractSvgComponentFromNode(d, "variable");
+                if (svgComponents) {
+                  // Exported variable declaration 'export const variableName = value;'
+                  if (isExported || identifiers.has(svgComponents.name)) {
+                    lengthExports++;
+                    exports.push(svgComponents);
+                  } else {
+                    // Variable declaration 'const variableName = value;'
+                    notExports.push(svgComponents);
+                  }
                 }
+              }
+            });
+          } else if (t.isIdentifier(declaration)) {
+            identifiers.add(declaration.name);
+          } else if (t.isObjectExpression(declaration)) {
+            declaration.properties.forEach((property) => {
+              if (t.isObjectProperty(property) && t.isIdentifier(property.key)) {
+                identifiers.add(property.key.name);
+              }
+            });
+          } else if (t.isExportNamedDeclaration(declaration) && declaration.specifiers) {
+            declaration.specifiers.forEach((specifier) => {
+              if (t.isExportSpecifier(specifier) && t.isIdentifier(specifier.exported)) {
+                identifiers.add(specifier.exported.name);
               }
             });
           }
