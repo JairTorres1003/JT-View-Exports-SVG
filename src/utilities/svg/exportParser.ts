@@ -3,7 +3,7 @@ import * as fs from "fs";
 import * as babelParser from "@babel/parser";
 import traverse from "@babel/traverse";
 import * as t from "@babel/types";
-import { camelCase } from "lodash";
+import { camelCase, isArray } from "lodash";
 
 import {
   HasInvalidChild,
@@ -198,7 +198,7 @@ function isSVGComponent(
       if (typeof svgProps.style === "string") {
         // Convert the "style" string to an object
         svgProps.style = cssStringToObject(svgProps.style);
-      } else if (!svgProps.style) {
+      } else if (!svgProps.style || typeof svgProps.style !== "object" || isArray(svgProps.style)) {
         svgProps.style = {};
       }
     }

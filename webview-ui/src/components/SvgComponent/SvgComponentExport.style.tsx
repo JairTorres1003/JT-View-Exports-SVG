@@ -43,7 +43,7 @@ export const AccordionSummary = styled((props: AccordionSummaryProps | PaperProp
       height: 8,
       position: "absolute",
       background: "inherit",
-      bottom: -9,
+      bottom: -9.5,
     },
   },
   "& .MuiAccordionSummary-expandIconWrapper.Mui-expanded": {

@@ -14,4 +14,5 @@ export const defaultProps: { [tagKey: string]: any } = {
   state: false,
   style: {},
   sx: {},
+  className: "",
 };
