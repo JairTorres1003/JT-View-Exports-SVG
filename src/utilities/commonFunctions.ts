@@ -6,6 +6,10 @@ import { getWorkspaceFolder } from "./getWorkspaceFolder";
 import { SvgExport, SvgExportErrors, SvgFile } from "../interfaces/svgExports";
 import { REGEX_FILE } from "./regex";
 import { extractSVGComponentExports } from "./svg/exportParser";
+import { FileModifiedCache, getFileTimestamp } from "./svg/fileModifiedCache";
+
+// Create an instance of FileModifiedCache for caching SvgExport objects
+const fileCache = new FileModifiedCache<SvgExport>();
 
 /**
  * Process the selected files and extract the svg components
@@ -83,8 +87,21 @@ export async function processFiles(
       const svgComponents: SvgExport[] = await Promise.all(
         selectedFiles.map(async (file) => {
           try {
-            const svgExports = await extractSVGComponentExports(file.absolutePath);
-            return { ...svgExports, file, lengthSvg: svgExports.svgComponents.length };
+            const lastModified = getFileTimestamp(file.absolutePath);
+            const cachedValue = fileCache.get(file.absolutePath, lastModified);
+
+            // If a cached value exists and the file hasn't been modified since caching, return it
+            if (cachedValue !== undefined) {
+              return cachedValue;
+            }
+
+            const result = await extractSVGComponentExports(file.absolutePath);
+
+            result.svgComponents.sort((a, b) => a.name.localeCompare(b.name));
+            // Cache the result associated with the file and its last modification timestamp
+            fileCache.set(file.absolutePath, result, lastModified);
+
+            return { ...result, file, lengthSvg: result.svgComponents.length };
           } catch (error) {
             console.error(`Error parsing file ${file.absolutePath}: ${error}`);
             return { file, lengthExports: 0, lengthSvg: 0, svgComponents: [] };

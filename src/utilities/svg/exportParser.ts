@@ -14,11 +14,7 @@ import {
 import { ExportType, ExportTypeNode, IsSVGComponent } from "../../interfaces/exportParser";
 import { SVG_TAGS } from "./svgTags";
 import { cssStringToObject } from "./cssStringToObject";
-import { FileModifiedCache, getFileTimestamp } from "./fileModifiedCache";
 import { getPropertyValues } from "./getPropertyValues";
-
-// Create an instance of FileModifiedCache for caching SvgExport objects
-const fileCache = new FileModifiedCache<SvgExport>();
 
 /**
  * Parse the content of a file and return the AST (Abstract Syntax Tree).
@@ -385,13 +381,6 @@ async function extractSvgComponentFromNode(
  */
 export async function extractSVGComponentExports(filePath: string): Promise<SvgExport> {
   try {
-    const lastModified = getFileTimestamp(filePath);
-    const cachedValue = fileCache.get(filePath, lastModified);
-
-    if (cachedValue !== undefined) {
-      return cachedValue;
-    }
-
     // Parse the file content into an AST (Abstract Syntax Tree)
     const ast = parseFileContent(filePath);
     const exports: SvgComponent[] = [];
@@ -470,8 +459,6 @@ export async function extractSVGComponentExports(filePath: string): Promise<SvgE
     });
 
     const result: SvgExport = { lengthExports, lengthSvg: exports.length, svgComponents: exports };
-    fileCache.set(filePath, result, lastModified);
-
     // Return an object containing the extracted SVG component exports and their lengths
     return result;
   } catch (error) {
