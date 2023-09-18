@@ -37,16 +37,19 @@ export const AccordionSummary = styled((props: AccordionSummaryProps | PaperProp
     "position": "sticky",
     "top": 0,
     "zIndex": 10,
-    "&::before": {
+    "&::before, &::after": {
       content: '""',
       width: "100%",
-      height: 8,
       position: "absolute",
       background: "inherit",
+      height: 8,
+    },
+    "&::after": {
       bottom: -8,
       borderTop: "1px solid",
       borderColor: "inherit",
     },
+    "&::before": { top: -4 },
   },
   "& .MuiAccordionSummary-expandIconWrapper.Mui-expanded": {
     transform: "rotate(90deg)",
