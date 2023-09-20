@@ -95,13 +95,14 @@ export async function processFiles(
               return cachedValue;
             }
 
-            const result = await extractSVGComponentExports(file.absolutePath);
+            const svgExports = await extractSVGComponentExports(file.absolutePath);
 
-            result.svgComponents.sort((a, b) => a.name.localeCompare(b.name));
+            svgExports.svgComponents.sort((a, b) => a.name.localeCompare(b.name));
+            const result = { ...svgExports, file, lengthSvg: svgExports.svgComponents.length };
             // Cache the result associated with the file and its last modification timestamp
             fileCache.set(file.absolutePath, result, lastModified);
 
-            return { ...result, file, lengthSvg: result.svgComponents.length };
+            return result;
           } catch (error) {
             console.error(`Error parsing file ${file.absolutePath}: ${error}`);
             return { file, lengthExports: 0, lengthSvg: 0, svgComponents: [] };
