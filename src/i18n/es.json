@@ -2,5 +2,6 @@
     "panelTitle": "Ver Exportaciones SVG",
     "progressTitle": "Extrayendo exportaciones SVG...",
     "NoIconsFound": "No se encontraron iconos",
+    "NoFileSelected": "Ningún archivo seleccionado",
     "PleaseSearch": "Por favor, ingrese al menos 3 caracteres para buscar..."
 }

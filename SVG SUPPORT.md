@@ -112,16 +112,25 @@ export const CircleBlue = () => (
 );
 ```
 
-6. **Validated SVG Tags**: This extension performs validations on various SVG tags to ensure the correctness of the SVG components. The following list shows the SVG tags that are currently supported and validated by the extension:
+6. **Validated SVG Tags**: This extension conducts validation checks on different SVG tags to ensure the accuracy of SVG components. The list below displays the SVG tags currently supported and validated by the extension:
 
-| Supported Tags | Supported Tags | Supported Tags | Supported Tags |
-|----------------|----------------|----------------|----------------|
-| svg            | g              | circle         | ellipse        |
-| line           | polyline       | polygon        | rect           |
-| path           | text           | tspan          | textPath       |
-| image          | use            | defs           | clipPath       |
-| mask           | pattern        | linearGradient | radialGradient |
-| filter         | symbol         | a              | metadata       |
-| desc           | title          | stop           |                |
+|   Supported Tags    |   Supported Tags    |   Supported Tags    |   Supported Tags    |
+| ------------------- | ------------------- | ------------------- | ------------------- |
+| svg                 | animate             | animateMotion       | animateTransform    |
+| circle              | clipPath            | defs                | desc                |
+| ellipse             | feBlend             | feColorMatrix       | feComponentTransfer |
+| feComposite         | feConvolveMatrix    | feDiffuseLighting   | feDisplacementMap   |
+| feDistantLight      | feDropShadow        | feFlood             | feFuncA             |
+| feFuncB             | feFuncG             | feFuncR             | feGaussianBlur      |
+| feImage             | feMerge             | feMergeNode         | feMorphology        |
+| feOffset            | fePointLight        | feSpecularLighting  | feSpotLight         |
+| feTile              | feTurbulence        | filter              | foreignObject       |
+| g                   | image               | line                | linearGradient      |
+| marker              | mask                | metadata            | mpath               |
+| path                | pattern             | polygon             | polyline            |
+| radialGradient      | rect                | stop                | switch              |
+| symbol              | text                | textPath            | tspan               |
+| use                 | view                |                     |                     |
 
-The extension ensures that the SVG components use only the tags listed above. If any other unsupported tags are used, the extension will raise validation errors to maintain the integrity of the SVG components and ensure they adhere to SVG specifications.
+
+The extension ensures that the SVG components use only the tags listed above. If any other unsupported tags are used, the extension will raise validation errors to maintain the integrity of the SVG components and ensure they adhere to SVG specifications. Components with invalid tags will not be displayed in the "**View Exports SVG**" panel.

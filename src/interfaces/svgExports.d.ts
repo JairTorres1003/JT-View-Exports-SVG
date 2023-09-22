@@ -42,6 +42,10 @@ export interface SvgComponent {
    * The type of export for the SVG component.
    */
   typeExport: "function" | "variable";
+  /**
+   * Indicates whether the component is an SVG animation component.
+   */
+  isAnimated?: boolean;
 }
 
 /**
@@ -62,12 +66,24 @@ export interface SvgComponentDetails {
   props: {
     [key: string]: any;
   };
+  /**
+   * A flag indicating whether the component uses framer-motion
+   */
+  isMotion?: boolean;
 }
 
 /**
  * Represents an SVG file.
  */
 export interface SvgFile {
+  /**
+   * The basename of the SVG file.
+   */
+  basename: string;
+  /**
+   * The dirname of the SVG file.
+   */
+  dirname: string;
   /**
    * The absolute path of the SVG file.
    */
@@ -104,6 +120,10 @@ export interface SvgExportErrors {
    * The error message describing the issue with SVG exports.
    */
   messageError: string;
+  /**
+   * The optional number representing the selected file.
+   */
+  fileSelected?: number;
 }
 
 /**

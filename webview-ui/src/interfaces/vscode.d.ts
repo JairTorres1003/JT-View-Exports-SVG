@@ -1,4 +1,5 @@
 export type PostMessageCommand =
+  | "extractIconsFile"
   | "getCurrentTheme"
   | "getTranslations"
   | "requestSvgComponents"

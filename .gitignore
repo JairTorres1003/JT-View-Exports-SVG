@@ -11,6 +11,7 @@
 /out
 /dist
 .vscode-test/
+/test/responseFile.json
 
 # Production
 /build

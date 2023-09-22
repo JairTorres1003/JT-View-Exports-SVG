@@ -1,11 +1,13 @@
 import { Disposable, Uri, ViewColumn, Webview, WebviewPanel, env, window } from "vscode";
-import { getUri } from "../utilities/getUri";
-import { getNonce } from "../utilities/getNonce";
+
 import { SvgExport, SvgExportErrors } from "../interfaces/svgExports";
-import { getCurrentTheme } from "../utilities/getTheme";
-import { ReciveMessageData, PostMessageCommand } from "../interfaces/vscode";
-import { filterSvgComponents } from "../utilities/svg/filterSvgComponents";
+import { ReceiveMessageData, PostMessageCommand, CommandHandler } from "../interfaces/vscode";
+import { getInputFiles } from "../utilities/getInputFiles";
 import { getTranslations } from "../utilities/getLocaleLanguage";
+import { getNonce } from "../utilities/getNonce";
+import { getCurrentTheme } from "../utilities/getTheme";
+import { getUri } from "../utilities/getUri";
+import { filterSvgComponents } from "../utilities/svg/filterSvgComponents";
 
 /**
  * Webview panel for displaying SVG exports.
@@ -59,8 +61,7 @@ export class ViewExportsSVGPanel {
 
     // If we already have a panel, show it
     if (ViewExportsSVGPanel.currentPanel) {
-      ViewExportsSVGPanel.currentPanel.svgComponents = svgComponents;
-      ViewExportsSVGPanel.currentPanel._panel.reveal(column);
+      this.update(svgComponents);
       return;
     }
 
@@ -83,6 +84,20 @@ export class ViewExportsSVGPanel {
     panel.iconPath = Uri.joinPath(extensionUri, "assets", "JT View Exports SVG - ICON.svg");
 
     ViewExportsSVGPanel.currentPanel = new ViewExportsSVGPanel(panel, extensionUri, svgComponents);
+  }
+
+  /**
+   * Update the contents of the webview panel displaying SVG components.
+   * @param svgComponents - SVG components or error data to display.
+   */
+  public static update(svgComponents: SvgExport[] | SvgExportErrors) {
+    // If we already have a panel, show it
+    if (ViewExportsSVGPanel.currentPanel) {
+      const svgComponentsJson = JSON.stringify(svgComponents);
+      ViewExportsSVGPanel.currentPanel.svgComponents = svgComponents;
+      ViewExportsSVGPanel.currentPanel._postMessage("svgComponents", svgComponentsJson);
+      ViewExportsSVGPanel.currentPanel._panel.reveal(ViewColumn.Active);
+    }
   }
 
   /**
@@ -111,7 +126,7 @@ export class ViewExportsSVGPanel {
   private _getWebviewContent(webview: Webview, extensionUri: Uri) {
     const i18n = getTranslations();
     // Get the URIs for the required assets
-    const icoUri = getUri(webview, extensionUri, ["webview-ui", "build", "assets", "favico.ico"]);
+    const icoUri = getUri(webview, extensionUri, ["webview-ui", "build", "assets", "favicon.ico"]);
     const stylesUri = getUri(webview, extensionUri, ["webview-ui", "build", "assets", "index.css"]);
     const scriptUri = getUri(webview, extensionUri, ["webview-ui", "build", "assets", "index.js"]);
 
@@ -139,30 +154,70 @@ export class ViewExportsSVGPanel {
   }
 
   /**
+   * Handles the request for SVG components.
+   * @param message The received message data.
+   */
+  private handleRequestSvgComponents(message: ReceiveMessageData) {
+    const svgComponentsJson = JSON.stringify(this.svgComponents);
+    this._postMessage("svgComponents", svgComponentsJson);
+  }
+
+  /**
+   * Handles the request to get the current theme.
+   * @param message The received message data.
+   */
+  private handleGetCurrentTheme(message: ReceiveMessageData) {
+    const theme = getCurrentTheme();
+    this._postMessage("currentTheme", theme);
+  }
+
+  /**
+   * Handles the search for SVG components based on a filter.
+   * @param message The received message data.
+   */
+  private handleSearchSvgComponents(message: ReceiveMessageData) {
+    const filter = message.data;
+
+    const svgComponents = filterSvgComponents(this.svgComponents as SvgExport[], filter);
+    const svgComponentsJson = JSON.stringify(svgComponents);
+    this._postMessage("filteredSvgComponents", svgComponentsJson);
+  }
+
+  /**
+   * Handles the request to get translations.
+   * @param message The received message data.
+   */
+  private handleGetTranslations() {
+    const language = env.language || "en";
+    this._postMessage("language", language);
+  }
+
+  /**
+   * Handles the extraction of icons from a dropped file.
+   * @param message The received message data.
+   */
+  private handleExtractIconsFile(message: ReceiveMessageData) {
+    getInputFiles(message.data);
+  }
+
+  /**
    * Sets up a message listener for the webview panel.
    * @param webview The webview instance.
    */
   private _setWebviewMessageListener(webview: Webview) {
-    webview.onDidReceiveMessage(
-      (message: ReciveMessageData) => {
-        if (message.command === "requestSvgComponents") {
-          const svgComponentsJson = JSON.stringify(this.svgComponents);
-          this._postMessage("svgComponents", svgComponentsJson);
-        }
-        if (message.command === "getCurrentTheme") {
-          const theme = getCurrentTheme();
-          this._postMessage("currentTheme", theme);
-        }
-        if (message.command === "searchSvgComponents") {
-          const filter = message.data;
+    const commandHandlers: CommandHandler = {
+      requestSvgComponents: this.handleRequestSvgComponents,
+      getCurrentTheme: this.handleGetCurrentTheme,
+      searchSvgComponents: this.handleSearchSvgComponents,
+      getTranslations: this.handleGetTranslations,
+      extractIconsFile: this.handleExtractIconsFile,
+    };
 
-          const svgComponents = filterSvgComponents(this.svgComponents as SvgExport[], filter);
-          const svgComponentsJson = JSON.stringify(svgComponents);
-          this._postMessage("filteredSvgComponents", svgComponentsJson);
-        }
-        if (message.command === "getTranslations") {
-          const language = env.language || "en";
-          this._postMessage("language", language);
+    webview.onDidReceiveMessage(
+      (message: ReceiveMessageData) => {
+        const handler = commandHandlers[message.command];
+        if (handler) {
+          handler.call(this, message);
         }
       },
       undefined,

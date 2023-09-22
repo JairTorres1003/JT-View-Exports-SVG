@@ -6,14 +6,18 @@ import { SvgExport } from "./svgExports";
  */
 export interface FinderProps {
   /**
-   * Function to set the SVG components.
-   * @param components An array of SVG exports.
+   * Handles the received SVG components data from the webview context.
+   * @param data The data received from the webview context.
    */
-  setSvgComponents: Dispatch<SetStateAction<SvgExport[]>>;
-
+  handleSvgComponents: (data: any) => void;
   /**
-   * Function to set the message to show.
-   * @param message The message to be shown or null if no message should be displayed.
+   * An optional reference to a DOM element.
+   * This reference can be used to position the panel relative to the referenced element.
    */
-  setShowMessage: Dispatch<SetStateAction<string | null>>;
+  refPortalButton?: RefObject<HTMLElement> | null;
+  /**
+   * A boolean indicating whether the panel is open.
+   * @default false
+   */
+  isOpenPanel?: boolean;
 }

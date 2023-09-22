@@ -1,23 +1,35 @@
 import { FunctionComponent, useEffect, useRef } from "react";
-import { SvgComponentDetails } from "../../interfaces/svgExports";
 import { isArray } from "lodash";
 import { motion } from "framer-motion";
-import { IconFailExport } from "../../icons/IconFailExport";
 
-const RenderSVG: FunctionComponent<SvgComponentDetails> = ({ children, tag, props }) => {
+import { IconFailExport } from "../../icons";
+import { SvgComponentDetails } from "../../interfaces/svgExports";
+
+const RenderSVG: FunctionComponent<SvgComponentDetails & { fullSize?: boolean }> = (properties) => {
+  const { children, fullSize, tag, isMotion } = properties;
+  let props = properties.props;
+
   const svgRef = useRef<HTMLElement>(null);
   const isValidChild = typeof tag === "string";
-  const isSvg = isValidChild && tag.includes("svg");
+  const isSvg = isValidChild && tag === "svg";
+
+  const fullSizeProps = fullSize
+    ? {
+        width: "100%",
+        height: "100%",
+        style: {
+          transform: "scale(1)",
+        },
+      }
+    : {};
 
   useEffect(() => {
-    if (svgRef.current) {
-      let width = svgRef.current.clientWidth;
+    if (svgRef.current && !fullSize) {
+      const width = svgRef.current.clientWidth;
       const height = svgRef.current.clientHeight;
       const padding = 20; // 20px: 10px padding on each side
       const minWidthFather = 94;
       const maxHeightFather = 65;
-
-      width = width > minWidthFather ? width % minWidthFather : Math.round(minWidthFather / width);
 
       const maxWidthScale = (minWidthFather - padding) / (width + padding);
       const maxHeightScale = (maxHeightFather - padding) / (height + padding);
@@ -31,8 +43,8 @@ const RenderSVG: FunctionComponent<SvgComponentDetails> = ({ children, tag, prop
   if (isArray(children) && isValidChild) {
     let Component: any = tag;
 
-    if (tag.includes("motion")) {
-      Component = motion(tag.split(".")[1]);
+    if (isMotion) {
+      Component = motion(tag);
       const transition: { [key: string]: any } = { ...props.transition };
       transition.repeat = Infinity;
       props = { ...props, transition };
@@ -40,7 +52,7 @@ const RenderSVG: FunctionComponent<SvgComponentDetails> = ({ children, tag, prop
 
     if (children.length > 0) {
       return (
-        <Component {...props} ref={isSvg ? svgRef : null}>
+        <Component {...props} {...(isSvg ? fullSizeProps : {})} ref={isSvg ? svgRef : null}>
           {children.map((child, index) => (
             <RenderSVG {...child} key={index} />
           ))}

@@ -25,7 +25,8 @@
     "dev": "vite",
     "build": "tsc && vite build",
     "preview": "vite preview",
-    "lint": "eslint src --ext ts"
+    "lint": "eslint src --ext .ts --ext .tsx",
+    "format": "prettier --write 'src/**/*.{ts,tsx}'"
   },
   "dependencies": {
     "@emotion/react": "^11.11.1",
@@ -35,9 +36,12 @@
     "framer-motion": "^10.13.0",
     "i18next": "^23.4.1",
     "lodash": "^4.17.21",
+    "re-resizable": "^6.9.11",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
-    "react-i18next": "^13.0.3"
+    "react-drag-drop-files": "^2.3.10",
+    "react-i18next": "^13.0.3",
+    "react-middle-ellipsis": "^1.2.2"
   },
   "devDependencies": {
     "@types/lodash": "^4.14.195",
@@ -48,7 +52,7 @@
     "@typescript-eslint/parser": "^6.2.1",
     "@vitejs/plugin-react": "^4.0.1",
     "eslint": "^8.46.0",
-    "prettier": "^3.0.0",
+    "prettier": "^3.0.3",
     "typescript": "^5.0.2",
     "vite": "^4.4.0"
   }

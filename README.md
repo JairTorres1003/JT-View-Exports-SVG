@@ -1,10 +1,10 @@
-# JT View Exports SVG
+# View Exports SVG
 
-<img src="./assets/JT View Exports SVG - ICON.png" alt="Logo JT View Exports SVG" width="180" height="180">
+<img src="./assets/JT View Exports SVG - ICON.png" alt="Logo View Exports SVG" width="180" height="180">
 
 ## Descripción
 
-'**JT View Exports SVG**' is a Visual Studio Code extension that provides a convenient way to view SVG icons exported from JavaScript, JSX, TypeScript, or TSX files. With this extension, you can easily explore and search for SVG icons within your project, making it effortless to find and utilize your icon assets.
+'**View Exports SVG**' is a Visual Studio Code extension that provides a convenient way to view SVG icons exported from JavaScript, JSX, TypeScript, or TSX files. With this extension, you can easily explore and search for SVG icons within your project, making it effortless to find and utilize your icon assets.
 
 **Key features:**
 
@@ -13,11 +13,11 @@
 - Open a dedicated window with a searchable list of all discovered icons
 - Efficient search functionality to locate specific icons
 
-Enhance your productivity and streamline your icon management workflow with the '**JT View Exports SVG**' extension for Visual Studio Code.
+Enhance your productivity and streamline your icon management workflow with the '**View Exports SVG**' extension for Visual Studio Code.
 
 ## Screenshots
 
-<img src="./assets/JT View Exports SVG - Demo.gif" alt="Demo JT View Exports SVG" width="auto" height="auto">
+https://github.com/JairTorres1003/JT-View-Exports-SVG/assets/83931760/b12ebc35-bfdb-41dc-a415-862a09e58970
 
 ## Installation
 
@@ -42,6 +42,10 @@ Contributions are welcome! If you find any bugs or have suggestions for new feat
 ## License
 
 This extension is available under the [MIT License](LICENSE).
+
+## Recent Changes
+
+You can find details of the changes and updates in the [changelog file (CHANGELOG.md)](CHANGELOG.md).
 
 ## Keywords
 
