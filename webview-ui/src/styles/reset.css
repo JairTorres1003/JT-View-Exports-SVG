@@ -27,15 +27,15 @@ button {
 }
 
 button {
-  background: transparent;
   border: 0;
   outline: 0;
+  background: transparent;
 }
 
 a {
   color: inherit;
-  -webkit-text-stroke: inherit;
   text-decoration: none;
+  -webkit-text-stroke: inherit;
 }
 
 input:-webkit-autofill,
@@ -47,17 +47,17 @@ textarea:-webkit-autofill:focus,
 select:-webkit-autofill,
 select:-webkit-autofill:hover,
 select:-webkit-autofill:focus {
-  transition: background-color 99999s ease-in-out 0s;
-  -webkit-text-fill-color: inherit !important;
   caret-color: inherit !important;
+  -webkit-text-fill-color: inherit !important;
+  transition: background-color 99999s ease-in-out 0s;
 }
 
 /* clears the 'X' from Internet Explorer */
 input[type="search"]::-ms-clear,
 input[type="search"]::-ms-reveal {
-  display: none;
   width: 0;
   height: 0;
+  display: none;
 }
 
 /* clears the 'X' from Chrome */
@@ -72,7 +72,7 @@ body,
 body[data-vscode-theme-kind="vscode-light"],
 body[data-vscode-theme-kind="vscode-high-contrast-light"] {
   --color-JT-view-export-svg: 0, 0, 0;
-  padding: 0 10px;
+  padding: 0 !important;
 }
 
 body[data-vscode-theme-kind="vscode-dark"],
@@ -81,13 +81,54 @@ body[data-vscode-theme-kind="vscode-high-contrast"] {
 }
 
 #root {
-  padding: 2rem 1.5rem;
+  height: 100vh;
 }
 
 main {
-  min-height: 100vh;
+  gap: 10px;
   width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.BoxContainer {
+  display: flex;
+  justify-content: flex-start;
+  flex-direction: row;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+}
+
+.Resizable-Box > div:not([class]) > div {
+  transition: background-color 0.1s ease-out;
+  width: var(--vscode-sash-size, 4px) !important;
+  right: 0 !important;
+}
+
+.Resizable-Box > div:not([class]) > div:hover {
+  background-color: var(--vscode-sash-hoverBorder, #3e4452);
+  width: var(--vscode-sash-hover-size, 4px) !important;
+  right: 0 !important;
+}
+
+.BoxContainer-gallery {
+  gap: 10px;
+  display: flex;
+  flex-direction: column;
+  padding: 2rem 1.5rem;
+  height: 100%;
+  width: 100%;
+}
+
+.BoxContainer-gallery-container {
+  overflow: hidden auto;
+  height: 100%;
+  width: calc(100% + 20px);
   display: flex;
   flex-direction: column;
   gap: 10px;
+  padding: 0 10px;
+  margin: 0 -10px;
 }

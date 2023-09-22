@@ -1,6 +1,22 @@
 {
     "Label.Clear": "Limpiar",
-    "Label.SearchIcons": "Buscar íconos",
+    "Label.Settings": "Configuración",
+    "Label.SearchIcons": "Buscar iconos",
     "Copied": "Copiado",
-    "ToClipboard": "al portapapeles"
+    "ToClipboard": "al portapapeles",
+    "DropHere": "Soltar aquí",
+    "Upload": "Subir",
+    "OrDropFile": "o arrastrar un archivo aquí",
+    "SelectedFile": {
+        "Single": "Archivo seleccionado",
+        "Multiple": "Archivos seleccionados",
+        "None": "Ningún archivo seleccionado"
+    },
+    "ExtractIcons": "Extraer iconos SVG",
+    "progressTitle": "Extrayendo exportaciones SVG...",
+    "Close": "Cerrar",
+    "DeveloperTools": "Herramientas de desarrollo",
+    "playground": "Área de pruebas",
+    "dark": "Oscuro",
+    "light": "Claro"
 }
