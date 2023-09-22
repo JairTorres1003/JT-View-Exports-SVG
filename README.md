@@ -17,7 +17,7 @@ Enhance your productivity and streamline your icon management workflow with the 
 
 ## Screenshots
 
-<img src="./assets/JT View Exports SVG - Demo.gif" alt="Demo View Exports SVG" width="auto" height="auto">
+https://github.com/JairTorres1003/JT-View-Exports-SVG/assets/83931760/b12ebc35-bfdb-41dc-a415-862a09e58970
 
 ## Installation
 
