@@ -2,7 +2,7 @@
 
 ## 2.0.0
 
-_Sep x, 2023_
+_Sep 22, 2023_
 
 **Enhancements and New Features**
 
