@@ -16,5 +16,7 @@
     "progressTitle": "Extracting SVG exports...",
     "Close": "Close",
     "DeveloperTools": "Developer tools",
-    "playground": "Playground"
+    "playground": "Playground",
+    "dark": "Dark",
+    "light": "Light"
 }

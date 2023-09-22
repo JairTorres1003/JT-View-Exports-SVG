@@ -1,0 +1,22 @@
+{
+    "Label.Clear": "Effacer",
+    "Label.Settings": "Paramètres",
+    "Label.SearchIcons": "Rechercher des icônes",
+    "Copied": "Copié",
+    "ToClipboard": "dans le presse-papiers",
+    "DropHere": "Déposez ici",
+    "Upload": "Télécharger",
+    "OrDropFile": "ou déposez un fichier ici",
+    "SelectedFile": {
+        "Single": "Fichier sélectionné",
+        "Multiple": "Fichiers sélectionnés",
+        "None": "Aucun fichier sélectionné"
+    },
+    "ExtractIcons": "Extraire les icônes SVG",
+    "progressTitle": "Extraction des exportations SVG en cours...",
+    "Close": "Fermer",
+    "DeveloperTools": "Outils de développement",
+    "playground": "Aire de jeux",
+    "dark": "Sombre",
+    "light": "Clair"
+}
