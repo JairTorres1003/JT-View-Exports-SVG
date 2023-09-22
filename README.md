@@ -43,6 +43,11 @@ Contributions are welcome! If you find any bugs or have suggestions for new feat
 
 This extension is available under the [MIT License](LICENSE).
 
+
+## Recent Changes
+
+You can find details of the changes and updates in the [changelog file (CHANGELOG.md)](CHANGELOG.md).
+
 ## Keywords
 
 Visual Studio Code, Extension, SVG icons, React, Javascript, JSX, TypeScript, TSX, Icon management, Icon assets.
