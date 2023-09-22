@@ -28,7 +28,7 @@ export const AccordionSummary = styled((props: AccordionSummaryProps | PaperProp
   "minHeight": "60px !important",
   "flexDirection": "row-reverse",
   "transition": "background-color 0.2s",
-  "& .AccordionSummary-title": { whiteSpace: "nowrap", width: "100%" },
+  "& .AccordionSummary-title": { whiteSpace: "nowrap", width: "100%", fontSize: 13 },
   "&.Mui-expanded": {
     "borderRadius": 0,
     "color": "inherit",

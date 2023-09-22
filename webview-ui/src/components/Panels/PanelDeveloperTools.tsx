@@ -3,16 +3,20 @@ import { Divider, IconButton, Portal } from "@mui/material";
 import { useTranslation } from "react-i18next";
 
 import { useSvg } from "../../provider/SvgProvider";
+import { useSwitchDarkMode } from "../../hooks/useSwitch";
 
 import { PanelDeveloperToolsProps } from "../../interfaces/PanelDeveloperTools";
 import { EmptySelectionIcon, IconFailExport, IconSettings } from "../../icons";
 import {
   BoxDeveloper,
   BoxPanelDeveloperTools,
+  BoxTools,
+  BoxViewerSvg,
   ContainerSvg,
   TitlePanel,
 } from "./PanelDeveloperTools.style";
 import RenderSVG from "../SvgComponent/RenderSvg";
+import { SwitchDarkMode } from "../Switch";
 
 const PanelDeveloperTools: FunctionComponent<PanelDeveloperToolsProps> = (props) => {
   const { isOpenPanel, handleOpenPanel, refPortalButton } = props;
@@ -20,6 +24,7 @@ const PanelDeveloperTools: FunctionComponent<PanelDeveloperToolsProps> = (props)
   const {
     state: { selectedSvg },
   } = useSvg();
+  const { checkedMode, onChangeMode } = useSwitchDarkMode({ keyMode: "svgCardMode" });
 
   return (
     <BoxPanelDeveloperTools elevation={isOpenPanel ? 3 : 0}>
@@ -41,15 +46,20 @@ const PanelDeveloperTools: FunctionComponent<PanelDeveloperToolsProps> = (props)
       <Divider sx={{ mt: "-8px" }} />
       {isOpenPanel && (
         <BoxDeveloper>
-          <ContainerSvg elevation={3}>
-            {!selectedSvg ? (
-              <EmptySelectionIcon size="100%" className="empty-selection" />
-            ) : selectedSvg.component ? (
-              <RenderSVG {...selectedSvg.component} fullSize />
-            ) : (
-              <IconFailExport />
-            )}
-          </ContainerSvg>
+          <BoxViewerSvg elevation={3} mode={checkedMode}>
+            <ContainerSvg>
+              {!selectedSvg ? (
+                <EmptySelectionIcon size="100%" className="empty-selection" />
+              ) : selectedSvg.component ? (
+                <RenderSVG {...selectedSvg.component} fullSize />
+              ) : (
+                <IconFailExport />
+              )}
+            </ContainerSvg>
+            <BoxTools>
+              <SwitchDarkMode onChange={onChangeMode} checked={checkedMode} />
+            </BoxTools>
+          </BoxViewerSvg>
         </BoxDeveloper>
       )}
     </BoxPanelDeveloperTools>

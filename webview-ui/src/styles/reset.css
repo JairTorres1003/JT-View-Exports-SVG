@@ -72,7 +72,7 @@ body,
 body[data-vscode-theme-kind="vscode-light"],
 body[data-vscode-theme-kind="vscode-high-contrast-light"] {
   --color-JT-view-export-svg: 0, 0, 0;
-  padding: 0 10px;
+  padding: 0 !important;
 }
 
 body[data-vscode-theme-kind="vscode-dark"],
@@ -104,13 +104,13 @@ main {
 .Resizable-Box > div:not([class]) > div {
   transition: background-color 0.1s ease-out;
   width: var(--vscode-sash-size, 4px) !important;
-  right: calc(var(--vscode-sash-size, 4px) / 2) !important;
+  right: 0 !important;
 }
 
 .Resizable-Box > div:not([class]) > div:hover {
   background-color: var(--vscode-sash-hoverBorder, #3e4452);
   width: var(--vscode-sash-hover-size, 4px) !important;
-  right: calc(var(--vscode-sash-hover-size, 4px) / 2) !important;
+  right: 0 !important;
 }
 
 .BoxContainer-gallery {

@@ -42,7 +42,7 @@ class VSCodeAPIWrapper {
       this.vsCodeApi.postMessage({ command, data });
     } else {
       if (command === "requestSvgComponents") {
-        fetch("../../responseFile.json")
+        fetch("../../test/responseFile.json")
           .then((response) => response.json())
           .then((data) => {
             const resData = JSON.stringify(data);

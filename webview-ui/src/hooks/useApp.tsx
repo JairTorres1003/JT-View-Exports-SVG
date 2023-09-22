@@ -47,7 +47,7 @@ const useApp = () => {
   const handleResizeStop = (e: Event, direction: string, ref: HTMLElement, d: Object) => {
     const newWidth = parseInt(ref.style.width, 10);
 
-    if (isPanelOpen && newWidth >= 81) {
+    if ((isPanelOpen && newWidth >= 81) || (!isPanelOpen && newWidth > 95)) {
       setIsPanelOpen(false);
       setResizableWidth("100%");
     }
