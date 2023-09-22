@@ -28,4 +28,4 @@ dist-ssr
 *.sw?
 
 # Testing
-responseFile.json
+/test/responseFile.json
