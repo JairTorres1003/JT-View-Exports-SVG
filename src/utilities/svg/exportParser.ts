@@ -346,6 +346,7 @@ async function extractSvgComponentFromNode(
   let isAnimated: boolean = false;
   let name: string = "";
   let location: SvgComponent["location"] = undefined;
+  let params: SvgComponent["params"] = {};
 
   if (t.isFunctionDeclaration(node) || t.isVariableDeclarator(node)) {
     // Extract the name and location of the function or variable.
@@ -356,6 +357,7 @@ async function extractSvgComponentFromNode(
       // Analyze the export type and check if it's a valid SVG component.
       const nodeAnalyze = analyzeExportType(t.isFunctionDeclaration(node) ? node : node.init);
       if (nodeAnalyze) {
+        params = nodeAnalyze.properties;
         const SVGComponent = isSVGComponent(nodeAnalyze.argument, nodeAnalyze.properties);
         if (SVGComponent.validate) {
           component = SVGComponent.component;
@@ -368,7 +370,7 @@ async function extractSvgComponentFromNode(
   }
 
   if (component) {
-    return { component, name, location, typeExport, isAnimated };
+    return { component, name, location, typeExport, isAnimated, params };
   } else {
     return undefined;
   }
