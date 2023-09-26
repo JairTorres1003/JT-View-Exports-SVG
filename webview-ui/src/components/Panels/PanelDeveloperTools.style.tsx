@@ -49,6 +49,7 @@ export const BoxViewerSvg = styled(({ mode = false, ...props }: BoxViewerSvgProp
   overflow: "hidden",
   border: `1px solid #${mode ? "dae0e714" : "E5EAF2"}`,
   color: `#${mode ? "fff" : "000"}`,
+  svg: { aspectRatio: "1 / 1" },
 }));
 
 export const ContainerSvg = styled(Box)(() => ({

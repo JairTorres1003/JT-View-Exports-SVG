@@ -1,7 +1,7 @@
 import * as t from "@babel/types";
 import { camelCase } from "lodash";
 
-import { ExportType, Value } from "../../interfaces/exportParser";
+import { Value } from "../../interfaces/exportParser";
 import { defaultProps } from "./defaultProps";
 
 /**
@@ -121,7 +121,7 @@ function getLogicalExpression(operator: t.LogicalExpression["operator"], left: a
  */
 export function getPropertyValues(
   value: Value,
-  properties: ExportType["properties"]
+  properties: { [key: string]: any }
 ): any | undefined {
   if (!value) {
     return;

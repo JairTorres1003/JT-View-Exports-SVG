@@ -14,7 +14,8 @@
         "arrowParens",
         "ecmaVersion",
         "esnext",
-        "mpath"
+        "mpath",
+        "quasis"
     ],
     "cSpell.ignorePaths": [
         "package-lock.json",

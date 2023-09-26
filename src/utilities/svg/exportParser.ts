@@ -11,10 +11,19 @@ import {
   SvgComponentDetails,
   SvgExport,
 } from "../../interfaces/svgExports";
-import { ExportType, ExportTypeNode, IsSVGComponent } from "../../interfaces/exportParser";
+import {
+  ChildAttributesResponse,
+  ComponentNameResponse,
+  ExportType,
+  ExportTypeNode,
+  IsSVGComponent,
+} from "../../interfaces/exportParser";
 import { SVG_TAGS } from "./svgTags";
 import { cssStringToObject } from "./cssStringToObject";
 import { getPropertyValues } from "./getPropertyValues";
+
+// Declaration properties
+var properties: { [key: string]: any } = {};
 
 /**
  * Parse the content of a file and return the AST (Abstract Syntax Tree).
@@ -33,15 +42,42 @@ function parseFileContent(filePath: string): t.Node {
 }
 
 /**
+ * Convert JSX element properties into a properties object.
+ * @param {t.JSXOpeningElement["attributes"]} attributes - The properties of the JSX element.
+ * @returns {{ [key: string]: any }} An object containing the properties.
+ */
+function setProperties(attributes: t.JSXOpeningElement["attributes"]): { [key: string]: any } {
+  const props: { [key: string]: any } = {};
+
+  // Iterate over the attributes of the JSX element
+  attributes.forEach((attr) => {
+    if (t.isJSXAttribute(attr)) {
+      const { name, value } = attr;
+
+      // Store the attribute value in the props object using camelCase format for the attribute name
+      props[camelCase(name.name?.toString() || "")] = getPropertyValues(value, properties);
+    }
+  });
+
+  // Check if the "style" property exists in props
+  if ("style" in props) {
+    if (typeof props.style === "string") {
+      // Convert the "style" string to an object
+      props.style = cssStringToObject(props.style);
+    } else if (!props.style || typeof props.style !== "object" || isArray(props.style)) {
+      props.style = {};
+    }
+  }
+
+  return props;
+}
+
+/**
  * Recursively extracts attributes from JSXElement children.
  * @param {t.JSXElement["children"]} children - The children of the JSXElement.
- * @param {ExportType["properties"]} properties - The properties of the export type.
- * @returns {{ children: SvgComponentDetails["children"]; isAnimated: boolean }} An object with the extracted child components and a boolean flag indicating if animation is present.
+ * @returns {ChildAttributesResponse} An object with the extracted child components and a boolean flag indicating if animation is present.
  */
-function getChildAttributes(
-  children: t.JSXElement["children"],
-  properties: ExportType["properties"]
-): { children: SvgComponentDetails["children"]; isAnimated: boolean } {
+function getChildAttributes(children: t.JSXElement["children"]): ChildAttributesResponse {
   const components: SvgComponentDetails[] = [];
   let hasInvalidChild: HasInvalidChild | null = null;
   let isAnimated: boolean = false;
@@ -50,30 +86,10 @@ function getChildAttributes(
     // Check if the child is a JSXElement
     if (t.isJSXElement(child)) {
       const openingElement = child.openingElement;
-      const props: { [key: string]: any } = {};
-
-      // Iterate over the attributes of the opening element
-      openingElement.attributes.forEach((attr) => {
-        if (t.isJSXAttribute(attr)) {
-          const { name, value } = attr;
-
-          // Store the attribute value in the props object using camelCase format for the attribute name
-          props[camelCase(name.name?.toString() || "")] = getPropertyValues(value, properties);
-        }
-      });
-
-      // Check if "style" property exists in props
-      if ("style" in props) {
-        if (typeof props.style === "string") {
-          // Convert the "style" string to an object
-          props.style = cssStringToObject(props.style);
-        } else if (!props.style) {
-          props.style = {};
-        }
-      }
+      const props = setProperties(openingElement.attributes);
 
       // Recursively extract child components
-      const childComponents = getChildAttributes(child.children, properties).children;
+      const childComponents = getChildAttributes(child.children).children;
 
       // Check if childComponents is an array or contains an error
       if (!Array.isArray(childComponents) && childComponents.error) {
@@ -121,12 +137,9 @@ function getChildAttributes(
 /**
  * Extracts the component tag name from a JSX opening element and checks if it's a motion component.
  * @param {t.JSXOpeningElement} openingElement - The JSX opening element to analyze.
- * @returns {{ tag: string | HasInvalidChild, isMotion: boolean }} An object containing the component tag name and a flag indicating if it's a motion component.
+ * @returns {ComponentNameResponse} An object containing the component tag name and a flag indicating if it's a motion component.
  */
-function getComponentName(openingElement: t.JSXOpeningElement): {
-  tag: string | HasInvalidChild;
-  isMotion: boolean;
-} {
+function getComponentName(openingElement: t.JSXOpeningElement): ComponentNameResponse {
   // Create a special object representing an error
   const error: HasInvalidChild = {
     error: "HasInvalidChild",
@@ -153,13 +166,9 @@ function getComponentName(openingElement: t.JSXOpeningElement): {
 /**
  * Check if a JSXElement represents an SVG component and extract relevant information.
  * @param {t.JSXElement} argument - The JSXElement to check.
- * @param {ExportType["properties"]} properties - The properties of the export type.
  * @returns {IsSVGComponent} An object indicating whether the JSXElement is an SVG component and the extracted component details.
  */
-function isSVGComponent(
-  argument: t.JSXElement,
-  properties: ExportType["properties"]
-): IsSVGComponent {
+function isSVGComponent(argument: t.JSXElement): IsSVGComponent {
   let validate: boolean = false;
   let component: IsSVGComponent["component"] = undefined;
   let isAnimated: boolean = false;
@@ -171,17 +180,7 @@ function isSVGComponent(
 
   // Check if the node has an opening element
   if (openingElement) {
-    const svgProps: { [key: string]: any } = {};
-
-    // Iterate over the attributes of the opening element
-    openingElement.attributes.forEach((attr) => {
-      if (t.isJSXAttribute(attr)) {
-        const { name, value } = attr;
-
-        // Store the attribute value in the svgProps object using camelCase format for the attribute name
-        svgProps[camelCase(name.name?.toString() || "")] = getPropertyValues(value, properties);
-      }
-    });
+    const svgProps = setProperties(openingElement.attributes);
 
     // Check if the attribute is 'xmlns' and its value is 'http://www.w3.org/2000/svg'
     if (svgProps.xmlns === "http://www.w3.org/2000/svg") {
@@ -189,20 +188,10 @@ function isSVGComponent(
       validate = true;
     }
 
-    // Check if "style" property exists in svgProps
-    if ("style" in svgProps) {
-      if (typeof svgProps.style === "string") {
-        // Convert the "style" string to an object
-        svgProps.style = cssStringToObject(svgProps.style);
-      } else if (!svgProps.style || typeof svgProps.style !== "object" || isArray(svgProps.style)) {
-        svgProps.style = {};
-      }
-    }
-
     // If it's a valid SVG component with children
     if (validate && children.length > 0) {
       // Recursively extract child attributes
-      childrenDetails = getChildAttributes(children, properties);
+      childrenDetails = getChildAttributes(children);
       const componentName = getComponentName(openingElement);
       isAnimated = childrenDetails.isAnimated || componentName.isMotion;
 
@@ -271,7 +260,6 @@ function getChildFragments(children: t.JSXElement["children"] | undefined): t.JS
  */
 function analyzeExportType(node: ExportTypeNode): ExportType | undefined {
   // Initialize variables
-  const properties: ExportType["properties"] = {};
   let argument = node as t.JSXElement;
   let type = node?.type;
 
@@ -325,7 +313,7 @@ function analyzeExportType(node: ExportTypeNode): ExportType | undefined {
     (t.isJSXIdentifier(argument?.openingElement?.name) ||
       t.isJSXMemberExpression(argument?.openingElement?.name))
   ) {
-    return { argument, properties };
+    return { argument };
   }
 
   // Return undefined if the export type is not JSXElement
@@ -346,7 +334,6 @@ async function extractSvgComponentFromNode(
   let isAnimated: boolean = false;
   let name: string = "";
   let location: SvgComponent["location"] = undefined;
-  let params: SvgComponent["params"] = {};
 
   if (t.isFunctionDeclaration(node) || t.isVariableDeclarator(node)) {
     // Extract the name and location of the function or variable.
@@ -356,9 +343,9 @@ async function extractSvgComponentFromNode(
     try {
       // Analyze the export type and check if it's a valid SVG component.
       const nodeAnalyze = analyzeExportType(t.isFunctionDeclaration(node) ? node : node.init);
+
       if (nodeAnalyze) {
-        params = nodeAnalyze.properties;
-        const SVGComponent = isSVGComponent(nodeAnalyze.argument, nodeAnalyze.properties);
+        const SVGComponent = isSVGComponent(nodeAnalyze.argument);
         if (SVGComponent.validate) {
           component = SVGComponent.component;
           isAnimated = SVGComponent.isAnimated;
@@ -370,7 +357,7 @@ async function extractSvgComponentFromNode(
   }
 
   if (component) {
-    return { component, name, location, typeExport, isAnimated, params };
+    return { component, name, location, typeExport, isAnimated, params: properties };
   } else {
     return undefined;
   }
@@ -398,6 +385,8 @@ export async function extractSVGComponentExports(filePath: string): Promise<SvgE
         if (t.isProgram(parent) && node) {
           let declaration: any = node;
           let isExported = false;
+          // Initialize declaration properties
+          properties = {};
 
           if (
             (t.isExportNamedDeclaration(node) || t.isExportDefaultDeclaration(node)) &&

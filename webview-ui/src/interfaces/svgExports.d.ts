@@ -38,12 +38,20 @@ export interface SvgComponent {
   location: Location | undefined;
   /**
    * The type of export for the SVG component.
+   * It can be either "function" or "variable".
    */
   typeExport: "function" | "variable";
   /**
    * Indicates whether the component is an SVG animation component.
+   * It's optional and can be true or false.
    */
   isAnimated?: boolean;
+  /**
+   * Parameters related to the SVG component, which are passed as props to the component.
+   */
+  params: {
+    [key: string]: any;
+  };
 }
 
 /**
