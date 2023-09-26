@@ -1,5 +1,5 @@
 import * as t from "@babel/types";
-import { SvgComponentDetails } from "./svgExports";
+import { HasInvalidChild, SvgComponentDetails } from "./svgExports";
 
 /**
  * Represents the structure of an exported component.
@@ -9,10 +9,6 @@ export interface ExportType {
    * The JSX argument associated with the exported component.
    */
   argument: t.JSXElement;
-  /**
-   * Additional properties associated with the exported component.
-   */
-  properties: { [key: string]: any };
 }
 
 /**
@@ -49,4 +45,34 @@ export interface IsSVGComponent {
    * Details of the SVG component.
    */
   component: SvgComponentDetails | undefined;
+}
+
+/**
+ * Response interface for the `getChildAttributes` function.
+ */
+interface ChildAttributesResponse {
+  /**
+   * An array of extracted child components or an object representing an invalid child.
+   * If an invalid child is encountered, this property will contain an object with an error message.
+   */
+  children: SvgComponentDetails["children"];
+  /**
+   * A boolean flag indicating whether any of the extracted components are animated.
+   * It will be true if at least one animated component is found in the children.
+   */
+  isAnimated: boolean;
+}
+
+/**
+ * Response interface for the `getComponentName` function.
+ */
+interface ComponentNameResponse {
+  /**
+   * The name of the JSX component, which can be a string representing the component tag or an object indicating an invalid child.
+   */
+  tag: string | HasInvalidChild;
+  /**
+   * A boolean flag indicating whether the component is a motion component.
+   */
+  isMotion: boolean;
 }
