@@ -47,7 +47,7 @@ function parseFileContent(filePath: string): t.Node {
  * @returns {{ [key: string]: any }} An object containing the properties.
  */
 function setProperties(attributes: t.JSXOpeningElement["attributes"]): { [key: string]: any } {
-  const props: { [key: string]: any } = {};
+  let props: { [key: string]: any } = {};
 
   // Iterate over the attributes of the JSX element
   attributes.forEach((attr) => {
@@ -55,7 +55,10 @@ function setProperties(attributes: t.JSXOpeningElement["attributes"]): { [key: s
       const { name, value } = attr;
 
       // Store the attribute value in the props object using camelCase format for the attribute name
-      props[camelCase(name.name?.toString() || "")] = getPropertyValues(value, properties);
+      const propKey = camelCase(name.name?.toString() || "");
+      props[propKey] = getPropertyValues(value, properties);
+    } else if (t.isJSXSpreadAttribute(attr)) {
+      props = { ...props, ...getPropertyValues(attr.argument, properties) };
     }
   });
 
