@@ -153,11 +153,14 @@ export function getPropertyValues(
 
       return getLogicalExpression(value.operator, leftValue, rightValue);
     case "ObjectExpression":
-      const objectProps: { [key: string]: any } = {};
+      let objectProps: { [key: string]: any } = {};
 
       value.properties.forEach((property) => {
         if (t.isObjectProperty(property) && t.isIdentifier(property.key)) {
-          objectProps[camelCase(property.key.name)] = getPropertyValues(property.value, properties);
+          const propKey = camelCase(property.key.name || "");
+          objectProps[propKey] = getPropertyValues(property.value, properties);
+        } else if (t.isSpreadElement(property)) {
+          objectProps = { ...objectProps, ...getPropertyValues(property.argument, properties) };
         }
       });
 
@@ -166,7 +169,11 @@ export function getPropertyValues(
       const arrayProps: any[] = [];
 
       value.elements.forEach((element) => {
-        arrayProps.push(getPropertyValues(element, properties));
+        if (t.isSpreadElement(element)) {
+          arrayProps.push(...getPropertyValues(element.argument, properties));
+        } else {
+          arrayProps.push(getPropertyValues(element, properties));
+        }
       });
 
       return arrayProps;
