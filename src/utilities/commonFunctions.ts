@@ -91,9 +91,9 @@ export async function processFiles(
             const cachedValue = fileCache.get(file.absolutePath, lastModified);
 
             // If a cached value exists and the file hasn't been modified since caching, return it
-            if (cachedValue !== undefined) {
-              return cachedValue;
-            }
+            // if (cachedValue !== undefined) {
+            //   return cachedValue;
+            // }
 
             const svgExports = await extractSVGComponentExports(file.absolutePath);
 
