@@ -18,6 +18,7 @@ import {
   ExportTypeNode,
   IsSVGComponent,
 } from "../../interfaces/exportParser";
+import { Property } from "../../interfaces/propertyValues";
 import { SVG_TAGS } from "./svgTags";
 import { cssStringToObject } from "./cssStringToObject";
 import { getPropertyValues } from "./getPropertyValues";
@@ -42,25 +43,49 @@ function parseFileContent(filePath: string): t.Node {
 }
 
 /**
- * Convert JSX element properties into a properties object.
- * @param {t.JSXOpeningElement["attributes"]} attributes - The properties of the JSX element.
+ * Convert JSX element attributes into a properties object.
+ * @param {t.JSXOpeningElement["attributes"]} attributes - The attributes of the JSX element.
  * @returns {{ [key: string]: any }} An object containing the properties.
  */
 function setProperties(attributes: t.JSXOpeningElement["attributes"]): { [key: string]: any } {
   let props: { [key: string]: any } = {};
+  let auxProps: { [key: string]: any } = {};
+  let params: { [key: string]: any }[] = [];
 
   // Iterate over the attributes of the JSX element
   attributes.forEach((attr) => {
+    let propKey = "";
+    let property: Property | undefined = undefined;
+
     if (t.isJSXAttribute(attr)) {
       const { name, value } = attr;
 
+      const result = getPropertyValues(value, properties);
+      property = result.property;
       // Store the attribute value in the props object using camelCase format for the attribute name
-      const propKey = camelCase(name.name?.toString() || "");
-      props[propKey] = getPropertyValues(value, properties);
+      propKey = camelCase(name.name?.toString() || "");
+      props[propKey] = result.value;
+      auxProps[propKey] = result.value;
     } else if (t.isJSXSpreadAttribute(attr)) {
-      props = { ...props, ...getPropertyValues(attr.argument, properties) };
+      const result = getPropertyValues(attr.argument, properties);
+      property = { ...result.property, type: "SpreadElement" };
+      props = { ...props, ...result.value };
+    }
+
+    if (Object.keys(auxProps).length > 0 && property) {
+      params.push({ type: "DefaultProperty", initialValue: auxProps });
+      auxProps = {};
+    }
+
+    if (property) {
+      const attrs = [propKey || [], property.attrs || []].flat().join(".") || undefined;
+      params.push({ ...property, attrs });
     }
   });
+
+  if (Object.keys(auxProps).length > 0 && params.length > 0) {
+    params.push({ type: "DefaultProperty", initialValue: auxProps });
+  }
 
   // Check if the "style" property exists in props
   if ("style" in props) {
@@ -72,6 +97,7 @@ function setProperties(attributes: t.JSXOpeningElement["attributes"]): { [key: s
     }
   }
 
+  // return {props, nodeParams: params} Possible implementation
   return props;
 }
 
@@ -301,7 +327,7 @@ function analyzeExportType(node: ExportTypeNode): ExportType | undefined {
 
               if (t.isIdentifier(key)) {
                 // Add the property to the properties object
-                properties[key.name] = getPropertyValues(value, {});
+                properties[key.name] = getPropertyValues(value, {}).value;
               }
             }
           });
