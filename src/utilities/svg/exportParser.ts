@@ -96,7 +96,7 @@ function setProperties(attributes: t.JSXOpeningElement["attributes"]): { [key: s
       props.style = {};
     }
   }
-
+  console.log(params)
   // return {props, nodeParams: params} Possible implementation
   return props;
 }

@@ -15,6 +15,7 @@ const runCommand = async (context: ExtensionContext, item: Uri, items: Uri[]) =>
   // Define the operation that will be executed after processing files
   const operation = (result: SvgExport[] | SvgExportErrors) => {
     // Create or show the webview panel
+    console.log(result);
     ViewExportsSVGPanel.render(context.extensionUri, result);
   };
 
