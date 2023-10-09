@@ -1,47 +1,24 @@
-name: Console.log Checker
+name: Comment on New Pull Request
 
 on:
   pull_request:
     types:
       - opened
-      - synchronize
 
 jobs:
-  check-console-log:
+  comment-on-pr:
     runs-on: ubuntu-latest
 
     steps:
-    - name: Checkout code
-      uses: actions/checkout@v2
-
-    - name: Count modified files
-      id: count-files
-      run: |
-        # Count the modified files
-        changed_files=$(git diff --name-only ${{ github.event.before }} ${{ github.sha }})
-        file_count=$(echo "$changed_files" | wc -l)
-        echo "FILES_CHANGED=$file_count" >> $GITHUB_ENV
-
     - name: Comment on Pull Request
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       run: |
-        if [[ $FILES_CHANGED -gt 0 ]]; then
-          echo "Found $FILES_CHANGED modified files."
-        else
-          echo "No files were modified."
-        fi
+        # Get the pull request number and repository name
+        PR_NUMBER=$(jq --raw-output .pull_request.number "$GITHUB_EVENT_PATH")
+        REPO_NAME=$(jq --raw-output .repository.name "$GITHUB_EVENT_PATH")
 
-    - name: Find console.log
-      run: |
-        # Search for modified TypeScript and TypeScript React files containing console.log
-        changed_files=$(git diff --name-only ${{ github.event.before }} ${{ github.sha }})
-
-        for file in $changed_files; do
-          if [[ $file == *.ts || $file == *.tsx ]]; then
-            if grep -q "console.log" "$file"; then
-              echo "Found a console.log in the TypeScript/TSX file: $file"
-              echo "Please remove the console.log statements from this file."
-              # Use GitHub Actions Workflow Commands to comment on the Pull Request
-              echo "::warning file=$file,line=1::Found a console.log in this TypeScript/TSX file, please remove it."
-            fi
-          fi
-        done
+        # Comment on the pull request
+        MESSAGE="Thank you for creating this Pull Request, we will review it shortly! :rocket:"
+        API_URL="https://api.github.com/repos/$GITHUB_REPOSITORY/issues/$PR_NUMBER/comments"
+        curl -s -X POST -H "Authorization: token $GITHUB_TOKEN" -d "{\"body\": \"$MESSAGE\"}" $API_URL
