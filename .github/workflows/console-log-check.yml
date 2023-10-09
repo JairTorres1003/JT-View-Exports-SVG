@@ -1,0 +1,27 @@
+name: Console.log Checker
+
+on:
+  pull_request:
+    types:
+      - opened
+      - synchronize
+
+jobs:
+  check-console-log:
+    runs-on: ubuntu-lates
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v2
+
+    - name: Find console.log
+      run: |
+        # Search for modified files containing console.log
+        changed_files=$(git diff --name-only ${{ github.event.before }} ${{ github.sha }})
+
+        for file in $changed_files; do
+          if grep -q "console.log" "$file"; then
+            echo "Se encontró un console.log en el archivo: $file"
+            # Puedes personalizar el mensaje de respuesta aquí
+          fi
+        done
