@@ -20,12 +20,12 @@ jobs:
         # Count the modified files
         changed_files=$(git diff --name-only ${{ github.event.before }} ${{ github.sha }})
         file_count=$(echo "$changed_files" | wc -l)
-        echo "::set-output name=files_changed::$file_count"
+        echo "FILES_CHANGED=$file_count" >> $GITHUB_ENV
 
     - name: Comment on Pull Request
       run: |
-        if [[ ${{ steps.count-files.outputs.files_changed }} -gt 0 ]]; then
-          echo "Found ${{ steps.count-files.outputs.files_changed }} modified files."
+        if [[ $FILES_CHANGED -gt 0 ]]; then
+          echo "Found $FILES_CHANGED modified files."
         else
           echo "No files were modified."
         fi
