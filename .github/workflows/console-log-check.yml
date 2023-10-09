@@ -11,6 +11,11 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
+    - name: Use Node.js 16
+      uses: actions/setup-node@v2
+      with:
+        node-version: 16
+
     - name: Checkout code
       uses: actions/checkout@v2
 
@@ -22,5 +27,8 @@ jobs:
         for file in $changed_files; do
           if grep -q "console.log" "$file"; then
             echo "Found a console.log in the file: $file"
+            echo "Please remove the console.log statements from this file."
+            # Use GitHub Actions Workflow Commands to comment on the Pull Request
+            echo "::warning file=$file,line=1::Found a console.log in this file, please remove it."
           fi
         done
