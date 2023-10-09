@@ -12,7 +12,7 @@ jobs:
     steps:
     - name: Comment on Pull Request
       env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN_COMMENT }}
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       run: |
         # Get the pull request number and repository name
         PR_NUMBER=$(jq --raw-output .pull_request.number "$GITHUB_EVENT_PATH")
