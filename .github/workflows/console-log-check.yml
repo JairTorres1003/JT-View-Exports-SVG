@@ -8,7 +8,7 @@ on:
 
 jobs:
   check-console-log:
-    runs-on: ubuntu-lates
+    runs-on: ubuntu-latest
 
     steps:
     - name: Checkout code
@@ -21,7 +21,6 @@ jobs:
 
         for file in $changed_files; do
           if grep -q "console.log" "$file"; then
-            echo "Se encontró un console.log en el archivo: $file"
-            # Puedes personalizar el mensaje de respuesta aquí
+            echo "Found a console.log in the file: $file"
           fi
         done
