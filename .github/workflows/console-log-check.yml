@@ -12,7 +12,7 @@ jobs:
     steps:
     - name: Comment on Pull Request
       env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN_COMMENT }}
       run: |
         # Get the pull request number and repository name
         PR_NUMBER=$(jq --raw-output .pull_request.number "$GITHUB_EVENT_PATH")
@@ -21,4 +21,4 @@ jobs:
         # Comment on the pull request
         MESSAGE="Thank you for creating this Pull Request, we will review it shortly! :rocket:"
         API_URL="https://api.github.com/repos/$GITHUB_REPOSITORY/issues/$PR_NUMBER/comments"
-        curl -s -X POST -H "Authorization: token $GITHUB_TOKEN" -d "{\"body\": \"$MESSAGE\"}" $API_URL
+        curl -s -X POST -H "Authorization: token $GITHUB_TOKEN_COMMENT" -d "{\"body\": \"$MESSAGE\"}" $API_URL
