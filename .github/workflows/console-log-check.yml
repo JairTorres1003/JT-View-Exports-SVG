@@ -11,24 +11,37 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    - name: Use Node.js 16
-      uses: actions/setup-node@v2
-      with:
-        node-version: 16
-
     - name: Checkout code
       uses: actions/checkout@v2
 
+    - name: Count modified files
+      id: count-files
+      run: |
+        # Count the modified files
+        changed_files=$(git diff --name-only ${{ github.event.before }} ${{ github.sha }})
+        file_count=$(echo "$changed_files" | wc -l)
+        echo "::set-output name=files_changed::$file_count"
+
+    - name: Comment on Pull Request
+      run: |
+        if [[ ${{ steps.count-files.outputs.files_changed }} -gt 0 ]]; then
+          echo "Found ${{ steps.count-files.outputs.files_changed }} modified files."
+        else
+          echo "No files were modified."
+        fi
+
     - name: Find console.log
       run: |
-        # Search for modified files containing console.log
+        # Search for modified TypeScript and TypeScript React files containing console.log
         changed_files=$(git diff --name-only ${{ github.event.before }} ${{ github.sha }})
 
         for file in $changed_files; do
-          if grep -q "console.log" "$file"; then
-            echo "Found a console.log in the file: $file"
-            echo "Please remove the console.log statements from this file."
-            # Use GitHub Actions Workflow Commands to comment on the Pull Request
-            echo "::warning file=$file,line=1::Found a console.log in this file, please remove it."
+          if [[ $file == *.ts || $file == *.tsx ]]; then
+            if grep -q "console.log" "$file"; then
+              echo "Found a console.log in the TypeScript/TSX file: $file"
+              echo "Please remove the console.log statements from this file."
+              # Use GitHub Actions Workflow Commands to comment on the Pull Request
+              echo "::warning file=$file,line=1::Found a console.log in this TypeScript/TSX file, please remove it."
+            fi
           fi
         done
