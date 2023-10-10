@@ -2,9 +2,8 @@ name: Console.log Checker
 
 on:
   pull_request:
-    types:
-      - opened
-      - synchronize
+    types: [opened, reopened, synchronize]
+    branches: [main]
 
 jobs:
   check-console-log:
@@ -12,15 +11,44 @@ jobs:
 
     steps:
     - name: Checkout code
-      uses: actions/checkout@v2
+      uses: actions/checkout@v4
+      with:
+        fetch-depth: 0  # Settings for pull_request events
 
-    - name: Find console.log
+    - name: Changed Files
+      id: changed-files
+      uses: tj-actions/changed-files@v39.2.1
+
+    - name: Find specific word
+      id: find-specific-word
       run: |
-        # Search for modified files containing console.log
-        changed_files=$(git diff --name-only ${{ github.event.before }} ${{ github.sha }})
+        # Create a variable to store the results
+        results=""
 
-        for file in $changed_files; do
-          if grep -q "console.log" "$file"; then
-            echo "Found a console.log in the file: $file"
+        # Find the word "console.log" in the modified files
+        for file in ${{ steps.changed-files.outputs.modified_files }}; do
+          resultGrep=$(grep -n 'console.log' "$file" || true)
+          if [ $? -eq 0 ] && [ -n "$resultGrep" ]; then
+            results="${results}\`\`\`js\n// File: $file\n$resultGrep\n\`\`\`\n\n"
           fi
         done
+
+        # Store the results in GITHUB_OUTPUT
+        echo "RESULTS=$results" >> "$GITHUB_OUTPUT"
+
+    - name: Add Comment Pull
+      env:
+        COMMENTS_RESULTS: ${{ steps.find-specific-word.outputs.RESULTS }}
+      if: steps.find-specific-word.outputs.RESULTS != ''
+      run: |
+        # Get the results
+        comment_results="$COMMENTS_RESULTS"
+    
+        # Build the comment with Markdown format
+        comment="### Found \`console.log\` in:\n\n$comment_results"
+        echo "$comment"
+    
+        # Add the comment to the pull request
+        curl -X POST -H "Authorization: Bearer ${{ secrets.GITHUB_TOKEN }}" \
+          -d "{\"body\":\"$comment\"}" \
+          "https://api.github.com/repos/${{ github.repository }}/issues/${{ github.event.pull_request.number }}/comments"
