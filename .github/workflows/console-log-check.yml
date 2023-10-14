@@ -22,33 +22,45 @@ jobs:
     - name: Find specific word
       id: find-specific-word
       run: |
-        # Create a variable to store the results
+        # Create a variable to store the file names with matches
         results=""
+        echo "### Instances of \`console.log\` were found in the code:" >> $GITHUB_STEP_SUMMARY
 
         # Find the word "console.log" in the modified files
         for file in ${{ steps.changed-files.outputs.modified_files }}; do
           resultGrep=$(grep -n 'console.log' "$file" || true)
           if [ $? -eq 0 ] && [ -n "$resultGrep" ]; then
-            results="${results}\`\`\`js\n// File: $file\n$resultGrep\n\`\`\`\n\n"
+            # Escape single quotes in results
+            echo "  \`\`\`js" >> $GITHUB_STEP_SUMMARY
+            echo "  // File: $file" >> $GITHUB_STEP_SUMMARY
+            echo "$resultGrep" >> $GITHUB_STEP_SUMMARY
+            echo "  \`\`\`" >> $GITHUB_STEP_SUMMARY
+            echo "" >> $GITHUB_STEP_SUMMARY
+
+            results="${results}$file/n"
           fi
         done
 
         # Store the results in GITHUB_OUTPUT
-        echo "RESULTS=$results" >> "$GITHUB_OUTPUT"
+        echo "RESULTS=$GITHUB_STEP_SUMMARY" >> "$GITHUB_OUTPUT"
+        echo "FOUND=$results" >> "$GITHUB_OUTPUT"
 
     - name: Add Comment Pull
       env:
         COMMENTS_RESULTS: ${{ steps.find-specific-word.outputs.RESULTS }}
-      if: steps.find-specific-word.outputs.RESULTS != ''
+        FOUND_CONSOLE: ${{ steps.find-specific-word.outputs.FOUND }}
+      if: steps.find-specific-word.outputs.FOUND != ''
       run: |
-        # Get the results
-        comment_results="$COMMENTS_RESULTS"
-    
-        # Build the comment with Markdown format
-        comment="### Found \`console.log\` in:\n\n$comment_results"
+        # Get the comment content
+        comment=$(cat "$COMMENTS_RESULTS")
         echo "$comment"
-    
+        
+        # Use jq to format the comment as JSON
+        comment_json=$(jq -n --arg body "$comment" '{"body": $body'})
+        
         # Add the comment to the pull request
         curl -X POST -H "Authorization: Bearer ${{ secrets.GITHUB_TOKEN }}" \
-          -d "{\"body\":\"$comment\"}" \
+          -d "$comment_json" \
           "https://api.github.com/repos/${{ github.repository }}/issues/${{ github.event.pull_request.number }}/comments"
+
+        exit 1
