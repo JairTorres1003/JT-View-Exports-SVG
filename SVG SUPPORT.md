@@ -16,19 +16,19 @@ export const CircleGreen = (
     <circle cx="50" cy="50" r="40" fill="green" />
   </svg>
 );
+const CircleYellow = () => (
+  <svg width="24" height="24" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
+    <circle cx="50" cy="50" r="40" fill="yellow" />
+  </svg>
+);
+export default CircleYellow;
 // ❌ Invalid use
 const CircleRed = (
   <svg width="24" height="24" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
     <circle cx="50" cy="50" r="40" fill="red" />
   </svg>
 );
-const CircleYellow = () => (
-  <svg width="24" height="24" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
-    <circle cx="50" cy="50" r="40" fill="yellow" />
-  </svg>
-);
 export const IconCircleRed = CircleRed;
-export default CircleYellow;
 ```
 
 2. **Fragments**: The extension supports components with fragments (React Fragments) as long as their only child is an SVG or another fragment that ultimately leads to an SVG. 
