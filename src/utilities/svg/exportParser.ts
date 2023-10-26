@@ -21,9 +21,10 @@ import {
 import { SVG_TAGS } from "./svgTags";
 import { cssStringToObject } from "./cssStringToObject";
 import { getPropertyValues } from "./getPropertyValues";
+import { propertyManager } from "./propertyManager";
 
 // Declaration properties
-var properties: { [key: string]: any } = {};
+const properties = propertyManager;
 
 /**
  * Parse the content of a file and return the AST (Abstract Syntax Tree).
@@ -48,6 +49,7 @@ function parseFileContent(filePath: string): t.Node {
  */
 function setProperties(attributes: t.JSXOpeningElement["attributes"]): { [key: string]: any } {
   let props: { [key: string]: any } = {};
+  const propsValue = properties.get();
 
   // Iterate over the attributes of the JSX element
   attributes.forEach((attr) => {
@@ -56,9 +58,9 @@ function setProperties(attributes: t.JSXOpeningElement["attributes"]): { [key: s
 
       // Store the attribute value in the props object using camelCase format for the attribute name
       const propKey = camelCase(name.name?.toString() || "");
-      props[propKey] = getPropertyValues(value, properties);
+      props[propKey] = getPropertyValues(value, propsValue);
     } else if (t.isJSXSpreadAttribute(attr)) {
-      props = { ...props, ...getPropertyValues(attr.argument, properties) };
+      props = { ...props, ...getPropertyValues(attr.argument, propsValue) };
     }
   });
 
@@ -257,6 +259,32 @@ function getChildFragments(children: t.JSXElement["children"] | undefined): t.JS
 }
 
 /**
+ * Extracts properties from the parameters array, especially from object patterns.
+ * @param {(t.Identifier | t.Pattern | t.RestElement)[]} params - An array of parameters, including object patterns.
+ */
+function getNodeParams(params: (t.Identifier | t.Pattern | t.RestElement)[]) {
+  // Initialize declaration properties
+  properties.clean();
+  // Check if there are parameters with object patterns
+  if (params && params.length > 0) {
+    params.forEach((param: any) => {
+      if (t.isObjectPattern(param) && param.properties) {
+        param.properties.forEach((property) => {
+          if (t.isObjectProperty(property)) {
+            const { key, value } = property;
+
+            if (t.isIdentifier(key)) {
+              // Add the property to the properties object
+              properties.set(key.name, getPropertyValues(value, {}));
+            }
+          }
+        });
+      }
+    });
+  }
+}
+
+/**
  * Analyze the export type of a node and extract relevant information.
  * @param {ExportTypeNode} node - The export type node to analyze.
  * @returns {ExportType | undefined} An object representing the analyzed export type, or undefined if the export type is not JSXElement.
@@ -291,23 +319,7 @@ function analyzeExportType(node: ExportTypeNode): ExportType | undefined {
       }
     }
 
-    // Check if there are parameters with object patterns
-    if (node.params && node.params.length > 0) {
-      node.params.forEach((param: any) => {
-        if (t.isObjectPattern(param) && param.properties) {
-          param.properties.forEach((property) => {
-            if (t.isObjectProperty(property)) {
-              const { key, value } = property;
-
-              if (t.isIdentifier(key)) {
-                // Add the property to the properties object
-                properties[key.name] = getPropertyValues(value, {});
-              }
-            }
-          });
-        }
-      });
-    }
+    getNodeParams(node.params);
   }
 
   // Check if the export type is JSXElement and the opening element's name is JSXIdentifier or JSXMemberExpression
@@ -360,7 +372,7 @@ async function extractSvgComponentFromNode(
   }
 
   if (component) {
-    return { component, name, location, typeExport, isAnimated, params: properties };
+    return { component, name, location, typeExport, isAnimated, params: properties.get() };
   } else {
     return undefined;
   }
@@ -388,8 +400,6 @@ export async function extractSVGComponentExports(filePath: string): Promise<SvgE
         if (t.isProgram(parent) && node) {
           let declaration: any = node;
           let isExported = false;
-          // Initialize declaration properties
-          properties = {};
 
           if (
             (t.isExportNamedDeclaration(node) || t.isExportDefaultDeclaration(node)) &&
