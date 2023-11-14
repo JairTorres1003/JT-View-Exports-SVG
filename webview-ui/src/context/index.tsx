@@ -1,10 +1,10 @@
-import { createContext } from "react";
-import { SvgContextAction, SvgContextState } from "../interfaces/SvgContext";
+import { createContext } from 'react'
+import { SvgContextAction, SvgContextState } from '../interfaces/SvgContext'
 
 export const SvgContext = createContext<
   | {
-      state: SvgContextState;
-      dispatch: React.Dispatch<SvgContextAction>;
+      state: SvgContextState
+      dispatch: React.Dispatch<SvgContextAction>
     }
   | undefined
->(undefined);
+>(undefined)

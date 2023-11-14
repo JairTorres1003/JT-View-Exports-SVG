@@ -1,4 +1,4 @@
-import { BoxProps, PaperProps, SwitchProps, TypographyProps } from "@mui/material";
+import { BoxProps, PaperProps, SwitchProps, TypographyProps } from '@mui/material'
 
 /**
  * Props for the `BoxViewerSvg` component.
@@ -8,7 +8,7 @@ interface BoxViewerSvgProps extends PaperProps {
    * The mode of the component.
    * `true` represents dark mode, `false` represents light mode.
    */
-  mode?: boolean;
+  mode?: boolean
 }
 
 /**
@@ -18,7 +18,7 @@ interface SwitchDarkModeProps extends BoxProps {
   /**
    * The checked state of the switch.
    */
-  checked?: SwitchProps["checked"];
+  checked?: SwitchProps['checked']
   /**
    * Additional properties for child slots.
    */
@@ -26,10 +26,10 @@ interface SwitchDarkModeProps extends BoxProps {
     /**
      * Props for the switch element.
      */
-    switch?: SwitchProps;
+    switch?: SwitchProps
     /**
      * Props for the typography element.
      */
-    typography?: TypographyProps;
-  };
+    typography?: TypographyProps
+  }
 }

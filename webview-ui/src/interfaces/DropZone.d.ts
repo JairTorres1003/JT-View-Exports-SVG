@@ -1,5 +1,5 @@
-import { SetStateAction } from "react";
-import { SvgExport } from "./svgExports";
+import { SetStateAction } from 'react'
+import { SvgExport } from './svgExports'
 
 /**
  * Represents properties for a DropZone component.
@@ -10,5 +10,5 @@ export interface DropZoneProps {
    *
    * @param fileList The dropped file to extract icons from.
    */
-  onExtractIcons: (fileList: FileList | null) => void;
+  onExtractIcons: (fileList: FileList | null) => void
 }

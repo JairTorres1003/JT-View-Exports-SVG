@@ -1,18 +1,18 @@
-import { useState } from "react";
+import { useState } from 'react'
 
-import { SvgComponent } from "../interfaces/svgExports";
-import { useSvg } from "../provider/SvgProvider";
+import { SvgComponent } from '../interfaces/svgExports'
+import { useSvg } from '../provider/SvgProvider'
 
 const useSvgComponentExport = () => {
-  const [isExpanded, setIsExpanded] = useState<boolean>(true);
+  const [isExpanded, setIsExpanded] = useState<boolean>(true)
 
-  const { dispatch } = useSvg();
+  const { dispatch } = useSvg()
 
   /**
    * Toggles the expansion state.
    * @returns {void}
    */
-  const handleExpanded = (): void => setIsExpanded((previousState) => !previousState);
+  const handleExpanded = (): void => setIsExpanded((previousState) => !previousState)
 
   /**
    * Copies the provided text to the clipboard and displays a snackbar notification.
@@ -20,9 +20,9 @@ const useSvgComponentExport = () => {
    * @returns {void}
    */
   const handleCopy = (text: string): void => {
-    navigator.clipboard.writeText(text);
-    dispatch({ type: "SNACKBAR", payload: { open: true, text } });
-  };
+    navigator.clipboard.writeText(text)
+    dispatch({ type: 'SNACKBAR', payload: { open: true, text } })
+  }
 
   /**
    * Updates the selected SVG component.
@@ -30,15 +30,15 @@ const useSvgComponentExport = () => {
    * @returns {void}
    */
   const handleSelected = (item: SvgComponent): void => {
-    dispatch({ type: "SELECTED", payload: item });
-  };
+    dispatch({ type: 'SELECTED', payload: item })
+  }
 
   return {
     handleCopy,
     handleExpanded,
     handleSelected,
     isExpanded,
-  };
-};
+  }
+}
 
-export default useSvgComponentExport;
+export default useSvgComponentExport
