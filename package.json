@@ -68,12 +68,14 @@
     "build:webview": "cd webview-ui && npm run build",
     "lint:webview": "cd webview-ui && npm run lint",
     "format:webview": "cd webview-ui && npm run format",
+    "format:check:webview": "cd webview-ui && npm run format:check",
     "vscode:prepublish": "npm run compile",
     "compile": "tsc -p ./",
     "watch": "tsc -watch -p ./",
     "pretest": "npm run compile && npm run lint",
     "lint": "eslint src --ext ts",
-    "format": "prettier --write src/**/*.ts"
+    "format:check": "prettier --check \"**/*.{ts,json,md,yml}\"",
+    "format": "prettier --write \"**/*.{ts,json,md,yml}\""
   },
   "devDependencies": {
     "@babel/types": "^7.22.5",
