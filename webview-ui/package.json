@@ -26,7 +26,8 @@
     "build": "tsc && vite build",
     "preview": "vite preview",
     "lint": "eslint src --ext .ts --ext .tsx",
-    "format": "prettier --write 'src/**/*.{ts,tsx}'"
+    "format:check": "prettier --check \"**/*.{ts,tsx,json,css,md}\"",
+    "format": "prettier --write \"**/*.{ts,tsx,json,css,md}\""
   },
   "dependencies": {
     "@emotion/react": "^11.11.1",
