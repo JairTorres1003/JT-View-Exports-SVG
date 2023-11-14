@@ -5,19 +5,19 @@ export interface SvgExport {
   /**
    * The file object containing the absolute and relative paths of the SVG file.
    */
-  file?: SvgFile;
+  file?: SvgFile
   /**
    * The number of exports (SVG components) present in the file.
    */
-  lengthExports?: number;
+  lengthExports?: number
   /**
    * The number of SVG elements found in the file.
    */
-  lengthSvg?: number;
+  lengthSvg?: number
   /**
    * An array of SvgComponent objects representing the exported SVG components.
    */
-  svgComponents: SvgComponent[];
+  svgComponents: SvgComponent[]
 }
 
 /**
@@ -27,31 +27,31 @@ export interface SvgComponent {
   /**
    * An object representing the SVG component details.
    */
-  component: SvgComponentDetails | undefined;
+  component: SvgComponentDetails | undefined
   /**
    * The name of the SVG component.
    */
-  name: string;
+  name: string
   /**
    * The location of the SVG component in the file.
    */
-  location: Location | undefined;
+  location: Location | undefined
   /**
    * The type of export for the SVG component.
    * It can be either "function" or "variable".
    */
-  typeExport: "function" | "variable";
+  typeExport: 'function' | 'variable'
   /**
    * Indicates whether the component is an SVG animation component.
    * It's optional and can be true or false.
    */
-  isAnimated?: boolean;
+  isAnimated?: boolean
   /**
    * Parameters related to the SVG component, which are passed as props to the component.
    */
   params: {
-    [key: string]: any;
-  };
+    [key: string]: any
+  }
 }
 
 /**
@@ -61,21 +61,21 @@ export interface SvgComponentDetails {
   /**
    * The name of the component.
    */
-  tag: keyof JSX.IntrinsicElements | string | HasInvalidChild;
+  tag: keyof JSX.IntrinsicElements | string | HasInvalidChild
   /**
    * An array of child SvgComponentDetails objects representing nested components.
    */
-  children: SvgComponentDetails[] | [] | HasInvalidChild;
+  children: SvgComponentDetails[] | [] | HasInvalidChild
   /**
    * An object containing the props of the component.
    */
   props: {
-    [key: string]: any;
-  };
+    [key: string]: any
+  }
   /**
    * A flag indicating whether the component uses framer-motion
    */
-  isMotion?: boolean;
+  isMotion?: boolean
 }
 
 /**
@@ -85,19 +85,19 @@ export interface SvgFile {
   /**
    * The basename of the SVG file.
    */
-  basename: string;
+  basename: string
   /**
    * The dirname of the SVG file.
    */
-  dirname: string;
+  dirname: string
   /**
    * The absolute path of the SVG file.
    */
-  absolutePath: string;
+  absolutePath: string
   /**
    * The relative path of the SVG file.
    */
-  relativePath: string;
+  relativePath: string
 }
 
 /**
@@ -107,15 +107,15 @@ interface Location {
   /**
    * The column number in the source code.
    */
-  column: number;
+  column: number
   /**
    * The line number in the source code.
    */
-  line: number;
+  line: number
   /**
    * The optional index number in the source code.
    */
-  index?: number | undefined;
+  index?: number | undefined
 }
 
 /**
@@ -125,9 +125,9 @@ export interface HasInvalidChild {
   /**
    * The error type indicating the presence of an invalid child.
    */
-  error: "HasInvalidChild";
+  error: 'HasInvalidChild'
   /**
    * The location of the invalid child in the source code.
    */
-  location: Location | undefined;
+  location: Location | undefined
 }

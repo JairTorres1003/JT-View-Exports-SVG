@@ -1,13 +1,13 @@
-import { Disposable, Uri, ViewColumn, Webview, WebviewPanel, env, window } from "vscode";
+import { Disposable, Uri, ViewColumn, Webview, WebviewPanel, env, window } from 'vscode'
 
-import { SvgExport, SvgExportErrors } from "../interfaces/svgExports";
-import { ReceiveMessageData, PostMessageCommand, CommandHandler } from "../interfaces/vscode";
-import { getInputFiles } from "../utilities/getInputFiles";
-import { getTranslations } from "../utilities/getLocaleLanguage";
-import { getNonce } from "../utilities/getNonce";
-import { getCurrentTheme } from "../utilities/getTheme";
-import { getUri } from "../utilities/getUri";
-import { filterSvgComponents } from "../utilities/svg/filterSvgComponents";
+import { SvgExport, SvgExportErrors } from '../interfaces/svgExports'
+import { ReceiveMessageData, PostMessageCommand, CommandHandler } from '../interfaces/vscode'
+import { getInputFiles } from '../utilities/getInputFiles'
+import { getTranslations } from '../utilities/getLocaleLanguage'
+import { getNonce } from '../utilities/getNonce'
+import { getCurrentTheme } from '../utilities/getTheme'
+import { getUri } from '../utilities/getUri'
+import { filterSvgComponents } from '../utilities/svg/filterSvgComponents'
 
 /**
  * Webview panel for displaying SVG exports.
@@ -16,13 +16,13 @@ export class ViewExportsSVGPanel {
   /**
    * Track the currently active panel. Only allow a single panel to exist at a time.
    */
-  public static currentPanel: ViewExportsSVGPanel | undefined;
+  public static currentPanel: ViewExportsSVGPanel | undefined
 
-  public static readonly viewType = "JT-View-Exports-SVG";
+  public static readonly viewType = 'JT-View-Exports-SVG'
 
-  private svgComponents: SvgExport[] | SvgExportErrors;
-  private readonly _panel: WebviewPanel;
-  private _disposables: Disposable[] = [];
+  private svgComponents: SvgExport[] | SvgExportErrors
+  private readonly _panel: WebviewPanel
+  private _disposables: Disposable[] = []
 
   /**
    * Create a new instance of the ViewExportsSVGPanel class.
@@ -35,18 +35,18 @@ export class ViewExportsSVGPanel {
     extensionUri: Uri,
     svgComponents: SvgExport[] | SvgExportErrors
   ) {
-    this.svgComponents = svgComponents;
-    this._panel = panel;
+    this.svgComponents = svgComponents
+    this._panel = panel
 
     // Listen for when the panel is disposed
     // This happens when the user closes the panel or when the panel is closed programmatically
-    this._panel.onDidDispose(() => this.dispose(), null, this._disposables);
+    this._panel.onDidDispose(() => this.dispose(), null, this._disposables)
 
     // Set the HTML content for the webview panel
-    this._panel.webview.html = this._getWebviewContent(this._panel.webview, extensionUri);
+    this._panel.webview.html = this._getWebviewContent(this._panel.webview, extensionUri)
 
     // Set an event listener to listen for messages passed from the webview context
-    this._setWebviewMessageListener(this._panel.webview);
+    this._setWebviewMessageListener(this._panel.webview)
   }
 
   /**
@@ -56,13 +56,13 @@ export class ViewExportsSVGPanel {
    * @param svgComponents The array of SVG exports or an SvgExportErrors object.
    */
   public static render(extensionUri: Uri, svgComponents: SvgExport[] | SvgExportErrors) {
-    const column = window.activeTextEditor ? window.activeTextEditor.viewColumn : undefined;
-    const i18n = getTranslations();
+    const column = window.activeTextEditor ? window.activeTextEditor.viewColumn : undefined
+    const i18n = getTranslations()
 
     // If we already have a panel, show it
     if (ViewExportsSVGPanel.currentPanel) {
-      this.update(svgComponents);
-      return;
+      this.update(svgComponents)
+      return
     }
 
     // Otherwise, create a new panel
@@ -75,15 +75,15 @@ export class ViewExportsSVGPanel {
         enableScripts: true,
         // Restrict the webview to only load content from the extension's directories
         localResourceRoots: [
-          Uri.joinPath(extensionUri, "assets"),
-          Uri.joinPath(extensionUri, "out"),
-          Uri.joinPath(extensionUri, "webview-ui/build"),
+          Uri.joinPath(extensionUri, 'assets'),
+          Uri.joinPath(extensionUri, 'out'),
+          Uri.joinPath(extensionUri, 'webview-ui/build'),
         ],
       }
-    );
-    panel.iconPath = Uri.joinPath(extensionUri, "assets", "JT View Exports SVG - ICON.svg");
+    )
+    panel.iconPath = Uri.joinPath(extensionUri, 'assets', 'JT View Exports SVG - ICON.svg')
 
-    ViewExportsSVGPanel.currentPanel = new ViewExportsSVGPanel(panel, extensionUri, svgComponents);
+    ViewExportsSVGPanel.currentPanel = new ViewExportsSVGPanel(panel, extensionUri, svgComponents)
   }
 
   /**
@@ -93,10 +93,10 @@ export class ViewExportsSVGPanel {
   public static update(svgComponents: SvgExport[] | SvgExportErrors) {
     // If we already have a panel, show it
     if (ViewExportsSVGPanel.currentPanel) {
-      const svgComponentsJson = JSON.stringify(svgComponents);
-      ViewExportsSVGPanel.currentPanel.svgComponents = svgComponents;
-      ViewExportsSVGPanel.currentPanel._postMessage("svgComponents", svgComponentsJson);
-      ViewExportsSVGPanel.currentPanel._panel.reveal(ViewColumn.Active);
+      const svgComponentsJson = JSON.stringify(svgComponents)
+      ViewExportsSVGPanel.currentPanel.svgComponents = svgComponents
+      ViewExportsSVGPanel.currentPanel._postMessage('svgComponents', svgComponentsJson)
+      ViewExportsSVGPanel.currentPanel._panel.reveal(ViewColumn.Active)
     }
   }
 
@@ -104,15 +104,15 @@ export class ViewExportsSVGPanel {
    * Dispose of the panel and clean up resources.
    */
   public dispose() {
-    ViewExportsSVGPanel.currentPanel = undefined;
+    ViewExportsSVGPanel.currentPanel = undefined
 
     // Clean up resources
-    this._panel.dispose();
+    this._panel.dispose()
 
     while (this._disposables.length) {
-      const disposable = this._disposables.pop();
+      const disposable = this._disposables.pop()
       if (disposable) {
-        disposable.dispose();
+        disposable.dispose()
       }
     }
   }
@@ -124,14 +124,14 @@ export class ViewExportsSVGPanel {
    * @returns The HTML content for the webview panel.
    */
   private _getWebviewContent(webview: Webview, extensionUri: Uri) {
-    const i18n = getTranslations();
+    const i18n = getTranslations()
     // Get the URIs for the required assets
-    const icoUri = getUri(webview, extensionUri, ["webview-ui", "build", "assets", "favicon.ico"]);
-    const stylesUri = getUri(webview, extensionUri, ["webview-ui", "build", "assets", "index.css"]);
-    const scriptUri = getUri(webview, extensionUri, ["webview-ui", "build", "assets", "index.js"]);
+    const icoUri = getUri(webview, extensionUri, ['webview-ui', 'build', 'assets', 'favicon.ico'])
+    const stylesUri = getUri(webview, extensionUri, ['webview-ui', 'build', 'assets', 'index.css'])
+    const scriptUri = getUri(webview, extensionUri, ['webview-ui', 'build', 'assets', 'index.js'])
 
     // Generate a nonce for script elements
-    const nonce = getNonce();
+    const nonce = getNonce()
 
     // Return the HTML content for the webview panel
     return `
@@ -150,7 +150,7 @@ export class ViewExportsSVGPanel {
           <script type="module" nonce="${nonce}" src="${scriptUri}"></script>
         </body>
       </html>
-    `;
+    `
   }
 
   /**
@@ -158,8 +158,8 @@ export class ViewExportsSVGPanel {
    * @param message The received message data.
    */
   private handleRequestSvgComponents(message: ReceiveMessageData) {
-    const svgComponentsJson = JSON.stringify(this.svgComponents);
-    this._postMessage("svgComponents", svgComponentsJson);
+    const svgComponentsJson = JSON.stringify(this.svgComponents)
+    this._postMessage('svgComponents', svgComponentsJson)
   }
 
   /**
@@ -167,8 +167,8 @@ export class ViewExportsSVGPanel {
    * @param message The received message data.
    */
   private handleGetCurrentTheme(message: ReceiveMessageData) {
-    const theme = getCurrentTheme();
-    this._postMessage("currentTheme", theme);
+    const theme = getCurrentTheme()
+    this._postMessage('currentTheme', theme)
   }
 
   /**
@@ -176,11 +176,11 @@ export class ViewExportsSVGPanel {
    * @param message The received message data.
    */
   private handleSearchSvgComponents(message: ReceiveMessageData) {
-    const filter = message.data;
+    const filter = message.data
 
-    const svgComponents = filterSvgComponents(this.svgComponents as SvgExport[], filter);
-    const svgComponentsJson = JSON.stringify(svgComponents);
-    this._postMessage("filteredSvgComponents", svgComponentsJson);
+    const svgComponents = filterSvgComponents(this.svgComponents as SvgExport[], filter)
+    const svgComponentsJson = JSON.stringify(svgComponents)
+    this._postMessage('filteredSvgComponents', svgComponentsJson)
   }
 
   /**
@@ -188,8 +188,8 @@ export class ViewExportsSVGPanel {
    * @param message The received message data.
    */
   private handleGetTranslations() {
-    const language = env.language || "en";
-    this._postMessage("language", language);
+    const language = env.language || 'en'
+    this._postMessage('language', language)
   }
 
   /**
@@ -197,7 +197,7 @@ export class ViewExportsSVGPanel {
    * @param message The received message data.
    */
   private handleExtractIconsFile(message: ReceiveMessageData) {
-    getInputFiles(message.data);
+    getInputFiles(message.data)
   }
 
   /**
@@ -211,18 +211,18 @@ export class ViewExportsSVGPanel {
       searchSvgComponents: this.handleSearchSvgComponents,
       getTranslations: this.handleGetTranslations,
       extractIconsFile: this.handleExtractIconsFile,
-    };
+    }
 
     webview.onDidReceiveMessage(
       (message: ReceiveMessageData) => {
-        const handler = commandHandlers[message.command];
+        const handler = commandHandlers[message.command]
         if (handler) {
-          handler.call(this, message);
+          handler.call(this, message)
         }
       },
       undefined,
       this._disposables
-    );
+    )
   }
 
   /**
@@ -231,6 +231,6 @@ export class ViewExportsSVGPanel {
    * @param data An optional parameter representing the data payload of the message.
    */
   private _postMessage(command: PostMessageCommand, data?: any) {
-    this._panel.webview.postMessage({ command, data });
+    this._panel.webview.postMessage({ command, data })
   }
 }

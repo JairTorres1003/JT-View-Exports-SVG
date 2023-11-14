@@ -1,7 +1,7 @@
 {
-    "panelTitle": "Ver Exportações SVG",
-    "progressTitle": "A extrair exportações SVG...",
-    "NoIconsFound": "Nenhum ícone encontrado",
-    "NoFileSelected": "Nenhum ficheiro selecionado",
-    "PleaseSearch": "Por favor, insira pelo menos 3 caracteres para pesquisar..."
+  "panelTitle": "Ver Exportações SVG",
+  "progressTitle": "A extrair exportações SVG...",
+  "NoIconsFound": "Nenhum ícone encontrado",
+  "NoFileSelected": "Nenhum ficheiro selecionado",
+  "PleaseSearch": "Por favor, insira pelo menos 3 caracteres para pesquisar..."
 }

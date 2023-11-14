@@ -1,5 +1,5 @@
 class PropertyManager {
-  private properties: { [key: string]: any } = {};
+  private properties: { [key: string]: any } = {}
 
   /**
    * Gets a specific property or all properties if no key is specified.
@@ -8,9 +8,9 @@ class PropertyManager {
    */
   get(key?: string): any {
     if (key) {
-      return this.properties[key];
+      return this.properties[key]
     } else {
-      return this.properties;
+      return this.properties
     }
   }
 
@@ -20,7 +20,7 @@ class PropertyManager {
    * @param {any} value - Value of the property.
    */
   set(key: string, value: any): void {
-    this.properties[key] = value;
+    this.properties[key] = value
   }
 
   /**
@@ -29,12 +29,12 @@ class PropertyManager {
    */
   clean(key?: string): void {
     if (key) {
-      delete this.properties[key];
+      delete this.properties[key]
     } else {
-      this.properties = {};
+      this.properties = {}
     }
   }
 }
 
 // Usage of the class
-export const propertyManager = new PropertyManager();
+export const propertyManager = new PropertyManager()

@@ -1,14 +1,14 @@
 export type ReceiveMessageCommand =
-  | "extractIconsFile"
-  | "getCurrentTheme"
-  | "getTranslations"
-  | "requestSvgComponents"
-  | "searchSvgComponents";
+  | 'extractIconsFile'
+  | 'getCurrentTheme'
+  | 'getTranslations'
+  | 'requestSvgComponents'
+  | 'searchSvgComponents'
 export type PostMessageCommand =
-  | "currentTheme"
-  | "filteredSvgComponents"
-  | "language"
-  | "svgComponents";
+  | 'currentTheme'
+  | 'filteredSvgComponents'
+  | 'language'
+  | 'svgComponents'
 /**
  * Data structure representing a message received by the webview.
  */
@@ -16,11 +16,11 @@ interface ReceiveMessageData {
   /**
    * The command associated with the received message.
    */
-  command: ReceiveMessageCommand;
+  command: ReceiveMessageCommand
   /**
    * The payload data of the received message.
    */
-  data: any;
+  data: any
 }
 
 /**
@@ -31,5 +31,5 @@ interface CommandHandler {
    * A dictionary of command names and their corresponding handler functions.
    * @param message The received message data.
    */
-  [command: string]: (message: ReceiveMessageData) => void;
+  [command: string]: (message: ReceiveMessageData) => void
 }

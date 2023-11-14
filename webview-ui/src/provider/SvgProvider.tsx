@@ -1,17 +1,17 @@
-import { FunctionComponent, ReactNode, useContext, useReducer } from "react";
+import { FunctionComponent, ReactNode, useContext, useReducer } from 'react'
 
-import { SvgContext } from "../context";
-import { SvgContextAction, SvgContextState } from "../interfaces/SvgContext";
+import { SvgContext } from '../context'
+import { SvgContextAction, SvgContextState } from '../interfaces/SvgContext'
 
 const initialState: SvgContextState = {
   selectedSvg: null,
   snackbar: { open: false, text: null },
-};
+}
 
 const actionHandlers: Record<string, (state: SvgContextState, payload?: any) => SvgContextState> = {
   SELECTED: (state, payload) => ({ ...state, selectedSvg: payload }),
   SNACKBAR: (state, payload) => ({ ...state, snackbar: payload }),
-};
+}
 
 /**
  * Reducer function for managing the state of an SVG context.
@@ -20,13 +20,13 @@ const actionHandlers: Record<string, (state: SvgContextState, payload?: any) => 
  * @returns The new state of the SVG context after applying the action.
  */
 function svgReducer(state: SvgContextState, action: SvgContextAction): SvgContextState {
-  const handler = actionHandlers[action.type];
+  const handler = actionHandlers[action.type]
 
   if (handler) {
-    return handler(state, action.payload);
+    return handler(state, action.payload)
   }
 
-  return state;
+  return state
 }
 
 /**
@@ -34,12 +34,12 @@ function svgReducer(state: SvgContextState, action: SvgContextAction): SvgContex
  * @returns The JSX element representing the SVG provider.
  */
 const SvgProvider: FunctionComponent<{ children: ReactNode }> = (props) => {
-  const [state, dispatch] = useReducer(svgReducer, initialState);
+  const [state, dispatch] = useReducer(svgReducer, initialState)
 
-  return <SvgContext.Provider value={{ state, dispatch }}>{props.children}</SvgContext.Provider>;
-};
+  return <SvgContext.Provider value={{ state, dispatch }}>{props.children}</SvgContext.Provider>
+}
 
-export default SvgProvider;
+export default SvgProvider
 
 /**
  * A custom hook for accessing the SVG context and its state and dispatch functions.
@@ -47,11 +47,11 @@ export default SvgProvider;
  * @throws Throws an error if used outside of a SvgProvider.
  */
 export const useSvg = () => {
-  const context = useContext(SvgContext);
+  const context = useContext(SvgContext)
 
   if (context === undefined) {
-    throw new Error("useSvg must be used within a SvgProvider");
+    throw new Error('useSvg must be used within a SvgProvider')
   }
 
-  return context;
-};
+  return context
+}
