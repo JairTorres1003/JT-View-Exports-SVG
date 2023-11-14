@@ -1,30 +1,30 @@
 /* eslint-disable @typescript-eslint/naming-convention */
-import * as fs from "fs";
-import * as babelParser from "@babel/parser";
-import traverse from "@babel/traverse";
-import * as t from "@babel/types";
-import { camelCase, isArray } from "lodash";
+import * as fs from 'fs'
+import * as babelParser from '@babel/parser'
+import traverse from '@babel/traverse'
+import * as t from '@babel/types'
+import { camelCase, isArray } from 'lodash'
 
 import {
   HasInvalidChild,
   SvgComponent,
   SvgComponentDetails,
   SvgExport,
-} from "../../interfaces/svgExports";
+} from '../../interfaces/svgExports'
 import {
   ChildAttributesResponse,
   ComponentNameResponse,
   ExportType,
   ExportTypeNode,
   IsSVGComponent,
-} from "../../interfaces/exportParser";
-import { SVG_TAGS } from "./svgTags";
-import { cssStringToObject } from "./cssStringToObject";
-import { getPropertyValues } from "./getPropertyValues";
-import { propertyManager } from "./propertyManager";
+} from '../../interfaces/exportParser'
+import { SVG_TAGS } from './svgTags'
+import { cssStringToObject } from './cssStringToObject'
+import { getPropertyValues } from './getPropertyValues'
+import { propertyManager } from './propertyManager'
 
 // Declaration properties
-const properties = propertyManager;
+const properties = propertyManager
 
 /**
  * Parse the content of a file and return the AST (Abstract Syntax Tree).
@@ -33,13 +33,13 @@ const properties = propertyManager;
  */
 function parseFileContent(filePath: string): t.Node {
   // Read the file content synchronously
-  const fileContent = fs.readFileSync(filePath, "utf8");
+  const fileContent = fs.readFileSync(filePath, 'utf8')
 
   // Parse the file content using Babel parser
   return babelParser.parse(fileContent, {
-    sourceType: "module",
-    plugins: ["jsx", "typescript"],
-  });
+    sourceType: 'module',
+    plugins: ['jsx', 'typescript'],
+  })
 }
 
 /**
@@ -47,34 +47,34 @@ function parseFileContent(filePath: string): t.Node {
  * @param {t.JSXOpeningElement["attributes"]} attributes - The properties of the JSX element.
  * @returns {{ [key: string]: any }} An object containing the properties.
  */
-function setProperties(attributes: t.JSXOpeningElement["attributes"]): { [key: string]: any } {
-  let props: { [key: string]: any } = {};
-  const propsValue = properties.get();
+function setProperties(attributes: t.JSXOpeningElement['attributes']): { [key: string]: any } {
+  let props: { [key: string]: any } = {}
+  const propsValue = properties.get()
 
   // Iterate over the attributes of the JSX element
   attributes.forEach((attr) => {
     if (t.isJSXAttribute(attr)) {
-      const { name, value } = attr;
+      const { name, value } = attr
 
       // Store the attribute value in the props object using camelCase format for the attribute name
-      const propKey = camelCase(name.name?.toString() || "");
-      props[propKey] = getPropertyValues(value, propsValue);
+      const propKey = camelCase(name.name?.toString() || '')
+      props[propKey] = getPropertyValues(value, propsValue)
     } else if (t.isJSXSpreadAttribute(attr)) {
-      props = { ...props, ...getPropertyValues(attr.argument, propsValue) };
+      props = { ...props, ...getPropertyValues(attr.argument, propsValue) }
     }
-  });
+  })
 
   // Check if the "style" property exists in props
-  if ("style" in props) {
-    if (typeof props.style === "string") {
+  if ('style' in props) {
+    if (typeof props.style === 'string') {
       // Convert the "style" string to an object
-      props.style = cssStringToObject(props.style);
-    } else if (!props.style || typeof props.style !== "object" || isArray(props.style)) {
-      props.style = {};
+      props.style = cssStringToObject(props.style)
+    } else if (!props.style || typeof props.style !== 'object' || isArray(props.style)) {
+      props.style = {}
     }
   }
 
-  return props;
+  return props
 }
 
 /**
@@ -82,43 +82,43 @@ function setProperties(attributes: t.JSXOpeningElement["attributes"]): { [key: s
  * @param {t.JSXElement["children"]} children - The children of the JSXElement.
  * @returns {ChildAttributesResponse} An object with the extracted child components and a boolean flag indicating if animation is present.
  */
-function getChildAttributes(children: t.JSXElement["children"]): ChildAttributesResponse {
-  const components: SvgComponentDetails[] = [];
-  let hasInvalidChild: HasInvalidChild | null = null;
-  let isAnimated: boolean = false;
+function getChildAttributes(children: t.JSXElement['children']): ChildAttributesResponse {
+  const components: SvgComponentDetails[] = []
+  let hasInvalidChild: HasInvalidChild | null = null
+  let isAnimated: boolean = false
 
   children.forEach((child) => {
     // Check if the child is a JSXElement
     if (t.isJSXElement(child)) {
-      const openingElement = child.openingElement;
-      const props = setProperties(openingElement.attributes);
+      const openingElement = child.openingElement
+      const props = setProperties(openingElement.attributes)
 
       // Recursively extract child components
-      const childComponents = getChildAttributes(child.children).children;
+      const childComponents = getChildAttributes(child.children).children
 
       // Check if childComponents is an array or contains an error
       if (!Array.isArray(childComponents) && childComponents.error) {
         // Handle the case of an invalid child component
         if (hasInvalidChild === null) {
-          hasInvalidChild = { error: "HasInvalidChild", location: child.loc?.start };
+          hasInvalidChild = { error: 'HasInvalidChild', location: child.loc?.start }
         }
-        return;
+        return
       }
 
       // Get the name of the JSX component from the opening element
-      const componentName = getComponentName(openingElement);
+      const componentName = getComponentName(openingElement)
 
       // Check if the component name is a string (valid)
-      if (typeof componentName.tag !== "string") {
+      if (typeof componentName.tag !== 'string') {
         // Handle the case of an invalid child component
         if (hasInvalidChild === null) {
-          hasInvalidChild = componentName.tag;
+          hasInvalidChild = componentName.tag
         }
-        return;
+        return
       }
 
       if (componentName.isMotion) {
-        isAnimated = true;
+        isAnimated = true
       }
 
       // Add the child component to the components array
@@ -126,17 +126,17 @@ function getChildAttributes(children: t.JSXElement["children"]): ChildAttributes
         ...componentName,
         children: childComponents,
         props,
-      });
+      })
     }
-  });
+  })
 
   // Return the error if an invalid child component is found
   if (hasInvalidChild) {
-    return { children: hasInvalidChild, isAnimated };
+    return { children: hasInvalidChild, isAnimated }
   }
 
   // Return the array of extracted components
-  return { children: components, isAnimated };
+  return { children: components, isAnimated }
 }
 
 /**
@@ -147,25 +147,25 @@ function getChildAttributes(children: t.JSXElement["children"]): ChildAttributes
 function getComponentName(openingElement: t.JSXOpeningElement): ComponentNameResponse {
   // Create a special object representing an error
   const error: HasInvalidChild = {
-    error: "HasInvalidChild",
+    error: 'HasInvalidChild',
     location: openingElement.name.loc?.start,
-  };
-  let tag: string | undefined = undefined;
-  let isMotion: boolean = false;
+  }
+  let tag: string | undefined = undefined
+  let isMotion: boolean = false
 
   // Check if the opening element is a JSXIdentifier (for regular components)
   if (t.isJSXIdentifier(openingElement.name)) {
-    tag = SVG_TAGS[camelCase(openingElement.name.name)];
+    tag = SVG_TAGS[camelCase(openingElement.name.name)]
   } else if (t.isJSXMemberExpression(openingElement.name)) {
     // Check if the opening element is a JSXMemberExpression (for components with namespaces)
-    const objectName = (openingElement.name.object as t.JSXIdentifier).name || "";
-    const propertyName = openingElement.name.property.name;
+    const objectName = (openingElement.name.object as t.JSXIdentifier).name || ''
+    const propertyName = openingElement.name.property.name
 
-    tag = propertyName === "Fragment" ? "Fragment" : SVG_TAGS[camelCase(propertyName)];
-    isMotion = objectName !== "" && objectName === "motion";
+    tag = propertyName === 'Fragment' ? 'Fragment' : SVG_TAGS[camelCase(propertyName)]
+    isMotion = objectName !== '' && objectName === 'motion'
   }
 
-  return { tag: tag ? tag : error, isMotion };
+  return { tag: tag ? tag : error, isMotion }
 }
 
 /**
@@ -174,43 +174,43 @@ function getComponentName(openingElement: t.JSXOpeningElement): ComponentNameRes
  * @returns {IsSVGComponent} An object indicating whether the JSXElement is an SVG component and the extracted component details.
  */
 function isSVGComponent(argument: t.JSXElement): IsSVGComponent {
-  let validate: boolean = false;
-  let component: IsSVGComponent["component"] = undefined;
-  let isAnimated: boolean = false;
-  const { openingElement, children } = argument;
-  let childrenDetails: { children: SvgComponentDetails["children"]; isAnimated: boolean } = {
+  let validate: boolean = false
+  let component: IsSVGComponent['component'] = undefined
+  let isAnimated: boolean = false
+  const { openingElement, children } = argument
+  let childrenDetails: { children: SvgComponentDetails['children']; isAnimated: boolean } = {
     children: [],
     isAnimated: false,
-  };
+  }
 
   // Check if the node has an opening element
   if (openingElement) {
-    const svgProps = setProperties(openingElement.attributes);
+    const svgProps = setProperties(openingElement.attributes)
 
     // Check if the attribute is 'xmlns' and its value is 'http://www.w3.org/2000/svg'
-    if (svgProps.xmlns === "http://www.w3.org/2000/svg") {
+    if (svgProps.xmlns === 'http://www.w3.org/2000/svg') {
       // Set the validation flag to true
-      validate = true;
+      validate = true
     }
 
     // If it's a valid SVG component with children
     if (validate && children.length > 0) {
       // Recursively extract child attributes
-      childrenDetails = getChildAttributes(children);
-      const componentName = getComponentName(openingElement);
-      isAnimated = childrenDetails.isAnimated || componentName.isMotion;
+      childrenDetails = getChildAttributes(children)
+      const componentName = getComponentName(openingElement)
+      isAnimated = childrenDetails.isAnimated || componentName.isMotion
 
       // Create the component object with the component name, children, and props
       component = {
         ...componentName,
         children: childrenDetails.children,
         props: svgProps,
-      };
+      }
     }
   }
 
   // Return the result indicating whether it's an SVG component and the extracted component details
-  return { validate, component, isAnimated };
+  return { validate, component, isAnimated }
 }
 
 /**
@@ -218,44 +218,44 @@ function isSVGComponent(argument: t.JSXElement): IsSVGComponent {
  * @param {t.JSXElement["children"] | undefined} children - The array of JSX elements and fragments to search in.
  * @returns {t.JSXElement | null} The first JSX element or fragment found, or null if multiple elements are found or none is found.
  */
-function getChildFragments(children: t.JSXElement["children"] | undefined): t.JSXElement | null {
+function getChildFragments(children: t.JSXElement['children'] | undefined): t.JSXElement | null {
   if (!children) {
-    return null;
+    return null
   }
 
-  let jsxElementsCount: number = 0;
-  let jsxElement: t.JSXElement | null = null;
+  let jsxElementsCount: number = 0
+  let jsxElement: t.JSXElement | null = null
 
   for (const child of children) {
     // If more than one JSX element is found, set jsxElement to null and break the loop.
     if (jsxElementsCount > 1) {
-      jsxElement = null;
-      break;
+      jsxElement = null
+      break
     }
 
     // Check if the child is a JSX element with children.
     if (t.isJSXElement(child) && child.children.length > 0) {
-      const componentName = getComponentName(child.openingElement);
+      const componentName = getComponentName(child.openingElement)
 
       if (jsxElementsCount === 0) {
         // If it is the first JSX element found, check if it is a Fragment
-        if (componentName.tag === "Fragment") {
-          jsxElement = getChildFragments(child.children);
+        if (componentName.tag === 'Fragment') {
+          jsxElement = getChildFragments(child.children)
         } else {
-          jsxElement = child;
+          jsxElement = child
         }
       }
 
-      jsxElementsCount++;
+      jsxElementsCount++
     } else if (t.isJSXFragment(child) && child.children.length > 0) {
       if (jsxElementsCount === 0) {
-        jsxElement = getChildFragments(child.children);
+        jsxElement = getChildFragments(child.children)
       }
-      jsxElementsCount++;
+      jsxElementsCount++
     }
   }
 
-  return jsxElement;
+  return jsxElement
 }
 
 /**
@@ -264,23 +264,23 @@ function getChildFragments(children: t.JSXElement["children"] | undefined): t.JS
  */
 function getNodeParams(params: (t.Identifier | t.Pattern | t.RestElement)[]) {
   // Initialize declaration properties
-  properties.clean();
+  properties.clean()
   // Check if there are parameters with object patterns
   if (params && params.length > 0) {
     params.forEach((param: any) => {
       if (t.isObjectPattern(param) && param.properties) {
         param.properties.forEach((property) => {
           if (t.isObjectProperty(property)) {
-            const { key, value } = property;
+            const { key, value } = property
 
             if (t.isIdentifier(key)) {
               // Add the property to the properties object
-              properties.set(key.name, getPropertyValues(value, {}));
+              properties.set(key.name, getPropertyValues(value, {}))
             }
           }
-        });
+        })
       }
-    });
+    })
   }
 }
 
@@ -291,48 +291,48 @@ function getNodeParams(params: (t.Identifier | t.Pattern | t.RestElement)[]) {
  */
 function analyzeExportType(node: ExportTypeNode): ExportType | undefined {
   // Initialize variables
-  let argument = node as t.JSXElement;
-  let type = node?.type;
+  let argument = node as t.JSXElement
+  let type = node?.type
 
   // Check if the node represents an arrow function or function declaration with a block statement body
   if (node && (t.isArrowFunctionExpression(node) || t.isFunctionDeclaration(node))) {
     if (t.isJSXElement(node.body) || t.isJSXFragment(node.body)) {
-      const childFragment = getChildFragments([node.body]);
+      const childFragment = getChildFragments([node.body])
       if (childFragment) {
-        argument = childFragment;
-        type = childFragment.type;
+        argument = childFragment
+        type = childFragment.type
       }
     } else if (t.isBlockStatement(node.body)) {
       // Reverse iterate over the body statements
-      const body = [...node.body.body].reverse();
-      const findReturn = body.find((bd) => t.isReturnStatement(bd) && type !== "Identifier");
+      const body = [...node.body.body].reverse()
+      const findReturn = body.find((bd) => t.isReturnStatement(bd) && type !== 'Identifier')
 
       if (
         t.isReturnStatement(findReturn) &&
         (t.isJSXElement(findReturn.argument) || t.isJSXFragment(findReturn.argument))
       ) {
-        const childFragment = getChildFragments([findReturn.argument]);
+        const childFragment = getChildFragments([findReturn.argument])
         if (childFragment) {
-          argument = childFragment;
-          type = childFragment.type;
+          argument = childFragment
+          type = childFragment.type
         }
       }
     }
 
-    getNodeParams(node.params);
+    getNodeParams(node.params)
   }
 
   // Check if the export type is JSXElement and the opening element's name is JSXIdentifier or JSXMemberExpression
   if (
-    type === "JSXElement" &&
+    type === 'JSXElement' &&
     (t.isJSXIdentifier(argument?.openingElement?.name) ||
       t.isJSXMemberExpression(argument?.openingElement?.name))
   ) {
-    return { argument };
+    return { argument }
   }
 
   // Return undefined if the export type is not JSXElement
-  return undefined;
+  return undefined
 }
 
 /**
@@ -343,38 +343,38 @@ function analyzeExportType(node: ExportTypeNode): ExportType | undefined {
  */
 async function extractSvgComponentFromNode(
   node: t.Node,
-  typeExport: SvgComponent["typeExport"]
+  typeExport: SvgComponent['typeExport']
 ): Promise<SvgComponent | undefined> {
-  let component: SvgComponent["component"] = undefined;
-  let isAnimated: boolean = false;
-  let name: string = "";
-  let location: SvgComponent["location"] = undefined;
+  let component: SvgComponent['component'] = undefined
+  let isAnimated: boolean = false
+  let name: string = ''
+  let location: SvgComponent['location'] = undefined
 
   if (t.isFunctionDeclaration(node) || t.isVariableDeclarator(node)) {
     // Extract the name and location of the function or variable.
-    name = (node.id as t.Identifier).name || "";
-    location = node.id?.loc?.start;
+    name = (node.id as t.Identifier).name || ''
+    location = node.id?.loc?.start
 
     try {
       // Analyze the export type and check if it's a valid SVG component.
-      const nodeAnalyze = analyzeExportType(t.isFunctionDeclaration(node) ? node : node.init);
+      const nodeAnalyze = analyzeExportType(t.isFunctionDeclaration(node) ? node : node.init)
 
       if (nodeAnalyze) {
-        const SVGComponent = isSVGComponent(nodeAnalyze.argument);
+        const SVGComponent = isSVGComponent(nodeAnalyze.argument)
         if (SVGComponent.validate) {
-          component = SVGComponent.component;
-          isAnimated = SVGComponent.isAnimated;
+          component = SVGComponent.component
+          isAnimated = SVGComponent.isAnimated
         }
       }
     } catch (error) {
-      console.error(`Error reading ${typeExport}: ${name}`);
+      console.error(`Error reading ${typeExport}: ${name}`)
     }
   }
 
   if (component) {
-    return { component, name, location, typeExport, isAnimated, params: properties.get() };
+    return { component, name, location, typeExport, isAnimated, params: properties.get() }
   } else {
-    return undefined;
+    return undefined
   }
 }
 
@@ -386,87 +386,87 @@ async function extractSvgComponentFromNode(
 export async function extractSVGComponentExports(filePath: string): Promise<SvgExport> {
   try {
     // Parse the file content into an AST (Abstract Syntax Tree)
-    const ast = parseFileContent(filePath);
-    const exports: SvgComponent[] = [];
-    const notExports: SvgComponent[] = [];
-    const identifiers = new Set<string>();
-    let lengthExports: number = 0;
+    const ast = parseFileContent(filePath)
+    const exports: SvgComponent[] = []
+    const notExports: SvgComponent[] = []
+    const identifiers = new Set<string>()
+    let lengthExports: number = 0
 
     // Traverse the AST to find export declarations
     traverse(ast, {
       Declaration(path) {
-        const { node, parent } = path;
+        const { node, parent } = path
 
         if (t.isProgram(parent) && node) {
-          let declaration: any = node;
-          let isExported = false;
+          let declaration: any = node
+          let isExported = false
 
           if (
             (t.isExportNamedDeclaration(node) || t.isExportDefaultDeclaration(node)) &&
             node.declaration
           ) {
-            declaration = node.declaration;
-            isExported = true;
+            declaration = node.declaration
+            isExported = true
           }
 
           if (t.isFunctionDeclaration(declaration)) {
             const extractDeclaration = async () => {
               const svgComponents = await extractSvgComponentFromNode(
                 declaration as t.Declaration,
-                "function"
-              );
+                'function'
+              )
               if (svgComponents) {
                 // Exported function declaration 'export function functionName() {}'
                 if (isExported || identifiers.has(svgComponents.name)) {
-                  lengthExports++;
-                  exports.push(svgComponents);
+                  lengthExports++
+                  exports.push(svgComponents)
                 } else {
                   // Function declaration 'function functionName() {}'
-                  notExports.push(svgComponents);
+                  notExports.push(svgComponents)
                 }
               }
-            };
-            extractDeclaration();
+            }
+            extractDeclaration()
           } else if (t.isVariableDeclaration(declaration)) {
             declaration.declarations.forEach(async (d) => {
               if (t.isIdentifier(d.id)) {
-                const svgComponents = await extractSvgComponentFromNode(d, "variable");
+                const svgComponents = await extractSvgComponentFromNode(d, 'variable')
                 if (svgComponents) {
                   // Exported variable declaration 'export const variableName = value;'
                   if (isExported || identifiers.has(svgComponents.name)) {
-                    lengthExports++;
-                    exports.push(svgComponents);
+                    lengthExports++
+                    exports.push(svgComponents)
                   } else {
                     // Variable declaration 'const variableName = value;'
-                    notExports.push(svgComponents);
+                    notExports.push(svgComponents)
                   }
                 }
               }
-            });
+            })
           } else if (t.isIdentifier(declaration)) {
-            identifiers.add(declaration.name);
+            identifiers.add(declaration.name)
           } else if (t.isObjectExpression(declaration)) {
             declaration.properties.forEach((property) => {
               if (t.isObjectProperty(property) && t.isIdentifier(property.key)) {
-                identifiers.add(property.key.name);
+                identifiers.add(property.key.name)
               }
-            });
+            })
           } else if (t.isExportNamedDeclaration(declaration) && declaration.specifiers) {
             declaration.specifiers.forEach((specifier) => {
               if (t.isExportSpecifier(specifier) && t.isIdentifier(specifier.exported)) {
-                identifiers.add(specifier.exported.name);
+                identifiers.add(specifier.exported.name)
               }
-            });
+            })
           }
         }
       },
-    });
+    })
 
-    const result: SvgExport = { lengthExports, lengthSvg: exports.length, svgComponents: exports };
+    const result: SvgExport = { lengthExports, lengthSvg: exports.length, svgComponents: exports }
     // Return an object containing the extracted SVG component exports and their lengths
-    return result;
+    return result
   } catch (error) {
-    console.error("Error during extraction:", error);
-    return { lengthExports: 0, lengthSvg: 0, svgComponents: [] };
+    console.error('Error during extraction:', error)
+    return { lengthExports: 0, lengthSvg: 0, svgComponents: [] }
   }
 }

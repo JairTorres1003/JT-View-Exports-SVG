@@ -1,8 +1,8 @@
-import * as t from "@babel/types";
-import { camelCase } from "lodash";
+import * as t from '@babel/types'
+import { camelCase } from 'lodash'
 
-import { Value } from "../../interfaces/exportParser";
-import { defaultProps } from "./defaultProps";
+import { Value } from '../../interfaces/exportParser'
+import { defaultProps } from './defaultProps'
 
 /**
  * Performs a unary expression operation based on the provided operator and given value.
@@ -10,24 +10,24 @@ import { defaultProps } from "./defaultProps";
  * @param value The value on which the operation will be applied.
  * @returns The result of the unary operation or undefined if the operator is not valid.
  */
-function getUnaryExpression(operator: t.UnaryExpression["operator"], value: any) {
+function getUnaryExpression(operator: t.UnaryExpression['operator'], value: any) {
   try {
     switch (operator) {
-      case "+":
-        return +value;
-      case "-":
-        return -value;
-      case "!":
-        return !value;
-      case "~":
-        return ~value;
-      case "typeof":
-        return typeof value;
+      case '+':
+        return +value
+      case '-':
+        return -value
+      case '!':
+        return !value
+      case '~':
+        return ~value
+      case 'typeof':
+        return typeof value
       default:
-        return undefined;
+        return undefined
     }
   } catch (error) {
-    return undefined;
+    return undefined
   }
 }
 
@@ -38,54 +38,54 @@ function getUnaryExpression(operator: t.UnaryExpression["operator"], value: any)
  * @param right The right operand.
  * @returns The result of the binary operation or undefined if the operator is not valid.
  */
-function getBinaryExpression(operator: t.BinaryExpression["operator"], left: any, right: any) {
+function getBinaryExpression(operator: t.BinaryExpression['operator'], left: any, right: any) {
   try {
     switch (operator) {
-      case "+":
-        return left + right;
-      case "-":
-        return left - right;
-      case "/":
-        return left / right;
-      case "%":
-        return left % right;
-      case "*":
-        return left * right;
-      case "**":
-        return left ** right;
-      case "&":
-        return left & right;
-      case "|":
-        return left | right;
-      case ">>":
-        return left >> right;
-      case ">>>":
-        return left >>> right;
-      case "<<":
-        return left << right;
-      case "^":
-        return left ^ right;
-      case "==":
-      case "===":
-        return left === right;
-      case "!=":
-      case "!==":
-        return left !== right;
-      case "in":
-        return left in right;
-      case ">":
-        return left > right;
-      case "<":
-        return left < right;
-      case ">=":
-        return left >= right;
-      case "<=":
-        return left <= right;
+      case '+':
+        return left + right
+      case '-':
+        return left - right
+      case '/':
+        return left / right
+      case '%':
+        return left % right
+      case '*':
+        return left * right
+      case '**':
+        return left ** right
+      case '&':
+        return left & right
+      case '|':
+        return left | right
+      case '>>':
+        return left >> right
+      case '>>>':
+        return left >>> right
+      case '<<':
+        return left << right
+      case '^':
+        return left ^ right
+      case '==':
+      case '===':
+        return left === right
+      case '!=':
+      case '!==':
+        return left !== right
+      case 'in':
+        return left in right
+      case '>':
+        return left > right
+      case '<':
+        return left < right
+      case '>=':
+        return left >= right
+      case '<=':
+        return left <= right
       default:
-        return undefined;
+        return undefined
     }
   } catch (error) {
-    return undefined;
+    return undefined
   }
 }
 
@@ -96,20 +96,20 @@ function getBinaryExpression(operator: t.BinaryExpression["operator"], left: any
  * @param right The right operand.
  * @returns The result of the logical operation or undefined if the operator is not valid.
  */
-function getLogicalExpression(operator: t.LogicalExpression["operator"], left: any, right: any) {
+function getLogicalExpression(operator: t.LogicalExpression['operator'], left: any, right: any) {
   try {
     switch (operator) {
-      case "||":
-        return left || right;
-      case "&&":
-        return left && right;
-      case "??":
-        return left ?? right;
+      case '||':
+        return left || right
+      case '&&':
+        return left && right
+      case '??':
+        return left ?? right
       default:
-        break;
+        break
     }
   } catch (error) {
-    return undefined;
+    return undefined
   }
 }
 
@@ -124,86 +124,86 @@ export function getPropertyValues(
   properties: { [key: string]: any }
 ): any | undefined {
   if (!value) {
-    return;
+    return
   }
 
   switch (value.type) {
-    case "NumericLiteral":
-    case "BooleanLiteral":
-    case "StringLiteral":
-      return value.value;
-    case "Identifier":
-      return properties[value.name] || defaultProps[value.name];
-    case "JSXExpressionContainer":
-      return getPropertyValues(value.expression, properties);
-    case "AssignmentPattern":
-      return getPropertyValues(value.right, properties);
-    case "UnaryExpression":
-      const argumentValue = getPropertyValues(value.argument, properties);
+    case 'NumericLiteral':
+    case 'BooleanLiteral':
+    case 'StringLiteral':
+      return value.value
+    case 'Identifier':
+      return properties[value.name] || defaultProps[value.name]
+    case 'JSXExpressionContainer':
+      return getPropertyValues(value.expression, properties)
+    case 'AssignmentPattern':
+      return getPropertyValues(value.right, properties)
+    case 'UnaryExpression':
+      const argumentValue = getPropertyValues(value.argument, properties)
 
-      return getUnaryExpression(value.operator, argumentValue);
-    case "BinaryExpression":
-      const left = getPropertyValues(value.left, properties);
-      const right = getPropertyValues(value.right, properties);
+      return getUnaryExpression(value.operator, argumentValue)
+    case 'BinaryExpression':
+      const left = getPropertyValues(value.left, properties)
+      const right = getPropertyValues(value.right, properties)
 
-      return getBinaryExpression(value.operator, left, right);
-    case "LogicalExpression":
-      const leftValue = getPropertyValues(value.left, properties);
-      const rightValue = getPropertyValues(value.right, properties);
+      return getBinaryExpression(value.operator, left, right)
+    case 'LogicalExpression':
+      const leftValue = getPropertyValues(value.left, properties)
+      const rightValue = getPropertyValues(value.right, properties)
 
-      return getLogicalExpression(value.operator, leftValue, rightValue);
-    case "ObjectExpression":
-      let objectProps: { [key: string]: any } = {};
+      return getLogicalExpression(value.operator, leftValue, rightValue)
+    case 'ObjectExpression':
+      let objectProps: { [key: string]: any } = {}
 
       value.properties.forEach((property) => {
         if (t.isObjectProperty(property) && t.isIdentifier(property.key)) {
-          const propKey = camelCase(property.key.name || "");
-          objectProps[propKey] = getPropertyValues(property.value, properties);
+          const propKey = camelCase(property.key.name || '')
+          objectProps[propKey] = getPropertyValues(property.value, properties)
         } else if (t.isSpreadElement(property)) {
-          objectProps = { ...objectProps, ...getPropertyValues(property.argument, properties) };
+          objectProps = { ...objectProps, ...getPropertyValues(property.argument, properties) }
         }
-      });
+      })
 
-      return objectProps;
-    case "ArrayExpression":
-      const arrayProps: any[] = [];
+      return objectProps
+    case 'ArrayExpression':
+      const arrayProps: any[] = []
 
       value.elements.forEach((element) => {
         if (t.isSpreadElement(element)) {
-          arrayProps.push(...getPropertyValues(element.argument, properties));
+          arrayProps.push(...getPropertyValues(element.argument, properties))
         } else {
-          arrayProps.push(getPropertyValues(element, properties));
+          arrayProps.push(getPropertyValues(element, properties))
         }
-      });
+      })
 
-      return arrayProps;
-    case "TemplateLiteral":
+      return arrayProps
+    case 'TemplateLiteral':
       const templateString = value.quasis.reduce((acc, quasi, i) => {
-        acc += quasi.value.raw;
+        acc += quasi.value.raw
         if (i < value.expressions.length) {
-          acc += getPropertyValues(value.expressions[i], properties);
+          acc += getPropertyValues(value.expressions[i], properties)
         }
-        return acc;
-      }, "");
+        return acc
+      }, '')
 
-      return templateString;
-    case "MemberExpression":
+      return templateString
+    case 'MemberExpression':
       if (t.isIdentifier(value.property)) {
-        const objectValue = getPropertyValues(value.object, properties);
-        if (objectValue && typeof objectValue === "object") {
-          const propertyName = value.property.name;
+        const objectValue = getPropertyValues(value.object, properties)
+        if (objectValue && typeof objectValue === 'object') {
+          const propertyName = value.property.name
           if (propertyName in objectValue) {
-            return objectValue[propertyName];
+            return objectValue[propertyName]
           }
         }
       }
-      return undefined;
-    case "ConditionalExpression":
-      const conditionValue = getPropertyValues(value.test, properties);
-      const trueValue = getPropertyValues(value.consequent, properties);
-      const falseValue = getPropertyValues(value.alternate, properties);
-      return conditionValue ? trueValue : falseValue;
+      return undefined
+    case 'ConditionalExpression':
+      const conditionValue = getPropertyValues(value.test, properties)
+      const trueValue = getPropertyValues(value.consequent, properties)
+      const falseValue = getPropertyValues(value.alternate, properties)
+      return conditionValue ? trueValue : falseValue
     default:
-      return undefined;
+      return undefined
   }
 }

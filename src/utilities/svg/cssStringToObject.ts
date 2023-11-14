@@ -1,4 +1,4 @@
-import { camelCase } from "lodash";
+import { camelCase } from 'lodash'
 
 /**
  * Convert a CSS string to an object.
@@ -7,21 +7,21 @@ import { camelCase } from "lodash";
  */
 export function cssStringToObject(cssString: string) {
   // Initialize an empty object to store CSS properties and values.
-  const cssObj: { [key: string]: string } = {};
+  const cssObj: { [key: string]: string } = {}
 
   // Split the CSS string into individual declarations based on semicolons.
-  const declarations = cssString.split(";");
+  const declarations = cssString.split(';')
 
   for (const declaration of declarations) {
     // Split each declaration into property and value based on colons.
-    const [property, value] = declaration.split(":");
+    const [property, value] = declaration.split(':')
 
     if (property && value) {
-      const camelCaseProperty = camelCase(property.trim());
-      cssObj[camelCaseProperty] = value.trim();
+      const camelCaseProperty = camelCase(property.trim())
+      cssObj[camelCaseProperty] = value.trim()
     }
   }
 
   // Return the resulting object with camelCased property names.
-  return cssObj;
+  return cssObj
 }
