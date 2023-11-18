@@ -145,9 +145,9 @@ export class ViewExportsSVGPanel {
     const i18n = getTranslations()
     const dirs = ['webview-ui', 'build', 'assets']
     // Get the URIs for the required assets
-    const icoUri = getUri(webview, extensionUri, [...dirs, 'favicon.ico']).path
-    const stylesUri = getUri(webview, extensionUri, [...dirs, 'index.css']).path
-    const scriptUri = getUri(webview, extensionUri, [...dirs, 'index.js']).path
+    const icoUri = getUri(webview, extensionUri, [...dirs, 'favicon.ico']).toString()
+    const stylesUri = getUri(webview, extensionUri, [...dirs, 'index.css']).toString()
+    const scriptUri = getUri(webview, extensionUri, [...dirs, 'index.js']).toString()
 
     // Generate a nonce for script elements
     const nonce = getNonce()
