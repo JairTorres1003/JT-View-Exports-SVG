@@ -17,6 +17,8 @@
     ".git/objects",
     ".vscode",
     ".vscode-insiders",
-    ".github"
+    ".github",
+    "**/tsconfig.json",
+    "**/.eslintrc.cjs"
   ]
 }
