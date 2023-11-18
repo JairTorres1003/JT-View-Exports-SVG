@@ -15,14 +15,14 @@ import zh_tw from './zh-tw.json'
 // Configuración de i18next
 i18n.use(initReactI18next).init({
   resources: {
-    'de': { translation: de },
-    'en': { translation: en },
-    'es': { translation: es },
-    'fr': { translation: fr },
-    'ja': { translation: ja },
+    de: { translation: de },
+    en: { translation: en },
+    es: { translation: es },
+    fr: { translation: fr },
+    ja: { translation: ja },
     'pt-br': { translation: pt_br },
     'pt-pt': { translation: pt_pt },
-    'ru': { translation: ru },
+    ru: { translation: ru },
     'zh-cn': { translation: zh_cn },
     'zh-tw': { translation: zh_tw },
   },
