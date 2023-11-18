@@ -26,10 +26,4 @@ interface ReceiveMessageData {
 /**
  * Represents a handler for commands.
  */
-interface CommandHandler {
-  /**
-   * A dictionary of command names and their corresponding handler functions.
-   * @param message The received message data.
-   */
-  [command: string]: (message: ReceiveMessageData) => void
-}
+type CommandHandler = Record<string, (message: ReceiveMessageData) => void>

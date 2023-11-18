@@ -1,5 +1,5 @@
 class PropertyManager {
-  private properties: { [key: string]: any } = {}
+  private properties: Record<string, any> = {}
 
   /**
    * Gets a specific property or all properties if no key is specified.

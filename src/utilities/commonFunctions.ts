@@ -1,9 +1,9 @@
-import { ProgressLocation, ProgressOptions, Uri, window } from 'vscode'
+import { ProgressLocation, type ProgressOptions, type Uri, window } from 'vscode'
 import * as path from 'path'
 
 import { getTranslations } from './getLocaleLanguage'
 import { getWorkspaceFolder } from './getWorkspaceFolder'
-import { SvgExport, SvgExportErrors, SvgFile } from '../interfaces/svgExports'
+import { type SvgExport, type SvgExportErrors, type SvgFile } from '../interfaces/svgExports'
 import { REGEX_FILE } from './regex'
 import { extractSVGComponentExports } from './svg/exportParser'
 import { FileModifiedCache, getFileTimestamp } from './svg/fileModifiedCache'
@@ -50,7 +50,7 @@ export async function processFiles(
       }
 
       // Define a sorting function based on the source of files
-      let sortingFunction: ((a: any, b: any) => number) | undefined = undefined
+      let sortingFunction: ((a: any, b: any) => number) | undefined
 
       if (items) {
         sortingFunction = (a: Uri, b: Uri) => a.fsPath.localeCompare(b.fsPath)

@@ -1,7 +1,19 @@
-import { Disposable, Uri, ViewColumn, Webview, WebviewPanel, env, window } from 'vscode'
+import {
+  type Disposable,
+  Uri,
+  ViewColumn,
+  type Webview,
+  type WebviewPanel,
+  env,
+  window,
+} from 'vscode'
 
-import { SvgExport, SvgExportErrors } from '../interfaces/svgExports'
-import { ReceiveMessageData, PostMessageCommand, CommandHandler } from '../interfaces/vscode'
+import { type SvgExport, type SvgExportErrors } from '../interfaces/svgExports'
+import {
+  type ReceiveMessageData,
+  type PostMessageCommand,
+  type CommandHandler,
+} from '../interfaces/vscode'
 import { getInputFiles } from '../utilities/getInputFiles'
 import { getTranslations } from '../utilities/getLocaleLanguage'
 import { getNonce } from '../utilities/getNonce'
@@ -22,7 +34,7 @@ export class ViewExportsSVGPanel {
 
   private svgComponents: SvgExport[] | SvgExportErrors
   private readonly _panel: WebviewPanel
-  private _disposables: Disposable[] = []
+  private readonly _disposables: Disposable[] = []
 
   /**
    * Create a new instance of the ViewExportsSVGPanel class.
@@ -40,7 +52,13 @@ export class ViewExportsSVGPanel {
 
     // Listen for when the panel is disposed
     // This happens when the user closes the panel or when the panel is closed programmatically
-    this._panel.onDidDispose(() => this.dispose(), null, this._disposables)
+    this._panel.onDidDispose(
+      () => {
+        this.dispose()
+      },
+      null,
+      this._disposables
+    )
 
     // Set the HTML content for the webview panel
     this._panel.webview.html = this._getWebviewContent(this._panel.webview, extensionUri)

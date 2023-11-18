@@ -1,4 +1,9 @@
-import { BoxProps, PaperProps, SwitchProps, TypographyProps } from '@mui/material'
+import {
+  type BoxProps,
+  type PaperProps,
+  type SwitchProps,
+  type TypographyProps,
+} from '@mui/material'
 
 /**
  * Props for the `BoxViewerSvg` component.

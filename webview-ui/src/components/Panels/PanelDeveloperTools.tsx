@@ -1,11 +1,11 @@
-import { FunctionComponent } from 'react'
+import { type FunctionComponent } from 'react'
 import { Divider, IconButton, Portal } from '@mui/material'
 import { useTranslation } from 'react-i18next'
 
 import { useSvg } from '../../provider/SvgProvider'
 import { useSwitchDarkMode } from '../../hooks/useSwitch'
 
-import { PanelDeveloperToolsProps } from '../../interfaces/PanelDeveloperTools'
+import { type PanelDeveloperToolsProps } from '../../interfaces/PanelDeveloperTools'
 import { EmptySelectionIcon, IconFailExport, IconSettings } from '../../icons'
 import {
   BoxDeveloper,

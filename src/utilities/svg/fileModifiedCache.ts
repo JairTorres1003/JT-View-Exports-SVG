@@ -26,7 +26,7 @@ export class FileModifiedCache<T> {
   /**
    * The cache stores data as an object where keys are file paths, and values are objects containing `value` and `lastModified`.
    */
-  private cache: { [key: string]: { value: T; lastModified: number } } = {}
+  private cache: Record<string, { value: T; lastModified: number }> = {}
 
   /**
    * Sets a new cache entry or updates an existing one.

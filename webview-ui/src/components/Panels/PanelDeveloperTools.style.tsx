@@ -1,6 +1,6 @@
 import { Box, Paper, Typography, styled } from '@mui/material'
 
-import { BoxViewerSvgProps } from '../../interfaces/styled.props'
+import { type BoxViewerSvgProps } from '../../interfaces/styled.props'
 
 export const BoxPanelDeveloperTools = styled(Paper)(() => ({
   width: '100%',

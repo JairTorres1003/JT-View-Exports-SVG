@@ -1,7 +1,7 @@
 import * as t from '@babel/types'
 import { camelCase } from 'lodash'
 
-import { Value } from '../../interfaces/exportParser'
+import { type Value } from '../../interfaces/exportParser'
 import { defaultProps } from './defaultProps'
 
 /**
@@ -119,10 +119,7 @@ function getLogicalExpression(operator: t.LogicalExpression['operator'], left: a
  * @param {ExportType["properties"]} properties - An object containing properties from the export type.
  * @returns {any | undefined} The extracted property value, or undefined if the value node type is not recognized.
  */
-export function getPropertyValues(
-  value: Value,
-  properties: { [key: string]: any }
-): any | undefined {
+export function getPropertyValues(value: Value, properties: Record<string, any>): any | undefined {
   if (!value) {
     return
   }
@@ -153,7 +150,7 @@ export function getPropertyValues(
 
       return getLogicalExpression(value.operator, leftValue, rightValue)
     case 'ObjectExpression':
-      let objectProps: { [key: string]: any } = {}
+      let objectProps: Record<string, any> = {}
 
       value.properties.forEach((property) => {
         if (t.isObjectProperty(property) && t.isIdentifier(property.key)) {

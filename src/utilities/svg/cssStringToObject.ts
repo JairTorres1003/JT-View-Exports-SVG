@@ -7,7 +7,7 @@ import { camelCase } from 'lodash'
  */
 export function cssStringToObject(cssString: string) {
   // Initialize an empty object to store CSS properties and values.
-  const cssObj: { [key: string]: string } = {}
+  const cssObj: Record<string, string> = {}
 
   // Split the CSS string into individual declarations based on semicolons.
   const declarations = cssString.split(';')

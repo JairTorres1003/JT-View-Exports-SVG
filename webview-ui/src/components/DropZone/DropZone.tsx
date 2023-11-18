@@ -1,10 +1,10 @@
-import { Fragment, FunctionComponent, useState } from 'react'
+import { Fragment, type FunctionComponent, useState } from 'react'
 import { Box, Button, Typography } from '@mui/material'
 import { FileUploader } from 'react-drag-drop-files'
 import { useTranslation } from 'react-i18next'
 
 import { DropFilesIcon, MoreFilesIcon } from '../../icons'
-import { DropZoneProps } from '../../interfaces/DropZone'
+import { type DropZoneProps } from '../../interfaces/DropZone'
 import { BoxDropZone, CustomFileUploader } from './DropZone.style'
 
 const fileTypes: string[] = ['JS', 'JSX', 'TS', 'TSX']
@@ -14,8 +14,8 @@ export const DropZone: FunctionComponent<DropZoneProps> = (props) => {
 
   const { t } = useTranslation()
   const [file, setFile] = useState<FileList | null>(null)
-  const [message, setMessage] = useState<String>(t('SelectedFile.None'))
-  const [isDrag, setIsDrag] = useState<Boolean>(false)
+  const [message, setMessage] = useState<string>(t('SelectedFile.None'))
+  const [isDrag, setIsDrag] = useState<boolean>(false)
 
   /**
    * Handles changes in selected files.
@@ -43,7 +43,9 @@ export const DropZone: FunctionComponent<DropZoneProps> = (props) => {
         types={fileTypes}
         multiple
         hoverTitle=' '
-        onDraggingStateChange={(newState: boolean) => setIsDrag(newState)}
+        onDraggingStateChange={(newState: boolean) => {
+          setIsDrag(newState)
+        }}
       >
         <CustomFileUploader>
           <Typography fontSize={16} component='h1'>
@@ -74,7 +76,9 @@ export const DropZone: FunctionComponent<DropZoneProps> = (props) => {
         variant='outlined'
         color='success'
         disabled={!file || file?.length < 1}
-        onClick={() => onExtractIcons(file)}
+        onClick={() => {
+          onExtractIcons(file)
+        }}
       >
         {t('ExtractIcons')}
       </Button>

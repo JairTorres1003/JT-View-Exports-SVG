@@ -1,4 +1,4 @@
-import { SvgExport, SvgExportErrors } from '../../interfaces/svgExports'
+import { type SvgExport, type SvgExportErrors } from '../../interfaces/svgExports'
 import { getTranslations } from '../getLocaleLanguage'
 
 /**

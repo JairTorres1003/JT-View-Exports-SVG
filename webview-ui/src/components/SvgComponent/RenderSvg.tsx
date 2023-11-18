@@ -1,8 +1,8 @@
-import { FunctionComponent, useEffect, useRef } from 'react'
+import { type FunctionComponent, useEffect, useRef } from 'react'
 import { motion } from 'framer-motion'
 
 import { IconFailExport } from '../../icons'
-import { SvgComponentDetails } from '../../interfaces/svgExports'
+import { type SvgComponentDetails } from '../../interfaces/svgExports'
 
 const RenderSVG: FunctionComponent<SvgComponentDetails & { fullSize?: boolean }> = (props) => {
   const { children, fullSize, tag, isMotion } = props

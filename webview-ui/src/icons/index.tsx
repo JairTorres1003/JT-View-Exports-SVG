@@ -1,5 +1,5 @@
 import { motion } from 'framer-motion'
-import { FunctionComponent } from 'react'
+import { type FunctionComponent } from 'react'
 
 export const ArrowForwardIcon = () => (
   <svg focusable='false' viewBox='0 0 24 24' width={17} xmlns='http://www.w3.org/2000/svg'>
@@ -329,7 +329,7 @@ export const DropFilesIcon = ({ size = 20, borderDash = '1 1' }) => (
     <path
       d='M10.0428 17.0115C10.9706 17.0115 11.8603 16.6429 12.5163 15.9869C13.1723 15.3309 13.5409 14.4412 13.5409 13.5134C13.5409 12.5857 13.1723 11.6959 12.5163 11.0399C11.8603 10.3839 10.9706 10.0154 10.0428 10.0154C9.1151 10.0154 8.22536 10.3839 7.56935 11.0399C6.91334 11.6959 6.5448 12.5857 6.5448 13.5134C6.5448 14.4412 6.91334 15.3309 7.56935 15.9869C8.22536 16.6429 9.1151 17.0115 10.0428 17.0115Z'
       fill='black'
-      fill-opacity='0.05'
+      fillOpacity='0.05'
     />
     <path
       d='M7.94403 13.5134H12.1417M10.0429 11.4146V15.6122'

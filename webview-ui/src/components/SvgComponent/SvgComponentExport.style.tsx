@@ -1,9 +1,9 @@
 import {
-  AccordionSummaryProps,
+  type AccordionSummaryProps,
   Accordion as AccordionMui,
   AccordionSummary as AccordionSummaryMui,
   Paper as PaperMui,
-  PaperProps,
+  type PaperProps,
   styled,
   Typography as TypographyMui,
   Box,

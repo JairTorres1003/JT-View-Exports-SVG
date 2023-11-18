@@ -1,5 +1,9 @@
 import type { WebviewApi } from 'vscode-webview'
-import { MessageData, OnMessageCommand, PostMessageCommand } from '../interfaces/vscode'
+import {
+  type MessageData,
+  type OnMessageCommand,
+  type PostMessageCommand,
+} from '../interfaces/vscode'
 
 /**
  * Wrapper class for the VSCode API, providing methods for communication between the webview and the extension.
@@ -43,10 +47,10 @@ class VSCodeAPIWrapper {
     } else {
       if (command === 'requestSvgComponents') {
         fetch('../../test/responseFile.json')
-          .then((response) => response.json())
+          .then(async (response) => await response.json())
           .then((data) => {
             const resData = JSON.stringify(data)
-            const handlers = this.messageHandlers['svgComponents']
+            const handlers = this.messageHandlers.svgComponents
 
             if (handlers) {
               handlers.forEach((handler) => handler(resData))

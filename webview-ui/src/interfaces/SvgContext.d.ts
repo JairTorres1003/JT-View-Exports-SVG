@@ -1,4 +1,4 @@
-import { SvgComponent } from './svgExports'
+import { type SvgComponent } from './svgExports'
 
 /**
  * Represents the state of an SVG context.

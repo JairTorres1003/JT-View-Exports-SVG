@@ -1,5 +1,5 @@
 import { processFiles } from './commonFunctions'
-import { SvgExport, SvgExportErrors } from '../interfaces/svgExports'
+import { type SvgExport, type SvgExportErrors } from '../interfaces/svgExports'
 import { ViewExportsSVGPanel } from '../panels/ViewExportsSVGPanel'
 
 /**

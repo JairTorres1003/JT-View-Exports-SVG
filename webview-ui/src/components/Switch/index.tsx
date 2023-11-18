@@ -1,7 +1,7 @@
-import { Box, BoxProps, Switch, Typography, styled } from '@mui/material'
+import { Box, type BoxProps, Switch, Typography, styled } from '@mui/material'
 import { useTranslation } from 'react-i18next'
 
-import { SwitchDarkModeProps } from '../../interfaces/styled.props'
+import { type SwitchDarkModeProps } from '../../interfaces/styled.props'
 
 export const SwitchDarkMode = styled((props: SwitchDarkModeProps) => {
   const { checked, onChange, slotsProps } = props

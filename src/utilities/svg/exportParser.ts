@@ -6,17 +6,17 @@ import * as t from '@babel/types'
 import { camelCase, isArray } from 'lodash'
 
 import {
-  HasInvalidChild,
-  SvgComponent,
-  SvgComponentDetails,
-  SvgExport,
+  type HasInvalidChild,
+  type SvgComponent,
+  type SvgComponentDetails,
+  type SvgExport,
 } from '../../interfaces/svgExports'
 import {
-  ChildAttributesResponse,
-  ComponentNameResponse,
-  ExportType,
-  ExportTypeNode,
-  IsSVGComponent,
+  type ChildAttributesResponse,
+  type ComponentNameResponse,
+  type ExportType,
+  type ExportTypeNode,
+  type IsSVGComponent,
 } from '../../interfaces/exportParser'
 import { SVG_TAGS } from './svgTags'
 import { cssStringToObject } from './cssStringToObject'
@@ -47,8 +47,8 @@ function parseFileContent(filePath: string): t.Node {
  * @param {t.JSXOpeningElement["attributes"]} attributes - The properties of the JSX element.
  * @returns {{ [key: string]: any }} An object containing the properties.
  */
-function setProperties(attributes: t.JSXOpeningElement['attributes']): { [key: string]: any } {
-  let props: { [key: string]: any } = {}
+function setProperties(attributes: t.JSXOpeningElement['attributes']): Record<string, any> {
+  let props: Record<string, any> = {}
   const propsValue = properties.get()
 
   // Iterate over the attributes of the JSX element
@@ -150,7 +150,7 @@ function getComponentName(openingElement: t.JSXOpeningElement): ComponentNameRes
     error: 'HasInvalidChild',
     location: openingElement.name.loc?.start,
   }
-  let tag: string | undefined = undefined
+  let tag: string | undefined
   let isMotion: boolean = false
 
   // Check if the opening element is a JSXIdentifier (for regular components)
@@ -165,7 +165,7 @@ function getComponentName(openingElement: t.JSXOpeningElement): ComponentNameRes
     isMotion = objectName !== '' && objectName === 'motion'
   }
 
-  return { tag: tag ? tag : error, isMotion }
+  return { tag: tag || error, isMotion }
 }
 
 /**
@@ -175,7 +175,7 @@ function getComponentName(openingElement: t.JSXOpeningElement): ComponentNameRes
  */
 function isSVGComponent(argument: t.JSXElement): IsSVGComponent {
   let validate: boolean = false
-  let component: IsSVGComponent['component'] = undefined
+  let component: IsSVGComponent['component']
   let isAnimated: boolean = false
   const { openingElement, children } = argument
   let childrenDetails: { children: SvgComponentDetails['children']; isAnimated: boolean } = {
@@ -262,7 +262,7 @@ function getChildFragments(children: t.JSXElement['children'] | undefined): t.JS
  * Extracts properties from the parameters array, especially from object patterns.
  * @param {(t.Identifier | t.Pattern | t.RestElement)[]} params - An array of parameters, including object patterns.
  */
-function getNodeParams(params: (t.Identifier | t.Pattern | t.RestElement)[]) {
+function getNodeParams(params: Array<t.Identifier | t.Pattern | t.RestElement>) {
   // Initialize declaration properties
   properties.clean()
   // Check if there are parameters with object patterns
@@ -345,10 +345,10 @@ async function extractSvgComponentFromNode(
   node: t.Node,
   typeExport: SvgComponent['typeExport']
 ): Promise<SvgComponent | undefined> {
-  let component: SvgComponent['component'] = undefined
+  let component: SvgComponent['component']
   let isAnimated: boolean = false
   let name: string = ''
-  let location: SvgComponent['location'] = undefined
+  let location: SvgComponent['location']
 
   if (t.isFunctionDeclaration(node) || t.isVariableDeclarator(node)) {
     // Extract the name and location of the function or variable.
