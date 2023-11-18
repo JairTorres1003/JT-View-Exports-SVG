@@ -22,7 +22,12 @@ const useSvgComponentExport = () => {
    * @returns {void}
    */
   const handleCopy = (text: string): void => {
-    navigator.clipboard.writeText(text)
+    navigator.clipboard.writeText(text).catch((error) => {
+      dispatch({
+        type: 'SNACKBAR',
+        payload: { open: true, text: error.message },
+      })
+    })
     dispatch({ type: 'SNACKBAR', payload: { open: true, text } })
   }
 

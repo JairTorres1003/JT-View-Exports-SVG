@@ -1,6 +1,12 @@
 import { motion } from 'framer-motion'
 import { type FunctionComponent } from 'react'
 
+interface IconProps {
+  size?: number | string
+  color?: string
+  className?: string
+}
+
 export const ArrowForwardIcon = () => (
   <svg focusable='false' viewBox='0 0 24 24' width={17} xmlns='http://www.w3.org/2000/svg'>
     <path d='M6.23 20.23 8 22l10-10L8 2 6.23 3.77 14.46 12z'></path>
@@ -151,12 +157,12 @@ export const IconLupe = () => {
   )
 }
 
-export const IconSettings = ({
-  size = 20,
-  color = 'currentColor',
-  circleColor = 'currentColor',
-  state = false,
-}) => {
+export const IconSettings: FunctionComponent<
+  IconProps & {
+    circleColor?: string
+    state?: boolean
+  }
+> = ({ size = 20, color = 'currentColor', circleColor = 'currentColor', state = false }) => {
   return (
     <svg
       xmlns='http://www.w3.org/2000/svg'
@@ -292,7 +298,10 @@ export const IconSettings = ({
   )
 }
 
-export const DropFilesIcon = ({ size = 20, borderDash = '1 1' }) => (
+export const DropFilesIcon: FunctionComponent<IconProps & { borderDash?: string }> = ({
+  size = 20,
+  borderDash = '1 1',
+}) => (
   <svg
     xmlns='http://www.w3.org/2000/svg'
     width={size}
@@ -340,7 +349,7 @@ export const DropFilesIcon = ({ size = 20, borderDash = '1 1' }) => (
   </svg>
 )
 
-export const MoreFilesIcon = ({ color = '#000', size = 20 }) => (
+export const MoreFilesIcon: FunctionComponent<IconProps> = ({ color = '#000', size = 20 }) => (
   <svg
     xmlns='http://www.w3.org/2000/svg'
     width={size}
@@ -358,7 +367,7 @@ export const MoreFilesIcon = ({ color = '#000', size = 20 }) => (
   </svg>
 )
 
-export const MotionIcon = ({ color = 'currentColor', size = 20 }) => (
+export const MotionIcon: FunctionComponent<IconProps> = ({ color = 'currentColor', size = 20 }) => (
   <svg
     xmlns='http://www.w3.org/2000/svg'
     width={size}

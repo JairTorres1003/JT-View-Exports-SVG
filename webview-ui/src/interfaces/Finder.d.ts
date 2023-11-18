@@ -1,6 +1,3 @@
-import { Dispatch, SetStateAction } from 'react'
-import { SvgExport } from './svgExports'
-
 /**
  * Props for the Finder component.
  */

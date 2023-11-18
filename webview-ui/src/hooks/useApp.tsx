@@ -24,7 +24,7 @@ const useApp = () => {
    * @param ref - The reference to the resizable element.
    * @param d - The width and height changes during resizing.
    */
-  const handleResize = (e: Event, direction: string, ref: HTMLElement, d: Object) => {
+  const handleResize = (e: Event, direction: string, ref: HTMLElement, d: Record<string, any>) => {
     const newWidth = parseInt(ref.style.width, 10)
 
     if (!isPanelOpen && newWidth <= 95) {
@@ -44,7 +44,12 @@ const useApp = () => {
    * @param ref - The reference to the resizable element.
    * @param d - The width and height changes during resizing.
    */
-  const handleResizeStop = (e: Event, direction: string, ref: HTMLElement, d: Object) => {
+  const handleResizeStop = (
+    e: Event,
+    direction: string,
+    ref: HTMLElement,
+    d: Record<string, any>
+  ) => {
     const newWidth = parseInt(ref.style.width, 10)
 
     if ((isPanelOpen && newWidth >= 81) || (!isPanelOpen && newWidth > 95)) {
@@ -113,7 +118,9 @@ const useApp = () => {
    * @param {string} lang - The language code of the selected language.
    */
   const handleLanguage = (lang: string) => {
-    i18n.changeLanguage(lang)
+    i18n.changeLanguage(lang).catch((error) => {
+      console.error('Failed to change language', error)
+    })
   }
 
   const theme = useMemo(

@@ -16,7 +16,7 @@ class VSCodeAPIWrapper {
   /**
    * Mapping of message commands to their corresponding handlers.
    */
-  private messageHandlers: Record<string, Function[]> = {}
+  private messageHandlers: Record<string, Array<(...pros: any) => void>> = {}
 
   /**
    * Creates an instance of `VSCodeAPIWrapper`.
@@ -31,7 +31,9 @@ class VSCodeAPIWrapper {
       const handlers = this.messageHandlers[message.command]
 
       if (handlers) {
-        handlers.forEach((handler) => handler(message.data))
+        handlers.forEach((handler) => {
+          handler(message.data)
+        })
       }
     })
   }
@@ -53,7 +55,9 @@ class VSCodeAPIWrapper {
             const handlers = this.messageHandlers.svgComponents
 
             if (handlers) {
-              handlers.forEach((handler) => handler(resData))
+              handlers.forEach((handler) => {
+                handler(resData)
+              })
             }
           })
           .catch((error) => {
@@ -68,7 +72,7 @@ class VSCodeAPIWrapper {
    * @param command The command associated with the message.
    * @param handler The handler function to be called when the message is received.
    */
-  public onMessage(command: OnMessageCommand, handler: Function) {
+  public onMessage(command: OnMessageCommand, handler: (...pros: any) => void) {
     if (!this.messageHandlers[command]) {
       this.messageHandlers[command] = []
     }
@@ -80,7 +84,7 @@ class VSCodeAPIWrapper {
    * @param command The command associated with the message.
    * @param handler The handler function to be removed.
    */
-  public removeMessageHandler(command: OnMessageCommand, handler: Function) {
+  public removeMessageHandler(command: OnMessageCommand, handler: (...pros: any) => void) {
     const handlers = this.messageHandlers[command]
     if (handlers) {
       const index = handlers.indexOf(handler)
