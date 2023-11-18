@@ -13,5 +13,5 @@ export async function getInputFiles(filesPath: string[] | null) {
     ViewExportsSVGPanel.update(result)
   }
 
-  processFiles(null, filesPath, operation)
+  await processFiles(null, filesPath, operation)
 }

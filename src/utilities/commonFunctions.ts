@@ -104,7 +104,7 @@ export async function processFiles(
 
             return result
           } catch (error) {
-            console.error(`Error parsing file ${file.absolutePath}: ${error}`)
+            console.error(`Error parsing file ${file.absolutePath}: ${String(error)}`)
             return { file, lengthExports: 0, lengthSvg: 0, svgComponents: [] }
           }
         })

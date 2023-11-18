@@ -57,7 +57,7 @@ function setProperties(attributes: t.JSXOpeningElement['attributes']): Record<st
       const { name, value } = attr
 
       // Store the attribute value in the props object using camelCase format for the attribute name
-      const propKey = camelCase(name.name?.toString() || '')
+      const propKey = camelCase(((name.name || '') as string).toString())
       props[propKey] = getPropertyValues(value, propsValue)
     } else if (t.isJSXSpreadAttribute(attr)) {
       props = { ...props, ...getPropertyValues(attr.argument, propsValue) }
@@ -410,37 +410,41 @@ export async function extractSVGComponentExports(filePath: string): Promise<SvgE
           }
 
           if (t.isFunctionDeclaration(declaration)) {
-            const extractDeclaration = async () => {
-              const svgComponents = await extractSvgComponentFromNode(
-                declaration as t.Declaration,
-                'function'
-              )
-              if (svgComponents) {
-                // Exported function declaration 'export function functionName() {}'
-                if (isExported || identifiers.has(svgComponents.name)) {
-                  lengthExports++
-                  exports.push(svgComponents)
-                } else {
-                  // Function declaration 'function functionName() {}'
-                  notExports.push(svgComponents)
-                }
-              }
-            }
-            extractDeclaration()
-          } else if (t.isVariableDeclaration(declaration)) {
-            declaration.declarations.forEach(async (d) => {
-              if (t.isIdentifier(d.id)) {
-                const svgComponents = await extractSvgComponentFromNode(d, 'variable')
-                if (svgComponents) {
-                  // Exported variable declaration 'export const variableName = value;'
-                  if (isExported || identifiers.has(svgComponents.name)) {
+            extractSvgComponentFromNode(declaration as t.Declaration, 'function')
+              .then((result) => {
+                if (result) {
+                  // Exported function declaration 'export function functionName() {}'
+                  if (isExported || identifiers.has(result.name)) {
                     lengthExports++
-                    exports.push(svgComponents)
+                    exports.push(result)
                   } else {
-                    // Variable declaration 'const variableName = value;'
-                    notExports.push(svgComponents)
+                    // Function declaration 'function functionName() {}'
+                    notExports.push(result)
                   }
                 }
+              })
+              .catch((error) => {
+                console.error(`Error extracting variable declaration: ${error}`)
+              })
+          } else if (t.isVariableDeclaration(declaration)) {
+            declaration.declarations.forEach((d) => {
+              if (t.isIdentifier(d.id)) {
+                extractSvgComponentFromNode(d, 'variable')
+                  .then((result) => {
+                    if (result) {
+                      // Exported variable declaration 'export const variableName = value;'
+                      if (isExported || identifiers.has(result.name)) {
+                        lengthExports++
+                        exports.push(result)
+                      } else {
+                        // Variable declaration 'const variableName = value;'
+                        notExports.push(result)
+                      }
+                    }
+                  })
+                  .catch((error) => {
+                    console.error(`Error extracting variable declaration: ${error}`)
+                  })
               }
             })
           } else if (t.isIdentifier(declaration)) {

@@ -143,10 +143,11 @@ export class ViewExportsSVGPanel {
    */
   private _getWebviewContent(webview: Webview, extensionUri: Uri) {
     const i18n = getTranslations()
+    const dirs = ['webview-ui', 'build', 'assets']
     // Get the URIs for the required assets
-    const icoUri = getUri(webview, extensionUri, ['webview-ui', 'build', 'assets', 'favicon.ico'])
-    const stylesUri = getUri(webview, extensionUri, ['webview-ui', 'build', 'assets', 'index.css'])
-    const scriptUri = getUri(webview, extensionUri, ['webview-ui', 'build', 'assets', 'index.js'])
+    const icoUri = getUri(webview, extensionUri, [...dirs, 'favicon.ico']).path
+    const stylesUri = getUri(webview, extensionUri, [...dirs, 'index.css']).path
+    const scriptUri = getUri(webview, extensionUri, [...dirs, 'index.js']).path
 
     // Generate a nonce for script elements
     const nonce = getNonce()
@@ -215,7 +216,9 @@ export class ViewExportsSVGPanel {
    * @param message The received message data.
    */
   private handleExtractIconsFile(message: ReceiveMessageData) {
-    getInputFiles(message.data)
+    getInputFiles(message.data).catch((error) => {
+      console.error('Failed to extract icons from file:', error)
+    })
   }
 
   /**
@@ -249,6 +252,8 @@ export class ViewExportsSVGPanel {
    * @param data An optional parameter representing the data payload of the message.
    */
   private _postMessage(command: PostMessageCommand, data?: any) {
-    this._panel.webview.postMessage({ command, data })
+    this._panel.webview.postMessage({ command, data }).then(undefined, (error) => {
+      console.error('Failed to send message:', error)
+    })
   }
 }

@@ -124,6 +124,13 @@ export function getPropertyValues(value: Value, properties: Record<string, any>)
     return
   }
 
+  let argument: any
+  let left: any
+  let right: any
+  let objectProps: Record<string, any> = {}
+  let arrayProps: any[] = []
+  let conditionValue: boolean
+
   switch (value.type) {
     case 'NumericLiteral':
     case 'BooleanLiteral':
@@ -136,21 +143,21 @@ export function getPropertyValues(value: Value, properties: Record<string, any>)
     case 'AssignmentPattern':
       return getPropertyValues(value.right, properties)
     case 'UnaryExpression':
-      const argumentValue = getPropertyValues(value.argument, properties)
+      argument = getPropertyValues(value.argument, properties)
 
-      return getUnaryExpression(value.operator, argumentValue)
+      return getUnaryExpression(value.operator, argument)
     case 'BinaryExpression':
-      const left = getPropertyValues(value.left, properties)
-      const right = getPropertyValues(value.right, properties)
+      left = getPropertyValues(value.left, properties)
+      right = getPropertyValues(value.right, properties)
 
       return getBinaryExpression(value.operator, left, right)
     case 'LogicalExpression':
-      const leftValue = getPropertyValues(value.left, properties)
-      const rightValue = getPropertyValues(value.right, properties)
+      left = getPropertyValues(value.left, properties)
+      right = getPropertyValues(value.right, properties)
 
-      return getLogicalExpression(value.operator, leftValue, rightValue)
+      return getLogicalExpression(value.operator, left, right)
     case 'ObjectExpression':
-      let objectProps: Record<string, any> = {}
+      objectProps = {}
 
       value.properties.forEach((property) => {
         if (t.isObjectProperty(property) && t.isIdentifier(property.key)) {
@@ -163,7 +170,7 @@ export function getPropertyValues(value: Value, properties: Record<string, any>)
 
       return objectProps
     case 'ArrayExpression':
-      const arrayProps: any[] = []
+      arrayProps = []
 
       value.elements.forEach((element) => {
         if (t.isSpreadElement(element)) {
@@ -175,18 +182,17 @@ export function getPropertyValues(value: Value, properties: Record<string, any>)
 
       return arrayProps
     case 'TemplateLiteral':
-      const templateString = value.quasis.reduce((acc, quasi, i) => {
+      return value.quasis.reduce((acc, quasi, i) => {
         acc += quasi.value.raw
         if (i < value.expressions.length) {
           acc += getPropertyValues(value.expressions[i], properties)
         }
         return acc
       }, '')
-
-      return templateString
     case 'MemberExpression':
       if (t.isIdentifier(value.property)) {
         const objectValue = getPropertyValues(value.object, properties)
+
         if (objectValue && typeof objectValue === 'object') {
           const propertyName = value.property.name
           if (propertyName in objectValue) {
@@ -196,10 +202,11 @@ export function getPropertyValues(value: Value, properties: Record<string, any>)
       }
       return undefined
     case 'ConditionalExpression':
-      const conditionValue = getPropertyValues(value.test, properties)
-      const trueValue = getPropertyValues(value.consequent, properties)
-      const falseValue = getPropertyValues(value.alternate, properties)
-      return conditionValue ? trueValue : falseValue
+      conditionValue = getPropertyValues(value.test, properties)
+      left = getPropertyValues(value.consequent, properties)
+      right = getPropertyValues(value.alternate, properties)
+
+      return conditionValue ? left : right
     default:
       return undefined
   }

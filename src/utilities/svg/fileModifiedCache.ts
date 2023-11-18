@@ -52,7 +52,12 @@ export class FileModifiedCache<T> {
     }
 
     if (lastModified > item.lastModified) {
-      delete this.cache[key] // Remove the entry if file has been modified
+      if (key in this.cache) {
+        // Remove the entry if file has been modified
+        const { [key]: omitted, ...rest } = this.cache
+        this.cache = rest
+      }
+
       return undefined // Cache entry is no longer valid
     }
 
@@ -64,6 +69,7 @@ export class FileModifiedCache<T> {
    * @param key - The key (file path) to delete from the cache.
    */
   delete(key: string): void {
-    delete this.cache[key]
+    const { [key]: omitted, ...rest } = this.cache
+    this.cache = rest
   }
 }
