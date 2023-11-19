@@ -1,4 +1,4 @@
-import { window, workspace } from 'vscode'
+import { Uri, commands, window, workspace } from 'vscode'
 import * as fs from 'fs'
 
 export async function saveResponseFile(data: object) {
@@ -16,10 +16,15 @@ export async function saveResponseFile(data: object) {
       })
     })
 
-    await window.showInformationMessage(`File saved at ${filePath}`)
+    const result = await window.showInformationMessage(
+      `The file was saved successfully at: ${filePath}`,
+      'View file',
+      'Close'
+    )
 
-    const doc = await workspace.openTextDocument(filePath)
-    await window.showTextDocument(doc)
+    if (result === 'View file') {
+      await commands.executeCommand('vscode.open', Uri.file(filePath))
+    }
   } catch (error) {
     await window.showErrorMessage('Error creating and saving the file. Try again.')
   }
