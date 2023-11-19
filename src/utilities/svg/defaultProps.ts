@@ -2,7 +2,7 @@
  * Default properties for SVG components.
  * This object provides default values for various properties of SVG components.
  */
-export const defaultProps: { [tagKey: string]: any } = {
+export const defaultProps: Record<string, any> = {
   size: 28,
   width: 28,
   height: 28,

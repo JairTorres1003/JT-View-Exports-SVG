@@ -1,4 +1,4 @@
-import { FunctionComponent } from 'react'
+import { type FunctionComponent } from 'react'
 import { Alert, Snackbar as MuiSnackbar, Typography } from '@mui/material'
 import { useTranslation } from 'react-i18next'
 

@@ -2,7 +2,7 @@ import * as fs from 'fs'
 import { Uri, env } from 'vscode'
 
 // Object to store the loaded translations
-var i18n: { [key: string]: string } = {}
+let i18n: Record<string, string> = {}
 
 /**
  * Load language translations from a JSON file.

@@ -1,7 +1,7 @@
-import { FunctionComponent, ReactNode, useContext, useReducer } from 'react'
+import { type FunctionComponent, type ReactNode, useContext, useReducer } from 'react'
 
 import { SvgContext } from '../context'
-import { SvgContextAction, SvgContextState } from '../interfaces/SvgContext'
+import { type SvgContextAction, type SvgContextState } from '../interfaces/SvgContext'
 
 const initialState: SvgContextState = {
   selectedSvg: null,

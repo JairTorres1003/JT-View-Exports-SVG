@@ -1,9 +1,9 @@
 import {
-  AccordionSummaryProps,
+  type AccordionSummaryProps,
   Accordion as AccordionMui,
   AccordionSummary as AccordionSummaryMui,
   Paper as PaperMui,
-  PaperProps,
+  type PaperProps,
   styled,
   Typography as TypographyMui,
   Box,
@@ -13,30 +13,30 @@ import GridMui from '@mui/material/Unstable_Grid2'
 import { ArrowForwardIcon, MotionIcon } from '../../icons'
 
 export const Accordion = styled(AccordionMui)(() => ({
-  'margin': '0 !important',
-  'backgroundColor': 'inherit',
+  margin: '0 !important',
+  backgroundColor: 'inherit',
   '&::before': { display: 'none' },
 }))
 
 export const AccordionSummary = styled((props: AccordionSummaryProps | PaperProps) => (
   <AccordionSummaryMui component={PaperMui} expandIcon={<ArrowForwardIcon />} {...props} />
 ))(({ theme }) => ({
-  'color': '#000',
-  'maxHeight': 60,
-  'borderRadius': 4,
-  'backgroundColor': '#fff',
-  'minHeight': '60px !important',
-  'flexDirection': 'row-reverse',
-  'transition': 'background-color 0.2s',
+  color: '#000',
+  maxHeight: 60,
+  borderRadius: 4,
+  backgroundColor: '#fff',
+  minHeight: '60px !important',
+  flexDirection: 'row-reverse',
+  transition: 'background-color 0.2s',
   '& .AccordionSummary-title': { whiteSpace: 'nowrap', width: '100%', fontSize: 13 },
   '&.Mui-expanded': {
-    'borderRadius': 0,
-    'color': 'inherit',
-    'borderBottom': '1px outset',
-    'backgroundColor': 'var(--vscode-editor-background, #fff)',
-    'position': 'sticky',
-    'top': 0,
-    'zIndex': 10,
+    borderRadius: 0,
+    color: 'inherit',
+    borderBottom: '1px outset',
+    backgroundColor: 'var(--vscode-editor-background, #fff)',
+    position: 'sticky',
+    top: 0,
+    zIndex: 10,
     '&::before, &::after': {
       content: '""',
       width: '100%',
@@ -56,9 +56,9 @@ export const AccordionSummary = styled((props: AccordionSummaryProps | PaperProp
     fill: 'rgb(var(--color-JT-view-export-svg))',
   },
   '& .MuiAccordionSummary-content, & .MuiAccordionSummary-content.Mui-expanded': {
-    'margin': 0,
-    'marginLeft': theme.spacing(1),
-    'width': '100%',
+    margin: 0,
+    marginLeft: theme.spacing(1),
+    width: '100%',
     '& .MuiTypography-root': { fontSize: '16px' },
   },
 }))

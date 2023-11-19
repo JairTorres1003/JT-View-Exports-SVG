@@ -1,6 +1,6 @@
-import { commands, ExtensionContext, Uri } from 'vscode'
+import { commands, type ExtensionContext, type Uri } from 'vscode'
 
-import { SvgExport, SvgExportErrors } from './interfaces/svgExports'
+import { type SvgExport, type SvgExportErrors } from './interfaces/svgExports'
 import { ViewExportsSVGPanel } from './panels/ViewExportsSVGPanel'
 import { loadLanguage } from './utilities/getLocaleLanguage'
 import { processFiles } from './utilities/commonFunctions'
@@ -19,9 +19,9 @@ const runCommand = async (context: ExtensionContext, item: Uri, items: Uri[]) =>
   }
 
   // Determine the files to process
-  const filesToProcess: Uri[] | null = items ? items : item ? [item] : null
+  const filesToProcess: Uri[] | null = items || (item ? [item] : null)
 
-  processFiles(filesToProcess, null, operation)
+  await processFiles(filesToProcess, null, operation)
 }
 
 /**
@@ -30,12 +30,14 @@ const runCommand = async (context: ExtensionContext, item: Uri, items: Uri[]) =>
  */
 export function activate(context: ExtensionContext) {
   // Load the local language
-  loadLanguage(context.extensionUri)
+  loadLanguage(context.extensionUri).catch((error) => {
+    console.error('Failed to load language:', error)
+  })
 
   context.subscriptions.push(
-    commands.registerCommand('JT-View-Exports-SVG.showMenu', (item: any, items: any[]) =>
-      runCommand(context, item, items)
-    )
+    commands.registerCommand('JT-View-Exports-SVG.showMenu', async (item: any, items: any[]) => {
+      await runCommand(context, item, items)
+    })
   )
 }
 

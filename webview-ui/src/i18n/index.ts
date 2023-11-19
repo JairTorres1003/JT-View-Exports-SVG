@@ -12,25 +12,30 @@ import ru from './ru.json'
 import zh_cn from './zh-cn.json'
 import zh_tw from './zh-tw.json'
 
-// Configuración de i18next
-i18n.use(initReactI18next).init({
-  resources: {
-    'de': { translation: de },
-    'en': { translation: en },
-    'es': { translation: es },
-    'fr': { translation: fr },
-    'ja': { translation: ja },
-    'pt-br': { translation: pt_br },
-    'pt-pt': { translation: pt_pt },
-    'ru': { translation: ru },
-    'zh-cn': { translation: zh_cn },
-    'zh-tw': { translation: zh_tw },
-  },
-  lng: 'en',
-  fallbackLng: 'en',
-  interpolation: {
-    escapeValue: false,
-  },
-})
+// Configuration for i18next
+i18n
+  .use(initReactI18next)
+  .init({
+    resources: {
+      de: { translation: de },
+      en: { translation: en },
+      es: { translation: es },
+      fr: { translation: fr },
+      ja: { translation: ja },
+      'pt-br': { translation: pt_br },
+      'pt-pt': { translation: pt_pt },
+      ru: { translation: ru },
+      'zh-cn': { translation: zh_cn },
+      'zh-tw': { translation: zh_tw },
+    },
+    lng: 'en',
+    fallbackLng: 'en',
+    interpolation: {
+      escapeValue: false,
+    },
+  })
+  .catch((err) => {
+    console.error('i18n initialization failed', err)
+  })
 
 export default i18n

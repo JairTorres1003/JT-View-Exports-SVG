@@ -1,6 +1,6 @@
 import { useState } from 'react'
 
-import { SvgComponent } from '../interfaces/svgExports'
+import { type SvgComponent } from '../interfaces/svgExports'
 import { useSvg } from '../provider/SvgProvider'
 
 const useSvgComponentExport = () => {
@@ -12,7 +12,9 @@ const useSvgComponentExport = () => {
    * Toggles the expansion state.
    * @returns {void}
    */
-  const handleExpanded = (): void => setIsExpanded((previousState) => !previousState)
+  const handleExpanded = (): void => {
+    setIsExpanded((previousState) => !previousState)
+  }
 
   /**
    * Copies the provided text to the clipboard and displays a snackbar notification.
@@ -20,7 +22,12 @@ const useSvgComponentExport = () => {
    * @returns {void}
    */
   const handleCopy = (text: string): void => {
-    navigator.clipboard.writeText(text)
+    navigator.clipboard.writeText(text).catch((error) => {
+      dispatch({
+        type: 'SNACKBAR',
+        payload: { open: true, text: error.message },
+      })
+    })
     dispatch({ type: 'SNACKBAR', payload: { open: true, text } })
   }
 

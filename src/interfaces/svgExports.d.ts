@@ -1,4 +1,4 @@
-import { JSXIdentifier } from '@babel/types'
+import { type JSXIdentifier } from '@babel/types'
 
 /**
  * Represents the exported SVG components from a file.
@@ -51,9 +51,7 @@ export interface SvgComponent {
   /**
    * Parameters related to the SVG component, which are passed as props to the component.
    */
-  params: {
-    [key: string]: any
-  }
+  params: Record<string, any>
 }
 
 /**
@@ -71,9 +69,7 @@ export interface SvgComponentDetails {
   /**
    * An object containing the props of the component.
    */
-  props: {
-    [key: string]: any
-  }
+  props: Record<string, any>
   /**
    * A flag indicating whether the component uses framer-motion
    */

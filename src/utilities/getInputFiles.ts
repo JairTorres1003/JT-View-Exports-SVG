@@ -1,5 +1,5 @@
 import { processFiles } from './commonFunctions'
-import { SvgExport, SvgExportErrors } from '../interfaces/svgExports'
+import { type SvgExport, type SvgExportErrors } from '../interfaces/svgExports'
 import { ViewExportsSVGPanel } from '../panels/ViewExportsSVGPanel'
 
 /**
@@ -13,5 +13,5 @@ export async function getInputFiles(filesPath: string[] | null) {
     ViewExportsSVGPanel.update(result)
   }
 
-  processFiles(null, filesPath, operation)
+  await processFiles(null, filesPath, operation)
 }

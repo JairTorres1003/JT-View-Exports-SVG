@@ -10,7 +10,9 @@ const useDebounce = (value: string, delay: number | undefined) => {
     }, delay)
 
     // Clear the timer if the value or delay changes before the timeout is reached
-    return () => clearTimeout(handler)
+    return () => {
+      clearTimeout(handler)
+    }
   }, [value, delay])
 
   return debouncedValue

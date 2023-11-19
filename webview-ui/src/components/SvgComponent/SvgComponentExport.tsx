@@ -1,10 +1,10 @@
-import { FunctionComponent } from 'react'
+import { type FunctionComponent } from 'react'
 import { AccordionDetails, Tooltip } from '@mui/material'
 import MiddleEllipsis from 'react-middle-ellipsis'
 
 import useSvgComponentExport from '../../hooks/useSvgComponentExport'
 
-import { SvgExport } from '../../interfaces/svgExports'
+import { type SvgExport } from '../../interfaces/svgExports'
 import { IconFailExport } from '../../icons'
 import RenderSVG from './RenderSvg'
 import {
@@ -31,8 +31,8 @@ const SvgComponentExport: FunctionComponent<SvgExport> = (props) => {
       <AccordionSummary elevation={isExpanded ? 0 : 3}>
         <div className='AccordionSummary-title'>
           <MiddleEllipsis>
-            <Tooltip title={file && file.relativePath} arrow>
-              <span>{file && file.relativePath}</span>
+            <Tooltip title={file?.relativePath} arrow>
+              <span>{file?.relativePath}</span>
             </Tooltip>
           </MiddleEllipsis>
         </div>
@@ -40,8 +40,18 @@ const SvgComponentExport: FunctionComponent<SvgExport> = (props) => {
       <AccordionDetails>
         <Grid container spacing={2}>
           {svgComponents.map((item, index) => (
-            <GridItem key={index} onClick={() => handleCopy(item.name)}>
-              <Paper elevation={3} onClick={() => handleSelected(item)}>
+            <GridItem
+              key={index}
+              onClick={() => {
+                handleCopy(item.name)
+              }}
+            >
+              <Paper
+                elevation={3}
+                onClick={() => {
+                  handleSelected(item)
+                }}
+              >
                 {item.isAnimated && <BoxAnimated />}
                 {item.component ? <RenderSVG {...item.component} /> : <IconFailExport />}
               </Paper>

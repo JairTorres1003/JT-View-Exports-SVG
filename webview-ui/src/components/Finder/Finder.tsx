@@ -1,10 +1,10 @@
 import { Box, IconButton, Typography } from '@mui/material'
 import { useTranslation } from 'react-i18next'
-import { FunctionComponent } from 'react'
+import { type FunctionComponent } from 'react'
 
 import useFinder from '../../hooks/useFinder'
 
-import { FinderProps } from '../../interfaces/Finder'
+import { type FinderProps } from '../../interfaces/Finder'
 import { IconClose, IconLupe } from '../../icons'
 import { BoxFinder, TextField } from './Finder.style'
 
@@ -37,7 +37,9 @@ export const Finder: FunctionComponent<FinderProps> = (props) => {
               <Typography>{t('Label.SearchIcons')}</Typography>
             </Box>
           }
-          onChange={(val) => setValue(val.target.value.trimStart())}
+          onChange={(val) => {
+            setValue(val.target.value.trimStart())
+          }}
           InputProps={{
             endAdornment: (
               <IconButton size='small' onClick={handleClearValue} title={t('Label.Clear')}>

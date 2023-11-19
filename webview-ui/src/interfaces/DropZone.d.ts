@@ -1,6 +1,3 @@
-import { SetStateAction } from 'react'
-import { SvgExport } from './svgExports'
-
 /**
  * Represents properties for a DropZone component.
  */

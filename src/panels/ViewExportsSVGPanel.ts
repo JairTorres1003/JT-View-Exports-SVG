@@ -1,7 +1,19 @@
-import { Disposable, Uri, ViewColumn, Webview, WebviewPanel, env, window } from 'vscode'
+import {
+  type Disposable,
+  Uri,
+  ViewColumn,
+  type Webview,
+  type WebviewPanel,
+  env,
+  window,
+} from 'vscode'
 
-import { SvgExport, SvgExportErrors } from '../interfaces/svgExports'
-import { ReceiveMessageData, PostMessageCommand, CommandHandler } from '../interfaces/vscode'
+import { type SvgExport, type SvgExportErrors } from '../interfaces/svgExports'
+import {
+  type ReceiveMessageData,
+  type PostMessageCommand,
+  type CommandHandler,
+} from '../interfaces/vscode'
 import { getInputFiles } from '../utilities/getInputFiles'
 import { getTranslations } from '../utilities/getLocaleLanguage'
 import { getNonce } from '../utilities/getNonce'
@@ -22,7 +34,7 @@ export class ViewExportsSVGPanel {
 
   private svgComponents: SvgExport[] | SvgExportErrors
   private readonly _panel: WebviewPanel
-  private _disposables: Disposable[] = []
+  private readonly _disposables: Disposable[] = []
 
   /**
    * Create a new instance of the ViewExportsSVGPanel class.
@@ -40,7 +52,13 @@ export class ViewExportsSVGPanel {
 
     // Listen for when the panel is disposed
     // This happens when the user closes the panel or when the panel is closed programmatically
-    this._panel.onDidDispose(() => this.dispose(), null, this._disposables)
+    this._panel.onDidDispose(
+      () => {
+        this.dispose()
+      },
+      null,
+      this._disposables
+    )
 
     // Set the HTML content for the webview panel
     this._panel.webview.html = this._getWebviewContent(this._panel.webview, extensionUri)
@@ -125,10 +143,11 @@ export class ViewExportsSVGPanel {
    */
   private _getWebviewContent(webview: Webview, extensionUri: Uri) {
     const i18n = getTranslations()
+    const dirs = ['webview-ui', 'build', 'assets']
     // Get the URIs for the required assets
-    const icoUri = getUri(webview, extensionUri, ['webview-ui', 'build', 'assets', 'favicon.ico'])
-    const stylesUri = getUri(webview, extensionUri, ['webview-ui', 'build', 'assets', 'index.css'])
-    const scriptUri = getUri(webview, extensionUri, ['webview-ui', 'build', 'assets', 'index.js'])
+    const icoUri = getUri(webview, extensionUri, [...dirs, 'favicon.ico']).toString()
+    const stylesUri = getUri(webview, extensionUri, [...dirs, 'index.css']).toString()
+    const scriptUri = getUri(webview, extensionUri, [...dirs, 'index.js']).toString()
 
     // Generate a nonce for script elements
     const nonce = getNonce()
@@ -197,7 +216,9 @@ export class ViewExportsSVGPanel {
    * @param message The received message data.
    */
   private handleExtractIconsFile(message: ReceiveMessageData) {
-    getInputFiles(message.data)
+    getInputFiles(message.data).catch((error) => {
+      console.error('Failed to extract icons from file:', error)
+    })
   }
 
   /**
@@ -231,6 +252,8 @@ export class ViewExportsSVGPanel {
    * @param data An optional parameter representing the data payload of the message.
    */
   private _postMessage(command: PostMessageCommand, data?: any) {
-    this._panel.webview.postMessage({ command, data })
+    this._panel.webview.postMessage({ command, data }).then(undefined, (error) => {
+      console.error('Failed to send message:', error)
+    })
   }
 }

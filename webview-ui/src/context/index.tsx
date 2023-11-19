@@ -1,5 +1,5 @@
 import { createContext } from 'react'
-import { SvgContextAction, SvgContextState } from '../interfaces/SvgContext'
+import { type SvgContextAction, type SvgContextState } from '../interfaces/SvgContext'
 
 export const SvgContext = createContext<
   | {

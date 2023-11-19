@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react'
 
-import { FinderProps } from '../interfaces/Finder'
+import { type FinderProps } from '../interfaces/Finder'
 import { vscode } from '../utilities/vscode'
 import useDebounce from './useDebounce'
 

@@ -1,7 +1,7 @@
-import { Box, BoxProps, Switch, Typography, styled } from '@mui/material'
+import { Box, type BoxProps, Switch, Typography, styled } from '@mui/material'
 import { useTranslation } from 'react-i18next'
 
-import { SwitchDarkModeProps } from '../../interfaces/styled.props'
+import { type SwitchDarkModeProps } from '../../interfaces/styled.props'
 
 export const SwitchDarkMode = styled((props: SwitchDarkModeProps) => {
   const { checked, onChange, slotsProps } = props
@@ -14,14 +14,14 @@ export const SwitchDarkMode = styled((props: SwitchDarkModeProps) => {
     </Box>
   )
 })(({ theme }) => ({
-  'display': 'flex',
-  'textAlign': 'center',
-  'justifyContent': 'center',
-  'alignItems': 'center',
-  'width': 'max-content',
-  'gap': 5,
+  display: 'flex',
+  textAlign: 'center',
+  justifyContent: 'center',
+  alignItems: 'center',
+  width: 'max-content',
+  gap: 5,
   '& .MuiSwitch-root': {
-    'padding': 0,
+    padding: 0,
     '& .MuiSwitch-thumb': { boxSizing: 'border-box' },
     '& .MuiSwitch-track': {
       backgroundColor: theme.palette.mode === 'light' ? '#E9E9EA' : '#39393D',
@@ -31,25 +31,25 @@ export const SwitchDarkMode = styled((props: SwitchDarkModeProps) => {
       }),
     },
     '&.MuiSwitch-sizeSmall': {
-      'width': 34,
-      'height': 18,
+      width: 34,
+      height: 18,
       '& .MuiSwitch-thumb': { width: 14, height: 14 },
       '& .MuiSwitch-track': { borderRadius: 18 / 2 },
     },
     '&.MuiSwitch-sizeMedium': {
-      'width': 42,
-      'height': 26,
+      width: 42,
+      height: 26,
       '& .MuiSwitch-thumb': { width: 22, height: 22 },
       '& .MuiSwitch-track': { borderRadius: 26 / 2 },
     },
     '& .MuiSwitch-switchBase': {
-      'padding': 0,
-      'margin': 2,
-      'transitionDuration': '300ms',
+      padding: 0,
+      margin: 2,
+      transitionDuration: '300ms',
       '& + .MuiSwitch-track': { backgroundColor: '#b0aeae' },
       '&.Mui-checked': {
-        'transform': 'translateX(16px)',
-        'color': 'rgba(0 0 0 / 50%)',
+        transform: 'translateX(16px)',
+        color: 'rgba(0 0 0 / 50%)',
         '& + .MuiSwitch-track': {
           backgroundColor: '#889dae',
           opacity: 1,

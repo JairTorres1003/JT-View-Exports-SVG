@@ -1,5 +1,5 @@
 class PropertyManager {
-  private properties: { [key: string]: any } = {}
+  private properties: Record<string, any> = {}
 
   /**
    * Gets a specific property or all properties if no key is specified.
@@ -29,7 +29,10 @@ class PropertyManager {
    */
   clean(key?: string): void {
     if (key) {
-      delete this.properties[key]
+      if (key in this.properties) {
+        const { [key]: omitted, ...rest } = this.properties
+        this.properties = rest
+      }
     } else {
       this.properties = {}
     }
