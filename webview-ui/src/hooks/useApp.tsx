@@ -118,7 +118,9 @@ const useApp = () => {
    * @param {string} lang - The language code of the selected language.
    */
   const handleLanguage = (lang: string) => {
-    i18n.changeLanguage(lang).catch((error) => {
+    const language = lang.replace('-', '_')
+
+    i18n.changeLanguage(language).catch((error) => {
       console.error('Failed to change language', error)
     })
   }
