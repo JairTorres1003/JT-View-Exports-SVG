@@ -174,18 +174,16 @@ export class ViewExportsSVGPanel {
 
   /**
    * Handles the request for SVG components.
-   * @param message The received message data.
    */
-  private handleRequestSvgComponents(message: ReceiveMessageData) {
+  private handleRequestSvgComponents(): void {
     const svgComponentsJson = JSON.stringify(this.svgComponents)
     this._postMessage('svgComponents', svgComponentsJson)
   }
 
   /**
    * Handles the request to get the current theme.
-   * @param message The received message data.
    */
-  private handleGetCurrentTheme(message: ReceiveMessageData) {
+  private handleGetCurrentTheme(): void {
     const theme = getCurrentTheme()
     this._postMessage('currentTheme', theme)
   }
@@ -194,9 +192,8 @@ export class ViewExportsSVGPanel {
    * Handles the search for SVG components based on a filter.
    * @param message The received message data.
    */
-  private handleSearchSvgComponents(message: ReceiveMessageData) {
+  private handleSearchSvgComponents(message: ReceiveMessageData): void {
     const filter = message.data
-
     const svgComponents = filterSvgComponents(this.svgComponents as SvgExport[], filter)
     const svgComponentsJson = JSON.stringify(svgComponents)
     this._postMessage('filteredSvgComponents', svgComponentsJson)
@@ -204,9 +201,8 @@ export class ViewExportsSVGPanel {
 
   /**
    * Handles the request to get translations.
-   * @param message The received message data.
    */
-  private handleGetTranslations() {
+  private handleGetTranslations(): void {
     const language = env.language || 'en'
     this._postMessage('language', language)
   }
@@ -215,7 +211,7 @@ export class ViewExportsSVGPanel {
    * Handles the extraction of icons from a dropped file.
    * @param message The received message data.
    */
-  private handleExtractIconsFile(message: ReceiveMessageData) {
+  private handleExtractIconsFile(message: ReceiveMessageData): void {
     getInputFiles(message.data).catch((error) => {
       console.error('Failed to extract icons from file:', error)
     })
@@ -227,11 +223,11 @@ export class ViewExportsSVGPanel {
    */
   private _setWebviewMessageListener(webview: Webview) {
     const commandHandlers: CommandHandler = {
-      requestSvgComponents: this.handleRequestSvgComponents,
-      getCurrentTheme: this.handleGetCurrentTheme,
-      searchSvgComponents: this.handleSearchSvgComponents,
-      getTranslations: this.handleGetTranslations,
-      extractIconsFile: this.handleExtractIconsFile,
+      requestSvgComponents: this.handleRequestSvgComponents.bind(this),
+      getCurrentTheme: this.handleGetCurrentTheme.bind(this),
+      searchSvgComponents: this.handleSearchSvgComponents.bind(this),
+      getTranslations: this.handleGetTranslations.bind(this),
+      extractIconsFile: this.handleExtractIconsFile.bind(this),
     }
 
     webview.onDidReceiveMessage(
