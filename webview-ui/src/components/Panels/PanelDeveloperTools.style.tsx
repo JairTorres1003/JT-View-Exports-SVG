@@ -67,12 +67,17 @@ export const BoxTools = styled(Box)(() => ({
   minHeight: 32,
   height: 'max-content',
   padding: 10,
+  display: 'flex',
+  justifyContent: 'space-between',
+  gap: 8,
   '.mode-dark &': {
     backgroundColor: 'rgba(20, 26, 31, 0.2)',
     borderTop: '1px solid #dae0e714',
+    color: '#fff',
   },
   '.mode-light &': {
     backgroundColor: 'rgba(243, 246, 249, 0.2)',
     borderTop: '1px solid #E5EAF2',
+    color: '#000',
   },
 }))

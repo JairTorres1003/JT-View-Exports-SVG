@@ -1,4 +1,4 @@
-import { type FunctionComponent } from 'react'
+import { type FC } from 'react'
 import { Divider, IconButton, Portal } from '@mui/material'
 import { useTranslation } from 'react-i18next'
 
@@ -6,7 +6,7 @@ import { useSvg } from '../../provider/SvgProvider'
 import { useSwitchDarkMode } from '../../hooks/useSwitch'
 
 import { type PanelDeveloperToolsProps } from '../../interfaces/PanelDeveloperTools'
-import { EmptySelectionIcon, IconFailExport, IconSettings } from '../../icons'
+import { EmptySelectionIcon, IconFailExport, IconFragmentCode, IconSettings } from '../../icons'
 import {
   BoxDeveloper,
   BoxPanelDeveloperTools,
@@ -18,7 +18,7 @@ import {
 import RenderSVG from '../SvgComponent/RenderSvg'
 import { SwitchDarkMode } from '../Switch'
 
-const PanelDeveloperTools: FunctionComponent<PanelDeveloperToolsProps> = (props) => {
+const PanelDeveloperTools: FC<PanelDeveloperToolsProps> = (props) => {
   const { isOpenPanel, handleOpenPanel, refPortalButton } = props
   const { t } = useTranslation()
   const {
@@ -58,6 +58,9 @@ const PanelDeveloperTools: FunctionComponent<PanelDeveloperToolsProps> = (props)
             </ContainerSvg>
             <BoxTools>
               <SwitchDarkMode onChange={onChangeMode} checked={checkedMode} />
+              <IconButton size='small' sx={{ color: 'inherit', p: '3px' }} title='view code'>
+                <IconFragmentCode size={18} />
+              </IconButton>
             </BoxTools>
           </BoxViewerSvg>
         </BoxDeveloper>
