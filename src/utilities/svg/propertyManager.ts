@@ -24,6 +24,14 @@ class PropertyManager {
   }
 
   /**
+   * Sets the value of multiple properties.
+   * @param {Record<string, any>} properties - Object with the properties to set.
+   */
+  setAll(properties: Record<string, any>): void {
+    this.properties = properties
+  }
+
+  /**
    * Clears a specific property or all properties if no key is specified.
    * @param {string} key - Key of the property to clear (optional).
    */

@@ -1,7 +1,3 @@
-/* eslint-disable @typescript-eslint/naming-convention */
-import * as fs from 'fs'
-import * as babelParser from '@babel/parser'
-import traverse from '@babel/traverse'
 import * as t from '@babel/types'
 import { camelCase, isArray } from 'lodash'
 
@@ -9,7 +5,6 @@ import {
   type HasInvalidChild,
   type SvgComponent,
   type SvgComponentDetails,
-  type SvgExport,
 } from '../../interfaces/svgExports'
 import {
   type ChildAttributesResponse,
@@ -25,22 +20,6 @@ import { propertyManager } from './propertyManager'
 
 // Declaration properties
 const properties = propertyManager
-
-/**
- * Parse the content of a file and return the AST (Abstract Syntax Tree).
- * @param {string} filePath - The path to the file.
- * @returns {t.Node} The AST representing the file content.
- */
-function parseFileContent(filePath: string): t.Node {
-  // Read the file content synchronously
-  const fileContent = fs.readFileSync(filePath, 'utf8')
-
-  // Parse the file content using Babel parser
-  return babelParser.parse(fileContent, {
-    sourceType: 'module',
-    plugins: ['jsx', 'typescript'],
-  })
-}
 
 /**
  * Convert JSX element properties into a properties object.
@@ -289,7 +268,10 @@ function getNodeParams(params: Array<t.Identifier | t.Pattern | t.RestElement>) 
  * @param {ExportTypeNode} node - The export type node to analyze.
  * @returns {ExportType | undefined} An object representing the analyzed export type, or undefined if the export type is not JSXElement.
  */
-function analyzeExportType(node: ExportTypeNode): ExportType | undefined {
+function analyzeExportType(
+  node: ExportTypeNode,
+  customParams?: Record<string, any>
+): ExportType | undefined {
   // Initialize variables
   let argument = node as t.JSXElement
   let type = node?.type
@@ -319,7 +301,12 @@ function analyzeExportType(node: ExportTypeNode): ExportType | undefined {
       }
     }
 
-    getNodeParams(node.params)
+    // Extract properties from the parameters array
+    if (customParams && Object.keys(customParams).length > 0) {
+      properties.setAll(customParams)
+    } else {
+      getNodeParams(node.params)
+    }
   }
 
   // Check if the export type is JSXElement and the opening element's name is JSXIdentifier or JSXMemberExpression
@@ -341,23 +328,27 @@ function analyzeExportType(node: ExportTypeNode): ExportType | undefined {
  * @param {SvgComponent["typeExport"]} typeExport - The type of export (function or variable).
  * @returns {Promise<SvgComponent | undefined>} A promise that resolves to the extracted SVG component object or undefined if no SVG component is found.
  */
-async function extractSvgComponentFromNode(
+export async function extractSvgComponentFromNode(
   node: t.Node,
-  typeExport: SvgComponent['typeExport']
+  typeExport: SvgComponent['typeExport'],
+  customParams?: Record<string, any>
 ): Promise<SvgComponent | undefined> {
   let component: SvgComponent['component']
   let isAnimated: boolean = false
   let name: string = ''
-  let location: SvgComponent['location']
+  let location: SvgComponent['location'] = { start: undefined, end: undefined }
 
   if (t.isFunctionDeclaration(node) || t.isVariableDeclarator(node)) {
     // Extract the name and location of the function or variable.
     name = (node.id as t.Identifier).name || ''
-    location = node.id?.loc?.start
+    location = { start: node.loc?.start, end: node.loc?.end }
 
     try {
       // Analyze the export type and check if it's a valid SVG component.
-      const nodeAnalyze = analyzeExportType(t.isFunctionDeclaration(node) ? node : node.init)
+      const nodeAnalyze = analyzeExportType(
+        t.isFunctionDeclaration(node) ? node : node.init,
+        customParams
+      )
 
       if (nodeAnalyze) {
         const SVGComponent = isSVGComponent(nodeAnalyze.argument)
@@ -375,102 +366,5 @@ async function extractSvgComponentFromNode(
     return { component, name, location, typeExport, isAnimated, params: properties.get() }
   } else {
     return undefined
-  }
-}
-
-/**
- * Extract SVG component exports from a file.
- * @param {string} filePath - The file path of the TypeScript/JavaScript file to parse.
- * @returns {Promise<SvgExport>} A promise that resolves to an object containing the extracted SVG component exports.
- */
-export async function extractSVGComponentExports(filePath: string): Promise<SvgExport> {
-  try {
-    // Parse the file content into an AST (Abstract Syntax Tree)
-    const ast = parseFileContent(filePath)
-    const exports: SvgComponent[] = []
-    const notExports: SvgComponent[] = []
-    const identifiers = new Set<string>()
-    let lengthExports: number = 0
-
-    // Traverse the AST to find export declarations
-    traverse(ast, {
-      Declaration(path) {
-        const { node, parent } = path
-
-        if (t.isProgram(parent) && node) {
-          let declaration: any = node
-          let isExported = false
-
-          if (
-            (t.isExportNamedDeclaration(node) || t.isExportDefaultDeclaration(node)) &&
-            node.declaration
-          ) {
-            declaration = node.declaration
-            isExported = true
-          }
-
-          if (t.isFunctionDeclaration(declaration)) {
-            extractSvgComponentFromNode(declaration as t.Declaration, 'function')
-              .then((result) => {
-                if (result) {
-                  // Exported function declaration 'export function functionName() {}'
-                  if (isExported || identifiers.has(result.name)) {
-                    lengthExports++
-                    exports.push(result)
-                  } else {
-                    // Function declaration 'function functionName() {}'
-                    notExports.push(result)
-                  }
-                }
-              })
-              .catch((error) => {
-                console.error(`Error extracting variable declaration: ${error}`)
-              })
-          } else if (t.isVariableDeclaration(declaration)) {
-            declaration.declarations.forEach((d) => {
-              if (t.isIdentifier(d.id)) {
-                extractSvgComponentFromNode(d, 'variable')
-                  .then((result) => {
-                    if (result) {
-                      // Exported variable declaration 'export const variableName = value;'
-                      if (isExported || identifiers.has(result.name)) {
-                        lengthExports++
-                        exports.push(result)
-                      } else {
-                        // Variable declaration 'const variableName = value;'
-                        notExports.push(result)
-                      }
-                    }
-                  })
-                  .catch((error) => {
-                    console.error(`Error extracting variable declaration: ${error}`)
-                  })
-              }
-            })
-          } else if (t.isIdentifier(declaration)) {
-            identifiers.add(declaration.name)
-          } else if (t.isObjectExpression(declaration)) {
-            declaration.properties.forEach((property) => {
-              if (t.isObjectProperty(property) && t.isIdentifier(property.key)) {
-                identifiers.add(property.key.name)
-              }
-            })
-          } else if (t.isExportNamedDeclaration(declaration) && declaration.specifiers) {
-            declaration.specifiers.forEach((specifier) => {
-              if (t.isExportSpecifier(specifier) && t.isIdentifier(specifier.exported)) {
-                identifiers.add(specifier.exported.name)
-              }
-            })
-          }
-        }
-      },
-    })
-
-    const result: SvgExport = { lengthExports, lengthSvg: exports.length, svgComponents: exports }
-    // Return an object containing the extracted SVG component exports and their lengths
-    return result
-  } catch (error) {
-    console.error('Error during extraction:', error)
-    return { lengthExports: 0, lengthSvg: 0, svgComponents: [] }
   }
 }

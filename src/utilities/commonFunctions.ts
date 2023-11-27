@@ -5,7 +5,8 @@ import { getTranslations } from './getLocaleLanguage'
 import { getWorkspaceFolder } from './getWorkspaceFolder'
 import { type SvgExport, type SvgExportErrors, type SvgFile } from '../interfaces/svgExports'
 import { REGEX_FILE } from './regex'
-import { extractSVGComponentExports } from './svg/exportParser'
+import { baseFileCache } from './svg/baseFileCache'
+import { extractSVGComponentExports } from './svg/extractSVGComponentExports'
 import { FileModifiedCache, getFileTimestamp } from './svg/fileModifiedCache'
 
 // Create an instance of FileModifiedCache for caching SvgExport objects
@@ -95,12 +96,13 @@ export async function processFiles(
               return cachedValue
             }
 
-            const svgExports = await extractSVGComponentExports(file.absolutePath)
+            const { base, result: svgExports } = await extractSVGComponentExports(file.absolutePath)
 
             svgExports.svgComponents.sort((a, b) => a.name.localeCompare(b.name))
             const result = { ...svgExports, file, lengthSvg: svgExports.svgComponents.length }
             // Cache the result associated with the file and its last modification timestamp
             fileCache.set(file.absolutePath, result, lastModified)
+            baseFileCache.set(file.absolutePath, base, lastModified)
 
             return result
           } catch (error) {
