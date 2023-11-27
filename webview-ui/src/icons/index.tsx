@@ -1,5 +1,5 @@
 import { motion } from 'framer-motion'
-import { type FunctionComponent } from 'react'
+import { type FC } from 'react'
 
 interface IconProps {
   size?: number | string
@@ -141,23 +141,28 @@ export const IconFailExport = () => {
   )
 }
 
-export const IconLupe = () => {
+export const IconLupe: FC<IconProps> = ({ size = 24, color = 'currentColor' }) => {
   return (
     <svg
-      stroke='currentColor'
-      fill='currentColor'
-      strokeWidth='0'
-      viewBox='0 0 16 16'
-      height='1em'
-      width='1em'
       xmlns='http://www.w3.org/2000/svg'
+      width={size}
+      height={size}
+      viewBox='0 0 24 24'
+      fill='none'
     >
-      <path d='M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z'></path>
+      <circle cx='11' cy='11' r='7' stroke={color} strokeWidth='2' />
+      <path
+        d='M11 8C10.606 8 10.2159 8.0776 9.85195 8.22836C9.48797 8.37913 9.15726 8.6001 8.87868 8.87868C8.6001 9.15726 8.37913 9.48797 8.22836 9.85195C8.0776 10.2159 8 10.606 8 11'
+        stroke={color}
+        strokeWidth='2'
+        strokeLinecap='round'
+      />
+      <path d='M20 20L17 17' stroke={color} strokeWidth='2' strokeLinecap='round' />
     </svg>
   )
 }
 
-export const IconSettings: FunctionComponent<
+export const IconSettings: FC<
   IconProps & {
     circleColor?: string
     state?: boolean
@@ -298,7 +303,7 @@ export const IconSettings: FunctionComponent<
   )
 }
 
-export const DropFilesIcon: FunctionComponent<IconProps & { borderDash?: string }> = ({
+export const DropFilesIcon: FC<IconProps & { borderDash?: string }> = ({
   size = 20,
   borderDash = '1 1',
 }) => (
@@ -349,7 +354,7 @@ export const DropFilesIcon: FunctionComponent<IconProps & { borderDash?: string 
   </svg>
 )
 
-export const MoreFilesIcon: FunctionComponent<IconProps> = ({ color = '#000', size = 20 }) => (
+export const MoreFilesIcon: FC<IconProps> = ({ color = '#000', size = 20 }) => (
   <svg
     xmlns='http://www.w3.org/2000/svg'
     width={size}
@@ -367,7 +372,7 @@ export const MoreFilesIcon: FunctionComponent<IconProps> = ({ color = '#000', si
   </svg>
 )
 
-export const MotionIcon: FunctionComponent<IconProps> = ({ color = 'currentColor', size = 20 }) => (
+export const MotionIcon: FC<IconProps> = ({ color = 'currentColor', size = 20 }) => (
   <svg
     xmlns='http://www.w3.org/2000/svg'
     width={size}
@@ -382,7 +387,7 @@ export const MotionIcon: FunctionComponent<IconProps> = ({ color = 'currentColor
   </svg>
 )
 
-export const EmptySelectionIcon: FunctionComponent<{
+export const EmptySelectionIcon: FC<{
   size?: number | string
   className?: string
 }> = ({ size = '50', className = '' }) => (
@@ -497,6 +502,24 @@ export const EmptySelectionIcon: FunctionComponent<{
     <path
       d='M32.4724 45.459C32.5919 45.5785 32.659 45.7406 32.659 45.9096C32.659 47.6227 31.5903 48.8191 30.0602 48.8191C28.4559 48.8191 27.1506 47.5139 27.1506 45.9096C27.1506 44.3053 28.4558 43 30.0602 43C30.6402 42.9991 31.2071 43.1723 31.6874 43.4973C31.7568 43.5441 31.8162 43.6042 31.8623 43.674C31.9084 43.7438 31.9404 43.822 31.9563 43.9041C31.9722 43.9863 31.9717 44.0707 31.955 44.1527C31.9383 44.2347 31.9055 44.3126 31.8587 44.3819C31.8118 44.4512 31.7518 44.5107 31.682 44.5568C31.6122 44.6029 31.534 44.6349 31.4519 44.6508C31.3697 44.6667 31.2852 44.6662 31.2033 44.6495C31.1213 44.6327 31.0434 44.6 30.9741 44.5532C30.7043 44.3708 30.3859 44.2736 30.0602 44.2743C29.1585 44.2743 28.4249 45.0078 28.4249 45.9096C28.4249 46.8112 29.1584 47.5449 30.0602 47.5449C30.7719 47.5449 31.1498 47.0961 31.3024 46.5467H30.6623C30.4933 46.5467 30.3313 46.4796 30.2118 46.3601C30.0923 46.2406 30.0252 46.0785 30.0252 45.9096C30.0252 45.7406 30.0923 45.5785 30.2118 45.459C30.3313 45.3396 30.4933 45.2724 30.6623 45.2724H32.0219C32.1908 45.2724 32.3529 45.3396 32.4724 45.459Z'
       fill='white'
+    />
+  </svg>
+)
+
+export const IconFragmentCode: FC<IconProps> = ({ color = 'currentColor', size = 24 }) => (
+  <svg
+    width={size}
+    height={size}
+    viewBox='0 0 256 256'
+    fill='none'
+    xmlns='http://www.w3.org/2000/svg'
+  >
+    <path
+      d='M64 88L16 128L64 168M192 88L240 128L192 168M160 40L96 216'
+      stroke={color}
+      strokeWidth='16'
+      strokeLinecap='round'
+      strokeLinejoin='round'
     />
   </svg>
 )
