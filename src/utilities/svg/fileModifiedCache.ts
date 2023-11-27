@@ -1,4 +1,4 @@
-import * as fs from "fs";
+import * as fs from 'fs'
 
 /**
  * Gets the last modification timestamp of a file.
@@ -8,13 +8,13 @@ import * as fs from "fs";
 export function getFileTimestamp(filePath: string) {
   try {
     // Get file statistics (sync)
-    const stats = fs.statSync(filePath);
+    const stats = fs.statSync(filePath)
 
     // Extract the modification timestamp (mtime) and return it
-    const timestamp = stats.mtime.getTime();
-    return timestamp;
+    const timestamp = stats.mtime.getTime()
+    return timestamp
   } catch (error) {
-    return 0;
+    return 0
   }
 }
 
@@ -26,7 +26,7 @@ export class FileModifiedCache<T> {
   /**
    * The cache stores data as an object where keys are file paths, and values are objects containing `value` and `lastModified`.
    */
-  private cache: { [key: string]: { value: T; lastModified: number } } = {};
+  private cache: Record<string, { value: T; lastModified: number }> = {}
 
   /**
    * Sets a new cache entry or updates an existing one.
@@ -35,7 +35,7 @@ export class FileModifiedCache<T> {
    * @param lastModified - The last modification timestamp of the associated file.
    */
   set(key: string, value: T, lastModified: number): void {
-    this.cache[key] = { value, lastModified };
+    this.cache[key] = { value, lastModified }
   }
 
   /**
@@ -45,18 +45,23 @@ export class FileModifiedCache<T> {
    * @returns The cached value if valid, or `undefined` if not found or invalid.
    */
   get(key: string, lastModified: number): T | undefined {
-    const item = this.cache[key];
+    const item = this.cache[key]
 
     if (!item) {
-      return undefined; // Cache entry not found
+      return undefined // Cache entry not found
     }
 
     if (lastModified > item.lastModified) {
-      delete this.cache[key]; // Remove the entry if file has been modified
-      return undefined; // Cache entry is no longer valid
+      if (key in this.cache) {
+        // Remove the entry if file has been modified
+        const { [key]: omitted, ...rest } = this.cache
+        this.cache = rest
+      }
+
+      return undefined // Cache entry is no longer valid
     }
 
-    return item.value; // Return the cached value
+    return item.value // Return the cached value
   }
 
   /**
@@ -64,6 +69,7 @@ export class FileModifiedCache<T> {
    * @param key - The key (file path) to delete from the cache.
    */
   delete(key: string): void {
-    delete this.cache[key];
+    const { [key]: omitted, ...rest } = this.cache
+    this.cache = rest
   }
 }

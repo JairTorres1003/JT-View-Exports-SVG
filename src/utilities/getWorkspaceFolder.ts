@@ -1,4 +1,4 @@
-import { workspace } from "vscode";
+import { workspace } from 'vscode'
 
 /**
  * Retrieves the file system path of the first workspace folder in the currently
@@ -7,14 +7,14 @@ import { workspace } from "vscode";
  * workspace folder is found.
  */
 export function getWorkspaceFolder(): string {
-  const workspaceFolders = workspace.workspaceFolders;
+  const workspaceFolders = workspace.workspaceFolders
 
   if (workspaceFolders && workspaceFolders.length > 0) {
-    const firstWorkspaceFolder = workspaceFolders[0];
-    const workspaceFolderPath = firstWorkspaceFolder.uri.fsPath;
+    const firstWorkspaceFolder = workspaceFolders[0]
+    const workspaceFolderPath = firstWorkspaceFolder.uri.fsPath
 
-    return workspaceFolderPath;
+    return workspaceFolderPath
   }
 
-  return "";
+  return ''
 }

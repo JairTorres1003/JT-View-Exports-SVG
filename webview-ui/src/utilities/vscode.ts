@@ -1,5 +1,9 @@
-import type { WebviewApi } from "vscode-webview";
-import { MessageData, OnMessageCommand, PostMessageCommand } from "../interfaces/vscode";
+import type { WebviewApi } from 'vscode-webview'
+import {
+  type MessageData,
+  type OnMessageCommand,
+  type PostMessageCommand,
+} from '../interfaces/vscode'
 
 /**
  * Wrapper class for the VSCode API, providing methods for communication between the webview and the extension.
@@ -8,28 +12,30 @@ class VSCodeAPIWrapper {
   /**
    * The VSCode API instance obtained from `acquireVsCodeApi`.
    */
-  private readonly vsCodeApi: WebviewApi<unknown> | undefined;
+  private readonly vsCodeApi: WebviewApi<unknown> | undefined
   /**
    * Mapping of message commands to their corresponding handlers.
    */
-  private messageHandlers: Record<string, Function[]> = {};
+  private messageHandlers: Record<string, Array<(...pros: any) => void>> = {}
 
   /**
    * Creates an instance of `VSCodeAPIWrapper`.
    */
   constructor() {
-    if (typeof acquireVsCodeApi === "function") {
-      this.vsCodeApi = acquireVsCodeApi();
+    if (typeof acquireVsCodeApi === 'function') {
+      this.vsCodeApi = acquireVsCodeApi()
     }
 
-    window.addEventListener("message", (event) => {
-      const message: MessageData = event.data;
-      const handlers = this.messageHandlers[message.command];
+    window.addEventListener('message', (event) => {
+      const message: MessageData = event.data
+      const handlers = this.messageHandlers[message.command]
 
       if (handlers) {
-        handlers.forEach((handler) => handler(message.data));
+        handlers.forEach((handler) => {
+          handler(message.data)
+        })
       }
-    });
+    })
   }
 
   /**
@@ -39,22 +45,24 @@ class VSCodeAPIWrapper {
    */
   public postMessage(command: PostMessageCommand, data?: any) {
     if (this.vsCodeApi) {
-      this.vsCodeApi.postMessage({ command, data });
+      this.vsCodeApi.postMessage({ command, data })
     } else {
-      if (command === "requestSvgComponents") {
-        fetch("../../test/responseFile.json")
-          .then((response) => response.json())
+      if (command === 'requestSvgComponents') {
+        fetch('../../test/responseFile.json')
+          .then(async (response) => await response.json())
           .then((data) => {
-            const resData = JSON.stringify(data);
-            const handlers = this.messageHandlers["svgComponents"];
+            const resData = JSON.stringify(data)
+            const handlers = this.messageHandlers.svgComponents
 
             if (handlers) {
-              handlers.forEach((handler) => handler(resData));
+              handlers.forEach((handler) => {
+                handler(resData)
+              })
             }
           })
           .catch((error) => {
-            console.error("Error load test data:", error);
-          });
+            console.error('Error load test data:', error)
+          })
       }
     }
   }
@@ -64,11 +72,11 @@ class VSCodeAPIWrapper {
    * @param command The command associated with the message.
    * @param handler The handler function to be called when the message is received.
    */
-  public onMessage(command: OnMessageCommand, handler: Function) {
+  public onMessage(command: OnMessageCommand, handler: (...pros: any) => void) {
     if (!this.messageHandlers[command]) {
-      this.messageHandlers[command] = [];
+      this.messageHandlers[command] = []
     }
-    this.messageHandlers[command].push(handler);
+    this.messageHandlers[command].push(handler)
   }
 
   /**
@@ -76,12 +84,12 @@ class VSCodeAPIWrapper {
    * @param command The command associated with the message.
    * @param handler The handler function to be removed.
    */
-  public removeMessageHandler(command: OnMessageCommand, handler: Function) {
-    const handlers = this.messageHandlers[command];
+  public removeMessageHandler(command: OnMessageCommand, handler: (...pros: any) => void) {
+    const handlers = this.messageHandlers[command]
     if (handlers) {
-      const index = handlers.indexOf(handler);
+      const index = handlers.indexOf(handler)
       if (index !== -1) {
-        handlers.splice(index, 1);
+        handlers.splice(index, 1)
       }
     }
   }
@@ -90,4 +98,4 @@ class VSCodeAPIWrapper {
 /**
  * Wrapper instance for the VSCode API.
  */
-export const vscode = new VSCodeAPIWrapper();
+export const vscode = new VSCodeAPIWrapper()
