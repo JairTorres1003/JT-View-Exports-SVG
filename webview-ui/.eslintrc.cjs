@@ -65,5 +65,6 @@ module.exports = {
     '**/dist/**',
     'src/vite-env.d.ts',
     'vite.config.ts',
+    '.eslintrc.cjs',
   ],
 }
