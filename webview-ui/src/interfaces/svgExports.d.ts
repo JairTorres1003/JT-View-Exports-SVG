@@ -5,7 +5,7 @@ export interface SvgExport {
   /**
    * The file object containing the absolute and relative paths of the SVG file.
    */
-  file?: SvgFile
+  file: SvgFile
   /**
    * The number of exports (SVG components) present in the file.
    */

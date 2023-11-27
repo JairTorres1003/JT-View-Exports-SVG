@@ -31,8 +31,8 @@ const SvgComponentExport: FunctionComponent<SvgExport> = (props) => {
       <AccordionSummary elevation={isExpanded ? 0 : 3}>
         <div className='AccordionSummary-title'>
           <MiddleEllipsis>
-            <Tooltip title={file?.relativePath} arrow>
-              <span>{file?.relativePath}</span>
+            <Tooltip title={file.relativePath} arrow>
+              <span>{file.relativePath}</span>
             </Tooltip>
           </MiddleEllipsis>
         </div>
@@ -49,13 +49,15 @@ const SvgComponentExport: FunctionComponent<SvgExport> = (props) => {
               <Paper
                 elevation={3}
                 onClick={() => {
-                  handleSelected(item)
+                  handleSelected(item, file.absolutePath)
                 }}
               >
                 {item.isAnimated && <BoxAnimated />}
                 {item.component ? <RenderSVG {...item.component} /> : <IconFailExport />}
               </Paper>
-              <Typography noWrap>{item.name}</Typography>
+              <Tooltip title={item.name} arrow>
+                <Typography noWrap>{item.name}</Typography>
+              </Tooltip>
             </GridItem>
           ))}
         </Grid>

@@ -36,8 +36,8 @@ const useSvgComponentExport = () => {
    * @param {SvgComponent} item - The SVG component to be selected.
    * @returns {void}
    */
-  const handleSelected = (item: SvgComponent): void => {
-    dispatch({ type: 'SELECTED', payload: item })
+  const handleSelected = (item: SvgComponent, path: string): void => {
+    dispatch({ type: 'SELECTED', payload: { item, path } })
   }
 
   return {
