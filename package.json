@@ -80,14 +80,14 @@
     "vscode:prepublish": "npm run compile"
   },
   "devDependencies": {
-    "@babel/types": "^7.23.3",
+    "@babel/types": "^7.23.4",
     "@types/babel__traverse": "^7.20.4",
     "@types/glob": "^8.1.0",
-    "@types/lodash": "^4.14.201",
-    "@types/node": "^20.9.2",
-    "@types/vscode": "^1.84.1",
-    "@typescript-eslint/eslint-plugin": "^6.11.0",
-    "@typescript-eslint/parser": "^6.11.0",
+    "@types/lodash": "^4.14.202",
+    "@types/node": "^20.10.0",
+    "@types/vscode": "^1.84.2",
+    "@typescript-eslint/eslint-plugin": "^6.13.0",
+    "@typescript-eslint/parser": "^6.13.0",
     "eslint": "^8.54.0",
     "eslint-config-prettier": "^9.0.0",
     "eslint-config-standard-with-typescript": "^40.0.0",
@@ -95,14 +95,13 @@
     "eslint-plugin-node": "^11.1.0",
     "eslint-plugin-prettier": "^5.0.1",
     "eslint-plugin-promise": "^6.1.1",
-    "eslint-plugin-standard": "^5.0.0",
     "glob": "^10.3.10",
     "prettier": "^3.1.0",
-    "typescript": "^5.2.2"
+    "typescript": "^5.3.2"
   },
   "dependencies": {
-    "@babel/parser": "^7.23.3",
-    "@babel/traverse": "^7.23.3",
+    "@babel/parser": "^7.23.4",
+    "@babel/traverse": "^7.23.4",
     "lodash": "^4.17.21"
   }
 }
