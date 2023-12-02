@@ -29,7 +29,10 @@
     "lint": "eslint .",
     "lint:fix": "eslint . --fix",
     "format:check": "prettier --check \"**/*.{ts,tsx,json,css,md,cjs}\"",
-    "format": "prettier --write \"**/*.{ts,tsx,json,css,md,cjs}\""
+    "format": "prettier --write \"**/*.{ts,tsx,json,css,md,cjs}\"",
+    "nvm:i": "nvm install",
+    "nvm:u": "nvm use",
+    "nvm": "nvm install && nvm use"
   },
   "dependencies": {
     "@emotion/react": "^11.11.1",
