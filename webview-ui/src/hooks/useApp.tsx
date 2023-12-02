@@ -7,6 +7,7 @@ import { useSvg } from '../provider/SvgProvider'
 import { vscode } from '../utilities/vscode'
 
 const useApp = () => {
+  const [styles, setStyles] = useState<Record<string, any>>({})
   const [svgComponents, setSvgComponents] = useState<SvgExport[]>([])
   const [showMessage, setShowMessage] = useState<string | null>(null)
   const [isLoading, setIsLoading] = useState<boolean>(true)
@@ -106,6 +107,15 @@ const useApp = () => {
   }
 
   /**
+   * Handles the configuration data received from VS Code.
+   * @param data - The configuration data.
+   */
+  const handleConfigurationVsCode = (data: any) => {
+    const response = JSON.parse(data) || {}
+    setStyles(response.styles)
+  }
+
+  /**
    * Handles the current theme and updates the application state.
    * @param theme The current theme ("dark" or "light").
    */
@@ -136,25 +146,29 @@ const useApp = () => {
             secondary: 'rgba(var(--color-JT-view-export-svg), 0.6)',
           },
         },
+        typography: { fontFamily: styles?.fontFamily, fontSize: styles?.fontSize },
       }),
-    [currentTheme]
+    [currentTheme, styles]
   )
 
   useEffect(() => {
     setIsLoading(true)
     // Request the extension
     vscode.postMessage('requestSvgComponents')
+    vscode.postMessage('getConfigurationVsCode')
     vscode.postMessage('getCurrentTheme')
     vscode.postMessage('getTranslations')
 
     // Listen for messages
     vscode.onMessage('svgComponents', handleSvgComponents)
+    vscode.onMessage('configurationVsCode', handleConfigurationVsCode)
     vscode.onMessage('currentTheme', handleCurrentTheme)
     vscode.onMessage('language', handleLanguage)
 
     // Clean up by removing the message handlers when the component is unmounted
     return () => {
       vscode.removeMessageHandler('currentTheme', handleCurrentTheme)
+      vscode.removeMessageHandler('configurationVsCode', handleConfigurationVsCode)
       vscode.removeMessageHandler('language', handleLanguage)
       setIsLoading(false)
     }
@@ -172,6 +186,7 @@ const useApp = () => {
     resizableWidth,
     refPortalButton,
     showMessage,
+    styles,
     svgComponents,
     theme,
   }
