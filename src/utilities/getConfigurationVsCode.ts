@@ -1,5 +1,9 @@
 import { workspace } from 'vscode'
 
+/**
+ * Retrieves the VS Code editor configuration.
+ * @returns An object containing the editor styles.
+ */
 export function getConfigurationVsCode(): any {
   const configuration = workspace.getConfiguration('editor')
 
