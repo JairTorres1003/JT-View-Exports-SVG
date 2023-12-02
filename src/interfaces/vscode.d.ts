@@ -2,10 +2,12 @@ export type ReceiveMessageCommand =
   | 'extractIconsFile'
   | 'getCurrentTheme'
   | 'getTranslations'
+  | 'playgroundSvgComponents'
   | 'requestSvgComponents'
   | 'searchSvgComponents'
 export type PostMessageCommand =
   | 'currentTheme'
+  | 'customSvgComponent'
   | 'filteredSvgComponents'
   | 'language'
   | 'svgComponents'

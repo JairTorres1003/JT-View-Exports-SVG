@@ -19,6 +19,7 @@ import { getTranslations } from '../utilities/getLocaleLanguage'
 import { getNonce } from '../utilities/getNonce'
 import { getCurrentTheme } from '../utilities/getTheme'
 import { getUri } from '../utilities/getUri'
+import { customSvgComponent } from '../utilities/svg/customSvgComponent'
 import { filterSvgComponents } from '../utilities/svg/filterSvgComponents'
 
 /**
@@ -218,6 +219,27 @@ export class ViewExportsSVGPanel {
   }
 
   /**
+   * Handles the extraction of icons from the playground.
+   * @param message The received message data.
+   */
+  private handlePlayground(message: ReceiveMessageData): void {
+    const svgComponent = JSON.parse(message.data)
+    customSvgComponent(svgComponent)
+      .then((newSvgComponent) => {
+        const result = newSvgComponent || svgComponent
+        this._postMessage('customSvgComponent', JSON.stringify(result))
+      })
+      .catch((error) => {
+        console.error('Failed to extract icons from playground:', error)
+        this._postMessage('customSvgComponent', {
+          name: 'Error',
+          message: error.message,
+          type: 'error',
+        })
+      })
+  }
+
+  /**
    * Sets up a message listener for the webview panel.
    * @param webview The webview instance.
    */
@@ -228,6 +250,7 @@ export class ViewExportsSVGPanel {
       searchSvgComponents: this.handleSearchSvgComponents.bind(this),
       getTranslations: this.handleGetTranslations.bind(this),
       extractIconsFile: this.handleExtractIconsFile.bind(this),
+      playgroundSvgComponents: this.handlePlayground.bind(this),
     }
 
     webview.onDidReceiveMessage(
