@@ -8,6 +8,7 @@ import { useSwitchDarkMode } from '../../hooks/useSwitch'
 import { type PanelDeveloperToolsProps } from '../../interfaces/PanelDeveloperTools'
 import { EmptySelectionIcon, IconFailExport, IconFragmentCode, IconSettings } from '../../icons'
 import {
+  BoxCode,
   BoxDeveloper,
   BoxPanelDeveloperTools,
   BoxTools,
@@ -58,10 +59,13 @@ const PanelDeveloperTools: FC<PanelDeveloperToolsProps> = (props) => {
             </ContainerSvg>
             <BoxTools>
               <SwitchDarkMode onChange={onChangeMode} checked={checkedMode} />
-              <IconButton size='small' sx={{ color: 'inherit', p: '3px' }} title='view code'>
-                <IconFragmentCode size={18} />
-              </IconButton>
+              {selectedSvg && (
+                <IconButton size='small' sx={{ color: 'inherit', p: '3px' }} title='view code'>
+                  <IconFragmentCode size={18} />
+                </IconButton>
+              )}
             </BoxTools>
+            <BoxCode>CODE</BoxCode>
           </BoxViewerSvg>
         </BoxDeveloper>
       )}
