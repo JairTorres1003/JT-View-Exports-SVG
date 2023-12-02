@@ -50,6 +50,9 @@ export const BoxViewerSvg = styled(({ mode = false, ...props }: BoxViewerSvgProp
   border: `1px solid #${mode ? 'dae0e714' : 'E5EAF2'}`,
   color: `#${mode ? 'fff' : '000'}`,
   svg: { aspectRatio: '1 / 1' },
+  '--color-JT-view-export-svg-bgColor': `rgba(${mode ? '20, 26, 31' : '243, 246, 249'}, 0.2)`,
+  '--color-JT-view-export-svg-border': `1px solid #${mode ? 'dae0e714' : 'E5EAF2'}`,
+  '--color-JT-view-export-svg-color': `#${mode ? 'fff' : '000'}`,
 }))
 
 export const ContainerSvg = styled(Box)(() => ({
@@ -70,14 +73,15 @@ export const BoxTools = styled(Box)(() => ({
   display: 'flex',
   justifyContent: 'space-between',
   gap: 8,
-  '.mode-dark &': {
-    backgroundColor: 'rgba(20, 26, 31, 0.2)',
-    borderTop: '1px solid #dae0e714',
-    color: '#fff',
-  },
-  '.mode-light &': {
-    backgroundColor: 'rgba(243, 246, 249, 0.2)',
-    borderTop: '1px solid #E5EAF2',
-    color: '#000',
-  },
+  backgroundColor: 'var(--color-JT-view-export-svg-bgColor)',
+  borderTop: 'var(--color-JT-view-export-svg-border)',
+  color: 'var(--color-JT-view-export-svg-color)',
+}))
+
+export const BoxCode = styled(Box)(() => ({
+  backgroundColor: 'var(--color-JT-view-export-svg-bgColor)',
+  borderTop: 'var(--color-JT-view-export-svg-border)',
+  color: 'var(--color-JT-view-export-svg-color)',
+  padding: 10,
+  minHeight: 32,
 }))

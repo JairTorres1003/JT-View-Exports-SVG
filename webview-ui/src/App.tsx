@@ -24,13 +24,14 @@ function App() {
     resizableWidth,
     refPortalButton,
     showMessage,
+    styles,
     svgComponents,
     theme,
   } = useApp()
 
   return (
     <ThemeProvider theme={theme}>
-      <main>
+      <main style={styles}>
         {isLoading ? (
           <Loading />
         ) : fileSelected && fileSelected > 0 ? (
@@ -40,7 +41,7 @@ function App() {
                 defaultSize={{ width: '100%', height: '100%' }}
                 className='Resizable-Box'
                 maxWidth='100%'
-                minWidth='150'
+                minWidth='300'
                 minHeight='100%'
                 maxHeight='100%'
                 enable={{ right: true }}

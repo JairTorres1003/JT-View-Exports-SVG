@@ -1,11 +1,15 @@
 export type PostMessageCommand =
   | 'extractIconsFile'
+  | 'getConfigurationVsCode'
   | 'getCurrentTheme'
   | 'getTranslations'
+  | 'playgroundSvgComponents'
   | 'requestSvgComponents'
   | 'searchSvgComponents'
 export type OnMessageCommand =
+  | 'configurationVsCode'
   | 'currentTheme'
+  | 'customSvgComponent'
   | 'filteredSvgComponents'
   | 'language'
   | 'svgComponents'
