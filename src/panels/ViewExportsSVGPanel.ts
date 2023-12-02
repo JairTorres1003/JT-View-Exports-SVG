@@ -21,6 +21,7 @@ import { getCurrentTheme } from '../utilities/getTheme'
 import { getUri } from '../utilities/getUri'
 import { customSvgComponent } from '../utilities/svg/customSvgComponent'
 import { filterSvgComponents } from '../utilities/svg/filterSvgComponents'
+import { getConfigurationVsCode } from '../utilities/getConfigurationVsCode'
 
 /**
  * Webview panel for displaying SVG exports.
@@ -240,12 +241,21 @@ export class ViewExportsSVGPanel {
   }
 
   /**
+   * Handles the request to get the VS Code configuration.
+   */
+  private handleConfiguration(): void {
+    const config = getConfigurationVsCode()
+    this._postMessage('configurationVsCode', JSON.stringify(config))
+  }
+
+  /**
    * Sets up a message listener for the webview panel.
    * @param webview The webview instance.
    */
   private _setWebviewMessageListener(webview: Webview) {
     const commandHandlers: CommandHandler = {
       requestSvgComponents: this.handleRequestSvgComponents.bind(this),
+      getConfigurationVsCode: this.handleConfiguration.bind(this),
       getCurrentTheme: this.handleGetCurrentTheme.bind(this),
       searchSvgComponents: this.handleSearchSvgComponents.bind(this),
       getTranslations: this.handleGetTranslations.bind(this),
