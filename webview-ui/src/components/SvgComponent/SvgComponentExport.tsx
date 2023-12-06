@@ -1,4 +1,4 @@
-import { type FunctionComponent } from 'react'
+import { type FC } from 'react'
 import { AccordionDetails, Tooltip } from '@mui/material'
 import MiddleEllipsis from 'react-middle-ellipsis'
 
@@ -17,7 +17,7 @@ import {
   Typography,
 } from './SvgComponentExport.style'
 
-const SvgComponentExport: FunctionComponent<SvgExport> = (props) => {
+const SvgComponentExport: FC<SvgExport> = (props) => {
   const { file, svgComponents } = props
   const { handleCopy, handleExpanded, handleSelected, isExpanded } = useSvgComponentExport()
 

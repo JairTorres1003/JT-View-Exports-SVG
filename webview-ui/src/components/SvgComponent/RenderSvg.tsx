@@ -1,10 +1,10 @@
-import { type FunctionComponent, useEffect, useRef } from 'react'
+import { type FC, useEffect, useRef } from 'react'
 import { motion } from 'framer-motion'
 
 import { IconFailExport } from '../../icons'
 import { type SvgComponentDetails } from '../../interfaces/svgExports'
 
-const RenderSVG: FunctionComponent<SvgComponentDetails & { fullSize?: boolean }> = (props) => {
+const RenderSVG: FC<SvgComponentDetails & { fullSize?: boolean }> = (props) => {
   const { children, fullSize, tag, isMotion } = props
 
   const svgRef = useRef<HTMLElement>(null)

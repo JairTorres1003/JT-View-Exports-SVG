@@ -1,10 +1,10 @@
 import { Backdrop, Box, CircularProgress, Typography } from '@mui/material'
-import { type FunctionComponent } from 'react'
+import { type FC } from 'react'
 import { useTranslation } from 'react-i18next'
 
 import { BoxLoad } from './Loading.style'
 
-export const Loading: FunctionComponent = () => {
+export const Loading: FC = () => {
   const { t } = useTranslation()
 
   return (
