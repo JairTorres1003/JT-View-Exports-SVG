@@ -1,4 +1,4 @@
-import { type FC } from 'react'
+import { useState, type FC } from 'react'
 import { Divider, IconButton, Portal } from '@mui/material'
 import { useTranslation } from 'react-i18next'
 
@@ -16,6 +16,7 @@ import {
   ContainerSvg,
   TitlePanel,
 } from './PanelDeveloperTools.style'
+import { Playground } from '../Editor/Playground'
 import RenderSVG from '../SvgComponent/RenderSvg'
 import { SwitchDarkMode } from '../Switch'
 
@@ -26,6 +27,8 @@ const PanelDeveloperTools: FC<PanelDeveloperToolsProps> = (props) => {
     state: { selectedSvg },
   } = useSvg()
   const { checkedMode, onChangeMode } = useSwitchDarkMode({ keyMode: 'svgCardMode' })
+
+  const [showPlayground, setShowPlayground] = useState<boolean>(false)
 
   return (
     <BoxPanelDeveloperTools elevation={isOpenPanel ? 3 : 0}>
@@ -60,12 +63,23 @@ const PanelDeveloperTools: FC<PanelDeveloperToolsProps> = (props) => {
             <BoxTools>
               <SwitchDarkMode onChange={onChangeMode} checked={checkedMode} />
               {selectedSvg && (
-                <IconButton size='small' sx={{ color: 'inherit', p: '3px' }} title='view code'>
+                <IconButton
+                  size='small'
+                  sx={{ color: 'inherit', p: '3px' }}
+                  title='view code'
+                  onClick={() => {
+                    setShowPlayground(!showPlayground)
+                  }}
+                >
                   <IconFragmentCode size={18} />
                 </IconButton>
               )}
             </BoxTools>
-            <BoxCode>CODE</BoxCode>
+            {selectedSvg && showPlayground && (
+              <BoxCode>
+                <Playground />
+              </BoxCode>
+            )}
           </BoxViewerSvg>
         </BoxDeveloper>
       )}
