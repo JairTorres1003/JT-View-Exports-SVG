@@ -1,4 +1,4 @@
-import { Fragment, type FunctionComponent, useState } from 'react'
+import { Fragment, type FC, useState } from 'react'
 import { Box, Button, Typography } from '@mui/material'
 import { FileUploader } from 'react-drag-drop-files'
 import { useTranslation } from 'react-i18next'
@@ -9,7 +9,7 @@ import { BoxDropZone, CustomFileUploader } from './DropZone.style'
 
 const fileTypes: string[] = ['JS', 'JSX', 'TS', 'TSX']
 
-export const DropZone: FunctionComponent<DropZoneProps> = (props) => {
+export const DropZone: FC<DropZoneProps> = (props) => {
   const { onExtractIcons } = props
 
   const { t } = useTranslation()
