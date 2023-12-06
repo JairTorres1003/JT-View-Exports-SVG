@@ -1,10 +1,10 @@
-import { type FunctionComponent } from 'react'
+import { type FC } from 'react'
 import { Alert, Snackbar as MuiSnackbar, Typography } from '@mui/material'
 import { useTranslation } from 'react-i18next'
 
 import { useSvg } from '../../provider/SvgProvider'
 
-export const Snackbar: FunctionComponent = () => {
+export const Snackbar: FC = () => {
   const {
     state: { snackbar },
     dispatch,

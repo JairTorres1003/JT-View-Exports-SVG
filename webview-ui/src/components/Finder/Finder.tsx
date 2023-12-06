@@ -1,6 +1,6 @@
 import { Box, IconButton, Typography } from '@mui/material'
 import { useTranslation } from 'react-i18next'
-import { type FunctionComponent } from 'react'
+import { type FC } from 'react'
 
 import useFinder from '../../hooks/useFinder'
 
@@ -8,7 +8,7 @@ import { type FinderProps } from '../../interfaces/Finder'
 import { IconClose, IconLupe } from '../../icons'
 import { BoxFinder, TextField } from './Finder.style'
 
-export const Finder: FunctionComponent<FinderProps> = (props) => {
+export const Finder: FC<FinderProps> = (props) => {
   const { isOpenPanel, refPortalButton } = props
   const { handleClearValue, setValue, value } = useFinder(props)
   const { t } = useTranslation()

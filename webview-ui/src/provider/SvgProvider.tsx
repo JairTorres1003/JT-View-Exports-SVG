@@ -1,4 +1,4 @@
-import { type FunctionComponent, type ReactNode, useContext, useReducer } from 'react'
+import { type FC, type ReactNode, useContext, useReducer } from 'react'
 
 import { SvgContext } from '../context'
 import { type SvgContextAction, type SvgContextState } from '../interfaces/SvgContext'
@@ -38,7 +38,7 @@ function svgReducer(state: SvgContextState, action: SvgContextAction): SvgContex
  * Provides an SVG context for managing SVG-related state and actions.
  * @returns The JSX element representing the SVG provider.
  */
-const SvgProvider: FunctionComponent<{ children: ReactNode }> = (props) => {
+const SvgProvider: FC<{ children: ReactNode }> = (props) => {
   const [state, dispatch] = useReducer(svgReducer, initialState)
 
   return <SvgContext.Provider value={{ state, dispatch }}>{props.children}</SvgContext.Provider>
