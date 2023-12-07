@@ -2,7 +2,7 @@ import * as t from '@babel/types'
 import { camelCase } from 'lodash'
 
 import { type Value } from '../../interfaces/exportParser'
-import { defaultProps } from './defaultProps'
+import { defaultProps } from '../../constants/defaultProps'
 
 /**
  * Performs a unary expression operation based on the provided operator and given value.
