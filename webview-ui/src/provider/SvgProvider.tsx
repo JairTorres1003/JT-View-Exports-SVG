@@ -1,37 +1,51 @@
-import { type FC, type ReactNode, useContext, useReducer } from 'react'
+import { type FC, type ReactNode, useContext, useReducer, type Reducer } from 'react'
 
 import { SvgContext } from '../context'
 import { type SvgContextAction, type SvgContextState } from '../interfaces/SvgContext'
 
 const initialState: SvgContextState = {
   selectedSvg: null,
+  selectedSvgName: '',
   selectedSvgPath: null,
+  selectedSvgLanguage: '',
   snackbar: { open: false, text: null },
 }
 
-const actionHandlers: Record<string, (state: SvgContextState, payload?: any) => SvgContextState> = {
-  SELECTED: (state, payload) => ({
-    ...state,
-    selectedSvg: payload?.item,
-    selectedSvgPath: payload?.path,
-  }),
-  SNACKBAR: (state, payload) => ({ ...state, snackbar: payload }),
-}
-
 /**
- * Reducer function for managing the state of an SVG context.
- * @param state - The current state of the SVG context.
- * @param action - An action object that describes the state change.
- * @returns The new state of the SVG context after applying the action.
+ * The reducer function for managing the SVG context's state.
+ * @param prevState The previous state of the SVG context.
+ * @param action The action to perform on the SVG context.
+ * @returns The new state of the SVG context.
  */
-function svgReducer(state: SvgContextState, action: SvgContextAction): SvgContextState {
-  const handler = actionHandlers[action.type]
+const svgReducer: Reducer<SvgContextState, SvgContextAction> = (prevState, action) => {
+  switch (action.type) {
+    case 'CLEAR_SELECTED':
+      return {
+        ...prevState,
+        selectedSvg: null,
+        selectedSvgName: '',
+        selectedSvgPath: null,
+        selectedSvgLanguage: '',
+      }
+    case 'SELECTED':
+      if (!action.payload) {
+        return { ...prevState }
+      }
 
-  if (handler) {
-    return handler(state, action.payload)
+      return {
+        ...prevState,
+        selectedSvg: action.payload.item,
+        selectedSvgName: action.payload.name,
+        selectedSvgPath: action.payload.path,
+        selectedSvgLanguage: action.payload.language,
+      }
+    case 'SNACKBAR':
+      return { ...prevState, snackbar: action.payload || { open: false, text: null } }
+    case 'UPDATE_PLAYGROUND':
+      return { ...prevState, selectedSvg: action.payload }
+    default:
+      return prevState
   }
-
-  return state
 }
 
 /**

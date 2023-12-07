@@ -49,7 +49,7 @@ const SvgComponentExport: FC<SvgExport> = (props) => {
               <Paper
                 elevation={3}
                 onClick={() => {
-                  handleSelected(item, file.absolutePath)
+                  handleSelected(item, file)
                 }}
               >
                 {item.isAnimated && <BoxAnimated />}

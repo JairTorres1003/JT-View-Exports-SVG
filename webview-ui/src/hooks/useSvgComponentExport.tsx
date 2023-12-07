@@ -1,6 +1,6 @@
 import { useState } from 'react'
 
-import { type SvgComponent } from '../interfaces/svgExports'
+import { type SvgFile, type SvgComponent } from '../interfaces/svgExports'
 import { useSvg } from '../provider/SvgProvider'
 
 const useSvgComponentExport = () => {
@@ -36,8 +36,12 @@ const useSvgComponentExport = () => {
    * @param {SvgComponent} item - The SVG component to be selected.
    * @returns {void}
    */
-  const handleSelected = (item: SvgComponent, path: string): void => {
-    dispatch({ type: 'SELECTED', payload: { item, path } })
+  const handleSelected = (item: SvgComponent, file: SvgFile): void => {
+    const name = item.name
+    const path = file.absolutePath
+    const language = file.language ?? 'plaintext'
+
+    dispatch({ type: 'SELECTED', payload: { item, name, path, language } })
   }
 
   return {
