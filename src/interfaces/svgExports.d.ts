@@ -96,6 +96,11 @@ export interface SvgFile {
    * The relative path of the SVG file.
    */
   relativePath: string
+  /**
+   * The language of the SVG file.
+   * @default 'plaintext'
+   */
+  language?: string
 }
 
 /**

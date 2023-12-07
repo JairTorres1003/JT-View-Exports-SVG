@@ -8,6 +8,7 @@ import { REGEX_FILE } from '../constants/regex'
 import { baseFileCache } from './svg/baseFileCache'
 import { extractSVGComponentExports } from './svg/extractSVGComponentExports'
 import { FileModifiedCache, getFileTimestamp } from './svg/fileModifiedCache'
+import { getFileLanguage } from './getFileLanguage'
 
 // Create an instance of FileModifiedCache for caching SvgExport objects
 const fileCache = new FileModifiedCache<SvgExport>()
@@ -63,23 +64,24 @@ export async function processFiles(
       arrayFiles.sort(sortingFunction)
 
       arrayFiles.forEach((file) => {
-        let filePath: string | null = null
+        let absolutePath: string | null = null
         if (items) {
           const f = file as Uri
-          filePath = f.scheme === 'file' ? f.fsPath : null
+          absolutePath = f.scheme === 'file' ? f.fsPath : null
         } else if (filesPath) {
-          filePath = file as string
+          absolutePath = file as string
         }
 
-        if (filePath) {
-          const extname = path.extname(filePath)
+        if (absolutePath) {
+          const extname = path.extname(absolutePath)
 
-          if (filePath && REGEX_FILE.test(extname)) {
-            const basename = path.basename(filePath)
-            const dirname = path.relative(workspaceFolder, path.dirname(filePath))
-            const relativePath: string = path.relative(workspaceFolder, filePath)
+          if (absolutePath && REGEX_FILE.test(extname)) {
+            const basename = path.basename(absolutePath)
+            const dirname = path.relative(workspaceFolder, path.dirname(absolutePath))
+            const relativePath: string = path.relative(workspaceFolder, absolutePath)
+            const language = getFileLanguage(basename)
 
-            selectedFiles.push({ absolutePath: filePath, relativePath, basename, dirname })
+            selectedFiles.push({ absolutePath, relativePath, basename, dirname, language })
           }
         }
       })

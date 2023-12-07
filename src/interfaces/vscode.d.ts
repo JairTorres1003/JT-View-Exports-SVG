@@ -31,3 +31,17 @@ interface ReceiveMessageData {
  * Represents a handler for commands.
  */
 type CommandHandler = Record<string, (message: ReceiveMessageData) => void>
+
+/**
+ * Represents a language file.
+ */
+export interface LanguageFile {
+  /**
+   * The name of the language.
+   */
+  name: string
+  /**
+   * The file extensions associated with the language.
+   */
+  extensions: string[]
+}
