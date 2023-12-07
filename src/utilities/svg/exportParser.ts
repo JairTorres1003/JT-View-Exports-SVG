@@ -13,7 +13,7 @@ import {
   type ExportTypeNode,
   type IsSVGComponent,
 } from '../../interfaces/exportParser'
-import { SVG_TAGS } from './svgTags'
+import { SVG_TAGS } from '../../constants/svgTags'
 import { cssStringToObject } from './cssStringToObject'
 import { getPropertyValues } from './getPropertyValues'
 import { propertyManager } from './propertyManager'
