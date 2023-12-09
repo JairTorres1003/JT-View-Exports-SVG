@@ -92,7 +92,7 @@ const useApp = () => {
    */
   const handleExtractIcons = (fileList: FileList | null) => {
     setIsLoading(true)
-    dispatch({ type: 'SELECTED', payload: null })
+    dispatch({ type: 'CLEAR_SELECTED' })
     let fullPaths = []
 
     if (fileList && fileList.length > 0) {

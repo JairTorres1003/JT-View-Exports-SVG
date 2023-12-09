@@ -1,6 +1,8 @@
-import { Box, Paper, Typography, styled } from '@mui/material'
+import { Box, type BoxProps, Paper, Typography, styled } from '@mui/material'
 
 import { type BoxViewerSvgProps } from '../../interfaces/styled.props'
+import { type MotionProps, motion } from 'framer-motion'
+import { type FC } from 'react'
 
 export const BoxPanelDeveloperTools = styled(Paper)(() => ({
   width: '100%',
@@ -37,7 +39,7 @@ export const BoxDeveloper = styled(Box)(() => ({
   paddingTop: '24px',
 }))
 
-export const BoxViewerSvg = styled(({ mode = false, ...props }: BoxViewerSvgProps) => (
+export const BoxViewerSvg = styled(({ mode = false, style = {}, ...props }: BoxViewerSvgProps) => (
   <Paper {...props} className={`mode-${mode ? 'dark' : 'light'} ${props.className}`} />
 ))(({ mode }) => ({
   width: '100%',
@@ -78,10 +80,24 @@ export const BoxTools = styled(Box)(() => ({
   color: 'var(--color-JT-view-export-svg-color)',
 }))
 
-export const BoxCode = styled(Box)(() => ({
+export const BoxCode: FC<BoxProps & MotionProps> = styled(
+  (props): JSX.Element => (
+    <Box
+      component={motion.div}
+      variants={{
+        open: { height: 'max-content', borderTop: 'inherit' },
+        closed: { height: 0, borderTop: 'none' },
+      }}
+      initial='closed'
+      transition={{ duration: 0.3, delay: 0.1 }}
+      {...props}
+    />
+  )
+)(() => ({
   backgroundColor: 'var(--color-JT-view-export-svg-bgColor)',
   borderTop: 'var(--color-JT-view-export-svg-border)',
   color: 'var(--color-JT-view-export-svg-color)',
-  padding: 10,
-  minHeight: 32,
+  overflow: 'hidden',
+  height: 'max-content',
+  '& > div': { padding: 10 },
 }))

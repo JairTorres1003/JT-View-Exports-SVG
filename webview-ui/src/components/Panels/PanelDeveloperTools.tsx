@@ -16,6 +16,7 @@ import {
   ContainerSvg,
   TitlePanel,
 } from './PanelDeveloperTools.style'
+import { Delay } from '../Delay/Delay'
 import { Playground } from '../Editor/Playground'
 import RenderSVG from '../SvgComponent/RenderSvg'
 import { SwitchDarkMode } from '../Switch'
@@ -66,7 +67,7 @@ const PanelDeveloperTools: FC<PanelDeveloperToolsProps> = (props) => {
                 <IconButton
                   size='small'
                   sx={{ color: 'inherit', p: '3px' }}
-                  title='view code'
+                  title={`${showPlayground ? 'Hide' : 'View'} code`}
                   onClick={() => {
                     setShowPlayground(!showPlayground)
                   }}
@@ -75,9 +76,11 @@ const PanelDeveloperTools: FC<PanelDeveloperToolsProps> = (props) => {
                 </IconButton>
               )}
             </BoxTools>
-            {selectedSvg && showPlayground && (
-              <BoxCode>
-                <Playground />
+            {selectedSvg && (
+              <BoxCode animate={showPlayground ? 'open' : 'closed'}>
+                <Delay show={showPlayground}>
+                  <Playground />
+                </Delay>
               </BoxCode>
             )}
           </BoxViewerSvg>
