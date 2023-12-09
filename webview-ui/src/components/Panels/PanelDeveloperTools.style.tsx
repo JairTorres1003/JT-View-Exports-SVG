@@ -48,7 +48,6 @@ export const BoxViewerSvg = styled(({ mode = false, style = {}, ...props }: BoxV
   backgroundColor: mode ? '#101418' : '#fff',
   display: 'flex',
   flexDirection: 'column',
-  overflow: 'hidden',
   border: `1px solid #${mode ? 'dae0e714' : 'E5EAF2'}`,
   color: `#${mode ? 'fff' : '000'}`,
   svg: { aspectRatio: '1 / 1' },
@@ -85,8 +84,8 @@ export const BoxCode: FC<BoxProps & MotionProps> = styled(
     <Box
       component={motion.div}
       variants={{
-        open: { height: 'max-content', borderTop: 'inherit' },
-        closed: { height: 0, borderTop: 'none' },
+        open: { height: 100, borderTop: 'inherit', overflow: 'visible' },
+        closed: { height: 0, borderTop: 'none', overflow: 'hidden' },
       }}
       initial='closed'
       transition={{ duration: 0.3, delay: 0.1 }}
@@ -97,7 +96,6 @@ export const BoxCode: FC<BoxProps & MotionProps> = styled(
   backgroundColor: 'var(--color-JT-view-export-svg-bgColor)',
   borderTop: 'var(--color-JT-view-export-svg-border)',
   color: 'var(--color-JT-view-export-svg-color)',
-  overflow: 'hidden',
   height: 'max-content',
-  '& > div': { padding: 10 },
+  '& > div': { padding: 10, height: '100%' },
 }))
