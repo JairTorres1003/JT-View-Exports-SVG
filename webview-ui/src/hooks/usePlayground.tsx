@@ -1,10 +1,22 @@
 import { useState, useEffect } from 'react'
-import { type Monaco, type EditorProps } from '@monaco-editor/react'
+import { type Monaco, type EditorProps, loader } from '@monaco-editor/react'
+import * as monaco from 'monaco-editor'
 
 import { useSvg } from '../provider/SvgProvider'
 
+loader.config({ monaco })
+
+loader.init().catch((error) => {
+  console.error('An error occurred during initialization of Monaco: ', error)
+})
+
+/**
+ * Hook to handle the playground.
+ *
+ * @returns The playground hook.
+ */
 const usePlayground = () => {
-  const [completionDisposable, setCompletionDisposable] = useState<any>(null)
+  const [completionDisposable, setCompletionDisposable] = useState<monaco.IDisposable | null>(null)
   const {
     state: { selectedSvgLanguage, selectedSvg },
   } = useSvg()
@@ -13,7 +25,28 @@ const usePlayground = () => {
     automaticLayout: true,
     minimap: { enabled: false },
     lineNumbers: 'off',
-    language: `JT-${selectedSvgLanguage}`,
+    language: selectedSvgLanguage,
+    fontFamily: 'monospace',
+  }
+
+  /**
+   * Returns the default insert text for a given value.
+   *
+   * @param value - The value to generate the insert text for.
+   * @returns The default insert text as a string.
+   */
+  const defaultInsertText = (value: any): string => {
+    const type = typeof value
+
+    switch (type) {
+      case 'string':
+        return `"${value}"`
+      case 'object':
+        // format object in multiline to prevent monaco from adding a semicolon
+        return JSON.stringify(value, null, 2).replace(/"([^"]+)":/g, '$1:')
+      default:
+        return value.toString()
+    }
   }
 
   /**
@@ -24,18 +57,17 @@ const usePlayground = () => {
    */
   function initializeEditor(monaco: Monaco) {
     const { languages } = monaco
-    const customLangId = `JT-${selectedSvgLanguage}`
     const properties = selectedSvg?.params ?? {}
 
     const existingLangId = languages.getEncodedLanguageId(selectedSvgLanguage)
     const langDef = languages.getLanguages()[existingLangId - 1]
-    const languageExtensionPoint = { ...langDef, id: customLangId }
+    const languageExtensionPoint = { ...langDef, id: selectedSvgLanguage }
 
     // Register a new language
     languages.register(languageExtensionPoint)
 
     // Register a tokens provider for the language
-    const register = languages.registerCompletionItemProvider(`JT-${selectedSvgLanguage}`, {
+    const register = languages.registerCompletionItemProvider(selectedSvgLanguage, {
       provideCompletionItems: (model, position) => {
         const word = model.getWordUntilPosition(position)
         const range = {
@@ -47,8 +79,8 @@ const usePlayground = () => {
         const suggestions = Object.keys(properties).map((key) => ({
           label: key,
           kind: languages.CompletionItemKind.Snippet,
-          documentation: `@default: ${properties[key]}`,
-          insertText: `${key}={$1}`,
+          documentation: `@default: ${defaultInsertText(properties[key])}`,
+          insertText: `${key}=`,
           range,
         }))
 
