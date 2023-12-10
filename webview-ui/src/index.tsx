@@ -5,6 +5,7 @@ import App from './App'
 import SvgProvider from './provider/SvgProvider'
 import './i18n'
 import './styles/reset.css'
+import './userWorker'
 
 const container = document.getElementById('root')
 const root = createRoot(container!)
