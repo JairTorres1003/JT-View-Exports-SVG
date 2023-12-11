@@ -2,7 +2,11 @@ import { useState, useEffect } from 'react'
 import { type Monaco, type EditorProps, loader } from '@monaco-editor/react'
 import * as monaco from 'monaco-editor'
 
+import useDebounce from './useDebounce'
+
+import { type CustomSvgComponentData } from '../interfaces/svgExports'
 import { useSvg } from '../provider/SvgProvider'
+import { vscode } from '../utilities/vscode'
 
 loader.config({ monaco })
 
@@ -16,10 +20,23 @@ loader.init().catch((error) => {
  * @returns The playground hook.
  */
 const usePlayground = () => {
-  const [completionDisposable, setCompletionDisposable] = useState<monaco.IDisposable | null>(null)
   const {
-    state: { selectedSvgLanguage, selectedSvg },
+    state: { selectedSvgLanguage, selectedSvgName, selectedSvgPath, selectedSvg },
+    dispatch,
   } = useSvg()
+
+  const DEFAULT_SVG: CustomSvgComponentData = {
+    name: selectedSvgName,
+    path: selectedSvgPath ?? '',
+    typeExport: selectedSvg?.typeExport ?? 'variable',
+    value: `<${selectedSvgName} />`,
+  }
+
+  const [completionDisposable, setCompletionDisposable] = useState<monaco.IDisposable | null>(null)
+  const [editorValue, setEditorValue] = useState<string>(DEFAULT_SVG.value)
+  const [dataComponent, setDataComponent] = useState<CustomSvgComponentData>(DEFAULT_SVG)
+
+  const debounce = useDebounce(dataComponent, 600)
 
   const OPTIONS: EditorProps['options'] = {
     automaticLayout: true,
@@ -91,13 +108,79 @@ const usePlayground = () => {
     return register
   }
 
+  /**
+   * Handles the change event of the editor.
+   * @param value - The new value of the editor.
+   */
+  const handleEditorChange = (value?: string) => {
+    setEditorValue(value ?? '')
+    setDataComponent({
+      name: selectedSvgName,
+      path: selectedSvgPath ?? '',
+      typeExport: selectedSvg?.typeExport ?? 'variable',
+      value: value ?? '',
+    })
+  }
+
+  /**
+   * Handles the change event for the SVG data.
+   * @param data - The SVG data as a string.
+   */
+  const handleChangeSvg = (data: string) => {
+    const response = JSON.parse(data) || {}
+
+    if (response && Object.keys(response).length > 0) {
+      if (response?.type === 'error') {
+        dispatch({
+          type: 'SNACKBAR_PLAYGROUND',
+          payload: {
+            open: true,
+            text: response?.message ?? 'Error on playground',
+            severity: 'error',
+          },
+        })
+        return
+      }
+
+      dispatch({ type: 'UPDATE_PLAYGROUND', payload: response })
+    }
+  }
+
   useEffect(() => {
     return () => {
       completionDisposable?.dispose()
     }
   }, [completionDisposable])
 
+  useEffect(() => {
+    if (selectedSvgLanguage) {
+      completionDisposable?.dispose()
+      setCompletionDisposable(initializeEditor(monaco))
+    }
+  }, [selectedSvgLanguage])
+
+  useEffect(() => {
+    if (selectedSvgName) {
+      setEditorValue(DEFAULT_SVG.value)
+    }
+  }, [selectedSvgName])
+
+  useEffect(() => {
+    // Request the extension
+    vscode.postMessage('playgroundSvgComponents', JSON.stringify(debounce))
+
+    // Listen for messages
+    vscode.onMessage('customSvgComponent', handleChangeSvg)
+
+    // Cleanup function to remove the message handler when the component unmounts or dependencies change
+    return () => {
+      vscode.removeMessageHandler('customSvgComponent', handleChangeSvg)
+    }
+  }, [debounce])
+
   return {
+    editorValue,
+    handleEditorChange,
     initializeEditor,
     OPTIONS,
     setCompletionDisposable,
