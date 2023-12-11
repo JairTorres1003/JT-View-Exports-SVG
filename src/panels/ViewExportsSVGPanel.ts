@@ -251,19 +251,16 @@ export class ViewExportsSVGPanel {
    * @param message The received message data.
    */
   private handlePlayground(message: ReceiveMessageData): void {
-    const svgComponent = JSON.parse(message.data)
-    customSvgComponent(svgComponent)
+    const data = JSON.parse(message.data)
+    customSvgComponent(data)
       .then((newSvgComponent) => {
-        const result = newSvgComponent || svgComponent
+        const result = newSvgComponent
         this._postMessage('customSvgComponent', JSON.stringify(result))
       })
       .catch((error) => {
         console.error('Failed to extract icons from playground:', error)
-        this._postMessage('customSvgComponent', {
-          name: 'Error',
-          message: error.message,
-          type: 'error',
-        })
+        const result = { name: 'Error', message: error.message, type: 'error' }
+        this._postMessage('customSvgComponent', JSON.stringify(result))
       })
   }
 
