@@ -1,7 +1,15 @@
 import { useState, useEffect } from 'react'
 
-const useDebounce = (value: string, delay: number | undefined) => {
-  const [debouncedValue, setDebouncedValue] = useState<string>(value)
+/**
+ * Custom hook that debounces a value.
+ *
+ * @template T - The type of the value.
+ * @param {T} value - The value to debounce.
+ * @param {number | undefined} delay - The delay in milliseconds.
+ * @returns {T} - The debounced value.
+ */
+export default function useDebounce<T>(value: T, delay: number | undefined): T {
+  const [debouncedValue, setDebouncedValue] = useState<T>(value)
 
   useEffect(() => {
     // Use a timer to delay the update of the value
@@ -17,5 +25,3 @@ const useDebounce = (value: string, delay: number | undefined) => {
 
   return debouncedValue
 }
-
-export default useDebounce

@@ -1,5 +1,5 @@
 import * as t from '@babel/types'
-import { camelCase, isArray } from 'lodash'
+import { camelCase } from 'lodash'
 
 import {
   type HasInvalidChild,
@@ -14,47 +14,12 @@ import {
   type IsSVGComponent,
 } from '../../interfaces/exportParser'
 import { SVG_TAGS } from '../../constants/svgTags'
-import { cssStringToObject } from './cssStringToObject'
 import { getPropertyValues } from './getPropertyValues'
 import { propertyManager } from './propertyManager'
+import { setProperties } from './setProperties'
 
 // Declaration properties
 const properties = propertyManager
-
-/**
- * Convert JSX element properties into a properties object.
- * @param {t.JSXOpeningElement["attributes"]} attributes - The properties of the JSX element.
- * @returns {{ [key: string]: any }} An object containing the properties.
- */
-function setProperties(attributes: t.JSXOpeningElement['attributes']): Record<string, any> {
-  let props: Record<string, any> = {}
-  const propsValue = properties.get()
-
-  // Iterate over the attributes of the JSX element
-  attributes.forEach((attr) => {
-    if (t.isJSXAttribute(attr)) {
-      const { name, value } = attr
-
-      // Store the attribute value in the props object using camelCase format for the attribute name
-      const propKey = camelCase(((name.name || '') as string).toString())
-      props[propKey] = getPropertyValues(value, propsValue)
-    } else if (t.isJSXSpreadAttribute(attr)) {
-      props = { ...props, ...getPropertyValues(attr.argument, propsValue) }
-    }
-  })
-
-  // Check if the "style" property exists in props
-  if ('style' in props) {
-    if (typeof props.style === 'string') {
-      // Convert the "style" string to an object
-      props.style = cssStringToObject(props.style)
-    } else if (!props.style || typeof props.style !== 'object' || isArray(props.style)) {
-      props.style = {}
-    }
-  }
-
-  return props
-}
 
 /**
  * Recursively extracts attributes from JSXElement children.
@@ -70,7 +35,7 @@ function getChildAttributes(children: t.JSXElement['children']): ChildAttributes
     // Check if the child is a JSXElement
     if (t.isJSXElement(child)) {
       const openingElement = child.openingElement
-      const props = setProperties(openingElement.attributes)
+      const props = setProperties(openingElement.attributes, properties.get())
 
       // Recursively extract child components
       const childComponents = getChildAttributes(child.children).children
@@ -164,7 +129,7 @@ function isSVGComponent(argument: t.JSXElement): IsSVGComponent {
 
   // Check if the node has an opening element
   if (openingElement) {
-    const svgProps = setProperties(openingElement.attributes)
+    const svgProps = setProperties(openingElement.attributes, properties.get())
 
     // Check if the attribute is 'xmlns' and its value is 'http://www.w3.org/2000/svg'
     if (svgProps.xmlns === 'http://www.w3.org/2000/svg') {

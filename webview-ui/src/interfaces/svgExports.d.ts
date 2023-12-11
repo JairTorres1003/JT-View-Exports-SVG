@@ -132,3 +132,23 @@ export interface HasInvalidChild {
    */
   location: Location | undefined
 }
+
+interface CustomSvgComponentData {
+  /**
+   * The name of the SVG component.
+   */
+  name: string
+  /**
+   * The path of the SVG component.
+   */
+  path: string
+  /**
+   * The type of export for the SVG component.
+   * It can be either "function" or "variable".
+   */
+  typeExport: SvgComponent['typeExport']
+  /**
+   * The value of the SVG component.
+   */
+  value: string
+}

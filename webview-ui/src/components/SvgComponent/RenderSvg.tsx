@@ -46,7 +46,13 @@ const RenderSVG: FC<SvgComponentDetails & { fullSize?: boolean }> = (props) => {
     return (
       <Component
         {...componentProps}
-        {...(isSvg ? { width: '100%', height: '100%', style: { transform: 'scale(1)' } } : {})}
+        {...(isSvg
+          ? {
+              width: '100%',
+              height: '100%',
+              style: { transform: 'scale(1)', ...(props.props.style ?? {}) },
+            }
+          : {})}
         ref={isSvg ? svgRef : null}
       >
         {children.map((child, index) => (

@@ -24,6 +24,14 @@ export interface SvgContextState {
    * Snackbar information, including whether it's open and its text.
    */
   snackbar: { open: boolean; text: string | null }
+  /**
+   * Snackbar information for the playground, including whether it's open and its text.
+   */
+  snackbarPlayground: {
+    open: boolean
+    text: string | null
+    severity?: 'success' | 'error' | 'warning' | 'info'
+  }
 }
 
 type SelectedActionPayload = {
@@ -52,4 +60,5 @@ export type SvgContextAction =
   | { type: 'CLEAR_SELECTED' }
   | { type: 'SELECTED'; payload: SelectedActionPayload }
   | { type: 'SNACKBAR'; payload: SvgContextState['snackbar'] }
+  | { type: 'SNACKBAR_PLAYGROUND'; payload: SvgContextState['snackbarPlayground'] }
   | { type: 'UPDATE_PLAYGROUND'; payload: SvgContextState['selectedSvg'] }

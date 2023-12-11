@@ -62,6 +62,20 @@
       ]
     }
   },
+  "jest": {
+    "testEnvironment": "node",
+    "preset": "ts-jest",
+    "testMatch": [
+      "**/test/**/*.test.ts"
+    ],
+    "coveragePathIgnorePatterns": [
+      "/node_modules/",
+      "/webview-ui/"
+    ],
+    "collectCoverageFrom": [
+      "src/**/*.ts"
+    ]
+  },
   "scripts": {
     "install:all": "npm install && cd webview-ui && npm install",
     "start:webview": "cd webview-ui && npm run dev",
@@ -77,12 +91,14 @@
     "compile": "tsc -p ./",
     "watch": "tsc -watch -p ./",
     "pretest": "npm run compile && npm run lint",
+    "test": "jest --coverage",
     "vscode:prepublish": "npm run compile"
   },
   "devDependencies": {
     "@babel/types": "^7.23.5",
     "@types/babel__traverse": "^7.20.4",
     "@types/glob": "^8.1.0",
+    "@types/jest": "^29.5.11",
     "@types/lodash": "^4.14.202",
     "@types/node": "^20.10.4",
     "@types/vscode": "^1.85.0",
@@ -96,7 +112,9 @@
     "eslint-plugin-prettier": "^5.0.1",
     "eslint-plugin-promise": "^6.1.1",
     "glob": "^10.3.10",
+    "jest": "^29.7.0",
     "prettier": "^3.1.0",
+    "ts-jest": "^29.1.1",
     "typescript": "^5.3.3"
   },
   "dependencies": {

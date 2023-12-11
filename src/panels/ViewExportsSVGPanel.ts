@@ -146,11 +146,24 @@ export class ViewExportsSVGPanel {
   private _getWebviewContent(webview: Webview, extensionUri: Uri) {
     const i18n = getTranslations()
     const dirs = ['webview-ui', 'build', 'assets']
+
     // Get the URIs for the required assets
     const icoUri = getUri(webview, extensionUri, [...dirs, 'favicon.ico']).toString()
     const stylesUri = getUri(webview, extensionUri, [...dirs, 'index.css']).toString()
     const scriptUri = getUri(webview, extensionUri, [...dirs, 'index.js']).toString()
 
+    // Get the URI to monaco-editor
+    const jsonWorkerUri = getUri(webview, extensionUri, [...dirs, 'json.worker.js']).toString()
+    const cssWorkerUri = getUri(webview, extensionUri, [...dirs, 'css.worker.js']).toString()
+    const htmlWorkerUri = getUri(webview, extensionUri, [...dirs, 'html.worker.js']).toString()
+    const tsWorkerUri = getUri(webview, extensionUri, [...dirs, 'ts.worker.js']).toString()
+    const editorWorkerUri = getUri(webview, extensionUri, [...dirs, 'editor.worker.js']).toString()
+    const javascriptUri = getUri(webview, extensionUri, [...dirs, 'javascript.js']).toString()
+    const typescriptUri = getUri(webview, extensionUri, [...dirs, 'typescript.js']).toString()
+    const tsModeUri = getUri(webview, extensionUri, [...dirs, 'tsMode.js']).toString()
+    const fontUri = getUri(webview, extensionUri, [...dirs, 'codicon.ttf']).toString()
+
+    console.log('fontUri', fontUri)
     // Generate a nonce for script elements
     const nonce = getNonce()
 
@@ -162,12 +175,26 @@ export class ViewExportsSVGPanel {
           <meta charset="UTF-8" />
           <link rel="icon" type="ico" href="${icoUri}" />
           <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-          <meta http-equiv="Content-Security-Policy" content="default-src 'none'; style-src 'unsafe-inline' ${webview.cspSource}; script-src 'nonce-${nonce}';">
+          <meta http-equiv="Content-Security-Policy" content="default-src 'none'; style-src 'unsafe-inline' ${webview.cspSource}; script-src 'nonce-${nonce}'; worker-src ${webview.cspSource}; font-src 'self' vscode-resource.vscode-cdn.net;">
           <link rel="stylesheet" type="text/css" href="${stylesUri}">
+          <link rel="stylesheet" type="font/ttf" href="${fontUri}">
           <title>${i18n.panelTitle}</title>
         </head>
         <body>
           <div id="root"></div>
+          <script type="module" nonce="${nonce}">
+            self.MonacoEnvironment = {
+              getWorkerUrl: function (moduleId, label) {
+                if (label === 'json') return '${jsonWorkerUri}';
+                if (label === 'css' || label === 'scss' || label === 'less') return '${cssWorkerUri}';
+                if (label === 'html' || label === 'handlebars' || label === 'razor') return '${htmlWorkerUri}';
+                if (label === 'typescript' || label === 'javascript') return '${tsWorkerUri}';
+                return '${editorWorkerUri}';
+            }
+          </script>
+          <script type="module" nonce="${nonce}" src="${javascriptUri}"></script>
+          <script type="module" nonce="${nonce}" src="${typescriptUri}"></script>
+          <script type="module" nonce="${nonce}" src="${tsModeUri}"></script>
           <script type="module" nonce="${nonce}" src="${scriptUri}"></script>
         </body>
       </html>
@@ -224,19 +251,16 @@ export class ViewExportsSVGPanel {
    * @param message The received message data.
    */
   private handlePlayground(message: ReceiveMessageData): void {
-    const svgComponent = JSON.parse(message.data)
-    customSvgComponent(svgComponent)
+    const data = JSON.parse(message.data)
+    customSvgComponent(data)
       .then((newSvgComponent) => {
-        const result = newSvgComponent || svgComponent
+        const result = newSvgComponent
         this._postMessage('customSvgComponent', JSON.stringify(result))
       })
       .catch((error) => {
         console.error('Failed to extract icons from playground:', error)
-        this._postMessage('customSvgComponent', {
-          name: 'Error',
-          message: error.message,
-          type: 'error',
-        })
+        const result = { name: 'Error', message: error.message, type: 'error' }
+        this._postMessage('customSvgComponent', JSON.stringify(result))
       })
   }
 
