@@ -1,40 +1,24 @@
 /* eslint-disable @typescript-eslint/naming-convention */
-import * as fs from 'fs'
-import * as babelParser from '@babel/parser'
 import traverse from '@babel/traverse'
 import * as t from '@babel/types'
 
 import { type SvgComponent, type SvgExport } from '../../interfaces/svgExports'
+import { parseFileContent } from '../babelParser'
 import { extractSvgComponentFromNode } from './exportParser'
-
-/**
- * Parse the content of a file and return the AST (Abstract Syntax Tree).
- * @param {string} filePath - The path to the file.
- * @returns {t.Node} The AST representing the file content.
- */
-function parseFileContent(filePath: string): t.Node {
-  // Read the file content synchronously
-  const fileContent = fs.readFileSync(filePath, 'utf8')
-
-  // Parse the file content using Babel parser
-  return babelParser.parse(fileContent, {
-    sourceType: 'module',
-    plugins: ['jsx', 'typescript'],
-  })
-}
 
 /**
  * Extract SVG component exports from a file.
  * @param {string} filePath - The file path of the TypeScript/JavaScript file to parse.
  * @returns {Promise<SvgExport>} A promise that resolves to an object containing the extracted SVG component exports.
  */
-export async function extractSVGComponentExports(
-  filePath: string
-): Promise<{ result: SvgExport; base: Record<string, any> }> {
+export async function extractSVGComponentExports(filePath: string): Promise<{
+  result: SvgExport
+  base: Record<string, { declaration: any; params: Record<string, any> }>
+}> {
   try {
     // Parse the file content into an AST (Abstract Syntax Tree)
     const ast = parseFileContent(filePath)
-    const baseExports: Record<string, any> = {}
+    const baseExports: Record<string, { declaration: any; params: Record<string, any> }> = {}
     const exports: SvgComponent[] = []
     const notExports: SvgComponent[] = []
     const identifiers = new Set<string>()
@@ -65,7 +49,7 @@ export async function extractSVGComponentExports(
                   if (isExported || identifiers.has(result.name)) {
                     lengthExports++
                     exports.push(result)
-                    baseExports[result.name] = declaration
+                    baseExports[result.name] = { declaration, params: result.params }
                   } else {
                     // Function declaration 'function functionName() {}'
                     notExports.push(result)
@@ -85,7 +69,7 @@ export async function extractSVGComponentExports(
                       if (isExported || identifiers.has(result.name)) {
                         lengthExports++
                         exports.push(result)
-                        baseExports[result.name] = d
+                        baseExports[result.name] = { declaration: d, params: result.params }
                       } else {
                         // Variable declaration 'const variableName = value;'
                         notExports.push(result)
