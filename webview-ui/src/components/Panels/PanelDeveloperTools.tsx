@@ -20,6 +20,7 @@ import { Delay } from '../Delay/Delay'
 import { Playground } from '../Editor/Playground'
 import RenderSVG from '../SvgComponent/RenderSvg'
 import { SwitchDarkMode } from '../Switch'
+import { Snackbar } from '../Snackbar/SnackbarPlayground'
 
 const PanelDeveloperTools: FC<PanelDeveloperToolsProps> = (props) => {
   const { isOpenPanel, handleOpenPanel, refPortalButton } = props
@@ -48,10 +49,11 @@ const PanelDeveloperTools: FC<PanelDeveloperToolsProps> = (props) => {
           {t('DeveloperTools')}
         </TitlePanel>
       </div>
-      <Divider sx={{ mt: '-8px' }} />
+      <Divider sx={{ mt: '-8px', mb: '24px' }} />
       {isOpenPanel && (
         <BoxDeveloper>
           <BoxViewerSvg elevation={3} mode={checkedMode}>
+            <Snackbar />
             <ContainerSvg>
               {!selectedSvg ? (
                 <EmptySelectionIcon size='100%' className='empty-selection' />

@@ -36,7 +36,7 @@ export const BoxDeveloper = styled(Box)(() => ({
   flexDirection: 'column',
   width: '100%',
   height: '100%',
-  paddingTop: '24px',
+  overflowY: 'auto',
 }))
 
 export const BoxViewerSvg = styled(({ mode = false, style = {}, ...props }: BoxViewerSvgProps) => (
