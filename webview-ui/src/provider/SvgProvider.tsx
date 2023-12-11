@@ -9,6 +9,7 @@ const initialState: SvgContextState = {
   selectedSvgPath: null,
   selectedSvgLanguage: '',
   snackbar: { open: false, text: null },
+  snackbarPlayground: { open: false, text: null, severity: 'success' },
 }
 
 /**
@@ -41,6 +42,14 @@ const svgReducer: Reducer<SvgContextState, SvgContextAction> = (prevState, actio
       }
     case 'SNACKBAR':
       return { ...prevState, snackbar: action.payload || { open: false, text: null } }
+    case 'SNACKBAR_PLAYGROUND':
+      return {
+        ...prevState,
+        snackbarPlayground: {
+          ...action.payload,
+          severity: action.payload.severity ?? 'success',
+        } || { open: false, text: null, severity: 'success' },
+      }
     case 'UPDATE_PLAYGROUND':
       return { ...prevState, selectedSvg: action.payload }
     default:
