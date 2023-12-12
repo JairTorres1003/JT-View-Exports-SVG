@@ -5,15 +5,18 @@ import { type MotionProps, motion } from 'framer-motion'
 import { type FC } from 'react'
 
 export const BoxPanelDeveloperTools = styled(Paper)(() => ({
+  '--fixed-height-JT-view-export-svg': '56px',
+  '--py-JT-view-export-svg': '2rem',
   width: '100%',
   display: 'flex',
   flexDirection: 'column',
   minWidth: 0,
   borderRadius: 0,
-  padding: '2rem 1.5rem',
+  padding: 'var(--py-JT-view-export-svg) 1.5rem',
   background: 'rgba(0 0 0 / 10%)',
   '& .PaperBox-title': {
-    minHeight: 56,
+    minHeight: 'var(--fixed-height-JT-view-export-svg)',
+    height: 'var(--fixed-height-JT-view-export-svg)',
     display: 'flex',
     justifyContent: 'flex-start',
     alignItems: 'center',
@@ -36,7 +39,8 @@ export const BoxDeveloper = styled(Box)(() => ({
   flexDirection: 'column',
   width: '100%',
   height: '100%',
-  overflowY: 'auto',
+  maxHeight:
+    'calc(100% - var(--fixed-height-JT-view-export-svg) - var(--py-JT-view-export-svg) / 2)',
 }))
 
 export const BoxViewerSvg = styled(({ mode = false, style = {}, ...props }: BoxViewerSvgProps) => (
@@ -44,6 +48,7 @@ export const BoxViewerSvg = styled(({ mode = false, style = {}, ...props }: BoxV
 ))(({ mode }) => ({
   width: '100%',
   height: 'max-content',
+  maxHeight: '100%',
   borderRadius: 10,
   backgroundColor: mode ? '#101418' : '#fff',
   display: 'flex',
@@ -57,14 +62,20 @@ export const BoxViewerSvg = styled(({ mode = false, style = {}, ...props }: BoxV
 }))
 
 export const ContainerSvg = styled(Box)(() => ({
-  width: '100%',
-  height: 'auto',
-  display: 'flex',
-  justifyContent: 'center',
-  alignItems: 'center',
-  padding: '14px',
+  maxHeight: '100%',
+  overflow: 'hidden',
   aspectRatio: '1 / 1',
-  '& svg.empty-selection': { filter: 'grayscale(0.8)' },
+  '& .container-svg-card': {
+    width: '100%',
+    height: '100%',
+    maxHeight: '100%',
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'center',
+    padding: '14px',
+    aspectRatio: '1 / 1',
+    '& svg.empty-selection': { filter: 'grayscale(0.8)' },
+  },
 }))
 
 export const BoxTools = styled(Box)(() => ({

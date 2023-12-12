@@ -55,13 +55,15 @@ const PanelDeveloperTools: FC<PanelDeveloperToolsProps> = (props) => {
           <BoxViewerSvg elevation={3} mode={checkedMode}>
             <Snackbar />
             <ContainerSvg>
-              {!selectedSvg ? (
-                <EmptySelectionIcon size='100%' className='empty-selection' />
-              ) : selectedSvg.component ? (
-                <RenderSVG {...selectedSvg.component} fullSize />
-              ) : (
-                <IconFailExport />
-              )}
+              <div className='container-svg-card'>
+                {!selectedSvg ? (
+                  <EmptySelectionIcon size='100%' className='empty-selection' />
+                ) : selectedSvg.component ? (
+                  <RenderSVG {...selectedSvg.component} fullSize />
+                ) : (
+                  <IconFailExport />
+                )}
+              </div>
             </ContainerSvg>
             <BoxTools>
               <SwitchDarkMode onChange={onChangeMode} checked={checkedMode} />
