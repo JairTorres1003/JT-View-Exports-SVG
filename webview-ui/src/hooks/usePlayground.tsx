@@ -7,6 +7,7 @@ import useDebounce from './useDebounce'
 import { type CustomSvgComponentData } from '../interfaces/svgExports'
 import { useSvg } from '../provider/SvgProvider'
 import { vscode } from '../utilities/vscode'
+import { ATTR_TAG_REGEX, JSON_REGEX, TAG_REGEX } from '../constants/regex'
 
 loader.config({ monaco })
 
@@ -57,10 +58,10 @@ const usePlayground = () => {
 
     switch (type) {
       case 'string':
-        return `"${value}"`
+        return `'${value}'`
       case 'object':
         // format object in multiline to prevent monaco from adding a semicolon
-        return JSON.stringify(value, null, 2).replace(/"([^"]+)":/g, '$1:')
+        return JSON.stringify(value, null, 2).replace(JSON_REGEX, '$1:')
       default:
         return value.toString()
     }
@@ -86,18 +87,37 @@ const usePlayground = () => {
     // Register a tokens provider for the language
     const register = languages.registerCompletionItemProvider(selectedSvgLanguage, {
       provideCompletionItems: (model, position) => {
+        const { column, lineNumber } = position
+        // find out if we are completing a property in a tag '<tag |'
+        const textUntilPosition = model.getValueInRange({
+          startLineNumber: lineNumber,
+          endLineNumber: 1,
+          startColumn: 1,
+          endColumn: column,
+        })
+        const match = textUntilPosition.match(TAG_REGEX)
+
+        if (!match) {
+          return { suggestions: [] }
+        }
+
         const word = model.getWordUntilPosition(position)
+        const usedProperties: string[] = textUntilPosition.match(ATTR_TAG_REGEX) || []
+        const remainingProperties = Object.keys(properties).filter(
+          (key) => !usedProperties.join(' ').includes(key)
+        )
+
         const range = {
-          startLineNumber: position.lineNumber,
-          endLineNumber: position.lineNumber,
+          startLineNumber: lineNumber,
+          endLineNumber: lineNumber,
           startColumn: word.startColumn,
           endColumn: word.endColumn,
         }
-        const suggestions = Object.keys(properties).map((key) => ({
+        const suggestions = remainingProperties.map((key) => ({
           label: key,
-          kind: languages.CompletionItemKind.Snippet,
-          documentation: `@default: ${defaultInsertText(properties[key])}`,
-          insertText: `${key}=`,
+          kind: languages.CompletionItemKind.Property,
+          documentation: `(property) ${key}\n@default:\n${defaultInsertText(properties[key])}`,
+          insertText: key,
           range,
         }))
 
@@ -153,7 +173,7 @@ const usePlayground = () => {
   }, [completionDisposable])
 
   useEffect(() => {
-    if (selectedSvgLanguage) {
+    if (selectedSvgLanguage && completionDisposable) {
       completionDisposable?.dispose()
       setCompletionDisposable(initializeEditor(monaco))
     }
@@ -162,6 +182,11 @@ const usePlayground = () => {
   useEffect(() => {
     if (selectedSvgName) {
       setEditorValue(DEFAULT_SVG.value)
+
+      if (completionDisposable) {
+        completionDisposable?.dispose()
+        setCompletionDisposable(initializeEditor(monaco))
+      }
     }
   }, [selectedSvgName])
 
