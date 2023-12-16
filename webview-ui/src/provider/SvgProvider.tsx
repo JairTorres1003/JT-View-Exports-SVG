@@ -48,7 +48,7 @@ const svgReducer: Reducer<SvgContextState, SvgContextAction> = (prevState, actio
         snackbarPlayground: {
           ...action.payload,
           severity: action.payload.severity ?? 'success',
-        } || { open: false, text: null, severity: 'success' },
+        },
       }
     case 'UPDATE_PLAYGROUND':
       return { ...prevState, selectedSvg: action.payload }

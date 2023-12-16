@@ -15,7 +15,14 @@ import { setProperties } from './setProperties'
  * @param params - The parameters to set as attributes for the component.
  * @returns An object containing the extracted component name and its attributes.
  */
-export async function extractComponent(value: string, params: Record<string, any>) {
+export async function extractComponent(
+  value: string,
+  params: Record<string, any>
+): Promise<{
+  name: string
+  attributes: Record<string, any>
+  error?: string
+}> {
   try {
     const ast = parserContent(value)
     let name: string = ''

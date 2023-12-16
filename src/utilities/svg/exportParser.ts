@@ -14,6 +14,7 @@ import {
   type IsSVGComponent,
 } from '../../interfaces/exportParser'
 import { SVG_TAGS } from '../../constants/svgTags'
+import { REST_PROPS_KEY } from '../../constants/misc'
 import { getPropertyValues } from './getPropertyValues'
 import { propertyManager } from './propertyManager'
 import { setProperties } from './setProperties'
@@ -211,16 +212,16 @@ function getNodeParams(params: Array<t.Identifier | t.Pattern | t.RestElement>) 
   properties.clean()
   // Check if there are parameters with object patterns
   if (params && params.length > 0) {
-    params.forEach((param: any) => {
+    params.forEach((param) => {
       if (t.isObjectPattern(param) && param.properties) {
         param.properties.forEach((property) => {
-          if (t.isObjectProperty(property)) {
+          // Add the property to the properties object
+          if (t.isObjectProperty(property) && t.isIdentifier(property.key)) {
             const { key, value } = property
 
-            if (t.isIdentifier(key)) {
-              // Add the property to the properties object
-              properties.set(key.name, getPropertyValues(value, {}))
-            }
+            properties.set(key.name, getPropertyValues(value, {}))
+          } else if (t.isRestElement(property) && t.isIdentifier(property.argument)) {
+            properties.set(REST_PROPS_KEY, { [property.argument.name]: {} })
           }
         })
       }

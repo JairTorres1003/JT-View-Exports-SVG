@@ -1,3 +1,5 @@
+import { REST_PROPS_KEY } from '../../constants/misc'
+
 class PropertyManager {
   private properties: Record<string, any> = {}
 
@@ -12,6 +14,14 @@ class PropertyManager {
     } else {
       return this.properties
     }
+  }
+
+  /**
+   * Retrieves the rest properties from the property manager.
+   * @returns A record containing the rest properties.
+   */
+  getRestProps(): Record<string, any> {
+    return this.properties[REST_PROPS_KEY]
   }
 
   /**
