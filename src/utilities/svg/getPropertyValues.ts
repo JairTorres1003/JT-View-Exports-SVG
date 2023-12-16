@@ -3,6 +3,7 @@ import { camelCase } from 'lodash'
 
 import { type Value } from '../../interfaces/exportParser'
 import { defaultProps } from '../../constants/defaultProps'
+import { REST_PROPS_KEY } from '../../constants/misc'
 
 /**
  * Performs a unary expression operation based on the provided operator and given value.
@@ -124,6 +125,7 @@ export function getPropertyValues(value: Value, properties: Record<string, any>)
     return
   }
 
+  const restProps = properties[REST_PROPS_KEY] || {}
   let argument: any
   let left: any
   let right: any
@@ -137,7 +139,7 @@ export function getPropertyValues(value: Value, properties: Record<string, any>)
     case 'StringLiteral':
       return value.value
     case 'Identifier':
-      return properties[value.name] || defaultProps[value.name]
+      return properties[value.name] || restProps[value.name] || defaultProps[value.name]
     case 'JSXExpressionContainer':
       return getPropertyValues(value.expression, properties)
     case 'AssignmentPattern':
