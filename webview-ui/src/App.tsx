@@ -64,7 +64,7 @@ function App() {
                       </Box>
                     ) : (
                       svgComponents.map((item, index) => (
-                        <SvgComponentExport {...item} key={index} />
+                        <SvgComponentExport key={index} {...item} />
                       ))
                     )}
                   </Box>

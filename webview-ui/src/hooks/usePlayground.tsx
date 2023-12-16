@@ -102,7 +102,7 @@ const usePlayground = () => {
         }
 
         const word = model.getWordUntilPosition(position)
-        const usedProperties: string[] = textUntilPosition.match(ATTR_TAG_REGEX) || []
+        const usedProperties: string[] = textUntilPosition.match(ATTR_TAG_REGEX) ?? []
         const remainingProperties = Object.keys(properties).filter(
           (key) => !usedProperties.join(' ').includes(key)
         )
