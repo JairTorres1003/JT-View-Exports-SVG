@@ -1,6 +1,7 @@
 import { type Declaration } from '@babel/types'
 
 import { type CustomSvgComponentData, type SvgComponent } from '../../interfaces/svgExports'
+import { REST_PROPS_KEY } from '../../constants/misc'
 import { baseFileCache } from './baseFileCache'
 import { extractSvgComponentFromNode } from './exportParser'
 import { getFileTimestamp } from './fileModifiedCache'
@@ -32,6 +33,22 @@ export async function customSvgComponent(
     throw new Error(`Error extracting component: ${component.error}`)
   }
 
+  const componentKeys = Object.keys(component.attributes)
+  const firstRestParam = Object.keys(params[REST_PROPS_KEY])[0]
+
+  if (params[REST_PROPS_KEY] && firstRestParam && componentKeys.length > 0) {
+    const restProps: Record<string, any> = {}
+
+    for (const key of componentKeys) {
+      if (!(key in params)) {
+        restProps[key] = component.attributes[key]
+      }
+    }
+
+    // Add the rest properties to the component attributes
+    component.attributes[REST_PROPS_KEY] = { [firstRestParam]: restProps }
+  }
+
   const attributes = { ...params, ...component.attributes }
 
   const svgComponent = await extractSvgComponentFromNode(
@@ -40,5 +57,5 @@ export async function customSvgComponent(
     attributes
   )
 
-  return svgComponent
+  return svgComponent ? { ...svgComponent, params } : undefined
 }
