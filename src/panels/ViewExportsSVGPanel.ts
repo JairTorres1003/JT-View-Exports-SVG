@@ -14,14 +14,14 @@ import {
   type PostMessageCommand,
   type CommandHandler,
 } from '../interfaces/vscode'
-import { getInputFiles } from '../utilities/getInputFiles'
-import { getTranslations } from '../utilities/getLocaleLanguage'
-import { getNonce } from '../utilities/getNonce'
-import { getCurrentTheme } from '../utilities/getTheme'
-import { getUri } from '../utilities/getUri'
+import { getInputFiles } from '../utilities/fileSystem/getInputFiles'
+import { getTranslations } from '../utilities/vscode/getLocaleLanguage'
+import { getNonce } from '../utilities/fileSystem/getNonce'
+import { getCurrentTheme } from '../utilities/vscode/getTheme'
+import { getUri } from '../utilities/fileSystem/getUri'
 import { customSvgComponent } from '../utilities/svg/customSvgComponent'
 import { filterSvgComponents } from '../utilities/svg/filterSvgComponents'
-import { getConfigurationVsCode } from '../utilities/getConfigurationVsCode'
+import { getConfigurationVsCode } from '../utilities/vscode/getConfigurationVsCode'
 
 /**
  * Webview panel for displaying SVG exports.

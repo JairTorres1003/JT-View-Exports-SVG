@@ -1,14 +1,14 @@
 import { ProgressLocation, type ProgressOptions, type Uri, window } from 'vscode'
 import * as path from 'path'
 
-import { getTranslations } from './getLocaleLanguage'
-import { getWorkspaceFolder } from './getWorkspaceFolder'
+import { getTranslations } from './vscode/getLocaleLanguage'
+import { getWorkspaceFolder } from './fileSystem/getWorkspaceFolder'
 import { type SvgExport, type SvgExportErrors, type SvgFile } from '../interfaces/svgExports'
 import { REGEX_FILE } from '../constants/regex'
 import { baseFileCache } from './svg/baseFileCache'
 import { extractSVGComponentExports } from './svg/extractSVGComponentExports'
 import { FileModifiedCache, getFileTimestamp } from './svg/fileModifiedCache'
-import { getFileLanguage } from './getFileLanguage'
+import { getFileLanguage } from './fileSystem/getFileLanguage'
 
 // Create an instance of FileModifiedCache for caching SvgExport objects
 const fileCache = new FileModifiedCache<SvgExport>()

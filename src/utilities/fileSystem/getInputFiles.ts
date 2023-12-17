@@ -1,6 +1,6 @@
-import { processFiles } from './commonFunctions'
-import { type SvgExport, type SvgExportErrors } from '../interfaces/svgExports'
-import { ViewExportsSVGPanel } from '../panels/ViewExportsSVGPanel'
+import { processFiles } from '../commonFunctions'
+import { type SvgExport, type SvgExportErrors } from '../../interfaces/svgExports'
+import { ViewExportsSVGPanel } from '../../panels/ViewExportsSVGPanel'
 
 /**
  * Get input files and start the process for the extraction of svg components.

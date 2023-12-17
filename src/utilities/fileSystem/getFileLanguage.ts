@@ -1,6 +1,6 @@
 import * as path from 'path'
 
-import { LANGUAGES } from '../constants/fileLanguages'
+import { LANGUAGES } from '../../constants/fileLanguages'
 
 /**
  * Retrieves the language of a file based on its extension.
