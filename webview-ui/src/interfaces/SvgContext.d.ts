@@ -1,5 +1,20 @@
 import { type SvgComponent } from './svgExports'
 
+interface Snackbar {
+  /**
+   * Whether the snackbar is open.
+   */
+  open: boolean
+  /**
+   * The text of the snackbar.
+   */
+  text: string | null
+  /**
+   * The severity of the snackbar.
+   */
+  severity?: 'success' | 'error' | 'warning' | 'info'
+}
+
 /**
  * Represents the state of an SVG context.
  */
@@ -23,15 +38,11 @@ export interface SvgContextState {
   /**
    * Snackbar information, including whether it's open and its text.
    */
-  snackbar: { open: boolean; text: string | null }
+  snackbar: Omit<Snackbar, 'severity'>
   /**
    * Snackbar information for the playground, including whether it's open and its text.
    */
-  snackbarPlayground: {
-    open: boolean
-    text: string | null
-    severity?: 'success' | 'error' | 'warning' | 'info'
-  }
+  snackbarPlayground: Snackbar
 }
 
 type SelectedActionPayload = {
