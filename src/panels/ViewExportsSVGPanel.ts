@@ -15,11 +15,9 @@ import {
   type CommandHandler,
 } from '../interfaces/vscode'
 import { getInputFiles, getNonce, getUri } from '../utilities/fileSystem'
-import { getTranslations } from '../utilities/vscode/getLocaleLanguage'
-import { getCurrentTheme } from '../utilities/vscode/getTheme'
 import { customSvgComponent } from '../utilities/svg/customSvgComponent'
 import { filterSvgComponents } from '../utilities/svg/filterSvgComponents'
-import { getConfigurationVsCode } from '../utilities/vscode/getConfigurationVsCode'
+import { getTranslations, getCurrentTheme, getConfigurationVsCode } from '../utilities/vscode'
 
 /**
  * Webview panel for displaying SVG exports.
