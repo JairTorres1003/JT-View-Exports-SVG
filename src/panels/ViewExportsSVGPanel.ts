@@ -14,11 +14,9 @@ import {
   type PostMessageCommand,
   type CommandHandler,
 } from '../interfaces/vscode'
-import { getInputFiles } from '../utilities/fileSystem/getInputFiles'
+import { getInputFiles, getNonce, getUri } from '../utilities/fileSystem'
 import { getTranslations } from '../utilities/vscode/getLocaleLanguage'
-import { getNonce } from '../utilities/fileSystem/getNonce'
 import { getCurrentTheme } from '../utilities/vscode/getTheme'
-import { getUri } from '../utilities/fileSystem/getUri'
 import { customSvgComponent } from '../utilities/svg/customSvgComponent'
 import { filterSvgComponents } from '../utilities/svg/filterSvgComponents'
 import { getConfigurationVsCode } from '../utilities/vscode/getConfigurationVsCode'
