@@ -10,6 +10,7 @@ import PanelDeveloperTools from './components/Panels/PanelDeveloperTools'
 import { Snackbar } from './components/Snackbar/Snackbar'
 
 import useApp from './hooks/useApp'
+import { useVSCode } from './provider/VSCodeProvider'
 
 function App() {
   const {
@@ -24,10 +25,12 @@ function App() {
     resizableWidth,
     refPortalButton,
     showMessage,
-    styles,
     svgComponents,
     theme,
   } = useApp()
+  const {
+    state: { styles },
+  } = useVSCode()
 
   return (
     <ThemeProvider theme={theme}>
