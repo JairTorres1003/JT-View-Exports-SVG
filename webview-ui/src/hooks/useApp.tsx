@@ -4,19 +4,22 @@ import { useEffect, useMemo, useRef, useState } from 'react'
 import i18n from '../i18n'
 import { type SvgExport } from '../interfaces/svgExports'
 import { useSvg } from '../provider/SvgProvider'
+import { useVSCode } from '../provider/VSCodeProvider'
 import { vscode } from '../utilities/vscode'
 
 const useApp = () => {
-  const [styles, setStyles] = useState<Record<string, any>>({})
   const [svgComponents, setSvgComponents] = useState<SvgExport[]>([])
   const [showMessage, setShowMessage] = useState<string | null>(null)
   const [isLoading, setIsLoading] = useState<boolean>(true)
   const [fileSelected, setFileSelected] = useState<number | null | undefined>(0)
-  const [currentTheme, setCurrentTheme] = useState<'dark' | 'light'>('light')
   const [isPanelOpen, setIsPanelOpen] = useState<boolean>(false)
   const [resizableWidth, setResizableWidth] = useState<string>('100%')
   const refPortalButton = useRef<HTMLElement>(null)
   const { dispatch } = useSvg()
+  const {
+    state: { theme: currentTheme, styles },
+    dispatch: dispatchVSCode,
+  } = useVSCode()
 
   /**
    * Handle resizing of the panel.
@@ -112,7 +115,7 @@ const useApp = () => {
    */
   const handleConfigurationVsCode = (data: any) => {
     const response = JSON.parse(data) || {}
-    setStyles(response.styles)
+    dispatchVSCode({ type: 'SET_STYLES', payload: response.styles })
   }
 
   /**
@@ -120,7 +123,7 @@ const useApp = () => {
    * @param theme The current theme ("dark" or "light").
    */
   const handleCurrentTheme = (theme: 'dark' | 'light') => {
-    setCurrentTheme(theme)
+    dispatchVSCode({ type: 'SET_THEME', payload: theme })
   }
 
   /**
@@ -186,7 +189,6 @@ const useApp = () => {
     resizableWidth,
     refPortalButton,
     showMessage,
-    styles,
     svgComponents,
     theme,
   }
