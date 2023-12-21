@@ -2,7 +2,7 @@ import * as t from '@babel/types'
 import { camelCase, isArray } from 'lodash'
 
 import { cssStringToObject } from './cssStringToObject'
-import { getPropertyValues } from './getPropertyValues'
+import { getPropertyValues } from './propertyValues'
 
 /**
  * Sets the properties of a JSX element based on the provided attributes and default properties.

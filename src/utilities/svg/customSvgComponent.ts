@@ -34,9 +34,9 @@ export async function customSvgComponent(
   }
 
   const componentKeys = Object.keys(component.attributes)
-  const firstRestParam = Object.keys(params[REST_PROPS_KEY])[0]
+  const firstRestParam = Object.keys(params[REST_PROPS_KEY] ?? {})[0]
 
-  if (params[REST_PROPS_KEY] && firstRestParam && componentKeys.length > 0) {
+  if (firstRestParam && componentKeys.length > 0) {
     const restProps: Record<string, any> = {}
 
     for (const key of componentKeys) {

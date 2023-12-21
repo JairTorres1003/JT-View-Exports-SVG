@@ -6,6 +6,7 @@ import useDebounce from './useDebounce'
 
 import { type CustomSvgComponentData } from '../interfaces/svgExports'
 import { useSvg } from '../provider/SvgProvider'
+import { useVSCode } from '../provider/VSCodeProvider'
 import { vscode } from '../utilities/vscode'
 import { ATTR_TAG_REGEX, JSON_REGEX, TAG_REGEX } from '../constants/regex'
 
@@ -25,6 +26,9 @@ const usePlayground = () => {
     state: { selectedSvgLanguage, selectedSvgName, selectedSvgPath, selectedSvg },
     dispatch,
   } = useSvg()
+  const {
+    state: { styles },
+  } = useVSCode()
 
   const DEFAULT_SVG: CustomSvgComponentData = {
     name: selectedSvgName,
@@ -41,10 +45,18 @@ const usePlayground = () => {
 
   const OPTIONS: EditorProps['options'] = {
     automaticLayout: true,
-    minimap: { enabled: false },
+    minimap: { enabled: false, scale: 0, size: undefined },
     lineNumbers: 'off',
     language: selectedSvgLanguage,
     fontFamily: 'monospace',
+    ...styles,
+    tabSize: 2,
+    detectIndentation: true,
+    padding: { top: 0, bottom: 0 },
+    acceptSuggestionOnCommitCharacter: false,
+    scrollbar: { verticalScrollbarSize: 6, horizontalScrollbarSize: 6 },
+    bracketPairColorization: { enabled: true },
+    colorDecorators: true,
   }
 
   /**

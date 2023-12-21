@@ -1,3 +1,3 @@
-export * from './getConfigurationVsCode'
-export * from './getLocaleLanguage'
-export * from './getTheme'
+export * from './configurationVsCode'
+export * from './localeLanguage'
+export * from './theme'
