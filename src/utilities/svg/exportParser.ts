@@ -15,7 +15,7 @@ import {
 } from '../../interfaces/exportParser'
 import { SVG_TAGS } from '../../constants/svgTags'
 import { REST_PROPS_KEY } from '../../constants/misc'
-import { getPropertyValues } from './getPropertyValues'
+import { getPropertyValues } from './propertyValues'
 import { propertyManager } from './propertyManager'
 import { setProperties } from './setProperties'
 
