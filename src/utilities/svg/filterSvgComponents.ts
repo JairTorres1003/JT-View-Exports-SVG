@@ -1,5 +1,5 @@
 import { type SvgExport, type SvgExportErrors } from '../../interfaces/svgExports'
-import { getTranslations } from '../vscode/getLocaleLanguage'
+import { getTranslations } from '../vscode'
 
 /**
  * Filters an array of SvgExport objects based on a given filter string.
