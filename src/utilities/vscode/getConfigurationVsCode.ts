@@ -14,7 +14,7 @@ export function getConfigurationVsCode(): any {
     fontVariations: configuration.get('fontVariations'),
     fontWeight: configuration.get('fontWeight'),
     letterSpacing: configuration.get('letterSpacing'),
-    lineHeight: '100%',
+    lineHeight: Number(configuration.get('fontSize') ?? 12) + 4,
     tabSize: configuration.get('tabSize'),
     wordBreak: configuration.get('wordBreak'),
     wordWrap: configuration.get('wordWrap'),

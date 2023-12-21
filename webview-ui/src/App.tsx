@@ -34,7 +34,7 @@ function App() {
 
   return (
     <ThemeProvider theme={theme}>
-      <main style={styles}>
+      <main style={{ ...styles, lineHeight: `${styles.lineHeight ?? 12}px` }}>
         {isLoading ? (
           <Loading />
         ) : fileSelected && fileSelected > 0 ? (
