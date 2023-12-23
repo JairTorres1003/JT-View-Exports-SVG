@@ -27,7 +27,7 @@ const usePlayground = () => {
     dispatch,
   } = useSvg()
   const {
-    state: { styles },
+    state: { styles, themeData },
   } = useVSCode()
 
   const DEFAULT_SVG: CustomSvgComponentData = {
@@ -57,6 +57,7 @@ const usePlayground = () => {
     scrollbar: { verticalScrollbarSize: 6, horizontalScrollbarSize: 6 },
     bracketPairColorization: { enabled: true },
     colorDecorators: true,
+    theme: themeData.themeName,
   }
 
   /**
@@ -86,7 +87,7 @@ const usePlayground = () => {
    * @returns The completion item provider registration.
    */
   function initializeEditor(monaco: Monaco) {
-    const { languages } = monaco
+    const { languages, editor } = monaco
     const properties = selectedSvg?.params ?? {}
 
     const existingLangId = languages.getEncodedLanguageId(selectedSvgLanguage)
@@ -136,6 +137,11 @@ const usePlayground = () => {
         return { suggestions, incomplete: true }
       },
     })
+
+    if (themeData.themeName !== '') {
+      editor.defineTheme(themeData.themeName, themeData.themeData)
+      editor.setTheme(themeData.themeName)
+    }
 
     return register
   }

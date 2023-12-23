@@ -1,11 +1,14 @@
 import { workspace } from 'vscode'
 
+import { getThemeInfo } from './theme'
+
 /**
- * Retrieves the VS Code editor configuration.
- * @returns An object containing the editor styles.
+ * Gets the current configuration of the Visual Studio Code editor.
+ * @returns The current configuration.
  */
-export function getConfigurationVsCode(): any {
+export async function getConfigurationVsCode() {
   const configuration = workspace.getConfiguration('editor')
+  const colorTheme = workspace.getConfiguration('workbench').get('colorTheme')
 
   const styles = {
     fontFamily: configuration.get('fontFamily'),
@@ -21,7 +24,7 @@ export function getConfigurationVsCode(): any {
     wordWrapColumn: configuration.get('wordWrapColumn'),
   }
 
-  return {
-    styles,
-  }
+  const themeData = await getThemeInfo(colorTheme as string)
+
+  return { styles, themeData }
 }
