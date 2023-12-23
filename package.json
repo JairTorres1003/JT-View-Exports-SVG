@@ -120,6 +120,7 @@
   "dependencies": {
     "@babel/parser": "^7.23.5",
     "@babel/traverse": "^7.23.5",
+    "color": "^4.2.3",
     "lodash": "^4.17.21"
   }
 }
