@@ -2,9 +2,9 @@ import { type Declaration } from '@babel/types'
 
 import { type CustomSvgComponentData, type SvgComponent } from '../../interfaces/svgExports'
 import { REST_PROPS_KEY } from '../../constants/misc'
-import { baseFileCache } from './baseFileCache'
+import { baseFileCache } from '../cache/baseFileCache'
 import { extractSvgComponentFromNode } from './exportParser'
-import { getFileTimestamp } from './fileModifiedCache'
+import { getFileTimestamp } from '../cache/fileModifiedCache'
 import { extractComponent } from './extractComponent'
 
 /**

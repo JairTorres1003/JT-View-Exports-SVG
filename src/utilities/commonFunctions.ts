@@ -3,10 +3,9 @@ import * as path from 'path'
 
 import { type SvgExport, type SvgExportErrors, type SvgFile } from '../interfaces/svgExports'
 import { REGEX_FILE } from '../constants/regex'
+import { baseFileCache, FileModifiedCache, getFileTimestamp } from './cache'
 import { getWorkspaceFolder, getFileLanguage } from './fileSystem'
-import { baseFileCache } from './svg/baseFileCache'
 import { extractSVGComponentExports } from './svg/extractSVGComponentExports'
-import { FileModifiedCache, getFileTimestamp } from './svg/fileModifiedCache'
 import { getTranslations } from './vscode'
 
 // Create an instance of FileModifiedCache for caching SvgExport objects
