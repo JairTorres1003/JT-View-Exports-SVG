@@ -6,6 +6,7 @@ import { type VSCodeContextAction, type VSCodeContextState } from '../interfaces
 const initialState: VSCodeContextState = {
   styles: {},
   theme: 'light',
+  themeData: { themeData: {}, themeName: '' },
 }
 
 /**
@@ -20,6 +21,8 @@ const vscodeReducer: Reducer<VSCodeContextState, VSCodeContextAction> = (prevSta
       return { ...prevState, styles: action.payload }
     case 'SET_THEME':
       return { ...prevState, theme: action.payload }
+    case 'SET_THEME_DATA':
+      return { ...prevState, themeData: action.payload }
     default:
       return prevState
   }

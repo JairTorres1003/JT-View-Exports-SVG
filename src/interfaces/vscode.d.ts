@@ -45,3 +45,30 @@ export interface LanguageFile {
    */
   extensions: string[]
 }
+
+/**
+ * Represents the theme mode.
+ */
+export type ThemeMode = 'dark' | 'light'
+
+/**
+ * Represents information about a theme.
+ */
+export interface ThemeInfo {
+  /**
+   * The name of the theme.
+   */
+  id?: string
+  /**
+   * The label of the theme.
+   */
+  label?: string
+  /**
+   * The path of the theme.
+   */
+  path?: string
+  /**
+   * The mode of the theme.
+   */
+  uiTheme?: string
+}
