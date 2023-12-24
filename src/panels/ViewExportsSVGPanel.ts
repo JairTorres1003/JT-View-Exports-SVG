@@ -159,7 +159,6 @@ export class ViewExportsSVGPanel {
     const tsModeUri = getUri(webview, extensionUri, [...dirs, 'tsMode.js']).toString()
     const fontUri = getUri(webview, extensionUri, [...dirs, 'codicon.ttf']).toString()
 
-    console.log('fontUri', fontUri)
     // Generate a nonce for script elements
     const nonce = getNonce()
 
@@ -264,8 +263,13 @@ export class ViewExportsSVGPanel {
    * Handles the request to get the VS Code configuration.
    */
   private handleConfiguration(): void {
-    const config = getConfigurationVsCode()
-    this._postMessage('configurationVsCode', JSON.stringify(config))
+    getConfigurationVsCode()
+      .then((config) => {
+        this._postMessage('configurationVsCode', JSON.stringify(config))
+      })
+      .catch((error) => {
+        console.error('Failed to get VS Code configuration:', error)
+      })
   }
 
   /**

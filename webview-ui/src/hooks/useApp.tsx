@@ -116,6 +116,9 @@ const useApp = () => {
   const handleConfigurationVsCode = (data: any) => {
     const response = JSON.parse(data) || {}
     dispatchVSCode({ type: 'SET_STYLES', payload: response.styles })
+    if (response.themeData) {
+      dispatchVSCode({ type: 'SET_THEME_DATA', payload: response.themeData })
+    }
   }
 
   /**
