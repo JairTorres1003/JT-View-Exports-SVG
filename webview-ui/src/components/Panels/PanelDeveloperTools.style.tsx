@@ -84,6 +84,7 @@ export const BoxTools = styled(Box)(() => ({
   padding: 10,
   display: 'flex',
   justifyContent: 'space-between',
+  borderRadius: '0 0 10px 10px',
   gap: 8,
   backgroundColor: 'var(--color-JT-view-export-svg-bgColor)',
   borderTop: 'var(--color-JT-view-export-svg-border)',
@@ -95,7 +96,7 @@ export const BoxCode: FC<BoxProps & MotionProps> = styled(
     <Box
       component={motion.div}
       variants={{
-        open: { height: 100, borderTop: 'inherit', overflow: 'visible' },
+        open: { height: 130, borderTop: 'inherit', overflow: 'visible' },
         closed: { height: 0, borderTop: 'none', overflow: 'hidden' },
       }}
       initial='closed'
@@ -108,5 +109,11 @@ export const BoxCode: FC<BoxProps & MotionProps> = styled(
   borderTop: 'var(--color-JT-view-export-svg-border)',
   color: 'var(--color-JT-view-export-svg-color)',
   height: 'max-content',
-  '& > div': { padding: 10, height: '100%' },
+  borderRadius: '0 0 10px 10px',
+  '& > div': {
+    height: '100%',
+    '& > section > div > div.monaco-editor, & > section > div > div.monaco-editor > div': {
+      borderRadius: '0 0 10px 10px',
+    },
+  },
 }))
