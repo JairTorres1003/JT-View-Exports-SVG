@@ -3,15 +3,15 @@ import { extensions, window } from 'vscode'
 import * as path from 'path'
 
 import {
-  IStandaloneThemeData,
-  IThemeData,
-  IThemeObject,
-  ITokenThemeRule,
+  type IStandaloneThemeData,
+  type IThemeData,
+  type IThemeObject,
+  type ITokenThemeRule,
 } from '../../interfaces/editorTheme'
-import { ThemeInfo, ThemeMode } from '../../interfaces/vscode'
+import { type ThemeInfo, type ThemeMode } from '../../interfaces/vscode'
 import { BaseCache } from '../cache/base'
 
-const themeCache: BaseCache<IThemeData> = new BaseCache()
+const themeCache = new BaseCache<IThemeData>()
 
 /**
  * Gets the current color theme of the Visual Studio Code editor.
@@ -71,7 +71,7 @@ function themeParser(theme: string, mode: ThemeMode, values: IThemeObject): IThe
 
   return {
     themeName: theme.replace(/ /g, '-').toLowerCase(),
-    themeData: themeData,
+    themeData,
   }
 }
 
@@ -93,25 +93,22 @@ export async function getThemeInfo(colorTheme: string) {
   // Check if the theme is provided by an extension
   const themeExtensionProvided = extensions.all.find((ext) => {
     const { contributes } = ext.packageJSON
-    const contributedThemes = contributes && contributes.themes
+    const contributedThemes = contributes?.themes
 
-    return (
-      contributedThemes &&
-      contributedThemes.some(
-        (theme: ThemeInfo) => theme.label === colorTheme || theme.id === colorTheme
-      )
+    return contributedThemes?.some(
+      (theme: ThemeInfo) => theme.label === colorTheme || theme.id === colorTheme
     )
   })
 
   if (themeExtensionProvided) {
-    const { extensionPath, id, packageJSON } = themeExtensionProvided
+    const { extensionPath, packageJSON } = themeExtensionProvided
 
     // Theme provided by an extension
     const themeInfo: ThemeInfo = packageJSON.contributes.themes.find(
       (theme: ThemeInfo) => theme.label === colorTheme || theme.id === colorTheme
     )
 
-    if (themeInfo && themeInfo.path) {
+    if (themeInfo?.path) {
       const themePath = path.join(extensionPath, themeInfo.path)
       const themeJSON = await import(themePath)
 

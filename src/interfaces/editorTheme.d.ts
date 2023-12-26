@@ -1,8 +1,6 @@
 export type BuiltinTheme = 'vs' | 'vs-dark' | 'hc-black' | 'hc-light'
 
-export type IColors = {
-  [colorId: string]: string
-}
+export type IColors = Record<string, string>
 
 export interface ITokenThemeRule {
   /**
