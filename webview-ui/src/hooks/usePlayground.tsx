@@ -9,6 +9,7 @@ import { useSvg } from '../provider/SvgProvider'
 import { useVSCode } from '../provider/VSCodeProvider'
 import { vscode } from '../utilities/vscode'
 import { ATTR_TAG_REGEX, JSON_REGEX, TAG_REGEX } from '../constants/regex'
+import { REST_PROPS_KEY } from '../constants/misc'
 
 loader.config({ monaco })
 
@@ -88,7 +89,10 @@ const usePlayground = () => {
    */
   function initializeEditor(monaco: Monaco) {
     const { languages, editor } = monaco
-    const properties = selectedSvg?.params ?? {}
+    const properties: Record<string, any> = selectedSvg?.params ?? {}
+
+    // Remove the custom property from the object
+    delete properties[REST_PROPS_KEY]
 
     const existingLangId = languages.getEncodedLanguageId(selectedSvgLanguage)
     const langDef = languages.getLanguages()[existingLangId - 1]
