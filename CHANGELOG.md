@@ -30,7 +30,6 @@ _Sep 22, 2023_
   - Ability to view SVG components in a larger size.
   - Toggle between dark and light mode for displaying SVG components.
 
-
 ## 1.0.0
 
 _Aug 3, 2023_

@@ -1,4 +1,3 @@
-
 ### Contributions
 
 We appreciate your interest in contributing to View Exports SVG! Contributions are essential to improving and growing this extension. Here, you'll find information on how to contribute effectively.
@@ -32,6 +31,7 @@ If you want to contribute code, follow these steps:
    ```bash
    git commit -m "Add my contribution"
    ```
+
 6. Push your changes to your fork:
 
    ```bash

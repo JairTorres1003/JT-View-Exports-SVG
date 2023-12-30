@@ -1,45 +1,73 @@
-import { FunctionComponent, ReactNode, useContext, useReducer } from "react";
+import { type FC, type ReactNode, useContext, useReducer, type Reducer } from 'react'
 
-import { SvgContext } from "../context";
-import { SvgContextAction, SvgContextState } from "../interfaces/SvgContext";
+import { SvgContext } from '../context'
+import { type SvgContextAction, type SvgContextState } from '../interfaces/SvgContext'
 
 const initialState: SvgContextState = {
   selectedSvg: null,
+  selectedSvgName: '',
+  selectedSvgPath: null,
+  selectedSvgLanguage: '',
   snackbar: { open: false, text: null },
-};
-
-const actionHandlers: Record<string, (state: SvgContextState, payload?: any) => SvgContextState> = {
-  SELECTED: (state, payload) => ({ ...state, selectedSvg: payload }),
-  SNACKBAR: (state, payload) => ({ ...state, snackbar: payload }),
-};
+  snackbarPlayground: { open: false, text: null, severity: 'success' },
+}
 
 /**
- * Reducer function for managing the state of an SVG context.
- * @param state - The current state of the SVG context.
- * @param action - An action object that describes the state change.
- * @returns The new state of the SVG context after applying the action.
+ * The reducer function for managing the SVG context's state.
+ * @param prevState The previous state of the SVG context.
+ * @param action The action to perform on the SVG context.
+ * @returns The new state of the SVG context.
  */
-function svgReducer(state: SvgContextState, action: SvgContextAction): SvgContextState {
-  const handler = actionHandlers[action.type];
+const svgReducer: Reducer<SvgContextState, SvgContextAction> = (prevState, action) => {
+  switch (action.type) {
+    case 'CLEAR_SELECTED':
+      return {
+        ...prevState,
+        selectedSvg: null,
+        selectedSvgName: '',
+        selectedSvgPath: null,
+        selectedSvgLanguage: '',
+      }
+    case 'SELECTED':
+      if (!action.payload) {
+        return { ...prevState }
+      }
 
-  if (handler) {
-    return handler(state, action.payload);
+      return {
+        ...prevState,
+        selectedSvg: action.payload.item,
+        selectedSvgName: action.payload.name,
+        selectedSvgPath: action.payload.path,
+        selectedSvgLanguage: action.payload.language,
+      }
+    case 'SNACKBAR':
+      return { ...prevState, snackbar: action.payload || { open: false, text: null } }
+    case 'SNACKBAR_PLAYGROUND':
+      return {
+        ...prevState,
+        snackbarPlayground: {
+          ...action.payload,
+          severity: action.payload.severity ?? 'success',
+        },
+      }
+    case 'UPDATE_PLAYGROUND':
+      return { ...prevState, selectedSvg: action.payload }
+    default:
+      return prevState
   }
-
-  return state;
 }
 
 /**
  * Provides an SVG context for managing SVG-related state and actions.
  * @returns The JSX element representing the SVG provider.
  */
-const SvgProvider: FunctionComponent<{ children: ReactNode }> = (props) => {
-  const [state, dispatch] = useReducer(svgReducer, initialState);
+const SvgProvider: FC<{ children: ReactNode }> = (props) => {
+  const [state, dispatch] = useReducer(svgReducer, initialState)
 
-  return <SvgContext.Provider value={{ state, dispatch }}>{props.children}</SvgContext.Provider>;
-};
+  return <SvgContext.Provider value={{ state, dispatch }}>{props.children}</SvgContext.Provider>
+}
 
-export default SvgProvider;
+export default SvgProvider
 
 /**
  * A custom hook for accessing the SVG context and its state and dispatch functions.
@@ -47,11 +75,11 @@ export default SvgProvider;
  * @throws Throws an error if used outside of a SvgProvider.
  */
 export const useSvg = () => {
-  const context = useContext(SvgContext);
+  const context = useContext(SvgContext)
 
   if (context === undefined) {
-    throw new Error("useSvg must be used within a SvgProvider");
+    throw new Error('useSvg must be used within a SvgProvider')
   }
 
-  return context;
-};
+  return context
+}
