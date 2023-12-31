@@ -1,27 +1,24 @@
 // Place your settings in this file to overwrite default and user settings.
 {
-    "files.exclude": {
-        "out": false // set this to true to hide the "out" folder with the compiled JS files
-    },
-    "search.exclude": {
-        "out": true // set this to false to include "out" folder in search results
-    },
-    // Turn off tsc task auto detection since we have the necessary tasks as npm scripts
-    "typescript.tsc.autoDetect": "off",
-    "cSpell.language": "en,es-ES",
-    "cSpell.ignoreWords": [
-        "Jair",
-        "arrowParens",
-        "ecmaVersion",
-        "esnext",
-        "mpath"
-    ],
-    "cSpell.ignorePaths": [
-        "package-lock.json",
-        "node_modules",
-        "vscode-extension",
-        ".git/objects",
-        ".vscode",
-        ".vscode-insiders"
-    ],
+  "files.exclude": {
+    "out": false // set this to true to hide the "out" folder with the compiled JS files
+  },
+  "search.exclude": {
+    "out": true // set this to false to include "out" folder in search results
+  },
+  // Turn off tsc task auto detection since we have the necessary tasks as npm scripts
+  "typescript.tsc.autoDetect": "off",
+  "cSpell.language": "en,es-ES",
+  "cSpell.ignoreWords": ["Jair", "arrowParens", "ecmaVersion", "esnext", "mpath", "quasis"],
+  "cSpell.ignorePaths": [
+    "package-lock.json",
+    "node_modules",
+    "vscode-extension",
+    ".git/objects",
+    ".vscode",
+    ".vscode-insiders",
+    ".github",
+    "**/tsconfig.json",
+    "**/.eslintrc.cjs"
+  ]
 }

@@ -1,22 +1,22 @@
 {
-    "Label.Clear": "クリア",
-    "Label.Settings": "設定",
-    "Label.SearchIcons": "アイコン検索",
-    "Copied": "コピーしました",
-    "ToClipboard": "クリップボードにコピー",
-    "DropHere": "ここにドロップ",
-    "Upload": "アップロード",
-    "OrDropFile": "またはここにファイルをドロップ",
-    "SelectedFile": {
-        "Single": "選択したファイル",
-        "Multiple": "選択したファイル",
-        "None": "ファイルが選択されていません"
-    },
-    "ExtractIcons": "SVGアイコンの抽出",
-    "progressTitle": "SVGエクスポートを抽出しています...",
-    "Close": "閉じる",
-    "DeveloperTools": "開発者ツール",
-    "playground": "プレイグラウンド",
-    "dark": "ダーク",
-    "light": "ライト"
+  "Label.Clear": "クリア",
+  "Label.Settings": "設定",
+  "Label.SearchIcons": "アイコン検索",
+  "Copied": "コピーしました",
+  "ToClipboard": "クリップボードにコピー",
+  "DropHere": "ここにドロップ",
+  "Upload": "アップロード",
+  "OrDropFile": "またはここにファイルをドロップ",
+  "SelectedFile": {
+    "Single": "選択したファイル",
+    "Multiple": "選択したファイル",
+    "None": "ファイルが選択されていません"
+  },
+  "ExtractIcons": "SVGアイコンの抽出",
+  "progressTitle": "SVGエクスポートを抽出しています...",
+  "Close": "閉じる",
+  "DeveloperTools": "開発者ツール",
+  "playground": "プレイグラウンド",
+  "dark": "ダーク",
+  "light": "ライト"
 }

@@ -1,22 +1,22 @@
 {
-    "Label.Clear": "Limpar",
-    "Label.Settings": "Configurações",
-    "Label.SearchIcons": "Buscar ícones",
-    "Copied": "Copiado",
-    "ToClipboard": "para a área de transferência",
-    "DropHere": "Solte aqui",
-    "Upload": "Enviar",
-    "OrDropFile": "ou solte um arquivo aqui",
-    "SelectedFile": {
-        "Single": "Arquivo selecionado",
-        "Multiple": "Arquivos selecionados",
-        "None": "Nenhum arquivo selecionado"
-    },
-    "ExtractIcons": "Extrair ícones SVG",
-    "progressTitle": "Extraindo exportações SVG...",
-    "Close": "Fechar",
-    "DeveloperTools": "Ferramentas de Desenvolvedor",
-    "playground": "Área de Testes",
-    "dark": "Escuro",
-    "light": "Claro"
+  "Label.Clear": "Limpar",
+  "Label.Settings": "Configurações",
+  "Label.SearchIcons": "Buscar ícones",
+  "Copied": "Copiado",
+  "ToClipboard": "para a área de transferência",
+  "DropHere": "Solte aqui",
+  "Upload": "Enviar",
+  "OrDropFile": "ou solte um arquivo aqui",
+  "SelectedFile": {
+    "Single": "Arquivo selecionado",
+    "Multiple": "Arquivos selecionados",
+    "None": "Nenhum arquivo selecionado"
+  },
+  "ExtractIcons": "Extrair ícones SVG",
+  "progressTitle": "Extraindo exportações SVG...",
+  "Close": "Fechar",
+  "DeveloperTools": "Ferramentas de Desenvolvedor",
+  "playground": "Área de Testes",
+  "dark": "Escuro",
+  "light": "Claro"
 }

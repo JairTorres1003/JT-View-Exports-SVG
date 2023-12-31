@@ -1,22 +1,22 @@
 {
-    "Label.Clear": "清空",
-    "Label.Settings": "设置",
-    "Label.SearchIcons": "搜索图标",
-    "Copied": "已复制",
-    "ToClipboard": "到剪贴板",
-    "DropHere": "拖放到此处",
-    "Upload": "上传",
-    "OrDropFile": "或拖放文件到这里",
-    "SelectedFile": {
-        "Single": "已选择文件",
-        "Multiple": "已选择文件",
-        "None": "未选择文件"
-    },
-    "ExtractIcons": "提取SVG图标",
-    "progressTitle": "提取SVG导出中...",
-    "Close": "关闭",
-    "DeveloperTools": "开发者工具",
-    "playground": "游乐场",
-    "dark": "暗",
-    "light": "亮"
+  "Label.Clear": "清空",
+  "Label.Settings": "设置",
+  "Label.SearchIcons": "搜索图标",
+  "Copied": "已复制",
+  "ToClipboard": "到剪贴板",
+  "DropHere": "拖放到此处",
+  "Upload": "上传",
+  "OrDropFile": "或拖放文件到这里",
+  "SelectedFile": {
+    "Single": "已选择文件",
+    "Multiple": "已选择文件",
+    "None": "未选择文件"
+  },
+  "ExtractIcons": "提取SVG图标",
+  "progressTitle": "提取SVG导出中...",
+  "Close": "关闭",
+  "DeveloperTools": "开发者工具",
+  "playground": "游乐场",
+  "dark": "暗",
+  "light": "亮"
 }

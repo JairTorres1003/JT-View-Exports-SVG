@@ -1,17 +1,23 @@
-import React from "react";
-import { createRoot } from "react-dom/client";
+import React from 'react'
+import { createRoot } from 'react-dom/client'
 
-import App from "./App";
-import SvgProvider from "./provider/SvgProvider";
-import "./i18n";
-import "./styles/reset.css";
+import App from './App'
+import SvgProvider from './provider/SvgProvider'
+import VSCodeProvider from './provider/VSCodeProvider'
 
-const container = document.getElementById("root");
-const root = createRoot(container!);
+import './i18n'
+import './styles/reset.css'
+import './userWorker'
+
+const container = document.getElementById('root')
+const root = createRoot(container!)
+
 root.render(
   <React.StrictMode>
-    <SvgProvider>
-      <App />
-    </SvgProvider>
+    <VSCodeProvider>
+      <SvgProvider>
+        <App />
+      </SvgProvider>
+    </VSCodeProvider>
   </React.StrictMode>
-);
+)

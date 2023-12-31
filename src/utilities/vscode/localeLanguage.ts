@@ -1,8 +1,8 @@
-import * as fs from "fs";
-import { Uri, env } from "vscode";
+import * as fs from 'fs'
+import { Uri, env } from 'vscode'
 
 // Object to store the loaded translations
-var i18n: { [key: string]: string } = {};
+let i18n: Record<string, string> = {}
 
 /**
  * Load language translations from a JSON file.
@@ -10,21 +10,21 @@ var i18n: { [key: string]: string } = {};
  * @returns An object containing the loaded language translations.
  */
 export async function loadLanguage(extensionUri: Uri) {
-  const editorLanguage = env.language || "en";
+  const editorLanguage = env.language || 'en'
 
   try {
     // Build the path of the language file based on the editor's language
-    const fileUri = Uri.joinPath(extensionUri, "src", "i18n", `${editorLanguage}.json`);
-    const content = fs.readFileSync(fileUri.fsPath, "utf-8");
-    i18n = JSON.parse(content);
+    const fileUri = Uri.joinPath(extensionUri, 'src', 'i18n', `${editorLanguage}.json`)
+    const content = fs.readFileSync(fileUri.fsPath, 'utf-8')
+    i18n = JSON.parse(content)
 
-    return i18n;
+    return i18n
   } catch (error) {
-    console.error("Error loading language file:", error);
+    console.error('Error loading language file:', error)
 
     // Reset the 'i18n' object to an empty object and return an empty object
-    i18n = {};
-    return {};
+    i18n = {}
+    return {}
   }
 }
 
@@ -33,5 +33,5 @@ export async function loadLanguage(extensionUri: Uri) {
  * @returns The currently loaded translations object.
  */
 export function getTranslations() {
-  return i18n;
+  return i18n
 }

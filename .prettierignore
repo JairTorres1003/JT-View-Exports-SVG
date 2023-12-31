@@ -9,6 +9,7 @@
 # production
 /build
 /dist
+*.vsix
 
 # misc
 .DS_Store
