@@ -36,7 +36,6 @@ module.exports = {
     'prettier/prettier': STATE.ERROR,
     'multiline-ternary': [STATE.OFF, CONFIG_STATES.ALWAYS_MULTILINE],
     '@typescript-eslint/space-before-function-paren': STATE.OFF,
-    '@typescript-eslint/comma-dangle': [STATE.ERROR, CONFIG_STATES.ALWAYS_MULTILINE],
     '@typescript-eslint/member-delimiter-style': [
       STATE.ERROR,
       {
