@@ -1,5 +1,18 @@
 # View Exports SVG - Changelog
 
+## 3.0.0
+
+_Jan 2, 2024_
+
+**Enhancements and New Features**
+
+- **Update Dependencies:** Dependencies were updated.
+- **Minor Bug Fixes:** Minor bug fixes and optimizations were made throughout the code.
+- **New Styles and Visual Enhancements:** New styles and visual enhancements were added.
+- **New Functions and SVG File Handling Improvements:** New functions and improvements in SVG file handling were added.
+- **Playground Integrated into PanelDeveloperTools:** A Playground was added.
+- **Translations:** the reading of Chinese and Portuguese languages is corrected.
+
 ## 2.0.0
 
 _Sep 22, 2023_

@@ -18,5 +18,8 @@
   "DeveloperTools": "Developer tools",
   "playground": "Playground",
   "dark": "Dark",
-  "light": "Light"
+  "light": "Light",
+  "hide": "Hide",
+  "show": "Show",
+  "code": "Code"
 }

@@ -18,5 +18,8 @@
   "DeveloperTools": "Outils de développement",
   "playground": "Aire de jeux",
   "dark": "Sombre",
-  "light": "Clair"
+  "light": "Clair",
+  "hide": "Masquer",
+  "show": "Afficher",
+  "code": "Code"
 }
