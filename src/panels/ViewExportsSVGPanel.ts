@@ -143,21 +143,21 @@ export class ViewExportsSVGPanel {
     const i18n = getTranslations()
     const dirs = ['webview-ui', 'build', 'assets']
 
+    const getAssetUri = (asset: string) =>
+      getUri(webview, extensionUri, [...dirs, asset]).toString()
+
     // Get the URIs for the required assets
-    const icoUri = getUri(webview, extensionUri, [...dirs, 'favicon.ico']).toString()
-    const stylesUri = getUri(webview, extensionUri, [...dirs, 'index.css']).toString()
-    const scriptUri = getUri(webview, extensionUri, [...dirs, 'index.js']).toString()
+    const icoUri = getAssetUri('favicon.ico')
+    const stylesUri = getAssetUri('index.css')
+    const scriptUri = getAssetUri('index.js')
 
     // Get the URI to monaco-editor
-    const jsonWorkerUri = getUri(webview, extensionUri, [...dirs, 'json.worker.js']).toString()
-    const cssWorkerUri = getUri(webview, extensionUri, [...dirs, 'css.worker.js']).toString()
-    const htmlWorkerUri = getUri(webview, extensionUri, [...dirs, 'html.worker.js']).toString()
-    const tsWorkerUri = getUri(webview, extensionUri, [...dirs, 'ts.worker.js']).toString()
-    const editorWorkerUri = getUri(webview, extensionUri, [...dirs, 'editor.worker.js']).toString()
-    const javascriptUri = getUri(webview, extensionUri, [...dirs, 'javascript.js']).toString()
-    const typescriptUri = getUri(webview, extensionUri, [...dirs, 'typescript.js']).toString()
-    const tsModeUri = getUri(webview, extensionUri, [...dirs, 'tsMode.js']).toString()
-    const fontUri = getUri(webview, extensionUri, [...dirs, 'codicon.ttf']).toString()
+    const editorWorkerUri = getAssetUri('editor.worker-J4Hzw8F3.js')
+    const tsWorkerUri = getAssetUri('ts.worker-4eAHnwkp.js')
+    const tsModeUri = getAssetUri('tsMode.js')
+    const javascriptUri = getAssetUri('javascript.js')
+    const typescriptUri = getAssetUri('typescript.js')
+    const fontUri = getAssetUri('codicon.ttf')
 
     // Generate a nonce for script elements
     const nonce = getNonce()
@@ -165,24 +165,26 @@ export class ViewExportsSVGPanel {
     // Return the HTML content for the webview panel
     return `
       <!DOCTYPE html>
-      <html lang="en">
+      <html lang="${env.language || 'en'}">
         <head>
           <meta charset="UTF-8" />
-          <link rel="icon" type="ico" href="${icoUri}" />
+          <link rel="icon" type="image/x-icon" href="${icoUri}" />
           <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-          <meta http-equiv="Content-Security-Policy" content="default-src 'none'; style-src 'unsafe-inline' ${webview.cspSource}; script-src 'nonce-${nonce}'; worker-src ${webview.cspSource}; font-src 'self' vscode-resource.vscode-cdn.net;">
+          <meta http-equiv="Content-Security-Policy" content="default-src 'none'; style-src 'unsafe-inline' ${
+            webview.cspSource
+          }; script-src 'nonce-${nonce}'; worker-src ${
+            webview.cspSource
+          }; font-src 'self' vscode-resource.vscode-cdn.net;">
           <link rel="stylesheet" type="text/css" href="${stylesUri}">
           <link rel="stylesheet" type="font/ttf" href="${fontUri}">
           <title>${i18n.panelTitle}</title>
         </head>
         <body>
           <div id="root"></div>
+          <script type="module" nonce="${nonce}" src="${scriptUri}"></script>
           <script type="module" nonce="${nonce}">
             self.MonacoEnvironment = {
               getWorkerUrl: function (moduleId, label) {
-                if (label === 'json') return '${jsonWorkerUri}';
-                if (label === 'css' || label === 'scss' || label === 'less') return '${cssWorkerUri}';
-                if (label === 'html' || label === 'handlebars' || label === 'razor') return '${htmlWorkerUri}';
                 if (label === 'typescript' || label === 'javascript') return '${tsWorkerUri}';
                 return '${editorWorkerUri}';
             }
@@ -190,7 +192,6 @@ export class ViewExportsSVGPanel {
           <script type="module" nonce="${nonce}" src="${javascriptUri}"></script>
           <script type="module" nonce="${nonce}" src="${typescriptUri}"></script>
           <script type="module" nonce="${nonce}" src="${tsModeUri}"></script>
-          <script type="module" nonce="${nonce}" src="${scriptUri}"></script>
         </body>
       </html>
     `
