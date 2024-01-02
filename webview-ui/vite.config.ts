@@ -8,11 +8,11 @@ export default defineConfig({
   plugins: [react()],
   optimizeDeps: {
     include: [
-      `${PREFIX_MONACO}/language/json/json.worker`,
-      `${PREFIX_MONACO}/language/css/css.worker`,
-      `${PREFIX_MONACO}/language/html/html.worker`,
-      `${PREFIX_MONACO}/language/typescript/ts.worker`,
+      `${PREFIX_MONACO}/basic-languages/javascript/javascript`,
+      `${PREFIX_MONACO}/basic-languages/typescript/typescript`,
       `${PREFIX_MONACO}/editor/editor.worker`,
+      `${PREFIX_MONACO}/language/typescript/ts.worker`,
+      `${PREFIX_MONACO}/language/typescript/tsMode`,
     ],
     exclude: ['node_modules'],
   },
