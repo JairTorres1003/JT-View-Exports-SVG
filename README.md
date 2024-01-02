@@ -17,7 +17,7 @@ Enhance your productivity and streamline your icon management workflow with the 
 
 ## Screenshots
 
-https://github.com/JairTorres1003/JT-View-Exports-SVG/assets/83931760/b12ebc35-bfdb-41dc-a415-862a09e58970
+https://github.com/JairTorres1003/JT-View-Exports-SVG/assets/83931760/5a869f06-87e9-4426-89d2-84a2926eb568
 
 ## Installation
 
