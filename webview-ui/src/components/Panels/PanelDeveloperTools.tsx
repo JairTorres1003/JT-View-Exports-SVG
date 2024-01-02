@@ -71,7 +71,7 @@ const PanelDeveloperTools: FC<PanelDeveloperToolsProps> = (props) => {
                 <IconButton
                   size='small'
                   sx={{ color: 'inherit', p: '3px' }}
-                  title={`${showPlayground ? 'Hide' : 'View'} code`}
+                  title={`${showPlayground ? t('hide') : t('show')} ${t('code')}`}
                   onClick={() => {
                     setShowPlayground(!showPlayground)
                   }}

@@ -18,5 +18,8 @@
   "DeveloperTools": "Ferramentas de desenvolvedor",
   "playground": "Área de testes",
   "dark": "Escuro",
-  "light": "Claro"
+  "light": "Claro",
+  "hide": "Esconder",
+  "show": "Mostrar",
+  "code": "Código"
 }

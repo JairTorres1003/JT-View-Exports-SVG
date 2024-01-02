@@ -18,5 +18,8 @@
   "DeveloperTools": "开发者工具",
   "playground": "游乐场",
   "dark": "暗",
-  "light": "亮"
+  "light": "亮",
+  "hide": "隐藏",
+  "show": "显示",
+  "code": "代码"
 }

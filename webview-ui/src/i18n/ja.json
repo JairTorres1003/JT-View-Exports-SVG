@@ -18,5 +18,8 @@
   "DeveloperTools": "開発者ツール",
   "playground": "プレイグラウンド",
   "dark": "ダーク",
-  "light": "ライト"
+  "light": "ライト",
+  "hide": "非表示",
+  "show": "表示",
+  "code": "コード"
 }
