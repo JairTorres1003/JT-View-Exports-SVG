@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react'
 import { type Monaco, type EditorProps, loader } from '@monaco-editor/react'
-import * as monaco from 'monaco-editor'
+import * as monaco from 'monaco-editor/esm/vs/editor/editor.api'
 
 import useDebounce from './useDebounce'
 
