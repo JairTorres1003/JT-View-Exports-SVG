@@ -92,7 +92,10 @@ const usePlayground = () => {
     const properties: Record<string, any> = selectedSvg?.params ?? {}
 
     // Remove the custom property from the object
-    delete properties[REST_PROPS_KEY]
+    if (REST_PROPS_KEY in properties) {
+      const { [REST_PROPS_KEY]: omitted, ...rest } = properties
+      properties[REST_PROPS_KEY] = rest
+    }
 
     const existingLangId = languages.getEncodedLanguageId(selectedSvgLanguage)
     const langDef = languages.getLanguages()[existingLangId - 1]

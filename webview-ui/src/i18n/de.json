@@ -18,5 +18,8 @@
   "DeveloperTools": "Entwicklertools",
   "playground": "Spielplatz",
   "dark": "Dunkel",
-  "light": "Hell"
+  "light": "Hell",
+  "hide": "Verbergen",
+  "show": "Anzeigen",
+  "code": "Code"
 }
