@@ -5,3 +5,5 @@
 Enhance your creative workflow by visualizing all your icon assets in one central location. Optimize your development process and bring your icons to life with this essential tool for developers!
 
 ![Screenshots-ui](../assets/Screenshots-ui.png)
+
+![Screenshots-ui](../assets/Screenshots-2-ui.png)
