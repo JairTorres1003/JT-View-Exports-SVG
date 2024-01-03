@@ -2,7 +2,7 @@
 
 <img src="./assets/JT View Exports SVG - ICON.png" alt="Logo View Exports SVG" width="180" height="180">
 
-## Descripción
+## Description
 
 '**View Exports SVG**' is a Visual Studio Code extension that provides a convenient way to view SVG icons exported from JavaScript, JSX, TypeScript, or TSX files. With this extension, you can easily explore and search for SVG icons within your project, making it effortless to find and utilize your icon assets.
 
