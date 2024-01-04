@@ -35,6 +35,10 @@ https://github.com/JairTorres1003/JT-View-Exports-SVG/assets/83931760/5a869f06-8
 5. Use the search bar in the panel to filter the icons by their names.
 6. Click the SVG icon to copy the name to the clipboard.
 
+## Wiki
+
+Consulta la [wiki](https://github.com/JairTorres1003/JT-View-Exports-SVG/wiki) para obtener más información y documentación detallada.
+
 ## Contribuciones
 
 Contributions are welcome! If you find any bugs or have suggestions for new features, please feel free to open an issue or submit a pull request.
