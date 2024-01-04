@@ -62,20 +62,6 @@
       ]
     }
   },
-  "jest": {
-    "testEnvironment": "node",
-    "preset": "ts-jest",
-    "testMatch": [
-      "**/test/**/*.test.ts"
-    ],
-    "coveragePathIgnorePatterns": [
-      "/node_modules/",
-      "/webview-ui/"
-    ],
-    "collectCoverageFrom": [
-      "src/**/*.ts"
-    ]
-  },
   "scripts": {
     "install:all": "npm install && cd webview-ui && npm install",
     "start:webview": "cd webview-ui && npm run dev",

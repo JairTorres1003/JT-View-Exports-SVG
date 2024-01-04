@@ -67,5 +67,6 @@ module.exports = {
     '**/*.vsix/**',
     '.eslintrc.cjs',
     'webview-ui',
+    'test',
   ],
 }
