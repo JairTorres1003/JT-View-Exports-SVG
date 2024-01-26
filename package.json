@@ -60,7 +60,19 @@
           "when": "resourceLangId == javascript || resourceLangId == typescript || resourceLangId == javascriptreact || resourceLangId == typescriptreact"
         }
       ]
-    }
+    },
+    "configuration":[
+      {
+        "title": "View Exports SVG",
+        "properties": {
+          "JT-View-Exports-SVG.assetsPath": {
+            "type": "array",
+            "default": [],
+            "description": "An array to store the paths of analyzed files that have SVG icons. This allows for quick access to them from the webview, serving as shortcuts."
+          }
+        }
+      }
+    ]
   },
   "jest": {
     "testEnvironment": "node",
