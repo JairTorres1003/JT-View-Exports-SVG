@@ -1,11 +1,4 @@
-import {
-  ProgressLocation,
-  type ProgressOptions,
-  type Uri,
-  window,
-  workspace,
-  ConfigurationTarget,
-} from 'vscode'
+import { ProgressLocation, type ProgressOptions, type Uri, window } from 'vscode'
 import * as path from 'path'
 
 import { type SvgExport, type SvgExportErrors, type SvgFile } from '../interfaces/svgExports'
