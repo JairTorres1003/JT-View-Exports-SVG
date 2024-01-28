@@ -6,7 +6,7 @@ import { REGEX_FILE } from '../constants/regex'
 import { baseFileCache, FileModifiedCache, getFileTimestamp } from './cache'
 import { getWorkspaceFolder, getFileLanguage } from './fileSystem'
 import { extractSVGComponentExports } from './svg/extractSVGComponentExports'
-import { addAssetsFile, getTranslations } from './vscode'
+import { ConfigAssetsPath, getTranslations } from './vscode'
 
 // Create an instance of FileModifiedCache for caching SvgExport objects
 const fileCache = new FileModifiedCache<SvgExport>()
@@ -106,7 +106,8 @@ export async function processFiles(
             baseFileCache.set(file.absolutePath, base, lastModified)
 
             if (lengthSvg > 0) {
-              addAssetsFile(file).catch((error) => {
+              // Add the file to the assets path if it doesn't exist
+              new ConfigAssetsPath().set(file).catch((error) => {
                 console.error(`Error adding file ${file.absolutePath} to assets: ${String(error)}`)
               })
             }

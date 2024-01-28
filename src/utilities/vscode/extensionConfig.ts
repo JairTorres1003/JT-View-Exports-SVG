@@ -6,7 +6,7 @@ import { type SvgFile } from '../../interfaces/svgExports'
  * Manages the configuration of the assets path for the extension.
  * Extends the `ExtensionConfigManager` class.
  */
-export class configAssetsPath extends ExtensionConfigManager<string[]> {
+export class ConfigAssetsPath extends ExtensionConfigManager<string[]> {
   private readonly assetsPath: string[] = this.get() ?? []
   private readonly assetsPathUser: string[] = this.inspect() ?? []
   private readonly workspaceFolders = workspace.workspaceFolders
