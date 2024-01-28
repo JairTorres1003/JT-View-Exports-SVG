@@ -1,5 +1,15 @@
 # View Exports SVG - Changelog
 
+## 3.0.1
+
+_Jan 4, 2024_
+
+**Documentation Updates**
+
+- **Wiki Enhancements:** Added and refined documentation in the project's wiki.
+- **Clarifications:** Provided additional clarifications and examples for better understanding.
+- **Usage Instructions:** Improved user guidance in the documentation.
+
 ## 3.0.0
 
 _Jan 2, 2024_
