@@ -6,8 +6,7 @@ import { REGEX_FILE } from '../constants/regex'
 import { baseFileCache, FileModifiedCache, getFileTimestamp } from './cache'
 import { getWorkspaceFolder, getFileLanguage } from './fileSystem'
 import { extractSVGComponentExports } from './svg/extractSVGComponentExports'
-import { getTranslations } from './vscode'
-import { addAssetsFile } from './vscode/extensionConfiguration'
+import { addAssetsFile, getTranslations } from './vscode'
 
 // Create an instance of FileModifiedCache for caching SvgExport objects
 const fileCache = new FileModifiedCache<SvgExport>()
