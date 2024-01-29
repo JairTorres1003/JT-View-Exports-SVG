@@ -7,9 +7,11 @@ import {
   TableCell,
   TableContainer,
   TableRow,
+  Tooltip,
   Typography,
 } from '@mui/material'
 import { useTranslation } from 'react-i18next'
+import MiddleEllipsis from 'react-middle-ellipsis'
 
 import { AssetFilesBox } from './AssetFiles.style'
 import { useAssetFiles } from '../../hooks/useAssetFiles'
@@ -35,13 +37,18 @@ const AssetFiles = () => {
                       handleViewAsset(path)
                     }}
                   >
-                    {path}
+                    <MiddleEllipsis>
+                      <Tooltip title={path} arrow>
+                        <span>{path}</span>
+                      </Tooltip>
+                    </MiddleEllipsis>
                   </Button>
                 </TableCell>
-                <TableCell align='right' width='30px'>
+                <TableCell align='right' className='assetFiles__tableCell' width={40}>
                   <IconButton
                     size='small'
                     title={t('OpenFile')}
+                    className='assetFiles__tableCellIconButton'
                     onClick={() => {
                       handleOpenFile(path)
                     }}
