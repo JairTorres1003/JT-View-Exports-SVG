@@ -96,4 +96,12 @@ export class ConfigAssetsPath extends ExtensionConfigManager<string[]> {
       }
     }
   }
+
+  /**
+   * Retrieves the assets path for the extension.
+   * @returns An object containing the workspace and user assets paths.
+   */
+  public getAssetsPath(): { workspace: string[]; user: string[] } {
+    return { workspace: this.assetsPath, user: this.assetsPathUser }
+  }
 }
