@@ -21,5 +21,9 @@
   "light": "Светлая тема",
   "hide": "Скрыть",
   "show": "Показать",
-  "code": "Код"
+  "code": "Код",
+  "OpenFile": "Открыть файл",
+  "AssetFiles.Title.Workspace": "Файлы ресурсов в рабочей области",
+  "AssetFiles.Title.Others": "Файлы ресурсов в других папках",
+  "AssetFiles.Empty.Workspace": "Нет файлов ресурсов в рабочей области"
 }
