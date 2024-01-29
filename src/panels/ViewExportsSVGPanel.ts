@@ -14,10 +14,15 @@ import {
   type PostMessageCommand,
   type CommandHandler,
 } from '../interfaces/vscode'
-import { getInputFiles, getNonce, getUri } from '../utilities/fileSystem'
+import { getInputFiles, getNonce, getUri, openFile, viewAssetFile } from '../utilities/fileSystem'
 import { customSvgComponent } from '../utilities/svg/customSvgComponent'
 import { filterSvgComponents } from '../utilities/svg/filterSvgComponents'
-import { getTranslations, getCurrentTheme, getConfigurationVsCode } from '../utilities/vscode'
+import {
+  getTranslations,
+  getCurrentTheme,
+  getConfigurationVsCode,
+  ConfigAssetsPath,
+} from '../utilities/vscode'
 
 /**
  * Webview panel for displaying SVG exports.
@@ -274,6 +279,33 @@ export class ViewExportsSVGPanel {
   }
 
   /**
+   * Handles the retrieval of the assets path.
+   */
+  private handleGetAssetsPath(): void {
+    const config = new ConfigAssetsPath()
+    const response = config.getAssetsPath()
+    this._postMessage('assetsPath', response)
+  }
+
+  /**
+   * Handles the opening of a file.
+   * @param message The received message data.
+   */
+  private handleOpenFile(message: ReceiveMessageData): void {
+    openFile(message.data).catch((error) => {
+      console.error('Failed to open file:', error)
+    })
+  }
+
+  /**
+   * Handles the view assets message.
+   * @param message The received message data.
+   */
+  private handleViewAssets(message: ReceiveMessageData): void {
+    viewAssetFile(message.data)
+  }
+
+  /**
    * Sets up a message listener for the webview panel.
    * @param webview The webview instance.
    */
@@ -286,6 +318,9 @@ export class ViewExportsSVGPanel {
       getTranslations: this.handleGetTranslations.bind(this),
       extractIconsFile: this.handleExtractIconsFile.bind(this),
       playgroundSvgComponents: this.handlePlayground.bind(this),
+      getAssetsPath: this.handleGetAssetsPath.bind(this),
+      openFile: this.handleOpenFile.bind(this),
+      viewAssets: this.handleViewAssets.bind(this),
     }
 
     webview.onDidReceiveMessage(
