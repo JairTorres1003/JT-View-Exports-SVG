@@ -302,7 +302,9 @@ export class ViewExportsSVGPanel {
    * @param message The received message data.
    */
   private handleViewAssets(message: ReceiveMessageData): void {
-    viewAssetFile(message.data)
+    viewAssetFile(message.data).catch((error) => {
+      console.error('Failed to view assets:', error)
+    })
   }
 
   /**

@@ -37,11 +37,19 @@ export const openFile = async (filePath: string): Promise<void> => {
   }
 }
 
-export const viewAssetFile = (filePath: string): void => {
+/**
+ * Opens and processes a view asset file.
+ *
+ * @param filePath - The path to the file to be opened and processed.
+ * @returns A promise that resolves when the file is successfully processed.
+ */
+export const viewAssetFile = async (filePath: string): Promise<void> => {
   const isRelative = !path.isAbsolute(filePath)
   const absolutePath = isRelative ? path.join(getWorkspaceFolder(), filePath) : filePath
 
-  getInputFiles([absolutePath]).catch((error) => {
-    console.error(error)
-  })
+  if (fs.existsSync(absolutePath)) {
+    await getInputFiles([absolutePath])
+  } else {
+    await window.showErrorMessage(`The file ${absolutePath} does not exist.`)
+  }
 }
