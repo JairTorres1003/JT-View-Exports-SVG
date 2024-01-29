@@ -74,6 +74,7 @@ export const DropZone: FC<DropZoneProps> = (props) => {
       </FileUploader>
       <Button
         variant='outlined'
+        size='medium'
         color='success'
         disabled={!file || file?.length < 1}
         onClick={() => {
