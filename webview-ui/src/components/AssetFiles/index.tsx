@@ -47,6 +47,7 @@ const AssetFiles = () => {
                 <TableCell align='right' className='assetFiles__tableCell' width={40}>
                   <IconButton
                     size='small'
+                    color='success'
                     title={t('OpenFile')}
                     className='assetFiles__tableCellIconButton'
                     onClick={() => {
