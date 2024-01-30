@@ -25,5 +25,6 @@
   "OpenFile": "Open file",
   "AssetFiles.Title.Workspace": "Asset Files in Workspace",
   "AssetFiles.Title.Others": "Asset Files in Other Folders",
-  "AssetFiles.Empty.Workspace": "No asset files in workspace"
+  "AssetFiles.Empty.Workspace": "No asset files in workspace",
+  "delete": "Delete"
 }

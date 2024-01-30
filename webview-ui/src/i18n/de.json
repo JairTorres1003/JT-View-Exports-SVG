@@ -25,5 +25,6 @@
   "OpenFile": "Datei öffnen",
   "AssetFiles.Title.Workspace": "Asset-Dateien im Arbeitsbereich",
   "AssetFiles.Title.Others": "Asset-Dateien in anderen Ordnern",
-  "AssetFiles.Empty.Workspace": "Keine Asset-Dateien im Arbeitsbereich"
+  "AssetFiles.Empty.Workspace": "Keine Asset-Dateien im Arbeitsbereich",
+  "delete": "Löschen"
 }

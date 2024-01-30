@@ -25,5 +25,6 @@
   "OpenFile": "Ouvrir le fichier",
   "AssetFiles.Title.Workspace": "Fichiers d'actifs dans l'espace de travail",
   "AssetFiles.Title.Others": "Fichiers d'actifs dans d'autres dossiers",
-  "AssetFiles.Empty.Workspace": "Aucun fichier d'actif dans l'espace de travail"
+  "AssetFiles.Empty.Workspace": "Aucun fichier d'actif dans l'espace de travail",
+  "delete": "Supprimer"
 }
