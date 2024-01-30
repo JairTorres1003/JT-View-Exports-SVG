@@ -61,7 +61,7 @@ const AssetFiles = () => {
                   <IconButton
                     size='small'
                     color='error'
-                    title={t('OpenFile')}
+                    title={t('delete')}
                     className='assetFiles__tableCellIconButton'
                     onClick={() => {
                       handleRemoveAsset(path)
