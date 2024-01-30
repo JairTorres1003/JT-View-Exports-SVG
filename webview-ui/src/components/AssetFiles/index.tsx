@@ -15,11 +15,11 @@ import MiddleEllipsis from 'react-middle-ellipsis'
 
 import { AssetFilesBox } from './AssetFiles.style'
 import { useAssetFiles } from '../../hooks/useAssetFiles'
-import { IconFragmentCode } from '../../icons'
+import { IconClose, IconFragmentCode } from '../../icons'
 import { type FC } from 'react'
 
 const AssetFiles = () => {
-  const { assetFiles, handleOpenFile, handleViewAsset } = useAssetFiles()
+  const { assetFiles, handleOpenFile, handleRemoveAsset, handleViewAsset } = useAssetFiles()
   const { t } = useTranslation()
 
   const AssetTable: FC<{ paths: string[] }> = ({ paths }) => {
@@ -54,6 +54,19 @@ const AssetFiles = () => {
                     }}
                   >
                     <IconFragmentCode size={18} />
+                  </IconButton>
+                </TableCell>
+                <TableCell align='right' className='assetFiles__tableCell' width={40}>
+                  <IconButton
+                    size='small'
+                    color='error'
+                    title={t('OpenFile')}
+                    className='assetFiles__tableCellIconButton'
+                    onClick={() => {
+                      handleRemoveAsset(path)
+                    }}
+                  >
+                    <IconClose size={18} color='red' />
                   </IconButton>
                 </TableCell>
               </TableRow>
