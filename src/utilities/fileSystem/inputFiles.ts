@@ -6,6 +6,7 @@ import { processFiles } from '../commonFunctions'
 import { getWorkspaceFolder } from './workspaceFolder'
 import { type SvgExport, type SvgExportErrors } from '../../interfaces/svgExports'
 import { ViewExportsSVGPanel } from '../../panels/ViewExportsSVGPanel'
+import { ConfigAssetsPath } from '../vscode'
 
 /**
  * Get input files and start the process for the extraction of svg components.
@@ -52,4 +53,24 @@ export const viewAssetFile = async (filePath: string): Promise<void> => {
   } else {
     await window.showErrorMessage(`The file ${absolutePath} does not exist.`)
   }
+}
+
+/**
+ * Removes an asset file.
+ *
+ * @param filePath - The path to the file to be removed.
+ * @returns A promise that resolves when the file is successfully removed.
+ */
+export const removeAssetFile = async (filePath: string): Promise<void> => {
+  const isRelative = !path.isAbsolute(filePath)
+  const absolutePath = isRelative ? path.join(getWorkspaceFolder(), filePath) : filePath
+
+  const file = {
+    basename: path.basename(absolutePath),
+    dirname: path.dirname(absolutePath),
+    absolutePath: absolutePath,
+    relativePath: path.relative(getWorkspaceFolder(), absolutePath),
+  }
+
+  await new ConfigAssetsPath().remove(file)
 }
