@@ -37,6 +37,14 @@ export const useAssetFiles = () => {
     vscode.postMessage('viewAssets', path)
   }
 
+  /**
+   * Handles the removal of an asset file.
+   * @param path - The path of the asset file to be removed.
+   */
+  const handleRemoveAsset = (path: string) => {
+    vscode.postMessage('removeAsset', path)
+  }
+
   useEffect(() => {
     vscode.postMessage('getAssetsPath')
     vscode.onMessage('assetsPath', handleAssetFiles)
@@ -46,5 +54,5 @@ export const useAssetFiles = () => {
     }
   }, [])
 
-  return { assetFiles, handleOpenFile, handleViewAsset }
+  return { assetFiles, handleOpenFile, handleRemoveAsset, handleViewAsset }
 }
