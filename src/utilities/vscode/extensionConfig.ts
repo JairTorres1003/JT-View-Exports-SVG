@@ -50,6 +50,17 @@ export class ConfigAssetsPath extends ExtensionConfigManager<string[]> {
   }
 
   /**
+   * Updates the assets paths by copying the values from the configuration.
+   * If the configuration values are null or undefined, the assets paths will be empty arrays.
+   */
+  private updateAssetsPaths(): void {
+    this.assetsPath.length = 0
+    this.assetsPath.push(...(this.get() ?? []))
+    this.assetsPathUser.length = 0
+    this.assetsPathUser.push(...(this.inspect() ?? []))
+  }
+
+  /**
    * Sets the assets path for the given SVG file.
    * Adds the file to the assets path if it doesn't already exist.
    * @param file - The SVG file.
@@ -90,6 +101,7 @@ export class ConfigAssetsPath extends ExtensionConfigManager<string[]> {
           value.splice(index, 1)
 
           await this.update(value, target)
+          this.updateAssetsPaths()
         }
       } catch (error) {
         console.error('Error removing assets path:', error)
