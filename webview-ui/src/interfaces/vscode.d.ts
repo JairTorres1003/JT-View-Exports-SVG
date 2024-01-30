@@ -9,6 +9,7 @@ export type PostMessageCommand =
   | 'searchSvgComponents'
   | 'openFile'
   | 'viewAssets'
+  | 'removeAsset'
 export type OnMessageCommand =
   | 'assetsPath'
   | 'configurationVsCode'

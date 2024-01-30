@@ -9,6 +9,7 @@ export type ReceiveMessageCommand =
   | 'searchSvgComponents'
   | 'openFile'
   | 'viewAssets'
+  | 'removeAsset'
 export type PostMessageCommand =
   | 'assetsPath'
   | 'configurationVsCode'
@@ -34,7 +35,7 @@ interface ReceiveMessageData {
 /**
  * Represents a handler for commands.
  */
-type CommandHandler = Record<string, (message: ReceiveMessageData) => void>
+type CommandHandler = Record<ReceiveMessageCommand, (message: ReceiveMessageData) => void>
 
 /**
  * Represents a language file.
