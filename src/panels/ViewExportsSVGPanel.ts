@@ -14,7 +14,14 @@ import {
   type PostMessageCommand,
   type CommandHandler,
 } from '../interfaces/vscode'
-import { getInputFiles, getNonce, getUri, openFile, viewAssetFile } from '../utilities/fileSystem'
+import {
+  getInputFiles,
+  getNonce,
+  getUri,
+  openFile,
+  removeAssetFile,
+  viewAssetFile,
+} from '../utilities/fileSystem'
 import { customSvgComponent } from '../utilities/svg/customSvgComponent'
 import { filterSvgComponents } from '../utilities/svg/filterSvgComponents'
 import {
@@ -308,6 +315,21 @@ export class ViewExportsSVGPanel {
   }
 
   /**
+   * Handles the removal of an asset.
+   * @param message - The message containing the data for the asset to be removed.
+   */
+  private handleRemoveAsset(message: ReceiveMessageData): void {
+    removeAssetFile(message.data)
+      .then(() => {
+        const response = new ConfigAssetsPath().getAssetsPath()
+        this._postMessage('assetsPath', response)
+      })
+      .catch((error) => {
+        console.error('Failed to remove asset:', error)
+      })
+  }
+
+  /**
    * Sets up a message listener for the webview panel.
    * @param webview The webview instance.
    */
@@ -323,6 +345,7 @@ export class ViewExportsSVGPanel {
       getAssetsPath: this.handleGetAssetsPath.bind(this),
       openFile: this.handleOpenFile.bind(this),
       viewAssets: this.handleViewAssets.bind(this),
+      removeAsset: this.handleRemoveAsset.bind(this),
     }
 
     webview.onDidReceiveMessage(
