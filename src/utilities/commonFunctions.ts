@@ -84,6 +84,7 @@ export async function processFiles(
         }
       })
 
+      const svgComponentFiles: SvgFile[] = []
       // Extract SVG exports from the selected files
       const svgComponents: SvgExport[] = await Promise.all(
         selectedFiles.map(async (file) => {
@@ -106,10 +107,7 @@ export async function processFiles(
             baseFileCache.set(file.absolutePath, base, lastModified)
 
             if (lengthSvg > 0) {
-              // Add the file to the assets path if it doesn't exist
-              new ConfigAssetsPath().set(file).catch((error) => {
-                console.error(`Error adding file ${file.absolutePath} to assets: ${String(error)}`)
-              })
+              svgComponentFiles.push(file)
             }
 
             return result
@@ -129,6 +127,12 @@ export async function processFiles(
       // Execute the specified operation with the extracted SVG components
 
       operation(svgComponents.length > 0 ? svgComponents : newError)
+
+      // Update the assets path configuration
+      const configAssetsPath = new ConfigAssetsPath()
+      configAssetsPath.set(svgComponentFiles).catch((error) => {
+        console.error('Error setting assets path:', error)
+      })
 
       return progress
     })
