@@ -36,7 +36,7 @@ export default class ExtensionConfigManager<T> {
    * @returns The value of the configuration section.
    */
   get(): T {
-    return this.config.get(this.section) as T
+    return this.config.inspect(this.section)?.workspaceValue as T
   }
 
   /**
