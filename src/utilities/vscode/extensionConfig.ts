@@ -1,6 +1,9 @@
 import { ConfigurationTarget, workspace } from 'vscode'
+import * as path from 'path'
+
 import ExtensionConfigManager from './extensionConfigManager'
 import { type SvgFile } from '../../interfaces/svgExports'
+import { getWorkspaceFolder } from '../fileSystem'
 
 /**
  * Manages the configuration of the assets path for the extension.
@@ -65,19 +68,31 @@ export class ConfigAssetsPath extends ExtensionConfigManager<string[]> {
    * Adds the file to the assets path if it doesn't already exist.
    * @param file - The SVG file.
    */
-  public async set(file: SvgFile): Promise<void> {
+  public async set(file: SvgFile | SvgFile[]): Promise<void> {
     if (this.workspaceFolders) {
       try {
-        const filePath = this.getPath(file)
-        const [target, value] = this.getTargetValue(file)
+        const filesArray = Array.isArray(file) ? file : [file]
+        const value = this.get() ?? []
+        const valueUser = this.inspect() ?? []
 
-        // Add the file to the assets path if it doesn't exist
-        if (!value.includes(filePath)) {
-          value.push(filePath)
-          value.sort((a, b) => a.localeCompare(b))
+        for (const f of filesArray) {
+          const filePath = this.getPath(f)
+          const exists = this.existsInWorkspace(f)
 
-          await this.update(value, target)
+          if (!value.includes(filePath) && exists) {
+            value.push(filePath)
+          } else if (!valueUser.includes(filePath) && !exists) {
+            valueUser.push(filePath)
+          }
         }
+
+        // Sort the assets path
+        value.sort()
+        valueUser.sort()
+
+        // Update the configuration
+        await this.update(value, ConfigurationTarget.Workspace)
+        await this.update(valueUser, ConfigurationTarget.Global)
       } catch (error) {
         console.error('Error setting assets path:', error)
       }
@@ -111,9 +126,34 @@ export class ConfigAssetsPath extends ExtensionConfigManager<string[]> {
 
   /**
    * Retrieves the assets path for the extension.
+   * The assets path includes both the workspace and user paths.
    * @returns An object containing the workspace and user assets paths.
    */
   public getAssetsPath(): { workspace: string[]; user: string[] } {
+    this.assetsPathUser.forEach((p, index) => {
+      if (this.workspaceFolders) {
+        const exists = this.workspaceFolders?.some((folder) => p.includes(folder.uri.fsPath))
+        const relativePath = exists ? path.relative(getWorkspaceFolder(), p) : p
+
+        if (exists) {
+          // Add the file to the assets path if it doesn't exist
+          if (!this.assetsPath.includes(relativePath)) {
+            const file = {
+              basename: path.basename(p),
+              dirname: path.dirname(p),
+              absolutePath: p,
+              relativePath,
+            }
+
+            this.set(file).catch((error) => console.error('Error setting assets path:', error))
+          }
+
+          // Remove the file from the user assets path
+          this.assetsPathUser.splice(index, 1)
+        }
+      }
+    })
+
     return { workspace: this.assetsPath, user: this.assetsPathUser }
   }
 }
