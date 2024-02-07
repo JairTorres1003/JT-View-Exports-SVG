@@ -49,7 +49,7 @@ export const AssetTable: FC<AssetTableProps> = ({
                 <IconButton
                   size='small'
                   color='success'
-                  title={t('OpenFile')}
+                  title={t('EditFile')}
                   className='assetFiles__tableCellIconButton'
                   onClick={() => {
                     handleOpenFile(path)
