@@ -551,3 +551,21 @@ export const FolderOpenIcon: FC<IconProps> = ({ color = 'currentColor', size = 2
     <path d='M1 3.5A1.5 1.5 0 0 1 2.5 2h2.764c.958 0 1.76.56 2.311 1.184C7.985 3.648 8.48 4 9 4h4.5A1.5 1.5 0 0 1 15 5.5v.64c.57.265.94.876.856 1.546l-.64 5.124A2.5 2.5 0 0 1 12.733 15H3.266a2.5 2.5 0 0 1-2.481-2.19l-.64-5.124A1.5 1.5 0 0 1 1 6.14V3.5zM2 6h12v-.5a.5.5 0 0 0-.5-.5H9c-.964 0-1.71-.629-2.174-1.154C6.374 3.334 5.82 3 5.264 3H2.5a.5.5 0 0 0-.5.5V6zm-.367 1a.5.5 0 0 0-.496.562l.64 5.124A1.5 1.5 0 0 0 3.266 14h9.468a1.5 1.5 0 0 0 1.489-1.314l.64-5.124A.5.5 0 0 0 14.367 7H1.633z'></path>
   </svg>
 )
+
+export const IconPencilSquare: FC<IconProps> = ({ color = 'currentColor', size = 24 }) => (
+  <svg
+    stroke={color}
+    fill='none'
+    strokeWidth='1.5'
+    viewBox='0 0 24 24'
+    height={size}
+    width={size}
+    xmlns='http://www.w3.org/2000/svg'
+  >
+    <path
+      strokeLinecap='round'
+      strokeLinejoin='round'
+      d='M16.862 4.487l1.687-1.688a1.875 1.875 0 112.652 2.652L10.582 16.07a4.5 4.5 0 01-1.897 1.13L6 18l.8-2.685a4.5 4.5 0 011.13-1.897l8.932-8.931zm0 0L19.5 7.125M18 14v4.75A2.25 2.25 0 0115.75 21H5.25A2.25 2.25 0 013 18.75V8.25A2.25 2.25 0 015.25 6H10'
+    ></path>
+  </svg>
+)
