@@ -23,6 +23,7 @@
   "show": "Show",
   "code": "Code",
   "OpenFile": "Open file",
+  "EditFile": "Edit file",
   "AssetFiles.Title.Workspace": "Asset Files in Workspace",
   "AssetFiles.Title.Others": "Asset Files in Other Folders",
   "AssetFiles.Empty.Workspace": "No asset files in workspace",

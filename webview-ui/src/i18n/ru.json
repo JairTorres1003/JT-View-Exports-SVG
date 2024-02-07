@@ -23,6 +23,7 @@
   "show": "Показать",
   "code": "Код",
   "OpenFile": "Открыть файл",
+  "EditFile": "Редактировать файл",
   "AssetFiles.Title.Workspace": "Файлы ресурсов в рабочей области",
   "AssetFiles.Title.Others": "Файлы ресурсов в других папках",
   "AssetFiles.Empty.Workspace": "Нет файлов ресурсов в рабочей области",

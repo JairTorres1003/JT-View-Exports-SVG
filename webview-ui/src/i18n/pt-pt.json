@@ -23,6 +23,7 @@
   "show": "Mostrar",
   "code": "Código",
   "OpenFile": "Abrir ficheiro",
+  "EditFile": "Editar ficheiro",
   "AssetFiles.Title.Workspace": "Ficheiros de ativos no espaço de trabalho",
   "AssetFiles.Title.Others": "Ficheiros de ativos em outras pastas",
   "AssetFiles.Empty.Workspace": "Nenhum ficheiro de ativo no espaço de trabalho",
