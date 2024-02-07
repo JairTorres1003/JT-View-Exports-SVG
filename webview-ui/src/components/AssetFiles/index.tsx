@@ -3,6 +3,7 @@ import { useTranslation } from 'react-i18next'
 
 import { AssetFilesBox } from './AssetFiles.style'
 import { AssetTable } from './AssetTable'
+import { FolderIcon, FolderOpenIcon } from '../../icons'
 
 import { useAssetFiles } from '../../hooks/useAssetFiles'
 
@@ -13,6 +14,9 @@ const AssetFiles = () => {
   return (
     <AssetFilesBox>
       <Typography component='h1' fontSize={20}>
+        <span>
+          <FolderOpenIcon size={20} sx={{ margin: '0 8px -2px 0' }} />
+        </span>
         {t('AssetFiles.Title.Workspace')}
       </Typography>
       {assetFiles && assetFiles.workspace.length > 0 ? (
@@ -25,6 +29,9 @@ const AssetFiles = () => {
       {assetFiles && assetFiles.user.length > 0 && (
         <>
           <Typography component='h1' fontSize={20}>
+            <span>
+              <FolderIcon size={20} sx={{ margin: '0 8px -2px 0' }} />
+            </span>
             {t('AssetFiles.Title.Others')}
           </Typography>
           <AssetTable paths={assetFiles.user} {...useProps} />

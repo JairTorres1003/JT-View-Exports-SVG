@@ -9,11 +9,11 @@ import {
   TableRow,
   Tooltip,
 } from '@mui/material'
+import { type FC } from 'react'
 import { useTranslation } from 'react-i18next'
 import MiddleEllipsis from 'react-middle-ellipsis'
 
-import { IconClose, IconFragmentCode } from '../../icons'
-import { type FC } from 'react'
+import { IconClose, IconPencilSquare } from '../../icons'
 import { type AssetTableProps } from '../../interfaces/AssetTable'
 
 export const AssetTable: FC<AssetTableProps> = ({
@@ -55,7 +55,7 @@ export const AssetTable: FC<AssetTableProps> = ({
                     handleOpenFile(path)
                   }}
                 >
-                  <IconFragmentCode size={18} />
+                  <IconPencilSquare size={18} />
                 </IconButton>
               </TableCell>
               <TableCell align='right' className='assetFiles__tableCell' width={40}>
