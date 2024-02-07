@@ -1,5 +1,5 @@
 import { motion } from 'framer-motion'
-import { CSSProperties, type FC } from 'react'
+import { type CSSProperties, type FC } from 'react'
 
 interface IconProps {
   size?: number | string
