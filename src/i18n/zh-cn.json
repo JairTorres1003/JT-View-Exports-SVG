@@ -1,7 +1,8 @@
 {
-  "panelTitle": "查看SVG导出",
-  "progressTitle": "正在提取SVG导出...",
+  "panelTitle": "查看导出的SVG",
+  "progressTitle": "提取SVG导出...",
   "NoIconsFound": "未找到图标",
   "NoFileSelected": "未选择文件",
-  "PleaseSearch": "请输入至少3个字符进行搜索..."
+  "PleaseSearch": "请输入至少3个字符进行搜索...",
+  "NoExistedFile": "文件{0}不存在。"
 }

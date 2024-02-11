@@ -6,7 +6,7 @@ import { REGEX_FILE } from '../constants/regex'
 import { baseFileCache, FileModifiedCache, getFileTimestamp } from './cache'
 import { getWorkspaceFolder, getFileLanguage } from './fileSystem'
 import { extractSVGComponentExports } from './svg/extractSVGComponentExports'
-import { getTranslations } from './vscode'
+import { ConfigAssetsPath, getTranslations } from './vscode'
 
 // Create an instance of FileModifiedCache for caching SvgExport objects
 const fileCache = new FileModifiedCache<SvgExport>()
@@ -84,6 +84,7 @@ export async function processFiles(
         }
       })
 
+      const svgComponentFiles: SvgFile[] = []
       // Extract SVG exports from the selected files
       const svgComponents: SvgExport[] = await Promise.all(
         selectedFiles.map(async (file) => {
@@ -99,10 +100,15 @@ export async function processFiles(
             const { base, result: svgExports } = await extractSVGComponentExports(file.absolutePath)
 
             svgExports.svgComponents.sort((a, b) => a.name.localeCompare(b.name))
-            const result = { ...svgExports, file, lengthSvg: svgExports.svgComponents.length }
+            const lengthSvg = svgExports.svgComponents.length
+            const result = { ...svgExports, file, lengthSvg, lengthExports: lengthSvg }
             // Cache the result associated with the file and its last modification timestamp
             fileCache.set(file.absolutePath, result, lastModified)
             baseFileCache.set(file.absolutePath, base, lastModified)
+
+            if (lengthSvg > 0) {
+              svgComponentFiles.push(file)
+            }
 
             return result
           } catch (error) {
@@ -121,6 +127,12 @@ export async function processFiles(
       // Execute the specified operation with the extracted SVG components
 
       operation(svgComponents.length > 0 ? svgComponents : newError)
+
+      // Update the assets path configuration
+      const configAssetsPath = new ConfigAssetsPath()
+      configAssetsPath.set(svgComponentFiles).catch((error) => {
+        console.error('Error setting assets path:', error)
+      })
 
       return progress
     })

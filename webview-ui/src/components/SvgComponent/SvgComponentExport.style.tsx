@@ -28,7 +28,20 @@ export const AccordionSummary = styled((props: AccordionSummaryProps | PaperProp
   minHeight: '60px !important',
   flexDirection: 'row-reverse',
   transition: 'background-color 0.2s',
-  '& .AccordionSummary-title': { whiteSpace: 'nowrap', width: '100%', fontSize: 13 },
+  '& .AccordionSummary-title': {
+    '& .AccordionSummary-title-text': { whiteSpace: 'nowrap', width: '100%', fontSize: 13 },
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'space-between',
+    width: '100%',
+    gap: theme.spacing(1),
+    svg: {
+      minWidth: 20,
+      maxWidth: 20,
+      maxHeight: 20,
+      stroke: 'rgb(var(--color-JT-view-export-svg))',
+    },
+  },
   '&.Mui-expanded': {
     borderRadius: 0,
     color: 'inherit',

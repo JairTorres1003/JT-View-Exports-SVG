@@ -2,6 +2,7 @@ import { useState } from 'react'
 
 import { type SvgFile, type SvgComponent } from '../interfaces/svgExports'
 import { useSvg } from '../provider/SvgProvider'
+import { vscode } from '../utilities/vscode'
 
 const useSvgComponentExport = () => {
   const [isExpanded, setIsExpanded] = useState<boolean>(true)
@@ -44,10 +45,19 @@ const useSvgComponentExport = () => {
     dispatch({ type: 'SELECTED', payload: { item, name, path, language } })
   }
 
+  /**
+   * Handles opening a file.
+   * @param path - The path of the file to open.
+   */
+  const handleOpenFile = (path: string) => {
+    vscode.postMessage('openFile', path)
+  }
+
   return {
     handleCopy,
     handleExpanded,
     handleSelected,
+    handleOpenFile,
     isExpanded,
   }
 }

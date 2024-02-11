@@ -2,6 +2,7 @@ import { Box, ThemeProvider, Typography } from '@mui/material'
 import { Fragment } from 'react'
 import { Resizable } from 're-resizable'
 
+import AssetFiles from './components/AssetFiles'
 import { Finder } from './components/Finder/Finder'
 import SvgComponentExport from './components/SvgComponent/SvgComponentExport'
 import { DropZone } from './components/DropZone/DropZone'
@@ -82,7 +83,10 @@ function App() {
             <Snackbar />
           </Fragment>
         ) : (
-          <DropZone onExtractIcons={handleExtractIcons} />
+          <>
+            <DropZone onExtractIcons={handleExtractIcons} />
+            <AssetFiles />
+          </>
         )}
       </main>
     </ThemeProvider>

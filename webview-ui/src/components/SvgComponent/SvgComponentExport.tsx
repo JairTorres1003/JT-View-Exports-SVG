@@ -1,11 +1,12 @@
 import { type FC } from 'react'
-import { AccordionDetails, Tooltip } from '@mui/material'
+import { AccordionDetails, IconButton, Tooltip } from '@mui/material'
+import { useTranslation } from 'react-i18next'
 import MiddleEllipsis from 'react-middle-ellipsis'
 
 import useSvgComponentExport from '../../hooks/useSvgComponentExport'
 
 import { type SvgExport } from '../../interfaces/svgExports'
-import { IconFailExport } from '../../icons'
+import { IconFailExport, IconPencilSquare } from '../../icons'
 import RenderSVG from './RenderSvg'
 import {
   Accordion,
@@ -19,7 +20,9 @@ import {
 
 const SvgComponentExport: FC<SvgExport> = (props) => {
   const { file, svgComponents } = props
-  const { handleCopy, handleExpanded, handleSelected, isExpanded } = useSvgComponentExport()
+  const { handleCopy, handleExpanded, handleSelected, handleOpenFile, isExpanded } =
+    useSvgComponentExport()
+  const { t } = useTranslation()
 
   return (
     <Accordion
@@ -30,11 +33,22 @@ const SvgComponentExport: FC<SvgExport> = (props) => {
     >
       <AccordionSummary elevation={isExpanded ? 0 : 3}>
         <div className='AccordionSummary-title'>
-          <MiddleEllipsis>
-            <Tooltip title={file.relativePath} arrow>
-              <span>{file.relativePath}</span>
-            </Tooltip>
-          </MiddleEllipsis>
+          <div className='AccordionSummary-title-text'>
+            <MiddleEllipsis>
+              <Tooltip title={file.relativePath} arrow>
+                <span>{file.relativePath}</span>
+              </Tooltip>
+            </MiddleEllipsis>
+          </div>
+          <IconButton
+            size='small'
+            title={t('EditFile')}
+            onClick={() => {
+              handleOpenFile(file.absolutePath)
+            }}
+          >
+            <IconPencilSquare size={18} />
+          </IconButton>
         </div>
       </AccordionSummary>
       <AccordionDetails>
