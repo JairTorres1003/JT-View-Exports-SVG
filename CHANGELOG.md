@@ -1,5 +1,14 @@
 # View Exports SVG - Changelog
 
+## 3.1.0
+
+_Feb 11, 2024_
+
+**Adds Configurations**
+
+- **New Configuration:** Introduces the `JT-View-Exports-SVG.assetsPath` configuration to define in the workspace and/or user settings the files that have been opened and have icons available in the workspace.
+- **nternationalization Update:** Adds new translations.
+
 ## 3.0.1
 
 _Jan 4, 2024_
