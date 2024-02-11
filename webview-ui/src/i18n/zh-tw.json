@@ -21,5 +21,11 @@
   "light": "亮",
   "hide": "隱藏",
   "show": "顯示",
-  "code": "代碼"
+  "code": "代碼",
+  "OpenFile": "打開文件",
+  "EditFile": "編輯文件",
+  "AssetFiles.Title.Workspace": "工作區中的資源檔案",
+  "AssetFiles.Title.Others": "其他資料夾中的資源檔案",
+  "AssetFiles.Empty.Workspace": "工作區中沒有資源檔案",
+  "delete": "刪除"
 }

@@ -1,12 +1,17 @@
 export type ReceiveMessageCommand =
   | 'extractIconsFile'
+  | 'getAssetsPath'
   | 'getConfigurationVsCode'
   | 'getCurrentTheme'
   | 'getTranslations'
   | 'playgroundSvgComponents'
   | 'requestSvgComponents'
   | 'searchSvgComponents'
+  | 'openFile'
+  | 'viewAssets'
+  | 'removeAsset'
 export type PostMessageCommand =
+  | 'assetsPath'
   | 'configurationVsCode'
   | 'currentTheme'
   | 'customSvgComponent'
@@ -30,7 +35,7 @@ interface ReceiveMessageData {
 /**
  * Represents a handler for commands.
  */
-type CommandHandler = Record<string, (message: ReceiveMessageData) => void>
+type CommandHandler = Record<ReceiveMessageCommand, (message: ReceiveMessageData) => void>
 
 /**
  * Represents a language file.

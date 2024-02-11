@@ -153,6 +153,21 @@ const useApp = () => {
           },
         },
         typography: { fontFamily: styles?.fontFamily, fontSize: styles?.fontSize },
+        components: {
+          MuiButton: {
+            defaultProps: { size: 'small' },
+            styleOverrides: {
+              root: {
+                fontFamily: styles?.fontFamily,
+                fontSize: styles?.fontSize,
+                color: 'rgb(var(--color-JT-view-export-svg))',
+              },
+            },
+          },
+          MuiIconButton: {
+            styleOverrides: { root: { color: 'rgb(var(--color-JT-view-export-svg))' } },
+          },
+        },
       }),
     [currentTheme, styles]
   )

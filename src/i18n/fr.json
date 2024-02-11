@@ -3,5 +3,6 @@
   "progressTitle": "Extraction des exportations SVG...",
   "NoIconsFound": "Aucune icône trouvée",
   "NoFileSelected": "Aucun fichier sélectionné",
-  "PleaseSearch": "Veuillez entrer au moins 3 caractères pour effectuer une recherche..."
+  "PleaseSearch": "Veuillez entrer au moins 3 caractères pour rechercher...",
+  "NoExistedFile": "Le fichier {0} n'existe pas."
 }
