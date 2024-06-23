@@ -35,3 +35,5 @@ yarn-error.log*
 
 # Extension-specific
 *.vsix
+
+.eslintcache

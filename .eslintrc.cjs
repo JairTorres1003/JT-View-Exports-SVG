@@ -32,7 +32,7 @@ module.exports = {
   ],
   parserOptions: { ecmaVersion: 'latest', sourceType: 'module' },
   plugins: ['prettier'],
-  ignorePatterns: ['node_modules', 'out'],
+  ignorePatterns: ['node_modules', 'out', 'webview-ui'],
   rules: {
     'prettier/prettier': [STATE.ERROR, { endOfLine: 'auto' }],
     'no-unused-vars': STATE.WARN,
