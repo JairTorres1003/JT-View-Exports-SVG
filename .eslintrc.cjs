@@ -35,9 +35,6 @@ module.exports = {
   ignorePatterns: ['node_modules', 'out'],
   rules: {
     'prettier/prettier': [STATE.ERROR, { endOfLine: 'auto' }],
-    'react/jsx-no-undef': STATE.ERROR,
-    'react/react-in-jsx-scope': STATE.OFF,
-    'react/prop-types': STATE.OFF,
     'no-unused-vars': STATE.WARN,
     'no-const-assign': STATE.ERROR,
     'spaced-comment': [STATE.ERROR, CONFIG_STATES.ALWAYS],
