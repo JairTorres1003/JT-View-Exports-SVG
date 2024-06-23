@@ -4,9 +4,9 @@ import { Uri, commands, window, workspace } from 'vscode'
 
 import { isEmpty } from '../misc'
 
-export async function saveResponseFile(data: object): Promise<void> {
+export async function saveResponseFile(data: object, path?: string): Promise<void> {
   const content = JSON.stringify(data, null, 2)
-  const filePath = workspace.workspaceFolders?.[0].uri.fsPath + '/response.json'
+  const filePath = path ?? workspace.workspaceFolders?.[0].uri.fsPath + '/response.json'
 
   try {
     await new Promise((resolve, reject) => {
