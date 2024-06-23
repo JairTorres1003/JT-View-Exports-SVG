@@ -1,5 +1,6 @@
 import type * as t from '@babel/types'
 
+import { type SvgTagName } from './misc'
 import { type HasInvalidChild, type SvgComponentDetails } from './svgExports'
 
 /**
@@ -71,7 +72,7 @@ interface ComponentNameResponse {
   /**
    * The name of the JSX component, which can be a string representing the component tag or an object indicating an invalid child.
    */
-  tag: string | HasInvalidChild
+  tag: SvgTagName | 'Fragment' | HasInvalidChild
   /**
    * A boolean flag indicating whether the component is a motion component.
    */

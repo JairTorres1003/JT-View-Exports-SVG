@@ -2,6 +2,7 @@ import traverse from '@babel/traverse'
 import { isJSXIdentifier } from '@babel/types'
 
 import { parserContent } from '../babelParser'
+import { getUnknownError } from '../misc'
 
 import { setProperties } from './setProperties'
 
@@ -18,15 +19,18 @@ import { setProperties } from './setProperties'
  */
 export async function extractComponent(
   value: string,
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   params: Record<string, any>
 ): Promise<{
   name: string
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   attributes: Record<string, any>
   error?: string
 }> {
   try {
     const ast = parserContent(value)
     let name: string = ''
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     let attributes: Record<string, any> = {}
 
     traverse(ast, {
@@ -41,8 +45,8 @@ export async function extractComponent(
     })
 
     return { name, attributes }
-  } catch (error: any) {
-    console.error('Error during extraction of component:', error?.message)
-    return { name: '', attributes: {}, error: error?.message }
+  } catch (error) {
+    console.error('Error during extraction of component:', getUnknownError(error))
+    return { name: '', attributes: {}, error: getUnknownError(error) }
   }
 }

@@ -10,11 +10,13 @@ import {
   type ExportTypeNode,
   type IsSVGComponent,
 } from '../../interfaces/exportParser'
+import { type SvgTagName } from '../../interfaces/misc'
 import {
   type HasInvalidChild,
   type SvgComponent,
   type SvgComponentDetails,
 } from '../../interfaces/svgExports'
+import { isEmpty } from '../misc'
 
 import { propertyManager } from './propertyManager'
 import { getPropertyValues } from './propertyValues'
@@ -43,7 +45,7 @@ function getChildAttributes(children: t.JSXElement['children']): ChildAttributes
       const childComponents = getChildAttributes(child.children).children
 
       // Check if childComponents is an array or contains an error
-      if (!Array.isArray(childComponents) && childComponents.error) {
+      if (!Array.isArray(childComponents) && !isEmpty(childComponents.error)) {
         // Handle the case of an invalid child component
         if (hasInvalidChild === null) {
           hasInvalidChild = { error: 'HasInvalidChild', location: child.loc?.start }
@@ -77,7 +79,7 @@ function getChildAttributes(children: t.JSXElement['children']): ChildAttributes
   })
 
   // Return the error if an invalid child component is found
-  if (hasInvalidChild) {
+  if (hasInvalidChild !== null) {
     return { children: hasInvalidChild, isAnimated }
   }
 
@@ -96,22 +98,22 @@ function getComponentName(openingElement: t.JSXOpeningElement): ComponentNameRes
     error: 'HasInvalidChild',
     location: openingElement.name.loc?.start,
   }
-  let tag: string | undefined
+  let tag: SvgTagName | 'Fragment' | undefined
   let isMotion: boolean = false
 
   // Check if the opening element is a JSXIdentifier (for regular components)
   if (t.isJSXIdentifier(openingElement.name)) {
-    tag = SVG_TAGS[camelCase(openingElement.name.name)]
+    tag = SVG_TAGS[camelCase(openingElement.name.name) as SvgTagName]
   } else if (t.isJSXMemberExpression(openingElement.name)) {
     // Check if the opening element is a JSXMemberExpression (for components with namespaces)
-    const objectName = (openingElement.name.object as t.JSXIdentifier).name || ''
+    const objectName = (openingElement.name.object as t.JSXIdentifier).name ?? ''
     const propertyName = openingElement.name.property.name
 
-    tag = propertyName === 'Fragment' ? 'Fragment' : SVG_TAGS[camelCase(propertyName)]
+    tag = propertyName === 'Fragment' ? 'Fragment' : SVG_TAGS[camelCase(propertyName) as SvgTagName]
     isMotion = objectName !== '' && objectName === 'motion'
   }
 
-  return { tag: tag || error, isMotion }
+  return { tag: tag ?? error, isMotion }
 }
 
 /**
@@ -130,7 +132,7 @@ function isSVGComponent(argument: t.JSXElement): IsSVGComponent {
   }
 
   // Check if the node has an opening element
-  if (openingElement) {
+  if (!isEmpty(openingElement)) {
     const svgProps = setProperties(openingElement.attributes, properties.get())
 
     // Check if the attribute is 'xmlns' and its value is 'http://www.w3.org/2000/svg'
@@ -165,7 +167,7 @@ function isSVGComponent(argument: t.JSXElement): IsSVGComponent {
  * @returns {t.JSXElement | null} The first JSX element or fragment found, or null if multiple elements are found or none is found.
  */
 function getChildFragments(children: t.JSXElement['children'] | undefined): t.JSXElement | null {
-  if (!children) {
+  if (children === undefined) {
     return null
   }
 
@@ -208,13 +210,13 @@ function getChildFragments(children: t.JSXElement['children'] | undefined): t.JS
  * Extracts properties from the parameters array, especially from object patterns.
  * @param {(t.Identifier | t.Pattern | t.RestElement)[]} params - An array of parameters, including object patterns.
  */
-function getNodeParams(params: Array<t.Identifier | t.Pattern | t.RestElement>) {
+function getNodeParams(params: Array<t.Identifier | t.Pattern | t.RestElement>): void {
   // Initialize declaration properties
   properties.clean()
   // Check if there are parameters with object patterns
-  if (params && params.length > 0) {
+  if (!isEmpty(params)) {
     params.forEach((param) => {
-      if (t.isObjectPattern(param) && param.properties) {
+      if (t.isObjectPattern(param) && !isEmpty(param.properties)) {
         param.properties.forEach((property) => {
           // Add the property to the properties object
           if (t.isObjectProperty(property) && t.isIdentifier(property.key)) {
@@ -237,6 +239,7 @@ function getNodeParams(params: Array<t.Identifier | t.Pattern | t.RestElement>) 
  */
 function analyzeExportType(
   node: ExportTypeNode,
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   customParams?: Record<string, any>
 ): ExportType | undefined {
   // Initialize variables
@@ -244,10 +247,10 @@ function analyzeExportType(
   let type = node?.type
 
   // Check if the node represents an arrow function or function declaration with a block statement body
-  if (node && (t.isArrowFunctionExpression(node) || t.isFunctionDeclaration(node))) {
+  if (!isEmpty(node) && (t.isArrowFunctionExpression(node) || t.isFunctionDeclaration(node))) {
     if (t.isJSXElement(node.body) || t.isJSXFragment(node.body)) {
       const childFragment = getChildFragments([node.body])
-      if (childFragment) {
+      if (childFragment !== null) {
         argument = childFragment
         type = childFragment.type
       }
@@ -261,7 +264,7 @@ function analyzeExportType(
         (t.isJSXElement(findReturn.argument) || t.isJSXFragment(findReturn.argument))
       ) {
         const childFragment = getChildFragments([findReturn.argument])
-        if (childFragment) {
+        if (childFragment !== null) {
           argument = childFragment
           type = childFragment.type
         }
@@ -269,7 +272,7 @@ function analyzeExportType(
     }
 
     // Extract properties from the parameters array
-    if (customParams && Object.keys(customParams).length > 0) {
+    if (!isEmpty(customParams) && Object.keys(customParams).length > 0) {
       properties.setAll(customParams)
     } else {
       getNodeParams(node.params)
@@ -298,6 +301,7 @@ function analyzeExportType(
 export async function extractSvgComponentFromNode(
   node: t.Node,
   typeExport: SvgComponent['typeExport'],
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   customParams?: Record<string, any>
 ): Promise<SvgComponent | undefined> {
   let component: SvgComponent['component']
@@ -307,7 +311,7 @@ export async function extractSvgComponentFromNode(
 
   if (t.isFunctionDeclaration(node) || t.isVariableDeclarator(node)) {
     // Extract the name and location of the function or variable.
-    name = (node.id as t.Identifier).name || ''
+    name = (node.id as t.Identifier).name ?? ''
     location = { start: node.loc?.start, end: node.loc?.end }
 
     try {
@@ -317,7 +321,7 @@ export async function extractSvgComponentFromNode(
         customParams
       )
 
-      if (nodeAnalyze) {
+      if (nodeAnalyze !== undefined) {
         const SVGComponent = isSVGComponent(nodeAnalyze.argument)
         if (SVGComponent.validate) {
           component = SVGComponent.component
@@ -329,7 +333,7 @@ export async function extractSvgComponentFromNode(
     }
   }
 
-  if (component) {
+  if (component !== undefined) {
     return { component, name, location, typeExport, isAnimated, params: properties.get() }
   } else {
     return undefined
