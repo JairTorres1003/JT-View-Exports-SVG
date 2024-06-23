@@ -8,6 +8,7 @@
   },
   // Turn off tsc task auto detection since we have the necessary tasks as npm scripts
   "typescript.tsc.autoDetect": "off",
+
   "cSpell.language": "en,es-ES",
   "cSpell.ignoreWords": ["Jair", "arrowParens", "ecmaVersion", "esnext", "mpath", "quasis"],
   "cSpell.ignorePaths": [
@@ -19,7 +20,99 @@
     ".vscode-insiders",
     ".github",
     "**/tsconfig.json",
-    "**/.eslintrc.cjs"
+    "**/.eslintrc.cjs",
+    "**/.eslintrc",
+    ".prettierrc"
   ],
+  "workbench.tree.enableStickyScroll": true,
+  "editor.defaultFormatter": "esbenp.prettier-vscode",
+  "editor.detectIndentation": true,
+  "editor.tabSize": 2,
+  "editor.formatOnSave": true,
+  "editor.fontLigatures": true,
+  "eslint.enable": true,
+  "eslint.lintTask.enable": true,
+  "eslint.validate": ["javascript", "javascriptreact", "typescript", "typescriptreact"],
+  "editor.codeActionsOnSave": {
+    "source.fixAll": "always"
+  },
+  "editor.cursorBlinking": "expand",
+  "editor.linkedEditing": true,
+  "editor.guides.bracketPairs": true,
+  "editor.cursorSmoothCaretAnimation": "on",
+  "explorer.fileNesting.enabled": true,
+  "explorer.fileNesting.patterns": {
+    "*.tsx": "${capture}.tsx",
+    "package.json": "package-lock.json, yarn.lock, pnpm-lock.yaml, bun.lockb, .*"
+  },
+  "files.trimTrailingWhitespace": true,
+  "files.insertFinalNewline": true,
+  "[javascript]": {
+    "editor.tabSize": 2,
+    "editor.formatOnSave": true,
+    "editor.defaultFormatter": "esbenp.prettier-vscode",
+    "editor.codeActionsOnSave": {
+      "source.fixAll": "always"
+    }
+  },
+  "[javascriptreact]": {
+    "editor.tabSize": 2,
+    "editor.formatOnSave": true,
+    "editor.defaultFormatter": "esbenp.prettier-vscode",
+    "editor.codeActionsOnSave": {
+      "source.fixAll": "always"
+    }
+  },
+  "[typescript]": {
+    "editor.tabSize": 2,
+    "editor.formatOnSave": true,
+    "editor.defaultFormatter": "esbenp.prettier-vscode",
+    "editor.codeActionsOnSave": {
+      "source.fixAll": "always"
+    }
+  },
+  "[typescriptreact]": {
+    "editor.tabSize": 2,
+    "editor.formatOnSave": true,
+    "editor.defaultFormatter": "esbenp.prettier-vscode",
+    "editor.codeActionsOnSave": {
+      "source.fixAll": "always"
+    }
+  },
+  "[markdown]": {
+    "editor.tabSize": 2,
+    "editor.formatOnSave": true,
+    "editor.defaultFormatter": "esbenp.prettier-vscode",
+    "editor.codeActionsOnSave": {
+      "source.fixAll": "always"
+    }
+  },
+  "[mdx]": {
+    "editor.tabSize": 2,
+    "editor.formatOnSave": true,
+    "editor.defaultFormatter": "esbenp.prettier-vscode",
+    "editor.codeActionsOnSave": {
+      "source.fixAll": "always"
+    }
+  },
+  "terminal.integrated.profiles.osx": {
+    "bash": null,
+    "zsh": {
+      "path": "/bin/zsh",
+      "icon": "terminal-bash",
+      "color": "terminal.ansiGreen"
+    }
+  },
+  "files.readonlyInclude": {
+    ".eslintrc.cjs": true,
+    ".eslintignore": true,
+    ".prettierrc": true,
+    ".prettierignore": true,
+    ".lintstagedrc": true,
+    "tsconfig.json": true,
+    ".husky/**": true,
+    ".vscode/settings.json": true,
+    ".vscode/extensions.json": true
+  },
   "JT-View-Exports-SVG.assetsPath": []
 }
