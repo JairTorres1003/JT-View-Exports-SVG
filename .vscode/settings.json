@@ -20,5 +20,6 @@
     ".github",
     "**/tsconfig.json",
     "**/.eslintrc.cjs"
-  ]
+  ],
+  "JT-View-Exports-SVG.assetsPath": []
 }

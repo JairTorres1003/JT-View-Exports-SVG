@@ -11,7 +11,7 @@ const CONFIG_STATES = {
   ALWAYS_MULTILINE: 'always-multiline',
   IGNORED: 'ignored',
 }
-
+/** @type {import('eslint').Linter.Config}*/
 module.exports = {
   root: true,
   parser: '@typescript-eslint/parser',
@@ -32,10 +32,30 @@ module.exports = {
   ],
   parserOptions: { ecmaVersion: 'latest', sourceType: 'module' },
   plugins: ['prettier'],
+  ignorePatterns: ['node_modules', 'out'],
   rules: {
-    'prettier/prettier': STATE.ERROR,
+    'prettier/prettier': [STATE.ERROR, { endOfLine: 'auto' }],
+    'react/jsx-no-undef': STATE.ERROR,
+    'react/react-in-jsx-scope': STATE.OFF,
+    'react/prop-types': STATE.OFF,
+    'no-unused-vars': STATE.WARN,
+    'no-const-assign': STATE.ERROR,
+    'spaced-comment': [STATE.ERROR, CONFIG_STATES.ALWAYS],
     'multiline-ternary': [STATE.OFF, CONFIG_STATES.ALWAYS_MULTILINE],
+    '@typescript-eslint/no-misused-promises': STATE.OFF,
     '@typescript-eslint/space-before-function-paren': STATE.OFF,
+    '@typescript-eslint/explicit-function-return-type': STATE.WARN,
+    '@typescript-eslint/indent': STATE.OFF,
+    '@typescript-eslint/prefer-optional-chain': STATE.OFF,
+    'no-console': [STATE.ERROR, { allow: ['warn', 'error', 'info'] }],
+    'import/order': [
+      STATE.ERROR,
+      {
+        groups: ['builtin', 'external', 'internal', 'parent', 'sibling', 'index'],
+        'newlines-between': 'always',
+        alphabetize: { order: 'asc', caseInsensitive: true },
+      },
+    ],
     '@typescript-eslint/member-delimiter-style': [
       STATE.ERROR,
       {
@@ -43,16 +63,14 @@ module.exports = {
         singleline: { delimiter: 'semi', requireLast: false },
       },
     ],
-    '@typescript-eslint/strict-boolean-expressions': STATE.OFF,
-    '@typescript-eslint/indent': STATE.OFF,
-    '@typescript-eslint/explicit-function-return-type': STATE.OFF,
-    '@typescript-eslint/no-explicit-any': STATE.OFF,
-    '@typescript-eslint/no-non-null-assertion': STATE.OFF,
-    '@typescript-eslint/prefer-nullish-coalescing': STATE.OFF,
+    // '@typescript-eslint/no-non-null-assertion': STATE.OFF,
+    // '@typescript-eslint/prefer-nullish-coalescing': STATE.OFF,
     '@typescript-eslint/comma-dangle': [
       STATE.ERROR,
       {
         arrays: CONFIG_STATES.ALWAYS_MULTILINE,
+        generics: CONFIG_STATES.ALWAYS_MULTILINE,
+        enums: CONFIG_STATES.ALWAYS_MULTILINE,
         objects: CONFIG_STATES.ALWAYS_MULTILINE,
         imports: CONFIG_STATES.ALWAYS_MULTILINE,
         exports: CONFIG_STATES.ALWAYS_MULTILINE,

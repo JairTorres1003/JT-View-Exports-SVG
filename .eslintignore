@@ -1,0 +1,5 @@
+*.config.js
+.eslintrc.cjs
+
+/node_modules
+/out
