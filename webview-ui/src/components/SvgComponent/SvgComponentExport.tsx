@@ -42,6 +42,7 @@ const SvgComponentExport: FC<SvgExport> = (props) => {
           </div>
           <IconButton
             size='small'
+            className='IconButton-edit'
             title={t('EditFile')}
             onClick={() => {
               handleOpenFile(file.absolutePath)

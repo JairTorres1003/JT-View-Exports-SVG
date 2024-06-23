@@ -28,6 +28,7 @@ export const AccordionSummary = styled((props: AccordionSummaryProps | PaperProp
   minHeight: '60px !important',
   flexDirection: 'row-reverse',
   transition: 'background-color 0.2s',
+  '& .IconButton-edit': { color: 'inherit' },
   '& .AccordionSummary-title': {
     '& .AccordionSummary-title-text': { whiteSpace: 'nowrap', width: '100%', fontSize: 13 },
     display: 'flex',
@@ -63,6 +64,7 @@ export const AccordionSummary = styled((props: AccordionSummaryProps | PaperProp
       borderColor: 'inherit',
     },
     '&::before': { top: -4 },
+    svg: { stroke: 'currentColor' },
   },
   '& .MuiAccordionSummary-expandIconWrapper.Mui-expanded': {
     transform: 'rotate(90deg)',
