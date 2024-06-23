@@ -114,5 +114,5 @@
     ".vscode/settings.json": true,
     ".vscode/extensions.json": true
   },
-  "JT-View-Exports-SVG.assetsPath": []
+  "JT-View-Exports-SVG.assetsPath": ["webview-ui/src/icons/index.tsx"]
 }
