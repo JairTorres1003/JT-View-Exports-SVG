@@ -14,9 +14,9 @@ import { getWorkspaceFolder } from './workspaceFolder'
  * Get input files and start the process for the extraction of svg components.
  * @param filesPath An array of file paths.
  */
-export async function getInputFiles(filesPath: string[] | null) {
+export async function getInputFiles(filesPath: string[] | null): Promise<void> {
   // Define the operation that will be executed after processing files
-  const operation = (result: SvgExport[] | SvgExportErrors) => {
+  const operation = (result: SvgExport[] | SvgExportErrors): void => {
     // Update or show the webview panel
     ViewExportsSVGPanel.update(result)
   }

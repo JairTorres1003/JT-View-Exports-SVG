@@ -2,14 +2,16 @@ import * as fs from 'fs'
 
 import { Uri, commands, window, workspace } from 'vscode'
 
-export async function saveResponseFile(data: object) {
+import { isEmpty } from '../misc'
+
+export async function saveResponseFile(data: object): Promise<void> {
   const content = JSON.stringify(data, null, 2)
-  const filePath = workspace.rootPath + '/responseFile.json'
+  const filePath = workspace.workspaceFolders?.[0].uri.fsPath + '/response.json'
 
   try {
     await new Promise((resolve, reject) => {
       fs.writeFile(filePath, content, (err) => {
-        if (err) {
+        if (!isEmpty(err)) {
           reject(err)
         } else {
           resolve('File saved successfully.')
