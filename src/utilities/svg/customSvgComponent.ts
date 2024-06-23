@@ -1,10 +1,12 @@
 import { type Declaration } from '@babel/types'
 
-import { type CustomSvgComponentData, type SvgComponent } from '../../interfaces/svgExports'
 import { REST_PROPS_KEY } from '../../constants/misc'
+import { type CustomSvgComponentData, type SvgComponent } from '../../interfaces/svgExports'
 import { baseFileCache } from '../cache/baseFileCache'
-import { extractSvgComponentFromNode } from './exportParser'
 import { getFileTimestamp } from '../cache/fileModifiedCache'
+import { isEmpty } from '../misc'
+
+import { extractSvgComponentFromNode } from './exportParser'
 import { extractComponent } from './extractComponent'
 
 /**
@@ -21,7 +23,7 @@ export async function customSvgComponent(
   const lastModified = getFileTimestamp(path)
   const cachedValue = baseFileCache.get(path, lastModified)
 
-  if (!cachedValue) {
+  if (cachedValue === undefined) {
     throw new Error(`SVG component not found: ${name}`)
   }
 
@@ -29,14 +31,15 @@ export async function customSvgComponent(
 
   const component = await extractComponent(value, params)
 
-  if (component.error) {
+  if (!isEmpty(component.error)) {
     throw new Error(`Error extracting component: ${component.error}`)
   }
 
   const componentKeys = Object.keys(component.attributes)
   const firstRestParam = Object.keys(params[REST_PROPS_KEY] ?? {})[0]
 
-  if (firstRestParam && componentKeys.length > 0) {
+  if (!isEmpty(firstRestParam) && componentKeys.length > 0) {
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     const restProps: Record<string, any> = {}
 
     for (const key of componentKeys) {
@@ -57,5 +60,5 @@ export async function customSvgComponent(
     attributes
   )
 
-  return svgComponent ? { ...svgComponent, params } : undefined
+  return !isEmpty(svgComponent) ? { ...svgComponent, params } : undefined
 }

@@ -1,9 +1,10 @@
+import { type SvgTagName } from '../interfaces/misc'
+
 /**
  * Mapping of SVG tag names to their corresponding string representations.
  * This object provides a convenient way to access the string representations of various SVG tags.
  */
-export const SVG_TAGS: Record<string, string> = {
-  svg: 'svg',
+export const SVG_TAGS: Record<SvgTagName, SvgTagName> = {
   animate: 'animate',
   animateMotion: 'animateMotion',
   animateTransform: 'animateTransform',
@@ -54,6 +55,7 @@ export const SVG_TAGS: Record<string, string> = {
   radialGradient: 'radialGradient',
   rect: 'rect',
   stop: 'stop',
+  svg: 'svg',
   switch: 'switch',
   symbol: 'symbol',
   text: 'text',

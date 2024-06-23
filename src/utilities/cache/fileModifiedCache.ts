@@ -5,7 +5,7 @@ import * as fs from 'fs'
  * @param filePath - The path to the file.
  * @returns The last modification timestamp as a Unix timestamp in milliseconds, or 0 if the file doesn't exist or an error occurs.
  */
-export function getFileTimestamp(filePath: string) {
+export function getFileTimestamp(filePath: string): number {
   try {
     // Get file statistics (sync)
     const stats = fs.statSync(filePath)
@@ -47,7 +47,7 @@ export class FileModifiedCache<T> {
   get(key: string, lastModified: number): T | undefined {
     const item = this.cache[key]
 
-    if (!item) {
+    if (item === undefined) {
       return undefined // Cache entry not found
     }
 

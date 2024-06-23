@@ -1,20 +1,22 @@
-import { Uri, commands, window } from 'vscode'
 import * as fs from 'fs'
 import * as path from 'path'
 
-import { processFiles } from '../commonFunctions'
-import { getWorkspaceFolder } from './workspaceFolder'
+import { Uri, commands, window } from 'vscode'
+
 import { type SvgExport, type SvgExportErrors } from '../../interfaces/svgExports'
 import { ViewExportsSVGPanel } from '../../panels/ViewExportsSVGPanel'
+import { processFiles } from '../commonFunctions'
 import { ConfigAssetsPath } from '../vscode'
+
+import { getWorkspaceFolder } from './workspaceFolder'
 
 /**
  * Get input files and start the process for the extraction of svg components.
  * @param filesPath An array of file paths.
  */
-export async function getInputFiles(filesPath: string[] | null) {
+export async function getInputFiles(filesPath: string[] | null): Promise<void> {
   // Define the operation that will be executed after processing files
-  const operation = (result: SvgExport[] | SvgExportErrors) => {
+  const operation = (result: SvgExport[] | SvgExportErrors): void => {
     // Update or show the webview panel
     ViewExportsSVGPanel.update(result)
   }
@@ -68,7 +70,7 @@ export const removeAssetFile = async (filePath: string): Promise<void> => {
   const file = {
     basename: path.basename(absolutePath),
     dirname: path.dirname(absolutePath),
-    absolutePath: absolutePath,
+    absolutePath,
     relativePath: path.relative(getWorkspaceFolder(), absolutePath),
   }
 

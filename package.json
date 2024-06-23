@@ -18,7 +18,7 @@
   "license": "MIT",
   "author": "Jair Torres",
   "publisher": "JairTorres1003",
-  "version": "3.0.1",
+  "version": "3.1.1",
   "repository": {
     "type": "git",
     "url": "https://github.com/JairTorres1003/JT-View-Exports-SVG.git"
@@ -92,19 +92,24 @@
     "install:all": "npm install && cd webview-ui && npm install",
     "start:webview": "cd webview-ui && npm run dev",
     "build:webview": "cd webview-ui && npm run build",
-    "lint": "eslint .",
     "lint:webview": "cd webview-ui && npm run lint",
-    "lint:fix": "eslint --fix .",
     "lint:fix:webview": "cd webview-ui && npm run lint:fix",
-    "format:check": "prettier --check \"**/*.{ts,json,md,yml}\"",
     "format:check:webview": "cd webview-ui && npm run format:check",
-    "format": "prettier --write \"**/*.{ts,json,md,yml}\"",
     "format:webview": "cd webview-ui && npm run format",
+    "lint": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
+    "lint:fix": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0 --fix --cache",
+    "format:check": "prettier --check \"**/*.{ts,json,md,yml,cjs}\"",
+    "format": "prettier --write \"**/*.{ts,json,md,yml,cjs}\"",
+    "lint:all": "npm run lint && npm run lint:webview",
+    "lint:fix:all": "npm run lint:fix && npm run lint:fix:webview",
+    "format:check:all": "npm run format:check && npm run format:check:webview",
+    "format:all": "npm run format && npm run format:webview",
     "compile": "tsc -p ./",
     "watch": "tsc -watch -p ./",
     "pretest": "npm run compile && npm run lint",
     "test": "jest --coverage",
-    "vscode:prepublish": "npm run compile"
+    "vscode:prepublish": "npm run compile",
+    "prepare": "husky"
   },
   "devDependencies": {
     "@babel/types": "^7.23.5",
@@ -124,7 +129,9 @@
     "eslint-plugin-prettier": "^5.0.1",
     "eslint-plugin-promise": "^6.1.1",
     "glob": "^10.3.10",
+    "husky": "^9.0.11",
     "jest": "^29.7.0",
+    "lint-staged": "^15.2.7",
     "prettier": "^3.1.0",
     "ts-jest": "^29.1.1",
     "typescript": "^5.3.3"
@@ -134,5 +141,10 @@
     "@babel/traverse": "^7.23.5",
     "color": "^4.2.3",
     "lodash": "^4.17.21"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged"
+    }
   }
 }

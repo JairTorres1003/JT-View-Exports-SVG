@@ -48,7 +48,7 @@ class VSCodeAPIWrapper {
       this.vsCodeApi.postMessage({ command, data })
     } else {
       if (command === 'requestSvgComponents') {
-        fetch(`${import.meta.env.VITE_RAW_URL}main/test/responseFile.json`)
+        fetch(`${import.meta.env.VITE_RAW_URL}/main/test/responseFile.json`)
           .then(async (response) => await response.json())
           .then((data) => {
             const resData = JSON.stringify(data)

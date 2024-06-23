@@ -9,7 +9,7 @@ import { workspace } from 'vscode'
 export function getWorkspaceFolder(): string {
   const workspaceFolders = workspace.workspaceFolders
 
-  if (workspaceFolders && workspaceFolders.length > 0) {
+  if (workspaceFolders !== undefined && workspaceFolders.length > 0) {
     const firstWorkspaceFolder = workspaceFolders[0]
     const workspaceFolderPath = firstWorkspaceFolder.uri.fsPath
 
