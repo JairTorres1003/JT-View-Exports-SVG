@@ -40,7 +40,7 @@ export const AccordionSummary = styled((props: AccordionSummaryProps | PaperProp
       minWidth: 20,
       maxWidth: 20,
       maxHeight: 20,
-      stroke: 'rgb(var(--color-JT-view-export-svg))',
+      stroke: 'currentcolor',
     },
   },
   '&.Mui-expanded': {
@@ -64,7 +64,7 @@ export const AccordionSummary = styled((props: AccordionSummaryProps | PaperProp
       borderColor: 'inherit',
     },
     '&::before': { top: -4 },
-    svg: { stroke: 'currentColor' },
+    svg: { stroke: 'rgb(var(--color-JT-view-export-svg))' },
   },
   '& .MuiAccordionSummary-expandIconWrapper.Mui-expanded': {
     transform: 'rotate(90deg)',
