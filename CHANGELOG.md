@@ -1,5 +1,13 @@
 # View Exports SVG - Changelog
 
+## 3.1.1
+
+_Jun 23, 2024_
+
+**Bug Fixes**
+
+- Minor bug fixes and improvements.
+
 ## 3.1.0
 
 _Feb 11, 2024_
