@@ -1,11 +1,8 @@
 import * as t from '@babel/types'
 import { camelCase } from 'lodash'
 
-import {
-  type HasInvalidChild,
-  type SvgComponent,
-  type SvgComponentDetails,
-} from '../../interfaces/svgExports'
+import { REST_PROPS_KEY } from '../../constants/misc'
+import { SVG_TAGS } from '../../constants/svgTags'
 import {
   type ChildAttributesResponse,
   type ComponentNameResponse,
@@ -13,10 +10,14 @@ import {
   type ExportTypeNode,
   type IsSVGComponent,
 } from '../../interfaces/exportParser'
-import { SVG_TAGS } from '../../constants/svgTags'
-import { REST_PROPS_KEY } from '../../constants/misc'
-import { getPropertyValues } from './propertyValues'
+import {
+  type HasInvalidChild,
+  type SvgComponent,
+  type SvgComponentDetails,
+} from '../../interfaces/svgExports'
+
 import { propertyManager } from './propertyManager'
+import { getPropertyValues } from './propertyValues'
 import { setProperties } from './setProperties'
 
 // Declaration properties

@@ -2,8 +2,8 @@ import { commands, type ExtensionContext, type Uri } from 'vscode'
 
 import { type SvgExport, type SvgExportErrors } from './interfaces/svgExports'
 import { ViewExportsSVGPanel } from './panels/ViewExportsSVGPanel'
-import { loadLanguage } from './utilities/vscode'
 import { processFiles } from './utilities/commonFunctions'
+import { loadLanguage } from './utilities/vscode'
 
 /**
  * Run the command and create or show the webview panel.

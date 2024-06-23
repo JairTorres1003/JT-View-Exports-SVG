@@ -2,6 +2,7 @@ import traverse from '@babel/traverse'
 import { isJSXIdentifier } from '@babel/types'
 
 import { parserContent } from '../babelParser'
+
 import { setProperties } from './setProperties'
 
 /**

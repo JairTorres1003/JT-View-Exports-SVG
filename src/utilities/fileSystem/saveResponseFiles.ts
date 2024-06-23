@@ -1,5 +1,6 @@
-import { Uri, commands, window, workspace } from 'vscode'
 import * as fs from 'fs'
+
+import { Uri, commands, window, workspace } from 'vscode'
 
 export async function saveResponseFile(data: object) {
   const content = JSON.stringify(data, null, 2)

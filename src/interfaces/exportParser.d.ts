@@ -1,4 +1,5 @@
 import type * as t from '@babel/types'
+
 import { type HasInvalidChild, type SvgComponentDetails } from './svgExports'
 
 /**

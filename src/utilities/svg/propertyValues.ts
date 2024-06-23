@@ -1,9 +1,9 @@
 import * as t from '@babel/types'
 import { camelCase } from 'lodash'
 
-import { type Value } from '../../interfaces/exportParser'
 import { defaultProps } from '../../constants/defaultProps'
 import { REST_PROPS_KEY } from '../../constants/misc'
+import { type Value } from '../../interfaces/exportParser'
 
 /**
  * Performs a unary expression operation based on the provided operator and given value.

@@ -1,6 +1,7 @@
+import * as path from 'path'
+
 import * as Color from 'color'
 import { extensions, window } from 'vscode'
-import * as path from 'path'
 
 import {
   type IStandaloneThemeData,
@@ -21,7 +22,7 @@ export function getCurrentTheme(): ThemeMode {
   // Get the current color theme's kind value
   const currentTheme = window.activeColorTheme.kind
 
-  /// Check if the kind value corresponds to a "light" theme (1, 4) or "dark" theme (2, 3)
+  // Check if the kind value corresponds to a "light" theme (1, 4) or "dark" theme (2, 3)
   // and return the appropriate theme name
   return currentTheme === 1 || currentTheme === 4 ? 'light' : 'dark'
 }

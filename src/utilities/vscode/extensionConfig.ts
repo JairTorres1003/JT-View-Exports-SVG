@@ -1,9 +1,11 @@
-import { ConfigurationTarget, workspace } from 'vscode'
 import * as path from 'path'
 
-import ExtensionConfigManager from './extensionConfigManager'
+import { ConfigurationTarget, workspace } from 'vscode'
+
 import { type SvgFile } from '../../interfaces/svgExports'
 import { getWorkspaceFolder } from '../fileSystem'
+
+import ExtensionConfigManager from './extensionConfigManager'
 
 /**
  * Manages the configuration of the assets path for the extension.
@@ -145,7 +147,9 @@ export class ConfigAssetsPath extends ExtensionConfigManager<string[]> {
               relativePath,
             }
 
-            this.set(file).catch((error) => console.error('Error setting assets path:', error))
+            this.set(file).catch((error) => {
+              console.error('Error setting assets path:', error)
+            })
           }
 
           // Remove the file from the user assets path

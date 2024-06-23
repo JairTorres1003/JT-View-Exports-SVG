@@ -4,6 +4,7 @@ import * as t from '@babel/types'
 
 import { type SvgComponent, type SvgExport } from '../../interfaces/svgExports'
 import { parseFileContent } from '../babelParser'
+
 import { extractSvgComponentFromNode } from './exportParser'
 
 /**

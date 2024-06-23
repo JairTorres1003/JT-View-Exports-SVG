@@ -1,4 +1,5 @@
 import * as fs from 'fs'
+
 import { Uri, env } from 'vscode'
 
 // Object to store the loaded translations

@@ -1,8 +1,10 @@
-import { ProgressLocation, type ProgressOptions, type Uri, window } from 'vscode'
 import * as path from 'path'
 
-import { type SvgExport, type SvgExportErrors, type SvgFile } from '../interfaces/svgExports'
+import { ProgressLocation, type ProgressOptions, type Uri, window } from 'vscode'
+
 import { REGEX_FILE } from '../constants/regex'
+import { type SvgExport, type SvgExportErrors, type SvgFile } from '../interfaces/svgExports'
+
 import { baseFileCache, FileModifiedCache, getFileTimestamp } from './cache'
 import { getWorkspaceFolder, getFileLanguage } from './fileSystem'
 import { extractSVGComponentExports } from './svg/extractSVGComponentExports'

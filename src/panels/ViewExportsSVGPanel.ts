@@ -97,7 +97,7 @@ export class ViewExportsSVGPanel {
     const panel = window.createWebviewPanel(
       ViewExportsSVGPanel.viewType,
       i18n.panelTitle,
-      column || ViewColumn.One,
+      column != null || ViewColumn.One,
       {
         // Enable JavaScript in the webview
         enableScripts: true,
@@ -137,7 +137,7 @@ export class ViewExportsSVGPanel {
     // Clean up resources
     this._panel.dispose()
 
-    while (this._disposables.length) {
+    while (this._disposables.length > 0) {
       const disposable = this._disposables.pop()
       if (disposable) {
         disposable.dispose()
