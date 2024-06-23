@@ -1,7 +1,5 @@
 import * as fs from 'fs'
 
-import { isEmpty } from '../misc'
-
 /**
  * Gets the last modification timestamp of a file.
  * @param filePath - The path to the file.
@@ -49,7 +47,7 @@ export class FileModifiedCache<T> {
   get(key: string, lastModified: number): T | undefined {
     const item = this.cache[key]
 
-    if (!isEmpty(item)) {
+    if (item === undefined) {
       return undefined // Cache entry not found
     }
 
