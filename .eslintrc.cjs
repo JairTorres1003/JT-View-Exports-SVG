@@ -60,8 +60,6 @@ module.exports = {
         singleline: { delimiter: 'semi', requireLast: false },
       },
     ],
-    // '@typescript-eslint/no-non-null-assertion': STATE.OFF,
-    // '@typescript-eslint/prefer-nullish-coalescing': STATE.OFF,
     '@typescript-eslint/comma-dangle': [
       STATE.ERROR,
       {
