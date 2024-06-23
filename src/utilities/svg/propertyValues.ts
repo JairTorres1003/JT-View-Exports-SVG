@@ -1,9 +1,11 @@
 import * as t from '@babel/types'
 import { camelCase } from 'lodash'
 
-import { type Value } from '../../interfaces/exportParser'
 import { defaultProps } from '../../constants/defaultProps'
 import { REST_PROPS_KEY } from '../../constants/misc'
+import { type Value } from '../../interfaces/exportParser'
+import { type ANY_TYPE } from '../../interfaces/misc'
+import { isEmpty } from '../misc'
 
 /**
  * Performs a unary expression operation based on the provided operator and given value.
@@ -11,7 +13,8 @@ import { REST_PROPS_KEY } from '../../constants/misc'
  * @param value The value on which the operation will be applied.
  * @returns The result of the unary operation or undefined if the operator is not valid.
  */
-function getUnaryExpression(operator: t.UnaryExpression['operator'], value: any) {
+// eslint-disable-next-line @typescript-eslint/explicit-function-return-type
+function getUnaryExpression(operator: t.UnaryExpression['operator'], value: ANY_TYPE) {
   try {
     switch (operator) {
       case '+':
@@ -19,6 +22,7 @@ function getUnaryExpression(operator: t.UnaryExpression['operator'], value: any)
       case '-':
         return -value
       case '!':
+        // eslint-disable-next-line @typescript-eslint/strict-boolean-expressions
         return !value
       case '~':
         return ~value
@@ -39,7 +43,11 @@ function getUnaryExpression(operator: t.UnaryExpression['operator'], value: any)
  * @param right The right operand.
  * @returns The result of the binary operation or undefined if the operator is not valid.
  */
-function getBinaryExpression(operator: t.BinaryExpression['operator'], left: any, right: any) {
+function getBinaryExpression(
+  operator: t.BinaryExpression['operator'],
+  left: ANY_TYPE,
+  right: ANY_TYPE
+): ANY_TYPE {
   try {
     switch (operator) {
       case '+':
@@ -97,12 +105,18 @@ function getBinaryExpression(operator: t.BinaryExpression['operator'], left: any
  * @param right The right operand.
  * @returns The result of the logical operation or undefined if the operator is not valid.
  */
-function getLogicalExpression(operator: t.LogicalExpression['operator'], left: any, right: any) {
+function getLogicalExpression(
+  operator: t.LogicalExpression['operator'],
+  left: ANY_TYPE,
+  right: ANY_TYPE
+): ANY_TYPE {
   try {
     switch (operator) {
       case '||':
+        // eslint-disable-next-line @typescript-eslint/strict-boolean-expressions
         return left || right
       case '&&':
+        // eslint-disable-next-line @typescript-eslint/strict-boolean-expressions
         return left && right
       case '??':
         return left ?? right
@@ -120,17 +134,20 @@ function getLogicalExpression(operator: t.LogicalExpression['operator'], left: a
  * @param {ExportType["properties"]} properties - An object containing properties from the export type.
  * @returns {any | undefined} The extracted property value, or undefined if the value node type is not recognized.
  */
-export function getPropertyValues(value: Value, properties: Record<string, any>): any | undefined {
-  if (!value) {
+export function getPropertyValues(
+  value: Value,
+  properties: Record<string, ANY_TYPE>
+): ANY_TYPE | undefined {
+  if (isEmpty(value)) {
     return
   }
 
-  const restProps = properties[REST_PROPS_KEY] || {}
-  let argument: any
-  let left: any
-  let right: any
-  let objectProps: Record<string, any> = {}
-  let arrayProps: any[] = []
+  const restProps = properties[REST_PROPS_KEY] ?? {}
+  let argument
+  let left
+  let right
+  let objectProps: Record<string, ANY_TYPE> = {}
+  let arrayProps: ANY_TYPE[] = []
   let conditionValue: boolean
 
   switch (value.type) {
@@ -139,7 +156,11 @@ export function getPropertyValues(value: Value, properties: Record<string, any>)
     case 'StringLiteral':
       return value.value
     case 'Identifier':
-      return properties[value.name] || restProps[value.name] || defaultProps[value.name]
+      return (
+        properties[value.name] ??
+        restProps[value.name] ??
+        defaultProps[value.name as keyof typeof defaultProps]
+      )
     case 'JSXExpressionContainer':
       return getPropertyValues(value.expression, properties)
     case 'AssignmentPattern':
@@ -163,7 +184,7 @@ export function getPropertyValues(value: Value, properties: Record<string, any>)
 
       value.properties.forEach((property) => {
         if (t.isObjectProperty(property) && t.isIdentifier(property.key)) {
-          const propKey = camelCase(property.key.name || '')
+          const propKey = camelCase(property.key.name ?? '')
           objectProps[propKey] = getPropertyValues(property.value, properties)
         } else if (t.isSpreadElement(property)) {
           objectProps = { ...objectProps, ...getPropertyValues(property.argument, properties) }
@@ -195,7 +216,7 @@ export function getPropertyValues(value: Value, properties: Record<string, any>)
       if (t.isIdentifier(value.property)) {
         const objectValue = getPropertyValues(value.object, properties)
 
-        if (objectValue && typeof objectValue === 'object') {
+        if (!isEmpty(objectValue) && typeof objectValue === 'object') {
           const propertyName = value.property.name
           if (propertyName in objectValue) {
             return objectValue[propertyName]

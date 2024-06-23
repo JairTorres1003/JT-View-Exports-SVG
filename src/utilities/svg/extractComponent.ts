@@ -1,7 +1,10 @@
 import traverse from '@babel/traverse'
 import { isJSXIdentifier } from '@babel/types'
 
+import { type ANY_TYPE } from '../../interfaces/misc'
 import { parserContent } from '../babelParser'
+import { getUnknownError } from '../misc'
+
 import { setProperties } from './setProperties'
 
 /**
@@ -17,16 +20,16 @@ import { setProperties } from './setProperties'
  */
 export async function extractComponent(
   value: string,
-  params: Record<string, any>
+  params: Record<string, ANY_TYPE>
 ): Promise<{
   name: string
-  attributes: Record<string, any>
+  attributes: Record<string, ANY_TYPE>
   error?: string
 }> {
   try {
     const ast = parserContent(value)
     let name: string = ''
-    let attributes: Record<string, any> = {}
+    let attributes: Record<string, ANY_TYPE> = {}
 
     traverse(ast, {
       JSXOpeningElement(path) {
@@ -40,8 +43,8 @@ export async function extractComponent(
     })
 
     return { name, attributes }
-  } catch (error: any) {
-    console.error('Error during extraction of component:', error?.message)
-    return { name: '', attributes: {}, error: error?.message }
+  } catch (error) {
+    console.error('Error during extraction of component:', getUnknownError(error))
+    return { name: '', attributes: {}, error: getUnknownError(error) }
   }
 }

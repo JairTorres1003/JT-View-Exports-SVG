@@ -7,9 +7,9 @@ import { LANGUAGES } from '../../constants/fileLanguages'
  * @param fileName - The name of the file.
  * @returns The language of the file, or 'plaintext' if no matching language is found.
  */
-export const getFileLanguage = (fileName: string) => {
+export const getFileLanguage = (fileName: string): string => {
   const fileExtension = path.extname(fileName).replace('.', '')
   const language = LANGUAGES.find((lang) => lang.extensions.includes(fileExtension))
 
-  return language ? language.name : 'plaintext'
+  return language?.name ?? 'plaintext'
 }

@@ -1,4 +1,5 @@
 import * as fs from 'fs'
+
 import { Uri, env } from 'vscode'
 
 // Object to store the loaded translations
@@ -9,8 +10,8 @@ let i18n: Record<string, string> = {}
  * @param extensionUri The Uri of the extension.
  * @returns An object containing the loaded language translations.
  */
-export async function loadLanguage(extensionUri: Uri) {
-  const editorLanguage = env.language || 'en'
+export async function loadLanguage(extensionUri: Uri): Promise<Record<string, string>> {
+  const editorLanguage = env.language ?? 'en'
 
   try {
     // Build the path of the language file based on the editor's language
@@ -32,6 +33,6 @@ export async function loadLanguage(extensionUri: Uri) {
  * Get the currently loaded translations object.
  * @returns The currently loaded translations object.
  */
-export function getTranslations() {
+export function getTranslations(): Record<string, string> {
   return i18n
 }

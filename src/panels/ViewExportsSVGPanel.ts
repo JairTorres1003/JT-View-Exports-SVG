@@ -22,6 +22,7 @@ import {
   removeAssetFile,
   viewAssetFile,
 } from '../utilities/fileSystem'
+import { isEmpty } from '../utilities/misc'
 import { customSvgComponent } from '../utilities/svg/customSvgComponent'
 import { filterSvgComponents } from '../utilities/svg/filterSvgComponents'
 import {
@@ -83,12 +84,12 @@ export class ViewExportsSVGPanel {
    * @param extensionUri The URI of the directory containing the extension.
    * @param svgComponents The array of SVG exports or an SvgExportErrors object.
    */
-  public static render(extensionUri: Uri, svgComponents: SvgExport[] | SvgExportErrors) {
-    const column = window.activeTextEditor ? window.activeTextEditor.viewColumn : undefined
+  public static render(extensionUri: Uri, svgComponents: SvgExport[] | SvgExportErrors): void {
+    const column = window.activeTextEditor?.viewColumn
     const i18n = getTranslations()
 
     // If we already have a panel, show it
-    if (ViewExportsSVGPanel.currentPanel) {
+    if (!isEmpty(ViewExportsSVGPanel.currentPanel)) {
       this.update(svgComponents)
       return
     }
@@ -97,7 +98,7 @@ export class ViewExportsSVGPanel {
     const panel = window.createWebviewPanel(
       ViewExportsSVGPanel.viewType,
       i18n.panelTitle,
-      column || ViewColumn.One,
+      column ?? ViewColumn.One,
       {
         // Enable JavaScript in the webview
         enableScripts: true,
@@ -118,9 +119,9 @@ export class ViewExportsSVGPanel {
    * Update the contents of the webview panel displaying SVG components.
    * @param svgComponents - SVG components or error data to display.
    */
-  public static update(svgComponents: SvgExport[] | SvgExportErrors) {
+  public static update(svgComponents: SvgExport[] | SvgExportErrors): void {
     // If we already have a panel, show it
-    if (ViewExportsSVGPanel.currentPanel) {
+    if (!isEmpty(ViewExportsSVGPanel.currentPanel)) {
       const svgComponentsJson = JSON.stringify(svgComponents)
       ViewExportsSVGPanel.currentPanel.svgComponents = svgComponents
       ViewExportsSVGPanel.currentPanel._postMessage('svgComponents', svgComponentsJson)
@@ -131,15 +132,15 @@ export class ViewExportsSVGPanel {
   /**
    * Dispose of the panel and clean up resources.
    */
-  public dispose() {
+  public dispose(): void {
     ViewExportsSVGPanel.currentPanel = undefined
 
     // Clean up resources
     this._panel.dispose()
 
-    while (this._disposables.length) {
+    while (this._disposables.length > 0) {
       const disposable = this._disposables.pop()
-      if (disposable) {
+      if (!isEmpty(disposable)) {
         disposable.dispose()
       }
     }
@@ -151,11 +152,11 @@ export class ViewExportsSVGPanel {
    * @param extensionUri The URI of the directory containing the extension.
    * @returns The HTML content for the webview panel.
    */
-  private _getWebviewContent(webview: Webview, extensionUri: Uri) {
+  private _getWebviewContent(webview: Webview, extensionUri: Uri): string {
     const i18n = getTranslations()
     const dirs = ['webview-ui', 'build', 'assets']
 
-    const getAssetUri = (asset: string) =>
+    const getAssetUri = (asset: string): string =>
       getUri(webview, extensionUri, [...dirs, asset]).toString()
 
     // Get the URIs for the required assets
@@ -177,7 +178,7 @@ export class ViewExportsSVGPanel {
     // Return the HTML content for the webview panel
     return `
       <!DOCTYPE html>
-      <html lang="${env.language || 'en'}">
+      <html lang="${env.language ?? 'en'}">
         <head>
           <meta charset="UTF-8" />
           <link rel="icon" type="image/x-icon" href="${icoUri}" />
@@ -240,7 +241,7 @@ export class ViewExportsSVGPanel {
    * Handles the request to get translations.
    */
   private handleGetTranslations(): void {
-    const language = env.language || 'en'
+    const language = env.language ?? 'en'
     this._postMessage('language', language)
   }
 
@@ -333,7 +334,7 @@ export class ViewExportsSVGPanel {
    * Sets up a message listener for the webview panel.
    * @param webview The webview instance.
    */
-  private _setWebviewMessageListener(webview: Webview) {
+  private _setWebviewMessageListener(webview: Webview): void {
     const commandHandlers: CommandHandler = {
       requestSvgComponents: this.handleRequestSvgComponents.bind(this),
       getConfigurationVsCode: this.handleConfiguration.bind(this),
@@ -351,7 +352,7 @@ export class ViewExportsSVGPanel {
     webview.onDidReceiveMessage(
       (message: ReceiveMessageData) => {
         const handler = commandHandlers[message.command]
-        if (handler) {
+        if (!isEmpty(handler)) {
           handler.call(this, message)
         }
       },
@@ -365,7 +366,8 @@ export class ViewExportsSVGPanel {
    * @param command The command to be included in the message.
    * @param data An optional parameter representing the data payload of the message.
    */
-  private _postMessage(command: PostMessageCommand, data?: any) {
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  private _postMessage(command: PostMessageCommand, data?: any): void {
     this._panel.webview.postMessage({ command, data }).then(undefined, (error) => {
       console.error('Failed to send message:', error)
     })

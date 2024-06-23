@@ -1,6 +1,9 @@
 import * as t from '@babel/types'
 import { camelCase, isArray } from 'lodash'
 
+import { type ANY_TYPE } from '../../interfaces/misc'
+import { isEmpty } from '../misc'
+
 import { cssStringToObject } from './cssStringToObject'
 import { getPropertyValues } from './propertyValues'
 
@@ -12,9 +15,9 @@ import { getPropertyValues } from './propertyValues'
  */
 export function setProperties(
   attributes: t.JSXOpeningElement['attributes'],
-  defaultProperties: Record<string, any>
-): Record<string, any> {
-  let props: Record<string, any> = {}
+  defaultProperties: Record<string, ANY_TYPE>
+): Record<string, ANY_TYPE> {
+  let props: Record<string, ANY_TYPE> = {}
 
   // Iterate over the attributes of the JSX element
   attributes.forEach((attr) => {
@@ -22,7 +25,7 @@ export function setProperties(
       const { name, value } = attr
 
       // Store the attribute value in the props object using camelCase format for the attribute name
-      const propKey = camelCase(((name.name || '') as string).toString())
+      const propKey = camelCase(((name.name ?? '') as string).toString())
       props[propKey] = getPropertyValues(value, defaultProperties)
     } else if (t.isJSXSpreadAttribute(attr)) {
       props = { ...props, ...getPropertyValues(attr.argument, defaultProperties) }
@@ -34,7 +37,7 @@ export function setProperties(
     if (typeof props.style === 'string') {
       // Convert the "style" string to an object
       props.style = cssStringToObject(props.style)
-    } else if (!props.style || typeof props.style !== 'object' || isArray(props.style)) {
+    } else if (isEmpty(props.style) || typeof props.style !== 'object' || isArray(props.style)) {
       props.style = {}
     }
   }

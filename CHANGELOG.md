@@ -1,5 +1,16 @@
 # View Exports SVG - Changelog
 
+## 3.1.1
+
+_Jun 23, 2024_
+
+**Bug Fixes**
+
+- Bump vite from 5.0.12 to 5.0.13 in /webview-ui by @dependabot in [#123](https://github.com/JairTorres1003/JT-View-Exports-SVG/pull/123)
+- Bump braces from 3.0.2 to 3.0.3 by @dependabot in [#124](https://github.com/JairTorres1003/JT-View-Exports-SVG/pull/124)
+- Bump braces from 3.0.2 to 3.0.3 in /webview-ui by @dependabot in [#125](https://github.com/JairTorres1003/JT-View-Exports-SVG/pull/125)
+- Minor bug fixes and improvements.
+
 ## 3.1.0
 
 _Feb 11, 2024_
@@ -7,7 +18,7 @@ _Feb 11, 2024_
 **Adds Configurations**
 
 - **New Configuration:** Introduces the `JT-View-Exports-SVG.assetsPath` configuration to define in the workspace and/or user settings the files that have been opened and have icons available in the workspace.
-- **nternationalization Update:** Adds new translations.
+- **Internationalization Update:** Adds new translations.
 
 ## 3.0.1
 

@@ -28,6 +28,7 @@ export const AccordionSummary = styled((props: AccordionSummaryProps | PaperProp
   minHeight: '60px !important',
   flexDirection: 'row-reverse',
   transition: 'background-color 0.2s',
+  '& .IconButton-edit': { color: 'inherit' },
   '& .AccordionSummary-title': {
     '& .AccordionSummary-title-text': { whiteSpace: 'nowrap', width: '100%', fontSize: 13 },
     display: 'flex',
@@ -39,7 +40,7 @@ export const AccordionSummary = styled((props: AccordionSummaryProps | PaperProp
       minWidth: 20,
       maxWidth: 20,
       maxHeight: 20,
-      stroke: 'rgb(var(--color-JT-view-export-svg))',
+      stroke: 'currentcolor',
     },
   },
   '&.Mui-expanded': {
@@ -63,6 +64,7 @@ export const AccordionSummary = styled((props: AccordionSummaryProps | PaperProp
       borderColor: 'inherit',
     },
     '&::before': { top: -4 },
+    svg: { stroke: 'rgb(var(--color-JT-view-export-svg))' },
   },
   '& .MuiAccordionSummary-expandIconWrapper.Mui-expanded': {
     transform: 'rotate(90deg)',

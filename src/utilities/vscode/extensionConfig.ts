@@ -1,9 +1,11 @@
-import { ConfigurationTarget, workspace } from 'vscode'
 import * as path from 'path'
 
-import ExtensionConfigManager from './extensionConfigManager'
+import { ConfigurationTarget, workspace } from 'vscode'
+
 import { type SvgFile } from '../../interfaces/svgExports'
 import { getWorkspaceFolder } from '../fileSystem'
+
+import ExtensionConfigManager from './extensionConfigManager'
 
 /**
  * Manages the configuration of the assets path for the extension.
@@ -24,7 +26,7 @@ export class ConfigAssetsPath extends ExtensionConfigManager<string[]> {
    * @returns `true` if the file exists in the workspace folders, `false` otherwise.
    */
   private existsInWorkspace(file: SvgFile): boolean {
-    if (!this.workspaceFolders) return false
+    if (this.workspaceFolders === undefined) return false
 
     return this.workspaceFolders.some((folder) => file.absolutePath.includes(folder.uri.fsPath))
   }
@@ -69,7 +71,7 @@ export class ConfigAssetsPath extends ExtensionConfigManager<string[]> {
    * @param file - The SVG file.
    */
   public async set(file: SvgFile | SvgFile[]): Promise<void> {
-    if (this.workspaceFolders) {
+    if (this.workspaceFolders !== undefined) {
       try {
         const filesArray = Array.isArray(file) ? file : [file]
         const value = this.get() ?? []
@@ -105,7 +107,7 @@ export class ConfigAssetsPath extends ExtensionConfigManager<string[]> {
    * @param file - The SVG file.
    */
   public async remove(file: SvgFile): Promise<void> {
-    if (this.workspaceFolders) {
+    if (this.workspaceFolders !== undefined) {
       try {
         const filePath = this.getPath(file)
         const [target, value] = this.getTargetValue(file)
@@ -131,7 +133,7 @@ export class ConfigAssetsPath extends ExtensionConfigManager<string[]> {
    */
   public getAssetsPath(): { workspace: string[]; user: string[] } {
     this.assetsPathUser.forEach((p, index) => {
-      if (this.workspaceFolders) {
+      if (this.workspaceFolders !== undefined) {
         const exists = this.workspaceFolders?.some((folder) => p.includes(folder.uri.fsPath))
         const relativePath = exists ? path.relative(getWorkspaceFolder(), p) : p
 
@@ -145,7 +147,9 @@ export class ConfigAssetsPath extends ExtensionConfigManager<string[]> {
               relativePath,
             }
 
-            this.set(file).catch((error) => console.error('Error setting assets path:', error))
+            this.set(file).catch((error) => {
+              console.error('Error setting assets path:', error)
+            })
           }
 
           // Remove the file from the user assets path
