@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/naming-convention */
 import traverse from '@babel/traverse'
 import * as t from '@babel/types'
 
