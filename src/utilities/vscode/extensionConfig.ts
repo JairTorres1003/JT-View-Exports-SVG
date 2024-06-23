@@ -26,7 +26,7 @@ export class ConfigAssetsPath extends ExtensionConfigManager<string[]> {
    * @returns `true` if the file exists in the workspace folders, `false` otherwise.
    */
   private existsInWorkspace(file: SvgFile): boolean {
-    if (!this.workspaceFolders) return false
+    if (this.workspaceFolders === undefined) return false
 
     return this.workspaceFolders.some((folder) => file.absolutePath.includes(folder.uri.fsPath))
   }
@@ -71,7 +71,7 @@ export class ConfigAssetsPath extends ExtensionConfigManager<string[]> {
    * @param file - The SVG file.
    */
   public async set(file: SvgFile | SvgFile[]): Promise<void> {
-    if (this.workspaceFolders) {
+    if (this.workspaceFolders !== undefined) {
       try {
         const filesArray = Array.isArray(file) ? file : [file]
         const value = this.get() ?? []
@@ -107,7 +107,7 @@ export class ConfigAssetsPath extends ExtensionConfigManager<string[]> {
    * @param file - The SVG file.
    */
   public async remove(file: SvgFile): Promise<void> {
-    if (this.workspaceFolders) {
+    if (this.workspaceFolders !== undefined) {
       try {
         const filePath = this.getPath(file)
         const [target, value] = this.getTargetValue(file)
@@ -133,7 +133,7 @@ export class ConfigAssetsPath extends ExtensionConfigManager<string[]> {
    */
   public getAssetsPath(): { workspace: string[]; user: string[] } {
     this.assetsPathUser.forEach((p, index) => {
-      if (this.workspaceFolders) {
+      if (this.workspaceFolders !== undefined) {
         const exists = this.workspaceFolders?.some((folder) => p.includes(folder.uri.fsPath))
         const relativePath = exists ? path.relative(getWorkspaceFolder(), p) : p
 

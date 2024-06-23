@@ -1,6 +1,7 @@
 import traverse from '@babel/traverse'
 import { isJSXIdentifier } from '@babel/types'
 
+import { type ANY_TYPE } from '../../interfaces/misc'
 import { parserContent } from '../babelParser'
 import { getUnknownError } from '../misc'
 
@@ -19,19 +20,16 @@ import { setProperties } from './setProperties'
  */
 export async function extractComponent(
   value: string,
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  params: Record<string, any>
+  params: Record<string, ANY_TYPE>
 ): Promise<{
   name: string
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  attributes: Record<string, any>
+  attributes: Record<string, ANY_TYPE>
   error?: string
 }> {
   try {
     const ast = parserContent(value)
     let name: string = ''
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    let attributes: Record<string, any> = {}
+    let attributes: Record<string, ANY_TYPE> = {}
 
     traverse(ast, {
       JSXOpeningElement(path) {

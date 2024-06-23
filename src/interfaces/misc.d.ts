@@ -72,3 +72,6 @@ type SvgTagName =
   | 'tspan'
   | 'use'
   | 'view'
+
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+export type ANY_TYPE = any

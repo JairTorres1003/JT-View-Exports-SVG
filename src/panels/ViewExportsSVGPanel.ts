@@ -1,4 +1,3 @@
-import { isEmpty } from 'lodash'
 import {
   type Disposable,
   Uri,
@@ -23,6 +22,7 @@ import {
   removeAssetFile,
   viewAssetFile,
 } from '../utilities/fileSystem'
+import { isEmpty } from '../utilities/misc'
 import { customSvgComponent } from '../utilities/svg/customSvgComponent'
 import { filterSvgComponents } from '../utilities/svg/filterSvgComponents'
 import {

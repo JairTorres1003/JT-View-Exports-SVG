@@ -1,4 +1,6 @@
-import { camelCase, isEmpty } from 'lodash'
+import { camelCase } from 'lodash'
+
+import { isEmpty } from '../misc'
 
 /**
  * Convert a CSS string to an object.

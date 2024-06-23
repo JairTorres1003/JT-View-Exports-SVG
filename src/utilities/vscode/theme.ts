@@ -55,9 +55,9 @@ function themeParser(theme: string, mode: ThemeMode, values: IThemeObject): IThe
         token: scope.trim(),
       }
 
-      if (foreground) rule.foreground = (Color(foreground).hex() ?? '').toLowerCase()
-      if (background) rule.background = (Color(background).hex() ?? '').toLowerCase()
-      if (fontStyle) rule.fontStyle = fontStyle
+      if (foreground !== undefined) rule.foreground = (Color(foreground).hex() ?? '').toLowerCase()
+      if (background !== undefined) rule.background = (Color(background).hex() ?? '').toLowerCase()
+      if (fontStyle !== undefined) rule.fontStyle = fontStyle
 
       rules.push(rule)
     }
@@ -81,11 +81,11 @@ function themeParser(theme: string, mode: ThemeMode, values: IThemeObject): IThe
  * @param colorTheme The name or ID of the color theme.
  * @returns A promise that resolves to the theme data, or undefined if the theme is not found.
  */
-export async function getThemeInfo(colorTheme: string) {
+export async function getThemeInfo(colorTheme: string): Promise<IThemeData | undefined> {
   // Check if the theme is cached
   const cachedTheme = themeCache.get(colorTheme)
 
-  if (cachedTheme) {
+  if (cachedTheme !== undefined) {
     return cachedTheme
   }
 
@@ -101,7 +101,7 @@ export async function getThemeInfo(colorTheme: string) {
     )
   })
 
-  if (themeExtensionProvided) {
+  if (themeExtensionProvided !== undefined) {
     const { extensionPath, packageJSON } = themeExtensionProvided
 
     // Theme provided by an extension
@@ -109,7 +109,7 @@ export async function getThemeInfo(colorTheme: string) {
       (theme: ThemeInfo) => theme.label === colorTheme || theme.id === colorTheme
     )
 
-    if (themeInfo?.path) {
+    if (themeInfo?.path !== undefined) {
       const themePath = path.join(extensionPath, themeInfo.path)
       const themeJSON = await import(themePath)
 
@@ -117,7 +117,7 @@ export async function getThemeInfo(colorTheme: string) {
     }
   }
 
-  if (result) {
+  if (result !== undefined) {
     themeCache.set(colorTheme, result)
   }
 

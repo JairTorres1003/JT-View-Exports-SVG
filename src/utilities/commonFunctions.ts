@@ -7,6 +7,7 @@ import { type SvgExport, type SvgExportErrors, type SvgFile } from '../interface
 
 import { baseFileCache, FileModifiedCache, getFileTimestamp } from './cache'
 import { getWorkspaceFolder, getFileLanguage } from './fileSystem'
+import { isEmpty } from './misc'
 import { extractSVGComponentExports } from './svg/extractSVGComponentExports'
 import { ConfigAssetsPath, getTranslations } from './vscode'
 
@@ -23,7 +24,7 @@ export async function processFiles(
   items: Uri[] | undefined | null,
   filesPath: string[] | null,
   operation: (result: SvgExport[] | SvgExportErrors) => void
-) {
+): Promise<void> {
   try {
     // Get the translation messages
     const i18n = getTranslations()
@@ -37,12 +38,12 @@ export async function processFiles(
       title: i18n.progressTitle,
       cancellable: false,
     }
-    const arrayFiles = items || filesPath
+    const arrayFiles = items ?? filesPath
 
     // Show loader message
     const progress = await window.withProgress(progressOptions, async (progress) => {
       // Check if any files are selected
-      if (!arrayFiles || arrayFiles.length === 0) {
+      if (isEmpty(arrayFiles)) {
         newError.messageError = i18n.NoFileSelected
         newError.fileSelected = 0
 
@@ -52,11 +53,12 @@ export async function processFiles(
       }
 
       // Define a sorting function based on the source of files
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
       let sortingFunction: ((a: any, b: any) => number) | undefined
 
-      if (items) {
+      if (!isEmpty(items)) {
         sortingFunction = (a: Uri, b: Uri) => a.fsPath.localeCompare(b.fsPath)
-      } else if (filesPath) {
+      } else if (!isEmpty(filesPath)) {
         sortingFunction = (a: string, b: string) => a.localeCompare(b)
       }
 
@@ -65,17 +67,17 @@ export async function processFiles(
 
       arrayFiles.forEach((file) => {
         let absolutePath: string | null = null
-        if (items) {
+        if (!isEmpty(items)) {
           const f = file as Uri
           absolutePath = f.scheme === 'file' ? f.fsPath : null
-        } else if (filesPath) {
+        } else if (!isEmpty(filesPath)) {
           absolutePath = file as string
         }
 
-        if (absolutePath) {
+        if (!isEmpty(absolutePath)) {
           const extname = path.extname(absolutePath)
 
-          if (absolutePath && REGEX_FILE.test(extname)) {
+          if (!isEmpty(absolutePath) && REGEX_FILE.test(extname)) {
             const basename = path.basename(absolutePath)
             const dirname = path.relative(workspaceFolder, path.dirname(absolutePath))
             const relativePath: string = path.relative(workspaceFolder, absolutePath)
@@ -140,7 +142,7 @@ export async function processFiles(
     })
 
     // Hide the progress message if it was shown
-    if (progress) {
+    if (!isEmpty(progress)) {
       progress.report({ increment: 100 })
     }
   } catch (error) {
