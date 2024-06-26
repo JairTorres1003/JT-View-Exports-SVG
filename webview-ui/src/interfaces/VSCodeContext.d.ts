@@ -10,6 +10,7 @@ export interface VSCodeContextState {
   /**
    * The current styles of the VSCode window.
    */
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   styles: Record<string, any>
   /**
    * The current theme of the VSCode window.
@@ -25,6 +26,7 @@ export interface VSCodeContextState {
  * Represents an action that can be dispatched to modify the VSCode context's state.
  */
 export type VSCodeContextAction =
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   | { type: 'SET_STYLES'; payload: Record<string, any> }
   | { type: 'SET_THEME'; payload: VSCodeContextState['theme'] }
   | { type: 'SET_THEME_DATA'; payload: IThemeData }

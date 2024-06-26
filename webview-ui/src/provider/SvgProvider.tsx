@@ -29,7 +29,7 @@ const svgReducer: Reducer<SvgContextState, SvgContextAction> = (prevState, actio
         selectedSvgLanguage: '',
       }
     case 'SELECTED':
-      if (!action.payload) {
+      if (action.payload === null) {
         return { ...prevState }
       }
 
@@ -41,7 +41,7 @@ const svgReducer: Reducer<SvgContextState, SvgContextAction> = (prevState, actio
         selectedSvgLanguage: action.payload.language,
       }
     case 'SNACKBAR':
-      return { ...prevState, snackbar: action.payload || { open: false, text: null } }
+      return { ...prevState, snackbar: action.payload ?? { open: false, text: null } }
     case 'SNACKBAR_PLAYGROUND':
       return {
         ...prevState,
@@ -74,7 +74,10 @@ export default SvgProvider
  * @returns An object containing the SVG context's state and dispatch functions.
  * @throws Throws an error if used outside of a SvgProvider.
  */
-export const useSvg = () => {
+export const useSvg = (): {
+  state: SvgContextState
+  dispatch: React.Dispatch<SvgContextAction>
+} => {
   const context = useContext(SvgContext)
 
   if (context === undefined) {

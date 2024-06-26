@@ -38,10 +38,13 @@ const VSCodeProvider: FC<{ children: ReactNode }> = (props) => {
 
 export default VSCodeProvider
 
-export const useVSCode = () => {
+export const useVSCode = (): {
+  state: VSCodeContextState
+  dispatch: React.Dispatch<VSCodeContextAction>
+} => {
   const context = useContext(VSCodeContext)
 
-  if (!context) {
+  if (context === undefined) {
     throw new Error('useVSCode must be used within a VSCodeProvider')
   }
 

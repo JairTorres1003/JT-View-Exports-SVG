@@ -2,16 +2,23 @@ import { useEffect, useState } from 'react'
 
 import { type FinderProps } from '../interfaces/Finder'
 import { vscode } from '../utilities/vscode'
+
 import useDebounce from './useDebounce'
 
-const useFinder = (props: FinderProps) => {
+interface FinderHook {
+  handleClearValue: () => void
+  setValue: React.Dispatch<React.SetStateAction<string>>
+  value: string
+}
+
+const useFinder = (props: FinderProps): FinderHook => {
   const [value, setValue] = useState<string>('')
   const debounce = useDebounce(value, 600)
 
   /**
    * Clear the value and trigger.
    */
-  const handleClearValue = () => {
+  const handleClearValue = (): void => {
     if (value.trim().length > 0) {
       setValue('')
     }

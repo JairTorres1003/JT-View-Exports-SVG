@@ -1,9 +1,12 @@
 import type { WebviewApi } from 'vscode-webview'
+
 import {
   type MessageData,
   type OnMessageCommand,
   type PostMessageCommand,
 } from '../interfaces/vscode'
+
+import { isEmpty } from './misc'
 
 /**
  * Wrapper class for the VSCode API, providing methods for communication between the webview and the extension.
@@ -16,6 +19,7 @@ class VSCodeAPIWrapper {
   /**
    * Mapping of message commands to their corresponding handlers.
    */
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   private messageHandlers: Record<string, Array<(...pros: any) => void>> = {}
 
   /**
@@ -30,7 +34,7 @@ class VSCodeAPIWrapper {
       const message: MessageData = event.data
       const handlers = this.messageHandlers[message.command]
 
-      if (handlers) {
+      if (!isEmpty(handlers)) {
         handlers.forEach((handler) => {
           handler(message.data)
         })
@@ -43,8 +47,9 @@ class VSCodeAPIWrapper {
    * @param command The command associated with the message.
    * @param data The data payload of the message.
    */
-  public postMessage(command: PostMessageCommand, data?: any) {
-    if (this.vsCodeApi) {
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  public postMessage(command: PostMessageCommand, data?: any): void {
+    if (this.vsCodeApi !== undefined) {
       this.vsCodeApi.postMessage({ command, data })
     } else {
       if (command === 'requestSvgComponents') {
@@ -54,7 +59,7 @@ class VSCodeAPIWrapper {
             const resData = JSON.stringify(data)
             const handlers = this.messageHandlers.svgComponents
 
-            if (handlers) {
+            if (!isEmpty(handlers)) {
               handlers.forEach((handler) => {
                 handler(resData)
               })
@@ -72,8 +77,9 @@ class VSCodeAPIWrapper {
    * @param command The command associated with the message.
    * @param handler The handler function to be called when the message is received.
    */
-  public onMessage(command: OnMessageCommand, handler: (...pros: any) => void) {
-    if (!this.messageHandlers[command]) {
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  public onMessage(command: OnMessageCommand, handler: (...pros: any) => void): void {
+    if (isEmpty(this.messageHandlers[command])) {
       this.messageHandlers[command] = []
     }
     this.messageHandlers[command].push(handler)
@@ -84,9 +90,10 @@ class VSCodeAPIWrapper {
    * @param command The command associated with the message.
    * @param handler The handler function to be removed.
    */
-  public removeMessageHandler(command: OnMessageCommand, handler: (...pros: any) => void) {
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  public removeMessageHandler(command: OnMessageCommand, handler: (...pros: any) => void): void {
     const handlers = this.messageHandlers[command]
-    if (handlers) {
+    if (!isEmpty(handlers)) {
       const index = handlers.indexOf(handler)
       if (index !== -1) {
         handlers.splice(index, 1)

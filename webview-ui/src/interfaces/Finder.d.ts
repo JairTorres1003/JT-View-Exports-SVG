@@ -6,6 +6,7 @@ export interface FinderProps {
    * Handles the received SVG components data from the webview context.
    * @param data The data received from the webview context.
    */
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   handleSvgComponents: (data: any) => void
   /**
    * An optional reference to a DOM element.

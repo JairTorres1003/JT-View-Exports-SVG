@@ -1,8 +1,9 @@
-import { type FC } from 'react'
 import { Alert, Snackbar as MuiSnackbar, Typography } from '@mui/material'
+import { type FC } from 'react'
 import { useTranslation } from 'react-i18next'
 
 import { useSvg } from '../../provider/SvgProvider'
+import { isEmpty } from '../../utilities/misc'
 
 export const Snackbar: FC = () => {
   const {
@@ -11,7 +12,7 @@ export const Snackbar: FC = () => {
   } = useSvg()
   const { t } = useTranslation()
 
-  const onClose = () => {
+  const onClose = (): void => {
     dispatch({ type: 'SNACKBAR', payload: { open: false, text: null } })
   }
 
@@ -25,7 +26,7 @@ export const Snackbar: FC = () => {
     >
       <Alert severity='success'>
         <Typography fontSize={12}>
-          {`${t('Copied')} ${snackbar.text && `'${snackbar.text}' `}${t('ToClipboard')}`}
+          {`${t('Copied')} ${!isEmpty(snackbar.text) && `'${snackbar.text}' `}${t('ToClipboard')}`}
         </Typography>
       </Alert>
     </MuiSnackbar>

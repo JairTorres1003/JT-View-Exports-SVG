@@ -3,17 +3,18 @@ import { useTranslation } from 'react-i18next'
 
 import { type SwitchDarkModeProps } from '../../interfaces/styled.props'
 
-export const SwitchDarkMode = styled((props: SwitchDarkModeProps) => {
-  const { checked, onChange, slotsProps } = props
-  const { t } = useTranslation()
+export const SwitchDarkMode = styled(
+  ({ checked = false, onChange, slotsProps, ...props }: SwitchDarkModeProps & BoxProps) => {
+    const { t } = useTranslation()
 
-  return (
-    <Box {...(props as BoxProps)} onChange={() => {}}>
-      <Switch size='small' {...slotsProps?.switch} onChange={onChange} checked={checked} />
-      <Typography {...slotsProps?.typography}>{t(checked ? 'dark' : 'light')}</Typography>
-    </Box>
-  )
-})(({ theme }) => ({
+    return (
+      <Box {...props} onChange={() => {}}>
+        <Switch size='small' {...slotsProps?.switch} onChange={onChange} checked={checked} />
+        <Typography {...slotsProps?.typography}>{t(checked ? 'dark' : 'light')}</Typography>
+      </Box>
+    )
+  }
+)(({ theme }) => ({
   display: 'flex',
   textAlign: 'center',
   justifyContent: 'center',

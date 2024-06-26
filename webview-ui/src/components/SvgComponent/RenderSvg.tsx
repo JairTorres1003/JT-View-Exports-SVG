@@ -1,17 +1,22 @@
-import { type FC, useEffect, useRef } from 'react'
 import { motion } from 'framer-motion'
+import { type FC, useEffect, useRef } from 'react'
 
 import { IconFailExport } from '../../icons'
 import { type SvgComponentDetails } from '../../interfaces/svgExports'
+import { isEmpty } from '../../utilities/misc'
 
-const RenderSVG: FC<SvgComponentDetails & { fullSize?: boolean }> = (props) => {
-  const { children, fullSize, tag, isMotion } = props
-
+const RenderSVG: FC<SvgComponentDetails & { fullSize?: boolean }> = ({
+  children,
+  fullSize = false,
+  tag,
+  isMotion = false,
+  ...props
+}) => {
   const svgRef = useRef<HTMLElement>(null)
   const isSvg = typeof tag === 'string' && tag === 'svg'
 
   useEffect(() => {
-    if (svgRef.current && !fullSize) {
+    if (!isEmpty(svgRef.current) && !fullSize) {
       const width = svgRef.current.clientWidth
       const height = svgRef.current.clientHeight
       const padding = 20 // 20px: 10px padding on each side

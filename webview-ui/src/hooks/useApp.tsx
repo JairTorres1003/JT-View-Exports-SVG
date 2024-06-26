@@ -1,13 +1,31 @@
-import { createTheme } from '@mui/material'
+import { type Theme, createTheme } from '@mui/material'
+import { type ResizeCallback } from 're-resizable'
 import { useEffect, useMemo, useRef, useState } from 'react'
 
 import i18n from '../i18n'
 import { type SvgExport } from '../interfaces/svgExports'
 import { useSvg } from '../provider/SvgProvider'
 import { useVSCode } from '../provider/VSCodeProvider'
+import { isEmpty } from '../utilities/misc'
 import { vscode } from '../utilities/vscode'
 
-const useApp = () => {
+interface AppHook {
+  fileSelected: number | null | undefined
+  handleExtractIcons: (fileList: FileList | null) => void
+  handleOpenPanel: () => void
+  handleResize: ResizeCallback
+  handleResizeStop: ResizeCallback
+  handleSvgComponents: (data: string) => void
+  isLoading: boolean
+  isPanelOpen: boolean
+  resizableWidth: string
+  refPortalButton: React.MutableRefObject<HTMLElement | null>
+  showMessage: string | null
+  svgComponents: SvgExport[]
+  theme: Theme
+}
+
+const useApp = (): AppHook => {
   const [svgComponents, setSvgComponents] = useState<SvgExport[]>([])
   const [showMessage, setShowMessage] = useState<string | null>(null)
   const [isLoading, setIsLoading] = useState<boolean>(true)
@@ -28,7 +46,7 @@ const useApp = () => {
    * @param ref - The reference to the resizable element.
    * @param d - The width and height changes during resizing.
    */
-  const handleResize = (e: Event, direction: string, ref: HTMLElement, d: Record<string, any>) => {
+  const handleResize: ResizeCallback = (_, direction, ref, d) => {
     const newWidth = parseInt(ref.style.width, 10)
 
     if (!isPanelOpen && newWidth <= 95) {
@@ -48,12 +66,7 @@ const useApp = () => {
    * @param ref - The reference to the resizable element.
    * @param d - The width and height changes during resizing.
    */
-  const handleResizeStop = (
-    e: Event,
-    direction: string,
-    ref: HTMLElement,
-    d: Record<string, any>
-  ) => {
+  const handleResizeStop: ResizeCallback = (_, direction, ref, d) => {
     const newWidth = parseInt(ref.style.width, 10)
 
     if ((isPanelOpen && newWidth >= 81) || (!isPanelOpen && newWidth > 95)) {
@@ -65,7 +78,7 @@ const useApp = () => {
   /**
    * Handle opening or closing the panel.
    */
-  const handleOpenPanel = () => {
+  const handleOpenPanel = (): void => {
     setResizableWidth(`${!isPanelOpen ? 65 : 100}%`)
     setIsPanelOpen(!isPanelOpen)
   }
@@ -74,10 +87,11 @@ const useApp = () => {
    * Handle the SVG components data received from the webview.
    * @param data The SVG components data.
    */
-  const handleSvgComponents = (data: any) => {
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const handleSvgComponents = (data: any): void => {
     const response = JSON.parse(data)
 
-    if (response.messageError) {
+    if (!isEmpty(response.messageError)) {
       setShowMessage(response.messageError)
       setFileSelected(response?.fileSelected)
     } else {
@@ -93,17 +107,17 @@ const useApp = () => {
    * Handles the extraction of icons from a dropped file.
    * @param fileList The dropped files to extract icons from.
    */
-  const handleExtractIcons = (fileList: FileList | null) => {
+  const handleExtractIcons = (fileList: FileList | null): void => {
     setIsLoading(true)
     dispatch({ type: 'CLEAR_SELECTED' })
-    let fullPaths = []
+    let fullPaths: string[] = []
 
-    if (fileList && fileList.length > 0) {
+    if (fileList !== null && fileList.length > 0) {
       const fileListArray = Array.from(fileList)
 
       // Create an array of full paths to the dropped files
       // Note: The 'path' property is available only in VS Code extensions
-      fullPaths = fileListArray.map((file: any) => file.path)
+      fullPaths = fileListArray.map((file: File & { path?: string }) => file.path ?? '')
     }
 
     vscode.postMessage('extractIconsFile', fullPaths)
@@ -113,10 +127,12 @@ const useApp = () => {
    * Handles the configuration data received from VS Code.
    * @param data - The configuration data.
    */
-  const handleConfigurationVsCode = (data: any) => {
-    const response = JSON.parse(data) || {}
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const handleConfigurationVsCode = (data: any): void => {
+    const response = JSON.parse(data) ?? {}
+
     dispatchVSCode({ type: 'SET_STYLES', payload: response.styles })
-    if (response.themeData) {
+    if (!isEmpty(response.themeData)) {
       dispatchVSCode({ type: 'SET_THEME_DATA', payload: response.themeData })
     }
   }
@@ -125,7 +141,7 @@ const useApp = () => {
    * Handles the current theme and updates the application state.
    * @param theme The current theme ("dark" or "light").
    */
-  const handleCurrentTheme = (theme: 'dark' | 'light') => {
+  const handleCurrentTheme = (theme: 'dark' | 'light'): void => {
     dispatchVSCode({ type: 'SET_THEME', payload: theme })
   }
 
@@ -133,7 +149,7 @@ const useApp = () => {
    * Handles the selection of a language and sets the chosen language in the state.
    * @param {string} lang - The language code of the selected language.
    */
-  const handleLanguage = (lang: string) => {
+  const handleLanguage = (lang: string): void => {
     const language = lang.replace('-', '_')
 
     i18n.changeLanguage(language).catch((error) => {

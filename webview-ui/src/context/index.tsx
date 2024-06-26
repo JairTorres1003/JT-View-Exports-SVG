@@ -1,4 +1,5 @@
 import { createContext } from 'react'
+
 import { type SvgContextAction, type SvgContextState } from '../interfaces/SvgContext'
 import { type VSCodeContextAction, type VSCodeContextState } from '../interfaces/VSCodeContext'
 

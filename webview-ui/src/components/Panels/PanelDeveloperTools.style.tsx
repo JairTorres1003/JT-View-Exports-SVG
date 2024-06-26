@@ -1,8 +1,8 @@
 import { Box, type BoxProps, Paper, Typography, styled } from '@mui/material'
-
-import { type BoxViewerSvgProps } from '../../interfaces/styled.props'
 import { type MotionProps, motion } from 'framer-motion'
 import { type FC } from 'react'
+
+import { type BoxViewerSvgProps } from '../../interfaces/styled.props'
 
 export const BoxPanelDeveloperTools = styled(Paper)(() => ({
   '--fixed-height-JT-view-export-svg': '56px',
@@ -45,7 +45,7 @@ export const BoxDeveloper = styled(Box)(() => ({
 
 export const BoxViewerSvg = styled(({ mode = false, style = {}, ...props }: BoxViewerSvgProps) => (
   <Paper {...props} className={`mode-${mode ? 'dark' : 'light'} ${props.className}`} />
-))(({ mode }) => ({
+))(({ mode = false }) => ({
   width: '100%',
   height: 'max-content',
   maxHeight: '100%',

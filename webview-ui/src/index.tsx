@@ -9,8 +9,8 @@ import './i18n'
 import './styles/reset.css'
 import './userWorker'
 
-const container = document.getElementById('root')
-const root = createRoot(container!)
+const container = document.getElementById('root') as HTMLElement
+const root = createRoot(container)
 
 root.render(
   <React.StrictMode>

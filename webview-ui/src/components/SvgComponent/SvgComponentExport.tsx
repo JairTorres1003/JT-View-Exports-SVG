@@ -1,12 +1,12 @@
-import { type FC } from 'react'
 import { AccordionDetails, IconButton, Tooltip } from '@mui/material'
+import { type FC } from 'react'
 import { useTranslation } from 'react-i18next'
 import MiddleEllipsis from 'react-middle-ellipsis'
 
 import useSvgComponentExport from '../../hooks/useSvgComponentExport'
-
-import { type SvgExport } from '../../interfaces/svgExports'
 import { IconFailExport, IconPencilSquare } from '../../icons'
+import { type SvgExport } from '../../interfaces/svgExports'
+
 import RenderSVG from './RenderSvg'
 import {
   Accordion,
@@ -67,8 +67,12 @@ const SvgComponentExport: FC<SvgExport> = (props) => {
                   handleSelected(item, file)
                 }}
               >
-                {item.isAnimated && <BoxAnimated />}
-                {item.component ? <RenderSVG {...item.component} /> : <IconFailExport />}
+                {item.isAnimated === true && <BoxAnimated />}
+                {item.component !== undefined ? (
+                  <RenderSVG {...item.component} />
+                ) : (
+                  <IconFailExport />
+                )}
               </Paper>
               <Tooltip title={item.name} arrow>
                 <Typography noWrap>{item.name}</Typography>

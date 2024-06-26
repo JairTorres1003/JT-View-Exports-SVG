@@ -49,6 +49,7 @@ export interface SvgComponent {
   /**
    * Parameters related to the SVG component, which are passed as props to the component.
    */
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   readonly params: Readonly<Record<string, any>>
 }
 
@@ -67,6 +68,7 @@ export interface SvgComponentDetails {
   /**
    * An object containing the props of the component.
    */
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   props: Record<string, any>
   /**
    * A flag indicating whether the component uses framer-motion

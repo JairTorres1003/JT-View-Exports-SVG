@@ -1,15 +1,16 @@
-import { useState, useEffect } from 'react'
 import { type Monaco, type EditorProps, loader } from '@monaco-editor/react'
 import * as monaco from 'monaco-editor/esm/vs/editor/editor.api'
+import { useState, useEffect } from 'react'
 
-import useDebounce from './useDebounce'
-
+import { REST_PROPS_KEY } from '../constants/misc'
+import { ATTR_TAG_REGEX, JSON_REGEX, TAG_REGEX } from '../constants/regex'
 import { type CustomSvgComponentData } from '../interfaces/svgExports'
 import { useSvg } from '../provider/SvgProvider'
 import { useVSCode } from '../provider/VSCodeProvider'
+import { isEmpty } from '../utilities/misc'
 import { vscode } from '../utilities/vscode'
-import { ATTR_TAG_REGEX, JSON_REGEX, TAG_REGEX } from '../constants/regex'
-import { REST_PROPS_KEY } from '../constants/misc'
+
+import useDebounce from './useDebounce'
 
 loader.config({ monaco })
 
@@ -17,12 +18,20 @@ loader.init().catch((error) => {
   console.error('An error occurred during initialization of Monaco: ', error)
 })
 
+interface PlaygroundHook {
+  editorValue: string
+  handleEditorChange: (value?: string) => void
+  initializeEditor: (monaco: Monaco) => monaco.IDisposable
+  OPTIONS: EditorProps['options']
+  setCompletionDisposable: React.Dispatch<React.SetStateAction<monaco.IDisposable | null>>
+}
+
 /**
  * Hook to handle the playground.
  *
  * @returns The playground hook.
  */
-const usePlayground = () => {
+const usePlayground = (): PlaygroundHook => {
   const {
     state: { selectedSvgLanguage, selectedSvgName, selectedSvgPath, selectedSvg },
     dispatch,
@@ -67,17 +76,16 @@ const usePlayground = () => {
    * @param value - The value to generate the insert text for.
    * @returns The default insert text as a string.
    */
-  const defaultInsertText = (value: any): string => {
-    const type = typeof value
-
-    switch (type) {
+  const defaultInsertText = (value: unknown): string => {
+    switch (typeof value) {
       case 'string':
         return `'${value}'`
       case 'object':
         // format object in multiline to prevent monaco from adding a semicolon
         return JSON.stringify(value, null, 2).replace(JSON_REGEX, '$1:')
       default:
-        return value.toString()
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        return (value as any).toString()
     }
   }
 
@@ -87,8 +95,9 @@ const usePlayground = () => {
    * @param monaco - The Monaco editor instance.
    * @returns The completion item provider registration.
    */
-  function initializeEditor(monaco: Monaco) {
+  function initializeEditor(monaco: Monaco): monaco.IDisposable {
     const { languages, editor } = monaco
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     const properties: Record<string, any> = selectedSvg?.params ?? {}
 
     // Remove the custom property from the object
@@ -117,7 +126,7 @@ const usePlayground = () => {
         })
         const match = textUntilPosition.match(TAG_REGEX)
 
-        if (!match) {
+        if (match === null) {
           return { suggestions: [] }
         }
 
@@ -157,7 +166,7 @@ const usePlayground = () => {
    * Handles the change event of the editor.
    * @param value - The new value of the editor.
    */
-  const handleEditorChange = (value?: string) => {
+  const handleEditorChange = (value?: string): void => {
     setEditorValue(value ?? '')
     setDataComponent({
       name: selectedSvgName,
@@ -171,10 +180,10 @@ const usePlayground = () => {
    * Handles the change event for the SVG data.
    * @param data - The SVG data as a string.
    */
-  const handleChangeSvg = (data: string) => {
-    const response = JSON.parse(data) || {}
+  const handleChangeSvg = (data: string): void => {
+    const response = JSON.parse(data) ?? {}
 
-    if (response && Object.keys(response).length > 0) {
+    if (!isEmpty(response)) {
       if (response?.type === 'error') {
         dispatch({
           type: 'SNACKBAR_PLAYGROUND',
@@ -198,17 +207,17 @@ const usePlayground = () => {
   }, [completionDisposable])
 
   useEffect(() => {
-    if (selectedSvgLanguage && completionDisposable) {
+    if (!isEmpty(selectedSvgLanguage) && !isEmpty(completionDisposable)) {
       completionDisposable?.dispose()
       setCompletionDisposable(initializeEditor(monaco))
     }
   }, [selectedSvgLanguage])
 
   useEffect(() => {
-    if (selectedSvgName) {
+    if (!isEmpty(selectedSvgName)) {
       setEditorValue(DEFAULT_SVG.value)
 
-      if (completionDisposable) {
+      if (!isEmpty(completionDisposable)) {
         completionDisposable?.dispose()
         setCompletionDisposable(initializeEditor(monaco))
       }

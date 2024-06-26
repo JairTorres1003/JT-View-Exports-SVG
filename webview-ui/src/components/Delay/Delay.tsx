@@ -22,7 +22,7 @@ export const Delay: FC<DelayProps> = (props) => {
     }
 
     return () => {
-      if (timer) {
+      if (timer !== null) {
         clearTimeout(timer)
         setIsShow(true)
       }

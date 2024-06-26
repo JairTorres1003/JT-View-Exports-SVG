@@ -1,10 +1,11 @@
-import { Fragment, type FC, useState } from 'react'
 import { Box, Button, Typography } from '@mui/material'
+import { Fragment, type FC, useState } from 'react'
 import { FileUploader } from 'react-drag-drop-files'
 import { useTranslation } from 'react-i18next'
 
 import { DropFilesIcon, MoreFilesIcon } from '../../icons'
 import { type DropZoneProps } from '../../interfaces/DropZone'
+
 import { BoxDropZone, CustomFileUploader } from './DropZone.style'
 
 const fileTypes: string[] = ['JS', 'JSX', 'TS', 'TSX']
@@ -21,7 +22,7 @@ export const DropZone: FC<DropZoneProps> = (props) => {
    * Handles changes in selected files.
    * @param newFiles An array of selected File objects.
    */
-  const handleChange = (newFiles: FileList) => {
+  const handleChange = (newFiles: FileList): void => {
     try {
       // Check if there's only one file selected
       const type = newFiles.length === 1 ? 'Single' : 'Multiple'
@@ -49,7 +50,7 @@ export const DropZone: FC<DropZoneProps> = (props) => {
       >
         <CustomFileUploader>
           <Typography fontSize={16} component='h1'>
-            {file && file.length > 0 && file.length} {message}
+            {file !== null && file.length > 0 && file.length} {message}
           </Typography>
           <Box className='icon_description'>
             {isDrag ? (
@@ -76,7 +77,7 @@ export const DropZone: FC<DropZoneProps> = (props) => {
         variant='outlined'
         size='medium'
         color='success'
-        disabled={!file || file?.length < 1}
+        disabled={file === null || file?.length < 1}
         onClick={() => {
           onExtractIcons(file)
         }}

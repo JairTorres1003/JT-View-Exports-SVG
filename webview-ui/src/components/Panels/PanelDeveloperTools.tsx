@@ -1,12 +1,18 @@
-import { useState, type FC } from 'react'
 import { Divider, IconButton, Portal } from '@mui/material'
+import React, { useState, type FC } from 'react'
 import { useTranslation } from 'react-i18next'
 
-import { useSvg } from '../../provider/SvgProvider'
 import { useSwitchDarkMode } from '../../hooks/useSwitch'
-
-import { type PanelDeveloperToolsProps } from '../../interfaces/PanelDeveloperTools'
 import { EmptySelectionIcon, IconFailExport, IconFragmentCode, IconSettings } from '../../icons'
+import { type PanelDeveloperToolsProps } from '../../interfaces/PanelDeveloperTools'
+import { useSvg } from '../../provider/SvgProvider'
+import { isEmpty } from '../../utilities/misc'
+import { Delay } from '../Delay/Delay'
+import { Playground } from '../Editor/Playground'
+import { Snackbar } from '../Snackbar/SnackbarPlayground'
+import RenderSVG from '../SvgComponent/RenderSvg'
+import { SwitchDarkMode } from '../Switch'
+
 import {
   BoxCode,
   BoxDeveloper,
@@ -16,13 +22,8 @@ import {
   ContainerSvg,
   TitlePanel,
 } from './PanelDeveloperTools.style'
-import { Delay } from '../Delay/Delay'
-import { Playground } from '../Editor/Playground'
-import RenderSVG from '../SvgComponent/RenderSvg'
-import { SwitchDarkMode } from '../Switch'
-import { Snackbar } from '../Snackbar/SnackbarPlayground'
 
-const PanelDeveloperTools: FC<PanelDeveloperToolsProps> = (props) => {
+const PanelDeveloperTools: FC<PanelDeveloperToolsProps> = (props): React.JSX.Element => {
   const { isOpenPanel, handleOpenPanel, refPortalButton } = props
   const { t } = useTranslation()
   const {
@@ -56,9 +57,9 @@ const PanelDeveloperTools: FC<PanelDeveloperToolsProps> = (props) => {
             <Snackbar />
             <ContainerSvg>
               <div className='container-svg-card'>
-                {!selectedSvg ? (
+                {isEmpty(selectedSvg) ? (
                   <EmptySelectionIcon size='100%' className='empty-selection' />
-                ) : selectedSvg.component ? (
+                ) : !isEmpty(selectedSvg.component) ? (
                   <RenderSVG {...selectedSvg.component} fullSize />
                 ) : (
                   <IconFailExport />
@@ -67,7 +68,7 @@ const PanelDeveloperTools: FC<PanelDeveloperToolsProps> = (props) => {
             </ContainerSvg>
             <BoxTools>
               <SwitchDarkMode onChange={onChangeMode} checked={checkedMode} />
-              {selectedSvg && (
+              {!isEmpty(selectedSvg) && (
                 <IconButton
                   size='small'
                   sx={{ color: 'inherit', p: '3px' }}
@@ -80,7 +81,7 @@ const PanelDeveloperTools: FC<PanelDeveloperToolsProps> = (props) => {
                 </IconButton>
               )}
             </BoxTools>
-            {selectedSvg && (
+            {!isEmpty(selectedSvg) && (
               <BoxCode animate={showPlayground ? 'open' : 'closed'}>
                 <Delay show={showPlayground}>
                   <Playground />

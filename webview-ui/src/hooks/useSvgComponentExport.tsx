@@ -4,7 +4,15 @@ import { type SvgFile, type SvgComponent } from '../interfaces/svgExports'
 import { useSvg } from '../provider/SvgProvider'
 import { vscode } from '../utilities/vscode'
 
-const useSvgComponentExport = () => {
+interface SvgComponentExportHook {
+  handleCopy: (text: string) => void
+  handleExpanded: () => void
+  handleSelected: (item: SvgComponent, file: SvgFile) => void
+  handleOpenFile: (path: string) => void
+  isExpanded: boolean
+}
+
+const useSvgComponentExport = (): SvgComponentExportHook => {
   const [isExpanded, setIsExpanded] = useState<boolean>(true)
 
   const { dispatch } = useSvg()
@@ -49,7 +57,7 @@ const useSvgComponentExport = () => {
    * Handles opening a file.
    * @param path - The path of the file to open.
    */
-  const handleOpenFile = (path: string) => {
+  const handleOpenFile = (path: string): void => {
     vscode.postMessage('openFile', path)
   }
 

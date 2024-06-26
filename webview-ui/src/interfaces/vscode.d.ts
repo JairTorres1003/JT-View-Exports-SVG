@@ -30,5 +30,6 @@ interface MessageData {
   /**
    * The data payload of the message.
    */
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   data: any
 }

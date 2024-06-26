@@ -1,5 +1,5 @@
-import { type FC } from 'react'
 import { Alert, Snackbar as MuiSnackbar, Typography } from '@mui/material'
+import { type FC } from 'react'
 
 import { useSvg } from '../../provider/SvgProvider'
 
@@ -9,7 +9,7 @@ export const Snackbar: FC = () => {
     dispatch,
   } = useSvg()
 
-  const onClose = () => {
+  const onClose = (): void => {
     dispatch({ type: 'SNACKBAR_PLAYGROUND', payload: { open: false, text: null } })
   }
 

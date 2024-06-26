@@ -8,7 +8,7 @@ interface IconProps {
   sx?: CSSProperties
 }
 
-export const ArrowForwardIcon = () => (
+export const ArrowForwardIcon = (): React.JSX.Element => (
   <svg focusable='false' viewBox='0 0 24 24' width={17} xmlns='http://www.w3.org/2000/svg'>
     <path d='M6.23 20.23 8 22l10-10L8 2 6.23 3.77 14.46 12z'></path>
   </svg>
@@ -30,7 +30,7 @@ export const IconClose: FC<IconProps> = ({ size = '1rem', color = 'currentColor'
   )
 }
 
-export const IconFailExport = () => {
+export const IconFailExport = (): React.JSX.Element => {
   return (
     <svg
       xmlns='http://www.w3.org/2000/svg'
@@ -125,7 +125,10 @@ export const IconFailExport = () => {
   )
 }
 
-export const IconLupe: FC<IconProps> = ({ size = 24, color = 'currentColor' }) => {
+export const IconLupe: FC<IconProps> = ({
+  size = 24,
+  color = 'currentColor',
+}): React.JSX.Element => {
   return (
     <svg
       xmlns='http://www.w3.org/2000/svg'
@@ -151,7 +154,12 @@ export const IconSettings: FC<
     circleColor?: string
     state?: boolean
   }
-> = ({ size = 20, color = 'currentColor', circleColor = 'currentColor', state = false }) => {
+> = ({
+  size = 20,
+  color = 'currentColor',
+  circleColor = 'currentColor',
+  state = false,
+}): React.JSX.Element => {
   return (
     <svg
       xmlns='http://www.w3.org/2000/svg'
@@ -290,7 +298,7 @@ export const IconSettings: FC<
 export const DropFilesIcon: FC<IconProps & { borderDash?: string }> = ({
   size = 20,
   borderDash = '1 1',
-}) => (
+}): React.JSX.Element => (
   <svg
     xmlns='http://www.w3.org/2000/svg'
     width={size}
@@ -338,7 +346,7 @@ export const DropFilesIcon: FC<IconProps & { borderDash?: string }> = ({
   </svg>
 )
 
-export const MoreFilesIcon: FC<IconProps> = ({ color = '#000', size = 20 }) => (
+export const MoreFilesIcon: FC<IconProps> = ({ color = '#000', size = 20 }): React.JSX.Element => (
   <svg
     xmlns='http://www.w3.org/2000/svg'
     width={size}
@@ -490,7 +498,10 @@ export const EmptySelectionIcon: FC<{
   </svg>
 )
 
-export const IconFragmentCode: FC<IconProps> = ({ color = 'currentColor', size = 24 }) => (
+export const IconFragmentCode: FC<IconProps> = ({
+  color = 'currentColor',
+  size = 24,
+}): React.JSX.Element => (
   <svg
     width={size}
     height={size}
@@ -508,7 +519,11 @@ export const IconFragmentCode: FC<IconProps> = ({ color = 'currentColor', size =
   </svg>
 )
 
-export const FolderIcon: FC<IconProps> = ({ color = 'currentColor', size = 24, sx = {} }) => (
+export const FolderIcon: FC<IconProps> = ({
+  color = 'currentColor',
+  size = 24,
+  sx = {},
+}): React.JSX.Element => (
   <svg
     stroke={color}
     fill={color}
@@ -523,7 +538,11 @@ export const FolderIcon: FC<IconProps> = ({ color = 'currentColor', size = 24, s
   </svg>
 )
 
-export const FolderOpenIcon: FC<IconProps> = ({ color = 'currentColor', size = 24, sx = {} }) => (
+export const FolderOpenIcon: FC<IconProps> = ({
+  color = 'currentColor',
+  size = 24,
+  sx = {},
+}): React.JSX.Element => (
   <svg
     stroke={color}
     fill={color}
@@ -538,7 +557,10 @@ export const FolderOpenIcon: FC<IconProps> = ({ color = 'currentColor', size = 2
   </svg>
 )
 
-export const IconPencilSquare: FC<IconProps> = ({ color = 'currentColor', size = 24 }) => (
+export const IconPencilSquare: FC<IconProps> = ({
+  color = 'currentColor',
+  size = 24,
+}): React.JSX.Element => (
   <svg
     stroke={color}
     fill='none'
