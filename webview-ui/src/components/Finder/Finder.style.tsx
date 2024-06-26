@@ -9,9 +9,10 @@ export const BoxFinder = styled(Box)(() => ({
 
 export const TextField = styled(TextFieldMui)(() => ({
   maxWidth: 600,
-  '& .MuiButtonBase-root': { color: 'rgba(var(--color-JT-view-export-svg), 0.67)' },
+  '& .MuiButtonBase-root': { color: 'var(--color-JT-view-export-svg)' },
   fieldset: {
-    borderColor: 'rgba(var(--color-JT-view-export-svg), 0.23)',
+    borderColor: 'var(--color-JT-view-export-svg)',
+    opacity: 0.5,
     'legend span': {
       top: 0,
       left: '-5px',

@@ -64,11 +64,11 @@ export const AccordionSummary = styled((props: AccordionSummaryProps | PaperProp
       borderColor: 'inherit',
     },
     '&::before': { top: -4 },
-    svg: { stroke: 'rgb(var(--color-JT-view-export-svg))' },
+    svg: { stroke: 'var(--color-JT-view-export-svg)' },
   },
   '& .MuiAccordionSummary-expandIconWrapper.Mui-expanded': {
     transform: 'rotate(90deg)',
-    fill: 'rgb(var(--color-JT-view-export-svg))',
+    fill: 'var(--color-JT-view-export-svg)',
   },
   '& .MuiAccordionSummary-content, & .MuiAccordionSummary-content.Mui-expanded': {
     margin: 0,

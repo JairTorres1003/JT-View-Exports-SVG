@@ -41,7 +41,7 @@ const PanelDeveloperTools: FC<PanelDeveloperToolsProps> = (props): React.JSX.Ele
             size='small'
             title={t(`${isOpenPanel ? 'Close' : 'DeveloperTools'}`)}
             onClick={handleOpenPanel}
-            sx={{ mb: '16px', color: 'rgba(var(--color-JT-view-export-svg))' }}
+            sx={{ mb: '16px', color: 'var(--color-JT-view-export-svg)' }}
           >
             <IconSettings state={isOpenPanel} />
           </IconButton>

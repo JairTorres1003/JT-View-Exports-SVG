@@ -71,13 +71,15 @@ input[type='search']::-webkit-search-results-decoration {
 body,
 body[data-vscode-theme-kind='vscode-light'],
 body[data-vscode-theme-kind='vscode-high-contrast-light'] {
-  --color-JT-view-export-svg: 0, 0, 0;
+  --color-JT-view-export-svg: var(--vscode-editor-foreground, rgb(0, 0, 0));
+  --color-JT-view-export-svg2: 0, 0, 0;
   padding: 0 !important;
 }
 
 body[data-vscode-theme-kind='vscode-dark'],
 body[data-vscode-theme-kind='vscode-high-contrast'] {
-  --color-JT-view-export-svg: 255, 255, 255;
+  --color-JT-view-export-svg: var(--vscode-editor-foreground, rgb(255, 255, 255));
+  --color-JT-view-export-svg2: 255, 255, 255;
 }
 
 #root {

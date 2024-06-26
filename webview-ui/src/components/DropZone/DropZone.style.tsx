@@ -15,8 +15,8 @@ export const BoxDropZone = styled(Box)(() => ({
     height: 230,
     cursor: 'pointer',
     borderRadius: 5,
-    border: '2px dashed rgba(var(--color-JT-view-export-svg), 0.85)',
-    color: 'rgba(var(--color-JT-view-export-svg), 0.85)',
+    border: '2px dashed var(--color-JT-view-export-svg)',
+    color: 'var(--color-JT-view-export-svg)',
     position: 'relative',
     "& input[type='file']": {
       width: '100%',

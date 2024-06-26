@@ -47,7 +47,7 @@ function themeParser(theme: string, mode: ThemeMode, values: IThemeObject): IThe
   // Convert all token colors to the new format.
   for (const entry of values.tokenColors ?? []) {
     const { scope, settings } = entry
-    const scopes = Array.isArray(scope) ? scope : scope.split(',')
+    const scopes = Array.isArray(scope) ? scope : scope?.split(',') ?? []
     const { foreground, background, fontStyle } = settings
 
     for (const scope of scopes) {

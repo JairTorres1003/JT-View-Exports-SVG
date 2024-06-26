@@ -14,7 +14,7 @@ export function cssStringToObject(
   const cssObj: CSSStyleDeclaration | Record<string, unknown> = {}
 
   // Split the CSS string into individual declarations based on semicolons.
-  const declarations = cssString.split(';')
+  const declarations = cssString?.split(';')
 
   for (const declaration of declarations) {
     // Split each declaration into property and value based on colons.

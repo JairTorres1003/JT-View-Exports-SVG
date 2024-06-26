@@ -22,7 +22,7 @@ export const AssetFilesBox = styled(Box)(() => ({
       borderRadius: 0,
       whiteSpace: 'nowrap',
     },
-    '& .assetFiles__tableCellIconButton': {
+    '& .assetFiles__tableCellIconButton, & .assetFiles__tableCellCheckbox': {
       padding: 0,
       width: '100%',
       height: 40,
@@ -30,6 +30,10 @@ export const AssetFilesBox = styled(Box)(() => ({
       alignItems: 'center',
       justifyContent: 'center',
       borderRadius: 0,
+    },
+    '& .assetFiles__tableCellCheckbox': {
+      color: 'var(--color-JT-view-export-svg)',
+      '&.Mui-checked': { color: 'var(--color-JT-view-export-svg)' },
     },
   },
 }))

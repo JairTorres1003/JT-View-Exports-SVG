@@ -1,5 +1,6 @@
 import {
   Button,
+  Checkbox,
   IconButton,
   Paper,
   Table,
@@ -30,6 +31,12 @@ export const AssetTable: FC<AssetTableProps> = ({
         <TableBody>
           {paths.map((path, index) => (
             <TableRow key={index} className='assetFiles__tableRow'>
+              <TableCell align='right' className='assetFiles__tableCell' width={40}>
+                <Checkbox
+                  className='assetFiles__tableCellCheckbox'
+                  inputProps={{ 'aria-label': 'select all desserts' }}
+                />
+              </TableCell>
               <TableCell component='th' scope='row' className='assetFiles__tableCell'>
                 <Button
                   fullWidth

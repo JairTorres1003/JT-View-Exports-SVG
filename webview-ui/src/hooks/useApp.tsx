@@ -163,9 +163,9 @@ const useApp = (): AppHook => {
         palette: {
           mode: currentTheme,
           text: {
-            disabled: 'rgba(var(--color-JT-view-export-svg), 0.38)',
-            primary: 'rgba(var(--color-JT-view-export-svg), 0.87)',
-            secondary: 'rgba(var(--color-JT-view-export-svg), 0.6)',
+            disabled: 'rgba(var(--color-JT-view-export-svg2), 0.38)',
+            primary: 'rgba(var(--color-JT-view-export-svg2), 0.87)',
+            secondary: 'rgba(var(--color-JT-view-export-svg2), 0.6)',
           },
         },
         typography: { fontFamily: styles?.fontFamily, fontSize: styles?.fontSize },
@@ -176,12 +176,12 @@ const useApp = (): AppHook => {
               root: {
                 fontFamily: styles?.fontFamily,
                 fontSize: styles?.fontSize,
-                color: 'rgb(var(--color-JT-view-export-svg))',
+                color: 'var(--color-JT-view-export-svg)',
               },
             },
           },
           MuiIconButton: {
-            styleOverrides: { root: { color: 'rgb(var(--color-JT-view-export-svg))' } },
+            styleOverrides: { root: { color: 'var(--color-JT-view-export-svg)' } },
           },
         },
       }),
