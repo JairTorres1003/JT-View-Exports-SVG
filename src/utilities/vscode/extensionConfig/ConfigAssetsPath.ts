@@ -2,10 +2,9 @@ import * as path from 'path'
 
 import { ConfigurationTarget, workspace } from 'vscode'
 
-import { type SvgFile } from '../../interfaces/svgExports'
-import { getWorkspaceFolder } from '../fileSystem'
-
-import ExtensionConfigManager from './extensionConfigManager'
+import { type SvgFile } from '../../../interfaces/svgExports'
+import { getWorkspaceFolder } from '../../fileSystem'
+import ExtensionConfigManager from '../extensionConfigManager'
 
 /**
  * Manages the configuration of the assets path for the extension.
