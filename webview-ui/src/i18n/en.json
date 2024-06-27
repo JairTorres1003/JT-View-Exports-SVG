@@ -23,11 +23,13 @@
   "show": "Show",
   "code": "Code",
   "OpenFile": "Open file",
+  "OpenFiles": "Open files",
   "EditFile": "Edit file",
   "AssetFiles.Title.Workspace": "Asset Files in Workspace",
   "AssetFiles.Title.Others": "Asset Files in Other Folders",
   "AssetFiles.Empty.Workspace": "No asset files in workspace",
   "deleteFile": "Delete file",
+  "deleteFiles": "Delete files",
   "selectFile": "Select file",
   "selectAllFiles": "Select all files"
 }

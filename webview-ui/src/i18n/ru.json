@@ -23,11 +23,13 @@
   "show": "Показать",
   "code": "Код",
   "OpenFile": "Открыть файл",
+  "OpenFiles": "Открыть файлы",
   "EditFile": "Редактировать файл",
   "AssetFiles.Title.Workspace": "Файлы ресурсов в рабочей области",
   "AssetFiles.Title.Others": "Файлы ресурсов в других папках",
   "AssetFiles.Empty.Workspace": "Нет файлов ресурсов в рабочей области",
   "deleteFile": "Удалить файл",
+  "deleteFiles": "Удалить файлы",
   "selectFile": "Выбрать файл",
   "selectAllFiles": "Выбрать все файлы"
 }

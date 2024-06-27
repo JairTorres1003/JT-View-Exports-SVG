@@ -23,11 +23,13 @@
   "show": "Mostrar",
   "code": "Código",
   "OpenFile": "Abrir archivo",
+  "OpenFiles": "Abrir archivos",
   "EditFile": "Editar archivo",
   "AssetFiles.Title.Workspace": "Archivos de activos en el espacio de trabajo",
   "AssetFiles.Title.Others": "Archivos de activos en otras carpetas",
   "AssetFiles.Empty.Workspace": "No hay archivos de activos en el espacio de trabajo",
   "deleteFile": "Eliminar archivo",
+  "deleteFiles": "Eliminar archivos",
   "selectFile": "Seleccionar archivo",
   "selectAllFiles": "Seleccionar todos los archivos"
 }
