@@ -3,7 +3,7 @@ import * as path from 'path'
 
 import { Uri, commands, window } from 'vscode'
 
-import { type SvgExport, type SvgExportErrors } from '../../interfaces/svgExports'
+import { type SvgFile, type SvgExport, type SvgExportErrors } from '../../interfaces/svgExports'
 import { ViewExportsSVGPanel } from '../../panels/ViewExportsSVGPanel'
 import { processFiles } from '../commonFunctions'
 import { ConfigAssetsPath } from '../vscode'
@@ -77,17 +77,19 @@ export const viewAssetFile = async (filePath: string[]): Promise<void> => {
  * @returns A promise that resolves when the file is successfully removed.
  */
 export const removeAssetFile = async (filePath: string[]): Promise<void> => {
-  filePath.forEach(async (file) => {
+  const allFiles: SvgFile[] = []
+
+  filePath.forEach((file) => {
     const isRelative = !path.isAbsolute(file)
     const absPath = isRelative ? path.join(getWorkspaceFolder(), file) : file
 
-    const svgFile = {
+    allFiles.push({
       basename: path.basename(absPath),
       dirname: path.dirname(absPath),
       absolutePath: absPath,
       relativePath: path.relative(getWorkspaceFolder(), absPath),
-    }
-
-    await new ConfigAssetsPath().remove(svgFile)
+    })
   })
+
+  await new ConfigAssetsPath().removeMultiple(allFiles)
 }

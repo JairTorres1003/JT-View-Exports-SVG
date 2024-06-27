@@ -80,6 +80,7 @@ export const useAssetFiles = (): AssetFilesHook => {
    */
   const handleViewAssets = (): void => {
     vscode.postMessage('viewAssets', JSON.stringify(checkedFiles))
+    setCheckedFiles([])
   }
 
   /**
@@ -95,6 +96,7 @@ export const useAssetFiles = (): AssetFilesHook => {
    */
   const handleRemoveAssets = (): void => {
     vscode.postMessage('removeAsset', JSON.stringify(checkedFiles))
+    setCheckedFiles([])
   }
 
   useEffect(() => {

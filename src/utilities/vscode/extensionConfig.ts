@@ -126,6 +126,34 @@ export class ConfigAssetsPath extends ExtensionConfigManager<string[]> {
     }
   }
 
+  public async removeMultiple(files: SvgFile[]): Promise<void> {
+    if (this.workspaceFolders !== undefined) {
+      try {
+        const value = this.get() ?? []
+        const valueUser = this.inspect() ?? []
+
+        for (const f of files) {
+          const filePath = this.getPath(f)
+          const exists = this.existsInWorkspace(f)
+
+          if (value.includes(filePath) && exists) {
+            const index = value.indexOf(filePath)
+            value.splice(index, 1)
+          } else if (valueUser.includes(filePath) && !exists) {
+            const index = valueUser.indexOf(filePath)
+            valueUser.splice(index, 1)
+          }
+        }
+
+        // Update the configuration
+        await this.update(value, ConfigurationTarget.Workspace)
+        await this.update(valueUser, ConfigurationTarget.Global)
+      } catch (error) {
+        console.error('Error removing assets path:', error)
+      }
+    }
+  }
+
   /**
    * Retrieves the assets path for the extension.
    * The assets path includes both the workspace and user paths.
