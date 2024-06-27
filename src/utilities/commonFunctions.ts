@@ -10,6 +10,7 @@ import { getWorkspaceFolder, getFileLanguage } from './fileSystem'
 import { isEmpty } from './misc'
 import { extractSVGComponentExports } from './svg/extractSVGComponentExports'
 import { ConfigAssetsPath, getTranslations } from './vscode'
+import { ConfigHideEmptyFiles } from './vscode/extensionConfig/ConfigHideEmptyFiles'
 
 // Create an instance of FileModifiedCache for caching SvgExport objects
 const fileCache = new FileModifiedCache<SvgExport>()
@@ -42,6 +43,9 @@ export async function processFiles(
 
     // Show loader message
     const progress = await window.withProgress(progressOptions, async (progress) => {
+      const configAssetsPath = new ConfigAssetsPath()
+      const isHideEmptyFiles = new ConfigHideEmptyFiles().isHide()
+
       // Check if any files are selected
       if (isEmpty(arrayFiles)) {
         newError.messageError = i18n.NoFileSelected
@@ -122,18 +126,23 @@ export async function processFiles(
         })
       )
 
+      let svgComponentsAux = svgComponents
+
+      if (isHideEmptyFiles) {
+        svgComponentsAux = svgComponents.filter((svg) => Number(svg.lengthExports) > 0)
+      }
+
       // Handle cases where no SVG icons are found
-      if (svgComponents.length <= 0 && selectedFiles.length > 0) {
+      if (svgComponentsAux.length === 0 && selectedFiles.length > 0) {
         newError.messageError = i18n.NoIconsFound
         newError.fileSelected = selectedFiles.length
       }
 
       // Execute the specified operation with the extracted SVG components
 
-      operation(svgComponents.length > 0 ? svgComponents : newError)
+      operation(svgComponentsAux.length > 0 ? svgComponents : newError)
 
       // Update the assets path configuration
-      const configAssetsPath = new ConfigAssetsPath()
       configAssetsPath.set(svgComponentFiles).catch((error) => {
         console.error('Error setting assets path:', error)
       })
