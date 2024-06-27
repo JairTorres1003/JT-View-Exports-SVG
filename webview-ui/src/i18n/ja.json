@@ -27,5 +27,7 @@
   "AssetFiles.Title.Workspace": "ワークスペース内のアセットファイル",
   "AssetFiles.Title.Others": "他のフォルダ内のアセットファイル",
   "AssetFiles.Empty.Workspace": "ワークスペースにアセットファイルがありません",
-  "delete": "削除"
+  "deleteFile": "削除ファイル",
+  "selectFile": "ファイルを選択",
+  "selectAllFiles": "すべてのファイルを選択"
 }

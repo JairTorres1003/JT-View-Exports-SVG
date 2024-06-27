@@ -27,5 +27,7 @@
   "AssetFiles.Title.Workspace": "Archivos de activos en el espacio de trabajo",
   "AssetFiles.Title.Others": "Archivos de activos en otras carpetas",
   "AssetFiles.Empty.Workspace": "No hay archivos de activos en el espacio de trabajo",
-  "delete": "Eliminar"
+  "deleteFile": "Eliminar archivo",
+  "selectFile": "Seleccionar archivo",
+  "selectAllFiles": "Seleccionar todos los archivos"
 }

@@ -27,5 +27,7 @@
   "AssetFiles.Title.Workspace": "Asset Files in Workspace",
   "AssetFiles.Title.Others": "Asset Files in Other Folders",
   "AssetFiles.Empty.Workspace": "No asset files in workspace",
-  "delete": "Delete"
+  "deleteFile": "Delete file",
+  "selectFile": "Select file",
+  "selectAllFiles": "Select all files"
 }

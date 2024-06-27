@@ -27,5 +27,7 @@
   "AssetFiles.Title.Workspace": "工作區中的資源檔案",
   "AssetFiles.Title.Others": "其他資料夾中的資源檔案",
   "AssetFiles.Empty.Workspace": "工作區中沒有資源檔案",
-  "delete": "刪除"
+  "deleteFile": "刪除檔案",
+  "selectFile": "選擇檔案",
+  "selectAllFiles": "選擇所有檔案"
 }

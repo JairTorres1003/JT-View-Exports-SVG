@@ -27,5 +27,7 @@
   "AssetFiles.Title.Workspace": "Файлы ресурсов в рабочей области",
   "AssetFiles.Title.Others": "Файлы ресурсов в других папках",
   "AssetFiles.Empty.Workspace": "Нет файлов ресурсов в рабочей области",
-  "delete": "Удалить"
+  "deleteFile": "Удалить файл",
+  "selectFile": "Выбрать файл",
+  "selectAllFiles": "Выбрать все файлы"
 }
