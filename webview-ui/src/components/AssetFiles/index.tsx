@@ -8,7 +8,14 @@ import { AssetFilesBox } from './AssetFiles.style'
 import { AssetTable } from './AssetTable'
 
 const AssetFiles = (): React.JSX.Element => {
-  const { assetFiles, handleCheckAllFiles, checkedFiles, ...useProps } = useAssetFiles()
+  const {
+    assetFiles,
+    handleCheckAllFiles,
+    checkedFiles,
+    handleViewAssets,
+    handleRemoveAssets,
+    ...useProps
+  } = useAssetFiles()
   const { t } = useTranslation()
 
   return (
@@ -34,6 +41,7 @@ const AssetFiles = (): React.JSX.Element => {
             variant='outlined'
             size='small'
             disabled={checkedFiles.length === 0}
+            onClick={handleViewAssets}
           >
             {t('OpenFiles')}
           </Button>
@@ -42,6 +50,7 @@ const AssetFiles = (): React.JSX.Element => {
             variant='outlined'
             size='small'
             disabled={checkedFiles.length === 0}
+            onClick={handleRemoveAssets}
           >
             {t('deleteFiles')}
           </Button>

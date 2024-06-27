@@ -310,7 +310,9 @@ export class ViewExportsSVGPanel {
    * @param message The received message data.
    */
   private handleViewAssets(message: ReceiveMessageData): void {
-    viewAssetFile(message.data).catch((error) => {
+    const data = JSON.parse(message.data)
+
+    viewAssetFile(data).catch((error) => {
       console.error('Failed to view assets:', error)
     })
   }
@@ -320,7 +322,9 @@ export class ViewExportsSVGPanel {
    * @param message - The message containing the data for the asset to be removed.
    */
   private handleRemoveAsset(message: ReceiveMessageData): void {
-    removeAssetFile(message.data)
+    const data = JSON.parse(message.data)
+
+    removeAssetFile(data)
       .then(() => {
         const response = new ConfigAssetsPath().getAssetsPath()
         this._postMessage('assetsPath', response)

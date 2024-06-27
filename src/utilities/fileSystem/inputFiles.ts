@@ -43,36 +43,51 @@ export const openFile = async (filePath: string): Promise<void> => {
 /**
  * Opens and processes a view asset file.
  *
- * @param filePath - The path to the file to be opened and processed.
+ * @param filePath - The path's to the file to be processed.
  * @returns A promise that resolves when the file is successfully processed.
  */
-export const viewAssetFile = async (filePath: string): Promise<void> => {
-  const isRelative = !path.isAbsolute(filePath)
-  const absolutePath = isRelative ? path.join(getWorkspaceFolder(), filePath) : filePath
+export const viewAssetFile = async (filePath: string[]): Promise<void> => {
+  const absolutePath: string[] = []
+  const notExist: string[] = []
 
-  if (fs.existsSync(absolutePath)) {
-    await getInputFiles([absolutePath])
-  } else {
-    await window.showErrorMessage(`The file ${absolutePath} does not exist.`)
+  filePath.forEach((file) => {
+    const isRelative = !path.isAbsolute(file)
+    const absPath = isRelative ? path.join(getWorkspaceFolder(), file) : file
+
+    if (fs.existsSync(absPath)) {
+      absolutePath.push(absPath)
+    } else {
+      notExist.push(absPath)
+    }
+  })
+
+  if (notExist.length > 0) {
+    await window.showErrorMessage(`The file(s) ${notExist.join(', ')} do(es) not exist.`)
+  }
+
+  if (absolutePath.length > 0) {
+    await getInputFiles(absolutePath)
   }
 }
 
 /**
- * Removes an asset file.
+ * Removes an asset files from the configuration.
  *
- * @param filePath - The path to the file to be removed.
+ * @param filePath - The path's to the file to be removed.
  * @returns A promise that resolves when the file is successfully removed.
  */
-export const removeAssetFile = async (filePath: string): Promise<void> => {
-  const isRelative = !path.isAbsolute(filePath)
-  const absolutePath = isRelative ? path.join(getWorkspaceFolder(), filePath) : filePath
+export const removeAssetFile = async (filePath: string[]): Promise<void> => {
+  filePath.forEach(async (file) => {
+    const isRelative = !path.isAbsolute(file)
+    const absPath = isRelative ? path.join(getWorkspaceFolder(), file) : file
 
-  const file = {
-    basename: path.basename(absolutePath),
-    dirname: path.dirname(absolutePath),
-    absolutePath,
-    relativePath: path.relative(getWorkspaceFolder(), absolutePath),
-  }
+    const svgFile = {
+      basename: path.basename(absPath),
+      dirname: path.dirname(absPath),
+      absolutePath: absPath,
+      relativePath: path.relative(getWorkspaceFolder(), absPath),
+    }
 
-  await new ConfigAssetsPath().remove(file)
+    await new ConfigAssetsPath().remove(svgFile)
+  })
 }

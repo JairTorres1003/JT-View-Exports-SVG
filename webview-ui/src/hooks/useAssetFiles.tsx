@@ -11,6 +11,8 @@ interface AssetFilesHook extends AssetTableActions {
       }
     | undefined
   handleCheckAllFiles: (event: React.ChangeEvent<HTMLInputElement>) => void
+  handleViewAssets: () => void
+  handleRemoveAssets: () => void
 }
 
 /**
@@ -70,7 +72,14 @@ export const useAssetFiles = (): AssetFilesHook => {
    * @param path - The path of the asset to view.
    */
   const handleViewAsset = (path: string): void => {
-    vscode.postMessage('viewAssets', path)
+    vscode.postMessage('viewAssets', JSON.stringify([path]))
+  }
+
+  /**
+   * Handles the action of viewing multiple assets.
+   */
+  const handleViewAssets = (): void => {
+    vscode.postMessage('viewAssets', JSON.stringify(checkedFiles))
   }
 
   /**
@@ -78,7 +87,14 @@ export const useAssetFiles = (): AssetFilesHook => {
    * @param path - The path of the asset file to be removed.
    */
   const handleRemoveAsset = (path: string): void => {
-    vscode.postMessage('removeAsset', path)
+    vscode.postMessage('removeAsset', JSON.stringify([path]))
+  }
+
+  /**
+   * Handles the removal of multiple asset files.
+   */
+  const handleRemoveAssets = (): void => {
+    vscode.postMessage('removeAsset', JSON.stringify(checkedFiles))
   }
 
   useEffect(() => {
@@ -98,5 +114,7 @@ export const useAssetFiles = (): AssetFilesHook => {
     handleViewAsset,
     handleCheckFile,
     checkedFiles,
+    handleViewAssets,
+    handleRemoveAssets,
   }
 }
