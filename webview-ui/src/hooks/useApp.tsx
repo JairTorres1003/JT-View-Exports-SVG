@@ -180,6 +180,17 @@ const useApp = (): AppHook => {
               },
             },
           },
+          MuiCheckbox: {
+            styleOverrides: {
+              root: {
+                color: 'var(--color-JT-view-export-svg)',
+                '&.MuiCheckbox-root.Mui-checked': { color: 'var(--color-JT-view-export-svg)' },
+                '&.MuiCheckbox-root.MuiCheckbox-indeterminate': {
+                  color: 'var(--color-JT-view-export-svg)',
+                },
+              },
+            },
+          },
           MuiIconButton: {
             styleOverrides: { root: { color: 'var(--color-JT-view-export-svg)' } },
           },

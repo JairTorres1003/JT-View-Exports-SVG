@@ -1,17 +1,16 @@
 import { useEffect, useState } from 'react'
 
+import { type AssetTableActions } from '../interfaces/AssetTable'
 import { vscode } from '../utilities/vscode'
 
-interface AssetFilesHook {
+interface AssetFilesHook extends AssetTableActions {
   assetFiles:
     | {
         workspace: string[]
         user: string[]
       }
     | undefined
-  handleOpenFile: (path: string) => void
-  handleRemoveAsset: (path: string) => void
-  handleViewAsset: (path: string) => void
+  handleCheckAllFiles: (event: React.ChangeEvent<HTMLInputElement>) => void
 }
 
 /**
@@ -20,6 +19,7 @@ interface AssetFilesHook {
  */
 export const useAssetFiles = (): AssetFilesHook => {
   const [assetFiles, setAssetFiles] = useState<{ workspace: string[]; user: string[] }>()
+  const [checkedFiles, setCheckedFiles] = useState<string[]>([])
 
   /**
    * Handles the asset files retrieved from the VS Code extension.
@@ -30,6 +30,30 @@ export const useAssetFiles = (): AssetFilesHook => {
       setAssetFiles(assetFiles)
     } catch (error) {
       console.error('Failed to set asset files', error)
+    }
+  }
+
+  /**
+   * Handles checking a file.
+   * @param path - The path of the file to check.
+   */
+  const handleCheckFile: AssetFilesHook['handleCheckFile'] = (path) => (event) => {
+    const checked = event.target.checked
+
+    if (checked) {
+      setCheckedFiles([...checkedFiles, path])
+    } else {
+      setCheckedFiles(checkedFiles.filter((file) => file !== path))
+    }
+  }
+
+  const handleCheckAllFiles: AssetFilesHook['handleCheckAllFiles'] = (event): void => {
+    const checked = event.target.checked
+
+    if (checked) {
+      setCheckedFiles([...(assetFiles?.workspace ?? []), ...(assetFiles?.user ?? [])])
+    } else {
+      setCheckedFiles([])
     }
   }
 
@@ -66,5 +90,13 @@ export const useAssetFiles = (): AssetFilesHook => {
     }
   }, [])
 
-  return { assetFiles, handleOpenFile, handleRemoveAsset, handleViewAsset }
+  return {
+    assetFiles,
+    handleCheckAllFiles,
+    handleOpenFile,
+    handleRemoveAsset,
+    handleViewAsset,
+    handleCheckFile,
+    checkedFiles,
+  }
 }
