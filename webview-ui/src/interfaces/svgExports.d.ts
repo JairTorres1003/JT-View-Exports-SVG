@@ -35,7 +35,10 @@ export interface SvgComponent {
   /**
    * The location of the SVG component in the file.
    */
-  location: Location | undefined
+  location: {
+    start: Location
+    end: Location
+  }
   /**
    * The type of export for the SVG component.
    * It can be either "function" or "variable".

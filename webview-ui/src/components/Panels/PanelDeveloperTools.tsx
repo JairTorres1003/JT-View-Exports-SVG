@@ -1,12 +1,19 @@
-import { Divider, IconButton, Portal } from '@mui/material'
+import { Box, Divider, IconButton, Portal } from '@mui/material'
 import React, { useState, type FC } from 'react'
 import { useTranslation } from 'react-i18next'
 
 import { useSwitchDarkMode } from '../../hooks/useSwitch'
-import { EmptySelectionIcon, IconFailExport, IconFragmentCode, IconSettings } from '../../icons'
+import {
+  EmptySelectionIcon,
+  IconFailExport,
+  IconFragmentCode,
+  IconPencilSquare,
+  IconSettings,
+} from '../../icons'
 import { type PanelDeveloperToolsProps } from '../../interfaces/PanelDeveloperTools'
 import { useSvg } from '../../provider/SvgProvider'
 import { isEmpty } from '../../utilities/misc'
+import { vscode } from '../../utilities/vscode'
 import { Delay } from '../Delay/Delay'
 import { Playground } from '../Editor/Playground'
 import { Snackbar } from '../Snackbar/SnackbarPlayground'
@@ -27,11 +34,23 @@ const PanelDeveloperTools: FC<PanelDeveloperToolsProps> = (props): React.JSX.Ele
   const { isOpenPanel, handleOpenPanel, refPortalButton } = props
   const { t } = useTranslation()
   const {
-    state: { selectedSvg },
+    state: { selectedSvg, selectedSvgPath },
   } = useSvg()
   const { checkedMode, onChangeMode } = useSwitchDarkMode({ keyMode: 'svgCardMode' })
 
   const [showPlayground, setShowPlayground] = useState<boolean>(false)
+
+  /**
+   * Opens the selected SVG file in the editor.
+   */
+  const handleOpenFile = (): void => {
+    if (selectedSvgPath === null || isEmpty(selectedSvg)) return
+
+    const location = selectedSvg.location?.start
+    const path = `${selectedSvgPath}:${location?.line ?? 0},${location?.column ?? 0}`
+
+    vscode.postMessage('openFile', path)
+  }
 
   return (
     <BoxPanelDeveloperTools elevation={isOpenPanel ? 3 : 0}>
@@ -69,16 +88,26 @@ const PanelDeveloperTools: FC<PanelDeveloperToolsProps> = (props): React.JSX.Ele
             <BoxTools>
               <SwitchDarkMode onChange={onChangeMode} checked={checkedMode} />
               {!isEmpty(selectedSvg) && (
-                <IconButton
-                  size='small'
-                  sx={{ color: 'inherit', p: '3px' }}
-                  title={`${showPlayground ? t('hide') : t('show')} ${t('code')}`}
-                  onClick={() => {
-                    setShowPlayground(!showPlayground)
-                  }}
-                >
-                  <IconFragmentCode size={18} />
-                </IconButton>
+                <Box display='flex' gap='6px'>
+                  <IconButton
+                    size='small'
+                    sx={{ color: 'inherit', p: '3px' }}
+                    title={t('EditIcon')}
+                    onClick={handleOpenFile}
+                  >
+                    <IconPencilSquare size={18} />
+                  </IconButton>
+                  <IconButton
+                    size='small'
+                    sx={{ color: 'inherit', p: '3px' }}
+                    title={`${showPlayground ? t('hide') : t('show')} ${t('code')}`}
+                    onClick={() => {
+                      setShowPlayground(!showPlayground)
+                    }}
+                  >
+                    <IconFragmentCode size={18} />
+                  </IconButton>
+                </Box>
               )}
             </BoxTools>
             {!isEmpty(selectedSvg) && (

@@ -1,7 +1,7 @@
 import * as fs from 'fs'
 import * as path from 'path'
 
-import { Uri, commands, window } from 'vscode'
+import { Position, Selection, TextEditorRevealType, window, workspace } from 'vscode'
 
 import { type SvgFile, type SvgExport, type SvgExportErrors } from '../../interfaces/svgExports'
 import { ViewExportsSVGPanel } from '../../panels/ViewExportsSVGPanel'
@@ -29,12 +29,21 @@ export async function getInputFiles(filesPath: string[] | null): Promise<void> {
  * @param filePath - The path of the file to be opened.
  */
 export const openFile = async (filePath: string): Promise<void> => {
-  const isRelative = !path.isAbsolute(filePath)
+  const parts = filePath.split(':')
+  const isRelative = !path.isAbsolute(parts[0])
 
-  const absolutePath = isRelative ? path.join(getWorkspaceFolder(), filePath) : filePath
+  const absolutePath = isRelative ? path.join(getWorkspaceFolder(), parts[0]) : parts[0]
 
   if (fs.existsSync(absolutePath)) {
-    await commands.executeCommand('vscode.open', Uri.file(absolutePath))
+    const document = await workspace.openTextDocument(absolutePath)
+    const editor = await window.showTextDocument(document)
+    const [line, column] = (parts[1] ?? '')
+      .split(',')
+      .map((value) => (Number(value) > 0 ? Number(value) : 1))
+    const position = new Position((line ?? 1) - 1, (column ?? 1) - 1)
+
+    editor.selection = new Selection(position, position)
+    editor.revealRange(new Selection(position, position), TextEditorRevealType.AtTop)
   } else {
     await window.showErrorMessage(`The file ${absolutePath} does not exist.`)
   }
