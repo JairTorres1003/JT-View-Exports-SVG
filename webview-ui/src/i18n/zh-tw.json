@@ -25,6 +25,7 @@
   "OpenFile": "打開文件",
   "OpenFiles": "打開文件",
   "EditFile": "編輯文件",
+  "EditIcon": "編輯圖示",
   "AssetFiles.Title.Workspace": "工作區中的資源檔案",
   "AssetFiles.Title.Others": "其他資料夾中的資源檔案",
   "AssetFiles.Empty.Workspace": "工作區中沒有資源檔案",

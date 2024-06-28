@@ -25,6 +25,7 @@
   "OpenFile": "ファイルを開く",
   "OpenFiles": "ファイルを開く",
   "EditFile": "ファイルを編集",
+  "EditIcon": "アイコンを編集",
   "AssetFiles.Title.Workspace": "ワークスペース内のアセットファイル",
   "AssetFiles.Title.Others": "他のフォルダ内のアセットファイル",
   "AssetFiles.Empty.Workspace": "ワークスペースにアセットファイルがありません",

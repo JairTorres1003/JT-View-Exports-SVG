@@ -25,6 +25,7 @@
   "OpenFile": "Datei öffnen",
   "OpenFiles": "Dateien öffnen",
   "EditFile": "Datei bearbeiten",
+  "EditIcon": "Symbol bearbeiten",
   "AssetFiles.Title.Workspace": "Asset-Dateien im Arbeitsbereich",
   "AssetFiles.Title.Others": "Asset-Dateien in anderen Ordnern",
   "AssetFiles.Empty.Workspace": "Keine Asset-Dateien im Arbeitsbereich",

@@ -25,6 +25,7 @@
   "OpenFile": "Открыть файл",
   "OpenFiles": "Открыть файлы",
   "EditFile": "Редактировать файл",
+  "EditIcon": "Редактировать иконку",
   "AssetFiles.Title.Workspace": "Файлы ресурсов в рабочей области",
   "AssetFiles.Title.Others": "Файлы ресурсов в других папках",
   "AssetFiles.Empty.Workspace": "Нет файлов ресурсов в рабочей области",

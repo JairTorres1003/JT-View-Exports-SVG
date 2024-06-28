@@ -25,6 +25,7 @@
   "OpenFile": "Open file",
   "OpenFiles": "Open files",
   "EditFile": "Edit file",
+  "EditIcon": "Edit icon",
   "AssetFiles.Title.Workspace": "Asset Files in Workspace",
   "AssetFiles.Title.Others": "Asset Files in Other Folders",
   "AssetFiles.Empty.Workspace": "No asset files in workspace",
