@@ -140,7 +140,7 @@ export async function processFiles(
 
       // Execute the specified operation with the extracted SVG components
 
-      operation(svgComponentsAux.length > 0 ? svgComponents : newError)
+      operation(svgComponentsAux.length > 0 ? svgComponentsAux : newError)
 
       // Update the assets path configuration
       configAssetsPath.set(svgComponentFiles).catch((error) => {
