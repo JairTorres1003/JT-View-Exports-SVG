@@ -32,5 +32,6 @@
   "deleteFile": "Eliminar ficheiro",
   "deleteFiles": "Eliminar ficheiros",
   "selectFile": "Selecionar ficheiro",
-  "selectAllFiles": "Selecionar todos os ficheiros"
+  "selectAllFiles": "Selecionar todos os ficheiros",
+  "home": "Início"
 }

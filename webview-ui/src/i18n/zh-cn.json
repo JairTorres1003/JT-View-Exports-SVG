@@ -32,5 +32,6 @@
   "deleteFile": "删除文件",
   "deleteFiles": "删除文件",
   "selectFile": "选择文件",
-  "selectAllFiles": "选择所有文件"
+  "selectAllFiles": "选择所有文件",
+  "home": "主页"
 }

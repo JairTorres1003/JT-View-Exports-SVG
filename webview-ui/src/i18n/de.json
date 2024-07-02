@@ -32,5 +32,6 @@
   "deleteFile": "Löschen Datei",
   "deleteFiles": "Löschen Dateien",
   "selectFile": "Datei auswählen",
-  "selectAllFiles": "Alle Dateien auswählen"
+  "selectAllFiles": "Alle Dateien auswählen",
+  "home": "Startseite"
 }

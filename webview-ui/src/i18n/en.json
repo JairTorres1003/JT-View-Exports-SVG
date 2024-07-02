@@ -32,5 +32,6 @@
   "deleteFile": "Delete file",
   "deleteFiles": "Delete files",
   "selectFile": "Select file",
-  "selectAllFiles": "Select all files"
+  "selectAllFiles": "Select all files",
+  "home": "Home"
 }

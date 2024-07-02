@@ -32,5 +32,6 @@
   "deleteFile": "Удалить файл",
   "deleteFiles": "Удалить файлы",
   "selectFile": "Выбрать файл",
-  "selectAllFiles": "Выбрать все файлы"
+  "selectAllFiles": "Выбрать все файлы",
+  "home": "Главная"
 }

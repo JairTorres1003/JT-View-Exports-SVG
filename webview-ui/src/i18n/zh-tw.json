@@ -32,5 +32,6 @@
   "deleteFile": "刪除檔案",
   "deleteFiles": "刪除檔案",
   "selectFile": "選擇檔案",
-  "selectAllFiles": "選擇所有檔案"
+  "selectAllFiles": "選擇所有檔案",
+  "home": "首頁"
 }
