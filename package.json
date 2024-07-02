@@ -74,6 +74,26 @@
             "type": "boolean",
             "default": true,
             "description": "Hide files that do not have any SVG icons exported."
+          },
+          "JT-View-Exports-SVG.ignoreDirectories": {
+            "type": "array",
+            "default": [
+              ".git",
+              ".github",
+              ".husky",
+              ".idea",
+              ".vscode-test",
+              ".vscode",
+              "build",
+              "coverage",
+              "dist",
+              "node_modules",
+              "out"
+            ],
+            "description": "An array to store the names of directories to ignore when analyzing files for SVG icons.",
+            "items": {
+              "type": "string"
+            }
           }
         }
       }
