@@ -102,6 +102,10 @@ export async function processFiles(
 
             // If a cached value exists and the file hasn't been modified since caching, return it
             if (cachedValue !== undefined) {
+              if (cachedValue.svgComponents?.length > 0) {
+                svgComponentFiles.push(file)
+              }
+
               return cachedValue
             }
 
