@@ -78,6 +78,7 @@
           "JT-View-Exports-SVG.ignoreDirectories": {
             "type": "array",
             "default": [
+              ".DS_Store",
               ".git",
               ".github",
               ".husky",
