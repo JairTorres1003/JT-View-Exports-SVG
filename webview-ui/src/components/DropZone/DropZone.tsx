@@ -5,6 +5,7 @@ import { useTranslation } from 'react-i18next'
 
 import { DropFilesIcon, MoreFilesIcon } from '../../icons'
 import { type DropZoneProps } from '../../interfaces/DropZone'
+import { vscode } from '../../utilities/vscode'
 
 import { BoxDropZone, CustomFileUploader } from './DropZone.style'
 
@@ -73,17 +74,29 @@ export const DropZone: FC<DropZoneProps> = (props) => {
           </Typography>
         </CustomFileUploader>
       </FileUploader>
-      <Button
-        variant='outlined'
-        size='medium'
-        color='success'
-        disabled={file === null || file?.length < 1}
-        onClick={() => {
-          onExtractIcons(file)
-        }}
-      >
-        {t('ExtractIcons')}
-      </Button>
+      <Box display='flex' flexDirection='column' gap='6px'>
+        <Button
+          variant='outlined'
+          size='medium'
+          color='success'
+          disabled={file === null || file?.length < 1}
+          onClick={() => {
+            onExtractIcons(file)
+          }}
+        >
+          {t('ExtractIcons')}
+        </Button>
+        <Button
+          variant='outlined'
+          size='medium'
+          color='warning'
+          onClick={() => {
+            vscode.postMessage('scanWorkspace')
+          }}
+        >
+          {t('ScanWorkspace')}
+        </Button>
+      </Box>
     </BoxDropZone>
   )
 }

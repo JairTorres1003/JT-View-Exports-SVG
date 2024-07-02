@@ -77,20 +77,8 @@
           },
           "JT-View-Exports-SVG.ignoreDirectories": {
             "type": "array",
-            "default": [
-              ".git",
-              ".github",
-              ".husky",
-              ".idea",
-              ".vscode-test",
-              ".vscode",
-              "build",
-              "coverage",
-              "dist",
-              "node_modules",
-              "out"
-            ],
-            "description": "An array to store the names of directories to ignore when analyzing files for SVG icons.",
+            "default": [],
+            "description": "An array to store the names of directories to ignore when analyzing files for SVG icons.\nDefault:\n.git\n.github\n.husky\n.idea\n.vscode-test\n.vscode\nbuild\ncoverage\ndist\nnode_modules\nout",
             "items": {
               "type": "string"
             }

@@ -6,6 +6,7 @@ import {
   type WebviewPanel,
   env,
   window,
+  workspace,
 } from 'vscode'
 
 import { type SvgExport, type SvgExportErrors } from '../interfaces/svgExports'
@@ -15,6 +16,8 @@ import {
   type CommandHandler,
 } from '../interfaces/vscode'
 import {
+  getAllowedFilesInFolder,
+  getAssetsFiles,
   getInputFiles,
   getNonce,
   getUri,
@@ -335,6 +338,25 @@ export class ViewExportsSVGPanel {
   }
 
   /**
+   * Handles the scanning of the workspace for SVG files.
+   */
+  private handleScanWorkspace(): void {
+    const workspaceFolders = workspace.workspaceFolders
+
+    if (!isEmpty(workspaceFolders)) {
+      getAllowedFilesInFolder(workspaceFolders[0].uri)
+        .then((files) => {
+          getAssetsFiles(files).catch((error) => {
+            console.error('Failed get assets files:', error)
+          })
+        })
+        .catch((error) => {
+          console.error('Failed to scan workspace:', error)
+        })
+    }
+  }
+
+  /**
    * Sets up a message listener for the webview panel.
    * @param webview The webview instance.
    */
@@ -351,6 +373,7 @@ export class ViewExportsSVGPanel {
       openFile: this.handleOpenFile.bind(this),
       viewAssets: this.handleViewAssets.bind(this),
       removeAsset: this.handleRemoveAsset.bind(this),
+      scanWorkspace: this.handleScanWorkspace.bind(this),
     }
 
     webview.onDidReceiveMessage(

@@ -28,8 +28,8 @@ i18n
       zh_cn: { translation: zh_cn },
       zh_tw: { translation: zh_tw },
     },
-    lng: 'en',
-    fallbackLng: 'en',
+    lng: 'es',
+    fallbackLng: 'es',
     interpolation: {
       escapeValue: false,
     },

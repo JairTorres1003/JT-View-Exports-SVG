@@ -10,6 +10,7 @@ export type ReceiveMessageCommand =
   | 'openFile'
   | 'viewAssets'
   | 'removeAsset'
+  | 'scanWorkspace'
 export type PostMessageCommand =
   | 'assetsPath'
   | 'configurationVsCode'

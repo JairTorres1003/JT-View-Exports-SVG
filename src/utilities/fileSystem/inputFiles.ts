@@ -1,7 +1,7 @@
 import * as fs from 'fs'
 import * as path from 'path'
 
-import { Position, Selection, TextEditorRevealType, window, workspace } from 'vscode'
+import { Position, Selection, TextEditorRevealType, type Uri, window, workspace } from 'vscode'
 
 import { type SvgFile, type SvgExport, type SvgExportErrors } from '../../interfaces/svgExports'
 import { ViewExportsSVGPanel } from '../../panels/ViewExportsSVGPanel'
@@ -22,6 +22,14 @@ export async function getInputFiles(filesPath: string[] | null): Promise<void> {
   }
 
   await processFiles(null, filesPath, operation)
+}
+
+export async function getAssetsFiles(filesPath: Uri[]): Promise<void> {
+  const operation = (result: SvgExport[] | SvgExportErrors): void => {
+    ViewExportsSVGPanel.update(result)
+  }
+
+  await processFiles(filesPath, null, operation)
 }
 
 /**

@@ -50,6 +50,7 @@ export const AssetTable: FC<AssetTableProps> = ({
                   onClick={() => {
                     handleViewAsset(path)
                   }}
+                  sx={{ color: 'var(--color-JT-view-export-svg)' }}
                 >
                   <MiddleEllipsis>
                     <Tooltip title={path} arrow>

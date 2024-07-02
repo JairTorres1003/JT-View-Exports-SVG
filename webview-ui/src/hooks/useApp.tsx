@@ -185,7 +185,6 @@ const useApp = (): AppHook => {
               root: {
                 fontFamily: styles?.fontFamily,
                 fontSize: styles?.fontSize,
-                color: 'var(--color-JT-view-export-svg)',
               },
             },
           },
