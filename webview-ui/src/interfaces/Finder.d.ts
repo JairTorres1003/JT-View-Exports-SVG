@@ -18,4 +18,5 @@ export interface FinderProps {
    * @default false
    */
   isOpenPanel?: boolean
+  handleHome: () => void
 }

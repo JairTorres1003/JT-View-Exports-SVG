@@ -17,14 +17,15 @@ function App(): React.JSX.Element {
   const {
     fileSelected,
     handleExtractIcons,
+    handleHome,
     handleOpenPanel,
     handleResize,
     handleResizeStop,
     handleSvgComponents,
     isLoading,
     isPanelOpen,
-    resizableWidth,
     refPortalButton,
+    resizableWidth,
     showMessage,
     svgComponents,
     theme,
@@ -58,6 +59,7 @@ function App(): React.JSX.Element {
                     isOpenPanel={isPanelOpen}
                     handleSvgComponents={handleSvgComponents}
                     refPortalButton={refPortalButton}
+                    handleHome={handleHome}
                   />
                   <Box className='BoxContainer-gallery-container'>
                     {!isEmpty(showMessage) ? (

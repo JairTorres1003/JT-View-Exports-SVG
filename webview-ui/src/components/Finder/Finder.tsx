@@ -3,7 +3,7 @@ import { type FC } from 'react'
 import { useTranslation } from 'react-i18next'
 
 import useFinder from '../../hooks/useFinder'
-import { IconClose, IconLupe } from '../../icons'
+import { IconClose, IconHome, IconLupe } from '../../icons'
 import { type FinderProps } from '../../interfaces/Finder'
 
 import { BoxFinder, TextField } from './Finder.style'
@@ -12,6 +12,7 @@ export const Finder: FC<FinderProps> = ({
   isOpenPanel = false,
   refPortalButton,
   handleSvgComponents,
+  handleHome,
 }) => {
   const { handleClearValue, setValue, value } = useFinder({
     handleSvgComponents,
@@ -30,6 +31,14 @@ export const Finder: FC<FinderProps> = ({
         justifyContent: 'space-between',
       }}
     >
+      <IconButton
+        size='small'
+        title={t('home')}
+        onClick={handleHome}
+        sx={{ mb: '16px', color: 'var(--color-JT-view-export-svg)' }}
+      >
+        <IconHome />
+      </IconButton>
       <BoxFinder>
         <TextField
           fullWidth

@@ -12,14 +12,15 @@ import { vscode } from '../utilities/vscode'
 interface AppHook {
   fileSelected: number | null | undefined
   handleExtractIcons: (fileList: FileList | null) => void
+  handleHome: () => void
   handleOpenPanel: () => void
   handleResize: ResizeCallback
   handleResizeStop: ResizeCallback
   handleSvgComponents: (data: string) => void
   isLoading: boolean
   isPanelOpen: boolean
-  resizableWidth: string
   refPortalButton: React.MutableRefObject<HTMLElement | null>
+  resizableWidth: string
   showMessage: string | null
   svgComponents: SvgExport[]
   theme: Theme
@@ -38,6 +39,14 @@ const useApp = (): AppHook => {
     state: { theme: currentTheme, styles },
     dispatch: dispatchVSCode,
   } = useVSCode()
+
+  /**
+   * Handle the home button click event.
+   */
+  const handleHome = (): void => {
+    setFileSelected(0)
+    dispatch({ type: 'CLEAR_SELECTED' })
+  }
 
   /**
    * Handle resizing of the panel.
@@ -225,14 +234,15 @@ const useApp = (): AppHook => {
   return {
     fileSelected,
     handleExtractIcons,
+    handleHome,
     handleOpenPanel,
     handleResize,
     handleResizeStop,
     handleSvgComponents,
     isLoading,
     isPanelOpen,
-    resizableWidth,
     refPortalButton,
+    resizableWidth,
     showMessage,
     svgComponents,
     theme,

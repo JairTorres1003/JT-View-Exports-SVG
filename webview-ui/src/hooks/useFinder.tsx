@@ -11,7 +11,7 @@ interface FinderHook {
   value: string
 }
 
-const useFinder = (props: FinderProps): FinderHook => {
+const useFinder = (props: Omit<FinderProps, 'handleHome'>): FinderHook => {
   const [value, setValue] = useState<string>('')
   const debounce = useDebounce(value, 600)
 
