@@ -33,5 +33,6 @@
   "deleteFiles": "ファイルを削除",
   "selectFile": "ファイルを選択",
   "selectAllFiles": "すべてのファイルを選択",
-  "home": "ホーム"
+  "home": "ホーム",
+  "ScanWorkspace": "ワークスペースをスキャン"
 }

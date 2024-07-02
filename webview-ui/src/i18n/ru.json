@@ -33,5 +33,6 @@
   "deleteFiles": "Удалить файлы",
   "selectFile": "Выбрать файл",
   "selectAllFiles": "Выбрать все файлы",
-  "home": "Главная"
+  "home": "Главная",
+  "ScanWorkspace": "Сканировать рабочую область"
 }

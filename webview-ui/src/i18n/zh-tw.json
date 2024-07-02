@@ -33,5 +33,6 @@
   "deleteFiles": "刪除檔案",
   "selectFile": "選擇檔案",
   "selectAllFiles": "選擇所有檔案",
-  "home": "首頁"
+  "home": "首頁",
+  "ScanWorkspace": "掃描工作區"
 }

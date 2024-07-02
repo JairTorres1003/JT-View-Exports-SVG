@@ -33,5 +33,6 @@
   "deleteFiles": "Supprimer les fichiers",
   "selectFile": "Sélectionner un fichier",
   "selectAllFiles": "Sélectionner tous les fichiers",
-  "home": "Accueil"
+  "home": "Accueil",
+  "ScanWorkspace": "Analyser l'espace de travail"
 }

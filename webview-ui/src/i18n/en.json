@@ -33,5 +33,6 @@
   "deleteFiles": "Delete files",
   "selectFile": "Select file",
   "selectAllFiles": "Select all files",
-  "home": "Home"
+  "home": "Home",
+  "ScanWorkspace": "Scan workspace"
 }
