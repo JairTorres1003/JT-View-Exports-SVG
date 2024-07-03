@@ -4,6 +4,7 @@ export const IGNORE_DIRECTORIES = [
   '.github',
   '.husky',
   '.idea',
+  '.idx',
   '.vscode-test',
   '.vscode',
   'build',
