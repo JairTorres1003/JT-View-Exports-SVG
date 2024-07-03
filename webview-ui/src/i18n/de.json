@@ -16,6 +16,7 @@
   "progressTitle": "Extrahiere SVG-Exporte...",
   "processingScanWorkspace": "Arbeitsbereich scannen...",
   "processingScanWorkspaceDescription": "Dieser Vorgang kann einige Minuten dauern. Bitte warten.",
+  "LastScanDate": "Letztes Scan-Datum:",
   "Close": "Schließen",
   "DeveloperTools": "Entwicklertools",
   "playground": "Spielplatz",

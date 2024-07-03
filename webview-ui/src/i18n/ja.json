@@ -16,6 +16,7 @@
   "progressTitle": "SVGエクスポートを抽出しています...",
   "processingScanWorkspace": "ワークスペースをスキャンしています...",
   "processingScanWorkspaceDescription": "このプロセスには数分かかる場合があります。お待ちください。",
+  "LastScanDate": "最終スキャン日：",
   "Close": "閉じる",
   "DeveloperTools": "開発者ツール",
   "playground": "プレイグラウンド",

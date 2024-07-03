@@ -16,6 +16,7 @@
   "progressTitle": "提取SVG匯出中...",
   "processingScanWorkspace": "掃描工作區...",
   "processingScanWorkspaceDescription": "此過程可能需要幾分鐘。請稍候。",
+  "LastScanDate": "上次掃描日期：",
   "Close": "關閉",
   "DeveloperTools": "開發者工具",
   "playground": "遊樂場",

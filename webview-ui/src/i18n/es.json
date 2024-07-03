@@ -16,6 +16,7 @@
   "progressTitle": "Extrayendo exportaciones SVG...",
   "processingScanWorkspace": "Escaneando espacio de trabajo...",
   "processingScanWorkspaceDescription": "Este proceso puede tardar unos minutos. Por favor, espere.",
+  "LastScanDate": "Última fecha de escaneo:",
   "Close": "Cerrar",
   "DeveloperTools": "Herramientas de desarrollo",
   "playground": "Área de pruebas",
