@@ -14,6 +14,8 @@
   },
   "ExtractIcons": "提取SVG图标",
   "progressTitle": "提取SVG导出中...",
+  "processingScanWorkspace": "扫描工作区...",
+  "processingScanWorkspaceDescription": "此过程可能需要几分钟。请稍候。",
   "Close": "关闭",
   "DeveloperTools": "开发者工具",
   "playground": "游乐场",

@@ -14,6 +14,8 @@
   },
   "ExtractIcons": "Extraer iconos SVG",
   "progressTitle": "Extrayendo exportaciones SVG...",
+  "processingScanWorkspace": "Escaneando espacio de trabajo...",
+  "processingScanWorkspaceDescription": "Este proceso puede tardar unos minutos. Por favor, espere.",
   "Close": "Cerrar",
   "DeveloperTools": "Herramientas de desarrollo",
   "playground": "Área de pruebas",
