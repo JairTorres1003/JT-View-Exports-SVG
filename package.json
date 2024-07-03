@@ -82,6 +82,11 @@
             "items": {
               "type": "string"
             }
+          },
+          "JT-View-Exports-SVG.lastScanDate": {
+            "type": "string",
+            "default": "",
+            "description": "The date of the last scan of the workspace for SVG icons."
           }
         }
       }

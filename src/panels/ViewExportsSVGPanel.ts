@@ -34,6 +34,7 @@ import {
   getConfigurationVsCode,
   ConfigAssetsPath,
 } from '../utilities/vscode'
+import { ConfigLastScanDate } from '../utilities/vscode/extensionConfig/ConfigLastScanDate'
 
 /**
  * Webview panel for displaying SVG exports.
@@ -340,19 +341,20 @@ export class ViewExportsSVGPanel {
   /**
    * Handles the scanning of the workspace for SVG files.
    */
-  private handleScanWorkspace(): void {
+  private async handleScanWorkspace(): Promise<void> {
     const workspaceFolders = workspace.workspaceFolders
 
-    if (!isEmpty(workspaceFolders)) {
-      getAllowedFilesInFolder(workspaceFolders[0].uri)
-        .then((files) => {
-          getAssetsFiles(files).catch((error) => {
-            console.error('Failed get assets files:', error)
-          })
-        })
-        .catch((error) => {
-          console.error('Failed to scan workspace:', error)
-        })
+    try {
+      if (!isEmpty(workspaceFolders)) {
+        const files = await getAllowedFilesInFolder(workspaceFolders[0].uri)
+        const configLastScanDate = new ConfigLastScanDate()
+
+        await getAssetsFiles(files)
+
+        await configLastScanDate.updateLastScanDate(new Date().toISOString())
+      }
+    } catch (error) {
+      console.error('Failed to scan workspace:', error)
     }
   }
 
