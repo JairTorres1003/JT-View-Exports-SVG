@@ -34,7 +34,10 @@ const useApp = (): AppHook => {
   const [isPanelOpen, setIsPanelOpen] = useState<boolean>(false)
   const [resizableWidth, setResizableWidth] = useState<string>('100%')
   const refPortalButton = useRef<HTMLElement>(null)
-  const { dispatch } = useSvg()
+  const {
+    dispatch,
+    state: { isScanning },
+  } = useSvg()
   const {
     state: { theme: currentTheme, styles },
     dispatch: dispatchVSCode,
@@ -110,6 +113,7 @@ const useApp = (): AppHook => {
     }
 
     setIsLoading(false)
+    dispatch({ type: 'IS_SCANNING', payload: false })
   }
 
   /**
@@ -229,6 +233,12 @@ const useApp = (): AppHook => {
       setIsLoading(false)
     }
   }, [])
+
+  useEffect(() => {
+    if (isScanning) {
+      setIsLoading(true)
+    }
+  }, [isScanning])
 
   return {
     fileSelected,

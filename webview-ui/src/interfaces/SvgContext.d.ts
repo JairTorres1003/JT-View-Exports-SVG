@@ -43,6 +43,10 @@ export interface SvgContextState {
    * Snackbar information for the playground, including whether it's open and its text.
    */
   snackbarPlayground: Snackbar
+  /**
+   * Whether the scanner is currently scanning.
+   */
+  isScanning: boolean
 }
 
 type SelectedActionPayload = {
@@ -73,3 +77,4 @@ export type SvgContextAction =
   | { type: 'SNACKBAR'; payload: SvgContextState['snackbar'] }
   | { type: 'SNACKBAR_PLAYGROUND'; payload: SvgContextState['snackbarPlayground'] }
   | { type: 'UPDATE_PLAYGROUND'; payload: SvgContextState['selectedSvg'] }
+  | { type: 'IS_SCANNING'; payload: boolean }
