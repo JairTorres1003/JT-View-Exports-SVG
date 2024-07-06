@@ -6,6 +6,7 @@ import { useTranslation } from 'react-i18next'
 import { DropFilesIcon, MoreFilesIcon } from '../../icons'
 import { type DropZoneProps } from '../../interfaces/DropZone'
 import { useSvg } from '../../provider/SvgProvider'
+import { isEmpty } from '../../utilities/misc'
 import { vscode } from '../../utilities/vscode'
 
 import { BoxDropZone, CustomFileUploader } from './DropZone.style'
@@ -15,7 +16,10 @@ const fileTypes: string[] = ['JS', 'JSX', 'TS', 'TSX']
 export const DropZone: FC<DropZoneProps> = (props) => {
   const { onExtractIcons } = props
 
-  const { dispatch } = useSvg()
+  const {
+    dispatch,
+    state: { lastScanDate },
+  } = useSvg()
 
   const { t } = useTranslation()
   const [file, setFile] = useState<FileList | null>(null)
@@ -102,6 +106,11 @@ export const DropZone: FC<DropZoneProps> = (props) => {
           {t('ScanWorkspace')}
         </Button>
       </Box>
+      {!isEmpty(lastScanDate) && (
+        <Typography>
+          {t('LastScanDate')} <strong>{lastScanDate}</strong>
+        </Typography>
+      )}
     </BoxDropZone>
   )
 }

@@ -67,3 +67,26 @@ export const getUnknownError = (error: any): string => {
 
   return 'Unknown error'
 }
+
+/**
+ * Formats a given date into a string representation based on the specified language.
+ * @param date - The date to be formatted.
+ * @param language - The language used for formatting the date.
+ * @returns The formatted date as a string.
+ */
+export const formatDate = (date: Date, language: string): string => {
+  // Definir opciones para formatear fecha y hora
+  const options: Intl.DateTimeFormatOptions = {
+    year: 'numeric',
+    month: 'long',
+    day: 'numeric',
+    hour: '2-digit',
+    minute: '2-digit',
+    second: '2-digit',
+    hour12: false,
+  }
+
+  const formatter = new Intl.DateTimeFormat(language, options)
+
+  return formatter.format(date)
+}

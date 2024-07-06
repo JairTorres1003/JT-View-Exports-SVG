@@ -116,6 +116,10 @@ const useApp = (): AppHook => {
     dispatch({ type: 'IS_SCANNING', payload: false })
   }
 
+  const handleLastScanDate = (data: string): void => {
+    dispatch({ type: 'SET_LAST_SCAN_DATE', payload: data })
+  }
+
   /**
    * Handles the extraction of icons from a dropped file.
    * @param fileList The dropped files to extract icons from.
@@ -218,12 +222,14 @@ const useApp = (): AppHook => {
     vscode.postMessage('getConfigurationVsCode')
     vscode.postMessage('getCurrentTheme')
     vscode.postMessage('getTranslations')
+    vscode.postMessage('getLastScanDate')
 
     // Listen for messages
     vscode.onMessage('svgComponents', handleSvgComponents)
     vscode.onMessage('configurationVsCode', handleConfigurationVsCode)
     vscode.onMessage('currentTheme', handleCurrentTheme)
     vscode.onMessage('language', handleLanguage)
+    vscode.onMessage('lastScanDate', handleLastScanDate)
 
     // Clean up by removing the message handlers when the component is unmounted
     return () => {

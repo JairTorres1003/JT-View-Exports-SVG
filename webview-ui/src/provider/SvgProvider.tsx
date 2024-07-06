@@ -11,6 +11,7 @@ const initialState: SvgContextState = {
   snackbar: { open: false, text: null },
   snackbarPlayground: { open: false, text: null, severity: 'success' },
   isScanning: false,
+  lastScanDate: '',
 }
 
 /**
@@ -53,9 +54,10 @@ const svgReducer: Reducer<SvgContextState, SvgContextAction> = (prevState, actio
       }
     case 'UPDATE_PLAYGROUND':
       return { ...prevState, selectedSvg: action.payload }
-    case 'IS_SCANNING': {
+    case 'IS_SCANNING':
       return { ...prevState, isScanning: action.payload }
-    }
+    case 'SET_LAST_SCAN_DATE':
+      return { ...prevState, lastScanDate: action.payload }
     default:
       return prevState
   }

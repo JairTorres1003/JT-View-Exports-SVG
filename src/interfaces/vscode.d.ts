@@ -11,6 +11,7 @@ export type ReceiveMessageCommand =
   | 'viewAssets'
   | 'removeAsset'
   | 'scanWorkspace'
+  | 'getLastScanDate'
 export type PostMessageCommand =
   | 'assetsPath'
   | 'configurationVsCode'
@@ -19,6 +20,7 @@ export type PostMessageCommand =
   | 'filteredSvgComponents'
   | 'language'
   | 'svgComponents'
+  | 'lastScanDate'
 /**
  * Data structure representing a message received by the webview.
  */

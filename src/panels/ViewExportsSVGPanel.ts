@@ -25,7 +25,7 @@ import {
   removeAssetFile,
   viewAssetFile,
 } from '../utilities/fileSystem'
-import { isEmpty } from '../utilities/misc'
+import { formatDate, isEmpty } from '../utilities/misc'
 import { customSvgComponent } from '../utilities/svg/customSvgComponent'
 import { filterSvgComponents } from '../utilities/svg/filterSvgComponents'
 import {
@@ -346,16 +346,29 @@ export class ViewExportsSVGPanel {
 
     try {
       if (!isEmpty(workspaceFolders)) {
+        const language = env.language ?? 'en'
         const files = await getAllowedFilesInFolder(workspaceFolders[0].uri)
         const configLastScanDate = new ConfigLastScanDate()
 
         await getAssetsFiles(files)
 
-        await configLastScanDate.updateLastScanDate(new Date().toISOString())
+        const nowScanDate = formatDate(new Date(), language)
+
+        await configLastScanDate.updateLastScanDate(nowScanDate)
+        this._postMessage('lastScanDate', nowScanDate)
       }
     } catch (error) {
       console.error('Failed to scan workspace:', error)
     }
+  }
+
+  /**
+   * Handles the retrieval of the last scan date.
+   */
+  private handleGetLastScanDate(): void {
+    const configLastScanDate = new ConfigLastScanDate()
+    const response = configLastScanDate.getLastScanDate()
+    this._postMessage('lastScanDate', response)
   }
 
   /**
@@ -376,6 +389,7 @@ export class ViewExportsSVGPanel {
       viewAssets: this.handleViewAssets.bind(this),
       removeAsset: this.handleRemoveAsset.bind(this),
       scanWorkspace: this.handleScanWorkspace.bind(this),
+      getLastScanDate: this.handleGetLastScanDate.bind(this),
     }
 
     webview.onDidReceiveMessage(

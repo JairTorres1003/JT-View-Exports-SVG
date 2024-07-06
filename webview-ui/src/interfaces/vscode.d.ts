@@ -11,6 +11,7 @@ export type PostMessageCommand =
   | 'viewAssets'
   | 'removeAsset'
   | 'scanWorkspace'
+  | 'getLastScanDate'
 export type OnMessageCommand =
   | 'assetsPath'
   | 'configurationVsCode'
@@ -19,6 +20,7 @@ export type OnMessageCommand =
   | 'filteredSvgComponents'
   | 'language'
   | 'svgComponents'
+  | 'lastScanDate'
 
 /**
  * Data structure representing a message sent between the webview and the extension.

@@ -47,6 +47,10 @@ export interface SvgContextState {
    * Whether the scanner is currently scanning.
    */
   isScanning: boolean
+  /**
+   * The last scan date.
+   */
+  lastScanDate: string
 }
 
 type SelectedActionPayload = {
@@ -78,3 +82,4 @@ export type SvgContextAction =
   | { type: 'SNACKBAR_PLAYGROUND'; payload: SvgContextState['snackbarPlayground'] }
   | { type: 'UPDATE_PLAYGROUND'; payload: SvgContextState['selectedSvg'] }
   | { type: 'IS_SCANNING'; payload: boolean }
+  | { type: 'SET_LAST_SCAN_DATE'; payload: string }
