@@ -1,3 +1,3 @@
-export * from './base'
-export * from './baseFileCache'
-export * from './fileModifiedCache'
+export * from './BaseCache'
+export * from './DeclarationFileCache'
+export * from './FileModifiedCache'

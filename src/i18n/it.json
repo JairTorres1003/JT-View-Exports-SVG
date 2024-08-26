@@ -1,0 +1,8 @@
+{
+  "extensionTitle": "Visualizza esportazioni SVG",
+  "iconExtractionInProgress": "Estrazione dell'icona in corso...",
+  "noIconsFound": "Nessuna icona trovata",
+  "noFileSelected": "Nessun file selezionato",
+  "searchMinChars": "Inserisci almeno 3 caratteri per cercare...",
+  "noExistedFile": "Il file {0} non esiste."
+}

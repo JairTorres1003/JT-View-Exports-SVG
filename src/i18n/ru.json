@@ -1,8 +1,8 @@
 {
-  "panelTitle": "Просмотр экспорта SVG",
-  "progressTitle": "Извлечение экспорта SVG...",
-  "NoIconsFound": "Иконки не найдены",
-  "NoFileSelected": "Файл не выбран",
-  "PleaseSearch": "Введите как минимум 3 символа для поиска...",
-  "NoExistedFile": "Файл {0} не существует."
+  "extensionTitle": "Просмотр экспорта SVG",
+  "iconExtractionInProgress": "Идет извлечение значков...",
+  "noIconsFound": "Иконки не найдены",
+  "noFileSelected": "Файл не выбран",
+  "searchMinChars": "Введите не менее 3 символов для поиска...",
+  "noExistedFile": "Файл {0} не существует."
 }

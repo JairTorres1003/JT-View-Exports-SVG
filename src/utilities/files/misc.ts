@@ -1,0 +1,93 @@
+import * as fs from 'fs'
+import * as path from 'path'
+
+import { Position, Selection, TextEditorRevealType, Uri, window, workspace } from 'vscode'
+
+import { getUnknownError } from '../misc'
+import { getWorkspacePath } from '../vscode'
+
+import { type SVGFile } from '@/interfaces/ViewExportsSVG'
+import { type OpenFile } from '@/interfaces/views/ViewExportsSVGPanel'
+
+/**
+ * Gets the last modification timestamp of a file.
+ * @param filePath - The path to the file.
+ * @returns The last modification timestamp as a Unix timestamp in milliseconds, or 0 if the file doesn't exist or an error occurs.
+ */
+export function getFileTimestamp(filePath: string): number {
+  try {
+    const stats = fs.statSync(filePath)
+
+    // Extract the modification timestamp (mtime) and return it
+    const timestamp = stats.mtime.getTime()
+    return timestamp
+  } catch (error) {
+    return 0
+  }
+}
+
+/**
+ * Retrieves the language of a file based on its extension.
+ * @param fileName - The name of the file.
+ * @returns The language of the file, or 'plaintext' if no matching language is found.
+ */
+export async function getLanguageFromFile(file: Uri): Promise<string> {
+  try {
+    const document = await workspace.openTextDocument(file)
+    return document.languageId ?? 'plaintext'
+  } catch (error) {
+    console.error('Error getting language from file: ', getUnknownError(error))
+    return 'plaintext'
+  }
+}
+
+/**
+ * Converts an absolute file path to an SVGFile object.
+ * @param filePath - The absolute file path.
+ * @returns The SVGFile object containing information about the file.
+ */
+export async function pathToSVGFile(filePath: string): Promise<SVGFile> {
+  const workspacePath = getWorkspacePath()
+
+  const absolutePath = path.isAbsolute(filePath) ? filePath : path.join(workspacePath, filePath)
+  const basename = path.basename(absolutePath)
+  const dirname = path.dirname(absolutePath)
+  const relativePath = path.relative(workspacePath, absolutePath)
+  const language = await getLanguageFromFile(Uri.file(absolutePath))
+
+  return { absolutePath, basename, dirname, relativePath, language }
+}
+
+/**
+ * Opens a file in the editor at the specified position.
+ * @param file - The file to open.
+ * @param position - The position in the file to navigate to (optional).
+ */
+export function openFile({ file, position = { column: 1, line: 1, index: 1 } }: OpenFile): void {
+  const { absolutePath } = file
+
+  try {
+    if (fs.existsSync(absolutePath)) {
+      ;(async () => {
+        const document = await workspace.openTextDocument(absolutePath)
+        const editor = await window.showTextDocument(document)
+        const line = position.line > 0 ? position.line - 1 : 0
+        const column = position.column > 0 ? position.column - 1 : 0
+
+        const pos = new Position(line, column)
+
+        editor.selection = new Selection(pos, pos)
+        editor.revealRange(new Selection(pos, pos), TextEditorRevealType.AtTop)
+      })().catch(console.error)
+    } else {
+      window
+        .showErrorMessage(`The file ${absolutePath} does not exist.`)
+        .then(undefined, console.error)
+    }
+  } catch (error) {
+    console.error(`Error opening file ${absolutePath} in editor: `, getUnknownError(error))
+    window
+      .showErrorMessage(`Error opening file ${absolutePath} in editor`)
+      .then(undefined, console.error)
+  }
+}

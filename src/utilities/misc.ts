@@ -5,7 +5,7 @@
  */
 export const isEmpty = (
   value: unknown
-): value is null | undefined | '' | [] | Record<string, unknown> => {
+): value is null | undefined | '' | [] | Record<string, never> => {
   if (value === null || value === undefined) return true
 
   if (typeof value === 'string' && value.trim() === '') return true
@@ -27,7 +27,6 @@ export const isEmpty = (
 
 /**
  * Returns the error message from an unknown error.
- *
  * @param error - The unknown error from which to retrieve the message.
  * @returns The error message.
  */
@@ -69,14 +68,39 @@ export const getUnknownError = (error: any): string => {
 }
 
 /**
+ * Checks if a given value is a valid date.
+ * @param date - The value to be checked.
+ * @returns A boolean indicating whether the value is a valid date.
+ */
+export const isValidDate = (date: Date | string): boolean => {
+  try {
+    if (date instanceof Date) {
+      return !isNaN(date.getTime())
+    }
+
+    return !isNaN(new Date(date).getTime())
+  } catch {
+    return false
+  }
+}
+
+/**
  * Formats a given date into a string representation based on the specified language.
  * @param date - The date to be formatted.
  * @param language - The language used for formatting the date.
  * @returns The formatted date as a string.
  */
-export const formatDate = (date: Date, language: string): string => {
+export const formatDate = (
+  date: Date,
+  language: string,
+  options?: Intl.DateTimeFormatOptions
+): string => {
+  if (!isValidDate(date)) {
+    return ''
+  }
+
   // Definir opciones para formatear fecha y hora
-  const options: Intl.DateTimeFormatOptions = {
+  const opt: Intl.DateTimeFormatOptions = {
     year: 'numeric',
     month: 'long',
     day: 'numeric',
@@ -86,7 +110,7 @@ export const formatDate = (date: Date, language: string): string => {
     hour12: false,
   }
 
-  const formatter = new Intl.DateTimeFormat(language, options)
+  const formatter = new Intl.DateTimeFormat(language, options ?? opt)
 
   return formatter.format(date)
 }

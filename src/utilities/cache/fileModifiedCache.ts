@@ -1,23 +1,3 @@
-import * as fs from 'fs'
-
-/**
- * Gets the last modification timestamp of a file.
- * @param filePath - The path to the file.
- * @returns The last modification timestamp as a Unix timestamp in milliseconds, or 0 if the file doesn't exist or an error occurs.
- */
-export function getFileTimestamp(filePath: string): number {
-  try {
-    // Get file statistics (sync)
-    const stats = fs.statSync(filePath)
-
-    // Extract the modification timestamp (mtime) and return it
-    const timestamp = stats.mtime.getTime()
-    return timestamp
-  } catch (error) {
-    return 0
-  }
-}
-
 /**
  * A caching mechanism for values associated with files using their modification timestamps.
  * @template T - The type of the cached value.

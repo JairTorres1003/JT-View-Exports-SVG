@@ -1,8 +1,8 @@
 {
-  "panelTitle": "查看導出的SVG",
-  "progressTitle": "提取SVG導出...",
-  "NoIconsFound": "找不到圖標",
-  "NoFileSelected": "未選擇文件",
-  "PleaseSearch": "請輸入至少3個字符進行搜索...",
-  "NoExistedFile": "文件{0}不存在。"
+  "extensionTitle": "查看SVG匯出",
+  "iconExtractionInProgress": "圖示提取中...",
+  "noIconsFound": "找不到圖示",
+  "noFileSelected": "未選取檔案",
+  "searchMinChars": "請輸入至少3個字元以進行搜尋...",
+  "noExistedFile": "檔案 {0} 不存在。"
 }

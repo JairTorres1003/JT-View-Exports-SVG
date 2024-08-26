@@ -1,0 +1,108 @@
+import * as t from '@babel/types'
+
+import { isEmpty } from '../misc'
+import { getProperties, propertyManager } from '../properties'
+
+import { getSVGTagName } from './tags'
+
+import { type GetChildAttributes, type GetSVGComponent } from '@/interfaces/svg/SVGComponent'
+import { type SVGErrors, type SVGComponentProps } from '@/interfaces/ViewExportsSVG'
+
+/**
+ * Retrieves the attributes of the child elements in an SVG component.
+ *
+ * @param children - The children of the SVG component.
+ * @returns An object containing the attributes of the child elements.
+ */
+function getChildAttributes(children: t.JSXElement['children']): GetChildAttributes {
+  const components: SVGComponentProps[] = []
+  let errors: SVGErrors | undefined
+  let hasErrors = false
+  let isMotion = false
+
+  children.forEach((child) => {
+    if (t.isJSXElement(child)) {
+      const openingElement = child.openingElement
+      const params = (propertyManager.get() ?? {}) as Record<string, unknown>
+      const props = getProperties(openingElement.attributes, params)
+      const childAttrs = getChildAttributes(child.children)
+      const tag = getSVGTagName(openingElement)
+
+      isMotion = tag.isMotion || childAttrs.isMotion
+
+      if (!hasErrors) {
+        hasErrors = childAttrs.hasErrors
+        errors = childAttrs.errors
+      }
+
+      if (!tag.isValid || tag.name === 'Fragment' || isEmpty(tag.name)) {
+        hasErrors = true
+        errors = { message: 'Invalid SVG tag', location: tag.location }
+      } else {
+        components.push({
+          props,
+          isMotion,
+          tag: tag.name,
+          children: childAttrs.children,
+        })
+      }
+    }
+  })
+
+  return { children: components, isMotion, hasErrors, errors }
+}
+
+/**
+ * Retrieves the SVG component from a JSX element.
+ * @param element The JSX element to extract the SVG component from.
+ * @returns An object containing the SVG component, animation flag, validity flag, and parameters.
+ */
+export function getSVGComponent(element: t.JSXElement): GetSVGComponent {
+  const { openingElement, children } = element
+  const params = (propertyManager.get() ?? {}) as Record<string, unknown>
+  let isValid = false
+  let isAnimated = false
+  let hasErrors = false
+  let component: SVGComponentProps = { children: [], isMotion: false, props: {}, tag: 'svg' }
+  let errors: SVGErrors | undefined
+
+  if (!isEmpty(openingElement)) {
+    const svgProps = getProperties(openingElement.attributes, params)
+    const tag = getSVGTagName(openingElement)
+
+    // Check if the attribute is 'xmlns' and its value is 'http://www.w3.org/2000/svg'
+    isValid = svgProps.xmlns === 'http://www.w3.org/2000/svg' && tag.isValid
+
+    if (svgProps.xmlns !== 'http://www.w3.org/2000/svg') {
+      hasErrors = true
+      errors = {
+        message: 'Invalid xmlns attribute',
+        location: { start: openingElement.loc?.start, end: openingElement.loc?.end },
+      }
+    } else if (!tag.isValid || tag.name === 'Fragment' || isEmpty(tag.name)) {
+      hasErrors = true
+      errors = { message: `Invalid SVG tag: ${tag.name}`, location: tag.location }
+    } else if (children.length > 0) {
+      const child = getChildAttributes(children)
+
+      isAnimated = tag.isMotion || child.isMotion
+      hasErrors = child.hasErrors
+      errors = child.errors
+      component = {
+        tag: tag.name,
+        props: svgProps,
+        isMotion: tag.isMotion,
+        children: child.children,
+      }
+    }
+  }
+
+  return {
+    component,
+    isAnimated,
+    isValid,
+    params,
+    hasErrors,
+    errors,
+  }
+}

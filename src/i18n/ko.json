@@ -1,0 +1,8 @@
+{
+  "extensionTitle": "SVG 내보내기 보기",
+  "iconExtractionInProgress": "아이콘 추출 중...",
+  "noIconsFound": "아이콘을 찾을 수 없습니다",
+  "noFileSelected": "선택된 파일이 없습니다",
+  "searchMinChars": "검색하려면 최소 3자를 입력하십시오...",
+  "noExistedFile": "파일 {0}이(가) 존재하지 않습니다."
+}

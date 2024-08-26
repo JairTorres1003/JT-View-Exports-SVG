@@ -1,8 +1,8 @@
 {
-  "panelTitle": "Ver Exportaciones SVG",
-  "progressTitle": "Extrayendo exportaciones SVG...",
-  "NoIconsFound": "No se encontraron iconos",
-  "NoFileSelected": "Ningún archivo seleccionado",
-  "PleaseSearch": "Por favor, ingrese al menos 3 caracteres para buscar...",
-  "NoExistedFile": "El archivo {0} no existe."
+  "extensionTitle": "Ver Exportaciones SVG",
+  "iconExtractionInProgress": "Extracción de iconos en progreso...",
+  "noIconsFound": "No se encontraron iconos",
+  "noFileSelected": "Ningún archivo seleccionado",
+  "searchMinChars": "Por favor, ingrese al menos 3 caracteres para buscar...",
+  "noExistedFile": "El archivo {0} no existe."
 }

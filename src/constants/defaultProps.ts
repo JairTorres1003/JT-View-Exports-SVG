@@ -1,4 +1,4 @@
-import { type SVGDefaultProps } from '../interfaces/misc'
+import { type SVGDefaultProps } from '@/interfaces/ViewExportsSVG'
 
 /**
  * Default properties for SVG components.
