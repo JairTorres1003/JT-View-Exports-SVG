@@ -1,7 +1,7 @@
 // Place your settings in this file to overwrite default and user settings.
 {
   "files.exclude": {
-    "out": false // set this to true to hide the "out" folder with the compiled JS files
+    "out": false // set this to true to exclude "out" folder from the explorer
   },
   "search.exclude": {
     "out": true // set this to false to include "out" folder in search results
@@ -47,54 +47,6 @@
   },
   "files.trimTrailingWhitespace": true,
   "files.insertFinalNewline": true,
-  "[javascript]": {
-    "editor.tabSize": 2,
-    "editor.formatOnSave": true,
-    "editor.defaultFormatter": "esbenp.prettier-vscode",
-    "editor.codeActionsOnSave": {
-      "source.fixAll": "always"
-    }
-  },
-  "[javascriptreact]": {
-    "editor.tabSize": 2,
-    "editor.formatOnSave": true,
-    "editor.defaultFormatter": "esbenp.prettier-vscode",
-    "editor.codeActionsOnSave": {
-      "source.fixAll": "always"
-    }
-  },
-  "[typescript]": {
-    "editor.tabSize": 2,
-    "editor.formatOnSave": true,
-    "editor.defaultFormatter": "esbenp.prettier-vscode",
-    "editor.codeActionsOnSave": {
-      "source.fixAll": "always"
-    }
-  },
-  "[typescriptreact]": {
-    "editor.tabSize": 2,
-    "editor.formatOnSave": true,
-    "editor.defaultFormatter": "esbenp.prettier-vscode",
-    "editor.codeActionsOnSave": {
-      "source.fixAll": "always"
-    }
-  },
-  "[markdown]": {
-    "editor.tabSize": 2,
-    "editor.formatOnSave": true,
-    "editor.defaultFormatter": "esbenp.prettier-vscode",
-    "editor.codeActionsOnSave": {
-      "source.fixAll": "always"
-    }
-  },
-  "[mdx]": {
-    "editor.tabSize": 2,
-    "editor.formatOnSave": true,
-    "editor.defaultFormatter": "esbenp.prettier-vscode",
-    "editor.codeActionsOnSave": {
-      "source.fixAll": "always"
-    }
-  },
   "terminal.integrated.profiles.osx": {
     "bash": null,
     "zsh": {
@@ -113,6 +65,5 @@
     ".husky/**": true,
     ".vscode/settings.json": true,
     ".vscode/extensions.json": true
-  },
-  "JT-View-Exports-SVG.assetsPath": ["webview-ui/src/icons/index.tsx"]
+  }
 }
