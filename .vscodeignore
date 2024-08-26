@@ -3,6 +3,7 @@
 
 # Ignore test files
 .vscode-test/**
+.temp
 out/test/**
 out/utilities/saveResponseFiles.js
 

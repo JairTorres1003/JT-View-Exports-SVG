@@ -11,39 +11,29 @@ const CONFIG_STATES = {
   ALWAYS_MULTILINE: 'always-multiline',
   IGNORED: 'ignored',
 }
+
 /** @type {import('eslint').Linter.Config}*/
 module.exports = {
   root: true,
   parser: '@typescript-eslint/parser',
-  env: { browser: true, es2021: true, node: true },
+  parserOptions: {
+    ecmaVersion: 'latest',
+    sourceType: 'module',
+  },
+  plugins: ['@typescript-eslint', 'prettier'],
   extends: [
+    'eslint:recommended',
     'plugin:@typescript-eslint/recommended',
     'plugin:prettier/recommended',
-    'eslint:recommended',
     'prettier',
     'standard-with-typescript',
   ],
-  overrides: [
-    {
-      env: { node: true },
-      files: ['.eslintrc.{js,cjs}'],
-      parserOptions: { sourceType: 'script' },
-    },
-  ],
-  parserOptions: { ecmaVersion: 'latest', sourceType: 'module' },
-  plugins: ['prettier'],
-  ignorePatterns: ['node_modules', 'out', 'webview-ui'],
   rules: {
     'prettier/prettier': [STATE.ERROR, { endOfLine: 'auto' }],
-    'no-unused-vars': STATE.WARN,
-    'no-const-assign': STATE.ERROR,
     'spaced-comment': [STATE.ERROR, CONFIG_STATES.ALWAYS],
     'multiline-ternary': [STATE.OFF, CONFIG_STATES.ALWAYS_MULTILINE],
-    '@typescript-eslint/no-misused-promises': STATE.OFF,
     '@typescript-eslint/space-before-function-paren': STATE.OFF,
-    '@typescript-eslint/explicit-function-return-type': STATE.WARN,
     '@typescript-eslint/indent': STATE.OFF,
-    '@typescript-eslint/prefer-optional-chain': STATE.OFF,
     'no-console': [STATE.ERROR, { allow: ['warn', 'error', 'info'] }],
     'import/order': [
       STATE.ERROR,
@@ -73,12 +63,5 @@ module.exports = {
       },
     ],
   },
-  ignorePatterns: [
-    '**/node_modules/**',
-    '**/build/**',
-    '**/out/**',
-    '**/*.vsix/**',
-    '.eslintrc.cjs',
-    'webview-ui',
-  ],
+  ignorePatterns: ['out', 'dist', '**/*.d.ts', 'client'],
 }

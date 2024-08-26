@@ -11,7 +11,8 @@
 /out
 /dist
 .vscode-test/
-/test/responseFile.json
+src/test/.temp
+
 
 # Production
 /build
@@ -20,10 +21,7 @@
 # Miscellaneous
 .DS_Store
 .env
-.env.local
-.env.development.local
-.env.test.local
-.env.production.local
+.env*.local
 
 # Logs
 npm-debug.log*
