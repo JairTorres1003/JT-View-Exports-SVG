@@ -1,0 +1,20 @@
+{
+  "recommendations": [
+    "dbaeumer.vscode-eslint",
+    "dsznajder.es7-react-js-snippets",
+    "esbenp.prettier-vscode",
+    "JairTorres1003.jt-view-exports-svg",
+    "kisstkondoros.vscode-gutter-preview",
+    "mattpocock.ts-error-translator",
+    "meganrogge.template-string-converter",
+    "MS-CEINTL.vscode-language-pack-es",
+    "quicktype.quicktype",
+    "rvest.vs-code-prettier-eslint",
+    "streetsidesoftware.code-spell-checker-spanish",
+    "streetsidesoftware.code-spell-checker",
+    "usernamehw.errorlens",
+    "WallabyJs.console-ninja",
+    "wix.vscode-import-cost",
+    "YoavBls.pretty-ts-errorsn"
+  ]
+}
