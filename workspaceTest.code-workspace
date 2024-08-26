@@ -1,0 +1,10 @@
+{
+  "folders": [{ "path": "./src/test", "name": "test" }],
+  "settings": {
+    "JT-View-Exports-SVG.lastScanDate": "August 18, 2024 at 14:26:33",
+    "JT-View-Exports-SVG.assetsPath": [
+      "assets/test-1.js",
+      "assets/test-2.tsx"
+    ]
+  },
+}

@@ -45,7 +45,7 @@ export async function extractSVGComponent(
 
     try {
       if (!isEmpty(node)) {
-        const analysis = analyzeExportType(node, parameters)
+        const analysis = analyzeExportType(node, file, parameters)
 
         if (!isEmpty(analysis)) {
           const { isValid, ...component } = getSVGComponent(analysis, file)

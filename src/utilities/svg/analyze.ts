@@ -6,6 +6,7 @@ import { getPropertyValues, propertyManager } from '../properties'
 import { getChildFragments } from './children'
 
 import { REST_PROPS_KEY } from '@/constants/misc'
+import { type SVGFile } from '@/interfaces/ViewExportsSVG'
 
 /**
  * Analyzes the parameters of a node and performs certain actions based on the parameter type.
@@ -36,13 +37,14 @@ export function getNodeParams(params: Array<t.Identifier | t.Pattern | t.RestEle
  */
 export function analyzeExportType(
   node: t.FunctionDeclaration | t.ArrowFunctionExpression | t.Expression,
+  file: SVGFile,
   params?: Record<string, unknown>
 ): t.JSXElement | undefined {
   if (t.isArrowFunctionExpression(node) || t.isFunctionDeclaration(node)) {
     let element: t.JSXElement | undefined
 
     if (t.isJSXElement(node.body) || t.isJSXFragment(node.body)) {
-      element = getChildFragments([node.body])
+      element = getChildFragments([node.body], file)
     } else if (t.isBlockStatement(node.body)) {
       const body = [...node.body.body].reverse()
       const returnStatement = body.find((bd) => t.isReturnStatement(bd))
@@ -51,7 +53,7 @@ export function analyzeExportType(
         !isEmpty(returnStatement) &&
         (t.isJSXElement(returnStatement.argument) || t.isJSXFragment(returnStatement.argument))
       ) {
-        element = getChildFragments([returnStatement.argument])
+        element = getChildFragments([returnStatement.argument], file)
       }
     }
 
