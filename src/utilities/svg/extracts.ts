@@ -48,7 +48,7 @@ export async function extractSVGComponent(
         const analysis = analyzeExportType(node, parameters)
 
         if (!isEmpty(analysis)) {
-          const { isValid, ...component } = getSVGComponent(analysis)
+          const { isValid, ...component } = getSVGComponent(analysis, file)
           const result = {
             ...component,
             name,
@@ -186,6 +186,7 @@ export async function extractSVGExports(file: SVGFile): Promise<ExtractSVGExport
 /**
  * Extracts the icon component from the given icon component.
  * @param component - The icon component as a string.
+ * @param location - The location of the icon component.
  * @param params - The parameters for the icon component.
  * @returns A promise that resolves to an object containing the extracted component information.
  */
@@ -207,7 +208,7 @@ export async function extractIconComponent(
         const { node } = path
 
         if (!isEmpty(node.openingElement)) {
-          tag = getTagName(node.openingElement)
+          tag = getTagName(node.openingElement, location.file)
           props = getProperties(node.openingElement.attributes, params)
 
           if (!tag.isValid) {

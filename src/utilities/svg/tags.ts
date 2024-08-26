@@ -5,16 +5,18 @@ import { isEmpty } from '../misc'
 
 import { SVG_TAGS } from '@/constants/svgTags'
 import { type SVGTagName, type GetSVGTagName, type GetTagName } from '@/interfaces/svg/tags'
+import { type SVGLocation, type SVGFile } from '@/interfaces/ViewExportsSVG'
 
 /**
  * Retrieves the tag name from a JSXOpeningElement and provides additional information.
  * @param openingElement The JSXOpeningElement to extract the tag name from.
  * @returns An object containing the tag name, motion flag, location, and validity flag.
  */
-export function getTagName(openingElement: t.JSXOpeningElement): GetTagName {
-  const location = {
+export function getTagName(openingElement: t.JSXOpeningElement, file: SVGFile): GetTagName {
+  const location: SVGLocation = {
     start: openingElement.loc?.start,
     end: openingElement.loc?.end,
+    file,
   }
   let name: GetTagName['name'] = ''
   let isMotion: boolean = false
@@ -40,8 +42,8 @@ export function getTagName(openingElement: t.JSXOpeningElement): GetTagName {
  * @param openingElement The JSX opening element.
  * @returns An object containing the tag name, its camel-cased name, and a flag indicating its validity.
  */
-export function getSVGTagName(openingElement: t.JSXOpeningElement): GetSVGTagName {
-  const tag = getTagName(openingElement)
+export function getSVGTagName(openingElement: t.JSXOpeningElement, file: SVGFile): GetSVGTagName {
+  const tag = getTagName(openingElement, file)
   const name = SVG_TAGS[camelCase(tag.name) as SVGTagName]
 
   return {
