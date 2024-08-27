@@ -1,16 +1,15 @@
 import * as t from '@babel/types'
 import { camelCase } from 'lodash'
 
+import { DefaultIconProperties } from '../config/DefaultIconProperties'
 import { isEmpty } from '../misc'
 
 import { getBinaryExpression } from './binaryExpression'
 import { getLogicalExpression } from './logicalExpression'
 import { getUnaryExpression } from './unaryExpression'
 
-import { defaultProps } from '@/constants/defaultProps'
 import { REST_PROPS_KEY } from '@/constants/misc'
 import { type PropertyValue } from '@/interfaces/properties/propertyValues'
-import { type SVGDefaultProps } from '@/interfaces/ViewExportsSVG'
 
 /**
  * Retrieves the property values based on the provided value and properties.
@@ -26,6 +25,9 @@ export function getPropertyValues(
     return
   }
 
+  const config = new DefaultIconProperties()
+  const defaultProps = config.getAllProperties()
+
   const restProps = (properties[REST_PROPS_KEY] ?? {}) as Record<string, unknown>
   let valueA: unknown | undefined
   let valueB: unknown | undefined
@@ -38,11 +40,7 @@ export function getPropertyValues(
     case 'DecimalLiteral':
       return value.value
     case 'Identifier':
-      return (
-        properties[value.name] ??
-        restProps[value.name] ??
-        defaultProps[value.name as keyof SVGDefaultProps]
-      )
+      return properties[value.name] ?? restProps[value.name] ?? defaultProps[value.name]
     case 'JSXExpressionContainer':
       return getPropertyValues(value.expression, properties)
     case 'AssignmentPattern':

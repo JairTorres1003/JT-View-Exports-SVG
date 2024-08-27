@@ -83,6 +83,27 @@
             "type": "string",
             "default": "",
             "description": "The date of the last scan of the workspace for SVG icons."
+          },
+          "JT-View-Exports-SVG.defaultIconProperties": {
+            "type": "object",
+            "description": "Default properties to apply to SVG icons when they do not have a property defined or when the extension does not find it.",
+            "default": {
+              "className": "",
+              "color": "#0a0a0a",
+              "fill": "#0a0a0a",
+              "height": "28",
+              "width": "28",
+              "size": "28",
+              "state": "false",
+              "stroke": "#0a0a0a",
+              "strokeColor": "#0a0a0a",
+              "strokeWidth": "0.2",
+              "style": "{}",
+              "sx": "{}"
+            },
+            "additionalProperties": {
+              "type": "string"
+            }
           }
         }
       }

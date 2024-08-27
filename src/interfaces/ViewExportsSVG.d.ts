@@ -119,21 +119,6 @@ export interface ExtractSVGExports {
   svg: Pick<ViewExportSVG, 'exportComponents' | 'noExportComponents'>
 }
 
-export interface SVGDefaultProps {
-  className: string
-  color: string
-  fill: string
-  height: number
-  size: number
-  state: boolean
-  stroke: string
-  strokeColor: string
-  strokeWidth: number
-  style?: CSSStyleDeclaration | {}
-  sx?: CSSStyleDeclaration | {}
-  width: number
-}
-
 export interface SVGPlayground {
   /**
    * The name of the SVG component.
