@@ -1,4 +1,4 @@
-import { Box, IconButton, TextField, Typography } from '@mui/material'
+import { Box, IconButton, TextField, Tooltip, Typography } from '@mui/material'
 import { useTranslation } from 'react-i18next'
 
 import { BoxSearchBar } from './index.style'
@@ -31,9 +31,11 @@ export const SearchBar = () => {
         slotProps={{
           input: {
             endAdornment: (
-              <IconButton onClick={handleClear} title={t('clear')} aria-label={t('clear')}>
-                <IconClose size={16} />
-              </IconButton>
+              <Tooltip title={t('clear')}>
+                <IconButton onClick={handleClear}>
+                  <IconClose size={16} />
+                </IconButton>
+              </Tooltip>
             ),
           },
         }}

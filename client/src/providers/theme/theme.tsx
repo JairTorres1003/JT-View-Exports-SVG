@@ -1,6 +1,6 @@
 import { vscode } from '@/services/vscode'
 import { SVGPostMessage, SVGReceiveMessage } from '@api/enums/ViewExportsSVG'
-import { createTheme, type Theme } from '@mui/material'
+import { createTheme, inputBaseClasses, tooltipClasses, type Theme } from '@mui/material'
 import { useEffect, useMemo } from 'react'
 import { useDispatch } from 'react-redux'
 import { useSelector } from '../redux/store'
@@ -25,18 +25,9 @@ export const useCustomTheme = (): { theme: Theme } => {
           MuiIconButton: {
             defaultProps: { size: 'small' },
           },
-          MuiTextField: {
-            defaultProps: { size: 'small' },
+          MuiInputBase: {
             styleOverrides: {
-              root: {
-                '& .MuiInputBase-root': {
-                  backgroundColor: 'var(--vscode-input-background)',
-                  '&.Mui-focused fieldset': { borderWidth: 1 },
-                  '&:not(:hover):not(.Mui-focused) fieldset': {
-                    borderColor: 'var(--vscode-input-background)',
-                  },
-                },
-              },
+              root: { fontFamily: styles.fontFamily?.toString() },
             },
           },
           MuiInputLabel: {
@@ -44,9 +35,69 @@ export const useCustomTheme = (): { theme: Theme } => {
               root: { fontFamily: styles.fontFamily?.toString() },
             },
           },
-          MuiInputBase: {
+          MuiTextField: {
+            defaultProps: { size: 'small' },
             styleOverrides: {
-              root: { fontFamily: styles.fontFamily?.toString() },
+              root: {
+                [`& .${inputBaseClasses.root}`]: {
+                  backgroundColor: 'var(--vscode-input-background)',
+                  [`&.${inputBaseClasses.focused}`]: { borderWidth: 1 },
+                  [`&:not(:hover):not(${inputBaseClasses.focused}) fieldset`]: {
+                    borderColor: 'var(--vscode-input-background)',
+                  },
+                },
+              },
+            },
+          },
+          MuiTooltip: {
+            defaultProps: { arrow: true, disableInteractive: true },
+            styleOverrides: {
+              tooltip: {
+                backgroundColor: 'var(--vscode-editorHoverWidget-background, #616161eb)',
+                border: '1px solid var(--vscode-editorHoverWidget-border)',
+                color: 'var(--vscode-editorHoverWidget-foreground, #ffffff)',
+                boxShadow: '0 2px 8px var(--vscode-widget-shadow)',
+                padding: '2px 8px',
+              },
+              arrow: {
+                top: 'initial',
+                color: 'var(--vscode-editorHoverWidget-background, #616161eb)',
+                '&:before': { border: '1px solid var(--vscode-editorHoverWidget-border)' },
+              },
+              popper: {
+                [`&[data-popper-placement*="bottom"] div.${tooltipClasses.tooltip}`]: {
+                  marginTop: '6px',
+                  [`& .${tooltipClasses.arrow}`]: {
+                    marginTop: '-4.6px',
+                    width: '6.6px',
+                    height: '4.6px',
+                  },
+                },
+                [`&[data-popper-placement*="top"] div.${tooltipClasses.tooltip}`]: {
+                  marginBottom: '6px',
+                  [`& .${tooltipClasses.arrow}`]: {
+                    marginBottom: '-4.6px',
+                    width: '6.6px',
+                    height: '4.6px',
+                  },
+                },
+                [`&[data-popper-placement*="right"] div.${tooltipClasses.tooltip}`]: {
+                  marginLeft: '6px',
+                  [`& .${tooltipClasses.arrow}`]: {
+                    marginLeft: '-4.6px',
+                    width: '4.6px',
+                    height: '6.6px',
+                  },
+                },
+                [`&[data-popper-placement*="left"] div.${tooltipClasses.tooltip}`]: {
+                  marginRight: '6px',
+                  [`& .${tooltipClasses.arrow}`]: {
+                    marginRight: '-4.6px',
+                    width: '4.6px',
+                    height: '6.6px',
+                  },
+                },
+              },
             },
           },
         },
@@ -60,6 +111,9 @@ export const useCustomTheme = (): { theme: Theme } => {
             letterSpacing: styles.letterSpacing?.toString(),
             fontFeatureSettings: styles.fontFeatureSettings?.toString(),
           },
+        },
+        shape: {
+          borderRadius: 3,
         },
       }),
     [styles]
