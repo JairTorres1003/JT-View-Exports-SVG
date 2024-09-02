@@ -149,6 +149,7 @@ export class ViewExportsSVGPanel {
     return {
       icon: getAssetUri('favicon.ico'),
       index: getAssetUri('index.js'),
+      styles: getAssetUri('index.css'),
     }
   }
 
@@ -170,10 +171,11 @@ export class ViewExportsSVGPanel {
         <head>
           <meta charset="UTF-8" />
           <link rel="icon" type="image/svg+xml" href="${assets.icon}" />
-          <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+          <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no" />
+          <link href="${assets.styles}" rel="stylesheet" />
           <title>${i18n.extensionTitle}</title>
-          </head>
-          <body>
+        </head>
+        <body>
           <div id="root"></div>
           <noscript>You need to enable JavaScript to run this app.</noscript>
           <script type="module" nonce="${nonce}" src="${assets.index}"></script>
