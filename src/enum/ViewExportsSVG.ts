@@ -9,7 +9,7 @@ export enum SVGPostMessage {
   SendLastScanDate = 'send-last-scan-date', // lastScanDate
   SendSVGComponents = 'send-svg-components', // svgComponents
   SendSVGError = 'send-svg-error', // svgError
-  SendSVGFilter = 'send-svg-filter', // filteredSvgComponents
+  SendSVGFilteredComponents = 'send-svg-filter', // filteredSvgComponents
   SendSVGPlayground = 'send-svg-playground', // customSvgComponent
   SendPlaygroundError = 'send-playground-error', // playgroundError
   SendTheme = 'send-theme', // currentTheme

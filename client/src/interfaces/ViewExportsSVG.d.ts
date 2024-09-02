@@ -18,7 +18,7 @@ export interface MessageHandlersView {
   [SVGPostMessage.SendLastScanDate]?: (data: string) => void
   [SVGPostMessage.SendSVGComponents]?: (data: ViewExportSVG[]) => void
   [SVGPostMessage.SendSVGError]?: (data: SVGErrors) => void
-  [SVGPostMessage.SendSVGFilter]?: (data: ViewExportSVG[]) => void
+  [SVGPostMessage.SendSVGFilteredComponents]?: (data: ViewExportSVG[]) => void
   [SVGPostMessage.SendSVGPlayground]?: (data: SVGComponent) => void
   [SVGPostMessage.SendPlaygroundError]?: (data: SVGErrors) => void
   [SVGPostMessage.SendTheme]?: (data: ThemeMode) => void
@@ -33,7 +33,7 @@ export interface FuncOnMessage {
   (type: SVGPostMessage.SendLastScanDate, handler: (data: string) => void): void
   (type: SVGPostMessage.SendSVGComponents, handler: (data: ViewExportSVG[]) => void): void
   (type: SVGPostMessage.SendSVGError, handler: (data: SVGErrors) => void): void
-  (type: SVGPostMessage.SendSVGFilter, handler: (data: ViewExportSVG[]) => void): void
+  (type: SVGPostMessage.SendSVGFilteredComponents, handler: (data: ViewExportSVG[]) => void): void
   (type: SVGPostMessage.SendSVGPlayground, handler: (data: SVGComponent) => void): void
   (type: SVGPostMessage.SendPlaygroundError, handler: (data: SVGErrors) => void): void
   (type: SVGPostMessage.SendTheme, handler: (data: ThemeMode) => void): void

@@ -28,7 +28,7 @@ export type PostMessage =
   | { type: SVGPostMessage.SendLastScanDate; data: string }
   | { type: SVGPostMessage.SendSVGComponents; data: ViewExportSVG[] }
   | { type: SVGPostMessage.SendSVGError; data: SVGErrors }
-  | { type: SVGPostMessage.SendSVGFilter; data: ViewExportSVG[] }
+  | { type: SVGPostMessage.SendSVGFilteredComponents; data: ViewExportSVG[] }
   | { type: SVGPostMessage.SendSVGPlayground; data: SVGComponent }
   | { type: SVGPostMessage.SendPlaygroundError; data: SVGErrors }
   | { type: SVGPostMessage.SendTheme; data: ThemeMode }
@@ -66,7 +66,7 @@ export interface FuncPostMessage {
    * Sends the filtered SVG components to the webview.
    * @param data - The filtered SVG components.
    */
-  (type: SVGPostMessage.SendSVGFilter, data: ViewExportSVG[]): void
+  (type: SVGPostMessage.SendSVGFilteredComponents, data: ViewExportSVG[]): void
   /**
    * Sends the custom SVG component to the webview.
    * @param data - The custom SVG component.

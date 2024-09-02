@@ -351,7 +351,7 @@ export class ViewExportsSVGPanel {
     const filtered = filteredExports(this.viewExportSVG, query)
 
     if (Array.isArray(filtered)) {
-      this._postMessage(SVGPostMessage.SendSVGFilter, filtered)
+      this._postMessage(SVGPostMessage.SendSVGFilteredComponents, filtered)
     } else {
       this._postMessage(SVGPostMessage.SendSVGError, filtered)
     }
