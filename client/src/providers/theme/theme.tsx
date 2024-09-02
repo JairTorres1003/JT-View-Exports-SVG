@@ -41,9 +41,16 @@ export const useCustomTheme = (): { theme: Theme } => {
               root: {
                 [`& .${inputBaseClasses.root}`]: {
                   backgroundColor: 'var(--vscode-input-background)',
-                  [`&.${inputBaseClasses.focused}`]: { borderWidth: 1 },
-                  [`&:not(:hover):not(${inputBaseClasses.focused}) fieldset`]: {
-                    borderColor: 'var(--vscode-input-background)',
+                  fieldset: { border: '1px solid var(--vscode-input-border, transparent)' },
+                  [`&.${inputBaseClasses.focused} fieldset`]: {
+                    borderWidth: 1,
+                    borderColor: 'var(--vscode-focusBorder, var(--vscode-input-border))',
+                  },
+                  [`&:hover:not(.${inputBaseClasses.focused}) fieldset`]: {
+                    borderColor: 'var(--vscode-input-border, transparent)',
+                  },
+                  [`&:not(:hover):not(.${inputBaseClasses.focused}) fieldset`]: {
+                    borderColor: 'var(--vscode-input-border, transparent)',
                   },
                 },
               },

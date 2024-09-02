@@ -10,6 +10,11 @@ html:root {
   --JT-SVG-palette-action-active: var(--vscode-icon-foreground);
 }
 
+body {
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.02);
+}
+
 *,
 *:before,
 *:after {
