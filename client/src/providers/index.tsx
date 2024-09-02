@@ -1,9 +1,8 @@
 import { ThemeProvider } from '@mui/material'
-import { useMemo } from 'react'
 import { Provider } from 'react-redux'
 
 import { store } from './redux/store'
-import { theme } from './theme/theme'
+import { useCustomTheme } from './theme/theme'
 
 import { type ProviderProps } from '@/interfaces/misc'
 
@@ -24,9 +23,9 @@ const ReduxProvider = ({ children }: ProviderProps): React.JSX.Element => {
  * @returns The JSX element representing the MuiThemeProvider.
  */
 const MuiThemeProvider = ({ children }: ProviderProps): React.JSX.Element => {
-  const currentTheme = useMemo(theme, [])
+  const { theme } = useCustomTheme()
 
-  return <ThemeProvider theme={currentTheme}>{children}</ThemeProvider>
+  return <ThemeProvider theme={theme}>{children}</ThemeProvider>
 }
 
 /**

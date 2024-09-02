@@ -7,7 +7,7 @@ import {
   ViewExportSVG,
 } from '@api/interfaces/ViewExportsSVG'
 import { AssetPath } from '@api/interfaces/views/ViewExportsSVGPanel'
-import { ThemeMode } from '@api/interfaces/vscode'
+import { ThemeMode, VsCodeStyles } from '@api/interfaces/vscode'
 
 /**
  * The message to receive from the webview.
@@ -22,6 +22,7 @@ export interface MessageHandlersView {
   [SVGPostMessage.SendSVGPlayground]?: (data: SVGComponent) => void
   [SVGPostMessage.SendPlaygroundError]?: (data: SVGErrors) => void
   [SVGPostMessage.SendTheme]?: (data: ThemeMode) => void
+  [SVGPostMessage.SendVsCodeStyles]?: (data: VsCodeStyles) => void
 }
 
 /**
@@ -37,6 +38,7 @@ export interface FuncOnMessage {
   (type: SVGPostMessage.SendSVGPlayground, handler: (data: SVGComponent) => void): void
   (type: SVGPostMessage.SendPlaygroundError, handler: (data: SVGErrors) => void): void
   (type: SVGPostMessage.SendTheme, handler: (data: ThemeMode) => void): void
+  (type: SVGPostMessage.SendVsCodeStyles, handler: (data: VsCodeStyles) => void): void
 }
 
 /**
@@ -50,6 +52,7 @@ export interface FuncPostMessage {
   (type: SVGReceiveMessage.GetSVGComponents): void
   (type: SVGReceiveMessage.GetTheme): void
   (type: SVGReceiveMessage.GetViewAssets, data: SVGFile[]): void
+  (type: SVGReceiveMessage.GetVsCodeStyles): void
   (type: SVGReceiveMessage.OpenFile, data: OpenFile): void
   (type: SVGReceiveMessage.PlaygroundSVGComponents, data: SVGPlayground): void
   (type: SVGReceiveMessage.RemoveAssets, data: SVGFile[]): void

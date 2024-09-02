@@ -28,7 +28,13 @@ import { getNonce } from '@/utilities/files/nonce'
 import { getUnknownError, isEmpty } from '@/utilities/misc'
 import { filteredExports } from '@/utilities/svg/filtered'
 import { playground } from '@/utilities/svg/playground'
-import { getCurrentTheme, getTranslations, getUri, svgFileToUri } from '@/utilities/vscode'
+import {
+  getCurrentTheme,
+  getStyles,
+  getTranslations,
+  getUri,
+  svgFileToUri,
+} from '@/utilities/vscode'
 
 export class ViewExportsSVGPanel {
   public static currentPanel: ViewExportsSVGPanel | undefined
@@ -215,6 +221,7 @@ export class ViewExportsSVGPanel {
         [SVGReceiveMessage.RemoveAssets]: this._removeAssets.bind(this),
         [SVGReceiveMessage.ScanWorkspace]: this._scanWorkspace.bind(this),
         [SVGReceiveMessage.SearchSVGComponents]: this._searchSVGComponents.bind(this),
+        [SVGReceiveMessage.GetVsCodeStyles]: this._vscodeStyles.bind(this),
       }
 
       const listener = (event: ReceiveMessage): void => {
@@ -357,5 +364,13 @@ export class ViewExportsSVGPanel {
     } else {
       this._postMessage(SVGPostMessage.SendSVGError, filtered)
     }
+  }
+
+  /**
+   * Retrieves the VS Code styles and sends them as a post message.
+   */
+  private _vscodeStyles(): void {
+    const config = getStyles()
+    this._postMessage(SVGPostMessage.SendVsCodeStyles, config)
   }
 }

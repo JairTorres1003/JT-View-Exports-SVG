@@ -2,9 +2,15 @@ import { createSlice } from '@reduxjs/toolkit'
 
 import { type VsCodeReducers, type VsCodeState } from '@/interfaces/redux/featureVsCode'
 
-const initialState: VsCodeState = {}
+const initialState: VsCodeState = {
+  styles: {},
+}
 
-const reducers: VsCodeReducers = {}
+const reducers: VsCodeReducers = {
+  setVsCodeStyles: (state, { payload }) => {
+    state.styles = payload
+  },
+}
 
 /**
  * Redux slice for managing VsCode state.
@@ -15,6 +21,6 @@ export const VsCodeSlice = createSlice({
   reducers,
 })
 
-export const {} = VsCodeSlice.actions
+export const { setVsCodeStyles } = VsCodeSlice.actions
 
 export const VsCodeReducer = VsCodeSlice.reducer

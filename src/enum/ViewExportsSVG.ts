@@ -13,7 +13,7 @@ export enum SVGPostMessage {
   SendSVGPlayground = 'send-svg-playground', // customSvgComponent
   SendPlaygroundError = 'send-playground-error', // playgroundError
   SendTheme = 'send-theme', // currentTheme
-  // SendVsCodeConfiguration = 'send-vscode-configuration', // configurationVsCode
+  SendVsCodeStyles = 'send-vscode-styles', // vscodeStyles
 }
 
 export enum SVGReceiveMessage {
@@ -24,7 +24,7 @@ export enum SVGReceiveMessage {
   GetSVGComponents = 'get-svg-components', // requestSvgComponents
   GetTheme = 'get-theme', // getCurrentTheme
   GetViewAssets = 'get-view-assets', // viewAssets
-  // GetVsCodeConfiguration = 'get-vscode-configuration', // getConfigurationVsCode
+  GetVsCodeStyles = 'get-vscode-styles', // getStyles
   OpenFile = 'open-file', // openFile
   PlaygroundSVGComponents = 'playground-svg-components', // playgroundSvgComponents
   RemoveAssets = 'remove-assets', // removeAsset

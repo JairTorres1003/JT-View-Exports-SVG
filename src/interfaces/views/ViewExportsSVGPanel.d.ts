@@ -7,7 +7,7 @@ import {
   SVGPlayground,
   ViewExportSVG,
 } from '../ViewExportsSVG'
-import { ThemeMode } from '../vscode'
+import { ThemeMode, VsCodeStyles } from '../vscode'
 
 export interface OpenFile {
   file: SVGFile
@@ -32,6 +32,7 @@ export type PostMessage =
   | { type: SVGPostMessage.SendSVGPlayground; data: SVGComponent }
   | { type: SVGPostMessage.SendPlaygroundError; data: SVGErrors }
   | { type: SVGPostMessage.SendTheme; data: ThemeMode }
+  | { type: SVGPostMessage.SendVsCodeStyles; data: VsCodeStyles }
 
 /**
  * The message to send to the webview.
@@ -82,6 +83,11 @@ export interface FuncPostMessage {
    * @param data - The theme mode.
    */
   (type: SVGPostMessage.SendTheme, data: ThemeMode): void
+  /**
+   * Sends the Visual Studio Code styles to the webview.
+   * @param data - The Visual Studio Code styles.
+   */
+  (type: SVGPostMessage.SendVsCodeStyles, data: VsCodeStyles): void
 }
 
 /**
@@ -159,6 +165,10 @@ export interface HandlerReceiveMessage {
    * @param query - The search query.
    */
   [SVGReceiveMessage.SearchSVGComponents]: (query: string) => void
+  /**
+   * Gets the Visual Studio Code styles.
+   */
+  [SVGReceiveMessage.GetVsCodeStyles]: () => void
 }
 
 export interface GetWebviewAssets {
