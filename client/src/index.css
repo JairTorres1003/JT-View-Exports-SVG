@@ -13,6 +13,7 @@ html:root {
 body {
   height: 100vh;
   background-color: rgba(0, 0, 0, 0.02);
+  padding: 0 !important;
 }
 
 *,

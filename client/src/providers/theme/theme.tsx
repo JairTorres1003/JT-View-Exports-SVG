@@ -1,11 +1,18 @@
 import { vscode } from '@/services/vscode'
 import { SVGPostMessage, SVGReceiveMessage } from '@api/enums/ViewExportsSVG'
-import { createTheme, inputBaseClasses, tooltipClasses, type Theme } from '@mui/material'
+import {
+  accordionSummaryClasses,
+  createTheme,
+  inputBaseClasses,
+  tooltipClasses,
+  type Theme,
+} from '@mui/material'
 import { useEffect, useMemo } from 'react'
 import { useDispatch } from 'react-redux'
 import { useSelector } from '../redux/store'
 import { setVsCodeStyles } from '../redux/features/VsCodeSlice'
 import { VsCodeStyles } from '@api/interfaces/vscode'
+import { IconForward } from '@/assets/icons/navigation'
 
 /**
  * Returns the current theme based on the VS Code styles.
@@ -22,6 +29,29 @@ export const useCustomTheme = (): { theme: Theme } => {
       createTheme({
         cssVariables: { cssVarPrefix: 'JT-SVG' },
         components: {
+          MuiAccordion: {
+            defaultProps: {
+              disableGutters: true,
+              elevation: 0,
+              square: true,
+              slotProps: { heading: { component: 'div' } },
+            },
+            styleOverrides: {
+              root: {
+                [`& .${accordionSummaryClasses.content}`]: { maxWidth: '100%', overflow: 'hidden' },
+              },
+            },
+          },
+          MuiAccordionSummary: {
+            defaultProps: { expandIcon: <IconForward size={24} /> },
+            styleOverrides: {
+              root: { flexDirection: 'row-reverse', gap: '4px', minHeight: 38 },
+              content: { margin: 0 },
+              expandIconWrapper: {
+                [`&.${accordionSummaryClasses.expanded}`]: { transform: 'rotate(90deg)' },
+              },
+            },
+          },
           MuiIconButton: {
             defaultProps: { size: 'small' },
           },
@@ -40,7 +70,7 @@ export const useCustomTheme = (): { theme: Theme } => {
             styleOverrides: {
               root: {
                 [`& .${inputBaseClasses.root}`]: {
-                  backgroundColor: 'var(--vscode-input-background)',
+                  backgroundColor: 'var(--vscode-input-background, #fff)',
                   fieldset: { border: '1px solid var(--vscode-input-border, transparent)' },
                   [`&.${inputBaseClasses.focused} fieldset`]: {
                     borderWidth: 1,
@@ -57,7 +87,12 @@ export const useCustomTheme = (): { theme: Theme } => {
             },
           },
           MuiTooltip: {
-            defaultProps: { arrow: true, disableInteractive: true },
+            defaultProps: {
+              arrow: true,
+              disableInteractive: true,
+              enterDelay: 500,
+              leaveDelay: 200,
+            },
             styleOverrides: {
               tooltip: {
                 backgroundColor: 'var(--vscode-editorHoverWidget-background, #616161eb)',
