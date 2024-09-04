@@ -77,7 +77,14 @@ export async function processFiles(
 
             if (totalExports > 0) {
               svg.exportComponents.sort((a, b) => a.name.localeCompare(b.name))
-              const result: ViewExportSVG = { ...svg, totalExports, totalNoExports, totalSVG }
+              const result: ViewExportSVG = {
+                ...svg,
+                totalExports,
+                totalNoExports,
+                totalSVG,
+                groupKind: file.absolutePath,
+                labelGroupKind: file.relativePath,
+              }
 
               fileCache.set(file.absolutePath, result, lastModified)
               DeclarationFileCache.set(file.absolutePath, base, lastModified)
