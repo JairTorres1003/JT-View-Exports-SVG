@@ -2,7 +2,7 @@ import * as path from 'path'
 
 import { ProgressLocation, type Uri, window, type ProgressOptions } from 'vscode'
 
-import { DeclarationFileCache, FileModifiedCache } from '../cache'
+import { DeclarationFileCache, SVGFileCache } from '../cache'
 import { AssetsPaths } from '../config'
 import { isEmpty } from '../misc'
 import { extractSVGExports } from '../svg'
@@ -12,9 +12,6 @@ import { getFileTimestamp, pathToSVGFile } from './misc'
 
 import { REGEX_FILE } from '@/constants/regex'
 import { type SVGFile, type ViewExportSVG } from '@/interfaces/ViewExportsSVG'
-
-// Create an instance of FileModifiedCache for caching SvgExport objects
-const fileCache = new FileModifiedCache<ViewExportSVG>()
 
 /**
  * Processes the selected files and extracts SVG exports from them.
@@ -61,7 +58,7 @@ export async function processFiles(
           try {
             const file = await pathToSVGFile(f.fsPath)
             const lastModified = getFileTimestamp(file.absolutePath)
-            const cachedFile = fileCache.get(file.absolutePath, lastModified)
+            const cachedFile = SVGFileCache.get(file.absolutePath, lastModified)
 
             if (cachedFile !== undefined && cachedFile.totalExports > 0) {
               SVGExports.push(cachedFile)
@@ -86,7 +83,7 @@ export async function processFiles(
                 labelGroupKind: file.relativePath,
               }
 
-              fileCache.set(file.absolutePath, result, lastModified)
+              SVGFileCache.set(file.absolutePath, result, lastModified)
               DeclarationFileCache.set(file.absolutePath, base, lastModified)
               SVGExports.push(result)
               SVGFiles.push(file)

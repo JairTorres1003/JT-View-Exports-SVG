@@ -76,6 +76,10 @@ export interface SVGComponent {
    */
   declaration: SVGDeclaration
   /**
+   * Indicates whether the SVG component is exported.
+   */
+  isExported: boolean
+  /**
    * Indicates whether the component is an SVG animation component.
    * It's optional and can be true or false.
    */
@@ -136,10 +140,6 @@ export interface SVGPlayground {
    * The location of the SVG component in the file.
    */
   location: SVGLocation
-  /**
-   * The declaration of the SVG component.
-   */
-  declaration: SVGDeclaration
   /**
    * The SVG component in use and edited.
    * @example

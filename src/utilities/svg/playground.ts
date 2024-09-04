@@ -1,4 +1,4 @@
-import { DeclarationFileCache } from '../cache'
+import { DeclarationFileCache, SVGFileCache } from '../cache'
 import { getFileTimestamp } from '../files'
 import { getUnknownError, isEmpty } from '../misc'
 
@@ -13,15 +13,32 @@ import { type SVGErrors, type SVGComponent, type SVGPlayground } from '@/interfa
  * @returns A promise that resolves to the generated SVG component or an error message.
  */
 export async function playground(icon: SVGPlayground): Promise<SVGComponent | SVGErrors> {
-  const { location, name, declaration: SVGdeclaration, value } = icon
+  const { location, name, value } = icon
 
   try {
     const lastModified = getFileTimestamp(location.file.absolutePath)
     const declarationCache = DeclarationFileCache.get(location.file.absolutePath, lastModified)
+    const componentsCache = SVGFileCache.get(location.file.absolutePath, lastModified)
 
     if (declarationCache?.[name] === undefined) {
       return {
         message: `Declaration named ${name} not found in file ${location.file.absolutePath}`,
+        location,
+      }
+    }
+
+    if (isEmpty(componentsCache)) {
+      return { message: `SVG file ${location.file.absolutePath} not found`, location }
+    }
+
+    const originalComponent = [
+      ...componentsCache.exportComponents,
+      ...componentsCache.noExportComponents,
+    ].find((c) => c.name === name)
+
+    if (originalComponent === undefined) {
+      return {
+        message: `SVG component ${name} not found in file ${location.file.absolutePath}`,
         location,
       }
     }
@@ -44,18 +61,13 @@ export async function playground(icon: SVGPlayground): Promise<SVGComponent | SV
     }
 
     const parameters = { ...params, ...iconComponent.props }
-    const component = await extractSVGComponent(
-      declaration,
-      SVGdeclaration,
-      location.file,
-      parameters
-    )
+    const component = await extractSVGComponent(declaration, location.file, parameters)
 
     if (isEmpty(component)) {
       return { message: `Error extracting SVG component ${name}`, location: {} }
     }
 
-    return component
+    return { ...originalComponent, ...component }
   } catch (error) {
     return { message: getUnknownError(error), location: {} }
   }

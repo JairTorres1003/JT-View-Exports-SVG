@@ -26,16 +26,14 @@ import {
  * Extracts an SVG component from a declaration export.
  *
  * @param declaration - The declaration export to extract the SVG component from.
- * @param SVGdeclaration - The type of SVG export.
  * @param parameters - Optional parameters for the SVG component.
  * @returns A promise that resolves to the extracted SVG component, or undefined if extraction fails.
  */
 export async function extractSVGComponent(
   declaration: DeclarationExport,
-  SVGdeclaration: SVGDeclaration,
   file: SVGFile,
   parameters?: Record<string, unknown>
-): Promise<SVGComponent | undefined> {
+): Promise<Omit<SVGComponent, 'declaration' | 'isExported'> | undefined> {
   if (t.isFunctionDeclaration(declaration) || t.isVariableDeclarator(declaration)) {
     const name = (declaration.id as t.Identifier)?.name ?? ''
     const location = { start: declaration.loc?.start, end: declaration.loc?.end, file }
@@ -48,15 +46,9 @@ export async function extractSVGComponent(
         const analysis = analyzeExportType(node, file, parameters)
 
         if (!isEmpty(analysis)) {
-          const { isValid, ...component } = getSVGComponent(analysis, file)
-          const result = {
-            ...component,
-            name,
-            location,
-            declaration: SVGdeclaration,
-          }
+          const component = getSVGComponent(analysis, file)
 
-          return isValid ? result : undefined
+          return { ...component, name, location }
         }
       }
     } catch (error) {
@@ -82,22 +74,26 @@ export async function extractSVGExports(file: SVGFile): Promise<ExtractSVGExport
 
     /**
      * Handles the extraction of SVG exports.
-     * @param svgResult - The SVG component to be extracted.
      * @param declaration - The declaration export.
+     * @param SVGdeclaration - The type of SVG declaration.
      * @param isExported - A boolean indicating if the SVG component is exported.
+     * @param svgResult - The SVG component to be extracted.
      * @returns A promise that resolves to void.
      */
     const handleExtraction = async (
       declaration: DeclarationExport,
+      SVGdeclaration: SVGDeclaration,
       isExported: boolean,
-      svgResult?: SVGComponent
+      svgResult?: Omit<SVGComponent, 'declaration' | 'isExported'>
     ): Promise<void> => {
       if (!isEmpty(svgResult)) {
+        const result: SVGComponent = { ...svgResult, declaration: SVGdeclaration, isExported }
+
         if (isExported || identifiers.has(svgResult.name)) {
-          exportComponents.push(svgResult)
+          exportComponents.push(result)
           base[svgResult.name] = { declaration, params: svgResult.params }
         } else {
-          noExportComponents.push(svgResult)
+          noExportComponents.push(result)
         }
       }
     }
@@ -107,18 +103,18 @@ export async function extractSVGExports(file: SVGFile): Promise<ExtractSVGExport
      */
     const handlers: HandlersDeclaration = {
       FunctionDeclaration: async (declaration, isExported) => {
-        extractSVGComponent(declaration, SVGDeclaration.Function, file)
+        extractSVGComponent(declaration, file)
           .then(async (result) => {
-            await handleExtraction(declaration, isExported, result)
+            await handleExtraction(declaration, SVGDeclaration.Function, isExported, result)
           })
           .catch(console.error)
       },
       VariableDeclaration: async (declaration, isExported) => {
         for (const d of declaration.declarations) {
           if (t.isIdentifier(d.id)) {
-            extractSVGComponent(d, SVGDeclaration.Variable, file)
+            extractSVGComponent(d, file)
               .then(async (result) => {
-                await handleExtraction(declaration, isExported, result)
+                await handleExtraction(declaration, SVGDeclaration.Variable, isExported, result)
               })
               .catch(console.error)
           }
