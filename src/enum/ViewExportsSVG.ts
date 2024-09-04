@@ -1,4 +1,4 @@
-export enum SVGTypeExport {
+export enum SVGDeclaration {
   Function = 'function',
   Variable = 'variable',
 }

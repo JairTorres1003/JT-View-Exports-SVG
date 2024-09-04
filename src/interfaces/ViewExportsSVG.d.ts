@@ -1,4 +1,4 @@
-import { SVGTypeExport } from '@/enum/ViewExportsSVG'
+import { SVGDeclaration } from '@/enum/ViewExportsSVG'
 
 import { SVGTagName } from './svg/tags'
 import { DeclarationExport } from './svg/extracts'
@@ -72,9 +72,9 @@ export interface SVGComponent {
    */
   location: SVGLocation
   /**
-   * The type of export of the SVG component.
+   * The declaration of the SVG component.
    */
-  typeExport: SVGTypeExport
+  declaration: SVGDeclaration
   /**
    * Indicates whether the component is an SVG animation component.
    * It's optional and can be true or false.
@@ -137,9 +137,9 @@ export interface SVGPlayground {
    */
   location: SVGLocation
   /**
-   * The type of export of the SVG component.
+   * The declaration of the SVG component.
    */
-  typeExport: SVGTypeExport
+  declaration: SVGDeclaration
   /**
    * The SVG component in use and edited.
    * @example

@@ -9,7 +9,7 @@ import { analyzeExportType } from './analyze'
 import { getSVGComponent } from './SVGComponent'
 import { getTagName } from './tags'
 
-import { SVGTypeExport } from '@/enum/ViewExportsSVG'
+import { SVGDeclaration } from '@/enum/ViewExportsSVG'
 import {
   type HandlersDeclaration,
   type DeclarationExport,
@@ -26,13 +26,13 @@ import {
  * Extracts an SVG component from a declaration export.
  *
  * @param declaration - The declaration export to extract the SVG component from.
- * @param typeExport - The type of SVG export.
+ * @param SVGdeclaration - The type of SVG export.
  * @param parameters - Optional parameters for the SVG component.
  * @returns A promise that resolves to the extracted SVG component, or undefined if extraction fails.
  */
 export async function extractSVGComponent(
   declaration: DeclarationExport,
-  typeExport: SVGTypeExport,
+  SVGdeclaration: SVGDeclaration,
   file: SVGFile,
   parameters?: Record<string, unknown>
 ): Promise<SVGComponent | undefined> {
@@ -53,7 +53,7 @@ export async function extractSVGComponent(
             ...component,
             name,
             location,
-            typeExport,
+            declaration: SVGdeclaration,
           }
 
           return isValid ? result : undefined
@@ -107,7 +107,7 @@ export async function extractSVGExports(file: SVGFile): Promise<ExtractSVGExport
      */
     const handlers: HandlersDeclaration = {
       FunctionDeclaration: async (declaration, isExported) => {
-        extractSVGComponent(declaration, SVGTypeExport.Function, file)
+        extractSVGComponent(declaration, SVGDeclaration.Function, file)
           .then(async (result) => {
             await handleExtraction(declaration, isExported, result)
           })
@@ -116,7 +116,7 @@ export async function extractSVGExports(file: SVGFile): Promise<ExtractSVGExport
       VariableDeclaration: async (declaration, isExported) => {
         for (const d of declaration.declarations) {
           if (t.isIdentifier(d.id)) {
-            extractSVGComponent(d, SVGTypeExport.Variable, file)
+            extractSVGComponent(d, SVGDeclaration.Variable, file)
               .then(async (result) => {
                 await handleExtraction(declaration, isExported, result)
               })

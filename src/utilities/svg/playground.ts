@@ -13,7 +13,7 @@ import { type SVGErrors, type SVGComponent, type SVGPlayground } from '@/interfa
  * @returns A promise that resolves to the generated SVG component or an error message.
  */
 export async function playground(icon: SVGPlayground): Promise<SVGComponent | SVGErrors> {
-  const { location, name, typeExport, value } = icon
+  const { location, name, declaration: SVGdeclaration, value } = icon
 
   try {
     const lastModified = getFileTimestamp(location.file.absolutePath)
@@ -44,7 +44,12 @@ export async function playground(icon: SVGPlayground): Promise<SVGComponent | SV
     }
 
     const parameters = { ...params, ...iconComponent.props }
-    const component = await extractSVGComponent(declaration, typeExport, location.file, parameters)
+    const component = await extractSVGComponent(
+      declaration,
+      SVGdeclaration,
+      location.file,
+      parameters
+    )
 
     if (isEmpty(component)) {
       return { message: `Error extracting SVG component ${name}`, location: {} }
