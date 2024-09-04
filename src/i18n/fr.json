@@ -4,5 +4,15 @@
   "noIconsFound": "Aucune icône trouvée",
   "noFileSelected": "Aucun fichier sélectionné",
   "searchMinChars": "Veuillez saisir au moins 3 caractères pour rechercher...",
-  "noExistedFile": "Le fichier {0} n'existe pas."
+  "noExistedFile": "Le fichier {file} n'existe pas.",
+  "errorSettingWebviewMessageListener": "Erreur lors du réglage de l'écouteur de messages du webview",
+  "invalidSvgTag": "Balise SVG invalide : {tag}",
+  "declarationNotFound": "Déclaration nommée {name} non trouvée dans le fichier {file}",
+  "svgFileNotFound": "Fichier SVG {file} non trouvé",
+  "svgComponentNotFoundFile": "Composant SVG {name} non trouvé dans le fichier {file}",
+  "errorExtractingSvgComponent": "Erreur lors de l'extraction du composant SVG {name}",
+  "invalidAttribute": "Attribut {attr} invalide, attendu '{expected}' mais obtenu {actual}",
+  "errorScanningWorkspace": "Erreur lors du balayage de l'espace de travail",
+  "errorScanningFiles": "Erreur lors du balayage des fichiers",
+  "errorOpeningFile": "Erreur lors de l'ouverture du fichier ${file} dans l'éditeur"
 }

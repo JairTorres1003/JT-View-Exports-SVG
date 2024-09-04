@@ -2,6 +2,7 @@ import * as t from '@babel/types'
 
 import { isEmpty } from '../misc'
 import { getProperties, propertyManager } from '../properties'
+import { translate } from '../vscode'
 
 import { getSVGTagName } from './tags'
 
@@ -37,7 +38,10 @@ function getChildAttributes(children: t.JSXElement['children'], file: SVGFile): 
 
       if (!tag.isValid || tag.name === 'Fragment' || isEmpty(tag.name)) {
         hasErrors = true
-        errors = { message: 'Invalid SVG tag', location: tag.location }
+        errors = {
+          message: translate('invalidSvgTag', { tag: tag.name ?? 'undefined' }),
+          location: tag.location,
+        }
       } else {
         components.push({
           props,
@@ -76,12 +80,19 @@ export function getSVGComponent(element: t.JSXElement, file: SVGFile): GetSVGCom
     if (svgProps.xmlns !== 'http://www.w3.org/2000/svg') {
       hasErrors = true
       errors = {
-        message: 'Invalid xmlns attribute',
+        message: translate('invalidAttribute', {
+          attr: 'xmlns',
+          expected: 'http://www.w3.org/2000/svg',
+          actual: svgProps.xmlns?.toString() ?? 'undefined',
+        }),
         location: { start: openingElement.loc?.start, end: openingElement.loc?.end },
       }
     } else if (!tag.isValid || tag.name === 'Fragment' || isEmpty(tag.name)) {
       hasErrors = true
-      errors = { message: `Invalid SVG tag: ${tag.name}`, location: tag.location }
+      errors = {
+        message: translate('invalidSvgTag', { tag: tag.name ?? 'undefined' }),
+        location: tag.location,
+      }
     } else if (children.length > 0) {
       const child = getChildAttributes(children, file)
 

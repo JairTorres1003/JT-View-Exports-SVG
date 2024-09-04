@@ -4,5 +4,15 @@
   "noIconsFound": "Keine Symbole gefunden",
   "noFileSelected": "Keine Datei ausgewählt",
   "searchMinChars": "Bitte geben Sie mindestens 3 Zeichen ein, um zu suchen...",
-  "noExistedFile": "Die Datei {0} existiert nicht."
+  "noExistedFile": "Die Datei {file} existiert nicht.",
+  "errorSettingWebviewMessageListener": "Fehler beim Festlegen des Webview-Nachrichtenlisteners",
+  "invalidSvgTag": "Ungültiges SVG-Tag: {tag}",
+  "declarationNotFound": "Deklaration mit dem Namen {name} in der Datei {file} nicht gefunden",
+  "svgFileNotFound": "SVG-Datei {file} nicht gefunden",
+  "svgComponentNotFoundFile": "SVG-Komponente {name} in der Datei {file} nicht gefunden",
+  "errorExtractingSvgComponent": "Fehler beim Extrahieren der SVG-Komponente {name}",
+  "invalidAttribute": "Ungültiges {attr}-Attribut, erwartet '{expected}', aber erhalten {actual}",
+  "errorScanningWorkspace": "Fehler beim Scannen des Arbeitsbereichs",
+  "errorScanningFiles": "Fehler beim Scannen von Dateien",
+  "errorOpeningFile": "Fehler beim Öffnen der Datei ${file} im Editor"
 }

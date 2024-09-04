@@ -4,7 +4,7 @@ import * as path from 'path'
 import { Position, Selection, TextEditorRevealType, Uri, window, workspace } from 'vscode'
 
 import { getUnknownError } from '../misc'
-import { getWorkspacePath } from '../vscode'
+import { getWorkspacePath, translate } from '../vscode'
 
 import { type SVGFile } from '@/interfaces/ViewExportsSVG'
 import { type OpenFile } from '@/interfaces/views/ViewExportsSVGPanel'
@@ -81,13 +81,13 @@ export function openFile({ file, position = { column: 1, line: 1, index: 1 } }: 
       })().catch(console.error)
     } else {
       window
-        .showErrorMessage(`The file ${absolutePath} does not exist.`)
+        .showErrorMessage(translate('noExistedFile', { file: absolutePath }))
         .then(undefined, console.error)
     }
   } catch (error) {
     console.error(`Error opening file ${absolutePath} in editor: `, getUnknownError(error))
     window
-      .showErrorMessage(`Error opening file ${absolutePath} in editor`)
+      .showErrorMessage(translate('errorOpeningFile', { file: absolutePath }))
       .then(undefined, console.error)
   }
 }

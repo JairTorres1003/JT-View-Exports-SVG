@@ -1,6 +1,7 @@
 import { DeclarationFileCache, SVGFileCache } from '../cache'
 import { getFileTimestamp } from '../files'
 import { getUnknownError, isEmpty } from '../misc'
+import { translate } from '../vscode'
 
 import { extractIconComponent, extractSVGComponent } from './extracts'
 
@@ -22,13 +23,16 @@ export async function playground(icon: SVGPlayground): Promise<SVGComponent | SV
 
     if (declarationCache?.[name] === undefined) {
       return {
-        message: `Declaration named ${name} not found in file ${location.file.absolutePath}`,
+        message: translate('declarationNotFound', { name, file: location.file.absolutePath }),
         location,
       }
     }
 
     if (isEmpty(componentsCache)) {
-      return { message: `SVG file ${location.file.absolutePath} not found`, location }
+      return {
+        message: translate('svgFileNotFound', { file: location.file.absolutePath }),
+        location,
+      }
     }
 
     const originalComponent = [
@@ -38,7 +42,7 @@ export async function playground(icon: SVGPlayground): Promise<SVGComponent | SV
 
     if (originalComponent === undefined) {
       return {
-        message: `SVG component ${name} not found in file ${location.file.absolutePath}`,
+        message: translate('svgComponentNotFoundFile', { name, file: location.file.absolutePath }),
         location,
       }
     }
@@ -64,7 +68,10 @@ export async function playground(icon: SVGPlayground): Promise<SVGComponent | SV
     const component = await extractSVGComponent(declaration, location.file, parameters)
 
     if (isEmpty(component)) {
-      return { message: `Error extracting SVG component ${name}`, location: {} }
+      return {
+        message: translate('errorExtractingSVGComponent', { name }),
+        location: {},
+      }
     }
 
     return { ...originalComponent, ...component }

@@ -207,6 +207,8 @@ export class ViewExportsSVGPanel {
    * @param webview The webview instance.
    */
   private _setWebviewMessageListener(webview: Webview): void {
+    const i18n = getTranslations()
+
     try {
       const handlers: HandlerReceiveMessage = {
         [SVGReceiveMessage.ExtractSVGComponent]: this._extractSVGComponent.bind(this),
@@ -243,7 +245,7 @@ export class ViewExportsSVGPanel {
     } catch (error) {
       console.error('Error setting webview message listener:', error)
       window
-        .showErrorMessage('Error setting webview message listener')
+        .showErrorMessage(i18n.errorSettingWebviewMessageListener)
         .then(undefined, console.error)
     }
   }

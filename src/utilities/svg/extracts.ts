@@ -4,6 +4,7 @@ import * as t from '@babel/types'
 import { parseFileContent, parserContent } from '../babelParser'
 import { getUnknownError, isEmpty } from '../misc'
 import { getProperties, propertyManager } from '../properties'
+import { translate } from '../vscode'
 
 import { analyzeExportType } from './analyze'
 import { getSVGComponent } from './SVGComponent'
@@ -209,7 +210,10 @@ export async function extractIconComponent(
 
           if (!tag.isValid) {
             hasErrors = true
-            errors = { location: tag.location, message: 'Invalid SVG tag' }
+            errors = {
+              location: tag.location,
+              message: translate('invalidSvgTag', { tag: tag.name ?? 'undefined' }),
+            }
           }
         }
       },

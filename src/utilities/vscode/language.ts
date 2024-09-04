@@ -2,7 +2,7 @@ import * as fs from 'fs'
 
 import { Uri, env } from 'vscode'
 
-import { type Translations } from '@/interfaces/i18n'
+import { type TranslationOptions, type Translations } from '@/interfaces/i18n'
 
 // Object to store the loaded translations
 let i18n: Translations
@@ -36,4 +36,30 @@ export async function loadLanguage(extensionUri: Uri, language?: string): Promis
  */
 export function getTranslations(): Translations {
   return i18n
+}
+
+/**
+ * Translates the given key using the provided options.
+ *
+ * @param key - The key to be translated.
+ * @param options - The options to be used for translation.
+ * @returns The translated string.
+ */
+export function translate<K extends keyof Translations>(
+  key: K,
+  options?: TranslationOptions<K>
+): string {
+  const translation = i18n[key]
+
+  if (options !== undefined) {
+    let translated: string = translation
+
+    for (const [optKey, value] of Object.entries(options as Record<string, string>)) {
+      translated = translated.replace(`{${optKey}}`, value)
+    }
+
+    return translated
+  }
+
+  return translation
 }
