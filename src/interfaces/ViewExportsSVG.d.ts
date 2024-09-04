@@ -24,6 +24,14 @@ export interface ViewExportSVG {
    * The SVG components that are not exported.
    */
   noExportComponents: SVGComponent[]
+  /**
+   * The kind of the label group.
+   */
+  groupKind: string
+  /**
+   * The label of the group kind.
+   */
+  labelGroupKind: string
 }
 
 export interface SVGFile {

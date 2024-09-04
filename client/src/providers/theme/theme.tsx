@@ -38,6 +38,11 @@ export const useCustomTheme = (): { theme: Theme } => {
             },
             styleOverrides: {
               root: {
+                backgroundColor: 'transparent',
+                '&:before': {
+                  opacity: 0.15,
+                  backgroundColor: 'var(--vscode-input-foreground, #1e1e1e)',
+                },
                 [`& .${accordionSummaryClasses.content}`]: { maxWidth: '100%', overflow: 'hidden' },
               },
             },
@@ -45,7 +50,12 @@ export const useCustomTheme = (): { theme: Theme } => {
           MuiAccordionSummary: {
             defaultProps: { expandIcon: <IconForward size={24} /> },
             styleOverrides: {
-              root: { flexDirection: 'row-reverse', gap: '4px', minHeight: 38 },
+              root: {
+                flexDirection: 'row-reverse',
+                gap: '4px',
+                minHeight: 38,
+                '&:hover': { backgroundColor: 'var(--vscode-list-hoverBackground, #2c313a)' },
+              },
               content: { margin: 0 },
               expandIconWrapper: {
                 [`&.${accordionSummaryClasses.expanded}`]: { transform: 'rotate(90deg)' },
