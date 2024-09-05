@@ -2,7 +2,7 @@ import React from 'react'
 
 import { ContainerComponents } from '@/components/ContainerComponents'
 import { SearchBar } from '@/components/SearchBar'
-import { useHome } from '@/hooks/useHome'
+import { useHome } from '@/hooks/pages/useHome'
 
 const HomePage: React.FC = () => {
   useHome()
