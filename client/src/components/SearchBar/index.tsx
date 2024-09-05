@@ -4,9 +4,9 @@ import { useTranslation } from 'react-i18next'
 import { BoxSearchBar } from './index.style'
 
 import { IconClose, IconLupe } from '@/assets/icons/functionalities'
-import { useSearchBar } from '@/hooks/useSearchBar'
+import { useSearchBar } from '@/hooks/components/useSearchBar'
 
-export const SearchBar = () => {
+export const SearchBar = (): React.ReactNode => {
   const { handleClear, handleSearch, search } = useSearchBar()
 
   const { t } = useTranslation(undefined, { keyPrefix: 'labels' })

@@ -1,17 +1,22 @@
+import { Accordion, AccordionDetails, AccordionSummary, Tooltip, Typography } from '@mui/material'
 import MiddleEllipsis from 'react-middle-ellipsis'
 
+import { useContainerComponents } from '@/hooks/components/useContainerComponents'
 import { useSelector } from '@/providers/redux/store'
-import { Accordion, AccordionDetails, AccordionSummary, Tooltip, Typography } from '@mui/material'
-// import { useContainerComponents } from '@/hooks/components/useContainerComponents'
 
-export const ContainerComponents = () => {
-  // const {} = useContainerComponents()
+export const ContainerComponents = (): React.ReactNode => {
+  const { isExpanded, toggleExpanded } = useContainerComponents()
   const { components } = useSelector((state) => state.svg)
 
   return (
     <div>
       {components.map((item) => (
-        <Accordion disableGutters key={item.groupKind}>
+        <Accordion
+          disableGutters
+          key={item.groupKind}
+          onChange={toggleExpanded(item.groupKind)}
+          expanded={isExpanded.includes(item.groupKind)}
+        >
           <AccordionSummary
             id={`${item.groupKind}-header`}
             aria-controls={`${item.groupKind}-content`}

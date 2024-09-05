@@ -6,7 +6,7 @@ import { useDispatch } from 'react-redux'
 import { setComponents } from '@/providers/redux/features/SVGSlice'
 import { vscode } from '@/services/vscode'
 
-export const useHome = () => {
+export const useHome = (): void => {
   const dispatch = useDispatch()
 
   /**
@@ -14,7 +14,7 @@ export const useHome = () => {
    *
    * @param data - An array of ViewExportSVG objects containing SVG data.
    */
-  const getSVGComponents = (data: ViewExportSVG[]) => {
+  const getSVGComponents = (data: ViewExportSVG[]): void => {
     dispatch(setComponents(data))
   }
 
