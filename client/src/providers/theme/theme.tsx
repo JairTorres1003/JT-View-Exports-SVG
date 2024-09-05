@@ -1,5 +1,5 @@
-import { vscode } from '@/services/vscode'
 import { SVGPostMessage, SVGReceiveMessage } from '@api/enums/ViewExportsSVG'
+import { type VsCodeStyles } from '@api/interfaces/vscode'
 import {
   accordionSummaryClasses,
   createTheme,
@@ -9,10 +9,12 @@ import {
 } from '@mui/material'
 import { useEffect, useMemo } from 'react'
 import { useDispatch } from 'react-redux'
-import { useSelector } from '../redux/store'
+
 import { setVsCodeStyles } from '../redux/features/VsCodeSlice'
-import { VsCodeStyles } from '@api/interfaces/vscode'
+import { useSelector } from '../redux/store'
+
 import { IconForward } from '@/assets/icons/navigation'
+import { vscode } from '@/services/vscode'
 
 /**
  * Returns the current theme based on the VS Code styles.
@@ -155,7 +157,7 @@ export const useCustomTheme = (): { theme: Theme } => {
         },
         typography: {
           fontFamily: styles.fontFamily?.toString(),
-          fontSize: parseInt(styles.fontSize?.toString() || '12', 10),
+          fontSize: parseInt(styles.fontSize?.toString() ?? '12', 10),
           allVariants: {
             lineHeight: 1.2,
             tabSize: styles.tabSize?.toString(),
@@ -176,7 +178,7 @@ export const useCustomTheme = (): { theme: Theme } => {
    *
    * @param data - The data to set the VS Code styles.
    */
-  const handleVsCodeStyles = (data: VsCodeStyles) => {
+  const handleVsCodeStyles = (data: VsCodeStyles): void => {
     dispatch(setVsCodeStyles(data))
   }
 
