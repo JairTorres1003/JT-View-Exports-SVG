@@ -2,14 +2,16 @@ import MiddleEllipsis from 'react-middle-ellipsis'
 
 import { useSelector } from '@/providers/redux/store'
 import { Accordion, AccordionDetails, AccordionSummary, Tooltip, Typography } from '@mui/material'
+// import { useContainerComponents } from '@/hooks/components/useContainerComponents'
 
 export const ContainerComponents = () => {
+  // const {} = useContainerComponents()
   const { components } = useSelector((state) => state.svg)
 
   return (
     <div>
-      {components.map((item, index) => (
-        <Accordion disableGutters key={item.groupKind} defaultExpanded={index === 0}>
+      {components.map((item) => (
+        <Accordion disableGutters key={item.groupKind}>
           <AccordionSummary
             id={`${item.groupKind}-header`}
             aria-controls={`${item.groupKind}-content`}
