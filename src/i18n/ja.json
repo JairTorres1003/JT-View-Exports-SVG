@@ -14,5 +14,5 @@
   "invalidAttribute": "無効な {attr} 属性、'{expected}' が期待されましたが、{actual} が取得されました",
   "errorScanningWorkspace": "ワークスペースのスキャンエラー",
   "errorScanningFiles": "ファイルのスキャンエラー",
-  "errorOpeningFile": "エディタでファイル ${file} を開く際にエラーが発生しました"
+  "errorOpeningFile": "エディタでファイル {file} を開く際にエラーが発生しました"
 }

@@ -14,5 +14,5 @@
   "invalidAttribute": "无效的 {attr} 属性，期望 '{expected}' 但得到 {actual}",
   "errorScanningWorkspace": "扫描工作区时出错",
   "errorScanningFiles": "扫描文件时出错",
-  "errorOpeningFile": "在编辑器中打开文件 ${file} 时出错"
+  "errorOpeningFile": "在编辑器中打开文件 {file} 时出错"
 }

@@ -14,5 +14,5 @@
   "invalidAttribute": "잘못된 {attr} 속성, '{expected}'(을)를 예상했지만 {actual}을(를) 받았습니다",
   "errorScanningWorkspace": "작업 영역 스캔 오류",
   "errorScanningFiles": "파일 스캔 오류",
-  "errorOpeningFile": "편집기에서 파일 ${file} 열기 오류"
+  "errorOpeningFile": "편집기에서 파일 {file} 열기 오류"
 }

@@ -14,5 +14,5 @@
   "invalidAttribute": "Ungültiges {attr}-Attribut, erwartet '{expected}', aber erhalten {actual}",
   "errorScanningWorkspace": "Fehler beim Scannen des Arbeitsbereichs",
   "errorScanningFiles": "Fehler beim Scannen von Dateien",
-  "errorOpeningFile": "Fehler beim Öffnen der Datei ${file} im Editor"
+  "errorOpeningFile": "Fehler beim Öffnen der Datei {file} im Editor"
 }

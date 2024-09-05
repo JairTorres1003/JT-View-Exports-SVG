@@ -14,5 +14,5 @@
   "invalidAttribute": "Attribut {attr} invalide, attendu '{expected}' mais obtenu {actual}",
   "errorScanningWorkspace": "Erreur lors du balayage de l'espace de travail",
   "errorScanningFiles": "Erreur lors du balayage des fichiers",
-  "errorOpeningFile": "Erreur lors de l'ouverture du fichier ${file} dans l'éditeur"
+  "errorOpeningFile": "Erreur lors de l'ouverture du fichier {file} dans l'éditeur"
 }

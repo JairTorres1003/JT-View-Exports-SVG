@@ -14,5 +14,5 @@
   "invalidAttribute": "Недопустимый атрибут {attr}, ожидалось '{expected}', но получено {actual}",
   "errorScanningWorkspace": "Ошибка сканирования рабочего пространства",
   "errorScanningFiles": "Ошибка сканирования файлов",
-  "errorOpeningFile": "Ошибка открытия файла ${file} в редакторе"
+  "errorOpeningFile": "Ошибка открытия файла {file} в редакторе"
 }

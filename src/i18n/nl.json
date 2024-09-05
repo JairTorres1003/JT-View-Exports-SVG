@@ -14,5 +14,5 @@
   "invalidAttribute": "Ongeldige {attr}-attribuut, '{expected}' verwacht maar '{actual}' verkregen",
   "errorScanningWorkspace": "Fout bij het scannen van de werkruimte",
   "errorScanningFiles": "Fout bij het scannen van bestanden",
-  "errorOpeningFile": "Fout bij het openen van bestand ${file} in de editor"
+  "errorOpeningFile": "Fout bij het openen van bestand {file} in de editor"
 }

@@ -14,5 +14,5 @@
   "invalidAttribute": "無效的 {attr} 屬性，期望 '{expected}' 但得到 {actual}",
   "errorScanningWorkspace": "掃描工作區時發生錯誤",
   "errorScanningFiles": "掃描檔案時發生錯誤",
-  "errorOpeningFile": "在編輯器中開啟檔案 ${file} 時發生錯誤"
+  "errorOpeningFile": "在編輯器中開啟檔案 {file} 時發生錯誤"
 }

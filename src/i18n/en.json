@@ -1,5 +1,5 @@
 {
-  "extensionTitle": "View SVG Exports",
+  "extensionTitle": "View Exports SVG",
   "iconExtractionInProgress": "Icon extraction in progress...",
   "noIconsFound": "No icons found",
   "noFileSelected": "No file selected",
@@ -14,5 +14,5 @@
   "invalidAttribute": "Invalid {attr} attribute, expected '{expected}' but got {actual}",
   "errorScanningWorkspace": "Error scanning workspace",
   "errorScanningFiles": "Error scanning files",
-  "errorOpeningFile": "Error opening file ${file} in editor"
+  "errorOpeningFile": "Error opening file {file} in editor"
 }
