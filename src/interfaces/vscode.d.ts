@@ -15,11 +15,11 @@ export interface LanguageFile {
 export type ThemeMode = 'dark' | 'light'
 
 export interface VsCodeStyles {
-  fontFamily: unknown
-  fontSize: unknown
-  fontWeight: unknown
-  letterSpacing: unknown
-  tabSize: unknown
+  fontFamily: string
+  fontSize: number
+  fontWeight: string | number
+  letterSpacing: number
+  tabSize: number
   fontFeatureSettings: string
   [key: string]: unknown
 }

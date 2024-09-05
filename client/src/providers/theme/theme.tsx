@@ -112,6 +112,7 @@ export const useCustomTheme = (): { theme: Theme } => {
                 color: 'var(--vscode-editorHoverWidget-foreground, #ffffff)',
                 boxShadow: '0 2px 8px var(--vscode-widget-shadow)',
                 padding: '2px 8px',
+                fontSize: `${typeof styles.fontSize === 'number' ? styles.fontSize : 12}px`,
               },
               arrow: {
                 top: 'initial',
@@ -157,10 +158,12 @@ export const useCustomTheme = (): { theme: Theme } => {
         },
         typography: {
           fontFamily: styles.fontFamily?.toString(),
-          fontSize: parseInt(styles.fontSize?.toString() ?? '12', 10),
+          fontSize: typeof styles.fontSize === 'number' ? styles.fontSize : 12,
           allVariants: {
             lineHeight: 1.2,
             tabSize: styles.tabSize?.toString(),
+            fontFamily: styles.fontFamily?.toString(),
+            fontSize: `${typeof styles.fontSize === 'number' ? styles.fontSize : 12}px`,
             fontWeight: styles.fontWeight?.toString(),
             letterSpacing: styles.letterSpacing?.toString(),
             fontFeatureSettings: styles.fontFeatureSettings?.toString(),

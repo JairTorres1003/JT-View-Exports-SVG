@@ -23,11 +23,14 @@ export function getStyles(): VsCodeStyles {
   const configuration = workspace.getConfiguration('editor')
 
   return {
-    fontFamily: configuration.get('fontFamily'),
-    fontSize: configuration.get('fontSize'),
-    fontWeight: configuration.get('fontWeight'),
-    letterSpacing: configuration.get('letterSpacing'),
-    tabSize: configuration.get('tabSize'),
-    fontFeatureSettings: configuration.get('fontLigatures') === true ? '"liga", "calt"' : 'normal',
+    fontFamily: configuration.get(
+      'fontFamily',
+      "-apple-system, 'system-ui', sans-serif, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue'"
+    ),
+    fontSize: configuration.get('fontSize', 12),
+    fontWeight: configuration.get('fontWeight', 'normal'),
+    letterSpacing: configuration.get('letterSpacing', 0),
+    tabSize: configuration.get('tabSize', 4),
+    fontFeatureSettings: configuration.get('fontLigatures', false) ? '"liga", "calt"' : 'normal',
   }
 }
