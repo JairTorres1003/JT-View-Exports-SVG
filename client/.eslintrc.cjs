@@ -20,6 +20,7 @@ module.exports = {
     ecmaVersion: 'latest',
     sourceType: 'module',
     project: './tsconfig.app.json',
+    tsconfigRootDir: __dirname,
   },
   env: { browser: true, es2021: true },
   settings: {

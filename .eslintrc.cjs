@@ -19,6 +19,7 @@ module.exports = {
   parserOptions: {
     ecmaVersion: 'latest',
     sourceType: 'module',
+    project: './tsconfig.json',
   },
   plugins: ['@typescript-eslint', 'prettier'],
   extends: [
@@ -63,5 +64,15 @@ module.exports = {
       },
     ],
   },
-  ignorePatterns: ['out', 'dist', '**/*.d.ts', 'client'],
+  ignorePatterns: ['out', 'dist', '**/*.d.ts'],
+  overrides: [
+    {
+      files: ['client/**/*.{ts,tsx}'],
+      parserOptions: {
+        project: './client/tsconfig.app.json',
+        tsconfigRootDir: __dirname,
+      },
+      extends: ['./client/.eslintrc.cjs'],
+    },
+  ],
 }
