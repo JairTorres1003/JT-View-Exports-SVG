@@ -1,5 +1,6 @@
-import { IconBaseProps } from '@/interfaces/misc'
-import { FC } from 'react'
+import { type FC } from 'react'
+
+import { type IconBaseProps } from '@/interfaces/misc'
 
 export const IconBackward: FC<IconBaseProps> = ({
   size = 32,
