@@ -1,6 +1,6 @@
 import { getTranslations } from '../vscode'
 
-import { type SVGErrors, type ViewExportSVG } from '@/interfaces/ViewExportsSVG'
+import { type SVGComponent, type SVGErrors, type ViewExportSVG } from '@/interfaces/ViewExportsSVG'
 
 /**
  * Filters the array of `ViewExportSVG` objects based on the provided query.
@@ -24,13 +24,8 @@ export function filteredExports(
   }
 
   const filtered = viewExportSVG.flatMap((view) => {
-    const exportComponents = view.exportComponents.filter((component) =>
-      component.name.toLowerCase().includes(query.toLowerCase())
-    )
-
-    const noExportComponents = view.noExportComponents.filter((component) =>
-      component.name.toLowerCase().includes(query.toLowerCase())
-    )
+    const exportComponents = filter(view.exportComponents, query)
+    const noExportComponents = filter(view.noExportComponents, query)
 
     return exportComponents.length > 0 || noExportComponents.length > 0
       ? [{ ...view, exportComponents, noExportComponents }]
@@ -38,4 +33,16 @@ export function filteredExports(
   })
 
   return filtered.length > 0 ? filtered : { message: i18n.noIconsFound, location: {} }
+}
+
+/**
+ * Filters the array of `SVGComponent` objects based on the provided query.
+ *
+ * @param components - The array of `SVGComponent` objects to filter.
+ * @param query - The query string to filter the array.
+ */
+const filter = (components: SVGComponent[], query: string): SVGComponent[] => {
+  return components.filter((component) =>
+    component.name.toLowerCase().includes(query.toLowerCase())
+  )
 }
