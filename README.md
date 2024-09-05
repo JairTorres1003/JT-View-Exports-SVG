@@ -30,7 +30,7 @@ https://github.com/JairTorres1003/JT-View-Exports-SVG/assets/83931760/5a869f06-8
 
 1. Select one or more files containing SVG icons in your Visual Studio Code workspace. ([SVG SUPPORT](SVG%20SUPPORT.md)).
 2. Right-click on the selected files.
-3. In the context menu, choose the "View SVG Exports 🔍" option.
+3. In the context menu, choose the "View Exports SVG 🔍" option.
 4. A panel will appear showing all the SVG icons found.
 5. Use the search bar in the panel to filter the icons by their names.
 6. Click the SVG icon to copy the name to the clipboard.

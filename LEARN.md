@@ -13,7 +13,7 @@ Welcome to **View Exports SVG**, a Visual Studio Code extension that makes it ea
 
 1. Seleccione uno o más archivos que contengan íconos SVG en su espacio de trabajo de Visual Studio Code. ([see SVG support](SVG%20SUPPORT.md)).
 2. Right-click on the selected files.
-3. In the context menu, choose the "**View SVG Exports 🔍**" option.
+3. In the context menu, choose the "**View Exports SVG 🔍**" option.
 4. A panel will appear showing all the SVG icons found.
 5. Use the search bar in the panel to quickly find icons by their names.
 6. Click on an SVG icon to automatically copy its name to the clipboard.
