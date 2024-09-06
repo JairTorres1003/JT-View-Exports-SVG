@@ -18,6 +18,6 @@ export class ShowNotExportedIcons extends ExtensionConfigManager<boolean> {
    * Retrieves the property from the ShowNotExportedIcons class.
    */
   public isShow(): boolean {
-    return this.showNotExportedIconsUser ?? this.showNotExportedIcons
+    return this.showNotExportedIconsUser || this.showNotExportedIcons
   }
 }
