@@ -35,10 +35,7 @@ export async function playground(icon: SVGPlayground): Promise<SVGComponent | SV
       }
     }
 
-    const originalComponent = [
-      ...componentsCache.exportComponents,
-      ...componentsCache.noExportComponents,
-    ].find((c) => c.name === name)
+    const originalComponent = componentsCache.components.find((c) => c.name === name)
 
     if (originalComponent === undefined) {
       return {

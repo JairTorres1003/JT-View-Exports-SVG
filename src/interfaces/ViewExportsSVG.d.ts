@@ -19,11 +19,7 @@ export interface ViewExportSVG {
   /**
    * The SVG components found in the file.
    */
-  exportComponents: SVGComponent[]
-  /**
-   * The SVG components that are not exported.
-   */
-  noExportComponents: SVGComponent[]
+  components: SVGComponent[]
   /**
    * The kind of the label group.
    */
@@ -32,6 +28,10 @@ export interface ViewExportSVG {
    * The label of the group kind.
    */
   labelGroupKind: string
+  /**
+   * Indicates whether the SVG components that are not exported should be shown.
+   */
+  isShowNoExports: boolean
 }
 
 export interface SVGFile {
@@ -128,7 +128,10 @@ export interface SVGErrors {
 
 export interface ExtractSVGExports {
   base: Record<string, { declaration: DeclarationExport; params: Record<string, any> }>
-  svg: Pick<ViewExportSVG, 'exportComponents' | 'noExportComponents'>
+  svg: {
+    exportComponents: SVGComponent[]
+    noExportComponents: SVGComponent[]
+  }
 }
 
 export interface SVGPlayground {

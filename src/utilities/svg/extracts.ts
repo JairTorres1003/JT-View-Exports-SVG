@@ -61,11 +61,11 @@ export async function extractSVGComponent(
 }
 
 /**
- * Extracts SVG exports from a file.
+ * Extracts the SVG from the given file.
  * @param file - The path to the file.
- * @returns A promise that resolves to an object containing the extracted SVG exports.
+ * @returns A promise that resolves to an object containing the extracted SVG.
  */
-export async function extractSVGExports(file: SVGFile): Promise<ExtractSVGExports> {
+export async function extractSVGData(file: SVGFile): Promise<ExtractSVGExports> {
   try {
     const ast = parseFileContent(file.absolutePath)
     const base: ExtractSVGExports['base'] = {}
@@ -74,8 +74,8 @@ export async function extractSVGExports(file: SVGFile): Promise<ExtractSVGExport
     const identifiers = new Set<string>()
 
     /**
-     * Handles the extraction of SVG exports.
-     * @param declaration - The declaration export.
+     * Handles the extraction of SVG.
+     * @param declaration - The declaration.
      * @param SVGdeclaration - The type of SVG declaration.
      * @param isExported - A boolean indicating if the SVG component is exported.
      * @param svgResult - The SVG component to be extracted.

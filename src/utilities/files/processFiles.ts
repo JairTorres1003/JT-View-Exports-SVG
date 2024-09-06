@@ -3,9 +3,9 @@ import * as path from 'path'
 import { ProgressLocation, type Uri, window, type ProgressOptions } from 'vscode'
 
 import { DeclarationFileCache, SVGFileCache } from '../cache'
-import { AssetsPaths } from '../config'
+import { AssetsPaths, ShowNotExportedIcons } from '../config'
 import { isEmpty } from '../misc'
-import { extractSVGExports } from '../svg'
+import { extractSVGData } from '../svg'
 import { getTranslations } from '../vscode'
 
 import { getFileTimestamp, pathToSVGFile } from './misc'
@@ -36,6 +36,7 @@ export async function processFiles(
 
     const progress = await window.withProgress(progressOptions, async (progress) => {
       const configAssetsPath = new AssetsPaths()
+      const configShowNoExports = new ShowNotExportedIcons()
       const SVGFiles: SVGFile[] = []
       const SVGExports: ViewExportSVG[] = []
 
@@ -60,27 +61,36 @@ export async function processFiles(
             const lastModified = getFileTimestamp(file.absolutePath)
             const cachedFile = SVGFileCache.get(file.absolutePath, lastModified)
 
-            if (cachedFile !== undefined && cachedFile.totalExports > 0) {
+            if (
+              cachedFile !== undefined &&
+              configShowNoExports.isShow() === cachedFile.isShowNoExports
+            ) {
               SVGExports.push(cachedFile)
               SVGFiles.push(file)
 
               return
             }
 
-            const { base, svg } = await extractSVGExports(file)
+            const { base, svg } = await extractSVGData(file)
             const totalExports = svg.exportComponents.length
             const totalNoExports = svg.noExportComponents.length
             const totalSVG = totalExports + totalNoExports
 
-            if (totalExports > 0) {
-              svg.exportComponents.sort((a, b) => a.name.localeCompare(b.name))
+            const components = configShowNoExports.isShow()
+              ? [...svg.exportComponents, ...svg.noExportComponents]
+              : svg.exportComponents
+
+            if (components.length > 0) {
+              components.sort((a, b) => a.name.localeCompare(b.name))
+
               const result: ViewExportSVG = {
-                ...svg,
+                components,
                 totalExports,
                 totalNoExports,
                 totalSVG,
                 groupKind: file.absolutePath,
                 labelGroupKind: file.relativePath,
+                isShowNoExports: configShowNoExports.isShow(),
               }
 
               SVGFileCache.set(file.absolutePath, result, lastModified)

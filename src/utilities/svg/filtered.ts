@@ -24,12 +24,9 @@ export function filteredExports(
   }
 
   const filtered = viewExportSVG.flatMap((view) => {
-    const exportComponents = filter(view.exportComponents, query)
-    const noExportComponents = filter(view.noExportComponents, query)
+    const components = filter(view.components, query)
 
-    return exportComponents.length > 0 || noExportComponents.length > 0
-      ? [{ ...view, exportComponents, noExportComponents }]
-      : []
+    return components.length > 0 ? [{ ...view, components }] : []
   })
 
   return filtered.length > 0 ? filtered : { message: i18n.noIconsFound, location: {} }

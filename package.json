@@ -104,6 +104,11 @@
             "additionalProperties": {
               "type": "string"
             }
+          },
+          "JT-View-Exports-SVG.showNotExportedIcons": {
+            "type": "boolean",
+            "default": false,
+            "description": "Indicates whether or not to show icons that are not being exported."
           }
         }
       }
