@@ -1,6 +1,11 @@
 import { Accordion, AccordionDetails, AccordionSummary, Tooltip, Typography } from '@mui/material'
 import MiddleEllipsis from 'react-middle-ellipsis'
 
+import { CardSvg } from '../Cards'
+import RenderSvg from '../SVG/RenderSvg'
+
+import { BoxContainerComponents } from './index.style'
+
 import { useContainerComponents } from '@/hooks/components/useContainerComponents'
 import { useSelector } from '@/providers/redux/store'
 
@@ -9,7 +14,7 @@ export const ContainerComponents = (): React.ReactNode => {
   const { components } = useSelector((state) => state.svg)
 
   return (
-    <div>
+    <BoxContainerComponents>
       {components.map((item) => (
         <Accordion
           disableGutters
@@ -29,13 +34,15 @@ export const ContainerComponents = (): React.ReactNode => {
               </Tooltip>
             </MiddleEllipsis>
           </AccordionSummary>
-          <AccordionDetails>
-            <Typography>Total exports {item.totalExports}</Typography>
-            <Typography>Total no exports {item.totalNoExports}</Typography>
-            <Typography>Total SVG {item.totalSVG}</Typography>
+          <AccordionDetails className='BoxContainerComponents__accordion-details'>
+            {item.components.map((component) => (
+              <CardSvg key={component.name}>
+                <RenderSvg {...component} />
+              </CardSvg>
+            ))}
           </AccordionDetails>
         </Accordion>
       ))}
-    </div>
+    </BoxContainerComponents>
   )
 }
