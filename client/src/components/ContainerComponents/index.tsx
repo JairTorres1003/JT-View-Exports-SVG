@@ -36,7 +36,7 @@ export const ContainerComponents = (): React.ReactNode => {
           </AccordionSummary>
           <AccordionDetails className='BoxContainerComponents__accordion-details'>
             {item.components.map((component) => (
-              <CardSvg key={component.name}>
+              <CardSvg key={component.name} title={component.name}>
                 <RenderSvg {...component} />
               </CardSvg>
             ))}
