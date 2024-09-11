@@ -1,6 +1,7 @@
 import { type Reducer, type Store, combineReducers, configureStore } from '@reduxjs/toolkit'
 import { type TypedUseSelectorHook, useSelector as useReduxSelector } from 'react-redux'
 
+import { GlobalReducer } from './features/GlobalSlice'
 import { SVGReducer } from './features/SVGSlice'
 import { VsCodeReducer } from './features/VsCodeSlice'
 
@@ -14,6 +15,7 @@ import { type RootStoreState } from '@/interfaces/redux/feature'
 const rootReducer: Reducer<RootStoreState> = combineReducers({
   svg: SVGReducer,
   vsCode: VsCodeReducer,
+  global: GlobalReducer,
 })
 
 /**
