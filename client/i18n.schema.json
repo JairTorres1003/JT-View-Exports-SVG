@@ -7,13 +7,29 @@
       "type": "object",
       "properties": {
         "clear": {
-          "type": "string"
+          "type": "string",
+          "default": "Clear"
         },
         "search": {
-          "type": "string"
+          "type": "string",
+          "default": "Search"
+        },
+        "copy": {
+          "type": "string",
+          "default": "Copy"
+        },
+        "copyToClipboard": {
+          "type": "string",
+          "default": "Copy to clipboard"
+        },
+        "copied {{value}} to clipboard": {
+          "type": "string",
+          "pattern": ".*{{value}}.*",
+          "patternErrorMessage": "The message must contain the variable {{value}}",
+          "default": "Copied {{value}} to clipboard"
         }
       },
-      "required": ["clear", "search"]
+      "required": ["clear", "search", "copy", "copyToClipboard"]
     }
   },
   "required": ["labels"]

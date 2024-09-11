@@ -1,6 +1,9 @@
 {
   "labels": {
     "clear": "Clear",
-    "search": "Search"
+    "search": "Search",
+    "copy": "Copy",
+    "copyToClipboard": "Copy to clipboard",
+    "copied {{value}} to clipboard": "Copied {{value}} to clipboard"
   }
 }
