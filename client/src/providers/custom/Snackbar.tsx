@@ -51,7 +51,7 @@ const SnackbarAlert = (): React.ReactNode => {
       autoHideDuration={duration}
       TransitionComponent={SlideTransition}
     >
-      <Alert severity={severity} action={action} icon={icon}>
+      <Alert severity={severity} action={action} icon={icon} elevation={5}>
         {content}
       </Alert>
     </Snackbar>
