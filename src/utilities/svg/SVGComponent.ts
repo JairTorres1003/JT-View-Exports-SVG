@@ -64,7 +64,6 @@ function getChildAttributes(children: t.JSXElement['children'], file: SVGFile): 
 export function getSVGComponent(element: t.JSXElement, file: SVGFile): GetSVGComponent {
   const { openingElement, children } = element
   const params = (propertyManager.get() ?? {}) as Record<string, unknown>
-  let isValid = false
   let isAnimated = false
   let hasErrors = false
   let component: SVGComponentProps = { children: [], isMotion: false, props: {}, tag: 'svg' }
@@ -73,9 +72,6 @@ export function getSVGComponent(element: t.JSXElement, file: SVGFile): GetSVGCom
   if (!isEmpty(openingElement)) {
     const svgProps = getProperties(openingElement.attributes, params)
     const tag = getSVGTagName(openingElement, file)
-
-    // Check if the attribute is 'xmlns' and its value is 'http://www.w3.org/2000/svg'
-    isValid = svgProps.xmlns === 'http://www.w3.org/2000/svg' && tag.isValid
 
     if (svgProps.xmlns !== 'http://www.w3.org/2000/svg') {
       hasErrors = true
@@ -111,7 +107,6 @@ export function getSVGComponent(element: t.JSXElement, file: SVGFile): GetSVGCom
   return {
     component,
     isAnimated,
-    isValid,
     params,
     hasErrors,
     errors,
