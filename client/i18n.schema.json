@@ -1,0 +1,20 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "JSON schema for i18n in View Exports SVG (client) extension for Visual Studio Code",
+  "type": "object",
+  "properties": {
+    "labels": {
+      "type": "object",
+      "properties": {
+        "clear": {
+          "type": "string"
+        },
+        "search": {
+          "type": "string"
+        }
+      },
+      "required": ["clear", "search"]
+    }
+  },
+  "required": ["labels"]
+}

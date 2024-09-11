@@ -68,8 +68,12 @@
   },
   "json.schemas": [
     {
-      "fileMatch": ["/src/i18n/*.json"],
+      "fileMatch": ["/src/i18n/*.json", "!client/src/i18n/**/*.json"],
       "url": "./i18n.schema.json"
+    },
+    {
+      "fileMatch": ["client/src/i18n/*.json"],
+      "url": "./client/i18n.schema.json"
     }
   ],
   "material-icon-theme.files.associations": {
