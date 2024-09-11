@@ -1,7 +1,24 @@
-import { type FC, type ReactNode } from 'react'
+import React, { type ReactNode } from 'react'
+import { MemoryRouter, Route, Routes } from 'react-router-dom'
 
-const Layout: FC<{ readonly children: ReactNode }> = ({ children }) => {
-  return children
+import { LoadingSuspense } from '@/components/Loadings'
+import Providers from '@/providers'
+import { routes } from '@/router'
+
+const Layout = (): ReactNode => {
+  return (
+    <Providers>
+      <MemoryRouter initialEntries={['/']} initialIndex={0}>
+        <React.Suspense fallback={<LoadingSuspense />}>
+          <Routes>
+            {routes.map((route, index) => (
+              <Route key={index} path={route.path} element={<route.Component />} />
+            ))}
+          </Routes>
+        </React.Suspense>
+      </MemoryRouter>
+    </Providers>
+  )
 }
 
 export default Layout
