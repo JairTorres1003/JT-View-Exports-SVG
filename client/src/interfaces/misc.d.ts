@@ -1,5 +1,5 @@
 export interface ProviderProps {
-  children: React.ReactNode
+  readonly children: React.ReactNode
 }
 
 /**
