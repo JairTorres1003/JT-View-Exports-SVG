@@ -1,16 +1,17 @@
-import { type SlideProps, type SnackbarOrigin } from '@mui/material'
-import { type ReactNode } from 'react'
+import { type SnackbarCloseReason, type SlideProps, type SnackbarOrigin } from '@mui/material'
+import { type SyntheticEvent, type ReactNode } from 'react'
 import { useDispatch } from 'react-redux'
 
 import { type GlobalState } from '@/interfaces/redux/featureGlobal'
 import { setAlert } from '@/providers/redux/features/GlobalSlice'
+import { useSelector } from '@/providers/redux/store'
 
 interface AlertHook {
   onOpen: (
     content: ReactNode,
     options?: Omit<GlobalState['snackbarAlert'], 'open' | 'content'>
   ) => void
-  onClose: () => void
+  onClose: (event: SyntheticEvent | Event, reason: SnackbarCloseReason) => void
   getTransitionDirection: (position?: SnackbarOrigin) => SlideProps['direction']
 }
 
@@ -20,6 +21,8 @@ interface AlertHook {
  * @returns An object with functions to open and close alerts.
  */
 export const useAlert = (): AlertHook => {
+  const { snackbarAlert } = useSelector((state) => state.global)
+
   const dispatch = useDispatch()
 
   /**
@@ -35,8 +38,12 @@ export const useAlert = (): AlertHook => {
   /**
    * Closes the alert.
    */
-  const onClose: AlertHook['onClose'] = (): void => {
-    dispatch(setAlert({ open: false, content: '' }))
+  const onClose: AlertHook['onClose'] = (_, reason): void => {
+    if (reason === 'clickaway') {
+      return
+    }
+
+    dispatch(setAlert({ ...snackbarAlert, open: false }))
   }
 
   /**

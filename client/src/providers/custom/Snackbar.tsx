@@ -1,33 +1,66 @@
-import { Alert, Slide, Snackbar } from '@mui/material'
-import { Fragment, type FC } from 'react'
+import { Alert, Slide, type SlideProps, Snackbar } from '@mui/material'
+import { Fragment, useEffect, useState, type FC } from 'react'
+import { v4 as uuidv4 } from 'uuid'
 
 import { useAlert } from '@/hooks/useAlert'
 import { type ProviderProps } from '@/interfaces/misc'
 import { useSelector } from '@/providers/redux/store'
 
-export const SnackbarProvider: FC<ProviderProps> = ({ children }): React.ReactNode => {
+/**
+ * SlideTransition component.
+ *
+ * @param props - SlideProps object containing the props for the Slide component.
+ * @returns The rendered Slide component with the specified direction.
+ */
+function SlideTransition(props: SlideProps): React.ReactNode {
+  const { position } = useSelector((state) => state.global.snackbarAlert)
+
+  const { getTransitionDirection } = useAlert()
+
+  return <Slide {...props} direction={getTransitionDirection(position)} />
+}
+
+/**
+ * SnackbarAlert component.
+ *
+ * @returns The rendered SnackbarAlert component.
+ */
+const SnackbarAlert = (): React.ReactNode => {
   const { content, duration, open, action, icon, position, severity } = useSelector(
     (state) => state.global.snackbarAlert
   )
 
-  const { onClose, getTransitionDirection } = useAlert()
+  const [key, setKey] = useState<string>('')
 
+  const { onClose } = useAlert()
+
+  useEffect(() => {
+    if (open) {
+      setKey(`snackbar-${uuidv4()}`)
+    }
+  }, [open])
+
+  return (
+    <Snackbar
+      key={key}
+      open={open}
+      onClose={onClose}
+      anchorOrigin={position}
+      autoHideDuration={duration}
+      TransitionComponent={SlideTransition}
+    >
+      <Alert severity={severity} action={action} icon={icon}>
+        {content}
+      </Alert>
+    </Snackbar>
+  )
+}
+
+export const SnackbarProvider: FC<ProviderProps> = ({ children }): React.ReactNode => {
   return (
     <Fragment>
       {children}
-      <Snackbar
-        open={open}
-        autoHideDuration={duration}
-        anchorOrigin={position}
-        onClose={onClose}
-        TransitionComponent={(props) => (
-          <Slide {...props} direction={getTransitionDirection(position)} />
-        )}
-      >
-        <Alert severity={severity} action={action} icon={icon}>
-          {content}
-        </Alert>
-      </Snackbar>
+      <SnackbarAlert />
     </Fragment>
   )
 }
