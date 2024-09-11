@@ -18,6 +18,9 @@ i18n
     interpolation: {
       escapeValue: false,
     },
+    react: {
+      transKeepBasicHtmlNodesFor: ['b', 'strong', 'i'],
+    },
   })
   .catch((err) => {
     console.error('i18n initialization failed', err)

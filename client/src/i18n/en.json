@@ -4,6 +4,6 @@
     "search": "Search",
     "copy": "Copy",
     "copyToClipboard": "Copy to clipboard",
-    "copied {{value}} to clipboard": "Copied {{value}} to clipboard"
+    "copied {{value}} to clipboard": "Copied <b>{{value}}</b> to clipboard"
   }
 }
