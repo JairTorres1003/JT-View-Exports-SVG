@@ -1,4 +1,4 @@
-import { AlertProps, SnackbarProps } from '@mui/material'
+import { AlertProps, SnackbarOrigin } from '@mui/material'
 import { type CaseReducer, type PayloadAction } from '@reduxjs/toolkit'
 import { ReactNode } from 'react'
 
@@ -31,7 +31,7 @@ export interface GlobalState {
      * The position of the alert.
      * @default { vertical: 'bottom', horizontal: 'center' }
      */
-    position?: SnackbarProps['anchorOrigin']
+    position?: SnackbarOrigin
   }
 }
 
