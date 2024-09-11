@@ -24,7 +24,7 @@ export const CardSvg = styled<React.ComponentType<CardSvgProps>>(
         .then(() => {
           onOpen(
             <Trans t={t} i18nKey='copied {{value}} to clipboard' values={{ value: title }} />,
-            { severity: 'info' }
+            { severity: 'success' }
           )
         })
         .catch((error) => {
