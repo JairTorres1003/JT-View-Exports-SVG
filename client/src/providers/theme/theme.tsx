@@ -13,6 +13,7 @@ import { useDispatch } from 'react-redux'
 import { setVsCodeStyles } from '../redux/features/VsCodeSlice'
 import { useSelector } from '../redux/store'
 
+import { IconError, IconInfo, IconWarning } from '@/assets/icons/indicators'
 import { IconForward } from '@/assets/icons/navigation'
 import { vscode } from '@/services/vscode'
 
@@ -63,6 +64,75 @@ export const useCustomTheme = (): { theme: Theme } => {
                 [`&.${accordionSummaryClasses.expanded}`]: { transform: 'rotate(90deg)' },
               },
             },
+          },
+          MuiAlert: {
+            defaultProps: {
+              iconMapping: {
+                error: <IconError size={20} />,
+                info: <IconInfo size={20} />,
+                warning: <IconWarning size={20} />,
+              },
+            },
+            styleOverrides: {
+              root: {
+                alignItems: 'center',
+                '& .MuiAlert-icon': { marginBottom: 'auto' },
+              },
+            },
+            variants: [
+              {
+                props: { severity: 'error' },
+                style: {
+                  backgroundColor:
+                    'var(--vscode-notifications-background, var(--JT-SVG-palette-Alert-errorStandardBg))',
+                  color:
+                    'var(--vscode-notifications-foreground, var(--JT-SVG-palette-Alert-errorColor))',
+                  '& .MuiAlert-icon': {
+                    color:
+                      'var(--vscode-notificationsErrorIcon-foreground, var(--JT-SVG-palette-Alert-errorIconColor))',
+                  },
+                },
+              },
+              {
+                props: { severity: 'info' },
+                style: {
+                  backgroundColor:
+                    'var(--vscode-notifications-background, var(--JT-SVG-palette-Alert-infoStandardBg))',
+                  color:
+                    'var(--vscode-notifications-foreground, var(--JT-SVG-palette-Alert-infoColor))',
+                  '& .MuiAlert-icon': {
+                    color:
+                      'var(--vscode-notificationsInfoIcon-foreground, var(--JT-SVG-palette-Alert-infoIconColor))',
+                  },
+                },
+              },
+              {
+                props: { severity: 'success' },
+                style: {
+                  backgroundColor:
+                    'var(--vscode-notifications-background, var(--JT-SVG-palette-Alert-successStandardBg))',
+                  color:
+                    'var(--vscode-notifications-foreground, var(--JT-SVG-palette-Alert-successColor))',
+                  '& .MuiAlert-icon': {
+                    color:
+                      'var(--vscode-notificationsSuccessIcon-foreground, var(--JT-SVG-palette-Alert-successIconColor))',
+                  },
+                },
+              },
+              {
+                props: { severity: 'warning' },
+                style: {
+                  backgroundColor:
+                    'var(--vscode-notifications-background, var(--JT-SVG-palette-Alert-warningStandardBg))',
+                  color:
+                    'var(--vscode-notifications-foreground, var(--JT-SVG-palette-Alert-warningColor))',
+                  '& .MuiAlert-icon': {
+                    color:
+                      'var(--vscode-notificationsWarningIcon-foreground, var(--JT-SVG-palette-Alert-warningIconColor))',
+                  },
+                },
+              },
+            ],
           },
           MuiIconButton: {
             defaultProps: { size: 'small' },
