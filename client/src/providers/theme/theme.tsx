@@ -56,7 +56,7 @@ export const useCustomTheme = (): { theme: Theme } => {
                 flexDirection: 'row-reverse',
                 gap: '4px',
                 minHeight: 38,
-                '&:hover': { backgroundColor: 'var(--vscode-list-hoverBackground, #2c313a)' },
+                '&:hover': { backgroundColor: 'var(--vscode-list-hoverBackground, #2c313a0d)' },
               },
               content: { margin: 0 },
               expandIconWrapper: {
