@@ -3,15 +3,24 @@ import { createSlice } from '@reduxjs/toolkit'
 import { type GlobalReducers, type GlobalState } from '@/interfaces/redux/featureGlobal'
 
 const initialState: GlobalState = {
-  copy: {
-    content: null,
-    show: false,
+  snackbarAlert: {
+    open: false,
+    content: '',
+    duration: 3000,
+    severity: 'info',
+    position: { vertical: 'bottom', horizontal: 'center' },
   },
 }
 
 const reducers: GlobalReducers = {
-  setCopy: (state, { payload }) => {
-    state.copy = payload
+  setAlert: (state, { payload }) => {
+    const defaultAlert: Partial<GlobalState['snackbarAlert']> = {
+      duration: 3000,
+      severity: 'info',
+      position: { vertical: 'bottom', horizontal: 'center' },
+    }
+
+    state.snackbarAlert = { ...defaultAlert, ...payload }
   },
 }
 
@@ -24,6 +33,6 @@ export const GlobalSlice = createSlice({
   reducers,
 })
 
-export const { setCopy } = GlobalSlice.actions
+export const { setAlert } = GlobalSlice.actions
 
 export const GlobalReducer = GlobalSlice.reducer
