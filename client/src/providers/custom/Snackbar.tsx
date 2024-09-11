@@ -31,14 +31,16 @@ const SnackbarAlert = (): React.ReactNode => {
   )
 
   const [key, setKey] = useState<string>('')
+  const [currentContent, setCurrentContent] = useState<typeof content>('')
 
   const { onClose } = useAlert()
 
   useEffect(() => {
-    if (open) {
+    if (open && content !== currentContent) {
       setKey(`snackbar-${uuidv4()}`)
+      setCurrentContent(content)
     }
-  }, [open])
+  }, [open, content])
 
   return (
     <Snackbar

@@ -3,8 +3,7 @@ import { type SyntheticEvent, type ReactNode } from 'react'
 import { useDispatch } from 'react-redux'
 
 import { type GlobalState } from '@/interfaces/redux/featureGlobal'
-import { setAlert } from '@/providers/redux/features/GlobalSlice'
-import { useSelector } from '@/providers/redux/store'
+import { closeAlert, openAlert } from '@/providers/redux/features/GlobalSlice'
 
 interface AlertHook {
   onOpen: (
@@ -21,8 +20,6 @@ interface AlertHook {
  * @returns An object with functions to open and close alerts.
  */
 export const useAlert = (): AlertHook => {
-  const { snackbarAlert } = useSelector((state) => state.global)
-
   const dispatch = useDispatch()
 
   /**
@@ -32,7 +29,7 @@ export const useAlert = (): AlertHook => {
    * @param options - The options for the alert.
    */
   const onOpen: AlertHook['onOpen'] = (content, options): void => {
-    dispatch(setAlert({ ...options, open: true, content }))
+    dispatch(openAlert({ ...options, content }))
   }
 
   /**
@@ -43,7 +40,7 @@ export const useAlert = (): AlertHook => {
       return
     }
 
-    dispatch(setAlert({ ...snackbarAlert, open: false }))
+    dispatch(closeAlert())
   }
 
   /**

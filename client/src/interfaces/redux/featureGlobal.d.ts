@@ -37,9 +37,14 @@ export interface GlobalState {
 
 export interface GlobalReducers {
   /**
-   * Set the content of the alert.
+   * Open the alert with the specified content and options.
    */
-  setAlert: CaseReducer<GlobalState, PayloadAction<GlobalState['snackbarAlert']>>
+  openAlert: CaseReducer<GlobalState, PayloadAction<Omit<GlobalState['snackbarAlert'], 'open'>>>
+  /**
+   * Close the alert.
+   */
+  closeAlert: CaseReducer<GlobalState>
+
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   [key: string]: CaseReducer<GlobalState, PayloadAction<any>>
 }

@@ -13,14 +13,17 @@ const initialState: GlobalState = {
 }
 
 const reducers: GlobalReducers = {
-  setAlert: (state, { payload }) => {
+  openAlert: (state, { payload }) => {
     const defaultAlert: Partial<GlobalState['snackbarAlert']> = {
       duration: 3000,
       severity: 'info',
       position: { vertical: 'bottom', horizontal: 'center' },
     }
 
-    state.snackbarAlert = { ...defaultAlert, ...payload }
+    state.snackbarAlert = { ...defaultAlert, ...payload, open: true }
+  },
+  closeAlert: (state) => {
+    state.snackbarAlert.open = false
   },
 }
 
@@ -33,6 +36,6 @@ export const GlobalSlice = createSlice({
   reducers,
 })
 
-export const { setAlert } = GlobalSlice.actions
+export const { openAlert, closeAlert } = GlobalSlice.actions
 
 export const GlobalReducer = GlobalSlice.reducer
