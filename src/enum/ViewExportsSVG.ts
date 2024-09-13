@@ -7,11 +7,12 @@ export enum SVGPostMessage {
   SendAssetsPath = 'send-assets-path', // assetsPath
   SendLanguage = 'send-language', // language
   SendLastScanDate = 'send-last-scan-date', // lastScanDate
+  SendPlaygroundError = 'send-playground-error', // playgroundError
+  SendRunExtraction = 'send-run-extraction', // startExtraction
   SendSVGComponents = 'send-svg-components', // svgComponents
   SendSVGError = 'send-svg-error', // svgError
   SendSVGFilteredComponents = 'send-svg-filter', // filteredSvgComponents
   SendSVGPlayground = 'send-svg-playground', // customSvgComponent
-  SendPlaygroundError = 'send-playground-error', // playgroundError
   SendTheme = 'send-theme', // currentTheme
   SendVsCodeStyles = 'send-vscode-styles', // vscodeStyles
 }

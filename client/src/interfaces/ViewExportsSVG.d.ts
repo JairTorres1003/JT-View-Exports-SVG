@@ -16,11 +16,12 @@ export interface MessageHandlersView {
   [SVGPostMessage.SendAssetsPath]?: (data: AssetPath) => void
   [SVGPostMessage.SendLanguage]?: (data: string) => void
   [SVGPostMessage.SendLastScanDate]?: (data: string) => void
+  [SVGPostMessage.SendPlaygroundError]?: (data: SVGErrors) => void
+  [SVGPostMessage.SendRunExtraction]?: (data: boolean) => void
   [SVGPostMessage.SendSVGComponents]?: (data: ViewExportSVG[]) => void
   [SVGPostMessage.SendSVGError]?: (data: SVGErrors) => void
   [SVGPostMessage.SendSVGFilteredComponents]?: (data: ViewExportSVG[]) => void
   [SVGPostMessage.SendSVGPlayground]?: (data: SVGComponent) => void
-  [SVGPostMessage.SendPlaygroundError]?: (data: SVGErrors) => void
   [SVGPostMessage.SendTheme]?: (data: ThemeMode) => void
   [SVGPostMessage.SendVsCodeStyles]?: (data: VsCodeStyles) => void
 }
@@ -32,11 +33,12 @@ export interface FuncOnMessage {
   (type: SVGPostMessage.SendAssetsPath, handler: (data: AssetPath) => void): void
   (type: SVGPostMessage.SendLanguage, handler: (data: string) => void): void
   (type: SVGPostMessage.SendLastScanDate, handler: (data: string) => void): void
+  (type: SVGPostMessage.SendPlaygroundError, handler: (data: SVGErrors) => void): void
+  (type: SVGPostMessage.SendRunExtraction, handler: (data: boolean) => void): void
   (type: SVGPostMessage.SendSVGComponents, handler: (data: ViewExportSVG[]) => void): void
   (type: SVGPostMessage.SendSVGError, handler: (data: SVGErrors) => void): void
   (type: SVGPostMessage.SendSVGFilteredComponents, handler: (data: ViewExportSVG[]) => void): void
   (type: SVGPostMessage.SendSVGPlayground, handler: (data: SVGComponent) => void): void
-  (type: SVGPostMessage.SendPlaygroundError, handler: (data: SVGErrors) => void): void
   (type: SVGPostMessage.SendTheme, handler: (data: ThemeMode) => void): void
   (type: SVGPostMessage.SendVsCodeStyles, handler: (data: VsCodeStyles) => void): void
 }

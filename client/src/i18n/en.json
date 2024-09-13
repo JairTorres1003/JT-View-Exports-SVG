@@ -5,6 +5,7 @@
     "copy": "Copy",
     "copyToClipboard": "Copy to clipboard",
     "copied {{value}} to clipboard": "Copied <b>{{value}}</b> to clipboard",
-    "loading": "Loading..."
+    "loading": "Loading...",
+    "extractingComponents": "Extracting components..."
   }
 }

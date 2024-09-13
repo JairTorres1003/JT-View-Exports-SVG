@@ -84,6 +84,16 @@ export class ViewExportsSVGPanel {
   }
 
   /**
+   * Runs the extraction process for the current panel.
+   */
+  public RunExtraction(): void {
+    if (!isEmpty(ViewExportsSVGPanel.currentPanel)) {
+      ViewExportsSVGPanel.currentPanel._panel.reveal(ViewColumn.Active)
+      this._postMessage(SVGPostMessage.SendRunExtraction, true)
+    }
+  }
+
+  /**
    * Renders the current webview panel if it exists, otherwise a new webview panel
    * will be created and displayed.
    * @param extensionUri The URI of the directory containing the extension.
@@ -127,7 +137,6 @@ export class ViewExportsSVGPanel {
   public static update(viewExportSVG: ViewExportSVG[]): void {
     if (!isEmpty(ViewExportsSVGPanel.currentPanel)) {
       ViewExportsSVGPanel.currentPanel.viewExportSVG = viewExportSVG
-      ViewExportsSVGPanel.currentPanel._panel.reveal(ViewColumn.Active)
 
       if (!isEmpty(viewExportSVG)) {
         ViewExportsSVGPanel.currentPanel._postMessage(
@@ -289,6 +298,8 @@ export class ViewExportsSVGPanel {
    * Retrieves the SVG components and sends them as a post message.
    */
   private _getSVGComponents(): void {
+    this._postMessage(SVGPostMessage.SendRunExtraction, true)
+
     if (!isEmpty(this.viewExportSVG)) {
       this._postMessage(SVGPostMessage.SendSVGComponents, this.viewExportSVG)
     } else {

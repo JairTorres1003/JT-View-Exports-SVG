@@ -26,11 +26,12 @@ export type PostMessage =
   | { type: SVGPostMessage.SendAssetsPath; data: AssetPath }
   | { type: SVGPostMessage.SendLanguage; data: string }
   | { type: SVGPostMessage.SendLastScanDate; data: string }
+  | { type: SVGPostMessage.SendPlaygroundError; data: SVGErrors }
+  | { type: SVGPostMessage.SendRunExtraction; data: boolean }
   | { type: SVGPostMessage.SendSVGComponents; data: ViewExportSVG[] }
   | { type: SVGPostMessage.SendSVGError; data: SVGErrors }
   | { type: SVGPostMessage.SendSVGFilteredComponents; data: ViewExportSVG[] }
   | { type: SVGPostMessage.SendSVGPlayground; data: SVGComponent }
-  | { type: SVGPostMessage.SendPlaygroundError; data: SVGErrors }
   | { type: SVGPostMessage.SendTheme; data: ThemeMode }
   | { type: SVGPostMessage.SendVsCodeStyles; data: VsCodeStyles }
 
@@ -78,6 +79,11 @@ export interface FuncPostMessage {
    * @param data - The error data.
    */
   (type: SVGPostMessage.SendPlaygroundError, data: SVGErrors): void
+  /**
+   * Sends the start extraction message to the webview.
+   * @param data - The theme mode.
+   */
+  (type: SVGPostMessage.SendRunExtraction, data: boolean): void
   /**
    * Sends the current theme to the webview.
    * @param data - The theme mode.
