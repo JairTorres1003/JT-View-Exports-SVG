@@ -7,6 +7,7 @@ import {
   tooltipClasses,
   type Theme,
 } from '@mui/material'
+import type {} from '@mui/material/themeCssVarsAugmentation'
 import { useEffect, useMemo } from 'react'
 import { useDispatch } from 'react-redux'
 

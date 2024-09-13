@@ -27,9 +27,20 @@
           "pattern": ".*{{value}}.*",
           "patternErrorMessage": "The message must contain the variable {{value}}",
           "default": "Copied {{value}} to clipboard"
+        },
+        "loading": {
+          "type": "string",
+          "default": "Loading..."
         }
       },
-      "required": ["clear", "search", "copy", "copyToClipboard"]
+      "required": [
+        "clear",
+        "search",
+        "copy",
+        "copyToClipboard",
+        "copied {{value}} to clipboard",
+        "loading"
+      ]
     }
   },
   "required": ["labels"]
