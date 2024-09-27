@@ -1,5 +1,7 @@
 import ExtensionConfigManager from './configManager'
 
+import { DEFAULT_ICON_PROPERTIES } from '@/constants/misc'
+
 /**
  * Default properties for the icons.
  * This object provides default values for various properties of the icons.
@@ -9,7 +11,7 @@ export class DefaultIconProperties extends ExtensionConfigManager<Record<string,
   private readonly defaultIconPropertiesUser: Record<string, string> = {}
 
   constructor() {
-    super('defaultIconProperties', {})
+    super('defaultIconProperties', DEFAULT_ICON_PROPERTIES)
     this.defaultIconProperties = this.get() ?? {}
     this.defaultIconPropertiesUser = this.inspect() ?? {}
   }
@@ -19,6 +21,7 @@ export class DefaultIconProperties extends ExtensionConfigManager<Record<string,
    */
   public getAllProperties(): Record<string, unknown> {
     const properties: Record<string, unknown> = {
+      ...this._initialValue,
       ...this.defaultIconPropertiesUser,
       ...this.defaultIconProperties,
     }

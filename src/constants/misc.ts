@@ -20,3 +20,21 @@ export const IGNORE_DIRECTORIES = [
   'node_modules',
   'out',
 ]
+
+/**
+ * The default icon properties.
+ */
+export const DEFAULT_ICON_PROPERTIES = {
+  className: '',
+  color: '#0a0a0a',
+  fill: '#0a0a0a',
+  height: '28',
+  size: '28',
+  state: 'false',
+  stroke: '#0a0a0a',
+  strokeColor: '#0a0a0a',
+  strokeWidth: '0.2',
+  style: '{}',
+  sx: '{}',
+  width: '28',
+}
