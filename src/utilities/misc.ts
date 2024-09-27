@@ -1,3 +1,5 @@
+import { minimatch } from 'minimatch'
+
 /**
  * Checks if a value is empty.
  * @param value - The value to check.
@@ -113,4 +115,14 @@ export const formatDate = (
   const formatter = new Intl.DateTimeFormat(language, options ?? opt)
 
   return formatter.format(date)
+}
+
+/**
+ * Checks if a path matches any of the given patterns.
+ * @param patterns - An array of patterns.
+ * @param pathToCheck - The path to check.
+ * @returns `true` if the path matches any pattern, `false` otherwise.
+ */
+export const matchesPattern = (patterns: string[], pathToCheck: string): boolean => {
+  return patterns.some((pattern) => minimatch(pathToCheck, pattern))
 }
