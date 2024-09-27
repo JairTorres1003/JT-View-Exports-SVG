@@ -74,7 +74,7 @@
           "JT-View-Exports-SVG.ignoreDirectories": {
             "type": "array",
             "default": [],
-            "description": "An array to store the names of directories to ignore when analyzing files for SVG icons.\nDefault:\n.git\n.github\n.husky\n.idea\n.vscode-test\n.vscode\nbuild\ncoverage\ndist\nnode_modules\nout",
+            "description": "An array to store the names of directories to ignore when analyzing files for SVG icons.\nDefault:\n.git\n.github\n.husky\n.idea\n.idx\n.vscode-test\n.vscode\nbuild\ncoverage\ndist\nnode_modules\nout",
             "items": {
               "type": "string"
             }
@@ -92,14 +92,14 @@
               "color": "#0a0a0a",
               "fill": "#0a0a0a",
               "height": "28",
-              "width": "28",
               "size": "28",
               "state": "false",
               "stroke": "#0a0a0a",
               "strokeColor": "#0a0a0a",
               "strokeWidth": "0.2",
               "style": "{}",
-              "sx": "{}"
+              "sx": "{}",
+              "width": "28"
             },
             "additionalProperties": {
               "type": "string"

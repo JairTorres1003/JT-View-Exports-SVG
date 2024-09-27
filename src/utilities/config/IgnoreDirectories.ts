@@ -2,6 +2,8 @@ import { isEmpty } from '../misc'
 
 import ExtensionConfigManager from './configManager'
 
+import { IGNORE_DIRECTORIES } from '@/constants/misc'
+
 export class IgnoreDirectories extends ExtensionConfigManager<string[]> {
   /**
    * The directories to ignore.
@@ -13,7 +15,7 @@ export class IgnoreDirectories extends ExtensionConfigManager<string[]> {
   private readonly ignoreDirectoriesUser: string[] = []
 
   constructor() {
-    super('ignoreDirectories', [])
+    super('ignoreDirectories', IGNORE_DIRECTORIES)
     this.ignoreDirectories = this.get() ?? []
     this.ignoreDirectoriesUser = this.inspect() ?? []
   }
@@ -40,6 +42,6 @@ export class IgnoreDirectories extends ExtensionConfigManager<string[]> {
    * @returns An array of strings representing the directories to ignore.
    */
   public get _allDirectories(): string[] {
-    return [...this.ignoreDirectories, ...this.ignoreDirectoriesUser]
+    return [...this.ignoreDirectories, ...this.ignoreDirectoriesUser, ...this._initialValue]
   }
 }
