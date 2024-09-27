@@ -74,7 +74,7 @@
           "JT-View-Exports-SVG.ignoreDirectories": {
             "type": "array",
             "default": [],
-            "description": "An array to store the names of directories to ignore when analyzing files for SVG icons.\nDefault:\n.git\n.github\n.husky\n.idea\n.idx\n.vscode-test\n.vscode\nbuild\ncoverage\ndist\nnode_modules\nout",
+            "description": "An array to store the pattern of directories to ignore when analyzing files for SVG icons.\nDefault:\n**/.git\n**/.github\n**/.husky\n**/.idea\n**/.idx\n**/.vscode*\n**/build\n**/coverage\n**/dist\n**/node_modules\n**/out",
             "items": {
               "type": "string"
             }
@@ -152,6 +152,7 @@
     "eslint-plugin-prettier": "^5.2.1",
     "glob": "^11.0.0",
     "husky": "^9.1.5",
+    "minimatch": "^10.0.1",
     "prettier": "^3.3.3",
     "rimraf": "^6.0.1",
     "sinon": "^18.0.0",
