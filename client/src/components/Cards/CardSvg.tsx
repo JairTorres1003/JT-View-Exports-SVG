@@ -64,11 +64,11 @@ export const CardSvg = styled<React.ComponentType<CardSvgProps>>(
     height: '66px',
     position: 'relative',
     '& > :first-of-type': {
-      width: 'calc(100% - 30px)',
-      height: 'calc(100% - 34px)',
-      position: 'absolute',
-      inset: 0,
-      margin: 'auto',
+      width: 'calc(100% - 30px) !important',
+      height: 'calc(100% - 34px) !important',
+      position: 'absolute !important',
+      inset: '0 !important',
+      margin: 'auto !important',
     },
   },
 }))
