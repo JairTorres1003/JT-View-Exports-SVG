@@ -247,27 +247,6 @@ export const IconDownloadDoc = ({ color = '#2a2634', size = 32, className = '', 
   </svg>
 )
 
-export const IconAthleticDoc = ({ color = '#2a2634', size = 32, className = '', sx = {} }) => (
-  <svg
-    xmlns='http://www.w3.org/2000/svg'
-    width={size}
-    height={size}
-    viewBox='0 0 32 32'
-    fill='none'
-    className={className}
-    style={sx}
-  >
-    <path
-      d='M10.0898 24.31L12.2498 24.28L13.1398 22.77L18.6598 22.71L19.5598 24.2L21.7398 24.17L19.9998 21.02L13.9198 21.1L16.7998 14.73L14.7198 14.76L10.0898 24.31Z'
-      fill={color}
-    />
-    <path
-      d='M17.07 3H6V28.12H25V10.98L17.07 3ZM17.51 5.56L22.51 10.56H17.51V5.56ZM23.51 26.62H7.50998V4.5H16.02V12.04H23.56L23.51 26.62Z'
-      fill={color}
-    />
-  </svg>
-)
-
 export const IconBono = ({ color = '#2a2634', size = 32, className = '', sx = {} }) => (
   <svg
     xmlns='http://www.w3.org/2000/svg'
