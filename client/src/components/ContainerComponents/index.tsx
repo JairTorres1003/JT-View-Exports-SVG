@@ -18,18 +18,18 @@ export const ContainerComponents = (): React.ReactNode => {
       {components.map((item) => (
         <Accordion
           disableGutters
-          key={item.groupKind}
-          onChange={toggleExpanded(item.groupKind)}
-          expanded={isExpanded.includes(item.groupKind)}
+          key={item.groupKind.id}
+          onChange={toggleExpanded(item.groupKind.id)}
+          expanded={isExpanded.includes(item.groupKind.id)}
         >
           <AccordionSummary
-            id={`${item.groupKind}-header`}
-            aria-controls={`${item.groupKind}-content`}
+            id={`${item.groupKind.id}-header`}
+            aria-controls={`${item.groupKind.id}-content`}
           >
             <MiddleEllipsis>
-              <Tooltip placement='top' title={item.labelGroupKind}>
+              <Tooltip placement='top' title={item.groupKind.label}>
                 <Typography component='span' noWrap>
-                  {item.labelGroupKind}
+                  {item.groupKind.label}
                 </Typography>
               </Tooltip>
             </MiddleEllipsis>

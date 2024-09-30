@@ -82,7 +82,8 @@
           "JT-View-Exports-SVG.lastScanDate": {
             "type": "string",
             "default": "",
-            "description": "The date of the last scan of the workspace for SVG icons."
+            "description": "The date of the last scan of the workspace for SVG icons.",
+            "readOnly": true
           },
           "JT-View-Exports-SVG.defaultIconProperties": {
             "type": "object",
@@ -109,6 +110,14 @@
             "type": "boolean",
             "default": false,
             "description": "Indicates whether or not to show icons that are not being exported."
+          },
+          "JT-View-Exports-SVG.groupPatterns": {
+            "type": "object",
+            "markdownDescription": "An array of patterns to group icon files. Each pattern requires an 'item' (the pattern) and a 'value (the group name).\nExample:\n| item | value |\n| --- | --- |\n| ** | All Icons |\n| **/Flag* | Flags |\n| **/Symbol*.{js, jsx} | Symbols |",
+            "default": {},
+            "additionalProperties": {
+              "type": "string"
+            }
           }
         }
       }

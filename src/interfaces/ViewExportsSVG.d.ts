@@ -21,13 +21,12 @@ export interface ViewExportSVG {
    */
   components: SVGComponent[]
   /**
-   * The kind of the label group.
+   * The group kind of the SVG components.
    */
-  groupKind: string
-  /**
-   * The label of the group kind.
-   */
-  labelGroupKind: string
+  groupKind: {
+    id: string
+    label: string
+  }
   /**
    * Indicates whether the SVG components that are not exported should be shown.
    */

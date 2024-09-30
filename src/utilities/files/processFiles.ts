@@ -8,6 +8,7 @@ import { isEmpty } from '../misc'
 import { extractSVGData } from '../svg'
 import { getTranslations } from '../vscode'
 
+import { groupIconsByPattern } from './groupIconsByPattern'
 import { getFileTimestamp, pathToSVGFile } from './misc'
 
 import { REGEX_FILE } from '@/constants/regex'
@@ -26,7 +27,6 @@ export async function processFiles(
 ): Promise<void> {
   try {
     const i18n = getTranslations()
-    const currentItems = items
     const fileSelected: Uri[] = []
     const progressOptions: ProgressOptions = {
       location: ProgressLocation.Notification,
@@ -40,9 +40,7 @@ export async function processFiles(
       const SVGFiles: SVGFile[] = []
       const SVGExports: ViewExportSVG[] = []
 
-      currentItems.sort((a, b) => a.fsPath.localeCompare(b.fsPath))
-
-      currentItems.forEach((item) => {
+      items.forEach((item) => {
         if (item.scheme === 'file') {
           const absolutePath = item.fsPath
           const extname = path.extname(absolutePath)
@@ -81,15 +79,12 @@ export async function processFiles(
               : svg.exportComponents
 
             if (components.length > 0) {
-              components.sort((a, b) => a.name.localeCompare(b.name))
-
               const result: ViewExportSVG = {
                 components,
                 totalExports,
                 totalNoExports,
                 totalSVG,
-                groupKind: file.absolutePath,
-                labelGroupKind: file.relativePath,
+                groupKind: { id: file.absolutePath, label: file.relativePath },
                 isShowNoExports: configShowNoExports.isShow(),
               }
 
@@ -111,8 +106,11 @@ export async function processFiles(
         })
       }
 
+      // Group the SVG exports by pattern
+      const groupedSVGExports = await groupIconsByPattern(SVGExports)
+
       // Process the SVG exports
-      operation(SVGExports)
+      operation(groupedSVGExports)
 
       return progress
     })
