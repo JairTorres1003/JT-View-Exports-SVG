@@ -59,8 +59,18 @@ export function getPropertyValues(
       return getLogicalExpression(value.operator, valueA, valueB)
     case 'ConditionalExpression':
       valueAny = getPropertyValues(value.test, properties) as boolean
-      valueA = getPropertyValues(value.consequent, properties)
-      valueB = getPropertyValues(value.alternate, properties)
+
+      if (t.isJSXElement(value.consequent) || t.isJSXFragment(value.consequent)) {
+        valueA = value.consequent
+      } else {
+        valueA = getPropertyValues(value.consequent, properties)
+      }
+
+      if (t.isJSXElement(value.alternate) || t.isJSXFragment(value.alternate)) {
+        valueB = value.alternate
+      } else {
+        valueB = getPropertyValues(value.alternate, properties)
+      }
 
       return valueAny ? valueA : valueB
     case 'ObjectExpression':
