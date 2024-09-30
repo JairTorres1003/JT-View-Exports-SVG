@@ -6,7 +6,7 @@ export interface GetSVGComponent extends Pick<SVGComponent, 'component' | 'isAni
 }
 
 export interface GetChildAttributes {
-  children: SVGComponentProps[]
+  children: SVGComponentProps['children']
   isMotion: boolean
   hasErrors: boolean
   errors?: SVGErrors

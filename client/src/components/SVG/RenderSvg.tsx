@@ -26,14 +26,18 @@ const DynamicTagComponent = forwardRef<RenderSvgProps, RenderSvgProps>(function 
     throw new Error('The component is empty.')
   }
 
+  const c = cn(className, component.props?.className as string | undefined)
+
   const Component = createElement(
     component.tag,
     {
       ...component.props,
-      className: cn(className, component.props?.className as string | undefined),
+      className: isEmpty(c) ? undefined : c,
       ref,
     },
-    component.children.map((child) => <DynamicTagComponent key={child.tag} component={child} />)
+    component.children.map((child, index) =>
+      typeof child === 'string' ? child : <DynamicTagComponent key={index} component={child} />
+    )
   )
 
   return Component

@@ -55,6 +55,7 @@ export const SVG_TAGS: Record<SVGTagName, SVGTagName> = {
   radialGradient: 'radialGradient',
   rect: 'rect',
   stop: 'stop',
+  style: 'style',
   svg: 'svg',
   switch: 'switch',
   symbol: 'symbol',

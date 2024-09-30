@@ -101,7 +101,7 @@ export interface SVGComponent {
 export interface SVGComponentProps {
   tag: string | SVGTagName
   isMotion: boolean
-  children: SVGComponentProps[]
+  children: Array<SVGComponentProps | string>
   props: Record<string, any>
 }
 

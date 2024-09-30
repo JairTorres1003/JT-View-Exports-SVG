@@ -62,6 +62,7 @@ export type SVGTagName =
   | 'radialGradient'
   | 'rect'
   | 'stop'
+  | 'style'
   | 'svg'
   | 'switch'
   | 'symbol'
