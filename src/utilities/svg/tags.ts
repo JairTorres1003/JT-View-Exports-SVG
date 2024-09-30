@@ -48,7 +48,7 @@ export function getSVGTagName(openingElement: t.JSXOpeningElement, file: SVGFile
 
   return {
     ...tag,
-    name,
+    name: name ?? tag.name,
     isValid: !isEmpty(name),
   }
 }
