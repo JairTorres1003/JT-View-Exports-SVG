@@ -114,7 +114,7 @@ export function getChildAttributes(
         processElement(value)
       } else {
         try {
-          components.push(`${getPropertyValues(child.expression, params) as string}`)
+          components.push(`${value as string}`)
         } catch (error) {
           hasErrors = true
           errors = {
