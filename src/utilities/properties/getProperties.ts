@@ -1,7 +1,7 @@
 import * as t from '@babel/types'
 import { camelCase, isArray } from 'lodash'
 
-import { cssStringToObject } from '../cssStringToObject'
+import { cssStringToObject } from '../css/cssStringToObject'
 import { isEmpty } from '../misc'
 
 import { getPropertyValues } from './propertyValues'
