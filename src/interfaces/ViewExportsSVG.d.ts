@@ -133,7 +133,7 @@ export interface ExtractSVGExports {
   }
 }
 
-export interface SVGPlayground {
+export interface SVGIcon {
   /**
    * The name of the SVG component.
    */
@@ -142,6 +142,9 @@ export interface SVGPlayground {
    * The location of the SVG component in the file.
    */
   location: SVGLocation
+}
+
+export interface SVGPlayground extends SVGIcon {
   /**
    * The SVG component in use and edited.
    * @example
