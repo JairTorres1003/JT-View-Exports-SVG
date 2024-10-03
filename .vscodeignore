@@ -9,9 +9,8 @@ out/utilities/saveResponseFiles.js
 
 # Ignore source code
 src/**
-!src/i18n
-webview-ui/**
-!webview-ui/build
+client/**
+!client/build
 
 # Ignore Misc
 .yarnrc
