@@ -1,4 +1,4 @@
-import { ConfigurationTarget, workspace } from 'vscode'
+import { ConfigurationTarget, l10n, workspace } from 'vscode'
 
 import { pathToSVGFile } from '../files'
 
@@ -75,7 +75,7 @@ export class AssetsPaths extends ExtensionConfigManager<string[]> {
         await this.update(value, ConfigurationTarget.Workspace)
         await this.update(valueUser, ConfigurationTarget.Global)
       } catch (error) {
-        console.error('Error setting assets path:', error)
+        console.error(`${l10n.t('Error setting assets path')}:`, error)
       }
     }
   }
@@ -108,7 +108,7 @@ export class AssetsPaths extends ExtensionConfigManager<string[]> {
         await this.update(value, ConfigurationTarget.Workspace)
         await this.update(valueUser, ConfigurationTarget.Global)
       } catch (error) {
-        console.error('Error removing assets path:', error)
+        console.error(`${l10n.t('Error removing assets path')}:`, error)
       }
     }
   }
@@ -128,7 +128,7 @@ export class AssetsPaths extends ExtensionConfigManager<string[]> {
           // Add the file to the assets path if it doesn't exist
           if (!this.assetsPath.includes(svgFile.relativePath)) {
             this.set([svgFile]).catch((error) => {
-              console.error('Error setting assets path:', error)
+              console.error(`${l10n.t('Error setting assets path')}:`, error)
             })
           }
 

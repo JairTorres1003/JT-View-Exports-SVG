@@ -1,6 +1,6 @@
 import * as path from 'path'
 
-import { FileType, Uri, workspace } from 'vscode'
+import { FileType, l10n, Uri, workspace } from 'vscode'
 
 import { IgnoreDirectories } from '../config'
 import { isEmpty, matchesPattern } from '../misc'
@@ -40,7 +40,7 @@ export async function allowedFilesInFolder(folder: Uri): Promise<Uri[]> {
           const subFiles = await allowedFilesInFolder(filePath)
           allowedFiles.push(...subFiles)
         } catch (error) {
-          console.error(`Error reading directory "${filePath.fsPath}":`, error)
+          console.error(l10n.t('Error reading directory "{file}":', { file: filePathStr }), error)
         }
       }
     }

@@ -2,17 +2,12 @@ import { commands, type ExtensionContext, type Uri } from 'vscode'
 
 import { showMenu } from './commands'
 import { initializeCacheManager } from './utilities/cache'
-import { loadLanguage } from './utilities/vscode'
 
 /**
  * This method is called when your extension is activated.
  * @param context The extension context.
  */
 export function activate(context: ExtensionContext): void {
-  loadLanguage(context.extensionUri).catch((error) => {
-    console.error('Failed to load language:', error)
-  })
-
   initializeCacheManager(context)
 
   context.subscriptions.push(

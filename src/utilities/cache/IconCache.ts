@@ -1,6 +1,4 @@
-import { type Uri } from 'vscode'
-
-import { translate } from '../vscode'
+import { l10n, type Uri } from 'vscode'
 
 import { FileModifiedCache } from './FileModifiedCache'
 
@@ -110,14 +108,14 @@ export class IconCache extends FileModifiedCache<SVGIconCache[]> {
   }
 
   set(): void {
-    throw new Error(translate('methodNotImplemented'))
+    throw new Error(l10n.t('Method not implemented'))
   }
 
   get(): SVGIconCache[] | undefined {
-    throw new Error(translate('methodNotImplemented'))
+    throw new Error(l10n.t('Method not implemented'))
   }
 
   delete(): void {
-    throw new Error(translate('methodNotImplemented'))
+    throw new Error(l10n.t('Method not implemented'))
   }
 }

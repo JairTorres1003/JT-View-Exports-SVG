@@ -1,8 +1,7 @@
-import { window, workspace, type Uri } from 'vscode'
+import { l10n, window, workspace, type Uri } from 'vscode'
 
 import { LastScanDate } from '../config'
-import { isEmpty } from '../misc'
-import { translate } from '../vscode'
+import { getUnknownError, isEmpty } from '../misc'
 
 import { allowedFilesInFolder } from './allowedFilesInFolder'
 import { processFiles } from './processFiles'
@@ -27,8 +26,11 @@ export async function scanningWorkspace(): Promise<Uri[]> {
 
     return files
   } catch (error) {
-    console.error('Error scanning workspace:', error)
-    window.showErrorMessage(translate('errorScanningWorkspace')).then(undefined, console.error)
+    const errorMessage = l10n.t('Error scanning workspace: {error}', {
+      error: getUnknownError(error),
+    })
+    console.error(errorMessage, error)
+    window.showErrorMessage(errorMessage).then(undefined, console.error)
     return []
   }
 }
@@ -46,7 +48,10 @@ export async function scanningFiles(files: Uri[]): Promise<void> {
 
     await processFiles(files, operation)
   } catch (error) {
-    console.error('Error scanning files:', error)
-    window.showErrorMessage(translate('errorScanningFiles')).then(undefined, console.error)
+    const errorMessage = l10n.t('Error scanning files: {error}', {
+      error: getUnknownError(error),
+    })
+    console.error(errorMessage, error)
+    window.showErrorMessage(errorMessage).then(undefined, console.error)
   }
 }

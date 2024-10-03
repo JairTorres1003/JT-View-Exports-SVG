@@ -1,4 +1,6 @@
 export * from './AssetsPaths'
+export * from './DefaultIconProperties'
+export * from './GroupPatterns'
 export * from './IgnoreDirectories'
 export * from './LastScanDate'
 export * from './ShowNotExportedIcons'

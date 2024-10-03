@@ -1,4 +1,4 @@
-import { getTranslations } from '../vscode'
+import { l10n } from 'vscode'
 
 import { type SVGComponent, type SVGErrors, type ViewExportSVG } from '@/interfaces/ViewExportsSVG'
 
@@ -13,14 +13,12 @@ export function filteredExports(
   viewExportSVG: ViewExportSVG[],
   query: string
 ): ViewExportSVG[] | SVGErrors {
-  const i18n = getTranslations()
-
   // If the query is empty, returns the original array.
   if (query.trim().length === 0) return viewExportSVG
 
   // If the query has less than 3 characters, returns an object with an error message.
   if (query.trim().length < 3) {
-    return { message: i18n.searchMinChars, location: {} }
+    return { location: {}, message: l10n.t('Please enter at least 3 characters to search...') }
   }
 
   const filtered = viewExportSVG.flatMap((view) => {
@@ -29,7 +27,7 @@ export function filteredExports(
     return components.length > 0 ? [{ ...view, components }] : []
   })
 
-  return filtered.length > 0 ? filtered : { message: i18n.noIconsFound, location: {} }
+  return filtered.length > 0 ? filtered : { location: {}, message: l10n.t('No results found...') }
 }
 
 /**

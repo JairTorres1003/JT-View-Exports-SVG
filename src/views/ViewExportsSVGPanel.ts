@@ -6,6 +6,7 @@ import {
   Uri,
   ViewColumn,
   window,
+  l10n,
 } from 'vscode'
 
 import { SVGPostMessage, SVGReceiveMessage } from '@/enum/ViewExportsSVG'
@@ -23,18 +24,17 @@ import {
   type ReceiveMessage,
 } from '@/interfaces/views/ViewExportsSVGPanel'
 import { AssetsPaths, LastScanDate } from '@/utilities/config'
-import { openFile, pathToSVGFile, scanningFiles, scanningWorkspace } from '@/utilities/files'
-import { getNonce } from '@/utilities/files/nonce'
+import {
+  getNonce,
+  openFile,
+  pathToSVGFile,
+  scanningFiles,
+  scanningWorkspace,
+} from '@/utilities/files'
 import { getUnknownError, isEmpty } from '@/utilities/misc'
 import { filteredExports } from '@/utilities/svg/filtered'
 import { playground } from '@/utilities/svg/playground'
-import {
-  getCurrentTheme,
-  getStyles,
-  getTranslations,
-  getUri,
-  svgFileToUri,
-} from '@/utilities/vscode'
+import { getCurrentTheme, getStyles, getUri, svgFileToUri } from '@/utilities/vscode'
 
 export class ViewExportsSVGPanel {
   public static currentPanel: ViewExportsSVGPanel | undefined
@@ -101,7 +101,6 @@ export class ViewExportsSVGPanel {
    */
   public static render(extensionUri: Uri, viewExportSVG: ViewExportSVG[]): void {
     const column = window.activeTextEditor?.viewColumn ?? ViewColumn.One
-    const i18n = getTranslations()
 
     // If we already have a panel, show it
     if (!isEmpty(ViewExportsSVGPanel.currentPanel)) {
@@ -112,7 +111,7 @@ export class ViewExportsSVGPanel {
     // Otherwise, create a new panel
     const panel = window.createWebviewPanel(
       ViewExportsSVGPanel.configName,
-      i18n.extensionTitle,
+      l10n.t('extension.title'),
       column,
       {
         enableScripts: true, // Enable JavaScript in the webview
@@ -144,8 +143,7 @@ export class ViewExportsSVGPanel {
           viewExportSVG
         )
       } else {
-        const i18n = getTranslations()
-        const error: SVGErrors = { message: i18n.noIconsFound, location: {} }
+        const error: SVGErrors = { location: {}, message: l10n.t('No SVG components found...') }
         ViewExportsSVGPanel.currentPanel._postMessage(SVGPostMessage.SendSVGError, error)
       }
     }
@@ -176,7 +174,6 @@ export class ViewExportsSVGPanel {
    * @returns The generated HTML content.
    */
   private _getWebviewContent(webview: Webview, extensionUri: Uri): string {
-    const i18n = getTranslations()
     const assets = this._getWebviewAssets(webview, extensionUri)
     const nonce = getNonce()
 
@@ -188,7 +185,7 @@ export class ViewExportsSVGPanel {
           <link rel="icon" type="image/svg+xml" href="${assets.icon}" />
           <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no" />
           <link href="${assets.styles}" rel="stylesheet" />
-          <title>${i18n.extensionTitle}</title>
+          <title>${l10n.t('extension.title')}</title>
         </head>
         <body>
           <div id="root"></div>
@@ -207,7 +204,7 @@ export class ViewExportsSVGPanel {
    */
   private readonly _postMessage: FuncPostMessage = (type, data) => {
     this._panel.webview.postMessage({ type, data }).then(undefined, (error) => {
-      console.error('Error posting message to webview:', error)
+      console.error(l10n.t('Error posting message to webview:'), error)
     })
   }
 
@@ -216,8 +213,6 @@ export class ViewExportsSVGPanel {
    * @param webview The webview instance.
    */
   private _setWebviewMessageListener(webview: Webview): void {
-    const i18n = getTranslations()
-
     try {
       const handlers: HandlerReceiveMessage = {
         [SVGReceiveMessage.ExtractSVGComponent]: this._extractSVGComponent.bind(this),
@@ -239,7 +234,7 @@ export class ViewExportsSVGPanel {
         const handler = handlers[event.type] as (arg0?: HandlerArgs<HandlerReceiveMessage>) => void
 
         if (isEmpty(handler) || typeof handler !== 'function') {
-          console.error('No handler found for event:', event)
+          console.error(l10n.t('No handler found for event:'), event)
           return
         }
 
@@ -252,10 +247,9 @@ export class ViewExportsSVGPanel {
 
       webview.onDidReceiveMessage(listener, undefined, this._disposables)
     } catch (error) {
-      console.error(`${i18n.errorSettingWebviewMessageListener}:`, error)
-      window
-        .showErrorMessage(i18n.errorSettingWebviewMessageListener)
-        .then(undefined, console.error)
+      const errorMessage = l10n.t('Error setting webview message listener')
+      console.error(errorMessage, error)
+      window.showErrorMessage(errorMessage).then(undefined, console.error)
     }
   }
 
@@ -303,8 +297,10 @@ export class ViewExportsSVGPanel {
     if (!isEmpty(this.viewExportSVG)) {
       this._postMessage(SVGPostMessage.SendSVGComponents, this.viewExportSVG)
     } else {
-      const i18n = getTranslations()
-      this._postMessage(SVGPostMessage.SendSVGError, { message: i18n.noIconsFound, location: {} })
+      this._postMessage(SVGPostMessage.SendSVGError, {
+        location: {},
+        message: l10n.t('No SVG components found...'),
+      })
     }
   }
 
@@ -337,9 +333,12 @@ export class ViewExportsSVGPanel {
         }
       })
       .catch((error) => {
-        console.error('Error generating SVG playground:', error)
+        const errorMessage = l10n.t('Error generating SVG playground {error}', {
+          error: getUnknownError(error),
+        })
+        console.error(errorMessage, error)
         this._postMessage(SVGPostMessage.SendPlaygroundError, {
-          message: getUnknownError(error),
+          message: errorMessage,
           location: {},
         })
       })

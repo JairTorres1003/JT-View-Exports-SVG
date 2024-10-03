@@ -1,8 +1,8 @@
 import type * as t from '@babel/types'
+import { l10n } from 'vscode'
 
 import { isEmpty } from '../misc'
 import { getProperties, propertyManager } from '../properties'
-import { translate } from '../vscode'
 
 import { getChildAttributes } from './children'
 import { getSVGTagName } from './tags'
@@ -30,18 +30,18 @@ export function getSVGComponent(element: t.JSXElement, file: SVGFile): GetSVGCom
     if (svgProps.xmlns !== 'http://www.w3.org/2000/svg') {
       hasErrors = true
       errors = {
-        message: translate('invalidAttribute', {
+        location: { start: openingElement.loc?.start, end: openingElement.loc?.end },
+        message: l10n.t('Invalid {attr} attribute, expected "{expected}" but got {actual}', {
           attr: 'xmlns',
           expected: 'http://www.w3.org/2000/svg',
           actual: svgProps.xmlns?.toString() ?? 'undefined',
         }),
-        location: { start: openingElement.loc?.start, end: openingElement.loc?.end },
       }
     } else if (!tag.isValid || tag.name === 'Fragment' || isEmpty(tag.name)) {
       hasErrors = true
       errors = {
-        message: translate('invalidSvgTag', { tag: tag.name ?? 'undefined' }),
         location: tag.location,
+        message: l10n.t('Invalid SVG tag: {tag}', { tag: tag.name ?? 'undefined' }),
       }
     } else if (children.length > 0) {
       const child = getChildAttributes(children, file)

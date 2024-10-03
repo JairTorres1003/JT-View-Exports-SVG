@@ -1,10 +1,10 @@
 import * as fs from 'fs'
 import * as path from 'path'
 
-import { Position, Selection, TextEditorRevealType, Uri, window, workspace } from 'vscode'
+import { l10n, Position, Selection, TextEditorRevealType, Uri, window, workspace } from 'vscode'
 
 import { getUnknownError } from '../misc'
-import { getWorkspacePath, translate } from '../vscode'
+import { getWorkspacePath } from '../vscode'
 
 import { type SVGFile } from '@/interfaces/ViewExportsSVG'
 import { type OpenFile } from '@/interfaces/views/ViewExportsSVGPanel'
@@ -36,7 +36,9 @@ export async function getLanguageFromFile(file: Uri): Promise<string> {
     const document = await workspace.openTextDocument(file)
     return document.languageId ?? 'plaintext'
   } catch (error) {
-    console.error('Error getting language from file: ', getUnknownError(error))
+    console.error(
+      l10n.t('Error getting language from file: {error}', { error: getUnknownError(error) })
+    )
     return 'plaintext'
   }
 }
@@ -81,13 +83,13 @@ export function openFile({ file, position = { column: 1, line: 1, index: 1 } }: 
       })().catch(console.error)
     } else {
       window
-        .showErrorMessage(translate('noExistedFile', { file: absolutePath }))
+        .showErrorMessage(l10n.t('File does not exist: {file}', { file: absolutePath }))
         .then(undefined, console.error)
     }
   } catch (error) {
     console.error(`Error opening file ${absolutePath} in editor: `, getUnknownError(error))
     window
-      .showErrorMessage(translate('errorOpeningFile', { file: absolutePath }))
+      .showErrorMessage(l10n.t('Error opening file: {file}', { file: absolutePath }))
       .then(undefined, console.error)
   }
 }

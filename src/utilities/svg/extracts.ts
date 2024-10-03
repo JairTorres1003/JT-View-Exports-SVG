@@ -1,10 +1,10 @@
 import traverse from '@babel/traverse'
 import * as t from '@babel/types'
+import { l10n } from 'vscode'
 
 import { parseFileContent, parserContent } from '../babelParser'
 import { getUnknownError, isEmpty } from '../misc'
 import { getProperties, propertyManager } from '../properties'
-import { translate } from '../vscode'
 
 import { analyzeExportType } from './analyze'
 import { getSVGComponent } from './SVGComponent'
@@ -53,7 +53,9 @@ export async function extractSVGComponent(
         }
       }
     } catch (error) {
-      console.error('Error extracting SVG component:', error)
+      console.error(
+        l10n.t('Error extracting SVG component: {error}', { error: getUnknownError(error) })
+      )
     }
   }
 
@@ -175,7 +177,9 @@ export async function extractSVGData(file: SVGFile): Promise<ExtractSVGExports> 
 
     return { svg: { exportComponents, noExportComponents }, base }
   } catch (error) {
-    console.error('Failed to extract SVG exports.', error)
+    console.error(
+      l10n.t('Failed to extract SVG exports: {error}', { error: getUnknownError(error) })
+    )
     return { svg: { exportComponents: [], noExportComponents: [] }, base: {} }
   }
 }
@@ -212,7 +216,7 @@ export async function extractIconComponent(
             hasErrors = true
             errors = {
               location: tag.location,
-              message: translate('invalidSvgTag', { tag: tag.name ?? 'undefined' }),
+              message: l10n.t('Invalid SVG tag: {tag}', { tag: tag.name ?? 'undefined' }),
             }
           }
         }
@@ -221,7 +225,9 @@ export async function extractIconComponent(
 
     return { tag, props, hasErrors, errors }
   } catch (error) {
-    console.error('Error during extraction of component:', error)
+    console.error(
+      l10n.t('Error extracting icon component: {error}', { error: getUnknownError(error) })
+    )
     return {
       tag,
       props: {},

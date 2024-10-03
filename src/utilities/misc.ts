@@ -1,4 +1,5 @@
 import { minimatch } from 'minimatch'
+import { l10n } from 'vscode'
 
 /**
  * Checks if a value is empty.
@@ -34,7 +35,9 @@ export const isEmpty = (
  */
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 export const getUnknownError = (error: any): string => {
-  if (isEmpty(error)) return 'Unknown error'
+  const unknownError = l10n.t('An unknown error occurred')
+
+  if (isEmpty(error)) return unknownError
 
   if (typeof error === 'string') {
     return error
@@ -66,7 +69,7 @@ export const getUnknownError = (error: any): string => {
     }
   }
 
-  return 'Unknown error'
+  return unknownError
 }
 
 /**

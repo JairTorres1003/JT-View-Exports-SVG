@@ -1,6 +1,6 @@
 import * as fs from 'fs'
 
-import { Uri, commands, window, workspace } from 'vscode'
+import { Uri, commands, l10n, window, workspace } from 'vscode'
 
 import { isEmpty } from '../misc'
 
@@ -24,13 +24,13 @@ export async function saveResponseFile(data: object, name: string, path?: string
         if (!isEmpty(err)) {
           reject(err)
         } else {
-          resolve('File saved successfully.')
+          resolve(l10n.t('File saved successfully.'))
         }
       })
     })
 
     const result = await window.showInformationMessage(
-      `The file was saved successfully at: ${filePath}`,
+      l10n.t('The file was saved successfully at: {filePath}', { filePath }),
       'View file',
       'Close'
     )
@@ -39,6 +39,6 @@ export async function saveResponseFile(data: object, name: string, path?: string
       await commands.executeCommand('vscode.open', Uri.file(filePath))
     }
   } catch (error) {
-    await window.showErrorMessage('Error creating and saving the file. Try again.')
+    console.error(l10n.t('Error creating and saving the file. Try again.'), error)
   }
 }

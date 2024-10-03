@@ -1,8 +1,8 @@
 import * as t from '@babel/types'
+import { l10n } from 'vscode'
 
 import { getUnknownError, isEmpty } from '../misc'
 import { getProperties, getPropertyValues, propertyManager } from '../properties'
-import { translate } from '../vscode'
 
 import { getSVGTagName } from './tags'
 
@@ -84,7 +84,7 @@ export function getChildAttributes(
     if (!tag.isValid || tag.name === 'Fragment' || isEmpty(tag.name)) {
       hasErrors = true
       errors = {
-        message: translate('invalidSvgTag', { tag: tag.name ?? 'undefined' }),
+        message: l10n.t('Invalid SVG tag: {tag}', { tag: tag.name ?? 'undefined' }),
         location: tag.location,
       }
     } else {
@@ -118,7 +118,9 @@ export function getChildAttributes(
         } catch (error) {
           hasErrors = true
           errors = {
-            message: getUnknownError(error),
+            message: l10n.t('Error processing JSX expression container: {error}', {
+              error: getUnknownError(error),
+            }),
             location: { start: child.loc?.start, end: child.loc?.end },
           }
         }

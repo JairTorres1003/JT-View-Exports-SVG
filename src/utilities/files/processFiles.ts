@@ -1,12 +1,11 @@
 import * as path from 'path'
 
-import { ProgressLocation, type Uri, window, type ProgressOptions } from 'vscode'
+import { ProgressLocation, type Uri, window, type ProgressOptions, l10n } from 'vscode'
 
 import { getCacheManager } from '../cache'
 import { AssetsPaths, ShowNotExportedIcons } from '../config'
 import { isEmpty } from '../misc'
 import { extractSVGData } from '../svg'
-import { getTranslations } from '../vscode'
 
 import { groupIconsByPattern } from './groupIconsByPattern'
 import { getFileTimestamp, pathToSVGFile } from './misc'
@@ -26,11 +25,10 @@ export async function processFiles(
   operation: (result: ViewExportSVG[]) => void
 ): Promise<void> {
   try {
-    const i18n = getTranslations()
     const fileSelected: Uri[] = []
     const progressOptions: ProgressOptions = {
       location: ProgressLocation.Notification,
-      title: i18n.iconExtractionInProgress,
+      title: l10n.t('Icon extraction in progress...'),
       cancellable: false,
     }
 
@@ -95,7 +93,7 @@ export async function processFiles(
               SVGFiles.push(file)
             }
           } catch (error) {
-            console.error(`Error processing file ${f.fsPath}:`, error)
+            console.error(l10n.t('Error processing file "{file}"', { file: f.fsPath }), error)
           }
         })
       )
@@ -103,7 +101,7 @@ export async function processFiles(
       if (SVGFiles.length > 0) {
         // Update the assets path configuration
         configAssetsPath.set(SVGFiles).catch((error) => {
-          console.error('Error setting assets path:', error)
+          console.error(l10n.t('Error setting assets path'), error)
         })
       }
 
@@ -121,6 +119,6 @@ export async function processFiles(
       progress.report({ increment: 100 })
     }
   } catch (error) {
-    console.error('Error processing files:', error)
+    console.error(l10n.t('Error processing files'), error)
   }
 }

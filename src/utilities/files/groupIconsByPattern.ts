@@ -1,6 +1,6 @@
 import { minimatch } from 'minimatch'
 
-import { GroupPatterns } from '../config/GroupPatterns'
+import { GroupPatterns } from '../config'
 import { isEmpty } from '../misc'
 
 import { type ViewExportSVG } from '@/interfaces/ViewExportsSVG'

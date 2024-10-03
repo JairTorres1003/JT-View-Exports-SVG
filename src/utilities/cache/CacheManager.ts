@@ -1,10 +1,9 @@
 import * as fs from 'fs'
 import * as path from 'path'
 
-import { Uri, type ExtensionContext } from 'vscode'
+import { l10n, Uri, type ExtensionContext } from 'vscode'
 
 import { isEmpty } from '../misc'
-import { translate } from '../vscode'
 
 import { FileModifiedCache } from './FileModifiedCache'
 import { IconCache } from './IconCache'
@@ -65,7 +64,7 @@ export function initializeCacheManager(context: ExtensionContext): void {
  */
 export function getCacheManager(): CacheManager {
   if (isEmpty(cacheManager)) {
-    throw new Error(translate('CacheManager has not been initialized'))
+    throw new Error(l10n.t('CacheManager has not been initialized'))
   }
   return cacheManager
 }

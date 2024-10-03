@@ -1,7 +1,7 @@
 import * as t from '@babel/types'
 import { camelCase } from 'lodash'
 
-import { DefaultIconProperties } from '../config/DefaultIconProperties'
+import { DefaultIconProperties } from '../config'
 import { isEmpty } from '../misc'
 
 import { getBinaryExpression } from './binaryExpression'

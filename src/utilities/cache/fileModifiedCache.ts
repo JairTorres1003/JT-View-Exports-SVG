@@ -1,6 +1,6 @@
 import * as fs from 'fs'
 
-import { translate } from '../vscode'
+import { l10n } from 'vscode'
 
 /**
  * A caching mechanism for values associated with files using their modification timestamps.
@@ -91,7 +91,7 @@ export class FileModifiedCache<T> {
     try {
       fs.writeFileSync(this.cacheFilePath, JSON.stringify(this.cache), 'utf-8')
     } catch (error) {
-      console.error(`${translate('errorSavingCache')}:`, error)
+      console.error(`${l10n.t('Error saving cache')}:`, error)
     }
   }
 
@@ -111,7 +111,7 @@ export class FileModifiedCache<T> {
         this.cache = JSON.parse(data)
       }
     } catch (error) {
-      console.error(`${translate('errorLoadingCache')}:`, error)
+      console.error(`${l10n.t('Error loading cache')}:`, error)
     }
   }
 }

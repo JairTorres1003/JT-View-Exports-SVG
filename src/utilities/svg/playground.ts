@@ -1,7 +1,8 @@
+import { l10n } from 'vscode'
+
 import { getCacheManager } from '../cache'
 import { getFileTimestamp } from '../files'
 import { getUnknownError, isEmpty } from '../misc'
-import { translate } from '../vscode'
 
 import { extractIconComponent, extractSVGComponent } from './extracts'
 
@@ -24,15 +25,20 @@ export async function playground(icon: SVGPlayground): Promise<SVGComponent | SV
 
     if (declarationCache?.[name] === undefined) {
       return {
-        message: translate('declarationNotFound', { name, file: location.file.absolutePath }),
         location,
+        message: l10n.t('Declaration named {name} not found in file {file}', {
+          name,
+          file: location.file.absolutePath,
+        }),
       }
     }
 
     if (isEmpty(componentsCache)) {
       return {
-        message: translate('svgFileNotFound', { file: location.file.absolutePath }),
         location,
+        message: l10n.t('SVG components not found in file {file}', {
+          file: location.file.absolutePath,
+        }),
       }
     }
 
@@ -40,8 +46,11 @@ export async function playground(icon: SVGPlayground): Promise<SVGComponent | SV
 
     if (originalComponent === undefined) {
       return {
-        message: translate('svgComponentNotFoundFile', { name, file: location.file.absolutePath }),
         location,
+        message: l10n.t('SVG component named {name} not found in file {file}', {
+          name,
+          file: location.file.absolutePath,
+        }),
       }
     }
 
@@ -67,13 +76,16 @@ export async function playground(icon: SVGPlayground): Promise<SVGComponent | SV
 
     if (isEmpty(component)) {
       return {
-        message: translate('errorExtractingSVGComponent', { name }),
         location: {},
+        message: l10n.t('Error extracting SVG component: {name}', { name }),
       }
     }
 
     return { ...originalComponent, ...component }
   } catch (error) {
-    return { message: getUnknownError(error), location: {} }
+    return {
+      message: l10n.t('Error generating SVG component: {error}', { error: getUnknownError(error) }),
+      location: {},
+    }
   }
 }
