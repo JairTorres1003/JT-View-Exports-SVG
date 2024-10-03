@@ -1,7 +1,7 @@
 {
   "name": "jt-view-exports-svg",
-  "displayName": "View Exports SVG",
-  "description": "✨ 'View Exports SVG' is a Visual Studio Code extension designed to streamline the process of accessing and utilizing SVG icons. With this extension, you can effortlessly explore and search for SVG icons within your project, simplifying the task of finding and integrating them into your project.",
+  "displayName": "%extension.title%",
+  "description": "%extension.description%",
   "keywords": [
     "Extension",
     "Icon assets",
@@ -37,11 +37,12 @@
   "activationEvents": [],
   "icon": "icon.png",
   "main": "./out/extension.js",
+  "l10n": "./l10n",
   "contributes": {
     "commands": [
       {
         "command": "JT-View-Exports-SVG.showMenu",
-        "title": "View Exports SVG 🔍",
+        "title": "%extension.commands.showMenu.title%",
         "icon": {
           "dark": "./assets/JT View Exports SVG - ICON.svg",
           "light": "./assets/JT View Exports SVG - ICON.svg"
@@ -64,17 +65,19 @@
     },
     "configuration": [
       {
-        "title": "View Exports SVG",
+        "title": "%extension.title%",
         "properties": {
           "JT-View-Exports-SVG.assetsPath": {
             "type": "array",
             "default": [],
-            "description": "An array to store the paths of analyzed files that have SVG icons. This allows for quick access to them from the webview, serving as shortcuts."
+            "title": "%extension.config.assetsPath.title%",
+            "description": "%extension.config.assetsPath.description%"
           },
           "JT-View-Exports-SVG.ignoreDirectories": {
             "type": "array",
             "default": [],
-            "description": "An array to store the pattern of directories to ignore when analyzing files for SVG icons.\nDefault:\n**/.git\n**/.github\n**/.husky\n**/.idea\n**/.idx\n**/.vscode*\n**/build\n**/coverage\n**/dist\n**/node_modules\n**/out",
+            "title": "%extension.config.ignoreDirectories.title%",
+            "description": "%extension.config.ignoreDirectories.description%",
             "items": {
               "type": "string"
             }
@@ -82,12 +85,14 @@
           "JT-View-Exports-SVG.lastScanDate": {
             "type": "string",
             "default": "",
-            "description": "The date of the last scan of the workspace for SVG icons.",
+            "title": "%extension.config.lastScanDate.title%",
+            "description": "%extension.config.lastScanDate.description%",
             "readOnly": true
           },
           "JT-View-Exports-SVG.defaultIconProperties": {
             "type": "object",
-            "description": "Default properties to apply to SVG icons when they do not have a property defined or when the extension does not find it.",
+            "title": "%extension.config.defaultIconProperties.title%",
+            "description": "%extension.config.defaultIconProperties.description%",
             "default": {
               "className": "",
               "color": "#0a0a0a",
@@ -109,11 +114,13 @@
           "JT-View-Exports-SVG.showNotExportedIcons": {
             "type": "boolean",
             "default": false,
-            "description": "Indicates whether or not to show icons that are not being exported."
+            "title": "%extension.config.showNotExportedIcons.title%",
+            "description": "%extension.config.showNotExportedIcons.description%"
           },
           "JT-View-Exports-SVG.groupPatterns": {
             "type": "object",
-            "markdownDescription": "An array of patterns to group icon files. Each pattern requires an 'item' (the pattern) and a 'value (the group name).\nExample:\n| item | value |\n| --- | --- |\n| ** | All Icons |\n| **/Flag* | Flags |\n| **/Symbol*.{js, jsx} | Symbols |",
+            "title": "%extension.config.groupPatterns.title%",
+            "markdownDescription": "%extension.config.groupPatterns.description%",
             "default": {},
             "additionalProperties": {
               "type": "string"
@@ -151,6 +158,7 @@
     "@types/vscode": "^1.92.0",
     "@typescript-eslint/eslint-plugin": "^6.13.2",
     "@typescript-eslint/parser": "^6.13.2",
+    "@vscode/l10n-dev": "^0.0.35",
     "@vscode/test-cli": "^0.0.10",
     "@vscode/test-electron": "^2.4.1",
     "concurrently": "^8.2.2",

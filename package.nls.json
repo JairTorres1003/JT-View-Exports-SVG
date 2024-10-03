@@ -1,0 +1,17 @@
+{
+  "extension.title": "View Exports SVG",
+  "extension.description": "✨ 'View Exports SVG' is a Visual Studio Code extension designed to streamline the process of accessing and utilizing SVG icons. With this extension, you can effortlessly explore and search for SVG icons within your project, simplifying the task of finding and integrating them into your project.",
+  "extension.commands.showMenu.title": "View Exports SVG 🔍",
+  "extension.config.assetsPath.title": "Assets Path",
+  "extension.config.assetsPath.description": "An array to store the paths of analyzed files that have SVG icons. This allows for quick access to them from the webview, serving as shortcuts.",
+  "extension.config.ignoreDirectories.title": "Ignore Directories",
+  "extension.config.ignoreDirectories.description": "An array to store the pattern of directories to ignore when analyzing files for SVG icons.\nDefault:\n**/.git\n**/.github\n**/.husky\n**/.idea\n**/.idx\n**/.vscode*\n**/build\n**/coverage\n**/dist\n**/node_modules\n**/out",
+  "extension.config.lastScanDate.title": "Last Scan Date",
+  "extension.config.lastScanDate.description": "The date of the last scan of the workspace for SVG icons.",
+  "extension.config.defaultIconProperties.title": "Default Icon Properties",
+  "extension.config.defaultIconProperties.description": "Default properties to apply to SVG icons when they do not have a property defined or when the extension does not find it.",
+  "extension.config.showNotExportedIcons.title": "Show Not Exported Icons",
+  "extension.config.showNotExportedIcons.description": "Indicates whether or not to show icons that are not being exported.",
+  "extension.config.groupPatterns.title": "Group Patterns",
+  "extension.config.groupPatterns.description": "An array of patterns to group icon files. Each pattern requires an 'item' (the pattern) and a 'value (the group name).\nExample:\n| item | value |\n| --- | --- |\n| ** | All Icons |\n| **/Flag* | Flags |\n| **/Symbol*.{js, jsx} | Symbols |"
+}
