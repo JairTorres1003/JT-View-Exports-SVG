@@ -3,7 +3,7 @@ import { camelCase } from 'lodash'
 
 import { isEmpty } from '../misc'
 
-import { SVG_TAGS } from '@/constants/svgTags'
+import { SVG_TAGS } from '@/constants/svg/tags'
 import { type SVGTagName, type GetSVGTagName, type GetTagName } from '@/interfaces/svg/tags'
 import { type SVGLocation, type SVGFile } from '@/interfaces/ViewExportsSVG'
 

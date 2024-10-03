@@ -252,7 +252,7 @@ export class ViewExportsSVGPanel {
 
       webview.onDidReceiveMessage(listener, undefined, this._disposables)
     } catch (error) {
-      console.error('Error setting webview message listener:', error)
+      console.error(`${i18n.errorSettingWebviewMessageListener}:`, error)
       window
         .showErrorMessage(i18n.errorSettingWebviewMessageListener)
         .then(undefined, console.error)
