@@ -17,5 +17,6 @@
   "errorOpeningFile": "Fout bij het openen van bestand {file} in de editor",
   "errorSavingCache": "Fout bij het opslaan van cache",
   "errorLoadingCache": "Fout bij het laden van cache",
-  "CacheManager has not been initialized": "CacheManager is niet geïnitialiseerd"
+  "CacheManager has not been initialized": "CacheManager is niet geïnitialiseerd",
+  "methodNotImplemented": "Methode niet geïmplementeerd"
 }

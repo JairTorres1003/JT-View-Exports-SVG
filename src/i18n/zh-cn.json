@@ -17,5 +17,6 @@
   "errorOpeningFile": "在编辑器中打开文件 {file} 时出错",
   "errorSavingCache": "保存缓存时出错",
   "errorLoadingCache": "加载缓存时出错",
-  "CacheManager has not been initialized": "CacheManager尚未初始化"
+  "CacheManager has not been initialized": "CacheManager尚未初始化",
+  "methodNotImplemented": "方法未实现"
 }

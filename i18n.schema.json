@@ -113,6 +113,11 @@
       "type": "string",
       "description": "Message displayed when the CacheManager has not been initialized",
       "default": "CacheManager has not been initialized."
+    },
+    "methodNotImplemented": {
+      "type": "string",
+      "description": "Message displayed when a method is not implemented",
+      "default": "Method not implemented"
     }
   },
   "required": [
@@ -134,6 +139,7 @@
     "errorOpeningFile",
     "errorSavingCache",
     "errorLoadingCache",
-    "CacheManager has not been initialized"
+    "CacheManager has not been initialized",
+    "methodNotImplemented"
   ]
 }

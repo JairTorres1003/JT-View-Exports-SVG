@@ -17,5 +17,6 @@
   "errorOpeningFile": "Erro ao abrir o ficheiro {file} no editor",
   "errorSavingCache": "Erro ao guardar a cache",
   "errorLoadingCache": "Erro ao carregar a cache",
-  "CacheManager has not been initialized": "CacheManager não foi inicializado"
+  "CacheManager has not been initialized": "CacheManager não foi inicializado",
+  "methodNotImplemented": "Método não implementado"
 }

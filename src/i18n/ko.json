@@ -17,5 +17,6 @@
   "errorOpeningFile": "편집기에서 파일 {file} 열기 오류",
   "errorSavingCache": "캐시 저장 오류",
   "errorLoadingCache": "캐시 로드 오류",
-  "CacheManager has not been initialized": "CacheManager가 초기화되지 않았습니다"
+  "CacheManager has not been initialized": "CacheManager가 초기화되지 않았습니다",
+  "methodNotImplemented": "메서드가 구현되지 않았습니다"
 }

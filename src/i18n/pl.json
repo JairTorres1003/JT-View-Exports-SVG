@@ -17,5 +17,6 @@
   "errorOpeningFile": "Błąd podczas otwierania pliku {file} w edytorze",
   "errorSavingCache": "Błąd zapisywania pamięci podręcznej",
   "errorLoadingCache": "Błąd ładowania pamięci podręcznej",
-  "CacheManager has not been initialized": "CacheManager nie został zainicjowany"
+  "CacheManager has not been initialized": "CacheManager nie został zainicjowany",
+  "methodNotImplemented": "Metoda niezaimplementowana"
 }

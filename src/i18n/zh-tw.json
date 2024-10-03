@@ -17,5 +17,6 @@
   "errorOpeningFile": "在編輯器中開啟檔案 {file} 時發生錯誤",
   "errorSavingCache": "儲存快取時發生錯誤",
   "errorLoadingCache": "載入快取時發生錯誤",
-  "CacheManager has not been initialized": "CacheManager尚未初始化"
+  "CacheManager has not been initialized": "CacheManager尚未初始化",
+  "methodNotImplemented": "方法未實作"
 }

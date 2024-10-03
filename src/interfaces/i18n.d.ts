@@ -18,6 +18,7 @@ export interface Translations {
   errorSavingCache: string
   errorLoadingCache: string
   'CacheManager has not been initialized': string
+  methodNotImplemented: string
 }
 
 type ExtractKeys<T extends string> = T extends `${string}{${infer Key}}${infer Rest}`

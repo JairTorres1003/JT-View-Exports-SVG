@@ -17,5 +17,6 @@
   "errorOpeningFile": "エディタでファイル {file} を開く際にエラーが発生しました",
   "errorSavingCache": "キャッシュの保存エラー",
   "errorLoadingCache": "キャッシュの読み込みエラー",
-  "CacheManager has not been initialized": "CacheManager が初期化されていません"
+  "CacheManager has not been initialized": "CacheManager が初期化されていません",
+  "methodNotImplemented": "メソッドが実装されていません"
 }

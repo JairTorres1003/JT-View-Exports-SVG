@@ -17,5 +17,6 @@
   "errorOpeningFile": "Ошибка открытия файла {file} в редакторе",
   "errorSavingCache": "Ошибка сохранения кэша",
   "errorLoadingCache": "Ошибка загрузки кэша",
-  "CacheManager has not been initialized": "CacheManager не был инициализирован"
+  "CacheManager has not been initialized": "CacheManager не был инициализирован",
+  "methodNotImplemented": "Метод не реализован"
 }
