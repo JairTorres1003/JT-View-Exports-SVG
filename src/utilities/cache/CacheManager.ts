@@ -7,6 +7,7 @@ import { isEmpty } from '../misc'
 import { translate } from '../vscode'
 
 import { FileModifiedCache } from './FileModifiedCache'
+import { IconCache } from './IconCache'
 
 import { type ExtractSVGExports, type ViewExportSVG } from '@/interfaces/ViewExportsSVG'
 
@@ -16,6 +17,8 @@ import { type ExtractSVGExports, type ViewExportSVG } from '@/interfaces/ViewExp
 class CacheManager {
   public DeclarationFileCache: FileModifiedCache<ExtractSVGExports['base']>
   public SVGFileCache: FileModifiedCache<ViewExportSVG>
+  public FavoritesIconCache: IconCache
+  public RecentIconCache: IconCache
 
   constructor(private readonly context: ExtensionContext) {
     // Create cache directory if it doesn't exist
@@ -27,12 +30,24 @@ class CacheManager {
     // Set up file paths for each cache
     const declarationCacheFilePath = path.join(cacheDir, 'declaration_cache.json')
     const svgCacheFilePath = path.join(cacheDir, 'svg_cache.json')
+    const favoritesCacheFilePath = path.join(cacheDir, 'favorites_cache.json')
+    const recentCacheFilePath = path.join(cacheDir, 'recent_cache.json')
 
     // Initialize caches
-    this.DeclarationFileCache = new FileModifiedCache<ExtractSVGExports['base']>(
-      declarationCacheFilePath
-    )
-    this.SVGFileCache = new FileModifiedCache<ViewExportSVG>(svgCacheFilePath)
+    this.DeclarationFileCache = new FileModifiedCache(declarationCacheFilePath)
+    this.SVGFileCache = new FileModifiedCache(svgCacheFilePath)
+    this.FavoritesIconCache = new IconCache(favoritesCacheFilePath)
+    this.RecentIconCache = new IconCache(recentCacheFilePath, 10)
+  }
+
+  /**
+   * Clears all caches.
+   */
+  clearAll(): void {
+    this.DeclarationFileCache.clear()
+    this.SVGFileCache.clear()
+    this.FavoritesIconCache.clear()
+    this.RecentIconCache.clear()
   }
 }
 
