@@ -98,6 +98,21 @@
       "default": "Error opening file {file} in editor",
       "pattern": ".*\\{file\\}.*",
       "patternErrorMessage": "The message must contain the variable {file}"
+    },
+    "errorSavingCache": {
+      "type": "string",
+      "description": "Message displayed when an error occurs saving the cache",
+      "default": "Error saving cache"
+    },
+    "errorLoadingCache": {
+      "type": "string",
+      "description": "Message displayed when an error occurs loading the cache",
+      "default": "Error loading cache"
+    },
+    "CacheManager has not been initialized": {
+      "type": "string",
+      "description": "Message displayed when the CacheManager has not been initialized",
+      "default": "CacheManager has not been initialized."
     }
   },
   "required": [
@@ -116,6 +131,9 @@
     "invalidAttribute",
     "errorScanningWorkspace",
     "errorScanningFiles",
-    "errorOpeningFile"
+    "errorOpeningFile",
+    "errorSavingCache",
+    "errorLoadingCache",
+    "CacheManager has not been initialized"
   ]
 }

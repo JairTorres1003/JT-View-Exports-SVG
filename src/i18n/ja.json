@@ -14,5 +14,8 @@
   "invalidAttribute": "無効な {attr} 属性、'{expected}' が期待されましたが、{actual} が取得されました",
   "errorScanningWorkspace": "ワークスペースのスキャンエラー",
   "errorScanningFiles": "ファイルのスキャンエラー",
-  "errorOpeningFile": "エディタでファイル {file} を開く際にエラーが発生しました"
+  "errorOpeningFile": "エディタでファイル {file} を開く際にエラーが発生しました",
+  "errorSavingCache": "キャッシュの保存エラー",
+  "errorLoadingCache": "キャッシュの読み込みエラー",
+  "CacheManager has not been initialized": "CacheManager が初期化されていません"
 }

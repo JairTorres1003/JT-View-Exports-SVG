@@ -14,5 +14,8 @@
   "invalidAttribute": "Invalid {attr} attribute, expected '{expected}' but got {actual}",
   "errorScanningWorkspace": "Error scanning workspace",
   "errorScanningFiles": "Error scanning files",
-  "errorOpeningFile": "Error opening file {file} in editor"
+  "errorOpeningFile": "Error opening file {file} in editor",
+  "errorSavingCache": "Error saving cache",
+  "errorLoadingCache": "Error loading cache",
+  "CacheManager has not been initialized": "CacheManager has not been initialized."
 }

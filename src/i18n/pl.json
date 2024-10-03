@@ -14,5 +14,8 @@
   "invalidAttribute": "Nieprawidłowy atrybut {attr}, oczekiwano '{expected}', ale otrzymano {actual}",
   "errorScanningWorkspace": "Błąd skanowania przestrzeni roboczej",
   "errorScanningFiles": "Błąd skanowania plików",
-  "errorOpeningFile": "Błąd podczas otwierania pliku {file} w edytorze"
+  "errorOpeningFile": "Błąd podczas otwierania pliku {file} w edytorze",
+  "errorSavingCache": "Błąd zapisywania pamięci podręcznej",
+  "errorLoadingCache": "Błąd ładowania pamięci podręcznej",
+  "CacheManager has not been initialized": "CacheManager nie został zainicjowany"
 }

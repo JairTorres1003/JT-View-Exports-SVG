@@ -1,6 +1,7 @@
 import { commands, type ExtensionContext, type Uri } from 'vscode'
 
 import { showMenu } from './commands'
+import { initializeCacheManager } from './utilities/cache'
 import { loadLanguage } from './utilities/vscode'
 
 /**
@@ -11,6 +12,8 @@ export function activate(context: ExtensionContext): void {
   loadLanguage(context.extensionUri).catch((error) => {
     console.error('Failed to load language:', error)
   })
+
+  initializeCacheManager(context)
 
   context.subscriptions.push(
     commands.registerCommand('JT-View-Exports-SVG.showMenu', async (item: Uri, items: Uri[]) => {

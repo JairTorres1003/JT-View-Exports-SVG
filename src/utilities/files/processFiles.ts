@@ -2,7 +2,7 @@ import * as path from 'path'
 
 import { ProgressLocation, type Uri, window, type ProgressOptions } from 'vscode'
 
-import { DeclarationFileCache, SVGFileCache } from '../cache'
+import { getCacheManager } from '../cache'
 import { AssetsPaths, ShowNotExportedIcons } from '../config'
 import { isEmpty } from '../misc'
 import { extractSVGData } from '../svg'
@@ -55,6 +55,7 @@ export async function processFiles(
       await Promise.all(
         fileSelected.map(async (f) => {
           try {
+            const { DeclarationFileCache, SVGFileCache } = getCacheManager()
             const file = await pathToSVGFile(f.fsPath)
             const lastModified = getFileTimestamp(file.absolutePath)
             const cachedFile = SVGFileCache.get(file.absolutePath, lastModified)

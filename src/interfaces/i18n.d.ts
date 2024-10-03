@@ -15,6 +15,9 @@ export interface Translations {
   errorScanningWorkspace: string
   errorScanningFiles: string
   errorOpeningFile: `${string}{file}${string}`
+  errorSavingCache: string
+  errorLoadingCache: string
+  'CacheManager has not been initialized': string
 }
 
 type ExtractKeys<T extends string> = T extends `${string}{${infer Key}}${infer Rest}`

@@ -1,4 +1,4 @@
-import { DeclarationFileCache, SVGFileCache } from '../cache'
+import { getCacheManager } from '../cache'
 import { getFileTimestamp } from '../files'
 import { getUnknownError, isEmpty } from '../misc'
 import { translate } from '../vscode'
@@ -17,6 +17,7 @@ export async function playground(icon: SVGPlayground): Promise<SVGComponent | SV
   const { location, name, value } = icon
 
   try {
+    const { DeclarationFileCache, SVGFileCache } = getCacheManager()
     const lastModified = getFileTimestamp(location.file.absolutePath)
     const declarationCache = DeclarationFileCache.get(location.file.absolutePath, lastModified)
     const componentsCache = SVGFileCache.get(location.file.absolutePath, lastModified)
