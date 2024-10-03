@@ -71,6 +71,14 @@ export class FileModifiedCache<T> {
   }
 
   /**
+   * Clears the cache by removing all entries.
+   */
+  clear(): void {
+    this.cache = {}
+    this.saveCache()
+  }
+
+  /**
    * Saves the current cache to a file.
    *
    * This method serializes the cache object to a JSON string and writes it to the file
