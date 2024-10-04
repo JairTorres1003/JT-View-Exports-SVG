@@ -72,12 +72,17 @@
       "url": "./l10n.schema.json"
     },
     {
+      "fileMatch": ["/package.nls*.json"],
+      "url": "./nls.schema.json"
+    },
+    {
       "fileMatch": ["client/src/i18n/*.json"],
       "url": "./client/i18n.schema.json"
     }
   ],
   "material-icon-theme.files.associations": {
     "i18n.schema.json": "i18n",
-    "l10n.schema.json": "i18n"
+    "l10n.schema.json": "i18n",
+    "nls.schema.json": "i18n"
   }
 }

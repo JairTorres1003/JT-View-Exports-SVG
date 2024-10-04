@@ -1,0 +1,99 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "JSON schema for l10n in package View Exports SVG extension for Visual Studio Code",
+  "type": "object",
+  "properties": {
+    "extension.title": {
+      "type": "string",
+      "description": "The title of the extension",
+      "default": "View Exports SVG"
+    },
+    "extension.description": {
+      "type": "string",
+      "description": "The description of the extension",
+      "default": "✨ 'View Exports SVG' is a Visual Studio Code extension designed to streamline the process of accessing and utilizing SVG icons. With this extension, you can effortlessly explore and search for SVG icons within your project, simplifying the task of finding and integrating them into your project."
+    },
+    "extension.commands.showMenu.title": {
+      "type": "string",
+      "description": "The title of the command to show the menu",
+      "default": "View Exports SVG 🔍"
+    },
+    "extension.config.assetsPath.title": {
+      "type": "string",
+      "description": "The title of the configuration to store the paths of analyzed files that have SVG icons",
+      "default": "Assets Path"
+    },
+    "extension.config.assetsPath.description": {
+      "type": "string",
+      "description": "The description of the configuration to store the paths of analyzed files that have SVG icons",
+      "default": "An array to store the paths of analyzed files that have SVG icons. This allows for quick access to them from the webview, serving as shortcuts."
+    },
+    "extension.config.ignoreDirectories.title": {
+      "type": "string",
+      "description": "The title of the configuration to store the pattern of directories to ignore when analyzing files for SVG icons",
+      "default": "Ignore Directories"
+    },
+    "extension.config.ignoreDirectories.description": {
+      "type": "string",
+      "description": "The description of the configuration to store the pattern of directories to ignore when analyzing files for SVG icons",
+      "default": "An array to store the pattern of directories to ignore when analyzing files for SVG icons.\nDefault:\n**/.git\n**/.github\n**/.husky\n**/.idea\n**/.idx\n**/.vscode*\n**/build\n**/coverage\n**/dist\n**/node_modules\n**/out"
+    },
+    "extension.config.lastScanDate.title": {
+      "type": "string",
+      "description": "The title of the configuration to store the date of the last scan of the workspace for SVG icons",
+      "default": "Last Scan Date"
+    },
+    "extension.config.lastScanDate.description": {
+      "type": "string",
+      "description": "The description of the configuration to store the date of the last scan of the workspace for SVG icons",
+      "default": "The date of the last scan of the workspace for SVG icons."
+    },
+    "extension.config.defaultIconProperties.title": {
+      "type": "string",
+      "description": "The title of the configuration to store the default properties to apply to SVG icons",
+      "default": "Default Icon Properties"
+    },
+    "extension.config.defaultIconProperties.description": {
+      "type": "string",
+      "description": "The description of the configuration to store the default properties to apply to SVG icons",
+      "default": "Default properties to apply to SVG icons when they do not have a property defined or when the extension does not find it."
+    },
+    "extension.config.showNotExportedIcons.title": {
+      "type": "string",
+      "description": "The title of the configuration to indicate whether or not to show icons that are not being exported",
+      "default": "Show Not Exported Icons"
+    },
+    "extension.config.showNotExportedIcons.description": {
+      "type": "string",
+      "description": "The description of the configuration to indicate whether or not to show icons that are not being exported",
+      "default": "Indicates whether or not to show icons that are not being exported."
+    },
+    "extension.config.groupPatterns.title": {
+      "type": "string",
+      "description": "The title of the configuration to store an array of patterns to group icon files",
+      "default": "Group Patterns"
+    },
+    "extension.config.groupPatterns.description": {
+      "type": "string",
+      "description": "The description of the configuration to store an array of patterns to group icon files",
+      "default": "An array of patterns to group icon files. Each pattern requires an 'item' (the pattern) and a 'value (the group name).\nExample:\n| item | value |\n| --- | --- |\n| ** | All Icons |\n| **/Flag* | Flags |\n| **/Symbol*.{js, jsx} | Symbols |"
+    }
+  },
+  "required": [
+    "extension.title",
+    "extension.description",
+    "extension.commands.showMenu.title",
+    "extension.config.assetsPath.title",
+    "extension.config.assetsPath.description",
+    "extension.config.ignoreDirectories.title",
+    "extension.config.ignoreDirectories.description",
+    "extension.config.lastScanDate.title",
+    "extension.config.lastScanDate.description",
+    "extension.config.defaultIconProperties.title",
+    "extension.config.defaultIconProperties.description",
+    "extension.config.showNotExportedIcons.title",
+    "extension.config.showNotExportedIcons.description",
+    "extension.config.groupPatterns.title",
+    "extension.config.groupPatterns.description"
+  ]
+}
