@@ -68,8 +68,8 @@
   },
   "json.schemas": [
     {
-      "fileMatch": ["/src/i18n/*.json", "!client/src/i18n/**/*.json"],
-      "url": "./i18n.schema.json"
+      "fileMatch": ["/l10n/bundle.l10n*.json"],
+      "url": "./l10n.schema.json"
     },
     {
       "fileMatch": ["client/src/i18n/*.json"],
@@ -77,6 +77,7 @@
     }
   ],
   "material-icon-theme.files.associations": {
-    "i18n.schema.json": "i18n"
+    "i18n.schema.json": "i18n",
+    "l10n.schema.json": "i18n"
   }
 }
