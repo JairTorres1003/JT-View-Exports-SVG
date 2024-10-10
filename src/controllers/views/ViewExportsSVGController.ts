@@ -36,8 +36,8 @@ import { filteredExports } from '@/utilities/svg/filtered'
 import { playground } from '@/utilities/svg/playground'
 import { getCurrentTheme, getStyles, getUri, svgFileToUri } from '@/utilities/vscode'
 
-export class ViewExportsSVGPanel {
-  public static currentPanel: ViewExportsSVGPanel | undefined
+export class ViewExportsSVGController {
+  public static currentPanel: ViewExportsSVGController | undefined
   public static readonly configName: string = 'JT-View-Exports-SVG'
 
   private viewExportSVG: ViewExportSVG[] = []
@@ -70,7 +70,7 @@ export class ViewExportsSVGPanel {
    * Dispose of the panel and clean up resources.
    */
   public dispose(): void {
-    ViewExportsSVGPanel.currentPanel = undefined
+    ViewExportsSVGController.currentPanel = undefined
 
     // Clean up resources
     this._panel.dispose()
@@ -87,8 +87,8 @@ export class ViewExportsSVGPanel {
    * Runs the extraction process for the current panel.
    */
   public RunExtraction(): void {
-    if (!isEmpty(ViewExportsSVGPanel.currentPanel)) {
-      ViewExportsSVGPanel.currentPanel._panel.reveal(ViewColumn.Active)
+    if (!isEmpty(ViewExportsSVGController.currentPanel)) {
+      ViewExportsSVGController.currentPanel._panel.reveal(ViewColumn.Active)
       this._postMessage(SVGPostMessage.SendRunExtraction, true)
     }
   }
@@ -103,14 +103,14 @@ export class ViewExportsSVGPanel {
     const column = window.activeTextEditor?.viewColumn ?? ViewColumn.One
 
     // If we already have a panel, show it
-    if (!isEmpty(ViewExportsSVGPanel.currentPanel)) {
+    if (!isEmpty(ViewExportsSVGController.currentPanel)) {
       this.update(viewExportSVG)
       return
     }
 
     // Otherwise, create a new panel
     const panel = window.createWebviewPanel(
-      ViewExportsSVGPanel.configName,
+      ViewExportsSVGController.configName,
       l10n.t('extension.title'),
       column,
       {
@@ -126,7 +126,11 @@ export class ViewExportsSVGPanel {
     )
     panel.iconPath = Uri.joinPath(extensionUri, 'assets', 'JT View Exports SVG - ICON.svg')
 
-    ViewExportsSVGPanel.currentPanel = new ViewExportsSVGPanel(panel, extensionUri, viewExportSVG)
+    ViewExportsSVGController.currentPanel = new ViewExportsSVGController(
+      panel,
+      extensionUri,
+      viewExportSVG
+    )
   }
 
   /**
@@ -134,17 +138,17 @@ export class ViewExportsSVGPanel {
    * @param svgComponents - SVG components or error data to display.
    */
   public static update(viewExportSVG: ViewExportSVG[]): void {
-    if (!isEmpty(ViewExportsSVGPanel.currentPanel)) {
-      ViewExportsSVGPanel.currentPanel.viewExportSVG = viewExportSVG
+    if (!isEmpty(ViewExportsSVGController.currentPanel)) {
+      ViewExportsSVGController.currentPanel.viewExportSVG = viewExportSVG
 
       if (!isEmpty(viewExportSVG)) {
-        ViewExportsSVGPanel.currentPanel._postMessage(
+        ViewExportsSVGController.currentPanel._postMessage(
           SVGPostMessage.SendSVGComponents,
           viewExportSVG
         )
       } else {
         const error: SVGErrors = { location: {}, message: l10n.t('No SVG components found...') }
-        ViewExportsSVGPanel.currentPanel._postMessage(SVGPostMessage.SendSVGError, error)
+        ViewExportsSVGController.currentPanel._postMessage(SVGPostMessage.SendSVGError, error)
       }
     }
   }

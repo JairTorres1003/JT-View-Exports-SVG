@@ -6,8 +6,8 @@ import { allowedFilesInFolder } from './allowedFilesInFolder'
 import { processFiles } from './processFiles'
 
 import { LastScanDateController } from '@/controllers/config'
+import { ViewExportsSVGController } from '@/controllers/views'
 import { type ViewExportSVG } from '@/interfaces/ViewExportsSVG'
-import { ViewExportsSVGPanel } from '@/views'
 
 /**
  * Scans the workspace
@@ -43,7 +43,7 @@ export async function scanningWorkspace(): Promise<Uri[]> {
 export async function scanningFiles(files: Uri[]): Promise<void> {
   try {
     const operation = (result: ViewExportSVG[]): void => {
-      ViewExportsSVGPanel.update(result)
+      ViewExportsSVGController.update(result)
     }
 
     await processFiles(files, operation)

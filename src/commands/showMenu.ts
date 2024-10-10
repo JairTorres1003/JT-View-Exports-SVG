@@ -1,9 +1,9 @@
 import { type ExtensionContext, type Uri } from 'vscode'
 
+import { ViewExportsSVGController } from '@/controllers/views'
 import { type ViewExportSVG } from '@/interfaces/ViewExportsSVG'
 import { processFiles, saveResponseFile } from '@/utilities/files'
 import { isEmpty } from '@/utilities/misc'
-import { ViewExportsSVGPanel } from '@/views'
 
 /**
  * Displays a menu and processes the selected files.
@@ -18,12 +18,12 @@ export const showMenu = async (
   item: Uri | null = null,
   items: Uri[] = []
 ): Promise<void> => {
-  if (!isEmpty(ViewExportsSVGPanel.currentPanel)) {
-    ViewExportsSVGPanel.currentPanel.RunExtraction()
+  if (!isEmpty(ViewExportsSVGController.currentPanel)) {
+    ViewExportsSVGController.currentPanel.RunExtraction()
   }
 
   const operation = (result: ViewExportSVG[]): void => {
-    ViewExportsSVGPanel.render(context.extensionUri, result)
+    ViewExportsSVGController.render(context.extensionUri, result)
     saveResponseFile(result, 'svg').catch(console.error)
   }
 
