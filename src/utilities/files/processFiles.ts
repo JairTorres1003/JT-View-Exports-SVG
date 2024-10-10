@@ -9,7 +9,7 @@ import { groupIconsByPattern } from './groupIconsByPattern'
 import { getFileTimestamp, pathToSVGFile } from './misc'
 
 import { REGEX_FILE } from '@/constants/regex'
-import { getCacheManager } from '@/controllers/cache/CacheManagerController'
+import { getCacheManager } from '@/controllers/cache'
 import { AssetsPathsController, ShowNotExportedIconsController } from '@/controllers/config'
 import { type SVGFile, type ViewExportSVG } from '@/interfaces/ViewExportsSVG'
 

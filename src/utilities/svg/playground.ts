@@ -6,7 +6,7 @@ import { getUnknownError, isEmpty } from '../misc'
 import { extractIconComponent, extractSVGComponent } from './extracts'
 
 import { REST_PROPS_KEY } from '@/constants/misc'
-import { getCacheManager } from '@/controllers/cache/CacheManagerController'
+import { getCacheManager } from '@/controllers/cache'
 import { type SVGErrors, type SVGComponent, type SVGPlayground } from '@/interfaces/ViewExportsSVG'
 
 /**
