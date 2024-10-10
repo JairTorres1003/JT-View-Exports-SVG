@@ -2,10 +2,10 @@ import * as path from 'path'
 
 import { FileType, l10n, Uri, workspace } from 'vscode'
 
-import { IgnoreDirectories } from '../config'
 import { isEmpty, matchesPattern } from '../misc'
 
 import { REGEX_FILE } from '@/constants/regex'
+import { IgnoreDirectoriesController } from '@/controllers/config'
 
 /**
  * Gets the list of allowed files in a folder and its subfolders,
@@ -17,7 +17,7 @@ export async function allowedFilesInFolder(folder: Uri): Promise<Uri[]> {
   const allowedFiles: Uri[] = []
 
   if (!isEmpty(folder)) {
-    const config = new IgnoreDirectories()
+    const config = new IgnoreDirectoriesController()
     const patterns = config._allDirectories
     const files = await workspace.fs.readDirectory(folder)
 

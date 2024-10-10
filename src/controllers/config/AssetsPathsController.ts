@@ -1,12 +1,11 @@
 import { ConfigurationTarget, l10n, workspace } from 'vscode'
 
-import { pathToSVGFile } from '../files'
-
-import ExtensionConfigManager from './configManager'
+import ConfigManagerController from './ConfigManagerController'
 
 import { type SVGFile } from '@/interfaces/ViewExportsSVG'
+import { pathToSVGFile } from '@/utilities/files'
 
-export class AssetsPaths extends ExtensionConfigManager<string[]> {
+export class AssetsPathsController extends ConfigManagerController<string[]> {
   /**
    * Relative paths to the assets in the workspace.
    */

@@ -1,7 +1,6 @@
 import * as t from '@babel/types'
 import { camelCase } from 'lodash'
 
-import { DefaultIconProperties } from '../config'
 import { isEmpty } from '../misc'
 
 import { getBinaryExpression } from './binaryExpression'
@@ -9,6 +8,7 @@ import { getLogicalExpression } from './logicalExpression'
 import { getUnaryExpression } from './unaryExpression'
 
 import { REST_PROPS_KEY } from '@/constants/misc'
+import { DefaultIconPropertiesController } from '@/controllers/config'
 import { type PropertyValue } from '@/interfaces/properties/propertyValues'
 
 /**
@@ -25,7 +25,7 @@ export function getPropertyValues(
     return
   }
 
-  const config = new DefaultIconProperties()
+  const config = new DefaultIconPropertiesController()
   const defaultProps = config.getAllProperties()
 
   const restProps = (properties[REST_PROPS_KEY] ?? {}) as Record<string, unknown>

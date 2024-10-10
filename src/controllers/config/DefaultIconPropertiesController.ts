@@ -1,4 +1,4 @@
-import ExtensionConfigManager from './configManager'
+import ConfigManagerController from './ConfigManagerController'
 
 import { DEFAULT_ICON_PROPERTIES } from '@/constants/misc'
 
@@ -6,7 +6,9 @@ import { DEFAULT_ICON_PROPERTIES } from '@/constants/misc'
  * Default properties for the icons.
  * This object provides default values for various properties of the icons.
  */
-export class DefaultIconProperties extends ExtensionConfigManager<Record<string, string>> {
+export class DefaultIconPropertiesController extends ConfigManagerController<
+  Record<string, string>
+> {
   private readonly defaultIconProperties: Record<string, string> = {}
   private readonly defaultIconPropertiesUser: Record<string, string> = {}
 

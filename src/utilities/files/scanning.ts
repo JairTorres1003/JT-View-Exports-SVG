@@ -1,11 +1,11 @@
 import { l10n, window, workspace, type Uri } from 'vscode'
 
-import { LastScanDate } from '../config'
 import { getUnknownError, isEmpty } from '../misc'
 
 import { allowedFilesInFolder } from './allowedFilesInFolder'
 import { processFiles } from './processFiles'
 
+import { LastScanDateController } from '@/controllers/config'
 import { type ViewExportSVG } from '@/interfaces/ViewExportsSVG'
 import { ViewExportsSVGPanel } from '@/views'
 
@@ -18,7 +18,7 @@ export async function scanningWorkspace(): Promise<Uri[]> {
     const workspaceFolders = workspace.workspaceFolders
     let files: Uri[] = []
     if (!isEmpty(workspaceFolders)) {
-      const config = new LastScanDate()
+      const config = new LastScanDateController()
 
       files = await allowedFilesInFolder(workspaceFolders[0].uri)
       await config.updateDate()

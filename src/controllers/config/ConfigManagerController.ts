@@ -4,14 +4,14 @@ import { type ConfigurationTarget, workspace } from 'vscode'
  * Manages the extension configuration for a specific section.
  * @template T The type of the configuration value.
  */
-export default class ExtensionConfigManager<T> {
+export default class ConfigManagerController<T> {
   private readonly configName: string = 'JT-View-Exports-SVG'
   private readonly config = workspace.getConfiguration(this.configName)
   private readonly section: string
   private readonly initialValue: T
 
   /**
-   * Creates an instance of ExtensionConfigManager.
+   * Creates an instance of ConfigManagerController.
    * @param section The section of the configuration to manage.
    * @param initialValue The initial value of the configuration section.
    */

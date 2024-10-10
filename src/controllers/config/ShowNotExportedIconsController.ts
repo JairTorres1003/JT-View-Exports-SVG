@@ -1,10 +1,10 @@
-import ExtensionConfigManager from './configManager'
+import ConfigManagerController from './ConfigManagerController'
 
 /**
  * The ShowNotExportedIcons class.
  * This class provides a method to retrieve the property from the ShowNotExportedIcons class.
  */
-export class ShowNotExportedIcons extends ExtensionConfigManager<boolean> {
+export class ShowNotExportedIconsController extends ConfigManagerController<boolean> {
   private readonly showNotExportedIcons: boolean = false
   private readonly showNotExportedIconsUser: boolean = false
 

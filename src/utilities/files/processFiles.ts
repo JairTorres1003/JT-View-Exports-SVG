@@ -2,7 +2,6 @@ import * as path from 'path'
 
 import { ProgressLocation, type Uri, window, type ProgressOptions, l10n } from 'vscode'
 
-import { AssetsPaths, ShowNotExportedIcons } from '../config'
 import { isEmpty } from '../misc'
 import { extractSVGData } from '../svg'
 
@@ -11,6 +10,7 @@ import { getFileTimestamp, pathToSVGFile } from './misc'
 
 import { REGEX_FILE } from '@/constants/regex'
 import { getCacheManager } from '@/controllers/cache/CacheManagerController'
+import { AssetsPathsController, ShowNotExportedIconsController } from '@/controllers/config'
 import { type SVGFile, type ViewExportSVG } from '@/interfaces/ViewExportsSVG'
 
 /**
@@ -33,8 +33,8 @@ export async function processFiles(
     }
 
     const progress = await window.withProgress(progressOptions, async (progress) => {
-      const configAssetsPath = new AssetsPaths()
-      const configShowNoExports = new ShowNotExportedIcons()
+      const configAssetsPath = new AssetsPathsController()
+      const configShowNoExports = new ShowNotExportedIconsController()
       const SVGFiles: SVGFile[] = []
       const SVGExports: ViewExportSVG[] = []
 

@@ -1,10 +1,9 @@
-import { isEmpty } from '../misc'
-
-import ExtensionConfigManager from './configManager'
+import ConfigManagerController from './ConfigManagerController'
 
 import { IGNORE_DIRECTORIES } from '@/constants/misc'
+import { isEmpty } from '@/utilities/misc'
 
-export class IgnoreDirectories extends ExtensionConfigManager<string[]> {
+export class IgnoreDirectoriesController extends ConfigManagerController<string[]> {
   /**
    * The directories to ignore.
    */

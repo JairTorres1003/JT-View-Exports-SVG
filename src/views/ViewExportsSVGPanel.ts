@@ -9,6 +9,7 @@ import {
   l10n,
 } from 'vscode'
 
+import { AssetsPathsController, LastScanDateController } from '@/controllers/config'
 import { SVGPostMessage, SVGReceiveMessage } from '@/enum/ViewExportsSVG'
 import { type HandlerArgs } from '@/interfaces/misc'
 import {
@@ -23,7 +24,6 @@ import {
   type FuncPostMessage,
   type ReceiveMessage,
 } from '@/interfaces/views/ViewExportsSVGPanel'
-import { AssetsPaths, LastScanDate } from '@/utilities/config'
 import {
   getNonce,
   openFile,
@@ -267,7 +267,7 @@ export class ViewExportsSVGPanel {
    * Retrieves the assets path and sends it as a post message.
    */
   private _getAssetsPath(): void {
-    new AssetsPaths().getAssetsPath().then((assetsPath) => {
+    new AssetsPathsController().getAssetsPath().then((assetsPath) => {
       this._postMessage(SVGPostMessage.SendAssetsPath, assetsPath)
     }, console.error)
   }
@@ -284,7 +284,7 @@ export class ViewExportsSVGPanel {
    * Retrieves the last scan date and sends it as a post message.
    */
   private _getLastScanDate(): void {
-    const config = new LastScanDate()
+    const config = new LastScanDateController()
     this._postMessage(SVGPostMessage.SendLastScanDate, config._dateString)
   }
 
@@ -349,7 +349,7 @@ export class ViewExportsSVGPanel {
    * @param files - An array of SVGFile objects representing the files to be removed.
    */
   private _removeAssets(files: SVGFile[]): void {
-    new AssetsPaths().remove(files).then(() => {
+    new AssetsPathsController().remove(files).then(() => {
       this._getAssetsPath()
     }, console.error)
   }

@@ -1,10 +1,10 @@
-import ExtensionConfigManager from './configManager'
+import ConfigManagerController from './ConfigManagerController'
 
 /**
  * Group patterns for the icons.
  * This object provides patterns for grouping the icons.
  */
-export class GroupPatterns extends ExtensionConfigManager<Record<string, string>> {
+export class GroupPatternsController extends ConfigManagerController<Record<string, string>> {
   private readonly groupPatterns: Record<string, string> = {}
   private readonly groupPatternsUser: Record<string, string> = {}
 
