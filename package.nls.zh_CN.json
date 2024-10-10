@@ -1,0 +1,17 @@
+{
+  "extension.title": "查看导出的 SVG",
+  "extension.description": "✨ '查看导出的 SVG' 是一个 Visual Studio Code 扩展，旨在简化访问和使用 SVG 图标的过程。使用此扩展，您可以轻松地在项目中浏览和搜索 SVG 图标，从而简化将它们集成到项目中的任务。",
+  "extension.commands.showMenu.title": "查看导出的 SVG 🔍",
+  "extension.config.assetsPath.title": "资源路径",
+  "extension.config.assetsPath.description": "一个数组，用于存储包含 SVG 图标的已分析文件的路径。这允许从 Web 视图快速访问它们，作为快捷方式。",
+  "extension.config.ignoreDirectories.title": "忽略目录",
+  "extension.config.ignoreDirectories.description": "一个数组，用于存储在分析文件以查找 SVG 图标时要忽略的目录模式。\n默认值：\n**/.git\n**/.github\n**/.husky\n**/.idea\n**/.idx\n**/.vscode*\n**/build\n**/coverage\n**/dist\n**/node_modules\n**/out",
+  "extension.config.lastScanDate.title": "上次扫描日期",
+  "extension.config.lastScanDate.description": "上次扫描工作区以查找 SVG 图标的日期。",
+  "extension.config.defaultIconProperties.title": "默认图标属性",
+  "extension.config.defaultIconProperties.description": "当 SVG 图标没有定义属性或扩展未找到时，应用于 SVG 图标的默认属性。",
+  "extension.config.showNotExportedIcons.title": "显示未导出的图标",
+  "extension.config.showNotExportedIcons.description": "指示是否显示未导出的图标。",
+  "extension.config.groupPatterns.title": "分组模式",
+  "extension.config.groupPatterns.description": "用于分组图标文件的模式数组。每个模式需要一个 'item'（模式）和一个 'value'（组名）。\n示例：\n| item | value |\n| --- | --- |\n| ** | 所有图标 |\n| **/Flag* | 旗帜 |\n| **/Symbol*.{js, jsx} | 符号 |"
+}
