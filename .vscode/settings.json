@@ -43,7 +43,8 @@
   "explorer.fileNesting.enabled": true,
   "explorer.fileNesting.patterns": {
     "*.tsx": "${capture}.tsx",
-    "package.json": "package-lock.json, yarn.lock, pnpm-lock.yaml, bun.lockb, .*"
+    "package.json": "package-lock.json, yarn.lock, pnpm-lock.yaml, bun.lockb, .*",
+    "package.nls.json": "package.nls*.json"
   },
   "files.trimTrailingWhitespace": true,
   "files.insertFinalNewline": true,
