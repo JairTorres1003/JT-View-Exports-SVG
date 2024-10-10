@@ -176,9 +176,3 @@ export interface HandlerReceiveMessage {
    */
   [SVGReceiveMessage.GetVsCodeStyles]: () => void
 }
-
-export interface GetWebviewAssets {
-  icon: string
-  index: string
-  styles: string
-}

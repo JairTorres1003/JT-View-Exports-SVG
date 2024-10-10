@@ -1,3 +1,5 @@
+export const CONFIG_KEY = 'JT-View-Exports-SVG'
+
 /**
  * The key used to store REST props in an object.
  */

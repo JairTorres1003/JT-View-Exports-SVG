@@ -9,6 +9,7 @@ import {
   l10n,
 } from 'vscode'
 
+import { CONFIG_KEY } from '@/constants/misc'
 import { AssetsPathsController, LastScanDateController } from '@/controllers/config'
 import { SVGPostMessage, SVGReceiveMessage } from '@/enum/ViewExportsSVG'
 import { type HandlerArgs } from '@/interfaces/misc'
@@ -19,26 +20,20 @@ import {
   type ViewExportSVG,
 } from '@/interfaces/ViewExportsSVG'
 import {
-  type GetWebviewAssets,
   type HandlerReceiveMessage,
   type FuncPostMessage,
   type ReceiveMessage,
 } from '@/interfaces/views/ViewExportsSVGPanel'
-import {
-  getNonce,
-  openFile,
-  pathToSVGFile,
-  scanningFiles,
-  scanningWorkspace,
-} from '@/utilities/files'
+import { openFile, pathToSVGFile, scanningFiles, scanningWorkspace } from '@/utilities/files'
 import { getUnknownError, isEmpty } from '@/utilities/misc'
 import { filteredExports } from '@/utilities/svg/filtered'
 import { playground } from '@/utilities/svg/playground'
-import { getCurrentTheme, getStyles, getUri, svgFileToUri } from '@/utilities/vscode'
+import { getCurrentTheme, getStyles, svgFileToUri } from '@/utilities/vscode'
+import { getWebviewContent } from '@/views/WebviewContent'
 
 export class ViewExportsSVGController {
   public static currentPanel: ViewExportsSVGController | undefined
-  public static readonly configName: string = 'JT-View-Exports-SVG'
+  public static readonly configName: string = CONFIG_KEY
 
   private viewExportSVG: ViewExportSVG[] = []
 
@@ -60,7 +55,7 @@ export class ViewExportsSVGController {
     )
 
     // Set the HTML content for the webview panel
-    this._panel.webview.html = this._getWebviewContent(this._panel.webview, extensionUri)
+    this._panel.webview.html = getWebviewContent(this._panel.webview, extensionUri)
 
     // Set an event listener to listen for messages passed from the webview context
     this._setWebviewMessageListener(this._panel.webview)
@@ -151,53 +146,6 @@ export class ViewExportsSVGController {
         ViewExportsSVGController.currentPanel._postMessage(SVGPostMessage.SendSVGError, error)
       }
     }
-  }
-
-  /**
-   * Returns an object containing the URIs for the webview assets.
-   * @param webview - The webview instance.
-   * @param extensionUri - The URI of the extension.
-   * @returns An object with the URIs for the webview assets.
-   */
-  private _getWebviewAssets(webview: Webview, extensionUri: Uri): GetWebviewAssets {
-    const getAssetUri = (...asset: string[]): string =>
-      getUri(webview, extensionUri, ['client', 'dist', 'assets', ...asset]).toString()
-
-    return {
-      icon: getAssetUri('favicon.ico'),
-      index: getAssetUri('index.js'),
-      styles: getAssetUri('index.css'),
-    }
-  }
-
-  /**
-   * Generates the HTML content for the webview.
-   *
-   * @param webview - The webview instance.
-   * @param extensionUri - The URI of the extension.
-   * @returns The generated HTML content.
-   */
-  private _getWebviewContent(webview: Webview, extensionUri: Uri): string {
-    const assets = this._getWebviewAssets(webview, extensionUri)
-    const nonce = getNonce()
-
-    return /* html */ `
-      <!DOCTYPE html>
-      <html lang="${env.language ?? 'en'}">
-        <head>
-          <meta charset="UTF-8" />
-          <link rel="icon" type="image/svg+xml" href="${assets.icon}" />
-          <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no" />
-          <link href="${assets.styles}" rel="stylesheet" />
-          <title>${l10n.t('extension.title')}</title>
-        </head>
-        <body>
-          <div id="root"></div>
-          <noscript>You need to enable JavaScript to run this app.</noscript>
-          <script type="module" nonce="${nonce}" src="${assets.index}"></script>
-        </body>
-      </html>
-    `
   }
 
   /**
