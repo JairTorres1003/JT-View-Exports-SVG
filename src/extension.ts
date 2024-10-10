@@ -1,8 +1,7 @@
 import { commands, type ExtensionContext, type Uri } from 'vscode'
 
 import { showMenu } from './commands'
-import { initializeCacheManager } from './utilities/cache'
-
+import { initializeCacheManager } from './controllers/cache/CacheManagerController'
 /**
  * This method is called when your extension is activated.
  * @param context The extension context.

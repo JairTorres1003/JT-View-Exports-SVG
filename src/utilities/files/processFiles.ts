@@ -2,7 +2,6 @@ import * as path from 'path'
 
 import { ProgressLocation, type Uri, window, type ProgressOptions, l10n } from 'vscode'
 
-import { getCacheManager } from '../cache'
 import { AssetsPaths, ShowNotExportedIcons } from '../config'
 import { isEmpty } from '../misc'
 import { extractSVGData } from '../svg'
@@ -11,6 +10,7 @@ import { groupIconsByPattern } from './groupIconsByPattern'
 import { getFileTimestamp, pathToSVGFile } from './misc'
 
 import { REGEX_FILE } from '@/constants/regex'
+import { getCacheManager } from '@/controllers/cache/CacheManagerController'
 import { type SVGFile, type ViewExportSVG } from '@/interfaces/ViewExportsSVG'
 
 /**

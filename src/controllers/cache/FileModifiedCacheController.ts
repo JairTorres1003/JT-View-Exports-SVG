@@ -6,7 +6,7 @@ import { l10n } from 'vscode'
  * A caching mechanism for values associated with files using their modification timestamps.
  * @template T - The type of the cached value.
  */
-export class FileModifiedCache<T> {
+export class FileModifiedCacheController<T> {
   /**
    * The cache stores data as an object where keys are file paths, and values are objects containing `value` and `lastModified`.
    */

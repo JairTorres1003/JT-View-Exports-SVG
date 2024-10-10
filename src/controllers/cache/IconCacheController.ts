@@ -1,12 +1,12 @@
 import { l10n, type Uri } from 'vscode'
 
-import { FileModifiedCache } from './FileModifiedCache'
+import { FileModifiedCacheController } from './FileModifiedCacheController'
 
 import { type CacheIconKind } from '@/enum/cache'
 import { type SVGIconCache } from '@/interfaces/cache'
 import { type SVGIcon } from '@/interfaces/ViewExportsSVG'
 
-export class IconCache extends FileModifiedCache<SVGIconCache[]> {
+export class IconCacheController extends FileModifiedCacheController<SVGIconCache[]> {
   /**
    * The maximum number of saved icons.
    */
