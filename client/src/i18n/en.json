@@ -9,6 +9,6 @@
     "extractingComponents": "Extracting components..."
   },
   "errors": {
-    "VSCode API is not available.": "VSCode API is not available."
+    "VSCodeApiIsNotAvailable": "VSCode API is not available"
   }
 }
