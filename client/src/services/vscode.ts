@@ -50,9 +50,12 @@ class VSCodeAPIWrapper {
    * @param data - The data to send with the post message.
    */
   public postMessage: FuncPostMessage = (type, data = undefined) => {
-    if (this.vsCodeApi !== undefined) {
-      this.vsCodeApi.postMessage({ type, data })
+    if (this.vsCodeApi === undefined) {
+      console.warn('VSCode API is not available.', { type })
+      return
     }
+
+    this.vsCodeApi.postMessage({ type, data })
   }
 
   /**

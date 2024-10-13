@@ -46,7 +46,17 @@
         "loading",
         "extractingComponents"
       ]
+    },
+    "errors": {
+      "type": "object",
+      "properties": {
+        "VSCode API is not available.": {
+          "type": "string",
+          "default": "VSCode API is not available."
+        }
+      },
+      "required": ["VSCode API is not available."]
     }
   },
-  "required": ["labels"]
+  "required": ["labels", "errors"]
 }

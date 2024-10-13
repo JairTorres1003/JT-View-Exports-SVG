@@ -7,5 +7,8 @@
     "copied {{value}} to clipboard": "Copied <b>{{value}}</b> to clipboard",
     "loading": "Loading...",
     "extractingComponents": "Extracting components..."
+  },
+  "errors": {
+    "VSCode API is not available.": "VSCode API is not available."
   }
 }
