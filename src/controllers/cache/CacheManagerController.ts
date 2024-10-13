@@ -8,6 +8,7 @@ import { isEmpty } from '../../utilities/misc'
 import { FileModifiedCacheController } from './FileModifiedCacheController'
 import { IconCacheController } from './IconCacheController'
 
+import { CacheIconKind } from '@/enum/cache'
 import { type ExtractSVGExports, type ViewExportSVG } from '@/interfaces/ViewExportsSVG'
 
 /**
@@ -27,16 +28,16 @@ class CacheManagerController {
     }
 
     // Set up file paths for each cache
-    const declarationCacheFilePath = path.join(cacheDir, 'declaration_cache.json')
-    const svgCacheFilePath = path.join(cacheDir, 'svg_cache.json')
-    const favoritesCacheFilePath = path.join(cacheDir, 'favorites_cache.json')
-    const recentCacheFilePath = path.join(cacheDir, 'recent_cache.json')
+    const declarationCacheFile = path.join(cacheDir, 'declaration_cache.json')
+    const svgCacheFile = path.join(cacheDir, 'svg_cache.json')
+    const favoritesCacheFile = path.join(cacheDir, 'favorites_cache.json')
+    const recentCacheFile = path.join(cacheDir, 'recent_cache.json')
 
     // Initialize caches
-    this.DeclarationFileCache = new FileModifiedCacheController(declarationCacheFilePath)
-    this.SVGFileCache = new FileModifiedCacheController(svgCacheFilePath)
-    this.FavoritesIconCache = new IconCacheController(favoritesCacheFilePath)
-    this.RecentIconCache = new IconCacheController(recentCacheFilePath, 10)
+    this.DeclarationFileCache = new FileModifiedCacheController(declarationCacheFile)
+    this.SVGFileCache = new FileModifiedCacheController(svgCacheFile)
+    this.FavoritesIconCache = new IconCacheController(favoritesCacheFile, CacheIconKind.FAVORITE)
+    this.RecentIconCache = new IconCacheController(recentCacheFile, CacheIconKind.RECENT, 10)
   }
 
   /**
