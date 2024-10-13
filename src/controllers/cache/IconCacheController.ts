@@ -49,20 +49,22 @@ export class IconCacheController extends FileModifiedCacheController<SVGIconCach
     const newValue = current
 
     value.forEach((icon) => {
-      const existing = current.some(
+      const existing = current.findIndex(
         (item) =>
           item.name === icon.name &&
           item.location.file.absolutePath === icon.location.file.absolutePath
       )
 
-      if (!existing) {
-        newValue.unshift({ ...icon, dateAdd: Date.now() })
+      if (existing !== -1) {
+        newValue.splice(existing, 1)
       }
+
+      newValue.unshift({ ...icon, dateAdd: Date.now() })
     })
 
     const limit = this.savedIconLimit ?? newValue.length
 
-    super.set(currentKey, newValue.slice(-limit), 0)
+    super.set(currentKey, newValue.slice(0, limit), 0)
   }
 
   /**
