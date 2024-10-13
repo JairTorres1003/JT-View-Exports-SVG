@@ -1,36 +1,17 @@
+import { type SVGIcon } from '@api/interfaces/ViewExportsSVG'
 import { Box, type BoxProps, Card, styled, Tooltip, Typography } from '@mui/material'
 import cn from 'classnames'
-import { Trans, useTranslation } from 'react-i18next'
 
-import { useAlert } from '@/hooks/useAlert'
-import { copyToClipboard, getUnknownError } from '@/utils/misc'
+import { useCardSvg } from '@/hooks/components/Cards/useCardSvg'
 
 interface CardSvgProps extends BoxProps {
   readonly children: React.ReactNode
-  readonly title: string
+  readonly icon: SVGIcon
 }
 
 export const CardSvg = styled<React.ComponentType<CardSvgProps>>(
-  ({ children, className, title, onClick = () => {}, ...props }) => {
-    const { onOpen } = useAlert()
-
-    const { t } = useTranslation(undefined, { keyPrefix: 'labels' })
-
-    /**
-     * Handles the click event on the card.
-     */
-    const handleClick = (): void => {
-      copyToClipboard(title)
-        .then(() => {
-          onOpen(
-            <Trans t={t} i18nKey='copied {{value}} to clipboard' values={{ value: title }} />,
-            { severity: 'success' }
-          )
-        })
-        .catch((error) => {
-          onOpen(getUnknownError(error), { severity: 'error' })
-        })
-    }
+  ({ children, className, icon, onClick = () => {}, ...props }) => {
+    const { handleClick } = useCardSvg()
 
     return (
       <Box
@@ -38,13 +19,13 @@ export const CardSvg = styled<React.ComponentType<CardSvgProps>>(
         className={cn(className, 'CardSvg')}
         onClick={(...args) => {
           onClick(...args)
-          handleClick()
+          handleClick(icon)
         }}
       >
         <Card className='CardSvg__card'>{children}</Card>
-        <Tooltip placement='top' title={title}>
+        <Tooltip placement='top' title={icon.name}>
           <Typography variant='caption' noWrap textAlign='center' padding='0 4px'>
-            {title}
+            {icon.name}
           </Typography>
         </Tooltip>
       </Box>
