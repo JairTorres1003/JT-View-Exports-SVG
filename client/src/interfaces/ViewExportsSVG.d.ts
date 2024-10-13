@@ -3,6 +3,7 @@ import {
   SVGComponent,
   SVGErrors,
   SVGFile,
+  SVGIcon,
   SVGPlayground,
   ViewExportSVG,
 } from '@api/interfaces/ViewExportsSVG'
@@ -24,6 +25,8 @@ export interface MessageHandlersView {
   [SVGPostMessage.SendSVGPlayground]?: (data: SVGComponent) => void
   [SVGPostMessage.SendTheme]?: (data: ThemeMode) => void
   [SVGPostMessage.SendVsCodeStyles]?: (data: VsCodeStyles) => void
+  [SVGPostMessage.SendRecentIcons]?: (data: ViewExportSVG[]) => void
+  [SVGPostMessage.SendFavoriteIcons]?: (data: ViewExportSVG[]) => void
 }
 
 /**
@@ -41,6 +44,8 @@ export interface FuncOnMessage {
   (type: SVGPostMessage.SendSVGPlayground, handler: (data: SVGComponent) => void): void
   (type: SVGPostMessage.SendTheme, handler: (data: ThemeMode) => void): void
   (type: SVGPostMessage.SendVsCodeStyles, handler: (data: VsCodeStyles) => void): void
+  (type: SVGPostMessage.SendRecentIcons, handler: (data: ViewExportSVG[]) => void): void
+  (type: SVGPostMessage.SendFavoriteIcons, handler: (data: ViewExportSVG[]) => void): void
 }
 
 /**
@@ -60,4 +65,12 @@ export interface FuncPostMessage {
   (type: SVGReceiveMessage.RemoveAssets, data: SVGFile[]): void
   (type: SVGReceiveMessage.ScanWorkspace): void
   (type: SVGReceiveMessage.SearchSVGComponents, data: string): void
+  (type: SVGReceiveMessage.AddRecentIcon, data: SVGIcon): void
+  (type: SVGReceiveMessage.RemoveRecentIcon, data: SVGIcon): void
+  (type: SVGReceiveMessage.GetRecentIcons): void
+  (type: SVGReceiveMessage.ClearRecentIcons): void
+  (type: SVGReceiveMessage.AddFavoriteIcon, data: SVGIcon): void
+  (type: SVGReceiveMessage.RemoveFavoriteIcon, data: SVGIcon): void
+  (type: SVGReceiveMessage.ClearFavoriteIcons): void
+  (type: SVGReceiveMessage.GetFavoriteIcons): void
 }
