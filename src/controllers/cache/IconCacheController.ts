@@ -10,7 +10,7 @@ export class IconCacheController extends FileModifiedCacheController<SVGIconCach
   /**
    * The maximum number of saved icons.
    */
-  private readonly savedIconLimit?: number
+  private savedIconLimit?: number
 
   /**
    * Constructs an instance of the IconCache.
@@ -21,6 +21,10 @@ export class IconCacheController extends FileModifiedCacheController<SVGIconCach
   constructor(cacheFilePath: string, savedIconLimit?: number) {
     super(cacheFilePath)
     this.savedIconLimit = savedIconLimit
+  }
+
+  updateLimit(limit: number): void {
+    this.savedIconLimit = limit
   }
 
   /**
