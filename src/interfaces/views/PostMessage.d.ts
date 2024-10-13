@@ -18,6 +18,8 @@ export type PostMessage =
   | { type: SVGPostMessage.SendSVGPlayground; data: SVGComponent }
   | { type: SVGPostMessage.SendTheme; data: ThemeMode }
   | { type: SVGPostMessage.SendVsCodeStyles; data: VsCodeStyles }
+  | { type: SVGPostMessage.SendRecentIcons; data: ViewExportSVG[] }
+  | { type: SVGPostMessage.SendFavoriteIcons; data: ViewExportSVG[] }
 
 /**
  * The message to send to the webview.
@@ -78,4 +80,14 @@ export interface FuncPostMessage {
    * @param data - The Visual Studio Code styles.
    */
   (type: SVGPostMessage.SendVsCodeStyles, data: VsCodeStyles): void
+  /**
+   * Sends the recent icons to the webview.
+   * @param data - The recent icons.
+   */
+  (type: SVGPostMessage.SendRecentIcons, data: ViewExportSVG[]): void
+  /**
+   * Sends the favorite icons to the webview.
+   * @param data - The favorite icons.
+   */
+  (type: SVGPostMessage.SendFavoriteIcons, data: ViewExportSVG[]): void
 }

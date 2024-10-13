@@ -1,10 +1,24 @@
-import { l10n, type WebviewPanel, window, type Disposable, type Webview, env } from 'vscode'
+import {
+  l10n,
+  type WebviewPanel,
+  window,
+  type Disposable,
+  type Webview,
+  env,
+  workspace,
+} from 'vscode'
 
+import { getCacheManager } from '../cache'
 import { AssetsPathsController, LastScanDateController } from '../config'
 
 import { SVGPostMessage, SVGReceiveMessage } from '@/enum/ViewExportsSVG'
 import { type HandlerArgs } from '@/interfaces/misc'
-import { type ViewExportSVG, type SVGFile, type SVGPlayground } from '@/interfaces/ViewExportsSVG'
+import {
+  type ViewExportSVG,
+  type SVGFile,
+  type SVGPlayground,
+  type SVGIcon,
+} from '@/interfaces/ViewExportsSVG'
 import { type FuncPostMessage } from '@/interfaces/views/PostMessage'
 import { type ReceiveMessage, type HandlerReceiveMessage } from '@/interfaces/views/ReceiveMessage'
 import { openFile, pathToSVGFile, scanningFiles, scanningWorkspace } from '@/utilities/files'
@@ -17,9 +31,15 @@ export class ListerWebviewController {
   public readonly _disposables: Disposable[] = []
   public viewExportSVG: ViewExportSVG[] = []
 
+  private readonly assetsPathController: AssetsPathsController
+  private readonly lastScanDateController: LastScanDateController
+
   constructor(panel: WebviewPanel, viewExportSVG: ViewExportSVG[]) {
     this._panel = panel
     this.viewExportSVG = viewExportSVG
+
+    this.assetsPathController = new AssetsPathsController()
+    this.lastScanDateController = new LastScanDateController()
 
     // Set an event listener to listen for messages passed from the webview context
     this._setWebviewMessageListener(this._panel.webview)
@@ -31,7 +51,7 @@ export class ListerWebviewController {
    */
   private _setWebviewMessageListener(webview: Webview): void {
     try {
-      const handlers: Partial<HandlerReceiveMessage> = {
+      const handlers: HandlerReceiveMessage = {
         [SVGReceiveMessage.ExtractSVGComponent]: this._extractSVGComponent.bind(this),
         [SVGReceiveMessage.GetAssetsPath]: this._getAssetsPath.bind(this),
         [SVGReceiveMessage.GetLanguage]: this._getLanguage.bind(this),
@@ -45,6 +65,14 @@ export class ListerWebviewController {
         [SVGReceiveMessage.ScanWorkspace]: this._scanWorkspace.bind(this),
         [SVGReceiveMessage.SearchSVGComponents]: this._searchSVGComponents.bind(this),
         [SVGReceiveMessage.GetVsCodeStyles]: this._vscodeStyles.bind(this),
+        [SVGReceiveMessage.AddRecentIcon]: this._addIconToCache(true).bind(this),
+        [SVGReceiveMessage.RemoveRecentIcon]: this._removeIconFromCache(true).bind(this),
+        [SVGReceiveMessage.GetRecentIcons]: this._getIconsFromCache(true).bind(this),
+        [SVGReceiveMessage.ClearRecentIcons]: this._clearIconsFromCache(true).bind(this),
+        [SVGReceiveMessage.AddFavoriteIcon]: this._addIconToCache(false).bind(this),
+        [SVGReceiveMessage.RemoveFavoriteIcon]: this._removeIconFromCache(false).bind(this),
+        [SVGReceiveMessage.ClearFavoriteIcons]: this._clearIconsFromCache(false).bind(this),
+        [SVGReceiveMessage.GetFavoriteIcons]: this._getIconsFromCache(false).bind(this),
       }
 
       const listener = (event: ReceiveMessage): void => {
@@ -96,7 +124,7 @@ export class ListerWebviewController {
    * Retrieves the assets path and sends it as a post message.
    */
   private _getAssetsPath(): void {
-    new AssetsPathsController().getAssetsPath().then((assetsPath) => {
+    this.assetsPathController.getAssetsPath().then((assetsPath) => {
       this._postMessage(SVGPostMessage.SendAssetsPath, assetsPath)
     }, console.error)
   }
@@ -113,8 +141,8 @@ export class ListerWebviewController {
    * Retrieves the last scan date and sends it as a post message.
    */
   private _getLastScanDate(): void {
-    const config = new LastScanDateController()
-    this._postMessage(SVGPostMessage.SendLastScanDate, config._dateString)
+    const date = this.lastScanDateController._dateString
+    this._postMessage(SVGPostMessage.SendLastScanDate, date)
   }
 
   /**
@@ -178,7 +206,7 @@ export class ListerWebviewController {
    * @param files - An array of SVGFile objects representing the files to be removed.
    */
   private _removeAssets(files: SVGFile[]): void {
-    new AssetsPathsController().remove(files).then(() => {
+    this.assetsPathController.remove(files).then(() => {
       this._getAssetsPath()
     }, console.error)
   }
@@ -213,5 +241,64 @@ export class ListerWebviewController {
   private _vscodeStyles(): void {
     const config = getStyles()
     this._postMessage(SVGPostMessage.SendVsCodeStyles, config)
+  }
+
+  /**
+   * Adds an icon to the cache.
+   * @param isRecent - Whether the icon is recent or favorite.
+   */
+  private _addIconToCache(isRecent: boolean) {
+    return (icon: SVGIcon): void => {
+      const { RecentIconCache, FavoritesIconCache } = getCacheManager()
+
+      if (isEmpty(workspace.workspaceFolders)) return
+
+      const cache = isRecent ? RecentIconCache : FavoritesIconCache
+      cache.add(workspace.workspaceFolders[0].uri, [icon])
+    }
+  }
+
+  /**
+   * Removes an icon from the cache.
+   * @param isRecent - Whether the icon is recent or favorite.
+   */
+  private _removeIconFromCache(isRecent: boolean) {
+    return (icon: SVGIcon): void => {
+      const { RecentIconCache, FavoritesIconCache } = getCacheManager()
+
+      if (isEmpty(workspace.workspaceFolders)) return
+
+      const cache = isRecent ? RecentIconCache : FavoritesIconCache
+      cache.remove(workspace.workspaceFolders[0].uri, icon)
+    }
+  }
+
+  /**
+   * Gets the icons from the cache.
+   * @param isRecent - Whether the icons are recent or favorite.
+   */
+  private _getIconsFromCache(isRecent: boolean) {
+    return (): void => {
+      const { RecentIconCache, FavoritesIconCache } = getCacheManager()
+
+      if (isEmpty(workspace.workspaceFolders)) return
+
+      const cache = isRecent ? RecentIconCache : FavoritesIconCache
+      const icons = cache.getIcons(workspace.workspaceFolders[0].uri)
+      console.info(icons)
+    }
+  }
+
+  /**
+   * Clears the icons from the cache.
+   * @param isRecent - Whether the icons are recent or favorite.
+   */
+  private _clearIconsFromCache(isRecent: boolean) {
+    return (): void => {
+      const { RecentIconCache, FavoritesIconCache } = getCacheManager()
+
+      const cache = isRecent ? RecentIconCache : FavoritesIconCache
+      cache.clear()
+    }
   }
 }

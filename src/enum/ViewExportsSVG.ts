@@ -15,6 +15,8 @@ export enum SVGPostMessage {
   SendSVGPlayground = 'send-svg-playground',
   SendTheme = 'send-theme',
   SendVsCodeStyles = 'send-vscode-styles',
+  SendRecentIcons = 'send-recent-icons',
+  SendFavoriteIcons = 'send-favorite-icons',
 }
 
 export enum SVGReceiveMessage {
@@ -32,4 +34,11 @@ export enum SVGReceiveMessage {
   ScanWorkspace = 'scan-workspace',
   SearchSVGComponents = 'search-svg-components',
   AddRecentIcon = 'add-recent-icon',
+  RemoveRecentIcon = 'remove-recent-icon',
+  GetRecentIcons = 'get-recent-icons',
+  ClearRecentIcons = 'clear-recent-icons',
+  AddFavoriteIcon = 'add-favorite-icon',
+  RemoveFavoriteIcon = 'remove-favorite-icon',
+  ClearFavoriteIcons = 'clear-favorite-icons',
+  GetFavoriteIcons = 'get-favorite-icons',
 }

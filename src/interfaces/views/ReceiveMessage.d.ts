@@ -22,6 +22,13 @@ export type ReceiveMessage =
   | { type: SVGReceiveMessage.SearchSVGComponents; data: string }
   | { type: SVGReceiveMessage.GetVsCodeStyles }
   | { type: SVGReceiveMessage.AddRecentIcon; data: SVGIcon }
+  | { type: SVGReceiveMessage.RemoveRecentIcon; data: SVGIcon }
+  | { type: SVGReceiveMessage.GetRecentIcons }
+  | { type: SVGReceiveMessage.ClearRecentIcons }
+  | { type: SVGReceiveMessage.AddFavoriteIcon; data: SVGIcon }
+  | { type: SVGReceiveMessage.RemoveFavoriteIcon; data: SVGIcon }
+  | { type: SVGReceiveMessage.ClearFavoriteIcons }
+  | { type: SVGReceiveMessage.GetFavoriteIcons }
 
 /**
  * The handler for receiving messages from the webview.
@@ -89,4 +96,32 @@ export interface HandlerReceiveMessage {
    * Adds the recent icon to the list.
    */
   [SVGReceiveMessage.AddRecentIcon]: (icon: SVGIcon) => void
+  /**
+   * Removes the recent icon from the list.
+   */
+  [SVGReceiveMessage.RemoveRecentIcon]: (icon: SVGIcon) => void
+  /**
+   * Gets the recent icons.
+   */
+  [SVGReceiveMessage.GetRecentIcons]: () => void
+  /**
+   * Clears the recent icons.
+   */
+  [SVGReceiveMessage.ClearRecentIcons]: () => void
+  /**
+   * Adds the favorite icon to the list.
+   */
+  [SVGReceiveMessage.AddFavoriteIcon]: (icon: SVGIcon) => void
+  /**
+   * Removes the favorite icon from the list.
+   */
+  [SVGReceiveMessage.RemoveFavoriteIcon]: (icon: SVGIcon) => void
+  /**
+   * Clears the favorite icons.
+   */
+  [SVGReceiveMessage.ClearFavoriteIcons]: () => void
+  /**
+   * Gets the favorite icons.
+   */
+  [SVGReceiveMessage.GetFavoriteIcons]: () => void
 }
