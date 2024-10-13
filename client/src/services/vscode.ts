@@ -1,6 +1,6 @@
 import { type SVGPostMessage } from '@api/enums/ViewExportsSVG'
 import { type HandlerArgs } from '@api/interfaces/misc'
-import { type PostMessage } from '@api/interfaces/views/ViewExportsSVGPanel'
+import { type PostMessage } from '@api/interfaces/views/PostMessage'
 import { type WebviewApi } from 'vscode-webview'
 
 import {

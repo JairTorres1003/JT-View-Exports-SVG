@@ -5,11 +5,8 @@ import { AssetsPathsController, LastScanDateController } from '../config'
 import { SVGPostMessage, SVGReceiveMessage } from '@/enum/ViewExportsSVG'
 import { type HandlerArgs } from '@/interfaces/misc'
 import { type ViewExportSVG, type SVGFile, type SVGPlayground } from '@/interfaces/ViewExportsSVG'
-import {
-  type ReceiveMessage,
-  type HandlerReceiveMessage,
-  type FuncPostMessage,
-} from '@/interfaces/views/ViewExportsSVGPanel'
+import { type FuncPostMessage } from '@/interfaces/views/PostMessage'
+import { type ReceiveMessage, type HandlerReceiveMessage } from '@/interfaces/views/ReceiveMessage'
 import { openFile, pathToSVGFile, scanningFiles, scanningWorkspace } from '@/utilities/files'
 import { getUnknownError, isEmpty } from '@/utilities/misc'
 import { filteredExports, playground } from '@/utilities/svg'

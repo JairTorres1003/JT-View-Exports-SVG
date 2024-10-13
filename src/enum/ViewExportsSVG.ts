@@ -4,31 +4,32 @@ export enum SVGDeclaration {
 }
 
 export enum SVGPostMessage {
-  SendAssetsPath = 'send-assets-path', // assetsPath
-  SendLanguage = 'send-language', // language
-  SendLastScanDate = 'send-last-scan-date', // lastScanDate
-  SendPlaygroundError = 'send-playground-error', // playgroundError
-  SendRunExtraction = 'send-run-extraction', // startExtraction
-  SendSVGComponents = 'send-svg-components', // svgComponents
-  SendSVGError = 'send-svg-error', // svgError
-  SendSVGFilteredComponents = 'send-svg-filter', // filteredSvgComponents
-  SendSVGPlayground = 'send-svg-playground', // customSvgComponent
-  SendTheme = 'send-theme', // currentTheme
-  SendVsCodeStyles = 'send-vscode-styles', // vscodeStyles
+  SendAssetsPath = 'send-assets-path',
+  SendLanguage = 'send-language',
+  SendLastScanDate = 'send-last-scan-date',
+  SendPlaygroundError = 'send-playground-error',
+  SendRunExtraction = 'send-run-extraction',
+  SendSVGComponents = 'send-svg-components',
+  SendSVGError = 'send-svg-error',
+  SendSVGFilteredComponents = 'send-svg-filter',
+  SendSVGPlayground = 'send-svg-playground',
+  SendTheme = 'send-theme',
+  SendVsCodeStyles = 'send-vscode-styles',
 }
 
 export enum SVGReceiveMessage {
-  ExtractSVGComponent = 'extract-svg-component', // extractIconsFile
-  GetAssetsPath = 'get-assets-path', // getAssetsPath
-  GetLanguage = 'get-language', // getTranslations
-  GetLastScanDate = 'get-last-scan-date', // getLastScanDate
-  GetSVGComponents = 'get-svg-components', // requestSvgComponents
-  GetTheme = 'get-theme', // getCurrentTheme
-  GetViewAssets = 'get-view-assets', // viewAssets
-  GetVsCodeStyles = 'get-vscode-styles', // getStyles
-  OpenFile = 'open-file', // openFile
-  PlaygroundSVGComponents = 'playground-svg-components', // playgroundSvgComponents
-  RemoveAssets = 'remove-assets', // removeAsset
-  ScanWorkspace = 'scan-workspace', // scanWorkspace
-  SearchSVGComponents = 'search-svg-components', // searchSvgComponents
+  ExtractSVGComponent = 'extract-svg-component',
+  GetAssetsPath = 'get-assets-path',
+  GetLanguage = 'get-language',
+  GetLastScanDate = 'get-last-scan-date',
+  GetSVGComponents = 'get-svg-components',
+  GetTheme = 'get-theme',
+  GetViewAssets = 'get-view-assets',
+  GetVsCodeStyles = 'get-vscode-styles',
+  OpenFile = 'open-file',
+  PlaygroundSVGComponents = 'playground-svg-components',
+  RemoveAssets = 'remove-assets',
+  ScanWorkspace = 'scan-workspace',
+  SearchSVGComponents = 'search-svg-components',
+  AddRecentIcon = 'add-recent-icon',
 }

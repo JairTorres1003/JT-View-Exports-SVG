@@ -7,7 +7,7 @@ import { getUnknownError } from '../misc'
 import { getWorkspacePath } from '../vscode'
 
 import { type SVGFile } from '@/interfaces/ViewExportsSVG'
-import { type OpenFile } from '@/interfaces/views/ViewExportsSVGPanel'
+import { type OpenFile } from '@/interfaces/views/content'
 
 /**
  * Gets the last modification timestamp of a file.
