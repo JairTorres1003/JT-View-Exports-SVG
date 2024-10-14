@@ -77,6 +77,26 @@
       "type": "string",
       "description": "The description of the configuration to store an array of patterns to group icon files",
       "default": "An array of patterns to group icon files. Each pattern requires an 'item' (the pattern) and a 'value (the group name).\nExample:\n| item | value |\n| --- | --- |\n| ** | All Icons |\n| **/Flag* | Flags |\n| **/Symbol*.{js, jsx} | Symbols |"
+    },
+    "extension.config.recentIcons.showIcons.title": {
+      "type": "string",
+      "description": "The title of the configuration to indicate whether or not to show recent icons",
+      "default": "Show Recent Icons"
+    },
+    "extension.config.recentIcons.showIcons.description": {
+      "type": "string",
+      "description": "The description of the configuration to indicate whether or not to show recent icons",
+      "default": "Indicates whether or not to show the most recently accessed icons."
+    },
+    "extension.config.recentIcons.limitShowIcons.title": {
+      "type": "string",
+      "description": "The title of the configuration to store the limit of recent icons to show",
+      "default": "Limit Show Recent Icons"
+    },
+    "extension.config.recentIcons.limitShowIcons.description": {
+      "type": "string",
+      "description": "The description of the configuration to store the limit of recent icons to show",
+      "default": "The maximum number of recent icons to show."
     }
   },
   "required": [
@@ -94,6 +114,10 @@
     "extension.config.showNotExportedIcons.title",
     "extension.config.showNotExportedIcons.description",
     "extension.config.groupPatterns.title",
-    "extension.config.groupPatterns.description"
+    "extension.config.groupPatterns.description",
+    "extension.config.recentIcons.showIcons.title",
+    "extension.config.recentIcons.showIcons.description",
+    "extension.config.recentIcons.limitShowIcons.title",
+    "extension.config.recentIcons.limitShowIcons.description"
   ]
 }

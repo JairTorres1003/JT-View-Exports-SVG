@@ -13,5 +13,9 @@
   "extension.config.showNotExportedIcons.title": "Nicht exportierte Icons anzeigen",
   "extension.config.showNotExportedIcons.description": "Gibt an, ob nicht exportierte Icons angezeigt werden sollen oder nicht.",
   "extension.config.groupPatterns.title": "Gruppenmuster",
-  "extension.config.groupPatterns.description": "Ein Array von Mustern zum Gruppieren von Icon-Dateien. Jedes Muster erfordert ein 'item' (das Muster) und einen 'value' (den Gruppennamen).\nBeispiel:\n| item | value |\n| --- | --- |\n| ** | Alle Icons |\n| **/Flag* | Flaggen |\n| **/Symbol*.{js, jsx} | Symbole |"
+  "extension.config.groupPatterns.description": "Ein Array von Mustern zum Gruppieren von Icon-Dateien. Jedes Muster erfordert ein 'Element' (das Muster) und einen 'Wert' (den Gruppennamen).\nBeispiel:\n| Element | Wert |\n| --- | --- |\n| ** | Alle Icons |\n| **/Flag* | Flaggen |\n| **/Symbol*.{js, jsx} | Symbole |",
+  "extension.config.recentIcons.showIcons.title": "Neueste Icons anzeigen",
+  "extension.config.recentIcons.showIcons.description": "Gibt an, ob die zuletzt verwendeten Icons angezeigt werden sollen oder nicht.",
+  "extension.config.recentIcons.limitShowIcons.title": "Anzeige der neuesten Icons begrenzen",
+  "extension.config.recentIcons.limitShowIcons.description": "Die maximale Anzahl der zuletzt verwendeten Icons, die angezeigt werden sollen."
 }

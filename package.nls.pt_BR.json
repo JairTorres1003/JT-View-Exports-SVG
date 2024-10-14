@@ -13,5 +13,9 @@
   "extension.config.showNotExportedIcons.title": "Mostrar Ícones Não Exportados",
   "extension.config.showNotExportedIcons.description": "Indica se deve ou não mostrar ícones que não estão sendo exportados.",
   "extension.config.groupPatterns.title": "Agrupar Padrões",
-  "extension.config.groupPatterns.description": "Uma matriz de padrões para agrupar arquivos de ícones. Cada padrão requer um 'item' (o padrão) e um 'valor' (o nome do grupo).\nExemplo:\n| item | valor |\n| --- | --- |\n| ** | Todos os Ícones |\n| **/Flag* | Bandeiras |\n| **/Symbol*.{js, jsx} | Símbolos |"
+  "extension.config.groupPatterns.description": "Uma matriz de padrões para agrupar arquivos de ícones. Cada padrão requer um 'elemento' (o padrão) e um 'valor' (o nome do grupo).\nExemplo:\n| Elemento | valor |\n| --- | --- |\n| ** | Todos os Ícones |\n| **/Flag* | Bandeiras |\n| **/Symbol*.{js, jsx} | Símbolos |",
+  "extension.config.recentIcons.showIcons.title": "Mostrar Ícones Recentes",
+  "extension.config.recentIcons.showIcons.description": "Indica se deve ou não mostrar os ícones mais recentemente acessados.",
+  "extension.config.recentIcons.limitShowIcons.title": "Limite de Mostrar Ícones Recentes",
+  "extension.config.recentIcons.limitShowIcons.description": "O número máximo de ícones recentes a serem mostrados."
 }

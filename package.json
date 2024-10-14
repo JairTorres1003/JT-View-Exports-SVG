@@ -125,6 +125,25 @@
             "additionalProperties": {
               "type": "string"
             }
+          },
+          "JT-View-Exports-SVG.recentIcons.showIcons": {
+            "type": "boolean",
+            "default": true,
+            "scope": "application",
+            "title": "%extension.config.recentIcons.showIcons.title%",
+            "description": "%extension.config.recentIcons.showIcons.description%",
+            "order": 0
+          },
+          "JT-View-Exports-SVG.recentIcons.limitShowIcons": {
+            "type": "number",
+            "default": 10,
+            "title": "%extension.config.recentIcons.limitShowIcons.title%",
+            "description": "%extension.config.recentIcons.limitShowIcons.description%",
+            "minimum": 1,
+            "maximum": 50,
+            "multipleOf": 1,
+            "scope": "application",
+            "order": 1
           }
         }
       }

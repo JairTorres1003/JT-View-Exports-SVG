@@ -13,5 +13,9 @@
   "extension.config.showNotExportedIcons.title": "Показывать Неэкспортированные Иконки",
   "extension.config.showNotExportedIcons.description": "Указывает, показывать ли иконки, которые не экспортируются.",
   "extension.config.groupPatterns.title": "Шаблоны Группировки",
-  "extension.config.groupPatterns.description": "Массив шаблонов для группировки файлов иконок. Каждый шаблон требует 'item' (шаблон) и 'value' (название группы).\nПример:\n| item | value |\n| --- | --- |\n| ** | Все Иконки |\n| **/Flag* | Флаги |\n| **/Symbol*.{js, jsx} | Символы |"
+  "extension.config.groupPatterns.description": "Массив шаблонов для группировки файлов иконок. Каждый шаблон требует 'элемент' (шаблон) и 'значение' (имя группы).\nПример:\n| Элемент | Значение |\n| --- | --- |\n| ** | Все Иконки |\n| **/Flag* | Флаги |\n| **/Symbol*.{js, jsx} | Символы |",
+  "extension.config.recentIcons.showIcons.title": "Показывать Недавние Иконки",
+  "extension.config.recentIcons.showIcons.description": "Указывает, показывать ли последние использованные иконки.",
+  "extension.config.recentIcons.limitShowIcons.title": "Лимит Показа Недавних Иконок",
+  "extension.config.recentIcons.limitShowIcons.description": "Максимальное количество последних иконок для показа."
 }

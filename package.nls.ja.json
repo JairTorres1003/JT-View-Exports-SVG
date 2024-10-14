@@ -13,5 +13,9 @@
   "extension.config.showNotExportedIcons.title": "エクスポートされていないアイコンを表示",
   "extension.config.showNotExportedIcons.description": "エクスポートされていないアイコンを表示するかどうかを示します。",
   "extension.config.groupPatterns.title": "グループパターン",
-  "extension.config.groupPatterns.description": "アイコンファイルをグループ化するためのパターンの配列です。各パターンには 'item'（パターン）と 'value'（グループ名）が必要です。\n例:\n| item | value |\n| --- | --- |\n| ** | すべてのアイコン |\n| **/Flag* | フラグ |\n| **/Symbol*.{js, jsx} | シンボル |"
+  "extension.config.recentIcons.showIcons.title": "最近のアイコンを表示",
+  "extension.config.groupPatterns.description": "アイコンファイルをグループ化するためのパターンの配列です。各パターンには 「項目」（パターン）と 「値」（グループ名）が必要です。\n例:\n| 項目 | 値 |\n| --- | --- |\n| ** | すべてのアイコン |\n| **/Flag* | フラグ |\n| **/Symbol*.{js, jsx} | シンボル |",
+  "extension.config.recentIcons.showIcons.description": "最近アクセスしたアイコンを表示するかどうかを示します。",
+  "extension.config.recentIcons.limitShowIcons.title": "最近のアイコンの表示制限",
+  "extension.config.recentIcons.limitShowIcons.description": "表示する最近のアイコンの最大数。"
 }

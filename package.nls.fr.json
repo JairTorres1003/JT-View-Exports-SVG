@@ -13,5 +13,9 @@
   "extension.config.showNotExportedIcons.title": "Afficher les icônes non exportées",
   "extension.config.showNotExportedIcons.description": "Indique si les icônes non exportées doivent être affichées ou non.",
   "extension.config.groupPatterns.title": "Modèles de groupe",
-  "extension.config.groupPatterns.description": "Un tableau de modèles pour regrouper les fichiers d'icônes. Chaque modèle nécessite un 'item' (le modèle) et une 'value' (le nom du groupe).\nExemple:\n| item | value |\n| --- | --- |\n| ** | Toutes les icônes |\n| **/Flag* | Drapeaux |\n| **/Symbol*.{js, jsx} | Symboles |"
+  "extension.config.groupPatterns.description": "Une variété de modèles pour regrouper des fichiers d'icônes. Chaque modèle nécessite un « élément » (le modèle) et une « valeur » (le nom du groupe).\nExemple :\n| élément | valeur |\n| --- | --- |\n| ** | Toutes les icônes |\n| **/Drapeau* | Drapeaux |\n| **/Symbole*.{js, jsx} | Symboles |",
+  "extension.config.recentIcons.showIcons.title": "Afficher les icônes récentes",
+  "extension.config.recentIcons.showIcons.description": "Indique si les icônes les plus récemment consultées doivent être affichées ou non.",
+  "extension.config.recentIcons.limitShowIcons.title": "Limite d'affichage des icônes récentes",
+  "extension.config.recentIcons.limitShowIcons.description": "Le nombre maximal d'icônes récentes à afficher."
 }
