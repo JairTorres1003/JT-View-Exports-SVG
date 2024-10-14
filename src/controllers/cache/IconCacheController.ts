@@ -11,7 +11,7 @@ export class IconCacheController extends FileModifiedCacheController<SVGIconCach
   /**
    * The maximum number of saved icons.
    */
-  private savedIconLimit?: number
+  private savedIconLimit?: number | (() => number)
 
   /**
    * Constructs an instance of the IconCache.
@@ -19,7 +19,11 @@ export class IconCacheController extends FileModifiedCacheController<SVGIconCach
    * @param cacheFilePath - The file path where the cache is stored.
    * @param savedIconLimit - Optional limit on the number of saved icons.
    */
-  constructor(cacheFilePath: string, kind: CacheIconKind, savedIconLimit?: number) {
+  constructor(
+    cacheFilePath: string,
+    kind: CacheIconKind,
+    savedIconLimit?: number | (() => number)
+  ) {
     super(cacheFilePath)
     this.kind = kind
     this.savedIconLimit = savedIconLimit
@@ -30,7 +34,7 @@ export class IconCacheController extends FileModifiedCacheController<SVGIconCach
    *
    * @param limit - The new limit on the number of saved icons.
    */
-  updateLimit(limit: number): void {
+  updateLimit(limit: number | (() => number)): void {
     this.savedIconLimit = limit
   }
 
@@ -62,7 +66,9 @@ export class IconCacheController extends FileModifiedCacheController<SVGIconCach
       newValue.unshift({ ...icon, dateAdd: Date.now() })
     })
 
-    const limit = this.savedIconLimit ?? newValue.length
+    const limitConfig =
+      (typeof this.savedIconLimit === 'function' ? this.savedIconLimit() : this.savedIconLimit) ?? 0
+    const limit = limitConfig > 0 ? limitConfig : newValue.length
 
     super.set(currentKey, newValue.slice(0, limit), 0)
   }

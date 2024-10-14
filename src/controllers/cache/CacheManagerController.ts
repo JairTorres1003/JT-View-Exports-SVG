@@ -4,6 +4,7 @@ import * as path from 'path'
 import { l10n, Uri, type ExtensionContext } from 'vscode'
 
 import { isEmpty } from '../../utilities/misc'
+import { RecentIconsLimitController } from '../config'
 
 import { FileModifiedCacheController } from './FileModifiedCacheController'
 import { IconCacheController } from './IconCacheController'
@@ -21,6 +22,9 @@ class CacheManagerController {
   public RecentIconCache: IconCacheController
 
   constructor(private readonly context: ExtensionContext) {
+    const recentIconsLimitController = new RecentIconsLimitController()
+    const limitFun = (): number => recentIconsLimitController.getLimit()
+
     // Create cache directory if it doesn't exist
     const cacheDir = Uri.joinPath(context.globalStorageUri, 'cache').fsPath
     if (!fs.existsSync(cacheDir)) {
@@ -37,7 +41,7 @@ class CacheManagerController {
     this.DeclarationFileCache = new FileModifiedCacheController(declarationCacheFile)
     this.SVGFileCache = new FileModifiedCacheController(svgCacheFile)
     this.FavoritesIconCache = new IconCacheController(favoritesCacheFile, CacheIconKind.FAVORITE)
-    this.RecentIconCache = new IconCacheController(recentCacheFile, CacheIconKind.RECENT, 10)
+    this.RecentIconCache = new IconCacheController(recentCacheFile, CacheIconKind.RECENT, limitFun)
   }
 
   /**
