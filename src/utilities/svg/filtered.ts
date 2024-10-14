@@ -3,6 +3,18 @@ import { l10n } from 'vscode'
 import { type SVGComponent, type SVGErrors, type ViewExportSVG } from '@/interfaces/ViewExportsSVG'
 
 /**
+ * Filters the array of `SVGComponent` objects based on the provided query.
+ *
+ * @param components - The array of `SVGComponent` objects to filter.
+ * @param query - The query string to filter the array.
+ */
+const filter = (components: SVGComponent[], query: string): SVGComponent[] => {
+  return components.filter((component) =>
+    component.name.toLowerCase().includes(query.toLowerCase())
+  )
+}
+
+/**
  * Filters the array of `ViewExportSVG` objects based on the provided query.
  *
  * @param viewExportSVG - The array of `ViewExportSVG` objects to filter.
@@ -28,16 +40,4 @@ export function filteredExports(
   })
 
   return filtered.length > 0 ? filtered : { location: {}, message: l10n.t('No results found...') }
-}
-
-/**
- * Filters the array of `SVGComponent` objects based on the provided query.
- *
- * @param components - The array of `SVGComponent` objects to filter.
- * @param query - The query string to filter the array.
- */
-const filter = (components: SVGComponent[], query: string): SVGComponent[] => {
-  return components.filter((component) =>
-    component.name.toLowerCase().includes(query.toLowerCase())
-  )
 }
