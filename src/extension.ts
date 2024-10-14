@@ -1,6 +1,7 @@
 import { commands, type ExtensionContext, type Uri } from 'vscode'
 
 import { showMenu } from './commands'
+import { CONFIG_KEY } from './constants/misc'
 import { initializeCacheManager } from './controllers/cache'
 /**
  * This method is called when your extension is activated.
@@ -10,7 +11,7 @@ export function activate(context: ExtensionContext): void {
   initializeCacheManager(context)
 
   context.subscriptions.push(
-    commands.registerCommand('JT-View-Exports-SVG.showMenu', async (item: Uri, items: Uri[]) => {
+    commands.registerCommand(`${CONFIG_KEY}.showMenu`, async (item: Uri, items: Uri[]) => {
       await showMenu(context, item, items)
     })
   )
