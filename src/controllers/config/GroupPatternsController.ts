@@ -20,8 +20,8 @@ export class GroupPatternsController extends ConfigManagerController<Record<stri
   public getAllPatterns(): Record<string, string> {
     return {
       ...this._initialValue,
-      ...this.groupPatternsUser,
       ...this.groupPatterns,
+      ...this.groupPatternsUser,
     }
   }
 

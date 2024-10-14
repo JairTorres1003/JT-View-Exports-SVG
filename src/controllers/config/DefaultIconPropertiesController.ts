@@ -24,8 +24,8 @@ export class DefaultIconPropertiesController extends ConfigManagerController<
   public getAllProperties(): Record<string, unknown> {
     const properties: Record<string, unknown> = {
       ...this._initialValue,
-      ...this.defaultIconPropertiesUser,
       ...this.defaultIconProperties,
+      ...this.defaultIconPropertiesUser,
     }
 
     for (const key in properties) {
