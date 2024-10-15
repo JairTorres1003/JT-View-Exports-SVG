@@ -16,6 +16,8 @@
     "WallabyJs.console-ninja",
     "wix.vscode-import-cost",
     "YoavBls.pretty-ts-errorsn",
+    "christian-kohler.path-intellisense",
+    "MylesMurphy.prettify-ts",
     "OmriGrossman.live-code-metric"
   ]
 }
