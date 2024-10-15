@@ -15,6 +15,7 @@
     "usernamehw.errorlens",
     "WallabyJs.console-ninja",
     "wix.vscode-import-cost",
-    "YoavBls.pretty-ts-errorsn"
+    "YoavBls.pretty-ts-errorsn",
+    "OmriGrossman.live-code-metric"
   ]
 }
