@@ -45,38 +45,42 @@ export class ListerWebviewController {
     this._setWebviewMessageListener(this._panel.webview)
   }
 
+  private get _handlersMap(): HandlerReceiveMessage {
+    return {
+      [SVGReceiveMessage.ExtractSVGComponent]: this._extractSVGComponent.bind(this),
+      [SVGReceiveMessage.GetAssetsPath]: this._getAssetsPath.bind(this),
+      [SVGReceiveMessage.GetLanguage]: this._getLanguage.bind(this),
+      [SVGReceiveMessage.GetLastScanDate]: this._getLastScanDate.bind(this),
+      [SVGReceiveMessage.GetSVGComponents]: this._getSVGComponents.bind(this),
+      [SVGReceiveMessage.GetTheme]: this._getTheme.bind(this),
+      [SVGReceiveMessage.GetViewAssets]: this._getViewAssets.bind(this),
+      [SVGReceiveMessage.OpenFile]: openFile.bind(this),
+      [SVGReceiveMessage.PlaygroundSVGComponents]: this._playgroundSVGComponents.bind(this),
+      [SVGReceiveMessage.RemoveAssets]: this._removeAssets.bind(this),
+      [SVGReceiveMessage.ScanWorkspace]: this._scanWorkspace.bind(this),
+      [SVGReceiveMessage.SearchSVGComponents]: this._searchSVGComponents.bind(this),
+      [SVGReceiveMessage.GetVsCodeStyles]: this._vscodeStyles.bind(this),
+      [SVGReceiveMessage.AddRecentIcon]: this._addIconToCache(true).bind(this),
+      [SVGReceiveMessage.RemoveRecentIcon]: this._removeIconFromCache(true).bind(this),
+      [SVGReceiveMessage.GetRecentIcons]: this._getIconsFromCache(true).bind(this),
+      [SVGReceiveMessage.ClearRecentIcons]: this._clearIconsFromCache(true).bind(this),
+      [SVGReceiveMessage.AddFavoriteIcon]: this._addIconToCache(false).bind(this),
+      [SVGReceiveMessage.RemoveFavoriteIcon]: this._removeIconFromCache(false).bind(this),
+      [SVGReceiveMessage.ClearFavoriteIcons]: this._clearIconsFromCache(false).bind(this),
+      [SVGReceiveMessage.GetFavoriteIcons]: this._getIconsFromCache(false).bind(this),
+    }
+  }
+
   /**
    * Sets up a message listener for the webview panel.
    * @param webview The webview instance.
    */
   private _setWebviewMessageListener(webview: Webview): void {
     try {
-      const handlers: HandlerReceiveMessage = {
-        [SVGReceiveMessage.ExtractSVGComponent]: this._extractSVGComponent.bind(this),
-        [SVGReceiveMessage.GetAssetsPath]: this._getAssetsPath.bind(this),
-        [SVGReceiveMessage.GetLanguage]: this._getLanguage.bind(this),
-        [SVGReceiveMessage.GetLastScanDate]: this._getLastScanDate.bind(this),
-        [SVGReceiveMessage.GetSVGComponents]: this._getSVGComponents.bind(this),
-        [SVGReceiveMessage.GetTheme]: this._getTheme.bind(this),
-        [SVGReceiveMessage.GetViewAssets]: this._getViewAssets.bind(this),
-        [SVGReceiveMessage.OpenFile]: openFile.bind(this),
-        [SVGReceiveMessage.PlaygroundSVGComponents]: this._playgroundSVGComponents.bind(this),
-        [SVGReceiveMessage.RemoveAssets]: this._removeAssets.bind(this),
-        [SVGReceiveMessage.ScanWorkspace]: this._scanWorkspace.bind(this),
-        [SVGReceiveMessage.SearchSVGComponents]: this._searchSVGComponents.bind(this),
-        [SVGReceiveMessage.GetVsCodeStyles]: this._vscodeStyles.bind(this),
-        [SVGReceiveMessage.AddRecentIcon]: this._addIconToCache(true).bind(this),
-        [SVGReceiveMessage.RemoveRecentIcon]: this._removeIconFromCache(true).bind(this),
-        [SVGReceiveMessage.GetRecentIcons]: this._getIconsFromCache(true).bind(this),
-        [SVGReceiveMessage.ClearRecentIcons]: this._clearIconsFromCache(true).bind(this),
-        [SVGReceiveMessage.AddFavoriteIcon]: this._addIconToCache(false).bind(this),
-        [SVGReceiveMessage.RemoveFavoriteIcon]: this._removeIconFromCache(false).bind(this),
-        [SVGReceiveMessage.ClearFavoriteIcons]: this._clearIconsFromCache(false).bind(this),
-        [SVGReceiveMessage.GetFavoriteIcons]: this._getIconsFromCache(false).bind(this),
-      }
-
       const listener = (event: ReceiveMessage): void => {
-        const handler = handlers[event.type] as (arg0?: HandlerArgs<HandlerReceiveMessage>) => void
+        const handler = this._handlersMap[event.type] as (
+          arg0?: HandlerArgs<HandlerReceiveMessage>
+        ) => void
 
         if (isEmpty(handler) || typeof handler !== 'function') {
           console.error(l10n.t('No handler found for event:'), event)
