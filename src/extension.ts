@@ -11,7 +11,7 @@ export function activate(context: ExtensionContext): void {
   initializeCacheManager(context)
 
   context.subscriptions.push(
-    commands.registerCommand(`${CONFIG_KEY}.showMenu2`, async (item: Uri, items: Uri[]) => {
+    commands.registerCommand(`${CONFIG_KEY}.showMenu`, async (item: Uri, items: Uri[]) => {
       await showMenu(context, item, items)
     })
   )
