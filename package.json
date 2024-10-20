@@ -158,7 +158,7 @@
     "compile": "tsc -p ./ && tsc-alias",
     "watch": "concurrently \"tsc -w -p ./\" \"tsc-alias -w\"",
     "test": "node ./out/test/runTest.js",
-    "pretest": "npm run client:built && npm run compile",
+    "pretest": "npm run client:build && npm run compile",
     "vscode:prepublish": "npm run test && npm run lint && npm run client:built && npm run compile",
     "client:lint": "cd client && npm run lint",
     "client:lint:fix": "cd client && npm run lint:fix",
