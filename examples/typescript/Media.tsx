@@ -1,6 +1,8 @@
 import React from 'react'
 
-export const HeadphonesFillOne = ({
+import { type IconComponentProps } from './types'
+
+export const HeadphonesFillOne: React.FC<IconComponentProps> = ({
   size = 24,
   color = 'currentColor',
   sx = {},
@@ -61,7 +63,12 @@ export const HeadphonesFillOne = ({
   </svg>
 )
 
-export const HeadphonesFill = ({ size = 24, color = 'currentColor', sx = {}, className = '' }) => (
+export const HeadphonesFill: React.FC<IconComponentProps> = ({
+  size = 24,
+  color = 'currentColor',
+  sx = {},
+  className = '',
+}) => (
   <svg
     width={size}
     height={size}
@@ -115,7 +122,7 @@ export const HeadphonesFill = ({ size = 24, color = 'currentColor', sx = {}, cla
   </svg>
 )
 
-export const HeadphonesFillDuotone = ({
+export const HeadphonesFillDuotone: React.FC<IconComponentProps> = ({
   size = 24,
   color = 'currentColor',
   sx = {},
@@ -178,7 +185,7 @@ export const HeadphonesFillDuotone = ({
   </svg>
 )
 
-export const HeadphonesFillLight = ({
+export const HeadphonesFillLight: React.FC<IconComponentProps> = ({
   size = 24,
   color = 'currentColor',
   sx = {},
@@ -206,7 +213,12 @@ export const HeadphonesFillLight = ({
   </svg>
 )
 
-export const Mic = ({ size = 24, color = 'currentColor', sx = {}, className = '' }) => (
+export const Mic: React.FC<IconComponentProps> = ({
+  size = 24,
+  color = 'currentColor',
+  sx = {},
+  className = '',
+}) => (
   <svg
     width={size}
     height={size}
@@ -243,7 +255,12 @@ export const Mic = ({ size = 24, color = 'currentColor', sx = {}, className = ''
   </svg>
 )
 
-export const MicAlt = ({ size = 24, color = 'currentColor', sx = {}, className = '' }) => (
+export const MicAlt: React.FC<IconComponentProps> = ({
+  size = 24,
+  color = 'currentColor',
+  sx = {},
+  className = '',
+}) => (
   <svg
     width={size}
     height={size}
@@ -295,7 +312,12 @@ export const MicAlt = ({ size = 24, color = 'currentColor', sx = {}, className =
   </svg>
 )
 
-export const MicAltDuotone = ({ size = 24, color = 'currentColor', sx = {}, className = '' }) => (
+export const MicAltDuotone: React.FC<IconComponentProps> = ({
+  size = 24,
+  color = 'currentColor',
+  sx = {},
+  className = '',
+}) => (
   <svg
     width={size}
     height={size}
@@ -355,7 +377,12 @@ export const MicAltDuotone = ({ size = 24, color = 'currentColor', sx = {}, clas
   </svg>
 )
 
-export const MicAltFill = ({ size = 24, color = 'currentColor', sx = {}, className = '' }) => (
+export const MicAltFill: React.FC<IconComponentProps> = ({
+  size = 24,
+  color = 'currentColor',
+  sx = {},
+  className = '',
+}) => (
   <svg
     width={size}
     height={size}
@@ -381,7 +408,12 @@ export const MicAltFill = ({ size = 24, color = 'currentColor', sx = {}, classNa
   </svg>
 )
 
-export const MicAltLight = ({ size = 24, color = 'currentColor', sx = {}, className = '' }) => (
+export const MicAltLight: React.FC<IconComponentProps> = ({
+  size = 24,
+  color = 'currentColor',
+  sx = {},
+  className = '',
+}) => (
   <svg
     width={size}
     height={size}
@@ -400,7 +432,12 @@ export const MicAltLight = ({ size = 24, color = 'currentColor', sx = {}, classN
   </svg>
 )
 
-export const MicDuotone = ({ size = 24, color = 'currentColor', sx = {}, className = '' }) => (
+export const MicDuotone: React.FC<IconComponentProps> = ({
+  size = 24,
+  color = 'currentColor',
+  sx = {},
+  className = '',
+}) => (
   <svg
     width={size}
     height={size}
@@ -439,7 +476,12 @@ export const MicDuotone = ({ size = 24, color = 'currentColor', sx = {}, classNa
   </svg>
 )
 
-export const MicFill = ({ size = 24, color = 'currentColor', sx = {}, className = '' }) => (
+export const MicFill: React.FC<IconComponentProps> = ({
+  size = 24,
+  color = 'currentColor',
+  sx = {},
+  className = '',
+}) => (
   <svg
     width={size}
     height={size}
@@ -467,7 +509,12 @@ export const MicFill = ({ size = 24, color = 'currentColor', sx = {}, className 
   </svg>
 )
 
-export const MicLight = ({ size = 24, color = 'currentColor', sx = {}, className = '' }) => (
+export const MicLight: React.FC<IconComponentProps> = ({
+  size = 24,
+  color = 'currentColor',
+  sx = {},
+  className = '',
+}) => (
   <svg
     width={size}
     height={size}
@@ -488,7 +535,12 @@ export const MicLight = ({ size = 24, color = 'currentColor', sx = {}, className
   </svg>
 )
 
-export const Music = ({ size = 24, color = 'currentColor', sx = {}, className = '' }) => (
+export const Music: React.FC<IconComponentProps> = ({
+  size = 24,
+  color = 'currentColor',
+  sx = {},
+  className = '',
+}) => (
   <svg
     width={size}
     height={size}
@@ -506,7 +558,12 @@ export const Music = ({ size = 24, color = 'currentColor', sx = {}, className = 
   </svg>
 )
 
-export const MusicDuotone = ({ size = 24, color = 'currentColor', sx = {}, className = '' }) => (
+export const MusicDuotone: React.FC<IconComponentProps> = ({
+  size = 24,
+  color = 'currentColor',
+  sx = {},
+  className = '',
+}) => (
   <svg
     width={size}
     height={size}
@@ -543,7 +600,12 @@ export const MusicDuotone = ({ size = 24, color = 'currentColor', sx = {}, class
   </svg>
 )
 
-export const MusicFill = ({ size = 24, color = 'currentColor', sx = {}, className = '' }) => (
+export const MusicFill: React.FC<IconComponentProps> = ({
+  size = 24,
+  color = 'currentColor',
+  sx = {},
+  className = '',
+}) => (
   <svg
     width={size}
     height={size}
@@ -567,7 +629,12 @@ export const MusicFill = ({ size = 24, color = 'currentColor', sx = {}, classNam
   </svg>
 )
 
-export const MusicLight = ({ size = 24, color = 'currentColor', sx = {}, className = '' }) => (
+export const MusicLight: React.FC<IconComponentProps> = ({
+  size = 24,
+  color = 'currentColor',
+  sx = {},
+  className = '',
+}) => (
   <svg
     width={size}
     height={size}
@@ -584,7 +651,12 @@ export const MusicLight = ({ size = 24, color = 'currentColor', sx = {}, classNa
   </svg>
 )
 
-export const Play = ({ size = 24, color = 'currentColor', sx = {}, className = '' }) => (
+export const Play: React.FC<IconComponentProps> = ({
+  size = 24,
+  color = 'currentColor',
+  sx = {},
+  className = '',
+}) => (
   <svg
     width={size}
     height={size}
@@ -604,7 +676,12 @@ export const Play = ({ size = 24, color = 'currentColor', sx = {}, className = '
   </svg>
 )
 
-export const PlayDuotone = ({ size = 24, color = 'currentColor', sx = {}, className = '' }) => (
+export const PlayDuotone: React.FC<IconComponentProps> = ({
+  size = 24,
+  color = 'currentColor',
+  sx = {},
+  className = '',
+}) => (
   <svg
     width={size}
     height={size}
@@ -625,7 +702,12 @@ export const PlayDuotone = ({ size = 24, color = 'currentColor', sx = {}, classN
   </svg>
 )
 
-export const PlayFill = ({ size = 24, color = 'currentColor', sx = {}, className = '' }) => (
+export const PlayFill: React.FC<IconComponentProps> = ({
+  size = 24,
+  color = 'currentColor',
+  sx = {},
+  className = '',
+}) => (
   <svg
     width={size}
     height={size}
@@ -642,7 +724,12 @@ export const PlayFill = ({ size = 24, color = 'currentColor', sx = {}, className
   </svg>
 )
 
-export const PlayLight = ({ size = 24, color = 'currentColor', sx = {}, className = '' }) => (
+export const PlayLight: React.FC<IconComponentProps> = ({
+  size = 24,
+  color = 'currentColor',
+  sx = {},
+  className = '',
+}) => (
   <svg
     width={size}
     height={size}
@@ -661,7 +748,12 @@ export const PlayLight = ({ size = 24, color = 'currentColor', sx = {}, classNam
   </svg>
 )
 
-export const Sound = ({ size = 24, color = 'currentColor', sx = {}, className = '' }) => (
+export const Sound: React.FC<IconComponentProps> = ({
+  size = 24,
+  color = 'currentColor',
+  sx = {},
+  className = '',
+}) => (
   <svg
     width={size}
     height={size}
@@ -679,7 +771,12 @@ export const Sound = ({ size = 24, color = 'currentColor', sx = {}, className = 
   </svg>
 )
 
-export const SoundDuotone = ({ size = 24, color = 'currentColor', sx = {}, className = '' }) => (
+export const SoundDuotone: React.FC<IconComponentProps> = ({
+  size = 24,
+  color = 'currentColor',
+  sx = {},
+  className = '',
+}) => (
   <svg
     width={size}
     height={size}
@@ -701,7 +798,12 @@ export const SoundDuotone = ({ size = 24, color = 'currentColor', sx = {}, class
   </svg>
 )
 
-export const SoundFill = ({ size = 24, color = 'currentColor', sx = {}, className = '' }) => (
+export const SoundFill: React.FC<IconComponentProps> = ({
+  size = 24,
+  color = 'currentColor',
+  sx = {},
+  className = '',
+}) => (
   <svg
     width={size}
     height={size}
@@ -725,7 +827,12 @@ export const SoundFill = ({ size = 24, color = 'currentColor', sx = {}, classNam
   </svg>
 )
 
-export const SoundLight = ({ size = 24, color = 'currentColor', sx = {}, className = '' }) => (
+export const SoundLight: React.FC<IconComponentProps> = ({
+  size = 24,
+  color = 'currentColor',
+  sx = {},
+  className = '',
+}) => (
   <svg
     width={size}
     height={size}
@@ -742,7 +849,12 @@ export const SoundLight = ({ size = 24, color = 'currentColor', sx = {}, classNa
   </svg>
 )
 
-export const Stop = ({ size = 24, color = 'currentColor', sx = {}, className = '' }) => (
+export const Stop: React.FC<IconComponentProps> = ({
+  size = 24,
+  color = 'currentColor',
+  sx = {},
+  className = '',
+}) => (
   <svg
     width={size}
     height={size}
@@ -775,7 +887,12 @@ export const Stop = ({ size = 24, color = 'currentColor', sx = {}, className = '
   </svg>
 )
 
-export const StopAndPlay = ({ size = 24, color = 'currentColor', sx = {}, className = '' }) => (
+export const StopAndPlay: React.FC<IconComponentProps> = ({
+  size = 24,
+  color = 'currentColor',
+  sx = {},
+  className = '',
+}) => (
   <svg
     width={size}
     height={size}
@@ -797,7 +914,7 @@ export const StopAndPlay = ({ size = 24, color = 'currentColor', sx = {}, classN
   </svg>
 )
 
-export const StopAndPlayDuotone = ({
+export const StopAndPlayDuotone: React.FC<IconComponentProps> = ({
   size = 24,
   color = 'currentColor',
   sx = {},
@@ -826,7 +943,12 @@ export const StopAndPlayDuotone = ({
   </svg>
 )
 
-export const StopAndPlayFill = ({ size = 24, color = 'currentColor', sx = {}, className = '' }) => (
+export const StopAndPlayFill: React.FC<IconComponentProps> = ({
+  size = 24,
+  color = 'currentColor',
+  sx = {},
+  className = '',
+}) => (
   <svg
     width={size}
     height={size}
@@ -845,7 +967,7 @@ export const StopAndPlayFill = ({ size = 24, color = 'currentColor', sx = {}, cl
   </svg>
 )
 
-export const StopAndPlayLight = ({
+export const StopAndPlayLight: React.FC<IconComponentProps> = ({
   size = 24,
   color = 'currentColor',
   sx = {},
@@ -871,7 +993,12 @@ export const StopAndPlayLight = ({
   </svg>
 )
 
-export const StopDuotone = ({ size = 24, color = 'currentColor', sx = {}, className = '' }) => (
+export const StopDuotone: React.FC<IconComponentProps> = ({
+  size = 24,
+  color = 'currentColor',
+  sx = {},
+  className = '',
+}) => (
   <svg
     width={size}
     height={size}
@@ -908,7 +1035,12 @@ export const StopDuotone = ({ size = 24, color = 'currentColor', sx = {}, classN
   </svg>
 )
 
-export const StopFill = ({ size = 24, color = 'currentColor', sx = {}, className = '' }) => (
+export const StopFill: React.FC<IconComponentProps> = ({
+  size = 24,
+  color = 'currentColor',
+  sx = {},
+  className = '',
+}) => (
   <svg
     width={size}
     height={size}
@@ -923,7 +1055,12 @@ export const StopFill = ({ size = 24, color = 'currentColor', sx = {}, className
   </svg>
 )
 
-export const StopLight = ({ size = 24, color = 'currentColor', sx = {}, className = '' }) => (
+export const StopLight: React.FC<IconComponentProps> = ({
+  size = 24,
+  color = 'currentColor',
+  sx = {},
+  className = '',
+}) => (
   <svg
     width={size}
     height={size}
@@ -938,7 +1075,12 @@ export const StopLight = ({ size = 24, color = 'currentColor', sx = {}, classNam
   </svg>
 )
 
-export const Video = ({ size = 24, color = 'currentColor', sx = {}, className = '' }) => (
+export const Video: React.FC<IconComponentProps> = ({
+  size = 24,
+  color = 'currentColor',
+  sx = {},
+  className = '',
+}) => (
   <svg
     width={size}
     height={size}
@@ -959,7 +1101,12 @@ export const Video = ({ size = 24, color = 'currentColor', sx = {}, className = 
   </svg>
 )
 
-export const VideoDuotone = ({ size = 24, color = 'currentColor', sx = {}, className = '' }) => (
+export const VideoDuotone: React.FC<IconComponentProps> = ({
+  size = 24,
+  color = 'currentColor',
+  sx = {},
+  className = '',
+}) => (
   <svg
     width={size}
     height={size}
@@ -986,7 +1133,12 @@ export const VideoDuotone = ({ size = 24, color = 'currentColor', sx = {}, class
   </svg>
 )
 
-export const VideoFill = ({ size = 24, color = 'currentColor', sx = {}, className = '' }) => (
+export const VideoFill: React.FC<IconComponentProps> = ({
+  size = 24,
+  color = 'currentColor',
+  sx = {},
+  className = '',
+}) => (
   <svg
     width={size}
     height={size}
@@ -1005,7 +1157,12 @@ export const VideoFill = ({ size = 24, color = 'currentColor', sx = {}, classNam
   </svg>
 )
 
-export const VideoLight = ({ size = 24, color = 'currentColor', sx = {}, className = '' }) => (
+export const VideoLight: React.FC<IconComponentProps> = ({
+  size = 24,
+  color = 'currentColor',
+  sx = {},
+  className = '',
+}) => (
   <svg
     width={size}
     height={size}
@@ -1025,7 +1182,12 @@ export const VideoLight = ({ size = 24, color = 'currentColor', sx = {}, classNa
   </svg>
 )
 
-export const SoundMax = ({ size = 24, color = 'currentColor', sx = {}, className = '' }) => (
+export const SoundMax: React.FC<IconComponentProps> = ({
+  size = 24,
+  color = 'currentColor',
+  sx = {},
+  className = '',
+}) => (
   <svg
     width={size}
     height={size}
@@ -1055,7 +1217,12 @@ export const SoundMax = ({ size = 24, color = 'currentColor', sx = {}, className
   </svg>
 )
 
-export const SoundMaxDuotone = ({ size = 24, color = 'currentColor', sx = {}, className = '' }) => (
+export const SoundMaxDuotone: React.FC<IconComponentProps> = ({
+  size = 24,
+  color = 'currentColor',
+  sx = {},
+  className = '',
+}) => (
   <svg
     width={size}
     height={size}
@@ -1086,7 +1253,12 @@ export const SoundMaxDuotone = ({ size = 24, color = 'currentColor', sx = {}, cl
   </svg>
 )
 
-export const SoundMaxFill = ({ size = 24, color = 'currentColor', sx = {}, className = '' }) => (
+export const SoundMaxFill: React.FC<IconComponentProps> = ({
+  size = 24,
+  color = 'currentColor',
+  sx = {},
+  className = '',
+}) => (
   <svg
     width={size}
     height={size}
@@ -1115,7 +1287,12 @@ export const SoundMaxFill = ({ size = 24, color = 'currentColor', sx = {}, class
   </svg>
 )
 
-export const SoundMaxLight = ({ size = 24, color = 'currentColor', sx = {}, className = '' }) => (
+export const SoundMaxLight: React.FC<IconComponentProps> = ({
+  size = 24,
+  color = 'currentColor',
+  sx = {},
+  className = '',
+}) => (
   <svg
     width={size}
     height={size}
@@ -1142,7 +1319,12 @@ export const SoundMaxLight = ({ size = 24, color = 'currentColor', sx = {}, clas
   </svg>
 )
 
-export const SoundMin = ({ size = 24, color = 'currentColor', sx = {}, className = '' }) => (
+export const SoundMin: React.FC<IconComponentProps> = ({
+  size = 24,
+  color = 'currentColor',
+  sx = {},
+  className = '',
+}) => (
   <svg
     width={size}
     height={size}
@@ -1166,7 +1348,12 @@ export const SoundMin = ({ size = 24, color = 'currentColor', sx = {}, className
   </svg>
 )
 
-export const SoundMinDuotone = ({ size = 24, color = 'currentColor', sx = {}, className = '' }) => (
+export const SoundMinDuotone: React.FC<IconComponentProps> = ({
+  size = 24,
+  color = 'currentColor',
+  sx = {},
+  className = '',
+}) => (
   <svg
     width={size}
     height={size}
@@ -1191,7 +1378,12 @@ export const SoundMinDuotone = ({ size = 24, color = 'currentColor', sx = {}, cl
   </svg>
 )
 
-export const SoundMinFill = ({ size = 24, color = 'currentColor', sx = {}, className = '' }) => (
+export const SoundMinFill: React.FC<IconComponentProps> = ({
+  size = 24,
+  color = 'currentColor',
+  sx = {},
+  className = '',
+}) => (
   <svg
     width={size}
     height={size}
@@ -1214,7 +1406,12 @@ export const SoundMinFill = ({ size = 24, color = 'currentColor', sx = {}, class
   </svg>
 )
 
-export const SoundMinLight = ({ size = 24, color = 'currentColor', sx = {}, className = '' }) => (
+export const SoundMinLight: React.FC<IconComponentProps> = ({
+  size = 24,
+  color = 'currentColor',
+  sx = {},
+  className = '',
+}) => (
   <svg
     width={size}
     height={size}
@@ -1236,7 +1433,12 @@ export const SoundMinLight = ({ size = 24, color = 'currentColor', sx = {}, clas
   </svg>
 )
 
-export const SoundMute = ({ size = 24, color = 'currentColor', sx = {}, className = '' }) => (
+export const SoundMute: React.FC<IconComponentProps> = ({
+  size = 24,
+  color = 'currentColor',
+  sx = {},
+  className = '',
+}) => (
   <svg
     width={size}
     height={size}
@@ -1256,7 +1458,7 @@ export const SoundMute = ({ size = 24, color = 'currentColor', sx = {}, classNam
   </svg>
 )
 
-export const SoundMuteDuotone = ({
+export const SoundMuteDuotone: React.FC<IconComponentProps> = ({
   size = 24,
   color = 'currentColor',
   sx = {},
@@ -1282,7 +1484,12 @@ export const SoundMuteDuotone = ({
   </svg>
 )
 
-export const SoundMuteFill = ({ size = 24, color = 'currentColor', sx = {}, className = '' }) => (
+export const SoundMuteFill: React.FC<IconComponentProps> = ({
+  size = 24,
+  color = 'currentColor',
+  sx = {},
+  className = '',
+}) => (
   <svg
     width={size}
     height={size}
@@ -1301,7 +1508,12 @@ export const SoundMuteFill = ({ size = 24, color = 'currentColor', sx = {}, clas
   </svg>
 )
 
-export const SoundMuteLight = ({ size = 24, color = 'currentColor', sx = {}, className = '' }) => (
+export const SoundMuteLight: React.FC<IconComponentProps> = ({
+  size = 24,
+  color = 'currentColor',
+  sx = {},
+  className = '',
+}) => (
   <svg
     width={size}
     height={size}
