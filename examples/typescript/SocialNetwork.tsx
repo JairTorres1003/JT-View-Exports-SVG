@@ -1,6 +1,13 @@
 import React from 'react'
 
-export const Chat = ({ size = 24, color = 'currentColor', sx = {}, className = '' }) => (
+import { type IconComponentProps } from './types'
+
+export const Chat: React.FC<IconComponentProps> = ({
+  size = 24,
+  color = 'currentColor',
+  sx = {},
+  className = '',
+}) => (
   <svg
     width={size}
     height={size}
@@ -32,7 +39,12 @@ export const Chat = ({ size = 24, color = 'currentColor', sx = {}, className = '
   </svg>
 )
 
-export const ChatAlt = ({ size = 24, color = 'currentColor', sx = {}, className = '' }) => (
+export const ChatAlt: React.FC<IconComponentProps> = ({
+  size = 24,
+  color = 'currentColor',
+  sx = {},
+  className = '',
+}) => (
   <svg
     width={size}
     height={size}
@@ -64,7 +76,12 @@ export const ChatAlt = ({ size = 24, color = 'currentColor', sx = {}, className 
   </svg>
 )
 
-export const ChatAlt2 = ({ size = 24, color = 'currentColor', sx = {}, className = '' }) => (
+export const ChatAlt2: React.FC<IconComponentProps> = ({
+  size = 24,
+  color = 'currentColor',
+  sx = {},
+  className = '',
+}) => (
   <svg
     width={size}
     height={size}
@@ -98,7 +115,12 @@ export const ChatAlt2 = ({ size = 24, color = 'currentColor', sx = {}, className
   </svg>
 )
 
-export const ChatAlt2Duotone = ({ size = 24, color = 'currentColor', sx = {}, className = '' }) => (
+export const ChatAlt2Duotone: React.FC<IconComponentProps> = ({
+  size = 24,
+  color = 'currentColor',
+  sx = {},
+  className = '',
+}) => (
   <svg
     width={size}
     height={size}
@@ -120,7 +142,7 @@ export const ChatAlt2Duotone = ({ size = 24, color = 'currentColor', sx = {}, cl
   </svg>
 )
 
-export const ChatAlt2DuotoneLine = ({
+export const ChatAlt2DuotoneLine: React.FC<IconComponentProps> = ({
   size = 24,
   color = 'currentColor',
   sx = {},
@@ -161,7 +183,12 @@ export const ChatAlt2DuotoneLine = ({
   </svg>
 )
 
-export const ChatAlt2Fill = ({ size = 24, color = 'currentColor', sx = {}, className = '' }) => (
+export const ChatAlt2Fill: React.FC<IconComponentProps> = ({
+  size = 24,
+  color = 'currentColor',
+  sx = {},
+  className = '',
+}) => (
   <svg
     width={size}
     height={size}
@@ -180,7 +207,12 @@ export const ChatAlt2Fill = ({ size = 24, color = 'currentColor', sx = {}, class
   </svg>
 )
 
-export const ChatAlt2Light = ({ size = 24, color = 'currentColor', sx = {}, className = '' }) => (
+export const ChatAlt2Light: React.FC<IconComponentProps> = ({
+  size = 24,
+  color = 'currentColor',
+  sx = {},
+  className = '',
+}) => (
   <svg
     width={size}
     height={size}
@@ -201,7 +233,12 @@ export const ChatAlt2Light = ({ size = 24, color = 'currentColor', sx = {}, clas
   </svg>
 )
 
-export const ChatAlt3 = ({ size = 24, color = 'currentColor', sx = {}, className = '' }) => (
+export const ChatAlt3: React.FC<IconComponentProps> = ({
+  size = 24,
+  color = 'currentColor',
+  sx = {},
+  className = '',
+}) => (
   <svg
     width={size}
     height={size}
@@ -221,7 +258,12 @@ export const ChatAlt3 = ({ size = 24, color = 'currentColor', sx = {}, className
   </svg>
 )
 
-export const ChatAlt3Duotone = ({ size = 24, color = 'currentColor', sx = {}, className = '' }) => (
+export const ChatAlt3Duotone: React.FC<IconComponentProps> = ({
+  size = 24,
+  color = 'currentColor',
+  sx = {},
+  className = '',
+}) => (
   <svg
     width={size}
     height={size}
@@ -244,7 +286,7 @@ export const ChatAlt3Duotone = ({ size = 24, color = 'currentColor', sx = {}, cl
   </svg>
 )
 
-export const ChatAlt3DuotoneLine = ({
+export const ChatAlt3DuotoneLine: React.FC<IconComponentProps> = ({
   size = 24,
   color = 'currentColor',
   sx = {},
@@ -300,7 +342,12 @@ export const ChatAlt3DuotoneLine = ({
   </svg>
 )
 
-export const ChatAlt3Fill = ({ size = 24, color = 'currentColor', sx = {}, className = '' }) => (
+export const ChatAlt3Fill: React.FC<IconComponentProps> = ({
+  size = 24,
+  color = 'currentColor',
+  sx = {},
+  className = '',
+}) => (
   <svg
     width={size}
     height={size}
@@ -319,7 +366,12 @@ export const ChatAlt3Fill = ({ size = 24, color = 'currentColor', sx = {}, class
   </svg>
 )
 
-export const ChatAlt3Light = ({ size = 24, color = 'currentColor', sx = {}, className = '' }) => (
+export const ChatAlt3Light: React.FC<IconComponentProps> = ({
+  size = 24,
+  color = 'currentColor',
+  sx = {},
+  className = '',
+}) => (
   <svg
     width={size}
     height={size}
@@ -339,7 +391,12 @@ export const ChatAlt3Light = ({ size = 24, color = 'currentColor', sx = {}, clas
   </svg>
 )
 
-export const ChatAltAddOne = ({ size = 24, color = 'currentColor', sx = {}, className = '' }) => (
+export const ChatAltAddOne: React.FC<IconComponentProps> = ({
+  size = 24,
+  color = 'currentColor',
+  sx = {},
+  className = '',
+}) => (
   <svg
     width={size}
     height={size}
@@ -371,7 +428,12 @@ export const ChatAltAddOne = ({ size = 24, color = 'currentColor', sx = {}, clas
   </svg>
 )
 
-export const ChatAltAdd = ({ size = 24, color = 'currentColor', sx = {}, className = '' }) => (
+export const ChatAltAdd: React.FC<IconComponentProps> = ({
+  size = 24,
+  color = 'currentColor',
+  sx = {},
+  className = '',
+}) => (
   <svg
     width={size}
     height={size}
@@ -403,7 +465,7 @@ export const ChatAltAdd = ({ size = 24, color = 'currentColor', sx = {}, classNa
   </svg>
 )
 
-export const ChatAltAddDuotoneOne = ({
+export const ChatAltAddDuotoneOne: React.FC<IconComponentProps> = ({
   size = 24,
   color = 'currentColor',
   sx = {},
@@ -440,7 +502,7 @@ export const ChatAltAddDuotoneOne = ({
   </svg>
 )
 
-export const ChatAltAddDuotone = ({
+export const ChatAltAddDuotone: React.FC<IconComponentProps> = ({
   size = 24,
   color = 'currentColor',
   sx = {},
@@ -465,7 +527,7 @@ export const ChatAltAddDuotone = ({
   </svg>
 )
 
-export const ChatAltAddDuotoneLineOne = ({
+export const ChatAltAddDuotoneLineOne: React.FC<IconComponentProps> = ({
   size = 24,
   color = 'currentColor',
   sx = {},
@@ -504,7 +566,7 @@ export const ChatAltAddDuotoneLineOne = ({
   </svg>
 )
 
-export const ChatAltAddDuotoneLine = ({
+export const ChatAltAddDuotoneLine: React.FC<IconComponentProps> = ({
   size = 24,
   color = 'currentColor',
   sx = {},
@@ -543,7 +605,7 @@ export const ChatAltAddDuotoneLine = ({
   </svg>
 )
 
-export const ChatAltAddFillOne = ({
+export const ChatAltAddFillOne: React.FC<IconComponentProps> = ({
   size = 24,
   color = 'currentColor',
   sx = {},
@@ -567,7 +629,12 @@ export const ChatAltAddFillOne = ({
   </svg>
 )
 
-export const ChatAltAddFill = ({ size = 24, color = 'currentColor', sx = {}, className = '' }) => (
+export const ChatAltAddFill: React.FC<IconComponentProps> = ({
+  size = 24,
+  color = 'currentColor',
+  sx = {},
+  className = '',
+}) => (
   <svg
     width={size}
     height={size}
@@ -586,7 +653,7 @@ export const ChatAltAddFill = ({ size = 24, color = 'currentColor', sx = {}, cla
   </svg>
 )
 
-export const ChatAltAddLightOne = ({
+export const ChatAltAddLightOne: React.FC<IconComponentProps> = ({
   size = 24,
   color = 'currentColor',
   sx = {},
@@ -610,7 +677,12 @@ export const ChatAltAddLightOne = ({
   </svg>
 )
 
-export const ChatAltAddLight = ({ size = 24, color = 'currentColor', sx = {}, className = '' }) => (
+export const ChatAltAddLight: React.FC<IconComponentProps> = ({
+  size = 24,
+  color = 'currentColor',
+  sx = {},
+  className = '',
+}) => (
   <svg
     width={size}
     height={size}
@@ -629,7 +701,12 @@ export const ChatAltAddLight = ({ size = 24, color = 'currentColor', sx = {}, cl
   </svg>
 )
 
-export const ChatAltDuotone = ({ size = 24, color = 'currentColor', sx = {}, className = '' }) => (
+export const ChatAltDuotone: React.FC<IconComponentProps> = ({
+  size = 24,
+  color = 'currentColor',
+  sx = {},
+  className = '',
+}) => (
   <svg
     width={size}
     height={size}
@@ -649,7 +726,7 @@ export const ChatAltDuotone = ({ size = 24, color = 'currentColor', sx = {}, cla
   </svg>
 )
 
-export const ChatAltDuotoneLine = ({
+export const ChatAltDuotoneLine: React.FC<IconComponentProps> = ({
   size = 24,
   color = 'currentColor',
   sx = {},
@@ -688,7 +765,12 @@ export const ChatAltDuotoneLine = ({
   </svg>
 )
 
-export const ChatAltFill = ({ size = 24, color = 'currentColor', sx = {}, className = '' }) => (
+export const ChatAltFill: React.FC<IconComponentProps> = ({
+  size = 24,
+  color = 'currentColor',
+  sx = {},
+  className = '',
+}) => (
   <svg
     width={size}
     height={size}
@@ -707,7 +789,12 @@ export const ChatAltFill = ({ size = 24, color = 'currentColor', sx = {}, classN
   </svg>
 )
 
-export const ChatAltLight = ({ size = 24, color = 'currentColor', sx = {}, className = '' }) => (
+export const ChatAltLight: React.FC<IconComponentProps> = ({
+  size = 24,
+  color = 'currentColor',
+  sx = {},
+  className = '',
+}) => (
   <svg
     width={size}
     height={size}
@@ -726,7 +813,12 @@ export const ChatAltLight = ({ size = 24, color = 'currentColor', sx = {}, class
   </svg>
 )
 
-export const ChatDuotone = ({ size = 24, color = 'currentColor', sx = {}, className = '' }) => (
+export const ChatDuotone: React.FC<IconComponentProps> = ({
+  size = 24,
+  color = 'currentColor',
+  sx = {},
+  className = '',
+}) => (
   <svg
     width={size}
     height={size}
@@ -746,7 +838,12 @@ export const ChatDuotone = ({ size = 24, color = 'currentColor', sx = {}, classN
   </svg>
 )
 
-export const ChatDuotoneLine = ({ size = 24, color = 'currentColor', sx = {}, className = '' }) => (
+export const ChatDuotoneLine: React.FC<IconComponentProps> = ({
+  size = 24,
+  color = 'currentColor',
+  sx = {},
+  className = '',
+}) => (
   <svg
     width={size}
     height={size}
@@ -780,7 +877,12 @@ export const ChatDuotoneLine = ({ size = 24, color = 'currentColor', sx = {}, cl
   </svg>
 )
 
-export const ChatFill = ({ size = 24, color = 'currentColor', sx = {}, className = '' }) => (
+export const ChatFill: React.FC<IconComponentProps> = ({
+  size = 24,
+  color = 'currentColor',
+  sx = {},
+  className = '',
+}) => (
   <svg
     width={size}
     height={size}
@@ -799,7 +901,12 @@ export const ChatFill = ({ size = 24, color = 'currentColor', sx = {}, className
   </svg>
 )
 
-export const ChatLight = ({ size = 24, color = 'currentColor', sx = {}, className = '' }) => (
+export const ChatLight: React.FC<IconComponentProps> = ({
+  size = 24,
+  color = 'currentColor',
+  sx = {},
+  className = '',
+}) => (
   <svg
     width={size}
     height={size}
@@ -818,7 +925,12 @@ export const ChatLight = ({ size = 24, color = 'currentColor', sx = {}, classNam
   </svg>
 )
 
-export const ChatPlusOne = ({ size = 24, color = 'currentColor', sx = {}, className = '' }) => (
+export const ChatPlusOne: React.FC<IconComponentProps> = ({
+  size = 24,
+  color = 'currentColor',
+  sx = {},
+  className = '',
+}) => (
   <svg
     width={size}
     height={size}
@@ -857,7 +969,12 @@ export const ChatPlusOne = ({ size = 24, color = 'currentColor', sx = {}, classN
   </svg>
 )
 
-export const ChatPlus = ({ size = 24, color = 'currentColor', sx = {}, className = '' }) => (
+export const ChatPlus: React.FC<IconComponentProps> = ({
+  size = 24,
+  color = 'currentColor',
+  sx = {},
+  className = '',
+}) => (
   <svg
     width={size}
     height={size}
@@ -903,7 +1020,7 @@ export const ChatPlus = ({ size = 24, color = 'currentColor', sx = {}, className
   </svg>
 )
 
-export const ChatPlusDuotoneOne = ({
+export const ChatPlusDuotoneOne: React.FC<IconComponentProps> = ({
   size = 24,
   color = 'currentColor',
   sx = {},
@@ -930,7 +1047,12 @@ export const ChatPlusDuotoneOne = ({
   </svg>
 )
 
-export const ChatPlusDuotone = ({ size = 24, color = 'currentColor', sx = {}, className = '' }) => (
+export const ChatPlusDuotone: React.FC<IconComponentProps> = ({
+  size = 24,
+  color = 'currentColor',
+  sx = {},
+  className = '',
+}) => (
   <svg
     width={size}
     height={size}
@@ -952,7 +1074,7 @@ export const ChatPlusDuotone = ({ size = 24, color = 'currentColor', sx = {}, cl
   </svg>
 )
 
-export const ChatPlusDuotoneLineOne = ({
+export const ChatPlusDuotoneLineOne: React.FC<IconComponentProps> = ({
   size = 24,
   color = 'currentColor',
   sx = {},
@@ -998,7 +1120,7 @@ export const ChatPlusDuotoneLineOne = ({
   </svg>
 )
 
-export const ChatPlusDuotoneLine = ({
+export const ChatPlusDuotoneLine: React.FC<IconComponentProps> = ({
   size = 24,
   color = 'currentColor',
   sx = {},
@@ -1051,7 +1173,12 @@ export const ChatPlusDuotoneLine = ({
   </svg>
 )
 
-export const ChatPlusFillOne = ({ size = 24, color = 'currentColor', sx = {}, className = '' }) => (
+export const ChatPlusFillOne: React.FC<IconComponentProps> = ({
+  size = 24,
+  color = 'currentColor',
+  sx = {},
+  className = '',
+}) => (
   <svg
     width={size}
     height={size}
@@ -1084,7 +1211,12 @@ export const ChatPlusFillOne = ({ size = 24, color = 'currentColor', sx = {}, cl
   </svg>
 )
 
-export const ChatPlusFill = ({ size = 24, color = 'currentColor', sx = {}, className = '' }) => (
+export const ChatPlusFill: React.FC<IconComponentProps> = ({
+  size = 24,
+  color = 'currentColor',
+  sx = {},
+  className = '',
+}) => (
   <svg
     width={size}
     height={size}
@@ -1110,7 +1242,7 @@ export const ChatPlusFill = ({ size = 24, color = 'currentColor', sx = {}, class
   </svg>
 )
 
-export const ChatPlusLightOne = ({
+export const ChatPlusLightOne: React.FC<IconComponentProps> = ({
   size = 24,
   color = 'currentColor',
   sx = {},
@@ -1135,7 +1267,12 @@ export const ChatPlusLightOne = ({
   </svg>
 )
 
-export const ChatPlusLight = ({ size = 24, color = 'currentColor', sx = {}, className = '' }) => (
+export const ChatPlusLight: React.FC<IconComponentProps> = ({
+  size = 24,
+  color = 'currentColor',
+  sx = {},
+  className = '',
+}) => (
   <svg
     width={size}
     height={size}
@@ -1156,7 +1293,12 @@ export const ChatPlusLight = ({ size = 24, color = 'currentColor', sx = {}, clas
   </svg>
 )
 
-export const ChatSearch = ({ size = 24, color = 'currentColor', sx = {}, className = '' }) => (
+export const ChatSearch: React.FC<IconComponentProps> = ({
+  size = 24,
+  color = 'currentColor',
+  sx = {},
+  className = '',
+}) => (
   <svg
     width={size}
     height={size}
@@ -1192,7 +1334,7 @@ export const ChatSearch = ({ size = 24, color = 'currentColor', sx = {}, classNa
   </svg>
 )
 
-export const ChatSearchDuotone = ({
+export const ChatSearchDuotone: React.FC<IconComponentProps> = ({
   size = 24,
   color = 'currentColor',
   sx = {},
@@ -1219,7 +1361,7 @@ export const ChatSearchDuotone = ({
   </svg>
 )
 
-export const ChatSearchDuotoneLight = ({
+export const ChatSearchDuotoneLight: React.FC<IconComponentProps> = ({
   size = 24,
   color = 'currentColor',
   sx = {},
@@ -1260,7 +1402,12 @@ export const ChatSearchDuotoneLight = ({
   </svg>
 )
 
-export const ChatSearchFill = ({ size = 24, color = 'currentColor', sx = {}, className = '' }) => (
+export const ChatSearchFill: React.FC<IconComponentProps> = ({
+  size = 24,
+  color = 'currentColor',
+  sx = {},
+  className = '',
+}) => (
   <svg
     width={size}
     height={size}
@@ -1281,7 +1428,12 @@ export const ChatSearchFill = ({ size = 24, color = 'currentColor', sx = {}, cla
   </svg>
 )
 
-export const ChatSearchLight = ({ size = 24, color = 'currentColor', sx = {}, className = '' }) => (
+export const ChatSearchLight: React.FC<IconComponentProps> = ({
+  size = 24,
+  color = 'currentColor',
+  sx = {},
+  className = '',
+}) => (
   <svg
     width={size}
     height={size}
@@ -1303,7 +1455,12 @@ export const ChatSearchLight = ({ size = 24, color = 'currentColor', sx = {}, cl
   </svg>
 )
 
-export const Comment = ({ size = 24, color = 'currentColor', sx = {}, className = '' }) => (
+export const Comment: React.FC<IconComponentProps> = ({
+  size = 24,
+  color = 'currentColor',
+  sx = {},
+  className = '',
+}) => (
   <svg
     width={size}
     height={size}
@@ -1334,7 +1491,12 @@ export const Comment = ({ size = 24, color = 'currentColor', sx = {}, className 
   </svg>
 )
 
-export const CommentDuotone = ({ size = 24, color = 'currentColor', sx = {}, className = '' }) => (
+export const CommentDuotone: React.FC<IconComponentProps> = ({
+  size = 24,
+  color = 'currentColor',
+  sx = {},
+  className = '',
+}) => (
   <svg
     width={size}
     height={size}
@@ -1356,7 +1518,7 @@ export const CommentDuotone = ({ size = 24, color = 'currentColor', sx = {}, cla
   </svg>
 )
 
-export const CommentDuotoneLine = ({
+export const CommentDuotoneLine: React.FC<IconComponentProps> = ({
   size = 24,
   color = 'currentColor',
   sx = {},
@@ -1385,7 +1547,12 @@ export const CommentDuotoneLine = ({
   </svg>
 )
 
-export const CommentFill = ({ size = 24, color = 'currentColor', sx = {}, className = '' }) => (
+export const CommentFill: React.FC<IconComponentProps> = ({
+  size = 24,
+  color = 'currentColor',
+  sx = {},
+  className = '',
+}) => (
   <svg
     width={size}
     height={size}
@@ -1404,7 +1571,12 @@ export const CommentFill = ({ size = 24, color = 'currentColor', sx = {}, classN
   </svg>
 )
 
-export const CommentLight = ({ size = 24, color = 'currentColor', sx = {}, className = '' }) => (
+export const CommentLight: React.FC<IconComponentProps> = ({
+  size = 24,
+  color = 'currentColor',
+  sx = {},
+  className = '',
+}) => (
   <svg
     width={size}
     height={size}
@@ -1423,7 +1595,12 @@ export const CommentLight = ({ size = 24, color = 'currentColor', sx = {}, class
   </svg>
 )
 
-export const Insta = ({ size = 24, color = 'currentColor', sx = {}, className = '' }) => (
+export const Insta: React.FC<IconComponentProps> = ({
+  size = 24,
+  color = 'currentColor',
+  sx = {},
+  className = '',
+}) => (
   <svg
     width={size}
     height={size}
@@ -1443,7 +1620,12 @@ export const Insta = ({ size = 24, color = 'currentColor', sx = {}, className = 
   </svg>
 )
 
-export const InstaDuotone = ({ size = 24, color = 'currentColor', sx = {}, className = '' }) => (
+export const InstaDuotone: React.FC<IconComponentProps> = ({
+  size = 24,
+  color = 'currentColor',
+  sx = {},
+  className = '',
+}) => (
   <svg
     width={size}
     height={size}
@@ -1463,7 +1645,7 @@ export const InstaDuotone = ({ size = 24, color = 'currentColor', sx = {}, class
   </svg>
 )
 
-export const InstaDuotoneLine = ({
+export const InstaDuotoneLine: React.FC<IconComponentProps> = ({
   size = 24,
   color = 'currentColor',
   sx = {},
@@ -1495,7 +1677,12 @@ export const InstaDuotoneLine = ({
   </svg>
 )
 
-export const InstaFill = ({ size = 24, color = 'currentColor', sx = {}, className = '' }) => (
+export const InstaFill: React.FC<IconComponentProps> = ({
+  size = 24,
+  color = 'currentColor',
+  sx = {},
+  className = '',
+}) => (
   <svg
     width={size}
     height={size}
@@ -1514,7 +1701,12 @@ export const InstaFill = ({ size = 24, color = 'currentColor', sx = {}, classNam
   </svg>
 )
 
-export const InstaLight = ({ size = 24, color = 'currentColor', sx = {}, className = '' }) => (
+export const InstaLight: React.FC<IconComponentProps> = ({
+  size = 24,
+  color = 'currentColor',
+  sx = {},
+  className = '',
+}) => (
   <svg
     width={size}
     height={size}

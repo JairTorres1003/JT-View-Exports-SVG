@@ -1,6 +1,13 @@
 import React from 'react'
 
-export const ExternalOne = ({ size = 24, color = 'currentColor', sx = {}, className = '' }) => (
+import { type IconComponentProps } from './types'
+
+export const ExternalOne: React.FC<IconComponentProps> = ({
+  size = 24,
+  color = 'currentColor',
+  sx = {},
+  className = '',
+}) => (
   <svg
     width={size}
     height={size}
@@ -19,7 +26,12 @@ export const ExternalOne = ({ size = 24, color = 'currentColor', sx = {}, classN
   </svg>
 )
 
-export const External = ({ size = 24, color = 'currentColor', sx = {}, className = '' }) => (
+export const External: React.FC<IconComponentProps> = ({
+  size = 24,
+  color = 'currentColor',
+  sx = {},
+  className = '',
+}) => (
   <svg
     width={size}
     height={size}
@@ -39,7 +51,12 @@ export const External = ({ size = 24, color = 'currentColor', sx = {}, className
   </svg>
 )
 
-export const FullOne = ({ size = 24, color = 'currentColor', sx = {}, className = '' }) => (
+export const FullOne: React.FC<IconComponentProps> = ({
+  size = 24,
+  color = 'currentColor',
+  sx = {},
+  className = '',
+}) => (
   <svg
     width={size}
     height={size}
@@ -62,7 +79,12 @@ export const FullOne = ({ size = 24, color = 'currentColor', sx = {}, className 
   </svg>
 )
 
-export const FullTwo = ({ size = 24, color = 'currentColor', sx = {}, className = '' }) => (
+export const FullTwo: React.FC<IconComponentProps> = ({
+  size = 24,
+  color = 'currentColor',
+  sx = {},
+  className = '',
+}) => (
   <svg
     width={size}
     height={size}
@@ -91,7 +113,12 @@ export const FullTwo = ({ size = 24, color = 'currentColor', sx = {}, className 
   </svg>
 )
 
-export const Full = ({ size = 24, color = 'currentColor', sx = {}, className = '' }) => (
+export const Full: React.FC<IconComponentProps> = ({
+  size = 24,
+  color = 'currentColor',
+  sx = {},
+  className = '',
+}) => (
   <svg
     width={size}
     height={size}
@@ -128,7 +155,7 @@ export const Full = ({ size = 24, color = 'currentColor', sx = {}, className = '
   </svg>
 )
 
-export const FullScreenCorner = ({
+export const FullScreenCorner: React.FC<IconComponentProps> = ({
   size = 24,
   color = 'currentColor',
   sx = {},
@@ -154,7 +181,7 @@ export const FullScreenCorner = ({
   </svg>
 )
 
-export const FullScreenCornerLight = ({
+export const FullScreenCornerLight: React.FC<IconComponentProps> = ({
   size = 24,
   color = 'currentColor',
   sx = {},
@@ -180,7 +207,12 @@ export const FullScreenCornerLight = ({
   </svg>
 )
 
-export const FullAltOne = ({ size = 24, color = 'currentColor', sx = {}, className = '' }) => (
+export const FullAltOne: React.FC<IconComponentProps> = ({
+  size = 24,
+  color = 'currentColor',
+  sx = {},
+  className = '',
+}) => (
   <svg
     width={size}
     height={size}
@@ -209,7 +241,12 @@ export const FullAltOne = ({ size = 24, color = 'currentColor', sx = {}, classNa
   </svg>
 )
 
-export const FullAlt = ({ size = 24, color = 'currentColor', sx = {}, className = '' }) => (
+export const FullAlt: React.FC<IconComponentProps> = ({
+  size = 24,
+  color = 'currentColor',
+  sx = {},
+  className = '',
+}) => (
   <svg
     width={size}
     height={size}
@@ -240,7 +277,12 @@ export const FullAlt = ({ size = 24, color = 'currentColor', sx = {}, className 
   </svg>
 )
 
-export const FullAltLightOne = ({ size = 24, color = 'currentColor', sx = {}, className = '' }) => (
+export const FullAltLightOne: React.FC<IconComponentProps> = ({
+  size = 24,
+  color = 'currentColor',
+  sx = {},
+  className = '',
+}) => (
   <svg
     width={size}
     height={size}
@@ -269,7 +311,12 @@ export const FullAltLightOne = ({ size = 24, color = 'currentColor', sx = {}, cl
   </svg>
 )
 
-export const FullAltLight = ({ size = 24, color = 'currentColor', sx = {}, className = '' }) => (
+export const FullAltLight: React.FC<IconComponentProps> = ({
+  size = 24,
+  color = 'currentColor',
+  sx = {},
+  className = '',
+}) => (
   <svg
     width={size}
     height={size}
@@ -291,7 +338,12 @@ export const FullAltLight = ({ size = 24, color = 'currentColor', sx = {}, class
   </svg>
 )
 
-export const FullLightOne = ({ size = 24, color = 'currentColor', sx = {}, className = '' }) => (
+export const FullLightOne: React.FC<IconComponentProps> = ({
+  size = 24,
+  color = 'currentColor',
+  sx = {},
+  className = '',
+}) => (
   <svg
     width={size}
     height={size}
@@ -313,7 +365,12 @@ export const FullLightOne = ({ size = 24, color = 'currentColor', sx = {}, class
   </svg>
 )
 
-export const FullLightTwo = ({ size = 24, color = 'currentColor', sx = {}, className = '' }) => (
+export const FullLightTwo: React.FC<IconComponentProps> = ({
+  size = 24,
+  color = 'currentColor',
+  sx = {},
+  className = '',
+}) => (
   <svg
     width={size}
     height={size}
@@ -342,7 +399,12 @@ export const FullLightTwo = ({ size = 24, color = 'currentColor', sx = {}, class
   </svg>
 )
 
-export const FullLight = ({ size = 24, color = 'currentColor', sx = {}, className = '' }) => (
+export const FullLight: React.FC<IconComponentProps> = ({
+  size = 24,
+  color = 'currentColor',
+  sx = {},
+  className = '',
+}) => (
   <svg
     width={size}
     height={size}
@@ -375,7 +437,12 @@ export const FullLight = ({ size = 24, color = 'currentColor', sx = {}, classNam
   </svg>
 )
 
-export const In = ({ size = 24, color = 'currentColor', sx = {}, className = '' }) => (
+export const In: React.FC<IconComponentProps> = ({
+  size = 24,
+  color = 'currentColor',
+  sx = {},
+  className = '',
+}) => (
   <svg
     width={size}
     height={size}
@@ -398,7 +465,12 @@ export const In = ({ size = 24, color = 'currentColor', sx = {}, className = '' 
   </svg>
 )
 
-export const InLight = ({ size = 24, color = 'currentColor', sx = {}, className = '' }) => (
+export const InLight: React.FC<IconComponentProps> = ({
+  size = 24,
+  color = 'currentColor',
+  sx = {},
+  className = '',
+}) => (
   <svg
     width={size}
     height={size}
@@ -420,7 +492,12 @@ export const InLight = ({ size = 24, color = 'currentColor', sx = {}, className 
   </svg>
 )
 
-export const Move = ({ size = 24, color = 'currentColor', sx = {}, className = '' }) => (
+export const Move: React.FC<IconComponentProps> = ({
+  size = 24,
+  color = 'currentColor',
+  sx = {},
+  className = '',
+}) => (
   <svg
     width={size}
     height={size}
@@ -449,7 +526,12 @@ export const Move = ({ size = 24, color = 'currentColor', sx = {}, className = '
   </svg>
 )
 
-export const MoveAltOne = ({ size = 24, color = 'currentColor', sx = {}, className = '' }) => (
+export const MoveAltOne: React.FC<IconComponentProps> = ({
+  size = 24,
+  color = 'currentColor',
+  sx = {},
+  className = '',
+}) => (
   <svg
     width={size}
     height={size}
@@ -478,7 +560,12 @@ export const MoveAltOne = ({ size = 24, color = 'currentColor', sx = {}, classNa
   </svg>
 )
 
-export const MoveAlt = ({ size = 24, color = 'currentColor', sx = {}, className = '' }) => (
+export const MoveAlt: React.FC<IconComponentProps> = ({
+  size = 24,
+  color = 'currentColor',
+  sx = {},
+  className = '',
+}) => (
   <svg
     width={size}
     height={size}
@@ -507,7 +594,12 @@ export const MoveAlt = ({ size = 24, color = 'currentColor', sx = {}, className 
   </svg>
 )
 
-export const MoveAltAlt = ({ size = 24, color = 'currentColor', sx = {}, className = '' }) => (
+export const MoveAltAlt: React.FC<IconComponentProps> = ({
+  size = 24,
+  color = 'currentColor',
+  sx = {},
+  className = '',
+}) => (
   <svg
     width={size}
     height={size}
@@ -536,7 +628,12 @@ export const MoveAltAlt = ({ size = 24, color = 'currentColor', sx = {}, classNa
   </svg>
 )
 
-export const Out = ({ size = 24, color = 'currentColor', sx = {}, className = '' }) => (
+export const Out: React.FC<IconComponentProps> = ({
+  size = 24,
+  color = 'currentColor',
+  sx = {},
+  className = '',
+}) => (
   <svg
     width={size}
     height={size}
@@ -559,7 +656,12 @@ export const Out = ({ size = 24, color = 'currentColor', sx = {}, className = ''
   </svg>
 )
 
-export const OutLight = ({ size = 24, color = 'currentColor', sx = {}, className = '' }) => (
+export const OutLight: React.FC<IconComponentProps> = ({
+  size = 24,
+  color = 'currentColor',
+  sx = {},
+  className = '',
+}) => (
   <svg
     width={size}
     height={size}
@@ -581,7 +683,12 @@ export const OutLight = ({ size = 24, color = 'currentColor', sx = {}, className
   </svg>
 )
 
-export const Reduce = ({ size = 24, color = 'currentColor', sx = {}, className = '' }) => (
+export const Reduce: React.FC<IconComponentProps> = ({
+  size = 24,
+  color = 'currentColor',
+  sx = {},
+  className = '',
+}) => (
   <svg
     width={size}
     height={size}
@@ -598,7 +705,12 @@ export const Reduce = ({ size = 24, color = 'currentColor', sx = {}, className =
   </svg>
 )
 
-export const ReduceLight = ({ size = 24, color = 'currentColor', sx = {}, className = '' }) => (
+export const ReduceLight: React.FC<IconComponentProps> = ({
+  size = 24,
+  color = 'currentColor',
+  sx = {},
+  className = '',
+}) => (
   <svg
     width={size}
     height={size}
@@ -615,7 +727,12 @@ export const ReduceLight = ({ size = 24, color = 'currentColor', sx = {}, classN
   </svg>
 )
 
-export const Regroup = ({ size = 24, color = 'currentColor', sx = {}, className = '' }) => (
+export const Regroup: React.FC<IconComponentProps> = ({
+  size = 24,
+  color = 'currentColor',
+  sx = {},
+  className = '',
+}) => (
   <svg
     width={size}
     height={size}
@@ -636,7 +753,12 @@ export const Regroup = ({ size = 24, color = 'currentColor', sx = {}, className 
   </svg>
 )
 
-export const RegroupLight = ({ size = 24, color = 'currentColor', sx = {}, className = '' }) => (
+export const RegroupLight: React.FC<IconComponentProps> = ({
+  size = 24,
+  color = 'currentColor',
+  sx = {},
+  className = '',
+}) => (
   <svg
     width={size}
     height={size}
@@ -657,7 +779,12 @@ export const RegroupLight = ({ size = 24, color = 'currentColor', sx = {}, class
   </svg>
 )
 
-export const SizeDown = ({ size = 24, color = 'currentColor', sx = {}, className = '' }) => (
+export const SizeDown: React.FC<IconComponentProps> = ({
+  size = 24,
+  color = 'currentColor',
+  sx = {},
+  className = '',
+}) => (
   <svg
     width={size}
     height={size}
@@ -680,7 +807,12 @@ export const SizeDown = ({ size = 24, color = 'currentColor', sx = {}, className
   </svg>
 )
 
-export const SizeRightUp = ({ size = 24, color = 'currentColor', sx = {}, className = '' }) => (
+export const SizeRightUp: React.FC<IconComponentProps> = ({
+  size = 24,
+  color = 'currentColor',
+  sx = {},
+  className = '',
+}) => (
   <svg
     width={size}
     height={size}

@@ -1,6 +1,13 @@
 import React from 'react'
 
-export const Camera = ({ size = 24, color = 'currentColor', sx = {}, className = '' }) => (
+import { type IconComponentProps } from './types'
+
+export const Camera: React.FC<IconComponentProps> = ({
+  size = 24,
+  color = 'currentColor',
+  sx = {},
+  className = '',
+}) => (
   <svg
     width={size}
     height={size}
@@ -19,7 +26,12 @@ export const Camera = ({ size = 24, color = 'currentColor', sx = {}, className =
   </svg>
 )
 
-export const CameraDuotone = ({ size = 24, color = 'currentColor', sx = {}, className = '' }) => (
+export const CameraDuotone: React.FC<IconComponentProps> = ({
+  size = 24,
+  color = 'currentColor',
+  sx = {},
+  className = '',
+}) => (
   <svg
     width={size}
     height={size}
@@ -40,7 +52,7 @@ export const CameraDuotone = ({ size = 24, color = 'currentColor', sx = {}, clas
   </svg>
 )
 
-export const CameraDuotoneLine = ({
+export const CameraDuotoneLine: React.FC<IconComponentProps> = ({
   size = 24,
   color = 'currentColor',
   sx = {},
@@ -71,7 +83,12 @@ export const CameraDuotoneLine = ({
   </svg>
 )
 
-export const CameraFill = ({ size = 24, color = 'currentColor', sx = {}, className = '' }) => (
+export const CameraFill: React.FC<IconComponentProps> = ({
+  size = 24,
+  color = 'currentColor',
+  sx = {},
+  className = '',
+}) => (
   <svg
     width={size}
     height={size}
@@ -90,7 +107,12 @@ export const CameraFill = ({ size = 24, color = 'currentColor', sx = {}, classNa
   </svg>
 )
 
-export const CameraLight = ({ size = 24, color = 'currentColor', sx = {}, className = '' }) => (
+export const CameraLight: React.FC<IconComponentProps> = ({
+  size = 24,
+  color = 'currentColor',
+  sx = {},
+  className = '',
+}) => (
   <svg
     width={size}
     height={size}
@@ -108,7 +130,12 @@ export const CameraLight = ({ size = 24, color = 'currentColor', sx = {}, classN
   </svg>
 )
 
-export const Nfc = ({ size = 24, color = 'currentColor', sx = {}, className = '' }) => (
+export const Nfc: React.FC<IconComponentProps> = ({
+  size = 24,
+  color = 'currentColor',
+  sx = {},
+  className = '',
+}) => (
   <svg
     width={size}
     height={size}
@@ -146,7 +173,12 @@ export const Nfc = ({ size = 24, color = 'currentColor', sx = {}, className = ''
   </svg>
 )
 
-export const NfcDuotone = ({ size = 24, color = 'currentColor', sx = {}, className = '' }) => (
+export const NfcDuotone: React.FC<IconComponentProps> = ({
+  size = 24,
+  color = 'currentColor',
+  sx = {},
+  className = '',
+}) => (
   <svg
     width={size}
     height={size}
@@ -186,7 +218,12 @@ export const NfcDuotone = ({ size = 24, color = 'currentColor', sx = {}, classNa
   </svg>
 )
 
-export const NfcFill = ({ size = 24, color = 'currentColor', sx = {}, className = '' }) => (
+export const NfcFill: React.FC<IconComponentProps> = ({
+  size = 24,
+  color = 'currentColor',
+  sx = {},
+  className = '',
+}) => (
   <svg
     width={size}
     height={size}
@@ -205,7 +242,12 @@ export const NfcFill = ({ size = 24, color = 'currentColor', sx = {}, className 
   </svg>
 )
 
-export const NfcLight = ({ size = 24, color = 'currentColor', sx = {}, className = '' }) => (
+export const NfcLight: React.FC<IconComponentProps> = ({
+  size = 24,
+  color = 'currentColor',
+  sx = {},
+  className = '',
+}) => (
   <svg
     width={size}
     height={size}
@@ -239,7 +281,12 @@ export const NfcLight = ({ size = 24, color = 'currentColor', sx = {}, className
   </svg>
 )
 
-export const BatteryFull = ({ size = 24, color = 'currentColor', sx = {}, className = '' }) => (
+export const BatteryFull: React.FC<IconComponentProps> = ({
+  size = 24,
+  color = 'currentColor',
+  sx = {},
+  className = '',
+}) => (
   <svg
     width={size}
     height={size}
@@ -260,7 +307,7 @@ export const BatteryFull = ({ size = 24, color = 'currentColor', sx = {}, classN
   </svg>
 )
 
-export const BatteryFullDuotone = ({
+export const BatteryFullDuotone: React.FC<IconComponentProps> = ({
   size = 24,
   color = 'currentColor',
   sx = {},
@@ -281,7 +328,7 @@ export const BatteryFullDuotone = ({
   </svg>
 )
 
-export const BatteryFullDuotoneLine = ({
+export const BatteryFullDuotoneLine: React.FC<IconComponentProps> = ({
   size = 24,
   color = 'currentColor',
   sx = {},
@@ -310,7 +357,12 @@ export const BatteryFullDuotoneLine = ({
   </svg>
 )
 
-export const BatteryFullFill = ({ size = 24, color = 'currentColor', sx = {}, className = '' }) => (
+export const BatteryFullFill: React.FC<IconComponentProps> = ({
+  size = 24,
+  color = 'currentColor',
+  sx = {},
+  className = '',
+}) => (
   <svg
     width={size}
     height={size}
@@ -331,7 +383,7 @@ export const BatteryFullFill = ({ size = 24, color = 'currentColor', sx = {}, cl
   </svg>
 )
 
-export const BatteryFullLight = ({
+export const BatteryFullLight: React.FC<IconComponentProps> = ({
   size = 24,
   color = 'currentColor',
   sx = {},
@@ -357,7 +409,12 @@ export const BatteryFullLight = ({
   </svg>
 )
 
-export const BatteryLow = ({ size = 24, color = 'currentColor', sx = {}, className = '' }) => (
+export const BatteryLow: React.FC<IconComponentProps> = ({
+  size = 24,
+  color = 'currentColor',
+  sx = {},
+  className = '',
+}) => (
   <svg
     width={size}
     height={size}
@@ -378,7 +435,7 @@ export const BatteryLow = ({ size = 24, color = 'currentColor', sx = {}, classNa
   </svg>
 )
 
-export const BatteryLowDuotone = ({
+export const BatteryLowDuotone: React.FC<IconComponentProps> = ({
   size = 24,
   color = 'currentColor',
   sx = {},
@@ -399,7 +456,7 @@ export const BatteryLowDuotone = ({
   </svg>
 )
 
-export const BatteryLowDuotoneLine = ({
+export const BatteryLowDuotoneLine: React.FC<IconComponentProps> = ({
   size = 24,
   color = 'currentColor',
   sx = {},
@@ -428,7 +485,12 @@ export const BatteryLowDuotoneLine = ({
   </svg>
 )
 
-export const BatteryLowFill = ({ size = 24, color = 'currentColor', sx = {}, className = '' }) => (
+export const BatteryLowFill: React.FC<IconComponentProps> = ({
+  size = 24,
+  color = 'currentColor',
+  sx = {},
+  className = '',
+}) => (
   <svg
     width={size}
     height={size}
@@ -453,7 +515,12 @@ export const BatteryLowFill = ({ size = 24, color = 'currentColor', sx = {}, cla
   </svg>
 )
 
-export const BatteryLowLight = ({ size = 24, color = 'currentColor', sx = {}, className = '' }) => (
+export const BatteryLowLight: React.FC<IconComponentProps> = ({
+  size = 24,
+  color = 'currentColor',
+  sx = {},
+  className = '',
+}) => (
   <svg
     width={size}
     height={size}
@@ -474,7 +541,12 @@ export const BatteryLowLight = ({ size = 24, color = 'currentColor', sx = {}, cl
   </svg>
 )
 
-export const Lightning = ({ size = 24, color = 'currentColor', sx = {}, className = '' }) => (
+export const Lightning: React.FC<IconComponentProps> = ({
+  size = 24,
+  color = 'currentColor',
+  sx = {},
+  className = '',
+}) => (
   <svg
     width={size}
     height={size}
@@ -492,7 +564,12 @@ export const Lightning = ({ size = 24, color = 'currentColor', sx = {}, classNam
   </svg>
 )
 
-export const LightningAlt = ({ size = 24, color = 'currentColor', sx = {}, className = '' }) => (
+export const LightningAlt: React.FC<IconComponentProps> = ({
+  size = 24,
+  color = 'currentColor',
+  sx = {},
+  className = '',
+}) => (
   <svg
     width={size}
     height={size}
@@ -510,7 +587,7 @@ export const LightningAlt = ({ size = 24, color = 'currentColor', sx = {}, class
   </svg>
 )
 
-export const LightningAltDuotone = ({
+export const LightningAltDuotone: React.FC<IconComponentProps> = ({
   size = 24,
   color = 'currentColor',
   sx = {},
@@ -546,7 +623,7 @@ export const LightningAltDuotone = ({
   </svg>
 )
 
-export const LightningAltDuotoneLine = ({
+export const LightningAltDuotoneLine: React.FC<IconComponentProps> = ({
   size = 24,
   color = 'currentColor',
   sx = {},
@@ -582,7 +659,7 @@ export const LightningAltDuotoneLine = ({
   </svg>
 )
 
-export const LightningAltFill = ({
+export const LightningAltFill: React.FC<IconComponentProps> = ({
   size = 24,
   color = 'currentColor',
   sx = {},
@@ -604,7 +681,7 @@ export const LightningAltFill = ({
   </svg>
 )
 
-export const LightningAltLight = ({
+export const LightningAltLight: React.FC<IconComponentProps> = ({
   size = 24,
   color = 'currentColor',
   sx = {},
@@ -626,7 +703,7 @@ export const LightningAltLight = ({
   </svg>
 )
 
-export const LightningDuotone = ({
+export const LightningDuotone: React.FC<IconComponentProps> = ({
   size = 24,
   color = 'currentColor',
   sx = {},
@@ -662,7 +739,7 @@ export const LightningDuotone = ({
   </svg>
 )
 
-export const LightningDuotoneLine = ({
+export const LightningDuotoneLine: React.FC<IconComponentProps> = ({
   size = 24,
   color = 'currentColor',
   sx = {},
@@ -698,7 +775,7 @@ export const LightningDuotoneLine = ({
   </svg>
 )
 
-export const LightningFillOne = ({
+export const LightningFillOne: React.FC<IconComponentProps> = ({
   size = 24,
   color = 'currentColor',
   sx = {},
@@ -722,7 +799,12 @@ export const LightningFillOne = ({
   </svg>
 )
 
-export const LightningFill = ({ size = 24, color = 'currentColor', sx = {}, className = '' }) => (
+export const LightningFill: React.FC<IconComponentProps> = ({
+  size = 24,
+  color = 'currentColor',
+  sx = {},
+  className = '',
+}) => (
   <svg
     width={size}
     height={size}
@@ -739,7 +821,12 @@ export const LightningFill = ({ size = 24, color = 'currentColor', sx = {}, clas
   </svg>
 )
 
-export const LightningLight = ({ size = 24, color = 'currentColor', sx = {}, className = '' }) => (
+export const LightningLight: React.FC<IconComponentProps> = ({
+  size = 24,
+  color = 'currentColor',
+  sx = {},
+  className = '',
+}) => (
   <svg
     width={size}
     height={size}
@@ -756,7 +843,12 @@ export const LightningLight = ({ size = 24, color = 'currentColor', sx = {}, cla
   </svg>
 )
 
-export const LightningRing = ({ size = 24, color = 'currentColor', sx = {}, className = '' }) => (
+export const LightningRing: React.FC<IconComponentProps> = ({
+  size = 24,
+  color = 'currentColor',
+  sx = {},
+  className = '',
+}) => (
   <svg
     width={size}
     height={size}
@@ -774,7 +866,7 @@ export const LightningRing = ({ size = 24, color = 'currentColor', sx = {}, clas
   </svg>
 )
 
-export const LightningRingDuotone = ({
+export const LightningRingDuotone: React.FC<IconComponentProps> = ({
   size = 24,
   color = 'currentColor',
   sx = {},
@@ -805,7 +897,7 @@ export const LightningRingDuotone = ({
   </svg>
 )
 
-export const LightningRingLight = ({
+export const LightningRingLight: React.FC<IconComponentProps> = ({
   size = 24,
   color = 'currentColor',
   sx = {},
@@ -828,7 +920,12 @@ export const LightningRingLight = ({
   </svg>
 )
 
-export const Phone = ({ size = 24, color = 'currentColor', sx = {}, className = '' }) => (
+export const Phone: React.FC<IconComponentProps> = ({
+  size = 24,
+  color = 'currentColor',
+  sx = {},
+  className = '',
+}) => (
   <svg
     width={size}
     height={size}
@@ -860,7 +957,12 @@ export const Phone = ({ size = 24, color = 'currentColor', sx = {}, className = 
   </svg>
 )
 
-export const PhoneDuotone = ({ size = 24, color = 'currentColor', sx = {}, className = '' }) => (
+export const PhoneDuotone: React.FC<IconComponentProps> = ({
+  size = 24,
+  color = 'currentColor',
+  sx = {},
+  className = '',
+}) => (
   <svg
     width={size}
     height={size}
@@ -879,7 +981,7 @@ export const PhoneDuotone = ({ size = 24, color = 'currentColor', sx = {}, class
   </svg>
 )
 
-export const PhoneDuotoneLine = ({
+export const PhoneDuotoneLine: React.FC<IconComponentProps> = ({
   size = 24,
   color = 'currentColor',
   sx = {},
@@ -914,7 +1016,12 @@ export const PhoneDuotoneLine = ({
   </svg>
 )
 
-export const PhoneFill = ({ size = 24, color = 'currentColor', sx = {}, className = '' }) => (
+export const PhoneFill: React.FC<IconComponentProps> = ({
+  size = 24,
+  color = 'currentColor',
+  sx = {},
+  className = '',
+}) => (
   <svg
     width={size}
     height={size}
@@ -933,7 +1040,12 @@ export const PhoneFill = ({ size = 24, color = 'currentColor', sx = {}, classNam
   </svg>
 )
 
-export const PhoneLight = ({ size = 24, color = 'currentColor', sx = {}, className = '' }) => (
+export const PhoneLight: React.FC<IconComponentProps> = ({
+  size = 24,
+  color = 'currentColor',
+  sx = {},
+  className = '',
+}) => (
   <svg
     width={size}
     height={size}

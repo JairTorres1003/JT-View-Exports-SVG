@@ -29,10 +29,10 @@
   },
   "homepage": "https://github.com/JairTorres1003/JT-View-Exports-SVG/tree/main/examples#readme",
   "scripts": {
-    "lint": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
-    "lint:fix": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0 --fix --cache",
-    "format:check": "prettier --check \"**/*.{ts,tsx,json,css,md,cjs}\"",
-    "format": "prettier --write \"**/*.{ts,tsx,json,css,md,cjs}\""
+    "lint": "eslint . --ext js,jsx,ts,tsx --report-unused-disable-directives --max-warnings 0",
+    "lint:fix": "eslint . --ext js,jsx,ts,tsx --report-unused-disable-directives --max-warnings 0 --fix --cache",
+    "format:check": "prettier --check \"**/*.{js,jsx,ts,tsx,json,css,md,cjs}\"",
+    "format": "prettier --write \"**/*.{js,jsx,ts,tsx,json,css,md,cjs}\""
   },
   "dependencies": {
     "react": "^18.3.1",

@@ -1,6 +1,13 @@
 import React from 'react'
 
-export const Message = ({ size = 24, color = 'currentColor', sx = {}, className = '' }) => (
+import { type IconComponentProps } from './types'
+
+export const Message: React.FC<IconComponentProps> = ({
+  size = 24,
+  color = 'currentColor',
+  sx = {},
+  className = '',
+}) => (
   <svg
     width={size}
     height={size}
@@ -19,7 +26,12 @@ export const Message = ({ size = 24, color = 'currentColor', sx = {}, className 
   </svg>
 )
 
-export const MessageAlt = ({ size = 24, color = 'currentColor', sx = {}, className = '' }) => (
+export const MessageAlt: React.FC<IconComponentProps> = ({
+  size = 24,
+  color = 'currentColor',
+  sx = {},
+  className = '',
+}) => (
   <svg
     width={size}
     height={size}
@@ -37,7 +49,7 @@ export const MessageAlt = ({ size = 24, color = 'currentColor', sx = {}, classNa
   </svg>
 )
 
-export const MessageAltDuotone = ({
+export const MessageAltDuotone: React.FC<IconComponentProps> = ({
   size = 24,
   color = 'currentColor',
   sx = {},
@@ -60,7 +72,7 @@ export const MessageAltDuotone = ({
   </svg>
 )
 
-export const MessageAltDuotoneLine = ({
+export const MessageAltDuotoneLine: React.FC<IconComponentProps> = ({
   size = 24,
   color = 'currentColor',
   sx = {},
@@ -93,7 +105,12 @@ export const MessageAltDuotoneLine = ({
   </svg>
 )
 
-export const MessageAltFill = ({ size = 24, color = 'currentColor', sx = {}, className = '' }) => (
+export const MessageAltFill: React.FC<IconComponentProps> = ({
+  size = 24,
+  color = 'currentColor',
+  sx = {},
+  className = '',
+}) => (
   <svg
     width={size}
     height={size}
@@ -112,7 +129,12 @@ export const MessageAltFill = ({ size = 24, color = 'currentColor', sx = {}, cla
   </svg>
 )
 
-export const MessageAltLight = ({ size = 24, color = 'currentColor', sx = {}, className = '' }) => (
+export const MessageAltLight: React.FC<IconComponentProps> = ({
+  size = 24,
+  color = 'currentColor',
+  sx = {},
+  className = '',
+}) => (
   <svg
     width={size}
     height={size}
@@ -130,7 +152,12 @@ export const MessageAltLight = ({ size = 24, color = 'currentColor', sx = {}, cl
   </svg>
 )
 
-export const MessageDuotone = ({ size = 24, color = 'currentColor', sx = {}, className = '' }) => (
+export const MessageDuotone: React.FC<IconComponentProps> = ({
+  size = 24,
+  color = 'currentColor',
+  sx = {},
+  className = '',
+}) => (
   <svg
     width={size}
     height={size}
@@ -152,7 +179,7 @@ export const MessageDuotone = ({ size = 24, color = 'currentColor', sx = {}, cla
   </svg>
 )
 
-export const MessageDuotoneLine = ({
+export const MessageDuotoneLine: React.FC<IconComponentProps> = ({
   size = 24,
   color = 'currentColor',
   sx = {},
@@ -183,7 +210,12 @@ export const MessageDuotoneLine = ({
   </svg>
 )
 
-export const MessageFill = ({ size = 24, color = 'currentColor', sx = {}, className = '' }) => (
+export const MessageFill: React.FC<IconComponentProps> = ({
+  size = 24,
+  color = 'currentColor',
+  sx = {},
+  className = '',
+}) => (
   <svg
     width={size}
     height={size}
@@ -202,7 +234,12 @@ export const MessageFill = ({ size = 24, color = 'currentColor', sx = {}, classN
   </svg>
 )
 
-export const MessageLight = ({ size = 24, color = 'currentColor', sx = {}, className = '' }) => (
+export const MessageLight: React.FC<IconComponentProps> = ({
+  size = 24,
+  color = 'currentColor',
+  sx = {},
+  className = '',
+}) => (
   <svg
     width={size}
     height={size}
@@ -220,7 +257,12 @@ export const MessageLight = ({ size = 24, color = 'currentColor', sx = {}, class
   </svg>
 )
 
-export const MessageOpen = ({ size = 24, color = 'currentColor', sx = {}, className = '' }) => (
+export const MessageOpen: React.FC<IconComponentProps> = ({
+  size = 24,
+  color = 'currentColor',
+  sx = {},
+  className = '',
+}) => (
   <svg
     width={size}
     height={size}
@@ -244,7 +286,7 @@ export const MessageOpen = ({ size = 24, color = 'currentColor', sx = {}, classN
   </svg>
 )
 
-export const MessageOpenDuotone = ({
+export const MessageOpenDuotone: React.FC<IconComponentProps> = ({
   size = 24,
   color = 'currentColor',
   sx = {},
@@ -271,7 +313,7 @@ export const MessageOpenDuotone = ({
   </svg>
 )
 
-export const MessageOpenDuotoneLine = ({
+export const MessageOpenDuotoneLine: React.FC<IconComponentProps> = ({
   size = 24,
   color = 'currentColor',
   sx = {},
@@ -302,7 +344,12 @@ export const MessageOpenDuotoneLine = ({
   </svg>
 )
 
-export const MessageOpenFill = ({ size = 24, color = 'currentColor', sx = {}, className = '' }) => (
+export const MessageOpenFill: React.FC<IconComponentProps> = ({
+  size = 24,
+  color = 'currentColor',
+  sx = {},
+  className = '',
+}) => (
   <svg
     width={size}
     height={size}
@@ -321,7 +368,7 @@ export const MessageOpenFill = ({ size = 24, color = 'currentColor', sx = {}, cl
   </svg>
 )
 
-export const MessageOpenLight = ({
+export const MessageOpenLight: React.FC<IconComponentProps> = ({
   size = 24,
   color = 'currentColor',
   sx = {},
@@ -348,7 +395,12 @@ export const MessageOpenLight = ({
   </svg>
 )
 
-export const Phone = ({ size = 24, color = 'currentColor', sx = {}, className = '' }) => (
+export const Phone: React.FC<IconComponentProps> = ({
+  size = 24,
+  color = 'currentColor',
+  sx = {},
+  className = '',
+}) => (
   <svg
     width={size}
     height={size}
@@ -366,7 +418,12 @@ export const Phone = ({ size = 24, color = 'currentColor', sx = {}, className = 
   </svg>
 )
 
-export const PhoneDuotone = ({ size = 24, color = 'currentColor', sx = {}, className = '' }) => (
+export const PhoneDuotone: React.FC<IconComponentProps> = ({
+  size = 24,
+  color = 'currentColor',
+  sx = {},
+  className = '',
+}) => (
   <svg
     width={size}
     height={size}
@@ -390,7 +447,7 @@ export const PhoneDuotone = ({ size = 24, color = 'currentColor', sx = {}, class
   </svg>
 )
 
-export const PhoneDuotoneLine = ({
+export const PhoneDuotoneLine: React.FC<IconComponentProps> = ({
   size = 24,
   color = 'currentColor',
   sx = {},
@@ -415,7 +472,12 @@ export const PhoneDuotoneLine = ({
   </svg>
 )
 
-export const PhoneFill = ({ size = 24, color = 'currentColor', sx = {}, className = '' }) => (
+export const PhoneFill: React.FC<IconComponentProps> = ({
+  size = 24,
+  color = 'currentColor',
+  sx = {},
+  className = '',
+}) => (
   <svg
     width={size}
     height={size}
@@ -432,7 +494,12 @@ export const PhoneFill = ({ size = 24, color = 'currentColor', sx = {}, classNam
   </svg>
 )
 
-export const PhoneLight = ({ size = 24, color = 'currentColor', sx = {}, className = '' }) => (
+export const PhoneLight: React.FC<IconComponentProps> = ({
+  size = 24,
+  color = 'currentColor',
+  sx = {},
+  className = '',
+}) => (
   <svg
     width={size}
     height={size}
@@ -449,7 +516,12 @@ export const PhoneLight = ({ size = 24, color = 'currentColor', sx = {}, classNa
   </svg>
 )
 
-export const Send = ({ size = 24, color = 'currentColor', sx = {}, className = '' }) => (
+export const Send: React.FC<IconComponentProps> = ({
+  size = 24,
+  color = 'currentColor',
+  sx = {},
+  className = '',
+}) => (
   <svg
     width={size}
     height={size}
@@ -468,7 +540,12 @@ export const Send = ({ size = 24, color = 'currentColor', sx = {}, className = '
   </svg>
 )
 
-export const SendDuotone = ({ size = 24, color = 'currentColor', sx = {}, className = '' }) => (
+export const SendDuotone: React.FC<IconComponentProps> = ({
+  size = 24,
+  color = 'currentColor',
+  sx = {},
+  className = '',
+}) => (
   <svg
     width={size}
     height={size}
@@ -495,7 +572,12 @@ export const SendDuotone = ({ size = 24, color = 'currentColor', sx = {}, classN
   </svg>
 )
 
-export const SendDuotoneLine = ({ size = 24, color = 'currentColor', sx = {}, className = '' }) => (
+export const SendDuotoneLine: React.FC<IconComponentProps> = ({
+  size = 24,
+  color = 'currentColor',
+  sx = {},
+  className = '',
+}) => (
   <svg
     width={size}
     height={size}
@@ -514,7 +596,12 @@ export const SendDuotoneLine = ({ size = 24, color = 'currentColor', sx = {}, cl
   </svg>
 )
 
-export const SendFill = ({ size = 24, color = 'currentColor', sx = {}, className = '' }) => (
+export const SendFill: React.FC<IconComponentProps> = ({
+  size = 24,
+  color = 'currentColor',
+  sx = {},
+  className = '',
+}) => (
   <svg
     width={size}
     height={size}
@@ -533,7 +620,12 @@ export const SendFill = ({ size = 24, color = 'currentColor', sx = {}, className
   </svg>
 )
 
-export const SendHor = ({ size = 24, color = 'currentColor', sx = {}, className = '' }) => (
+export const SendHor: React.FC<IconComponentProps> = ({
+  size = 24,
+  color = 'currentColor',
+  sx = {},
+  className = '',
+}) => (
   <svg
     width={size}
     height={size}
@@ -551,7 +643,12 @@ export const SendHor = ({ size = 24, color = 'currentColor', sx = {}, className 
   </svg>
 )
 
-export const SendHorDuotone = ({ size = 24, color = 'currentColor', sx = {}, className = '' }) => (
+export const SendHorDuotone: React.FC<IconComponentProps> = ({
+  size = 24,
+  color = 'currentColor',
+  sx = {},
+  className = '',
+}) => (
   <svg
     width={size}
     height={size}
@@ -573,7 +670,7 @@ export const SendHorDuotone = ({ size = 24, color = 'currentColor', sx = {}, cla
   </svg>
 )
 
-export const SendHorDuotoneLine = ({
+export const SendHorDuotoneLine: React.FC<IconComponentProps> = ({
   size = 24,
   color = 'currentColor',
   sx = {},
@@ -598,7 +695,12 @@ export const SendHorDuotoneLine = ({
   </svg>
 )
 
-export const SendHorFill = ({ size = 24, color = 'currentColor', sx = {}, className = '' }) => (
+export const SendHorFill: React.FC<IconComponentProps> = ({
+  size = 24,
+  color = 'currentColor',
+  sx = {},
+  className = '',
+}) => (
   <svg
     width={size}
     height={size}
@@ -615,7 +717,12 @@ export const SendHorFill = ({ size = 24, color = 'currentColor', sx = {}, classN
   </svg>
 )
 
-export const SendHorLight = ({ size = 24, color = 'currentColor', sx = {}, className = '' }) => (
+export const SendHorLight: React.FC<IconComponentProps> = ({
+  size = 24,
+  color = 'currentColor',
+  sx = {},
+  className = '',
+}) => (
   <svg
     width={size}
     height={size}
@@ -632,7 +739,12 @@ export const SendHorLight = ({ size = 24, color = 'currentColor', sx = {}, class
   </svg>
 )
 
-export const SendLight = ({ size = 24, color = 'currentColor', sx = {}, className = '' }) => (
+export const SendLight: React.FC<IconComponentProps> = ({
+  size = 24,
+  color = 'currentColor',
+  sx = {},
+  className = '',
+}) => (
   <svg
     width={size}
     height={size}
@@ -651,7 +763,12 @@ export const SendLight = ({ size = 24, color = 'currentColor', sx = {}, classNam
   </svg>
 )
 
-export const Globe = ({ size = 24, color = 'currentColor', sx = {}, className = '' }) => (
+export const Globe: React.FC<IconComponentProps> = ({
+  size = 24,
+  color = 'currentColor',
+  sx = {},
+  className = '',
+}) => (
   <svg
     width={size}
     height={size}
@@ -667,7 +784,12 @@ export const Globe = ({ size = 24, color = 'currentColor', sx = {}, className = 
   </svg>
 )
 
-export const GlobeLight = ({ size = 24, color = 'currentColor', sx = {}, className = '' }) => (
+export const GlobeLight: React.FC<IconComponentProps> = ({
+  size = 24,
+  color = 'currentColor',
+  sx = {},
+  className = '',
+}) => (
   <svg
     width={size}
     height={size}
@@ -686,7 +808,12 @@ export const GlobeLight = ({ size = 24, color = 'currentColor', sx = {}, classNa
   </svg>
 )
 
-export const World = ({ size = 24, color = 'currentColor', sx = {}, className = '' }) => (
+export const World: React.FC<IconComponentProps> = ({
+  size = 24,
+  color = 'currentColor',
+  sx = {},
+  className = '',
+}) => (
   <svg
     width={size}
     height={size}
@@ -712,7 +839,12 @@ export const World = ({ size = 24, color = 'currentColor', sx = {}, className = 
   </svg>
 )
 
-export const World2 = ({ size = 24, color = 'currentColor', sx = {}, className = '' }) => (
+export const World2: React.FC<IconComponentProps> = ({
+  size = 24,
+  color = 'currentColor',
+  sx = {},
+  className = '',
+}) => (
   <svg
     width={size}
     height={size}
@@ -736,7 +868,12 @@ export const World2 = ({ size = 24, color = 'currentColor', sx = {}, className =
   </svg>
 )
 
-export const World2Light = ({ size = 24, color = 'currentColor', sx = {}, className = '' }) => (
+export const World2Light: React.FC<IconComponentProps> = ({
+  size = 24,
+  color = 'currentColor',
+  sx = {},
+  className = '',
+}) => (
   <svg
     width={size}
     height={size}
@@ -758,7 +895,12 @@ export const World2Light = ({ size = 24, color = 'currentColor', sx = {}, classN
   </svg>
 )
 
-export const WorldAlt = ({ size = 24, color = 'currentColor', sx = {}, className = '' }) => (
+export const WorldAlt: React.FC<IconComponentProps> = ({
+  size = 24,
+  color = 'currentColor',
+  sx = {},
+  className = '',
+}) => (
   <svg
     width={size}
     height={size}
@@ -783,40 +925,7 @@ export const WorldAlt = ({ size = 24, color = 'currentColor', sx = {}, className
   </svg>
 )
 
-export const WorldAltDuotone = ({ size = 24, color = 'currentColor', sx = {}, className = '' }) => (
-  <svg
-    width={size}
-    height={size}
-    className={className}
-    style={sx}
-    viewBox='0 0 24 24'
-    fill='none'
-    xmlns='http://www.w3.org/2000/svg'
-  >
-    <circle
-      cx='12'
-      cy='12'
-      r='8'
-      fill={color}
-      fillOpacity='0.25'
-      stroke={color}
-      strokeWidth='1.2'
-    />
-    <path
-      d='M18.572 7.20637C17.8483 8.05353 16.8869 8.74862 15.7672 9.23422C14.6475 9.71983 13.4017 9.98201 12.1326 9.99911C10.8636 10.0162 9.60778 9.78773 8.4689 9.33256C7.33002 8.87739 6.34077 8.20858 5.58288 7.38139'
-      stroke={color}
-      strokeWidth='1.2'
-    />
-    <path
-      d='M18.572 16.7936C17.8483 15.9465 16.8869 15.2514 15.7672 14.7658C14.6475 14.2802 13.4017 14.018 12.1326 14.0009C10.8636 13.9838 9.60778 14.2123 8.4689 14.6674C7.33002 15.1226 6.34077 15.7914 5.58288 16.6186'
-      stroke={color}
-      strokeWidth='1.2'
-    />
-    <path d='M12 4V20' stroke={color} strokeWidth='1.2' />
-  </svg>
-)
-
-export const WorldAltDuotoneLine = ({
+export const WorldAltDuotone: React.FC<IconComponentProps> = ({
   size = 24,
   color = 'currentColor',
   sx = {},
@@ -854,7 +963,50 @@ export const WorldAltDuotoneLine = ({
   </svg>
 )
 
-export const WorldAltFill = ({ size = 24, color = 'currentColor', sx = {}, className = '' }) => (
+export const WorldAltDuotoneLine: React.FC<IconComponentProps> = ({
+  size = 24,
+  color = 'currentColor',
+  sx = {},
+  className = '',
+}) => (
+  <svg
+    width={size}
+    height={size}
+    className={className}
+    style={sx}
+    viewBox='0 0 24 24'
+    fill='none'
+    xmlns='http://www.w3.org/2000/svg'
+  >
+    <circle
+      cx='12'
+      cy='12'
+      r='8'
+      fill={color}
+      fillOpacity='0.25'
+      stroke={color}
+      strokeWidth='1.2'
+    />
+    <path
+      d='M18.572 7.20637C17.8483 8.05353 16.8869 8.74862 15.7672 9.23422C14.6475 9.71983 13.4017 9.98201 12.1326 9.99911C10.8636 10.0162 9.60778 9.78773 8.4689 9.33256C7.33002 8.87739 6.34077 8.20858 5.58288 7.38139'
+      stroke={color}
+      strokeWidth='1.2'
+    />
+    <path
+      d='M18.572 16.7936C17.8483 15.9465 16.8869 15.2514 15.7672 14.7658C14.6475 14.2802 13.4017 14.018 12.1326 14.0009C10.8636 13.9838 9.60778 14.2123 8.4689 14.6674C7.33002 15.1226 6.34077 15.7914 5.58288 16.6186'
+      stroke={color}
+      strokeWidth='1.2'
+    />
+    <path d='M12 4V20' stroke={color} strokeWidth='1.2' />
+  </svg>
+)
+
+export const WorldAltFill: React.FC<IconComponentProps> = ({
+  size = 24,
+  color = 'currentColor',
+  sx = {},
+  className = '',
+}) => (
   <svg
     width={size}
     height={size}
@@ -873,7 +1025,12 @@ export const WorldAltFill = ({ size = 24, color = 'currentColor', sx = {}, class
   </svg>
 )
 
-export const WorldAltLight = ({ size = 24, color = 'currentColor', sx = {}, className = '' }) => (
+export const WorldAltLight: React.FC<IconComponentProps> = ({
+  size = 24,
+  color = 'currentColor',
+  sx = {},
+  className = '',
+}) => (
   <svg
     width={size}
     height={size}
@@ -896,41 +1053,7 @@ export const WorldAltLight = ({ size = 24, color = 'currentColor', sx = {}, clas
   </svg>
 )
 
-export const WorldDuotone = ({ size = 24, color = 'currentColor', sx = {}, className = '' }) => (
-  <svg
-    width={size}
-    height={size}
-    className={className}
-    style={sx}
-    viewBox='0 0 24 24'
-    fill='none'
-    xmlns='http://www.w3.org/2000/svg'
-  >
-    <circle
-      cx='12'
-      cy='12'
-      r='8'
-      fill={color}
-      fillOpacity='0.25'
-      stroke={color}
-      strokeWidth='1.2'
-    />
-    <path
-      d='M18.572 6.42127C17.8483 7.20326 16.8869 7.84488 15.7672 8.29313C14.6475 8.74138 13.4017 8.98339 12.1326 8.99918C10.8636 9.01496 9.60778 8.80406 8.4689 8.3839C7.33002 7.96374 6.34077 7.34638 5.58288 6.58282'
-      stroke={color}
-      strokeWidth='1.2'
-    />
-    <path
-      d='M18.572 17.5787C17.8483 16.7967 16.8869 16.1551 15.7672 15.7069C14.6475 15.2586 13.4017 15.0166 12.1326 15.0008C10.8636 14.985 9.60778 15.1959 8.4689 15.6161C7.33002 16.0363 6.34077 16.6536 5.58288 17.4172'
-      stroke={color}
-      strokeWidth='1.2'
-    />
-    <path d='M12 4V20' stroke={color} strokeWidth='1.2' />
-    <path d='M20 12H4' stroke={color} strokeWidth='1.2' />
-  </svg>
-)
-
-export const WorldDuotoneLine = ({
+export const WorldDuotone: React.FC<IconComponentProps> = ({
   size = 24,
   color = 'currentColor',
   sx = {},
@@ -969,7 +1092,51 @@ export const WorldDuotoneLine = ({
   </svg>
 )
 
-export const WorldFill = ({ size = 24, color = 'currentColor', sx = {}, className = '' }) => (
+export const WorldDuotoneLine: React.FC<IconComponentProps> = ({
+  size = 24,
+  color = 'currentColor',
+  sx = {},
+  className = '',
+}) => (
+  <svg
+    width={size}
+    height={size}
+    className={className}
+    style={sx}
+    viewBox='0 0 24 24'
+    fill='none'
+    xmlns='http://www.w3.org/2000/svg'
+  >
+    <circle
+      cx='12'
+      cy='12'
+      r='8'
+      fill={color}
+      fillOpacity='0.25'
+      stroke={color}
+      strokeWidth='1.2'
+    />
+    <path
+      d='M18.572 6.42127C17.8483 7.20326 16.8869 7.84488 15.7672 8.29313C14.6475 8.74138 13.4017 8.98339 12.1326 8.99918C10.8636 9.01496 9.60778 8.80406 8.4689 8.3839C7.33002 7.96374 6.34077 7.34638 5.58288 6.58282'
+      stroke={color}
+      strokeWidth='1.2'
+    />
+    <path
+      d='M18.572 17.5787C17.8483 16.7967 16.8869 16.1551 15.7672 15.7069C14.6475 15.2586 13.4017 15.0166 12.1326 15.0008C10.8636 14.985 9.60778 15.1959 8.4689 15.6161C7.33002 16.0363 6.34077 16.6536 5.58288 17.4172'
+      stroke={color}
+      strokeWidth='1.2'
+    />
+    <path d='M12 4V20' stroke={color} strokeWidth='1.2' />
+    <path d='M20 12H4' stroke={color} strokeWidth='1.2' />
+  </svg>
+)
+
+export const WorldFill: React.FC<IconComponentProps> = ({
+  size = 24,
+  color = 'currentColor',
+  sx = {},
+  className = '',
+}) => (
   <svg
     width={size}
     height={size}
@@ -988,7 +1155,12 @@ export const WorldFill = ({ size = 24, color = 'currentColor', sx = {}, classNam
   </svg>
 )
 
-export const WorldLight = ({ size = 24, color = 'currentColor', sx = {}, className = '' }) => (
+export const WorldLight: React.FC<IconComponentProps> = ({
+  size = 24,
+  color = 'currentColor',
+  sx = {},
+  className = '',
+}) => (
   <svg
     width={size}
     height={size}

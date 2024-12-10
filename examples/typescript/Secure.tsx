@@ -1,6 +1,13 @@
 import React from 'react'
 
-export const Chield = ({ size = 24, color = 'currentColor', sx = {}, className = '' }) => (
+import { type IconComponentProps } from './types'
+
+export const Chield: React.FC<IconComponentProps> = ({
+  size = 24,
+  color = 'currentColor',
+  sx = {},
+  className = '',
+}) => (
   <svg
     width={size}
     height={size}
@@ -19,7 +26,12 @@ export const Chield = ({ size = 24, color = 'currentColor', sx = {}, className =
   </svg>
 )
 
-export const ChieldAlt = ({ size = 24, color = 'currentColor', sx = {}, className = '' }) => (
+export const ChieldAlt: React.FC<IconComponentProps> = ({
+  size = 24,
+  color = 'currentColor',
+  sx = {},
+  className = '',
+}) => (
   <svg
     width={size}
     height={size}
@@ -41,7 +53,7 @@ export const ChieldAlt = ({ size = 24, color = 'currentColor', sx = {}, classNam
   </svg>
 )
 
-export const ChieldAltDuotone = ({
+export const ChieldAltDuotone: React.FC<IconComponentProps> = ({
   size = 24,
   color = 'currentColor',
   sx = {},
@@ -67,7 +79,7 @@ export const ChieldAltDuotone = ({
   </svg>
 )
 
-export const ChieldAltDuotoneLine = ({
+export const ChieldAltDuotoneLine: React.FC<IconComponentProps> = ({
   size = 24,
   color = 'currentColor',
   sx = {},
@@ -96,7 +108,12 @@ export const ChieldAltDuotoneLine = ({
   </svg>
 )
 
-export const ChieldAltFill = ({ size = 24, color = 'currentColor', sx = {}, className = '' }) => (
+export const ChieldAltFill: React.FC<IconComponentProps> = ({
+  size = 24,
+  color = 'currentColor',
+  sx = {},
+  className = '',
+}) => (
   <svg
     width={size}
     height={size}
@@ -115,7 +132,12 @@ export const ChieldAltFill = ({ size = 24, color = 'currentColor', sx = {}, clas
   </svg>
 )
 
-export const ChieldAltLight = ({ size = 24, color = 'currentColor', sx = {}, className = '' }) => (
+export const ChieldAltLight: React.FC<IconComponentProps> = ({
+  size = 24,
+  color = 'currentColor',
+  sx = {},
+  className = '',
+}) => (
   <svg
     width={size}
     height={size}
@@ -136,7 +158,12 @@ export const ChieldAltLight = ({ size = 24, color = 'currentColor', sx = {}, cla
   </svg>
 )
 
-export const ChieldCheck = ({ size = 24, color = 'currentColor', sx = {}, className = '' }) => (
+export const ChieldCheck: React.FC<IconComponentProps> = ({
+  size = 24,
+  color = 'currentColor',
+  sx = {},
+  className = '',
+}) => (
   <svg
     width={size}
     height={size}
@@ -161,7 +188,7 @@ export const ChieldCheck = ({ size = 24, color = 'currentColor', sx = {}, classN
   </svg>
 )
 
-export const ChieldCheckDuotone = ({
+export const ChieldCheckDuotone: React.FC<IconComponentProps> = ({
   size = 24,
   color = 'currentColor',
   sx = {},
@@ -188,7 +215,7 @@ export const ChieldCheckDuotone = ({
   </svg>
 )
 
-export const ChieldCheckDuotoneLine = ({
+export const ChieldCheckDuotoneLine: React.FC<IconComponentProps> = ({
   size = 24,
   color = 'currentColor',
   sx = {},
@@ -220,7 +247,12 @@ export const ChieldCheckDuotoneLine = ({
   </svg>
 )
 
-export const ChieldCheckFill = ({ size = 24, color = 'currentColor', sx = {}, className = '' }) => (
+export const ChieldCheckFill: React.FC<IconComponentProps> = ({
+  size = 24,
+  color = 'currentColor',
+  sx = {},
+  className = '',
+}) => (
   <svg
     width={size}
     height={size}
@@ -239,7 +271,7 @@ export const ChieldCheckFill = ({ size = 24, color = 'currentColor', sx = {}, cl
   </svg>
 )
 
-export const ChieldCheckLight = ({
+export const ChieldCheckLight: React.FC<IconComponentProps> = ({
   size = 24,
   color = 'currentColor',
   sx = {},
@@ -267,7 +299,12 @@ export const ChieldCheckLight = ({
   </svg>
 )
 
-export const ChieldDuotone = ({ size = 24, color = 'currentColor', sx = {}, className = '' }) => (
+export const ChieldDuotone: React.FC<IconComponentProps> = ({
+  size = 24,
+  color = 'currentColor',
+  sx = {},
+  className = '',
+}) => (
   <svg
     width={size}
     height={size}
@@ -289,7 +326,7 @@ export const ChieldDuotone = ({ size = 24, color = 'currentColor', sx = {}, clas
   </svg>
 )
 
-export const ChieldDuotoneLine = ({
+export const ChieldDuotoneLine: React.FC<IconComponentProps> = ({
   size = 24,
   color = 'currentColor',
   sx = {},
@@ -315,7 +352,12 @@ export const ChieldDuotoneLine = ({
   </svg>
 )
 
-export const ChieldFill = ({ size = 24, color = 'currentColor', sx = {}, className = '' }) => (
+export const ChieldFill: React.FC<IconComponentProps> = ({
+  size = 24,
+  color = 'currentColor',
+  sx = {},
+  className = '',
+}) => (
   <svg
     width={size}
     height={size}
@@ -332,7 +374,12 @@ export const ChieldFill = ({ size = 24, color = 'currentColor', sx = {}, classNa
   </svg>
 )
 
-export const ChieldLight = ({ size = 24, color = 'currentColor', sx = {}, className = '' }) => (
+export const ChieldLight: React.FC<IconComponentProps> = ({
+  size = 24,
+  color = 'currentColor',
+  sx = {},
+  className = '',
+}) => (
   <svg
     width={size}
     height={size}
@@ -350,7 +397,12 @@ export const ChieldLight = ({ size = 24, color = 'currentColor', sx = {}, classN
   </svg>
 )
 
-export const Key = ({ size = 24, color = 'currentColor', sx = {}, className = '' }) => (
+export const Key: React.FC<IconComponentProps> = ({
+  size = 24,
+  color = 'currentColor',
+  sx = {},
+  className = '',
+}) => (
   <svg
     width={size}
     height={size}
@@ -370,7 +422,12 @@ export const Key = ({ size = 24, color = 'currentColor', sx = {}, className = ''
   </svg>
 )
 
-export const KeyAlt = ({ size = 24, color = 'currentColor', sx = {}, className = '' }) => (
+export const KeyAlt: React.FC<IconComponentProps> = ({
+  size = 24,
+  color = 'currentColor',
+  sx = {},
+  className = '',
+}) => (
   <svg
     width={size}
     height={size}
@@ -395,7 +452,12 @@ export const KeyAlt = ({ size = 24, color = 'currentColor', sx = {}, className =
   </svg>
 )
 
-export const KeyAltDuotone = ({ size = 24, color = 'currentColor', sx = {}, className = '' }) => (
+export const KeyAltDuotone: React.FC<IconComponentProps> = ({
+  size = 24,
+  color = 'currentColor',
+  sx = {},
+  className = '',
+}) => (
   <svg
     width={size}
     height={size}
@@ -419,7 +481,7 @@ export const KeyAltDuotone = ({ size = 24, color = 'currentColor', sx = {}, clas
   </svg>
 )
 
-export const KeyAltDuotoneLine = ({
+export const KeyAltDuotoneLine: React.FC<IconComponentProps> = ({
   size = 24,
   color = 'currentColor',
   sx = {},
@@ -448,7 +510,12 @@ export const KeyAltDuotoneLine = ({
   </svg>
 )
 
-export const KeyAltFill = ({ size = 24, color = 'currentColor', sx = {}, className = '' }) => (
+export const KeyAltFill: React.FC<IconComponentProps> = ({
+  size = 24,
+  color = 'currentColor',
+  sx = {},
+  className = '',
+}) => (
   <svg
     width={size}
     height={size}
@@ -467,7 +534,12 @@ export const KeyAltFill = ({ size = 24, color = 'currentColor', sx = {}, classNa
   </svg>
 )
 
-export const KeyAltLight = ({ size = 24, color = 'currentColor', sx = {}, className = '' }) => (
+export const KeyAltLight: React.FC<IconComponentProps> = ({
+  size = 24,
+  color = 'currentColor',
+  sx = {},
+  className = '',
+}) => (
   <svg
     width={size}
     height={size}
@@ -490,7 +562,12 @@ export const KeyAltLight = ({ size = 24, color = 'currentColor', sx = {}, classN
   </svg>
 )
 
-export const KeyDuotone = ({ size = 24, color = 'currentColor', sx = {}, className = '' }) => (
+export const KeyDuotone: React.FC<IconComponentProps> = ({
+  size = 24,
+  color = 'currentColor',
+  sx = {},
+  className = '',
+}) => (
   <svg
     width={size}
     height={size}
@@ -515,7 +592,12 @@ export const KeyDuotone = ({ size = 24, color = 'currentColor', sx = {}, classNa
   </svg>
 )
 
-export const KeyDuotoneLine = ({ size = 24, color = 'currentColor', sx = {}, className = '' }) => (
+export const KeyDuotoneLine: React.FC<IconComponentProps> = ({
+  size = 24,
+  color = 'currentColor',
+  sx = {},
+  className = '',
+}) => (
   <svg
     width={size}
     height={size}
@@ -535,7 +617,12 @@ export const KeyDuotoneLine = ({ size = 24, color = 'currentColor', sx = {}, cla
   </svg>
 )
 
-export const KeyFill = ({ size = 24, color = 'currentColor', sx = {}, className = '' }) => (
+export const KeyFill: React.FC<IconComponentProps> = ({
+  size = 24,
+  color = 'currentColor',
+  sx = {},
+  className = '',
+}) => (
   <svg
     width={size}
     height={size}
@@ -553,7 +640,12 @@ export const KeyFill = ({ size = 24, color = 'currentColor', sx = {}, className 
   </svg>
 )
 
-export const KeyLight = ({ size = 24, color = 'currentColor', sx = {}, className = '' }) => (
+export const KeyLight: React.FC<IconComponentProps> = ({
+  size = 24,
+  color = 'currentColor',
+  sx = {},
+  className = '',
+}) => (
   <svg
     width={size}
     height={size}
@@ -568,7 +660,12 @@ export const KeyLight = ({ size = 24, color = 'currentColor', sx = {}, className
   </svg>
 )
 
-export const Lock = ({ size = 24, color = 'currentColor', sx = {}, className = '' }) => (
+export const Lock: React.FC<IconComponentProps> = ({
+  size = 24,
+  color = 'currentColor',
+  sx = {},
+  className = '',
+}) => (
   <svg
     width={size}
     height={size}
@@ -593,7 +690,12 @@ export const Lock = ({ size = 24, color = 'currentColor', sx = {}, className = '
   </svg>
 )
 
-export const LockAlt = ({ size = 24, color = 'currentColor', sx = {}, className = '' }) => (
+export const LockAlt: React.FC<IconComponentProps> = ({
+  size = 24,
+  color = 'currentColor',
+  sx = {},
+  className = '',
+}) => (
   <svg
     width={size}
     height={size}
@@ -617,7 +719,12 @@ export const LockAlt = ({ size = 24, color = 'currentColor', sx = {}, className 
   </svg>
 )
 
-export const LockAltDuotone = ({ size = 24, color = 'currentColor', sx = {}, className = '' }) => (
+export const LockAltDuotone: React.FC<IconComponentProps> = ({
+  size = 24,
+  color = 'currentColor',
+  sx = {},
+  className = '',
+}) => (
   <svg
     width={size}
     height={size}
@@ -639,7 +746,7 @@ export const LockAltDuotone = ({ size = 24, color = 'currentColor', sx = {}, cla
   </svg>
 )
 
-export const LockAltDuotoneLine = ({
+export const LockAltDuotoneLine: React.FC<IconComponentProps> = ({
   size = 24,
   color = 'currentColor',
   sx = {},
@@ -668,7 +775,12 @@ export const LockAltDuotoneLine = ({
   </svg>
 )
 
-export const LockAltFill = ({ size = 24, color = 'currentColor', sx = {}, className = '' }) => (
+export const LockAltFill: React.FC<IconComponentProps> = ({
+  size = 24,
+  color = 'currentColor',
+  sx = {},
+  className = '',
+}) => (
   <svg
     width={size}
     height={size}
@@ -691,7 +803,12 @@ export const LockAltFill = ({ size = 24, color = 'currentColor', sx = {}, classN
   </svg>
 )
 
-export const LockAltLight = ({ size = 24, color = 'currentColor', sx = {}, className = '' }) => (
+export const LockAltLight: React.FC<IconComponentProps> = ({
+  size = 24,
+  color = 'currentColor',
+  sx = {},
+  className = '',
+}) => (
   <svg
     width={size}
     height={size}
@@ -713,7 +830,12 @@ export const LockAltLight = ({ size = 24, color = 'currentColor', sx = {}, class
   </svg>
 )
 
-export const LockDuotone = ({ size = 24, color = 'currentColor', sx = {}, className = '' }) => (
+export const LockDuotone: React.FC<IconComponentProps> = ({
+  size = 24,
+  color = 'currentColor',
+  sx = {},
+  className = '',
+}) => (
   <svg
     width={size}
     height={size}
@@ -737,7 +859,12 @@ export const LockDuotone = ({ size = 24, color = 'currentColor', sx = {}, classN
   </svg>
 )
 
-export const LockDuotoneLine = ({ size = 24, color = 'currentColor', sx = {}, className = '' }) => (
+export const LockDuotoneLine: React.FC<IconComponentProps> = ({
+  size = 24,
+  color = 'currentColor',
+  sx = {},
+  className = '',
+}) => (
   <svg
     width={size}
     height={size}
@@ -764,7 +891,12 @@ export const LockDuotoneLine = ({ size = 24, color = 'currentColor', sx = {}, cl
   </svg>
 )
 
-export const LockFill = ({ size = 24, color = 'currentColor', sx = {}, className = '' }) => (
+export const LockFill: React.FC<IconComponentProps> = ({
+  size = 24,
+  color = 'currentColor',
+  sx = {},
+  className = '',
+}) => (
   <svg
     width={size}
     height={size}
@@ -789,7 +921,12 @@ export const LockFill = ({ size = 24, color = 'currentColor', sx = {}, className
   </svg>
 )
 
-export const LockLight = ({ size = 24, color = 'currentColor', sx = {}, className = '' }) => (
+export const LockLight: React.FC<IconComponentProps> = ({
+  size = 24,
+  color = 'currentColor',
+  sx = {},
+  className = '',
+}) => (
   <svg
     width={size}
     height={size}
@@ -812,7 +949,12 @@ export const LockLight = ({ size = 24, color = 'currentColor', sx = {}, classNam
   </svg>
 )
 
-export const Unlock = ({ size = 24, color = 'currentColor', sx = {}, className = '' }) => (
+export const Unlock: React.FC<IconComponentProps> = ({
+  size = 24,
+  color = 'currentColor',
+  sx = {},
+  className = '',
+}) => (
   <svg
     width={size}
     height={size}
@@ -837,7 +979,12 @@ export const Unlock = ({ size = 24, color = 'currentColor', sx = {}, className =
   </svg>
 )
 
-export const UnlockDuotone = ({ size = 24, color = 'currentColor', sx = {}, className = '' }) => (
+export const UnlockDuotone: React.FC<IconComponentProps> = ({
+  size = 24,
+  color = 'currentColor',
+  sx = {},
+  className = '',
+}) => (
   <svg
     width={size}
     height={size}
@@ -861,7 +1008,7 @@ export const UnlockDuotone = ({ size = 24, color = 'currentColor', sx = {}, clas
   </svg>
 )
 
-export const UnlockDuotoneLine = ({
+export const UnlockDuotoneLine: React.FC<IconComponentProps> = ({
   size = 24,
   color = 'currentColor',
   sx = {},
@@ -893,7 +1040,12 @@ export const UnlockDuotoneLine = ({
   </svg>
 )
 
-export const UnlockFill = ({ size = 24, color = 'currentColor', sx = {}, className = '' }) => (
+export const UnlockFill: React.FC<IconComponentProps> = ({
+  size = 24,
+  color = 'currentColor',
+  sx = {},
+  className = '',
+}) => (
   <svg
     width={size}
     height={size}
@@ -918,7 +1070,12 @@ export const UnlockFill = ({ size = 24, color = 'currentColor', sx = {}, classNa
   </svg>
 )
 
-export const UnlockLight = ({ size = 24, color = 'currentColor', sx = {}, className = '' }) => (
+export const UnlockLight: React.FC<IconComponentProps> = ({
+  size = 24,
+  color = 'currentColor',
+  sx = {},
+  className = '',
+}) => (
   <svg
     width={size}
     height={size}
@@ -941,7 +1098,12 @@ export const UnlockLight = ({ size = 24, color = 'currentColor', sx = {}, classN
   </svg>
 )
 
-export const HideEye = ({ size = 24, color = 'currentColor', sx = {}, className = '' }) => (
+export const HideEye: React.FC<IconComponentProps> = ({
+  size = 24,
+  color = 'currentColor',
+  sx = {},
+  className = '',
+}) => (
   <svg
     width={size}
     height={size}
@@ -968,7 +1130,12 @@ export const HideEye = ({ size = 24, color = 'currentColor', sx = {}, className 
   </svg>
 )
 
-export const HideEyeDuotone = ({ size = 24, color = 'currentColor', sx = {}, className = '' }) => (
+export const HideEyeDuotone: React.FC<IconComponentProps> = ({
+  size = 24,
+  color = 'currentColor',
+  sx = {},
+  className = '',
+}) => (
   <svg
     width={size}
     height={size}
@@ -997,7 +1164,12 @@ export const HideEyeDuotone = ({ size = 24, color = 'currentColor', sx = {}, cla
   </svg>
 )
 
-export const HideEyeFill = ({ size = 24, color = 'currentColor', sx = {}, className = '' }) => (
+export const HideEyeFill: React.FC<IconComponentProps> = ({
+  size = 24,
+  color = 'currentColor',
+  sx = {},
+  className = '',
+}) => (
   <svg
     width={size}
     height={size}
@@ -1016,7 +1188,12 @@ export const HideEyeFill = ({ size = 24, color = 'currentColor', sx = {}, classN
   </svg>
 )
 
-export const HideEyeLight = ({ size = 24, color = 'currentColor', sx = {}, className = '' }) => (
+export const HideEyeLight: React.FC<IconComponentProps> = ({
+  size = 24,
+  color = 'currentColor',
+  sx = {},
+  className = '',
+}) => (
   <svg
     width={size}
     height={size}

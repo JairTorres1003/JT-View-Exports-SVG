@@ -1,6 +1,13 @@
 import React from 'react'
 
-export const Calories = ({ size = 24, color = 'currentColor', sx = {}, className = '' }) => (
+import { type IconComponentProps } from './types'
+
+export const Calories: React.FC<IconComponentProps> = ({
+  size = 24,
+  color = 'currentColor',
+  sx = {},
+  className = '',
+}) => (
   <svg
     width={size}
     height={size}
@@ -23,7 +30,12 @@ export const Calories = ({ size = 24, color = 'currentColor', sx = {}, className
   </svg>
 )
 
-export const CaloriesLight = ({ size = 24, color = 'currentColor', sx = {}, className = '' }) => (
+export const CaloriesLight: React.FC<IconComponentProps> = ({
+  size = 24,
+  color = 'currentColor',
+  sx = {},
+  className = '',
+}) => (
   <svg
     width={size}
     height={size}
@@ -44,7 +56,12 @@ export const CaloriesLight = ({ size = 24, color = 'currentColor', sx = {}, clas
   </svg>
 )
 
-export const Carbs = ({ size = 24, color = 'currentColor', sx = {}, className = '' }) => (
+export const Carbs: React.FC<IconComponentProps> = ({
+  size = 24,
+  color = 'currentColor',
+  sx = {},
+  className = '',
+}) => (
   <svg
     width={size}
     height={size}
@@ -73,7 +90,12 @@ export const Carbs = ({ size = 24, color = 'currentColor', sx = {}, className = 
   </svg>
 )
 
-export const CarbsLight = ({ size = 24, color = 'currentColor', sx = {}, className = '' }) => (
+export const CarbsLight: React.FC<IconComponentProps> = ({
+  size = 24,
+  color = 'currentColor',
+  sx = {},
+  className = '',
+}) => (
   <svg
     width={size}
     height={size}
@@ -99,7 +121,12 @@ export const CarbsLight = ({ size = 24, color = 'currentColor', sx = {}, classNa
   </svg>
 )
 
-export const Fat = ({ size = 24, color = 'currentColor', sx = {}, className = '' }) => (
+export const Fat: React.FC<IconComponentProps> = ({
+  size = 24,
+  color = 'currentColor',
+  sx = {},
+  className = '',
+}) => (
   <svg
     width={size}
     height={size}
@@ -127,7 +154,12 @@ export const Fat = ({ size = 24, color = 'currentColor', sx = {}, className = ''
   </svg>
 )
 
-export const FatLight = ({ size = 24, color = 'currentColor', sx = {}, className = '' }) => (
+export const FatLight: React.FC<IconComponentProps> = ({
+  size = 24,
+  color = 'currentColor',
+  sx = {},
+  className = '',
+}) => (
   <svg
     width={size}
     height={size}
@@ -153,7 +185,12 @@ export const FatLight = ({ size = 24, color = 'currentColor', sx = {}, className
   </svg>
 )
 
-export const Protein = ({ size = 24, color = 'currentColor', sx = {}, className = '' }) => (
+export const Protein: React.FC<IconComponentProps> = ({
+  size = 24,
+  color = 'currentColor',
+  sx = {},
+  className = '',
+}) => (
   <svg
     width={size}
     height={size}
@@ -171,7 +208,12 @@ export const Protein = ({ size = 24, color = 'currentColor', sx = {}, className 
   </svg>
 )
 
-export const ProteinLight = ({ size = 24, color = 'currentColor', sx = {}, className = '' }) => (
+export const ProteinLight: React.FC<IconComponentProps> = ({
+  size = 24,
+  color = 'currentColor',
+  sx = {},
+  className = '',
+}) => (
   <svg
     width={size}
     height={size}
@@ -188,7 +230,12 @@ export const ProteinLight = ({ size = 24, color = 'currentColor', sx = {}, class
   </svg>
 )
 
-export const Trophy = ({ size = 24, color = 'currentColor', sx = {}, className = '' }) => (
+export const Trophy: React.FC<IconComponentProps> = ({
+  size = 24,
+  color = 'currentColor',
+  sx = {},
+  className = '',
+}) => (
   <svg
     width={size}
     height={size}
@@ -224,7 +271,12 @@ export const Trophy = ({ size = 24, color = 'currentColor', sx = {}, className =
   </svg>
 )
 
-export const TrophyLight = ({ size = 24, color = 'currentColor', sx = {}, className = '' }) => (
+export const TrophyLight: React.FC<IconComponentProps> = ({
+  size = 24,
+  color = 'currentColor',
+  sx = {},
+  className = '',
+}) => (
   <svg
     width={size}
     height={size}
@@ -257,7 +309,12 @@ export const TrophyLight = ({ size = 24, color = 'currentColor', sx = {}, classN
   </svg>
 )
 
-export const Water = ({ size = 24, color = 'currentColor', sx = {}, className = '' }) => (
+export const Water: React.FC<IconComponentProps> = ({
+  size = 24,
+  color = 'currentColor',
+  sx = {},
+  className = '',
+}) => (
   <svg
     width={size}
     height={size}
@@ -281,7 +338,12 @@ export const Water = ({ size = 24, color = 'currentColor', sx = {}, className = 
   </svg>
 )
 
-export const WaterLight = ({ size = 24, color = 'currentColor', sx = {}, className = '' }) => (
+export const WaterLight: React.FC<IconComponentProps> = ({
+  size = 24,
+  color = 'currentColor',
+  sx = {},
+  className = '',
+}) => (
   <svg
     width={size}
     height={size}

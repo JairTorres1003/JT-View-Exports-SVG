@@ -1,6 +1,13 @@
 import React from 'react'
 
-export const Cancel = ({ size = 24, color = 'currentColor', sx = {}, className = '' }) => (
+import { type IconComponentProps } from './types'
+
+export const Cancel: React.FC<IconComponentProps> = ({
+  size = 24,
+  color = 'currentColor',
+  sx = {},
+  className = '',
+}) => (
   <svg
     width={size}
     height={size}
@@ -15,7 +22,12 @@ export const Cancel = ({ size = 24, color = 'currentColor', sx = {}, className =
   </svg>
 )
 
-export const CancelDuotone = ({ size = 24, color = 'currentColor', sx = {}, className = '' }) => (
+export const CancelDuotone: React.FC<IconComponentProps> = ({
+  size = 24,
+  color = 'currentColor',
+  sx = {},
+  className = '',
+}) => (
   <svg
     width={size}
     height={size}
@@ -30,7 +42,7 @@ export const CancelDuotone = ({ size = 24, color = 'currentColor', sx = {}, clas
   </svg>
 )
 
-export const CancelDuotoneLine = ({
+export const CancelDuotoneLine: React.FC<IconComponentProps> = ({
   size = 24,
   color = 'currentColor',
   sx = {},
@@ -50,7 +62,12 @@ export const CancelDuotoneLine = ({
   </svg>
 )
 
-export const CancelFill = ({ size = 24, color = 'currentColor', sx = {}, className = '' }) => (
+export const CancelFill: React.FC<IconComponentProps> = ({
+  size = 24,
+  color = 'currentColor',
+  sx = {},
+  className = '',
+}) => (
   <svg
     width={size}
     height={size}
@@ -69,7 +86,12 @@ export const CancelFill = ({ size = 24, color = 'currentColor', sx = {}, classNa
   </svg>
 )
 
-export const CancelLight = ({ size = 24, color = 'currentColor', sx = {}, className = '' }) => (
+export const CancelLight: React.FC<IconComponentProps> = ({
+  size = 24,
+  color = 'currentColor',
+  sx = {},
+  className = '',
+}) => (
   <svg
     width={size}
     height={size}
@@ -84,7 +106,12 @@ export const CancelLight = ({ size = 24, color = 'currentColor', sx = {}, classN
   </svg>
 )
 
-export const Remove = ({ size = 24, color = 'currentColor', sx = {}, className = '' }) => (
+export const Remove: React.FC<IconComponentProps> = ({
+  size = 24,
+  color = 'currentColor',
+  sx = {},
+  className = '',
+}) => (
   <svg
     width={size}
     height={size}
@@ -99,7 +126,12 @@ export const Remove = ({ size = 24, color = 'currentColor', sx = {}, className =
   </svg>
 )
 
-export const RemoveDuotone = ({ size = 24, color = 'currentColor', sx = {}, className = '' }) => (
+export const RemoveDuotone: React.FC<IconComponentProps> = ({
+  size = 24,
+  color = 'currentColor',
+  sx = {},
+  className = '',
+}) => (
   <svg
     width={size}
     height={size}
@@ -114,7 +146,7 @@ export const RemoveDuotone = ({ size = 24, color = 'currentColor', sx = {}, clas
   </svg>
 )
 
-export const RemoveDuotoneLine = ({
+export const RemoveDuotoneLine: React.FC<IconComponentProps> = ({
   size = 24,
   color = 'currentColor',
   sx = {},
@@ -134,7 +166,12 @@ export const RemoveDuotoneLine = ({
   </svg>
 )
 
-export const RemoveFill = ({ size = 24, color = 'currentColor', sx = {}, className = '' }) => (
+export const RemoveFill: React.FC<IconComponentProps> = ({
+  size = 24,
+  color = 'currentColor',
+  sx = {},
+  className = '',
+}) => (
   <svg
     width={size}
     height={size}
@@ -153,7 +190,12 @@ export const RemoveFill = ({ size = 24, color = 'currentColor', sx = {}, classNa
   </svg>
 )
 
-export const RemoveLight = ({ size = 24, color = 'currentColor', sx = {}, className = '' }) => (
+export const RemoveLight: React.FC<IconComponentProps> = ({
+  size = 24,
+  color = 'currentColor',
+  sx = {},
+  className = '',
+}) => (
   <svg
     width={size}
     height={size}

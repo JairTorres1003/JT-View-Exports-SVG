@@ -24,7 +24,12 @@ export const Bell = ({ size = 24, color = 'currentColor', sx = {}, className = '
   </svg>
 )
 
-export const BellDuotoneLineOne = ({ size = 24, color = 'currentColor', sx = {}, className = '' }) => (
+export const BellDuotoneLineOne = ({
+  size = 24,
+  color = 'currentColor',
+  sx = {},
+  className = '',
+}) => (
   <svg
     width={size}
     height={size}
@@ -140,7 +145,12 @@ export const BellPin = ({ size = 24, color = 'currentColor', sx = {}, className 
   </svg>
 )
 
-export const BellPinDuotoneLineOne = ({ size = 24, color = 'currentColor', sx = {}, className = '' }) => (
+export const BellPinDuotoneLineOne = ({
+  size = 24,
+  color = 'currentColor',
+  sx = {},
+  className = '',
+}) => (
   <svg
     width={size}
     height={size}
@@ -166,7 +176,12 @@ export const BellPinDuotoneLineOne = ({ size = 24, color = 'currentColor', sx = 
   </svg>
 )
 
-export const BellPinDuotoneLine = ({ size = 24, color = 'currentColor', sx = {}, className = '' }) => (
+export const BellPinDuotoneLine = ({
+  size = 24,
+  color = 'currentColor',
+  sx = {},
+  className = '',
+}) => (
   <svg
     width={size}
     height={size}
@@ -343,7 +358,12 @@ export const FireAltLight = ({ size = 24, color = 'currentColor', sx = {}, class
   </svg>
 )
 
-export const FireDuotoneFillOne = ({ size = 24, color = 'currentColor', sx = {}, className = '' }) => (
+export const FireDuotoneFillOne = ({
+  size = 24,
+  color = 'currentColor',
+  sx = {},
+  className = '',
+}) => (
   <svg
     width={size}
     height={size}
@@ -396,7 +416,12 @@ export const FireDuotoneFill = ({ size = 24, color = 'currentColor', sx = {}, cl
   </svg>
 )
 
-export const FireDuotoneLineOne = ({ size = 24, color = 'currentColor', sx = {}, className = '' }) => (
+export const FireDuotoneLineOne = ({
+  size = 24,
+  color = 'currentColor',
+  sx = {},
+  className = '',
+}) => (
   <svg
     width={size}
     height={size}
@@ -582,7 +607,12 @@ export const Lamp = ({ size = 24, color = 'currentColor', sx = {}, className = '
   </svg>
 )
 
-export const LampDuotoneLineOne = ({ size = 24, color = 'currentColor', sx = {}, className = '' }) => (
+export const LampDuotoneLineOne = ({
+  size = 24,
+  color = 'currentColor',
+  sx = {},
+  className = '',
+}) => (
   <svg
     width={size}
     height={size}
@@ -707,7 +737,12 @@ export const Ring = ({ size = 24, color = 'currentColor', sx = {}, className = '
   </svg>
 )
 
-export const RingDuotoneLineOne = ({ size = 24, color = 'currentColor', sx = {}, className = '' }) => (
+export const RingDuotoneLineOne = ({
+  size = 24,
+  color = 'currentColor',
+  sx = {},
+  className = '',
+}) => (
   <svg
     width={size}
     height={size}

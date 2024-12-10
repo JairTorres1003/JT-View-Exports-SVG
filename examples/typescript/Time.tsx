@@ -1,6 +1,13 @@
 import React from 'react'
 
-export const Alarmclock = ({ size = 24, color = 'currentColor', sx = {}, className = '' }) => (
+import { type IconComponentProps } from './types'
+
+export const Alarmclock: React.FC<IconComponentProps> = ({
+  size = 24,
+  color = 'currentColor',
+  sx = {},
+  className = '',
+}) => (
   <svg
     width={size}
     height={size}
@@ -22,7 +29,7 @@ export const Alarmclock = ({ size = 24, color = 'currentColor', sx = {}, classNa
   </svg>
 )
 
-export const AlarmclockDuotone = ({
+export const AlarmclockDuotone: React.FC<IconComponentProps> = ({
   size = 24,
   color = 'currentColor',
   sx = {},
@@ -48,7 +55,7 @@ export const AlarmclockDuotone = ({
   </svg>
 )
 
-export const AlarmclockDuotoneLine = ({
+export const AlarmclockDuotoneLine: React.FC<IconComponentProps> = ({
   size = 24,
   color = 'currentColor',
   sx = {},
@@ -83,7 +90,12 @@ export const AlarmclockDuotoneLine = ({
   </svg>
 )
 
-export const AlarmclockFill = ({ size = 24, color = 'currentColor', sx = {}, className = '' }) => (
+export const AlarmclockFill: React.FC<IconComponentProps> = ({
+  size = 24,
+  color = 'currentColor',
+  sx = {},
+  className = '',
+}) => (
   <svg
     width={size}
     height={size}
@@ -104,7 +116,12 @@ export const AlarmclockFill = ({ size = 24, color = 'currentColor', sx = {}, cla
   </svg>
 )
 
-export const AlarmclockLight = ({ size = 24, color = 'currentColor', sx = {}, className = '' }) => (
+export const AlarmclockLight: React.FC<IconComponentProps> = ({
+  size = 24,
+  color = 'currentColor',
+  sx = {},
+  className = '',
+}) => (
   <svg
     width={size}
     height={size}
@@ -125,7 +142,12 @@ export const AlarmclockLight = ({ size = 24, color = 'currentColor', sx = {}, cl
   </svg>
 )
 
-export const Clock = ({ size = 24, color = 'currentColor', sx = {}, className = '' }) => (
+export const Clock: React.FC<IconComponentProps> = ({
+  size = 24,
+  color = 'currentColor',
+  sx = {},
+  className = '',
+}) => (
   <svg
     width={size}
     height={size}
@@ -157,7 +179,12 @@ export const Clock = ({ size = 24, color = 'currentColor', sx = {}, className = 
   </svg>
 )
 
-export const ClockDuotone = ({ size = 24, color = 'currentColor', sx = {}, className = '' }) => (
+export const ClockDuotone: React.FC<IconComponentProps> = ({
+  size = 24,
+  color = 'currentColor',
+  sx = {},
+  className = '',
+}) => (
   <svg
     width={size}
     height={size}
@@ -186,7 +213,7 @@ export const ClockDuotone = ({ size = 24, color = 'currentColor', sx = {}, class
   </svg>
 )
 
-export const ClockDuotoneLine = ({
+export const ClockDuotoneLine: React.FC<IconComponentProps> = ({
   size = 24,
   color = 'currentColor',
   sx = {},
@@ -220,7 +247,12 @@ export const ClockDuotoneLine = ({
   </svg>
 )
 
-export const ClockFill = ({ size = 24, color = 'currentColor', sx = {}, className = '' }) => (
+export const ClockFill: React.FC<IconComponentProps> = ({
+  size = 24,
+  color = 'currentColor',
+  sx = {},
+  className = '',
+}) => (
   <svg
     width={size}
     height={size}
@@ -251,7 +283,12 @@ export const ClockFill = ({ size = 24, color = 'currentColor', sx = {}, classNam
   </svg>
 )
 
-export const ClockLight = ({ size = 24, color = 'currentColor', sx = {}, className = '' }) => (
+export const ClockLight: React.FC<IconComponentProps> = ({
+  size = 24,
+  color = 'currentColor',
+  sx = {},
+  className = '',
+}) => (
   <svg
     width={size}
     height={size}
@@ -280,7 +317,7 @@ export const ClockLight = ({ size = 24, color = 'currentColor', sx = {}, classNa
   </svg>
 )
 
-export const HhourglassMoveLightOne = ({
+export const HhourglassMoveLightOne: React.FC<IconComponentProps> = ({
   size = 24,
   color = 'currentColor',
   sx = {},
@@ -317,7 +354,7 @@ export const HhourglassMoveLightOne = ({
   </svg>
 )
 
-export const HhourglassMoveLight = ({
+export const HhourglassMoveLight: React.FC<IconComponentProps> = ({
   size = 24,
   color = 'currentColor',
   sx = {},
@@ -354,7 +391,7 @@ export const HhourglassMoveLight = ({
   </svg>
 )
 
-export const HourglassLightOne = ({
+export const HourglassLightOne: React.FC<IconComponentProps> = ({
   size = 24,
   color = 'currentColor',
   sx = {},
@@ -383,7 +420,12 @@ export const HourglassLightOne = ({
   </svg>
 )
 
-export const HourglassLight = ({ size = 24, color = 'currentColor', sx = {}, className = '' }) => (
+export const HourglassLight: React.FC<IconComponentProps> = ({
+  size = 24,
+  color = 'currentColor',
+  sx = {},
+  className = '',
+}) => (
   <svg
     width={size}
     height={size}
@@ -408,7 +450,12 @@ export const HourglassLight = ({ size = 24, color = 'currentColor', sx = {}, cla
   </svg>
 )
 
-export const JumpTimeOne = ({ size = 24, color = 'currentColor', sx = {}, className = '' }) => (
+export const JumpTimeOne: React.FC<IconComponentProps> = ({
+  size = 24,
+  color = 'currentColor',
+  sx = {},
+  className = '',
+}) => (
   <svg
     width={size}
     height={size}
@@ -428,7 +475,12 @@ export const JumpTimeOne = ({ size = 24, color = 'currentColor', sx = {}, classN
   </svg>
 )
 
-export const JumpTime = ({ size = 24, color = 'currentColor', sx = {}, className = '' }) => (
+export const JumpTime: React.FC<IconComponentProps> = ({
+  size = 24,
+  color = 'currentColor',
+  sx = {},
+  className = '',
+}) => (
   <svg
     width={size}
     height={size}
@@ -449,7 +501,12 @@ export const JumpTime = ({ size = 24, color = 'currentColor', sx = {}, className
   </svg>
 )
 
-export const JumpTimeDuotone = ({ size = 24, color = 'currentColor', sx = {}, className = '' }) => (
+export const JumpTimeDuotone: React.FC<IconComponentProps> = ({
+  size = 24,
+  color = 'currentColor',
+  sx = {},
+  className = '',
+}) => (
   <svg
     width={size}
     height={size}
@@ -469,7 +526,7 @@ export const JumpTimeDuotone = ({ size = 24, color = 'currentColor', sx = {}, cl
   </svg>
 )
 
-export const JumpTimeDuotoneLine = ({
+export const JumpTimeDuotoneLine: React.FC<IconComponentProps> = ({
   size = 24,
   color = 'currentColor',
   sx = {},
@@ -501,7 +558,12 @@ export const JumpTimeDuotoneLine = ({
   </svg>
 )
 
-export const JumpTimeFill = ({ size = 24, color = 'currentColor', sx = {}, className = '' }) => (
+export const JumpTimeFill: React.FC<IconComponentProps> = ({
+  size = 24,
+  color = 'currentColor',
+  sx = {},
+  className = '',
+}) => (
   <svg
     width={size}
     height={size}
@@ -520,7 +582,12 @@ export const JumpTimeFill = ({ size = 24, color = 'currentColor', sx = {}, class
   </svg>
 )
 
-export const Time = ({ size = 24, color = 'currentColor', sx = {}, className = '' }) => (
+export const Time: React.FC<IconComponentProps> = ({
+  size = 24,
+  color = 'currentColor',
+  sx = {},
+  className = '',
+}) => (
   <svg
     width={size}
     height={size}
@@ -540,7 +607,12 @@ export const Time = ({ size = 24, color = 'currentColor', sx = {}, className = '
   </svg>
 )
 
-export const TimeAtack = ({ size = 24, color = 'currentColor', sx = {}, className = '' }) => (
+export const TimeAtack: React.FC<IconComponentProps> = ({
+  size = 24,
+  color = 'currentColor',
+  sx = {},
+  className = '',
+}) => (
   <svg
     width={size}
     height={size}
@@ -558,7 +630,7 @@ export const TimeAtack = ({ size = 24, color = 'currentColor', sx = {}, classNam
   </svg>
 )
 
-export const TimeAtackDuotone = ({
+export const TimeAtackDuotone: React.FC<IconComponentProps> = ({
   size = 24,
   color = 'currentColor',
   sx = {},
@@ -581,7 +653,7 @@ export const TimeAtackDuotone = ({
   </svg>
 )
 
-export const TimeAtackDuotoneLine = ({
+export const TimeAtackDuotoneLine: React.FC<IconComponentProps> = ({
   size = 24,
   color = 'currentColor',
   sx = {},
@@ -611,7 +683,12 @@ export const TimeAtackDuotoneLine = ({
   </svg>
 )
 
-export const TimeAtackFill = ({ size = 24, color = 'currentColor', sx = {}, className = '' }) => (
+export const TimeAtackFill: React.FC<IconComponentProps> = ({
+  size = 24,
+  color = 'currentColor',
+  sx = {},
+  className = '',
+}) => (
   <svg
     width={size}
     height={size}
@@ -630,7 +707,12 @@ export const TimeAtackFill = ({ size = 24, color = 'currentColor', sx = {}, clas
   </svg>
 )
 
-export const TimeAtackLight = ({ size = 24, color = 'currentColor', sx = {}, className = '' }) => (
+export const TimeAtackLight: React.FC<IconComponentProps> = ({
+  size = 24,
+  color = 'currentColor',
+  sx = {},
+  className = '',
+}) => (
   <svg
     width={size}
     height={size}
@@ -648,7 +730,12 @@ export const TimeAtackLight = ({ size = 24, color = 'currentColor', sx = {}, cla
   </svg>
 )
 
-export const TimeDelLightOne = ({ size = 24, color = 'currentColor', sx = {}, className = '' }) => (
+export const TimeDelLightOne: React.FC<IconComponentProps> = ({
+  size = 24,
+  color = 'currentColor',
+  sx = {},
+  className = '',
+}) => (
   <svg
     width={size}
     height={size}
@@ -686,7 +773,12 @@ export const TimeDelLightOne = ({ size = 24, color = 'currentColor', sx = {}, cl
   </svg>
 )
 
-export const TimeDelLight = ({ size = 24, color = 'currentColor', sx = {}, className = '' }) => (
+export const TimeDelLight: React.FC<IconComponentProps> = ({
+  size = 24,
+  color = 'currentColor',
+  sx = {},
+  className = '',
+}) => (
   <svg
     width={size}
     height={size}
@@ -715,7 +807,12 @@ export const TimeDelLight = ({ size = 24, color = 'currentColor', sx = {}, class
   </svg>
 )
 
-export const TimeDuotone = ({ size = 24, color = 'currentColor', sx = {}, className = '' }) => (
+export const TimeDuotone: React.FC<IconComponentProps> = ({
+  size = 24,
+  color = 'currentColor',
+  sx = {},
+  className = '',
+}) => (
   <svg
     width={size}
     height={size}
@@ -730,7 +827,12 @@ export const TimeDuotone = ({ size = 24, color = 'currentColor', sx = {}, classN
   </svg>
 )
 
-export const TimeDuotoneLine = ({ size = 24, color = 'currentColor', sx = {}, className = '' }) => (
+export const TimeDuotoneLine: React.FC<IconComponentProps> = ({
+  size = 24,
+  color = 'currentColor',
+  sx = {},
+  className = '',
+}) => (
   <svg
     width={size}
     height={size}
@@ -758,7 +860,12 @@ export const TimeDuotoneLine = ({ size = 24, color = 'currentColor', sx = {}, cl
   </svg>
 )
 
-export const TimeFill = ({ size = 24, color = 'currentColor', sx = {}, className = '' }) => (
+export const TimeFill: React.FC<IconComponentProps> = ({
+  size = 24,
+  color = 'currentColor',
+  sx = {},
+  className = '',
+}) => (
   <svg
     width={size}
     height={size}
@@ -777,7 +884,12 @@ export const TimeFill = ({ size = 24, color = 'currentColor', sx = {}, className
   </svg>
 )
 
-export const TimeLight = ({ size = 24, color = 'currentColor', sx = {}, className = '' }) => (
+export const TimeLight: React.FC<IconComponentProps> = ({
+  size = 24,
+  color = 'currentColor',
+  sx = {},
+  className = '',
+}) => (
   <svg
     width={size}
     height={size}
@@ -796,7 +908,12 @@ export const TimeLight = ({ size = 24, color = 'currentColor', sx = {}, classNam
   </svg>
 )
 
-export const TimeProgress = ({ size = 24, color = 'currentColor', sx = {}, className = '' }) => (
+export const TimeProgress: React.FC<IconComponentProps> = ({
+  size = 24,
+  color = 'currentColor',
+  sx = {},
+  className = '',
+}) => (
   <svg
     width={size}
     height={size}
@@ -820,7 +937,7 @@ export const TimeProgress = ({ size = 24, color = 'currentColor', sx = {}, class
   </svg>
 )
 
-export const TimeProgressDuotone = ({
+export const TimeProgressDuotone: React.FC<IconComponentProps> = ({
   size = 24,
   color = 'currentColor',
   sx = {},
@@ -847,7 +964,7 @@ export const TimeProgressDuotone = ({
   </svg>
 )
 
-export const TimeProgressDuotoneLine = ({
+export const TimeProgressDuotoneLine: React.FC<IconComponentProps> = ({
   size = 24,
   color = 'currentColor',
   sx = {},
@@ -894,7 +1011,7 @@ export const TimeProgressDuotoneLine = ({
   </svg>
 )
 
-export const TimeProgressFill = ({
+export const TimeProgressFill: React.FC<IconComponentProps> = ({
   size = 24,
   color = 'currentColor',
   sx = {},
@@ -934,7 +1051,7 @@ export const TimeProgressFill = ({
   </svg>
 )
 
-export const TimeProgressLight = ({
+export const TimeProgressLight: React.FC<IconComponentProps> = ({
   size = 24,
   color = 'currentColor',
   sx = {},
@@ -962,7 +1079,7 @@ export const TimeProgressLight = ({
   </svg>
 )
 
-export const TimeSleepLightOne = ({
+export const TimeSleepLightOne: React.FC<IconComponentProps> = ({
   size = 24,
   color = 'currentColor',
   sx = {},
@@ -1000,7 +1117,12 @@ export const TimeSleepLightOne = ({
   </svg>
 )
 
-export const TimeSleepLight = ({ size = 24, color = 'currentColor', sx = {}, className = '' }) => (
+export const TimeSleepLight: React.FC<IconComponentProps> = ({
+  size = 24,
+  color = 'currentColor',
+  sx = {},
+  className = '',
+}) => (
   <svg
     width={size}
     height={size}
@@ -1030,7 +1152,12 @@ export const TimeSleepLight = ({ size = 24, color = 'currentColor', sx = {}, cla
   </svg>
 )
 
-export const Tumer = ({ size = 24, color = 'currentColor', sx = {}, className = '' }) => (
+export const Tumer: React.FC<IconComponentProps> = ({
+  size = 24,
+  color = 'currentColor',
+  sx = {},
+  className = '',
+}) => (
   <svg
     width={size}
     height={size}
@@ -1052,7 +1179,12 @@ export const Tumer = ({ size = 24, color = 'currentColor', sx = {}, className = 
   </svg>
 )
 
-export const TumerDuotone = ({ size = 24, color = 'currentColor', sx = {}, className = '' }) => (
+export const TumerDuotone: React.FC<IconComponentProps> = ({
+  size = 24,
+  color = 'currentColor',
+  sx = {},
+  className = '',
+}) => (
   <svg
     width={size}
     height={size}
@@ -1077,7 +1209,7 @@ export const TumerDuotone = ({ size = 24, color = 'currentColor', sx = {}, class
   </svg>
 )
 
-export const TumerDuotoneLine = ({
+export const TumerDuotoneLine: React.FC<IconComponentProps> = ({
   size = 24,
   color = 'currentColor',
   sx = {},
@@ -1111,7 +1243,12 @@ export const TumerDuotoneLine = ({
   </svg>
 )
 
-export const TumerFill = ({ size = 24, color = 'currentColor', sx = {}, className = '' }) => (
+export const TumerFill: React.FC<IconComponentProps> = ({
+  size = 24,
+  color = 'currentColor',
+  sx = {},
+  className = '',
+}) => (
   <svg
     width={size}
     height={size}
@@ -1137,7 +1274,12 @@ export const TumerFill = ({ size = 24, color = 'currentColor', sx = {}, classNam
   </svg>
 )
 
-export const TumerLight = ({ size = 24, color = 'currentColor', sx = {}, className = '' }) => (
+export const TumerLight: React.FC<IconComponentProps> = ({
+  size = 24,
+  color = 'currentColor',
+  sx = {},
+  className = '',
+}) => (
   <svg
     width={size}
     height={size}
@@ -1158,7 +1300,12 @@ export const TumerLight = ({ size = 24, color = 'currentColor', sx = {}, classNa
   </svg>
 )
 
-export const Watch = ({ size = 24, color = 'currentColor', sx = {}, className = '' }) => (
+export const Watch: React.FC<IconComponentProps> = ({
+  size = 24,
+  color = 'currentColor',
+  sx = {},
+  className = '',
+}) => (
   <svg
     width={size}
     height={size}
@@ -1192,7 +1339,12 @@ export const Watch = ({ size = 24, color = 'currentColor', sx = {}, className = 
   </svg>
 )
 
-export const WatchLight = ({ size = 24, color = 'currentColor', sx = {}, className = '' }) => (
+export const WatchLight: React.FC<IconComponentProps> = ({
+  size = 24,
+  color = 'currentColor',
+  sx = {},
+  className = '',
+}) => (
   <svg
     width={size}
     height={size}
