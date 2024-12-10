@@ -1,6 +1,6 @@
 import React from 'react'
 
-import { type IconComponentProps } from './types'
+import { type IconComponentProps } from '../types'
 
 export const View: React.FC<IconComponentProps> = ({
   size = 24,

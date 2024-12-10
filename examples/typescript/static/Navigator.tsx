@@ -1,6 +1,6 @@
 import React from 'react'
 
-import { type IconComponentProps } from './types'
+import { type IconComponentProps } from '../types'
 
 export const CompasMini: React.FC<IconComponentProps> = ({
   size = 24,
