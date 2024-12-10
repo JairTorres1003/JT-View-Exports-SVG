@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/explicit-function-return-type */
 import React from 'react'
 
 export const Calendar = ({ size = 24, color = 'currentColor', sx = {}, className = '' }) => (

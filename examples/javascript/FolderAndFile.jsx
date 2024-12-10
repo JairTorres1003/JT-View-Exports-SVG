@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/explicit-function-return-type */
 import React from 'react'
 
 export const Folder = ({ size = 24, color = 'currentColor', sx = {}, className = '' }) => (

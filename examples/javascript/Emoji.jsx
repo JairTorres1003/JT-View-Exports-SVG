@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/explicit-function-return-type */
 import React from 'react'
 
 export const Angry = ({ size = 24, color = 'currentColor', sx = {}, className = '' }) => (
@@ -40,7 +41,7 @@ export const Angry = ({ size = 24, color = 'currentColor', sx = {}, className = 
   </svg>
 )
 
-export const Angry_light = ({ size = 24, color = 'currentColor', sx = {}, className = '' }) => (
+export const AngryLight = ({ size = 24, color = 'currentColor', sx = {}, className = '' }) => (
   <svg
     width={size}
     height={size}
@@ -101,7 +102,7 @@ export const Lol = ({ size = 24, color = 'currentColor', sx = {}, className = ''
   </svg>
 )
 
-export const Lol_light = ({ size = 24, color = 'currentColor', sx = {}, className = '' }) => (
+export const LolLight = ({ size = 24, color = 'currentColor', sx = {}, className = '' }) => (
   <svg
     width={size}
     height={size}
@@ -143,7 +144,7 @@ export const Rofl = ({ size = 24, color = 'currentColor', sx = {}, className = '
   </svg>
 )
 
-export const Rofl_light = ({ size = 24, color = 'currentColor', sx = {}, className = '' }) => (
+export const RoflLight = ({ size = 24, color = 'currentColor', sx = {}, className = '' }) => (
   <svg
     width={size}
     height={size}
@@ -201,7 +202,7 @@ export const Sad = ({ size = 24, color = 'currentColor', sx = {}, className = ''
   </svg>
 )
 
-export const Sad_alt = ({ size = 24, color = 'currentColor', sx = {}, className = '' }) => (
+export const SadAlt = ({ size = 24, color = 'currentColor', sx = {}, className = '' }) => (
   <svg
     width={size}
     height={size}
@@ -265,7 +266,7 @@ export const Sad_alt = ({ size = 24, color = 'currentColor', sx = {}, className 
   </svg>
 )
 
-export const Sad_alt_2 = ({ size = 24, color = 'currentColor', sx = {}, className = '' }) => (
+export const SadAlt2 = ({ size = 24, color = 'currentColor', sx = {}, className = '' }) => (
   <svg
     width={size}
     height={size}
@@ -329,7 +330,7 @@ export const Sad_alt_2 = ({ size = 24, color = 'currentColor', sx = {}, classNam
   </svg>
 )
 
-export const Sad_alt_2_light = ({ size = 24, color = 'currentColor', sx = {}, className = '' }) => (
+export const SadAlt2Light = ({ size = 24, color = 'currentColor', sx = {}, className = '' }) => (
   <svg
     width={size}
     height={size}
@@ -360,7 +361,7 @@ export const Sad_alt_2_light = ({ size = 24, color = 'currentColor', sx = {}, cl
   </svg>
 )
 
-export const Sad_alt_light = ({ size = 24, color = 'currentColor', sx = {}, className = '' }) => (
+export const SadAltLight = ({ size = 24, color = 'currentColor', sx = {}, className = '' }) => (
   <svg
     width={size}
     height={size}
@@ -391,7 +392,7 @@ export const Sad_alt_light = ({ size = 24, color = 'currentColor', sx = {}, clas
   </svg>
 )
 
-export const Sad_light = ({ size = 24, color = 'currentColor', sx = {}, className = '' }) => (
+export const SadLight = ({ size = 24, color = 'currentColor', sx = {}, className = '' }) => (
   <svg
     width={size}
     height={size}
@@ -448,7 +449,7 @@ export const Wow = ({ size = 24, color = 'currentColor', sx = {}, className = ''
   </svg>
 )
 
-export const Wow_light = ({ size = 24, color = 'currentColor', sx = {}, className = '' }) => (
+export const WowLight = ({ size = 24, color = 'currentColor', sx = {}, className = '' }) => (
   <svg
     width={size}
     height={size}
@@ -468,7 +469,7 @@ export const Wow_light = ({ size = 24, color = 'currentColor', sx = {}, classNam
   </svg>
 )
 
-export const happyOne = ({ size = 24, color = 'currentColor', sx = {}, className = '' }) => (
+export const HappyOne = ({ size = 24, color = 'currentColor', sx = {}, className = '' }) => (
   <svg
     width={size}
     height={size}
@@ -510,7 +511,7 @@ export const happyOne = ({ size = 24, color = 'currentColor', sx = {}, className
   </svg>
 )
 
-export const happy = ({ size = 24, color = 'currentColor', sx = {}, className = '' }) => (
+export const Happy = ({ size = 24, color = 'currentColor', sx = {}, className = '' }) => (
   <svg
     width={size}
     height={size}
@@ -548,7 +549,7 @@ export const happy = ({ size = 24, color = 'currentColor', sx = {}, className = 
   </svg>
 )
 
-export const happy_lightOne = ({ size = 24, color = 'currentColor', sx = {}, className = '' }) => (
+export const HappyLightOne = ({ size = 24, color = 'currentColor', sx = {}, className = '' }) => (
   <svg
     width={size}
     height={size}
@@ -569,7 +570,7 @@ export const happy_lightOne = ({ size = 24, color = 'currentColor', sx = {}, cla
   </svg>
 )
 
-export const happy_light = ({ size = 24, color = 'currentColor', sx = {}, className = '' }) => (
+export const HappyLight = ({ size = 24, color = 'currentColor', sx = {}, className = '' }) => (
   <svg
     width={size}
     height={size}
@@ -590,7 +591,7 @@ export const happy_light = ({ size = 24, color = 'currentColor', sx = {}, classN
   </svg>
 )
 
-export const thumb_downOne = ({ size = 24, color = 'currentColor', sx = {}, className = '' }) => (
+export const ThumbDownOne = ({ size = 24, color = 'currentColor', sx = {}, className = '' }) => (
   <svg
     width={size}
     height={size}
@@ -621,7 +622,7 @@ export const thumb_downOne = ({ size = 24, color = 'currentColor', sx = {}, clas
   </svg>
 )
 
-export const thumb_down = ({ size = 24, color = 'currentColor', sx = {}, className = '' }) => (
+export const ThumbDown = ({ size = 24, color = 'currentColor', sx = {}, className = '' }) => (
   <svg
     width={size}
     height={size}
@@ -649,7 +650,7 @@ export const thumb_down = ({ size = 24, color = 'currentColor', sx = {}, classNa
   </svg>
 )
 
-export const thumb_upOne = ({ size = 24, color = 'currentColor', sx = {}, className = '' }) => (
+export const ThumbUpOne = ({ size = 24, color = 'currentColor', sx = {}, className = '' }) => (
   <svg
     width={size}
     height={size}
@@ -680,7 +681,7 @@ export const thumb_upOne = ({ size = 24, color = 'currentColor', sx = {}, classN
   </svg>
 )
 
-export const thumb_up = ({ size = 24, color = 'currentColor', sx = {}, className = '' }) => (
+export const ThumbUp = ({ size = 24, color = 'currentColor', sx = {}, className = '' }) => (
   <svg
     width={size}
     height={size}
