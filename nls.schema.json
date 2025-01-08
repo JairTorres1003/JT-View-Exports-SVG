@@ -1,6 +1,6 @@
 {
   "$schema": "http://json-schema.org/draft-07/schema#",
-  "title": "JSON schema for l10n in package View Exports SVG extension for Visual Studio Code",
+  "title": "JSON schema for nls in package View Exports SVG extension for Visual Studio Code",
   "type": "object",
   "properties": {
     "extension.title": {
