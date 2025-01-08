@@ -18,6 +18,16 @@
       "description": "The title of the command to show the menu",
       "default": "View Exports SVG 🔍"
     },
+    "extension.commands.collapseAll.title": {
+      "type": "string",
+      "description": "The title of the command to collapse all items",
+      "default": "View Exports SVG: Collapse All Icons"
+    },
+    "extension.commands.expandAll.title": {
+      "type": "string",
+      "description": "The title of the command to expand all items",
+      "default": "View Exports SVG: Expand All Icons"
+    },
     "extension.config.assetsPath.title": {
       "type": "string",
       "description": "The title of the configuration to store the paths of analyzed files that have SVG icons",
@@ -103,6 +113,8 @@
     "extension.title",
     "extension.description",
     "extension.commands.showMenu.title",
+    "extension.commands.collapseAll.title",
+    "extension.commands.expandAll.title",
     "extension.config.assetsPath.title",
     "extension.config.assetsPath.description",
     "extension.config.ignoreDirectories.title",
