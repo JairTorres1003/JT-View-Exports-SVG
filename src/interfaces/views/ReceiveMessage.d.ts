@@ -29,6 +29,7 @@ export type ReceiveMessage =
   | { type: SVGReceiveMessage.RemoveFavoriteIcon; data: SVGIcon }
   | { type: SVGReceiveMessage.ClearFavoriteIcons }
   | { type: SVGReceiveMessage.GetFavoriteIcons }
+  | { type: SVGReceiveMessage.ToggleExpandIcon; data: boolean }
 
 /**
  * The handler for receiving messages from the webview.
@@ -124,4 +125,9 @@ export interface HandlerReceiveMessage {
    * Gets the favorite icons.
    */
   [SVGReceiveMessage.GetFavoriteIcons]: () => void
+  /**
+   * Toggles the expand icon.
+   * @param isExpanded - A boolean indicating whether the icons should be expanded.
+   */
+  [SVGReceiveMessage.ToggleExpandIcon]: (isExpanded: boolean) => void
 }

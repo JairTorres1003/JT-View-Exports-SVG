@@ -1,6 +1,8 @@
+import { SVGPostMessage, SVGReceiveMessage } from '@api/enums/ViewExportsSVG'
 import { type SyntheticEvent, useEffect, useState } from 'react'
 
 import { useSelector } from '@/providers/redux/store'
+import { vscode } from '@/services/vscode'
 
 interface ContainerComponentsHook {
   isExpanded: string[]
@@ -22,11 +24,43 @@ export const useContainerComponents = (): ContainerComponentsHook => {
     )
   }
 
+  /**
+   * Handles the expansion or collapse of all items in VS Code.
+   *
+   * @param {boolean} isExpanded - A boolean indicating whether to expand or collapse all items.
+   * If true, all items will be expanded. If false, all items will be collapsed.
+   *
+   * @returns {void}
+   */
+  const handleVsCodeExpandAll = (isExpanded: boolean): void => {
+    if (isExpanded) {
+      setExpandedItems(components.map((component) => component.groupKind.id))
+    } else {
+      setExpandedItems([])
+    }
+  }
+
   useEffect(() => {
     if (components.length >= 1) {
-      setExpandedItems([components[0].groupKind])
+      setExpandedItems([components[0].groupKind.id])
     }
   }, [components])
+
+  useEffect(() => {
+    if (expandedItems.length === 0) {
+      vscode.postMessage(SVGReceiveMessage.ToggleExpandIcon, false)
+    } else if (expandedItems.length === 1) {
+      vscode.postMessage(SVGReceiveMessage.ToggleExpandIcon, true)
+    }
+  }, [expandedItems])
+
+  useEffect(() => {
+    vscode.onMessage(SVGPostMessage.SendExpandAllIcons, handleVsCodeExpandAll)
+
+    return () => {
+      vscode.unregisterMessage(SVGPostMessage.SendExpandAllIcons)
+    }
+  }, [])
 
   return {
     isExpanded: expandedItems,

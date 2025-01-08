@@ -1,6 +1,6 @@
 import { commands, type ExtensionContext, type Uri } from 'vscode'
 
-import { expandedIcons, showMenu } from './commands'
+import { runToggleExpandIcon, showMenu } from './commands'
 import { CONFIG_KEY } from './constants/misc'
 import { initializeCacheManager } from './controllers/cache'
 
@@ -16,10 +16,10 @@ export function activate(context: ExtensionContext): void {
       await showMenu(context, item, items)
     }),
     commands.registerCommand(`${CONFIG_KEY}.collapseAll`, async () => {
-      await expandedIcons(false)
+      await runToggleExpandIcon(false)
     }),
     commands.registerCommand(`${CONFIG_KEY}.expandAll`, async () => {
-      await expandedIcons(true)
+      await runToggleExpandIcon(true)
     }),
   ]
 

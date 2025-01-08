@@ -27,6 +27,7 @@ export interface MessageHandlersView {
   [SVGPostMessage.SendVsCodeStyles]?: (data: VsCodeStyles) => void
   [SVGPostMessage.SendRecentIcons]?: (data: ViewExportSVG[]) => void
   [SVGPostMessage.SendFavoriteIcons]?: (data: ViewExportSVG[]) => void
+  [SVGPostMessage.SendExpandAllIcons]?: (data: boolean) => void
 }
 
 /**
@@ -46,6 +47,7 @@ export interface FuncOnMessage {
   (type: SVGPostMessage.SendVsCodeStyles, handler: (data: VsCodeStyles) => void): void
   (type: SVGPostMessage.SendRecentIcons, handler: (data: ViewExportSVG[]) => void): void
   (type: SVGPostMessage.SendFavoriteIcons, handler: (data: ViewExportSVG[]) => void): void
+  (type: SVGPostMessage.SendExpandAllIcons, handler: (data: boolean) => void): void
 }
 
 /**
@@ -73,4 +75,5 @@ export interface FuncPostMessage {
   (type: SVGReceiveMessage.RemoveFavoriteIcon, data: SVGIcon): void
   (type: SVGReceiveMessage.ClearFavoriteIcons): void
   (type: SVGReceiveMessage.GetFavoriteIcons): void
+  (type: SVGReceiveMessage.ToggleExpandIcon, data: boolean): void
 }

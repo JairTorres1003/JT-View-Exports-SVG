@@ -20,6 +20,7 @@ export type PostMessage =
   | { type: SVGPostMessage.SendVsCodeStyles; data: VsCodeStyles }
   | { type: SVGPostMessage.SendRecentIcons; data: ViewExportSVG[] }
   | { type: SVGPostMessage.SendFavoriteIcons; data: ViewExportSVG[] }
+  | { type: SVGPostMessage.SendExpandAllIcons; data: boolean }
 
 /**
  * The message to send to the webview.
@@ -90,4 +91,9 @@ export interface FuncPostMessage {
    * @param data - The favorite icons.
    */
   (type: SVGPostMessage.SendFavoriteIcons, data: ViewExportSVG[]): void
+  /**
+   * Sends the expand all icons message to the webview.
+   * @param data - The expand all icons message.
+   */
+  (type: SVGPostMessage.SendExpandAllIcons, data: boolean): void
 }

@@ -17,6 +17,7 @@ export enum SVGPostMessage {
   SendVsCodeStyles = 'send-vscode-styles',
   SendRecentIcons = 'send-recent-icons',
   SendFavoriteIcons = 'send-favorite-icons',
+  SendExpandAllIcons = 'send-expand-all-icons',
 }
 
 export enum SVGReceiveMessage {
@@ -41,4 +42,5 @@ export enum SVGReceiveMessage {
   RemoveFavoriteIcon = 'remove-favorite-icon',
   ClearFavoriteIcons = 'clear-favorite-icons',
   GetFavoriteIcons = 'get-favorite-icons',
+  ToggleExpandIcon = 'toggle-expand-icon',
 }

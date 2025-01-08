@@ -11,6 +11,7 @@ import {
 import { getCacheManager } from '../cache'
 import { AssetsPathsController, LastScanDateController } from '../config'
 
+import { expandedIcons } from '@/commands'
 import { SVGPostMessage, SVGReceiveMessage } from '@/enum/ViewExportsSVG'
 import { type HandlerArgs } from '@/interfaces/misc'
 import {
@@ -68,6 +69,7 @@ export class ListerWebviewController {
       [SVGReceiveMessage.RemoveFavoriteIcon]: this._removeIconFromCache(false).bind(this),
       [SVGReceiveMessage.ClearFavoriteIcons]: this._clearIconsFromCache(false).bind(this),
       [SVGReceiveMessage.GetFavoriteIcons]: this._getIconsFromCache(false).bind(this),
+      [SVGReceiveMessage.ToggleExpandIcon]: this._toggleExpandIcon.bind(this),
     }
   }
 
@@ -304,5 +306,13 @@ export class ListerWebviewController {
       const cache = isRecent ? RecentIconCache : FavoritesIconCache
       cache.clear()
     }
+  }
+
+  /**
+   * Toggles the expand icon context.
+   * @param isExpanded - A boolean indicating whether the icons should be expanded.
+   */
+  private _toggleExpandIcon(isExpanded: boolean): void {
+    expandedIcons(isExpanded).catch(console.error)
   }
 }
