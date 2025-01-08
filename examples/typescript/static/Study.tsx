@@ -496,7 +496,7 @@ export const BookOpenAltDuotone: React.FC<IconComponentProps> = ({
     />
     <mask
       id='mask0_2165_7310'
-      style='mask-type:alpha'
+      style={{ maskType: 'alpha' }}
       maskUnits='userSpaceOnUse'
       x='3'
       y='4'

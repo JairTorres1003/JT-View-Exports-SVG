@@ -1259,7 +1259,10 @@ export const Plus: React.FC<IconAnimatedComponentProps> = ({
       fillRule='evenodd'
       d='M12.75 8.744a.75.75 0 00-1.5 0v2.506H8.744a.75.75 0 000 1.5h2.506v2.506a.75.75 0 001.5 0V12.75h2.506a.75.75 0 000-1.5H12.75V8.744z'
       clipRule='evenodd'
-      style={{ animation: `bounce ${speed}s 1s infinite both`, transformOrigin: 'center center' }}
+      style={{
+        animation: `bounce ${speed}s ${speed}s infinite both`,
+        transformOrigin: 'center center',
+      }}
     ></path>
     <rect width='16' height='16' x='4' y='4' stroke={color} strokeWidth='1.5' rx='2.075'></rect>
   </svg>
