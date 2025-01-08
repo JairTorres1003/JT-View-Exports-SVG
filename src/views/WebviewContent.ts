@@ -40,7 +40,7 @@ export function getWebviewContent(webview: Webview, extensionUri: Uri): string {
         <link rel="icon" type="image/svg+xml" href="${assets.icon}" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no" />
         <link href="${assets.styles}" rel="stylesheet" />
-        <title>${l10n.t('extension.title')}</title>
+        <title>${l10n.t('View Exports SVG')}</title>
       </head>
       <body>
         <div id="root"></div>

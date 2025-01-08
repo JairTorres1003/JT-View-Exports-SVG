@@ -3,7 +3,7 @@
   "title": "JSON schema for l10n in the bundle View Exports SVG extension for Visual Studio Code",
   "type": "object",
   "properties": {
-    "extension.title": {
+    "View Exports SVG": {
       "type": "string",
       "description": "The title of the extension",
       "default": "View Exports SVG"
@@ -235,7 +235,7 @@
     }
   },
   "required": [
-    "extension.title",
+    "View Exports SVG",
     "No SVG components found...",
     "Error posting message to webview:",
     "No handler found for event:",

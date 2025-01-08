@@ -75,7 +75,7 @@ export class ViewExportsSVGController extends ListerWebviewController {
     // Otherwise, create a new panel
     const panel = window.createWebviewPanel(
       ViewExportsSVGController.configName,
-      l10n.t('extension.title'),
+      l10n.t('View Exports SVG'),
       column,
       {
         enableScripts: true, // Enable JavaScript in the webview
