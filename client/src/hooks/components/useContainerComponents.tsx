@@ -49,6 +49,7 @@ export const useContainerComponents = (): ContainerComponentsHook => {
   }, [expandedItems])
 
   useEffect(() => {
+    vscode.postMessage(SVGReceiveMessage.InitDefaultExpandedIcons)
     vscode.onMessage(SVGPostMessage.SendExpandAllIcons, handleVsCodeExpandAll)
 
     return () => {

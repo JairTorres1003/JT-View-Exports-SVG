@@ -42,5 +42,6 @@ export enum SVGReceiveMessage {
   RemoveFavoriteIcon = 'remove-favorite-icon',
   ClearFavoriteIcons = 'clear-favorite-icons',
   GetFavoriteIcons = 'get-favorite-icons',
+  InitDefaultExpandedIcons = 'init-default-expanded-icons',
   ToggleExpandIcon = 'toggle-expand-icon',
 }

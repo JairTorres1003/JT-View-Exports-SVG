@@ -75,5 +75,6 @@ export interface FuncPostMessage {
   (type: SVGReceiveMessage.RemoveFavoriteIcon, data: SVGIcon): void
   (type: SVGReceiveMessage.ClearFavoriteIcons): void
   (type: SVGReceiveMessage.GetFavoriteIcons): void
+  (type: SVGReceiveMessage.InitDefaultExpandedIcons): void
   (type: SVGReceiveMessage.ToggleExpandIcon, data: boolean): void
 }

@@ -9,9 +9,13 @@ import {
 } from 'vscode'
 
 import { getCacheManager } from '../cache'
-import { AssetsPathsController, LastScanDateController } from '../config'
+import {
+  AssetsPathsController,
+  DefaultExpandAllController,
+  LastScanDateController,
+} from '../config'
 
-import { expandedIcons } from '@/commands'
+import { expandedIcons, runToggleExpandIcon } from '@/commands'
 import { SVGPostMessage, SVGReceiveMessage } from '@/enum/ViewExportsSVG'
 import { type HandlerArgs } from '@/interfaces/misc'
 import {
@@ -69,6 +73,7 @@ export class ListerWebviewController {
       [SVGReceiveMessage.RemoveFavoriteIcon]: this._removeIconFromCache(false).bind(this),
       [SVGReceiveMessage.ClearFavoriteIcons]: this._clearIconsFromCache(false).bind(this),
       [SVGReceiveMessage.GetFavoriteIcons]: this._getIconsFromCache(false).bind(this),
+      [SVGReceiveMessage.InitDefaultExpandedIcons]: this._initDefaultExpandedIcons.bind(this),
       [SVGReceiveMessage.ToggleExpandIcon]: this._toggleExpandIcon.bind(this),
     }
   }
@@ -305,6 +310,17 @@ export class ListerWebviewController {
 
       const cache = isRecent ? RecentIconCache : FavoritesIconCache
       cache.clear()
+    }
+  }
+
+  /**
+   * Initializes the default expanded icons.
+   */
+  private _initDefaultExpandedIcons(): void {
+    const config = new DefaultExpandAllController()
+
+    if (config.isExpandAll()) {
+      runToggleExpandIcon(true).catch(console.error)
     }
   }
 
