@@ -89,6 +89,13 @@
       {
         "title": "%extension.title%",
         "properties": {
+          "JT-View-Exports-SVG.defaultExpandAll": {
+            "type": "boolean",
+            "default": false,
+            "title": "%extension.config.defaultExpandAll.title%",
+            "description": "%extension.config.defaultExpandAll.description%",
+            "scope": "application"
+          },
           "JT-View-Exports-SVG.assetsPath": {
             "type": "array",
             "default": [],

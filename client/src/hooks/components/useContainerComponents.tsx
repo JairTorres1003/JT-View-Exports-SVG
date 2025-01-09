@@ -41,13 +41,7 @@ export const useContainerComponents = (): ContainerComponentsHook => {
   }
 
   useEffect(() => {
-    if (components.length >= 1) {
-      setExpandedItems([components[0].groupKind.id])
-    }
-  }, [components])
-
-  useEffect(() => {
-    if (expandedItems.length === 0) {
+    if (expandedItems.length === 0 && components.length >= 1) {
       vscode.postMessage(SVGReceiveMessage.ToggleExpandIcon, false)
     } else if (expandedItems.length === 1) {
       vscode.postMessage(SVGReceiveMessage.ToggleExpandIcon, true)

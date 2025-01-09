@@ -28,6 +28,16 @@
       "description": "The title of the command to expand all items",
       "default": "View Exports SVG: Expand All Icons"
     },
+    "extension.config.defaultExpandAll.title": {
+      "type": "string",
+      "description": "The title of the configuration to indicate whether or not to expand all items by default",
+      "default": "Default Expand All Icons"
+    },
+    "extension.config.defaultExpandAll.description": {
+      "type": "string",
+      "description": "The description of the configuration to indicate whether or not to expand all items by default",
+      "default": "Indicates whether or not to expand all items by default."
+    },
     "extension.config.assetsPath.title": {
       "type": "string",
       "description": "The title of the configuration to store the paths of analyzed files that have SVG icons",
@@ -115,6 +125,8 @@
     "extension.commands.showMenu.title",
     "extension.commands.collapseAll.title",
     "extension.commands.expandAll.title",
+    "extension.config.defaultExpandAll.title",
+    "extension.config.defaultExpandAll.description",
     "extension.config.assetsPath.title",
     "extension.config.assetsPath.description",
     "extension.config.ignoreDirectories.title",

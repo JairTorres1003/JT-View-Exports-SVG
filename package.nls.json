@@ -4,6 +4,8 @@
   "extension.commands.showMenu.title": "View Exports SVG 🔍",
   "extension.commands.collapseAll.title": "View Exports SVG: Collapse All Icons",
   "extension.commands.expandAll.title": "View Exports SVG: Expand All Icons",
+  "extension.config.defaultExpandAll.title": "Default Expand All Icons",
+  "extension.config.defaultExpandAll.description": "Indicates whether or not to expand all items by default.",
   "extension.config.assetsPath.title": "Assets Path",
   "extension.config.assetsPath.description": "An array to store the paths of analyzed files that have SVG icons. This allows for quick access to them from the webview, serving as shortcuts.",
   "extension.config.ignoreDirectories.title": "Ignore Directories",
