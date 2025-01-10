@@ -12,5 +12,5 @@
       "@/*": ["./src/*"]
     }
   },
-  "exclude": ["client", "examples/*"]
+  "exclude": ["client", "examples/*", "server/*"]
 }

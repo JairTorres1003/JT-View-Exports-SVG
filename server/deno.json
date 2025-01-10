@@ -1,0 +1,9 @@
+{
+  "tasks": {
+    "dev": "deno run --watch -A main.ts",
+    "start": "deno run -A main.ts"
+  },
+  "imports": {
+    "express": "npm:express@latest"
+  }
+}
