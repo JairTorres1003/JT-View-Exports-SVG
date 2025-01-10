@@ -6,6 +6,17 @@ import { BoxSearchBar } from './index.style'
 import { IconClose, IconLupe } from '@/assets/icons/functionalities'
 import { useSearchBar } from '@/hooks/components/useSearchBar'
 
+function LabelSearchBar({ label }: { label: string }): React.ReactNode {
+  return (
+    <Box component='span' display='flex' alignItems='center' gap='8px'>
+      <IconLupe size={16} className='BoxSearchBar__input-icon' />
+      <Typography component='span' variant='inherit'>
+        {label}
+      </Typography>
+    </Box>
+  )
+}
+
 export const SearchBar = (): React.ReactNode => {
   const { handleClear, handleSearch, search } = useSearchBar()
 
@@ -20,14 +31,7 @@ export const SearchBar = (): React.ReactNode => {
         value={search}
         onChange={handleSearch}
         className='BoxSearchBar__input'
-        label={
-          <Box component='span' display='flex' alignItems='center' gap='8px'>
-            <IconLupe size={16} className='BoxSearchBar__input-icon' />
-            <Typography component='span' variant='inherit'>
-              {t('search')}
-            </Typography>
-          </Box>
-        }
+        label={<LabelSearchBar label={t('search')} />}
         slotProps={{
           input: {
             endAdornment: (
