@@ -1,4 +1,4 @@
-import assert = require('assert')
+import * as assert from 'assert'
 import * as path from 'path'
 
 import { Uri, workspace } from 'vscode'
