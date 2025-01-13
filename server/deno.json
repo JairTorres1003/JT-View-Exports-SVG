@@ -1,9 +1,12 @@
 {
-  "tasks": {
-    "dev": "deno run --watch -A main.ts",
-    "start": "deno run -A main.ts"
-  },
+  "version": "1.0.0",
   "imports": {
-    "express": "npm:express@latest"
+    "@/": "./src/",
+    "express": "npm:express@latest",
+    "path": "npm:path@latest"
+  },
+  "tasks": {
+    "dev": "deno run --watch --allow-net --allow-read --allow-env src/server.ts",
+    "start": "deno run --allow-net --allow-read --allow-env src/server.ts"
   }
 }
