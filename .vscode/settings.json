@@ -24,7 +24,6 @@
     "**/.eslintrc",
     ".prettierrc"
   ],
-  "deno.enable": true,
   "workbench.tree.enableStickyScroll": true,
   "editor.defaultFormatter": "esbenp.prettier-vscode",
   "editor.detectIndentation": true,
