@@ -36,7 +36,7 @@
   ],
   "activationEvents": [],
   "icon": "icon.png",
-  "main": "./out/extension.js",
+  "main": "./out/cjs/extension.js",
   "l10n": "./l10n",
   "contributes": {
     "commands": [
@@ -184,8 +184,8 @@
     "lint:fix": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0 --fix --cache",
     "format:check": "prettier --check \"**/*.{ts,json,md,yml,cjs}\"",
     "format": "prettier --write \"**/*.{ts,json,md,yml,cjs}\"",
-    "compile": "tsc -p tsconfig.prod.json && tsc-alias",
-    "watch": "concurrently \"tsc -w -p tsconfig.prod.json\" \"tsc-alias -w\"",
+    "compile": "tsc -p ./ && tsc-alias",
+    "watch": "concurrently \"tsc -w -p ./\" \"tsc-alias -w\"",
     "watch:local": "concurrently \"tsc -w -p tsconfig.local.json\" \"tsc-alias -w\"",
     "test": "node ./out/cjs/test/runTest.js",
     "pretest": "npm run client:build && npm run compile",
