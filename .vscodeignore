@@ -10,6 +10,8 @@ out/utilities/saveResponseFiles.js
 # Ignore source code
 src/**
 client/**
+examples/**
+server/**
 !client/build
 
 # Ignore Misc

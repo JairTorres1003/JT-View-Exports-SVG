@@ -8,7 +8,7 @@
 
 # Testing
 /coverage
-/out
+/out*
 /dist
 .vscode-test/
 src/test/.temp

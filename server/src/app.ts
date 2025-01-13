@@ -1,6 +1,6 @@
 // @ts-types="npm:@types/express@4.17.15"
 import express from 'express'
-import path from 'path'
+import * as path from 'path'
 
 import { svgRoutes } from '@/routes/svg.route.ts'
 

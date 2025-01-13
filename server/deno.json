@@ -3,7 +3,8 @@
   "imports": {
     "@/": "./src/",
     "express": "npm:express@latest",
-    "path": "npm:path@latest"
+    "fs": "node:fs",
+    "path": "https://deno.land/std@0.224.0/path/mod.ts"
   },
   "tasks": {
     "dev": "deno run --watch --allow-net --allow-read --allow-env src/server.ts",
