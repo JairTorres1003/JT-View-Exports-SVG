@@ -63,13 +63,13 @@
       "explorer/context": [
         {
           "command": "JT-View-Exports-SVG.showMenu",
-          "when": "resourceLangId == javascript || resourceLangId == typescript || resourceLangId == javascriptreact || resourceLangId == typescriptreact"
+          "when": "resourceLangId =~ /^(javascript|typescript|javascriptreact|typescriptreact)$/ && resourceFilename =~ /^(?!.*\\.d\\.ts$).*\\.(ts|tsx|js|jsx)$/"
         }
       ],
       "editor/context": [
         {
           "command": "JT-View-Exports-SVG.showMenu",
-          "when": "resourceLangId == javascript || resourceLangId == typescript || resourceLangId == javascriptreact || resourceLangId == typescriptreact"
+          "when": "resourceLangId =~ /^(javascript|typescript|javascriptreact|typescriptreact)$/ && resourceFilename =~ /^(?!.*\\.d\\.ts$).*\\.(ts|tsx|js|jsx)$/"
         }
       ],
       "editor/title": [
