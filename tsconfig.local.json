@@ -5,7 +5,9 @@
     "module": "ES2020",
     "moduleResolution": "node",
     "allowSyntheticDefaultImports": true,
-    "outDir": "out/esm"
+    "outDir": "out/esm",
+    "declaration": true
   },
+  "include": ["src/interfaces/**/*", "src/**/*.ts"],
   "exclude": ["client", "examples/*", "server/*", "src/test/**/*"]
 }

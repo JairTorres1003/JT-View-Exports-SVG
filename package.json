@@ -185,7 +185,7 @@
     "format:check": "prettier --check \"**/*.{ts,json,md,yml,cjs}\"",
     "format": "prettier --write \"**/*.{ts,json,md,yml,cjs}\"",
     "compile": "tsc -p ./ && tsc-alias",
-    "watch": "concurrently \"tsc -w -p ./\" \"tsc-alias -w\"",
+    "watch": "concurrently \"tsc -w --sourceMap -p ./\" \"tsc-alias -w\"",
     "watch:local": "concurrently \"tsc -w -p tsconfig.local.json\" \"tsc-alias -w\"",
     "test": "node ./out/cjs/test/runTest.js",
     "pretest": "npm run client:build && npm run compile",
