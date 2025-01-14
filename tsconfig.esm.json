@@ -1,0 +1,9 @@
+{
+  "extends": "./tsconfig.json",
+  "compilerOptions": {
+    "sourceMap": true,
+    "module": "ESNext",
+    "outDir": "./out/esm"
+  },
+  "exclude": ["client", "examples/*", "server/*", "src/test/**/*"]
+}
