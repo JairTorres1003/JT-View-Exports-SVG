@@ -184,7 +184,7 @@
     "lint:fix": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0 --fix --cache",
     "format:check": "prettier --check \"**/*.{ts,json,md,yml,cjs}\"",
     "format": "prettier --write \"**/*.{ts,json,md,yml,cjs}\"",
-    "copy-interfaces": "if [ \"$npm_config_copy_interfaces\" = \"true\" ]; then cp -r ./src/interfaces $(jq -r .compilerOptions.outDir $npm_config_ts_file)/interfaces; fi",
+    "copy-interfaces": "if [ \"$npm_config_copy_interfaces\" = \"true\" ]; then mkdir -p $(jq -r .compilerOptions.outDir $npm_config_ts_file)/interfaces && cp -r ./src/interfaces $(jq -r .compilerOptions.outDir $npm_config_ts_file)/interfaces; fi",
     "compile:root": "tsc -b $npm_config_ts_file && npm run copy-interfaces && tsc-alias -p $npm_config_ts_file",
     "compile": "npm run compile:root --ts-file='./tsconfig.cjs.json'",
     "compile:esm": "npm run compile:root --ts-file='./tsconfig.esm.json' --copy-interfaces=true",
