@@ -36,9 +36,6 @@ export async function getLanguageFromFile(file: Uri): Promise<string> {
     const document = await workspace.openTextDocument(file)
     return document.languageId ?? 'plaintext'
   } catch (error) {
-    console.error(
-      l10n.t('Error getting language from file: {error}', { error: getUnknownError(error) })
-    )
     return 'plaintext'
   }
 }
