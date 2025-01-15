@@ -12,7 +12,7 @@
     "vscode": "npm:@codingame/monaco-vscode-api"
   },
   "tasks": {
-    "dev": "deno run --watch --allow-net --allow-read --allow-env  src/server.ts",
+    "dev": "deno run --watch --allow-net --allow-read --allow-env --unstable-sloppy-imports src/server.ts",
     "start": "deno run --allow-net --allow-read --allow-env src/server.ts"
   },
   "compilerOptions": {
