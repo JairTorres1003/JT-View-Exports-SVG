@@ -11,6 +11,7 @@
       "runtimeArgs": [
         "run",
         "--inspect",
+        "--watch",
         "--allow-net",
         "--allow-read",
         "--allow-env",
