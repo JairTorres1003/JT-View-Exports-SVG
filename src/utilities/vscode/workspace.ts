@@ -18,9 +18,9 @@ export function getWorkspacePath(): string {
       return workspaceFolderPath
     }
 
-    return ''
+    return '/'
   } catch (error) {
     console.error(error)
-    return ''
+    return '/'
   }
 }
