@@ -2,8 +2,9 @@
   "extends": "./tsconfig.json",
   "compilerOptions": {
     "sourceMap": true,
-    "module": "ESNext",
-    "outDir": "./out/esm"
+    "module": "ES2020",
+    "outDir": "./out/esm",
+    "moduleResolution": "node"
   },
   "exclude": ["client", "examples/*", "server/*", "src/test/**/*"]
 }
