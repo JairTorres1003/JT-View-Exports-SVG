@@ -1,4 +1,10 @@
 import 'jsr:@std/dotenv/load'
+import '@/polyfill.ts'
+import 'vscode/localExtensionHost'
+
+import { initialize } from 'vscode/services'
+
+await initialize({})
 
 import app from '@/app.ts'
 

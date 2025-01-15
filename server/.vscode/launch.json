@@ -2,12 +2,20 @@
   "version": "0.2.0",
   "configurations": [
     {
-      "name": "Deno Debug",
       "type": "node",
       "request": "launch",
+      "name": "Launch Program",
+      "program": "${workspaceFolder}/src/server.ts",
       "cwd": "${workspaceFolder}",
       "runtimeExecutable": "deno",
-      "runtimeArgs": ["run", "--inspect-brk", "-A", "src/server.ts"],
+      "runtimeArgs": [
+        "run",
+        "--inspect",
+        "--allow-net",
+        "--allow-read",
+        "--allow-env",
+        "--unstable-sloppy-imports"
+      ],
       "attachSimplePort": 9229
     }
   ]

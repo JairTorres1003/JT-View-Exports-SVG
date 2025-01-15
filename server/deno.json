@@ -2,12 +2,17 @@
   "version": "1.0.0",
   "imports": {
     "@/": "./src/",
+    "@codingame/monaco-vscode-chat-extensions-notebook-task-terminal-testing-common": "npm:@codingame/monaco-vscode-chat-extensions-notebook-task-terminal-testing-common@^11.1.2",
+    "@jt/view-exports-svg/": "../out/esm/",
     "express": "npm:express@latest",
     "fs": "node:fs",
-    "path": "https://deno.land/std@0.224.0/path/mod.ts"
+    "happy-dom": "npm:happy-dom",
+    "minimatch": "npm:minimatch@10.0.1",
+    "path": "https://deno.land/std@0.224.0/path/mod.ts",
+    "vscode": "npm:@codingame/monaco-vscode-api"
   },
   "tasks": {
-    "dev": "deno run --watch --allow-net --allow-read --allow-env src/server.ts",
+    "dev": "deno run --watch --allow-net --allow-read --allow-env  src/server.ts",
     "start": "deno run --allow-net --allow-read --allow-env src/server.ts"
   },
   "compilerOptions": {
