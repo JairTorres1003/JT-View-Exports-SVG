@@ -2,18 +2,22 @@
   "version": "1.0.0",
   "imports": {
     "@/": "./src/",
+    "@babel/parser": "npm:@babel/parser@^7.26.5",
+    "@babel/traverse": "npm:@babel/traverse@^7.26.5",
+    "@babel/types": "npm:@babel/types@^7.26.5",
     "@codingame/monaco-vscode-chat-extensions-notebook-task-terminal-testing-common": "npm:@codingame/monaco-vscode-chat-extensions-notebook-task-terminal-testing-common@^11.1.2",
     "@jt/view-exports-svg/": "../out/esm/",
     "express": "npm:express@latest",
     "fs": "node:fs",
     "happy-dom": "npm:happy-dom",
-    "minimatch": "npm:minimatch@10.0.1",
+    "lodash": "https://cdn.skypack.dev/lodash",
+    "minimatch": "npm:minimatch@^10.0.1",
     "path": "https://deno.land/std@0.224.0/path/mod.ts",
     "vscode": "npm:@codingame/monaco-vscode-api"
   },
   "tasks": {
-    "dev": "deno run --watch --allow-net --allow-read --allow-env --unstable-sloppy-imports src/server.ts",
-    "start": "deno run --allow-net --allow-read --allow-env --unstable-sloppy-imports src/server.ts"
+    "dev": "deno run --watch -A --unstable-sloppy-imports src/server.ts",
+    "start": "deno run -A --unstable-sloppy-imports src/server.ts"
   },
   "compilerOptions": {
     "types": ["./src/types.d.ts"]

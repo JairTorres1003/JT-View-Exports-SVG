@@ -2,6 +2,7 @@
 import { Router } from 'express'
 import * as path from 'path'
 
+import { processFiles } from '@jt/view-exports-svg/utilities/files/processFiles.js'
 import { pathToSVGFile } from '@jt/view-exports-svg/utilities/files/misc.js'
 import { svgFileToUri } from '@jt/view-exports-svg/utilities/vscode/uri.js'
 
@@ -37,7 +38,11 @@ router.get('/get-components', async function (_, res) {
 
     const resolvedFiles = await Promise.all(svgFiles.map(svgFileToUri))
 
-    res.send(resolvedFiles)
+    const operation = (result: unknown): void => {
+      res.send(result)
+    }
+
+    await processFiles(resolvedFiles, operation)
   } catch (error) {
     console.error(error)
     res.status(500).send([])
