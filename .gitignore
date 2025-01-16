@@ -12,7 +12,6 @@
 /dist
 .vscode-test/
 src/test/.temp
-server/src/extension/**/*
 
 
 # Production

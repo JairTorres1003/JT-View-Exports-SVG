@@ -16,4 +16,3 @@ node_modules
 deno.lock
 .env
 
-./src/extension/**/*
