@@ -9,7 +9,7 @@ import { svgFileToUri } from '@jt/view-exports-svg/utilities/vscode/uri.js'
 import { REGEX_FILE } from '@/constants/regex.ts'
 
 const router = Router()
-const BASE_PATH = Deno.env.get('BASE_PATH') ?? ''
+const BASE_PATH = Deno.env.get('BASE_PATH') ?? Deno.cwd()
 
 router.get('/get-components', async function (_, res) {
   try {
@@ -42,7 +42,7 @@ router.get('/get-components', async function (_, res) {
       res.send(result)
     }
 
-    await processFiles(resolvedFiles, operation)
+    await processFiles([resolvedFiles[0]], operation)
   } catch (error) {
     console.error(error)
     res.status(500).send([])
