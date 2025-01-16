@@ -24,6 +24,9 @@
     "**/.eslintrc",
     ".prettierrc"
   ],
+  "deno.enable": true,
+  "deno.config": "./server/deno.json",
+  "deno.enablePaths": ["server"],
   "workbench.tree.enableStickyScroll": true,
   "editor.defaultFormatter": "esbenp.prettier-vscode",
   "editor.detectIndentation": true,

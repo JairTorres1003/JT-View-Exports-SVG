@@ -1,5 +1,6 @@
 {
   "deno.enable": true,
+  "deno.config": "./deno.json",
   "workbench.tree.enableStickyScroll": true,
   "editor.defaultFormatter": "esbenp.prettier-vscode",
   "editor.detectIndentation": true,

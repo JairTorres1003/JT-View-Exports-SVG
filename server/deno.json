@@ -3,6 +3,7 @@
   "imports": {
     "@/": "./src/",
     "@babel/parser": "npm:@babel/parser@^7.26.5",
+    "@vscode/l10n-dev": "npm:@vscode/l10n-dev@^0.0.35",
     "babel_traverse": "npm:@babel/traverse@^7.26.5",
     "@babel/traverse": "./src/libs/@babel/traverse/index.ts",
     "@babel/types": "npm:@babel/types@^7.26.5",

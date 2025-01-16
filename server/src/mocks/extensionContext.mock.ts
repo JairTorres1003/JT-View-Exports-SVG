@@ -1,8 +1,7 @@
 // deno-lint-ignore-file no-explicit-any
 // @ts-types="npm:@types/vscode@1.60.0"
-import { Extension, ExtensionContext, ExtensionMode, ExtensionRuntime } from 'vscode'
+import { Extension, ExtensionContext, ExtensionMode, ExtensionRuntime, Uri } from 'vscode'
 import { existsSync } from 'fs'
-import { Uri } from 'vscode'
 
 import { createMockEnvironmentVariableCollection } from '@/mocks/EnvironmentVariableCollection.mock.ts'
 
