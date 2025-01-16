@@ -42,7 +42,7 @@ router.get('/get-components', async function (_, res) {
       res.send(result)
     }
 
-    await processFiles([resolvedFiles[0]], operation)
+    await processFiles(resolvedFiles, operation)
   } catch (error) {
     console.error(error)
     res.status(500).send([])
