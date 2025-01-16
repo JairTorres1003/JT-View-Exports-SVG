@@ -15,6 +15,7 @@
         "--allow-net",
         "--allow-read",
         "--allow-env",
+        "--allow-import",
         "--unstable-sloppy-imports"
       ],
       "attachSimplePort": 9229
