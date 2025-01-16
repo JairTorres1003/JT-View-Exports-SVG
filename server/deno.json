@@ -8,6 +8,7 @@
     "@codingame/monaco-vscode-chat-extensions-notebook-task-terminal-testing-common": "npm:@codingame/monaco-vscode-chat-extensions-notebook-task-terminal-testing-common@^11.1.2",
     "@jt/view-exports-svg/": "../out/esm/",
     "@jt/view-exports-svg/package": "../package.json",
+    "@types/babel__traverse": "npm:@types/babel__traverse@^7.20.6",
     "express": "npm:express@latest",
     "fs": "node:fs",
     "happy-dom": "npm:happy-dom",
@@ -18,7 +19,8 @@
   },
   "tasks": {
     "dev": "deno run --watch -A --unstable-sloppy-imports src/server.ts",
-    "start": "deno run -A --unstable-sloppy-imports src/server.ts"
+    "start": "deno run -A --unstable-sloppy-imports src/server.ts",
+    "clean:caches": "deno cache --reload src/server.ts"
   },
   "compilerOptions": {
     "types": ["./src/types.d.ts"]

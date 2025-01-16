@@ -2,12 +2,9 @@
 // @ts-types="npm:@types/vscode@1.60.0"
 import { Extension, ExtensionContext, ExtensionMode, ExtensionRuntime } from 'vscode'
 import { existsSync } from 'fs'
-import * as path from 'path'
 import { Uri } from 'vscode'
 
 import { createMockEnvironmentVariableCollection } from '@/mocks/EnvironmentVariableCollection.mock.ts'
-
-const BASE_PATH = Deno.env.get('BASE_PATH') ?? ''
 
 /**
  * Creates a mock extension context for testing purposes.
@@ -18,9 +15,11 @@ const BASE_PATH = Deno.env.get('BASE_PATH') ?? ''
 export function createMockExtensionContext(extension: Extension<any>): ExtensionContext {
   const subscriptions: { dispose(): any }[] = []
 
-  const globalStorageUri = createExtensionUri(`mocks/globalStorage/${extension.id}/`)
-  const logUri = createExtensionUri(`mocks/logs/${extension.id}/`)
-  const storageUri = createExtensionUri(`mocks/workspaceStorage/${extension.id}/`)
+  const tempDir = Deno.makeTempDirSync({ prefix: extension.id })
+
+  const globalStorageUri = createExtensionUri(`${tempDir}/mocks/globalStorage`)
+  const logUri = createExtensionUri(`${tempDir}/mocks/logs`)
+  const storageUri = createExtensionUri(`${tempDir}/mocks/workspaceStorage`)
 
   const environmentVariableCollection = createMockEnvironmentVariableCollection()
 
@@ -72,18 +71,15 @@ export function createMockExtensionContext(extension: Extension<any>): Extension
 }
 
 /**
- * Creates a URI for the specified directory within the extension's path.
- * If the directory does not exist, it will be created recursively.
+ * Creates a URI for the given directory. If the directory does not exist, it will be created.
  *
- * @param directory - The directory within the extension path to create a URI for.
+ * @param directory - The path of the directory for which to create the URI.
  * @returns The URI of the specified directory.
  */
 function createExtensionUri(directory: string): Uri {
-  const pathToExtension = path.join(BASE_PATH, 'src', 'extension', directory)
-
-  if (!existsSync(pathToExtension)) {
-    Deno.mkdirSync(pathToExtension, { recursive: true })
+  if (!existsSync(directory)) {
+    Deno.mkdirSync(directory, { recursive: true })
   }
 
-  return Uri.file(pathToExtension)
+  return Uri.file(directory)
 }
