@@ -1,3 +1,4 @@
+import cors from 'cors'
 // @ts-types="npm:@types/express@4.17.15"
 import express from 'express'
 import * as path from 'path'
@@ -5,6 +6,8 @@ import * as path from 'path'
 import { svgRoutes } from '@/routes/svg.route.ts'
 
 const app = express()
+
+app.use(cors())
 
 app.use(express.static('src/views'))
 
