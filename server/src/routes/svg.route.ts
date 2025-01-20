@@ -7,5 +7,6 @@ const router = Router()
 const svgController = new SvgController()
 
 router.get('/get-components', svgController.getComponents)
+router.post('/search-components', svgController.searchComponents)
 
 export const svgRoutes = Router().use('/svg', router)

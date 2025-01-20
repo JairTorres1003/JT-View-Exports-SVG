@@ -6,12 +6,15 @@ import { l10n } from 'vscode'
 
 import { pathToSVGFile } from '@jt/view-exports-svg/utilities/files/misc.js'
 import { processFiles } from '@jt/view-exports-svg/utilities/files/processFiles.js'
+import { filteredExports } from '@jt/view-exports-svg/utilities/svg/filtered.js'
 import { svgFileToUri } from '@jt/view-exports-svg/utilities/vscode/uri.js'
 import { SVGPostMessage } from '@jt/view-exports-svg/enum/ViewExportsSVG.js'
 
 import { getFilesFrontDirectory } from '@/utilities/getFilesFrontDirectory.ts'
 
 export class SvgController {
+  private viewExportSVG: unknown[] = []
+
   /**
    * Handles the retrieval of SVG components from the specified directories.
    *
@@ -23,18 +26,19 @@ export class SvgController {
    *
    * @returns A promise that resolves when the SVG files have been processed and the response has been sent.
    */
-  async getComponents(_: Request, res: Response) {
+  public getComponents = async (_: Request, res: Response) => {
     try {
       const directory = path.join(Deno.env.get('BASE_PATH') ?? Deno.cwd(), '..', 'examples')
 
-      const filesTs = getFilesFrontDirectory(path.join(directory, 'typescript'))
-      const filesJs = getFilesFrontDirectory(path.join(directory, 'javascript'))
+      const filesTs = getFilesFrontDirectory(path.join(directory, 'typescript')).slice(0, 3)
+      const filesJs = getFilesFrontDirectory(path.join(directory, 'javascript')).slice(0, 2)
 
-      const allFiles = await Promise.all(filesTs.concat(filesJs).map(pathToSVGFile))
+      const allFiles = await Promise.all([...filesTs, ...filesJs].map(pathToSVGFile))
 
       const svgFiles = await Promise.all(allFiles.map(svgFileToUri))
 
-      const operation = (data: unknown): void => {
+      const operation = (data: unknown[]): void => {
+        this.viewExportSVG = data
         res.send({ type: SVGPostMessage.SendSVGComponents, data })
       }
 
@@ -48,6 +52,27 @@ export class SvgController {
           error,
         },
       })
+    }
+  }
+
+  /**
+   * Handles the search for SVG components based on the provided query.
+   *
+   * @param req - The request object containing the search query in `req.body.data`.
+   * @param res - The response object used to send back the filtered components or an error message.
+   *
+   * The function filters the SVG components using the `filteredExports` function.
+   * If the result is an array, it sends back the filtered components with the type `SVGPostMessage.SendSVGFilteredComponents`.
+   * Otherwise, it sends back an error message with the type `SVGPostMessage.SendSVGError`.
+   */
+  public searchComponents = (req: Request, res: Response) => {
+    const query = req.body.data
+    const filtered = filteredExports(this.viewExportSVG, query)
+
+    if (Array.isArray(filtered)) {
+      res.send({ type: SVGPostMessage.SendSVGFilteredComponents, data: filtered })
+    } else {
+      res.send({ type: SVGPostMessage.SendSVGError, data: filtered })
     }
   }
 }
