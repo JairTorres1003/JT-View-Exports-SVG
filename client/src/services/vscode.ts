@@ -4,6 +4,8 @@ import { type PostMessage } from '@api/interfaces/views/PostMessage'
 import i18next from 'i18next'
 import { type WebviewApi } from 'vscode-webview'
 
+import { vscodeInternal } from './vscodeInternal'
+
 import {
   type FuncPostMessage,
   type FuncOnMessage,
@@ -30,6 +32,8 @@ class VSCodeAPIWrapper {
   constructor() {
     if (typeof acquireVsCodeApi === 'function') {
       this.vsCodeApi = acquireVsCodeApi()
+    } else if (process.env.NODE_ENV === 'development') {
+      this.vsCodeApi = vscodeInternal.api
     }
 
     window.addEventListener('message', (event: MessageEvent<PostMessage>) => {
