@@ -5,7 +5,7 @@ import { useDispatch } from 'react-redux'
 
 import useDebounce from '../useDebounce'
 
-import { setComponents, setSearch } from '@/providers/redux/features/SVGSlice'
+import { setComponents, setErrors, setSearch } from '@/providers/redux/features/SVGSlice'
 import { useSelector } from '@/providers/redux/store'
 import { vscode } from '@/services/vscode'
 
@@ -45,6 +45,7 @@ export const useSearchBar = (): SearchBarHook => {
    */
   const getSVGComponents = (data: ViewExportSVG[]): void => {
     dispatch(setComponents(data))
+    dispatch(setErrors())
   }
 
   useEffect(() => {

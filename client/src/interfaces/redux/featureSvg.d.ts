@@ -1,8 +1,9 @@
-import { ViewExportSVG } from '@api/interfaces/ViewExportsSVG'
+import { SVGErrors, ViewExportSVG } from '@api/interfaces/ViewExportsSVG'
 import { type CaseReducer, type PayloadAction } from '@reduxjs/toolkit'
 
 export interface SVGState {
   components: ViewExportSVG[]
+  errors?: SVGErrors
   search: string
 }
 
@@ -16,6 +17,11 @@ export interface SVGReducers {
    * Set the search string to the state.
    */
   setSearch: CaseReducer<SVGState, PayloadAction<string>>
+
+  /**
+   * Set the errors to the state.
+   */
+  setErrors: CaseReducer<SVGState, PayloadAction<SVGErrors | undefined>>
 
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   [key: string]: CaseReducer<SVGState, PayloadAction<any>>

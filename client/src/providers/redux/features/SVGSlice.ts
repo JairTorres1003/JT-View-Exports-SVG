@@ -4,6 +4,7 @@ import { type SVGReducers, type SVGState } from '@/interfaces/redux/featureSvg'
 
 const initialState: SVGState = {
   components: [],
+  errors: undefined,
   search: '',
 }
 
@@ -13,6 +14,9 @@ const reducers: SVGReducers = {
   },
   setSearch: (state, { payload }) => {
     state.search = payload
+  },
+  setErrors: (state, { payload }) => {
+    state.errors = payload
   },
 }
 
@@ -25,6 +29,6 @@ export const SVGSlice = createSlice({
   reducers,
 })
 
-export const { setComponents, setSearch } = SVGSlice.actions
+export const { setComponents, setSearch, setErrors } = SVGSlice.actions
 
 export const SVGReducer = SVGSlice.reducer
