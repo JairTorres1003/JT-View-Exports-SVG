@@ -1,5 +1,8 @@
+import { Box } from '@mui/material'
 import React from 'react'
 import { useTranslation } from 'react-i18next'
+
+import { BoxHomePage } from './index.style'
 
 import { ContainerComponents } from '@/components/ContainerComponents'
 import { LoadingPage } from '@/components/Custom/LoadingPage'
@@ -15,13 +18,13 @@ const HomePage: React.FC = () => {
   }
 
   return (
-    <div>
-      <div>
+    <BoxHomePage>
+      <Box className='BoxHomePage__content'>
         <SearchBar />
         <ContainerComponents />
-      </div>
+      </Box>
       {/* <div>editor</div> */}
-    </div>
+    </BoxHomePage>
   )
 }
 
