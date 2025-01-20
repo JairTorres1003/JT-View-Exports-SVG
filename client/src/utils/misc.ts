@@ -36,6 +36,7 @@ export const copyToClipboard = async (text: string): Promise<void> => {
 
 /**
  * Returns the error message from an unknown error.
+ *
  * @param error - The unknown error from which to retrieve the message.
  * @returns The error message.
  */
@@ -71,6 +72,10 @@ export const getUnknownError = (error: any): string => {
     } else if (Array.isArray(message) && message.length > 0) {
       return Object.values(message[0] as string[])[0]
     }
+  }
+
+  if (error.statusText !== undefined) {
+    return error.statusText?.toString()
   }
 
   return 'Unknown error'
