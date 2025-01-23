@@ -3,7 +3,7 @@ import cors from 'cors'
 import express from 'express'
 import * as path from 'path'
 
-import { svgRoutes } from '@/routes/svg.route.ts'
+import { svgRoutes } from '@/routes/svg.routes.ts'
 
 const app = express()
 
