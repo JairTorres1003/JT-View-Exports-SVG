@@ -1,9 +1,9 @@
 // deno-lint-ignore-file no-explicit-any
 // @ts-types="npm:@types/vscode@1.60.0"
 import { Extension, ExtensionContext, ExtensionMode, ExtensionRuntime, Uri } from 'vscode'
-import { existsSync } from 'fs'
 
 import { createMockEnvironmentVariableCollection } from '@/mocks/EnvironmentVariableCollection.mock.ts'
+import { createExtensionUri } from '@/utilities/createExtensionUri.ts'
 
 /**
  * Creates a mock extension context for testing purposes.
@@ -11,10 +11,11 @@ import { createMockEnvironmentVariableCollection } from '@/mocks/EnvironmentVari
  * @param extension - The extension for which the mock context is being created.
  * @returns A mock implementation of the `ExtensionContext` interface.
  */
-export function createMockExtensionContext(extension: Extension<any>): ExtensionContext {
+export function createMockExtensionContext(
+  extension: Extension<any>,
+  tempDir: string
+): ExtensionContext {
   const subscriptions: { dispose(): any }[] = []
-
-  const tempDir = Deno.makeTempDirSync({ prefix: extension.id })
 
   const globalStorageUri = createExtensionUri(`${tempDir}/mocks/globalStorage`)
   const logUri = createExtensionUri(`${tempDir}/mocks/logs`)
@@ -67,18 +68,4 @@ export function createMockExtensionContext(extension: Extension<any>): Extension
     },
     extensionRuntime: ExtensionRuntime.Node,
   }
-}
-
-/**
- * Creates a URI for the given directory. If the directory does not exist, it will be created.
- *
- * @param directory - The path of the directory for which to create the URI.
- * @returns The URI of the specified directory.
- */
-function createExtensionUri(directory: string): Uri {
-  if (!existsSync(directory)) {
-    Deno.mkdirSync(directory, { recursive: true })
-  }
-
-  return Uri.file(directory)
 }
