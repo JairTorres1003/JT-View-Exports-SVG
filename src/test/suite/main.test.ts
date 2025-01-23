@@ -1,9 +1,8 @@
 import * as assert from 'assert'
-import * as path from 'path'
 
 import { Uri, workspace } from 'vscode'
 
-export const extensionUri: Uri = Uri.file(path.resolve(__dirname, '../../../'))
+export const extensionUri: Uri = Uri.file(process.cwd())
 export const testFolderUri: Uri = Uri.joinPath(extensionUri, 'src', 'test')
 
 suite('workspace', () => {
