@@ -43,11 +43,12 @@ export class IconCacheController extends FileModifiedCacheController<SVGIconCach
    * If an icon with the same name already exists in the cache, it will not be added again.
    *
    * @param key - The key under which the icons will be cached.
-   * @param workspace - The workspace URI to which the icons belong.
+   * @param folder - The folder URI to which the icons belong.
    * @param value - An array of SVG icons to be added to the cache.
+   * @returns The new list of icons after the specified icons have been added.
    */
-  add(workspace: Uri, value: SVGIcon[]): void {
-    const currentKey = `[${this.kind}]-[${workspace.fsPath}]`
+  add(folder: Uri, value: SVGIcon[]): SVGIconCache[] {
+    const currentKey = `[${this.kind}]-[${folder.fsPath}]`
 
     const current = super.get(currentKey, 0) ?? []
     const newValue = current
@@ -71,17 +72,20 @@ export class IconCacheController extends FileModifiedCacheController<SVGIconCach
     const limit = limitConfig > 0 ? limitConfig : newValue.length
 
     super.set(currentKey, newValue.slice(0, limit), 0)
+
+    return newValue.slice(0, limit)
   }
 
   /**
    * Removes an icon from the cache.
    *
    * @param key - The key under which the icon is cached.
-   * @param workspace - The workspace URI to which the icon belongs.
+   * @param folder - The folder URI to which the icon belongs.
    * @param icon - The icon to be removed from the cache.
+   * @returns The new list of icons after the specified icon has been removed.
    */
-  remove(workspace: Uri, icon: SVGIcon): void {
-    const currentKey = `[${this.kind}]-[${workspace.fsPath}]`
+  remove(folder: Uri, icon: SVGIcon): SVGIconCache[] {
+    const currentKey = `[${this.kind}]-[${folder.fsPath}]`
     const current = super.get(currentKey, 0) ?? []
 
     const newValue = current.filter(
@@ -91,6 +95,8 @@ export class IconCacheController extends FileModifiedCacheController<SVGIconCach
     )
 
     super.set(currentKey, newValue, 0)
+
+    return newValue
   }
 
   /**
@@ -98,13 +104,13 @@ export class IconCacheController extends FileModifiedCacheController<SVGIconCach
    * Each icon in the value array is augmented with the current timestamp.
    *
    * @param key - The key under which the value should be stored.
-   * @param workspace - The workspace URI to which the icons belong.
+   * @param folder - The folder URI to which the icons belong.
    * @param value - An array of SVGIcon objects to be stored in the cache.
    */
-  public setIcons(workspace: Uri, value: SVGIcon[]): void {
+  public setIcons(folder: Uri, value: SVGIcon[]): void {
     const newValue = value.map((icon) => ({ ...icon, dateAdd: Date.now() }))
 
-    super.set(`[${this.kind}]-[${workspace.fsPath}]`, newValue, 0)
+    super.set(`[${this.kind}]-[${folder.fsPath}]`, newValue, 0)
   }
 
   /**
@@ -113,8 +119,8 @@ export class IconCacheController extends FileModifiedCacheController<SVGIconCach
    * @param key - The key to look up in the cache.
    * @returns The cached value if found, or `undefined` if not found.
    */
-  getIcons(workspace: Uri): SVGIconCache[] | undefined {
-    return super.get(`[${this.kind}]-[${workspace.fsPath}]`, 0)
+  getIcons(folder: Uri): SVGIconCache[] | undefined {
+    return super.get(`[${this.kind}]-[${folder.fsPath}]`, 0)
   }
 
   /**
@@ -122,8 +128,8 @@ export class IconCacheController extends FileModifiedCacheController<SVGIconCach
    *
    * @param key - The key to delete from the cache.
    */
-  deleteIcons(workspace: Uri): void {
-    super.delete(`[${this.kind}]-[${workspace.fsPath}]`)
+  deleteIcons(folder: Uri): void {
+    super.delete(`[${this.kind}]-[${folder.fsPath}]`)
   }
 
   /**
