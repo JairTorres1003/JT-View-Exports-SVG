@@ -8,12 +8,13 @@ import { registerExtension, ExtensionHostKind } from 'vscode/extensions'
 
 import { createMockExtensionContext } from '@/mocks/extensionContext.mock.ts'
 
+const fileExtensionPath = '../../package.json'
+const extensionId = `${packageJson.publisher}.${packageJson.name}`
+const tempDir = Deno.makeTempDirSync({ prefix: extensionId })
+
 await initialize({})
 
 const { registerFileUrl, getApi } = registerExtension(packageJson, ExtensionHostKind.LocalProcess)
-
-const fileExtensionPath = '../../package.json'
-const extensionId = `${packageJson.publisher}.${packageJson.name}`
 
 registerFileUrl(fileExtensionPath, new URL(fileExtensionPath, import.meta.url).toString())
 
@@ -31,6 +32,6 @@ if (!extension.isActive) {
   throw new Error(`Extension ${extensionId} failed to activate`)
 }
 
-const context = createMockExtensionContext(extension)
+const context = createMockExtensionContext(extension, tempDir)
 
 initializeCacheManager(context)
