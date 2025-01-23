@@ -193,7 +193,7 @@
     "watch:root": "npm run copy-interfaces && concurrently \"tsc -w --sourceMap -p $npm_config_ts_file\" \"tsc-alias -w -p $npm_config_ts_file\"",
     "watch": "npm run watch:root --ts-file='./tsconfig.cjs.json'",
     "watch:esm": "npm run watch:root --ts-file='./tsconfig.esm.json'",
-    "test": "node ./out/cjs/test/runTest.js",
+    "test": "node ./out/cjs/test/runTest.js --verbose",
     "pretest": "npm-run-all compile:clean client:build compile",
     "vscode:prepublish": "npm-run-all lint test",
     "client:lint": "cd client && npm run lint",

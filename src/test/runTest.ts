@@ -8,13 +8,13 @@ async function main(): Promise<void> {
   try {
     // The folder containing the Extension Manifest package.json
     // Passed to `--extensionDevelopmentPath`
-    const extensionDevelopmentPath = path.resolve(__dirname, '../../')
+    const extensionDevelopmentPath = process.cwd()
 
     // The path to test runner
     // Passed to --extensionTestsPath
     const extensionTestsPath = path.resolve(__dirname, './suite/index')
 
-    const mainUserDataDir = path.resolve(__dirname, '../../.vscode-test/user-data/1.91-main')
+    const mainUserDataDir = path.resolve(extensionDevelopmentPath, '.vscode-test/user-data')
 
     if (fs.existsSync(mainUserDataDir)) {
       rimraf.sync(mainUserDataDir)
@@ -24,7 +24,7 @@ async function main(): Promise<void> {
     await runTests({
       extensionDevelopmentPath,
       extensionTestsPath,
-      launchArgs: [path.resolve(__dirname, '../../workspaceTest.code-workspace')],
+      launchArgs: [path.resolve(extensionDevelopmentPath, 'workspaceTest.code-workspace')],
     })
   } catch (err) {
     console.error('Failed to run tests', err)
