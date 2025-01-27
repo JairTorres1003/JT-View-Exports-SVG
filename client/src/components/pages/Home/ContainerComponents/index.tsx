@@ -1,18 +1,7 @@
 import { useContainerComponents } from '@home/hooks/components/useContainerComponents'
-import {
-  Accordion,
-  AccordionDetails,
-  AccordionSummary,
-  ListItem,
-  ListItemIcon,
-  ListItemText,
-  Tooltip,
-  Typography,
-} from '@mui/material'
-import MiddleEllipsis from 'react-middle-ellipsis'
+import { ListItem, ListItemIcon, ListItemText } from '@mui/material'
 
-import { CardSvg } from '../Cards'
-import RenderSvg from '../SVG/RenderSvg'
+import { Accordion } from '../SVG/Accordion'
 
 import { BoxContainerComponents } from './index.style'
 
@@ -40,31 +29,11 @@ export const ContainerComponents = (): React.ReactNode => {
     <BoxContainerComponents>
       {components.map((item) => (
         <Accordion
-          disableGutters
+          component={item}
           key={item.groupKind.id}
           onChange={toggleExpanded(item.groupKind.id)}
           expanded={isExpanded.includes(item.groupKind.id)}
-        >
-          <AccordionSummary
-            id={`${item.groupKind.id}-header`}
-            aria-controls={`${item.groupKind.id}-content`}
-          >
-            <MiddleEllipsis>
-              <Tooltip placement='top' title={item.groupKind.label}>
-                <Typography component='span' noWrap>
-                  {item.groupKind.label}
-                </Typography>
-              </Tooltip>
-            </MiddleEllipsis>
-          </AccordionSummary>
-          <AccordionDetails className='BoxContainerComponents__accordion-details'>
-            {item.components.map(({ name, location, ...component }) => (
-              <CardSvg key={name} icon={{ name, location }}>
-                <RenderSvg {...component} name={name} location={location} />
-              </CardSvg>
-            ))}
-          </AccordionDetails>
-        </Accordion>
+        />
       ))}
     </BoxContainerComponents>
   )
