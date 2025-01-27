@@ -1,8 +1,9 @@
 import { LoadingPage } from '@custom/components/LoadingPage'
 import { ContainerComponents } from '@home/components/ContainerComponents'
+import { DevTools } from '@home/components/DevTools'
+import { Resizable } from '@home/components/Resizable'
 import { SearchBar } from '@home/components/SearchBar'
 import { useHome } from '@home/hooks/useHome'
-import { Resizable } from 're-resizable'
 import React from 'react'
 import { useTranslation } from 'react-i18next'
 
@@ -18,17 +19,11 @@ const HomePage: React.FC = () => {
 
   return (
     <BoxHomePage>
-      <Resizable
-        minWidth='300'
-        maxWidth='100%'
-        minHeight='100%'
-        maxHeight='100%'
-        className='BoxHomePage__content'
-        defaultSize={{ width: '100%', height: '100%' }}
-      >
+      <Resizable className='BoxHomePage__content'>
         <SearchBar />
         <ContainerComponents />
       </Resizable>
+      <DevTools />
     </BoxHomePage>
   )
 }
