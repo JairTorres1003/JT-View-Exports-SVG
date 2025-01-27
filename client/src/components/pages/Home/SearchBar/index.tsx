@@ -1,10 +1,10 @@
+import { useSearchBar } from '@home/hooks/components/useSearchBar'
 import { Box, IconButton, TextField, Tooltip, Typography } from '@mui/material'
 import { useTranslation } from 'react-i18next'
 
 import { BoxSearchBar } from './index.style'
 
 import { IconClose, IconLupe } from '@/assets/icons/functionalities'
-import { useSearchBar } from '@/hooks/components/useSearchBar'
 
 function LabelSearchBar({ label }: { label: string }): React.ReactNode {
   return (

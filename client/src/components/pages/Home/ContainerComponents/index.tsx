@@ -1,3 +1,4 @@
+import { useContainerComponents } from '@home/hooks/components/useContainerComponents'
 import {
   Accordion,
   AccordionDetails,
@@ -16,7 +17,6 @@ import RenderSvg from '../SVG/RenderSvg'
 import { BoxContainerComponents } from './index.style'
 
 import { IconWarning } from '@/assets/icons/indicators'
-import { useContainerComponents } from '@/hooks/components/useContainerComponents'
 import { useSelector } from '@/providers/redux/store'
 
 export const ContainerComponents = (): React.ReactNode => {

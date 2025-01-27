@@ -2,9 +2,8 @@ import { type SVGComponent, type SVGComponentProps } from '@api/interfaces/ViewE
 import cn from 'classnames'
 import { createElement, forwardRef } from 'react'
 
-import { ErrorBoundary } from '../helpers'
-
 import { SVGError } from '@/assets/icons/indicators'
+import { ErrorBoundary } from '@/components/helpers'
 import { isEmpty } from '@/utils/misc'
 
 interface RenderSvgProps {

@@ -1,7 +1,7 @@
+import { LoadingPage } from '@custom/components/LoadingPage'
 import React, { type ReactNode } from 'react'
 import { MemoryRouter, Route, Routes } from 'react-router-dom'
 
-import { LoadingPage } from '@/components/Custom/LoadingPage'
 import Providers from '@/providers'
 import { routes } from '@/router'
 

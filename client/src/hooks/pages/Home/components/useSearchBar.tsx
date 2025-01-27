@@ -3,8 +3,7 @@ import { type ViewExportSVG } from '@api/interfaces/ViewExportsSVG'
 import { useEffect } from 'react'
 import { useDispatch } from 'react-redux'
 
-import useDebounce from '../useDebounce'
-
+import useDebounce from '@/hooks/useDebounce'
 import { setComponents, setErrors, setSearch } from '@/providers/redux/features/SVGSlice'
 import { useSelector } from '@/providers/redux/store'
 import { vscode } from '@/services/vscode'

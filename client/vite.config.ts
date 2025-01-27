@@ -29,6 +29,9 @@ export default defineConfig({
   resolve: {
     alias: {
       '@': path.resolve(__dirname, './src'),
+      '@custom/components': path.resolve(__dirname, './src/components/Custom'),
+      '@home/components': path.resolve(__dirname, './src/components/pages/Home'),
+      '@home/hooks': path.resolve(__dirname, './src/hooks/pages/Home'),
       '@api/enums': path.resolve(__dirname, '../src/enum'),
       '@api/interfaces': path.resolve(__dirname, '../src/interfaces'),
     },

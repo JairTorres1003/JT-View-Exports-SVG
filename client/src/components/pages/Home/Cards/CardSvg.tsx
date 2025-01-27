@@ -1,8 +1,7 @@
 import { type SVGIcon } from '@api/interfaces/ViewExportsSVG'
+import { useCardSvg } from '@home/hooks/components/Cards/useCardSvg'
 import { Box, type BoxProps, Card, styled, Tooltip, Typography } from '@mui/material'
 import cn from 'classnames'
-
-import { useCardSvg } from '@/hooks/components/Cards/useCardSvg'
 
 interface CardSvgProps extends BoxProps {
   readonly children: React.ReactNode

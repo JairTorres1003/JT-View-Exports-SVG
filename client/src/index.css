@@ -8,6 +8,9 @@ html:root {
   --JT-SVG-palette-primary-main: var(--vscode-input-foreground);
   --JT-SVG-palette-text-secondary: var(--vscode-input-foreground);
   --JT-SVG-palette-action-active: var(--vscode-icon-foreground);
+  --JT-SVG-vscode-sash-hoverBorder: var(--vscode-sash-hoverBorder, #3e4452);
+  --JT-SVG-vscode-sash-size: var(--vscode-sash-size, 4px);
+  --JT-SVG-vscode-sash-hover-size: var(--vscode-sash-hover-size, 4px);
 }
 
 body {
