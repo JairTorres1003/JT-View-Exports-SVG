@@ -1,6 +1,6 @@
 import { Box, listItemIconClasses, styled } from '@mui/material'
 
-export const BoxContainerComponents = styled(Box, { name: 'BoxContainerComponents' })(
+export const BoxContainerComponents = styled(Box, { name: 'ContainerComponents-Box' })(
   ({ theme }) => ({
     display: 'flex',
     flexDirection: 'column',

@@ -3,7 +3,7 @@ import { ListItem, ListItemIcon, ListItemText } from '@mui/material'
 
 import { Accordion } from '../SVG/Accordion'
 
-import { BoxContainerComponents } from './index.style'
+import { BoxContainerComponents } from './ContainerComponents.style'
 
 import { IconWarning } from '@/assets/icons/indicators'
 import { useSelector } from '@/providers/redux/store'

@@ -10,7 +10,7 @@ import { type ComponentType } from 'react'
 
 import { IconLupe } from '@/assets/icons/functionalities'
 
-export const BoxSearchBar = styled(Box, { name: 'BoxSearchBar' })(() => ({
+export const BoxSearchBar = styled(Box, { name: 'SearchBar-Box' })(() => ({
   display: 'flex',
   padding: '16px 8px',
   justifyContent: 'center',

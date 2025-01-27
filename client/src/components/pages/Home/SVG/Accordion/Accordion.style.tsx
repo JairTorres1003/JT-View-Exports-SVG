@@ -1,6 +1,6 @@
 import { AccordionDetails, styled } from '@mui/material'
 
-export const BoxAccordionDetails = styled(AccordionDetails, { name: 'BoxAccordionDetails' })(
+export const BoxAccordionDetails = styled(AccordionDetails, { name: 'AccordionDetails-Box' })(
   () => ({
     display: 'grid',
     gridAutoRows: 'auto',

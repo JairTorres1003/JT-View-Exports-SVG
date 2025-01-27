@@ -2,7 +2,7 @@ import { useSearchBar } from '@home/hooks/components/useSearchBar'
 import { IconButton, TextField, Tooltip } from '@mui/material'
 import { useTranslation } from 'react-i18next'
 
-import { BoxSearchBar, LabelSearchBar } from './index.style'
+import { BoxSearchBar, LabelSearchBar } from './SearchBar.style'
 
 import { IconClose } from '@/assets/icons/functionalities'
 
