@@ -8,6 +8,9 @@
     "loading": "Loading...",
     "extractingComponents": "Extracting components..."
   },
+  "DevTools": {
+    "title": "DevTools"
+  },
   "errors": {
     "VSCodeApiIsNotAvailable": "VSCode API is not available"
   }
