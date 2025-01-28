@@ -11,7 +11,7 @@ import { vscode } from '@/services/vscode'
 interface SearchBarHook {
   search: string
   handleSearch: (e: React.ChangeEvent<HTMLInputElement>) => void
-  handleClear: () => void
+  handleClear: VoidFunction
 }
 
 export const useSearchBar = (): SearchBarHook => {

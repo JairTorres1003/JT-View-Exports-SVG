@@ -44,23 +44,23 @@ export interface HandlerReceiveMessage {
   /**
    * Gets the assets path for the workspace and user.
    */
-  [SVGReceiveMessage.GetAssetsPath]: () => void
+  [SVGReceiveMessage.GetAssetsPath]: VoidFunction
   /**
    * Gets the language.
    */
-  [SVGReceiveMessage.GetLanguage]: () => void
+  [SVGReceiveMessage.GetLanguage]: VoidFunction
   /**
    * Gets the last scan date.
    */
-  [SVGReceiveMessage.GetLastScanDate]: () => void
+  [SVGReceiveMessage.GetLastScanDate]: VoidFunction
   /**
    * Gets the SVG components.
    */
-  [SVGReceiveMessage.GetSVGComponents]: () => void
+  [SVGReceiveMessage.GetSVGComponents]: VoidFunction
   /**
    * Gets the current theme.
    */
-  [SVGReceiveMessage.GetTheme]: () => void
+  [SVGReceiveMessage.GetTheme]: VoidFunction
   /**
    * Gets the view assets.
    * @param files - The SVG files to display in the view.
@@ -84,7 +84,7 @@ export interface HandlerReceiveMessage {
   /**
    * Scans the workspace for SVG files.
    */
-  [SVGReceiveMessage.ScanWorkspace]: () => void
+  [SVGReceiveMessage.ScanWorkspace]: VoidFunction
   /**
    * Searches the SVG components.
    * @param query - The search query.
@@ -93,7 +93,7 @@ export interface HandlerReceiveMessage {
   /**
    * Gets the Visual Studio Code styles.
    */
-  [SVGReceiveMessage.GetVsCodeStyles]: () => void
+  [SVGReceiveMessage.GetVsCodeStyles]: VoidFunction
   /**
    * Adds the recent icon to the list.
    */
@@ -105,11 +105,11 @@ export interface HandlerReceiveMessage {
   /**
    * Gets the recent icons.
    */
-  [SVGReceiveMessage.GetRecentIcons]: () => void
+  [SVGReceiveMessage.GetRecentIcons]: VoidFunction
   /**
    * Clears the recent icons.
    */
-  [SVGReceiveMessage.ClearRecentIcons]: () => void
+  [SVGReceiveMessage.ClearRecentIcons]: VoidFunction
   /**
    * Adds the favorite icon to the list.
    */
@@ -121,15 +121,15 @@ export interface HandlerReceiveMessage {
   /**
    * Clears the favorite icons.
    */
-  [SVGReceiveMessage.ClearFavoriteIcons]: () => void
+  [SVGReceiveMessage.ClearFavoriteIcons]: VoidFunction
   /**
    * Gets the favorite icons.
    */
-  [SVGReceiveMessage.GetFavoriteIcons]: () => void
+  [SVGReceiveMessage.GetFavoriteIcons]: VoidFunction
   /**
    * Initializes the default expanded icons.
    */
-  [SVGReceiveMessage.InitDefaultExpandedIcons]: () => void
+  [SVGReceiveMessage.InitDefaultExpandedIcons]: VoidFunction
   /**
    * Toggles the expand icon.
    * @param isExpanded - A boolean indicating whether the icons should be expanded.
