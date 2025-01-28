@@ -8,9 +8,71 @@ html:root {
   --JT-SVG-palette-primary-main: var(--vscode-input-foreground);
   --JT-SVG-palette-text-secondary: var(--vscode-input-foreground);
   --JT-SVG-palette-action-active: var(--vscode-icon-foreground);
+  /* VS Code Colors */
   --JT-SVG-vscode-sash-hoverBorder: var(--vscode-sash-hoverBorder, #3e4452);
   --JT-SVG-vscode-sash-size: var(--vscode-sash-size, 4px);
   --JT-SVG-vscode-sash-hover-size: var(--vscode-sash-hover-size, 4px);
+  --JT-SVG-vscode-input-border: var(--vscode-input-border);
+  --JT-SVG-vscode-focusBorder: var(--vscode-focusBorder, var(--JT-SVG-vscode-input-border));
+  --JT-SVG-vscode-input-background: var(--vscode-input-background);
+  --JT-SVG-vscode-input-foreground: var(--vscode-input-foreground, #3e4452);
+  --JT-SVG-vscode-list-hoverBackground: var(--vscode-list-hoverBackground, #2c313a0d);
+  --JT-SVG-vscode-notifications-background: var(
+    --vscode-notifications-background,
+    var(--JT-SVG-palette-Alert-errorStandardBg)
+  );
+  --JT-SVG-vscode-notifications-foreground: var(
+    --vscode-notifications-foreground,
+    var(--JT-SVG-palette-Alert-errorColor)
+  );
+  --JT-SVG-vscode-notificationsErrorIcon-foreground: var(
+    --vscode-notificationsErrorIcon-foreground,
+    var(--JT-SVG-palette-Alert-errorIconColor)
+  );
+  --JT-SVG-vscode-notifications-background: var(
+    --vscode-notifications-background,
+    var(--JT-SVG-palette-Alert-infoStandardBg)
+  );
+  --JT-SVG-vscode-notifications-foreground: var(
+    --vscode-notifications-foreground,
+    var(--JT-SVG-palette-Alert-infoColor)
+  );
+  --JT-SVG-vscode-notificationsInfoIcon-foreground: var(
+    --vscode-notificationsInfoIcon-foreground,
+    var(--JT-SVG-palette-Alert-infoIconColor)
+  );
+  --JT-SVG-vscode-notifications-background: var(
+    --vscode-notifications-background,
+    var(--JT-SVG-palette-Alert-successStandardBg)
+  );
+  --JT-SVG-vscode-notifications-foreground: var(
+    --vscode-notifications-foreground,
+    var(--JT-SVG-palette-Alert-successColor)
+  );
+  --JT-SVG-vscode-notificationsSuccessIcon-foreground: var(
+    --vscode-notificationsSuccessIcon-foreground,
+    var(--JT-SVG-palette-Alert-successIconColor)
+  );
+  --JT-SVG-vscode-notifications-background: var(
+    --vscode-notifications-background,
+    var(--JT-SVG-palette-Alert-warningStandardBg)
+  );
+  --JT-SVG-vscode-notifications-foreground: var(
+    --vscode-notifications-foreground,
+    var(--JT-SVG-palette-Alert-warningColor)
+  );
+  --JT-SVG-vscode-notificationsWarningIcon-foreground: var(
+    --vscode-notificationsWarningIcon-foreground,
+    var(--JT-SVG-palette-Alert-warningIconColor)
+  );
+  --JT-SVG-vscode-editorHoverWidget-background: var(
+    --vscode-editorHoverWidget-background,
+    #616161eb
+  );
+  --JT-SVG-vscode-editorHoverWidget-border: var(--vscode-editorHoverWidget-border);
+  --JT-SVG-vscode-editorHoverWidget-foreground: var(--vscode-editorHoverWidget-foreground);
+  --JT-SVG-vscode-widget-shadow: var(--vscode-widget-shadow);
+  --JT-SVG-vscode-sideBarTitle-background: var(--vscode-sideBarTitle-background, #fff);
 }
 
 body {

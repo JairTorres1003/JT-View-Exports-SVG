@@ -45,7 +45,7 @@ export const useCustomTheme = (): { theme: Theme } => {
                 backgroundColor: 'transparent',
                 '&:before': {
                   opacity: 0.15,
-                  backgroundColor: 'var(--vscode-input-foreground, #1e1e1e)',
+                  backgroundColor: 'var(--JT-SVG-vscode-input-foreground)',
                 },
                 [`& .${accordionSummaryClasses.content}`]: { maxWidth: '100%', overflow: 'hidden' },
               },
@@ -58,7 +58,7 @@ export const useCustomTheme = (): { theme: Theme } => {
                 flexDirection: 'row-reverse',
                 gap: '4px',
                 minHeight: 38,
-                '&:hover': { backgroundColor: 'var(--vscode-list-hoverBackground, #2c313a0d)' },
+                '&:hover': { backgroundColor: 'var(--JT-SVG-vscode-list-hoverBackground)' },
               },
               content: { margin: 0 },
               expandIconWrapper: {
@@ -84,52 +84,40 @@ export const useCustomTheme = (): { theme: Theme } => {
               {
                 props: { severity: 'error' },
                 style: {
-                  backgroundColor:
-                    'var(--vscode-notifications-background, var(--JT-SVG-palette-Alert-errorStandardBg))',
-                  color:
-                    'var(--vscode-notifications-foreground, var(--JT-SVG-palette-Alert-errorColor))',
+                  backgroundColor: 'var(--JT-SVG-vscode-notifications-background)',
+                  color: 'var(--JT-SVG-vscode-notifications-foreground)',
                   '& .MuiAlert-icon': {
-                    color:
-                      'var(--vscode-notificationsErrorIcon-foreground, var(--JT-SVG-palette-Alert-errorIconColor))',
+                    color: 'var(--JT-SVG-vscode-notificationsErrorIcon-foreground)',
                   },
                 },
               },
               {
                 props: { severity: 'info' },
                 style: {
-                  backgroundColor:
-                    'var(--vscode-notifications-background, var(--JT-SVG-palette-Alert-infoStandardBg))',
-                  color:
-                    'var(--vscode-notifications-foreground, var(--JT-SVG-palette-Alert-infoColor))',
+                  backgroundColor: 'var(--JT-SVG-vscode-notifications-background)',
+                  color: 'var(--JT-SVG-vscode-notifications-foreground)',
                   '& .MuiAlert-icon': {
-                    color:
-                      'var(--vscode-notificationsInfoIcon-foreground, var(--JT-SVG-palette-Alert-infoIconColor))',
+                    color: 'var(--JT-SVG-vscode-notificationsInfoIcon-foreground)',
                   },
                 },
               },
               {
                 props: { severity: 'success' },
                 style: {
-                  backgroundColor:
-                    'var(--vscode-notifications-background, var(--JT-SVG-palette-Alert-successStandardBg))',
-                  color:
-                    'var(--vscode-notifications-foreground, var(--JT-SVG-palette-Alert-successColor))',
+                  backgroundColor: 'var(--JT-SVG-vscode-notifications-background)',
+                  color: 'var(--JT-SVG-vscode-notifications-foreground)',
                   '& .MuiAlert-icon': {
-                    color:
-                      'var(--vscode-notificationsSuccessIcon-foreground, var(--JT-SVG-palette-Alert-successIconColor))',
+                    color: 'var(--JT-SVG-vscode-notificationsSuccessIcon-foreground)',
                   },
                 },
               },
               {
                 props: { severity: 'warning' },
                 style: {
-                  backgroundColor:
-                    'var(--vscode-notifications-background, var(--JT-SVG-palette-Alert-warningStandardBg))',
-                  color:
-                    'var(--vscode-notifications-foreground, var(--JT-SVG-palette-Alert-warningColor))',
+                  backgroundColor: 'var(--JT-SVG-vscode-notifications-background)',
+                  color: 'var(--JT-SVG-vscode-notifications-foreground)',
                   '& .MuiAlert-icon': {
-                    color:
-                      'var(--vscode-notificationsWarningIcon-foreground, var(--JT-SVG-palette-Alert-warningIconColor))',
+                    color: 'var(--JT-SVG-vscode-notificationsWarningIcon-foreground)',
                   },
                 },
               },
@@ -153,17 +141,17 @@ export const useCustomTheme = (): { theme: Theme } => {
             styleOverrides: {
               root: {
                 [`& .${inputBaseClasses.root}`]: {
-                  backgroundColor: 'var(--vscode-input-background, #fff)',
-                  fieldset: { border: '1px solid var(--vscode-input-border, transparent)' },
+                  backgroundColor: 'var(--JT-SVG-vscode-input-background, #fff)',
+                  fieldset: { border: '1px solid var(--JT-SVG-vscode-input-border, transparent)' },
                   [`&.${inputBaseClasses.focused} fieldset`]: {
                     borderWidth: 1,
-                    borderColor: 'var(--vscode-focusBorder, var(--vscode-input-border))',
+                    borderColor: 'var(--JT-SVG-vscode-focusBorder)',
                   },
                   [`&:hover:not(.${inputBaseClasses.focused}) fieldset`]: {
-                    borderColor: 'var(--vscode-input-border, transparent)',
+                    borderColor: 'var(--JT-SVG-vscode-input-border, transparent)',
                   },
                   [`&:not(:hover):not(.${inputBaseClasses.focused}) fieldset`]: {
-                    borderColor: 'var(--vscode-input-border, transparent)',
+                    borderColor: 'var(--JT-SVG-vscode-input-border, transparent)',
                   },
                 },
               },
@@ -178,17 +166,17 @@ export const useCustomTheme = (): { theme: Theme } => {
             },
             styleOverrides: {
               tooltip: {
-                backgroundColor: 'var(--vscode-editorHoverWidget-background, #616161eb)',
-                border: '1px solid var(--vscode-editorHoverWidget-border)',
-                color: 'var(--vscode-editorHoverWidget-foreground, #ffffff)',
-                boxShadow: '0 2px 8px var(--vscode-widget-shadow)',
+                backgroundColor: 'var(--JT-SVG-vscode-editorHoverWidget-background)',
+                border: '1px solid var(--JT-SVG-vscode-editorHoverWidget-border)',
+                color: 'var(--JT-SVG-vscode-editorHoverWidget-foreground, #ffffff)',
+                boxShadow: '0 2px 8px var(--JT-SVG-vscode-widget-shadow)',
                 padding: '2px 8px',
                 fontSize: `${typeof styles.fontSize === 'number' ? styles.fontSize : 12}px`,
               },
               arrow: {
                 top: 'initial',
-                color: 'var(--vscode-editorHoverWidget-background, #616161eb)',
-                '&:before': { border: '1px solid var(--vscode-editorHoverWidget-border)' },
+                color: 'var(--JT-SVG-vscode-editorHoverWidget-background)',
+                '&:before': { border: '1px solid var(--JT-SVG-vscode-editorHoverWidget-border)' },
               },
               popper: {
                 [`&[data-popper-placement*="bottom"] div.${tooltipClasses.tooltip}`]: {

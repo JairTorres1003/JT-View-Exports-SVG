@@ -43,7 +43,7 @@ export const CardSvg = styled<React.ComponentType<CardSvgProps>>(
     placeContent: 'center',
     height: '66px',
     position: 'relative',
-    color: 'var(--vscode-input-background, currentColor)',
+    color: 'var(--JT-SVG-vscode-input-background, currentColor)',
     '& > :first-of-type': {
       width: 'calc(100% - 30px) !important',
       height: 'calc(100% - 34px) !important',
