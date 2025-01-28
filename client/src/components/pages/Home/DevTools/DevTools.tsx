@@ -14,6 +14,7 @@ export const DevTools = (): React.ReactNode => {
         </Tooltip>
         <Box id='BoxDevTools-buttonClose' />
       </Box>
+      <Box className='BoxDevTools__content'></Box>
     </BoxDevTools>
   )
 }

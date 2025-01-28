@@ -8,6 +8,7 @@ export const BoxDevTools = styled(Box, { name: 'DevTools-Box' })(() => ({
   backgroundColor: 'var(--JT-SVG-vscode-sideBarTitle-background)',
   display: 'flex',
   flexDirection: 'column',
+  overflow: 'hidden',
   '& .BoxDevTools__header': {
     display: 'flex',
     justifyContent: 'space-between',
@@ -24,5 +25,10 @@ export const BoxDevTools = styled(Box, { name: 'DevTools-Box' })(() => ({
       textTransform: 'uppercase',
       userSelect: 'none',
     },
+  },
+  '& .BoxDevTools__content': {
+    display: 'flex',
+    flexDirection: 'column',
+    height: '100%',
   },
 }))

@@ -181,6 +181,8 @@ export const useCustomTheme = (): { theme: Theme } => {
                 boxShadow: '0 2px 8px var(--JT-SVG-vscode-widget-shadow)',
                 padding: '2px 8px',
                 fontSize: `${typeof styles.fontSize === 'number' ? styles.fontSize : 12}px`,
+                maxWidth: 700,
+                maxHeight: 540,
               },
               arrow: {
                 top: 'initial',
