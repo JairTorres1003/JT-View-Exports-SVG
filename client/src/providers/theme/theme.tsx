@@ -124,7 +124,16 @@ export const useCustomTheme = (): { theme: Theme } => {
             ],
           },
           MuiIconButton: {
-            defaultProps: { size: 'small' },
+            defaultProps: { size: 'small', disableRipple: true },
+            styleOverrides: {
+              root: {
+                borderRadius: '5px',
+                '&:hover': {
+                  backgroundColor: 'var(--JT-SVG-vscode-button-hoverBackground)',
+                },
+              },
+              sizeSmall: { padding: '3px' },
+            },
           },
           MuiInputBase: {
             styleOverrides: {
