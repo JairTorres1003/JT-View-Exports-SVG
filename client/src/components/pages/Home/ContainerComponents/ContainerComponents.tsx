@@ -1,7 +1,9 @@
+import { AccordionMenuItem } from '@custom/components/Accordion'
 import { useContainerComponents } from '@home/hooks/components/useContainerComponents'
 import { ListItem, ListItemIcon, ListItemText } from '@mui/material'
 
-import { Accordion } from '../SVG/Accordion'
+import { CardSvg } from '../Cards'
+import RenderSvg from '../SVG/RenderSvg'
 
 import { BoxContainerComponents } from './ContainerComponents.style'
 
@@ -28,12 +30,19 @@ export const ContainerComponents = (): React.ReactNode => {
   return (
     <BoxContainerComponents>
       {components.map((item) => (
-        <Accordion
-          component={item}
+        <AccordionMenuItem
           key={item.groupKind.id}
+          label={item.groupKind.label}
           onChange={toggleExpanded(item.groupKind.id)}
           expanded={isExpanded.includes(item.groupKind.id)}
-        />
+          slotProps={{ details: { className: 'BoxContainerComponents__details' } }}
+        >
+          {item.components.map(({ name, location, ...restComponent }) => (
+            <CardSvg key={name} icon={{ name, location }}>
+              <RenderSvg {...restComponent} name={name} location={location} />
+            </CardSvg>
+          ))}
+        </AccordionMenuItem>
       ))}
     </BoxContainerComponents>
   )

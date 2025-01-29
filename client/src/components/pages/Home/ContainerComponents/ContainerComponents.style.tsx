@@ -16,5 +16,12 @@ export const BoxContainerComponents = styled(Box, { name: 'ContainerComponents-B
         minWidth: 24,
       },
     },
+    '& .BoxContainerComponents__details': {
+      display: 'grid',
+      gridAutoRows: 'auto',
+      gridAutoColumns: 'max-content',
+      gridTemplateColumns: 'repeat(auto-fill, minmax(100px, 1fr))',
+      gap: '12px',
+    },
   })
 )
