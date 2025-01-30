@@ -4,7 +4,6 @@ import { type SVGReducers, type SVGState } from '@/interfaces/redux/featureSvg'
 
 const initialState: SVGState = {
   components: [],
-  errors: undefined,
   search: '',
 }
 
@@ -17,6 +16,9 @@ const reducers: SVGReducers = {
   },
   setErrors: (state, { payload }) => {
     state.errors = payload
+  },
+  setRecentlySelected: (state, { payload }) => {
+    state.recentlySelected = payload
   },
 }
 
