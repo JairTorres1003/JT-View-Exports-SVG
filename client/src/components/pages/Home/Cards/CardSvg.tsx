@@ -1,16 +1,16 @@
-import { type SVGIcon } from '@api/interfaces/ViewExportsSVG'
+import { type SVGComponent } from '@api/interfaces/ViewExportsSVG'
 import { useCardSvg } from '@home/hooks/components/Cards/useCardSvg'
 import { Box, type BoxProps, Card, styled, Tooltip, Typography } from '@mui/material'
 import cn from 'classnames'
 
-interface CardSvgProps extends BoxProps {
+interface CardSvgProps extends Omit<BoxProps, 'component'> {
   readonly children: React.ReactNode
-  readonly icon: SVGIcon
+  readonly component: SVGComponent
 }
 
 export const CardSvg = styled<React.ComponentType<CardSvgProps>>(
-  ({ children, className, icon, onClick = () => {}, ...props }) => {
-    const { handleClick } = useCardSvg()
+  ({ children, className, component, onClick = () => {}, ...props }) => {
+    const { handleClick, addRecentComponent } = useCardSvg()
 
     return (
       <Box
@@ -18,13 +18,14 @@ export const CardSvg = styled<React.ComponentType<CardSvgProps>>(
         className={cn(className, 'CardSvg')}
         onClick={(...args) => {
           onClick(...args)
-          handleClick(icon)
+          addRecentComponent(component)
+          handleClick({ name: component.name, location: component.location })
         }}
       >
         <Card className='CardSvg__card'>{children}</Card>
-        <Tooltip placement='top' title={icon.name}>
+        <Tooltip placement='top' title={component.name}>
           <Typography variant='caption' noWrap textAlign='center' padding='0 4px'>
-            {icon.name}
+            {component.name}
           </Typography>
         </Tooltip>
       </Box>

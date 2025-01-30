@@ -17,9 +17,6 @@ const reducers: SVGReducers = {
   setErrors: (state, { payload }) => {
     state.errors = payload
   },
-  setRecentlySelected: (state, { payload }) => {
-    state.recentlySelected = payload
-  },
 }
 
 /**

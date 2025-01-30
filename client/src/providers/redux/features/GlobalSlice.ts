@@ -25,6 +25,9 @@ const reducers: GlobalReducers = {
   closeAlert: (state) => {
     state.snackbarAlert.open = false
   },
+  setRecentlySelected: (state, { payload }) => {
+    state.recentlySelected = payload
+  },
 }
 
 /**
@@ -36,6 +39,6 @@ export const GlobalSlice = createSlice({
   reducers,
 })
 
-export const { openAlert, closeAlert } = GlobalSlice.actions
+export const { openAlert, closeAlert, setRecentlySelected } = GlobalSlice.actions
 
 export const GlobalReducer = GlobalSlice.reducer

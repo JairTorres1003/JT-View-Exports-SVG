@@ -37,9 +37,9 @@ export const ContainerComponents = (): React.ReactNode => {
           expanded={isExpanded.includes(item.groupKind.id)}
           slotProps={{ details: { className: 'BoxContainerComponents__details' } }}
         >
-          {item.components.map(({ name, location, ...restComponent }) => (
-            <CardSvg key={name} icon={{ name, location }}>
-              <RenderSvg {...restComponent} name={name} location={location} />
+          {item.components.map(({ name, ...restComponent }) => (
+            <CardSvg key={name} component={{ ...restComponent, name }}>
+              <RenderSvg {...restComponent} name={name} />
             </CardSvg>
           ))}
         </AccordionMenuItem>
