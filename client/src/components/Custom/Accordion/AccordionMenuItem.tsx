@@ -9,7 +9,6 @@ import {
   type TooltipProps,
 } from '@mui/material'
 import { useId, type FC } from 'react'
-import MiddleEllipsis from 'react-middle-ellipsis'
 
 export interface AccordionMenuItemProps extends AccordionProps {
   label: string
@@ -36,13 +35,11 @@ export const AccordionMenuItem: FC<AccordionMenuItemProps> = ({
       }}
     >
       <AccordionSummary id={`${id}header`} aria-controls={`${id}content`}>
-        <MiddleEllipsis>
-          <Tooltip placement='top' {...(slotProps.tooltip ?? {})} title={label}>
-            <Typography component='span' noWrap>
-              {label}
-            </Typography>
-          </Tooltip>
-        </MiddleEllipsis>
+        <Tooltip placement='top' {...(slotProps.tooltip ?? {})} title={label}>
+          <Typography component='span' noWrap>
+            {label}
+          </Typography>
+        </Tooltip>
       </AccordionSummary>
       <AccordionDetails {...(slotProps.details ?? {})}>{children}</AccordionDetails>
     </Accordion>
