@@ -73,6 +73,10 @@ html:root {
   --JT-SVG-vscode-editorHoverWidget-foreground: var(--vscode-editorHoverWidget-foreground);
   --JT-SVG-vscode-widget-shadow: var(--vscode-widget-shadow);
   --JT-SVG-vscode-sideBarTitle-background: var(--vscode-sideBarTitle-background, #fff);
+  --JT-SVG-vscode-sideBarSectionHeader-background: var(
+    --vscode-sideBarSectionHeader-background,
+    transparent
+  );
   --JT-SVG-vscode-button-hoverBackground: var(
     --vscode-toolbar-hoverBackground,
     var(--vscode-button-hoverBackground)

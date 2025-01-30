@@ -52,7 +52,7 @@ export const useCustomTheme = (): { theme: Theme } => {
             },
           },
           MuiAccordionSummary: {
-            defaultProps: { expandIcon: <IconForward size={24} /> },
+            defaultProps: { expandIcon: <IconForward size={22} /> },
             styleOverrides: {
               root: {
                 flexDirection: 'row-reverse',

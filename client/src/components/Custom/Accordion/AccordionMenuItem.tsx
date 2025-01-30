@@ -6,14 +6,16 @@ import {
   Tooltip,
   Typography,
   type AccordionProps,
+  type TooltipProps,
 } from '@mui/material'
 import { useId, type FC } from 'react'
 import MiddleEllipsis from 'react-middle-ellipsis'
 
-interface AccordionMenuItemProps extends AccordionProps {
+export interface AccordionMenuItemProps extends AccordionProps {
   label: string
   slotProps?: AccordionProps['slotProps'] & {
-    details?: AccordionDetailsProps
+    details?: Partial<Omit<AccordionDetailsProps, 'children'>>
+    tooltip?: Partial<Omit<TooltipProps, 'title'>>
   }
 }
 
@@ -35,7 +37,7 @@ export const AccordionMenuItem: FC<AccordionMenuItemProps> = ({
     >
       <AccordionSummary id={`${id}header`} aria-controls={`${id}content`}>
         <MiddleEllipsis>
-          <Tooltip placement='top' title={label}>
+          <Tooltip placement='top' {...(slotProps.tooltip ?? {})} title={label}>
             <Typography component='span' noWrap>
               {label}
             </Typography>
