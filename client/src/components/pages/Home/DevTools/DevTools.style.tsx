@@ -44,7 +44,7 @@ export const BoxDevTools = styled(Box, { name: 'DevTools-Box' })(() => ({
         minHeight: 22,
         textTransform: 'uppercase',
         backgroundColor: 'var(--JT-SVG-vscode-sideBarSectionHeader-background)',
-        [`& .${accordionSummaryClasses.content} > div > .${typographyClasses.root}`]: {
+        [`& .${accordionSummaryClasses.content} > .${typographyClasses.root}`]: {
           fontWeight: 'bold',
         },
       },
