@@ -3,6 +3,7 @@ import { Box, Tooltip, Typography } from '@mui/material'
 import { useTranslation } from 'react-i18next'
 
 import { BoxDevTools } from './DevTools.style'
+import { Playground } from './Playground'
 
 const SLOT_PROPS: AccordionMenuItemProps['slotProps'] = {
   tooltip: { placement: 'bottom-start', arrow: false },
@@ -21,18 +22,11 @@ export const DevTools = (): React.ReactNode => {
       </Box>
       <Box className='BoxDevTools__content'>
         <AccordionMenuItem
-          label='label-1'
+          label='playground'
           className='BoxDevTools__content__accordion'
           slotProps={SLOT_PROPS}
         >
-          <Box>content-1</Box>
-        </AccordionMenuItem>
-        <AccordionMenuItem
-          label='label-2'
-          className='BoxDevTools__content__accordion'
-          slotProps={SLOT_PROPS}
-        >
-          <Box>content-2</Box>
+          <Playground />
         </AccordionMenuItem>
       </Box>
     </BoxDevTools>

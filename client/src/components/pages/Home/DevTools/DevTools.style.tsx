@@ -1,4 +1,10 @@
-import { accordionSummaryClasses, Box, styled, typographyClasses } from '@mui/material'
+import {
+  accordionDetailsClasses,
+  accordionSummaryClasses,
+  Box,
+  styled,
+  typographyClasses,
+} from '@mui/material'
 
 export const BoxDevTools = styled(Box, { name: 'DevTools-Box' })(() => ({
   width: '100%',
@@ -41,6 +47,9 @@ export const BoxDevTools = styled(Box, { name: 'DevTools-Box' })(() => ({
         [`& .${accordionSummaryClasses.content} > div > .${typographyClasses.root}`]: {
           fontWeight: 'bold',
         },
+      },
+      [`& .${accordionDetailsClasses.root}`]: {
+        padding: 0,
       },
     },
   },
