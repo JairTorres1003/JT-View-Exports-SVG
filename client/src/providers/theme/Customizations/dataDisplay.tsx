@@ -25,8 +25,10 @@ export const dataDisplayCustomizations: CustomizationsFunction = (styles) => ({
       {
         props: { severity: 'error' },
         style: {
-          backgroundColor: 'var(--JT-SVG-vscode-notifications-background)',
-          color: 'var(--JT-SVG-vscode-notifications-foreground)',
+          backgroundColor:
+            'var(--JT-SVG-vscode-notifications-background, var(--JT-SVG-palette-Alert-errorStandardBg))',
+          color:
+            'var(--JT-SVG-vscode-notifications-foreground, var(--JT-SVG-palette-Alert-errorColor))',
           '& .MuiAlert-icon': {
             color: 'var(--JT-SVG-vscode-notificationsErrorIcon-foreground)',
           },
@@ -35,8 +37,10 @@ export const dataDisplayCustomizations: CustomizationsFunction = (styles) => ({
       {
         props: { severity: 'info' },
         style: {
-          backgroundColor: 'var(--JT-SVG-vscode-notifications-background)',
-          color: 'var(--JT-SVG-vscode-notifications-foreground)',
+          backgroundColor:
+            'var(--JT-SVG-vscode-notifications-background, var(--JT-SVG-palette-Alert-infoStandardBg))',
+          color:
+            'var(--JT-SVG-vscode-notifications-foreground, var(--JT-SVG-palette-Alert-infoColor))',
           '& .MuiAlert-icon': {
             color: 'var(--JT-SVG-vscode-notificationsInfoIcon-foreground)',
           },
@@ -45,8 +49,10 @@ export const dataDisplayCustomizations: CustomizationsFunction = (styles) => ({
       {
         props: { severity: 'success' },
         style: {
-          backgroundColor: 'var(--JT-SVG-vscode-notifications-background)',
-          color: 'var(--JT-SVG-vscode-notifications-foreground)',
+          backgroundColor:
+            'var(--JT-SVG-vscode-notifications-background, var(--JT-SVG-palette-Alert-successStandardBg))',
+          color:
+            'var(--JT-SVG-vscode-notifications-foreground, var(--JT-SVG-palette-Alert-successColor))',
           '& .MuiAlert-icon': {
             color: 'var(--JT-SVG-vscode-notificationsSuccessIcon-foreground)',
           },
@@ -55,8 +61,10 @@ export const dataDisplayCustomizations: CustomizationsFunction = (styles) => ({
       {
         props: { severity: 'warning' },
         style: {
-          backgroundColor: 'var(--JT-SVG-vscode-notifications-background)',
-          color: 'var(--JT-SVG-vscode-notifications-foreground)',
+          backgroundColor:
+            'var(--JT-SVG-vscode-notifications-background, var(--JT-SVG-palette-Alert-warningStandardBg))',
+          color:
+            'var(--JT-SVG-vscode-notifications-foreground, var(--JT-SVG-palette-Alert-warningColor))',
           '& .MuiAlert-icon': {
             color: 'var(--JT-SVG-vscode-notificationsWarningIcon-foreground)',
           },

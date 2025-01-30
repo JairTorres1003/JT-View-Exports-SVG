@@ -17,49 +17,19 @@ html:root {
   --JT-SVG-vscode-input-background: var(--vscode-input-background);
   --JT-SVG-vscode-input-foreground: var(--vscode-input-foreground, #3e4452);
   --JT-SVG-vscode-list-hoverBackground: var(--vscode-list-hoverBackground, #2c313a0d);
-  --JT-SVG-vscode-notifications-background: var(
-    --vscode-notifications-background,
-    var(--JT-SVG-palette-Alert-errorStandardBg)
-  );
-  --JT-SVG-vscode-notifications-foreground: var(
-    --vscode-notifications-foreground,
-    var(--JT-SVG-palette-Alert-errorColor)
-  );
+  --JT-SVG-vscode-notifications-background: var(--vscode-notifications-background);
+  --JT-SVG-vscode-notifications-foreground: var(--vscode-notifications-foreground);
   --JT-SVG-vscode-notificationsErrorIcon-foreground: var(
     --vscode-notificationsErrorIcon-foreground,
     var(--JT-SVG-palette-Alert-errorIconColor)
-  );
-  --JT-SVG-vscode-notifications-background: var(
-    --vscode-notifications-background,
-    var(--JT-SVG-palette-Alert-infoStandardBg)
-  );
-  --JT-SVG-vscode-notifications-foreground: var(
-    --vscode-notifications-foreground,
-    var(--JT-SVG-palette-Alert-infoColor)
   );
   --JT-SVG-vscode-notificationsInfoIcon-foreground: var(
     --vscode-notificationsInfoIcon-foreground,
     var(--JT-SVG-palette-Alert-infoIconColor)
   );
-  --JT-SVG-vscode-notifications-background: var(
-    --vscode-notifications-background,
-    var(--JT-SVG-palette-Alert-successStandardBg)
-  );
-  --JT-SVG-vscode-notifications-foreground: var(
-    --vscode-notifications-foreground,
-    var(--JT-SVG-palette-Alert-successColor)
-  );
   --JT-SVG-vscode-notificationsSuccessIcon-foreground: var(
     --vscode-notificationsSuccessIcon-foreground,
     var(--JT-SVG-palette-Alert-successIconColor)
-  );
-  --JT-SVG-vscode-notifications-background: var(
-    --vscode-notifications-background,
-    var(--JT-SVG-palette-Alert-warningStandardBg)
-  );
-  --JT-SVG-vscode-notifications-foreground: var(
-    --vscode-notifications-foreground,
-    var(--JT-SVG-palette-Alert-warningColor)
   );
   --JT-SVG-vscode-notificationsWarningIcon-foreground: var(
     --vscode-notificationsWarningIcon-foreground,
