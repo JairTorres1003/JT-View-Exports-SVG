@@ -1,8 +1,7 @@
 import { tooltipClasses } from '@mui/material'
 
-import { type CustomizationsFunction } from '.'
-
 import { IconError, IconInfo, IconWarning } from '@/assets/icons/indicators'
+import { type CustomizationsFunction } from '@/interfaces/misc'
 
 /**
  * Customizations for data display in the theme.

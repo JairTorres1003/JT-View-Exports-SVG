@@ -1,3 +1,6 @@
+import { VsCodeStyles } from '@api/interfaces/vscode'
+import { type Theme, type Components } from '@mui/material/styles'
+
 export interface ProviderProps {
   readonly children: React.ReactNode
 }
@@ -28,3 +31,5 @@ export interface IconBaseProps {
    */
   sx?: React.CSSProperties
 }
+
+export type CustomizationsFunction = (styles: Partial<VsCodeStyles>) => Components<Theme>

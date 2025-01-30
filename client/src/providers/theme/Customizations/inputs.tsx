@@ -1,6 +1,6 @@
 import { inputBaseClasses } from '@mui/material'
 
-import { type CustomizationsFunction } from '.'
+import { type CustomizationsFunction } from '@/interfaces/misc'
 
 /**
  * Customizations for inputs in the theme.
