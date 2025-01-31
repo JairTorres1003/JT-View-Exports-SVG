@@ -11,7 +11,7 @@ export const BoxPlayground = styled(Box, { name: 'Playground-Box' })(({ theme: {
     borderColor: `var(--JT-SVG-vscode-input-border, ${palette.divider})`,
     backgroundColor: 'rgba(0, 0, 0, 0.02)',
     '& .BoxPlayground__card__tools': {
-      backgroundColor: 'rgba(0, 0, 0, 0.02)',
+      backgroundColor: 'rgba(255, 255, 255, 0.12)',
     },
   },
 }))
