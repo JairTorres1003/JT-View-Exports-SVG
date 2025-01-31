@@ -1,0 +1,41 @@
+import { type IconButtonPickerProps } from '@home/interfaces/DevTools/SelectPickerColor'
+import { IconButton, styled } from '@mui/material'
+import { forwardRef } from 'react'
+
+import bgTransparent from '@/assets/images/bg-transparent.png'
+
+export const IconButtonPicker = styled(
+  forwardRef<HTMLButtonElement, IconButtonPickerProps>(function IconButtonPicker(
+    { size, shape, bgColor, ...props },
+    ref
+  ) {
+    return (
+      <IconButton
+        {...props}
+        style={
+          {
+            '--JT-SVG-IconButtonPicker-bg': bgColor,
+            ...props.style,
+          } as unknown as React.CSSProperties
+        }
+        ref={ref}
+      />
+    )
+  }),
+  { name: 'IconButtonPicker', slot: 'Root' }
+)(({ size = 20, shape = 'square', theme }) => ({
+  backgroundImage: `url('${bgTransparent}')`,
+  height: size,
+  width: size,
+  border: '1px solid #fff',
+  backgroundSize: '9px 9px',
+  imageRendering: 'pixelated',
+  borderRadius: shape === 'circle' ? '50%' : `${theme.shape.borderRadius}px`,
+  overflow: 'hidden',
+  '&::before': {
+    content: '""',
+    position: 'absolute',
+    inset: 0,
+    background: 'var(--JT-SVG-IconButtonPicker-bg)',
+  },
+}))

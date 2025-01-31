@@ -35,10 +35,7 @@ html:root {
     --vscode-notificationsWarningIcon-foreground,
     var(--JT-SVG-palette-Alert-warningIconColor)
   );
-  --JT-SVG-vscode-editorHoverWidget-background: var(
-    --vscode-editorHoverWidget-background,
-    #616161eb
-  );
+  --JT-SVG-vscode-editorHoverWidget-background: var(--vscode-editorHoverWidget-background, #616161);
   --JT-SVG-vscode-editorHoverWidget-border: var(--vscode-editorHoverWidget-border);
   --JT-SVG-vscode-editorHoverWidget-foreground: var(--vscode-editorHoverWidget-foreground);
   --JT-SVG-vscode-widget-shadow: var(--vscode-widget-shadow);

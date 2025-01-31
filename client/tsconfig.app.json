@@ -29,6 +29,7 @@
       "@custom/components/*": ["src/components/Custom/*"],
       "@home/components/*": ["src/components/pages/Home/*"],
       "@home/hooks/*": ["src/hooks/pages/Home/*"],
+      "@home/interfaces/*": ["src/interfaces/components/pages/Home/*"],
       "@/*": ["src/*"],
       "@api/enums/*": ["../src/enum/*"],
       "@api/interfaces/*": ["../src/interfaces/*"]

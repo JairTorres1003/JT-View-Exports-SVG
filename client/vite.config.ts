@@ -32,6 +32,7 @@ export default defineConfig({
       '@custom/components': path.resolve(__dirname, './src/components/Custom'),
       '@home/components': path.resolve(__dirname, './src/components/pages/Home'),
       '@home/hooks': path.resolve(__dirname, './src/hooks/pages/Home'),
+      '@home/interfaces': path.resolve(__dirname, './src/interfaces/components/pages/Home'),
       '@api/enums': path.resolve(__dirname, '../src/enum'),
       '@api/interfaces': path.resolve(__dirname, '../src/interfaces'),
     },

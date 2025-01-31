@@ -1,10 +1,10 @@
-import { Box, Typography } from '@mui/material'
+import { Box, type SxProps, Typography } from '@mui/material'
 import {
   type ColorPickerBaseProps,
   type AnyColor,
   type RgbaColor,
 } from 'node_modules/react-colorful/dist/types'
-import { type FC } from 'react'
+import { forwardRef } from 'react'
 import { RgbaColorPicker } from 'react-colorful'
 
 import { BoxInfoPickerColor, ColorPickerBox } from './ColorPicker.style'
@@ -15,14 +15,14 @@ import { useColorPicker } from '@/hooks/components/vs/useColorPicker'
 
 interface ColorPickerProps extends Partial<ColorPickerBaseProps<RgbaColor>> {
   currentColor?: AnyColor
+  getNewColor?: (color: RgbaColor, stringColor: string) => void
+  sx?: SxProps
 }
 
-export const ColorPicker: FC<ColorPickerProps> = ({
-  className,
-  onChange = () => {},
-  currentColor,
-  ...props
-}) => {
+export const ColorPicker = forwardRef<HTMLDivElement, ColorPickerProps>(function ColorPicker(
+  { className, onChange = () => {}, currentColor, getNewColor = () => {}, style, sx, ...props },
+  ref
+) {
   const {
     color,
     getStringColor,
@@ -35,10 +35,11 @@ export const ColorPicker: FC<ColorPickerProps> = ({
     handleHueChange,
   } = useColorPicker({
     currentColor,
+    getNewColor,
   })
 
   return (
-    <ColorPickerBox className={className}>
+    <ColorPickerBox ref={ref} sx={sx} style={style} className={className}>
       <Box className='ColorPicker__header'>
         <BoxInfoPickerColor
           width='calc(100% - 74px)'
@@ -77,4 +78,4 @@ export const ColorPicker: FC<ColorPickerProps> = ({
       </Box>
     </ColorPickerBox>
   )
-}
+})

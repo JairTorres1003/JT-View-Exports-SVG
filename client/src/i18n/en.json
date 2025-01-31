@@ -3,6 +3,7 @@
     "clear": "Clear",
     "close": "Close",
     "search": "Search",
+    "Select color": "Select color",
     "copy": "Copy",
     "copyToClipboard": "Copy to clipboard",
     "copied {{value}} to clipboard": "Copied <b>{{value}}</b> to clipboard",
