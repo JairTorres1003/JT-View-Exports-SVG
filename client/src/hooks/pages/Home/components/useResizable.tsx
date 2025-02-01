@@ -1,7 +1,9 @@
+import { SVGPostMessage, SVGReceiveMessage } from '@api/enums/ViewExportsSVG'
 import { type ResizeStartCallback, type ResizeCallback } from 're-resizable'
-import { useEffect, useState } from 'react'
+import { useCallback, useEffect, useState } from 'react'
 
 import { useSelector } from '@/providers/redux/store'
+import { vscode } from '@/services/vscode'
 
 interface ResizableHook {
   resizableWidth: string
@@ -20,11 +22,18 @@ export const useResizable = (): ResizableHook => {
   const recentlySelected = useSelector((state) => state.global.recentlySelected)
 
   /**
+   * Callback function to handle the default open dev tools event.
+   */
+  const onDefaultOpenDevTools = useCallback((data: boolean) => {
+    setLastWidth(data ? '75%' : '100%')
+  }, [])
+
+  /**
    * Resets the size of the resizable element to its default value.
    */
-  const onResetSize = (): void => {
+  const onResetSize = useCallback(() => {
     setResizableWidth('100%')
-  }
+  }, [])
 
   /**
    * Callback function to handle the start of a resize event.
@@ -54,6 +63,15 @@ export const useResizable = (): ResizableHook => {
       onResetSize()
     }
   }
+
+  useEffect(() => {
+    vscode.postMessage(SVGReceiveMessage.InitDefaultOpenDevTools)
+    vscode.onMessage(SVGPostMessage.SendOpenDevTools, onDefaultOpenDevTools)
+
+    return () => {
+      vscode.unregisterMessage(SVGPostMessage.SendOpenDevTools)
+    }
+  }, [])
 
   useEffect(() => {
     if (recentlySelected !== undefined) {

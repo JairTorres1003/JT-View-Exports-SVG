@@ -18,6 +18,7 @@ export enum SVGPostMessage {
   SendRecentIcons = 'send-recent-icons',
   SendFavoriteIcons = 'send-favorite-icons',
   SendExpandAllIcons = 'send-expand-all-icons',
+  SendOpenDevTools = 'send-open-dev-tools',
 }
 
 export enum SVGReceiveMessage {
@@ -33,6 +34,9 @@ export enum SVGReceiveMessage {
   GetLanguage = 'settings/language',
   GetTheme = 'settings/theme',
   GetVsCodeStyles = 'settings/vscode-styles',
+  InitDefaultExpandedIcons = 'settings/default-expand-all/init',
+  ToggleExpandIcon = 'settings/default-expand-all/toggle',
+  InitDefaultOpenDevTools = 'settings/default-click-to-open-dev-tools/init',
 
   GetLastScanDate = 'scan/last-date',
   ScanWorkspace = 'scan/workspace',
@@ -47,6 +51,4 @@ export enum SVGReceiveMessage {
   RemoveFavoriteIcon = 'icons/favorite/remove',
   ClearFavoriteIcons = 'icons/favorite/clear',
   GetFavoriteIcons = 'icons/favorite/get',
-  InitDefaultExpandedIcons = 'icons/expanded/init-default',
-  ToggleExpandIcon = 'icons/expanded/toggle',
 }

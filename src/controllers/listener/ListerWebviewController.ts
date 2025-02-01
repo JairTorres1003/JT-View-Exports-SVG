@@ -11,6 +11,7 @@ import {
 import { getCacheManager } from '../cache'
 import {
   AssetsPathsController,
+  DefaultClickToOpenDevToolsController,
   DefaultExpandAllController,
   LastScanDateController,
 } from '../config'
@@ -75,6 +76,7 @@ export class ListerWebviewController {
       [SVGReceiveMessage.GetFavoriteIcons]: this._getIconsFromCache(false).bind(this),
       [SVGReceiveMessage.InitDefaultExpandedIcons]: this._initDefaultExpandedIcons.bind(this),
       [SVGReceiveMessage.ToggleExpandIcon]: this._toggleExpandIcon.bind(this),
+      [SVGReceiveMessage.InitDefaultOpenDevTools]: this._initDefaultOpenDevTools.bind(this),
     }
   }
 
@@ -330,5 +332,11 @@ export class ListerWebviewController {
    */
   private _toggleExpandIcon(isExpanded: boolean): void {
     expandedIcons(isExpanded).catch(console.error)
+  }
+
+  private _initDefaultOpenDevTools(): void {
+    const config = new DefaultClickToOpenDevToolsController()
+
+    this._postMessage(SVGPostMessage.SendOpenDevTools, config.isDefaultOpen())
   }
 }

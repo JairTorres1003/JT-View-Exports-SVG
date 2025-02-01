@@ -38,6 +38,16 @@
       "description": "The description of the configuration to indicate whether or not to expand all items by default",
       "default": "Indicates whether or not to expand all items by default."
     },
+    "extension.config.defaultClickToOpenDevTools.title": {
+      "type": "string",
+      "description": "The title of the configuration to indicate whether or not to open the developer tools by default",
+      "default": "Default Click To Open DevTools"
+    },
+    "extension.config.defaultClickToOpenDevTools.description": {
+      "type": "string",
+      "description": "The description of the configuration to indicate whether or not to open the developer tools by default",
+      "default": "Indicates whether or not to open the developer tools by default."
+    },
     "extension.config.assetsPath.title": {
       "type": "string",
       "description": "The title of the configuration to store the paths of analyzed files that have SVG icons",
@@ -127,6 +137,8 @@
     "extension.commands.expandAll.title",
     "extension.config.defaultExpandAll.title",
     "extension.config.defaultExpandAll.description",
+    "extension.config.defaultClickToOpenDevTools.title",
+    "extension.config.defaultClickToOpenDevTools.description",
     "extension.config.assetsPath.title",
     "extension.config.assetsPath.description",
     "extension.config.ignoreDirectories.title",

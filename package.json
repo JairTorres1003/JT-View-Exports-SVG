@@ -96,6 +96,13 @@
             "description": "%extension.config.defaultExpandAll.description%",
             "scope": "application"
           },
+          "JT-View-Exports-SVG.defaultClickToOpenDevTools": {
+            "type": "boolean",
+            "default": true,
+            "title": "%extension.config.defaultClickToOpenDevTools.title%",
+            "description": "%extension.config.defaultClickToOpenDevTools.description%",
+            "scope": "application"
+          },
           "JT-View-Exports-SVG.assetsPath": {
             "type": "array",
             "default": [],

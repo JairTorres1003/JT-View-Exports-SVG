@@ -3,6 +3,7 @@ import { type SVGErrors, type ViewExportSVG } from '@api/interfaces/ViewExportsS
 import { useEffect, useState } from 'react'
 import { useDispatch } from 'react-redux'
 
+import { setRecentlySelected } from '@/providers/redux/features/GlobalSlice'
 import { setComponents, setErrors, setSearch } from '@/providers/redux/features/SVGSlice'
 import { vscode } from '@/services/vscode'
 
@@ -21,6 +22,7 @@ export const useHome = (): HomeHook => {
    */
   const getSVGComponents = (data: ViewExportSVG[]): void => {
     dispatch(setComponents(data))
+    dispatch(setRecentlySelected())
     dispatch(setSearch(''))
     dispatch(setErrors())
     setLoading(false)

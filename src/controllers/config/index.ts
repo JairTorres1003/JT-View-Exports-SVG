@@ -1,4 +1,5 @@
 export * from './AssetsPathsController'
+export * from './DefaultClickToOpenDevTools'
 export * from './DefaultExpandAllController'
 export * from './DefaultIconPropertiesController'
 export * from './GroupPatternsController'

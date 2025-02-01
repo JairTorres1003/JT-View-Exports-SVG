@@ -31,6 +31,7 @@ export type ReceiveMessage =
   | { type: SVGReceiveMessage.GetFavoriteIcons }
   | { type: SVGReceiveMessage.InitDefaultExpandedIcons }
   | { type: SVGReceiveMessage.ToggleExpandIcon; data: boolean }
+  | { type: SVGReceiveMessage.InitDefaultOpenDevTools }
 
 /**
  * The handler for receiving messages from the webview.
@@ -135,4 +136,8 @@ export interface HandlerReceiveMessage {
    * @param isExpanded - A boolean indicating whether the icons should be expanded.
    */
   [SVGReceiveMessage.ToggleExpandIcon]: (isExpanded: boolean) => void
+  /**
+   * Initializes the default click to open dev tools setting.
+   */
+  [SVGReceiveMessage.InitDefaultOpenDevTools]: VoidFunction
 }
