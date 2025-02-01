@@ -22,6 +22,7 @@ export const DevTools = (): React.ReactNode => {
       </Box>
       <Box className='BoxDevTools__content'>
         <AccordionMenuItem
+          defaultExpanded
           label='playground'
           className='BoxDevTools__content__accordion'
           slotProps={SLOT_PROPS}

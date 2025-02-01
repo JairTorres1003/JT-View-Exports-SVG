@@ -7,7 +7,8 @@ import { useTranslation } from 'react-i18next'
 import { IconClose } from '@/assets/icons/functionalities'
 
 export const Resizable: FC<Omit<ResizableProps, 'size' | 'onResizeStop'>> = (props) => {
-  const { onResizeStop, onResetSize, resizableWidth, buttonContainer } = useResizable()
+  const { onResizeStop, onResizeStart, onResetSize, resizableWidth, buttonContainer } =
+    useResizable()
 
   const { t } = useTranslation(undefined, { keyPrefix: 'labels' })
 
@@ -21,6 +22,7 @@ export const Resizable: FC<Omit<ResizableProps, 'size' | 'onResizeStop'>> = (pro
         enable={{ right: true }}
         defaultSize={{ width: '100%', height: '100%' }}
         {...props}
+        onResizeStart={onResizeStart}
         onResizeStop={onResizeStop}
         size={{ width: resizableWidth, height: '100%' }}
       />
