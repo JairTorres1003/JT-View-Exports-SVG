@@ -2,6 +2,7 @@ import {
   accordionDetailsClasses,
   accordionSummaryClasses,
   Box,
+  collapseClasses,
   styled,
   typographyClasses,
 } from '@mui/material'
@@ -21,6 +22,7 @@ export const BoxDevTools = styled(Box, { name: 'DevTools-Box' })(() => ({
     alignItems: 'center',
     padding: '0 8px',
     height: 35,
+    minHeight: 35,
     overflow: 'hidden',
     [`& > .${typographyClasses.h2}`]: {
       paddingLeft: '12px',
@@ -33,12 +35,24 @@ export const BoxDevTools = styled(Box, { name: 'DevTools-Box' })(() => ({
     },
   },
   '& .BoxDevTools__content': {
-    display: 'flex',
-    flexDirection: 'column',
-    height: '100%',
+    display: 'grid',
+    height: 'min-content',
+    maxHeight: '100%',
+    overflow: 'hidden',
     '& .BoxDevTools__content__accordion': {
+      overflow: 'hidden',
+      maxHeight: '100%',
+      display: 'flex',
+      flexDirection: 'column',
       '&::before': {
         display: 'none',
+      },
+      [`& .${collapseClasses.wrapper}`]: {
+        maxHeight: '100%',
+        [`& .${collapseClasses.wrapperInner} > div[role='region']`]: {
+          overflowY: 'auto',
+          maxHeight: '100%',
+        },
       },
       [`& .${accordionSummaryClasses.root}`]: {
         minHeight: 22,

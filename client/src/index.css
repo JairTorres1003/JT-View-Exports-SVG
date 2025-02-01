@@ -42,7 +42,7 @@ html:root {
   --JT-SVG-vscode-sideBarTitle-background: var(--vscode-sideBarTitle-background, #fff);
   --JT-SVG-vscode-sideBarSectionHeader-background: var(
     --vscode-sideBarSectionHeader-background,
-    transparent
+    rgba(0, 0, 0, 0.03)
   );
   --JT-SVG-vscode-button-hoverBackground: var(
     --vscode-toolbar-hoverBackground,
@@ -53,7 +53,7 @@ html:root {
 body {
   height: 100vh;
   max-height: 100vh;
-  background-color: rgba(0, 0, 0, 0.02);
+  background-color: rgba(0, 0, 0, 0.03);
   padding: 0 !important;
 }
 
