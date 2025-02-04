@@ -5,7 +5,7 @@ import { GlobalReducer } from './features/GlobalSlice'
 import { SVGReducer } from './features/SVGSlice'
 import { VsCodeReducer } from './features/VsCodeSlice'
 
-import { type RootStoreState } from '@/interfaces/redux/feature'
+import type { RootStoreState } from '@/interfaces/redux/feature'
 
 /**
  * Root reducer function that combines all the reducers.
@@ -27,7 +27,7 @@ const rootReducer: Reducer<RootStoreState> = combineReducers({
 export const store: Store<RootStoreState> = configureStore({
   reducer: rootReducer,
   middleware: (getDefaultMiddleware) => getDefaultMiddleware({ serializableCheck: false }),
-  devTools: process.env.NODE_ENV === 'development',
+  devTools: import.meta.env.DEV,
 })
 
 /**

@@ -102,7 +102,10 @@ export interface SVGComponentProps {
   tag: string | SVGTagName
   isMotion: boolean
   children: Array<SVGComponentProps | string>
-  props: Record<string, any>
+  props: {
+    className?: string
+    [key: string]: any
+  }
 }
 
 export interface SVGLocation {

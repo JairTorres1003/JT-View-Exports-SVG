@@ -1,6 +1,6 @@
 import { createSlice } from '@reduxjs/toolkit'
 
-import { type SVGReducers, type SVGState } from '@/interfaces/redux/featureSvg'
+import type { SVGReducers, SVGState } from '@/interfaces/redux/featureSvg'
 
 const initialState: SVGState = {
   components: [],
@@ -28,6 +28,8 @@ export const SVGSlice = createSlice({
   reducers,
 })
 
-export const { setComponents, setSearch, setErrors } = SVGSlice.actions
+export const {
+  actions: { setComponents, setSearch, setErrors },
+} = SVGSlice
 
-export const SVGReducer = SVGSlice.reducer
+export const { reducer: SVGReducer } = SVGSlice

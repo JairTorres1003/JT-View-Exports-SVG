@@ -1,15 +1,15 @@
-import { type SVGPostMessage } from '@api/enums/ViewExportsSVG'
-import { type HandlerArgs } from '@api/interfaces/misc'
-import { type PostMessage } from '@api/interfaces/views/PostMessage'
+import type { SVGPostMessage } from '@api/enums/ViewExportsSVG'
+import type { HandlerArgs } from '@api/interfaces/misc'
+import type { PostMessage } from '@api/interfaces/views/PostMessage'
 import i18next from 'i18next'
-import { type WebviewApi } from 'vscode-webview'
+import type { WebviewApi } from 'vscode-webview'
 
-import { vscodeInternal } from './vscodeInternal'
+import { vscodeInternal } from './VSCodeInternal'
 
-import {
-  type FuncPostMessage,
-  type FuncOnMessage,
-  type MessageHandlersView,
+import type {
+  FuncPostMessage,
+  FuncOnMessage,
+  MessageHandlersView,
 } from '@/interfaces/ViewExportsSVG'
 
 /**
@@ -32,7 +32,7 @@ class VSCodeAPIWrapper {
   constructor() {
     if (typeof acquireVsCodeApi === 'function') {
       this.vsCodeApi = acquireVsCodeApi()
-    } else if (process.env.NODE_ENV === 'development') {
+    } else if (import.meta.env.DEV) {
       this.vsCodeApi = vscodeInternal.api
     }
 

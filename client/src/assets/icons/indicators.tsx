@@ -1,6 +1,6 @@
-import { type FC } from 'react'
+import type { FC } from 'react'
 
-import { type IconBaseProps } from '@/interfaces/misc'
+import type { IconBaseProps } from '@/interfaces/misc'
 
 export const SVGError: FC<Omit<IconBaseProps, 'color'>> = ({
   size = 32,

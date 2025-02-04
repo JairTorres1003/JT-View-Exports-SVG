@@ -1,7 +1,5 @@
 import React from 'react'
 
-const UploadsPage: React.FC = () => {
-  return <div>Uploads Page Component</div>
-}
+const SettingsPage: React.FC = () => <div>Settings Page Component</div>
 
-export default UploadsPage
+export default SettingsPage

@@ -6,56 +6,74 @@
     "labels": {
       "type": "object",
       "properties": {
-        "clear": {
+        "Clear": {
           "type": "string",
           "default": "Clear"
         },
-        "search": {
+        "Close": {
+          "type": "string",
+          "default": "Close"
+        },
+        "Search": {
           "type": "string",
           "default": "Search"
         },
-        "copy": {
+        "Select color": {
+          "type": "string",
+          "default": "Select color"
+        },
+        "Copy": {
           "type": "string",
           "default": "Copy"
         },
-        "copyToClipboard": {
+        "Copy to clipboard": {
           "type": "string",
           "default": "Copy to clipboard"
         },
-        "copied {{value}} to clipboard": {
+        "Copied {{value}} to clipboard": {
           "type": "string",
-          "pattern": ".*{{value}}.*",
-          "patternErrorMessage": "The message must contain the variable {{value}}",
-          "default": "Copied {{value}} to clipboard"
+          "default": "Copied <b>{{value}}</b> to clipboard"
         },
-        "loading": {
+        "Loading": {
           "type": "string",
           "default": "Loading..."
         },
-        "extractingComponents": {
+        "Extracting components": {
           "type": "string",
           "default": "Extracting components..."
         }
       },
       "required": [
-        "clear",
-        "search",
-        "copy",
-        "copyToClipboard",
-        "copied {{value}} to clipboard",
-        "loading",
-        "extractingComponents"
+        "Clear",
+        "Close",
+        "Search",
+        "Select color",
+        "Copy",
+        "Copy to clipboard",
+        "Copied {{value}} to clipboard",
+        "Loading",
+        "Extracting components"
       ]
+    },
+    "DevTools": {
+      "type": "object",
+      "properties": {
+        "title": {
+          "type": "string",
+          "default": "DevTools"
+        }
+      },
+      "required": ["title"]
     },
     "errors": {
       "type": "object",
       "properties": {
-        "VSCodeApiIsNotAvailable": {
+        "VSCode API is not available": {
           "type": "string",
-          "default": "VSCode API is not available."
+          "default": "VSCode API is not available"
         }
       },
-      "required": ["VSCodeApiIsNotAvailable"]
+      "required": ["VSCode API is not available"]
     }
   },
   "required": ["labels", "errors"]

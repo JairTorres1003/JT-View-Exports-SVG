@@ -49,7 +49,7 @@ export interface GlobalReducers {
   /**
    * Set the recently selected component to the state.
    */
-  setRecentlySelected: CaseReducer<SVGState, PayloadAction<SVGComponent | undefined>>
+  setRecentlySelected: CaseReducer<GlobalState, PayloadAction<SVGComponent | undefined>>
 
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   [key: string]: CaseReducer<GlobalState, PayloadAction<any>>

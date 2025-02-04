@@ -1,6 +1,6 @@
 import { createSlice } from '@reduxjs/toolkit'
 
-import { type GlobalReducers, type GlobalState } from '@/interfaces/redux/featureGlobal'
+import type { GlobalReducers, GlobalState } from '@/interfaces/redux/featureGlobal'
 
 const initialState: GlobalState = {
   snackbarAlert: {
@@ -39,6 +39,8 @@ export const GlobalSlice = createSlice({
   reducers,
 })
 
-export const { openAlert, closeAlert, setRecentlySelected } = GlobalSlice.actions
+export const {
+  actions: { openAlert, closeAlert, setRecentlySelected },
+} = GlobalSlice
 
-export const GlobalReducer = GlobalSlice.reducer
+export const { reducer: GlobalReducer } = GlobalSlice

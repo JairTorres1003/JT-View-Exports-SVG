@@ -1,29 +1,4 @@
-// Place your settings in this file to overwrite default and user settings.
 {
-  "files.exclude": {
-    "dist": false // set this to true to exclude "dist" folder from the explorer
-  },
-  "search.exclude": {
-    "dist": true // set this to false to include "dist" folder in search results
-  },
-  // Turn off tsc task auto detection since we have the necessary tasks as npm scripts
-  "typescript.tsc.autoDetect": "off",
-
-  "cSpell.language": "en,es-ES",
-  "cSpell.ignoreWords": ["Jair", "arrowParens", "ecmaVersion", "esnext", "mpath", "quasis"],
-  "cSpell.ignorePaths": [
-    "package-lock.json",
-    "node_modules",
-    "vscode-extension",
-    ".git/objects",
-    ".vscode",
-    ".vscode-insiders",
-    ".github",
-    "**/tsconfig.json",
-    "**/.eslintrc.cjs",
-    "**/.eslintrc",
-    ".prettierrc"
-  ],
   "workbench.tree.enableStickyScroll": true,
   "editor.defaultFormatter": "esbenp.prettier-vscode",
   "editor.detectIndentation": true,
@@ -32,39 +7,13 @@
   "editor.fontLigatures": true,
   "eslint.enable": true,
   "eslint.lintTask.enable": true,
-  "eslint.validate": ["javascript", "javascriptreact", "typescript", "typescriptreact"],
-  "editor.codeActionsOnSave": {
-    "source.fixAll": "always"
-  },
   "editor.cursorBlinking": "expand",
   "editor.linkedEditing": true,
   "editor.guides.bracketPairs": true,
   "editor.cursorSmoothCaretAnimation": "on",
   "explorer.fileNesting.enabled": true,
-  "explorer.fileNesting.patterns": {
-    "*.tsx": "${capture}.tsx",
-    "package.json": "package-lock.json, yarn.lock, pnpm-lock.yaml, bun.lockb, .*"
-  },
-  "files.trimTrailingWhitespace": true,
-  "files.insertFinalNewline": true,
-  "terminal.integrated.profiles.osx": {
-    "bash": null,
-    "zsh": {
-      "path": "/bin/zsh",
-      "icon": "terminal-bash",
-      "color": "terminal.ansiGreen"
-    }
-  },
-  "files.readonlyInclude": {
-    ".eslintrc.cjs": true,
-    ".eslintignore": true,
-    ".prettierrc": true,
-    ".prettierignore": true,
-    ".lintstagedrc": true,
-    "tsconfig.json": true,
-    ".husky/**": true,
-    ".vscode/settings.json": true,
-    ".vscode/extensions.json": true
+  "editor.codeActionsOnSave": {
+    "source.fixAll": "always"
   },
   "json.schemas": [
     {

@@ -1,12 +1,12 @@
 import { ThemeProvider } from '@mui/material'
-import { type ReactNode, type FC } from 'react'
+import type { ReactNode, FC } from 'react'
 import { Provider } from 'react-redux'
 
 import { SnackbarProvider } from './custom/Snackbar'
 import { store } from './redux/store'
 import { useCustomTheme } from './theme/theme'
 
-import { type ProviderProps } from '@/interfaces/misc'
+import type { ProviderProps } from '@/interfaces/misc'
 
 /**
  * ReduxProvider component.

@@ -14,8 +14,8 @@ export const isEmpty = (
 
   if (
     typeof value === 'object' &&
-    Object.keys(value).length === 0 &&
-    value.constructor === Object
+    value.constructor === Object &&
+    Object.keys(value).length === 0
   ) {
     return true
   }
@@ -40,7 +40,7 @@ export const copyToClipboard = async (text: string): Promise<void> => {
  * @param error - The unknown error from which to retrieve the message.
  * @returns The error message.
  */
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
+// eslint-disable-next-line @typescript-eslint/no-explicit-any -- unknown error type
 export const getUnknownError = (error: any): string => {
   if (isEmpty(error)) return 'Unknown error'
 
@@ -56,8 +56,8 @@ export const getUnknownError = (error: any): string => {
     return error.message
   }
 
-  if ('data' in error) {
-    const message = error.data.message
+  if ('data' in error && 'message' in error.data) {
+    const { message } = error.data
     if (typeof message === 'string') {
       return message
     } else if (Array.isArray(message) && message.length > 0) {
@@ -66,7 +66,7 @@ export const getUnknownError = (error: any): string => {
   }
 
   if ('message' in error) {
-    const message = error.message
+    const { message } = error
     if (typeof message === 'string') {
       return message
     } else if (Array.isArray(message) && message.length > 0) {
@@ -74,8 +74,8 @@ export const getUnknownError = (error: any): string => {
     }
   }
 
-  if (error.statusText !== undefined) {
-    return error.statusText?.toString()
+  if ('statusText' in error) {
+    return `${error.statusText} (${error.status})`
   }
 
   return 'Unknown error'

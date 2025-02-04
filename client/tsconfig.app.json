@@ -1,6 +1,5 @@
 {
   "compilerOptions": {
-    "composite": true,
     "tsBuildInfoFile": "./node_modules/.tmp/tsconfig.app.tsbuildinfo",
     "target": "ES2020",
     "useDefineForClassFields": true,
@@ -11,7 +10,6 @@
     /* Bundler mode */
     "moduleResolution": "bundler",
     "allowImportingTsExtensions": true,
-    "resolveJsonModule": true,
     "isolatedModules": true,
     "moduleDetection": "force",
     "noEmit": true,
@@ -22,18 +20,15 @@
     "noUnusedLocals": true,
     "noUnusedParameters": true,
     "noFallthroughCasesInSwitch": true,
+    "noUncheckedSideEffectImports": true,
 
     /* Paths */
     "baseUrl": ".",
     "paths": {
-      "@custom/components/*": ["src/components/Custom/*"],
-      "@home/components/*": ["src/components/pages/Home/*"],
-      "@home/hooks/*": ["src/hooks/pages/Home/*"],
-      "@home/interfaces/*": ["src/interfaces/components/pages/Home/*"],
       "@/*": ["src/*"],
       "@api/enums/*": ["../src/enum/*"],
       "@api/interfaces/*": ["../src/interfaces/*"]
     }
   },
-  "include": ["./src", "../src/enum", "../src/interfaces"]
+  "include": ["src", "../src/enum", "../src/interfaces"]
 }

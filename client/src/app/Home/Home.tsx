@@ -1,29 +1,30 @@
-import { LoadingPage } from '@custom/components/LoadingPage'
-import { ContainerComponents } from '@home/components/ContainerComponents'
-import { DevTools } from '@home/components/DevTools'
-import { Resizable } from '@home/components/Resizable'
-import { SearchBar } from '@home/components/SearchBar'
-import { useHome } from '@home/hooks/useHome'
 import React from 'react'
 import { useTranslation } from 'react-i18next'
 
 import { BoxHomePage } from './Home.style'
+
+import { LoadingPage } from '@/core/components/LoadingPage'
+import { ContainerComponents } from '@/modules/Home/components/ContainerComponents'
+import { DevTools } from '@/modules/Home/components/DevTools'
+import { ResizableHome } from '@/modules/Home/components/Resizable'
+import { SearchBar } from '@/modules/Home/components/SearchBar'
+import { useHome } from '@/modules/Home/hooks/useHome'
 
 const HomePage: React.FC = () => {
   const { loading } = useHome()
   const { t } = useTranslation(undefined, { keyPrefix: 'labels' })
 
   if (loading) {
-    return <LoadingPage>{t('extractingComponents')}</LoadingPage>
+    return <LoadingPage>{t('Extracting components')}</LoadingPage>
   }
 
   return (
     <BoxHomePage>
-      <Resizable className='BoxHomePage__content'>
+      <ResizableHome className='BoxHomePage__content' devTootsId='devTools-panel'>
         <SearchBar />
         <ContainerComponents />
-      </Resizable>
-      <DevTools />
+      </ResizableHome>
+      <DevTools id='devTools-panel' />
     </BoxHomePage>
   )
 }

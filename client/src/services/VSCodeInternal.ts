@@ -1,6 +1,6 @@
-import { type SVGReceiveMessage } from '@api/enums/ViewExportsSVG'
-import { type AxiosResponse } from 'axios'
-import { type WebviewApi } from 'vscode-webview'
+import type { SVGReceiveMessage } from '@api/enums/ViewExportsSVG'
+import type { AxiosResponse } from 'axios'
+import type { WebviewApi } from 'vscode-webview'
 
 import { axiosInstance } from './instance'
 
@@ -30,17 +30,15 @@ class VSCodeInternalAPIWrapper<T = unknown> {
     data = undefined,
   }: VSCodeInternalAPIWrapperMessage): Promise<void> => {
     try {
-      let request: () => Promise<AxiosResponse>
+      let request: () => Promise<AxiosResponse> = async () => await axiosInstance.get(type)
 
       if (data !== undefined) {
         request = async () => await axiosInstance.post(type, { data })
-      } else {
-        request = async () => await axiosInstance.get(type)
       }
 
       const response = await request()
 
-      if (response.status !== 200 || isEmpty(response.data?.type)) {
+      if (response.status !== 200) {
         throw new Error(response.statusText ?? 'No response data')
       }
 
@@ -57,7 +55,7 @@ class VSCodeInternalAPIWrapper<T = unknown> {
    * @throws Will warn if the message type is not provided.
    */
   private readonly postMessage = (message: VSCodeInternalAPIWrapperMessage): void => {
-    if (isEmpty(message?.type)) {
+    if (isEmpty(message.type)) {
       console.warn('No message type provided')
       return
     }

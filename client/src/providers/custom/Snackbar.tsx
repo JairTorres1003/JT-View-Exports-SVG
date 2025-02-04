@@ -2,8 +2,8 @@ import { Alert, Slide, type SlideProps, Snackbar } from '@mui/material'
 import { Fragment, useEffect, useState, type FC } from 'react'
 import { v4 as uuidv4 } from 'uuid'
 
-import { useAlert } from '@/hooks/useAlert'
-import { type ProviderProps } from '@/interfaces/misc'
+import { useAlert } from '@/core/hooks/useAlert'
+import type { ProviderProps } from '@/interfaces/misc'
 import { useSelector } from '@/providers/redux/store'
 
 /**
@@ -58,11 +58,9 @@ const SnackbarAlert = (): React.ReactNode => {
   )
 }
 
-export const SnackbarProvider: FC<ProviderProps> = ({ children }): React.ReactNode => {
-  return (
-    <Fragment>
-      {children}
-      <SnackbarAlert />
-    </Fragment>
-  )
-}
+export const SnackbarProvider: FC<ProviderProps> = ({ children }): React.ReactNode => (
+  <Fragment>
+    {children}
+    <SnackbarAlert />
+  </Fragment>
+)

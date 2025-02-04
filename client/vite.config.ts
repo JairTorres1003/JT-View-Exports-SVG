@@ -1,7 +1,7 @@
 import { defineConfig } from 'vite'
 import { type PreRenderedChunk } from './node_modules/rollup/dist/rollup'
 import react from '@vitejs/plugin-react-swc'
-import path from 'path'
+import tsconfigPaths from 'vite-tsconfig-paths'
 
 /**
  * Generates a file name based on the provided chunk information.
@@ -13,9 +13,9 @@ function CreateFileName(chunkInfo: PreRenderedChunk): string {
   const { name, facadeModuleId } = chunkInfo
 
   if (facadeModuleId?.includes('client/src/app')) {
-    const [folderName, fileName] = facadeModuleId.split('client/src/app/')[1]?.split('/')
+    const [folderName, fileName] = facadeModuleId.split('client/src/app/')[1]?.split('/') ?? []
 
-    if (fileName.split('.')[0] === name && typeof folderName === 'string') {
+    if (typeof folderName === 'string' && fileName?.split('.')[0] === name) {
       return `assets/${name}-${folderName.toLowerCase()}.js`
     }
   }
@@ -23,20 +23,9 @@ function CreateFileName(chunkInfo: PreRenderedChunk): string {
   return `assets/${name}.js`
 }
 
-// https://vitejs.dev/config/
+// https://vite.dev/config/
 export default defineConfig({
-  plugins: [react()],
-  resolve: {
-    alias: {
-      '@': path.resolve(__dirname, './src'),
-      '@custom/components': path.resolve(__dirname, './src/components/Custom'),
-      '@home/components': path.resolve(__dirname, './src/components/pages/Home'),
-      '@home/hooks': path.resolve(__dirname, './src/hooks/pages/Home'),
-      '@home/interfaces': path.resolve(__dirname, './src/interfaces/components/pages/Home'),
-      '@api/enums': path.resolve(__dirname, '../src/enum'),
-      '@api/interfaces': path.resolve(__dirname, '../src/interfaces'),
-    },
-  },
+  plugins: [tsconfigPaths(), react()],
   build: {
     rollupOptions: {
       output: {
