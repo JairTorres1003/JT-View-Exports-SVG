@@ -65,14 +65,4 @@ module.exports = {
     ],
   },
   ignorePatterns: ['out', 'dist', '**/*.d.ts'],
-  overrides: [
-    {
-      files: ['client/**/*.{ts,tsx}'],
-      parserOptions: {
-        project: './client/tsconfig.app.json',
-        tsconfigRootDir: __dirname,
-      },
-      extends: ['./client/.eslintrc.cjs'],
-    },
-  ],
 }
