@@ -27,7 +27,7 @@ export const SelectPickerColor: FC<SelectPickerColorProps> = ({
 
   return (
     <>
-      <Tooltip title={title ?? t('Select color')} placement='top'>
+      <Tooltip title={title ?? t('Select color')}>
         <IconButtonPicker
           id={id}
           {...props}
