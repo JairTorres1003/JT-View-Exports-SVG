@@ -2,7 +2,6 @@ import {
   accordionDetailsClasses,
   accordionSummaryClasses,
   Box,
-  collapseClasses,
   styled,
   typographyClasses,
 } from '@mui/material'
@@ -13,6 +12,7 @@ export const BoxDevTools = styled(Box, { name: 'Box-DevTools' })(() => ({
   maxWidth: '100%',
   height: '100%',
   backgroundColor: 'var(--JT-SVG-vscode-sideBarTitle-background)',
+  borderLeft: '1px solid var(--JT-SVG-vscode-panel-border)',
   display: 'flex',
   flexDirection: 'column',
   overflow: 'hidden',
@@ -24,6 +24,7 @@ export const BoxDevTools = styled(Box, { name: 'Box-DevTools' })(() => ({
     height: 35,
     minHeight: 35,
     overflow: 'hidden',
+    borderBottom: '1px solid var(--JT-SVG-vscode-panel-border)',
     [`& > .${typographyClasses.h2}`]: {
       paddingLeft: '12px',
       maxWidth: '100%',
@@ -40,24 +41,18 @@ export const BoxDevTools = styled(Box, { name: 'Box-DevTools' })(() => ({
     maxHeight: '100%',
     overflow: 'hidden',
     '& .Box-DevTools__content__accordion': {
-      overflow: 'hidden',
-      maxHeight: '100%',
       display: 'flex',
       flexDirection: 'column',
       '&::before': {
-        display: 'none',
-      },
-      [`& .${collapseClasses.wrapper}`]: {
-        maxHeight: '100%',
-        [`& .${collapseClasses.wrapperInner} > div[role='region']`]: {
-          overflowY: 'auto',
-          maxHeight: '100%',
-        },
+        backgroundColor: 'var(--JT-SVG-vscode-sideBarSectionHeader-border)',
+        height: '0.5px',
+        opacity: 1,
       },
       [`& .${accordionSummaryClasses.root}`]: {
         minHeight: 22,
         textTransform: 'uppercase',
         backgroundColor: 'var(--JT-SVG-vscode-sideBarSectionHeader-background)',
+        padding: 0,
         [`& .${accordionSummaryClasses.content} > .${typographyClasses.root}`]: {
           fontWeight: 'bold',
         },

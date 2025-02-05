@@ -88,6 +88,7 @@ export const dataDisplayCustomizations: CustomizationsFunction = (styles) => ({
         padding: '2px 8px',
         fontSize: `${typeof styles.fontSize === 'number' ? styles.fontSize : 12}px`,
         maxWidth: 700,
+        minHeight: 24,
         maxHeight: 540,
       },
       arrow: {

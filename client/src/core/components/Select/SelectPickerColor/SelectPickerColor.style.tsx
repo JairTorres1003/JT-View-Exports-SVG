@@ -25,7 +25,7 @@ export const IconButtonPicker = styled(
   backgroundImage: `url('${bgTransparent}')`,
   height: size,
   width: size,
-  border: `1px solid ${theme.palette.divider}`,
+  border: `1px solid var(--JT-SVG-vscode-panel-border, ${theme.palette.divider})`,
   backgroundSize: '9px 9px',
   imageRendering: 'pixelated',
   borderRadius: shape === 'circle' ? '50%' : `${theme.shape.borderRadius}px`,

@@ -10,6 +10,7 @@ html:root {
   --JT-SVG-palette-action-active: var(--vscode-icon-foreground);
   /* VS Code Colors */
   --JT-SVG-vscode-editor-background: var(--vscode-editor-background, rgba(0, 0, 0, 0.03));
+  --JT-SVG-vscode-panel-border: var(--vscode-panel-border);
   --JT-SVG-vscode-sash-hoverBorder: var(--vscode-sash-hoverBorder, #3e4452);
   --JT-SVG-vscode-sash-size: var(--vscode-sash-size, 4px);
   --JT-SVG-vscode-sash-hover-size: var(--vscode-sash-hover-size, 4px);
@@ -41,14 +42,13 @@ html:root {
   --JT-SVG-vscode-editorHoverWidget-foreground: var(--vscode-editorHoverWidget-foreground);
   --JT-SVG-vscode-widget-shadow: var(--vscode-widget-shadow);
   --JT-SVG-vscode-sideBarTitle-background: var(--vscode-sideBarTitle-background, #fff);
+  --JT-SVG-vscode-sideBarSectionHeader-border: var(--vscode-sideBarSectionHeader-border);
   --JT-SVG-vscode-sideBarSectionHeader-background: var(
     --vscode-sideBarSectionHeader-background,
     var(--JT-SVG-vscode-editor-background)
   );
-  --JT-SVG-vscode-button-hoverBackground: var(
-    --vscode-toolbar-hoverBackground,
-    var(--vscode-button-hoverBackground)
-  );
+  --JT-SVG-vscode-toolbar-hoverBackground: var(--vscode-toolbar-hoverBackground);
+  --JT-SVG-vscode-toolbar-hoverOutline: var(--vscode-toolbar-hoverOutline);
 }
 
 body {

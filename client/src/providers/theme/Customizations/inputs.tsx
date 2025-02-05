@@ -12,7 +12,9 @@ export const inputsCustomizations: CustomizationsFunction = (styles) => ({
       root: {
         borderRadius: '5px',
         '&:hover': {
-          backgroundColor: 'var(--JT-SVG-vscode-button-hoverBackground)',
+          backgroundColor: 'var(--JT-SVG-vscode-toolbar-hoverBackground)',
+          outline: '1px dashed var(--JT-SVG-vscode-toolbar-hoverOutline)',
+          outlineOffset: '-1px',
         },
       },
       sizeSmall: { padding: '3px' },
