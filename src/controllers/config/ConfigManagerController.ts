@@ -48,7 +48,7 @@ export default class ConfigManagerController<T> {
    * @returns The value of the configuration section.
    */
   get(): T {
-    return this.config.inspect(this.section)?.workspaceValue as T
+    return (this.config.inspect(this.section)?.workspaceValue as T) ?? this.initialValue
   }
 
   /**
@@ -56,7 +56,7 @@ export default class ConfigManagerController<T> {
    * @returns The inspected value of the configuration section.
    */
   inspect(): T {
-    return this.config.inspect(this.section)?.globalValue as T
+    return (this.config.inspect(this.section)?.globalValue as T) ?? this.initialValue
   }
 
   /**
