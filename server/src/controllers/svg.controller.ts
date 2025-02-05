@@ -28,7 +28,7 @@ export class SvgController {
    */
   public getComponents = async (_: Request, res: Response) => {
     try {
-      const directory = path.join(Deno.env.get('BASE_PATH') ?? Deno.cwd(), '..', 'examples')
+      const directory = path.join(Deno.env.get('SVG_DIRECTORY_EXAMPLE') ?? Deno.cwd())
 
       const filesTs = getFilesFrontDirectory(path.join(directory, 'typescript')).slice(0, 3)
       const filesJs = getFilesFrontDirectory(path.join(directory, 'javascript')).slice(0, 2)

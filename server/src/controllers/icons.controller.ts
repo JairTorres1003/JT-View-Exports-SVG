@@ -1,6 +1,6 @@
 // @ts-types="npm:@types/express@4.17.15"
 import { Request, Response } from 'express'
-import { workspace, Uri } from 'vscode'
+import { workspace } from 'vscode'
 
 // @ts-types="@jt/view-exports-svg/controllers/cache/CacheManagerController.d.ts"
 import { getCacheManager } from '@jt/view-exports-svg/controllers/cache/CacheManagerController.js'
@@ -12,8 +12,6 @@ interface IconParamsRequest {
 }
 
 export class IconsController {
-  private folderUri: Uri | undefined
-
   public addIcon = (req: Request<IconParamsRequest>, res: Response) => {
     if (isEmpty(workspace.workspaceFolders)) return
 
