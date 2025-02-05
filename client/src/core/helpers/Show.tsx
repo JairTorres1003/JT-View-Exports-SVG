@@ -1,11 +1,11 @@
-import React, { type ReactNode, type FC, type ReactElement } from 'react'
+import React, { type ReactNode, type FC } from 'react'
 
 interface ShowProps {
-  readonly children: ReactNode | ReactElement
+  readonly children: ReactNode
 }
 
 interface ShowWhenProps {
-  readonly children: ReactNode | ReactElement
+  readonly children: ReactNode
   /**
    * The condition to evaluate.
    */
@@ -13,7 +13,7 @@ interface ShowWhenProps {
 }
 
 interface ShowElseProps {
-  readonly children: ReactNode | ReactElement
+  readonly children: ReactNode
 }
 
 /**
@@ -47,9 +47,11 @@ export const Show: FC<ShowProps> & {
 
   React.Children.forEach(children, (child) => {
     if (React.isValidElement(child)) {
-      if (child.props?.isTrue === undefined) {
-        otherwise = child
-      } else if (!when && child.props.isTrue === true) {
+      const clonedChild = child as React.ReactElement<ShowWhenProps | ShowElseProps>
+
+      if (!('isTrue' in clonedChild.props)) {
+        otherwise = clonedChild
+      } else if (!when && clonedChild.props.isTrue) {
         when = child
       }
     }
