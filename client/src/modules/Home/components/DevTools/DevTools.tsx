@@ -20,7 +20,7 @@ export const DevTools: FC<{ id: string }> = ({ id }): React.ReactNode => {
         <Tooltip title={t('title')}>
           <Typography variant='h2'>{t('title')}</Typography>
         </Tooltip>
-        <Box id='BoxDevTools-buttonClose' />
+        <Box id={`${id}-buttonClose`} />
       </Box>
       <Box className='Box-DevTools__content'>
         <AccordionMenuItem

@@ -49,3 +49,75 @@ export const IconClose: FC<IconBaseProps> = ({
     />
   </svg>
 )
+
+export const IconCodeTag: FC<IconBaseProps> = ({
+  className = '',
+  color = 'currentcolor',
+  size = 32,
+  sx = {},
+}) => (
+  <svg
+    stroke={color}
+    fill={color}
+    width={size}
+    height={size}
+    style={sx}
+    className={className}
+    strokeWidth='0'
+    viewBox='0 0 16 16'
+    xmlns='http://www.w3.org/2000/svg'
+  >
+    <path d='M4.708 5.578L2.061 8.224l2.647 2.646-.708.708-3-3V7.87l3-3 .708.708zm7-.708L11 5.578l2.647 2.646L11 10.87l.708.708 3-3V7.87l-3-3zM4.908 13l.894.448 5-10L9.908 3l-5 10z'></path>
+  </svg>
+)
+
+export const IconCopy: FC<IconBaseProps> = ({
+  className = '',
+  color = 'currentcolor',
+  size = 32,
+  sx = {},
+}) => (
+  <svg
+    stroke={color}
+    fill={color}
+    width={size}
+    height={size}
+    style={sx}
+    className={className}
+    strokeWidth='0'
+    viewBox='0 0 16 16'
+    xmlns='http://www.w3.org/2000/svg'
+  >
+    <path
+      fillRule='evenodd'
+      clipRule='evenodd'
+      d='M4 4l1-1h5.414L14 6.586V14l-1 1H5l-1-1V4zm9 3l-3-3H5v10h8V7z'
+    ></path>
+    <path fillRule='evenodd' clipRule='evenodd' d='M3 1L2 2v10l1 1V2h6.414l-1-1H3z'></path>
+  </svg>
+)
+
+export const IconRefresh: FC<IconBaseProps> = ({
+  className = '',
+  color = 'currentcolor',
+  size = 32,
+  sx = {},
+}) => (
+  <svg
+    stroke={color}
+    fill={color}
+    width={size}
+    height={size}
+    style={sx}
+    className={className}
+    strokeWidth='0'
+    viewBox='0 0 16 16'
+    xmlns='http://www.w3.org/2000/svg'
+  >
+    <path
+      fillRule='evenodd'
+      clipRule='evenodd'
+      d='M4.681 3H2V2h3.5l.5.5V6H5V4a5 5 0 1 0 4.53-.761l.302-.954A6 6 0 1 1 4.681 3z'
+    ></path>
+  </svg>
+)

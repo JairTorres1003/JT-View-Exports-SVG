@@ -22,17 +22,25 @@
           "type": "string",
           "default": "Select color"
         },
-        "Copy": {
+        "Copy code": {
           "type": "string",
-          "default": "Copy"
-        },
-        "Copy to clipboard": {
-          "type": "string",
-          "default": "Copy to clipboard"
+          "default": "Copy code"
         },
         "Copied {{value}} to clipboard": {
           "type": "string",
           "default": "Copied <b>{{value}}</b> to clipboard"
+        },
+        "Reset code": {
+          "type": "string",
+          "default": "Reset code"
+        },
+        "Show code": {
+          "type": "string",
+          "default": "Show code"
+        },
+        "Hide code": {
+          "type": "string",
+          "default": "Hide code"
         },
         "Loading": {
           "type": "string",
@@ -48,9 +56,11 @@
         "Close",
         "Search",
         "Select color",
-        "Copy",
-        "Copy to clipboard",
+        "Copy code",
         "Copied {{value}} to clipboard",
+        "Reset code",
+        "Show code",
+        "Hide code",
         "Loading",
         "Extracting components"
       ]

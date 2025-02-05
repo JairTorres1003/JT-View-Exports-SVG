@@ -4,9 +4,11 @@
     "Close": "Close",
     "Search": "Search",
     "Select color": "Select color",
-    "Copy": "Copy",
-    "Copy to clipboard": "Copy to clipboard",
+    "Copy code": "Copy code",
     "Copied {{value}} to clipboard": "Copied <b>{{value}}</b> to clipboard",
+    "Reset code": "Reset code",
+    "Show code": "Show code",
+    "Hide code": "Hide code",
     "Loading": "Loading...",
     "Extracting components": "Extracting components..."
   },
