@@ -10,7 +10,7 @@ const configSchema = z.object({
   VITE_VSCODE_API_URL: z.string().url(),
 })
 
-configSchema.parse(process.env)
+configSchema.parse(import.meta.env)
 
 declare global {
   interface ImportMetaEnv extends z.infer<typeof configSchema> {}
