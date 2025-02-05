@@ -66,6 +66,12 @@ export const useResizableHome = ({ devTootsId }: ResizableHomeHookProps): Resiza
   }
 
   useEffect(() => {
+    if (recentlySelected !== undefined) {
+      setResizableWidth(lastWidth)
+    }
+  }, [recentlySelected])
+
+  useEffect(() => {
     vscode.postMessage(SVGReceiveMessage.InitDefaultOpenDevTools)
     vscode.onMessage(SVGPostMessage.SendOpenDevTools, onDefaultOpenDevTools)
 
@@ -73,12 +79,6 @@ export const useResizableHome = ({ devTootsId }: ResizableHomeHookProps): Resiza
       vscode.unregisterMessage(SVGPostMessage.SendOpenDevTools)
     }
   }, [])
-
-  useEffect(() => {
-    if (recentlySelected !== undefined) {
-      setResizableWidth(lastWidth)
-    }
-  }, [recentlySelected])
 
   return {
     onResizeStart,
