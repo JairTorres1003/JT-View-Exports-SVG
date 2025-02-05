@@ -67,6 +67,7 @@ export default tseslint.config(
       'react-hooks/exhaustive-deps': STATE.OFF,
       '@typescript-eslint/no-unsafe-member-access': STATE.OFF,
       '@typescript-eslint/no-unsafe-type-assertion': STATE.OFF,
+      '@typescript-eslint/no-unsafe-call': STATE.OFF,
       complexity: [STATE.WARN, { max: 30 }],
       'import/order': [
         STATE.ERROR,
