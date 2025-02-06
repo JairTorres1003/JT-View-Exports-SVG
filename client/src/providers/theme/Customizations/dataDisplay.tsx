@@ -85,10 +85,9 @@ export const dataDisplayCustomizations: CustomizationsFunction = (styles) => ({
         border: '1px solid var(--JT-SVG-vscode-editorHoverWidget-border)',
         color: 'var(--JT-SVG-vscode-editorHoverWidget-foreground, #ffffff)',
         boxShadow: '0 2px 8px var(--JT-SVG-vscode-widget-shadow)',
-        padding: '2px 8px',
+        padding: '4px 8px',
         fontSize: `${typeof styles.fontSize === 'number' ? styles.fontSize : 12}px`,
         maxWidth: 700,
-        minHeight: 24,
         maxHeight: 540,
       },
       arrow: {
