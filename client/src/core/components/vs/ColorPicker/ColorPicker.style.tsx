@@ -66,20 +66,35 @@ export const ColorPickerBox = styled(Box, { name: 'ColorPicker-Box' })(({ theme:
   },
 }))
 
-export const BoxInfoPickerColor = styled<ComponentType<BoxProps & { bgColor: string }>>(
-  ({ bgColor, style, ...props }) => (
+interface BoxInfoPickerColorProps extends BoxProps {
+  bgColor: string
+  /**
+   * If the color is light, the text will be black
+   * @default false
+   */
+  isLight?: boolean
+  /**
+   * The alpha value of the color
+   * @default 1
+   */
+  alpha?: number
+}
+
+export const BoxInfoPickerColor = styled<ComponentType<BoxInfoPickerColorProps>>(
+  ({ bgColor, isLight = false, alpha = 1, style, ...props }) => (
     <Box
       {...props}
       style={{
         backgroundColor: bgColor,
+        color: alpha < 0.5 ? undefined : isLight ? '#000' : '#fff',
         ...style,
       }}
     />
   ),
   { name: 'CurrentPickerColor-Box' }
-)(() => ({
+)(({ theme: { vars } }) => ({
   alignItems: 'center',
-  color: '#fff',
+  color: `var(${vars.palette.text.primary})`,
   cursor: 'pointer',
   display: 'flex',
   justifyContent: 'center',

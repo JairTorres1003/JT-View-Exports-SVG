@@ -42,10 +42,11 @@ export const ColorPicker = forwardRef<HTMLDivElement, ColorPickerProps>(function
     <ColorPickerBox ref={ref} sx={sx} style={style} className={className}>
       <Box className='ColorPicker__header'>
         <BoxInfoPickerColor
+          alpha={color.a}
           width='calc(100% - 74px)'
           bgColor={getStringColor(color)}
+          isLight={currentValueColor.isLight}
           onClick={handleChangeList}
-          style={{ color: currentValueColor.isLight ? '#000' : '#fff' }}
         >
           <IconMode size={16} />
           <Typography component='span' sx={{ color: 'currentColor' }}>

@@ -9,14 +9,14 @@ import { IconButtonPicker } from './SelectPickerColor.style'
 import type { SelectPickerColorProps } from '@/core/interfaces/components/Select/SelectPickerColor'
 
 export const SelectPickerColor: FC<SelectPickerColorProps> = ({
-  color = '#fff',
+  initialColor = '#fff',
   onChange = () => null,
   title,
-  slotProps,
+  slotProps = { popper: {} },
   ...props
 }) => {
-  const [currentColor, setCurrentColor] = useState(color)
-  const [newColor, setNewColor] = useState(color)
+  const [currentColor, setCurrentColor] = useState(initialColor)
+  const [newColor, setNewColor] = useState(initialColor)
   const [open, setOpen] = useState(false)
 
   const anchorEl = useRef<HTMLButtonElement>(null)
@@ -39,7 +39,8 @@ export const SelectPickerColor: FC<SelectPickerColorProps> = ({
         />
       </Tooltip>
       <Popper
-        {...(slotProps?.popper ?? {})}
+        sx={({ zIndex }) => ({ zIndex: zIndex.fab })}
+        {...slotProps.popper}
         id={id}
         open={open}
         anchorEl={anchorEl.current}
