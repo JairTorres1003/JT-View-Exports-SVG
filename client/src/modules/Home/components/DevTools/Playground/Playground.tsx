@@ -1,5 +1,5 @@
 import { Box, Card, Collapse, Divider, Grid2, IconButton, Tooltip } from '@mui/material'
-import React from 'react'
+import type { FC } from 'react'
 import { useTranslation } from 'react-i18next'
 
 import RenderSvg from '../../SVG/RenderSvg'
@@ -8,19 +8,15 @@ import { BoxPlayground, BoxPlaygroundCardSvg } from './Playground.style'
 
 import { IconCodeTag, IconCopy, IconRefresh } from '@/assets/icons/functionalities'
 import { SelectPickerColor } from '@/core/components/Select'
+import { usePlayground } from '@/modules/Home/hooks/usePlayground'
 import { useSelector } from '@/providers/redux/store'
 
-export const Playground = (): React.ReactNode => {
-  const [backgroundColor, setBackgroundColor] = React.useState('#fff')
-  const [expanded, setExpanded] = React.useState(true)
-
+export const Playground: FC = () => {
   const recentlySelected = useSelector((state) => state.global.recentlySelected)
 
   const { t } = useTranslation(undefined, { keyPrefix: 'labels' })
 
-  const handleExpand = () => {
-    setExpanded((prevExpanded) => !prevExpanded)
-  }
+  const { backgroundColor, expanded, handleExpand, onChangeColor, initialColor } = usePlayground()
 
   if (recentlySelected === undefined) return null
 
@@ -35,7 +31,7 @@ export const Playground = (): React.ReactNode => {
 
         <Grid2 container spacing={1} className='Box-Playground__card__tools'>
           <Grid2 flex={1}>
-            <SelectPickerColor onChange={setBackgroundColor} />
+            <SelectPickerColor onChange={onChangeColor} initialColor={initialColor} />
           </Grid2>
           <Grid2>
             <Tooltip title={expanded ? t('Hide code') : t('Show code')}>
