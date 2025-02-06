@@ -334,6 +334,9 @@ export class ListerWebviewController {
     expandedIcons(isExpanded).catch(console.error)
   }
 
+  /**
+   * Initializes the default open dev tools.
+   */
   private _initDefaultOpenDevTools(): void {
     const config = new DefaultClickToOpenDevToolsController()
 
