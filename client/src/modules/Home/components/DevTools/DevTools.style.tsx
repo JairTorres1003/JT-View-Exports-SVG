@@ -43,6 +43,7 @@ export const BoxDevTools = styled(Box, { name: 'Box-DevTools' })(() => ({
     '& .Box-DevTools__content__accordion': {
       display: 'flex',
       flexDirection: 'column',
+      backgroundColor: 'var(--JT-SVG-vscode-sideBarTitle-background)',
       '&::before': {
         backgroundColor: 'var(--JT-SVG-vscode-sideBarSectionHeader-border)',
         height: '0.5px',
