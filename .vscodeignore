@@ -4,15 +4,14 @@
 # Ignore test files
 .vscode-test/**
 .temp
-out/test/**
-out/utilities/saveResponseFiles.js
+out/cjs/test/**
+out/cjs/utilities/files/saveResponseFiles.js
 
 # Ignore source code
 src/**
-client/**
-examples/**
 server/**
-!client/build
+client/**
+!client/dist
 
 # Ignore Misc
 .yarnrc
