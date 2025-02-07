@@ -70,11 +70,7 @@ export const useEditor = ({ forwardedRef }: EditorHookProps): EditorHook => {
         setIsInitialized(true)
 
         const newEditor = monaco.editor.create(editorRef.current, {
-          value: function example(a: number, b: number) {
-            const c = a + b
-            console.info(c)
-            return c
-          }.toString(),
+          value: 'function hello() {\n  console.log("Hello, world!");\n}',
           language: 'javascript',
         })
 

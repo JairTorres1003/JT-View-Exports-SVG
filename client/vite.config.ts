@@ -1,5 +1,6 @@
 import { defineConfig } from 'vite'
 import { type PreRenderedChunk } from './node_modules/rollup/dist/rollup'
+import importMetaUrlPlugin from '@codingame/esbuild-import-meta-url-plugin'
 import react from '@vitejs/plugin-react-swc'
 import tsconfigPaths from 'vite-tsconfig-paths'
 
@@ -33,6 +34,11 @@ export default defineConfig({
         chunkFileNames: CreateFileName,
         assetFileNames: 'assets/[name].[ext]',
       },
+    },
+  },
+  optimizeDeps: {
+    esbuildOptions: {
+      plugins: [importMetaUrlPlugin],
     },
   },
 })

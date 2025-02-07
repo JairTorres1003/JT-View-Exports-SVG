@@ -37,6 +37,7 @@
     "format": "prettier --write \"**/*.{ts,tsx,json,css,md,cjs}\""
   },
   "dependencies": {
+    "@codingame/esbuild-import-meta-url-plugin": "^1.0.2",
     "@codingame/monaco-vscode-api": "^13.1.5",
     "@codingame/monaco-vscode-configuration-service-override": "^13.1.5",
     "@emotion/react": "^11.14.0",
