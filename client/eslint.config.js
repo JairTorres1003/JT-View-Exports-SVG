@@ -68,6 +68,7 @@ export default tseslint.config(
       '@typescript-eslint/no-unsafe-member-access': STATE.OFF,
       '@typescript-eslint/no-unsafe-type-assertion': STATE.OFF,
       '@typescript-eslint/no-unsafe-call': STATE.OFF,
+      '@typescript-eslint/no-unsafe-argument': STATE.OFF,
       complexity: [STATE.WARN, { max: 30 }],
       'import/order': [
         STATE.ERROR,
