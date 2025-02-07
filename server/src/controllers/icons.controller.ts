@@ -4,6 +4,7 @@ import { workspace } from 'vscode'
 
 // @ts-types="@jt/view-exports-svg/controllers/cache/CacheManagerController.d.ts"
 import { getCacheManager } from '@jt/view-exports-svg/controllers/cache/CacheManagerController.js'
+// @ts-types="@jt/view-exports-svg/enum/ViewExportsSVG.d.ts"
 import { SVGPostMessage } from '@jt/view-exports-svg/enum/ViewExportsSVG.js'
 import { isEmpty } from '@jt/view-exports-svg/utilities/misc.js'
 

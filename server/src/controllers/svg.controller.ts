@@ -8,6 +8,7 @@ import { pathToSVGFile } from '@jt/view-exports-svg/utilities/files/misc.js'
 import { processFiles } from '@jt/view-exports-svg/utilities/files/processFiles.js'
 import { filteredExports } from '@jt/view-exports-svg/utilities/svg/filtered.js'
 import { svgFileToUri } from '@jt/view-exports-svg/utilities/vscode/uri.js'
+// @ts-types="@jt/view-exports-svg/enum/ViewExportsSVG.d.ts"
 import { SVGPostMessage } from '@jt/view-exports-svg/enum/ViewExportsSVG.js'
 
 import { getFilesFrontDirectory } from '@/utilities/getFilesFrontDirectory.ts'
