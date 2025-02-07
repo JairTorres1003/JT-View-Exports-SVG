@@ -37,7 +37,7 @@ export const useEditor = ({ forwardedRef }: EditorHookProps): EditorHook => {
    * `updateUserConfiguration` function. If the update fails, it logs an error message
    * to the console.
    *
-   * @returns {void} This function does not return a value.
+   * @returns This function does not return a value.
    */
   const updateConfig = () => {
     if (!isInitialized) return
@@ -57,8 +57,6 @@ export const useEditor = ({ forwardedRef }: EditorHookProps): EditorHook => {
    * with a default JavaScript function as its content.
    *
    * If the initialization fails, it logs an error message to the console.
-   *
-   * @returns {void}
    */
   const initializeEditor = () => {
     if (!editorRef.current || isInitialized) return
