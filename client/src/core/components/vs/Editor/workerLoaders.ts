@@ -7,7 +7,11 @@ const workerLoaders: Partial<Record<string, WorkerLoader>> = {
     }),
 }
 
-window.MonacoEnvironment = {
+if (typeof window === 'undefined') {
+  throw new Error('This script can only be run in a browser environment')
+}
+
+window.MonacoEnvironment ??= {
   getWorker: function (_workerId, label) {
     const workerFactory = workerLoaders[label]
     if (workerFactory != null) {
