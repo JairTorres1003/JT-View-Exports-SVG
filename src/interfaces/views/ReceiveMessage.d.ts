@@ -20,6 +20,7 @@ export type ReceiveMessage =
   | { type: SVGReceiveMessage.RemoveAssets; data: SVGFile[] }
   | { type: SVGReceiveMessage.ScanWorkspace }
   | { type: SVGReceiveMessage.SearchSVGComponents; data: string }
+  | { type: SVGReceiveMessage.GetEditorConfig }
   | { type: SVGReceiveMessage.GetVsCodeStyles }
   | { type: SVGReceiveMessage.AddRecentIcon; data: SVGIcon }
   | { type: SVGReceiveMessage.RemoveRecentIcon; data: SVGIcon }
@@ -91,6 +92,10 @@ export interface HandlerReceiveMessage {
    * @param query - The search query.
    */
   [SVGReceiveMessage.SearchSVGComponents]: (query: string) => void
+  /**
+   * Gets the editor configuration.
+   */
+  [SVGReceiveMessage.GetEditorConfig]: VoidFunction
   /**
    * Gets the Visual Studio Code styles.
    */

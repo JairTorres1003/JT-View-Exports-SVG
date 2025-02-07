@@ -1,0 +1,38 @@
+import { workspace } from 'vscode'
+
+/**
+ * Retrieves the editor configuration settings from the workspace and modifies certain properties.
+ *
+ * @returns {Record<string, unknown>} An object containing the editor configuration settings with specific modifications:
+ * - `editor.minimap.enabled` is set to `false`.
+ * - `editor.folding` is set to `false`.
+ * - `editor.glyphMargin` is set to `false`.
+ * - `editor.lineNumbers` is set to `'off'`.
+ */
+export function getConfigurationEditor(): Record<string, unknown> {
+  const configuration = workspace.getConfiguration('editor')
+
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const editorConfig: Record<string, any> = {}
+
+  for (const key in configuration) {
+    const value = configuration.get(key)
+
+    if (value !== undefined) {
+      editorConfig[`editor.${key}`] = value
+    }
+  }
+
+  if (typeof editorConfig['editor.minimap'] === 'object') {
+    editorConfig['editor.minimap'].enabled = false
+  } else {
+    editorConfig['editor.minimap.enabled'] = false
+  }
+
+  return {
+    ...editorConfig,
+    'editor.folding': false,
+    'editor.glyphMargin': false,
+    'editor.lineNumbers': 'off',
+  }
+}

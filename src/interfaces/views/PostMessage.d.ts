@@ -17,6 +17,7 @@ export type PostMessage =
   | { type: SVGPostMessage.SendSVGFilteredComponents; data: ViewExportSVG[] }
   | { type: SVGPostMessage.SendSVGPlayground; data: SVGComponent }
   | { type: SVGPostMessage.SendTheme; data: ThemeMode }
+  | { type: SVGPostMessage.SendEditorConfig; data: Record<string, unknown> }
   | { type: SVGPostMessage.SendVsCodeStyles; data: VsCodeStyles }
   | { type: SVGPostMessage.SendRecentIcons; data: ViewExportSVG[] }
   | { type: SVGPostMessage.SendFavoriteIcons; data: ViewExportSVG[] }
@@ -77,6 +78,11 @@ export interface FuncPostMessage {
    * @param data - The theme mode.
    */
   (type: SVGPostMessage.SendTheme, data: ThemeMode): void
+  /**
+   * Sends the editor configuration to the webview.
+   * @param data - The editor configuration.
+   */
+  (type: SVGPostMessage.SendEditorConfig, data: Record<string, unknown>): void
   /**
    * Sends the Visual Studio Code styles to the webview.
    * @param data - The Visual Studio Code styles.

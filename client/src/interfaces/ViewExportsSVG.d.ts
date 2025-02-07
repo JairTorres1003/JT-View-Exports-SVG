@@ -24,6 +24,7 @@ export interface MessageHandlersView {
   [SVGPostMessage.SendSVGFilteredComponents]?: (data: ViewExportSVG[]) => void
   [SVGPostMessage.SendSVGPlayground]?: (data: SVGComponent) => void
   [SVGPostMessage.SendTheme]?: (data: ThemeMode) => void
+  [SVGPostMessage.SendEditorConfig]?: (data: Record<string, unknown>) => void
   [SVGPostMessage.SendVsCodeStyles]?: (data: VsCodeStyles) => void
   [SVGPostMessage.SendRecentIcons]?: (data: ViewExportSVG[]) => void
   [SVGPostMessage.SendFavoriteIcons]?: (data: ViewExportSVG[]) => void
@@ -45,6 +46,7 @@ export interface FuncOnMessage {
   (type: SVGPostMessage.SendSVGFilteredComponents, handler: (data: ViewExportSVG[]) => void): void
   (type: SVGPostMessage.SendSVGPlayground, handler: (data: SVGComponent) => void): void
   (type: SVGPostMessage.SendTheme, handler: (data: ThemeMode) => void): void
+  (type: SVGPostMessage.SendEditorConfig, handler: (data: Record<string, unknown>) => void): void
   (type: SVGPostMessage.SendVsCodeStyles, handler: (data: VsCodeStyles) => void): void
   (type: SVGPostMessage.SendRecentIcons, handler: (data: ViewExportSVG[]) => void): void
   (type: SVGPostMessage.SendFavoriteIcons, handler: (data: ViewExportSVG[]) => void): void
@@ -63,6 +65,7 @@ export interface FuncPostMessage {
   (type: SVGReceiveMessage.GetSVGComponents): void
   (type: SVGReceiveMessage.GetTheme): void
   (type: SVGReceiveMessage.GetViewAssets, data: SVGFile[]): void
+  (type: SVGReceiveMessage.GetEditorConfig): void
   (type: SVGReceiveMessage.GetVsCodeStyles): void
   (type: SVGReceiveMessage.OpenFile, data: OpenFile): void
   (type: SVGReceiveMessage.PlaygroundSVGComponents, data: SVGPlayground): void

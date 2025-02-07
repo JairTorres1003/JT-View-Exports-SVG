@@ -4,21 +4,26 @@ export enum SVGDeclaration {
 }
 
 export enum SVGPostMessage {
-  SendAssetsPath = 'send-assets-path',
-  SendLanguage = 'send-language',
-  SendLastScanDate = 'send-last-scan-date',
-  SendPlaygroundError = 'send-playground-error',
-  SendRunExtraction = 'send-run-extraction',
-  SendSVGComponents = 'send-svg-components',
-  SendSVGError = 'send-svg-error',
-  SendSVGFilteredComponents = 'send-svg-filter',
-  SendSVGPlayground = 'send-svg-playground',
-  SendTheme = 'send-theme',
-  SendVsCodeStyles = 'send-vscode-styles',
-  SendRecentIcons = 'send-recent-icons',
-  SendFavoriteIcons = 'send-favorite-icons',
-  SendExpandAllIcons = 'send-expand-all-icons',
-  SendOpenDevTools = 'send-open-dev-tools',
+  SendSVGComponents = 'send/svg/components',
+  SendSVGError = 'send/svg/error',
+  SendSVGFilteredComponents = 'send/svg/filtered-components',
+  SendSVGPlayground = 'send/svg/playground',
+  SendPlaygroundError = 'send/svg/playground-error',
+
+  SendAssetsPath = 'send/assets/paths',
+
+  SendRunExtraction = 'send/svg/run-extraction',
+  SendLanguage = 'send/settings/language',
+  SendTheme = 'send/settings/theme',
+  SendEditorConfig = 'send/settings/editor-config',
+  SendVsCodeStyles = 'send/settings/vscode-styles',
+  SendExpandAllIcons = 'send/settings/default-expand-all',
+  SendOpenDevTools = 'send/settings/default-click-to-open-dev-tools',
+
+  SendLastScanDate = 'send/scan/last-date',
+
+  SendRecentIcons = 'send/icons/recent',
+  SendFavoriteIcons = 'send/icons/favorite',
 }
 
 export enum SVGReceiveMessage {
@@ -33,6 +38,7 @@ export enum SVGReceiveMessage {
 
   GetLanguage = 'settings/language',
   GetTheme = 'settings/theme',
+  GetEditorConfig = 'settings/editor-config',
   GetVsCodeStyles = 'settings/vscode-styles',
   InitDefaultExpandedIcons = 'settings/default-expand-all/init',
   ToggleExpandIcon = 'settings/default-expand-all/toggle',

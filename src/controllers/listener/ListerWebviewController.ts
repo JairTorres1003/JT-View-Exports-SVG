@@ -30,7 +30,12 @@ import { type ReceiveMessage, type HandlerReceiveMessage } from '@/interfaces/vi
 import { openFile, pathToSVGFile, scanningFiles, scanningWorkspace } from '@/utilities/files'
 import { getUnknownError, isEmpty } from '@/utilities/misc'
 import { filteredExports, playground } from '@/utilities/svg'
-import { getCurrentTheme, getStyles, svgFileToUri } from '@/utilities/vscode'
+import {
+  getConfigurationEditor,
+  getCurrentTheme,
+  getStyles,
+  svgFileToUri,
+} from '@/utilities/vscode'
 
 export class ListerWebviewController {
   public readonly _panel: WebviewPanel
@@ -65,6 +70,7 @@ export class ListerWebviewController {
       [SVGReceiveMessage.RemoveAssets]: this._removeAssets.bind(this),
       [SVGReceiveMessage.ScanWorkspace]: this._scanWorkspace.bind(this),
       [SVGReceiveMessage.SearchSVGComponents]: this._searchSVGComponents.bind(this),
+      [SVGReceiveMessage.GetEditorConfig]: this._getEditorConfig.bind(this),
       [SVGReceiveMessage.GetVsCodeStyles]: this._vscodeStyles.bind(this),
       [SVGReceiveMessage.AddRecentIcon]: this._addIconToCache(true).bind(this),
       [SVGReceiveMessage.RemoveRecentIcon]: this._removeIconFromCache(true).bind(this),
@@ -246,6 +252,14 @@ export class ListerWebviewController {
     } else {
       this._postMessage(SVGPostMessage.SendSVGError, filtered)
     }
+  }
+
+  /**
+   * Retrieves the editor configuration and sends it as a post message.
+   */
+  private _getEditorConfig(): void {
+    const config = getConfigurationEditor()
+    this._postMessage(SVGPostMessage.SendEditorConfig, config)
   }
 
   /**
