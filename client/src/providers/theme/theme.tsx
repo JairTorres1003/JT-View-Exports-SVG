@@ -67,6 +67,10 @@ export const useCustomTheme = (): { theme: Theme } => {
   useEffect(() => {
     vscode.postMessage(SVGReceiveMessage.GetVsCodeStyles)
     vscode.onMessage(SVGPostMessage.SendVsCodeStyles, handleVsCodeStyles)
+
+    return () => {
+      vscode.unregisterMessage(SVGPostMessage.SendVsCodeStyles)
+    }
   }, [])
 
   return { theme }
