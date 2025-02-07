@@ -29,7 +29,7 @@
   },
   "homepage": "https://github.com/JairTorres1003/JT-View-Exports-SVG#readme",
   "engines": {
-    "vscode": "^1.80.0"
+    "vscode": ">=1.80.0"
   },
   "categories": [
     "Other"
