@@ -13,8 +13,6 @@ import { isEmpty } from '../misc'
  * @returns A promise that resolves when the file is saved successfully.
  */
 export async function saveResponseFile(data: object, name: string, path?: string): Promise<void> {
-  if (process.env.NODE_ENV === 'production') return
-
   const content = JSON.stringify(data, null, 2)
   const filePath = path ?? workspace.workspaceFolders?.[0].uri.fsPath + `/${name}.json`
 

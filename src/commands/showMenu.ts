@@ -2,7 +2,7 @@ import { type ExtensionContext, type Uri } from 'vscode'
 
 import { ViewExportsSVGController } from '@/controllers/views'
 import { type ViewExportSVG } from '@/interfaces/ViewExportsSVG'
-import { processFiles, saveResponseFile } from '@/utilities/files'
+import { processFiles } from '@/utilities/files'
 import { isEmpty } from '@/utilities/misc'
 
 /**
@@ -24,7 +24,6 @@ export const showMenu = async (
 
   const operation = (result: ViewExportSVG[]): void => {
     ViewExportsSVGController.render(context.extensionUri, result)
-    saveResponseFile(result, 'svg').catch(console.error)
   }
 
   const filesToProcess = !isEmpty(items) ? items : !isEmpty(item) ? [item] : []
