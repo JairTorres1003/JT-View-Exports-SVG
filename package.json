@@ -19,7 +19,7 @@
   "license": "MIT",
   "author": "Jair Torres",
   "publisher": "JairTorres1003",
-  "version": "4.0.0",
+  "version": "4.0.0-beta.1",
   "repository": {
     "type": "git",
     "url": "https://github.com/JairTorres1003/JT-View-Exports-SVG.git"
@@ -217,7 +217,7 @@
     "@types/lodash": "^4.17.14",
     "@types/node": "^22.10.5",
     "@types/sinon": "^17.0.3",
-    "@types/vscode": "^1.96.0",
+    "@types/vscode": "^1.80.0",
     "@typescript-eslint/eslint-plugin": "^6.21.0",
     "@typescript-eslint/parser": "^6.21.0",
     "@vscode/l10n-dev": "^0.0.35",
@@ -231,7 +231,6 @@
     "eslint-plugin-prettier": "^5.2.1",
     "glob": "^11.0.0",
     "husky": "^9.1.7",
-    "minimatch": "^10.0.1",
     "npm-run-all": "^4.1.5",
     "prettier": "^3.4.2",
     "rimraf": "^6.0.1",
@@ -242,7 +241,8 @@
   "dependencies": {
     "@babel/parser": "^7.26.3",
     "@babel/traverse": "^7.26.4",
-    "lodash": "^4.17.21"
+    "lodash": "^4.17.21",
+    "minimatch": "^10.0.1"
   },
   "husky": {
     "hooks": {
