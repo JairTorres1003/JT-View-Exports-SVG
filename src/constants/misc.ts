@@ -39,3 +39,6 @@ export const DEFAULT_ICON_PROPERTIES = {
   sx: '{}',
   width: '28',
 }
+
+export const DEFAULT_FONT_FAMILY =
+  "-apple-system, 'system-ui', sans-serif, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue'"
