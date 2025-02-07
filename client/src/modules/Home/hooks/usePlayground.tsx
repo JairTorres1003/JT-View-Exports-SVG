@@ -1,10 +1,14 @@
+import { SVGPostMessage, SVGReceiveMessage } from '@api/enums/ViewExportsSVG'
 import { useEffect, useState } from 'react'
+import { useDispatch } from 'react-redux'
 
+import { setEditorConfig } from '@/providers/redux/features/VsCodeSlice'
+import { vscode } from '@/services/vscode'
 import { getUnknownError } from '@/utils/misc'
 
 interface PlaygroundHook {
   backgroundColor: string
-  expanded: boolean
+  expandedCode: boolean
   handleExpand: VoidFunction
   onChangeColor: (color: string) => void
   initialColor: string
@@ -15,9 +19,11 @@ const CSS_VAR_SECONDARY = '--JT-SVG-vscode-sideBarSectionHeader-background'
 
 export const usePlayground = (): PlaygroundHook => {
   const [backgroundColor, setBackgroundColor] = useState('#fff')
-  const [expanded, setExpanded] = useState(true)
+  const [expandedCode, setExpandedCode] = useState(false)
 
   const [initialColor, setInitialColor] = useState('#fff')
+
+  const dispatch = useDispatch()
 
   /**
    * Toggles the expanded state.
@@ -26,7 +32,7 @@ export const usePlayground = (): PlaygroundHook => {
    * It uses the previous state value to ensure the state is correctly toggled.
    */
   const handleExpand = () => {
-    setExpanded((prevExpanded) => !prevExpanded)
+    setExpandedCode((prevExpanded) => !prevExpanded)
   }
 
   /**
@@ -75,13 +81,29 @@ export const usePlayground = (): PlaygroundHook => {
     }
   }
 
+  /**
+   * Handles the editor configuration by dispatching the setEditorConfig action with the provided data.
+   *
+   * @param data - A record containing the editor configuration settings.
+   */
+  const handleEditorConfig = (data: Record<string, unknown>) => {
+    dispatch(setEditorConfig(data))
+  }
+
   useEffect(() => {
     applyInitialColor()
+
+    vscode.postMessage(SVGReceiveMessage.GetEditorConfig)
+    vscode.onMessage(SVGPostMessage.SendEditorConfig, handleEditorConfig)
+
+    return () => {
+      vscode.unregisterMessage(SVGPostMessage.SendEditorConfig)
+    }
   }, [])
 
   return {
     backgroundColor,
-    expanded,
+    expandedCode,
     handleExpand,
     onChangeColor,
     initialColor,

@@ -4,11 +4,15 @@ import type { VsCodeReducers, VsCodeState } from '@/interfaces/redux/featureVsCo
 
 const initialState: VsCodeState = {
   styles: {},
+  editorConfig: {},
 }
 
 const reducers: VsCodeReducers = {
   setVsCodeStyles: (state, { payload }) => {
     state.styles = payload
+  },
+  setEditorConfig: (state, { payload }) => {
+    state.editorConfig = payload
   },
 }
 
@@ -22,7 +26,7 @@ export const VsCodeSlice = createSlice({
 })
 
 export const {
-  actions: { setVsCodeStyles },
+  actions: { setVsCodeStyles, setEditorConfig },
 } = VsCodeSlice
 
 export const { reducer: VsCodeReducer } = VsCodeSlice

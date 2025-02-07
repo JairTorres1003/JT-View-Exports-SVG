@@ -17,7 +17,8 @@ export const Playground: FC = () => {
 
   const { t } = useTranslation(undefined, { keyPrefix: 'labels' })
 
-  const { backgroundColor, expanded, handleExpand, onChangeColor, initialColor } = usePlayground()
+  const { backgroundColor, expandedCode, handleExpand, onChangeColor, initialColor } =
+    usePlayground()
 
   if (recentlySelected === undefined) return null
 
@@ -35,7 +36,7 @@ export const Playground: FC = () => {
             <SelectPickerColor onChange={onChangeColor} initialColor={initialColor} />
           </Grid2>
           <Grid2>
-            <Tooltip title={expanded ? t('Hide code') : t('Show code')}>
+            <Tooltip title={expandedCode ? t('Hide code') : t('Show code')}>
               <IconButton onClick={handleExpand}>
                 <IconCodeTag size={16} />
               </IconButton>
@@ -57,7 +58,7 @@ export const Playground: FC = () => {
           </Grid2>
         </Grid2>
 
-        <Collapse in={expanded}>
+        <Collapse in={expandedCode}>
           <Divider className='Box-Playground__card__divider' />
           <Editor />
         </Collapse>
