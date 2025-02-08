@@ -6,6 +6,7 @@
 .temp
 out/cjs/test/**
 out/cjs/utilities/files/saveResponseFiles.js
+workspaceTest.code-workspace
 
 # Ignore source code
 src/**
@@ -19,6 +20,18 @@ vsc-extension-quickstart.md
 **/.gitignore
 **/tsconfig.json
 **/vite.config.ts
+.eslintignore
 **/.eslintrc.json
 **/*.map
 **/*.ts
+**/.husky/**
+**/node_modules/**
+LEARN.md
+.lintstagedrc
+.nvmrc
+.prettierrc
+.prettierignore
+tsconfig*.json
+.github/
+l10n.schema.json
+nls.schema.json
