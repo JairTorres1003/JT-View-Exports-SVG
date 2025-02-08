@@ -43,7 +43,7 @@ export const BoxPlaygroundCardSvg = styled(
   placeContent: 'center',
   position: 'relative',
   aspectRatio: '1 / 1',
-  color: `var(${vars.palette.text.primary}, currentColor)`,
+  color: vars.palette.text.primary,
   overflow: 'auto',
   backgroundImage: `url('${bgTransparent}')`,
   backgroundSize: '9px 9px',

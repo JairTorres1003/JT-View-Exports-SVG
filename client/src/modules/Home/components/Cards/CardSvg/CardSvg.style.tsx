@@ -13,7 +13,7 @@ export const BoxCardSvg = styled(Box, { name: 'Box-CardSvg', slot: 'Root' })(
       placeContent: 'center',
       height: '66px',
       position: 'relative',
-      color: `var(${vars.palette.text.primary}, currentColor)`,
+      color: vars.palette.text.primary,
       border: `1px solid var(--JT-SVG-vscode-sideBarSectionHeader-border)`,
       backgroundColor: `var(--JT-SVG-vscode-sideBarSectionHeader-background)`,
       '&:before': {

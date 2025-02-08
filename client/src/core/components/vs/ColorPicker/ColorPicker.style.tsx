@@ -94,7 +94,7 @@ export const BoxInfoPickerColor = styled<ComponentType<BoxInfoPickerColorProps>>
   { name: 'CurrentPickerColor-Box' }
 )(({ theme: { vars } }) => ({
   alignItems: 'center',
-  color: `var(${vars.palette.text.primary})`,
+  color: vars.palette.text.primary,
   cursor: 'pointer',
   display: 'flex',
   justifyContent: 'center',
