@@ -1,5 +1,5 @@
 import { Box, ClickAwayListener, Fade, Popper, Tooltip } from '@mui/material'
-import { type FC, useRef, useState } from 'react'
+import { type FC, useEffect, useRef, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 
 import { ColorPicker } from '../../vs/ColorPicker'
@@ -15,8 +15,8 @@ export const SelectPickerColor: FC<SelectPickerColorProps> = ({
   slotProps = { popper: {} },
   ...props
 }) => {
-  const [currentColor, setCurrentColor] = useState(initialColor)
-  const [newColor, setNewColor] = useState(initialColor)
+  const [currentColor, setCurrentColor] = useState('#fff')
+  const [newColor, setNewColor] = useState('#fff')
   const [open, setOpen] = useState(false)
 
   const anchorEl = useRef<HTMLButtonElement>(null)
@@ -24,6 +24,11 @@ export const SelectPickerColor: FC<SelectPickerColorProps> = ({
   const { t } = useTranslation(undefined, { keyPrefix: 'labels' })
 
   const id = open ? 'transition-popper' : undefined
+
+  useEffect(() => {
+    setCurrentColor(initialColor)
+    setNewColor(initialColor)
+  }, [initialColor])
 
   return (
     <>
@@ -57,7 +62,7 @@ export const SelectPickerColor: FC<SelectPickerColorProps> = ({
               >
                 <ColorPicker
                   currentColor={currentColor}
-                  getNewColor={(_, stringColor) => {
+                  onChange={(_, stringColor) => {
                     setNewColor(stringColor)
                     onChange(stringColor)
                   }}

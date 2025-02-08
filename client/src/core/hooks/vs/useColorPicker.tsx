@@ -23,7 +23,6 @@ interface ColorPickerHook {
 
 interface ColorPickerHookProps {
   currentColor?: AnyColor
-  getNewColor?: (color: RgbaColor, stringColor: string) => void
 }
 
 const INITIAL_COLOR = { r: 255, g: 255, b: 255, a: 1 }
@@ -40,7 +39,6 @@ const ORDERED_LIST = [
 
 export const useColorPicker = ({
   currentColor = INITIAL_COLOR,
-  getNewColor = () => null,
 }: ColorPickerHookProps): ColorPickerHook => {
   const [oldColor, setOldColor] = useState<RgbaColor>(INITIAL_COLOR)
   const [color, setColor] = useState<RgbaColor>(INITIAL_COLOR)
@@ -146,18 +144,6 @@ export const useColorPicker = ({
         value: list(fixedColor).toString(),
         isLight,
       })
-
-      const newColor = Colorize(fixedColor).rgb()
-
-      getNewColor(
-        {
-          r: newColor.red(),
-          g: newColor.green(),
-          b: newColor.blue(),
-          a: newColor.alpha(),
-        },
-        newColor.string()
-      )
     } catch (error) {
       console.error(getUnknownError(error))
     }

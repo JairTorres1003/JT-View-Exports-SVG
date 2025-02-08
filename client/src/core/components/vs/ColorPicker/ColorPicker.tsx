@@ -13,14 +13,14 @@ import { VerticalPickerSlider } from './VerticalPickerSlider'
 import { IconMode } from '@/assets/icons/indicators'
 import { useColorPicker } from '@/core/hooks/vs/useColorPicker'
 
-interface ColorPickerProps extends Partial<ColorPickerBaseProps<RgbaColor>> {
+interface ColorPickerProps extends Omit<Partial<ColorPickerBaseProps<RgbaColor>>, 'onChange'> {
   currentColor?: AnyColor
-  getNewColor?: (color: RgbaColor, stringColor: string) => void
+  onChange?: (color: RgbaColor, stringColor: string) => void
   sx?: SxProps
 }
 
 export const ColorPicker = forwardRef<HTMLDivElement, ColorPickerProps>(function ColorPicker(
-  { className, onChange = () => null, currentColor, getNewColor = () => null, style, sx, ...props },
+  { className, onChange = () => null, currentColor, style, sx, ...props },
   ref
 ) {
   const {
@@ -33,10 +33,7 @@ export const ColorPicker = forwardRef<HTMLDivElement, ColorPickerProps>(function
     currentValueColor,
     handleChangeList,
     handleHueChange,
-  } = useColorPicker({
-    currentColor,
-    getNewColor,
-  })
+  } = useColorPicker({ currentColor })
 
   return (
     <ColorPickerBox ref={ref} sx={sx} style={style} className={className}>
@@ -62,7 +59,7 @@ export const ColorPicker = forwardRef<HTMLDivElement, ColorPickerProps>(function
           color={color}
           onChange={(newColor) => {
             handleColorChange(newColor)
-            onChange(newColor)
+            onChange(newColor, getStringColor(newColor))
           }}
         />
         <Box className='ColorPicker__body__slider'>
