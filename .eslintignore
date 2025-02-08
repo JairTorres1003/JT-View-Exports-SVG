@@ -6,3 +6,4 @@ src/test/assets
 /examples
 /server
 /client
+esbuild.config.js

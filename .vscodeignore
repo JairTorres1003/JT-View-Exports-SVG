@@ -35,3 +35,5 @@ tsconfig*.json
 .github/
 l10n.schema.json
 nls.schema.json
+esbuild.config.js
+package-lock.json
