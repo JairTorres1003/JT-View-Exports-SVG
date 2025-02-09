@@ -4,6 +4,8 @@ export interface GetWebviewAssets {
   icon: string
   index: string
   styles: string
+  moduleEditorWorker: string
+  webWorkerExtensionHostIframe: string
 }
 export interface OpenFile {
   file: SVGFile

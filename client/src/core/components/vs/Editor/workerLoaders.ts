@@ -1,10 +1,13 @@
-export type WorkerLoader = () => Worker
+export type WorkerLoader = () => Promise<Worker>
 
 const workerLoaders: Partial<Record<string, WorkerLoader>> = {
-  TextEditorWorker: () =>
-    new Worker(new URL('monaco-editor/esm/vs/editor/editor.worker.js', import.meta.url), {
-      type: 'module',
-    }),
+  TextEditorWorker: async () => {
+    const { default: EditorWorker } = await import(
+      'monaco-editor/esm/vs/editor/editor.worker?worker'
+    )
+
+    return new EditorWorker()
+  },
 }
 
 if (typeof window === 'undefined') {
@@ -12,10 +15,10 @@ if (typeof window === 'undefined') {
 }
 
 window.MonacoEnvironment ??= {
-  getWorker: function (_workerId, label) {
+  getWorker: async function (_workerId, label) {
     const workerFactory = workerLoaders[label]
     if (workerFactory != null) {
-      return workerFactory()
+      return await workerFactory()
     }
 
     throw new Error(`Worker ${label} not found`)
