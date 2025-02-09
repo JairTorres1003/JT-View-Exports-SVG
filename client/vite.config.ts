@@ -27,6 +27,11 @@ function CreateFileName(chunkInfo: PreRenderedChunk): string {
 // https://vite.dev/config/
 export default defineConfig({
   plugins: [tsconfigPaths(), react()],
+  optimizeDeps: {
+    esbuildOptions: {
+      plugins: [importMetaUrlPlugin],
+    },
+  },
   build: {
     rollupOptions: {
       output: {
@@ -34,11 +39,6 @@ export default defineConfig({
         chunkFileNames: CreateFileName,
         assetFileNames: 'assets/[name].[ext]',
       },
-    },
-  },
-  optimizeDeps: {
-    esbuildOptions: {
-      plugins: [importMetaUrlPlugin],
     },
   },
 })
