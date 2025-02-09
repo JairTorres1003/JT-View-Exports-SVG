@@ -83,6 +83,15 @@ class VSCodeAPIWrapper {
   public unregisterMessage(type: SVGPostMessage): void {
     this.messageHandlers[type] = undefined
   }
+
+  /**
+   * Getter for the VS Code API.
+   *
+   * @returns The VS Code API instance, or undefined if not available.
+   */
+  get _api(): Readonly<WebviewApi<unknown> | undefined> {
+    return this.vsCodeApi
+  }
 }
 
 /**
