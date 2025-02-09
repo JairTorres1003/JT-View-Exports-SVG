@@ -4,6 +4,9 @@ import importMetaUrlPlugin from '@codingame/esbuild-import-meta-url-plugin'
 import react from '@vitejs/plugin-react-swc'
 import tsconfigPaths from 'vite-tsconfig-paths'
 
+import fixOutputPlugin, { FixOutputPluginOptions } from './plugins/fixOutputPlugin'
+import renameAssetsPlugin, { RenamePluginOptions } from './plugins/renameAssets'
+
 /**
  * Generates a file name based on the provided chunk information.
  *
@@ -24,9 +27,44 @@ function CreateFileName(chunkInfo: PreRenderedChunk): string {
   return `assets/${name}.js`
 }
 
+const optionsRenameAssetsPlugin: RenamePluginOptions = {
+  outDir: 'dist/assets',
+  filesToRename: [
+    {
+      pattern: /^editor\.worker-.*\.js$/,
+      newName: 'module.editor.worker.js',
+    },
+  ],
+}
+
+const optionsFixOutputPlugin: FixOutputPluginOptions = {
+  outDir: 'dist',
+  filesToFixed: [
+    {
+      file: 'assets/editor.worker.js',
+      name: 'editorWorker',
+      pattern: '"/assets/editor.worker-.*\\.js"',
+      callback: (match) => {
+        const path = match.split('/').slice(0, -1).join('/')
+        return `${path}/module.editor.worker.js"`
+      },
+    },
+    {
+      file: 'assets/webWorkerExtensionHostIframe.html',
+      name: 'webWorkerExtensionHostIframe',
+      pattern: '"/assets/.*\\.html"',
+    },
+  ],
+}
+
 // https://vite.dev/config/
 export default defineConfig({
-  plugins: [tsconfigPaths(), react()],
+  plugins: [
+    tsconfigPaths(),
+    react(),
+    renameAssetsPlugin(optionsRenameAssetsPlugin),
+    fixOutputPlugin(optionsFixOutputPlugin),
+  ],
   optimizeDeps: {
     esbuildOptions: {
       plugins: [importMetaUrlPlugin],
