@@ -51,12 +51,16 @@
       {
         "command": "JT-View-Exports-SVG.collapseAll",
         "title": "%extension.commands.collapseAll.title%",
-        "icon": "$(collapse-all)"
+        "icon": "$(collapse-all)",
+        "category": "View",
+        "enablement": "JT-View-Exports-SVG.isExpanded"
       },
       {
         "command": "JT-View-Exports-SVG.expandAll",
         "title": "%extension.commands.expandAll.title%",
-        "icon": "$(expand-all)"
+        "icon": "$(expand-all)",
+        "category": "View",
+        "enablement": "!JT-View-Exports-SVG.isExpanded"
       }
     ],
     "menus": {
