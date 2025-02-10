@@ -21,12 +21,12 @@
     "extension.commands.collapseAll.title": {
       "type": "string",
       "description": "The title of the command to collapse all items",
-      "default": "View Exports SVG: Collapse All Icons"
+      "default": "Collapse All Icons"
     },
     "extension.commands.expandAll.title": {
       "type": "string",
       "description": "The title of the command to expand all items",
-      "default": "View Exports SVG: Expand All Icons"
+      "default": "Expand All Icons"
     },
     "extension.config.defaultExpandAll.title": {
       "type": "string",
