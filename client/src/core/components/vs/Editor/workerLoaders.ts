@@ -1,12 +1,27 @@
 export type WorkerLoader = () => Promise<Worker>
 
+/**
+ * Asynchronously loads a web worker from the specified file output.
+ *
+ * @param fileOutput - The path to the worker file relative to the current module.
+ * @returns A promise that resolves to a new Worker instance.
+ */
+async function loadWorker(fileOutput: string): Promise<Worker> {
+  const result = await fetch(new URL(fileOutput, import.meta.url))
+  const blob = await result.blob()
+  const blobUrl = URL.createObjectURL(blob)
+  return new Worker(blobUrl)
+}
+
 const workerLoaders: Partial<Record<string, WorkerLoader>> = {
   TextEditorWorker: async () => {
-    const { default: EditorWorker } = await import(
-      'monaco-editor/esm/vs/editor/editor.worker?worker'
-    )
+    if (!window.ViewExportsSVG) {
+      return new Worker(new URL('monaco-editor/esm/vs/editor/editor.worker', import.meta.url), {
+        type: 'module',
+      })
+    }
 
-    return new EditorWorker()
+    return await loadWorker('./editor.worker.js')
   },
 }
 

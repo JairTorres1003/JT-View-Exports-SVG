@@ -32,7 +32,7 @@ const optionsRenameAssetsPlugin: RenamePluginOptions = {
   filesToRename: [
     {
       pattern: /^editor\.worker-.*\.js$/,
-      newName: 'module.editor.worker.js',
+      newName: 'editor.worker.js',
     },
   ],
 }
@@ -41,18 +41,22 @@ const optionsFixOutputPlugin: FixOutputPluginOptions = {
   outDir: 'dist',
   filesToFixed: [
     {
-      file: 'assets/editor.worker.js',
-      name: 'editorWorker',
-      pattern: '"/assets/editor.worker-.*\\.js"',
+      file: 'assets/index-home.js',
+      pattern: /"\/assets\/editor\.worker-.*\.js"/,
       callback: (match) => {
-        const path = match.split('/').slice(0, -1).join('/')
-        return `${path}/module.editor.worker.js"`
+        const auxMatch = match.replace(/"/g, '')
+        const last = auxMatch.lastIndexOf('/')
+        return `"${auxMatch.slice(0, last)}/editor.worker.js"`
       },
     },
     {
-      file: 'assets/webWorkerExtensionHostIframe.html',
-      name: 'webWorkerExtensionHostIframe',
-      pattern: '"/assets/.*\\.html"',
+      file: 'assets/index-home.js',
+      pattern: /"\/assets\/.*\.html"/,
+      callback: (match) => {
+        const auxMatch = match.replace(/"/g, '')
+        const last = auxMatch.lastIndexOf('/')
+        return `window.ViewExportsSVG ? "./${auxMatch.slice(last + 1)}" : "${auxMatch}"`
+      },
     },
   ],
 }

@@ -6,7 +6,7 @@ export interface FixOutputPluginOptions {
   /**
    * The output directory where the files are located.
    */
-  outDir: string
+  outDir?: string
   /**
    * The list of files to be processed.
    */
@@ -16,19 +16,15 @@ export interface FixOutputPluginOptions {
      */
     file: string
     /**
-     * The name of the variable to be used as a prefix.
-     */
-    name: string
-    /**
      * The pattern to be replaced.
      */
-    pattern: string
+    pattern: RegExp
     /**
      * The callback to be executed
      * @param match - The matched string.
      * @returns The replacement string.
      */
-    callback?: (match: string) => string
+    callback: (match: string) => string
   }[]
 }
 
@@ -45,8 +41,7 @@ export interface FixOutputPluginOptions {
  *   filesToFixed: [
  *     {
  *       file: 'index.html',
- *       name: 'example',
- *       pattern: 'somePattern',
+ *       pattern: /"\/assets\/editor.worker-.*\.js"/,
  *       callback: (match) => `customReplacement(${match})`
  *     }
  *   ]
@@ -54,36 +49,34 @@ export interface FixOutputPluginOptions {
  */
 export default function fixOutputPlugin(options: FixOutputPluginOptions): Plugin {
   const namePlugin = 'fix-output-plugin'
-  const prefixVar = 'window.jt'
 
   return {
-    name: `${namePlugin}`,
+    name: namePlugin,
     apply: 'build',
     async closeBundle() {
-      const { outDir, filesToFixed } = options
+      const { outDir = 'dist', filesToFixed } = options
 
       if (!outDir || !filesToFixed || filesToFixed.length === 0) {
         console.log(`[${namePlugin}] No files found to process`)
         return
       }
 
-      for (const { file, name, pattern, callback } of filesToFixed) {
+      for (const { file, pattern, callback } of filesToFixed) {
         const filePath = path.resolve(outDir, file)
 
         try {
           let content = await fs.readFile(filePath, 'utf-8')
-          const regex = new RegExp(pattern, 'g')
+          const matches = content.match(pattern)
 
-          content = content.replace(
-            regex,
-            (match) => `${prefixVar}&&${prefixVar}.${name}?${prefixVar}.${name}:${match}`
-          )
-          await fs.writeFile(filePath, content, 'utf-8')
-
-          if (typeof callback === 'function') {
-            content = content.replace(regex, callback)
-            await fs.writeFile(filePath, content, 'utf-8')
+          if (!matches) {
+            console.log(`[${namePlugin}] No matches found for ${file}`)
+            continue
           }
+
+          const regex = new RegExp(pattern, 'g')
+          content = content.replace(regex, callback)
+
+          await fs.writeFile(filePath, content, 'utf-8')
 
           console.log(`[${namePlugin}] File modified: ${file}`)
         } catch (error) {

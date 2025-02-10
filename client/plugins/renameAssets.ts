@@ -33,7 +33,7 @@ export default function renameAssetsPlugin(options: RenamePluginOptions): Plugin
   const namePlugin = 'rename-assets-plugin'
 
   return {
-    name: `${namePlugin}`,
+    name: namePlugin,
     apply: 'build',
     async closeBundle() {
       const { outDir, filesToRename } = options

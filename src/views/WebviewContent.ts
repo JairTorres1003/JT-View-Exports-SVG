@@ -18,8 +18,6 @@ function getWebviewAssets(webview: Webview, extensionUri: Uri): GetWebviewAssets
     icon: getAssetUri('favicon.ico'),
     index: getAssetUri('index.js'),
     styles: getAssetUri('index.css'),
-    moduleEditorWorker: getAssetUri('module.editor.worker.js'),
-    webWorkerExtensionHostIframe: getAssetUri('webWorkerExtensionHostIframe.html'),
   }
 }
 
@@ -47,12 +45,7 @@ export function getWebviewContent(webview: Webview, extensionUri: Uri): string {
       <body>
         <div id="root"></div>
         <noscript>You need to enable JavaScript to run this app.</noscript>
-        <script>
-          window.jt = {
-            editorWorker: "${assets.moduleEditorWorker}",
-            webWorkerExtensionHostIframe: "${assets.webWorkerExtensionHostIframe}",
-          };
-        </script>
+        <script>{window.ViewExportsSVG = "${l10n.t('View Exports SVG')}"}</script>
         <script type="module" nonce="${nonce}" src="${assets.index}"></script>
       </body>
     </html>
