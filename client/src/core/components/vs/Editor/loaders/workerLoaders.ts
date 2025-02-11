@@ -23,6 +23,16 @@ const workerLoaders: Partial<Record<string, WorkerLoader>> = {
 
     return await loadWorker('./editor.worker.js')
   },
+  TextMateWorker: async () => {
+    if (!window.ViewExportsSVG) {
+      return new Worker(
+        new URL('@codingame/monaco-vscode-textmate-service-override/worker', import.meta.url),
+        { type: 'module' }
+      )
+    }
+
+    return await loadWorker('./textmate.worker.js')
+  },
 }
 
 if (typeof window === 'undefined') {

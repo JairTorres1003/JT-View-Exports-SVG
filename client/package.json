@@ -39,6 +39,11 @@
   "dependencies": {
     "@codingame/monaco-vscode-api": "^13.1.7",
     "@codingame/monaco-vscode-configuration-service-override": "^13.1.7",
+    "@codingame/monaco-vscode-languages-service-override": "^13.1.7",
+    "@codingame/monaco-vscode-textmate-service-override": "^13.1.7",
+    "@codingame/monaco-vscode-theme-defaults-default-extension": "^13.1.7",
+    "@codingame/monaco-vscode-theme-service-override": "^13.1.7",
+    "@codingame/monaco-vscode-typescript-basics-default-extension": "^13.1.7",
     "@emotion/react": "^11.14.0",
     "@emotion/styled": "^11.14.0",
     "@mui/material": "^6.4.3",
@@ -58,7 +63,8 @@
     "zod": "^3.24.1"
   },
   "devDependencies": {
-    "@codingame/esbuild-import-meta-url-plugin": "^1.0.2",
+    "@codingame/esbuild-import-meta-url-plugin": "^1.0.3",
+    "@codingame/monaco-vscode-python-default-extension": "^13.1.7",
     "@eslint/js": "^9.20.0",
     "@types/color": "^4.2.0",
     "@types/react": "^19.0.8",
@@ -82,5 +88,8 @@
     "typescript-eslint": "^8.23.0",
     "vite": "^6.1.0",
     "vite-tsconfig-paths": "^5.1.4"
+  },
+  "overrides": {
+    "esbuild": "0.24.2"
   }
 }

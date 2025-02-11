@@ -1,5 +1,5 @@
-import { forwardRef } from 'react'
-import './workerLoaders'
+import { forwardRef, useId } from 'react'
+import './loaders/workerLoaders'
 
 import { BoxEditor } from './Editor.style'
 
@@ -14,6 +14,7 @@ export interface EditorProps {
 
 export const Editor = forwardRef<TypeEditorRef, EditorProps>(({ className }, forwardedRef) => {
   const { rootRef } = useEditor({ forwardedRef })
+  const id = useId()
 
-  return <BoxEditor className={className} ref={rootRef} id='jt-editor' />
+  return <BoxEditor className={className} ref={rootRef} id={`jt-editor-${id}`} />
 })

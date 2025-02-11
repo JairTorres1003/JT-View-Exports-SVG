@@ -1,7 +1,13 @@
+import '@codingame/monaco-vscode-typescript-basics-default-extension'
+import '@codingame/monaco-vscode-theme-defaults-default-extension'
+
 import { type IEditorOverrideServices, initialize } from '@codingame/monaco-vscode-api'
 import getConfigurationServiceOverride, {
   updateUserConfiguration,
 } from '@codingame/monaco-vscode-configuration-service-override'
+import getLanguagesServiceOverride from '@codingame/monaco-vscode-languages-service-override'
+import getTextMateServiceOverride from '@codingame/monaco-vscode-textmate-service-override'
+import getThemeServiceOverride from '@codingame/monaco-vscode-theme-service-override'
 import * as monaco from 'monaco-editor'
 import { useEffect, useRef, useState } from 'react'
 
@@ -20,7 +26,12 @@ interface EditorHookProps {
   forwardedRef: React.ForwardedRef<TypeEditorRef>
 }
 
-const OVERRIDES: IEditorOverrideServices = { ...getConfigurationServiceOverride() }
+const OVERRIDES: IEditorOverrideServices = {
+  ...getConfigurationServiceOverride(),
+  ...getTextMateServiceOverride(),
+  ...getThemeServiceOverride(),
+  ...getLanguagesServiceOverride(),
+}
 
 export const useEditor = ({ forwardedRef }: EditorHookProps): EditorHook => {
   const [isInitialized, setIsInitialized] = useState(false)
@@ -69,7 +80,7 @@ export const useEditor = ({ forwardedRef }: EditorHookProps): EditorHook => {
 
         const newEditor = monaco.editor.create(editorRef.current, {
           value: 'function hello() {\n  console.log("Hello, world!");\n}',
-          language: 'javascript',
+          language: 'typescript',
         })
 
         editorRef.current.editor = newEditor
