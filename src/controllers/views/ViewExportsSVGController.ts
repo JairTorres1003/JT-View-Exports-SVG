@@ -6,7 +6,7 @@ import { CONFIG_KEY } from '@/constants/misc'
 import { SVGPostMessage } from '@/enum/ViewExportsSVG'
 import { type SVGErrors, type ViewExportSVG } from '@/interfaces/ViewExportsSVG'
 import { isEmpty } from '@/utilities/misc'
-import { getWebviewContent } from '@/views/WebviewContent'
+import { WebviewContent } from '@/views/WebviewContent'
 
 export class ViewExportsSVGController extends ListerWebviewController {
   public static currentPanel: ViewExportsSVGController | undefined
@@ -27,7 +27,8 @@ export class ViewExportsSVGController extends ListerWebviewController {
     )
 
     // Set the HTML content for the webview panel
-    this._panel.webview.html = getWebviewContent(this._panel.webview, extensionUri)
+    const webviewContent = new WebviewContent(this._panel.webview, extensionUri)
+    this._panel.webview.html = webviewContent._content
   }
 
   /**
@@ -84,7 +85,7 @@ export class ViewExportsSVGController extends ListerWebviewController {
         localResourceRoots: [
           Uri.joinPath(extensionUri, 'assets'),
           Uri.joinPath(extensionUri, 'out/cjs'),
-          Uri.joinPath(extensionUri, 'client/dist/assets'),
+          Uri.joinPath(extensionUri, 'client/dist'),
         ],
       }
     )

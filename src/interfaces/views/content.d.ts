@@ -1,7 +1,7 @@
 import { Position, SVGFile } from '../ViewExportsSVG'
 
 export interface GetWebviewAssets {
-  icon: string
+  favicon: string
   index: string
   styles: string
 }
