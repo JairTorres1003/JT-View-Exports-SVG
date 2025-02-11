@@ -22,7 +22,14 @@ const CONFIG_STATES = {
 
 export default tseslint.config(
   {
-    ignores: ['dist', '**/*.d.ts', 'vite.config.ts', 'eslint.config.js', 'plugins'],
+    ignores: [
+      'dist',
+      '**/*.d.ts',
+      'vite.config.ts',
+      'eslint.config.js',
+      'plugins',
+      'vite.generateFiles.ts',
+    ],
   },
   eslintConfigLove,
   eslintConfigPrettier,

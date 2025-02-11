@@ -12,7 +12,8 @@ workspaceTest.code-workspace
 src/**
 server/**
 client/**
-!client/dist/assets
+!client/dist
+client/dist/index.html
 
 # Ignore Misc
 .yarnrc
