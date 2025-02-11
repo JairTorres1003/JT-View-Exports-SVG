@@ -12,7 +12,7 @@ export const BoxDevTools = styled(Box, { name: 'Box-DevTools' })(() => ({
   maxWidth: '100%',
   height: '100%',
   backgroundColor: 'var(--JT-SVG-vscode-sideBarTitle-background)',
-  borderLeft: '1px solid var(--JT-SVG-vscode-panel-border)',
+  // borderLeft: '1px solid var(--JT-SVG-vscode-panel-border)',
   display: 'flex',
   flexDirection: 'column',
   overflow: 'hidden',
@@ -24,7 +24,8 @@ export const BoxDevTools = styled(Box, { name: 'Box-DevTools' })(() => ({
     height: 35,
     minHeight: 35,
     overflow: 'hidden',
-    borderBottom: '1px solid var(--JT-SVG-vscode-panel-border)',
+    // borderBottom: '1px solid var(--JT-SVG-vscode-panel-border)',
+    color: 'var(--JT-SVG-palette-text-primary)',
     [`& > .${typographyClasses.h2}`]: {
       paddingLeft: '12px',
       maxWidth: '100%',
