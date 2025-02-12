@@ -20,6 +20,7 @@ export default defineConfig({
         assetFileNames: generateAssetName,
       },
     },
+    chunkSizeWarningLimit: 1024,
     manifest: true,
   },
   worker: {
