@@ -2,6 +2,7 @@ import { defineConfig } from 'vite'
 import importMetaUrlPlugin from '@codingame/esbuild-import-meta-url-plugin'
 import react from '@vitejs/plugin-react-swc'
 import tsconfigPaths from 'vite-tsconfig-paths'
+
 import { generateAssetName, generateFileName, generateWorkerFileName } from './vite.generateFiles'
 
 // https://vite.dev/config/
@@ -22,7 +23,6 @@ export default defineConfig({
     manifest: true,
   },
   worker: {
-    format: 'es',
     rollupOptions: {
       output: {
         entryFileNames: generateWorkerFileName,

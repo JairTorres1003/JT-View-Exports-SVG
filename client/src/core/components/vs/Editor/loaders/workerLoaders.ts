@@ -7,6 +7,7 @@ export type WorkerLoader = () => Promise<Worker>
  * @returns A promise that resolves to a new Worker instance.
  */
 async function loadWorker(fileOutput: string): Promise<Worker> {
+  console.info('🚀 ~ loadWorker ~  import.meta.url:', import.meta.url)
   const result = await fetch(new URL(fileOutput, import.meta.url))
   const blob = await result.blob()
   const blobUrl = URL.createObjectURL(blob)
@@ -21,18 +22,18 @@ const workerLoaders: Partial<Record<string, WorkerLoader>> = {
       })
     }
 
-    return await loadWorker('./editor.worker.js')
+    return await loadWorker('../workers/editor.worker.js')
   },
-  TextMateWorker: async () => {
-    if (!window.ViewExportsSVG) {
-      return new Worker(
-        new URL('@codingame/monaco-vscode-textmate-service-override/worker', import.meta.url),
-        { type: 'module' }
-      )
-    }
+  // TextMateWorker: async () => {
+  //   if (!window.ViewExportsSVG) {
+  //     return new Worker(
+  //       new URL('@codingame/monaco-vscode-textmate-service-override/worker', import.meta.url),
+  //       { type: 'module' }
+  //     )
+  //   }
 
-    return await loadWorker('./textmate.worker.js')
-  },
+  //   return await loadWorker('../workers/textmate.worker.js')
+  // },
 }
 
 if (typeof window === 'undefined') {
@@ -41,6 +42,7 @@ if (typeof window === 'undefined') {
 
 window.MonacoEnvironment ??= {
   getWorker: async function (_workerId, label) {
+    console.info('🚀 ~ _workerId, label:', { _workerId, label })
     const workerFactory = workerLoaders[label]
     if (workerFactory != null) {
       return await workerFactory()

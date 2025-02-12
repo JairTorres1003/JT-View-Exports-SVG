@@ -1,13 +1,13 @@
-import '@codingame/monaco-vscode-typescript-basics-default-extension'
-import '@codingame/monaco-vscode-theme-defaults-default-extension'
+// import '@codingame/monaco-vscode-typescript-basics-default-extension'
+// import '@codingame/monaco-vscode-theme-defaults-default-extension'
 
 import { type IEditorOverrideServices, initialize } from '@codingame/monaco-vscode-api'
 import getConfigurationServiceOverride, {
   updateUserConfiguration,
 } from '@codingame/monaco-vscode-configuration-service-override'
-import getLanguagesServiceOverride from '@codingame/monaco-vscode-languages-service-override'
-import getTextMateServiceOverride from '@codingame/monaco-vscode-textmate-service-override'
-import getThemeServiceOverride from '@codingame/monaco-vscode-theme-service-override'
+// import getLanguagesServiceOverride from '@codingame/monaco-vscode-languages-service-override'
+// import getTextMateServiceOverride from '@codingame/monaco-vscode-textmate-service-override'
+// import getThemeServiceOverride from '@codingame/monaco-vscode-theme-service-override'
 import * as monaco from 'monaco-editor'
 import { useEffect, useRef, useState } from 'react'
 
@@ -28,9 +28,9 @@ interface EditorHookProps {
 
 const OVERRIDES: IEditorOverrideServices = {
   ...getConfigurationServiceOverride(),
-  ...getTextMateServiceOverride(),
-  ...getThemeServiceOverride(),
-  ...getLanguagesServiceOverride(),
+  // ...getTextMateServiceOverride(),
+  // ...getThemeServiceOverride(),
+  // ...getLanguagesServiceOverride(),
 }
 
 export const useEditor = ({ forwardedRef }: EditorHookProps): EditorHook => {
