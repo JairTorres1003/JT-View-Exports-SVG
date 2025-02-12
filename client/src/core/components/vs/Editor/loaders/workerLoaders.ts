@@ -7,7 +7,6 @@ export type WorkerLoader = () => Promise<Worker>
  * @returns A promise that resolves to a new Worker instance.
  */
 async function loadWorker(fileOutput: string): Promise<Worker> {
-  console.info('🚀 ~ loadWorker ~  import.meta.url:', import.meta.url)
   const result = await fetch(new URL(fileOutput, import.meta.url))
   const blob = await result.blob()
   const blobUrl = URL.createObjectURL(blob)
