@@ -16,18 +16,9 @@ const mode = argv.indexOf('--mode') > -1 ? argv[argv.indexOf('--mode') + 1] : 'd
 
 const regexPage = /src_app_[A-Za-z]+_index_ts/
 
-// function generateFileName({ chunk }) {
-//   if (chunk.name && chunk.name.endsWith('.worker')) {
-//     return '[name].[contenthash].worker.js'
-//   }
-//   // const aliased = regexPage.test(chunk.id) ? 'pages/' : ''
-//   // return `chunks/${aliased}[name]-[contenthash].js`
-//   return '[name]-[contenthash].js'
-// }
-
-export function generateAssetName() {
-  // return 'assets/[name]-[hash][ext]'
-  return '[name]-[hash][ext]'
+function generateFileName({ chunk }) {
+  const aliased = regexPage.test(chunk.id) ? 'pages/' : ''
+  return `chunks/${aliased}[contenthash].js`
 }
 
 /** @type {import('webpack').Configuration}*/
@@ -37,9 +28,9 @@ export default {
   output: {
     clean: true,
     path: path.resolve(__dirname, 'dist'),
-    filename: '[name]-[contenthash].js',
-    chunkFilename: '[name]-[contenthash].js',
-    assetModuleFilename: generateAssetName,
+    filename: '[contenthash].js',
+    chunkFilename: generateFileName,
+    assetModuleFilename: 'assets/[hash][ext]',
   },
   resolve: {
     extensions: ['.tsx', '.ts', '.js'],
@@ -78,7 +69,8 @@ export default {
           {
             loader: 'worker-loader',
             options: {
-              filename: '[name].[contenthash].worker.js',
+              filename: 'chunks/workers/[contenthash].worker.js',
+              chunkFilename: 'chunks/workers/[contenthash].worker.js',
               publicPath: '/',
             },
           },
@@ -93,7 +85,7 @@ export default {
       favicon: './favicon.ico',
     }),
     new MiniCssExtractPlugin({
-      filename: '[name]-[contenthash].css',
+      filename: '[contenthash].css',
       chunkFilename: '[id]-[contenthash].css',
     }),
     new webpack.DefinePlugin({
@@ -109,27 +101,30 @@ export default {
     new WebpackManifestPlugin({
       generate: (_, files) => {
         const manifest = {
+          assets: [],
           'index.html': { css: [], assets: [] },
         }
-        for (const file of files) {
-          if (file.name === 'index.html') {
-            continue
-          }
 
-          if (file.isInitial) {
-            if (file.name === 'main.js') {
-              manifest['index.html'].file = file.path
-            } else if (file.name.endsWith('.css')) {
-              manifest['index.html'].css.push(file.path)
+        for (const { name, path, isInitial } of files) {
+          if (name === 'index.html') continue
+
+          const cleanPath = path.replace(/^auto\//, '')
+
+          if (isInitial) {
+            if (name === 'main.js') {
+              manifest['index.html'].file = cleanPath
+            } else if (name.endsWith('.css')) {
+              manifest['index.html'].css.push(cleanPath)
             } else {
-              manifest['index.html'].assets.push(file.path)
+              manifest['index.html'].assets.push(cleanPath)
             }
+          } else if (name.startsWith('assets/')) {
+            manifest.assets.push(cleanPath)
           } else {
-            manifest[file.name] = {
-              file: file.path,
-            }
+            manifest[name] = { file: cleanPath }
           }
         }
+
         return manifest
       },
     }),
