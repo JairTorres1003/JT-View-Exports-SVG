@@ -47,7 +47,7 @@ export class WebviewContent {
    * @throws Will throw an error if the manifest file cannot be read or parsed.
    */
   private getManifest(): ManifestContent {
-    const path = this.getAssetUri('.vite', 'manifest.json').fsPath
+    const path = this.getAssetUri('manifest.json').fsPath
     const manifest = fs.readFileSync(path, 'utf-8')
     return JSON.parse(manifest)
   }

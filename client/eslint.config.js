@@ -29,6 +29,7 @@ export default tseslint.config(
       'eslint.config.js',
       'plugins',
       'vite.generateFiles.ts',
+      'webpack*.js',
     ],
   },
   eslintConfigLove,
