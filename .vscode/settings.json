@@ -89,5 +89,8 @@
     "l10n.schema.json": "i18n",
     "nls.schema.json": "i18n",
     "tsconfig.types.json": "tsconfig"
+  },
+  "material-icon-theme.folders.associations": {
+    "workers": "gh-workflows"
   }
 }

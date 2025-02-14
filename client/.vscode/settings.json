@@ -23,5 +23,8 @@
   ],
   "material-icon-theme.files.associations": {
     "i18n.schema.json": "i18n"
+  },
+  "material-icon-theme.folders.associations": {
+    "workers": "gh-workflows"
   }
 }
