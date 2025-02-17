@@ -12,6 +12,8 @@
   "editor.guides.bracketPairs": true,
   "editor.cursorSmoothCaretAnimation": "on",
   "explorer.fileNesting.enabled": true,
+  "files.trimTrailingWhitespace": true,
+  "files.insertFinalNewline": true,
   "editor.codeActionsOnSave": {
     "source.fixAll": "always"
   },
