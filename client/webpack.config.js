@@ -71,6 +71,7 @@ export default {
             options: {
               filename: 'chunks/workers/[contenthash].worker.js',
               chunkFilename: 'chunks/workers/[contenthash].worker.js',
+              inline: 'fallback',
               publicPath: '/',
             },
           },
