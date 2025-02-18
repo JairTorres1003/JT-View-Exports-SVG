@@ -37,7 +37,8 @@
     "lint": "eslint .",
     "lint:fix": "eslint . --fix --cache",
     "format:check": "prettier --check \"**/*.{ts,tsx,json,css,md,cjs}\"",
-    "format": "prettier --write \"**/*.{ts,tsx,json,css,md,cjs}\""
+    "format": "prettier --write \"**/*.{ts,tsx,json,css,md,cjs}\"",
+    "postinstall": "patch-package"
   },
   "dependencies": {
     "@codingame/esbuild-import-meta-url-plugin": "^1.0.3",
@@ -91,6 +92,7 @@
     "globals": "^15.15.0",
     "html-webpack-plugin": "^5.6.3",
     "mini-css-extract-plugin": "^2.9.2",
+    "patch-package": "^8.0.0",
     "prettier": "^3.5.1",
     "serve": "^14.2.4",
     "style-loader": "^4.0.0",
