@@ -9,7 +9,7 @@ import getLanguagesServiceOverride from '@codingame/monaco-vscode-languages-serv
 import getTextMateServiceOverride from '@codingame/monaco-vscode-textmate-service-override'
 import getThemeServiceOverride from '@codingame/monaco-vscode-theme-service-override'
 import * as monaco from 'monaco-editor'
-import { useEffect, useRef, useState } from 'react'
+import { useCallback, useEffect, useRef, useState } from 'react'
 
 import { useForkRef } from '../useForkRef'
 
@@ -69,8 +69,12 @@ export const useEditor = ({ forwardedRef }: EditorHookProps): EditorHook => {
    *
    * If the initialization fails, it logs an error message to the console.
    */
-  const initializeEditor = () => {
-    if (!editorRef.current || isInitialized) return
+  const initializeEditor = useCallback(() => {
+    if (!editorRef.current) return
+
+    if (isInitialized) {
+      editorRef.current.editor?.dispose()
+    }
 
     initialize(OVERRIDES)
       .then(() => {
@@ -88,7 +92,7 @@ export const useEditor = ({ forwardedRef }: EditorHookProps): EditorHook => {
       .catch((error) => {
         console.error(`Failed to initialize editor: ${getUnknownError(error)}`)
       })
-  }
+  }, [isInitialized])
 
   useEffect(updateConfig, [editorConfig, isInitialized])
 
