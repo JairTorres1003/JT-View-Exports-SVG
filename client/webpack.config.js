@@ -1,11 +1,11 @@
 import dotenv from 'dotenv'
 import HtmlWebpackPlugin from 'html-webpack-plugin'
+import MiniCssExtractPlugin from 'mini-css-extract-plugin'
 import path from 'path'
 import TsconfigPathsPlugin from 'tsconfig-paths-webpack-plugin'
 import { fileURLToPath } from 'url'
 import webpack from 'webpack'
 import { WebpackManifestPlugin } from 'webpack-manifest-plugin'
-import MiniCssExtractPlugin from 'mini-css-extract-plugin'
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url))
 
@@ -102,8 +102,9 @@ export default {
     new WebpackManifestPlugin({
       generate: (_, files) => {
         const manifest = {
+          'index.html': { css: [], assets: [], file: '' },
+          chunks: {},
           assets: [],
-          'index.html': { css: [], assets: [] },
         }
 
         for (const { name, path, isInitial } of files) {
@@ -119,10 +120,19 @@ export default {
             } else {
               manifest['index.html'].assets.push(cleanPath)
             }
-          } else if (name.startsWith('assets/')) {
-            manifest.assets.push(cleanPath)
           } else {
-            manifest[name] = { file: cleanPath }
+            const [, type] = name.split('/').slice(0, -1)
+            const fileName = name.split('/').pop()
+
+            if (name.includes('chunks/')) {
+              const category = type || 'others'
+              manifest.chunks[category] ??= []
+              manifest.chunks[category].push({ file: cleanPath, name: fileName })
+            } else if (name.includes('assets/')) {
+              manifest.assets.push({ file: cleanPath, name: fileName })
+            } else {
+              manifest[name] = { file: cleanPath, name: fileName }
+            }
           }
         }
 
