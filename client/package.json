@@ -96,6 +96,7 @@
     "prettier": "^3.5.1",
     "serve": "^14.2.4",
     "style-loader": "^4.0.0",
+    "terser-webpack-plugin": "^5.3.11",
     "ts-loader": "^9.5.2",
     "tsconfig-paths-webpack-plugin": "^4.2.0",
     "typescript": "~5.7.3",

@@ -2,6 +2,7 @@ import dotenv from 'dotenv'
 import HtmlWebpackPlugin from 'html-webpack-plugin'
 import MiniCssExtractPlugin from 'mini-css-extract-plugin'
 import path from 'path'
+import TerserPlugin from 'terser-webpack-plugin'
 import TsconfigPathsPlugin from 'tsconfig-paths-webpack-plugin'
 import { fileURLToPath } from 'url'
 import webpack from 'webpack'
@@ -24,6 +25,10 @@ export default {
     filename: '[contenthash].js',
     chunkFilename: 'chunks/[contenthash].js',
     assetModuleFilename: 'assets/[hash][ext]',
+  },
+  optimization: {
+    minimize: true,
+    minimizer: [new TerserPlugin({ extractComments: false })],
   },
   resolve: {
     extensions: ['.tsx', '.ts', '.js'],
@@ -92,6 +97,7 @@ export default {
         SSR: false,
       }),
     }),
+    new MiniCssExtractPlugin(),
     new WebpackManifestPlugin({
       generate: (_, files) => {
         const manifest = {
