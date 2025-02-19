@@ -14,13 +14,6 @@ const envConfig = dotenv.config().parsed || {}
 const argv = process.argv.slice(2)
 const mode = argv.indexOf('--mode') > -1 ? argv[argv.indexOf('--mode') + 1] : 'development'
 
-const regexPage = /src_app_[A-Za-z]+_index_ts/
-
-function generateFileName({ chunk }) {
-  const aliased = regexPage.test(chunk.id) ? 'pages/' : ''
-  return `chunks/${aliased}[contenthash].js`
-}
-
 /** @type {import('webpack').Configuration}*/
 export default {
   mode,
@@ -29,7 +22,7 @@ export default {
     clean: true,
     path: path.resolve(__dirname, 'dist'),
     filename: '[contenthash].js',
-    chunkFilename: generateFileName,
+    chunkFilename: 'chunks/[contenthash].js',
     assetModuleFilename: 'assets/[hash][ext]',
   },
   resolve: {

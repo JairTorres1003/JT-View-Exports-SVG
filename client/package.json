@@ -29,7 +29,7 @@
   "homepage": "https://github.com/JairTorres1003/JT-View-Exports-SVG/tree/main/client#readme",
   "scripts": {
     "dev": "webpack serve --config webpack.dev.js",
-    "build": "webpack --config webpack.config.js",
+    "build": "webpack --config webpack.config.js --mode production",
     "preview": "serve -s dist -l 4173",
     "dev:vite": "vite",
     "build:vite": "tsc -b && vite build",
