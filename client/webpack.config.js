@@ -97,7 +97,7 @@ export default {
       generate: (_, files) => {
         const manifest = {
           'index.html': { css: [], assets: [], file: '' },
-          chunks: {},
+          chunks: [],
           assets: [],
         }
 
@@ -115,13 +115,10 @@ export default {
               manifest['index.html'].assets.push(cleanPath)
             }
           } else {
-            const [, type] = name.split('/').slice(0, -1)
             const fileName = name.split('/').pop()
 
             if (name.includes('chunks/')) {
-              const category = type || 'others'
-              manifest.chunks[category] ??= []
-              manifest.chunks[category].push({ file: cleanPath, name: fileName })
+              manifest.chunks.push({ file: cleanPath, name: fileName })
             } else if (name.includes('assets/')) {
               manifest.assets.push({ file: cleanPath, name: fileName })
             } else {
