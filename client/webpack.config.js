@@ -74,7 +74,7 @@ export default {
     }),
     new MiniCssExtractPlugin({
       filename: '[contenthash].css',
-      chunkFilename: '[id]-[contenthash].css',
+      chunkFilename: '[contenthash].css',
     }),
     new webpack.DefinePlugin({
       'import.meta.env': JSON.stringify({
