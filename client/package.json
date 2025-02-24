@@ -41,7 +41,6 @@
     "postinstall": "patch-package"
   },
   "dependencies": {
-    "@codingame/esbuild-import-meta-url-plugin": "^1.0.3",
     "@codingame/monaco-vscode-api": "^14.0.4",
     "@codingame/monaco-vscode-configuration-service-override": "^14.0.4",
     "@codingame/monaco-vscode-languages-service-override": "^14.0.4",
@@ -68,6 +67,7 @@
     "zod": "^3.24.2"
   },
   "devDependencies": {
+    "@codingame/esbuild-import-meta-url-plugin": "^1.0.3",
     "@codingame/monaco-vscode-python-default-extension": "^14.0.4",
     "@eslint/js": "^9.20.0",
     "@types/color": "^4.2.0",
