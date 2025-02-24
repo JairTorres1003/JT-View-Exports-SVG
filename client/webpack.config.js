@@ -42,16 +42,19 @@ export default {
     rules: [
       {
         test: /\.tsx?$/,
-        exclude: /node_modules/,
-        use: [
-          {
-            loader: 'ts-loader',
-            options: {
-              transpileOnly: true,
-              configFile: path.resolve(__dirname, 'tsconfig.app.json'),
-            },
-          },
-        ],
+        loader: 'esbuild-loader',
+        options: {
+          loader: 'tsx',
+          target: 'esnext',
+          minify: false,
+        },
+      },
+      {
+        test: /\.js$/,
+        loader: 'esbuild-loader',
+        options: {
+          target: 'esnext',
+        },
       },
       {
         test: /\.css$/,
@@ -60,20 +63,6 @@ export default {
       {
         test: /\.(png|jpe?g|gif)$/i,
         use: [{ loader: 'file-loader' }],
-      },
-      {
-        test: /\.worker\.js$/,
-        use: [
-          {
-            loader: 'worker-loader',
-            options: {
-              filename: 'chunks/workers/[contenthash].worker.js',
-              chunkFilename: 'chunks/workers/[contenthash].worker.js',
-              inline: 'fallback',
-              publicPath: '/',
-            },
-          },
-        ],
       },
     ],
   },
@@ -97,7 +86,13 @@ export default {
         SSR: false,
       }),
     }),
+    new webpack.DefinePlugin({
+      rootDirectory: JSON.stringify(__dirname),
+    }),
     new MiniCssExtractPlugin(),
+    new webpack.ProvidePlugin({
+      React: 'react',
+    }),
     new WebpackManifestPlugin({
       generate: (_, files) => {
         const manifest = {
