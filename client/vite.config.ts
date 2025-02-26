@@ -4,8 +4,6 @@ import importMetaUrlPlugin from '@codingame/esbuild-import-meta-url-plugin'
 import react from '@vitejs/plugin-react-swc'
 import tsconfigPaths from 'vite-tsconfig-paths'
 
-import { generateAssetName, generateFileName, generateWorkerFileName } from './vite.generateFiles'
-
 const pkg = JSON.parse(
   fs.readFileSync(new URL('./package.json', import.meta.url).pathname).toString()
 )
@@ -37,8 +35,8 @@ export default defineConfig({
     chunkSizeWarningLimit: 1024,
     rollupOptions: {
       output: {
-        chunkFileNames: generateFileName,
-        assetFileNames: generateAssetName,
+        chunkFileNames: 'chunks/[hash].js',
+        assetFileNames: 'assets/[hash].[ext]',
       },
     },
   },
@@ -49,9 +47,9 @@ export default defineConfig({
     format: 'es',
     rollupOptions: {
       output: {
-        entryFileNames: generateWorkerFileName,
-        chunkFileNames: 'assets/workers/[name]-[hash].js',
-        assetFileNames: 'assets/workers/[name]-[hash].[ext]',
+        entryFileNames: 'chunks/[name]-[hash].js',
+        chunkFileNames: 'chunks/[name]-[hash].js',
+        assetFileNames: 'assets/[name]-[hash].[ext]',
       },
     },
   },
