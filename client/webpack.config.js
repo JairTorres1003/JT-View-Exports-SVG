@@ -1,8 +1,8 @@
 import dotenv from 'dotenv'
+import { EsbuildPlugin } from 'esbuild-loader'
 import HtmlWebpackPlugin from 'html-webpack-plugin'
 import MiniCssExtractPlugin from 'mini-css-extract-plugin'
 import path from 'path'
-import TerserPlugin from 'terser-webpack-plugin'
 import TsconfigPathsPlugin from 'tsconfig-paths-webpack-plugin'
 import { fileURLToPath } from 'url'
 import webpack from 'webpack'
@@ -28,7 +28,13 @@ export default {
   },
   optimization: {
     minimize: true,
-    minimizer: [new TerserPlugin({ extractComments: false })],
+    minimizer: [
+      new EsbuildPlugin({
+        target: 'esnext',
+        minify: true,
+        css: true,
+      }),
+    ],
   },
   resolve: {
     extensions: ['.tsx', '.ts', '.js'],
@@ -85,11 +91,8 @@ export default {
         BASE_URL: process.env.BASE_URL || '/',
         SSR: false,
       }),
-    }),
-    new webpack.DefinePlugin({
       rootDirectory: JSON.stringify(__dirname),
     }),
-    new MiniCssExtractPlugin(),
     new webpack.ProvidePlugin({
       React: 'react',
     }),
