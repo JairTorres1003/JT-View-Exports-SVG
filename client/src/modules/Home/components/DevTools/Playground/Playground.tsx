@@ -13,7 +13,7 @@ import { usePlayground } from '@/modules/Home/hooks/usePlayground'
 import { useSelector } from '@/providers/redux/store'
 
 export const Playground: FC = () => {
-  const recentlySelected = useSelector((state) => state.global.recentlySelected)
+  const recentlySelected = useSelector((state) => state.playground.recentlySelected)
 
   const { t } = useTranslation(undefined, { keyPrefix: 'labels' })
 

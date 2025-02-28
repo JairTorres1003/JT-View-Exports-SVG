@@ -20,7 +20,7 @@ export const useResizableHome = ({ devTootsId }: ResizableHomeHookProps): Resiza
   const [resizableWidth, setResizableWidth] = useState('100%')
   const [lastWidth, setLastWidth] = useState('75%')
 
-  const recentlySelected = useSelector((state) => state.global.recentlySelected)
+  const recentlySelected = useSelector((state) => state.playground.recentlySelected)
 
   /**
    * Callback function to handle the default open dev tools event.

@@ -2,6 +2,7 @@ import { type Reducer, type Store, combineReducers, configureStore } from '@redu
 import { type TypedUseSelectorHook, useSelector as useReduxSelector } from 'react-redux'
 
 import { GlobalReducer } from './features/GlobalSlice'
+import { PlaygroundReducer } from './features/PlaygroundSlice'
 import { SVGReducer } from './features/SVGSlice'
 import { VsCodeReducer } from './features/VsCodeSlice'
 
@@ -16,6 +17,7 @@ const rootReducer: Reducer<RootStoreState> = combineReducers({
   svg: SVGReducer,
   vsCode: VsCodeReducer,
   global: GlobalReducer,
+  playground: PlaygroundReducer,
 })
 
 /**

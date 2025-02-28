@@ -3,7 +3,7 @@ import type { SVGErrors, ViewExportSVG } from '@api/interfaces/ViewExportsSVG'
 import { useEffect, useState } from 'react'
 import { useDispatch } from 'react-redux'
 
-import { setRecentlySelected } from '@/providers/redux/features/GlobalSlice'
+import { setRecentlySelected } from '@/providers/redux/features/PlaygroundSlice'
 import { setComponents, setErrors, setSearch } from '@/providers/redux/features/SVGSlice'
 import { vscode } from '@/services/vscode'
 

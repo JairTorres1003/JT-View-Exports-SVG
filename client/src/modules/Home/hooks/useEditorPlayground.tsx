@@ -7,7 +7,7 @@ interface EditorPlaygroundHook {
 }
 
 export const useEditorPlayground = (): EditorPlaygroundHook => {
-  const recentlySelected = useSelector((state) => state.global.recentlySelected)
+  const recentlySelected = useSelector((state) => state.playground.recentlySelected)
 
   const defaultValue = useMemo(() => {
     if (!recentlySelected) return ''

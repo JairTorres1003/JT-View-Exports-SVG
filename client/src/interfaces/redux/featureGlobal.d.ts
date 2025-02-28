@@ -34,7 +34,6 @@ export interface GlobalState {
      */
     position?: SnackbarOrigin
   }
-  recentlySelected?: SVGComponent
 }
 
 export interface GlobalReducers {
@@ -46,10 +45,6 @@ export interface GlobalReducers {
    * Close the alert.
    */
   closeAlert: CaseReducer<GlobalState>
-  /**
-   * Set the recently selected component to the state.
-   */
-  setRecentlySelected: CaseReducer<GlobalState, PayloadAction<SVGComponent | undefined>>
 
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   [key: string]: CaseReducer<GlobalState, PayloadAction<any>>
