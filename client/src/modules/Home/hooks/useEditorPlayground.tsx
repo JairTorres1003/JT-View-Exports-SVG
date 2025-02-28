@@ -12,7 +12,7 @@ export const useEditorPlayground = (): EditorPlaygroundHook => {
   const defaultValue = useMemo(() => {
     if (!recentlySelected) return ''
 
-    return `<${recentlySelected.name} />`
+    return `<${recentlySelected.name} />\n`
   }, [recentlySelected])
 
   return { defaultValue }

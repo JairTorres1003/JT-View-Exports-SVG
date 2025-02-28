@@ -19,7 +19,7 @@ const CSS_VAR_SECONDARY = '--JT-SVG-vscode-sideBarSectionHeader-background'
 
 export const usePlayground = (): PlaygroundHook => {
   const [backgroundColor, setBackgroundColor] = useState('#fff')
-  const [expandedCode, setExpandedCode] = useState(false)
+  const [expandedCode, setExpandedCode] = useState(true)
 
   const [initialColor, setInitialColor] = useState('#fff')
 
