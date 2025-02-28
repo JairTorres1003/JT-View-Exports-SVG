@@ -12,9 +12,11 @@ export interface EditorProps {
   onChange?: (value: string) => void
 }
 
-export const Editor = forwardRef<TypeEditorRef, EditorProps>(({ className }, forwardedRef) => {
-  const { rootRef } = useEditor({ forwardedRef })
-  const id = useId()
+export const Editor = forwardRef<TypeEditorRef, EditorProps>(
+  ({ className, ...rest }, forwardedRef) => {
+    const { rootRef } = useEditor({ forwardedRef, ...rest })
+    const id = useId()
 
-  return <BoxEditor className={className} ref={rootRef} id={`jt-editor-${id}`} />
-})
+    return <BoxEditor className={className} ref={rootRef} id={`jt-editor-${id}`} />
+  }
+)

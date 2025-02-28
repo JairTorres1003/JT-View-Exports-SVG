@@ -4,11 +4,11 @@ import { useTranslation } from 'react-i18next'
 
 import RenderSvg from '../../SVG/RenderSvg'
 
+import { EditorPlayground } from './EditorPlayground'
 import { BoxPlayground, BoxPlaygroundCardSvg } from './Playground.style'
 
 import { IconCodeTag, IconCopy, IconRefresh } from '@/assets/icons/functionalities'
 import { SelectPickerColor } from '@/core/components/Select'
-import { Editor } from '@/core/components/vs/Editor'
 import { usePlayground } from '@/modules/Home/hooks/usePlayground'
 import { useSelector } from '@/providers/redux/store'
 
@@ -60,7 +60,7 @@ export const Playground: FC = () => {
 
         <Collapse in={expandedCode}>
           <Divider className='Box-Playground__card__divider' />
-          <Editor />
+          <EditorPlayground />
         </Collapse>
       </Card>
     </BoxPlayground>

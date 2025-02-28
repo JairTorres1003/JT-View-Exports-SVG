@@ -13,6 +13,7 @@ import { useCallback, useEffect, useRef, useState } from 'react'
 
 import { useForkRef } from '../useForkRef'
 
+import type { EditorProps } from '@/core/components/vs/Editor'
 import { useSelector } from '@/providers/redux/store'
 import { getUnknownError } from '@/utils/misc'
 
@@ -22,7 +23,7 @@ interface EditorHook {
   rootRef: React.RefCallback<Exclude<TypeEditorRef, 'null'>> | null
 }
 
-interface EditorHookProps {
+interface EditorHookProps extends Omit<EditorProps, 'className'> {
   forwardedRef: React.ForwardedRef<TypeEditorRef>
 }
 
@@ -33,7 +34,7 @@ const OVERRIDES: IEditorOverrideServices = {
   ...getLanguagesServiceOverride(),
 }
 
-export const useEditor = ({ forwardedRef }: EditorHookProps): EditorHook => {
+export const useEditor = ({ forwardedRef, defaultValue }: EditorHookProps): EditorHook => {
   const [isInitialized, setIsInitialized] = useState(false)
   const { editorConfig } = useSelector((state) => state.vsCode)
 
@@ -83,8 +84,8 @@ export const useEditor = ({ forwardedRef }: EditorHookProps): EditorHook => {
         setIsInitialized(true)
 
         const newEditor = monaco.editor.create(editorRef.current, {
-          value: 'function hello() {\n  console.log("Hello, world!");\n}',
           language: 'typescript',
+          value: '',
         })
 
         editorRef.current.editor = newEditor
@@ -95,6 +96,18 @@ export const useEditor = ({ forwardedRef }: EditorHookProps): EditorHook => {
   }, [isInitialized])
 
   useEffect(updateConfig, [editorConfig, isInitialized])
+
+  useEffect(() => {
+    if (isInitialized && defaultValue) {
+      editorRef.current?.editor?.focus()
+      editorRef.current?.editor?.trigger('keyboard', 'type', { text: '\n' })
+      editorRef.current?.editor?.setValue(defaultValue)
+      editorRef.current?.editor?.setPosition({
+        lineNumber: editorRef.current?.editor?.getModel()?.getLineCount() ?? 1,
+        column: 1,
+      })
+    }
+  }, [defaultValue, isInitialized])
 
   useEffect(() => {
     initializeEditor()
