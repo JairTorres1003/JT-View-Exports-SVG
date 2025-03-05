@@ -5,6 +5,7 @@ import { type IEditorOverrideServices, initialize } from '@codingame/monaco-vsco
 import getConfigurationServiceOverride, {
   updateUserConfiguration,
 } from '@codingame/monaco-vscode-configuration-service-override'
+import getKeybindingsServiceOverride from '@codingame/monaco-vscode-keybindings-service-override'
 import getLanguagesServiceOverride from '@codingame/monaco-vscode-languages-service-override'
 import getQuickAccessServiceOverride from '@codingame/monaco-vscode-quickaccess-service-override'
 import getTextMateServiceOverride from '@codingame/monaco-vscode-textmate-service-override'
@@ -33,10 +34,8 @@ const OVERRIDES: IEditorOverrideServices = {
   ...getTextMateServiceOverride(),
   ...getThemeServiceOverride(),
   ...getLanguagesServiceOverride(),
-  ...getQuickAccessServiceOverride({
-    isKeybindingConfigurationVisible: () => true,
-    shouldUseGlobalPicker: () => false,
-  }),
+  ...getKeybindingsServiceOverride(),
+  ...getQuickAccessServiceOverride(),
 }
 
 export const useEditor = ({ forwardedRef, defaultValue }: EditorHookProps): EditorHook => {
