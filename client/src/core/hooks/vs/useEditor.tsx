@@ -35,7 +35,9 @@ const OVERRIDES: IEditorOverrideServices = {
   ...getThemeServiceOverride(),
   ...getLanguagesServiceOverride(),
   ...getKeybindingsServiceOverride(),
-  ...getQuickAccessServiceOverride(),
+  ...getQuickAccessServiceOverride({
+    isKeybindingConfigurationVisible: () => true,
+  }),
 }
 
 export const useEditor = ({ forwardedRef, defaultValue }: EditorHookProps): EditorHook => {
