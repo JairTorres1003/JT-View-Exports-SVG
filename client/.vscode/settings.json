@@ -21,6 +21,10 @@
     {
       "fileMatch": ["/src/i18n/*.json"],
       "url": "./i18n.schema.json"
+    },
+    {
+      "fileMatch": ["/src/core/assets/vs/Editor/keybindings.json"],
+      "url": "vscode://schemas/keybindings"
     }
   ],
   "material-icon-theme.files.associations": {

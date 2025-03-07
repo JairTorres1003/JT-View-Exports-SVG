@@ -82,6 +82,10 @@
     {
       "fileMatch": ["client/src/i18n/*.json"],
       "url": "./client/i18n.schema.json"
+    },
+    {
+      "fileMatch": ["client/src/core/assets/vs/Editor/keybindings.json"],
+      "url": "vscode://schemas/keybindings"
     }
   ],
   "material-icon-theme.files.associations": {
