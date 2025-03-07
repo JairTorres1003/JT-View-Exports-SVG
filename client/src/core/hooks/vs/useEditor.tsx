@@ -5,7 +5,9 @@ import { type IEditorOverrideServices, initialize } from '@codingame/monaco-vsco
 import getConfigurationServiceOverride, {
   updateUserConfiguration,
 } from '@codingame/monaco-vscode-configuration-service-override'
-import getKeybindingsServiceOverride from '@codingame/monaco-vscode-keybindings-service-override'
+import getKeybindingsServiceOverride, {
+  updateUserKeybindings,
+} from '@codingame/monaco-vscode-keybindings-service-override'
 import getLanguagesServiceOverride from '@codingame/monaco-vscode-languages-service-override'
 import getQuickAccessServiceOverride from '@codingame/monaco-vscode-quickaccess-service-override'
 import getTextMateServiceOverride from '@codingame/monaco-vscode-textmate-service-override'
@@ -13,6 +15,7 @@ import getThemeServiceOverride from '@codingame/monaco-vscode-theme-service-over
 import * as monaco from 'monaco-editor'
 import { useCallback, useEffect, useRef, useState } from 'react'
 
+import keybindings from '../../assets/vs/Editor/keybindings.json'
 import { useForkRef } from '../useForkRef'
 
 import type { EditorProps } from '@/core/components/vs/Editor'
@@ -92,6 +95,10 @@ export const useEditor = ({ forwardedRef, defaultValue }: EditorHookProps): Edit
         const newEditor = monaco.editor.create(editorRef.current, {
           language: 'typescript',
           value: '',
+        })
+
+        updateUserKeybindings(JSON.stringify(keybindings)).catch((error) => {
+          console.error(`Failed to update user keybindings: ${getUnknownError(error)}`)
         })
 
         editorRef.current.editor = newEditor

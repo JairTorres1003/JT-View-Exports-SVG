@@ -130,7 +130,7 @@ input[type='search']::-webkit-search-results-decoration {
   display: none;
 }
 
-html .quick-input-widget.show-file-icons,
+/* html .quick-input-widget.show-file-icons,
 html .quick-input-widget.show-file-icons * {
   pointer-events: none;
   user-select: none;
@@ -138,4 +138,4 @@ html .quick-input-widget.show-file-icons * {
   height: 0;
   opacity: 0;
   width: 0 !important;
-}
+} */

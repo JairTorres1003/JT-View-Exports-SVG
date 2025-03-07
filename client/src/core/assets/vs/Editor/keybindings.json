@@ -1,1 +1,26 @@
-[]
+[
+  {
+    "key": "",
+    "command": "-workbench.action.showCommands"
+  },
+  {
+    "key": "",
+    "command": "-workbench.action.quickOpen"
+  },
+  {
+    "key": "",
+    "command": "-workbench.action.selectIconTheme"
+  },
+  {
+    "key": "",
+    "command": "-editor.action.accessibleViewGoToSymbol"
+  },
+  {
+    "key": "",
+    "command": "-workbench.action.gotoSymbol"
+  },
+  {
+    "key": "",
+    "command": "-workbench.action.gotoLine"
+  }
+]
