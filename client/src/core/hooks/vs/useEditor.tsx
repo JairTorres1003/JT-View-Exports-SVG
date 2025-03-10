@@ -19,6 +19,7 @@ import keybindings from '../../assets/vs/Editor/keybindings.json'
 import { useForkRef } from '../useForkRef'
 
 import type { EditorProps } from '@/core/components/vs/Editor'
+import { contextMenuServiceOverride } from '@/core/utils/vs/Editor'
 import { useSelector } from '@/providers/redux/store'
 import { getUnknownError } from '@/utils/misc'
 
@@ -100,6 +101,8 @@ export const useEditor = ({ forwardedRef, defaultValue }: EditorHookProps): Edit
         updateUserKeybindings(JSON.stringify(keybindings)).catch((error) => {
           console.error(`Failed to update user keybindings: ${getUnknownError(error)}`)
         })
+
+        contextMenuServiceOverride(newEditor)
 
         editorRef.current.editor = newEditor
       })
