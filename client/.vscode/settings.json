@@ -31,6 +31,7 @@
     "i18n.schema.json": "i18n"
   },
   "material-icon-theme.folders.associations": {
-    "workers": "gh-workflows"
+    "workers": "gh-workflows",
+    "vs": "vscode"
   }
 }
