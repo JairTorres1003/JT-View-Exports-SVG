@@ -105,6 +105,9 @@ export const useEditor = ({ forwardedRef, defaultValue }: EditorHookProps): Edit
         contextMenuServiceOverride(newEditor)
 
         editorRef.current.editor = newEditor
+
+        const quickAccess = newEditor.getContribution('editor.controller.quickInput')
+        quickAccess?.dispose()
       })
       .catch((error) => {
         console.error(`Failed to initialize editor: ${getUnknownError(error)}`)
