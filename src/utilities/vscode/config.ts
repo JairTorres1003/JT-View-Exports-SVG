@@ -11,6 +11,7 @@ import { workspace } from 'vscode'
  */
 export function getConfigurationEditor(): Record<string, unknown> {
   const configuration = workspace.getConfiguration('editor')
+  const workbenchConfiguration = workspace.getConfiguration('workbench')
 
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const editorConfig: Record<string, any> = {}
@@ -34,5 +35,8 @@ export function getConfigurationEditor(): Record<string, unknown> {
     'editor.folding': false,
     'editor.glyphMargin': false,
     'editor.lineNumbers': 'off',
+    'workbench.colorTheme': workbenchConfiguration.get('colorTheme'),
+    'workbench.iconTheme': workbenchConfiguration.get('iconTheme'),
+    'workbench.colorCustomizations': workbenchConfiguration.get('colorCustomizations'),
   }
 }
