@@ -61,6 +61,15 @@ export class FileModifiedCacheController<T> {
   }
 
   /**
+   * Checks if a cache entry exists for the specified key (file path).
+   * @param key - The key (file path) to check in the cache.
+   * @returns `true` if the key exists in the cache, `false` otherwise.
+   */
+  has(key: string): boolean {
+    return key in this.cache
+  }
+
+  /**
    * Deletes a cache entry for the specified key (file path).
    * @param key - The key (file path) to delete from the cache.
    */
