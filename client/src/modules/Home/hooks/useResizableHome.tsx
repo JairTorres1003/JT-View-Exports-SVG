@@ -73,10 +73,10 @@ export const useResizableHome = ({ devTootsId }: ResizableHomeHookProps): Resiza
 
   useEffect(() => {
     vscode.postMessage(SVGReceiveMessage.InitDefaultOpenDevTools)
-    vscode.onMessage(SVGPostMessage.SendOpenDevTools, onDefaultOpenDevTools)
+    vscode.onMessage(SVGPostMessage.SendDefaultOpenDevTools, onDefaultOpenDevTools)
 
     return () => {
-      vscode.unregisterMessage(SVGPostMessage.SendOpenDevTools)
+      vscode.unregisterMessage(SVGPostMessage.SendDefaultOpenDevTools)
     }
   }, [])
 

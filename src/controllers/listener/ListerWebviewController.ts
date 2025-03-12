@@ -356,7 +356,7 @@ export class ListerWebviewController {
   private _initDefaultOpenDevTools(): void {
     const config = new DefaultClickToOpenDevToolsController()
 
-    this._postMessage(SVGPostMessage.SendOpenDevTools, config.isDefaultOpen())
+    this._postMessage(SVGPostMessage.SendDefaultOpenDevTools, config.isDefaultOpen())
   }
 
   /**

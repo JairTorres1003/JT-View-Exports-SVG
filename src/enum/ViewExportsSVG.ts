@@ -18,7 +18,7 @@ export enum SVGPostMessage {
   SendEditorConfig = 'send/settings/editor-config',
   SendVsCodeStyles = 'send/settings/vscode-styles',
   SendExpandAllIcons = 'send/settings/default-expand-all',
-  SendOpenDevTools = 'send/settings/default-click-to-open-dev-tools',
+  SendDefaultOpenDevTools = 'send/settings/default-click-to-open-dev-tools',
   SendExtensionTheme = 'send/settings/extension-theme',
 
   SendLastScanDate = 'send/scan/last-date',
