@@ -11,6 +11,7 @@ import { IconCacheController } from './IconCacheController'
 
 import { CacheIconKind } from '@/enum/cache'
 import { type ExtractSVGExports, type ViewExportSVG } from '@/interfaces/ViewExportsSVG'
+import { type ExtensionManage } from '@/interfaces/vscode'
 
 /**
  * Cache manager to handle multiple file caches, one for each type.
@@ -20,6 +21,7 @@ class CacheManagerController {
   public SVGFileCache: FileModifiedCacheController<ViewExportSVG>
   public FavoritesIconCache: IconCacheController
   public RecentIconCache: IconCacheController
+  public ExtensionCache: FileModifiedCacheController<ExtensionManage | undefined>
 
   constructor(private readonly context: ExtensionContext) {
     const recentIconsLimitController = new RecentIconsLimitController()
@@ -36,12 +38,14 @@ class CacheManagerController {
     const svgCacheFile = path.join(cacheDir, 'svg_cache.json')
     const favoritesCacheFile = path.join(cacheDir, 'favorites_cache.json')
     const recentCacheFile = path.join(cacheDir, 'recent_cache.json')
+    const extensionCacheFile = path.join(cacheDir, 'extension_cache.json')
 
     // Initialize caches
     this.DeclarationFileCache = new FileModifiedCacheController(declarationCacheFile)
     this.SVGFileCache = new FileModifiedCacheController(svgCacheFile)
     this.FavoritesIconCache = new IconCacheController(favoritesCacheFile, CacheIconKind.FAVORITE)
     this.RecentIconCache = new IconCacheController(recentCacheFile, CacheIconKind.RECENT, limitFun)
+    this.ExtensionCache = new FileModifiedCacheController(extensionCacheFile)
   }
 
   /**
@@ -52,6 +56,7 @@ class CacheManagerController {
     this.SVGFileCache.clear()
     this.FavoritesIconCache.clear()
     this.RecentIconCache.clear()
+    this.ExtensionCache.clear()
   }
 }
 

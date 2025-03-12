@@ -232,6 +232,16 @@
       "type": "string",
       "description": "Error message displayed when the CacheManager has not been initialized",
       "default": "CacheManager has not been initialized"
+    },
+    "Failed to initialize the extension theme": {
+      "type": "string",
+      "description": "Error message displayed when the extension theme fails to initialize",
+      "default": "Failed to initialize the extension theme"
+    },
+    "No theme found for the current workspace": {
+      "type": "string",
+      "description": "Error message displayed when no theme is found for the current workspace",
+      "default": "No theme found for the current workspace"
     }
   },
   "required": [
@@ -272,6 +282,8 @@
     "Method not implemented",
     "Error saving cache",
     "Error loading cache",
-    "CacheManager has not been initialized"
+    "CacheManager has not been initialized",
+    "Failed to initialize the extension theme",
+    "No theme found for the current workspace"
   ]
 }

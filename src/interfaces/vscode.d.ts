@@ -1,3 +1,5 @@
+import { type Extension } from 'vscode'
+
 /**
  * Represents a language file.
  */
@@ -23,3 +25,9 @@ export interface VsCodeStyles {
   fontFeatureSettings: string
   [key: string]: unknown
 }
+
+export type ExtensionManage = Pick<
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  Extension<any>,
+  'id' | 'extensionUri' | 'extensionPath' | 'isActive'
+>

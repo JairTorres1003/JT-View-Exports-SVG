@@ -1,6 +1,6 @@
 import { SVGPostMessage } from '@/enum/ViewExportsSVG'
 import { SVGComponent, SVGErrors, ViewExportSVG } from '../ViewExportsSVG'
-import { ThemeMode, VsCodeStyles } from '../vscode'
+import { ExtensionManage, ThemeMode, VsCodeStyles } from '../vscode'
 import { AssetPath } from './content'
 
 /**
@@ -23,6 +23,7 @@ export type PostMessage =
   | { type: SVGPostMessage.SendFavoriteIcons; data: ViewExportSVG[] }
   | { type: SVGPostMessage.SendExpandAllIcons; data: boolean }
   | { type: SVGPostMessage.SendOpenDevTools; data: boolean }
+  | { type: SVGPostMessage.SendExtensionTheme; data: ExtensionManage }
 
 /**
  * The message to send to the webview.
@@ -108,4 +109,9 @@ export interface FuncPostMessage {
    * @param data - The open dev tools message.
    */
   (type: SVGPostMessage.SendOpenDevTools, data: boolean): void
+  /**
+   * Sends the extension theme to the webview.
+   * @param data - The extension theme.
+   */
+  (type: SVGPostMessage.SendExtensionTheme, data?: ExtensionManage): void
 }

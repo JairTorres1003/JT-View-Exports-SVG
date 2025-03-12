@@ -33,6 +33,7 @@ export type ReceiveMessage =
   | { type: SVGReceiveMessage.InitDefaultExpandedIcons }
   | { type: SVGReceiveMessage.ToggleExpandIcon; data: boolean }
   | { type: SVGReceiveMessage.InitDefaultOpenDevTools }
+  | { type: SVGReceiveMessage.GetExtensionTheme }
 
 /**
  * The handler for receiving messages from the webview.
@@ -145,4 +146,8 @@ export interface HandlerReceiveMessage {
    * Initializes the default click to open dev tools setting.
    */
   [SVGReceiveMessage.InitDefaultOpenDevTools]: VoidFunction
+  /**
+   * Gets the extension theme.
+   */
+  [SVGReceiveMessage.GetExtensionTheme]: VoidFunction
 }

@@ -61,6 +61,12 @@
         "icon": "$(expand-all)",
         "category": "View",
         "enablement": "!JT-View-Exports-SVG.isExpanded"
+      },
+      {
+        "command": "JT-View-Exports-SVG.reloadTheme",
+        "title": "%extension.commands.reloadTheme.title%",
+        "icon": "$(sync)",
+        "enablement": "activeWebviewPanelId == 'JT-View-Exports-SVG'"
       }
     ],
     "menus": {

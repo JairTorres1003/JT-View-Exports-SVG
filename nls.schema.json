@@ -28,6 +28,11 @@
       "description": "The title of the command to expand all items",
       "default": "Expand All Icons"
     },
+    "extension.commands.reloadTheme.title": {
+      "type": "string",
+      "description": "The title of the command to reload the built-in editor theme in the playground",
+      "default": "View Exports SVG: Reload the built-in editor theme in the playground"
+    },
     "extension.config.defaultExpandAll.title": {
       "type": "string",
       "description": "The title of the configuration to indicate whether or not to expand all items by default",
@@ -135,6 +140,7 @@
     "extension.commands.showMenu.title",
     "extension.commands.collapseAll.title",
     "extension.commands.expandAll.title",
+    "extension.commands.reloadTheme.title",
     "extension.config.defaultExpandAll.title",
     "extension.config.defaultExpandAll.description",
     "extension.config.defaultClickToOpenDevTools.title",

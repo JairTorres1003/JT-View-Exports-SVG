@@ -36,6 +36,7 @@ import {
   getStyles,
   svgFileToUri,
 } from '@/utilities/vscode'
+import { getExtensionTheme } from '@/utilities/vscode/extensions'
 
 export class ListerWebviewController {
   public readonly _panel: WebviewPanel
@@ -83,6 +84,7 @@ export class ListerWebviewController {
       [SVGReceiveMessage.InitDefaultExpandedIcons]: this._initDefaultExpandedIcons.bind(this),
       [SVGReceiveMessage.ToggleExpandIcon]: this._toggleExpandIcon.bind(this),
       [SVGReceiveMessage.InitDefaultOpenDevTools]: this._initDefaultOpenDevTools.bind(this),
+      [SVGReceiveMessage.GetExtensionTheme]: this._getExtensionTheme.bind(this),
     }
   }
 
@@ -355,5 +357,12 @@ export class ListerWebviewController {
     const config = new DefaultClickToOpenDevToolsController()
 
     this._postMessage(SVGPostMessage.SendOpenDevTools, config.isDefaultOpen())
+  }
+
+  /**
+   * Retrieves the extension theme and sends it as a post message.
+   */
+  private _getExtensionTheme(): void {
+    this._postMessage(SVGPostMessage.SendExtensionTheme, getExtensionTheme())
   }
 }

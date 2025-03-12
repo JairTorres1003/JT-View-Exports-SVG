@@ -1,8 +1,9 @@
 import { commands, type ExtensionContext, type Uri } from 'vscode'
 
-import { runToggleExpandIcon, showMenu } from './commands'
+import { runReloadTheme, runToggleExpandIcon, showMenu } from './commands'
 import { CONFIG_KEY } from './constants/misc'
 import { initializeCacheManager } from './controllers/cache'
+import { initializeExtensionTheme } from './utilities/vscode/extensions/theme'
 
 /**
  * This method is called when your extension is activated.
@@ -10,6 +11,7 @@ import { initializeCacheManager } from './controllers/cache'
  */
 export function activate(context: ExtensionContext): void {
   initializeCacheManager(context)
+  initializeExtensionTheme()
 
   const allCommands = [
     commands.registerCommand(`${CONFIG_KEY}.showMenu`, async (item: Uri, items: Uri[]) => {
@@ -21,6 +23,7 @@ export function activate(context: ExtensionContext): void {
     commands.registerCommand(`${CONFIG_KEY}.expandAll`, async () => {
       await runToggleExpandIcon(true)
     }),
+    commands.registerCommand(`${CONFIG_KEY}.reloadTheme`, runReloadTheme),
   ]
 
   context.subscriptions.push(...allCommands)

@@ -19,6 +19,7 @@ export enum SVGPostMessage {
   SendVsCodeStyles = 'send/settings/vscode-styles',
   SendExpandAllIcons = 'send/settings/default-expand-all',
   SendOpenDevTools = 'send/settings/default-click-to-open-dev-tools',
+  SendExtensionTheme = 'send/settings/extension-theme',
 
   SendLastScanDate = 'send/scan/last-date',
 
@@ -43,6 +44,7 @@ export enum SVGReceiveMessage {
   InitDefaultExpandedIcons = 'settings/default-expand-all/init',
   ToggleExpandIcon = 'settings/default-expand-all/toggle',
   InitDefaultOpenDevTools = 'settings/default-click-to-open-dev-tools/init',
+  GetExtensionTheme = 'settings/extension-theme',
 
   GetLastScanDate = 'scan/last-date',
   ScanWorkspace = 'scan/workspace',

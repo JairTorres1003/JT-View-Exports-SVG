@@ -4,6 +4,7 @@
   "extension.commands.showMenu.title": "View Exports SVG 🔍",
   "extension.commands.collapseAll.title": "Collapse All Icons",
   "extension.commands.expandAll.title": "Expand All Icons",
+  "extension.commands.reloadTheme.title": "View Exports SVG: Reload the built-in editor theme in the playground",
   "extension.config.defaultExpandAll.title": "Default Expand All Icons",
   "extension.config.defaultExpandAll.description": "Indicates whether or not to expand all items by default.",
   "extension.config.defaultClickToOpenDevTools.title": "Default Click To Open DevTools",
