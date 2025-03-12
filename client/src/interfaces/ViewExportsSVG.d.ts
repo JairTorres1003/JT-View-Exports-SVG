@@ -8,7 +8,7 @@ import {
   ViewExportSVG,
 } from '@api/interfaces/ViewExportsSVG'
 import { AssetPath } from '@api/interfaces/views/content'
-import { ThemeMode, VsCodeStyles } from '@api/interfaces/vscode'
+import { ExtensionManage, ThemeMode, VsCodeStyles } from '@api/interfaces/vscode'
 
 /**
  * The message to receive from the webview.
@@ -30,6 +30,7 @@ export interface MessageHandlersView {
   [SVGPostMessage.SendFavoriteIcons]?: (data: ViewExportSVG[]) => void
   [SVGPostMessage.SendExpandAllIcons]?: (data: boolean) => void
   [SVGPostMessage.SendOpenDevTools]?: (data: boolean) => void
+  [SVGPostMessage.SendExtensionTheme]?: (data: ExtensionManage) => void
 }
 
 /**
@@ -52,6 +53,7 @@ export interface FuncOnMessage {
   (type: SVGPostMessage.SendFavoriteIcons, handler: (data: ViewExportSVG[]) => void): void
   (type: SVGPostMessage.SendExpandAllIcons, handler: (data: boolean) => void): void
   (type: SVGPostMessage.SendOpenDevTools, handler: (data: boolean) => void): void
+  (type: SVGPostMessage.SendExtensionTheme, handler: (data: ExtensionManage) => void): void
 }
 
 /**
@@ -83,4 +85,5 @@ export interface FuncPostMessage {
   (type: SVGReceiveMessage.InitDefaultExpandedIcons): void
   (type: SVGReceiveMessage.ToggleExpandIcon, data: boolean): void
   (type: SVGReceiveMessage.InitDefaultOpenDevTools): void
+  (type: SVGReceiveMessage.GetExtensionTheme): void
 }

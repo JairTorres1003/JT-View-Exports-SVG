@@ -1,9 +1,10 @@
-import { VsCodeStyles } from '@api/interfaces/vscode'
+import { ExtensionManage, VsCodeStyles } from '@api/interfaces/vscode'
 import { type CaseReducer, type PayloadAction } from '@reduxjs/toolkit'
 
 export interface VsCodeState {
   styles: Partial<VsCodeStyles>
   editorConfig: Record<string, unknown>
+  extensionTheme?: ExtensionManage
 }
 
 export interface VsCodeReducers {
@@ -15,6 +16,10 @@ export interface VsCodeReducers {
    * Sets the editor configuration in the state.
    */
   setEditorConfig: CaseReducer<VsCodeState, PayloadAction<Record<string, unknown>>>
+  /**
+   * Sets the extension theme in the state.
+   */
+  setExtensionTheme: CaseReducer<VsCodeState, PayloadAction<ExtensionManage | undefined>>
 
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   [key: string]: CaseReducer<VsCodeState, PayloadAction<any>>

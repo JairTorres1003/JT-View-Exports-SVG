@@ -1,8 +1,9 @@
 import { SVGPostMessage, SVGReceiveMessage } from '@api/enums/ViewExportsSVG'
+import type { ExtensionManage } from '@api/interfaces/vscode'
 import { useEffect, useState } from 'react'
 import { useDispatch } from 'react-redux'
 
-import { setEditorConfig } from '@/providers/redux/features/VsCodeSlice'
+import { setEditorConfig, setExtensionTheme } from '@/providers/redux/features/VsCodeSlice'
 import { vscode } from '@/services/vscode'
 import { getUnknownError } from '@/utils/misc'
 
@@ -90,14 +91,26 @@ export const usePlayground = (): PlaygroundHook => {
     dispatch(setEditorConfig(data))
   }
 
+  /**
+   * Handles the extension theme by dispatching an action to set the extension theme.
+   *
+   * @param theme - The theme to be set for the extension.
+   */
+  const handleExtensionTheme = (theme?: ExtensionManage): void => {
+    dispatch(setExtensionTheme(theme))
+  }
+
   useEffect(() => {
     applyInitialColor()
 
     vscode.postMessage(SVGReceiveMessage.GetEditorConfig)
+    vscode.postMessage(SVGReceiveMessage.GetExtensionTheme)
     vscode.onMessage(SVGPostMessage.SendEditorConfig, handleEditorConfig)
+    vscode.onMessage(SVGPostMessage.SendExtensionTheme, handleExtensionTheme)
 
     return () => {
       vscode.unregisterMessage(SVGPostMessage.SendEditorConfig)
+      vscode.unregisterMessage(SVGPostMessage.SendExtensionTheme)
     }
   }, [])
 
