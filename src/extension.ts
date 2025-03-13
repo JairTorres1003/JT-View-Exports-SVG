@@ -1,6 +1,6 @@
 import { commands, type ExtensionContext, type Uri } from 'vscode'
 
-import { runReloadTheme, runToggleExpandIcon, showMenu } from './commands'
+import { runReloadTheme, runToggleDevTools, runToggleExpandIcon, showMenu } from './commands'
 import { CONFIG_KEY } from './constants/misc'
 import { initializeCacheManager } from './controllers/cache'
 import { initializeExtensionTheme } from './utilities/vscode/extensions/theme'
@@ -22,6 +22,12 @@ export function activate(context: ExtensionContext): void {
     }),
     commands.registerCommand(`${CONFIG_KEY}.expandAll`, async () => {
       await runToggleExpandIcon(true)
+    }),
+    commands.registerCommand(`${CONFIG_KEY}.openDevTools`, async () => {
+      await runToggleDevTools(true)
+    }),
+    commands.registerCommand(`${CONFIG_KEY}.closeDevTools`, async () => {
+      await runToggleDevTools(false)
     }),
     commands.registerCommand(`${CONFIG_KEY}.reloadTheme`, runReloadTheme),
   ]

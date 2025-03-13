@@ -49,24 +49,39 @@
         }
       },
       {
+        "command": "JT-View-Exports-SVG.reloadTheme",
+        "title": "%extension.commands.reloadTheme.title%",
+        "icon": "$(sync)",
+        "category": "View Exports SVG",
+        "enablement": "activeWebviewPanelId == 'JT-View-Exports-SVG'"
+      },
+      {
         "command": "JT-View-Exports-SVG.collapseAll",
         "title": "%extension.commands.collapseAll.title%",
         "icon": "$(collapse-all)",
-        "category": "View",
-        "enablement": "JT-View-Exports-SVG.isExpanded"
+        "category": "View Exports SVG",
+        "enablement": "activeWebviewPanelId == 'JT-View-Exports-SVG' && JT-View-Exports-SVG.isExpanded"
       },
       {
         "command": "JT-View-Exports-SVG.expandAll",
         "title": "%extension.commands.expandAll.title%",
         "icon": "$(expand-all)",
-        "category": "View",
-        "enablement": "!JT-View-Exports-SVG.isExpanded"
+        "category": "View Exports SVG",
+        "enablement": "activeWebviewPanelId == 'JT-View-Exports-SVG' && !JT-View-Exports-SVG.isExpanded"
       },
       {
-        "command": "JT-View-Exports-SVG.reloadTheme",
-        "title": "%extension.commands.reloadTheme.title%",
-        "icon": "$(sync)",
-        "enablement": "activeWebviewPanelId == 'JT-View-Exports-SVG'"
+        "command": "JT-View-Exports-SVG.openDevTools",
+        "title": "%extension.commands.openDevTools.title%",
+        "icon": "$(jt-viewExportsSVG-tools-filled)",
+        "category": "View Exports SVG",
+        "enablement": "activeWebviewPanelId == 'JT-View-Exports-SVG' && !JT-View-Exports-SVG.isOpenDevTools"
+      },
+      {
+        "command": "JT-View-Exports-SVG.closeDevTools",
+        "title": "%extension.commands.closeDevTools.title%",
+        "icon": "$(jt-viewExportsSVG-tools)",
+        "category": "View Exports SVG",
+        "enablement": "activeWebviewPanelId == 'JT-View-Exports-SVG' && JT-View-Exports-SVG.isOpenDevTools"
       }
     ],
     "menus": {
@@ -85,13 +100,23 @@
       "editor/title": [
         {
           "command": "JT-View-Exports-SVG.collapseAll",
-          "group": "navigation",
+          "group": "navigation@1",
           "when": "activeWebviewPanelId == 'JT-View-Exports-SVG' && JT-View-Exports-SVG.isExpanded"
         },
         {
           "command": "JT-View-Exports-SVG.expandAll",
-          "group": "navigation",
+          "group": "navigation@1",
           "when": "activeWebviewPanelId == 'JT-View-Exports-SVG' && !JT-View-Exports-SVG.isExpanded"
+        },
+        {
+          "command": "JT-View-Exports-SVG.openDevTools",
+          "group": "navigation@2",
+          "when": "activeWebviewPanelId == 'JT-View-Exports-SVG' && !JT-View-Exports-SVG.isOpenDevTools"
+        },
+        {
+          "command": "JT-View-Exports-SVG.closeDevTools",
+          "group": "navigation@2",
+          "when": "activeWebviewPanelId == 'JT-View-Exports-SVG' && JT-View-Exports-SVG.isOpenDevTools"
         }
       ]
     },
@@ -193,7 +218,23 @@
           }
         }
       }
-    ]
+    ],
+    "icons": {
+      "jt-viewExportsSVG-tools": {
+        "description": "View Exports SVG Tools Icon",
+        "default": {
+          "fontPath": "./assets/fonts/icon_moon.woff",
+          "fontCharacter": "\\e900"
+        }
+      },
+      "jt-viewExportsSVG-tools-filled": {
+        "description": "View Exports SVG Tools Filled Icon",
+        "default": {
+          "fontPath": "./assets/fonts/icon_moon.woff",
+          "fontCharacter": "\\e901"
+        }
+      }
+    }
   },
   "scripts": {
     "install:all": "npm install && cd client && npm install",
@@ -284,5 +325,9 @@
       "description": "Visual Studio Marketplace Rating",
       "href": "https://marketplace.visualstudio.com/items?itemName=JairTorres1003.jt-view-exports-svg"
     }
-  ]
+  ],
+  "galleryBanner": {
+    "color": "#166c7b",
+    "theme": "dark"
+  }
 }

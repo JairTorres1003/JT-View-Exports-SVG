@@ -16,7 +16,7 @@ import {
   LastScanDateController,
 } from '../config'
 
-import { expandedIcons, runToggleExpandIcon } from '@/commands'
+import { expandedIcons, runToggleExpandIcon, toggleDevTools } from '@/commands'
 import { SVGPostMessage, SVGReceiveMessage } from '@/enum/ViewExportsSVG'
 import { type HandlerArgs } from '@/interfaces/misc'
 import {
@@ -83,6 +83,7 @@ export class ListerWebviewController {
       [SVGReceiveMessage.GetFavoriteIcons]: this._getIconsFromCache(false).bind(this),
       [SVGReceiveMessage.InitDefaultExpandedIcons]: this._initDefaultExpandedIcons.bind(this),
       [SVGReceiveMessage.ToggleExpandIcon]: this._toggleExpandIcon.bind(this),
+      [SVGReceiveMessage.ToggleOpenDevTools]: this._toggleOpenDevTools.bind(this),
       [SVGReceiveMessage.InitDefaultOpenDevTools]: this._initDefaultOpenDevTools.bind(this),
       [SVGReceiveMessage.GetExtensionTheme]: this._getExtensionTheme.bind(this),
     }
@@ -348,6 +349,14 @@ export class ListerWebviewController {
    */
   private _toggleExpandIcon(isExpanded: boolean): void {
     expandedIcons(isExpanded).catch(console.error)
+  }
+
+  /**
+   * Toggles the open developer tools context.
+   * @param open - A boolean indicating whether to open or close the developer tools.
+   */
+  private _toggleOpenDevTools(open: boolean): void {
+    toggleDevTools(open).catch(console.error)
   }
 
   /**
