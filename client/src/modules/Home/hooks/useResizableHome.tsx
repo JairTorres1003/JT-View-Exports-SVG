@@ -1,7 +1,9 @@
 import { SVGPostMessage, SVGReceiveMessage } from '@api/enums/ViewExportsSVG'
 import type { ResizeStartCallback, ResizeCallback } from 're-resizable'
 import { useCallback, useEffect, useState } from 'react'
+import { useDispatch } from 'react-redux'
 
+import { setIsSelecting } from '@/providers/redux/features/PlaygroundSlice'
 import { useSelector } from '@/providers/redux/store'
 import { vscode } from '@/services/vscode'
 
@@ -20,20 +22,17 @@ export const useResizableHome = ({ devTootsId }: ResizableHomeHookProps): Resiza
   const [resizableWidth, setResizableWidth] = useState('100%')
   const [lastWidth, setLastWidth] = useState('75%')
 
-  const recentlySelected = useSelector((state) => state.playground.recentlySelected)
+  const isSelecting = useSelector((state) => state.playground.isSelecting)
 
-  /**
-   * Callback function to handle the default open dev tools event.
-   */
-  const onDefaultOpenDevTools = useCallback((data: boolean) => {
-    setLastWidth(data ? '75%' : '100%')
-  }, [])
+  const dispatch = useDispatch()
 
   /**
    * Resets the size of the resizable element to its default value.
    */
   const onResetSize = useCallback(() => {
     setResizableWidth('100%')
+    dispatch(setIsSelecting(false))
+    vscode.postMessage(SVGReceiveMessage.ToggleOpenDevTools, false)
   }, [])
 
   /**
@@ -60,23 +59,47 @@ export const useResizableHome = ({ devTootsId }: ResizableHomeHookProps): Resiza
       const newWidth = 100 - percentage
       setResizableWidth(`${newWidth}%`)
       setLastWidth(newWidth < 100 ? `${newWidth}%` : lastWidth)
+      vscode.postMessage(SVGReceiveMessage.ToggleOpenDevTools, newWidth < 100)
     } else {
       onResetSize()
     }
   }
 
+  /**
+   * Callback function to handle the default open dev tools event.
+   */
+  const onDefaultOpenDevTools = useCallback((data: boolean) => {
+    setLastWidth(data ? '75%' : '100%')
+  }, [])
+
+  /**
+   * Toggles the open state of the developer tools and adjusts the resizable width accordingly.
+   *
+   * @param data - A boolean indicating whether the developer tools should be open.
+   */
+  const onToggleOpenDevTools = useCallback(
+    (data: boolean) => {
+      setResizableWidth(data ? lastWidth : '100%')
+      if (!data) dispatch(setIsSelecting(false))
+    },
+    [lastWidth]
+  )
+
   useEffect(() => {
-    if (recentlySelected !== undefined) {
-      setResizableWidth(lastWidth)
+    if (isSelecting) {
+      onToggleOpenDevTools(true)
+      vscode.postMessage(SVGReceiveMessage.ToggleOpenDevTools, true)
     }
-  }, [recentlySelected])
+  }, [isSelecting])
 
   useEffect(() => {
     vscode.postMessage(SVGReceiveMessage.InitDefaultOpenDevTools)
     vscode.onMessage(SVGPostMessage.SendDefaultOpenDevTools, onDefaultOpenDevTools)
+    vscode.onMessage(SVGPostMessage.SendToggleOpenDevTools, onToggleOpenDevTools)
 
     return () => {
       vscode.unregisterMessage(SVGPostMessage.SendDefaultOpenDevTools)
+      vscode.unregisterMessage(SVGPostMessage.SendToggleOpenDevTools)
     }
   }, [])
 

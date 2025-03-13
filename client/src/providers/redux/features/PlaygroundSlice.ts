@@ -2,11 +2,18 @@ import { createSlice } from '@reduxjs/toolkit'
 
 import type { PlaygroundReducers, PlaygroundState } from '@/interfaces/redux/featurePlayground'
 
-const initialState: PlaygroundState = {}
+const initialState: PlaygroundState = {
+  recentlySelected: undefined,
+  isSelecting: false,
+}
 
 const reducers: PlaygroundReducers = {
   setRecentlySelected: (state, { payload }) => {
     state.recentlySelected = payload
+    state.isSelecting = !!payload
+  },
+  setIsSelecting: (state, { payload }) => {
+    state.isSelecting = payload
   },
 }
 
@@ -20,7 +27,7 @@ export const PlaygroundSlice = createSlice({
 })
 
 export const {
-  actions: { setRecentlySelected },
+  actions: { setRecentlySelected, setIsSelecting },
 } = PlaygroundSlice
 
 export const { reducer: PlaygroundReducer } = PlaygroundSlice
