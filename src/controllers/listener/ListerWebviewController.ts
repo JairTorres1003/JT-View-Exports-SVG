@@ -133,6 +133,15 @@ export class ListerWebviewController {
   }
 
   /**
+   * Initializes default values for certain calls used in the web view.
+   *
+   * @protected
+   */
+  protected readonly initialize = (): void => {
+    this._toggleOpenDevTools(false)
+  }
+
+  /**
    * Extracts SVG components from the given files.
    * @param files - An array of file paths.
    */

@@ -96,6 +96,8 @@ export class ViewExportsSVGController extends ListerWebviewController {
       extensionUri,
       viewExportSVG
     )
+
+    ViewExportsSVGController.currentPanel.initialize()
   }
 
   /**
