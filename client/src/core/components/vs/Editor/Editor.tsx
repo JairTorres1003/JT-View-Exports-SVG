@@ -3,14 +3,8 @@ import '@/workers/workerLoader'
 
 import { BoxEditor } from './Editor.style'
 
-import { type TypeEditorRef, useEditor } from '@/core/hooks/vs/useEditor'
-
-export interface EditorProps {
-  className?: string
-  value?: string
-  defaultValue?: string
-  onChange?: (value: string) => void
-}
+import { useEditor } from '@/core/hooks/vs/useEditor'
+import type { EditorProps, TypeEditorRef } from '@/core/interfaces/components/vs/Editor'
 
 export const Editor = forwardRef<TypeEditorRef, EditorProps>(
   ({ className, ...rest }, forwardedRef) => {

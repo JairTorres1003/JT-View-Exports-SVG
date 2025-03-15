@@ -1,48 +1,15 @@
-import '@codingame/monaco-vscode-typescript-basics-default-extension'
-import '@codingame/monaco-vscode-theme-defaults-default-extension'
-
-import { type IEditorOverrideServices, initialize } from '@codingame/monaco-vscode-api'
-import getConfigurationServiceOverride, {
-  updateUserConfiguration,
-} from '@codingame/monaco-vscode-configuration-service-override'
-import getKeybindingsServiceOverride, {
-  updateUserKeybindings,
-} from '@codingame/monaco-vscode-keybindings-service-override'
-import getLanguagesServiceOverride from '@codingame/monaco-vscode-languages-service-override'
-import getQuickAccessServiceOverride from '@codingame/monaco-vscode-quickaccess-service-override'
-import getTextMateServiceOverride from '@codingame/monaco-vscode-textmate-service-override'
-import getThemeServiceOverride from '@codingame/monaco-vscode-theme-service-override'
-import * as monaco from 'monaco-editor'
 import { useCallback, useEffect, useRef, useState } from 'react'
 
-import keybindings from '../../assets/vs/Editor/keybindings.json'
 import { useForkRef } from '../useForkRef'
 
-import type { EditorProps } from '@/core/components/vs/Editor'
-import { contextMenuServiceOverride } from '@/core/utils/vs/Editor'
+import type {
+  EditorHook,
+  EditorHookProps,
+  TypeEditorRef,
+} from '@/core/interfaces/components/vs/Editor'
+import { Editor } from '@/core/utils/vs/Editor'
 import { useSelector } from '@/providers/redux/store'
-import { getUnknownError } from '@/utils/misc'
-
-export type TypeEditorRef = (HTMLElement & { editor?: monaco.editor.IStandaloneCodeEditor }) | null
-
-interface EditorHook {
-  rootRef: React.RefCallback<Exclude<TypeEditorRef, 'null'>> | null
-}
-
-interface EditorHookProps extends Omit<EditorProps, 'className'> {
-  forwardedRef: React.ForwardedRef<TypeEditorRef>
-}
-
-const OVERRIDES: IEditorOverrideServices = {
-  ...getConfigurationServiceOverride(),
-  ...getTextMateServiceOverride(),
-  ...getThemeServiceOverride(),
-  ...getLanguagesServiceOverride(),
-  ...getKeybindingsServiceOverride(),
-  ...getQuickAccessServiceOverride({
-    isKeybindingConfigurationVisible: () => true,
-  }),
-}
+import { getUnknownError, isEmpty } from '@/utils/misc'
 
 export const useEditor = ({ forwardedRef, defaultValue }: EditorHookProps): EditorHook => {
   const [isInitialized, setIsInitialized] = useState(false)
@@ -53,74 +20,29 @@ export const useEditor = ({ forwardedRef, defaultValue }: EditorHookProps): Edit
   const forkedRef = useForkRef(editorRef, forwardedRef)
 
   /**
-   * Updates the user configuration if the editor is initialized.
+   * Initializes the editor instance if the editor reference and configuration are not empty.
+   * Uses the `Editor` class to create a new editor instance and assigns it to the current editor reference.
+
+   * @returns A promise that resolves when the editor is initialized.
+   * @throws Will throw an error if the editor creation fails.
    *
-   * This function serializes the current editor configuration and sends it to the
-   * `updateUserConfiguration` function. If the update fails, it logs an error message
-   * to the console.
-   *
-   * @returns This function does not return a value.
+   * @remarks
+   * This function is memoized using `useCallback` to prevent unnecessary re-initializations.
+   * It depends on `isInitialized` and `editorConfig` dependencies.
    */
-  const updateConfig = () => {
-    if (!isInitialized) return
+  const initializeEditor = useCallback(async () => {
+    if (isEmpty(editorRef.current) || isEmpty(editorConfig)) return
 
-    updateUserConfiguration(JSON.stringify(editorConfig)).catch((error) => {
-      console.error(`Failed to update user configuration: ${getUnknownError(error)}`)
-    })
-  }
+    const editor = new Editor(editorRef.current, editorConfig)
 
-  /**
-   * Initializes the Monaco editor instance if it hasn't been initialized yet.
-   *
-   * This function checks if the editor reference is available and if the editor
-   * has already been initialized. If not, it proceeds to initialize the editor
-   * with the provided overrides. Once the initialization is successful, it sets
-   * the `isInitialized` state to true and creates a new Monaco editor instance
-   * with a default JavaScript function as its content.
-   *
-   * If the initialization fails, it logs an error message to the console.
-   */
-  const initializeEditor = useCallback(() => {
-    if (!editorRef.current) return
-
-    if (isInitialized) {
-      editorRef.current.editor?.dispose()
-    }
-
-    initialize(OVERRIDES)
-      .then(() => {
-        if (!editorRef.current) return
-
-        setIsInitialized(true)
-
-        const newEditor = monaco.editor.create(editorRef.current, {
-          language: 'typescript',
-          value: '',
-        })
-
-        updateUserKeybindings(JSON.stringify(keybindings)).catch((error) => {
-          console.error(`Failed to update user keybindings: ${getUnknownError(error)}`)
-        })
-
-        contextMenuServiceOverride(newEditor)
-
-        editorRef.current.editor = newEditor
-
-        const quickAccess = newEditor.getContribution('editor.controller.quickInput')
-        quickAccess?.dispose()
-      })
-      .catch((error) => {
-        console.error(`Failed to initialize editor: ${getUnknownError(error)}`)
-      })
-  }, [isInitialized])
-
-  useEffect(updateConfig, [editorConfig, isInitialized])
+    editorRef.current.editor = await editor.createEditor()
+  }, [editorConfig])
 
   useEffect(() => {
     if (isInitialized && defaultValue) {
       editorRef.current?.editor?.focus()
       editorRef.current?.editor?.trigger('keyboard', 'type', { text: '\n' })
-      editorRef.current?.editor?.setValue(defaultValue)
+      editorRef.current?.editor?.setDefaultValue(defaultValue)
       editorRef.current?.editor?.setPosition({
         lineNumber: editorRef.current?.editor?.getModel()?.getLineCount() ?? 1,
         column: 1,
@@ -130,6 +52,12 @@ export const useEditor = ({ forwardedRef, defaultValue }: EditorHookProps): Edit
 
   useEffect(() => {
     initializeEditor()
+      .then(() => {
+        setIsInitialized(true)
+      })
+      .catch((error) => {
+        console.error(`Failed to initialize editor: ${getUnknownError(error)}`)
+      })
 
     return () => {
       if (editorRef.current?.editor) {
