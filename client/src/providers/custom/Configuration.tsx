@@ -17,7 +17,6 @@ export const ConfigurationProvider: FC<ProviderProps> = ({ children }): React.Re
 
   useEffect(() => {
     vscode.onMessage(SVGPostMessage.SendInitConfiguration, (data) => {
-      console.info('🚀 ~ vscode.onMessage ~ data:', data)
       dispatch(setConfiguration(data))
     })
 
