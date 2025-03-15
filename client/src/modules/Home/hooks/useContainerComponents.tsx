@@ -50,7 +50,6 @@ export const useContainerComponents = (): ContainerComponentsHook => {
   }, [expandedItems])
 
   useEffect(() => {
-    console.info('🚀 ~ useEffect ~ components:', { components, defaultExpandAll })
     if (components.length >= 1 && defaultExpandAll) {
       handleVsCodeExpandAll(true)
     }
