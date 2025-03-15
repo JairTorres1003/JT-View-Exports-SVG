@@ -2,7 +2,7 @@ import { ThemeProvider } from '@mui/material'
 import type { ReactNode, FC } from 'react'
 import { Provider } from 'react-redux'
 
-import { SnackbarProvider } from './custom/Snackbar'
+import { ConfigurationProvider, SnackbarProvider } from './custom'
 import { store } from './redux/store'
 import { useCustomTheme } from './theme/theme'
 
@@ -39,7 +39,9 @@ export default function Providers({ children }: ProviderProps): ReactNode {
   return (
     <ReduxProvider>
       <MuiThemeProvider>
-        <SnackbarProvider>{children}</SnackbarProvider>
+        <ConfigurationProvider>
+          <SnackbarProvider>{children}</SnackbarProvider>
+        </ConfigurationProvider>
       </MuiThemeProvider>
     </ReduxProvider>
   )

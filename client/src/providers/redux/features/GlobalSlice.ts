@@ -10,6 +10,9 @@ const initialState: GlobalState = {
     severity: 'info',
     position: { vertical: 'bottom', horizontal: 'center' },
   },
+  configuration: {
+    defaultExpandAll: false,
+  },
 }
 
 const reducers: GlobalReducers = {
@@ -25,6 +28,9 @@ const reducers: GlobalReducers = {
   closeAlert: (state) => {
     state.snackbarAlert.open = false
   },
+  setConfiguration: (state, { payload }) => {
+    state.configuration = { ...state.configuration, ...payload }
+  },
 }
 
 /**
@@ -37,7 +43,7 @@ export const GlobalSlice = createSlice({
 })
 
 export const {
-  actions: { openAlert, closeAlert },
+  actions: { openAlert, closeAlert, setConfiguration },
 } = GlobalSlice
 
 export const { reducer: GlobalReducer } = GlobalSlice

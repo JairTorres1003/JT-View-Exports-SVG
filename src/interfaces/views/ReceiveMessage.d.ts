@@ -30,7 +30,6 @@ export type ReceiveMessage =
   | { type: SVGReceiveMessage.RemoveFavoriteIcon; data: SVGIcon }
   | { type: SVGReceiveMessage.ClearFavoriteIcons }
   | { type: SVGReceiveMessage.GetFavoriteIcons }
-  | { type: SVGReceiveMessage.InitDefaultExpandedIcons }
   | { type: SVGReceiveMessage.ToggleExpandIcon; data: boolean }
   | { type: SVGReceiveMessage.ToggleOpenDevTools; data: boolean }
   | { type: SVGReceiveMessage.InitDefaultOpenDevTools }
@@ -134,10 +133,6 @@ export interface HandlerReceiveMessage {
    * Gets the favorite icons.
    */
   [SVGReceiveMessage.GetFavoriteIcons]: VoidFunction
-  /**
-   * Initializes the default expanded icons.
-   */
-  [SVGReceiveMessage.InitDefaultExpandedIcons]: VoidFunction
   /**
    * Toggles the expand icon.
    * @param isExpanded - A boolean indicating whether the icons should be expanded.

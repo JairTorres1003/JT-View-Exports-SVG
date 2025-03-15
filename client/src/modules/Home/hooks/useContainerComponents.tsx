@@ -11,6 +11,7 @@ interface ContainerComponentsHook {
 
 export const useContainerComponents = (): ContainerComponentsHook => {
   const [expandedItems, setExpandedItems] = useState<string[]>([])
+  const { defaultExpandAll } = useSelector((state) => state.global.configuration)
   const { components } = useSelector((state) => state.svg)
 
   /**
@@ -49,7 +50,13 @@ export const useContainerComponents = (): ContainerComponentsHook => {
   }, [expandedItems])
 
   useEffect(() => {
-    vscode.postMessage(SVGReceiveMessage.InitDefaultExpandedIcons)
+    console.info('🚀 ~ useEffect ~ components:', { components, defaultExpandAll })
+    if (components.length >= 1 && defaultExpandAll) {
+      handleVsCodeExpandAll(true)
+    }
+  }, [defaultExpandAll, components])
+
+  useEffect(() => {
     vscode.onMessage(SVGPostMessage.SendExpandAllIcons, handleVsCodeExpandAll)
 
     return () => {

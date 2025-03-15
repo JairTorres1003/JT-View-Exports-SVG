@@ -25,6 +25,7 @@ export type PostMessage =
   | { type: SVGPostMessage.SendToggleOpenDevTools; data: boolean }
   | { type: SVGPostMessage.SendDefaultOpenDevTools; data: boolean }
   | { type: SVGPostMessage.SendExtensionTheme; data: ExtensionManage }
+  | { type: SVGPostMessage.SendInitConfiguration; data: Record<string, unknown> }
 
 /**
  * The message to send to the webview.
@@ -120,4 +121,9 @@ export interface FuncPostMessage {
    * @param data - The extension theme.
    */
   (type: SVGPostMessage.SendExtensionTheme, data?: ExtensionManage): void
+  /**
+   * Sends the initial configuration to the webview.
+   * @param data - The initial configuration.
+   */
+  (type: SVGPostMessage.SendInitConfiguration, data: Record<string, unknown>): void
 }

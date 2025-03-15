@@ -16,7 +16,7 @@ import {
   LastScanDateController,
 } from '../config'
 
-import { expandedIcons, runToggleExpandIcon, toggleDevTools } from '@/commands'
+import { expandedIcons, toggleDevTools } from '@/commands'
 import { SVGPostMessage, SVGReceiveMessage } from '@/enum/ViewExportsSVG'
 import { type HandlerArgs } from '@/interfaces/misc'
 import {
@@ -81,7 +81,6 @@ export class ListerWebviewController {
       [SVGReceiveMessage.RemoveFavoriteIcon]: this._removeIconFromCache(false).bind(this),
       [SVGReceiveMessage.ClearFavoriteIcons]: this._clearIconsFromCache(false).bind(this),
       [SVGReceiveMessage.GetFavoriteIcons]: this._getIconsFromCache(false).bind(this),
-      [SVGReceiveMessage.InitDefaultExpandedIcons]: this._initDefaultExpandedIcons.bind(this),
       [SVGReceiveMessage.ToggleExpandIcon]: this._toggleExpandIcon.bind(this),
       [SVGReceiveMessage.ToggleOpenDevTools]: this._toggleOpenDevTools.bind(this),
       [SVGReceiveMessage.InitDefaultOpenDevTools]: this._initDefaultOpenDevTools.bind(this),
@@ -139,6 +138,16 @@ export class ListerWebviewController {
    */
   protected readonly initialize = (): void => {
     this._toggleOpenDevTools(false)
+
+    const config = new DefaultExpandAllController()
+
+    this._toggleExpandIcon(config.isExpandAll())
+
+    setTimeout(() => {
+      this._postMessage(SVGPostMessage.SendInitConfiguration, {
+        defaultExpandAll: config.isExpandAll(),
+      })
+    }, 500)
   }
 
   /**
@@ -338,17 +347,6 @@ export class ListerWebviewController {
 
       const cache = isRecent ? RecentIconCache : FavoritesIconCache
       cache.clear()
-    }
-  }
-
-  /**
-   * Initializes the default expanded icons.
-   */
-  private _initDefaultExpandedIcons(): void {
-    const config = new DefaultExpandAllController()
-
-    if (config.isExpandAll()) {
-      runToggleExpandIcon(true).catch(console.error)
     }
   }
 

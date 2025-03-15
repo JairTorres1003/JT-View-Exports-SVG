@@ -34,6 +34,13 @@ export interface GlobalState {
      */
     position?: SnackbarOrigin
   }
+  configuration: {
+    /**
+     * The default expand all setting.
+     * @default false
+     */
+    defaultExpandAll: boolean
+  }
 }
 
 export interface GlobalReducers {
@@ -45,6 +52,10 @@ export interface GlobalReducers {
    * Close the alert.
    */
   closeAlert: CaseReducer<GlobalState>
+  /**
+   * Set the configuration property.
+   */
+  setConfiguration: CaseReducer<GlobalState, PayloadAction<Partial<GlobalState['configuration']>>>
 
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   [key: string]: CaseReducer<GlobalState, PayloadAction<any>>
