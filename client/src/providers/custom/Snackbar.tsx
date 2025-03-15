@@ -49,7 +49,9 @@ const SnackbarAlert = (): React.ReactNode => {
       onClose={onClose}
       anchorOrigin={position}
       autoHideDuration={duration}
-      TransitionComponent={SlideTransition}
+      slots={{
+        transition: SlideTransition,
+      }}
     >
       <Alert severity={severity} action={action} icon={icon} elevation={5}>
         {content}
