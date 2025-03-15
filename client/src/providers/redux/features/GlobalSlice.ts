@@ -12,6 +12,7 @@ const initialState: GlobalState = {
   },
   configuration: {
     defaultExpandAll: false,
+    defaultClicToOpenDevTools: true,
   },
 }
 

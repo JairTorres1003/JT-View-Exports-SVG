@@ -32,7 +32,6 @@ export type ReceiveMessage =
   | { type: SVGReceiveMessage.GetFavoriteIcons }
   | { type: SVGReceiveMessage.ToggleExpandIcon; data: boolean }
   | { type: SVGReceiveMessage.ToggleOpenDevTools; data: boolean }
-  | { type: SVGReceiveMessage.InitDefaultOpenDevTools }
   | { type: SVGReceiveMessage.GetExtensionTheme }
 
 /**
@@ -143,10 +142,6 @@ export interface HandlerReceiveMessage {
    * @param isOpen - A boolean indicating whether the dev tools should be opened.
    */
   [SVGReceiveMessage.ToggleOpenDevTools]: (isOpen: boolean) => void
-  /**
-   * Initializes the default click to open dev tools setting.
-   */
-  [SVGReceiveMessage.InitDefaultOpenDevTools]: VoidFunction
   /**
    * Gets the extension theme.
    */

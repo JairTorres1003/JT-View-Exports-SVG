@@ -23,6 +23,7 @@ export const useResizableHome = ({ devTootsId }: ResizableHomeHookProps): Resiza
   const [lastWidth, setLastWidth] = useState('75%')
 
   const isSelecting = useSelector((state) => state.playground.isSelecting)
+  const { defaultClicToOpenDevTools } = useSelector((state) => state.global.configuration)
 
   const dispatch = useDispatch()
 
@@ -66,13 +67,6 @@ export const useResizableHome = ({ devTootsId }: ResizableHomeHookProps): Resiza
   }
 
   /**
-   * Callback function to handle the default open dev tools event.
-   */
-  const onDefaultOpenDevTools = useCallback((data: boolean) => {
-    setLastWidth(data ? '75%' : '100%')
-  }, [])
-
-  /**
    * Toggles the open state of the developer tools and adjusts the resizable width accordingly.
    *
    * @param data - A boolean indicating whether the developer tools should be open.
@@ -93,12 +87,13 @@ export const useResizableHome = ({ devTootsId }: ResizableHomeHookProps): Resiza
   }, [isSelecting])
 
   useEffect(() => {
-    vscode.postMessage(SVGReceiveMessage.InitDefaultOpenDevTools)
-    vscode.onMessage(SVGPostMessage.SendDefaultOpenDevTools, onDefaultOpenDevTools)
+    setLastWidth(defaultClicToOpenDevTools ? '75%' : '100%')
+  }, [])
+
+  useEffect(() => {
     vscode.onMessage(SVGPostMessage.SendToggleOpenDevTools, onToggleOpenDevTools)
 
     return () => {
-      vscode.unregisterMessage(SVGPostMessage.SendDefaultOpenDevTools)
       vscode.unregisterMessage(SVGPostMessage.SendToggleOpenDevTools)
     }
   }, [])

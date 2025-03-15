@@ -83,7 +83,6 @@ export class ListerWebviewController {
       [SVGReceiveMessage.GetFavoriteIcons]: this._getIconsFromCache(false).bind(this),
       [SVGReceiveMessage.ToggleExpandIcon]: this._toggleExpandIcon.bind(this),
       [SVGReceiveMessage.ToggleOpenDevTools]: this._toggleOpenDevTools.bind(this),
-      [SVGReceiveMessage.InitDefaultOpenDevTools]: this._initDefaultOpenDevTools.bind(this),
       [SVGReceiveMessage.GetExtensionTheme]: this._getExtensionTheme.bind(this),
     }
   }
@@ -140,12 +139,14 @@ export class ListerWebviewController {
     this._toggleOpenDevTools(false)
 
     const config = new DefaultExpandAllController()
+    const configDev = new DefaultClickToOpenDevToolsController()
 
     this._toggleExpandIcon(config.isExpandAll())
 
     setTimeout(() => {
       this._postMessage(SVGPostMessage.SendInitConfiguration, {
         defaultExpandAll: config.isExpandAll(),
+        defaultClicToOpenDevTools: configDev.isDefaultOpen(),
       })
     }, 500)
   }
@@ -364,15 +365,6 @@ export class ListerWebviewController {
    */
   private _toggleOpenDevTools(open: boolean): void {
     toggleDevTools(open).catch(console.error)
-  }
-
-  /**
-   * Initializes the default open dev tools.
-   */
-  private _initDefaultOpenDevTools(): void {
-    const config = new DefaultClickToOpenDevToolsController()
-
-    this._postMessage(SVGPostMessage.SendDefaultOpenDevTools, config.isDefaultOpen())
   }
 
   /**

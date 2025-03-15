@@ -40,6 +40,11 @@ export interface GlobalState {
      * @default false
      */
     defaultExpandAll: boolean
+    /**
+     * The default click to open dev tools setting.
+     * @default true
+     */
+    defaultClicToOpenDevTools: boolean
   }
 }
 

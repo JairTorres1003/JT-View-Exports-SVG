@@ -30,7 +30,6 @@ export interface MessageHandlersView {
   [SVGPostMessage.SendFavoriteIcons]?: (data: ViewExportSVG[]) => void
   [SVGPostMessage.SendExpandAllIcons]?: (data: boolean) => void
   [SVGPostMessage.SendToggleOpenDevTools]?: (data: boolean) => void
-  [SVGPostMessage.SendDefaultOpenDevTools]?: (data: boolean) => void
   [SVGPostMessage.SendExtensionTheme]?: (data: ExtensionManage) => void
   [SVGPostMessage.SendInitConfiguration]?: (data: Record<string, unknown>) => void
 }
@@ -55,7 +54,6 @@ export interface FuncOnMessage {
   (type: SVGPostMessage.SendFavoriteIcons, handler: (data: ViewExportSVG[]) => void): void
   (type: SVGPostMessage.SendExpandAllIcons, handler: (data: boolean) => void): void
   (type: SVGPostMessage.SendToggleOpenDevTools, handler: (data: boolean) => void): void
-  (type: SVGPostMessage.SendDefaultOpenDevTools, handler: (data: boolean) => void): void
   (type: SVGPostMessage.SendExtensionTheme, handler: (data: ExtensionManage) => void): void
   (
     type: SVGPostMessage.SendInitConfiguration,
@@ -91,6 +89,5 @@ export interface FuncPostMessage {
   (type: SVGReceiveMessage.GetFavoriteIcons): void
   (type: SVGReceiveMessage.ToggleExpandIcon, data: boolean): void
   (type: SVGReceiveMessage.ToggleOpenDevTools, data: boolean): void
-  (type: SVGReceiveMessage.InitDefaultOpenDevTools): void
   (type: SVGReceiveMessage.GetExtensionTheme): void
 }

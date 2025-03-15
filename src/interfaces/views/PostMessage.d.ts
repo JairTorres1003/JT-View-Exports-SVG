@@ -23,7 +23,6 @@ export type PostMessage =
   | { type: SVGPostMessage.SendFavoriteIcons; data: ViewExportSVG[] }
   | { type: SVGPostMessage.SendExpandAllIcons; data: boolean }
   | { type: SVGPostMessage.SendToggleOpenDevTools; data: boolean }
-  | { type: SVGPostMessage.SendDefaultOpenDevTools; data: boolean }
   | { type: SVGPostMessage.SendExtensionTheme; data: ExtensionManage }
   | { type: SVGPostMessage.SendInitConfiguration; data: Record<string, unknown> }
 
@@ -111,11 +110,6 @@ export interface FuncPostMessage {
    * @param data - The toggle open dev tools message.
    */
   (type: SVGPostMessage.SendToggleOpenDevTools, data: boolean): void
-  /**
-   * Sends the open dev tools message to the webview.
-   * @param data - The open dev tools message.
-   */
-  (type: SVGPostMessage.SendDefaultOpenDevTools, data: boolean): void
   /**
    * Sends the extension theme to the webview.
    * @param data - The extension theme.
