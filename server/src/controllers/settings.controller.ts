@@ -4,6 +4,7 @@ import { getConfigurationEditor } from '@jt/view-exports-svg/utilities/vscode/co
 import { isEmpty } from '@jt/view-exports-svg/utilities/misc.js'
 import { getStyles } from '@jt/view-exports-svg/utilities/vscode/theme.js'
 import { expandedIcons } from '@jt/view-exports-svg/commands/expandedIcons.js'
+import { toggleDevTools } from '@jt/view-exports-svg/commands/devTools.js'
 // @ts-types="@jt/view-exports-svg/enum/ViewExportsSVG.d.ts"
 import { SVGPostMessage } from '@jt/view-exports-svg/enum/ViewExportsSVG.js'
 import {
@@ -92,5 +93,25 @@ export class SettingsController {
       console.error(error)
       res.status(500).json({ message: SVGPostMessage.SendVsCodeStyles, data: {} })
     }
+  }
+
+  /**
+   * Handles the request to toggle the open developer tools setting.
+   *
+   * @param req - The request object containing the new value for the open developer tools setting.
+   * @param res - The response object used to send back a success message if the setting was updated.
+   *
+   * @returns A JSON response with a success message if the setting was updated, or an error message if an error occurs.
+   */
+  public toggleOpenDevTools = (req: Request, res: Response) => {
+    const isOpen = req.body.data
+    toggleDevTools(isOpen)
+      .then(() => {
+        res.send({ message: 'Open developer tools updated' })
+      })
+      .catch((error) => {
+        console.error(error)
+        res.status(500).send({ message: 'Error updating open developer tools' })
+      })
   }
 }
