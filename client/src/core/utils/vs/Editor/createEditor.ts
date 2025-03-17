@@ -32,6 +32,8 @@ const OVERRIDES: IEditorOverrideServices = {
   }),
 }
 
+let initialized = false
+
 export class Editor {
   private _defaultValue = ''
   private _editorInstance?: IStandaloneCodeEditor
@@ -63,7 +65,10 @@ export class Editor {
       this._editorInstance.dispose()
     }
 
-    await initialize(OVERRIDES)
+    if (!initialized) {
+      await initialize(OVERRIDES)
+      initialized = true
+    }
 
     try {
       await updateUserConfiguration(JSON.stringify(this._userConfiguration))
@@ -95,6 +100,7 @@ export class Editor {
     const editor = monaco.editor.create(this._reference, {
       language: 'typescript',
       value: '',
+      automaticLayout: true,
     }) as IStandaloneCodeEditor
 
     contextMenuServiceOverride(editor)
