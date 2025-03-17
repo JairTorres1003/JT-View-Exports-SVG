@@ -106,6 +106,8 @@ export class ViewExportsSVGController extends ListerWebviewController {
    */
   public static update(viewExportSVG: ViewExportSVG[]): void {
     if (!isEmpty(ViewExportsSVGController.currentPanel)) {
+      ViewExportsSVGController.currentPanel.update()
+
       ViewExportsSVGController.currentPanel.viewExportSVG = viewExportSVG
 
       if (!isEmpty(viewExportSVG)) {

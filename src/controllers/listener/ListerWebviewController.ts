@@ -152,6 +152,15 @@ export class ListerWebviewController {
   }
 
   /**
+   * Updates the state of the webview panel.
+   *
+   * @protected
+   */
+  protected readonly update = (): void => {
+    this._toggleOpenDevTools(false)
+  }
+
+  /**
    * Extracts SVG components from the given files.
    * @param files - An array of file paths.
    */
