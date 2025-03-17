@@ -17,8 +17,17 @@ export const Playground: FC = () => {
 
   const { t } = useTranslation(undefined, { keyPrefix: 'labels' })
 
-  const { backgroundColor, expandedCode, handleExpand, onChangeColor, initialColor, defaultValue } =
-    usePlayground()
+  const {
+    backgroundColor,
+    defaultValue,
+    editorRef,
+    expandedCode,
+    handleCopyCode,
+    handleExpand,
+    handleResetCode,
+    initialColor,
+    onChangeColor,
+  } = usePlayground()
 
   if (recentlySelected === undefined) return null
 
@@ -44,14 +53,14 @@ export const Playground: FC = () => {
           </Grid2>
           <Grid2>
             <Tooltip title={t('Copy code')}>
-              <IconButton>
+              <IconButton onClick={handleCopyCode}>
                 <IconCopy size={16} />
               </IconButton>
             </Tooltip>
           </Grid2>
           <Grid2>
             <Tooltip title={t('Reset code')}>
-              <IconButton>
+              <IconButton onClick={handleResetCode}>
                 <IconRefresh size={16} sx={{ transform: 'rotate(90deg)' }} />
               </IconButton>
             </Tooltip>
@@ -60,7 +69,7 @@ export const Playground: FC = () => {
 
         <Collapse in={expandedCode}>
           <Divider className='Box-Playground__card__divider' />
-          <Editor defaultValue={defaultValue} />
+          <Editor defaultValue={defaultValue} ref={editorRef} />
         </Collapse>
       </Card>
     </BoxPlayground>

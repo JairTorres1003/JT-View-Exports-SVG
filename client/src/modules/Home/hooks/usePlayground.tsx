@@ -1,11 +1,14 @@
 import { SVGPostMessage, SVGReceiveMessage } from '@api/enums/ViewExportsSVG'
 import type { ExtensionManage } from '@api/interfaces/vscode'
-import { useCallback, useEffect, useMemo, useState } from 'react'
+import { useCallback, useEffect, useMemo, useRef, useState } from 'react'
+import { Trans, useTranslation } from 'react-i18next'
 import { useDispatch, useSelector } from 'react-redux'
 
+import { useAlert } from '@/core/hooks/useAlert'
+import type { TypeEditorRef } from '@/core/interfaces/components/vs/Editor'
 import { setEditorConfig, setExtensionTheme } from '@/providers/redux/features/VsCodeSlice'
 import { vscode } from '@/services/vscode'
-import { getUnknownError } from '@/utils/misc'
+import { copyToClipboard, getUnknownError } from '@/utils/misc'
 
 interface PlaygroundHook {
   backgroundColor: string
@@ -14,6 +17,9 @@ interface PlaygroundHook {
   onChangeColor: (color: string) => void
   initialColor: string
   defaultValue: string
+  editorRef: React.RefObject<TypeEditorRef>
+  handleCopyCode: VoidFunction
+  handleResetCode: VoidFunction
 }
 
 const CSS_VAR_MAIN = '--JT-SVG-vscode-sideBarTitle-background'
@@ -22,12 +28,15 @@ const CSS_VAR_SECONDARY = '--JT-SVG-vscode-sideBarSectionHeader-background'
 export const usePlayground = (): PlaygroundHook => {
   const [backgroundColor, setBackgroundColor] = useState('#fff')
   const [expandedCode, setExpandedCode] = useState(true)
-
   const [initialColor, setInitialColor] = useState('#fff')
 
-  const recentlySelected = useSelector((state) => state.playground.recentlySelected)
+  const { t } = useTranslation(undefined, { keyPrefix: 'labels' })
+  const { onOpen } = useAlert()
 
+  const recentlySelected = useSelector((state) => state.playground.recentlySelected)
   const dispatch = useDispatch()
+
+  const editorRef = useRef<TypeEditorRef>(null)
 
   const defaultValue = useMemo(() => {
     if (!recentlySelected) return ''
@@ -109,6 +118,33 @@ export const usePlayground = (): PlaygroundHook => {
     dispatch(setExtensionTheme(theme))
   }
 
+  /**
+   * Handles the copying of code from the editor to the clipboard.
+   */
+  const handleCopyCode = () => {
+    if (editorRef.current?.editor) {
+      const code = editorRef.current.editor.getValue()
+      copyToClipboard(code)
+        .then(() => {
+          onOpen(<Trans t={t} i18nKey='Copied {{value}} to clipboard' values={{ value: '' }} />, {
+            severity: 'success',
+          })
+        })
+        .catch((error) => {
+          onOpen(getUnknownError(error), { severity: 'error' })
+        })
+    }
+  }
+
+  /**
+   * Resets the code in the editor to its initial value.
+   */
+  const handleResetCode = () => {
+    if (editorRef.current?.editor) {
+      editorRef.current.editor.resetValue()
+    }
+  }
+
   useEffect(() => {
     applyInitialColor()
 
@@ -130,5 +166,8 @@ export const usePlayground = (): PlaygroundHook => {
     onChangeColor,
     initialColor,
     defaultValue,
+    editorRef,
+    handleCopyCode,
+    handleResetCode,
   }
 }
