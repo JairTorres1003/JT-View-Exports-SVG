@@ -1,6 +1,7 @@
 // @ts-types="npm:@types/express@4.17.15"
 import { Request, Response } from 'express'
 import { getConfigurationEditor } from '@jt/view-exports-svg/utilities/vscode/config.js'
+import { expandedIcons } from '@jt/view-exports-svg/commands/expandedIcons.js'
 // @ts-types="@jt/view-exports-svg/enum/ViewExportsSVG.d.ts"
 import { SVGPostMessage } from '@jt/view-exports-svg/enum/ViewExportsSVG.js'
 
@@ -22,5 +23,17 @@ export class SettingsController {
       console.error(error)
       res.status(500).json({ message: SVGPostMessage.SendEditorConfig, data: {} })
     }
+  }
+
+  public toggleExpandAll = (req: Request, res: Response) => {
+    const isExpanded = req.body.data
+    expandedIcons(isExpanded)
+      .then(() => {
+        res.send({ message: 'Expanded icons updated' })
+      })
+      .catch((error) => {
+        console.error(error)
+        res.status(500).send({ message: 'Error updating expanded icons' })
+      })
   }
 }
