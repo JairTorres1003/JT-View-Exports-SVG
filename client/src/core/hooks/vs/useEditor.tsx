@@ -6,13 +6,14 @@ import { useForkRef } from '../useForkRef'
 import type {
   EditorHook,
   EditorHookProps,
+  IStandaloneCodeEditor,
   TypeEditorRef,
 } from '@/core/interfaces/components/vs/Editor'
 import { Editor } from '@/core/utils/vs/Editor'
 import { getUnknownError, isEmpty } from '@/utils/misc'
 
 export const useEditor = ({ forwardedRef, defaultValue }: EditorHookProps): EditorHook => {
-  const [isInitialized, setIsInitialized] = useState(false)
+  const [editorInstance, setEditorInstance] = useState<IStandaloneCodeEditor | undefined>(undefined)
   const { editorConfig } = useSelector((state) => state.vsCode)
 
   const editorRef = useRef<TypeEditorRef>(null)
@@ -34,36 +35,38 @@ export const useEditor = ({ forwardedRef, defaultValue }: EditorHookProps): Edit
     if (isEmpty(editorRef.current) || isEmpty(editorConfig)) return
 
     const editor = new Editor(editorRef.current, editorConfig)
+    const instance = await editor.createEditor()
 
-    editorRef.current.editor = await editor.createEditor()
+    editorRef.current.editor = instance
+
+    return instance
   }, [editorConfig])
 
   useEffect(() => {
-    if (isInitialized && defaultValue) {
-      editorRef.current?.editor?.focus()
-      editorRef.current?.editor?.trigger('keyboard', 'type', { text: '\n' })
-      editorRef.current?.editor?.setDefaultValue(defaultValue)
-      editorRef.current?.editor?.setPosition({
-        lineNumber: editorRef.current?.editor?.getModel()?.getLineCount() ?? 1,
+    if (editorInstance && defaultValue) {
+      editorInstance?.focus()
+      editorInstance?.trigger('keyboard', 'type', { text: '\n' })
+      editorInstance?.setDefaultValue(defaultValue)
+      editorInstance?.setPosition({
+        lineNumber: editorInstance?.getModel()?.getLineCount() ?? 1,
         column: 1,
       })
     }
-  }, [defaultValue, isInitialized])
+
+    return () => {
+      editorInstance?.dispose()
+    }
+  }, [defaultValue, editorInstance])
 
   useEffect(() => {
     initializeEditor()
-      .then(() => {
-        setIsInitialized(true)
+      .then((editor) => {
+        console.info('editor', editor)
+        setEditorInstance(editor)
       })
       .catch((error) => {
         console.error(`Failed to initialize editor: ${getUnknownError(error)}`)
       })
-
-    return () => {
-      if (editorRef.current?.editor) {
-        editorRef.current.editor.dispose()
-      }
-    }
   }, [])
 
   return {
