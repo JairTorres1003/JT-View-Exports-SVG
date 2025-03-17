@@ -44,10 +44,10 @@ export const useEditor = ({ forwardedRef, defaultValue }: EditorHookProps): Edit
 
   useEffect(() => {
     if (editorInstance && defaultValue) {
-      editorInstance?.focus()
-      editorInstance?.trigger('keyboard', 'type', { text: '\n' })
-      editorInstance?.setDefaultValue(defaultValue)
-      editorInstance?.setPosition({
+      editorInstance.focus()
+      editorInstance.trigger('keyboard', 'type', { text: '\n' })
+      editorInstance.setDefaultValue(defaultValue)
+      editorInstance.setPosition({
         lineNumber: editorInstance?.getModel()?.getLineCount() ?? 1,
         column: 1,
       })
