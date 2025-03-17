@@ -2,6 +2,7 @@
 import { Request, Response } from 'express'
 import { getConfigurationEditor } from '@jt/view-exports-svg/utilities/vscode/config.js'
 import { isEmpty } from '@jt/view-exports-svg/utilities/misc.js'
+import { getStyles } from '@jt/view-exports-svg/utilities/vscode/theme.js'
 import { expandedIcons } from '@jt/view-exports-svg/commands/expandedIcons.js'
 // @ts-types="@jt/view-exports-svg/enum/ViewExportsSVG.d.ts"
 import { SVGPostMessage } from '@jt/view-exports-svg/enum/ViewExportsSVG.js'
@@ -71,6 +72,25 @@ export class SettingsController {
     } catch (error) {
       console.error(error)
       res.status(500).json({ message: SVGPostMessage.SendExtensionTheme, data: {} })
+    }
+  }
+
+  /**
+   * Handles the request to get the VS Code styles.
+   *
+   * @param _ - The request object (not used).
+   * @param res - The response object used to send back the VS Code styles.
+   *
+   * @returns A JSON response with the VS Code styles if successful, or an error message if an error occurs.
+   */
+  public getVscodeStyles = (_: Request, res: Response) => {
+    try {
+      const config = getStyles()
+
+      res.status(200).json({ type: SVGPostMessage.SendVsCodeStyles, data: config })
+    } catch (error) {
+      console.error(error)
+      res.status(500).json({ message: SVGPostMessage.SendVsCodeStyles, data: {} })
     }
   }
 }
