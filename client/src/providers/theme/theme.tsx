@@ -3,10 +3,9 @@ import type { VsCodeStyles } from '@api/interfaces/vscode'
 import { createTheme, type Theme } from '@mui/material'
 import type {} from '@mui/material/themeCssVarsAugmentation'
 import { useEffect, useMemo } from 'react'
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 
 import { setVsCodeStyles } from '../redux/features/VsCodeSlice'
-import { useSelector } from '../redux/store'
 
 import {
   dataDisplayCustomizations,

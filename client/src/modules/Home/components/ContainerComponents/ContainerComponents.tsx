@@ -1,4 +1,5 @@
 import { ListItem, ListItemIcon, ListItemText } from '@mui/material'
+import { useSelector } from 'react-redux'
 
 import { CardSvg } from '../Cards/CardSvg'
 import RenderSvg from '../SVG/RenderSvg'
@@ -8,7 +9,6 @@ import { BoxContainerComponents } from './ContainerComponents.style'
 import { IconWarning } from '@/assets/icons/indicators'
 import { AccordionMenuItem } from '@/core/components/Accordion'
 import { useContainerComponents } from '@/modules/Home/hooks/useContainerComponents'
-import { useSelector } from '@/providers/redux/store'
 
 export const ContainerComponents = (): React.ReactNode => {
   const { isExpanded, toggleExpanded } = useContainerComponents()

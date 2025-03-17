@@ -1,4 +1,5 @@
 import { useCallback, useEffect, useRef, useState } from 'react'
+import { useSelector } from 'react-redux'
 
 import { useForkRef } from '../useForkRef'
 
@@ -8,7 +9,6 @@ import type {
   TypeEditorRef,
 } from '@/core/interfaces/components/vs/Editor'
 import { Editor } from '@/core/utils/vs/Editor'
-import { useSelector } from '@/providers/redux/store'
 import { getUnknownError, isEmpty } from '@/utils/misc'
 
 export const useEditor = ({ forwardedRef, defaultValue }: EditorHookProps): EditorHook => {

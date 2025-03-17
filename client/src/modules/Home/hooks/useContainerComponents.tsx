@@ -1,7 +1,7 @@
 import { SVGPostMessage, SVGReceiveMessage } from '@api/enums/ViewExportsSVG'
 import { type SyntheticEvent, useEffect, useState } from 'react'
+import { useSelector } from 'react-redux'
 
-import { useSelector } from '@/providers/redux/store'
 import { vscode } from '@/services/vscode'
 
 interface ContainerComponentsHook {

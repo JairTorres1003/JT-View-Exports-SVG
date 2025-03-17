@@ -1,6 +1,5 @@
 import { useMemo } from 'react'
-
-import { useSelector } from '@/providers/redux/store'
+import { useSelector } from 'react-redux'
 
 interface EditorPlaygroundHook {
   defaultValue: string

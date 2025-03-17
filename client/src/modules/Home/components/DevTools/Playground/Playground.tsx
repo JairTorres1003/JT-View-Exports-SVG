@@ -1,6 +1,7 @@
 import { Card, Collapse, Divider, Grid2, IconButton, Tooltip } from '@mui/material'
 import type { FC } from 'react'
 import { useTranslation } from 'react-i18next'
+import { useSelector } from 'react-redux'
 
 import RenderSvg from '../../SVG/RenderSvg'
 
@@ -10,7 +11,6 @@ import { BoxPlayground, BoxPlaygroundCardSvg } from './Playground.style'
 import { IconCodeTag, IconCopy, IconRefresh } from '@/assets/icons/functionalities'
 import { SelectPickerColor } from '@/core/components/Select'
 import { usePlayground } from '@/modules/Home/hooks/usePlayground'
-import { useSelector } from '@/providers/redux/store'
 
 export const Playground: FC = () => {
   const recentlySelected = useSelector((state) => state.playground.recentlySelected)

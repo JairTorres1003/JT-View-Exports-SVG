@@ -1,10 +1,10 @@
 import { Alert, Slide, type SlideProps, Snackbar } from '@mui/material'
 import { Fragment, useEffect, useState, type FC } from 'react'
+import { useSelector } from 'react-redux'
 import { v4 as uuidv4 } from 'uuid'
 
 import { useAlert } from '@/core/hooks/useAlert'
 import type { ProviderProps } from '@/interfaces/misc'
-import { useSelector } from '@/providers/redux/store'
 
 /**
  * SlideTransition component.

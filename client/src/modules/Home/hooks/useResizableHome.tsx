@@ -1,10 +1,9 @@
 import { SVGPostMessage, SVGReceiveMessage } from '@api/enums/ViewExportsSVG'
 import type { ResizeStartCallback, ResizeCallback } from 're-resizable'
 import { useCallback, useEffect, useState } from 'react'
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 
 import { setIsSelecting } from '@/providers/redux/features/PlaygroundSlice'
-import { useSelector } from '@/providers/redux/store'
 import { vscode } from '@/services/vscode'
 
 interface ResizableHomeHook {

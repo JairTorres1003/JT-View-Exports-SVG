@@ -1,11 +1,10 @@
 import { SVGPostMessage, SVGReceiveMessage } from '@api/enums/ViewExportsSVG'
 import type { ViewExportSVG } from '@api/interfaces/ViewExportsSVG'
 import { useEffect } from 'react'
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 
 import useDebounce from '@/core/hooks/useDebounce'
 import { setComponents, setErrors, setSearch } from '@/providers/redux/features/SVGSlice'
-import { useSelector } from '@/providers/redux/store'
 import { vscode } from '@/services/vscode'
 
 interface SearchBarHook {

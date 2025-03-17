@@ -1,5 +1,4 @@
 import { type Reducer, type Store, combineReducers, configureStore } from '@reduxjs/toolkit'
-import { type TypedUseSelectorHook, useSelector as useReduxSelector } from 'react-redux'
 
 import { GlobalReducer } from './features/GlobalSlice'
 import { PlaygroundReducer } from './features/PlaygroundSlice'
@@ -31,10 +30,3 @@ export const store: Store<RootStoreState> = configureStore({
   middleware: (getDefaultMiddleware) => getDefaultMiddleware({ serializableCheck: false }),
   devTools: import.meta.env.DEV,
 })
-
-/**
- * A typed hook to use the Redux store state.
- * @remarks
- * This hook is used to access the Redux store state in a type-safe manner.
- */
-export const useSelector: TypedUseSelectorHook<RootStoreState> = useReduxSelector
