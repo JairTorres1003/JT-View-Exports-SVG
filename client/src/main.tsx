@@ -4,9 +4,9 @@ import { createRoot } from 'react-dom/client'
 import Layout from './app/Layouts/main'
 
 import './config/environment'
-
 import './i18n'
 import './index.css'
+import './workers/workerLoader'
 
 const container = document.getElementById('root')
 

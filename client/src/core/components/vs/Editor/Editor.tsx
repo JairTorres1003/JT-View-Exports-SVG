@@ -1,5 +1,4 @@
 import { forwardRef, useId } from 'react'
-import '@/workers/workerLoader'
 
 import { BoxEditor } from './Editor.style'
 
