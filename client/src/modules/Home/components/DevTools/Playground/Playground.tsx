@@ -5,11 +5,11 @@ import { useSelector } from 'react-redux'
 
 import RenderSvg from '../../SVG/RenderSvg'
 
-import { EditorPlayground } from './EditorPlayground'
 import { BoxPlayground, BoxPlaygroundCardSvg } from './Playground.style'
 
 import { IconCodeTag, IconCopy, IconRefresh } from '@/assets/icons/functionalities'
 import { SelectPickerColor } from '@/core/components/Select'
+import { Editor } from '@/core/components/vs/Editor'
 import { usePlayground } from '@/modules/Home/hooks/usePlayground'
 
 export const Playground: FC = () => {
@@ -17,7 +17,7 @@ export const Playground: FC = () => {
 
   const { t } = useTranslation(undefined, { keyPrefix: 'labels' })
 
-  const { backgroundColor, expandedCode, handleExpand, onChangeColor, initialColor } =
+  const { backgroundColor, expandedCode, handleExpand, onChangeColor, initialColor, defaultValue } =
     usePlayground()
 
   if (recentlySelected === undefined) return null
@@ -60,7 +60,7 @@ export const Playground: FC = () => {
 
         <Collapse in={expandedCode}>
           <Divider className='Box-Playground__card__divider' />
-          <EditorPlayground />
+          <Editor defaultValue={defaultValue} />
         </Collapse>
       </Card>
     </BoxPlayground>

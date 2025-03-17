@@ -1,7 +1,7 @@
 import { SVGPostMessage, SVGReceiveMessage } from '@api/enums/ViewExportsSVG'
 import type { ExtensionManage } from '@api/interfaces/vscode'
-import { useEffect, useState } from 'react'
-import { useDispatch } from 'react-redux'
+import { useCallback, useEffect, useMemo, useState } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
 
 import { setEditorConfig, setExtensionTheme } from '@/providers/redux/features/VsCodeSlice'
 import { vscode } from '@/services/vscode'
@@ -13,6 +13,7 @@ interface PlaygroundHook {
   handleExpand: VoidFunction
   onChangeColor: (color: string) => void
   initialColor: string
+  defaultValue: string
 }
 
 const CSS_VAR_MAIN = '--JT-SVG-vscode-sideBarTitle-background'
@@ -24,7 +25,15 @@ export const usePlayground = (): PlaygroundHook => {
 
   const [initialColor, setInitialColor] = useState('#fff')
 
+  const recentlySelected = useSelector((state) => state.playground.recentlySelected)
+
   const dispatch = useDispatch()
+
+  const defaultValue = useMemo(() => {
+    if (!recentlySelected) return ''
+
+    return `<${recentlySelected.name} />\n`
+  }, [recentlySelected])
 
   /**
    * Toggles the expanded state.
@@ -52,7 +61,7 @@ export const usePlayground = (): PlaygroundHook => {
    *
    * @throws Will log an error message if there is an issue applying the initial color.
    */
-  const applyInitialColor = () => {
+  const applyInitialColor = useCallback(() => {
     try {
       const root = document.documentElement
       const mainColor = getComputedStyle(root).getPropertyValue(CSS_VAR_MAIN)
@@ -72,15 +81,15 @@ export const usePlayground = (): PlaygroundHook => {
 
         const imageData = ctx.getImageData(5, 5, 1, 1)
         const [r, g, b, a] = imageData.data
-        const initialColor = `rgba(${r}, ${g}, ${b}, ${a})`
+        const initial = `rgba(${r}, ${g}, ${b}, ${a})`
 
-        setInitialColor(initialColor)
-        onChangeColor(initialColor)
+        setInitialColor(initial)
+        onChangeColor(initial)
       }
     } catch (error) {
       console.error('Error applying initial color:', getUnknownError(error))
     }
-  }
+  }, [])
 
   /**
    * Handles the editor configuration by dispatching the setEditorConfig action with the provided data.
@@ -120,5 +129,6 @@ export const usePlayground = (): PlaygroundHook => {
     handleExpand,
     onChangeColor,
     initialColor,
+    defaultValue,
   }
 }
