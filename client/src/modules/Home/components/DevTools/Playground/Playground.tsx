@@ -29,13 +29,11 @@ export const Playground: FC = () => {
     onChangeColor,
   } = usePlayground()
 
-  if (recentlySelected === undefined) return null
-
   return (
     <BoxPlayground>
       <Card className='Box-Playground__card' variant='outlined'>
         <BoxPlaygroundCardSvg bgColor={backgroundColor}>
-          <RenderSvg {...recentlySelected} />
+          {recentlySelected && <RenderSvg {...recentlySelected} />}
         </BoxPlaygroundCardSvg>
 
         <Divider className='Box-Playground__card__divider' />
@@ -67,10 +65,12 @@ export const Playground: FC = () => {
           </Grid2>
         </Grid2>
 
-        <Collapse in={expandedCode}>
-          <Divider className='Box-Playground__card__divider' />
-          <Editor defaultValue={defaultValue} ref={editorRef} />
-        </Collapse>
+        {recentlySelected && (
+          <Collapse in={expandedCode}>
+            <Divider className='Box-Playground__card__divider' />
+            <Editor defaultValue={defaultValue} ref={editorRef} />
+          </Collapse>
+        )}
       </Card>
     </BoxPlayground>
   )

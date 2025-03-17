@@ -52,22 +52,26 @@ export const useEditor = ({ forwardedRef, defaultValue }: EditorHookProps): Edit
         column: 1,
       })
     }
-
-    return () => {
-      editorInstance?.dispose()
-    }
   }, [defaultValue, editorInstance])
 
   useEffect(() => {
     initializeEditor()
       .then((editor) => {
-        console.info('editor', editor)
         setEditorInstance(editor)
       })
       .catch((error) => {
         console.error(`Failed to initialize editor: ${getUnknownError(error)}`)
       })
   }, [])
+
+  useEffect(
+    () => () => {
+      if (editorInstance) {
+        editorInstance.dispose()
+      }
+    },
+    [editorInstance]
+  )
 
   return {
     rootRef: forkedRef,
