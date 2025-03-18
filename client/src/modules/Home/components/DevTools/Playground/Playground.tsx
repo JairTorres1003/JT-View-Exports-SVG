@@ -10,6 +10,7 @@ import { BoxPlayground, BoxPlaygroundCardSvg } from './Playground.style'
 import { IconCodeTag, IconCopy, IconRefresh } from '@/assets/icons/functionalities'
 import { SelectPickerColor } from '@/core/components/Select'
 import { Editor } from '@/core/components/vs/Editor'
+import { Show } from '@/core/helpers'
 import { usePlayground } from '@/modules/Home/hooks/usePlayground'
 
 export const Playground: FC = () => {
@@ -42,27 +43,31 @@ export const Playground: FC = () => {
           <Grid2 flex={1}>
             <SelectPickerColor onChange={onChangeColor} initialColor={initialColor} />
           </Grid2>
-          <Grid2>
-            <Tooltip title={expandedCode ? t('Hide code') : t('Show code')}>
-              <IconButton onClick={handleExpand}>
-                <IconCodeTag size={16} />
-              </IconButton>
-            </Tooltip>
-          </Grid2>
-          <Grid2>
-            <Tooltip title={t('Copy code')}>
-              <IconButton onClick={handleCopyCode}>
-                <IconCopy size={16} />
-              </IconButton>
-            </Tooltip>
-          </Grid2>
-          <Grid2>
-            <Tooltip title={t('Reset code')}>
-              <IconButton onClick={handleResetCode}>
-                <IconRefresh size={16} sx={{ transform: 'rotate(90deg)' }} />
-              </IconButton>
-            </Tooltip>
-          </Grid2>
+          <Show>
+            <Show.When isTrue={!!recentlySelected}>
+              <Grid2>
+                <Tooltip title={expandedCode ? t('Hide code') : t('Show code')}>
+                  <IconButton onClick={handleExpand}>
+                    <IconCodeTag size={16} />
+                  </IconButton>
+                </Tooltip>
+              </Grid2>
+              <Grid2>
+                <Tooltip title={t('Copy code')}>
+                  <IconButton onClick={handleCopyCode}>
+                    <IconCopy size={16} />
+                  </IconButton>
+                </Tooltip>
+              </Grid2>
+              <Grid2>
+                <Tooltip title={t('Reset code')}>
+                  <IconButton onClick={handleResetCode}>
+                    <IconRefresh size={16} sx={{ transform: 'rotate(90deg)' }} />
+                  </IconButton>
+                </Tooltip>
+              </Grid2>
+            </Show.When>
+          </Show>
         </Grid2>
 
         {recentlySelected && (
