@@ -1,4 +1,4 @@
-import { Card, Collapse, Divider, Grid2, IconButton, Tooltip } from '@mui/material'
+import { Card, Collapse, Divider, Grid2, IconButton, Portal, Tooltip } from '@mui/material'
 import type { FC } from 'react'
 import { useTranslation } from 'react-i18next'
 import { useSelector } from 'react-redux'
@@ -8,12 +8,17 @@ import RenderSvg from '../../SVG/RenderSvg'
 import { BoxPlayground, BoxPlaygroundCardSvg } from './Playground.style'
 
 import { IconCodeTag, IconCopy, IconRefresh } from '@/assets/icons/functionalities'
+import { IconKebabHorizontal } from '@/assets/icons/navigation'
 import { SelectPickerColor } from '@/core/components/Select'
 import { Editor } from '@/core/components/vs/Editor'
 import { Show } from '@/core/helpers'
 import { usePlayground } from '@/modules/Home/hooks/usePlayground'
 
-export const Playground: FC = () => {
+interface PlaygroundProps {
+  containerId?: string
+}
+
+export const Playground: FC<PlaygroundProps> = ({ containerId = 'playground-actions' }) => {
   const recentlySelected = useSelector((state) => state.playground.recentlySelected)
 
   const { t } = useTranslation(undefined, { keyPrefix: 'labels' })
@@ -77,6 +82,11 @@ export const Playground: FC = () => {
           </Collapse>
         )}
       </Card>
+      <Portal container={document.getElementById(containerId)}>
+        <IconButton sx={{ marginRight: '4px' }}>
+          <IconKebabHorizontal size={16} />
+        </IconButton>
+      </Portal>
     </BoxPlayground>
   )
 }
