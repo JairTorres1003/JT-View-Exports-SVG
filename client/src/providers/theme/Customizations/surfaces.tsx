@@ -40,4 +40,10 @@ export const surfacesCustomizations: CustomizationsFunction = () => ({
       },
     },
   },
+  MuiAccordionActions: {
+    defaultProps: { disableSpacing: true },
+    styleOverrides: {
+      root: { padding: 0, gap: '4px' },
+    },
+  },
 })
