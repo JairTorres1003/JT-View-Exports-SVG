@@ -6,6 +6,8 @@ import {
   typographyClasses,
 } from '@mui/material'
 
+import { accordionMenuItemClasses } from '@/core/components/Accordion/accordionMenuItemClasses'
+
 export const BoxDevTools = styled(Box, { name: 'Box-DevTools' })(() => ({
   width: '100%',
   minWidth: 170,
@@ -50,11 +52,15 @@ export const BoxDevTools = styled(Box, { name: 'Box-DevTools' })(() => ({
         height: '0.5px',
         opacity: 1,
       },
+      [`& .${accordionMenuItemClasses.summary}`]: {
+        padding: 0,
+        backgroundColor: 'var(--JT-SVG-vscode-sideBarSectionHeader-background)',
+      },
       [`& .${accordionSummaryClasses.root}`]: {
         minHeight: 22,
-        textTransform: 'uppercase',
-        backgroundColor: 'var(--JT-SVG-vscode-sideBarSectionHeader-background)',
         padding: 0,
+        textTransform: 'uppercase',
+        backgroundColor: 'transparent',
         [`& .${accordionSummaryClasses.content} > .${typographyClasses.root}`]: {
           fontWeight: 'bold',
         },

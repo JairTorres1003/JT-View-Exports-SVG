@@ -15,11 +15,16 @@ import {
 import cn from 'classnames'
 import { forwardRef, useId } from 'react'
 
+import { BoxAccordionMenuItem } from './AccordionMenuItem.style'
 import { accordionMenuItemClasses } from './accordionMenuItemClasses'
 
 export interface AccordionMenuItemProps extends AccordionProps {
   label: string
   actions?: React.ReactNode
+  /**
+   * @default false
+   */
+  enableEmptyActions?: boolean
   slotProps?: AccordionProps['slotProps'] & {
     actions?: Partial<Omit<AccordionActionsProps, 'children' | 'component'>>
     details?: Partial<Omit<AccordionDetailsProps, 'children'>>
@@ -29,7 +34,10 @@ export interface AccordionMenuItemProps extends AccordionProps {
 }
 
 export const AccordionMenuItem = forwardRef<HTMLDivElement, AccordionMenuItemProps>(
-  function AccordionMenuItem({ children, actions, label, slotProps = {}, ...props }, ref) {
+  function AccordionMenuItem(
+    { children, actions, label, slotProps = {}, enableEmptyActions = false, ...props },
+    ref
+  ) {
     const id = useId()
 
     return (
@@ -42,16 +50,13 @@ export const AccordionMenuItem = forwardRef<HTMLDivElement, AccordionMenuItemPro
         }}
         className={cn(accordionMenuItemClasses.root, props.className)}
       >
-        <Grid2
-          container
-          spacing={0.5}
-          alignItems='center'
-          className={accordionMenuItemClasses.summary}
-          sx={{ padding: 'calc(0 * var(--JT-SVG-spacing)) calc(2 * var(--JT-SVG-spacing))' }}
+        <BoxAccordionMenuItem
+          className={cn({
+            [accordionMenuItemClasses.withActions]: actions ?? enableEmptyActions,
+          })}
         >
           <Grid2
             size='grow'
-            padding={0}
             id={`${id}header`}
             aria-controls={`${id}content`}
             {...(slotProps.summary ?? {})}
@@ -63,7 +68,7 @@ export const AccordionMenuItem = forwardRef<HTMLDivElement, AccordionMenuItemPro
               </Typography>
             </Tooltip>
           </Grid2>
-          {actions && (
+          {(actions ?? enableEmptyActions) && (
             <Grid2
               size='auto'
               padding={0}
@@ -74,7 +79,7 @@ export const AccordionMenuItem = forwardRef<HTMLDivElement, AccordionMenuItemPro
               {actions}
             </Grid2>
           )}
-        </Grid2>
+        </BoxAccordionMenuItem>
         <AccordionDetails
           {...(slotProps.details ?? {})}
           className={cn(accordionMenuItemClasses.details, slotProps.details?.className)}
