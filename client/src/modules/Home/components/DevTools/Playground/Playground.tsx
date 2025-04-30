@@ -1,4 +1,4 @@
-import { Card, Collapse, Divider, Grid2, IconButton, Portal, Tooltip } from '@mui/material'
+import { Card, Collapse, Divider, Grid, IconButton, Portal, Tooltip } from '@mui/material'
 import type { FC } from 'react'
 import { useTranslation } from 'react-i18next'
 import { useSelector } from 'react-redux'
@@ -44,36 +44,36 @@ export const Playground: FC<PlaygroundProps> = ({ containerId = 'playground-acti
 
         <Divider className='Box-Playground__card__divider' />
 
-        <Grid2 container spacing={1} className='Box-Playground__card__tools'>
-          <Grid2 flex={1}>
+        <Grid container spacing={1} className='Box-Playground__card__tools'>
+          <Grid flex={1}>
             <SelectPickerColor onChange={onChangeColor} initialColor={initialColor} />
-          </Grid2>
+          </Grid>
           <Show>
             <Show.When isTrue={!!recentlySelected}>
-              <Grid2>
+              <Grid>
                 <Tooltip title={expandedCode ? t('Hide code') : t('Show code')}>
                   <IconButton onClick={handleExpand}>
                     <IconCodeTag size={16} />
                   </IconButton>
                 </Tooltip>
-              </Grid2>
-              <Grid2>
+              </Grid>
+              <Grid>
                 <Tooltip title={t('Copy code')}>
                   <IconButton onClick={handleCopyCode}>
                     <IconCopy size={16} />
                   </IconButton>
                 </Tooltip>
-              </Grid2>
-              <Grid2>
+              </Grid>
+              <Grid>
                 <Tooltip title={t('Reset code')}>
                   <IconButton onClick={handleResetCode}>
                     <IconRefresh size={16} sx={{ transform: 'rotate(90deg)' }} />
                   </IconButton>
                 </Tooltip>
-              </Grid2>
+              </Grid>
             </Show.When>
           </Show>
-        </Grid2>
+        </Grid>
 
         {recentlySelected && (
           <Collapse in={expandedCode}>

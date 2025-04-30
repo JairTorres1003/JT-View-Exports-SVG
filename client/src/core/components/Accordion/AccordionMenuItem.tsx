@@ -8,7 +8,7 @@ import {
   type AccordionProps,
   type TooltipProps,
   type AccordionSummaryProps,
-  Grid2,
+  Grid,
   AccordionActions,
   type AccordionActionsProps,
 } from '@mui/material'
@@ -55,7 +55,7 @@ export const AccordionMenuItem = forwardRef<HTMLDivElement, AccordionMenuItemPro
             [accordionMenuItemClasses.withActions]: actions ?? enableEmptyActions,
           })}
         >
-          <Grid2
+          <Grid
             size='grow'
             id={`${id}header`}
             aria-controls={`${id}content`}
@@ -67,9 +67,9 @@ export const AccordionMenuItem = forwardRef<HTMLDivElement, AccordionMenuItemPro
                 {label}
               </Typography>
             </Tooltip>
-          </Grid2>
+          </Grid>
           {(actions ?? enableEmptyActions) && (
-            <Grid2
+            <Grid
               size='auto'
               padding={0}
               component={AccordionActions}
@@ -77,7 +77,7 @@ export const AccordionMenuItem = forwardRef<HTMLDivElement, AccordionMenuItemPro
               className={cn(accordionMenuItemClasses.actions, slotProps.actions?.className)}
             >
               {actions}
-            </Grid2>
+            </Grid>
           )}
         </BoxAccordionMenuItem>
         <AccordionDetails
