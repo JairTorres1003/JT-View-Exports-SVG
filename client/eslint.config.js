@@ -87,5 +87,11 @@ export default tseslint.config(
         },
       ],
     },
+  },
+  {
+    files: ['**/*.style.tsx'],
+    rules: {
+      'react-refresh/only-export-components': STATE.OFF,
+    },
   }
 )
