@@ -47,6 +47,8 @@ export const BoxDevTools = styled(Box, { name: 'Box-DevTools' })(() => ({
       display: 'flex',
       flexDirection: 'column',
       backgroundColor: 'var(--JT-SVG-vscode-sideBarTitle-background)',
+      maxWidth: '100%',
+      overflow: 'hidden',
       '&::before': {
         backgroundColor: 'var(--JT-SVG-vscode-sideBarSectionHeader-border)',
         height: '0.5px',
