@@ -1,7 +1,7 @@
 import React from 'react'
 import { useTranslation } from 'react-i18next'
 
-import { BoxHomePage } from './Home.style'
+import { BoxHomePage, homePageClasses } from './Home.style'
 
 import { LoadingPage } from '@/core/components/LoadingPage'
 import { ContainerComponents } from '@/modules/Home/components/ContainerComponents'
@@ -20,7 +20,7 @@ const HomePage: React.FC = () => {
 
   return (
     <BoxHomePage>
-      <ResizableHome className='BoxHomePage__content' devTootsId='devTools-panel'>
+      <ResizableHome className={homePageClasses.content} devTootsId='devTools-panel'>
         <SearchBar />
         <ContainerComponents />
       </ResizableHome>
