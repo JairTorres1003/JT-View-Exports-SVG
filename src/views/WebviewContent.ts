@@ -107,6 +107,7 @@ export class WebviewContent {
         </head>
         <body>
           <div id="root"></div>
+          <div id="overflow_widgets_dom_node" class="monaco-editor"></div>
           <noscript>You need to enable JavaScript to run this app.</noscript>
           <script>{window.ViewExportsSVG = "${l10n.t('View Exports SVG')}"}</script>
           <script type="module" nonce="${nonce}" src="${index}"></script>

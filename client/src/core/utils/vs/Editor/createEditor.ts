@@ -97,10 +97,14 @@ export class Editor {
       throw new Error('Editor reference is not available')
     }
 
+    const overflowWidgetsDomNode = document.getElementById('overflow_widgets_dom_node') ?? undefined
+
     const editor = monaco.editor.create(this._reference, {
       language: 'typescript',
       value: '',
       automaticLayout: true,
+      overflowWidgetsDomNode,
+      fixedOverflowWidgets: true,
     }) as IStandaloneCodeEditor
 
     contextMenuServiceOverride(editor)
