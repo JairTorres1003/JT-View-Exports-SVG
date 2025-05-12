@@ -115,6 +115,7 @@ export class Editor {
     editor.setDefaultValue = this._setDefaultValue.bind(this)
     editor.getDefaultValue = this._getDefaultValue.bind(this)
     editor.resetValue = this._resetValue.bind(this)
+    editor.reload = this._reload.bind(this)
 
     return editor
   }
@@ -150,5 +151,24 @@ export class Editor {
    */
   public dispose(): void {
     this._editorInstance?.dispose()
+  }
+
+  /**
+   * Reloads the editor instance.
+   *
+   * This method disposes of the current editor instance and creates a new one.
+   * It also sets the default value and focuses the new editor instance.
+   */
+  private _reload(): void {
+    const defaultValue = this._editorInstance?.getDefaultValue() ?? ''
+    this._editorInstance?.dispose()
+    this.createEditor()
+      .then((editor) => {
+        this._setDefaultValue(defaultValue)
+        editor.focus()
+      })
+      .catch((error) => {
+        console.error(`Failed to reload editor: ${getUnknownError(error)}`)
+      })
   }
 }

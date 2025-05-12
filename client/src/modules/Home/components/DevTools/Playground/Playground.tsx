@@ -1,14 +1,14 @@
-import { Card, Collapse, Divider, Grid, IconButton, Portal, Tooltip } from '@mui/material'
+import { Card, Collapse, Divider, Grid, IconButton, Tooltip } from '@mui/material'
 import type { FC } from 'react'
 import { useTranslation } from 'react-i18next'
 import { useSelector } from 'react-redux'
 
 import RenderSvg from '../../SVG/RenderSvg'
+import { MenuTools } from '../Menu/MenuTools/MenuTools'
 
 import { BoxPlayground, BoxPlaygroundCardSvg } from './Playground.style'
 
 import { IconCodeTag, IconCopy, IconRefresh } from '@/assets/icons/functionalities'
-import { IconKebabHorizontal } from '@/assets/icons/navigation'
 import { SelectPickerColor } from '@/core/components/Select'
 import { Editor } from '@/core/components/vs/Editor'
 import { Show } from '@/core/helpers'
@@ -82,11 +82,8 @@ export const Playground: FC<PlaygroundProps> = ({ containerId = 'playground-acti
           </Collapse>
         )}
       </Card>
-      <Portal container={document.getElementById(containerId)}>
-        <IconButton sx={{ marginRight: '4px' }}>
-          <IconKebabHorizontal size={16} />
-        </IconButton>
-      </Portal>
+
+      <MenuTools containerId={containerId} editorRef={editorRef} />
     </BoxPlayground>
   )
 }

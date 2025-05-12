@@ -13,7 +13,9 @@
     "Extracting components": "Extracting components..."
   },
   "DevTools": {
-    "title": "DevTools"
+    "title": "DevTools",
+    "More actions...": "More actions...",
+    "Reload editor": "Reload editor"
   },
   "errors": {
     "VSCode API is not available": "VSCode API is not available"

@@ -11,6 +11,7 @@ export interface IStandaloneCodeEditor extends monaco.editor.IStandaloneCodeEdit
   setDefaultValue: (value: string) => void
   getDefaultValue: () => string
   resetValue: () => void
+  reload: () => void
 }
 
 export type TypeEditorRef = (HTMLElement & { editor?: IStandaloneCodeEditor }) | null
