@@ -28,7 +28,9 @@ export interface SelectPickerColorProps extends SelectPickerColorCommonProps {
    * @default '#fff'
    */
   initialColor?: string
+  value?: string
   onChange?: (color: string) => void
+  onChangeComplete?: (color: string) => void
   /**
    * The title of the icon button.
    * @default 'Select color'

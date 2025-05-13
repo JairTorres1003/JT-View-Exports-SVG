@@ -1,30 +1,25 @@
 import { IconButton, Menu, MenuItem, Portal, Tooltip } from '@mui/material'
-import { type FC, useState } from 'react'
+import type { FC } from 'react'
 import { useTranslation } from 'react-i18next'
 
 import { useMenuToolsStyles } from './MenuTools.style'
 
 import { IconKebabHorizontal } from '@/assets/icons/navigation'
 import type { TypeEditorRef } from '@/core/interfaces/components/vs/Editor'
+import { useMenuTools } from '@/modules/Home/hooks/useMenuTools'
 
 interface MenuToolsProps {
   containerId: string
   editorRef?: React.RefObject<TypeEditorRef>
+  resetPlaygroundColor?: VoidFunction
 }
 
-export const MenuTools: FC<MenuToolsProps> = ({ containerId, editorRef }) => {
+export const MenuTools: FC<MenuToolsProps> = ({ containerId, editorRef, resetPlaygroundColor }) => {
   const { t } = useTranslation(undefined, { keyPrefix: 'DevTools' })
   const { classes } = useMenuToolsStyles()
 
-  const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null)
-  const open = Boolean(anchorEl)
-
-  const handleClick = (event: React.MouseEvent<HTMLButtonElement>) => {
-    setAnchorEl(event.currentTarget)
-  }
-  const handleClose = () => {
-    setAnchorEl(null)
-  }
+  const { anchorEl, handleClick, handleClose, open, onReloadEditor, onReloadPlayground } =
+    useMenuTools({ editorRef, resetPlaygroundColor })
 
   return (
     <>
@@ -56,14 +51,11 @@ export const MenuTools: FC<MenuToolsProps> = ({ containerId, editorRef }) => {
           paper: { className: classes.paper },
         }}
       >
+        <MenuItem className={classes.menuItem} onClick={onReloadPlayground}>
+          {t('Reload playground')}
+        </MenuItem>
         {editorRef?.current && (
-          <MenuItem
-            className={classes.menuItem}
-            onClick={() => {
-              editorRef?.current?.editor?.reload()
-              handleClose()
-            }}
-          >
+          <MenuItem className={classes.menuItem} onClick={onReloadEditor}>
             {t('Reload editor')}
           </MenuItem>
         )}

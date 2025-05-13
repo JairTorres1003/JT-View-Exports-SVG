@@ -33,6 +33,9 @@ export const Playground: FC<PlaygroundProps> = ({ containerId = 'playground-acti
     handleResetCode,
     initialColor,
     onChangeColor,
+    onChangeCompleteColor,
+    valueColor,
+    resetPlaygroundColor,
   } = usePlayground()
 
   return (
@@ -46,7 +49,12 @@ export const Playground: FC<PlaygroundProps> = ({ containerId = 'playground-acti
 
         <Grid container spacing={1} className='Box-Playground__card__tools'>
           <Grid flex={1}>
-            <SelectPickerColor onChange={onChangeColor} initialColor={initialColor} />
+            <SelectPickerColor
+              value={valueColor}
+              onChange={onChangeColor}
+              initialColor={initialColor}
+              onChangeComplete={onChangeCompleteColor}
+            />
           </Grid>
           <Show>
             <Show.When isTrue={!!recentlySelected}>
@@ -83,7 +91,11 @@ export const Playground: FC<PlaygroundProps> = ({ containerId = 'playground-acti
         )}
       </Card>
 
-      <MenuTools containerId={containerId} editorRef={editorRef} />
+      <MenuTools
+        containerId={containerId}
+        editorRef={editorRef}
+        resetPlaygroundColor={resetPlaygroundColor}
+      />
     </BoxPlayground>
   )
 }

@@ -12,6 +12,8 @@ export const SelectPickerColor: FC<SelectPickerColorProps> = ({
   initialColor = '#fff',
   onChange = () => null,
   title,
+  onChangeComplete = () => null,
+  value,
   slotProps = { popper: {} },
   ...props
 }) => {
@@ -29,6 +31,13 @@ export const SelectPickerColor: FC<SelectPickerColorProps> = ({
     setCurrentColor(initialColor)
     setNewColor(initialColor)
   }, [initialColor])
+
+  useEffect(() => {
+    if (value) {
+      setCurrentColor(value)
+      setNewColor(value)
+    }
+  }, [value])
 
   return (
     <>
@@ -58,6 +67,7 @@ export const SelectPickerColor: FC<SelectPickerColorProps> = ({
                 onClickAway={() => {
                   setOpen(false)
                   setCurrentColor(newColor)
+                  onChangeComplete(newColor)
                 }}
               >
                 <ColorPicker

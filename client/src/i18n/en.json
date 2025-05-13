@@ -15,6 +15,7 @@
   "DevTools": {
     "title": "DevTools",
     "More actions...": "More actions...",
+    "Reload playground": "Reload playground",
     "Reload editor": "Reload editor"
   },
   "errors": {

@@ -20,6 +20,9 @@ interface PlaygroundHook {
   editorRef: React.RefObject<TypeEditorRef>
   handleCopyCode: VoidFunction
   handleResetCode: VoidFunction
+  resetPlaygroundColor: VoidFunction
+  valueColor: string
+  onChangeCompleteColor: (color: string) => void
 }
 
 const CSS_VAR_MAIN = '--JT-SVG-vscode-sideBarTitle-background'
@@ -29,6 +32,7 @@ export const usePlayground = (): PlaygroundHook => {
   const [backgroundColor, setBackgroundColor] = useState('#fff')
   const [expandedCode, setExpandedCode] = useState(true)
   const [initialColor, setInitialColor] = useState('#fff')
+  const [valueColor, setValueColor] = useState('#fff')
 
   const { t } = useTranslation(undefined, { keyPrefix: 'labels' })
   const { onOpen } = useAlert()
@@ -72,6 +76,7 @@ export const usePlayground = (): PlaygroundHook => {
    */
   const applyInitialColor = useCallback(() => {
     try {
+      setInitialColor('#fff')
       const root = document.documentElement
       const mainColor = getComputedStyle(root).getPropertyValue(CSS_VAR_MAIN)
       const secondaryColor = getComputedStyle(root).getPropertyValue(CSS_VAR_SECONDARY)
@@ -94,6 +99,7 @@ export const usePlayground = (): PlaygroundHook => {
 
         setInitialColor(initial)
         onChangeColor(initial)
+        onChangeCompleteColor(initial)
       }
     } catch (error) {
       console.error('Error applying initial color:', getUnknownError(error))
@@ -107,6 +113,15 @@ export const usePlayground = (): PlaygroundHook => {
    */
   const handleEditorConfig = (data: Record<string, unknown>) => {
     dispatch(setEditorConfig(data))
+  }
+
+  /**
+   * Handles the color change by updating the background color state and dispatching the setEditorConfig action.
+   *
+   * @param color - The new color to be set.
+   */
+  const onChangeCompleteColor = (color: string) => {
+    setValueColor(color)
   }
 
   /**
@@ -169,5 +184,8 @@ export const usePlayground = (): PlaygroundHook => {
     editorRef,
     handleCopyCode,
     handleResetCode,
+    valueColor,
+    onChangeCompleteColor,
+    resetPlaygroundColor: applyInitialColor,
   }
 }
