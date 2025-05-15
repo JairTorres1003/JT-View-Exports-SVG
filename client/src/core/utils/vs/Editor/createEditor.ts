@@ -1,6 +1,4 @@
-import '@codingame/monaco-vscode-typescript-basics-default-extension'
-import '@codingame/monaco-vscode-theme-defaults-default-extension'
-
+import type { ExtensionManage } from '@api/interfaces/vscode'
 import { type IEditorOverrideServices, initialize } from '@codingame/monaco-vscode-api'
 import getConfigurationServiceOverride, {
   updateUserConfiguration,
@@ -17,6 +15,7 @@ import * as monaco from 'monaco-editor'
 import keybindings from '../../../assets/vs/Editor/keybindings.json'
 
 import { contextMenuServiceOverride } from './contextMenu'
+import { activateDefaultExtensions } from './extensions/init'
 
 import type { IStandaloneCodeEditor, TypeEditorRef } from '@/core/interfaces/components/vs/Editor'
 import { getUnknownError } from '@/utils/misc'
@@ -25,11 +24,11 @@ const OVERRIDES: IEditorOverrideServices = {
   ...getConfigurationServiceOverride(),
   ...getTextMateServiceOverride(),
   ...getThemeServiceOverride(),
-  ...getLanguagesServiceOverride(),
-  ...getKeybindingsServiceOverride(),
   ...getQuickAccessServiceOverride({
     isKeybindingConfigurationVisible: () => true,
   }),
+  ...getLanguagesServiceOverride(),
+  ...getKeybindingsServiceOverride(),
 }
 
 let initialized = false
@@ -39,10 +38,16 @@ export class Editor {
   private _editorInstance?: IStandaloneCodeEditor
   private readonly _reference: TypeEditorRef
   private readonly _userConfiguration: Record<string, unknown>
+  private readonly _extensionTheme?: ExtensionManage
 
-  constructor(ref: TypeEditorRef, userConfiguration: Record<string, unknown>) {
+  constructor(
+    ref: TypeEditorRef,
+    userConfiguration: Record<string, unknown>,
+    extensionTheme?: ExtensionManage
+  ) {
     this._reference = ref
     this._userConfiguration = userConfiguration
+    this._extensionTheme = extensionTheme
   }
 
   /**
@@ -66,7 +71,12 @@ export class Editor {
     }
 
     if (!initialized) {
+      this._reference?.style.setProperty('opacity', '0')
+
       await initialize(OVERRIDES)
+
+      await activateDefaultExtensions({ extensionTheme: this._extensionTheme })
+
       initialized = true
     }
 
@@ -85,6 +95,8 @@ export class Editor {
     const editor = this._create()
 
     this._editorInstance = editor
+
+    this._reference?.style.removeProperty('opacity')
 
     return editor
   }

@@ -11,7 +11,7 @@ import { initializeExtensionTheme } from './utilities/vscode/extensions/theme'
  */
 export function activate(context: ExtensionContext): void {
   initializeCacheManager(context)
-  initializeExtensionTheme()
+  initializeExtensionTheme(context)
 
   const allCommands = [
     commands.registerCommand(`${CONFIG_KEY}.showMenu`, async (item: Uri, items: Uri[]) => {
@@ -29,7 +29,9 @@ export function activate(context: ExtensionContext): void {
     commands.registerCommand(`${CONFIG_KEY}.closeDevTools`, async () => {
       await runToggleDevTools(false)
     }),
-    commands.registerCommand(`${CONFIG_KEY}.reloadTheme`, runReloadTheme),
+    commands.registerCommand(`${CONFIG_KEY}.reloadTheme`, () => {
+      runReloadTheme(context)
+    }),
   ]
 
   context.subscriptions.push(...allCommands)

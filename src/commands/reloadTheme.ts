@@ -1,4 +1,4 @@
-import { l10n, window } from 'vscode'
+import { type ExtensionContext, l10n, window } from 'vscode'
 
 import { ViewExportsSVGController } from '@/controllers/views'
 import { SVGPostMessage } from '@/enum/ViewExportsSVG'
@@ -8,9 +8,9 @@ import { getExtensionTheme, reloadExtensionTheme } from '@/utilities/vscode/exte
 /**
  * Reloads the extension theme and sends it to the current panel if it exists.
  */
-export const runReloadTheme = (): void => {
+export const runReloadTheme = (context: ExtensionContext): void => {
   if (!isEmpty(ViewExportsSVGController.currentPanel)) {
-    reloadExtensionTheme()
+    reloadExtensionTheme(context)
 
     const theme = getExtensionTheme()
 

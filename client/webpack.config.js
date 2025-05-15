@@ -123,7 +123,9 @@ export default {
             if (name.includes('chunks/')) {
               manifest.chunks.push({ file: cleanPath, name: fileName })
             } else if (name.includes('assets/')) {
-              manifest.assets.push({ file: cleanPath, name: fileName })
+              if (!name.endsWith('.txt') && !name.endsWith('.svg')) {
+                manifest.assets.push({ file: cleanPath, name: fileName })
+              }
             } else {
               manifest[name] = { file: cleanPath, name: fileName }
             }

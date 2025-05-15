@@ -30,6 +30,7 @@
   "scripts": {
     "dev": "webpack serve --config webpack.dev.js",
     "build": "webpack --config webpack.config.js --mode production",
+    "postbuild": "rm -f dist/assets/*.txt && rm -f dist/assets/*.md && rm -f dist/assets/*.svg",
     "preview": "serve -s dist -l 4173",
     "dev:vite": "vite",
     "build:vite": "tsc -b && vite build",
@@ -49,6 +50,7 @@
     "@codingame/monaco-vscode-theme-defaults-default-extension": "^17.0.0",
     "@codingame/monaco-vscode-theme-service-override": "^17.0.0",
     "@codingame/monaco-vscode-typescript-basics-default-extension": "^17.0.0",
+    "@codingame/monaco-vscode-typescript-language-features-default-extension": "^17.1.0",
     "@emotion/react": "^11.14.0",
     "@emotion/styled": "^11.14.0",
     "@mui/material": "^7.1.0",

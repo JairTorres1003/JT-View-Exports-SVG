@@ -14,7 +14,7 @@ import { getUnknownError, isEmpty } from '@/utils/misc'
 
 export const useEditor = ({ forwardedRef, defaultValue }: EditorHookProps): EditorHook => {
   const [editorInstance, setEditorInstance] = useState<IStandaloneCodeEditor | undefined>(undefined)
-  const { editorConfig } = useSelector((state) => state.vsCode)
+  const { editorConfig, extensionTheme } = useSelector((state) => state.vsCode)
 
   const editorRef = useRef<TypeEditorRef>(null)
 
@@ -34,7 +34,7 @@ export const useEditor = ({ forwardedRef, defaultValue }: EditorHookProps): Edit
   const initializeEditor = useCallback(async () => {
     if (isEmpty(editorRef.current) || isEmpty(editorConfig)) return
 
-    const editor = new Editor(editorRef.current, editorConfig)
+    const editor = new Editor(editorRef.current, editorConfig, extensionTheme)
     const instance = await editor.createEditor()
 
     editorRef.current.editor = instance

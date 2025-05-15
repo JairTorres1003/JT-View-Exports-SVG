@@ -1,4 +1,7 @@
-import { extensions, l10n, workspace } from 'vscode'
+import * as fs from 'fs'
+import * as path from 'path'
+
+import { type ExtensionContext, extensions, l10n, workspace } from 'vscode'
 
 import { getCacheManager } from '@/controllers/cache'
 import { type ExtensionManage } from '@/interfaces/vscode'
@@ -25,12 +28,14 @@ const CACHE_KEY = 'CurrentExtensionTheme'
  * 3. Searches for the theme extension that matches the current color theme.
  * 4. If a matching theme extension is found, caches its details including `id`, `extensionUri`, `extensionPath`, and `isActive` status.
  *
+ * @param context - The extension context.
+ *
  * @remarks
  * - The function relies on the `getCacheManager` function to access the cache.
  * - The `workspace` and `extensions` objects are used to interact with the VSCode API.
  * - The cache key used for storing the theme details is defined by `CACHE_KEY`.
  */
-export function initializeExtensionTheme(): void {
+export function initializeExtensionTheme(context: ExtensionContext): void {
   try {
     const cachedTheme = getCacheManager().ExtensionCache
 
@@ -56,6 +61,7 @@ export function initializeExtensionTheme(): void {
         const { id, extensionUri, extensionPath, isActive } = themeExtension
 
         cachedTheme.set(CACHE_KEY, { id, extensionUri, extensionPath, isActive }, 0)
+        cloneThemeExtension(context, extensionPath)
       } else {
         cachedTheme.set(CACHE_KEY, undefined, 0)
       }
@@ -67,10 +73,12 @@ export function initializeExtensionTheme(): void {
 
 /**
  * Clears the cached extension theme.
+ *
+ * @param context - The extension context.
  */
-export function reloadExtensionTheme(): void {
+export function reloadExtensionTheme(context: ExtensionContext): void {
   getCacheManager().ExtensionCache.delete(CACHE_KEY)
-  initializeExtensionTheme()
+  initializeExtensionTheme(context)
 }
 
 /**
@@ -80,4 +88,45 @@ export function reloadExtensionTheme(): void {
  */
 export function getExtensionTheme(): ExtensionManage | undefined {
   return getCacheManager().ExtensionCache.get(CACHE_KEY, 0)
+}
+
+/**
+ * Clones a VS Code theme extension's manifest and theme files into a target directory within the current extension.
+ *
+ * This function copies the `package.json` manifest and all theme files defined in the `contributes.themes` section
+ * from the specified `extensionPath` into the `client/dist/extensions/theme` directory of the current extension context.
+ * It creates any necessary directories recursively.
+ *
+ * @param context - The VS Code extension context, used to determine the target directory for cloning.
+ * @param extensionPath - The file system path to the source extension or its `package.json` file.
+ */
+function cloneThemeExtension(context: ExtensionContext, extensionPath: string): void {
+  const folder = path.join(context.extensionPath, 'client/dist/assets/extensions/theme')
+
+  if (!fs.existsSync(folder)) {
+    fs.mkdirSync(folder, { recursive: true })
+  }
+
+  const file = !extensionPath?.endsWith('.json') ? `${extensionPath}/package.json` : extensionPath
+  const manifest = fs.readFileSync(file, 'utf-8')
+
+  fs.writeFileSync(`${folder}/package.json`, manifest, 'utf-8')
+
+  const themes = JSON.parse(manifest).contributes.themes
+
+  themes.forEach((theme: { path: string }) => {
+    const newThemeFilePath = path.join(folder, theme.path)
+    const themePath = path.join(extensionPath, theme.path)
+    const newThemeDir = path.dirname(newThemeFilePath)
+
+    if (!fs.existsSync(newThemeDir)) {
+      fs.mkdirSync(newThemeDir, { recursive: true })
+    }
+
+    if (fs.existsSync(themePath)) {
+      const themeFile = fs.readFileSync(themePath, 'utf-8')
+
+      fs.writeFileSync(newThemeFilePath, themeFile, 'utf-8')
+    }
+  })
 }
