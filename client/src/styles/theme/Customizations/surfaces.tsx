@@ -1,7 +1,7 @@
 import { accordionSummaryClasses } from '@mui/material'
 
 import { IconForward } from '@/assets/icons/navigation'
-import type { CustomizationsFunction } from '@/interfaces/misc'
+import type { CustomizationsFunction } from '@/types/BaseProps'
 
 /**
  * Customizations for surfaces in the theme.

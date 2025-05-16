@@ -5,8 +5,6 @@ import type {} from '@mui/material/themeCssVarsAugmentation'
 import { useEffect, useMemo } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 
-import { setVsCodeStyles } from '../redux/features/VsCodeSlice'
-
 import {
   dataDisplayCustomizations,
   inputsCustomizations,
@@ -14,6 +12,7 @@ import {
 } from './Customizations'
 
 import { vscode } from '@/services/vscode'
+import { setVsCodeStyles } from '@/store/features/VsCodeSlice'
 
 /**
  * Returns the current theme based on the VS Code styles.
