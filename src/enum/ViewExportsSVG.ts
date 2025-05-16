@@ -45,6 +45,7 @@ export enum SVGReceiveMessage {
   ToggleExpandIcon = 'settings/expand-all/toggle',
   ToggleOpenDevTools = 'settings/toggle-open-dev-tools',
   GetExtensionTheme = 'settings/extension-theme',
+  ReloadExtensionTheme = 'settings/reload-extension-theme',
 
   GetLastScanDate = 'scan/last-date',
   ScanWorkspace = 'scan/workspace',

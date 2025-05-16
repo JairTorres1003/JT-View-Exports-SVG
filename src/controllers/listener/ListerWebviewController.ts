@@ -6,6 +6,7 @@ import {
   type Webview,
   env,
   workspace,
+  commands,
 } from 'vscode'
 
 import { getCacheManager } from '../cache'
@@ -17,6 +18,7 @@ import {
 } from '../config'
 
 import { expandedIcons, toggleDevTools } from '@/commands'
+import { CONFIG_KEY } from '@/constants/misc'
 import { SVGPostMessage, SVGReceiveMessage } from '@/enum/ViewExportsSVG'
 import { type HandlerArgs } from '@/interfaces/misc'
 import {
@@ -84,6 +86,7 @@ export class ListerWebviewController {
       [SVGReceiveMessage.ToggleExpandIcon]: this._toggleExpandIcon.bind(this),
       [SVGReceiveMessage.ToggleOpenDevTools]: this._toggleOpenDevTools.bind(this),
       [SVGReceiveMessage.GetExtensionTheme]: this._getExtensionTheme.bind(this),
+      [SVGReceiveMessage.ReloadExtensionTheme]: this._reloadExtensionTheme.bind(this),
     }
   }
 
@@ -381,5 +384,12 @@ export class ListerWebviewController {
    */
   private _getExtensionTheme(): void {
     this._postMessage(SVGPostMessage.SendExtensionTheme, getExtensionTheme())
+  }
+
+  /**
+   * Reloads the extension theme.
+   */
+  private _reloadExtensionTheme(): void {
+    commands.executeCommand(`${CONFIG_KEY}.reloadTheme`).then(undefined, console.error)
   }
 }

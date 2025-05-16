@@ -33,6 +33,7 @@ export type ReceiveMessage =
   | { type: SVGReceiveMessage.ToggleExpandIcon; data: boolean }
   | { type: SVGReceiveMessage.ToggleOpenDevTools; data: boolean }
   | { type: SVGReceiveMessage.GetExtensionTheme }
+  | { type: SVGReceiveMessage.ReloadExtensionTheme }
 
 /**
  * The handler for receiving messages from the webview.
@@ -146,4 +147,8 @@ export interface HandlerReceiveMessage {
    * Gets the extension theme.
    */
   [SVGReceiveMessage.GetExtensionTheme]: VoidFunction
+  /**
+   * Reloads the extension theme.
+   */
+  [SVGReceiveMessage.ReloadExtensionTheme]: VoidFunction
 }

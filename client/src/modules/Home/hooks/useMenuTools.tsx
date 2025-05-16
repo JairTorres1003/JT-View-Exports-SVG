@@ -1,6 +1,8 @@
+import { SVGReceiveMessage } from '@api/enums/ViewExportsSVG'
 import { useState } from 'react'
 
 import type { TypeEditorRef } from '@/core/types/components/vs/Editor'
+import { vscode } from '@/services/vscode'
 
 interface MenuToolsHookProps {
   editorRef?: React.RefObject<TypeEditorRef>
@@ -42,6 +44,7 @@ export const useMenuTools = ({
    */
   const onReloadEditor = () => {
     editorRef?.current?.editor?.reload()
+    vscode.postMessage(SVGReceiveMessage.ReloadExtensionTheme)
     handleClose()
   }
 

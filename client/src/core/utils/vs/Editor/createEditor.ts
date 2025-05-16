@@ -2,9 +2,11 @@ import type { ExtensionManage } from '@api/interfaces/vscode'
 import { type IEditorOverrideServices, initialize } from '@codingame/monaco-vscode-api'
 import getConfigurationServiceOverride, {
   initUserConfiguration,
+  updateUserConfiguration,
 } from '@codingame/monaco-vscode-configuration-service-override'
 import getKeybindingsServiceOverride, {
   initUserKeybindings,
+  updateUserKeybindings,
 } from '@codingame/monaco-vscode-keybindings-service-override'
 import getLanguagesServiceOverride from '@codingame/monaco-vscode-languages-service-override'
 import getQuickAccessServiceOverride from '@codingame/monaco-vscode-quickaccess-service-override'
@@ -70,23 +72,9 @@ export class Editor {
       this._editorInstance.dispose()
     }
 
+    await this.applyConfigurations(initialized)
+
     if (!initialized) {
-      try {
-        await initUserConfiguration(JSON.stringify(this._userConfiguration))
-      } catch (error) {
-        console.error(
-          `${i18next.t('errors.FailedToUpdateUserConfiguration')}: ${getUnknownError(error)}`
-        )
-      }
-
-      try {
-        await initUserKeybindings(JSON.stringify(keybindings))
-      } catch (error) {
-        console.error(
-          `${i18next.t('errors.FailedToUpdateUserKeybindings')}: ${getUnknownError(error)}`
-        )
-      }
-
       await initialize(OVERRIDES)
 
       await activateDefaultExtensions({ extensionTheme: this._extensionTheme })
@@ -99,6 +87,27 @@ export class Editor {
     this._editorInstance = editor
 
     return editor
+  }
+
+  public async applyConfigurations(isInitialized = false): Promise<void> {
+    const applyUserConfiguration = isInitialized ? updateUserConfiguration : initUserConfiguration
+    const applyUserKeybindings = isInitialized ? updateUserKeybindings : initUserKeybindings
+
+    try {
+      await applyUserConfiguration(JSON.stringify(this._userConfiguration))
+    } catch (error) {
+      console.error(
+        `${i18next.t('errors.FailedToUpdateUserConfiguration')}: ${getUnknownError(error)}`
+      )
+    }
+
+    try {
+      await applyUserKeybindings(JSON.stringify(keybindings))
+    } catch (error) {
+      console.error(
+        `${i18next.t('errors.FailedToUpdateUserKeybindings')}: ${getUnknownError(error)}`
+      )
+    }
   }
 
   /**
