@@ -1,11 +1,11 @@
 import { Box, styled } from '@mui/material'
 
-export const homePageClasses = {
-  root: 'BoxHomePage',
-  content: 'BoxHomePage__content',
-}
+import { homePageClasses } from './Home.classes'
 
-export const BoxHomePage = styled(Box, { name: homePageClasses.root })(() => ({
+export const BoxHomePage = styled(Box, {
+  name: homePageClasses.root,
+  target: homePageClasses.root,
+})(() => ({
   display: 'flex',
   height: '100%',
   [`& .${homePageClasses.content}`]: {
