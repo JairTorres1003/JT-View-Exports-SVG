@@ -1,7 +1,7 @@
 import * as fs from 'fs'
-import { defineConfig } from 'vite'
 import importMetaUrlPlugin from '@codingame/esbuild-import-meta-url-plugin'
 import react from '@vitejs/plugin-react-swc'
+import { defineConfig } from 'vite'
 import tsconfigPaths from 'vite-tsconfig-paths'
 
 const pkg = JSON.parse(
@@ -17,7 +17,6 @@ export default defineConfig({
   plugins: [tsconfigPaths(), react()],
   optimizeDeps: {
     esbuildOptions: {
-      tsconfig: './tsconfig.app.json',
       plugins: [importMetaUrlPlugin],
     },
     exclude: [],
@@ -29,10 +28,18 @@ export default defineConfig({
       'marked',
     ],
   },
+  define: {
+    rootDirectory: JSON.stringify(__dirname),
+  },
+  resolve: {
+    dedupe: ['vscode', 'monaco-editor', ...localDependencies],
+  },
   build: {
-    target: 'esnext',
+    target: 'es2020',
+    reportCompressedSize: false,
+    cssCodeSplit: false,
+    assetsInlineLimit: 2048,
     manifest: 'manifest.json',
-    chunkSizeWarningLimit: 1024,
     rollupOptions: {
       output: {
         chunkFileNames: 'chunks/[hash].js',
@@ -51,19 +58,6 @@ export default defineConfig({
         chunkFileNames: 'chunks/[name]-[hash].js',
         assetFileNames: 'assets/[name]-[hash].[ext]',
       },
-    },
-  },
-  define: {
-    rootDirectory: JSON.stringify(__dirname),
-  },
-  resolve: {
-    dedupe: ['vscode', 'monaco-editor', ...localDependencies],
-  },
-  server: {
-    port: 5173,
-    host: '0.0.0.0',
-    fs: {
-      allow: ['../'], // allow to load codicon.ttf from monaco-editor in the parent folder
     },
   },
 })
