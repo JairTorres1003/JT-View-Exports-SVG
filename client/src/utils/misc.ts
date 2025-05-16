@@ -1,3 +1,5 @@
+import i18next from '../i18n'
+
 /**
  * Checks if a value is empty.
  * @param value - The value to check.
@@ -40,9 +42,8 @@ export const copyToClipboard = async (text: string): Promise<void> => {
  * @param error - The unknown error from which to retrieve the message.
  * @returns The error message.
  */
-// eslint-disable-next-line @typescript-eslint/no-explicit-any -- unknown error type
-export const getUnknownError = (error: any): string => {
-  if (isEmpty(error)) return 'Unknown error'
+export const getUnknownError = (error: unknown): string => {
+  if (isEmpty(error)) return i18next.t('errors.UnknownError')
 
   if (typeof error === 'string') {
     return error
@@ -53,30 +54,18 @@ export const getUnknownError = (error: any): string => {
   }
 
   if (error instanceof Error || error instanceof TypeError) {
-    return error.message
+    return getUnknownError('response' in error ? error.response : error.message)
   }
 
-  if ('data' in error && 'message' in error.data) {
-    const { message } = error.data
-    if (typeof message === 'string') {
-      return message
-    } else if (Array.isArray(message) && message.length > 0) {
-      return Object.values(message[0] as string[])[0]
+  if (typeof error === 'object' && error instanceof Object) {
+    const auxError = error as Record<string, unknown>
+
+    if ('error_description' in error && !isEmpty(auxError?.error_description)) {
+      return getUnknownError(auxError?.error_description)
     }
+
+    return getUnknownError(auxError?.message ?? auxError.data ?? auxError?.statusText)
   }
 
-  if ('message' in error) {
-    const { message } = error
-    if (typeof message === 'string') {
-      return message
-    } else if (Array.isArray(message) && message.length > 0) {
-      return Object.values(message[0] as string[])[0]
-    }
-  }
-
-  if ('statusText' in error) {
-    return `${error.statusText} (${error.status})`
-  }
-
-  return 'Unknown error'
+  return i18next.t('errors.UnknownError')
 }
