@@ -1,8 +1,5 @@
 import '@codingame/monaco-vscode-typescript-basics-default-extension'
-
 import '@codingame/monaco-vscode-theme-defaults-default-extension'
-
-import '@codingame/monaco-vscode-typescript-language-features-default-extension'
 
 import type { ExtensionManage } from '@api/interfaces/vscode'
 

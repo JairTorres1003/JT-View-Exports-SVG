@@ -1,23 +1,23 @@
 import type { ExtensionManage } from '@api/interfaces/vscode'
 import { type IEditorOverrideServices, initialize } from '@codingame/monaco-vscode-api'
 import getConfigurationServiceOverride, {
-  updateUserConfiguration,
+  initUserConfiguration,
 } from '@codingame/monaco-vscode-configuration-service-override'
 import getKeybindingsServiceOverride, {
-  updateUserKeybindings,
+  initUserKeybindings,
 } from '@codingame/monaco-vscode-keybindings-service-override'
 import getLanguagesServiceOverride from '@codingame/monaco-vscode-languages-service-override'
 import getQuickAccessServiceOverride from '@codingame/monaco-vscode-quickaccess-service-override'
 import getTextMateServiceOverride from '@codingame/monaco-vscode-textmate-service-override'
 import getThemeServiceOverride from '@codingame/monaco-vscode-theme-service-override'
 import * as monaco from 'monaco-editor'
-
-import keybindings from '../../../assets/vs/Editor/keybindings.json'
+import keybindings from 'public/vs/userConfiguration/keybindings.json'
 
 import { contextMenuServiceOverride } from './contextMenu'
 import { activateDefaultExtensions } from './extensions/init'
 
-import type { IStandaloneCodeEditor, TypeEditorRef } from '@/core/interfaces/components/vs/Editor'
+import type { IStandaloneCodeEditor, TypeEditorRef } from '@/core/types/components/vs/Editor'
+import i18next from '@/i18n'
 import { getUnknownError } from '@/utils/misc'
 
 const OVERRIDES: IEditorOverrideServices = {
@@ -66,30 +66,34 @@ export class Editor {
    * @throws Will log an error message if updating user configuration or keybindings fails.
    */
   public async createEditor(): Promise<IStandaloneCodeEditor> {
+    this._reference?.style.setProperty('opacity', '0')
+
     if (this._editorInstance) {
       this._editorInstance.dispose()
     }
 
     if (!initialized) {
-      this._reference?.style.setProperty('opacity', '0')
+      try {
+        await initUserConfiguration(JSON.stringify(this._userConfiguration))
+      } catch (error) {
+        console.error(
+          `${i18next.t('errors.FailedToUpdateUserConfiguration')}: ${getUnknownError(error)}`
+        )
+      }
+
+      try {
+        await initUserKeybindings(JSON.stringify(keybindings))
+      } catch (error) {
+        console.error(
+          `${i18next.t('errors.FailedToUpdateUserKeybindings')}: ${getUnknownError(error)}`
+        )
+      }
 
       await initialize(OVERRIDES)
 
       await activateDefaultExtensions({ extensionTheme: this._extensionTheme })
 
       initialized = true
-    }
-
-    try {
-      await updateUserConfiguration(JSON.stringify(this._userConfiguration))
-    } catch (error) {
-      console.error(`Failed to update user configuration: ${getUnknownError(error)}`)
-    }
-
-    try {
-      await updateUserKeybindings(JSON.stringify(keybindings))
-    } catch (error) {
-      console.error(`Failed to update user keybindings: ${getUnknownError(error)}`)
     }
 
     const editor = this._create()
@@ -106,13 +110,13 @@ export class Editor {
    */
   private _create(): IStandaloneCodeEditor {
     if (!this._reference) {
-      throw new Error('Editor reference is not available')
+      throw new Error(i18next.t('errors.EditorReferenceIsNotAvailable'))
     }
 
     const overflowWidgetsDomNode = document.getElementById('overflow_widgets_dom_node') ?? undefined
 
     const editor = monaco.editor.create(this._reference, {
-      language: 'typescript',
+      language: 'typescriptreact',
       value: '',
       automaticLayout: true,
       overflowWidgetsDomNode,
@@ -180,7 +184,7 @@ export class Editor {
         editor.focus()
       })
       .catch((error) => {
-        console.error(`Failed to reload editor: ${getUnknownError(error)}`)
+        console.error(`${i18next.t('errors.FailedToReloadEditor')}: ${getUnknownError(error)}`)
       })
   }
 }

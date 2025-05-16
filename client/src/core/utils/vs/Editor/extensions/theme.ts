@@ -5,8 +5,19 @@ import {
   type IExtensionManifest,
 } from '@codingame/monaco-vscode-api/extensions'
 
+import i18next from '@/i18n'
 import { getUnknownError } from '@/utils/misc'
 
+/**
+ * Activates the given extension theme by loading its manifest and registering its theme files.
+ *
+ * This function fetches the `package.json` manifest for the theme extension, registers the extension,
+ * and then iterates over the contributed themes to register their file URLs for use in the editor.
+ *
+ * @param extensionTheme - The extension theme object containing the extension path and related metadata.
+ * @returns A promise that resolves when the activation process is complete.
+ * @throws Logs an error to the console if activation fails.
+ */
 async function activate(extensionTheme: ExtensionManage) {
   try {
     if (!extensionTheme.extensionPath) return
@@ -16,21 +27,9 @@ async function activate(extensionTheme: ExtensionManage) {
 
     const packageJSON = await fetch(`${baseUrl}/extensions/theme/package.json`)
 
-    const manifestData: IExtensionManifest = await packageJSON.json()
+    const manifest: IExtensionManifest = await packageJSON.json()
 
-    const manifest: IExtensionManifest = {
-      name: manifestData.name,
-      version: manifestData.version,
-      publisher: manifestData.publisher,
-      engines: {
-        vscode: '*',
-      },
-      contributes: {
-        themes: manifestData.contributes?.themes ?? [],
-      },
-    }
-
-    const { registerFileUrl } = registerExtension(manifestData, ExtensionHostKind.LocalProcess)
+    const { registerFileUrl } = registerExtension(manifest, ExtensionHostKind.LocalProcess)
 
     manifest.contributes?.themes?.forEach((theme) => {
       const themePath = theme.path?.slice(theme.path.indexOf('/') + 1)
@@ -38,7 +37,9 @@ async function activate(extensionTheme: ExtensionManage) {
       registerFileUrl(`/${themePath}`, themeUrl)
     })
   } catch (error) {
-    console.error(`Failed to activate extension theme: ${getUnknownError(error)}`)
+    console.error(
+      `${i18next.t('errors.FailedToActivateExtensionTheme')}: ${getUnknownError(error)}`
+    )
   }
 }
 
