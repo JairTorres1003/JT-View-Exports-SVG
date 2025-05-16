@@ -1,25 +1,16 @@
-import { Box, type SxProps, Typography } from '@mui/material'
-import type {
-  ColorPickerBaseProps,
-  AnyColor,
-  RgbaColor,
-} from 'node_modules/react-colorful/dist/types'
+import { Box, Typography } from '@mui/material'
 import { forwardRef } from 'react'
 import { RgbaColorPicker } from 'react-colorful'
 
+import { colorPickerClasses } from './ColorPicker.classes'
 import { BoxInfoPickerColor, ColorPickerBox } from './ColorPicker.style'
 import { VerticalPickerSlider } from './VerticalPickerSlider'
 
 import { IconMode } from '@/assets/icons/indicators'
 import { useColorPicker } from '@/core/hooks/vs/useColorPicker'
+import type { ColorPickerProps } from '@/core/types/components/vs/ColorPicker'
 
-interface ColorPickerProps extends Omit<Partial<ColorPickerBaseProps<RgbaColor>>, 'onChange'> {
-  currentColor?: AnyColor
-  onChange?: (color: RgbaColor, stringColor: string) => void
-  sx?: SxProps
-}
-
-export const ColorPicker = forwardRef<HTMLDivElement, ColorPickerProps>(function ColorPicker(
+const ColorPicker = forwardRef<HTMLDivElement, ColorPickerProps>(function ColorPicker(
   { className, onChange = () => null, currentColor, style, sx, ...props },
   ref
 ) {
@@ -37,7 +28,7 @@ export const ColorPicker = forwardRef<HTMLDivElement, ColorPickerProps>(function
 
   return (
     <ColorPickerBox ref={ref} sx={sx} style={style} className={className}>
-      <Box className='ColorPicker__header'>
+      <Box className={colorPickerClasses.header}>
         <BoxInfoPickerColor
           alpha={color.a}
           width='calc(100% - 74px)'
@@ -46,23 +37,27 @@ export const ColorPicker = forwardRef<HTMLDivElement, ColorPickerProps>(function
           onClick={handleChangeList}
         >
           <IconMode size={16} />
-          <Typography component='span' sx={{ color: 'currentColor' }}>
+          <Typography
+            component='span'
+            sx={{ color: 'currentColor' }}
+            className={colorPickerClasses.textColor}
+          >
             {currentValueColor.value}
           </Typography>
         </BoxInfoPickerColor>
         <BoxInfoPickerColor width={74} bgColor={getStringColor(oldColor)} onClick={applyOldColor} />
       </Box>
-      <Box className='ColorPicker__body'>
+      <Box className={colorPickerClasses.body}>
         <RgbaColorPicker
           {...props}
-          className='ColorPicker__body__picker'
+          className={colorPickerClasses.picker}
           color={color}
           onChange={(newColor) => {
             handleColorChange(newColor)
             onChange(newColor, getStringColor(newColor))
           }}
         />
-        <Box className='ColorPicker__body__slider'>
+        <Box className={colorPickerClasses.sliders}>
           <VerticalPickerSlider
             variant='alpha'
             alphaColor={getStringColor(color)}
@@ -77,3 +72,5 @@ export const ColorPicker = forwardRef<HTMLDivElement, ColorPickerProps>(function
     </ColorPickerBox>
   )
 })
+
+export default ColorPicker

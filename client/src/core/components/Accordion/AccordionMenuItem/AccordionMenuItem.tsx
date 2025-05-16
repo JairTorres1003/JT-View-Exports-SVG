@@ -15,8 +15,8 @@ import {
 import cn from 'classnames'
 import { forwardRef, useId } from 'react'
 
+import { accordionMenuItemClasses } from './AccordionMenuItem.classes'
 import { BoxAccordionMenuItem } from './AccordionMenuItem.style'
-import { accordionMenuItemClasses } from './accordionMenuItemClasses'
 
 export interface AccordionMenuItemProps extends AccordionProps {
   label: string
@@ -33,7 +33,7 @@ export interface AccordionMenuItemProps extends AccordionProps {
   }
 }
 
-export const AccordionMenuItem = forwardRef<HTMLDivElement, AccordionMenuItemProps>(
+const AccordionMenuItem = forwardRef<HTMLDivElement, AccordionMenuItemProps>(
   function AccordionMenuItem(
     { children, actions, label, slotProps = {}, enableEmptyActions = false, ...props },
     ref
@@ -90,3 +90,5 @@ export const AccordionMenuItem = forwardRef<HTMLDivElement, AccordionMenuItemPro
     )
   }
 )
+
+export default AccordionMenuItem

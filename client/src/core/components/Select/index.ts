@@ -1,1 +1,1 @@
-export * from './SelectPickerColor'
+export { default as SelectPickerColor } from './SelectPickerColor/SelectPickerColor'

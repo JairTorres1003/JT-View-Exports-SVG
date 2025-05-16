@@ -1,7 +1,7 @@
 import { accordionSummaryClasses, Grid, type GridProps, styled } from '@mui/material'
 import cn from 'classnames'
 
-import { accordionMenuItemClasses } from './accordionMenuItemClasses'
+import { accordionMenuItemClasses } from './AccordionMenuItem.classes'
 
 export const BoxAccordionMenuItem = styled(
   (props: GridProps) => (

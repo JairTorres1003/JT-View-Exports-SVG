@@ -1,16 +1,21 @@
 import { Box, type BoxProps, styled, typographyClasses } from '@mui/material'
 import type { ComponentType } from 'react'
 
+import { colorPickerClasses, reactColorfulClasses } from './ColorPicker.classes'
+
 import bgTransparent from '@/assets/images/bg-transparent.png'
 
-export const ColorPickerBox = styled(Box, { name: 'ColorPicker-Box' })(({ theme: { shape } }) => ({
+export const ColorPickerBox = styled(Box, {
+  name: colorPickerClasses.root,
+  target: colorPickerClasses.root,
+})(({ theme: { shape } }) => ({
   backgroundColor: 'var(--JT-SVG-vscode-editorHoverWidget-background)',
   border: '1px solid var(--JT-SVG-vscode-editorHoverWidget-border, #2c313a)',
   borderRadius: `${shape.borderRadius}px`,
   color: 'var(--JT-SVG-vscode-editorHoverWidget-foreground)',
   maxWidth: '750px',
   maxHeight: '250px',
-  '& .ColorPicker__header': {
+  [`& .${colorPickerClasses.header}`]: {
     backgroundImage: `url('${bgTransparent}')`,
     backgroundSize: '9px 9px',
     display: 'flex',
@@ -18,18 +23,18 @@ export const ColorPickerBox = styled(Box, { name: 'ColorPicker-Box' })(({ theme:
     imageRendering: 'pixelated',
     position: 'relative',
   },
-  '& .ColorPicker__body': {
+  [`& .${colorPickerClasses.body}`]: {
     '--JT-SVG-max-height-picker': '150px',
     '--JT-SVG-space-picker': '8px',
     display: 'flex',
     padding: '8px',
     gap: 'var(--JT-SVG-space-picker)',
     position: 'relative',
-    '& .ColorPicker__body__picker': {
+    [`& .${colorPickerClasses.picker}`]: {
       width: '100%',
       height: 'max-content',
       flexDirection: 'row',
-      '& .react-colorful__saturation': {
+      [`& .${reactColorfulClasses.saturation}`]: {
         borderRadius: 0,
         overflow: 'hidden',
         height: 'var(--JT-SVG-max-height-picker)',
@@ -37,10 +42,7 @@ export const ColorPickerBox = styled(Box, { name: 'ColorPicker-Box' })(({ theme:
         flex: 'initial',
         width: '100%',
       },
-      '& .react-colorful__pointer-fill': {
-        display: 'none',
-      },
-      '& .react-colorful__saturation-pointer': {
+      [`& .${reactColorfulClasses.saturationPointer}`]: {
         border: '1px solid #fff',
         borderRadius: '100%',
         boxShadow: '0 0 2px rgba(0, 0, 0, .8)',
@@ -50,7 +52,10 @@ export const ColorPickerBox = styled(Box, { name: 'ColorPicker-Box' })(({ theme:
         width: '9px',
         backgroundColor: 'transparent',
       },
-      '& .react-colorful__hue, & .react-colorful__alpha': {
+      [`& .${reactColorfulClasses.fill}`]: {
+        display: 'none',
+      },
+      [`& .${reactColorfulClasses.hue}, & .${reactColorfulClasses.alpha}`]: {
         display: 'none',
         width: 0,
         height: 0,
@@ -58,7 +63,7 @@ export const ColorPickerBox = styled(Box, { name: 'ColorPicker-Box' })(({ theme:
         opacity: 0,
       },
     },
-    '& .ColorPicker__body__slider': {
+    [`& .${colorPickerClasses.sliders}`]: {
       height: 'var(--JT-SVG-max-height-picker)',
       display: 'flex',
       gap: 'var(--JT-SVG-space-picker)',
@@ -91,7 +96,7 @@ export const BoxInfoPickerColor = styled<ComponentType<BoxInfoPickerColorProps>>
       }}
     />
   ),
-  { name: 'CurrentPickerColor-Box' }
+  { name: colorPickerClasses.pad, target: colorPickerClasses.pad }
 )(({ theme: { vars } }) => ({
   alignItems: 'center',
   color: vars.palette.text.primary,
@@ -101,7 +106,7 @@ export const BoxInfoPickerColor = styled<ComponentType<BoxInfoPickerColorProps>>
   lineHeight: '24px',
   overflow: 'hidden',
   whiteSpace: 'nowrap',
-  [`& .${typographyClasses.root}`]: {
+  [`& .${typographyClasses.root}.${colorPickerClasses.textColor}`]: {
     fontFamily: '-apple-system, "system-ui", sans-serif',
     marginLeft: '5px',
     marginRight: '5px',

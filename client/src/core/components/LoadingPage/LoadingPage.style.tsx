@@ -1,8 +1,12 @@
 import { Box, styled } from '@mui/material'
 
+import { loadingPageClasses } from './LoadingPage.classes'
+
+import { loadingCodePad } from '@/styles/keyframes'
+
 export const BoxLoadingPage = styled(Box, {
-  name: 'Box-LoadingPage',
-  slot: 'Root',
+  name: loadingPageClasses.root,
+  target: loadingPageClasses.root,
 })(({ theme: { typography, shape, vars } }) => ({
   width: '100%',
   height: '100%',
@@ -12,7 +16,7 @@ export const BoxLoadingPage = styled(Box, {
   position: 'absolute',
   fontFamily: typography.fontFamily,
   inset: 0,
-  '& .Box-LoadingPage__codePad': {
+  [`& .${loadingPageClasses.codePad}`]: {
     width: '190px',
     height: '190px',
     margin: 'auto',
@@ -20,14 +24,14 @@ export const BoxLoadingPage = styled(Box, {
     borderRadius: `${shape.borderRadius + 2}px`,
     boxShadow: `inset 0 0 0 1px ${vars.palette.primary.main}`,
     transform: 'rotate(45deg)',
-    '&, &::before, &::after, & .Box-LoadingPage__codePad__content': {
+    [`&, &::before, &::after, & .${loadingPageClasses.codePadContent}`]: {
       position: 'absolute',
       top: 0,
       bottom: 0,
       left: 0,
       right: 0,
     },
-    '& .Box-LoadingPage__codePad__content': {
+    [`& .${loadingPageClasses.codePadContent}`]: {
       transform: 'rotate(-45deg)',
       width: 'calc(100% + 40px)',
       height: 'calc(100% + 40px)',
@@ -48,25 +52,10 @@ export const BoxLoadingPage = styled(Box, {
       margin: '-5%',
       boxShadow: 'inset 0 0 0 2px',
       borderRadius: `${shape.borderRadius + 2}px`,
-      animation: 'load 5s linear infinite',
+      animation: `${loadingCodePad} 5s linear infinite`,
     },
     '&::before': {
       animationDelay: '-2.5s',
-    },
-  },
-
-  '@keyframes load': {
-    '0%, 100%': {
-      clip: 'rect(0px, 210px, 210px, 208px)',
-    },
-    '25%': {
-      clip: 'rect(208px, 210px, 210px, 0px)',
-    },
-    '50%': {
-      clip: 'rect(0px, 2px, 210px, 0px)',
-    },
-    '75%': {
-      clip: 'rect(0px, 210px, 2px, 0px)',
     },
   },
 }))

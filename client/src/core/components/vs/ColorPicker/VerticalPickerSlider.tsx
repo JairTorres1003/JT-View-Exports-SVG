@@ -1,33 +1,26 @@
-import { alpha, Slider, sliderClasses, type SliderProps, styled } from '@mui/material'
+import { alpha, Slider, sliderClasses, styled } from '@mui/material'
 import cn from 'classnames'
 import type { ComponentType } from 'react'
 
+import { verticalPickerSliderClasses } from './ColorPicker.classes'
+
 import bgTransparent from '@/assets/images/bg-transparent.png'
-
-interface VerticalPickerSliderProps extends SliderProps {
-  /**
-   * The variant of the slider.
-   * @default 'hue'
-   */
-  variant?: 'hue' | 'alpha'
-
-  /**
-   * The color of the alpha slider.
-   */
-  alphaColor?: string
-}
+import type { VerticalPickerSliderProps } from '@/core/types/components/vs/ColorPicker'
 
 export const VerticalPickerSlider = styled<ComponentType<VerticalPickerSliderProps>>(
-  ({ variant = 'hue', alphaColor, className, ...props }) => (
+  ({ variant = 'hue', alphaColor, className, style, ...props }) => (
     <Slider
+      {...props}
       orientation='vertical'
-      className={cn(className, `VerticalPickerSlider-${variant}`)}
       max={variant === 'hue' ? 0 : 100}
       min={variant === 'hue' ? -360 : 0}
-      {...props}
+      className={cn(className, {
+        [verticalPickerSliderClasses.variantHue]: variant === 'hue',
+        [verticalPickerSliderClasses.variantAlpha]: variant === 'alpha',
+      })}
       style={{
         '--JT-SVG-VerticalPickerSlider-alpha-rail-bg': alpha(alphaColor ?? '#000', 1),
-        ...props.style,
+        ...style,
       }}
     />
   ),
@@ -50,7 +43,7 @@ export const VerticalPickerSlider = styled<ComponentType<VerticalPickerSliderPro
     height: 'calc(100% + 4px)',
     marginTop: '-2px',
   },
-  [`&.VerticalPickerSlider-alpha .${sliderClasses.rail}`]: {
+  [`&.${verticalPickerSliderClasses.variantAlpha} .${sliderClasses.rail}`]: {
     backgroundImage: `url('${bgTransparent}')`,
     backgroundSize: '9px 9px',
     imageRendering: 'pixelated',

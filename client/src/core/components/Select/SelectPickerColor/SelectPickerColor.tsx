@@ -1,14 +1,15 @@
 import { Box, ClickAwayListener, Fade, Popper, Tooltip } from '@mui/material'
-import { type FC, useEffect, useRef, useState } from 'react'
+import type { FC } from 'react'
 import { useTranslation } from 'react-i18next'
 
 import { ColorPicker } from '../../vs/ColorPicker'
 
 import { IconButtonPicker } from './SelectPickerColor.style'
 
-import type { SelectPickerColorProps } from '@/core/interfaces/components/Select/SelectPickerColor'
+import { useSelectPickerColor } from '@/core/hooks/useSelectPickerColor'
+import type { SelectPickerColorProps } from '@/core/types/components/Select/SelectPickerColor'
 
-export const SelectPickerColor: FC<SelectPickerColorProps> = ({
+const SelectPickerColor: FC<SelectPickerColorProps> = ({
   initialColor = '#fff',
   onChange = () => null,
   title,
@@ -17,39 +18,25 @@ export const SelectPickerColor: FC<SelectPickerColorProps> = ({
   slotProps = { popper: {} },
   ...props
 }) => {
-  const [currentColor, setCurrentColor] = useState('#fff')
-  const [newColor, setNewColor] = useState('#fff')
-  const [open, setOpen] = useState(false)
-
-  const anchorEl = useRef<HTMLButtonElement>(null)
-
-  const { t } = useTranslation(undefined, { keyPrefix: 'labels' })
+  const { t } = useTranslation(undefined, { keyPrefix: 'pickers' })
+  const { open, anchorEl, currentColor, handleToggle, handleClickAway, handleChangeColor } =
+    useSelectPickerColor({
+      onChangeComplete,
+      initialColor,
+      value,
+    })
 
   const id = open ? 'transition-popper' : undefined
 
-  useEffect(() => {
-    setCurrentColor(initialColor)
-    setNewColor(initialColor)
-  }, [initialColor])
-
-  useEffect(() => {
-    if (value) {
-      setCurrentColor(value)
-      setNewColor(value)
-    }
-  }, [value])
-
   return (
     <>
-      <Tooltip title={title ?? t('Select color')}>
+      <Tooltip title={title ?? t('color.title')}>
         <IconButtonPicker
           id={id}
           {...props}
           ref={anchorEl}
           bgColor={currentColor}
-          onClick={() => {
-            setOpen((prev) => !prev)
-          }}
+          onClick={handleToggle}
         />
       </Tooltip>
       <Popper
@@ -63,17 +50,11 @@ export const SelectPickerColor: FC<SelectPickerColorProps> = ({
         {({ TransitionProps }) => (
           <Fade {...TransitionProps} timeout={350}>
             <Box>
-              <ClickAwayListener
-                onClickAway={() => {
-                  setOpen(false)
-                  setCurrentColor(newColor)
-                  onChangeComplete(newColor)
-                }}
-              >
+              <ClickAwayListener onClickAway={handleClickAway}>
                 <ColorPicker
                   currentColor={currentColor}
                   onChange={(_, stringColor) => {
-                    setNewColor(stringColor)
+                    handleChangeColor(stringColor)
                     onChange(stringColor)
                   }}
                 />
@@ -85,3 +66,5 @@ export const SelectPickerColor: FC<SelectPickerColorProps> = ({
     </>
   )
 }
+
+export default SelectPickerColor
