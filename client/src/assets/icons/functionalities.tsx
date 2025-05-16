@@ -1,6 +1,6 @@
 import type { FC } from 'react'
 
-import type { IconBaseProps } from '@/interfaces/misc'
+import type { IconBaseProps } from '@/types/BaseProps'
 
 export const IconLupe: FC<IconBaseProps> = ({
   className = '',
