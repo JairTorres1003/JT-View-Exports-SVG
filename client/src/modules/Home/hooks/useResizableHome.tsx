@@ -3,8 +3,8 @@ import type { ResizeStartCallback, ResizeCallback } from 're-resizable'
 import { useCallback, useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 
-import { setIsSelecting } from '@/providers/redux/features/PlaygroundSlice'
 import { vscode } from '@/services/vscode'
+import { setIsSelecting } from '@/store/features/PlaygroundSlice'
 
 interface ResizableHomeHook {
   resizableWidth: string

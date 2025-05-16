@@ -1,6 +1,7 @@
 import type { SVGComponent, SVGComponentProps } from '@api/interfaces/ViewExportsSVG'
 import cn from 'classnames'
 import { createElement, forwardRef } from 'react'
+import { useTranslation } from 'react-i18next'
 
 import { SVGError } from '@/assets/icons/indicators'
 import { ErrorBoundary } from '@/core/helpers'
@@ -21,8 +22,10 @@ const DynamicTagComponent = forwardRef<RenderSvgProps, RenderSvgProps>(function 
   { component, className },
   ref
 ) {
+  const { t } = useTranslation(undefined, { keyPrefix: 'errors' })
+
   if (isEmpty(component)) {
-    throw new Error('The component is empty.')
+    throw new Error(t('TheComponentIsEmpty'))
   }
 
   const c = cn(className, component.props.className)

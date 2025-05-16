@@ -5,8 +5,8 @@ import { useTranslation } from 'react-i18next'
 import { useMenuToolsStyles } from './MenuTools.style'
 
 import { IconKebabHorizontal } from '@/assets/icons/navigation'
-import type { TypeEditorRef } from '@/core/interfaces/components/vs/Editor'
-import { useMenuTools } from '@/modules/Home/hooks/useMenuTools'
+import type { TypeEditorRef } from '@/core/types/components/vs/Editor'
+import { useMenuTools } from '@/modules/home/hooks/useMenuTools'
 
 interface MenuToolsProps {
   containerId: string
@@ -14,7 +14,7 @@ interface MenuToolsProps {
   resetPlaygroundColor?: VoidFunction
 }
 
-export const MenuTools: FC<MenuToolsProps> = ({ containerId, editorRef, resetPlaygroundColor }) => {
+const MenuTools: FC<MenuToolsProps> = ({ containerId, editorRef, resetPlaygroundColor }) => {
   const { t } = useTranslation(undefined, { keyPrefix: 'DevTools' })
   const { classes } = useMenuToolsStyles()
 
@@ -24,7 +24,7 @@ export const MenuTools: FC<MenuToolsProps> = ({ containerId, editorRef, resetPla
   return (
     <>
       <Portal container={document.getElementById(containerId)}>
-        <Tooltip title={t('More actions...')} placement='bottom-end'>
+        <Tooltip title={t('playground.MoreActions')} placement='bottom-end'>
           <IconButton
             sx={{ marginRight: '4px' }}
             id='playground-settings-button'
@@ -52,14 +52,16 @@ export const MenuTools: FC<MenuToolsProps> = ({ containerId, editorRef, resetPla
         }}
       >
         <MenuItem className={classes.menuItem} onClick={onReloadPlayground}>
-          {t('Reload playground')}
+          {t('menu.ReloadPlayground')}
         </MenuItem>
         {editorRef?.current && (
           <MenuItem className={classes.menuItem} onClick={onReloadEditor}>
-            {t('Reload editor')}
+            {t('menu.ReloadEditor')}
           </MenuItem>
         )}
       </Menu>
     </>
   )
 }
+
+export default MenuTools

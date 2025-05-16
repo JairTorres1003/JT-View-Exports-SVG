@@ -4,8 +4,8 @@ import { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 
 import useDebounce from '@/core/hooks/useDebounce'
-import { setComponents, setErrors, setSearch } from '@/providers/redux/features/SVGSlice'
 import { vscode } from '@/services/vscode'
+import { setComponents, setErrors, setSearch } from '@/store/features/SVGSlice'
 
 interface SearchBarHook {
   search: string

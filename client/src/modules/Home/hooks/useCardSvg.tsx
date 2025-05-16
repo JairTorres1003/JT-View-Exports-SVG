@@ -4,8 +4,8 @@ import { Trans, useTranslation } from 'react-i18next'
 import { useDispatch } from 'react-redux'
 
 import { useAlert } from '@/core/hooks/useAlert'
-import { setRecentlySelected } from '@/providers/redux/features/PlaygroundSlice'
 import { vscode } from '@/services/vscode'
+import { setRecentlySelected } from '@/store/features/PlaygroundSlice'
 import { copyToClipboard, getUnknownError } from '@/utils/misc'
 
 interface CardSvgHook {

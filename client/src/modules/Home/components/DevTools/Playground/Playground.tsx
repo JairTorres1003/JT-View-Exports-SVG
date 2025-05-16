@@ -3,25 +3,26 @@ import type { FC } from 'react'
 import { useTranslation } from 'react-i18next'
 import { useSelector } from 'react-redux'
 
-import RenderSvg from '../../SVG/RenderSvg'
-import { MenuTools } from '../Menu/MenuTools/MenuTools'
+import { RenderSvg } from '../../SVG/RenderSvg'
+import { MenuTools } from '../Menu'
 
+import { playgroundClasses } from './Playground.classes'
 import { BoxPlayground, BoxPlaygroundCardSvg } from './Playground.style'
 
 import { IconCodeTag, IconCopy, IconRefresh } from '@/assets/icons/functionalities'
 import { SelectPickerColor } from '@/core/components/Select'
 import { Editor } from '@/core/components/vs/Editor'
 import { Show } from '@/core/helpers'
-import { usePlayground } from '@/modules/Home/hooks/usePlayground'
+import { usePlayground } from '@/modules/home/hooks/usePlayground'
 
 interface PlaygroundProps {
-  containerId?: string
+  actionsId?: string
 }
 
-export const Playground: FC<PlaygroundProps> = ({ containerId = 'playground-actions' }) => {
+const Playground: FC<PlaygroundProps> = ({ actionsId = 'playground-actions' }) => {
   const recentlySelected = useSelector((state) => state.playground.recentlySelected)
 
-  const { t } = useTranslation(undefined, { keyPrefix: 'labels' })
+  const { t } = useTranslation(undefined, { keyPrefix: 'DevTools' })
 
   const {
     backgroundColor,
@@ -40,15 +41,15 @@ export const Playground: FC<PlaygroundProps> = ({ containerId = 'playground-acti
 
   return (
     <BoxPlayground>
-      <Card className='Box-Playground__card' variant='outlined'>
+      <Card variant='outlined' className={playgroundClasses.card}>
         <BoxPlaygroundCardSvg bgColor={backgroundColor}>
           {recentlySelected && <RenderSvg {...recentlySelected} />}
         </BoxPlaygroundCardSvg>
 
-        <Divider className='Box-Playground__card__divider' />
+        <Divider className={playgroundClasses.divider} />
 
-        <Grid container spacing={1} className='Box-Playground__card__tools'>
-          <Grid flex={1}>
+        <Grid container spacing={0.5} className={playgroundClasses.tools}>
+          <Grid size='grow'>
             <SelectPickerColor
               value={valueColor}
               onChange={onChangeColor}
@@ -58,22 +59,22 @@ export const Playground: FC<PlaygroundProps> = ({ containerId = 'playground-acti
           </Grid>
           <Show>
             <Show.When isTrue={!!recentlySelected}>
-              <Grid>
-                <Tooltip title={expandedCode ? t('Hide code') : t('Show code')}>
+              <Grid size='auto'>
+                <Tooltip title={expandedCode ? t('playground.HideCode') : t('playground.ShowCode')}>
                   <IconButton onClick={handleExpand}>
                     <IconCodeTag size={16} />
                   </IconButton>
                 </Tooltip>
               </Grid>
-              <Grid>
-                <Tooltip title={t('Copy code')}>
+              <Grid size='auto'>
+                <Tooltip title={t('playground.CopyCode')}>
                   <IconButton onClick={handleCopyCode}>
                     <IconCopy size={16} />
                   </IconButton>
                 </Tooltip>
               </Grid>
-              <Grid>
-                <Tooltip title={t('Reset code')}>
+              <Grid size='auto'>
+                <Tooltip title={t('playground.ResetCode')}>
                   <IconButton onClick={handleResetCode}>
                     <IconRefresh size={16} sx={{ transform: 'rotate(90deg)' }} />
                   </IconButton>
@@ -85,17 +86,19 @@ export const Playground: FC<PlaygroundProps> = ({ containerId = 'playground-acti
 
         {recentlySelected && (
           <Collapse in={expandedCode}>
-            <Divider className='Box-Playground__card__divider' />
+            <Divider className={playgroundClasses.divider} />
             <Editor defaultValue={defaultValue} ref={editorRef} />
           </Collapse>
         )}
       </Card>
 
       <MenuTools
-        containerId={containerId}
+        containerId={actionsId}
         editorRef={editorRef}
         resetPlaygroundColor={resetPlaygroundColor}
       />
     </BoxPlayground>
   )
 }
+
+export default Playground

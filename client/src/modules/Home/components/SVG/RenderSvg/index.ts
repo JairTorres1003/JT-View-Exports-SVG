@@ -1,1 +1,1 @@
-export { default } from './RenderSvg'
+export { default as RenderSvg } from './RenderSvg'

@@ -9,7 +9,7 @@ export const useMenuToolsStyles = makeStyles()(({ palette }) => ({
     color: '#000',
   },
   menuItem: {
-    p: '6px 10px',
+    padding: '6px 10px',
     height: 22,
     borderRadius: '4px',
     minHeight: 0,

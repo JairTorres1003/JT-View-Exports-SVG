@@ -2,21 +2,17 @@ import type { SVGComponent } from '@api/interfaces/ViewExportsSVG'
 import { type BoxProps, Card, Tooltip, Typography } from '@mui/material'
 import type { FC } from 'react'
 
+import { cardSvgClasses } from './CardSvg.classes'
 import { BoxCardSvg } from './CardSvg.style'
 
-import { useCardSvg } from '@/modules/Home/hooks/useCardSvg'
+import { useCardSvg } from '@/modules/home/hooks/useCardSvg'
 
 interface CardSvgProps extends Omit<BoxProps, 'component'> {
   readonly children: React.ReactNode
   readonly component: SVGComponent
 }
 
-export const CardSvg: FC<CardSvgProps> = ({
-  children,
-  component,
-  onClick = () => null,
-  ...props
-}) => {
+const CardSvg: FC<CardSvgProps> = ({ children, component, onClick = () => null, ...props }) => {
   const { handleClick, addRecentComponent } = useCardSvg()
 
   return (
@@ -28,12 +24,20 @@ export const CardSvg: FC<CardSvgProps> = ({
         handleClick({ name: component.name, location: component.location })
       }}
     >
-      <Card className='Box-CardSvg__card'>{children}</Card>
+      <Card className={cardSvgClasses.card}>{children}</Card>
       <Tooltip placement='top' title={component.name}>
-        <Typography variant='caption' noWrap textAlign='center' padding='0 4px'>
+        <Typography
+          variant='caption'
+          noWrap
+          textAlign='center'
+          padding='0 4px'
+          className={cardSvgClasses.label}
+        >
           {component.name}
         </Typography>
       </Tooltip>
     </BoxCardSvg>
   )
 }
+
+export default CardSvg

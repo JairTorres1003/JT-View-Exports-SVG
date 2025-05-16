@@ -3,15 +3,16 @@ import { Resizable as ReactResizable, type ResizableProps } from 're-resizable'
 import type { FC } from 'react'
 import { useTranslation } from 'react-i18next'
 
+import { useResizableHome } from '../../hooks/useResizableHome'
+
 import { IconClose } from '@/assets/icons/functionalities'
-import { useResizableHome } from '@/modules/Home/hooks/useResizableHome'
 
 interface ResizableHomeProps
   extends Omit<ResizableProps, 'size' | 'onResizeStart' | 'onResizeStop'> {
   devTootsId: string
 }
 
-export const ResizableHome: FC<ResizableHomeProps> = ({ devTootsId, ...props }) => {
+const ResizableHome: FC<ResizableHomeProps> = ({ devTootsId, ...props }) => {
   const { onResizeStop, onResizeStart, onResetSize, resizableWidth } = useResizableHome({
     devTootsId,
   })
@@ -42,3 +43,5 @@ export const ResizableHome: FC<ResizableHomeProps> = ({ devTootsId, ...props }) 
     </>
   )
 }
+
+export default ResizableHome

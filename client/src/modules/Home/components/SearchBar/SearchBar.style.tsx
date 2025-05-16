@@ -8,13 +8,18 @@ import {
 } from '@mui/material'
 import type { ComponentType } from 'react'
 
+import { searchBarClasses } from './SearchBar.classes'
+
 import { IconLupe } from '@/assets/icons/functionalities'
 
-export const BoxSearchBar = styled(Box, { name: 'Box-SearchBar' })(() => ({
+export const BoxSearchBar = styled(Box, {
+  name: searchBarClasses.root,
+  target: searchBarClasses.root,
+})(() => ({
   display: 'flex',
   padding: '16px 8px',
   justifyContent: 'center',
-  '& .Box-SearchBar__input': {
+  [`& .${searchBarClasses.input}`]: {
     maxWidth: 600,
   },
 }))
@@ -24,18 +29,21 @@ export const LabelSearchBar = styled<
 >(
   ({ label, ...props }) => (
     <Box component='span' display='flex' alignItems='center' gap='8px' {...props}>
-      <IconLupe size={16} className='LabelSearchBar__icon' />
-      <Typography component='span' variant='inherit' className='LabelSearchBar__text'>
+      <IconLupe size={16} className={searchBarClasses.labelicon} />
+      <Typography component='span' variant='inherit' className={searchBarClasses.label}>
         {label}
       </Typography>
     </Box>
   ),
-  { name: 'LabelSearchBar' }
+  {
+    name: searchBarClasses.labelContainer,
+    target: searchBarClasses.labelContainer,
+  }
 )(() => ({
-  [`.${inputLabelClasses.shrink} & .LabelSearchBar__icon`]: {
+  [`.${inputLabelClasses.shrink} & .${searchBarClasses.labelicon}`]: {
     display: 'none',
   },
-  [`.${inputBaseClasses.root} fieldset & .LabelSearchBar__icon`]: {
+  [`.${inputBaseClasses.root} fieldset & .${searchBarClasses.labelicon}`]: {
     display: 'none',
   },
 }))

@@ -1,12 +1,14 @@
 import { IconButton, TextField, Tooltip } from '@mui/material'
 import { useTranslation } from 'react-i18next'
 
+import { useSearchBar } from '../../hooks/useSearchBar'
+
+import { searchBarClasses } from './SearchBar.classes'
 import { BoxSearchBar, LabelSearchBar } from './SearchBar.style'
 
 import { IconClose } from '@/assets/icons/functionalities'
-import { useSearchBar } from '@/modules/Home/hooks/useSearchBar'
 
-export const SearchBar = (): React.ReactNode => {
+const SearchBar = (): React.ReactNode => {
   const { handleClear, handleSearch, search } = useSearchBar()
 
   const { t } = useTranslation(undefined, { keyPrefix: 'labels' })
@@ -19,13 +21,13 @@ export const SearchBar = (): React.ReactNode => {
         type='search'
         value={search}
         onChange={handleSearch}
-        className='Box-SearchBar__input'
+        className={searchBarClasses.input}
         label={<LabelSearchBar label={t('Search')} />}
         slotProps={{
           input: {
             endAdornment: (
               <Tooltip title={t('Clear')}>
-                <IconButton onClick={handleClear}>
+                <IconButton onClick={handleClear} className={searchBarClasses.clearButton}>
                   <IconClose size={16} />
                 </IconButton>
               </Tooltip>
@@ -36,3 +38,5 @@ export const SearchBar = (): React.ReactNode => {
     </BoxSearchBar>
   )
 }
+
+export default SearchBar

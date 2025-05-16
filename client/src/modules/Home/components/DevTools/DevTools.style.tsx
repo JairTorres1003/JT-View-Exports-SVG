@@ -6,9 +6,14 @@ import {
   typographyClasses,
 } from '@mui/material'
 
-import { accordionMenuItemClasses } from '@/core/components/Accordion/accordionMenuItemClasses'
+import { devToolsClasses } from './DevTools.classes'
 
-export const BoxDevTools = styled(Box, { name: 'Box-DevTools' })(() => ({
+import { accordionMenuItemClasses } from '@/core/components/Accordion'
+
+export const BoxDevTools = styled(Box, {
+  name: devToolsClasses.root,
+  target: devToolsClasses.root,
+})(() => ({
   width: '100%',
   minWidth: 170,
   maxWidth: '100%',
@@ -18,7 +23,7 @@ export const BoxDevTools = styled(Box, { name: 'Box-DevTools' })(() => ({
   display: 'flex',
   flexDirection: 'column',
   overflow: 'hidden',
-  '& .Box-DevTools__header': {
+  [`& .${devToolsClasses.header}`]: {
     display: 'flex',
     justifyContent: 'space-between',
     alignItems: 'center',
@@ -28,7 +33,7 @@ export const BoxDevTools = styled(Box, { name: 'Box-DevTools' })(() => ({
     overflow: 'hidden',
     // borderBottom: '1px solid var(--JT-SVG-vscode-panel-border)',
     color: 'var(--JT-SVG-palette-text-primary)',
-    [`& > .${typographyClasses.h2}`]: {
+    [`& > .${typographyClasses.h2}.${devToolsClasses.title}`]: {
       paddingLeft: '12px',
       maxWidth: '100%',
       overflow: 'hidden',
@@ -38,12 +43,12 @@ export const BoxDevTools = styled(Box, { name: 'Box-DevTools' })(() => ({
       userSelect: 'none',
     },
   },
-  '& .Box-DevTools__content': {
+  [`& .${devToolsClasses.content}`]: {
     display: 'grid',
     height: 'min-content',
     maxHeight: '100%',
     overflow: 'hidden',
-    '& .Box-DevTools__content__accordion': {
+    [`& .${devToolsClasses.accordion}`]: {
       display: 'flex',
       flexDirection: 'column',
       backgroundColor: 'var(--JT-SVG-vscode-sideBarTitle-background)',

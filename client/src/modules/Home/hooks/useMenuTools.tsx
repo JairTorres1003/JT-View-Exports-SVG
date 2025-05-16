@@ -1,6 +1,6 @@
 import { useState } from 'react'
 
-import type { TypeEditorRef } from '@/core/interfaces/components/vs/Editor'
+import type { TypeEditorRef } from '@/core/types/components/vs/Editor'
 
 interface MenuToolsHookProps {
   editorRef?: React.RefObject<TypeEditorRef>

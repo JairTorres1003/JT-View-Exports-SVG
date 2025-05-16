@@ -5,9 +5,9 @@ import { Trans, useTranslation } from 'react-i18next'
 import { useDispatch, useSelector } from 'react-redux'
 
 import { useAlert } from '@/core/hooks/useAlert'
-import type { TypeEditorRef } from '@/core/interfaces/components/vs/Editor'
-import { setEditorConfig, setExtensionTheme } from '@/providers/redux/features/VsCodeSlice'
+import type { TypeEditorRef } from '@/core/types/components/vs/Editor'
 import { vscode } from '@/services/vscode'
+import { setEditorConfig, setExtensionTheme } from '@/store/features/VsCodeSlice'
 import { copyToClipboard, getUnknownError } from '@/utils/misc'
 
 interface PlaygroundHook {
@@ -34,11 +34,11 @@ export const usePlayground = (): PlaygroundHook => {
   const [initialColor, setInitialColor] = useState('#fff')
   const [valueColor, setValueColor] = useState('#fff')
 
-  const { t } = useTranslation(undefined, { keyPrefix: 'labels' })
-  const { onOpen } = useAlert()
-
   const recentlySelected = useSelector((state) => state.playground.recentlySelected)
+
+  const { t } = useTranslation(undefined, { keyPrefix: 'labels' })
   const dispatch = useDispatch()
+  const { onOpen } = useAlert()
 
   const editorRef = useRef<TypeEditorRef>(null)
 

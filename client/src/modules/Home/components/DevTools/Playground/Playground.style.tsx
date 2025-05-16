@@ -1,20 +1,25 @@
 import { Box, type BoxProps, styled } from '@mui/material'
 import { forwardRef } from 'react'
 
+import { playgroundClasses } from './Playground.classes'
+
 import bgTransparent from '@/assets/images/bg-transparent.png'
 
-export const BoxPlayground = styled(Box, { name: 'Box-Playground' })(({ theme: { palette } }) => ({
+export const BoxPlayground = styled(Box, {
+  name: playgroundClasses.root,
+  target: playgroundClasses.root,
+})(({ theme: { palette } }) => ({
   padding: '12px 22px',
-  '& .Box-Playground__card': {
+  [`& .${playgroundClasses.card}`]: {
     display: 'flex',
     flexDirection: 'column',
     borderColor: `var(--JT-SVG-vscode-panel-border, ${palette.divider})`,
     backgroundColor: 'var(--JT-SVG-vscode-editor-background)',
-    '& .Box-Playground__card__tools': {
+    [`& .${playgroundClasses.tools}`]: {
       padding: '4px 8px',
       alignItems: 'center',
     },
-    '& .Box-Playground__card__divider': {
+    [`& .${playgroundClasses.divider}`]: {
       borderColor: `var(--JT-SVG-vscode-panel-border, ${palette.divider})`,
     },
   },
@@ -22,21 +27,24 @@ export const BoxPlayground = styled(Box, { name: 'Box-Playground' })(({ theme: {
 
 export const BoxPlaygroundCardSvg = styled(
   forwardRef<HTMLButtonElement, BoxProps & { bgColor: string }>(function BoxPlaygroundCardSvg(
-    { bgColor, ...props },
+    { bgColor, style, ...props },
     ref
   ) {
     return (
       <Box
         {...props}
+        ref={ref}
         style={{
           '--JT-SVG-playground-card-svg-bg': bgColor,
-          ...props.style,
+          ...style,
         }}
-        ref={ref}
       />
     )
   }),
-  { name: 'Box-Playground-CardSVG', slot: 'Root' }
+  {
+    name: playgroundClasses.svgCard,
+    target: playgroundClasses.svgCard,
+  }
 )(({ theme: { vars } }) => ({
   padding: '10px',
   display: 'grid',
