@@ -1,8 +1,9 @@
 import type { SVGReceiveMessage } from '@api/enums/ViewExportsSVG'
 import type { AxiosResponse } from 'axios'
+import i18next from 'i18next'
 import type { WebviewApi } from 'vscode-webview'
 
-import { axiosInstance } from './instance'
+import { axiosInstance } from '../instance'
 
 import { getUnknownError, isEmpty } from '@/utils/misc'
 
@@ -39,7 +40,7 @@ class VSCodeInternalAPIWrapper<T = unknown> {
       const response = await request()
 
       if (response.status !== 200) {
-        throw new Error(response.statusText ?? 'No response data')
+        throw new Error(response.statusText ?? i18next.t('errors.NoResponse'))
       }
 
       window.postMessage(response.data, '*')
@@ -56,7 +57,7 @@ class VSCodeInternalAPIWrapper<T = unknown> {
    */
   private readonly postMessage = (message: VSCodeInternalAPIWrapperMessage): void => {
     if (isEmpty(message.type)) {
-      console.warn('No message type provided')
+      console.warn(i18next.t('errors.NoMessageTypeProvided'))
       return
     }
 

@@ -6,11 +6,7 @@ import type { WebviewApi } from 'vscode-webview'
 
 import { vscodeInternal } from './VSCodeInternal'
 
-import type {
-  FuncPostMessage,
-  FuncOnMessage,
-  MessageHandlersView,
-} from '@/interfaces/ViewExportsSVG'
+import type { FuncPostMessage, FuncOnMessage, MessageHandlersView } from '@/types/ViewExportsSVG'
 
 /**
  * Wrapper class for the VSCode API, providing methods for communication between the webview and the extension.
