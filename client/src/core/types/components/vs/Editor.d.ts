@@ -10,8 +10,8 @@ export interface EditorProps {
 export interface IStandaloneCodeEditor extends monaco.editor.IStandaloneCodeEditor {
   setDefaultValue: (value: string) => void
   getDefaultValue: () => string
-  resetValue: () => void
-  reload: () => void
+  resetValue: VoidFunction
+  reload: VoidFunction
 }
 
 export type TypeEditorRef = (HTMLElement & { editor?: IStandaloneCodeEditor }) | null

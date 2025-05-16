@@ -1,5 +1,5 @@
-import { SxProps, type IconButtonProps } from '@mui/material'
-import { PopperProps } from '@mui/material/Popper/BasePopper.types'
+import type { SxProps, IconButtonProps } from '@mui/material'
+import type { PopperProps } from '@mui/material/Popper/BasePopper.types'
 
 interface SelectPickerColorCommonProps {
   /**
