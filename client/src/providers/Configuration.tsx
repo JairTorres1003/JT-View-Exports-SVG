@@ -2,10 +2,9 @@ import { SVGPostMessage } from '@api/enums/ViewExportsSVG'
 import { type FC, useEffect } from 'react'
 import { useDispatch } from 'react-redux'
 
-import { setConfiguration } from '../redux/features/GlobalSlice'
-
-import type { ProviderProps } from '@/interfaces/misc'
 import { vscode } from '@/services/vscode'
+import { setConfiguration } from '@/store/features/GlobalSlice'
+import type { ProviderProps } from '@/types/BaseProps'
 
 /**
  * ConfigurationProvider component is a context provider that listens for

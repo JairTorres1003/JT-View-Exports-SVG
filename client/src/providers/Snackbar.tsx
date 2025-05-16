@@ -4,7 +4,7 @@ import { useSelector } from 'react-redux'
 import { v4 as uuidv4 } from 'uuid'
 
 import { useAlert } from '@/core/hooks/useAlert'
-import type { ProviderProps } from '@/interfaces/misc'
+import type { ProviderProps } from '@/types/BaseProps'
 
 /**
  * SlideTransition component.
