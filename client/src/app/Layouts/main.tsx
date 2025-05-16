@@ -1,11 +1,11 @@
-import React, { type ReactNode } from 'react'
+import React from 'react'
 import { MemoryRouter, Route, Routes } from 'react-router-dom'
 
+import Providers from '@/config/provider'
+import { routes } from '@/config/routes/route'
 import { LoadingPage } from '@/core/components/LoadingPage'
-import Providers from '@/providers'
-import { routes } from '@/routes/route'
 
-const Layout = (): ReactNode => (
+const Layout = () => (
   <Providers>
     <MemoryRouter initialEntries={['/']} initialIndex={0}>
       <React.Suspense fallback={<LoadingPage />}>
