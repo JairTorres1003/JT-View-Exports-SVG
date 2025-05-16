@@ -16,7 +16,7 @@ if (typeof window === 'undefined') {
   throw new Error('This script can only be run in a browser environment')
 }
 
-window.MonacoEnvironment ??= {
+window.MonacoEnvironment = {
   getWorker: function (_workerId, label) {
     console.info('🚀 ~ _workerId, label:', { _workerId, label })
     const workerFactory = workerLoaders[label]
