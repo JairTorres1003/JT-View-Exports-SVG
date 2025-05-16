@@ -1,15 +1,14 @@
+import { useForkRef } from '@mui/material'
 import { useCallback, useEffect, useRef, useState } from 'react'
 import { useSelector } from 'react-redux'
-
-import { useForkRef } from '../useForkRef'
 
 import type {
   EditorHook,
   EditorHookProps,
   IStandaloneCodeEditor,
   TypeEditorRef,
-} from '@/core/interfaces/components/vs/Editor'
-import { Editor } from '@/core/utils/vs/Editor'
+} from '@/core/types/components/vs/Editor'
+import { Editor } from '@/core/utils/vs/editor/createEditor'
 import { getUnknownError, isEmpty } from '@/utils/misc'
 
 export const useEditor = ({ forwardedRef, defaultValue }: EditorHookProps): EditorHook => {

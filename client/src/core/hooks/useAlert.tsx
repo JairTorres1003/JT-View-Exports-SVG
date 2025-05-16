@@ -2,8 +2,8 @@ import type { SnackbarCloseReason, SlideProps, SnackbarOrigin } from '@mui/mater
 import type { SyntheticEvent, ReactNode } from 'react'
 import { useDispatch } from 'react-redux'
 
-import type { GlobalState } from '@/interfaces/redux/featureGlobal'
-import { closeAlert, openAlert } from '@/providers/redux/features/GlobalSlice'
+import { closeAlert, openAlert } from '@/store/features/GlobalSlice'
+import type { GlobalState } from '@/types/store/features/GlobalSlice'
 
 interface AlertHook {
   onOpen: (

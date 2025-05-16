@@ -2,52 +2,37 @@ import Colorize from 'color'
 import type { AnyColor, RgbaColor } from 'node_modules/react-colorful/dist/types'
 import { useEffect, useState } from 'react'
 
+import type {
+  ColorizeOrderedList,
+  ColorizeParam,
+  ColorPickerHook,
+  ColorPickerHookProps,
+} from '@/core/types/components/vs/ColorPicker'
 import { getUnknownError, isEmpty } from '@/utils/misc'
-
-type ColorizeParam = Parameters<typeof Colorize>[0]
-
-interface ColorPickerHook {
-  oldColor: RgbaColor
-  color: RgbaColor
-  getStringColor: (color: AnyColor) => string
-  currentHue: number
-  handleColorChange: (newColor: RgbaColor) => void
-  applyOldColor: VoidFunction
-  handleChangeList: VoidFunction
-  currentValueColor: {
-    value: string
-    isLight: boolean
-  }
-  handleHueChange: (color: RgbaColor) => (event: Event, newHue: number | number[]) => void
-}
-
-interface ColorPickerHookProps {
-  currentColor?: AnyColor
-}
 
 const INITIAL_COLOR = { r: 255, g: 255, b: 255, a: 1 }
 
-const ORDERED_LIST = [
-  (color: ColorizeParam) =>
+const ORDERED_LIST: ColorizeOrderedList = [
+  (color) =>
     typeof color === 'object' && 'alpha' in color && color.alpha !== 1
       ? Colorize(color).hexa()
       : Colorize(color).hex(),
-  (color: ColorizeParam) => Colorize(color).hsl(),
-  (color: ColorizeParam) => Colorize(color).hwb(),
-  (color: ColorizeParam) => Colorize(color).rgb(),
+  (color) => Colorize(color).hsl(),
+  (color) => Colorize(color).hwb(),
+  (color) => Colorize(color).rgb(),
 ]
 
 export const useColorPicker = ({
   currentColor = INITIAL_COLOR,
 }: ColorPickerHookProps): ColorPickerHook => {
-  const [oldColor, setOldColor] = useState<RgbaColor>(INITIAL_COLOR)
   const [color, setColor] = useState<RgbaColor>(INITIAL_COLOR)
+  const [oldColor, setOldColor] = useState<RgbaColor>(INITIAL_COLOR)
+  const [currentHue, setCurrentHue] = useState<number>(0)
   const [currentList, setCurrentList] = useState(0)
   const [currentValueColor, setCurrentValueColor] = useState<{ value: string; isLight: boolean }>({
     value: '',
     isLight: false,
   })
-  const [currentHue, setCurrentHue] = useState<number>(0)
 
   /**
    * Adjusts the color object to ensure it has the correct structure for the Colorize function.
