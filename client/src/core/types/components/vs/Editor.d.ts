@@ -14,10 +14,22 @@ export interface IStandaloneCodeEditor extends monaco.editor.IStandaloneCodeEdit
   reload: VoidFunction
 }
 
-export type TypeEditorRef = (HTMLElement & { editor?: IStandaloneCodeEditor }) | null
+interface EditorLoader {
+  start: (duration: number, endAction?: VoidFunction) => VoidFunction
+  stop: VoidFunction
+}
+
+export type TypeEditorRef =
+  | (HTMLElement & {
+      editor?: IStandaloneCodeEditor
+      editorLoader?: () => EditorLoader
+    })
+  | null
 
 interface EditorHook {
   rootRef: React.RefCallback<Exclude<TypeEditorRef, 'null'>> | null
+  loading: boolean
+  progress: number
 }
 
 interface EditorHookProps extends Omit<EditorProps, 'className'> {

@@ -66,8 +66,6 @@ export class Editor {
    * @throws Will log an error message if updating user configuration or keybindings fails.
    */
   public async createEditor(): Promise<IStandaloneCodeEditor> {
-    this._reference?.style.setProperty('opacity', '0')
-
     if (this._editorInstance) {
       this._editorInstance.dispose()
     }
@@ -100,8 +98,6 @@ export class Editor {
 
     this._editorInstance = editor
 
-    this._reference?.style.removeProperty('opacity')
-
     return editor
   }
 
@@ -113,11 +109,18 @@ export class Editor {
       throw new Error(i18next.t('errors.EditorReferenceIsNotAvailable'))
     }
 
+    this._reference?.editorLoader?.().start(1000, () => {
+      this._reference?.style.setProperty('opacity', '1')
+    })
+    this._reference?.style.setProperty('opacity', '0')
+
     const overflowWidgetsDomNode = document.getElementById('overflow_widgets_dom_node') ?? undefined
+    const theme = this._userConfiguration['workbench.colorTheme'] as string
 
     const editor = monaco.editor.create(this._reference, {
-      language: 'typescriptreact',
+      language: 'javascript',
       value: '',
+      theme,
       automaticLayout: true,
       overflowWidgetsDomNode,
       fixedOverflowWidgets: true,

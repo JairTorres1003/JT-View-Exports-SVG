@@ -14,10 +14,48 @@ import { getUnknownError, isEmpty } from '@/utils/misc'
 export const useEditor = ({ forwardedRef, defaultValue }: EditorHookProps): EditorHook => {
   const [editorInstance, setEditorInstance] = useState<IStandaloneCodeEditor | undefined>(undefined)
   const { editorConfig, extensionTheme } = useSelector((state) => state.vsCode)
+  const [loading, setLoading] = useState(false)
+  const [progress, setProgress] = useState(0)
 
   const editorRef = useRef<TypeEditorRef>(null)
 
   const forkedRef = useForkRef(editorRef, forwardedRef)
+
+  /**
+   * Provides editor loading state management with progress indication.
+   */
+  const editorLoader = useCallback(() => {
+    const startLoading = (duration: number, endAction?: VoidFunction) => {
+      setLoading(true)
+      setProgress(0)
+
+      const interval = setInterval(() => {
+        setProgress((prev) => {
+          if (prev >= 100) {
+            clearInterval(interval)
+            setLoading(false)
+            endAction?.()
+            return 100
+          }
+          return prev + 1
+        })
+      }, duration / 100)
+
+      return () => {
+        clearInterval(interval)
+      }
+    }
+
+    const stopLoading = () => {
+      setLoading(false)
+      setProgress(100)
+    }
+
+    return {
+      start: startLoading,
+      stop: stopLoading,
+    }
+  }, [])
 
   /**
    * Initializes the editor instance if the editor reference and configuration are not empty.
@@ -72,7 +110,15 @@ export const useEditor = ({ forwardedRef, defaultValue }: EditorHookProps): Edit
     [editorInstance]
   )
 
+  useEffect(() => {
+    if (editorRef.current) {
+      editorRef.current.editorLoader = editorLoader
+    }
+  }, [editorRef])
+
   return {
     rootRef: forkedRef,
+    loading,
+    progress,
   }
 }

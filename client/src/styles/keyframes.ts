@@ -14,3 +14,12 @@ export const loadingCodePad = keyframes({
     clip: 'rect(0px, 210px, 2px, 0px)',
   },
 })
+
+export const linearProgressBarLoad = keyframes({
+  from: {
+    backgroundPositionX: 0,
+  },
+  to: {
+    backgroundPositionX: 'var(--fundamentalBase)',
+  },
+})

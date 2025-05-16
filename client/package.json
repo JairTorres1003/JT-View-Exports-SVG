@@ -31,6 +31,7 @@
     "dev": "webpack serve --config webpack.dev.js",
     "build": "webpack --config webpack.config.js --mode production",
     "preview": "serve -s dist -l 4173",
+    "postbuild": "rm -f dist/assets/*.txt && rm -f dist/assets/*.md && rm -f dist/assets/*.svg",
     "dev:vite": "vite",
     "build:vite": "tsc -b && vite build",
     "preview:vite": "vite preview",
@@ -42,6 +43,9 @@
   "dependencies": {
     "@codingame/monaco-vscode-api": "^17.1.0",
     "@codingame/monaco-vscode-configuration-service-override": "^17.1.0",
+    "@codingame/monaco-vscode-css-default-extension": "^17.1.0",
+    "@codingame/monaco-vscode-html-default-extension": "^17.1.0",
+    "@codingame/monaco-vscode-javascript-default-extension": "^17.1.0",
     "@codingame/monaco-vscode-keybindings-service-override": "^17.1.0",
     "@codingame/monaco-vscode-languages-service-override": "^17.1.0",
     "@codingame/monaco-vscode-quickaccess-service-override": "^17.1.0",
