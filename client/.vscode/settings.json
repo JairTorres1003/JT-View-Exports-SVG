@@ -23,7 +23,7 @@
       "url": "./i18n.schema.json"
     },
     {
-      "fileMatch": ["/src/core/assets/vs/Editor/keybindings.json"],
+      "fileMatch": ["/public/vs/userConfiguration/keybindings.json"],
       "url": "vscode://schemas/keybindings"
     }
   ],
