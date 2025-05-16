@@ -1,6 +1,6 @@
 import { createSlice } from '@reduxjs/toolkit'
 
-import type { PlaygroundReducers, PlaygroundState } from '@/interfaces/redux/featurePlayground'
+import type { PlaygroundReducers, PlaygroundState } from '@/types/store/features/PlaygroundSlice'
 
 const initialState: PlaygroundState = {
   recentlySelected: undefined,

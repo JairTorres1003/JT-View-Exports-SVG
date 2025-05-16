@@ -21,6 +21,5 @@ export interface SVGReducers {
    */
   setErrors: CaseReducer<SVGState, PayloadAction<SVGErrors | undefined>>
 
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   [key: string]: CaseReducer<SVGState, PayloadAction<any>>
 }

@@ -1,5 +1,5 @@
 import { VsCodeStyles } from '@api/interfaces/vscode'
-import { type Theme, type Components } from '@mui/material/styles'
+import type { Theme, Components } from '@mui/material/styles'
 
 export interface ProviderProps {
   readonly children: React.ReactNode

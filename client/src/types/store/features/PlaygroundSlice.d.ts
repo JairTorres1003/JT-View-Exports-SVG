@@ -18,6 +18,5 @@ export interface PlaygroundReducers {
    */
   setIsSelecting: CaseReducer<PlaygroundState, PayloadAction<boolean>>
 
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   [key: string]: CaseReducer<PlaygroundState, PayloadAction<any>>
 }

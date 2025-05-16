@@ -1,6 +1,6 @@
 import { createSlice } from '@reduxjs/toolkit'
 
-import type { VsCodeReducers, VsCodeState } from '@/interfaces/redux/featureVsCode'
+import type { VsCodeReducers, VsCodeState } from '@/types/store/features/VsCodeSlice'
 
 const initialState: VsCodeState = {
   styles: {},

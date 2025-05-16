@@ -62,6 +62,5 @@ export interface GlobalReducers {
    */
   setConfiguration: CaseReducer<GlobalState, PayloadAction<Partial<GlobalState['configuration']>>>
 
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   [key: string]: CaseReducer<GlobalState, PayloadAction<any>>
 }

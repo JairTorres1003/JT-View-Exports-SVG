@@ -5,7 +5,7 @@ import { PlaygroundReducer } from './features/PlaygroundSlice'
 import { SVGReducer } from './features/SVGSlice'
 import { VsCodeReducer } from './features/VsCodeSlice'
 
-import type { RootStoreState } from '@/interfaces/redux/feature'
+import type { RootStoreState } from '@/types/store/store'
 
 /**
  * Root reducer function that combines all the reducers.
@@ -13,10 +13,10 @@ import type { RootStoreState } from '@/interfaces/redux/feature'
  * This function is used to combine all the reducers into a single root reducer.
  */
 const rootReducer: Reducer<RootStoreState> = combineReducers({
-  svg: SVGReducer,
-  vsCode: VsCodeReducer,
   global: GlobalReducer,
   playground: PlaygroundReducer,
+  svg: SVGReducer,
+  vsCode: VsCodeReducer,
 })
 
 /**

@@ -21,6 +21,5 @@ export interface VsCodeReducers {
    */
   setExtensionTheme: CaseReducer<VsCodeState, PayloadAction<ExtensionManage | undefined>>
 
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   [key: string]: CaseReducer<VsCodeState, PayloadAction<any>>
 }

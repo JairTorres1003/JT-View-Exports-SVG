@@ -1,6 +1,6 @@
 import { createSlice } from '@reduxjs/toolkit'
 
-import type { GlobalReducers, GlobalState } from '@/interfaces/redux/featureGlobal'
+import type { GlobalReducers, GlobalState } from '@/types/store/features/GlobalSlice'
 
 const initialState: GlobalState = {
   snackbarAlert: {

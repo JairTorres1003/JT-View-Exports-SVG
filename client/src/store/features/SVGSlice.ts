@@ -1,6 +1,6 @@
 import { createSlice } from '@reduxjs/toolkit'
 
-import type { SVGReducers, SVGState } from '@/interfaces/redux/featureSvg'
+import type { SVGReducers, SVGState } from '@/types/store/features/SvgSlice'
 
 const initialState: SVGState = {
   components: [],
