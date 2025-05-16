@@ -1,24 +1,43 @@
 {
+  "errors": {
+    "FailedToFindTheRootElement": "Failed to find the root element",
+    "UnknownError": "Unknown error",
+    "TheComponentIsEmpty": "The component is empty",
+    "VSCodeApiIsNotAvailable": "VSCode API is not available",
+    "NoResponse": "No response",
+    "NoMessageTypeProvided": "No message type provided",
+    "FailedToReloadEditor": "Failed to reload editor",
+    "FailedToUpdateUserConfiguration": "Failed to update user configuration",
+    "FailedToUpdateUserKeybindings": "Failed to update user keybindings",
+    "EditorReferenceIsNotAvailable": "Editor reference is not available",
+    "FailedToActivateExtensionTheme": "Failed to activate extension theme"
+  },
   "labels": {
-    "Clear": "Clear",
-    "Close": "Close",
-    "Search": "Search",
-    "Select color": "Select color",
-    "Copy code": "Copy code",
-    "Copied {{value}} to clipboard": "Copied <b>{{value}}</b> to clipboard",
-    "Reset code": "Reset code",
-    "Show code": "Show code",
-    "Hide code": "Hide code",
     "Loading": "Loading...",
-    "Extracting components": "Extracting components..."
+    "ExtractingComponents": "Extracting components...",
+    "Search": "Search",
+    "Clear": "Clear",
+    "Copied {{value}} to clipboard": "Copied <b>{{value}}</b> to clipboard",
+    "Close": "Close"
+  },
+  "pickers": {
+    "color": {
+      "title": "Select a color"
+    }
   },
   "DevTools": {
     "title": "DevTools",
-    "More actions...": "More actions...",
-    "Reload playground": "Reload playground",
-    "Reload editor": "Reload editor"
-  },
-  "errors": {
-    "VSCode API is not available": "VSCode API is not available"
+    "playground": {
+      "title": "Playground",
+      "HideCode": "Hide code",
+      "ShowCode": "Show code",
+      "CopyCode": "Copy code",
+      "ResetCode": "Reset code",
+      "MoreActions": "More actions..."
+    },
+    "menu": {
+      "ReloadPlayground": "Reload playground",
+      "ReloadEditor": "Reload editor"
+    }
   }
 }

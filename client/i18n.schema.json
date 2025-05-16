@@ -3,67 +3,120 @@
   "title": "JSON schema for i18n in View Exports SVG (client) extension for Visual Studio Code",
   "type": "object",
   "properties": {
+    "errors": {
+      "type": "object",
+      "properties": {
+        "FailedToFindTheRootElement": {
+          "type": "string",
+          "default": "Failed to find the root element"
+        },
+        "UnknownError": {
+          "type": "string",
+          "default": "Unknown error"
+        },
+        "TheComponentIsEmpty": {
+          "type": "string",
+          "default": "The component is empty"
+        },
+        "VSCodeApiIsNotAvailable": {
+          "type": "string",
+          "default": "VSCode API is not available"
+        },
+        "NoResponse": {
+          "type": "string",
+          "default": "No response"
+        },
+        "NoMessageTypeProvided": {
+          "type": "string",
+          "default": "No message type provided"
+        },
+        "FailedToReloadEditor": {
+          "type": "string",
+          "default": "Failed to reload editor"
+        },
+        "FailedToUpdateUserConfiguration": {
+          "type": "string",
+          "default": "Failed to update user configuration"
+        },
+        "FailedToUpdateUserKeybindings": {
+          "type": "string",
+          "default": "Failed to update user keybindings"
+        },
+        "EditorReferenceIsNotAvailable": {
+          "type": "string",
+          "default": "Editor reference is not available"
+        },
+        "FailedToActivateExtensionTheme": {
+          "type": "string",
+          "default": "Failed to activate extension theme"
+        }
+      },
+      "required": [
+        "FailedToFindTheRootElement",
+        "UnknownError",
+        "TheComponentIsEmpty",
+        "VSCodeApiIsNotAvailable",
+        "NoResponse",
+        "NoMessageTypeProvided",
+        "FailedToReloadEditor",
+        "FailedToUpdateUserConfiguration",
+        "FailedToUpdateUserKeybindings",
+        "EditorReferenceIsNotAvailable",
+        "FailedToActivateExtensionTheme"
+      ]
+    },
     "labels": {
       "type": "object",
       "properties": {
-        "Clear": {
+        "Loading": {
           "type": "string",
-          "default": "Clear"
+          "default": "Loading..."
         },
-        "Close": {
+        "ExtractingComponents": {
           "type": "string",
-          "default": "Close"
+          "default": "Extracting components..."
         },
         "Search": {
           "type": "string",
           "default": "Search"
         },
-        "Select color": {
+        "Clear": {
           "type": "string",
-          "default": "Select color"
-        },
-        "Copy code": {
-          "type": "string",
-          "default": "Copy code"
+          "default": "Clear"
         },
         "Copied {{value}} to clipboard": {
           "type": "string",
           "default": "Copied <b>{{value}}</b> to clipboard"
         },
-        "Reset code": {
+        "Close": {
           "type": "string",
-          "default": "Reset code"
-        },
-        "Show code": {
-          "type": "string",
-          "default": "Show code"
-        },
-        "Hide code": {
-          "type": "string",
-          "default": "Hide code"
-        },
-        "Loading": {
-          "type": "string",
-          "default": "Loading..."
-        },
-        "Extracting components": {
-          "type": "string",
-          "default": "Extracting components..."
+          "default": "Close"
         }
       },
       "required": [
-        "Clear",
-        "Close",
-        "Search",
-        "Select color",
-        "Copy code",
-        "Copied {{value}} to clipboard",
-        "Reset code",
-        "Show code",
-        "Hide code",
         "Loading",
-        "Extracting components"
+        "ExtractingComponents",
+        "Search",
+        "Clear",
+        "Copied {{value}} to clipboard",
+        "Close"
       ]
+    },
+    "pickers": {
+      "type": "object",
+      "properties": {
+        "color": {
+          "type": "object",
+          "properties": {
+            "title": {
+              "type": "string",
+              "default": "Select a color"
+            }
+          },
+          "required": ["title"]
+        }
+      },
+      "required": ["color"]
     },
     "DevTools": {
       "type": "object",
@@ -71,20 +124,54 @@
         "title": {
           "type": "string",
           "default": "DevTools"
+        },
+        "playground": {
+          "type": "object",
+          "properties": {
+            "title": {
+              "type": "string",
+              "default": "Playground"
+            },
+            "HideCode": {
+              "type": "string",
+              "default": "Hide code"
+            },
+            "ShowCode": {
+              "type": "string",
+              "default": "Show code"
+            },
+            "CopyCode": {
+              "type": "string",
+              "default": "Copy code"
+            },
+            "ResetCode": {
+              "type": "string",
+              "default": "Reset code"
+            },
+            "MoreActions": {
+              "type": "string",
+              "default": "More actions..."
+            }
+          },
+          "required": ["title", "HideCode", "ShowCode", "CopyCode", "ResetCode", "MoreActions"]
+        },
+        "menu": {
+          "type": "object",
+          "properties": {
+            "ReloadPlayground": {
+              "type": "string",
+              "default": "Reload playground"
+            },
+            "ReloadEditor": {
+              "type": "string",
+              "default": "Reload editor"
+            }
+          },
+          "required": ["ReloadPlayground", "ReloadEditor"]
         }
       },
-      "required": ["title"]
-    },
-    "errors": {
-      "type": "object",
-      "properties": {
-        "VSCode API is not available": {
-          "type": "string",
-          "default": "VSCode API is not available"
-        }
-      },
-      "required": ["VSCode API is not available"]
+      "required": ["title", "playground", "menu"]
     }
   },
-  "required": ["labels", "errors"]
+  "required": ["errors", "labels", "pickers", "DevTools"]
 }
