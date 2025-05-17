@@ -29,12 +29,18 @@ export const useEditor = ({ forwardedRef, defaultValue }: EditorHookProps): Edit
       setLoading(true)
       setProgress(0)
 
+      const finishLoading = () => {
+        setTimeout(() => {
+          setLoading(false)
+          endAction?.()
+        }, 400)
+      }
+
       const interval = setInterval(() => {
         setProgress((prev) => {
           if (prev >= 100) {
             clearInterval(interval)
-            setLoading(false)
-            endAction?.()
+            finishLoading()
             return 100
           }
           return prev + 1

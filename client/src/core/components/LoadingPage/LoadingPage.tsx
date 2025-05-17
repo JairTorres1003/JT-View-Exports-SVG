@@ -1,4 +1,4 @@
-import { Box } from '@mui/material'
+import { Box, Typography } from '@mui/material'
 import type { FC } from 'react'
 import { useTranslation } from 'react-i18next'
 
@@ -18,9 +18,9 @@ const LoadingPage: FC<LoadingPageProps> = ({ className, children }) => {
   return (
     <BoxLoadingPage className={className}>
       <Box className={loadingPageClasses.codePad}>
-        <Box className={loadingPageClasses.codePadContent}>
+        <Typography className={loadingPageClasses.codePadContent}>
           {isEmpty(children) ? t('Loading') : children}
-        </Box>
+        </Typography>
       </Box>
     </BoxLoadingPage>
   )
