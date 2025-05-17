@@ -2,6 +2,10 @@ import * as fs from 'fs'
 
 import { type Webview, type Uri, env, l10n } from 'vscode'
 
+import {
+  DefaultClickToOpenDevToolsController,
+  DefaultExpandAllController,
+} from '@/controllers/config'
 import { type GetWebviewAssets } from '@/interfaces/views/content'
 import { type ManifestContent } from '@/interfaces/views/WebviewContent'
 import { getNonce } from '@/utilities/files'
@@ -89,11 +93,39 @@ export class WebviewContent {
   }
 
   /**
+   * Generates a script tag containing the initial configuration for the webview.
+   * The configuration includes localized view name and default settings for
+   * expanding all sections and opening developer tools.
+   *
+   * @returns {string} An HTML script tag as a string, which sets up the
+   *                   `window.ViewExportsSVG` object with the necessary
+   *                   initialization parameters.
+   */
+  private scriptConfiguration(): string {
+    const config = new DefaultExpandAllController()
+    const devConfig = new DefaultClickToOpenDevToolsController()
+    const nonce = getNonce()
+
+    return /* html */ `
+      <script nonce="${nonce}">
+        window.ViewExportsSVG = {
+          name: "${l10n.t('View Exports SVG')}",
+          initConfiguration: {
+            _DEFAULT_EXPAND_ALL: ${config.isExpandAll()},
+            _DEFAULT_CLIC_TO_OPEN_DEV_TOOLS: ${devConfig.isDefaultOpen()},
+          }
+        };
+      </script>
+    `
+  }
+
+  /**
    * Generates the content for the webview.
    */
   private generateContent(): void {
     const { index, favicon, styles } = this.getWebviewAssets()
     const nonce = getNonce()
+    const script = this.scriptConfiguration()
 
     this.content = /* html */ `
       <!DOCTYPE html>
@@ -109,7 +141,7 @@ export class WebviewContent {
           <div id="root"></div>
           <div id="overflow_widgets_dom_node" class="monaco-editor"></div>
           <noscript>You need to enable JavaScript to run this app.</noscript>
-          <script>{window.ViewExportsSVG = "${l10n.t('View Exports SVG')}"}</script>
+          ${script}
           <script type="module" nonce="${nonce}" src="${index}"></script>
         </body>
       </html>

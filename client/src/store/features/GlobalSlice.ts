@@ -11,8 +11,9 @@ const initialState: GlobalState = {
     position: { vertical: 'bottom', horizontal: 'center' },
   },
   configuration: {
-    defaultExpandAll: false,
-    defaultClicToOpenDevTools: true,
+    defaultExpandAll: window.ViewExportsSVG.initConfiguration._DEFAULT_EXPAND_ALL,
+    defaultClicToOpenDevTools:
+      window.ViewExportsSVG.initConfiguration._DEFAULT_CLIC_TO_OPEN_DEV_TOOLS,
   },
 }
 

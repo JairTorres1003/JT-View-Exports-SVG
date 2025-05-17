@@ -12,7 +12,6 @@ import {
 import { getCacheManager } from '../cache'
 import {
   AssetsPathsController,
-  DefaultClickToOpenDevToolsController,
   DefaultExpandAllController,
   LastScanDateController,
 } from '../config'
@@ -142,16 +141,8 @@ export class ListerWebviewController {
     this._toggleOpenDevTools(false)
 
     const config = new DefaultExpandAllController()
-    const configDev = new DefaultClickToOpenDevToolsController()
 
     this._toggleExpandIcon(config.isExpandAll())
-
-    setTimeout(() => {
-      this._postMessage(SVGPostMessage.SendInitConfiguration, {
-        defaultExpandAll: config.isExpandAll(),
-        defaultClicToOpenDevTools: configDev.isDefaultOpen(),
-      })
-    }, 500)
   }
 
   /**

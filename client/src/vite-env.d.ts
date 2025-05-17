@@ -19,9 +19,12 @@ declare module 'react' {
 
 declare global {
   interface Window {
-    /**
-     * The name of the view.
-     */
-    ViewExportsSVG?: string
+    ViewExportsSVG: {
+      name: string
+      initConfiguration: {
+        _DEFAULT_EXPAND_ALL: boolean
+        _DEFAULT_CLIC_TO_OPEN_DEV_TOOLS: boolean
+      }
+    }
   }
 }
