@@ -89,6 +89,18 @@ export class Editor {
     return editor
   }
 
+  /**
+   * Applies the user configuration and keybindings to the editor.
+   *
+   * Depending on whether the editor has been initialized, this method will either
+   * initialize or update the user configuration and keybindings.
+   *
+   * @param isInitialized - Indicates if the editor has already been initialized.
+   *   If `true`, the method updates the existing configuration and keybindings.
+   *   If `false`, it initializes them.
+   * @returns A promise that resolves when the configurations and keybindings have been applied.
+   * @throws Logs an error to the console if applying the configuration or keybindings fails.
+   */
   public async applyConfigurations(isInitialized = false): Promise<void> {
     const applyUserConfiguration = isInitialized ? updateUserConfiguration : initUserConfiguration
     const applyUserKeybindings = isInitialized ? updateUserKeybindings : initUserKeybindings
