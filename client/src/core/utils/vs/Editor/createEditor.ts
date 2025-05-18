@@ -39,7 +39,7 @@ export class Editor {
   private _defaultValue = ''
   private _editorInstance?: IStandaloneCodeEditor
   private readonly _reference: TypeEditorRef
-  private readonly _userConfiguration: Record<string, unknown>
+  private _userConfiguration: Record<string, unknown>
   private readonly _extensionTheme?: ExtensionManage
 
   constructor(
@@ -156,8 +156,19 @@ export class Editor {
     editor.getDefaultValue = this._getDefaultValue.bind(this)
     editor.resetValue = this._resetValue.bind(this)
     editor.reload = this._reload.bind(this)
+    editor.updateUserConfiguration = this._updateUserConfiguration.bind(this)
 
     return editor
+  }
+
+  /**
+   * Updates the user configuration of the editor instance.
+   *
+   * @param userConfiguration - The new user configuration to set.
+   */
+  private _updateUserConfiguration(userConfiguration: Record<string, unknown>): void {
+    this._userConfiguration = userConfiguration
+    this._reload()
   }
 
   /**
@@ -191,6 +202,8 @@ export class Editor {
    */
   public dispose(): void {
     this._editorInstance?.dispose()
+    initialized = false
+    this._editorInstance = undefined
   }
 
   /**

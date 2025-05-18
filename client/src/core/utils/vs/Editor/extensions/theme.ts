@@ -27,6 +27,10 @@ async function activate(extensionTheme: ExtensionManage) {
 
     const packageJSON = await fetch(`${baseUrl}/extensions/theme/package.json`)
 
+    if (!packageJSON.ok) {
+      throw new Error(i18next.t('errors.FailedToFetchExtensionTheme'))
+    }
+
     const manifest: IExtensionManifest = await packageJSON.json()
 
     const { registerFileUrl } = registerExtension(manifest, ExtensionHostKind.LocalProcess)

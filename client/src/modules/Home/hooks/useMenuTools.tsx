@@ -9,10 +9,7 @@ interface MenuToolsHookProps {
   resetPlaygroundColor?: VoidFunction
 }
 
-export const useMenuTools = ({
-  editorRef,
-  resetPlaygroundColor = () => null,
-}: MenuToolsHookProps) => {
+export const useMenuTools = ({ resetPlaygroundColor = () => null }: MenuToolsHookProps) => {
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null)
   const open = Boolean(anchorEl)
 
@@ -40,10 +37,15 @@ export const useMenuTools = ({
   }
 
   /**
-   * Reloads the editor by calling the reload method on the editor instance.
+   * Handles the reload action for the editor.
+   * Sends a message to VSCode to reload the extension theme and closes the current menu or dialog.
+   *
+   * @remarks
+   * This function utilizes the `vscode.postMessage` API to communicate with the VSCode extension host,
+   * specifically triggering the `ReloadExtensionTheme` action. After sending the message, it invokes
+   * `handleClose` to close the menu or dialog associated with the action.
    */
   const onReloadEditor = () => {
-    editorRef?.current?.editor?.reload()
     vscode.postMessage(SVGReceiveMessage.ReloadExtensionTheme)
     handleClose()
   }

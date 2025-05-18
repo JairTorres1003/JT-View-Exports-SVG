@@ -12,6 +12,7 @@ export interface IStandaloneCodeEditor extends monaco.editor.IStandaloneCodeEdit
   getDefaultValue: () => string
   resetValue: VoidFunction
   reload: VoidFunction
+  updateUserConfiguration: (userConfiguration: Record<string, unknown>) => void
 }
 
 interface EditorLoader {

@@ -1,4 +1,5 @@
 import { useForkRef } from '@mui/material'
+import i18next from 'i18next'
 import { useCallback, useEffect, useRef, useState } from 'react'
 import { useSelector } from 'react-redux'
 
@@ -83,7 +84,13 @@ export const useEditor = ({ forwardedRef, defaultValue }: EditorHookProps): Edit
     editorRef.current.editor = instance
 
     return instance
-  }, [editorConfig])
+  }, [editorRef, editorConfig, extensionTheme])
+
+  const updateEditor = useCallback(() => {
+    if (isEmpty(editorRef.current) || isEmpty(editorConfig)) return
+
+    editorRef.current?.editor?.updateUserConfiguration(editorConfig)
+  }, [editorRef, editorConfig])
 
   useEffect(() => {
     if (editorInstance && defaultValue) {
@@ -96,16 +103,6 @@ export const useEditor = ({ forwardedRef, defaultValue }: EditorHookProps): Edit
       })
     }
   }, [defaultValue, editorInstance])
-
-  useEffect(() => {
-    initializeEditor()
-      .then((editor) => {
-        setEditorInstance(editor)
-      })
-      .catch((error) => {
-        console.error(`Failed to initialize editor: ${getUnknownError(error)}`)
-      })
-  }, [])
 
   useEffect(
     () => () => {
@@ -121,6 +118,20 @@ export const useEditor = ({ forwardedRef, defaultValue }: EditorHookProps): Edit
       editorRef.current.editorLoader = editorLoader
     }
   }, [editorRef])
+
+  useEffect(() => {
+    updateEditor()
+  }, [editorConfig])
+
+  useEffect(() => {
+    initializeEditor()
+      .then((editor) => {
+        setEditorInstance(editor)
+      })
+      .catch((error) => {
+        console.error(`${i18next.t('errors.FailedToInitializeEditor')}: ${getUnknownError(error)}`)
+      })
+  }, [])
 
   return {
     rootRef: forkedRef,

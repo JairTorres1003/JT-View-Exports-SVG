@@ -1,5 +1,6 @@
 import { SVGPostMessage, SVGReceiveMessage } from '@api/enums/ViewExportsSVG'
 import type { ExtensionManage } from '@api/interfaces/vscode'
+import i18next from 'i18next'
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react'
 import { Trans, useTranslation } from 'react-i18next'
 import { useDispatch, useSelector } from 'react-redux'
@@ -102,7 +103,7 @@ export const usePlayground = (): PlaygroundHook => {
         onChangeCompleteColor(initial)
       }
     } catch (error) {
-      console.error('Error applying initial color:', getUnknownError(error))
+      console.error(`${i18next.t('errors.ErrorApplyingInitialColor')}:`, getUnknownError(error))
     }
   }, [])
 

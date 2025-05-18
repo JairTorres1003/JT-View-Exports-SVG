@@ -10,9 +10,12 @@ export const useMenuToolsStyles = makeStyles()(({ palette }) => ({
   },
   menuItem: {
     padding: '6px 10px',
-    height: 22,
+    height: 26.5,
     borderRadius: '4px',
     minHeight: 0,
+    fontFamily: 'var(--vscode-font-family)',
+    fontWeight: 'var(--vscode-font-weight)',
+    fontSize: 'calc(var(--vscode-font-size) + 1px)',
     '&:hover': {
       backgroundColor: palette.primary.main,
       color: palette.primary.contrastText,
