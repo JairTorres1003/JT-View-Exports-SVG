@@ -1,6 +1,7 @@
 // @ts-types="npm:@types/express@4.17.15"
 import { Request, Response } from 'express'
 import { getConfigurationEditor } from '@jt/view-exports-svg/utilities/vscode/config.js'
+import { getCurrentTheme } from '@jt/view-exports-svg/utilities/vscode/theme.js'
 import { isEmpty } from '@jt/view-exports-svg/utilities/misc.js'
 import { getStyles } from '@jt/view-exports-svg/utilities/vscode/theme.js'
 import { expandedIcons } from '@jt/view-exports-svg/commands/expandedIcons.js'
@@ -113,5 +114,18 @@ export class SettingsController {
         console.error(error)
         res.status(500).send({ message: 'Error updating open developer tools' })
       })
+  }
+
+  /**
+   * Handles the request to get the current theme.
+   *
+   * @param _ - The request object (not used).
+   * @param res - The response object used to send back the current theme.
+   *
+   * @returns A JSON response with the current theme if successful, or an error message if an error occurs.
+   */
+  public getTheme = (_: Request, res: Response) => {
+    const themeKind = getCurrentTheme()
+    res.status(200).json({ type: SVGPostMessage.SendTheme, data: themeKind })
   }
 }

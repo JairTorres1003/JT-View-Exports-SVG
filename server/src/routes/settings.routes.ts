@@ -9,6 +9,7 @@ const settingsController = new SettingsController()
 router.get('/editor-config', settingsController.getEditorConfig)
 router.post('/expand-all/toggle', settingsController.toggleExpandAll)
 router.get('/extension-theme', settingsController.getExtensionTheme)
+router.get('/theme', settingsController.getTheme)
 router.get('/vscode-styles', settingsController.getVscodeStyles)
 router.post('/toggle-open-dev-tools', settingsController.toggleOpenDevTools)
 
