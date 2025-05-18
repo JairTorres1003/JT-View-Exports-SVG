@@ -1,5 +1,7 @@
 import { workspace } from 'vscode'
 
+import { getCurrentTheme } from './theme'
+
 /**
  * Retrieves the editor configuration settings from the workspace and modifies certain properties.
  *
@@ -30,12 +32,17 @@ export function getConfigurationEditor(): Record<string, unknown> {
     editorConfig['editor.minimap.enabled'] = false
   }
 
+  const kind = getCurrentTheme()
+
   return {
     ...editorConfig,
     'editor.folding': false,
     'editor.glyphMargin': false,
     'editor.lineNumbers': 'off',
-    'workbench.colorTheme': workbenchConfiguration.get('colorTheme'),
+    'workbench.colorTheme': workbenchConfiguration.get(
+      'colorTheme',
+      kind === 'dark' ? 'Default Light+' : 'Default Dark+'
+    ),
     'workbench.iconTheme': workbenchConfiguration.get('iconTheme'),
     'workbench.colorCustomizations': workbenchConfiguration.get('colorCustomizations'),
   }
