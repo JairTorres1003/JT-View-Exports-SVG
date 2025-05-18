@@ -1,5 +1,5 @@
 import { SVGPostMessage, SVGReceiveMessage } from '@api/enums/ViewExportsSVG'
-import type { ExtensionManage } from '@api/interfaces/vscode'
+import type { ExtensionManage, ThemeMode } from '@api/interfaces/vscode'
 import i18next from 'i18next'
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react'
 import { Trans, useTranslation } from 'react-i18next'
@@ -8,7 +8,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { useAlert } from '@/core/hooks/useAlert'
 import type { TypeEditorRef } from '@/core/types/components/vs/Editor'
 import { vscode } from '@/services/vscode'
-import { setEditorConfig, setExtensionTheme } from '@/store/features/VsCodeSlice'
+import { setEditorConfig, setExtensionTheme, setThemeKind } from '@/store/features/VsCodeSlice'
 import { copyToClipboard, getUnknownError } from '@/utils/misc'
 
 interface PlaygroundHook {
@@ -135,6 +135,15 @@ export const usePlayground = (): PlaygroundHook => {
   }
 
   /**
+   * Handles the theme change by dispatching the setEditorConfig action with the provided theme.
+   *
+   * @param theme - The new theme to be set.
+   */
+  const handleTheme = (theme: ThemeMode) => {
+    dispatch(setThemeKind(theme))
+  }
+
+  /**
    * Handles the copying of code from the editor to the clipboard.
    */
   const handleCopyCode = () => {
@@ -164,12 +173,16 @@ export const usePlayground = (): PlaygroundHook => {
   useEffect(() => {
     applyInitialColor()
 
+    vscode.postMessage(SVGReceiveMessage.GetTheme)
     vscode.postMessage(SVGReceiveMessage.GetEditorConfig)
     vscode.postMessage(SVGReceiveMessage.GetExtensionTheme)
+
+    vscode.onMessage(SVGPostMessage.SendTheme, handleTheme)
     vscode.onMessage(SVGPostMessage.SendEditorConfig, handleEditorConfig)
     vscode.onMessage(SVGPostMessage.SendExtensionTheme, handleExtensionTheme)
 
     return () => {
+      vscode.unregisterMessage(SVGPostMessage.SendTheme)
       vscode.unregisterMessage(SVGPostMessage.SendEditorConfig)
       vscode.unregisterMessage(SVGPostMessage.SendExtensionTheme)
     }

@@ -1,10 +1,11 @@
-import { ExtensionManage, VsCodeStyles } from '@api/interfaces/vscode'
+import { ExtensionManage, ThemeMode, VsCodeStyles } from '@api/interfaces/vscode'
 import { type CaseReducer, type PayloadAction } from '@reduxjs/toolkit'
 
 export interface VsCodeState {
   styles: Partial<VsCodeStyles>
   editorConfig: Record<string, unknown>
   extensionTheme?: ExtensionManage
+  themeKind: ThemeMode
 }
 
 export interface VsCodeReducers {
@@ -20,6 +21,10 @@ export interface VsCodeReducers {
    * Sets the extension theme in the state.
    */
   setExtensionTheme: CaseReducer<VsCodeState, PayloadAction<ExtensionManage | undefined>>
+  /**
+   * Sets the theme kind in the state.
+   */
+  setThemeKind: CaseReducer<VsCodeState, PayloadAction<ThemeMode>>
 
   [key: string]: CaseReducer<VsCodeState, PayloadAction<any>>
 }

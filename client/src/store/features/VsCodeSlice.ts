@@ -6,6 +6,7 @@ const initialState: VsCodeState = {
   styles: {},
   editorConfig: {},
   extensionTheme: undefined,
+  themeKind: 'dark',
 }
 
 const reducers: VsCodeReducers = {
@@ -17,6 +18,9 @@ const reducers: VsCodeReducers = {
   },
   setExtensionTheme: (state, { payload }) => {
     state.extensionTheme = payload
+  },
+  setThemeKind: (state, { payload }) => {
+    state.themeKind = payload
   },
 }
 
@@ -30,7 +34,7 @@ export const VsCodeSlice = createSlice({
 })
 
 export const {
-  actions: { setVsCodeStyles, setEditorConfig, setExtensionTheme },
+  actions: { setVsCodeStyles, setEditorConfig, setExtensionTheme, setThemeKind },
 } = VsCodeSlice
 
 export const { reducer: VsCodeReducer } = VsCodeSlice

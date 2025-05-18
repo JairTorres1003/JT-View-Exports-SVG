@@ -41,7 +41,7 @@ export function getConfigurationEditor(): Record<string, unknown> {
     'editor.lineNumbers': 'off',
     'workbench.colorTheme': workbenchConfiguration.get(
       'colorTheme',
-      kind === 'dark' ? 'Default Light+' : 'Default Dark+'
+      kind === 'dark' ? 'Default Dark+' : 'Default Light+'
     ),
     'workbench.iconTheme': workbenchConfiguration.get('iconTheme'),
     'workbench.colorCustomizations': workbenchConfiguration.get('colorCustomizations'),

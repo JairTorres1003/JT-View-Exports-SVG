@@ -3,7 +3,7 @@ import { type ExtensionContext, l10n, window } from 'vscode'
 import { ViewExportsSVGController } from '@/controllers/views'
 import { SVGPostMessage } from '@/enum/ViewExportsSVG'
 import { isEmpty } from '@/utilities/misc'
-import { getConfigurationEditor } from '@/utilities/vscode'
+import { getConfigurationEditor, getCurrentTheme } from '@/utilities/vscode'
 import { getExtensionTheme, reloadExtensionTheme } from '@/utilities/vscode/extensions/theme'
 
 /**
@@ -14,15 +14,19 @@ export const runReloadTheme = (context: ExtensionContext): void => {
     reloadExtensionTheme(context)
 
     const theme = getExtensionTheme()
-    const config = getConfigurationEditor()
 
     if (!isEmpty(theme)) {
       ViewExportsSVGController.currentPanel._postMessage(SVGPostMessage.SendExtensionTheme, theme)
-      ViewExportsSVGController.currentPanel._postMessage(SVGPostMessage.SendEditorConfig, config)
     } else {
       window
         .showInformationMessage(l10n.t('No theme found for the current workspace'))
         .then(undefined, console.error)
     }
+
+    const config = getConfigurationEditor()
+    const kind = getCurrentTheme()
+
+    ViewExportsSVGController.currentPanel._postMessage(SVGPostMessage.SendEditorConfig, config)
+    ViewExportsSVGController.currentPanel._postMessage(SVGPostMessage.SendTheme, kind)
   }
 }
