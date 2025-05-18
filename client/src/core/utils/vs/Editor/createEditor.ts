@@ -72,17 +72,17 @@ export class Editor {
       this._editorInstance.dispose()
     }
 
-    await this.applyConfigurations(initialized)
-
     if (!initialized) {
-      await initialize(OVERRIDES)
+      await this.applyConfigurations()
 
-      await activateDefaultExtensions({ extensionTheme: this._extensionTheme })
+      await initialize(OVERRIDES)
 
       initialized = true
     }
 
     const editor = this._create()
+
+    await activateDefaultExtensions({ extensionTheme: this._extensionTheme })
 
     this._editorInstance = editor
 
@@ -136,12 +136,10 @@ export class Editor {
     this._reference?.style.setProperty('opacity', '0')
 
     const overflowWidgetsDomNode = document.getElementById('overflow_widgets_dom_node') ?? undefined
-    const theme = this._userConfiguration['workbench.colorTheme'] as string
 
     const editor = monaco.editor.create(this._reference, {
       language: 'javascript',
       value: '',
-      theme,
       automaticLayout: true,
       overflowWidgetsDomNode,
       fixedOverflowWidgets: true,
@@ -155,7 +153,6 @@ export class Editor {
     editor.setDefaultValue = this._setDefaultValue.bind(this)
     editor.getDefaultValue = this._getDefaultValue.bind(this)
     editor.resetValue = this._resetValue.bind(this)
-    editor.reload = this._reload.bind(this)
     editor.updateUserConfiguration = this._updateUserConfiguration.bind(this)
 
     return editor
@@ -164,11 +161,41 @@ export class Editor {
   /**
    * Updates the user configuration of the editor instance.
    *
-   * @param userConfiguration - The new user configuration to set.
+   * @param userConfiguration - The new user configuration to apply.
+   * @returns A promise that resolves when the user configuration has been updated.
    */
-  private _updateUserConfiguration(userConfiguration: Record<string, unknown>): void {
+  private async _updateUserConfiguration(
+    userConfiguration: Record<string, unknown>
+  ): Promise<void> {
+    const defaultValue = this._editorInstance?.getDefaultValue() ?? ''
+    this._editorInstance?.dispose()
+
     this._userConfiguration = userConfiguration
-    this._reload()
+
+    await this.applyConfigurations(true)
+
+    const editor = this._create()
+
+    this._editorInstance = editor
+
+    let currentThemeId = this._userConfiguration?.['workbench.colorTheme'] as string
+
+    if (!currentThemeId) {
+      const kind = document
+        .querySelector('[data-vscode-theme-kind]')
+        ?.getAttribute('data-vscode-theme-kind')
+      currentThemeId = kind === 'vscode-dark' ? 'Default Dark+' : 'Default Light+'
+    }
+
+    const themes = await editor._themeService.getColorThemes()
+    const settingsId = themes.map((theme) => theme.settingsId)
+
+    if (!settingsId.includes(currentThemeId)) {
+      await activateDefaultExtensions({ extensionTheme: this._extensionTheme })
+    }
+
+    this._setDefaultValue(defaultValue)
+    editor.focus()
   }
 
   /**
@@ -204,24 +231,5 @@ export class Editor {
     this._editorInstance?.dispose()
     initialized = false
     this._editorInstance = undefined
-  }
-
-  /**
-   * Reloads the editor instance.
-   *
-   * This method disposes of the current editor instance and creates a new one.
-   * It also sets the default value and focuses the new editor instance.
-   */
-  private _reload(): void {
-    const defaultValue = this._editorInstance?.getDefaultValue() ?? ''
-    this._editorInstance?.dispose()
-    this.createEditor()
-      .then((editor) => {
-        this._setDefaultValue(defaultValue)
-        editor.focus()
-      })
-      .catch((error) => {
-        console.error(`${i18next.t('errors.FailedToReloadEditor')}: ${getUnknownError(error)}`)
-      })
   }
 }

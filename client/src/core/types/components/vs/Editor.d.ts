@@ -11,8 +11,10 @@ export interface IStandaloneCodeEditor extends monaco.editor.IStandaloneCodeEdit
   setDefaultValue: (value: string) => void
   getDefaultValue: () => string
   resetValue: VoidFunction
-  reload: VoidFunction
-  updateUserConfiguration: (userConfiguration: Record<string, unknown>) => void
+  updateUserConfiguration: (userConfiguration: Record<string, unknown>) => Promise<void>
+  _themeService: {
+    getColorThemes: () => Promise<{ settingsId: string }[]>
+  }
 }
 
 interface EditorLoader {
