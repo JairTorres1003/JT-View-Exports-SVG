@@ -1,3 +1,4 @@
+export * from './cache'
 export * from './devTools'
 export * from './expandedIcons'
 export * from './reloadTheme'

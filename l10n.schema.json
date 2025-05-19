@@ -228,6 +228,11 @@
       "description": "Error message displayed when loading the cache fails",
       "default": "Error loading cache"
     },
+    "Cache cleared successfully!": {
+      "type": "string",
+      "description": "Message displayed when the cache is cleared successfully",
+      "default": "Cache cleared successfully!"
+    },
     "CacheManager has not been initialized": {
       "type": "string",
       "description": "Error message displayed when the CacheManager has not been initialized",
@@ -282,6 +287,7 @@
     "Method not implemented",
     "Error saving cache",
     "Error loading cache",
+    "Cache cleared successfully!",
     "CacheManager has not been initialized",
     "Failed to initialize the extension theme",
     "No theme found for the current workspace"
