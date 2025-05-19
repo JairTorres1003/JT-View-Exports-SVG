@@ -4,6 +4,7 @@ import { useTranslation } from 'react-i18next'
 import { useSelector } from 'react-redux'
 
 import { RenderSvg } from '../../SVG/RenderSvg'
+import CodeEditor from '../CodeEditor/CodeEditor'
 import { MenuTools } from '../Menu'
 
 import { playgroundClasses } from './Playground.classes'
@@ -11,7 +12,6 @@ import { BoxPlayground, BoxPlaygroundCardSvg } from './Playground.style'
 
 import { IconCodeTag, IconCopy, IconRefresh } from '@/assets/icons/functionalities'
 import { SelectPickerColor } from '@/core/components/Select'
-import { Editor } from '@/core/components/vs/Editor'
 import { Show } from '@/core/helpers'
 import { usePlayground } from '@/modules/home/hooks/usePlayground'
 
@@ -26,7 +26,6 @@ const Playground: FC<PlaygroundProps> = ({ actionsId = 'playground-actions' }) =
 
   const {
     backgroundColor,
-    defaultValue,
     editorRef,
     expandedCode,
     handleCopyCode,
@@ -87,7 +86,7 @@ const Playground: FC<PlaygroundProps> = ({ actionsId = 'playground-actions' }) =
         {recentlySelected && (
           <Collapse in={expandedCode}>
             <Divider className={playgroundClasses.divider} />
-            <Editor defaultValue={defaultValue} ref={editorRef} />
+            <CodeEditor editorRef={editorRef} />
           </Collapse>
         )}
       </Card>

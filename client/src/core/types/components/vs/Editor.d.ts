@@ -2,7 +2,6 @@ import type * as monaco from 'monaco-editor'
 
 export interface EditorProps {
   className?: string
-  value?: string
   defaultValue?: string
   onChange?: (value: string) => void
 }

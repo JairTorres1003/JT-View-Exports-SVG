@@ -1,9 +1,9 @@
 import { SVGPostMessage, SVGReceiveMessage } from '@api/enums/ViewExportsSVG'
 import type { ExtensionManage, ThemeMode } from '@api/interfaces/vscode'
 import i18next from 'i18next'
-import { useCallback, useEffect, useMemo, useRef, useState } from 'react'
+import { useCallback, useEffect, useRef, useState } from 'react'
 import { Trans, useTranslation } from 'react-i18next'
-import { useDispatch, useSelector } from 'react-redux'
+import { useDispatch } from 'react-redux'
 
 import { useAlert } from '@/core/hooks/useAlert'
 import type { TypeEditorRef } from '@/core/types/components/vs/Editor'
@@ -17,7 +17,6 @@ interface PlaygroundHook {
   handleExpand: VoidFunction
   onChangeColor: (color: string) => void
   initialColor: string
-  defaultValue: string
   editorRef: React.RefObject<TypeEditorRef>
   handleCopyCode: VoidFunction
   handleResetCode: VoidFunction
@@ -35,19 +34,11 @@ export const usePlayground = (): PlaygroundHook => {
   const [initialColor, setInitialColor] = useState('#fff')
   const [valueColor, setValueColor] = useState('#fff')
 
-  const recentlySelected = useSelector((state) => state.playground.recentlySelected)
-
   const { t } = useTranslation(undefined, { keyPrefix: 'labels' })
   const dispatch = useDispatch()
   const { onOpen } = useAlert()
 
   const editorRef = useRef<TypeEditorRef>(null)
-
-  const defaultValue = useMemo(() => {
-    if (!recentlySelected) return ''
-
-    return `<${recentlySelected.name} />\n`
-  }, [recentlySelected])
 
   /**
    * Toggles the expanded state.
@@ -194,7 +185,6 @@ export const usePlayground = (): PlaygroundHook => {
     handleExpand,
     onChangeColor,
     initialColor,
-    defaultValue,
     editorRef,
     handleCopyCode,
     handleResetCode,

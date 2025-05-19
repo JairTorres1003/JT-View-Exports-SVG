@@ -12,7 +12,11 @@ import type {
 import { Editor } from '@/core/utils/vs/editor/createEditor'
 import { getUnknownError, isEmpty } from '@/utils/misc'
 
-export const useEditor = ({ forwardedRef, defaultValue }: EditorHookProps): EditorHook => {
+export const useEditor = ({
+  forwardedRef,
+  defaultValue,
+  onChange = () => null,
+}: EditorHookProps): EditorHook => {
   const [editorInstance, setEditorInstance] = useState<IStandaloneCodeEditor | undefined>(undefined)
   const { editorConfig, extensionTheme } = useSelector((state) => state.vsCode)
   const [loading, setLoading] = useState(false)
@@ -89,7 +93,9 @@ export const useEditor = ({ forwardedRef, defaultValue }: EditorHookProps): Edit
   const updateEditor = useCallback(() => {
     if (isEmpty(editorRef.current) || isEmpty(editorConfig)) return
 
-    editorRef.current?.editor?.updateUserConfiguration(editorConfig)
+    editorRef.current?.editor?.updateUserConfiguration(editorConfig).catch((error) => {
+      console.error(getUnknownError(error))
+    })
   }, [editorRef, editorConfig])
 
   useEffect(() => {
@@ -104,14 +110,20 @@ export const useEditor = ({ forwardedRef, defaultValue }: EditorHookProps): Edit
     }
   }, [defaultValue, editorInstance])
 
-  useEffect(
-    () => () => {
+  useEffect(() => {
+    if (editorInstance) {
+      editorInstance.onDidChangeModelContent(() => {
+        const value = editorInstance.getValue()
+        onChange?.(value)
+      })
+    }
+
+    return () => {
       if (editorInstance) {
         editorInstance.dispose()
       }
-    },
-    [editorInstance]
-  )
+    }
+  }, [editorInstance])
 
   useEffect(() => {
     if (editorRef.current) {
