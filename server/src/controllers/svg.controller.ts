@@ -7,11 +7,13 @@ import { l10n } from 'vscode'
 import { pathToSVGFile } from '@jt/view-exports-svg/utilities/files/misc.js'
 import { processFiles } from '@jt/view-exports-svg/utilities/files/processFiles.js'
 import { filteredExports } from '@jt/view-exports-svg/utilities/svg/filtered.js'
+import { playground } from '@jt/view-exports-svg/utilities/svg/playground.js'
 import { svgFileToUri } from '@jt/view-exports-svg/utilities/vscode/uri.js'
 // @ts-types="@jt/view-exports-svg/enum/ViewExportsSVG.d.ts"
 import { SVGPostMessage } from '@jt/view-exports-svg/enum/ViewExportsSVG.js'
 
 import { getFilesFrontDirectory } from '@/utilities/getFilesFrontDirectory.ts'
+import { getUnknownError } from '@jt/view-exports-svg/utilities/misc.js'
 
 export class SvgController {
   private viewExportSVG: unknown[] = []
@@ -75,5 +77,42 @@ export class SvgController {
     } else {
       res.send({ type: SVGPostMessage.SendSVGError, data: filtered })
     }
+  }
+
+  /**
+   * Handles the playground component generation based on the provided component data.
+   *
+   * @param req - The request object containing the component data in `req.body.data`.
+   * @param res - The response object used to send back the generated playground or an error message.
+   *
+   * The function generates the playground using the `playground` function.
+   * If the result contains a component, it sends back the generated playground with the type `SVGPostMessage.SendSVGPlayground`.
+   * Otherwise, it sends back an error message with the type `SVGPostMessage.SendPlaygroundError`.
+   */
+  public playgroundComponent = (req: Request, res: Response) => {
+    const component = req.body.data
+
+    playground(component)
+      .then((result) => {
+        if ('component' in result) {
+          res.send({ type: SVGPostMessage.SendSVGPlayground, data: result })
+        } else {
+          res.send({ type: SVGPostMessage.SendPlaygroundError, data: result })
+        }
+      })
+      .catch((error) => {
+        const errorMessage = l10n.t('Error generating SVG playground {error}', {
+          error: getUnknownError(error),
+        })
+        console.error(errorMessage, error)
+        res.send({
+          type: SVGPostMessage.SendPlaygroundError,
+          data: {
+            message: errorMessage,
+            location: {},
+            error,
+          },
+        })
+      })
   }
 }

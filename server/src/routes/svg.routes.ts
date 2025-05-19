@@ -8,5 +8,6 @@ const svgController = new SvgController()
 
 router.get('/get-components', svgController.getComponents)
 router.post('/search-components', svgController.searchComponents)
+router.post('/playground-component', svgController.playgroundComponent)
 
 export const svgRoutes = Router().use('/svg', router)
