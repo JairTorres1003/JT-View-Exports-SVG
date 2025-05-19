@@ -82,7 +82,11 @@ export const useEditor = ({
   const initializeEditor = useCallback(async () => {
     if (isEmpty(editorRef.current) || isEmpty(editorConfig)) return
 
-    const editor = new Editor(editorRef.current, editorConfig, extensionTheme)
+    const editor = new Editor(editorRef.current, {
+      userConfiguration: editorConfig,
+      extensionTheme,
+      onChange,
+    })
     const instance = await editor.createEditor()
 
     editorRef.current.editor = instance
@@ -90,6 +94,16 @@ export const useEditor = ({
     return instance
   }, [editorRef, editorConfig, extensionTheme])
 
+  /**
+   * Updates the editor configuration if the editor reference and configuration are not empty.
+   * Uses the `updateUserConfiguration` method of the editor instance to apply the new configuration.
+
+   * @throws Will log an error if the update fails.
+   *
+   * @remarks
+   * This function is memoized using `useCallback` to prevent unnecessary updates.
+   * It depends on `editorRef` and `editorConfig` dependencies.
+   */
   const updateEditor = useCallback(() => {
     if (isEmpty(editorRef.current) || isEmpty(editorConfig)) return
 
@@ -110,20 +124,14 @@ export const useEditor = ({
     }
   }, [defaultValue, editorInstance])
 
-  useEffect(() => {
-    if (editorInstance) {
-      editorInstance.onDidChangeModelContent(() => {
-        const value = editorInstance.getValue()
-        onChange?.(value)
-      })
-    }
-
-    return () => {
+  useEffect(
+    () => () => {
       if (editorInstance) {
         editorInstance.dispose()
       }
-    }
-  }, [editorInstance])
+    },
+    [editorInstance]
+  )
 
   useEffect(() => {
     if (editorRef.current) {

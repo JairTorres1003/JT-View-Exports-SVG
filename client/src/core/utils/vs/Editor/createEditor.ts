@@ -41,15 +41,24 @@ export class Editor {
   private readonly _reference: TypeEditorRef
   private _userConfiguration: Record<string, unknown>
   private readonly _extensionTheme?: ExtensionManage
+  private readonly _configurations: Partial<Record<string, unknown>> & {
+    onChange?: (value: string) => void
+  } = {}
 
   constructor(
     ref: TypeEditorRef,
-    userConfiguration: Record<string, unknown>,
-    extensionTheme?: ExtensionManage
+    config: {
+      userConfiguration: Record<string, unknown>
+      extensionTheme?: ExtensionManage
+      onChange?: (value: string) => void
+    }
   ) {
     this._reference = ref
-    this._userConfiguration = userConfiguration
-    this._extensionTheme = extensionTheme
+    this._userConfiguration = config.userConfiguration
+    this._extensionTheme = config.extensionTheme
+    this._configurations = {
+      onChange: config.onChange,
+    }
   }
 
   /**
@@ -155,6 +164,11 @@ export class Editor {
     editor.resetValue = this._resetValue.bind(this)
     editor.updateUserConfiguration = this._updateUserConfiguration.bind(this)
 
+    editor.onDidChangeModelContent(() => {
+      const value = editor.getValue()
+      this._configurations.onChange?.(value)
+    })
+
     return editor
   }
 
@@ -167,16 +181,18 @@ export class Editor {
   private async _updateUserConfiguration(
     userConfiguration: Record<string, unknown>
   ): Promise<void> {
-    const defaultValue = this._editorInstance?.getDefaultValue() ?? ''
-    this._editorInstance?.dispose()
-
     this._userConfiguration = userConfiguration
 
+    if (!this._editorInstance) {
+      throw new Error(i18next.t('errors.EditorReferenceIsNotAvailable'))
+    }
+
+    this._reference?.editorLoader?.().start(1000, () => {
+      this._reference?.style.setProperty('opacity', '1')
+    })
+    this._reference?.style.setProperty('opacity', '0')
+
     await this.applyConfigurations(true)
-
-    const editor = this._create()
-
-    this._editorInstance = editor
 
     let currentThemeId = this._userConfiguration?.['workbench.colorTheme'] as string
 
@@ -187,15 +203,16 @@ export class Editor {
       currentThemeId = kind === 'vscode-dark' ? 'Default Dark+' : 'Default Light+'
     }
 
-    const themes = await editor._themeService.getColorThemes()
+    const themes = await this._editorInstance?._themeService.getColorThemes()
     const settingsId = themes.map((theme) => theme.settingsId)
 
     if (!settingsId.includes(currentThemeId)) {
       await activateDefaultExtensions({ extensionTheme: this._extensionTheme })
     }
 
+    const defaultValue = this._editorInstance?.getDefaultValue() ?? ''
     this._setDefaultValue(defaultValue)
-    editor.focus()
+    this._editorInstance?.focus()
   }
 
   /**
