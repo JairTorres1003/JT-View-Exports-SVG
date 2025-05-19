@@ -40,7 +40,9 @@
     },
     "menu": {
       "ReloadPlayground": "Reload playground",
-      "ReloadEditor": "Reload editor"
+      "ReloadEditor": "Reload editor",
+      "DisableWordWrap": "Disable word wrap",
+      "EnableWordWrap": "Enable word wrap"
     }
   }
 }

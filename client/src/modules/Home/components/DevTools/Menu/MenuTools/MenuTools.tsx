@@ -5,6 +5,7 @@ import { useTranslation } from 'react-i18next'
 import { useMenuToolsStyles } from './MenuTools.style'
 
 import { IconKebabHorizontal } from '@/assets/icons/navigation'
+import { Show } from '@/core/helpers'
 import type { TypeEditorRef } from '@/core/types/components/vs/Editor'
 import { useMenuTools } from '@/modules/home/hooks/useMenuTools'
 
@@ -18,8 +19,16 @@ const MenuTools: FC<MenuToolsProps> = ({ containerId, editorRef, resetPlayground
   const { t } = useTranslation(undefined, { keyPrefix: 'DevTools' })
   const { classes } = useMenuToolsStyles()
 
-  const { anchorEl, handleClick, handleClose, open, onReloadEditor, onReloadPlayground } =
-    useMenuTools({ editorRef, resetPlaygroundColor })
+  const {
+    anchorEl,
+    handleClick,
+    handleClose,
+    open,
+    onReloadEditor,
+    onReloadPlayground,
+    isWordWrap,
+    toogleWordWrap,
+  } = useMenuTools({ editorRef, resetPlaygroundColor })
 
   return (
     <>
@@ -54,11 +63,16 @@ const MenuTools: FC<MenuToolsProps> = ({ containerId, editorRef, resetPlayground
         <MenuItem className={classes.menuItem} onClick={onReloadPlayground}>
           {t('menu.ReloadPlayground')}
         </MenuItem>
-        {editorRef?.current && (
-          <MenuItem className={classes.menuItem} onClick={onReloadEditor}>
-            {t('menu.ReloadEditor')}
-          </MenuItem>
-        )}
+        <Show>
+          <Show.When isTrue={!!editorRef?.current}>
+            <MenuItem className={classes.menuItem} onClick={toogleWordWrap}>
+              {isWordWrap ? t('menu.DisableWordWrap') : t('menu.EnableWordWrap')}
+            </MenuItem>
+            <MenuItem className={classes.menuItem} onClick={onReloadEditor}>
+              {t('menu.ReloadEditor')}
+            </MenuItem>
+          </Show.When>
+        </Show>
       </Menu>
     </>
   )
