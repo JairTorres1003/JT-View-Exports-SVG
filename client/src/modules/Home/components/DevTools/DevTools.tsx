@@ -25,6 +25,7 @@ const DevTools: FC<{ id: string }> = ({ id }): React.ReactNode => {
         <AccordionMenuItem
           defaultExpanded
           enableEmptyActions
+          hideActionsWhenCollapsed
           label={t('playground.title')}
           className={devToolsClasses.accordion}
           slotProps={{

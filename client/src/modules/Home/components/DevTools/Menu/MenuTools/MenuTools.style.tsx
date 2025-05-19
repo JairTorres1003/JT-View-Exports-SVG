@@ -15,7 +15,7 @@ export const useMenuToolsStyles = makeStyles()(({ palette }) => ({
     minHeight: 0,
     fontFamily: 'var(--vscode-font-family)',
     fontWeight: 'var(--vscode-font-weight)',
-    fontSize: 'calc(var(--vscode-font-size) + 1px)',
+    fontSize: 'calc(var(--vscode-font-size, 13px) + 1px)',
     '&:hover': {
       backgroundColor: palette.primary.main,
       color: palette.primary.contrastText,

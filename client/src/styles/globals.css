@@ -1,6 +1,6 @@
 html {
   box-sizing: border-box;
-  font-family: var(--vscode-editor-font-family);
+  font-family: var(--vscode-editor-font-family, Arial);
 }
 
 html:root {
