@@ -20,9 +20,19 @@ export const useContainerComponents = (): ContainerComponentsHook => {
    * @param panel - The panel to toggle.
    */
   const toggleExpanded = (panel: string) => (_: SyntheticEvent, expanded: boolean) => {
-    setExpandedItems((prev) =>
-      expanded ? [...prev, panel] : prev.filter((item) => item !== panel)
-    )
+    setExpandedItems((prev) => {
+      const newState = expanded ? [...prev, panel] : prev.filter((item) => item !== panel)
+
+      if (newState.length === 0) {
+        vscode.postMessage(SVGReceiveMessage.ToggleExpandIcon, false)
+      }
+
+      if (newState.length === 1) {
+        vscode.postMessage(SVGReceiveMessage.ToggleExpandIcon, true)
+      }
+
+      return newState
+    })
   }
 
   /**
@@ -40,14 +50,6 @@ export const useContainerComponents = (): ContainerComponentsHook => {
       setExpandedItems([])
     }
   }
-
-  useEffect(() => {
-    if (expandedItems.length === 0 && components.length >= 1) {
-      vscode.postMessage(SVGReceiveMessage.ToggleExpandIcon, false)
-    } else if (expandedItems.length === 1) {
-      vscode.postMessage(SVGReceiveMessage.ToggleExpandIcon, true)
-    }
-  }, [expandedItems])
 
   useEffect(() => {
     if (components.length >= 1 && defaultExpandAll) {
