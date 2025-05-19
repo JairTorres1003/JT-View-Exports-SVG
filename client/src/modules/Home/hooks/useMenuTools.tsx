@@ -76,7 +76,6 @@ export const useMenuTools = ({
       setIsWordWrap(editor?.getOption(currentOption) === 'on')
 
       editor?.onDidChangeConfiguration((e) => {
-        console.info('onDidChangeConfiguration', editor.getOption(currentOption))
         if (e.hasChanged(currentOption)) {
           setIsWordWrap(editor.getOption(currentOption) === 'on')
         }

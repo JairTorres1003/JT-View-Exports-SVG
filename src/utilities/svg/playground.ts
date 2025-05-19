@@ -6,6 +6,7 @@ import { getUnknownError, isEmpty } from '../misc'
 import { extractIconComponent, extractSVGComponent } from './extracts'
 
 import { REST_PROPS_KEY } from '@/constants/misc'
+import { REGEX_TAG_NAME } from '@/constants/regex'
 import { getCacheManager } from '@/controllers/cache'
 import { type SVGErrors, type SVGComponent, type SVGPlayground } from '@/interfaces/ViewExportsSVG'
 
@@ -23,11 +24,17 @@ export async function playground(icon: SVGPlayground): Promise<SVGComponent | SV
     const declarationCache = DeclarationFileCache.get(location.file.absolutePath, lastModified)
     const componentsCache = SVGFileCache.get(location.file.absolutePath, lastModified)
 
-    if (declarationCache?.[name] === undefined) {
+    let currentName = name
+    const tagName = value.match(REGEX_TAG_NAME)?.[1] ?? ''
+    if (currentName !== tagName) {
+      currentName = tagName
+    }
+
+    if (declarationCache?.[currentName] === undefined) {
       return {
         location,
         message: l10n.t('Declaration named {name} not found in file {file}', {
-          name,
+          name: currentName,
           file: location.file.absolutePath,
         }),
       }
@@ -42,23 +49,27 @@ export async function playground(icon: SVGPlayground): Promise<SVGComponent | SV
       }
     }
 
-    const originalComponent = componentsCache.components.find((c) => c.name === name)
+    const originalComponent = componentsCache.components.find((c) => c.name === currentName)
 
     if (originalComponent === undefined) {
       return {
         location,
         message: l10n.t('SVG component named {name} not found in file {file}', {
-          name,
+          name: currentName,
           file: location.file.absolutePath,
         }),
       }
     }
 
-    const { declaration, params } = declarationCache[name]
+    const { declaration, params } = declarationCache[currentName]
 
     const iconComponent = await extractIconComponent(value, location, params)
-    const propsKeys = Object.keys(iconComponent.props)
 
+    if (iconComponent.errors !== undefined) {
+      return iconComponent.errors
+    }
+
+    const propsKeys = Object.keys(iconComponent.props)
     if (propsKeys.length > 0) {
       const restProps: Record<string, unknown> = {}
 
@@ -77,7 +88,7 @@ export async function playground(icon: SVGPlayground): Promise<SVGComponent | SV
     if (isEmpty(component)) {
       return {
         location: {},
-        message: l10n.t('Error extracting SVG component: {name}', { name }),
+        message: l10n.t('Error extracting SVG component: {name}', { name: currentName }),
       }
     }
 

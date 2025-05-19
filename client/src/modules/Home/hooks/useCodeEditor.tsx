@@ -1,8 +1,10 @@
 import { SVGPostMessage, SVGReceiveMessage } from '@api/enums/ViewExportsSVG'
 import type { SVGComponent, SVGErrors } from '@api/interfaces/ViewExportsSVG'
 import { useEffect, useMemo, useState } from 'react'
+import { useTranslation } from 'react-i18next'
 import { useDispatch, useSelector } from 'react-redux'
 
+import { useAlert } from '@/core/hooks/useAlert'
 import useDebounce from '@/core/hooks/useDebounce'
 import { vscode } from '@/services/vscode'
 import { setRecentlySelected } from '@/store/features/PlaygroundSlice'
@@ -13,7 +15,10 @@ export const useCodeEditor = () => {
 
   const debounceValue = useDebounce(value, 600)
 
+  const { t } = useTranslation(undefined, { keyPrefix: 'errors' })
+
   const dispatch = useDispatch()
+  const { onOpen } = useAlert()
 
   const defaultValue = useMemo(() => {
     if (!recentlySelectedName) return ''
@@ -45,11 +50,20 @@ export const useCodeEditor = () => {
    * @param error - The SVG error data.
    */
   const handleErrorComponent = (error: SVGErrors) => {
-    console.error('handleErrorComponent', error)
+    onOpen(error.message, {
+      severity: 'error',
+      position: { vertical: 'top', horizontal: 'right' },
+    })
   }
 
   useEffect(() => {
-    if (debounceValue === '' || !recentlySelected) return
+    if (debounceValue?.trim() === '' || !recentlySelected) {
+      onOpen(t('PleaseSelectAComponentToEdit'), {
+        severity: 'info',
+        position: { vertical: 'top', horizontal: 'right' },
+      })
+      return
+    }
 
     vscode.postMessage(SVGReceiveMessage.PlaygroundSVGComponents, {
       value: debounceValue,

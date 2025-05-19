@@ -13,7 +13,8 @@
     "FailedToActivateExtensionTheme": "Failed to activate extension theme",
     "FailedToFetchExtensionTheme": "Failed to fetch extension theme",
     "FailedToInitializeEditor": "Failed to initialize editor",
-    "ErrorApplyingInitialColor": "Error applying initial color"
+    "ErrorApplyingInitialColor": "Error applying initial color",
+    "PleaseSelectAComponentToEdit": "Please select a component to edit"
   },
   "labels": {
     "Loading": "Loading...",
