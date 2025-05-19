@@ -10,6 +10,7 @@ const initialState: PlaygroundState = {
 const reducers: PlaygroundReducers = {
   setRecentlySelected: (state, { payload }) => {
     state.recentlySelected = payload
+    state.recentlySelectedName = payload?.name
     state.isSelecting = !!payload
   },
   setIsSelecting: (state, { payload }) => {

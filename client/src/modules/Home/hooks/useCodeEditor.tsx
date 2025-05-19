@@ -1,22 +1,25 @@
 import { SVGPostMessage, SVGReceiveMessage } from '@api/enums/ViewExportsSVG'
 import type { SVGComponent, SVGErrors } from '@api/interfaces/ViewExportsSVG'
 import { useEffect, useMemo, useState } from 'react'
-import { useSelector } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 
 import useDebounce from '@/core/hooks/useDebounce'
 import { vscode } from '@/services/vscode'
+import { setRecentlySelected } from '@/store/features/PlaygroundSlice'
 
 export const useCodeEditor = () => {
-  const recentlySelected = useSelector((state) => state.playground.recentlySelected)
+  const { recentlySelected, recentlySelectedName } = useSelector((state) => state.playground)
   const [value, setValue] = useState<string>('')
 
   const debounceValue = useDebounce(value, 600)
 
-  const defaultValue = useMemo(() => {
-    if (!recentlySelected) return ''
+  const dispatch = useDispatch()
 
-    return `<${recentlySelected.name} />\n`
-  }, [recentlySelected])
+  const defaultValue = useMemo(() => {
+    if (!recentlySelectedName) return ''
+
+    return `<${recentlySelectedName} />\n`
+  }, [recentlySelectedName])
 
   /**
    * Handles the change of the code editor value.
@@ -28,12 +31,12 @@ export const useCodeEditor = () => {
   }
 
   /**
-   * Handles the edit of the SVG component.
+   * Handles the edit component action.
    *
    * @param data - The SVG component data.
    */
   const handleEditComponent = (data: SVGComponent) => {
-    console.info('handleEditComponent', data)
+    dispatch(setRecentlySelected(data))
   }
 
   /**
@@ -46,7 +49,7 @@ export const useCodeEditor = () => {
   }
 
   useEffect(() => {
-    if (debounceValue === '') return
+    if (debounceValue === '' || !recentlySelected) return
 
     vscode.postMessage(SVGReceiveMessage.PlaygroundSVGComponents, {
       value: debounceValue,
