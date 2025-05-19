@@ -117,7 +117,7 @@ export async function extractSVGData(file: SVGFile): Promise<ExtractSVGExports> 
           if (t.isIdentifier(d.id)) {
             extractSVGComponent(d, file)
               .then(async (result) => {
-                await handleExtraction(declaration, SVGDeclaration.Variable, isExported, result)
+                await handleExtraction(d, SVGDeclaration.Variable, isExported, result)
               })
               .catch(console.error)
           }
