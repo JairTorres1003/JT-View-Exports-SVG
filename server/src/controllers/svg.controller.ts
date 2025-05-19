@@ -1,7 +1,6 @@
 // @ts-types="npm:@types/express@4.17.15"
 import { Request, Response } from 'express'
 import * as path from 'path'
-// @ts-types="npm:@types/vscode@1.60.0"
 import { l10n } from 'vscode'
 
 import { pathToSVGFile } from '@jt/view-exports-svg/utilities/files/misc.js'
@@ -9,7 +8,6 @@ import { processFiles } from '@jt/view-exports-svg/utilities/files/processFiles.
 import { filteredExports } from '@jt/view-exports-svg/utilities/svg/filtered.js'
 import { playground } from '@jt/view-exports-svg/utilities/svg/playground.js'
 import { svgFileToUri } from '@jt/view-exports-svg/utilities/vscode/uri.js'
-// @ts-types="@jt/view-exports-svg/enum/ViewExportsSVG.d.ts"
 import { SVGPostMessage } from '@jt/view-exports-svg/enum/ViewExportsSVG.js'
 
 import { getFilesFrontDirectory } from '@/utilities/getFilesFrontDirectory.ts'

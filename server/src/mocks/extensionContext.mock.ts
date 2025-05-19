@@ -1,5 +1,4 @@
 // deno-lint-ignore-file no-explicit-any
-// @ts-types="npm:@types/vscode@1.60.0"
 import { Extension, ExtensionContext, ExtensionMode, ExtensionRuntime, Uri } from 'vscode'
 
 import { createMockEnvironmentVariableCollection } from '@/mocks/EnvironmentVariableCollection.mock.ts'
@@ -50,21 +49,22 @@ export function createMockExtensionContext(
     },
     environmentVariableCollection: {
       ...environmentVariableCollection,
+      // @ts-ignore - this is a mock
       getScoped: () => environmentVariableCollection,
     },
     secrets: {
       delete: async () => {},
       get: () => Promise.resolve(undefined),
-      onDidChange: () => ({ dispose: () => {} }),
+      onDidChange: () => ({ dispose: () => null }),
       store: async () => {},
     },
     languageModelAccessInformation: {
       canSendRequest: () => true,
-      onDidChange: () => ({ dispose: () => {} }),
+      onDidChange: () => ({ dispose: () => null }),
     },
     messagePassingProtocol: {
-      onDidReceiveMessage: () => ({ dispose: () => {} }),
-      postMessage: () => {},
+      onDidReceiveMessage: () => ({ dispose: () => null }),
+      postMessage: () => null,
     },
     extensionRuntime: ExtensionRuntime.Node,
   }

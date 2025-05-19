@@ -1,17 +1,11 @@
 // @ts-types="npm:@types/express@4.17.15"
 import { Request, Response } from 'express'
 import { getConfigurationEditor } from '@jt/view-exports-svg/utilities/vscode/config.js'
-import { getCurrentTheme } from '@jt/view-exports-svg/utilities/vscode/theme.js'
-import { isEmpty } from '@jt/view-exports-svg/utilities/misc.js'
-import { getStyles } from '@jt/view-exports-svg/utilities/vscode/theme.js'
+import { getCurrentTheme, getStyles } from '@jt/view-exports-svg/utilities/vscode/theme.js'
 import { expandedIcons } from '@jt/view-exports-svg/commands/expandedIcons.js'
 import { toggleDevTools } from '@jt/view-exports-svg/commands/devTools.js'
-// @ts-types="@jt/view-exports-svg/enum/ViewExportsSVG.d.ts"
 import { SVGPostMessage } from '@jt/view-exports-svg/enum/ViewExportsSVG.js'
-import {
-  getExtensionTheme as _getExtensionTheme,
-  initializeExtensionTheme,
-} from '@jt/view-exports-svg/utilities/vscode/extensions/theme.js'
+import { getExtensionTheme as _getExtensionTheme } from '@jt/view-exports-svg/utilities/vscode/extensions/theme.js'
 
 export class SettingsController {
   /**

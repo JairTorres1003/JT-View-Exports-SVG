@@ -1,4 +1,3 @@
-// @ts-types="npm:@types/vscode@1.60.0"
 import { EnvironmentVariableCollection } from 'vscode'
 
 /**
@@ -9,15 +8,15 @@ import { EnvironmentVariableCollection } from 'vscode'
  */
 export function createMockEnvironmentVariableCollection(): EnvironmentVariableCollection {
   return {
-    append: () => {},
-    clear: () => {},
-    delete: () => {},
-    forEach: () => {},
+    append: () => null,
+    clear: () => null,
+    delete: () => null,
+    forEach: () => null,
     description: '',
     get: () => undefined,
     persistent: false,
-    prepend: () => {},
-    replace: () => {},
+    prepend: () => null,
+    replace: () => null,
     [Symbol.iterator]: function* () {
       yield* Object.entries(this)
     },

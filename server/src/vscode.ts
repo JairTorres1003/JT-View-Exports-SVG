@@ -4,6 +4,7 @@ import packageJson from '@jt/view-exports-svg/package' with { type: 'json' }
 import { initializeCacheManager } from '@jt/view-exports-svg/controllers/cache/CacheManagerController.js'
 
 import { initialize } from 'vscode/services'
+import getConfigurationServiceOverride from '@codingame/monaco-vscode-configuration-service-override'
 import { registerExtension, ExtensionHostKind } from 'vscode/extensions'
 
 import { createMockExtensionContext } from '@/mocks/extensionContext.mock.ts'
@@ -13,7 +14,9 @@ const extensionId = `${packageJson.publisher}.${packageJson.name}`
 const tempDir = Deno.makeTempDirSync({ prefix: extensionId })
 
 // Initialize the extension host
-await initialize({})
+await initialize({
+  ...getConfigurationServiceOverride(),
+})
 
 // Register the extension
 const { getApi } = registerExtension(packageJson, ExtensionHostKind.LocalProcess)
