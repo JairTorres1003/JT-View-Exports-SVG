@@ -7,6 +7,7 @@ import { initialize } from 'vscode/services'
 import { registerExtension, ExtensionHostKind } from 'vscode/extensions'
 
 import { createMockExtensionContext } from '@/mocks/extensionContext.mock.ts'
+import { initializeExtensionTheme } from '@jt/view-exports-svg/utilities/vscode/extensions/theme.js'
 
 const extensionId = `${packageJson.publisher}.${packageJson.name}`
 const tempDir = Deno.makeTempDirSync({ prefix: extensionId })
@@ -35,3 +36,4 @@ if (!extension.isActive) {
 const context = createMockExtensionContext(extension, tempDir)
 
 initializeCacheManager(context)
+initializeExtensionTheme(context)

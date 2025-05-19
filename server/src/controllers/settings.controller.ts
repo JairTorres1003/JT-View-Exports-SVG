@@ -63,13 +63,7 @@ export class SettingsController {
    */
   public getExtensionTheme = (_: Request, res: Response) => {
     try {
-      let theme = _getExtensionTheme()
-
-      if (isEmpty(theme)) {
-        initializeExtensionTheme()
-        theme = _getExtensionTheme()
-      }
-
+      const theme = _getExtensionTheme()
       res.status(200).json({ type: SVGPostMessage.SendExtensionTheme, data: theme })
     } catch (error) {
       console.error(error)
