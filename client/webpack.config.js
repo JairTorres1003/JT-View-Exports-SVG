@@ -8,6 +8,10 @@ import { fileURLToPath } from 'url'
 import webpack from 'webpack'
 import { WebpackManifestPlugin } from 'webpack-manifest-plugin'
 
+import { createRequire } from 'module'
+const require = createRequire(import.meta.url)
+const pkg = require('../package.json')
+
 const __dirname = path.dirname(fileURLToPath(import.meta.url))
 
 const envConfig = dotenv.config().parsed || {}
@@ -92,6 +96,9 @@ export default {
         SSR: false,
       }),
       rootDirectory: JSON.stringify(__dirname),
+      __APP_NAME: JSON.stringify(pkg.name),
+      __APP_PUBLISHER: JSON.stringify(pkg.publisher),
+      __APP_VERSION: JSON.stringify(pkg.version),
     }),
     new webpack.ProvidePlugin({
       React: 'react',

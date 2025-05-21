@@ -5,7 +5,6 @@ import { ReactNode } from 'react'
 
 export interface PlaygroundState {
   recentlySelected?: SVGComponent
-  recentlySelectedName?: string
   isSelecting: boolean
 }
 

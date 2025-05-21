@@ -7,7 +7,7 @@ import {
   SVGPlayground,
   ViewExportSVG,
 } from '@api/interfaces/ViewExportsSVG'
-import { AssetPath } from '@api/interfaces/views/content'
+import { AssetPath, OpenFile } from '@api/interfaces/views/content'
 import { ExtensionManage, ThemeMode, VsCodeStyles } from '@api/interfaces/vscode'
 
 /**

@@ -1,30 +1,38 @@
 import { SVGPostMessage, SVGReceiveMessage } from '@api/enums/ViewExportsSVG'
 import type { SVGComponent, SVGErrors } from '@api/interfaces/ViewExportsSVG'
-import { useEffect, useMemo, useState } from 'react'
+import type * as monaco from 'monaco-editor'
+import { useEffect, useMemo, useRef, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { useDispatch, useSelector } from 'react-redux'
 
+import completionComponentsManager from '../utils/completionComponentsManager'
+
 import { useAlert } from '@/core/hooks/useAlert'
 import useDebounce from '@/core/hooks/useDebounce'
+import type { TypeEditorRef } from '@/core/types/components/vs/Editor'
 import { vscode } from '@/services/vscode'
 import { setRecentlySelected } from '@/store/features/PlaygroundSlice'
 
-export const useCodeEditor = () => {
-  const { recentlySelected, recentlySelectedName } = useSelector((state) => state.playground)
+export const useCodeEditor = (editorRef: React.RefObject<TypeEditorRef>) => {
+  const { recentlySelected } = useSelector((state) => state.playground)
+  const { components } = useSelector((state) => state.svg)
   const [value, setValue] = useState<string>('')
+  const completionRef = useRef<{
+    components: monaco.IDisposable | null
+  }>({ components: null })
 
   const debounceValue = useDebounce(value, 600)
 
-  const { t } = useTranslation(undefined, { keyPrefix: 'errors' })
+  const { t } = useTranslation()
 
   const dispatch = useDispatch()
   const { onOpen } = useAlert()
 
   const defaultValue = useMemo(() => {
-    if (!recentlySelectedName) return ''
+    if (!recentlySelected?.name) return ''
 
-    return `<${recentlySelectedName} />\n`
-  }, [recentlySelectedName])
+    return `<${recentlySelected?.name} />\n`
+  }, [recentlySelected?.name])
 
   /**
    * Handles the change of the code editor value.
@@ -56,9 +64,35 @@ export const useCodeEditor = () => {
     })
   }
 
+  /**
+   * Registers the completion items for the code editor.
+   */
+  const onRegisterCompletionsComponent = () => {
+    if (!editorRef.current) return
+
+    if (completionRef.current?.components) {
+      completionRef.current.components.dispose()
+    }
+
+    const register = editorRef.current.editor?.api.registerCompletionItemProvider(
+      completionComponentsManager(components)
+    )
+
+    completionRef.current.components = register ?? null
+  }
+
+  useEffect(() => {
+    // handleRegisterCompletions()
+    console.info('Registering completions', { editorRef })
+  }, [recentlySelected?.name])
+
+  useEffect(() => {
+    onRegisterCompletionsComponent()
+  }, [components, editorRef.current?.editor])
+
   useEffect(() => {
     if (debounceValue?.trim() === '' || !recentlySelected) {
-      onOpen(t('PleaseSelectAComponentToEdit'), {
+      onOpen(t('errors.PleaseSelectAComponentToEdit'), {
         severity: 'info',
         position: { vertical: 'top', horizontal: 'right' },
       })

@@ -92,7 +92,7 @@ export async function playground(icon: SVGPlayground): Promise<SVGComponent | SV
       }
     }
 
-    return { ...originalComponent, ...component }
+    return { ...originalComponent, ...component, types: originalComponent.types }
   } catch (error) {
     return {
       message: l10n.t('Error generating SVG component: {error}', { error: getUnknownError(error) }),

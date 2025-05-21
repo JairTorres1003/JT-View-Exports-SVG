@@ -18,8 +18,13 @@ import keybindings from 'public/vs/userConfiguration/keybindings.json'
 import { contextMenuServiceOverride } from './contextMenu'
 import { activateDefaultExtensions } from './extensions/init'
 
-import type { IStandaloneCodeEditor, TypeEditorRef } from '@/core/types/components/vs/Editor'
+import type {
+  EditorConfigurations,
+  IStandaloneCodeEditor,
+  TypeEditorRef,
+} from '@/core/types/components/vs/Editor'
 import i18next from '@/i18n'
+import type { RequiredExcept } from '@/types/misc'
 import { getUnknownError } from '@/utils/misc'
 
 const OVERRIDES: IEditorOverrideServices = {
@@ -41,23 +46,18 @@ export class Editor {
   private readonly _reference: TypeEditorRef
   private _userConfiguration: Record<string, unknown>
   private readonly _extensionTheme?: ExtensionManage
-  private readonly _configurations: Partial<Record<string, unknown>> & {
-    onChange?: (value: string) => void
-  } = {}
+  private readonly _configurations: RequiredExcept<Partial<EditorConfigurations>, 'language'>
 
   constructor(
     ref: TypeEditorRef,
-    config: {
-      userConfiguration: Record<string, unknown>
-      extensionTheme?: ExtensionManage
-      onChange?: (value: string) => void
-    }
+    config: RequiredExcept<Partial<EditorConfigurations>, 'userConfiguration'>
   ) {
     this._reference = ref
     this._userConfiguration = config.userConfiguration
     this._extensionTheme = config.extensionTheme
     this._configurations = {
-      onChange: config.onChange,
+      ...config,
+      language: config.language ?? 'javascript',
     }
   }
 
@@ -147,7 +147,7 @@ export class Editor {
     const overflowWidgetsDomNode = document.getElementById('overflow_widgets_dom_node') ?? undefined
 
     const editor = monaco.editor.create(this._reference, {
-      language: 'javascript',
+      language: this._configurations.language,
       value: '',
       automaticLayout: true,
       overflowWidgetsDomNode,
@@ -162,7 +162,10 @@ export class Editor {
     editor.setDefaultValue = this._setDefaultValue.bind(this)
     editor.getDefaultValue = this._getDefaultValue.bind(this)
     editor.resetValue = this._resetValue.bind(this)
-    editor.updateUserConfiguration = this._updateUserConfiguration.bind(this)
+    editor.api = {
+      registerCompletionItemProvider: this._registerCompletionItemProvider.bind(this),
+      updateUserConfiguration: this._updateUserConfiguration.bind(this),
+    }
 
     editor.onDidChangeModelContent(() => {
       const value = editor.getValue()
@@ -182,6 +185,7 @@ export class Editor {
     userConfiguration: Record<string, unknown>
   ): Promise<void> {
     this._userConfiguration = userConfiguration
+    this._configurations.userConfiguration = userConfiguration
 
     if (!this._editorInstance) {
       throw new Error(i18next.t('errors.EditorReferenceIsNotAvailable'))
@@ -239,6 +243,18 @@ export class Editor {
    */
   private _resetValue(): void {
     this._editorInstance?.setValue(this._getDefaultValue())
+  }
+
+  /**
+   * Registers a completion item provider for the editor instance.
+   *
+   * @param provider - The completion item provider to register.
+   * @returns A disposable object that can be used to unregister the provider.
+   */
+  private _registerCompletionItemProvider(provider: monaco.languages.CompletionItemProvider) {
+    if (!this._editorInstance) return
+
+    return monaco.languages.registerCompletionItemProvider(this._configurations.language, provider)
   }
 
   /**

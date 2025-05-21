@@ -9,7 +9,7 @@ interface CodeEditorProps {
 }
 
 const CodeEditor: FC<CodeEditorProps> = ({ editorRef }) => {
-  const { defaultValue, handleChange } = useCodeEditor()
+  const { defaultValue, handleChange } = useCodeEditor(editorRef)
 
   return <Editor defaultValue={defaultValue} ref={editorRef} onChange={handleChange} />
 }

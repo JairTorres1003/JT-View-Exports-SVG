@@ -29,14 +29,14 @@ export function getFileTimestamp(filePath: string): number {
 /**
  * Retrieves the language of a file based on its extension.
  * @param fileName - The name of the file.
- * @returns The language of the file, or 'plaintext' if no matching language is found.
+ * @returns The language of the file, or 'javascript' if no matching language is found.
  */
 export async function getLanguageFromFile(file: Uri): Promise<string> {
   try {
     const document = await workspace.openTextDocument(file)
-    return document.languageId ?? 'plaintext'
+    return document.languageId ?? 'javascript'
   } catch (error) {
-    return 'plaintext'
+    return 'javascript'
   }
 }
 

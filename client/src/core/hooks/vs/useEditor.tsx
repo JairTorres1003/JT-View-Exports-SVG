@@ -107,7 +107,7 @@ export const useEditor = ({
   const updateEditor = useCallback(() => {
     if (isEmpty(editorRef.current) || isEmpty(editorConfig)) return
 
-    editorRef.current?.editor?.updateUserConfiguration(editorConfig).catch((error) => {
+    editorRef.current?.editor?.api.updateUserConfiguration(editorConfig).catch((error) => {
       console.error(getUnknownError(error))
     })
   }, [editorRef, editorConfig])

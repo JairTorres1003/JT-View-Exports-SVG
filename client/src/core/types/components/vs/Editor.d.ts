@@ -1,3 +1,4 @@
+import type { ExtensionManage } from '@api/interfaces/vscode'
 import type * as monaco from 'monaco-editor'
 
 export interface EditorProps {
@@ -10,7 +11,12 @@ export interface IStandaloneCodeEditor extends monaco.editor.IStandaloneCodeEdit
   setDefaultValue: (value: string) => void
   getDefaultValue: () => string
   resetValue: VoidFunction
-  updateUserConfiguration: (userConfiguration: Record<string, unknown>) => Promise<void>
+  api: {
+    updateUserConfiguration: (userConfiguration: Record<string, unknown>) => Promise<void>
+    registerCompletionItemProvider: (
+      provider: monaco.languages.CompletionItemProvider
+    ) => monaco.IDisposable | undefined
+  }
   _themeService: {
     getColorThemes: () => Promise<{ settingsId: string }[]>
   }
@@ -28,12 +34,19 @@ export type TypeEditorRef =
     })
   | null
 
-interface EditorHook {
+export interface EditorHook {
   rootRef: React.RefCallback<Exclude<TypeEditorRef, 'null'>> | null
   loading: boolean
   progress: number
 }
 
-interface EditorHookProps extends Omit<EditorProps, 'className'> {
+export interface EditorHookProps extends Omit<EditorProps, 'className'> {
   forwardedRef: React.ForwardedRef<TypeEditorRef>
+}
+
+export interface EditorConfigurations {
+  onChange: (value: string) => void
+  userConfiguration: Record<string, unknown>
+  extensionTheme: ExtensionManage
+  language: 'javascript' | 'javascriptreact' | 'typescript' | 'typescriptreact'
 }

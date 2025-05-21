@@ -6,7 +6,7 @@ import { parseFileContent, parserContent } from '../babelParser'
 import { getUnknownError, isEmpty } from '../misc'
 import { getProperties, propertyManager } from '../properties'
 
-import { analyzeExportType } from './analyze'
+import { analyzeExportType, getNodeTypes } from './analyze'
 import { getSVGComponent } from './SVGComponent'
 import { getTagName } from './tags'
 
@@ -48,8 +48,9 @@ export async function extractSVGComponent(
 
         if (!isEmpty(analysis)) {
           const component = getSVGComponent(analysis, file)
+          const types = getNodeTypes(component.params)
 
-          return { ...component, name, location }
+          return { ...component, name, location, types }
         }
       }
     } catch (error) {

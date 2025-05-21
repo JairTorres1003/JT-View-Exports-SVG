@@ -2,6 +2,7 @@ import { SVGDeclaration } from '@/enum/ViewExportsSVG'
 
 import { SVGTagName } from './svg/tags'
 import { DeclarationExport } from './svg/extracts'
+import { ParamsTypes } from './misc'
 
 export interface ViewExportSVG {
   /**
@@ -52,7 +53,7 @@ export interface SVGFile {
   dirname: string
   /**
    * The language of the SVG file.
-   * @default 'plaintext'
+   * @default 'javascript'
    */
   language?: string
 }
@@ -88,6 +89,11 @@ export interface SVGComponent {
    * - Which are passed as props to the component.
    */
   params: Record<string, any>
+  /**
+   * The types of the parameters of the SVG component.
+   * - Which are passed as props to the component.
+   */
+  types: ParamsTypes
   /**
    * Indicates whether the SVG component has errors.
    */

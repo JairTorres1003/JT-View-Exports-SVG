@@ -44,6 +44,30 @@
       "ReloadEditor": "Reload editor",
       "DisableWordWrap": "Disable word wrap",
       "EnableWordWrap": "Enable word wrap"
+    },
+    "editor": {
+      "suggestions": {
+        "components": {
+          "details": {
+            "static": "SVG Component",
+            "animated": "Animated SVG Component"
+          },
+          "documentation": [
+            "---",
+            "This is an SVG component. You can edit the code and see the changes in real time.",
+            "",
+            "Customize the component by passing different properties.",
+            "**Example:**",
+            "```jsx",
+            "<{{name}} {{propertyValue}} />",
+            "```",
+            "",
+            "**See also:** [{{fileName}}]({{link}} \"file://{{filePath}}\")",
+            "",
+            "For more information, refer to the documentation in file or hover over the component in your editor."
+          ]
+        }
+      }
     }
   }
 }

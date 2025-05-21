@@ -6,6 +6,7 @@ import { getPropertyValues, propertyManager } from '../properties'
 import { getChildFragments } from './children'
 
 import { REST_PROPS_KEY } from '@/constants/misc'
+import type { ParamsTypes } from '@/interfaces/misc'
 import { type SVGFile } from '@/interfaces/ViewExportsSVG'
 
 /**
@@ -26,6 +27,36 @@ export function getNodeParams(params: Array<t.Identifier | t.Pattern | t.RestEle
       })
     }
   })
+}
+
+/**
+ * Recursively analyzes the structure of a given object and returns a mapping of its properties
+ * to their types and default values.
+ *
+ * @param params - An object whose properties and types are to be analyzed.
+ * @returns An object describing the types and default values of each property in the input object.
+ * For nested objects, the structure is recursively described.
+ */
+export function getNodeTypes(params: Record<string, unknown>): ParamsTypes {
+  const types: ParamsTypes = {}
+
+  Object.entries(params).forEach(([key, value]) => {
+    if (typeof value === 'object' && !isEmpty(value)) {
+      types[key] = {
+        type: 'object',
+        properties: getNodeTypes(value),
+        default: value,
+      }
+    } else {
+      types[key] = {
+        type: typeof value,
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any -- It's a workaround for the type issue
+        default: value as any,
+      }
+    }
+  })
+
+  return types
 }
 
 /**

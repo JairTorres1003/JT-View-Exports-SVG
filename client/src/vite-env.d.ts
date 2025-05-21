@@ -16,8 +16,11 @@ declare module 'react' {
     [key: `--${string}`]: string | number | undefined
   }
 }
-
 declare global {
+  const __APP_NAME: string
+  const __APP_PUBLISHER: string
+  const __APP_VERSION: string
+
   interface Window {
     ViewExportsSVG: {
       name: string
