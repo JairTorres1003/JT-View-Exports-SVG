@@ -2,7 +2,6 @@ import { SVGPostMessage, SVGReceiveMessage } from '@api/enums/ViewExportsSVG'
 import type { SVGComponent, SVGErrors } from '@api/interfaces/ViewExportsSVG'
 import type * as monaco from 'monaco-editor'
 import { useEffect, useMemo, useRef, useState } from 'react'
-import { useTranslation } from 'react-i18next'
 import { useDispatch, useSelector } from 'react-redux'
 
 import completionComponentsManager from '../utils/completionComponentsManager'
@@ -22,9 +21,6 @@ export const useCodeEditor = (editorRef: React.RefObject<TypeEditorRef>) => {
   }>({ components: null })
 
   const debounceValue = useDebounce(value, 600)
-
-  const { t } = useTranslation()
-
   const dispatch = useDispatch()
   const { onOpen } = useAlert()
 
@@ -92,10 +88,6 @@ export const useCodeEditor = (editorRef: React.RefObject<TypeEditorRef>) => {
 
   useEffect(() => {
     if (debounceValue?.trim() === '' || !recentlySelected) {
-      onOpen(t('errors.PleaseSelectAComponentToEdit'), {
-        severity: 'info',
-        position: { vertical: 'top', horizontal: 'right' },
-      })
       return
     }
 
