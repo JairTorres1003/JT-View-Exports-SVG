@@ -1,4 +1,3 @@
-import type { ExtensionManage } from '@api/interfaces/vscode'
 import {
   registerExtension,
   ExtensionHostKind,
@@ -9,19 +8,16 @@ import i18next from '@/i18n'
 import { getUnknownError } from '@/utils/misc'
 
 /**
- * Activates the given extension theme by loading its manifest and registering its theme files.
+ * Activates the theme extension by fetching its manifest and registering its themes.
  *
- * This function fetches the `package.json` manifest for the theme extension, registers the extension,
- * and then iterates over the contributed themes to register their file URLs for use in the editor.
+ * This function locates the base URL for the extension, fetches the `package.json` manifest,
+ * and registers each theme contributed by the extension. If any step fails, an error is logged.
  *
- * @param extensionTheme - The extension theme object containing the extension path and related metadata.
- * @returns A promise that resolves when the activation process is complete.
- * @throws Logs an error to the console if activation fails.
+ * @async
+ * @throws Logs an error if the manifest cannot be fetched or processed.
  */
-async function activate(extensionTheme: ExtensionManage) {
+async function activate() {
   try {
-    if (!extensionTheme.extensionPath) return
-
     const urlTemp = new URL('favicon.ico', import.meta.url).href
     const baseUrl = urlTemp.substring(0, urlTemp.lastIndexOf('/'))
 

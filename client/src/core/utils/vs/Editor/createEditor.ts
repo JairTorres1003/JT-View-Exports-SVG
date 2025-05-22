@@ -1,4 +1,3 @@
-import type { ExtensionManage } from '@api/interfaces/vscode'
 import { type IEditorOverrideServices, initialize } from '@codingame/monaco-vscode-api'
 import getConfigurationServiceOverride, {
   initUserConfiguration,
@@ -45,7 +44,6 @@ export class Editor {
   private _editorInstance?: IStandaloneCodeEditor
   private readonly _reference: TypeEditorRef
   private _userConfiguration: Record<string, unknown>
-  private readonly _extensionTheme?: ExtensionManage
   private readonly _configurations: RequiredExcept<Partial<EditorConfigurations>, 'language'>
 
   constructor(
@@ -54,7 +52,6 @@ export class Editor {
   ) {
     this._reference = ref
     this._userConfiguration = config.userConfiguration
-    this._extensionTheme = config.extensionTheme
     this._configurations = {
       ...config,
       language: config.language ?? 'javascript',
@@ -91,7 +88,7 @@ export class Editor {
 
     const editor = this._create()
 
-    await activateDefaultExtensions({ extensionTheme: this._extensionTheme })
+    await activateDefaultExtensions()
 
     this._editorInstance = editor
 
@@ -211,7 +208,7 @@ export class Editor {
     const settingsId = themes.map((theme) => theme.settingsId)
 
     if (!settingsId.includes(currentThemeId)) {
-      await activateDefaultExtensions({ extensionTheme: this._extensionTheme })
+      await activateDefaultExtensions()
     }
 
     const defaultValue = this._editorInstance?.getDefaultValue() ?? ''

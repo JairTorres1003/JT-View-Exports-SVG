@@ -6,18 +6,11 @@ import '@codingame/monaco-vscode-typescript-basics-default-extension'
 
 import '@codingame/monaco-vscode-extension-api/localExtensionHost'
 
-import type { ExtensionManage } from '@api/interfaces/vscode'
-
 import activateDefaultExtension from './default'
 import activateExtensionTheme from './theme'
 
-interface ActivateDefaultExtensionsParams {
-  extensionTheme?: ExtensionManage
-}
-
-async function activateDefaultExtensions({ extensionTheme }: ActivateDefaultExtensionsParams) {
-  if (extensionTheme) await activateExtensionTheme(extensionTheme)
-  await activateDefaultExtension()
+async function activateDefaultExtensions() {
+  await Promise.all([activateDefaultExtension(), activateExtensionTheme()])
 }
 
 export { activateDefaultExtensions }

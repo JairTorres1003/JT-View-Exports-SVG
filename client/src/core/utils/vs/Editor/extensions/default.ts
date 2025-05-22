@@ -4,6 +4,7 @@ import {
   registerExtension,
   ExtensionHostKind,
   type IExtensionManifest,
+  type RegisterLocalProcessExtensionResult,
 } from '@codingame/monaco-vscode-api/extensions'
 
 import { vscode } from '@/services/vscode'
@@ -19,8 +20,12 @@ const manifest: IExtensionManifest = {
   },
 }
 
+let extension: RegisterLocalProcessExtensionResult | undefined = undefined
+
 async function activate() {
-  const extension = registerExtension(manifest, ExtensionHostKind.LocalProcess)
+  if (extension) return
+
+  extension = registerExtension(manifest, ExtensionHostKind.LocalProcess)
 
   await extension.setAsDefaultApi()
 

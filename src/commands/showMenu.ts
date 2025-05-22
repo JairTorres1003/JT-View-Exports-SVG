@@ -18,6 +18,8 @@ export const showMenu = async (
   item: Uri | null = null,
   items: Uri[] = []
 ): Promise<void> => {
+  ViewExportsSVGController.render(context.extensionUri, [])
+
   if (!isEmpty(ViewExportsSVGController.currentPanel)) {
     ViewExportsSVGController.currentPanel.RunExtraction()
   }

@@ -57,6 +57,7 @@
             "This is an SVG component. You can edit the code and see the changes in real time.",
             "",
             "Customize the component by passing different properties.",
+            "",
             "**Example:**",
             "```jsx",
             "<{{name}} {{propertyValue}} />",
