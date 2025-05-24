@@ -39,7 +39,7 @@ export function initializeExtensionTheme(context: ExtensionContext): void {
   try {
     const cachedTheme = getCacheManager().ExtensionCache
 
-    if (cachedTheme.has(CACHE_KEY)) {
+    if (cachedTheme.has(CACHE_KEY) && extensionThemePath(context)) {
       return
     }
 
@@ -129,4 +129,16 @@ function cloneThemeExtension(context: ExtensionContext, extensionPath: string): 
       fs.writeFileSync(newThemeFilePath, themeFile, 'utf-8')
     }
   })
+}
+
+/**
+ * Checks if the extension theme path exists.
+ *
+ * @param context - The extension context.
+ * @returns `true` if the theme path exists, `false` otherwise.
+ */
+function extensionThemePath(context: ExtensionContext): boolean {
+  const folder = path.join(context.extensionPath, 'client/dist/assets/extensions/theme')
+
+  return fs.existsSync(folder)
 }

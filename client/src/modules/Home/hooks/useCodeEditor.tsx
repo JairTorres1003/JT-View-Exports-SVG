@@ -1,10 +1,10 @@
 import { SVGPostMessage, SVGReceiveMessage } from '@api/enums/ViewExportsSVG'
 import type { SVGComponent, SVGErrors } from '@api/interfaces/ViewExportsSVG'
-import type * as monaco from 'monaco-editor'
-import { useEffect, useMemo, useRef, useState } from 'react'
+import { useEffect, useMemo, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 
 import completionComponentsManager from '../utils/completionComponentsManager'
+import completionPropertiesManager from '../utils/completionPropertiesManager'
 
 import { useAlert } from '@/core/hooks/useAlert'
 import useDebounce from '@/core/hooks/useDebounce'
@@ -16,9 +16,6 @@ export const useCodeEditor = (editorRef: React.RefObject<TypeEditorRef>) => {
   const { recentlySelected } = useSelector((state) => state.playground)
   const { components } = useSelector((state) => state.svg)
   const [value, setValue] = useState<string>('')
-  const completionRef = useRef<{
-    components: monaco.IDisposable | null
-  }>({ components: null })
 
   const debounceValue = useDebounce(value, 600)
   const dispatch = useDispatch()
@@ -27,7 +24,7 @@ export const useCodeEditor = (editorRef: React.RefObject<TypeEditorRef>) => {
   const defaultValue = useMemo(() => {
     if (!recentlySelected?.name) return ''
 
-    return `<${recentlySelected?.name} />\n`
+    return `<${recentlySelected?.name} />`
   }, [recentlySelected?.name])
 
   /**
@@ -65,22 +62,26 @@ export const useCodeEditor = (editorRef: React.RefObject<TypeEditorRef>) => {
    */
   const onRegisterCompletionsComponent = () => {
     if (!editorRef.current) return
-
-    if (completionRef.current?.components) {
-      completionRef.current.components.dispose()
-    }
-
-    const register = editorRef.current.editor?.api.registerCompletionItemProvider(
+    editorRef.current.editor?.api.registerCompletionItemProvider(
+      'components',
       completionComponentsManager(components)
     )
+  }
 
-    completionRef.current.components = register ?? null
+  /**
+   * Registers the properties completion items for the code editor.
+   */
+  const onRegisterPropertiesComponent = () => {
+    if (!editorRef.current || !recentlySelected) return
+    editorRef.current.editor?.api.registerCompletionItemProvider(
+      'properties',
+      completionPropertiesManager(recentlySelected)
+    )
   }
 
   useEffect(() => {
-    // handleRegisterCompletions()
-    console.info('Registering completions', { editorRef })
-  }, [recentlySelected?.name])
+    onRegisterPropertiesComponent()
+  }, [recentlySelected?.types])
 
   useEffect(() => {
     onRegisterCompletionsComponent()

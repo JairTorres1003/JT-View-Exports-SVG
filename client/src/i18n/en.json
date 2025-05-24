@@ -66,6 +66,11 @@
             "",
             "For more information, refer to the documentation in file or hover over the component in your editor."
           ]
+        },
+        "properties": {
+          "details": {
+            "static": "(property) {{name}}: {{type}}"
+          }
         }
       }
     }

@@ -14,6 +14,7 @@ export interface IStandaloneCodeEditor extends monaco.editor.IStandaloneCodeEdit
   api: {
     updateUserConfiguration: (userConfiguration: Record<string, unknown>) => Promise<void>
     registerCompletionItemProvider: (
+      name: string,
       provider: monaco.languages.CompletionItemProvider
     ) => monaco.IDisposable | undefined
   }

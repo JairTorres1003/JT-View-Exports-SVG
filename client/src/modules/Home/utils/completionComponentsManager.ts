@@ -102,12 +102,8 @@ function isValidSuggestionPosition(textUntilPosition: string): boolean {
 
   // Case 2: Inside a component tag, but before any space or closing bracket
   const tagMatch = /<([A-Za-z0-9_]*)$/.exec(textUntilPosition)
-  if (tagMatch) {
-    return true
-  }
 
-  // Don't show suggestions in other positions
-  return false
+  return !!tagMatch
 }
 
 export default completionComponentsManager

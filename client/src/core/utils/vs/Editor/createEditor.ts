@@ -45,6 +45,7 @@ export class Editor {
   private readonly _reference: TypeEditorRef
   private _userConfiguration: Record<string, unknown>
   private readonly _configurations: RequiredExcept<Partial<EditorConfigurations>, 'language'>
+  private _completions: Record<string, monaco.IDisposable | null> = {}
 
   constructor(
     ref: TypeEditorRef,
@@ -248,10 +249,24 @@ export class Editor {
    * @param provider - The completion item provider to register.
    * @returns A disposable object that can be used to unregister the provider.
    */
-  private _registerCompletionItemProvider(provider: monaco.languages.CompletionItemProvider) {
+  private _registerCompletionItemProvider(
+    name: string,
+    provider: monaco.languages.CompletionItemProvider
+  ) {
     if (!this._editorInstance) return
 
-    return monaco.languages.registerCompletionItemProvider(this._configurations.language, provider)
+    if (this._completions[name]) {
+      this._completions[name]?.dispose()
+    }
+
+    const register = monaco.languages.registerCompletionItemProvider(
+      this._configurations.language,
+      provider
+    )
+
+    this._completions[name] = register
+
+    return register
   }
 
   /**

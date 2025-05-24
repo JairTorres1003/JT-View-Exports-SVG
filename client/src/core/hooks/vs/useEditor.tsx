@@ -114,13 +114,11 @@ export const useEditor = ({
 
   useEffect(() => {
     if (editorInstance && defaultValue) {
-      editorInstance.focus()
-      editorInstance.trigger('keyboard', 'type', { text: '\n' })
+      const position = editorInstance.getPosition()
+
       editorInstance.setDefaultValue(defaultValue)
-      editorInstance.setPosition({
-        lineNumber: editorInstance?.getModel()?.getLineCount() ?? 1,
-        column: 1,
-      })
+      editorInstance.focus()
+      if (position) editorInstance.setPosition(position)
     }
   }, [defaultValue, editorInstance])
 
