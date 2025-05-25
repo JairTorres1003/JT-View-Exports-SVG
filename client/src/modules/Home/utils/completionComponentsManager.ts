@@ -41,6 +41,21 @@ const completionComponentsManager = (
         group.components.forEach((c) => {
           const property = Object.keys(c.types)[0]
 
+          const translationKeys = {
+            name: c.name,
+            fileName: c.location.file.basename,
+            filePath: c.location.file.absolutePath,
+            link: monaco.Uri.parse(
+              `command:${__APP_NAME}-default.action.clicLinkDocumentation?${encodeURIComponent(
+                JSON.stringify({ location: c.location })
+              )}`
+            ),
+            propertyValue: replaceSnippetValues(createInsertText(c.types[property], property), [
+              '',
+              c.types[property].default,
+            ]),
+          }
+
           suggestions.push({
             label: c.name,
             kind: monaco.languages.CompletionItemKind.Class,
@@ -53,21 +68,10 @@ const completionComponentsManager = (
               endColumn: completeWord?.endColumn ?? word.endColumn,
             },
             documentation: {
-              value: t(`${prefixT}.documentation`, {
-                name: c.name,
-                fileName: c.location.file.basename,
-                filePath: c.location.file.absolutePath,
-                link: monaco.Uri.parse(
-                  `command:${__APP_NAME}-default.action.clicLinkDocumentation?${encodeURIComponent(
-                    JSON.stringify({ location: c.location })
-                  )}`
-                ),
-                propertyValue: replaceSnippetValues(createInsertText(c.types[property], property), [
-                  '',
-                  c.types[property].default,
-                ]),
-                joinArrays: '\n',
-              }),
+              value: t(
+                `${prefixT}.${c.withRestProps ? 'documentation_withRestProps' : 'documentation'}`,
+                { ...translationKeys, joinArrays: '\n' }
+              ),
               isTrusted: true,
             },
             detail: t(`${prefixT}.details.${c.isAnimated ? 'animated' : 'static'}`),

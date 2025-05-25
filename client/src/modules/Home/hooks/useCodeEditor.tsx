@@ -24,7 +24,7 @@ export const useCodeEditor = (editorRef: React.RefObject<TypeEditorRef>) => {
   const defaultValue = useMemo(() => {
     if (!recentlySelected?.name) return ''
 
-    return `<${recentlySelected?.name} />`
+    return `<${recentlySelected?.name} />\n`
   }, [recentlySelected?.name])
 
   /**

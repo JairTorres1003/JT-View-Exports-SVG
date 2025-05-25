@@ -95,6 +95,10 @@ export interface SVGComponent {
    */
   types: ParamsTypes
   /**
+   * Indicates whether the SVG component has rest props.
+   */
+  withRestProps: boolean
+  /**
    * Indicates whether the SVG component has errors.
    */
   hasErrors: boolean

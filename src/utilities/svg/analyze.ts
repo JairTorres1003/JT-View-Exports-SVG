@@ -41,6 +41,8 @@ export function getNodeTypes(params: Record<string, unknown>): ParamsTypes {
   const types: ParamsTypes = {}
 
   Object.entries(params).forEach(([key, value]) => {
+    if (REST_PROPS_KEY === key) return
+
     if (typeof value === 'object' && !isEmpty(value)) {
       types[key] = {
         type: 'object',

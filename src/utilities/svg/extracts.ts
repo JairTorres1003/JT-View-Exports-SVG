@@ -10,6 +10,7 @@ import { analyzeExportType, getNodeTypes } from './analyze'
 import { getSVGComponent } from './SVGComponent'
 import { getTagName } from './tags'
 
+import { REST_PROPS_KEY } from '@/constants/misc'
 import { SVGDeclaration } from '@/enum/ViewExportsSVG'
 import {
   type HandlersDeclaration,
@@ -49,8 +50,9 @@ export async function extractSVGComponent(
         if (!isEmpty(analysis)) {
           const component = getSVGComponent(analysis, file)
           const types = getNodeTypes(component.params)
+          const withRestProps = REST_PROPS_KEY in component.params
 
-          return { ...component, name, location, types }
+          return { ...component, name, location, types, withRestProps }
         }
       }
     } catch (error) {

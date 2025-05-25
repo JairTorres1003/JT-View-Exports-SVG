@@ -123,6 +123,11 @@
           "command": "JT-View-Exports-SVG.closeDevTools",
           "group": "navigation@2",
           "when": "activeWebviewPanelId == 'JT-View-Exports-SVG' && JT-View-Exports-SVG.isOpenDevTools"
+        },
+        {
+          "command": "JT-View-Exports-SVG.clearCache",
+          "group": "navigation@3",
+          "when": "activeWebviewPanelId == 'JT-View-Exports-SVG'"
         }
       ]
     },
