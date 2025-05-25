@@ -37,6 +37,15 @@ const completionPropertiesManager = (
         return { suggestions: [] }
       }
 
+      if (
+        isInsideValueZone(
+          insideComponentInfo.tagContent,
+          cursorOffset - model.getValue().indexOf(insideComponentInfo.tagContent)
+        )
+      ) {
+        return { suggestions: [] }
+      }
+
       const suggestions: monaco.languages.CompletionItem[] = []
 
       const word = model.getWordUntilPosition(position)
@@ -217,6 +226,23 @@ function getUsedProperties(tagContent: string): Set<string> {
   }
 
   return usedProps
+}
+
+/**
+ * Detect if the cursor is inside a value zone: `prop=...` (in quotes, braces, etc)
+ */
+function isInsideValueZone(tagContent: string, relativeCursorOffset: number): boolean {
+  const uptoCursor = tagContent.slice(0, relativeCursorOffset)
+  const assignmentRegex = /([a-zA-Z_][a-zA-Z0-9_]*)\s*=\s*("[^"]*|'[^']*|\{[^}]*\}?|\{{[^}]*\}}?)$/g
+  let match: RegExpExecArray | null = null
+  while ((match = assignmentRegex.exec(uptoCursor)) !== null) {
+    const start = match.index + match[0].indexOf('=') + 1
+    const end = relativeCursorOffset
+    if (end > start) {
+      return true
+    }
+  }
+  return false
 }
 
 /**
