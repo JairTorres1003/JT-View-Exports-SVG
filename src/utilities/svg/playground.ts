@@ -70,7 +70,10 @@ export async function playground(icon: SVGPlayground): Promise<SVGComponent | SV
     }
 
     const propsKeys = Object.keys(iconComponent.props)
-    if (propsKeys.length > 0) {
+    const paramsObj = originalComponent.params?.[REST_PROPS_KEY] ?? {}
+    const restPropKey = Object.keys(paramsObj as Record<string, unknown>)[0]
+
+    if (propsKeys.length > 0 && !isEmpty(restPropKey)) {
       const restProps: Record<string, unknown> = {}
 
       for (const key of propsKeys) {
@@ -79,7 +82,7 @@ export async function playground(icon: SVGPlayground): Promise<SVGComponent | SV
         }
       }
 
-      iconComponent.props[REST_PROPS_KEY] = restProps
+      iconComponent.props[REST_PROPS_KEY] = { [restPropKey]: restProps }
     }
 
     const parameters = { ...params, ...iconComponent.props }
