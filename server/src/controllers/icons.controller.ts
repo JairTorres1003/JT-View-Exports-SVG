@@ -12,7 +12,9 @@ interface IconParamsRequest {
 
 export class IconsController {
   public addIcon = (req: Request<IconParamsRequest>, res: Response) => {
-    if (isEmpty(workspace.workspaceFolders)) return
+    if (isEmpty(workspace.workspaceFolders)) {
+      return res.status(400).send({ message: 'No workspace folders found' })
+    }
 
     const { cache } = this.getCachedIcons(req.params)
     cache.add(workspace.workspaceFolders?.[0].uri, [req.body.data])
@@ -29,7 +31,9 @@ export class IconsController {
    * @returns A response with the updated icons data.
    */
   public removeIcon = (req: Request<IconParamsRequest>, res: Response) => {
-    if (isEmpty(workspace.workspaceFolders)) return
+    if (isEmpty(workspace.workspaceFolders)) {
+      return res.status(400).send({ message: 'No workspace folders found' })
+    }
 
     const { cache, type } = this.getCachedIcons(req.params)
     const icons = cache.remove(workspace.workspaceFolders?.[0].uri, req.body.data)
@@ -46,7 +50,9 @@ export class IconsController {
    * @returns A response with the requested icons data.
    */
   public getIcons = (req: Request<IconParamsRequest>, res: Response) => {
-    if (isEmpty(workspace.workspaceFolders)) return
+    if (isEmpty(workspace.workspaceFolders)) {
+      return res.status(400).send({ message: 'No workspace folders found' })
+    }
 
     const { cache, type } = this.getCachedIcons(req.params)
     const icons = cache.getIcons(workspace.workspaceFolders?.[0].uri)
