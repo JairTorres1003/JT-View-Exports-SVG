@@ -24,7 +24,7 @@ const CONFIG_STATES = {
 
 export default tseslint.config(
   {
-    ignores: ['dist', '**/*.d.ts', '**/*.config.{js,mjs,ts}', 'node_modules'],
+    ignores: ['dist', '**/*.d.ts', '**/*.{dev,config}.{js,mjs,ts}', 'node_modules'],
   },
   eslintConfigLove,
   eslintPluginPrettier,
@@ -107,5 +107,5 @@ export default tseslint.config(
     rules: {
       complexity: [STATE.WARN, { max: 75 }],
     },
-  },
+  }
 )
