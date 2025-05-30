@@ -45,7 +45,7 @@ class VSCodeInternalAPIWrapper<T = unknown> {
 
       window.postMessage(response.data, '*')
     } catch (error) {
-      console.error(error)
+      console.error(getUnknownError(error))
     }
   }
 
