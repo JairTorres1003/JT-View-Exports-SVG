@@ -1,10 +1,11 @@
 import type { SVGComponent, SVGComponentProps } from '@api/interfaces/ViewExportsSVG'
 import cn from 'classnames'
-import { createElement, forwardRef } from 'react'
+import { createElement, forwardRef, useEffect } from 'react'
 import { useTranslation } from 'react-i18next'
 
 import { SVGError } from '@/assets/icons/indicators'
 import { ErrorBoundary } from '@/core/helpers'
+import { useAlert } from '@/core/hooks/useAlert'
 import { isEmpty } from '@/utils/misc'
 
 interface RenderSvgProps {
@@ -49,7 +50,25 @@ const DynamicTagComponent = forwardRef<RenderSvgProps, RenderSvgProps>(function 
  * Renders an SVG component.
  */
 const RenderSvg = forwardRef<SVGComponent, SVGComponent & { className?: string }>(
-  function RenderSvg({ component, hasErrors, className }, ref) {
+  function RenderSvg({ component, hasErrors, errors, className }, ref) {
+    const { onOpen } = useAlert()
+
+    /**
+     * Handles the error component by displaying an alert with the error message.
+     */
+    const handleErrorComponent = () => {
+      if (!errors) return
+
+      onOpen(errors.message, {
+        severity: 'error',
+        position: { vertical: 'top', horizontal: 'right' },
+      })
+    }
+
+    useEffect(() => {
+      handleErrorComponent()
+    }, [errors])
+
     if (isEmpty(component) || hasErrors) {
       return <SVGError />
     }
