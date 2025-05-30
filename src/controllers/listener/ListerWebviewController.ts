@@ -17,6 +17,7 @@ import {
 } from '../config'
 
 import { expandedIcons, toggleDevTools } from '@/commands'
+import { toggleViewActions } from '@/commands/editorTitleActions'
 import { CONFIG_KEY } from '@/constants/misc'
 import { SVGPostMessage, SVGReceiveMessage } from '@/enum/ViewExportsSVG'
 import { type HandlerArgs } from '@/interfaces/misc'
@@ -137,12 +138,13 @@ export class ListerWebviewController {
    *
    * @protected
    */
-  protected readonly initialize = (): void => {
+  protected readonly initialize = (processedFiles: number): void => {
     this._toggleOpenDevTools(false)
 
     const config = new DefaultExpandAllController()
 
     this._toggleExpandIcon(config.isExpandAll())
+    toggleViewActions(processedFiles > 0).catch(console.error)
   }
 
   /**
@@ -156,6 +158,8 @@ export class ListerWebviewController {
     this._postMessage(SVGPostMessage.SendUpdateConfiguration, {
       renderPath: processedFiles > 0 ? '/dashboard' : '/',
     })
+
+    toggleViewActions(processedFiles > 0).catch(console.error)
   }
 
   /**

@@ -107,7 +107,7 @@ export class ViewExportsSVGController extends ListerWebviewController {
       processedFiles
     )
 
-    ViewExportsSVGController.currentPanel.initialize()
+    ViewExportsSVGController.currentPanel.initialize(processedFiles)
   }
 
   /**

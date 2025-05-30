@@ -60,28 +60,28 @@
         "title": "%extension.commands.collapseAll.title%",
         "icon": "$(collapse-all)",
         "category": "View Exports SVG",
-        "enablement": "activeWebviewPanelId == 'JT-View-Exports-SVG' && JT-View-Exports-SVG.isExpanded"
+        "enablement": "activeWebviewPanelId == 'JT-View-Exports-SVG' && JT-View-Exports-SVG.isExpanded && JT-View-Exports-SVG.showActions"
       },
       {
         "command": "JT-View-Exports-SVG.expandAll",
         "title": "%extension.commands.expandAll.title%",
         "icon": "$(expand-all)",
         "category": "View Exports SVG",
-        "enablement": "activeWebviewPanelId == 'JT-View-Exports-SVG' && !JT-View-Exports-SVG.isExpanded"
+        "enablement": "activeWebviewPanelId == 'JT-View-Exports-SVG' && !JT-View-Exports-SVG.isExpanded && JT-View-Exports-SVG.showActions"
       },
       {
         "command": "JT-View-Exports-SVG.openDevTools",
         "title": "%extension.commands.openDevTools.title%",
         "icon": "$(jt-viewExportsSVG-tools-filled)",
         "category": "View Exports SVG",
-        "enablement": "activeWebviewPanelId == 'JT-View-Exports-SVG' && !JT-View-Exports-SVG.isOpenDevTools"
+        "enablement": "activeWebviewPanelId == 'JT-View-Exports-SVG' && !JT-View-Exports-SVG.isOpenDevTools && JT-View-Exports-SVG.showActions"
       },
       {
         "command": "JT-View-Exports-SVG.closeDevTools",
         "title": "%extension.commands.closeDevTools.title%",
         "icon": "$(jt-viewExportsSVG-tools)",
         "category": "View Exports SVG",
-        "enablement": "activeWebviewPanelId == 'JT-View-Exports-SVG' && JT-View-Exports-SVG.isOpenDevTools"
+        "enablement": "activeWebviewPanelId == 'JT-View-Exports-SVG' && JT-View-Exports-SVG.isOpenDevTools && JT-View-Exports-SVG.showActions"
       },
       {
         "command": "JT-View-Exports-SVG.clearCache",
@@ -107,22 +107,22 @@
         {
           "command": "JT-View-Exports-SVG.collapseAll",
           "group": "navigation@1",
-          "when": "activeWebviewPanelId == 'JT-View-Exports-SVG' && JT-View-Exports-SVG.isExpanded"
+          "when": "activeWebviewPanelId == 'JT-View-Exports-SVG' && JT-View-Exports-SVG.isExpanded && JT-View-Exports-SVG.showActions"
         },
         {
           "command": "JT-View-Exports-SVG.expandAll",
           "group": "navigation@1",
-          "when": "activeWebviewPanelId == 'JT-View-Exports-SVG' && !JT-View-Exports-SVG.isExpanded"
+          "when": "activeWebviewPanelId == 'JT-View-Exports-SVG' && !JT-View-Exports-SVG.isExpanded && JT-View-Exports-SVG.showActions"
         },
         {
           "command": "JT-View-Exports-SVG.openDevTools",
           "group": "navigation@2",
-          "when": "activeWebviewPanelId == 'JT-View-Exports-SVG' && !JT-View-Exports-SVG.isOpenDevTools"
+          "when": "activeWebviewPanelId == 'JT-View-Exports-SVG' && !JT-View-Exports-SVG.isOpenDevTools && JT-View-Exports-SVG.showActions"
         },
         {
           "command": "JT-View-Exports-SVG.closeDevTools",
           "group": "navigation@2",
-          "when": "activeWebviewPanelId == 'JT-View-Exports-SVG' && JT-View-Exports-SVG.isOpenDevTools"
+          "when": "activeWebviewPanelId == 'JT-View-Exports-SVG' && JT-View-Exports-SVG.isOpenDevTools && JT-View-Exports-SVG.showActions"
         },
         {
           "command": "JT-View-Exports-SVG.clearCache",
