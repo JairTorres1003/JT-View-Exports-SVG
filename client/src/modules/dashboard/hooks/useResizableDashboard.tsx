@@ -6,18 +6,20 @@ import { useDispatch, useSelector } from 'react-redux'
 import { vscode } from '@/services/vscode'
 import { setIsSelecting } from '@/store/features/PlaygroundSlice'
 
-interface ResizableHomeHook {
+interface ResizableDashboardHook {
   resizableWidth: string
   onResizeStart: ResizeStartCallback
   onResizeStop: ResizeCallback
   onResetSize: VoidFunction
 }
 
-interface ResizableHomeHookProps {
+interface ResizableDashboardHookProps {
   readonly devTootsId: string
 }
 
-export const useResizableHome = ({ devTootsId }: ResizableHomeHookProps): ResizableHomeHook => {
+export const useResizableDashboard = ({
+  devTootsId,
+}: ResizableDashboardHookProps): ResizableDashboardHook => {
   const [resizableWidth, setResizableWidth] = useState('100%')
   const [lastWidth, setLastWidth] = useState('75%')
 

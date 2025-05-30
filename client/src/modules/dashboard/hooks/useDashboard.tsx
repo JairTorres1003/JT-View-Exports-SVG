@@ -7,11 +7,11 @@ import { vscode } from '@/services/vscode'
 import { setRecentlySelected } from '@/store/features/PlaygroundSlice'
 import { setComponents, setErrors, setSearch } from '@/store/features/SVGSlice'
 
-interface HomeHook {
+interface DashboardHook {
   loading: boolean
 }
 
-export const useHome = (): HomeHook => {
+export const useDashboard = (): DashboardHook => {
   const [loading, setLoading] = useState<boolean>(true)
   const dispatch = useDispatch()
 
