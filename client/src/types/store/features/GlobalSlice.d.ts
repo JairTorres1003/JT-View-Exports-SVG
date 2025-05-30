@@ -45,6 +45,11 @@ export interface GlobalState {
      * @default true
      */
     defaultClicToOpenDevTools: boolean
+    /**
+     * The initial render path for the SVG component.
+     * @default '/'
+     */
+    renderPath: string
   }
 }
 

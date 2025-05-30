@@ -150,8 +150,12 @@ export class ListerWebviewController {
    *
    * @protected
    */
-  protected readonly update = (): void => {
+  protected readonly update = (processedFiles: number): void => {
     this._toggleOpenDevTools(false)
+
+    this._postMessage(SVGPostMessage.SendUpdateConfiguration, {
+      renderPath: processedFiles > 0 ? '/dashboard' : '/',
+    })
   }
 
   /**

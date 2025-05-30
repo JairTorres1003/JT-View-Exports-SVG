@@ -20,7 +20,7 @@ export enum SVGPostMessage {
   SendExpandAllIcons = 'send/settings/expand-all',
   SendToggleOpenDevTools = 'send/settings/toggle-open-dev-tools',
   SendExtensionTheme = 'send/settings/extension-theme',
-  SendInitConfiguration = 'send/init-configuration',
+  SendUpdateConfiguration = 'send/update-configuration',
 
   SendLastScanDate = 'send/scan/last-date',
 

@@ -9,6 +9,11 @@ interface Route {
 export const routes: Route[] = [
   {
     path: '/',
+    Component: lazy(async () => await import('@/app/home/Home')),
+    private: false,
+  },
+  {
+    path: '/dashboard',
     Component: lazy(async () => await import('@/app/dashboard/Dashboard')),
     private: false,
   },

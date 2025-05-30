@@ -43,7 +43,7 @@ export async function scanningWorkspace(): Promise<Uri[]> {
 export async function scanningFiles(files: Uri[]): Promise<void> {
   try {
     const operation = (result: ViewExportSVG[]): void => {
-      ViewExportsSVGController.update(result)
+      ViewExportsSVGController.update(result, files.length)
     }
 
     await processFiles(files, operation)

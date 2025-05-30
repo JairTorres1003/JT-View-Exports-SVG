@@ -15,12 +15,12 @@ export const ConfigurationProvider: FC<ProviderProps> = ({ children }): React.Re
   const dispatch = useDispatch()
 
   useEffect(() => {
-    vscode.onMessage(SVGPostMessage.SendInitConfiguration, (data) => {
+    vscode.onMessage(SVGPostMessage.SendUpdateConfiguration, (data) => {
       dispatch(setConfiguration(data))
     })
 
     return () => {
-      vscode.unregisterMessage(SVGPostMessage.SendInitConfiguration)
+      vscode.unregisterMessage(SVGPostMessage.SendUpdateConfiguration)
     }
   }, [dispatch])
 

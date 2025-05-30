@@ -31,7 +31,7 @@ export interface MessageHandlersView {
   [SVGPostMessage.SendExpandAllIcons]?: (data: boolean) => void
   [SVGPostMessage.SendToggleOpenDevTools]?: (data: boolean) => void
   [SVGPostMessage.SendExtensionTheme]?: (data: ExtensionManage) => void
-  [SVGPostMessage.SendInitConfiguration]?: (data: Record<string, unknown>) => void
+  [SVGPostMessage.SendUpdateConfiguration]?: (data: Record<string, unknown>) => void
 }
 
 /**
@@ -56,7 +56,7 @@ export interface FuncOnMessage {
   (type: SVGPostMessage.SendToggleOpenDevTools, handler: (data: boolean) => void): void
   (type: SVGPostMessage.SendExtensionTheme, handler: (data: ExtensionManage) => void): void
   (
-    type: SVGPostMessage.SendInitConfiguration,
+    type: SVGPostMessage.SendUpdateConfiguration,
     handler: (data: Record<string, unknown>) => void
   ): void
 }

@@ -16,11 +16,13 @@ export class WebviewContent {
   private readonly _extensionUri: Uri
   private content: string = ''
   private readonly manifest: ManifestContent
+  private readonly _processedFiles: number
 
-  public constructor(webview: Webview, extensionUri: Uri) {
+  public constructor(webview: Webview, extensionUri: Uri, processedFiles: number) {
     this._webview = webview
     this._extensionUri = extensionUri
     this.manifest = this.getManifest()
+    this._processedFiles = processedFiles
 
     this.generateContent()
   }
@@ -105,6 +107,7 @@ export class WebviewContent {
     const config = new DefaultExpandAllController()
     const devConfig = new DefaultClickToOpenDevToolsController()
     const nonce = getNonce()
+    const initialPath = this._processedFiles > 0 ? '/dashboard' : '/'
 
     return /* html */ `
       <script nonce="${nonce}">
@@ -113,6 +116,7 @@ export class WebviewContent {
           initConfiguration: {
             _DEFAULT_EXPAND_ALL: ${config.isExpandAll()},
             _DEFAULT_CLIC_TO_OPEN_DEV_TOOLS: ${devConfig.isDefaultOpen()},
+            _INITIAL_RENDER_PATH: "${initialPath}",
           }
         };
       </script>

@@ -2,6 +2,8 @@ import { createSlice } from '@reduxjs/toolkit'
 
 import type { GlobalReducers, GlobalState } from '@/types/store/features/GlobalSlice'
 
+const config = window.ViewExportsSVG.initConfiguration
+
 const initialState: GlobalState = {
   snackbarAlert: {
     open: false,
@@ -11,9 +13,9 @@ const initialState: GlobalState = {
     position: { vertical: 'bottom', horizontal: 'center' },
   },
   configuration: {
-    defaultExpandAll: window.ViewExportsSVG.initConfiguration._DEFAULT_EXPAND_ALL,
-    defaultClicToOpenDevTools:
-      window.ViewExportsSVG.initConfiguration._DEFAULT_CLIC_TO_OPEN_DEV_TOOLS,
+    defaultExpandAll: config._DEFAULT_EXPAND_ALL,
+    defaultClicToOpenDevTools: config._DEFAULT_CLIC_TO_OPEN_DEV_TOOLS,
+    renderPath: config._INITIAL_RENDER_PATH,
   },
 }
 

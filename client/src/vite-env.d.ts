@@ -27,6 +27,7 @@ declare global {
       initConfiguration: {
         _DEFAULT_EXPAND_ALL: boolean
         _DEFAULT_CLIC_TO_OPEN_DEV_TOOLS: boolean
+        _INITIAL_RENDER_PATH: string
       }
     }
   }

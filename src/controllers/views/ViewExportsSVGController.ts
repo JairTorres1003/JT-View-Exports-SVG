@@ -12,7 +12,12 @@ export class ViewExportsSVGController extends ListerWebviewController {
   public static currentPanel: ViewExportsSVGController | undefined
   public static readonly configName: string = CONFIG_KEY
 
-  private constructor(panel: WebviewPanel, extensionUri: Uri, viewExportSVG: ViewExportSVG[]) {
+  private constructor(
+    panel: WebviewPanel,
+    extensionUri: Uri,
+    viewExportSVG: ViewExportSVG[],
+    processedFiles: number
+  ) {
     super(panel, viewExportSVG)
     this.viewExportSVG = viewExportSVG
 
@@ -27,7 +32,7 @@ export class ViewExportsSVGController extends ListerWebviewController {
     )
 
     // Set the HTML content for the webview panel
-    const webviewContent = new WebviewContent(this._panel.webview, extensionUri)
+    const webviewContent = new WebviewContent(this._panel.webview, extensionUri, processedFiles)
     this._panel.webview.html = webviewContent._content
   }
 
@@ -64,12 +69,16 @@ export class ViewExportsSVGController extends ListerWebviewController {
    * @param extensionUri The URI of the directory containing the extension.
    * @param svgComponents The array of SVG exports or an SvgExportErrors object.
    */
-  public static render(extensionUri: Uri, viewExportSVG: ViewExportSVG[]): void {
+  public static render(
+    extensionUri: Uri,
+    viewExportSVG: ViewExportSVG[],
+    processedFiles: number = 0
+  ): void {
     const column = window.activeTextEditor?.viewColumn ?? ViewColumn.One
 
     // If we already have a panel, show it
     if (!isEmpty(ViewExportsSVGController.currentPanel)) {
-      this.update(viewExportSVG)
+      this.update(viewExportSVG, processedFiles)
       return
     }
 
@@ -94,7 +103,8 @@ export class ViewExportsSVGController extends ListerWebviewController {
     ViewExportsSVGController.currentPanel = new ViewExportsSVGController(
       panel,
       extensionUri,
-      viewExportSVG
+      viewExportSVG,
+      processedFiles
     )
 
     ViewExportsSVGController.currentPanel.initialize()
@@ -104,9 +114,9 @@ export class ViewExportsSVGController extends ListerWebviewController {
    * Update the contents of the webview panel displaying SVG components.
    * @param svgComponents - SVG components or error data to display.
    */
-  public static update(viewExportSVG: ViewExportSVG[]): void {
+  public static update(viewExportSVG: ViewExportSVG[], processedFiles: number): void {
     if (!isEmpty(ViewExportsSVGController.currentPanel)) {
-      ViewExportsSVGController.currentPanel.update()
+      ViewExportsSVGController.currentPanel.update(processedFiles)
 
       ViewExportsSVGController.currentPanel.viewExportSVG = viewExportSVG
 
