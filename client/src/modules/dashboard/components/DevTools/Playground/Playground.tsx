@@ -13,7 +13,7 @@ import { BoxPlayground, BoxPlaygroundCardSvg } from './Playground.style'
 import { IconCodeTag, IconCopy, IconRefresh } from '@/assets/icons/functionalities'
 import { SelectPickerColor } from '@/core/components/Select'
 import { Show } from '@/core/helpers'
-import { usePlayground } from '@/modules/home/hooks/usePlayground'
+import { usePlayground } from '@/modules/dashboard/hooks/usePlayground'
 
 interface PlaygroundProps {
   actionsId?: string

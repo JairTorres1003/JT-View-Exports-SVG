@@ -7,7 +7,7 @@ import { useMenuToolsStyles } from './MenuTools.style'
 import { IconKebabHorizontal } from '@/assets/icons/navigation'
 import { Show } from '@/core/helpers'
 import type { TypeEditorRef } from '@/core/types/components/vs/Editor'
-import { useMenuTools } from '@/modules/home/hooks/useMenuTools'
+import { useMenuTools } from '@/modules/dashboard/hooks/useMenuTools'
 
 interface MenuToolsProps {
   containerId: string

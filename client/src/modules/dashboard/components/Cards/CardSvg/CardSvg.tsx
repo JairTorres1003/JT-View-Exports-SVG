@@ -5,7 +5,7 @@ import type { FC } from 'react'
 import { cardSvgClasses } from './CardSvg.classes'
 import { BoxCardSvg } from './CardSvg.style'
 
-import { useCardSvg } from '@/modules/home/hooks/useCardSvg'
+import { useCardSvg } from '@/modules/dashboard/hooks/useCardSvg'
 
 interface CardSvgProps extends Omit<BoxProps, 'component'> {
   readonly children: React.ReactNode
