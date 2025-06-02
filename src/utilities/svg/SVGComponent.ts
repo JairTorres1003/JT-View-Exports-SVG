@@ -7,8 +7,8 @@ import { getProperties, propertyManager } from '../properties'
 import { getChildAttributes } from './children'
 import { getSVGTagName } from './tags'
 
-import type { GetSVGComponent } from '@/interfaces/svg/SVGComponent'
-import type { SVGErrors, SVGComponentProps, SVGFile } from '@/interfaces/ViewExportsSVG'
+import type { GetSVGComponent } from '@/types/svg/SVGComponent'
+import type { SVGErrors, SVGComponentProps, SVGFile } from '@/types/ViewExportsSVG'
 
 /**
  * Retrieves the SVG component from a JSX element.

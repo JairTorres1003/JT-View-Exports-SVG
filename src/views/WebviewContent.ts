@@ -7,8 +7,8 @@ import {
   DefaultExpandAllController,
   RecentIconsShowController,
 } from '@/controllers/config'
-import type { GetWebviewAssets } from '@/interfaces/views/content'
-import type { ManifestContent } from '@/interfaces/views/WebviewContent'
+import type { GetWebviewAssets } from '@/types/views/content'
+import type { ManifestContent } from '@/types/views/WebviewContent'
 import { getNonce } from '@/utilities/files'
 import { getUri } from '@/utilities/vscode'
 

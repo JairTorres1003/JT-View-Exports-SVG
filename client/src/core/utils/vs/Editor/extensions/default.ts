@@ -1,5 +1,5 @@
 import { SVGReceiveMessage } from '@api/enums/ViewExportsSVG'
-import type { SVGComponent, SVGLocation } from '@api/interfaces/ViewExportsSVG'
+import type { SVGComponent, SVGLocation } from '@api/types/ViewExportsSVG'
 import {
   registerExtension,
   ExtensionHostKind,

@@ -1,4 +1,4 @@
-import type { SVGTagName } from '@/interfaces/svg/tags'
+import type { SVGTagName } from '@/types/svg/tags'
 
 /**
  * Mapping of SVG tag names to their corresponding string representations.

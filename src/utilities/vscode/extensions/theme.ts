@@ -4,7 +4,7 @@ import * as path from 'path'
 import { type ExtensionContext, extensions, l10n, workspace } from 'vscode'
 
 import { getCacheManager } from '@/controllers/cache'
-import type { ExtensionManage } from '@/interfaces/vscode'
+import type { ExtensionManage } from '@/types/vscode'
 
 interface ThemeExtensionPackageJSON {
   contributes?: {

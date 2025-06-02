@@ -6,9 +6,9 @@ import {
   SVGIcon,
   SVGPlayground,
   ViewExportSVG,
-} from '@api/interfaces/ViewExportsSVG'
-import { AssetPath, OpenFile } from '@api/interfaces/views/content'
-import { ExtensionManage, ThemeMode, VsCodeStyles } from '@api/interfaces/vscode'
+} from '@api/types/ViewExportsSVG'
+import { AssetPath, OpenFile } from '@api/types/views/content'
+import { ExtensionManage, ThemeMode, VsCodeStyles } from '@api/types/vscode'
 
 /**
  * The message to receive from the webview.

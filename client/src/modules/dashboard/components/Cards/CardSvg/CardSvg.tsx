@@ -1,4 +1,4 @@
-import type { SVGComponent } from '@api/interfaces/ViewExportsSVG'
+import type { SVGComponent } from '@api/types/ViewExportsSVG'
 import { type BoxProps, Card, Tooltip, Typography } from '@mui/material'
 import type { FC } from 'react'
 

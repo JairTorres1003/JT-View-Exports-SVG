@@ -2,7 +2,7 @@ import { ConfigurationTarget, l10n, workspace } from 'vscode'
 
 import ConfigManagerController from './ConfigManagerController'
 
-import type { SVGFile } from '@/interfaces/ViewExportsSVG'
+import type { SVGFile } from '@/types/ViewExportsSVG'
 import { pathToSVGFile } from '@/utilities/files'
 
 export class AssetsPathsController extends ConfigManagerController<string[]> {

@@ -6,8 +6,8 @@ import { l10n, Position, Selection, TextEditorRevealType, Uri, window, workspace
 import { getUnknownError } from '../misc'
 import { getWorkspacePath } from '../vscode'
 
-import type { SVGFile } from '@/interfaces/ViewExportsSVG'
-import type { OpenFile } from '@/interfaces/views/content'
+import type { SVGFile } from '@/types/ViewExportsSVG'
+import type { OpenFile } from '@/types/views/content'
 
 /**
  * Gets the last modification timestamp of a file.

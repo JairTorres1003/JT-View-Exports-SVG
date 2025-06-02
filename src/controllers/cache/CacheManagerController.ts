@@ -10,8 +10,8 @@ import { FileModifiedCacheController } from './FileModifiedCacheController'
 import { IconCacheController } from './IconCacheController'
 
 import { CacheIconKind } from '@/enum/cache'
-import type { ExtractSVGExports, ViewExportSVG } from '@/interfaces/ViewExportsSVG'
-import type { ExtensionManage } from '@/interfaces/vscode'
+import type { ExtractSVGExports, ViewExportSVG } from '@/types/ViewExportsSVG'
+import type { ExtensionManage } from '@/types/vscode'
 
 /**
  * Cache manager to handle multiple file caches, one for each type.

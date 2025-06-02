@@ -7,6 +7,6 @@
     "moduleResolution": "node",
     "declaration": true
   },
-  "include": ["src/interfaces/**/*", "src/**/*"],
+  "include": ["src/types/**/*", "src/**/*"],
   "exclude": ["client", "examples/*", "server/*", "src/test/**/*"]
 }

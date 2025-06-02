@@ -13,17 +13,8 @@ import { getTagName } from './tags'
 
 import { REST_PROPS_KEY } from '@/constants/misc'
 import { SVGDeclaration } from '@/enum/ViewExportsSVG'
-import type {
-  HandlersDeclaration,
-  DeclarationExport,
-  ExtractComponent,
-} from '@/interfaces/svg/extracts'
-import type {
-  SVGComponent,
-  ExtractSVGExports,
-  SVGFile,
-  SVGLocation,
-} from '@/interfaces/ViewExportsSVG'
+import type { HandlersDeclaration, DeclarationExport, ExtractComponent } from '@/types/svg/extracts'
+import type { SVGComponent, ExtractSVGExports, SVGFile, SVGLocation } from '@/types/ViewExportsSVG'
 
 /**
  * Extracts an SVG component from a declaration export.

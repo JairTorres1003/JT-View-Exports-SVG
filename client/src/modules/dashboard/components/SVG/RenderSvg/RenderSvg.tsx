@@ -1,4 +1,4 @@
-import type { SVGComponent, SVGComponentProps } from '@api/interfaces/ViewExportsSVG'
+import type { SVGComponent, SVGComponentProps } from '@api/types/ViewExportsSVG'
 import cn from 'classnames'
 import { createElement, forwardRef, useEffect } from 'react'
 import { useTranslation } from 'react-i18next'

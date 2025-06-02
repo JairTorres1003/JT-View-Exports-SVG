@@ -1,4 +1,4 @@
-import type { ViewExportSVG } from '@api/interfaces/ViewExportsSVG'
+import type { ViewExportSVG } from '@api/types/ViewExportsSVG'
 import * as monaco from 'monaco-editor'
 
 import { createInsertText, replaceSnippetValues } from '@/core/utils/vs/editor'

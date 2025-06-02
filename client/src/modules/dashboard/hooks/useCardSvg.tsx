@@ -1,5 +1,5 @@
 import { SVGReceiveMessage } from '@api/enums/ViewExportsSVG'
-import type { SVGComponent, SVGIcon } from '@api/interfaces/ViewExportsSVG'
+import type { SVGComponent, SVGIcon } from '@api/types/ViewExportsSVG'
 import { Trans, useTranslation } from 'react-i18next'
 import { useDispatch } from 'react-redux'
 

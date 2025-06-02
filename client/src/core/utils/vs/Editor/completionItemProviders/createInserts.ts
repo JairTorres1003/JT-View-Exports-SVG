@@ -1,4 +1,4 @@
-import type { ParamDefinition } from '@api/interfaces/misc'
+import type { ParamDefinition } from '@api/types/misc'
 
 /**
  * Generates a snippet string for inserting a property into code,

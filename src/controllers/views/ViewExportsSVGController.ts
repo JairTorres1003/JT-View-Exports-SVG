@@ -4,7 +4,7 @@ import { ListerWebviewController } from '../listener'
 
 import { CONFIG_KEY } from '@/constants/misc'
 import { SVGPostMessage } from '@/enum/ViewExportsSVG'
-import type { SVGErrors, ViewExportSVG } from '@/interfaces/ViewExportsSVG'
+import type { SVGErrors, ViewExportSVG } from '@/types/ViewExportsSVG'
 import { isEmpty } from '@/utilities/misc'
 import { WebviewContent } from '@/views/WebviewContent'
 

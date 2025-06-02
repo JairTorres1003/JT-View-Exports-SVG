@@ -1,4 +1,4 @@
-import type { SVGComponent } from '@api/interfaces/ViewExportsSVG'
+import type { SVGComponent } from '@api/types/ViewExportsSVG'
 import * as monaco from 'monaco-editor'
 
 import { createInsertText } from '@/core/utils/vs/editor'

@@ -1,5 +1,5 @@
 import { SVGPostMessage, SVGReceiveMessage } from '@api/enums/ViewExportsSVG'
-import type { VsCodeStyles } from '@api/interfaces/vscode'
+import type { VsCodeStyles } from '@api/types/vscode'
 import { createTheme, type Theme } from '@mui/material'
 import type {} from '@mui/material/themeCssVarsAugmentation'
 import { useEffect, useMemo } from 'react'

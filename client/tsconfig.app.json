@@ -30,10 +30,10 @@
     "paths": {
       "@/*": ["src/*"],
       "@api/enums/*": ["../src/enum/*"],
-      "@api/interfaces/*": ["../src/interfaces/*"]
+      "@api/types/*": ["../src/types/*"]
     },
 
     "typeRoots": ["./node_modules/@types"]
   },
-  "include": ["src", "../src/enum", "../src/interfaces"]
+  "include": ["src", "../src/enum", "../src/types"]
 }

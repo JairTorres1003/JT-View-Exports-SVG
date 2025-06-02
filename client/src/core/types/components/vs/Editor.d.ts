@@ -1,4 +1,4 @@
-import type { ExtensionManage } from '@api/interfaces/vscode'
+import type { ExtensionManage } from '@api/types/vscode'
 import type * as monaco from 'monaco-editor'
 
 export interface EditorProps {

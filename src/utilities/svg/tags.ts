@@ -4,8 +4,8 @@ import { camelCase } from 'lodash'
 import { isEmpty } from '../misc'
 
 import { SVG_TAGS } from '@/constants/svg/tags'
-import type { SVGTagName, GetSVGTagName, GetTagName } from '@/interfaces/svg/tags'
-import type { SVGLocation, SVGFile } from '@/interfaces/ViewExportsSVG'
+import type { SVGTagName, GetSVGTagName, GetTagName } from '@/types/svg/tags'
+import type { SVGLocation, SVGFile } from '@/types/ViewExportsSVG'
 
 /**
  * Retrieves the tag name from a JSXOpeningElement and provides additional information.

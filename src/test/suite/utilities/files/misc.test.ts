@@ -7,7 +7,7 @@ import { Uri, window } from 'vscode'
 
 import { testFolderUri } from '../../main.test'
 
-import type { SVGFile } from '@/interfaces/ViewExportsSVG'
+import type { SVGFile } from '@/types/ViewExportsSVG'
 import {
   getFileTimestamp,
   getLanguageFromFile,

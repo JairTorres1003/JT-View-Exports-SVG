@@ -1,5 +1,5 @@
 import { SVGPostMessage, SVGReceiveMessage } from '@api/enums/ViewExportsSVG'
-import type { ViewExportSVG } from '@api/interfaces/ViewExportsSVG'
+import type { ViewExportSVG } from '@api/types/ViewExportsSVG'
 import { useEffect, useState } from 'react'
 
 import { vscode } from '@/services/vscode'

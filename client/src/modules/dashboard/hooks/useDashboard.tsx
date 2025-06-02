@@ -1,5 +1,5 @@
 import { SVGReceiveMessage, SVGPostMessage } from '@api/enums/ViewExportsSVG'
-import type { SVGErrors, ViewExportSVG } from '@api/interfaces/ViewExportsSVG'
+import type { SVGErrors, ViewExportSVG } from '@api/types/ViewExportsSVG'
 import { useEffect, useState } from 'react'
 import { useDispatch } from 'react-redux'
 

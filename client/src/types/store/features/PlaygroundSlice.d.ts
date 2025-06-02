@@ -1,4 +1,4 @@
-import { SVGComponent } from '@api/interfaces/ViewExportsSVG'
+import { SVGComponent } from '@api/types/ViewExportsSVG'
 import { AlertProps, SnackbarOrigin } from '@mui/material'
 import { type CaseReducer, type PayloadAction } from '@reduxjs/toolkit'
 import { ReactNode } from 'react'

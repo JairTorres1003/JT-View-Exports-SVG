@@ -11,7 +11,7 @@ import { getFileTimestamp, pathToSVGFile } from './misc'
 import { REGEX_FILE } from '@/constants/regex'
 import { getCacheManager } from '@/controllers/cache'
 import { AssetsPathsController, ShowNotExportedIconsController } from '@/controllers/config'
-import type { SVGFile, ViewExportSVG } from '@/interfaces/ViewExportsSVG'
+import type { SVGFile, ViewExportSVG } from '@/types/ViewExportsSVG'
 
 /**
  * Processes the selected files and extracts SVG exports from them.

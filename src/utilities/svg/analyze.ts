@@ -6,8 +6,8 @@ import { getPropertyValues, propertyManager } from '../properties'
 import { getChildFragments } from './children'
 
 import { REST_PROPS_KEY } from '@/constants/misc'
-import type { ParamsTypes } from '@/interfaces/misc'
-import type { SVGFile } from '@/interfaces/ViewExportsSVG'
+import type { ParamsTypes } from '@/types/misc'
+import type { SVGFile } from '@/types/ViewExportsSVG'
 
 /**
  * Analyzes the parameters of a node and performs certain actions based on the parameter type.

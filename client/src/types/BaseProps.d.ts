@@ -1,4 +1,4 @@
-import { VsCodeStyles } from '@api/interfaces/vscode'
+import { VsCodeStyles } from '@api/types/vscode'
 import type { Theme, Components } from '@mui/material/styles'
 
 export interface ProviderProps {

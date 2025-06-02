@@ -6,8 +6,8 @@ import { getProperties, getPropertyValues, propertyManager } from '../properties
 
 import { getSVGTagName } from './tags'
 
-import type { GetChildAttributes } from '@/interfaces/svg/SVGComponent'
-import type { SVGComponentProps, SVGErrors, SVGFile } from '@/interfaces/ViewExportsSVG'
+import type { GetChildAttributes } from '@/types/svg/SVGComponent'
+import type { SVGComponentProps, SVGErrors, SVGFile } from '@/types/ViewExportsSVG'
 
 /**
  * Retrieves the first JSX element from an array of JSX elements' children that contains child fragments.

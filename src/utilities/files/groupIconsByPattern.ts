@@ -3,7 +3,7 @@ import { minimatch } from 'minimatch'
 import { isEmpty } from '../misc'
 
 import { GroupPatternsController } from '@/controllers/config'
-import type { ViewExportSVG } from '@/interfaces/ViewExportsSVG'
+import type { ViewExportSVG } from '@/types/ViewExportsSVG'
 
 /**
  * Groups SVG exports by matching their groupKind with predefined patterns.
