@@ -58,6 +58,7 @@
     "@emotion/styled": "^11.14.0",
     "@mui/material": "^7.1.0",
     "@reduxjs/toolkit": "^2.8.2",
+    "@stylistic/eslint-plugin": "^4.4.0",
     "classnames": "^2.5.1",
     "color": "^5.0.0",
     "i18next": "^25.2.1",
@@ -76,7 +77,6 @@
   "devDependencies": {
     "@codingame/esbuild-import-meta-url-plugin": "^1.0.3",
     "@eslint/js": "^9.25.0",
-    "@stylistic/eslint-plugin-ts": "^4.2.0",
     "@types/color": "^4.2.0",
     "@types/react": "^19.1.2",
     "@types/react-dom": "^19.1.2",

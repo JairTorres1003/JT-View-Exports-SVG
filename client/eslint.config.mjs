@@ -1,5 +1,5 @@
 import js from '@eslint/js'
-import stylisticTs from '@stylistic/eslint-plugin-ts'
+import stylistic from '@stylistic/eslint-plugin'
 import eslintConfigLove from 'eslint-config-love'
 import eslintPluginPrettier from 'eslint-plugin-prettier/recommended'
 import eslintPluginReact from 'eslint-plugin-react'
@@ -51,7 +51,7 @@ export default tseslint.config(
       '@typescript-eslint': tseslint.plugin,
       'react-hooks': reactHooks,
       'react-refresh': reactRefresh,
-      '@stylistic/ts': stylisticTs,
+      '@stylistic': stylistic,
     },
     settings: {
       react: {
@@ -86,7 +86,7 @@ export default tseslint.config(
       'react-hooks/exhaustive-deps': STATE.OFF,
       'react/react-in-jsx-scope': STATE.OFF,
       'react/prop-types': STATE.OFF,
-      '@stylistic/ts/lines-around-comment': [STATE.ERROR, { beforeBlockComment: false }],
+      '@stylistic/lines-around-comment': [STATE.ERROR, { beforeBlockComment: false }],
       complexity: [STATE.WARN, { max: 30 }],
       'import/order': [
         STATE.ERROR,
