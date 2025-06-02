@@ -21,7 +21,9 @@
     "Search": "Search",
     "Clear": "Clear",
     "Copied {{value}} to clipboard": "Copied <b>{{value}}</b> to clipboard",
-    "Close": "Close"
+    "Close": "Close",
+    "RecentIcons": "Recent Icons",
+    "FavoriteIcons": "Favorite Icons"
   },
   "pickers": {
     "color": {

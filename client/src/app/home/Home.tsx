@@ -1,9 +1,40 @@
 import React from 'react'
+import { useSelector } from 'react-redux'
 
+import { homePageClasses } from './Home.classes'
 import { BoxHomePage } from './Home.style'
 
+import { LoadingPage } from '@/core/components/LoadingPage'
+import ResizableBox from '@/core/components/Resizable/ResizableBox'
+import RecentContainer from '@/modules/home/components/RecentContainer/RecentContainer'
+
+const devToolsPanelId = 'devTools-home-panel'
+
 const HomePage: React.FC = () => {
-  return <BoxHomePage>Home Page</BoxHomePage>
+  const [loading, setLoading] = React.useState(true)
+  const { showRecentIcons } = useSelector((state) => state.global.configuration)
+
+  React.useEffect(() => {
+    setTimeout(() => {
+      setLoading(false)
+    }, 300)
+  }, [])
+
+  if (loading) {
+    return <LoadingPage />
+  }
+
+  return (
+    <BoxHomePage>
+      <ResizableBox
+        className={homePageClasses.content}
+        containerId={devToolsPanelId}
+        hideCloseButton
+      >
+        {showRecentIcons && <RecentContainer />}
+      </ResizableBox>
+    </BoxHomePage>
+  )
 }
 
 export default HomePage

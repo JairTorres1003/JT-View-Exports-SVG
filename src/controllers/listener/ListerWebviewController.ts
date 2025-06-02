@@ -14,6 +14,7 @@ import {
   AssetsPathsController,
   DefaultExpandAllController,
   LastScanDateController,
+  RecentIconsShowController,
 } from '../config'
 
 import { expandedIcons, toggleDevTools } from '@/commands'
@@ -30,6 +31,7 @@ import {
 import { type FuncPostMessage } from '@/interfaces/views/PostMessage'
 import { type ReceiveMessage, type HandlerReceiveMessage } from '@/interfaces/views/ReceiveMessage'
 import { openFile, pathToSVGFile, scanningFiles, scanningWorkspace } from '@/utilities/files'
+import { getIconsFromCache } from '@/utilities/icons/getIconsFromCache'
 import { getUnknownError, isEmpty } from '@/utilities/misc'
 import { filteredExports, playground } from '@/utilities/svg'
 import {
@@ -157,6 +159,7 @@ export class ListerWebviewController {
 
     this._postMessage(SVGPostMessage.SendUpdateConfiguration, {
       renderPath: processedFiles > 0 ? '/dashboard' : '/',
+      showRecentIcons: new RecentIconsShowController().isShow(),
     })
 
     toggleViewActions(processedFiles > 0).catch(console.error)
@@ -339,13 +342,12 @@ export class ListerWebviewController {
    */
   private _getIconsFromCache(isRecent: boolean) {
     return (): void => {
-      const { RecentIconCache, FavoritesIconCache } = getCacheManager()
+      const configRecent = new RecentIconsShowController()
 
-      if (isEmpty(workspace.workspaceFolders)) return
+      if (isRecent && !configRecent.isShow()) return
 
-      const cache = isRecent ? RecentIconCache : FavoritesIconCache
-      const icons = cache.getIcons(workspace.workspaceFolders[0].uri)
-      console.info(icons)
+      const icons = getIconsFromCache(isRecent)
+      this._postMessage(SVGPostMessage.SendRecentIcons, icons)
     }
   }
 

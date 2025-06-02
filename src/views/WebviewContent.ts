@@ -5,6 +5,7 @@ import { type Webview, type Uri, env, l10n } from 'vscode'
 import {
   DefaultClickToOpenDevToolsController,
   DefaultExpandAllController,
+  RecentIconsShowController,
 } from '@/controllers/config'
 import { type GetWebviewAssets } from '@/interfaces/views/content'
 import { type ManifestContent } from '@/interfaces/views/WebviewContent'
@@ -106,6 +107,7 @@ export class WebviewContent {
   private scriptConfiguration(): string {
     const config = new DefaultExpandAllController()
     const devConfig = new DefaultClickToOpenDevToolsController()
+    const recentConfig = new RecentIconsShowController()
     const nonce = getNonce()
     const initialPath = this._processedFiles > 0 ? '/dashboard' : '/'
 
@@ -117,6 +119,7 @@ export class WebviewContent {
             _DEFAULT_EXPAND_ALL: ${config.isExpandAll()},
             _DEFAULT_CLIC_TO_OPEN_DEV_TOOLS: ${devConfig.isDefaultOpen()},
             _INITIAL_RENDER_PATH: "${initialPath}",
+            _RECENT_ICONS_SHOW: ${recentConfig.isShow()},
           }
         };
       </script>

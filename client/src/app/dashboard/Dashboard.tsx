@@ -5,9 +5,9 @@ import { dashboardPageClasses } from './Dashboard.classes'
 import { BoxDashboardPage } from './Dashboard.style'
 
 import { LoadingPage } from '@/core/components/LoadingPage'
+import ResizableBox from '@/core/components/Resizable/ResizableBox'
 import { ContainerComponents } from '@/modules/dashboard/components/ContainerComponents'
 import { DevTools } from '@/modules/dashboard/components/DevTools'
-import ResizableDashboard from '@/modules/dashboard/components/Resizable/ResizableDashboard'
 import { SearchBar } from '@/modules/dashboard/components/SearchBar'
 import { useDashboard } from '@/modules/dashboard/hooks/useDashboard'
 
@@ -23,10 +23,10 @@ const DashboardPage: React.FC = () => {
 
   return (
     <BoxDashboardPage>
-      <ResizableDashboard className={dashboardPageClasses.content} devTootsId={devToolsPanelId}>
+      <ResizableBox className={dashboardPageClasses.content} containerId={devToolsPanelId}>
         <SearchBar />
         <ContainerComponents />
-      </ResizableDashboard>
+      </ResizableBox>
       <DevTools id={devToolsPanelId} />
     </BoxDashboardPage>
   )

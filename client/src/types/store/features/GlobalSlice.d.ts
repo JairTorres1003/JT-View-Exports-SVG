@@ -50,6 +50,11 @@ export interface GlobalState {
      * @default '/'
      */
     renderPath: string
+    /**
+     * Whether to show recent icons.
+     * @default true
+     */
+    showRecentIcons: boolean
   }
 }
 

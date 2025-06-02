@@ -6,20 +6,18 @@ import { useDispatch, useSelector } from 'react-redux'
 import { vscode } from '@/services/vscode'
 import { setIsSelecting } from '@/store/features/PlaygroundSlice'
 
-interface ResizableDashboardHook {
+interface ResizableBoxHook {
   resizableWidth: string
   onResizeStart: ResizeStartCallback
   onResizeStop: ResizeCallback
   onResetSize: VoidFunction
 }
 
-interface ResizableDashboardHookProps {
-  readonly devTootsId: string
+interface ResizableBoxHookProps {
+  readonly containerId: string
 }
 
-export const useResizableDashboard = ({
-  devTootsId,
-}: ResizableDashboardHookProps): ResizableDashboardHook => {
+export const useResizableBox = ({ containerId }: ResizableBoxHookProps): ResizableBoxHook => {
   const [resizableWidth, setResizableWidth] = useState('100%')
   const [lastWidth, setLastWidth] = useState('75%')
 
@@ -56,7 +54,7 @@ export const useResizableDashboard = ({
     const minExpander = 80
 
     if (window.innerWidth - width > minExpander) {
-      const minWidth = document.getElementById(devTootsId)?.clientWidth ?? 170
+      const minWidth = document.getElementById(containerId)?.clientWidth ?? 170
       const percentage = (minWidth * 100) / window.innerWidth
       const newWidth = 100 - percentage
       setResizableWidth(`${newWidth}%`)
@@ -95,6 +93,9 @@ export const useResizableDashboard = ({
     vscode.onMessage(SVGPostMessage.SendToggleOpenDevTools, onToggleOpenDevTools)
 
     return () => {
+      setLastWidth('75%')
+      setResizableWidth('100%')
+      dispatch(setIsSelecting(false))
       vscode.unregisterMessage(SVGPostMessage.SendToggleOpenDevTools)
     }
   }, [])
