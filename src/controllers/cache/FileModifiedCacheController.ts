@@ -49,7 +49,7 @@ export class FileModifiedCacheController<T> {
     if (lastModified > item.lastModified) {
       if (key in this.cache) {
         // Remove the entry if file has been modified
-        const { [key]: omitted, ...rest } = this.cache
+        const { [key]: _omitted, ...rest } = this.cache
         this.cache = rest
         this.saveCache()
       }
@@ -74,7 +74,7 @@ export class FileModifiedCacheController<T> {
    * @param key - The key (file path) to delete from the cache.
    */
   delete(key: string): void {
-    const { [key]: omitted, ...rest } = this.cache
+    const { [key]: _omitted, ...rest } = this.cache
     this.cache = rest
     this.saveCache()
   }

@@ -3,15 +3,14 @@ import { minimatch } from 'minimatch'
 import { isEmpty } from '../misc'
 
 import { GroupPatternsController } from '@/controllers/config'
-import { type ViewExportSVG } from '@/interfaces/ViewExportsSVG'
+import type { ViewExportSVG } from '@/interfaces/ViewExportsSVG'
 
 /**
  * Groups SVG exports by matching their groupKind with predefined patterns.
  *
  * @param SVGExports - The array of SVG exports to be grouped.
- * @returns A promise that resolves to an array of grouped SVG exports.
  */
-export async function groupIconsByPattern(SVGExports: ViewExportSVG[]): Promise<ViewExportSVG[]> {
+export function groupIconsByPattern(SVGExports: ViewExportSVG[]): ViewExportSVG[] {
   const groupPatterns = new GroupPatternsController()._patternsArray
 
   if (groupPatterns.length === 0) return SVGExports

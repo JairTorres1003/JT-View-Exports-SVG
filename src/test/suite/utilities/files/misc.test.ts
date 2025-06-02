@@ -7,7 +7,7 @@ import { Uri, window } from 'vscode'
 
 import { testFolderUri } from '../../main.test'
 
-import { type SVGFile } from '@/interfaces/ViewExportsSVG'
+import type { SVGFile } from '@/interfaces/ViewExportsSVG'
 import {
   getFileTimestamp,
   getLanguageFromFile,
@@ -17,28 +17,28 @@ import {
 
 suite('getFileTimestamp Utility Function', () => {
   const folderUri = Uri.joinPath(testFolderUri, 'assets')
-  let statSyncStub: sinon.SinonStub
+  let statSyncStub: sinon.SinonStub | undefined = undefined
 
   setup(() => {
     statSyncStub = sinon.stub(fs, 'statSync')
   })
 
   teardown(() => {
-    statSyncStub.restore()
+    statSyncStub?.restore()
   })
 
   test('it should return the last modification timestamp of a file', () => {
     const filePath1 = Uri.joinPath(folderUri, 'test-1.js').fsPath
     const expectedTimestamp1 = 1720802491
 
-    statSyncStub.withArgs(filePath1).returns({ mtime: { getTime: () => expectedTimestamp1 } })
+    statSyncStub?.withArgs(filePath1).returns({ mtime: { getTime: () => expectedTimestamp1 } })
     assert.strictEqual(getFileTimestamp(filePath1), expectedTimestamp1)
   })
 
   test('it should return 0 if the file does not exist', () => {
     const filePath2 = Uri.joinPath(folderUri, 'nonexistent.ts').fsPath
 
-    statSyncStub.withArgs(filePath2).throws(new Error('File not found'))
+    statSyncStub?.withArgs(filePath2).throws(new Error('File not found'))
     assert.strictEqual(getFileTimestamp(filePath2), 0)
   })
 })
@@ -91,7 +91,7 @@ suite('openFile Utility Function', () => {
 
   openFile({ file, position: { column: 14, line: 43, index: 3 } })
 
-  test('it should open a file in the editor at the specified position', async () => {
+  test('it should open a file in the editor at the specified position', () => {
     const editor = window.activeTextEditor
 
     assert.strictEqual(editor?.document.fileName, currentFile)

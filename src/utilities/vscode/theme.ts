@@ -1,7 +1,7 @@
-import { window, workspace } from 'vscode'
+import { ColorThemeKind, window, workspace } from 'vscode'
 
 import { DEFAULT_FONT_FAMILY } from '@/constants/misc'
-import { type VsCodeStyles, type ThemeMode } from '@/interfaces/vscode'
+import type { VsCodeStyles, ThemeMode } from '@/interfaces/vscode'
 
 /**
  * Gets the current color theme of the Visual Studio Code editor.
@@ -13,7 +13,9 @@ export function getCurrentTheme(): ThemeMode {
 
   // Check if the kind value corresponds to a "light" theme (1, 4) or "dark" theme (2, 3)
   // and return the appropriate theme name
-  return currentTheme === 1 || currentTheme === 4 ? 'light' : 'dark'
+  return currentTheme === ColorThemeKind.Light || currentTheme === ColorThemeKind.HighContrastLight
+    ? 'light'
+    : 'dark'
 }
 
 /**

@@ -4,7 +4,7 @@ import { ListerWebviewController } from '../listener'
 
 import { CONFIG_KEY } from '@/constants/misc'
 import { SVGPostMessage } from '@/enum/ViewExportsSVG'
-import { type SVGErrors, type ViewExportSVG } from '@/interfaces/ViewExportsSVG'
+import type { SVGErrors, ViewExportSVG } from '@/interfaces/ViewExportsSVG'
 import { isEmpty } from '@/utilities/misc'
 import { WebviewContent } from '@/views/WebviewContent'
 
@@ -72,7 +72,7 @@ export class ViewExportsSVGController extends ListerWebviewController {
   public static render(
     extensionUri: Uri,
     viewExportSVG: ViewExportSVG[],
-    processedFiles: number = 0
+    processedFiles = 0
   ): void {
     const column = window.activeTextEditor?.viewColumn ?? ViewColumn.One
 

@@ -6,8 +6,8 @@ import { l10n, Position, Selection, TextEditorRevealType, Uri, window, workspace
 import { getUnknownError } from '../misc'
 import { getWorkspacePath } from '../vscode'
 
-import { type SVGFile } from '@/interfaces/ViewExportsSVG'
-import { type OpenFile } from '@/interfaces/views/content'
+import type { SVGFile } from '@/interfaces/ViewExportsSVG'
+import type { OpenFile } from '@/interfaces/views/content'
 
 /**
  * Gets the last modification timestamp of a file.
@@ -21,7 +21,7 @@ export function getFileTimestamp(filePath: string): number {
     // Extract the modification timestamp (mtime) and return it
     const timestamp = stats.mtime.getTime()
     return timestamp
-  } catch (error) {
+  } catch {
     return 0
   }
 }
@@ -35,7 +35,7 @@ export async function getLanguageFromFile(file: Uri): Promise<string> {
   try {
     const document = await workspace.openTextDocument(file)
     return document.languageId ?? 'javascript'
-  } catch (error) {
+  } catch {
     return 'javascript'
   }
 }

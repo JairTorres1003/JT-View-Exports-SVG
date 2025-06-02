@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/require-await -- This function is designed to be asynchronous */
 import traverse from '@babel/traverse'
 import * as t from '@babel/types'
 import { l10n } from 'vscode'
@@ -12,16 +13,16 @@ import { getTagName } from './tags'
 
 import { REST_PROPS_KEY } from '@/constants/misc'
 import { SVGDeclaration } from '@/enum/ViewExportsSVG'
-import {
-  type HandlersDeclaration,
-  type DeclarationExport,
-  type ExtractComponent,
+import type {
+  HandlersDeclaration,
+  DeclarationExport,
+  ExtractComponent,
 } from '@/interfaces/svg/extracts'
-import {
-  type SVGComponent,
-  type ExtractSVGExports,
-  type SVGFile,
-  type SVGLocation,
+import type {
+  SVGComponent,
+  ExtractSVGExports,
+  SVGFile,
+  SVGLocation,
 } from '@/interfaces/ViewExportsSVG'
 
 /**
@@ -52,7 +53,7 @@ export async function extractSVGComponent(
           const types = getNodeTypes(component.params)
           const withRestProps = REST_PROPS_KEY in component.params
 
-          return { ...component, name, location, types, withRestProps }
+          return await Promise.resolve({ ...component, name, location, types, withRestProps })
         }
       }
     } catch (error) {
@@ -84,14 +85,14 @@ export async function extractSVGData(file: SVGFile): Promise<ExtractSVGExports> 
      * @param SVGdeclaration - The type of SVG declaration.
      * @param isExported - A boolean indicating if the SVG component is exported.
      * @param svgResult - The SVG component to be extracted.
-     * @returns A promise that resolves to void.
+     * @returns A promise that resolves to null.
      */
     const handleExtraction = async (
       declaration: DeclarationExport,
       SVGdeclaration: SVGDeclaration,
       isExported: boolean,
       svgResult?: Omit<SVGComponent, 'declaration' | 'isExported'>
-    ): Promise<void> => {
+    ): Promise<null> => {
       if (!isEmpty(svgResult)) {
         const result: SVGComponent = { ...svgResult, declaration: SVGdeclaration, isExported }
 
@@ -102,6 +103,8 @@ export async function extractSVGData(file: SVGFile): Promise<ExtractSVGExports> 
           noExportComponents.push(result)
         }
       }
+
+      return await Promise.resolve(null)
     }
 
     /**
@@ -205,7 +208,7 @@ export async function extractIconComponent(
   try {
     const ast = parserContent(component)
     let hasErrors = false
-    let errors: ExtractComponent['errors']
+    let errors: ExtractComponent['errors'] = undefined
 
     traverse(ast, {
       JSXElement(path) {

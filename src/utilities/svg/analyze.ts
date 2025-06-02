@@ -7,7 +7,7 @@ import { getChildFragments } from './children'
 
 import { REST_PROPS_KEY } from '@/constants/misc'
 import type { ParamsTypes } from '@/interfaces/misc'
-import { type SVGFile } from '@/interfaces/ViewExportsSVG'
+import type { SVGFile } from '@/interfaces/ViewExportsSVG'
 
 /**
  * Analyzes the parameters of a node and performs certain actions based on the parameter type.
@@ -74,7 +74,7 @@ export function analyzeExportType(
   params?: Record<string, unknown>
 ): t.JSXElement | undefined {
   if (t.isArrowFunctionExpression(node) || t.isFunctionDeclaration(node)) {
-    let element: t.JSXElement | undefined
+    let element: t.JSXElement | undefined = undefined
 
     if (t.isJSXElement(node.body) || t.isJSXFragment(node.body)) {
       element = getChildFragments([node.body], file)

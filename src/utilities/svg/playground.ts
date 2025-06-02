@@ -8,7 +8,7 @@ import { extractIconComponent, extractSVGComponent } from './extracts'
 import { REST_PROPS_KEY } from '@/constants/misc'
 import { REGEX_TAG_NAME } from '@/constants/regex'
 import { getCacheManager } from '@/controllers/cache'
-import { type SVGErrors, type SVGComponent, type SVGPlayground } from '@/interfaces/ViewExportsSVG'
+import type { SVGErrors, SVGComponent, SVGPlayground } from '@/interfaces/ViewExportsSVG'
 
 /**
  * Generates an SVG component or returns an error message based on the provided parameters.

@@ -29,13 +29,15 @@ export class DefaultIconPropertiesController extends ConfigManagerController<
     }
 
     for (const key in properties) {
-      try {
-        properties[key] = JSON.parse(properties[key] as string)
-      } catch (error) {
-        if (properties[key] === 'undefined') {
-          properties[key] = undefined
-        } else if (properties[key] === 'null') {
-          properties[key] = null
+      if (Object.prototype.hasOwnProperty.call(properties, key)) {
+        try {
+          properties[key] = JSON.parse(properties[key] as string)
+        } catch {
+          if (properties[key] === 'undefined') {
+            properties[key] = undefined
+          } else if (properties[key] === 'null') {
+            properties[key] = null
+          }
         }
       }
     }

@@ -1,6 +1,6 @@
 import { l10n } from 'vscode'
 
-import { type SVGComponent, type SVGErrors, type ViewExportSVG } from '@/interfaces/ViewExportsSVG'
+import type { SVGComponent, SVGErrors, ViewExportSVG } from '@/interfaces/ViewExportsSVG'
 
 /**
  * Filters the array of `SVGComponent` objects based on the provided query.

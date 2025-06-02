@@ -7,15 +7,15 @@ import {
   DefaultExpandAllController,
   RecentIconsShowController,
 } from '@/controllers/config'
-import { type GetWebviewAssets } from '@/interfaces/views/content'
-import { type ManifestContent } from '@/interfaces/views/WebviewContent'
+import type { GetWebviewAssets } from '@/interfaces/views/content'
+import type { ManifestContent } from '@/interfaces/views/WebviewContent'
 import { getNonce } from '@/utilities/files'
 import { getUri } from '@/utilities/vscode'
 
 export class WebviewContent {
   private readonly _webview: Webview
   private readonly _extensionUri: Uri
-  private content: string = ''
+  private content = ''
   private readonly manifest: ManifestContent
   private readonly _processedFiles: number
 

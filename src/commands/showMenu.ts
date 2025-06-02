@@ -1,7 +1,7 @@
-import { type ExtensionContext, type Uri } from 'vscode'
+import type { ExtensionContext, Uri } from 'vscode'
 
 import { ViewExportsSVGController } from '@/controllers/views'
-import { type ViewExportSVG } from '@/interfaces/ViewExportsSVG'
+import type { ViewExportSVG } from '@/interfaces/ViewExportsSVG'
 import { processFiles } from '@/utilities/files'
 import { isEmpty } from '@/utilities/misc'
 

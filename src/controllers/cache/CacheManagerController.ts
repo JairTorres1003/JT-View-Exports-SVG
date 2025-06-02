@@ -10,8 +10,8 @@ import { FileModifiedCacheController } from './FileModifiedCacheController'
 import { IconCacheController } from './IconCacheController'
 
 import { CacheIconKind } from '@/enum/cache'
-import { type ExtractSVGExports, type ViewExportSVG } from '@/interfaces/ViewExportsSVG'
-import { type ExtensionManage } from '@/interfaces/vscode'
+import type { ExtractSVGExports, ViewExportSVG } from '@/interfaces/ViewExportsSVG'
+import type { ExtensionManage } from '@/interfaces/vscode'
 
 /**
  * Cache manager to handle multiple file caches, one for each type.
@@ -60,7 +60,7 @@ class CacheManagerController {
   }
 }
 
-let cacheManager: CacheManagerController
+let cacheManager: CacheManagerController | undefined = undefined
 
 /**
  * Initializes the cache manager. Should be called once from the `activate` function of your extension.

@@ -23,8 +23,12 @@ export function getProperties(
     if (t.isJSXAttribute(attr)) {
       const { name, value } = attr
 
-      // Store the attribute value in the props object using camelCase format for the attribute name
-      const propKey = camelCase(((name.name ?? '') as string).toString())
+      let propName = ''
+      if (t.isJSXIdentifier(name)) {
+        propName = name.name
+      }
+
+      const propKey = camelCase(propName)
       props[propKey] = getPropertyValues(value, defaultProperties)
     } else if (t.isJSXSpreadAttribute(attr)) {
       const restPros = getPropertyValues(attr.argument, defaultProperties) ?? {}

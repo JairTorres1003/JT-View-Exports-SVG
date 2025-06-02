@@ -5,8 +5,8 @@ import { isEmpty } from '../misc'
 
 import { getCacheManager } from '@/controllers/cache'
 import { ShowNotExportedIconsController } from '@/controllers/config'
-import { type SVGIconCache } from '@/interfaces/cache'
-import { type SVGComponent, type ViewExportSVG } from '@/interfaces/ViewExportsSVG'
+import type { SVGIconCache } from '@/interfaces/cache'
+import type { SVGComponent, ViewExportSVG } from '@/interfaces/ViewExportsSVG'
 
 /**
  * Retrieves a list of SVG icon components from the cache based on whether they are recent or favorites.

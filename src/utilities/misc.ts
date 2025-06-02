@@ -30,13 +30,12 @@ export const isEmpty = (
 
 /**
  * Returns the error message from an unknown error.
+ *
  * @param error - The unknown error from which to retrieve the message.
  * @returns The error message.
  */
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
-export const getUnknownError = (error: any): string => {
+export const getUnknownError = (error: unknown): string => {
   const unknownError = l10n.t('An unknown error occurred')
-
   if (isEmpty(error)) return unknownError
 
   if (typeof error === 'string') {
@@ -48,25 +47,17 @@ export const getUnknownError = (error: any): string => {
   }
 
   if (error instanceof Error || error instanceof TypeError) {
-    return error.message
+    return getUnknownError('response' in error ? error.response : error.message)
   }
 
-  if ('data' in error) {
-    const message = error.data.message
-    if (typeof message === 'string') {
-      return message
-    } else if (Array.isArray(message) && message.length > 0) {
-      return Object.values(message[0] as string[])[0]
-    }
-  }
+  if (typeof error === 'object' && error instanceof Object) {
+    const auxError = error as Record<string, unknown>
 
-  if ('message' in error) {
-    const message = error.message
-    if (typeof message === 'string') {
-      return message
-    } else if (Array.isArray(message) && message.length > 0) {
-      return Object.values(message[0] as string[])[0]
+    if ('error_description' in error && !isEmpty(auxError?.error_description)) {
+      return getUnknownError(auxError?.error_description)
     }
+
+    return getUnknownError(auxError?.message ?? auxError.data ?? auxError?.statusText)
   }
 
   return unknownError

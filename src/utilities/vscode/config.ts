@@ -15,14 +15,16 @@ export function getConfigurationEditor(): Record<string, unknown> {
   const configuration = workspace.getConfiguration('editor')
   const workbenchConfiguration = workspace.getConfiguration('workbench')
 
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any -- This is a workaround for the type issue
   const editorConfig: Record<string, any> = {}
 
   for (const key in configuration) {
-    const value = configuration.get(key)
+    if (Object.prototype.hasOwnProperty.call(configuration, key)) {
+      const value = configuration.get(key)
 
-    if (value !== undefined) {
-      editorConfig[`editor.${key}`] = value
+      if (value !== undefined) {
+        editorConfig[`editor.${key}`] = value
+      }
     }
   }
 

@@ -4,7 +4,7 @@ import * as path from 'path'
 import { type ExtensionContext, extensions, l10n, workspace } from 'vscode'
 
 import { getCacheManager } from '@/controllers/cache'
-import { type ExtensionManage } from '@/interfaces/vscode'
+import type { ExtensionManage } from '@/interfaces/vscode'
 
 interface ThemeExtensionPackageJSON {
   contributes?: {
@@ -66,7 +66,7 @@ export function initializeExtensionTheme(context: ExtensionContext): void {
         cachedTheme.set(CACHE_KEY, undefined, 0)
       }
     }
-  } catch (error) {
+  } catch {
     console.error(l10n.t('Failed to initialize the extension theme'))
   }
 }

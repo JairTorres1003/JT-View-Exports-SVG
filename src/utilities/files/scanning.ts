@@ -7,7 +7,7 @@ import { processFiles } from './processFiles'
 
 import { LastScanDateController } from '@/controllers/config'
 import { ViewExportsSVGController } from '@/controllers/views'
-import { type ViewExportSVG } from '@/interfaces/ViewExportsSVG'
+import type { ViewExportSVG } from '@/interfaces/ViewExportsSVG'
 
 /**
  * Scans the workspace

@@ -1,5 +1,5 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
-import { type BinaryExpression } from '@babel/types'
+/* eslint-disable @typescript-eslint/no-explicit-any -- This function is designed to handle various types of inputs, including numbers, strings, and booleans. */
+import type { BinaryExpression } from '@babel/types'
 
 /**
  * Performs a binary expression operation based on the provided operator and the given left and right operands.
@@ -59,7 +59,7 @@ export function getBinaryExpression(
       default:
         return undefined
     }
-  } catch (error) {
+  } catch {
     return undefined
   }
 }

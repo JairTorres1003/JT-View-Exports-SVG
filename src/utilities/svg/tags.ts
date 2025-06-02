@@ -4,8 +4,8 @@ import { camelCase } from 'lodash'
 import { isEmpty } from '../misc'
 
 import { SVG_TAGS } from '@/constants/svg/tags'
-import { type SVGTagName, type GetSVGTagName, type GetTagName } from '@/interfaces/svg/tags'
-import { type SVGLocation, type SVGFile } from '@/interfaces/ViewExportsSVG'
+import type { SVGTagName, GetSVGTagName, GetTagName } from '@/interfaces/svg/tags'
+import type { SVGLocation, SVGFile } from '@/interfaces/ViewExportsSVG'
 
 /**
  * Retrieves the tag name from a JSXOpeningElement and provides additional information.
@@ -19,7 +19,7 @@ export function getTagName(openingElement: t.JSXOpeningElement, file: SVGFile): 
     file,
   }
   let name: GetTagName['name'] = ''
-  let isMotion: boolean = false
+  let isMotion = false
 
   if (t.isJSXIdentifier(openingElement.name)) {
     name = openingElement.name.name

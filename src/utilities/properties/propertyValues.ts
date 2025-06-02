@@ -9,7 +9,7 @@ import { getUnaryExpression } from './unaryExpression'
 
 import { REST_PROPS_KEY } from '@/constants/misc'
 import { DefaultIconPropertiesController } from '@/controllers/config'
-import { type PropertyValue } from '@/interfaces/properties/propertyValues'
+import type { PropertyValue } from '@/interfaces/properties/propertyValues'
 
 /**
  * Retrieves the property values based on the provided value and properties.
@@ -20,7 +20,7 @@ import { type PropertyValue } from '@/interfaces/properties/propertyValues'
 export function getPropertyValues(
   value: PropertyValue,
   properties: Record<string, unknown>
-): unknown | undefined {
+): unknown {
   if (isEmpty(value)) {
     return
   }
@@ -29,9 +29,9 @@ export function getPropertyValues(
   const defaultProps = config.getAllProperties()
 
   const restProps = (properties[REST_PROPS_KEY] ?? {}) as Record<string, unknown>
-  let valueA: unknown | undefined
-  let valueB: unknown | undefined
-  let valueAny: boolean | Record<string, unknown> | unknown[] | string | undefined
+  let valueA: unknown = undefined
+  let valueB: unknown = undefined
+  let valueAny: boolean | Record<string, unknown> | unknown[] | string | undefined = undefined
 
   switch (value.type) {
     case 'BooleanLiteral':

@@ -48,7 +48,7 @@ class PropertyManager {
   clean(key?: string): void {
     if (key !== undefined) {
       if (key in this.properties) {
-        const { [key]: omitted, ...rest } = this.properties
+        const { [key]: _omitted, ...rest } = this.properties
         this.properties = rest
       }
     } else {

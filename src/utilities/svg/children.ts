@@ -6,8 +6,8 @@ import { getProperties, getPropertyValues, propertyManager } from '../properties
 
 import { getSVGTagName } from './tags'
 
-import { type GetChildAttributes } from '@/interfaces/svg/SVGComponent'
-import { type SVGComponentProps, type SVGErrors, type SVGFile } from '@/interfaces/ViewExportsSVG'
+import type { GetChildAttributes } from '@/interfaces/svg/SVGComponent'
+import type { SVGComponentProps, SVGErrors, SVGFile } from '@/interfaces/ViewExportsSVG'
 
 /**
  * Retrieves the first JSX element from an array of JSX elements' children that contains child fragments.
@@ -21,7 +21,7 @@ export function getChildFragments(
 ): t.JSXElement | undefined {
   if (isEmpty(children)) return undefined
 
-  let element: t.JSXElement | undefined
+  let element: t.JSXElement | undefined = undefined
 
   for (const child of children) {
     if (!isEmpty(element)) {
@@ -57,7 +57,7 @@ export function getChildAttributes(
 ): GetChildAttributes {
   const components: SVGComponentProps['children'] = []
   const params = (propertyManager.get() ?? {}) as Record<string, unknown>
-  let errors: SVGErrors | undefined
+  let errors: SVGErrors | undefined = undefined
   let hasErrors = false
   let isMotion = false
 
@@ -114,7 +114,7 @@ export function getChildAttributes(
         processElement(value)
       } else {
         try {
-          components.push(`${value as string}`)
+          components.push(value as string)
         } catch (error) {
           hasErrors = true
           errors = {

@@ -6,7 +6,7 @@ import { isEmpty } from '../misc'
 
 import { getWorkspacePath } from './workspace'
 
-import { type SVGFile } from '@/interfaces/ViewExportsSVG'
+import type { SVGFile } from '@/interfaces/ViewExportsSVG'
 
 /**
  * A helper function which will get the webview URI of a given file or resource.

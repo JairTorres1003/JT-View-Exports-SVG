@@ -21,15 +21,10 @@ import { expandedIcons, toggleDevTools } from '@/commands'
 import { toggleViewActions } from '@/commands/editorTitleActions'
 import { CONFIG_KEY } from '@/constants/misc'
 import { SVGPostMessage, SVGReceiveMessage } from '@/enum/ViewExportsSVG'
-import { type HandlerArgs } from '@/interfaces/misc'
-import {
-  type ViewExportSVG,
-  type SVGFile,
-  type SVGPlayground,
-  type SVGIcon,
-} from '@/interfaces/ViewExportsSVG'
-import { type FuncPostMessage } from '@/interfaces/views/PostMessage'
-import { type ReceiveMessage, type HandlerReceiveMessage } from '@/interfaces/views/ReceiveMessage'
+import type { HandlerArgs } from '@/interfaces/misc'
+import type { ViewExportSVG, SVGFile, SVGPlayground, SVGIcon } from '@/interfaces/ViewExportsSVG'
+import type { FuncPostMessage } from '@/interfaces/views/PostMessage'
+import type { ReceiveMessage, HandlerReceiveMessage } from '@/interfaces/views/ReceiveMessage'
 import { openFile, pathToSVGFile, scanningFiles, scanningWorkspace } from '@/utilities/files'
 import { getIconsFromCache } from '@/utilities/icons/getIconsFromCache'
 import { getUnknownError, isEmpty } from '@/utilities/misc'

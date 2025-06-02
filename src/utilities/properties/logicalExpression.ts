@@ -1,5 +1,5 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
-import { type LogicalExpression } from '@babel/types'
+/* eslint-disable @typescript-eslint/no-explicit-any -- This function is designed to handle various types of inputs, including numbers, strings, and booleans. */
+import type { LogicalExpression } from '@babel/types'
 
 /**
  * Performs a logical expression operation based on the provided operator and the given left and right operands.
@@ -17,17 +17,13 @@ export function getLogicalExpression(
   try {
     switch (operator) {
       case '||':
-        // eslint-disable-next-line @typescript-eslint/strict-boolean-expressions
         return left || right
       case '&&':
-        // eslint-disable-next-line @typescript-eslint/strict-boolean-expressions
         return left && right
       case '??':
         return left ?? right
-      default:
-        break
     }
-  } catch (error) {
+  } catch {
     return undefined
   }
 }

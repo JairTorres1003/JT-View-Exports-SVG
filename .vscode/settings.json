@@ -1,14 +1,8 @@
-// Place your settings in this file to overwrite default and user settings.
 {
-  "files.exclude": {
-    "out": false // set this to true to exclude "out" folder from the explorer
-  },
   "search.exclude": {
-    "out": true // set this to false to include "out" folder in search results
+    "out": true
   },
-  // Turn off tsc task auto detection since we have the necessary tasks as npm scripts
   "typescript.tsc.autoDetect": "off",
-
   "cSpell.language": "en,es-ES",
   "cSpell.ignoreWords": ["Jair", "arrowParens", "ecmaVersion", "esnext", "mpath", "quasis"],
   "cSpell.ignorePaths": [
@@ -20,8 +14,6 @@
     ".vscode-insiders",
     ".github",
     "**/tsconfig.json",
-    "**/.eslintrc.cjs",
-    "**/.eslintrc",
     ".prettierrc"
   ],
   "deno.enable": true,
@@ -60,8 +52,6 @@
     }
   },
   "files.readonlyInclude": {
-    ".eslintrc.cjs": true,
-    ".eslintignore": true,
     ".prettierrc": true,
     ".prettierignore": true,
     ".lintstagedrc": true,
@@ -84,7 +74,7 @@
       "url": "./client/i18n.schema.json"
     },
     {
-      "fileMatch": ["client/src/core/assets/vs/Editor/keybindings.json"],
+      "fileMatch": ["client/public/vs/userConfiguration/keybindings.json"],
       "url": "vscode://schemas/keybindings"
     }
   ],

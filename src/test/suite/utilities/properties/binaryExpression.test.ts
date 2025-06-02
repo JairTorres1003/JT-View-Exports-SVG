@@ -1,7 +1,6 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
 import * as assert from 'assert'
 
-import { type BinaryExpression } from '@babel/types'
+import type { BinaryExpression } from '@babel/types'
 
 import { getBinaryExpression } from '@/utilities/properties/binaryExpression'
 
@@ -13,15 +12,15 @@ interface OperatorTest {
   /**
    * The left operand.
    */
-  left: any
+  left: unknown
   /**
    * The right operand.
    */
-  right: any
+  right: unknown
   /**
    * The expected result of the binary expression.
    */
-  result: any
+  result: unknown
 }
 
 /**
@@ -60,7 +59,7 @@ suite('Binary Expression Utility', () => {
       assert.strictEqual(
         result,
         test.result,
-        `Expected ${test.result} but got ${result} for operator (${test.operator})`
+        `Expected ${String(test.result)} but got ${result} for operator (${test.operator})`
       )
     })
 

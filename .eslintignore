@@ -1,9 +1,0 @@
-.eslintrc.cjs
-
-/node_modules
-/out
-src/test/assets
-/examples
-/server
-/client
-esbuild.config.js

@@ -2,9 +2,9 @@ import { l10n, type Uri } from 'vscode'
 
 import { FileModifiedCacheController } from './FileModifiedCacheController'
 
-import { type CacheIconKind } from '@/enum/cache'
-import { type SVGIconCache } from '@/interfaces/cache'
-import { type SVGIcon } from '@/interfaces/ViewExportsSVG'
+import type { CacheIconKind } from '@/enum/cache'
+import type { SVGIconCache } from '@/interfaces/cache'
+import type { SVGIcon } from '@/interfaces/ViewExportsSVG'
 
 export class IconCacheController extends FileModifiedCacheController<SVGIconCache[]> {
   private readonly kind: CacheIconKind

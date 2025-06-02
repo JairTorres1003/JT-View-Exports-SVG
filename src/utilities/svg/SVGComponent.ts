@@ -7,8 +7,8 @@ import { getProperties, propertyManager } from '../properties'
 import { getChildAttributes } from './children'
 import { getSVGTagName } from './tags'
 
-import { type GetSVGComponent } from '@/interfaces/svg/SVGComponent'
-import { type SVGErrors, type SVGComponentProps, type SVGFile } from '@/interfaces/ViewExportsSVG'
+import type { GetSVGComponent } from '@/interfaces/svg/SVGComponent'
+import type { SVGErrors, SVGComponentProps, SVGFile } from '@/interfaces/ViewExportsSVG'
 
 /**
  * Retrieves the SVG component from a JSX element.
@@ -21,7 +21,7 @@ export function getSVGComponent(element: t.JSXElement, file: SVGFile): GetSVGCom
   let isAnimated = false
   let hasErrors = false
   let component: SVGComponentProps = { children: [], isMotion: false, props: {}, tag: 'svg' }
-  let errors: SVGErrors | undefined
+  let errors: SVGErrors | undefined = undefined
 
   if (!isEmpty(openingElement)) {
     const svgProps = getProperties(openingElement.attributes, params)
