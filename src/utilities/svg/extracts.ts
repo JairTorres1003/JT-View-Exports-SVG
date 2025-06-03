@@ -44,7 +44,7 @@ export async function extractSVGComponent(
           const types = getNodeTypes(component.params)
           const withRestProps = REST_PROPS_KEY in component.params
 
-          return await Promise.resolve({ ...component, name, location, types, withRestProps })
+          return { ...component, name, location, types, withRestProps }
         }
       }
     } catch (error) {
@@ -76,14 +76,14 @@ export async function extractSVGData(file: SVGFile): Promise<ExtractSVGExports> 
      * @param SVGdeclaration - The type of SVG declaration.
      * @param isExported - A boolean indicating if the SVG component is exported.
      * @param svgResult - The SVG component to be extracted.
-     * @returns A promise that resolves to null.
+     * @returns A promise that resolves to void.
      */
     const handleExtraction = async (
       declaration: DeclarationExport,
       SVGdeclaration: SVGDeclaration,
       isExported: boolean,
       svgResult?: Omit<SVGComponent, 'declaration' | 'isExported'>
-    ): Promise<null> => {
+    ): Promise<void> => {
       if (!isEmpty(svgResult)) {
         const result: SVGComponent = { ...svgResult, declaration: SVGdeclaration, isExported }
 
@@ -94,8 +94,6 @@ export async function extractSVGData(file: SVGFile): Promise<ExtractSVGExports> 
           noExportComponents.push(result)
         }
       }
-
-      return await Promise.resolve(null)
     }
 
     /**
