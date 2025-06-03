@@ -19,6 +19,17 @@
       ],
       "outFiles": ["${workspaceFolder}/out/cjs/test/**/*.js"],
       "preLaunchTask": "TaskTest"
+    },
+    {
+      "type": "node",
+      "request": "launch",
+      "name": "Launch Deno Program",
+      "program": "${workspaceFolder}/server/src/server.ts",
+      "cwd": "${workspaceFolder}/server",
+      "env": {},
+      "runtimeExecutable": "/Users/jairalexandretorrescaviedes/.deno/bin/deno",
+      "runtimeArgs": ["run", "-A", "--unstable-sloppy-imports", "--inspect-wait"],
+      "attachSimplePort": 9229
     }
   ]
 }
