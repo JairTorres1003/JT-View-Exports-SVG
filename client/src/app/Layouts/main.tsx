@@ -15,8 +15,8 @@ const Layout = () => (
       <RouteManager />
       <React.Suspense fallback={<LoadingPage />}>
         <Routes>
-          {routes.map((route, index) => (
-            <Route key={index} path={route.path} element={<route.Component />} />
+          {routes.map((route) => (
+            <Route key={route.path} path={route.path} element={<route.Component />} />
           ))}
         </Routes>
       </React.Suspense>

@@ -1,7 +1,9 @@
+import { Button, Stack, Typography } from '@mui/material'
 import { useEffect } from 'react'
 import { useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
 
+import { routes } from '@/config/routes/route'
 import { isEmpty } from '@/utils/misc'
 
 export const RouteManager = () => {
@@ -23,5 +25,37 @@ export const RouteManager = () => {
     handleChangePath(renderPath)
   }, [renderPath])
 
-  return <></>
+  if (process.env.NODE_ENV !== 'development') {
+    return null
+  }
+
+  return (
+    <Stack
+      p={1}
+      spacing={1}
+      width='100%'
+      direction='row'
+      alignItems='center'
+      borderBottom='1px solid var(--JT-SVG-vscode-panel-border, #ccc)'
+    >
+      <Typography variant='h1' color='textSecondary' fontWeight='bold'>
+        Route Manager
+      </Typography>
+      <Stack spacing={1} direction='row'>
+        {routes.map((route) => (
+          <Button
+            size='small'
+            key={route.path}
+            variant='outlined'
+            sx={{ minWidth: '100px' }}
+            onClick={() => {
+              handleChangePath(route.path)
+            }}
+          >
+            {route.name}
+          </Button>
+        ))}
+      </Stack>
+    </Stack>
+  )
 }

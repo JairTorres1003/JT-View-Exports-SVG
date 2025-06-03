@@ -21,7 +21,7 @@ export const BoxLoadingPage = styled(Box, {
     height: '190px',
     margin: 'auto',
     color: vars.palette.primary.main,
-    borderRadius: `${shape.borderRadius + 2}px`,
+    borderRadius: `${Number(shape.borderRadius) + 2}px`,
     boxShadow: `inset 0 0 0 1px ${vars.palette.primary.main}`,
     transform: 'rotate(45deg)',
     [`&, &::before, &::after, & .${loadingPageClasses.codePadContent}`]: {
@@ -51,7 +51,7 @@ export const BoxLoadingPage = styled(Box, {
       zIndex: -1,
       margin: '-5%',
       boxShadow: 'inset 0 0 0 2px',
-      borderRadius: `${shape.borderRadius + 2}px`,
+      borderRadius: `${Number(shape.borderRadius) + 2}px`,
       animation: `${loadingCodePad} 5s linear infinite`,
     },
     '&::before': {

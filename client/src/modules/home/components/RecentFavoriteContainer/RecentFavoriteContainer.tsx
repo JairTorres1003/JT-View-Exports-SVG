@@ -1,38 +1,48 @@
 import { Box, Typography } from '@mui/material'
-import React from 'react'
+import React, { type FC } from 'react'
 import { useTranslation } from 'react-i18next'
 import { useSelector } from 'react-redux'
 
-import { useRecentContainer } from '../../hooks/useRecentContainer'
+import { useRecentFavoriteContainer } from '../../hooks/useRecentFavoriteContainer'
 
-import { recentContainerClasses } from './RecentContainer.classes'
-import { BoxRecentContainer } from './RecentContainer.style'
+import { recentFavoriteContainerClasses } from './RecentFavoriteContainer.classes'
+import { BoxRecentFavoriteContainer } from './RecentFavoriteContainer.style'
 
 import { AccordionMenuItem } from '@/core/components/Accordion'
 import { CardSvg } from '@/modules/dashboard/components/Cards/CardSvg'
 import { RenderSvg } from '@/modules/dashboard/components/SVG/RenderSvg'
 
-const RecentContainer = () => {
-  const { icons } = useRecentContainer()
+interface RecentFavoriteContainerProps {
+  /**
+   * Type of icons to display in the container.
+   * - `recent`: Displays recently used icons.
+   * - `favorite`: Displays favorite icons.
+   * @default 'recent'
+   */
+  type?: 'recent' | 'favorite'
+}
+
+const RecentFavoriteContainer: FC<RecentFavoriteContainerProps> = ({ type }) => {
+  const { icons } = useRecentFavoriteContainer(type)
   const { defaultExpandAll } = useSelector((state) => state.global.configuration)
 
   const { t } = useTranslation(undefined, { keyPrefix: 'labels' })
 
   return (
-    <BoxRecentContainer>
+    <BoxRecentFavoriteContainer>
       <AccordionMenuItem
         label={t('RecentIcons')}
         defaultExpanded={defaultExpandAll}
-        slotProps={{ details: { className: recentContainerClasses.details } }}
+        slotProps={{ details: { className: recentFavoriteContainerClasses.details } }}
       >
         {icons.map((item) => (
           <React.Fragment key={item.groupKind.id}>
             {icons.length > 1 && (
-              <Box className={recentContainerClasses.detailsTitle}>
+              <Box className={recentFavoriteContainerClasses.detailsTitle}>
                 <Typography variant='subtitle1'>{item.groupKind.label}</Typography>
               </Box>
             )}
-            <Box className={recentContainerClasses.detailsContent}>
+            <Box className={recentFavoriteContainerClasses.detailsContent}>
               {item.components.map(({ name, ...restComponent }) => (
                 <CardSvg
                   key={`${item.groupKind.id}-${name}`}
@@ -45,8 +55,8 @@ const RecentContainer = () => {
           </React.Fragment>
         ))}
       </AccordionMenuItem>
-    </BoxRecentContainer>
+    </BoxRecentFavoriteContainer>
   )
 }
 
-export default RecentContainer
+export default RecentFavoriteContainer

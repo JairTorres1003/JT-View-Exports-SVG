@@ -6,7 +6,7 @@ import { BoxHomePage } from './Home.style'
 
 import { LoadingPage } from '@/core/components/LoadingPage'
 import ResizableBox from '@/core/components/Resizable/ResizableBox'
-import RecentContainer from '@/modules/home/components/RecentContainer/RecentContainer'
+import RecentFavoriteContainer from '@/modules/home/components/RecentFavoriteContainer/RecentFavoriteContainer'
 
 const devToolsPanelId = 'devTools-home-panel'
 
@@ -31,7 +31,7 @@ const HomePage: React.FC = () => {
         containerId={devToolsPanelId}
         hideCloseButton
       >
-        {showRecentIcons && <RecentContainer />}
+        {showRecentIcons && <RecentFavoriteContainer />}
       </ResizableBox>
     </BoxHomePage>
   )
