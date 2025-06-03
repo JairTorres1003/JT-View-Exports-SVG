@@ -5,7 +5,9 @@ import { initializeCacheManager } from '@jt/view-exports-svg/controllers/cache/C
 
 import { initialize } from 'vscode/services'
 import getConfigurationServiceOverride from '@codingame/monaco-vscode-configuration-service-override'
+import getModelServiceOverride from '@codingame/monaco-vscode-model-service-override'
 import { registerExtension, ExtensionHostKind } from 'vscode/extensions'
+import { Uri, workspace } from 'vscode'
 
 import { createMockExtensionContext } from '@/mocks/extensionContext.mock.ts'
 import { initializeExtensionTheme } from '@jt/view-exports-svg/utilities/vscode/extensions/theme.js'
@@ -14,8 +16,30 @@ const extensionId = `${packageJson.publisher}.${packageJson.name}`
 const tempDir = Deno.makeTempDirSync({ prefix: extensionId })
 
 // Initialize the extension host
-await initialize({
-  ...getConfigurationServiceOverride(),
+await initialize(
+  {
+    ...getConfigurationServiceOverride(),
+    ...getModelServiceOverride(),
+  },
+  undefined,
+  {
+    workspaceProvider: {
+      trusted: true,
+      workspace: {
+        workspaceUri: Uri.file(tempDir),
+        label: 'Test Workspace',
+        folderUri: Uri.file(tempDir),
+      },
+      open: async () => {
+        return true
+      },
+    },
+  }
+)
+
+workspace.updateWorkspaceFolders(0, 0, {
+  uri: Uri.file(tempDir),
+  name: 'Test Workspace',
 })
 
 // Register the extension
