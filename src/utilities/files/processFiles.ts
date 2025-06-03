@@ -58,10 +58,7 @@ export async function processFiles(
             const lastModified = getFileTimestamp(file.absolutePath)
             const cachedFile = SVGFileCache.get(file.absolutePath, lastModified)
 
-            if (
-              cachedFile !== undefined &&
-              configShowNoExports.isShow() === cachedFile.isShowNoExports
-            ) {
+            if (cachedFile && configShowNoExports.isShow() === cachedFile.isShowNoExports) {
               SVGExports.push(cachedFile)
               SVGFiles.push(file)
 

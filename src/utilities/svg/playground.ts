@@ -30,7 +30,7 @@ export async function playground(icon: SVGPlayground): Promise<SVGComponent | SV
       currentName = tagName
     }
 
-    if (declarationCache?.[currentName] === undefined) {
+    if (!declarationCache?.[currentName]) {
       return {
         location,
         message: l10n.t('Declaration named {name} not found in file {file}', {
@@ -51,7 +51,7 @@ export async function playground(icon: SVGPlayground): Promise<SVGComponent | SV
 
     const originalComponent = componentsCache.components.find((c) => c.name === currentName)
 
-    if (originalComponent === undefined) {
+    if (!originalComponent) {
       return {
         location,
         message: l10n.t('SVG component named {name} not found in file {file}', {
@@ -65,7 +65,7 @@ export async function playground(icon: SVGPlayground): Promise<SVGComponent | SV
 
     const iconComponent = await extractIconComponent(value, location, params)
 
-    if (iconComponent.errors !== undefined) {
+    if (iconComponent.errors) {
       return iconComponent.errors
     }
 

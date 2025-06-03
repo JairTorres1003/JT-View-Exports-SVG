@@ -22,7 +22,7 @@ export function getConfigurationEditor(): Record<string, unknown> {
     if (Object.prototype.hasOwnProperty.call(configuration, key)) {
       const value = configuration.get(key)
 
-      if (value !== undefined) {
+      if (value) {
         editorConfig[`editor.${key}`] = value
       }
     }

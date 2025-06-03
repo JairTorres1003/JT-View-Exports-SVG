@@ -15,7 +15,7 @@ const ContainerComponents = (): React.ReactNode => {
   const { isExpanded, toggleExpanded } = useContainerComponents()
   const { components, errors } = useSelector((state) => state.svg)
 
-  if (errors !== undefined) {
+  if (errors) {
     return (
       <BoxContainerComponents>
         <ListItem component='div' className={containerComponentsClasses.error}>

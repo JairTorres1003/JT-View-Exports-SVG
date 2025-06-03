@@ -33,7 +33,7 @@ class VSCodeInternalAPIWrapper<T = unknown> {
     try {
       let request: () => Promise<AxiosResponse> = async () => await axiosInstance.get(type)
 
-      if (data !== undefined) {
+      if (data) {
         request = async () => await axiosInstance.post(type, { data })
       }
 

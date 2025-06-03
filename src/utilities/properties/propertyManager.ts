@@ -9,7 +9,7 @@ class PropertyManager {
    * @returns - The value of the property or an object with all properties.
    */
   get(key?: string): unknown {
-    if (key !== undefined) {
+    if (key) {
       return this.properties[key]
     }
 
@@ -46,7 +46,7 @@ class PropertyManager {
    * @param key - Key of the property to clear (optional).
    */
   clean(key?: string): void {
-    if (key !== undefined) {
+    if (key) {
       if (key in this.properties) {
         const { [key]: _omitted, ...rest } = this.properties
         this.properties = rest

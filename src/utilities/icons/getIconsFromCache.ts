@@ -38,11 +38,11 @@ export const getIconsFromCache = (isRecent: boolean): ViewExportSVG[] => {
     const lastModified = getFileTimestamp(location.file.absolutePath)
     const cachedFile = SVGFileCache.get(location.file.absolutePath, lastModified)
 
-    if (cachedFile === undefined) return
+    if (!cachedFile) return
 
     const component = cachedFile.components.find((c) => c.name === name)
 
-    if (component !== undefined) {
+    if (component) {
       components.push(component)
 
       otherTotal[component.isExported ? 'totalExports' : 'totalNoExports']++

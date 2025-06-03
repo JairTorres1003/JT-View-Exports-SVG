@@ -7,7 +7,7 @@ export const testFolderUri: Uri = Uri.joinPath(extensionUri, 'src', 'test')
 
 suite('workspace', () => {
   test('it should have a workspace folder', () => {
-    if (workspace.workspaceFolders?.length === undefined) {
+    if (!workspace.workspaceFolders?.length) {
       console.error('Workspace folders not found')
       process.exit(1)
     }

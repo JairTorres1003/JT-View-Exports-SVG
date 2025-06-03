@@ -44,7 +44,7 @@ export class FileModifiedCacheController<T> {
   get(key: string, lastModified: number): T | undefined {
     const item = this.cache[key]
 
-    if (item === undefined) return
+    if (!item) return
 
     if (lastModified > item.lastModified) {
       if (key in this.cache) {

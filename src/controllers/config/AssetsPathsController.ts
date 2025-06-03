@@ -28,7 +28,7 @@ export class AssetsPathsController extends ConfigManagerController<string[]> {
    * @returns `true` if the file exists in the workspace folders, `false` otherwise.
    */
   private existsInWorkspace(file: SVGFile): boolean {
-    if (this.workspaceFolders === undefined) return false
+    if (!this.workspaceFolders) return false
 
     return this.workspaceFolders.some((folder) => file.absolutePath.includes(folder.uri.fsPath))
   }
@@ -50,7 +50,7 @@ export class AssetsPathsController extends ConfigManagerController<string[]> {
    * @param file - The SVG file to set.
    */
   public async set(file: SVGFile[]): Promise<void> {
-    if (this.workspaceFolders !== undefined) {
+    if (this.workspaceFolders) {
       try {
         const value = this.get() ?? []
         const valueUser = this.inspect() ?? []
@@ -85,7 +85,7 @@ export class AssetsPathsController extends ConfigManagerController<string[]> {
    * @returns A Promise that resolves once the assets paths configuration has been updated.
    */
   public async remove(files: SVGFile[]): Promise<void> {
-    if (this.workspaceFolders !== undefined) {
+    if (this.workspaceFolders) {
       try {
         const value = this.get() ?? []
         const valueUser = this.inspect() ?? []
