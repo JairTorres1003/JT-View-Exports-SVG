@@ -26,6 +26,9 @@ declare module '@jt/view-exports-svg/utilities/files/misc.js' {
 declare module '@jt/view-exports-svg/utilities/files/processFiles.js' {
   export * from '@jt/view-exports-svg/utilities/files/processFiles.d.ts'
 }
+declare module '@jt/view-exports-svg/utilities/icons/getIconsFromCache.js' {
+  export * from '@jt/view-exports-svg/utilities/icons/getIconsFromCache.d.ts'
+}
 declare module '@jt/view-exports-svg/utilities/misc.js' {
   export * from '@jt/view-exports-svg/utilities/misc.d.ts'
 }

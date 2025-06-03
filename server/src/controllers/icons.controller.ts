@@ -3,6 +3,7 @@ import { Request, Response } from 'express'
 import { workspace } from 'vscode'
 
 import { getCacheManager } from '@jt/view-exports-svg/controllers/cache/CacheManagerController.js'
+import { getIconsFromCache } from '@jt/view-exports-svg/utilities/icons/getIconsFromCache.js'
 import { SVGPostMessage } from '@jt/view-exports-svg/enum/ViewExportsSVG.js'
 import { isEmpty } from '@jt/view-exports-svg/utilities/misc.js'
 
@@ -54,8 +55,9 @@ export class IconsController {
       return res.status(400).send({ message: 'No workspace folders found' })
     }
 
-    const { cache, type } = this.getCachedIcons(req.params)
-    const icons = cache.getIcons(workspace.workspaceFolders?.[0].uri)
+    const { type } = this.getCachedIcons(req.params)
+
+    const icons = getIconsFromCache(type === SVGPostMessage.SendRecentIcons)
 
     res.send({ type, data: icons })
   }
