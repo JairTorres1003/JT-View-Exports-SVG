@@ -12,7 +12,6 @@ import { BoxPlayground, BoxPlaygroundCardSvg } from './Playground.style'
 
 import { IconCodeTag, IconCopy, IconRefresh } from '@/assets/icons/functionalities'
 import { SelectPickerColor } from '@/core/components/Select'
-import { Show } from '@/core/helpers'
 import { usePlayground } from '@/modules/dashboard/hooks/usePlayground'
 
 interface PlaygroundProps {
@@ -56,39 +55,33 @@ const Playground: FC<PlaygroundProps> = ({ actionsId = 'playground-actions' }) =
               onChangeComplete={onChangeCompleteColor}
             />
           </Grid>
-          <Show>
-            <Show.When isTrue={!!recentlySelected}>
-              <Grid size='auto'>
-                <Tooltip title={expandedCode ? t('playground.HideCode') : t('playground.ShowCode')}>
-                  <IconButton onClick={handleExpand}>
-                    <IconCodeTag size={16} />
-                  </IconButton>
-                </Tooltip>
-              </Grid>
-              <Grid size='auto'>
-                <Tooltip title={t('playground.CopyCode')}>
-                  <IconButton onClick={handleCopyCode}>
-                    <IconCopy size={16} />
-                  </IconButton>
-                </Tooltip>
-              </Grid>
-              <Grid size='auto'>
-                <Tooltip title={t('playground.ResetCode')}>
-                  <IconButton onClick={handleResetCode}>
-                    <IconRefresh size={16} sx={{ transform: 'rotate(90deg)' }} />
-                  </IconButton>
-                </Tooltip>
-              </Grid>
-            </Show.When>
-          </Show>
+          <Grid size='auto'>
+            <Tooltip title={expandedCode ? t('playground.HideCode') : t('playground.ShowCode')}>
+              <IconButton onClick={handleExpand}>
+                <IconCodeTag size={16} />
+              </IconButton>
+            </Tooltip>
+          </Grid>
+          <Grid size='auto'>
+            <Tooltip title={t('playground.CopyCode')}>
+              <IconButton onClick={handleCopyCode}>
+                <IconCopy size={16} />
+              </IconButton>
+            </Tooltip>
+          </Grid>
+          <Grid size='auto'>
+            <Tooltip title={t('playground.ResetCode')}>
+              <IconButton onClick={handleResetCode}>
+                <IconRefresh size={16} sx={{ transform: 'rotate(90deg)' }} />
+              </IconButton>
+            </Tooltip>
+          </Grid>
         </Grid>
 
-        {recentlySelected && (
-          <Collapse in={expandedCode}>
-            <Divider className={playgroundClasses.divider} />
-            <CodeEditor editorRef={editorRef} />
-          </Collapse>
-        )}
+        <Collapse in={expandedCode}>
+          <Divider className={playgroundClasses.divider} />
+          <CodeEditor editorRef={editorRef} />
+        </Collapse>
       </Card>
 
       <MenuTools

@@ -4,7 +4,7 @@ import { useCallback, useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 
 import { vscode } from '@/services/vscode'
-import { setIsSelecting } from '@/store/features/PlaygroundSlice'
+import { setIsSelecting, setRecentlySelected } from '@/store/features/PlaygroundSlice'
 
 interface ResizableBoxHook {
   resizableWidth: string
@@ -96,6 +96,7 @@ export const useResizableBox = ({ containerId }: ResizableBoxHookProps): Resizab
       setLastWidth('75%')
       setResizableWidth('100%')
       dispatch(setIsSelecting(false))
+      dispatch(setRecentlySelected())
       vscode.unregisterMessage(SVGPostMessage.SendToggleOpenDevTools)
     }
   }, [])
