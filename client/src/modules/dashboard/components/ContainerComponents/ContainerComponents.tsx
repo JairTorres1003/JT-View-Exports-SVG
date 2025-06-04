@@ -2,14 +2,14 @@ import { ListItem, ListItemIcon, ListItemText } from '@mui/material'
 import { useSelector } from 'react-redux'
 
 import { useContainerComponents } from '../../hooks/useContainerComponents'
-import { CardSvg } from '../Cards/CardSvg'
-import { RenderSvg } from '../SVG/RenderSvg'
 
 import { containerComponentsClasses } from './ContainerComponents.classes'
 import { BoxContainerComponents } from './ContainerComponents.style'
 
 import { IconWarning } from '@/assets/icons/indicators'
 import { AccordionMenuItem } from '@/core/components/Accordion'
+import { CardSvg } from '@/core/components/Cards/CardSvg'
+import { RenderSvg } from '@/core/components/SVG/RenderSvg'
 
 const ContainerComponents = (): React.ReactNode => {
   const { isExpanded, toggleExpanded } = useContainerComponents()

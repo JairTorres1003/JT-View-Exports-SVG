@@ -5,22 +5,25 @@ import { RouteManager } from './RouteManager'
 
 import Providers from '@/config/provider'
 import { routes } from '@/config/routes/route'
+import { Container } from '@/core/components/DevTools'
 import { LoadingPage } from '@/core/components/LoadingPage'
 
 const config = window.ViewExportsSVG.initConfiguration
 
 const Layout = () => (
   <Providers>
-    <MemoryRouter initialEntries={[config._INITIAL_RENDER_PATH]} initialIndex={0}>
-      <RouteManager />
-      <React.Suspense fallback={<LoadingPage />}>
-        <Routes>
-          {routes.map((route) => (
-            <Route key={route.path} path={route.path} element={<route.Component />} />
-          ))}
-        </Routes>
-      </React.Suspense>
-    </MemoryRouter>
+    <Container>
+      <MemoryRouter initialEntries={[config._INITIAL_RENDER_PATH]} initialIndex={0}>
+        <RouteManager />
+        <React.Suspense fallback={<LoadingPage />}>
+          <Routes>
+            {routes.map((route) => (
+              <Route key={route.path} path={route.path} element={<route.Component />} />
+            ))}
+          </Routes>
+        </React.Suspense>
+      </MemoryRouter>
+    </Container>
   </Providers>
 )
 

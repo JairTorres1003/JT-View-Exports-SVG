@@ -3,12 +3,11 @@ import type { SVGComponent, SVGErrors } from '@api/types/ViewExportsSVG'
 import { useEffect, useMemo, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 
-import completionComponentsManager from '../utils/completionComponentsManager'
-import completionPropertiesManager from '../utils/completionPropertiesManager'
-
 import { useAlert } from '@/core/hooks/useAlert'
 import useDebounce from '@/core/hooks/useDebounce'
 import type { TypeEditorRef } from '@/core/types/components/vs/Editor'
+import completionComponentsManager from '@/core/utils/DevTools/completionComponentsManager'
+import completionPropertiesManager from '@/core/utils/DevTools/completionPropertiesManager'
 import { vscode } from '@/services/vscode'
 import { setRecentlySelected } from '@/store/features/PlaygroundSlice'
 

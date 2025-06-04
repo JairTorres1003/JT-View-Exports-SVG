@@ -9,8 +9,8 @@ import { recentFavoriteContainerClasses } from './RecentFavoriteContainer.classe
 import { BoxRecentFavoriteContainer } from './RecentFavoriteContainer.style'
 
 import { AccordionMenuItem } from '@/core/components/Accordion'
-import { CardSvg } from '@/modules/dashboard/components/Cards/CardSvg'
-import { RenderSvg } from '@/modules/dashboard/components/SVG/RenderSvg'
+import { CardSvg } from '@/core/components/Cards/CardSvg'
+import { RenderSvg } from '@/core/components/SVG/RenderSvg'
 
 interface RecentFavoriteContainerProps {
   /**

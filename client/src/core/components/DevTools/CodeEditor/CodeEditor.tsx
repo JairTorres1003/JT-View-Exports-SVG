@@ -1,8 +1,8 @@
 import type { FC } from 'react'
 
 import { Editor } from '@/core/components/vs/Editor'
+import { useCodeEditor } from '@/core/hooks/DevTools/useCodeEditor'
 import type { TypeEditorRef } from '@/core/types/components/vs/Editor'
-import { useCodeEditor } from '@/modules/dashboard/hooks/useCodeEditor'
 
 interface CodeEditorProps {
   editorRef: React.RefObject<TypeEditorRef>

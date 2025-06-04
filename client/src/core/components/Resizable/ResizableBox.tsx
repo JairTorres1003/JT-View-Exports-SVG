@@ -6,7 +6,7 @@ import { useTranslation } from 'react-i18next'
 import { IconClose } from '@/assets/icons/functionalities'
 import { useResizableBox } from '@/core/hooks/useResizableBox'
 
-interface ResizableBoxProps
+export interface ResizableBoxProps
   extends Omit<ResizableProps, 'size' | 'onResizeStart' | 'onResizeStop'> {
   containerId: string
   /**
