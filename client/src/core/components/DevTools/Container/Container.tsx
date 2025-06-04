@@ -8,7 +8,7 @@ import { BoxContainer } from './Container.style'
 
 import ResizableBox, { type ResizableBoxProps } from '@/core/components/Resizable/ResizableBox'
 
-const devToolsPanelId = 'devTools-home-panel'
+const devToolsPanelId = 'devTools-panel'
 
 interface ContainerProps {
   children: React.ReactNode
