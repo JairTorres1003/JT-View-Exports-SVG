@@ -1,7 +1,7 @@
 import { useForkRef } from '@mui/material'
 import i18next from 'i18next'
-import { useCallback, useEffect, useRef, useState } from 'react'
-import { useSelector } from 'react-redux'
+import { useCallback, useEffect, useId, useRef, useState } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
 
 import type {
   EditorHook,
@@ -10,6 +10,7 @@ import type {
   TypeEditorRef,
 } from '@/core/types/components/vs/Editor'
 import { Editor } from '@/core/utils/vs/editor/createEditor'
+import { setInitializedEditor } from '@/store/features/PlaygroundSlice'
 import { getUnknownError, isEmpty } from '@/utils/misc'
 
 export const useEditor = ({
@@ -17,14 +18,20 @@ export const useEditor = ({
   defaultValue,
   onChange = () => null,
 }: EditorHookProps): EditorHook => {
-  const [editorInstance, setEditorInstance] = useState<IStandaloneCodeEditor | undefined>(undefined)
   const { editorConfig, extensionTheme } = useSelector((state) => state.vsCode)
+  const isInitialized = useSelector((state) => state.playground.isInitialized)
+
+  const [editorInstance, setEditorInstance] = useState<IStandaloneCodeEditor | undefined>(undefined)
   const [loading, setLoading] = useState(false)
   const [progress, setProgress] = useState(0)
 
   const editorRef = useRef<TypeEditorRef>(null)
-
   const forkedRef = useForkRef(editorRef, forwardedRef)
+
+  const id = useId()
+  const editorInitialized = isInitialized[id] || false
+
+  const dispatch = useDispatch()
 
   /**
    * Provides editor loading state management with progress indication.
@@ -142,6 +149,8 @@ export const useEditor = ({
   }, [editorConfig])
 
   useEffect(() => {
+    if (!editorInitialized) return
+
     initializeEditor()
       .then((editor) => {
         setEditorInstance(editor)
@@ -149,9 +158,16 @@ export const useEditor = ({
       .catch((error) => {
         console.error(`${i18next.t('errors.FailedToInitializeEditor')}: ${getUnknownError(error)}`)
       })
-  }, [])
+  }, [editorInitialized])
+
+  useEffect(() => {
+    if (isEmpty(editorRef.current) || isEmpty(editorConfig)) return
+
+    dispatch(setInitializedEditor(id))
+  }, [editorConfig, editorRef])
 
   return {
+    id,
     rootRef: forkedRef,
     loading,
     progress,

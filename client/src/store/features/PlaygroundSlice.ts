@@ -5,6 +5,7 @@ import type { PlaygroundReducers, PlaygroundState } from '@/types/store/features
 const initialState: PlaygroundState = {
   recentlySelected: undefined,
   isSelecting: false,
+  isInitialized: {},
 }
 
 const reducers: PlaygroundReducers = {
@@ -14,6 +15,10 @@ const reducers: PlaygroundReducers = {
   },
   setIsSelecting: (state, { payload }) => {
     state.isSelecting = payload
+  },
+
+  setInitializedEditor: (state, { payload }) => {
+    state.isInitialized = { ...state.isInitialized, [payload]: true }
   },
 }
 
@@ -27,7 +32,7 @@ export const PlaygroundSlice = createSlice({
 })
 
 export const {
-  actions: { setRecentlySelected, setIsSelecting },
+  actions: { setRecentlySelected, setIsSelecting, setInitializedEditor },
 } = PlaygroundSlice
 
 export const { reducer: PlaygroundReducer } = PlaygroundSlice

@@ -39,6 +39,7 @@ export interface EditorHook {
   rootRef: React.RefCallback<Exclude<TypeEditorRef, 'null'>> | null
   loading: boolean
   progress: number
+  id: string
 }
 
 export interface EditorHookProps extends Omit<EditorProps, 'className'> {

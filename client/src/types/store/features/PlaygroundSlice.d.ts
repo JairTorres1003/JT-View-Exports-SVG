@@ -6,6 +6,7 @@ import { ReactNode } from 'react'
 export interface PlaygroundState {
   recentlySelected?: SVGComponent
   isSelecting: boolean
+  isInitialized: Record<string, boolean>
 }
 
 export interface PlaygroundReducers {
@@ -17,6 +18,8 @@ export interface PlaygroundReducers {
    * Set the state to indicate if the user is selecting a component.
    */
   setIsSelecting: CaseReducer<PlaygroundState, PayloadAction<boolean>>
+
+  setInitializedEditor: CaseReducer<PlaygroundState, PayloadAction<string>>
 
   [key: string]: CaseReducer<PlaygroundState, PayloadAction<any>>
 }
