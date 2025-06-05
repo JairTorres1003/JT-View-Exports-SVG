@@ -1,41 +1,26 @@
-import { ListItem, ListItemIcon, ListItemText } from '@mui/material'
 import { useSelector } from 'react-redux'
 
-import { containerComponentsClasses } from './ContainerComponents.classes'
-import { BoxContainerComponents } from './ContainerComponents.style'
+import { containerIconsClasses } from './ContainerIcons.classes'
+import { BoxContainerIcons } from './ContainerIcons.style'
 
-import { IconWarning } from '@/assets/icons/indicators'
 import { AccordionMenuItem } from '@/core/components/Accordion'
 import { CardSvg } from '@/core/components/Cards/CardSvg'
 import { RenderSvg } from '@/core/components/SVG/RenderSvg'
 import { useExpandedComponents } from '@/core/hooks/useExpandedComponents'
 
-const ContainerComponents = (): React.ReactNode => {
+const ContainerIcons = (): React.ReactNode => {
   const { isExpanded, toggleExpanded } = useExpandedComponents()
-  const { components, errors } = useSelector((state) => state.svg)
-
-  if (errors) {
-    return (
-      <BoxContainerComponents>
-        <ListItem component='div' className={containerComponentsClasses.error}>
-          <ListItemIcon>
-            <IconWarning size='100%' />
-          </ListItemIcon>
-          <ListItemText primary={errors.message} />
-        </ListItem>
-      </BoxContainerComponents>
-    )
-  }
+  const { components } = useSelector((state) => state.svg)
 
   return (
-    <BoxContainerComponents>
+    <BoxContainerIcons>
       {components.map((item) => (
         <AccordionMenuItem
           key={item.groupKind.id}
           label={item.groupKind.label}
           onChange={toggleExpanded(item.groupKind.id)}
           expanded={isExpanded.includes(item.groupKind.id)}
-          slotProps={{ details: { className: containerComponentsClasses.details } }}
+          slotProps={{ details: { className: containerIconsClasses.details } }}
         >
           {item.components.map(({ name, ...restComponent }) => (
             <CardSvg key={name} component={{ ...restComponent, name }}>
@@ -44,8 +29,8 @@ const ContainerComponents = (): React.ReactNode => {
           ))}
         </AccordionMenuItem>
       ))}
-    </BoxContainerComponents>
+    </BoxContainerIcons>
   )
 }
 
-export default ContainerComponents
+export default ContainerIcons

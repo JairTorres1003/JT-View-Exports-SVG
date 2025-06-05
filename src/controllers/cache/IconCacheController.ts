@@ -48,7 +48,7 @@ export class IconCacheController extends FileModifiedCacheController<SVGIconCach
    * @returns The new list of icons after the specified icons have been added.
    */
   add(folder: Uri, value: SVGIcon[]): SVGIconCache[] {
-    const currentKey = `[${this.kind}]-[${folder.fsPath}]`
+    const currentKey = this.getId(folder)
 
     const current = super.get(currentKey, 0) ?? []
     const newValue = current
@@ -85,7 +85,7 @@ export class IconCacheController extends FileModifiedCacheController<SVGIconCach
    * @returns The new list of icons after the specified icon has been removed.
    */
   remove(folder: Uri, icon: SVGIcon): SVGIconCache[] {
-    const currentKey = `[${this.kind}]-[${folder.fsPath}]`
+    const currentKey = this.getId(folder)
     const current = super.get(currentKey, 0) ?? []
 
     const newValue = current.filter(
@@ -110,7 +110,7 @@ export class IconCacheController extends FileModifiedCacheController<SVGIconCach
   public setIcons(folder: Uri, value: SVGIcon[]): void {
     const newValue = value.map((icon) => ({ ...icon, dateAdd: Date.now() }))
 
-    super.set(`[${this.kind}]-[${folder.fsPath}]`, newValue, 0)
+    super.set(this.getId(folder), newValue, 0)
   }
 
   /**
@@ -120,7 +120,7 @@ export class IconCacheController extends FileModifiedCacheController<SVGIconCach
    * @returns The cached value if found, or `undefined` if not found.
    */
   getIcons(folder: Uri): SVGIconCache[] | undefined {
-    return super.get(`[${this.kind}]-[${folder.fsPath}]`, 0)
+    return super.get(this.getId(folder), 0)
   }
 
   /**
@@ -129,7 +129,26 @@ export class IconCacheController extends FileModifiedCacheController<SVGIconCach
    * @param key - The key to delete from the cache.
    */
   deleteIcons(folder: Uri): void {
-    super.delete(`[${this.kind}]-[${folder.fsPath}]`)
+    super.delete(this.getId(folder))
+  }
+
+  /**
+   * Generates a unique identifier string for the given folder based on its file system path and the current kind.
+   *
+   * @param folder - The URI of the folder for which to generate the identifier.
+   * @returns A string in the format `[kind]-[folder.fsPath]` representing the unique identifier.
+   */
+  getId(folder: Uri): string {
+    return `[${this.kind}]-[${folder.fsPath}]`
+  }
+
+  /**
+   * Returns the kind of the cache.
+   *
+   * @returns The kind of the cache.
+   */
+  getKind(): CacheIconKind {
+    return this.kind
   }
 
   /**

@@ -57,7 +57,7 @@ export class IconsController {
 
     const { type } = this.getCachedIcons(req.params)
 
-    const icons = getIconsFromCache(type === SVGPostMessage.SendRecentIcons)
+    const icons = getIconsFromCache()
 
     res.send({ type, data: icons })
   }
@@ -90,7 +90,7 @@ export class IconsController {
 
     return {
       cache: type ? RecentIconCache : FavoritesIconCache,
-      type: type ? SVGPostMessage.SendRecentIcons : SVGPostMessage.SendFavoriteIcons,
+      type: SVGPostMessage.SendHomeIcons,
     }
   }
 }

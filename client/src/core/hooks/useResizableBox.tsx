@@ -4,7 +4,7 @@ import { useCallback, useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 
 import { vscode } from '@/services/vscode'
-import { setIsSelecting, setRecentlySelected } from '@/store/features/PlaygroundSlice'
+import { setIsOpenDevTools, setRecentlySelected } from '@/store/features/PlaygroundSlice'
 
 interface ResizableBoxHook {
   resizableWidth: string
@@ -21,7 +21,7 @@ export const useResizableBox = ({ containerId }: ResizableBoxHookProps): Resizab
   const [resizableWidth, setResizableWidth] = useState('100%')
   const [lastWidth, setLastWidth] = useState('75%')
 
-  const isSelecting = useSelector((state) => state.playground.isSelecting)
+  const isOpenDevTools = useSelector((state) => state.playground.isOpenDevTools)
   const { defaultClicToOpenDevTools } = useSelector((state) => state.global.configuration)
 
   const dispatch = useDispatch()
@@ -31,7 +31,7 @@ export const useResizableBox = ({ containerId }: ResizableBoxHookProps): Resizab
    */
   const onResetSize = useCallback(() => {
     setResizableWidth('100%')
-    dispatch(setIsSelecting(false))
+    dispatch(setIsOpenDevTools(false))
     vscode.postMessage(SVGReceiveMessage.ToggleOpenDevTools, false)
   }, [])
 
@@ -73,17 +73,15 @@ export const useResizableBox = ({ containerId }: ResizableBoxHookProps): Resizab
   const onToggleOpenDevTools = useCallback(
     (data: boolean) => {
       setResizableWidth(data ? lastWidth : '100%')
-      if (!data) dispatch(setIsSelecting(false))
+      if (!data) dispatch(setIsOpenDevTools(false))
     },
     [lastWidth]
   )
 
   useEffect(() => {
-    if (isSelecting) {
-      onToggleOpenDevTools(true)
-      vscode.postMessage(SVGReceiveMessage.ToggleOpenDevTools, true)
-    }
-  }, [isSelecting])
+    onToggleOpenDevTools(isOpenDevTools)
+    vscode.postMessage(SVGReceiveMessage.ToggleOpenDevTools, isOpenDevTools)
+  }, [isOpenDevTools])
 
   useEffect(() => {
     setLastWidth(defaultClicToOpenDevTools ? '75%' : '100%')
@@ -95,7 +93,7 @@ export const useResizableBox = ({ containerId }: ResizableBoxHookProps): Resizab
     return () => {
       setLastWidth('75%')
       setResizableWidth('100%')
-      dispatch(setIsSelecting(false))
+      dispatch(setIsOpenDevTools(false))
       dispatch(setRecentlySelected())
       vscode.unregisterMessage(SVGPostMessage.SendToggleOpenDevTools)
     }

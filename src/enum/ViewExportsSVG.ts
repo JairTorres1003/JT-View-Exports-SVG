@@ -24,8 +24,7 @@ export enum SVGPostMessage {
 
   SendLastScanDate = 'send/scan/last-date',
 
-  SendRecentIcons = 'send/icons/recent',
-  SendFavoriteIcons = 'send/icons/favorite',
+  SendHomeIcons = 'send/icons/home',
 }
 
 export enum SVGReceiveMessage {
@@ -54,10 +53,9 @@ export enum SVGReceiveMessage {
 
   AddRecentIcon = 'icons/recent/add',
   RemoveRecentIcon = 'icons/recent/remove',
-  GetRecentIcons = 'icons/recent/get',
   ClearRecentIcons = 'icons/recent/clear',
   AddFavoriteIcon = 'icons/favorite/add',
   RemoveFavoriteIcon = 'icons/favorite/remove',
   ClearFavoriteIcons = 'icons/favorite/clear',
-  GetFavoriteIcons = 'icons/favorite/get',
+  GetHomeIcons = 'icons/home/get',
 }

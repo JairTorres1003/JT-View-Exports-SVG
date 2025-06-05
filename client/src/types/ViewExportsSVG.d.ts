@@ -26,8 +26,7 @@ export interface MessageHandlersView {
   [SVGPostMessage.SendTheme]?: (data: ThemeMode) => void
   [SVGPostMessage.SendEditorConfig]?: (data: Record<string, unknown>) => void
   [SVGPostMessage.SendVsCodeStyles]?: (data: VsCodeStyles) => void
-  [SVGPostMessage.SendRecentIcons]?: (data: ViewExportSVG[]) => void
-  [SVGPostMessage.SendFavoriteIcons]?: (data: ViewExportSVG[]) => void
+  [SVGPostMessage.SendHomeIcons]?: (data: ViewExportSVG[]) => void
   [SVGPostMessage.SendExpandAllIcons]?: (data: boolean) => void
   [SVGPostMessage.SendToggleOpenDevTools]?: (data: boolean) => void
   [SVGPostMessage.SendExtensionTheme]?: (data: ExtensionManage) => void
@@ -50,8 +49,7 @@ export interface FuncOnMessage {
   (type: SVGPostMessage.SendTheme, handler: (data: ThemeMode) => void): void
   (type: SVGPostMessage.SendEditorConfig, handler: (data: Record<string, unknown>) => void): void
   (type: SVGPostMessage.SendVsCodeStyles, handler: (data: VsCodeStyles) => void): void
-  (type: SVGPostMessage.SendRecentIcons, handler: (data: ViewExportSVG[]) => void): void
-  (type: SVGPostMessage.SendFavoriteIcons, handler: (data: ViewExportSVG[]) => void): void
+  (type: SVGPostMessage.SendHomeIcons, handler: (data: ViewExportSVG[]) => void): void
   (type: SVGPostMessage.SendExpandAllIcons, handler: (data: boolean) => void): void
   (type: SVGPostMessage.SendToggleOpenDevTools, handler: (data: boolean) => void): void
   (type: SVGPostMessage.SendExtensionTheme, handler: (data: ExtensionManage) => void): void
@@ -81,12 +79,11 @@ export interface FuncPostMessage {
   (type: SVGReceiveMessage.SearchSVGComponents, data: string): void
   (type: SVGReceiveMessage.AddRecentIcon, data: SVGIcon): void
   (type: SVGReceiveMessage.RemoveRecentIcon, data: SVGIcon): void
-  (type: SVGReceiveMessage.GetRecentIcons): void
   (type: SVGReceiveMessage.ClearRecentIcons): void
   (type: SVGReceiveMessage.AddFavoriteIcon, data: SVGIcon): void
   (type: SVGReceiveMessage.RemoveFavoriteIcon, data: SVGIcon): void
   (type: SVGReceiveMessage.ClearFavoriteIcons): void
-  (type: SVGReceiveMessage.GetFavoriteIcons): void
+  (type: SVGReceiveMessage.GetHomeIcons): void
   (type: SVGReceiveMessage.ToggleExpandIcon, data: boolean): void
   (type: SVGReceiveMessage.ToggleOpenDevTools, data: boolean): void
   (type: SVGReceiveMessage.GetExtensionTheme): void

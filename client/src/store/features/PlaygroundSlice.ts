@@ -1,20 +1,23 @@
 import { createSlice } from '@reduxjs/toolkit'
 
+import { setComponents } from './SVGSlice'
+
 import type { PlaygroundReducers, PlaygroundState } from '@/types/store/features/PlaygroundSlice'
 
 const initialState: PlaygroundState = {
   recentlySelected: undefined,
-  isSelecting: false,
+  isOpenDevTools: false,
   isInitialized: {},
 }
 
 const reducers: PlaygroundReducers = {
   setRecentlySelected: (state, { payload }) => {
     state.recentlySelected = payload
-    state.isSelecting = !!payload
+    state.isOpenDevTools = !!payload
   },
-  setIsSelecting: (state, { payload }) => {
-    state.isSelecting = payload
+
+  setIsOpenDevTools: (state, { payload }) => {
+    state.isOpenDevTools = payload
   },
 
   setInitializedEditor: (state, { payload }) => {
@@ -29,10 +32,16 @@ export const PlaygroundSlice = createSlice({
   name: 'Playground',
   initialState,
   reducers,
+  extraReducers: (builder) => {
+    builder.addCase(setComponents, (state) => {
+      state.isOpenDevTools = false
+      state.recentlySelected = undefined
+    })
+  },
 })
 
 export const {
-  actions: { setRecentlySelected, setIsSelecting, setInitializedEditor },
+  actions: { setRecentlySelected, setIsOpenDevTools, setInitializedEditor },
 } = PlaygroundSlice
 
 export const { reducer: PlaygroundReducer } = PlaygroundSlice

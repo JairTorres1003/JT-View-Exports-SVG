@@ -1,15 +1,17 @@
 import { Button, Stack, Typography } from '@mui/material'
 import { useEffect } from 'react'
-import { useSelector } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
 
 import { routes } from '@/config/routes/route'
+import { setIsOpenDevTools, setRecentlySelected } from '@/store/features/PlaygroundSlice'
 import { isEmpty } from '@/utils/misc'
 
 export const RouteManager = () => {
   const { renderPath } = useSelector((state) => state.global.configuration)
 
   const navigate = useNavigate()
+  const dispatch = useDispatch()
 
   /**
    * Handles the change of path based on the provided new path.
@@ -17,6 +19,9 @@ export const RouteManager = () => {
    */
   const handleChangePath = (newPath: string) => {
     if (isEmpty(newPath)) return
+
+    dispatch(setRecentlySelected())
+    dispatch(setIsOpenDevTools(false))
 
     void navigate(newPath)
   }

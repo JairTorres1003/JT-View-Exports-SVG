@@ -87,6 +87,10 @@ export const useCodeEditor = (editorRef: React.RefObject<TypeEditorRef>) => {
   }, [components, editorRef.current?.editor])
 
   useEffect(() => {
+    if (defaultValue?.trim() === '') editorRef.current?.editor?.setDefaultValue('')
+  }, [defaultValue])
+
+  useEffect(() => {
     if (debounceValue?.trim() === '' || !recentlySelected) {
       return
     }

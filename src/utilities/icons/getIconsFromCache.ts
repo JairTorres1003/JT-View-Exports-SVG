@@ -1,66 +1,79 @@
-import { workspace } from 'vscode'
+import { l10n, workspace } from 'vscode'
 
 import { getFileTimestamp } from '../files'
 import { isEmpty } from '../misc'
 
 import { getCacheManager } from '@/controllers/cache'
-import { ShowNotExportedIconsController } from '@/controllers/config'
+import { RecentIconsShowController, ShowNotExportedIconsController } from '@/controllers/config'
+import { CacheIconKind } from '@/enum/cache'
 import type { SVGIconCache } from '@/types/cache'
 import type { SVGComponent, ViewExportSVG } from '@/types/ViewExportsSVG'
 
-/**
- * Retrieves a list of SVG icon components from the cache based on whether they are recent or favorites.
- *
- * @param isRecent - If `true`, retrieves icons from the recent cache; otherwise, from the favorites cache.
- */
-export const getIconsFromCache = (isRecent: boolean): ViewExportSVG[] => {
-  let icons: SVGIconCache[] = []
+const valideteShowIcons = (): Partial<Record<CacheIconKind, boolean>> => {
+  const configRecent = new RecentIconsShowController()
 
+  return {
+    [CacheIconKind.RECENT]: configRecent.isShow(),
+  }
+}
+
+export const getIconsFromCache = (): ViewExportSVG[] => {
   const { RecentIconCache, FavoritesIconCache } = getCacheManager()
-  const cache = isRecent ? RecentIconCache : FavoritesIconCache
+  const validateShow = valideteShowIcons()
 
-  if (!isEmpty(workspace.workspaceFolders)) {
-    icons = cache.getIcons(workspace.workspaceFolders[0].uri) ?? []
-  }
+  const cacheList = [RecentIconCache, FavoritesIconCache]
+  const result: ViewExportSVG[] = []
 
-  const configShowNoExports = new ShowNotExportedIconsController()
-  const isShowNoExports = configShowNoExports.isShow()
+  cacheList.forEach((cache, index) => {
+    const kind = cache.getKind()
+    if (!validateShow[kind]) return
 
-  const components: SVGComponent[] = []
-  const otherTotal = {
-    totalExports: 0,
-    totalNoExports: 0,
-  }
+    let icons: SVGIconCache[] = []
+    const workspaceFolderUri = workspace.workspaceFolders?.[0]?.uri
 
-  const { SVGFileCache } = getCacheManager()
-
-  icons?.forEach(({ location, name }) => {
-    const lastModified = getFileTimestamp(location.file.absolutePath)
-    const cachedFile = SVGFileCache.get(location.file.absolutePath, lastModified)
-
-    if (!cachedFile) return
-
-    const component = cachedFile.components.find((c) => c.name === name)
-
-    if (component) {
-      components.push(component)
-
-      otherTotal[component.isExported ? 'totalExports' : 'totalNoExports']++
-    } else if (!isEmpty(workspace.workspaceFolders)) {
-      cache.remove(workspace.workspaceFolders[0].uri, { location, name })
+    if (!isEmpty(workspaceFolderUri)) {
+      icons = cache.getIcons(workspaceFolderUri) ?? []
     }
-  })
 
-  return [
-    {
+    const configShowNoExports = new ShowNotExportedIconsController()
+    const isShowNoExports = configShowNoExports.isShow()
+
+    const components: SVGComponent[] = []
+    const otherTotal = {
+      totalExports: 0,
+      totalNoExports: 0,
+    }
+
+    const { SVGFileCache } = getCacheManager()
+
+    icons?.forEach(({ location, name }) => {
+      const lastModified = getFileTimestamp(location.file.absolutePath)
+      const cachedFile = SVGFileCache.get(location.file.absolutePath, lastModified)
+
+      if (!cachedFile) return
+
+      const component = cachedFile.components.find((c) => c.name === name)
+
+      if (component) {
+        components.push(component)
+
+        otherTotal[component.isExported ? 'totalExports' : 'totalNoExports']++
+      } else if (!isEmpty(workspaceFolderUri)) {
+        cache.remove(workspaceFolderUri, { location, name })
+      }
+    })
+
+    result.push({
       components,
       isShowNoExports,
       totalSVG: components.length,
       ...otherTotal,
       groupKind: {
-        id: isRecent ? 'recent' : 'favorite',
-        label: workspace.workspaceFolders?.[0]?.name ?? '',
+        id: workspaceFolderUri ? cache.getId(workspaceFolderUri) : `icon-${index}`,
+        label: l10n.t(`cache.icon.${kind}`),
       },
-    },
-  ]
+    })
+  })
+
+  return result
 }

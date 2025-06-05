@@ -247,6 +247,16 @@
       "type": "string",
       "description": "Error message displayed when no theme is found for the current workspace",
       "default": "No theme found for the current workspace"
+    },
+    "cache.icon.favorite": {
+      "type": "string",
+      "description": "Label for favorite icons in the cache",
+      "default": "Favorite Icons"
+    },
+    "cache.icon.recent": {
+      "type": "string",
+      "description": "Label for recent icons in the cache",
+      "default": "Recent Icons"
     }
   },
   "required": [
@@ -290,6 +300,8 @@
     "Cache cleared successfully!",
     "CacheManager has not been initialized",
     "Failed to initialize the extension theme",
-    "No theme found for the current workspace"
+    "No theme found for the current workspace",
+    "cache.icon.favorite",
+    "cache.icon.recent"
   ]
 }

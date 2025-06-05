@@ -8,7 +8,7 @@ const svgController = new IconsController()
 
 router.post('/:type(recent|favorite)/add', svgController.addIcon)
 router.post('/:type(recent|favorite)/remove', svgController.removeIcon)
-router.get('/:type(recent|favorite)/get', svgController.getIcons)
+router.get('/home/get', svgController.getIcons)
 router.get('/:type(recent|favorite)/clear', svgController.clearIcons)
 
 export const iconsRoutes = Router().use('/icons', router)

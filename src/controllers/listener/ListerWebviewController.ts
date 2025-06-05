@@ -74,12 +74,11 @@ export class ListerWebviewController {
       [SVGReceiveMessage.GetVsCodeStyles]: this._vscodeStyles.bind(this),
       [SVGReceiveMessage.AddRecentIcon]: this._addIconToCache(true).bind(this),
       [SVGReceiveMessage.RemoveRecentIcon]: this._removeIconFromCache(true).bind(this),
-      [SVGReceiveMessage.GetRecentIcons]: this._getIconsFromCache(true).bind(this),
       [SVGReceiveMessage.ClearRecentIcons]: this._clearIconsFromCache(true).bind(this),
       [SVGReceiveMessage.AddFavoriteIcon]: this._addIconToCache(false).bind(this),
       [SVGReceiveMessage.RemoveFavoriteIcon]: this._removeIconFromCache(false).bind(this),
       [SVGReceiveMessage.ClearFavoriteIcons]: this._clearIconsFromCache(false).bind(this),
-      [SVGReceiveMessage.GetFavoriteIcons]: this._getIconsFromCache(false).bind(this),
+      [SVGReceiveMessage.GetHomeIcons]: this._getHomeIcons.bind(this),
       [SVGReceiveMessage.ToggleExpandIcon]: this._toggleExpandIcon.bind(this),
       [SVGReceiveMessage.ToggleOpenDevTools]: this._toggleOpenDevTools.bind(this),
       [SVGReceiveMessage.GetExtensionTheme]: this._getExtensionTheme.bind(this),
@@ -332,18 +331,11 @@ export class ListerWebviewController {
   }
 
   /**
-   * Gets the icons from the cache.
-   * @param isRecent - Whether the icons are recent or favorite.
+   * Gets the home icons for home view.
    */
-  private _getIconsFromCache(isRecent: boolean) {
-    return (): void => {
-      const configRecent = new RecentIconsShowController()
-
-      if (isRecent && !configRecent.isShow()) return
-
-      const icons = getIconsFromCache(isRecent)
-      this._postMessage(SVGPostMessage.SendRecentIcons, icons)
-    }
+  private _getHomeIcons() {
+    const icons = getIconsFromCache()
+    this._postMessage(SVGPostMessage.SendHomeIcons, icons)
   }
 
   /**

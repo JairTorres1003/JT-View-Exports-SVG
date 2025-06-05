@@ -24,12 +24,11 @@ export type ReceiveMessage =
   | { type: SVGReceiveMessage.GetVsCodeStyles }
   | { type: SVGReceiveMessage.AddRecentIcon; data: SVGIcon }
   | { type: SVGReceiveMessage.RemoveRecentIcon; data: SVGIcon }
-  | { type: SVGReceiveMessage.GetRecentIcons }
   | { type: SVGReceiveMessage.ClearRecentIcons }
   | { type: SVGReceiveMessage.AddFavoriteIcon; data: SVGIcon }
   | { type: SVGReceiveMessage.RemoveFavoriteIcon; data: SVGIcon }
   | { type: SVGReceiveMessage.ClearFavoriteIcons }
-  | { type: SVGReceiveMessage.GetFavoriteIcons }
+  | { type: SVGReceiveMessage.GetHomeIcons }
   | { type: SVGReceiveMessage.ToggleExpandIcon; data: boolean }
   | { type: SVGReceiveMessage.ToggleOpenDevTools; data: boolean }
   | { type: SVGReceiveMessage.GetExtensionTheme }
@@ -110,10 +109,6 @@ export interface HandlerReceiveMessage {
    */
   [SVGReceiveMessage.RemoveRecentIcon]: (icon: SVGIcon) => void
   /**
-   * Gets the recent icons.
-   */
-  [SVGReceiveMessage.GetRecentIcons]: VoidFunction
-  /**
    * Clears the recent icons.
    */
   [SVGReceiveMessage.ClearRecentIcons]: VoidFunction
@@ -130,9 +125,9 @@ export interface HandlerReceiveMessage {
    */
   [SVGReceiveMessage.ClearFavoriteIcons]: VoidFunction
   /**
-   * Gets the favorite icons.
+   * Gets the home icons.
    */
-  [SVGReceiveMessage.GetFavoriteIcons]: VoidFunction
+  [SVGReceiveMessage.GetHomeIcons]: VoidFunction
   /**
    * Toggles the expand icon.
    * @param isExpanded - A boolean indicating whether the icons should be expanded.

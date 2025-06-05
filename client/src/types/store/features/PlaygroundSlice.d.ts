@@ -5,7 +5,7 @@ import { ReactNode } from 'react'
 
 export interface PlaygroundState {
   recentlySelected?: SVGComponent
-  isSelecting: boolean
+  isOpenDevTools: boolean
   isInitialized: Record<string, boolean>
 }
 
@@ -15,10 +15,13 @@ export interface PlaygroundReducers {
    */
   setRecentlySelected: CaseReducer<PlaygroundState, PayloadAction<SVGComponent | undefined>>
   /**
-   * Set the state to indicate if the user is selecting a component.
+   * Toggles the visibility of the developer tools panel.
    */
-  setIsSelecting: CaseReducer<PlaygroundState, PayloadAction<boolean>>
+  setIsOpenDevTools: CaseReducer<PlaygroundState, PayloadAction<boolean>>
 
+  /**
+   * Sets the identifier of the initialized editor.
+   */
   setInitializedEditor: CaseReducer<PlaygroundState, PayloadAction<string>>
 
   [key: string]: CaseReducer<PlaygroundState, PayloadAction<any>>

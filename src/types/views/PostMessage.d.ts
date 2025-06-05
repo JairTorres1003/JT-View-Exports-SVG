@@ -19,8 +19,7 @@ export type PostMessage =
   | { type: SVGPostMessage.SendTheme; data: ThemeMode }
   | { type: SVGPostMessage.SendEditorConfig; data: Record<string, unknown> }
   | { type: SVGPostMessage.SendVsCodeStyles; data: VsCodeStyles }
-  | { type: SVGPostMessage.SendRecentIcons; data: ViewExportSVG[] }
-  | { type: SVGPostMessage.SendFavoriteIcons; data: ViewExportSVG[] }
+  | { type: SVGPostMessage.SendHomeIcons; data: ViewExportSVG[] }
   | { type: SVGPostMessage.SendExpandAllIcons; data: boolean }
   | { type: SVGPostMessage.SendToggleOpenDevTools; data: boolean }
   | { type: SVGPostMessage.SendExtensionTheme; data: ExtensionManage }
@@ -94,12 +93,7 @@ export interface FuncPostMessage {
    * Sends the recent icons to the webview.
    * @param data - The recent icons.
    */
-  (type: SVGPostMessage.SendRecentIcons, data: ViewExportSVG[]): void
-  /**
-   * Sends the favorite icons to the webview.
-   * @param data - The favorite icons.
-   */
-  (type: SVGPostMessage.SendFavoriteIcons, data: ViewExportSVG[]): void
+  (type: SVGPostMessage.SendHomeIcons, data: ViewExportSVG[]): void
   /**
    * Sends the expand all icons message to the webview.
    * @param data - The expand all icons message.

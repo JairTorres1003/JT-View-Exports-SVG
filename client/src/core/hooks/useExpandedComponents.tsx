@@ -4,12 +4,12 @@ import { useSelector } from 'react-redux'
 
 import { vscode } from '@/services/vscode'
 
-interface ContainerComponentsHook {
+interface ExpandedComponentsHook {
   isExpanded: string[]
   toggleExpanded: (panel: string) => (event: SyntheticEvent, expanded: boolean) => void
 }
 
-export const useContainerComponents = (): ContainerComponentsHook => {
+export const useExpandedComponents = (): ExpandedComponentsHook => {
   const [expandedItems, setExpandedItems] = useState<string[]>([])
   const { defaultExpandAll } = useSelector((state) => state.global.configuration)
   const { components } = useSelector((state) => state.svg)

@@ -4,7 +4,6 @@ import { useEffect, useState } from 'react'
 import { useDispatch } from 'react-redux'
 
 import { vscode } from '@/services/vscode'
-import { setRecentlySelected } from '@/store/features/PlaygroundSlice'
 import { setComponents, setErrors, setSearch } from '@/store/features/SVGSlice'
 
 interface DashboardHook {
@@ -22,7 +21,6 @@ export const useDashboard = (): DashboardHook => {
    */
   const getSVGComponents = (data: ViewExportSVG[]): void => {
     dispatch(setComponents(data))
-    dispatch(setRecentlySelected())
     dispatch(setSearch(''))
     dispatch(setErrors())
     setLoading(false)
