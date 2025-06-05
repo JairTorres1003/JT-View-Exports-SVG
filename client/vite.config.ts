@@ -30,6 +30,9 @@ export default defineConfig({
   },
   define: {
     rootDirectory: JSON.stringify(__dirname),
+    __APP_NAME: JSON.stringify(pkg.name),
+    __APP_PUBLISHER: JSON.stringify(pkg.publisher),
+    __APP_VERSION: JSON.stringify(pkg.version),
   },
   resolve: {
     dedupe: ['vscode', 'monaco-editor', ...localDependencies],
