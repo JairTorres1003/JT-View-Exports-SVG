@@ -143,6 +143,10 @@ export default {
       },
     }),
   ],
+  performance: {
+    maxAssetSize: 10 * 1024 * 1024, // 10 MiB
+    maxEntrypointSize: 1024 * 1024, // 1 MiB
+  },
   devServer: {
     compress: true,
     port: 5173,

@@ -1,7 +1,5 @@
 import cn from 'classnames'
-import React from 'react'
-
-import DevTools from '../DevTools'
+import React, { lazy, Suspense } from 'react'
 
 import { containerClasses } from './Container.classes'
 import { BoxContainer } from './Container.style'
@@ -9,6 +7,8 @@ import { BoxContainer } from './Container.style'
 import ResizableBox, { type ResizableBoxProps } from '@/core/components/Resizable/ResizableBox'
 
 const devToolsPanelId = 'devTools-panel'
+
+const DevTools = lazy(async () => await import('../DevTools'))
 
 interface ContainerProps {
   children: React.ReactNode
@@ -28,7 +28,9 @@ const Container: React.FC<Readonly<ContainerProps>> = ({ children, className, sl
       >
         {children}
       </ResizableBox>
-      <DevTools id={devToolsPanelId} />
+      <Suspense fallback={null}>
+        <DevTools id={devToolsPanelId} />
+      </Suspense>
     </BoxContainer>
   )
 }

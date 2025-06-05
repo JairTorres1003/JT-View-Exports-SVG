@@ -7,7 +7,7 @@ import { routes } from '@/config/routes/route'
 import { setIsOpenDevTools, setRecentlySelected } from '@/store/features/PlaygroundSlice'
 import { isEmpty } from '@/utils/misc'
 
-export const RouteManager = () => {
+const RouteManager = () => {
   const { renderPath } = useSelector((state) => state.global.configuration)
 
   const navigate = useNavigate()
@@ -64,3 +64,5 @@ export const RouteManager = () => {
     </Stack>
   )
 }
+
+export default RouteManager
