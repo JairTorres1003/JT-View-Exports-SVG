@@ -49,6 +49,8 @@ html:root {
   );
   --JT-SVG-vscode-toolbar-hoverBackground: var(--vscode-toolbar-hoverBackground);
   --JT-SVG-vscode-toolbar-hoverOutline: var(--vscode-toolbar-hoverOutline);
+
+  --JT-SVG-vscode-extensionIcon-starForeground: var(--vscode-extensionIcon-starForeground, #f1c40f);
 }
 
 body {

@@ -1,18 +1,29 @@
 import type { SVGComponent } from '@api/types/ViewExportsSVG'
-import { type BoxProps, Card, Tooltip, Typography } from '@mui/material'
+import { Box, type BoxProps, Card, Tooltip, Typography } from '@mui/material'
+import cn from 'classnames'
 import type { FC } from 'react'
 
 import { cardSvgClasses } from './CardSvg.classes'
 import { BoxCardSvg } from './CardSvg.style'
 
+import { IconStarFilled, IconStarOutlined } from '@/assets/icons/indicators'
 import { useCardSvg } from '@/core/hooks/useCardSvg'
 
 interface CardSvgProps extends Omit<BoxProps, 'component'> {
-  readonly children: React.ReactNode
-  readonly component: SVGComponent
+  children: React.ReactNode
+  component: SVGComponent
+  isFavorite?: boolean
+  disableFavorite?: boolean
 }
 
-const CardSvg: FC<CardSvgProps> = ({ children, component, onClick = () => null, ...props }) => {
+const CardSvg: FC<Readonly<CardSvgProps>> = ({
+  children,
+  component,
+  onClick = () => null,
+  isFavorite = false,
+  disableFavorite = false,
+  ...props
+}) => {
   const { handleClick, addRecentComponent } = useCardSvg()
 
   return (
@@ -24,7 +35,16 @@ const CardSvg: FC<CardSvgProps> = ({ children, component, onClick = () => null, 
         handleClick({ name: component.name, location: component.location })
       }}
     >
-      <Card className={cardSvgClasses.card}>{children}</Card>
+      <Card className={cardSvgClasses.card}>
+        {!disableFavorite && (
+          <Box
+            className={cn(cardSvgClasses.favorite, { [cardSvgClasses.favoriteActive]: isFavorite })}
+          >
+            {isFavorite ? <IconStarFilled size={11} /> : <IconStarOutlined size={11} />}
+          </Box>
+        )}
+        <Box className={cardSvgClasses.container}>{children}</Box>
+      </Card>
       <Tooltip placement='top' title={component.name}>
         <Typography
           variant='caption'
