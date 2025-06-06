@@ -14,6 +14,7 @@ const valideteShowIcons = (): Partial<Record<CacheIconKind, boolean>> => {
 
   return {
     [CacheIconKind.RECENT]: configRecent.isShow(),
+    [CacheIconKind.FAVORITE]: true,
   }
 }
 
@@ -44,11 +45,11 @@ export const getIconsFromCache = (): ViewExportSVG[] => {
       totalNoExports: 0,
     }
 
-    const { SVGFileCache } = getCacheManager()
+    const { ComponentsFileCache } = getCacheManager()
 
     icons?.forEach(({ location, name }) => {
       const lastModified = getFileTimestamp(location.file.absolutePath)
-      const cachedFile = SVGFileCache.get(location.file.absolutePath, lastModified)
+      const cachedFile = ComponentsFileCache.get(location.file.absolutePath, lastModified)
 
       if (!cachedFile) return
 

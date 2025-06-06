@@ -53,10 +53,10 @@ export async function processFiles(
       await Promise.all(
         fileSelected.map(async (f) => {
           try {
-            const { DeclarationFileCache, SVGFileCache } = getCacheManager()
+            const { DeclarationFileCache, ComponentsFileCache } = getCacheManager()
             const file = await pathToSVGFile(f.fsPath)
             const lastModified = getFileTimestamp(file.absolutePath)
-            const cachedFile = SVGFileCache.get(file.absolutePath, lastModified)
+            const cachedFile = ComponentsFileCache.get(file.absolutePath, lastModified)
 
             if (cachedFile && configShowNoExports.isShow() === cachedFile.isShowNoExports) {
               SVGExports.push(cachedFile)
@@ -84,7 +84,7 @@ export async function processFiles(
                 isShowNoExports: configShowNoExports.isShow(),
               }
 
-              SVGFileCache.set(file.absolutePath, result, lastModified)
+              ComponentsFileCache.set(file.absolutePath, result, lastModified)
               DeclarationFileCache.set(file.absolutePath, base, lastModified)
               SVGExports.push(result)
               SVGFiles.push(file)

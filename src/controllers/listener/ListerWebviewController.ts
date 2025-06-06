@@ -306,12 +306,16 @@ export class ListerWebviewController {
    */
   private _addIconToCache(isRecent: boolean) {
     return (icon: SVGIcon): void => {
-      const { RecentIconCache, FavoritesIconCache } = getCacheManager()
+      const { RecentIconCache, FavoritesIconCache, ComponentsFileCache } = getCacheManager()
 
       if (isEmpty(workspace.workspaceFolders)) return
 
       const cache = isRecent ? RecentIconCache : FavoritesIconCache
       cache.add(workspace.workspaceFolders[0].uri, [icon])
+
+      if (!isRecent) {
+        ComponentsFileCache.toggleFavoriteIcon(icon)
+      }
     }
   }
 
@@ -321,12 +325,18 @@ export class ListerWebviewController {
    */
   private _removeIconFromCache(isRecent: boolean) {
     return (icon: SVGIcon): void => {
-      const { RecentIconCache, FavoritesIconCache } = getCacheManager()
+      const { RecentIconCache, FavoritesIconCache, ComponentsFileCache } = getCacheManager()
 
       if (isEmpty(workspace.workspaceFolders)) return
 
       const cache = isRecent ? RecentIconCache : FavoritesIconCache
       cache.remove(workspace.workspaceFolders[0].uri, icon)
+
+      if (!isRecent) {
+        ComponentsFileCache.toggleFavoriteIcon(icon)
+      }
+
+      this._getHomeIcons()
     }
   }
 

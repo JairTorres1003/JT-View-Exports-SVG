@@ -89,9 +89,8 @@ export class IconCacheController extends FileModifiedCacheController<SVGIconCach
     const current = super.get(currentKey, 0) ?? []
 
     const newValue = current.filter(
-      (item) =>
-        item.name !== icon.name &&
-        item.location.file.absolutePath !== icon.location.file.absolutePath
+      ({ name, location }) =>
+        !(name === icon.name && location.file.absolutePath === icon.location.file.absolutePath)
     )
 
     super.set(currentKey, newValue, 0)
@@ -111,6 +110,24 @@ export class IconCacheController extends FileModifiedCacheController<SVGIconCach
     const newValue = value.map((icon) => ({ ...icon, dateAdd: Date.now() }))
 
     super.set(this.getId(folder), newValue, 0)
+  }
+
+  /**
+   * Checks if the specified icon exists in the cache for the given folder.
+   *
+   * @param folder - The folder URI to check for the icon.
+   * @param icon - The SVGIcon object to check for existence in the cache.
+   * @returns `true` if the icon exists in the cache, otherwise `false`.
+   */
+  public hasIcon(folder: Uri, icon: SVGIcon): boolean {
+    const currentKey = this.getId(folder)
+    const current = super.get(currentKey, 0) ?? []
+
+    return current.some(
+      (item) =>
+        item.name === icon.name &&
+        item.location.file.absolutePath === icon.location.file.absolutePath
+    )
   }
 
   /**

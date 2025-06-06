@@ -3,6 +3,7 @@ import { Request, Response } from 'express'
 import { workspace } from 'vscode'
 
 import { getCacheManager } from '@jt/view-exports-svg/controllers/cache/CacheManagerController.js'
+import { IconCacheController } from '@jt/view-exports-svg/controllers/cache/IconCacheController.js'
 import { getIconsFromCache } from '@jt/view-exports-svg/utilities/icons/getIconsFromCache.js'
 import { SVGPostMessage } from '@jt/view-exports-svg/enum/ViewExportsSVG.js'
 import { isEmpty } from '@jt/view-exports-svg/utilities/misc.js'
@@ -19,6 +20,10 @@ export class IconsController {
 
     const { cache } = this.getCachedIcons(req.params)
     cache.add(workspace.workspaceFolders?.[0].uri, [req.body.data])
+
+    if (req.params.type === 'favorite') {
+      getCacheManager().ComponentsFileCache.toggleFavoriteIcon(req.body.data)
+    }
 
     res.send({ message: 'Icon added' })
   }
@@ -37,7 +42,13 @@ export class IconsController {
     }
 
     const { cache, type } = this.getCachedIcons(req.params)
-    const icons = cache.remove(workspace.workspaceFolders?.[0].uri, req.body.data)
+    cache.remove(workspace.workspaceFolders?.[0].uri, req.body.data)
+
+    if (req.params.type === 'favorite') {
+      getCacheManager().ComponentsFileCache.toggleFavoriteIcon(req.body.data)
+    }
+
+    const icons = getIconsFromCache()
 
     res.send({ type, data: icons })
   }
@@ -83,7 +94,9 @@ export class IconsController {
    * @param params - The parameters to determine which cache to retrieve.
    * @returns An object containing the cache and the type of icons.
    */
-  private getCachedIcons = (params: IconParamsRequest) => {
+  private getCachedIcons = (
+    params: IconParamsRequest
+  ): { cache: IconCacheController; type: SVGPostMessage } => {
     const { RecentIconCache, FavoritesIconCache } = getCacheManager()
 
     const type = params.type === 'recent'

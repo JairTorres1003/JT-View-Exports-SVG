@@ -6,11 +6,12 @@ import { l10n, Uri, type ExtensionContext } from 'vscode'
 import { isEmpty } from '../../utilities/misc'
 import { RecentIconsLimitController } from '../config'
 
+import { ComponentsCacheController } from './ComponentsCacheController'
 import { FileModifiedCacheController } from './FileModifiedCacheController'
 import { IconCacheController } from './IconCacheController'
 
 import { CacheIconKind } from '@/enum/cache'
-import type { ExtractSVGExports, ViewExportSVG } from '@/types/ViewExportsSVG'
+import type { ExtractSVGExports } from '@/types/ViewExportsSVG'
 import type { ExtensionManage } from '@/types/vscode'
 
 /**
@@ -18,7 +19,7 @@ import type { ExtensionManage } from '@/types/vscode'
  */
 class CacheManagerController {
   public DeclarationFileCache: FileModifiedCacheController<ExtractSVGExports['base']>
-  public SVGFileCache: FileModifiedCacheController<ViewExportSVG>
+  public ComponentsFileCache: ComponentsCacheController
   public FavoritesIconCache: IconCacheController
   public RecentIconCache: IconCacheController
   public ExtensionCache: FileModifiedCacheController<ExtensionManage | undefined>
@@ -35,14 +36,14 @@ class CacheManagerController {
 
     // Set up file paths for each cache
     const declarationCacheFile = path.join(cacheDir, 'declaration_cache.json')
-    const svgCacheFile = path.join(cacheDir, 'svg_cache.json')
+    const componentsCacheFile = path.join(cacheDir, 'components_cache.json')
     const favoritesCacheFile = path.join(cacheDir, 'favorites_cache.json')
     const recentCacheFile = path.join(cacheDir, 'recent_cache.json')
     const extensionCacheFile = path.join(cacheDir, 'extension_cache.json')
 
     // Initialize caches
     this.DeclarationFileCache = new FileModifiedCacheController(declarationCacheFile)
-    this.SVGFileCache = new FileModifiedCacheController(svgCacheFile)
+    this.ComponentsFileCache = new ComponentsCacheController(componentsCacheFile)
     this.FavoritesIconCache = new IconCacheController(favoritesCacheFile, CacheIconKind.FAVORITE)
     this.RecentIconCache = new IconCacheController(recentCacheFile, CacheIconKind.RECENT, limitFun)
     this.ExtensionCache = new FileModifiedCacheController(extensionCacheFile)
@@ -53,7 +54,7 @@ class CacheManagerController {
    */
   clearAll(): void {
     this.DeclarationFileCache.clear()
-    this.SVGFileCache.clear()
+    this.ComponentsFileCache.clear()
     this.FavoritesIconCache.clear()
     this.RecentIconCache.clear()
     this.ExtensionCache.clear()
