@@ -1,4 +1,4 @@
-import { l10n, type WebviewPanel } from 'vscode'
+import { type Disposable, l10n, type WebviewPanel } from 'vscode'
 
 import { DefaultExpandAllController, RecentIconsShowController } from '../config'
 import { AssetsHandler } from '../handlers/AssetsHandler'
@@ -39,7 +39,7 @@ export class ListerWebviewController {
 
     // Initialize message router
     this.messageRouter = new MessageRouter(this)
-    this.messageRouter.setupMessageListener(this._panel.webview)
+    this.messageRouter.setupMessageListener(this._panel.webview, this._disposables)
   }
 
   /**

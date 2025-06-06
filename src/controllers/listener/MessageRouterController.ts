@@ -11,17 +11,15 @@ import { isEmpty } from '@/utilities/misc'
 type ReceiveMessageHandler = (arg0?: HandlerArgs<HandlerReceiveMessage>) => void
 
 export class MessageRouter {
-  public readonly _disposables: Disposable[] = []
-
   constructor(private readonly handlers: ListerWebviewController) {}
 
-  setupMessageListener(webview: Webview): void {
+  setupMessageListener(webview: Webview, disposables: Disposable[] = []): void {
     try {
       const listener = (event: ReceiveMessage): void => {
         this.handleMessage(event)
       }
 
-      webview.onDidReceiveMessage(listener, undefined, this._disposables)
+      webview.onDidReceiveMessage(listener, undefined, disposables)
     } catch (error) {
       const errorMessage = l10n.t('Error setting webview message listener')
       window.showErrorMessage(errorMessage).then(undefined, console.error)
