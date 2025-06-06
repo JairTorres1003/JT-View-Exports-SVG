@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/require-await -- This function is designed to be asynchronous */
 import traverse from '@babel/traverse'
 import * as t from '@babel/types'
-import { l10n } from 'vscode'
+import { l10n, workspace } from 'vscode'
 
 import { parseFileContent, parserContent } from '../babelParser'
 import { getUnknownError, isEmpty } from '../misc'
@@ -12,6 +12,7 @@ import { getSVGComponent } from './SVGComponent'
 import { getTagName } from './tags'
 
 import { REST_PROPS_KEY } from '@/constants/misc'
+import { getCacheManager } from '@/controllers/cache'
 import { SVGDeclaration } from '@/enum/ViewExportsSVG'
 import type { HandlersDeclaration, DeclarationExport, ExtractComponent } from '@/types/svg/extracts'
 import type { SVGComponent, ExtractSVGExports, SVGFile, SVGLocation } from '@/types/ViewExportsSVG'
@@ -85,7 +86,22 @@ export async function extractSVGData(file: SVGFile): Promise<ExtractSVGExports> 
       svgResult?: Omit<SVGComponent, 'declaration' | 'isExported'>
     ): Promise<void> => {
       if (!isEmpty(svgResult)) {
-        const result: SVGComponent = { ...svgResult, declaration: SVGdeclaration, isExported }
+        const { FavoritesIconCache } = getCacheManager()
+        let isFavorite = false
+
+        if (!isEmpty(workspace.workspaceFolders)) {
+          isFavorite = FavoritesIconCache.hasIcon(workspace.workspaceFolders[0].uri, {
+            location: svgResult.location,
+            name: svgResult.name,
+          })
+        }
+
+        const result: SVGComponent = {
+          ...svgResult,
+          declaration: SVGdeclaration,
+          isExported,
+          isFavorite,
+        }
 
         if (isExported || identifiers.has(svgResult.name)) {
           exportComponents.push(result)

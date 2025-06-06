@@ -13,6 +13,12 @@ declare module '@jt/view-exports-svg/commands/expandedIcons.js' {
 declare module '@jt/view-exports-svg/controllers/cache/CacheManagerController.js' {
   export * from '@jt/view-exports-svg/controllers/cache/CacheManagerController.d.ts'
 }
+declare module '@jt/view-exports-svg/controllers/cache/IconCacheController.js' {
+  export * from '@jt/view-exports-svg/controllers/cache/IconCacheController.d.ts'
+}
+declare module '@jt/view-exports-svg/controllers/cache/FileModifiedCacheController.js' {
+  export * from '@jt/view-exports-svg/controllers/cache/FileModifiedCacheController.d.ts'
+}
 
 // Enums
 declare module '@jt/view-exports-svg/enum/ViewExportsSVG.js' {

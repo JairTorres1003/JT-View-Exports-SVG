@@ -61,6 +61,7 @@ export const BoxCardSvg = styled(Box, {
     padding: '2px',
     opacity: 0,
     transition: 'opacity 0.2s ease-in-out',
+    borderRadius: `0 ${shape.borderRadius}px 0 0`,
     [`&.${cardSvgClasses.favoriteActive}`]: {
       opacity: 1,
     },

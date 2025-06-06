@@ -21,5 +21,10 @@ export interface SVGReducers {
    */
   setErrors: CaseReducer<SVGState, PayloadAction<SVGErrors | undefined>>
 
+  /**
+   * Toggle the favorite status of an SVG component.
+   */
+  toggleFavorite: CaseReducer<SVGState, PayloadAction<SVGComponent>>
+
   [key: string]: CaseReducer<SVGState, PayloadAction<any>>
 }

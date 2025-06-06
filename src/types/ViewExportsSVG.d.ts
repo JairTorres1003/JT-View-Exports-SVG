@@ -106,6 +106,10 @@ export interface SVGComponent {
    * The errors found in the SVG component.
    */
   errors?: SVGErrors
+  /**
+   * Indicates whether the SVG component is a favorite.
+   */
+  isFavorite?: boolean
 }
 
 export interface SVGComponentProps {

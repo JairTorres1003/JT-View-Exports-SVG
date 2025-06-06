@@ -6,11 +6,13 @@ import { useDispatch } from 'react-redux'
 import { useAlert } from '@/core/hooks/useAlert'
 import { vscode } from '@/services/vscode'
 import { setRecentlySelected } from '@/store/features/PlaygroundSlice'
+import { toggleFavorite } from '@/store/features/SVGSlice'
 import { copyToClipboard, getUnknownError } from '@/utils/misc'
 
 interface CardSvgHook {
   handleClick: (icon: SVGIcon) => void
   addRecentComponent: (component: SVGComponent) => void
+  toggleFavorite: (component: SVGComponent) => void
 }
 
 export const useCardSvg = (): CardSvgHook => {
@@ -50,5 +52,25 @@ export const useCardSvg = (): CardSvgHook => {
     dispatch(setRecentlySelected(component))
   }
 
-  return { handleClick, addRecentComponent }
+  /**
+   * Toggles the favorite status of an SVG component.
+   *
+   * @param {SVGComponent} component - The SVG component to toggle favorite status for.
+   */
+  const handleToggleFavorite = (component: SVGComponent): void => {
+    dispatch(toggleFavorite(component))
+
+    const payload = {
+      name: component.name,
+      location: component.location,
+    }
+
+    if (component.isFavorite) {
+      vscode.postMessage(SVGReceiveMessage.RemoveFavoriteIcon, payload)
+    } else {
+      vscode.postMessage(SVGReceiveMessage.AddFavoriteIcon, payload)
+    }
+  }
+
+  return { handleClick, addRecentComponent, toggleFavorite: handleToggleFavorite }
 }
