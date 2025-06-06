@@ -40,6 +40,7 @@
   "CacheManager has not been initialized": "CacheManager has not been initialized",
   "Failed to initialize the extension theme": "Failed to initialize the extension theme",
   "No theme found for the current workspace": "No theme found for the current workspace",
-  "cache.icon.favorite": "Favorite Icons",
-  "cache.icon.recent": "Recent Icons"
+  "{kind} icons": "{kind} icons",
+  "Favorite": "Favorite",
+  "Recent": "Recent"
 }

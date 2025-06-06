@@ -91,14 +91,6 @@
         "Close": {
           "type": "string",
           "default": "Close"
-        },
-        "RecentIcons": {
-          "type": "string",
-          "default": "Recent Icons"
-        },
-        "FavoriteIcons": {
-          "type": "string",
-          "default": "Favorite Icons"
         }
       },
       "required": [
@@ -107,9 +99,7 @@
         "Search",
         "Clear",
         "Copied {{value}} to clipboard",
-        "Close",
-        "RecentIcons",
-        "FavoriteIcons"
+        "Close"
       ]
     },
     "pickers": {

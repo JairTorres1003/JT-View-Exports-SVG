@@ -71,7 +71,9 @@ export const getIconsFromCache = (): ViewExportSVG[] => {
       ...otherTotal,
       groupKind: {
         id: workspaceFolderUri ? cache.getId(workspaceFolderUri) : `icon-${index}`,
-        label: l10n.t(`cache.icon.${kind}`),
+        label: l10n.t('{kind} icons', {
+          kind: l10n.t(kind).charAt(0).toUpperCase() + l10n.t(kind).slice(1),
+        }),
       },
     })
   })
