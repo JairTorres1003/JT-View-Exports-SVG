@@ -9,10 +9,18 @@ import { filteredExports, playground } from '@/utilities/svg'
 import { svgFileToUri } from '@/utilities/vscode'
 
 export class SVGComponentHandler {
+  private viewExportSVG: ViewExportSVG[]
+
   constructor(
     private readonly postMessage: FuncPostMessage,
-    private readonly viewExportSVG: ViewExportSVG[]
-  ) {}
+    viewExportSVG: ViewExportSVG[]
+  ) {
+    this.viewExportSVG = viewExportSVG
+  }
+
+  updateSVGComponents(viewExportSVG: ViewExportSVG[]): void {
+    this.viewExportSVG = viewExportSVG
+  }
 
   async extractSVGComponent(files: string[]): Promise<void> {
     try {

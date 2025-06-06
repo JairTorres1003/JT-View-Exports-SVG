@@ -68,7 +68,10 @@ export class ListerWebviewController {
   /**
    * Updates the state of the webview panel.
    */
-  protected readonly update = (processedFiles: number): void => {
+  protected readonly update = (processedFiles: number, viewExportSVG: ViewExportSVG[]): void => {
+    this.viewExportSVG = viewExportSVG
+    this.svgComponentHandler.updateSVGComponents(viewExportSVG)
+
     this.toggleOpenDevTools(false)
 
     this._postMessage(SVGPostMessage.SendUpdateConfiguration, {

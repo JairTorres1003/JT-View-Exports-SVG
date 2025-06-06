@@ -19,7 +19,6 @@ export class ViewExportsSVGController extends ListerWebviewController {
     processedFiles: number
   ) {
     super(panel, viewExportSVG)
-    this.viewExportSVG = viewExportSVG
 
     // Listen for when the panel is disposed
     // This happens when the user closes the panel or when the panel is closed programmatically
@@ -116,9 +115,7 @@ export class ViewExportsSVGController extends ListerWebviewController {
    */
   public static update(viewExportSVG: ViewExportSVG[], processedFiles: number): void {
     if (!isEmpty(ViewExportsSVGController.currentPanel)) {
-      ViewExportsSVGController.currentPanel.update(processedFiles)
-
-      ViewExportsSVGController.currentPanel.viewExportSVG = viewExportSVG
+      ViewExportsSVGController.currentPanel.update(processedFiles, viewExportSVG)
 
       if (!isEmpty(viewExportSVG)) {
         ViewExportsSVGController.currentPanel._postMessage(
