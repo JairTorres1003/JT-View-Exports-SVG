@@ -208,10 +208,15 @@
       "pattern": ".*\\{file\\}.*",
       "patternErrorMessage": "The message must contain the variable {file}"
     },
-    "Error removing assets path": {
+    "Error removing assets path: {error}": {
       "type": "string",
       "description": "Error message displayed when removing the assets path fails",
-      "default": "Error removing assets path"
+      "default": "Error removing assets path: {error}"
+    },
+    "Error getting assets path: {error}": {
+      "type": "string",
+      "description": "Error message displayed when getting the assets path fails",
+      "default": "Error getting assets path: {error}"
     },
     "Method not implemented": {
       "type": "string",
@@ -298,7 +303,8 @@
     "File does not exist: {file}",
     "Error opening file: {file}",
     "Error reading directory \"{file}\":",
-    "Error removing assets path",
+    "Error getting assets path: {error}",
+    "Error removing assets path: {error}",
     "Method not implemented",
     "Error saving cache",
     "Error loading cache",

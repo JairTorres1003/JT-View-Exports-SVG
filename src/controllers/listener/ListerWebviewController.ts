@@ -1,120 +1,45 @@
-import {
-  l10n,
-  type WebviewPanel,
-  window,
-  type Disposable,
-  type Webview,
-  env,
-  workspace,
-  commands,
-} from 'vscode'
+import { l10n, type WebviewPanel } from 'vscode'
 
-import { getCacheManager } from '../cache'
-import {
-  AssetsPathsController,
-  DefaultExpandAllController,
-  LastScanDateController,
-  RecentIconsShowController,
-} from '../config'
+import { DefaultExpandAllController, RecentIconsShowController } from '../config'
+import { AssetsHandler } from '../handlers/AssetsHandler'
+import { CacheHandler } from '../handlers/CacheHandler'
+import { ConfigurationHandler } from '../handlers/ConfigurationHandler'
+import { SVGComponentHandler } from '../handlers/SVGComponentHandler'
+import { UIHandler } from '../handlers/UIHandler'
 
-import { expandedIcons, toggleDevTools } from '@/commands'
+import { MessageRouter } from './MessageRouterController'
+
 import { toggleViewActions } from '@/commands/editorTitleActions'
-import { CONFIG_KEY } from '@/constants/misc'
-import { SVGPostMessage, SVGReceiveMessage } from '@/enum/ViewExportsSVG'
-import type { HandlerArgs } from '@/types/misc'
-import type { ViewExportSVG, SVGFile, SVGPlayground, SVGIcon } from '@/types/ViewExportsSVG'
+import { SVGPostMessage } from '@/enum/ViewExportsSVG'
+import type { SVGFile, SVGIcon, SVGPlayground, ViewExportSVG } from '@/types/ViewExportsSVG'
 import type { FuncPostMessage } from '@/types/views/PostMessage'
-import type { ReceiveMessage, HandlerReceiveMessage } from '@/types/views/ReceiveMessage'
-import { openFile, pathToSVGFile, scanningFiles, scanningWorkspace } from '@/utilities/files'
-import { getIconsFromCache } from '@/utilities/icons/getIconsFromCache'
-import { getUnknownError, isEmpty } from '@/utilities/misc'
-import { filteredExports, playground } from '@/utilities/svg'
-import {
-  getConfigurationEditor,
-  getCurrentTheme,
-  getStyles,
-  svgFileToUri,
-} from '@/utilities/vscode'
-import { getExtensionTheme } from '@/utilities/vscode/extensions'
 
 export class ListerWebviewController {
   public readonly _panel: WebviewPanel
   public readonly _disposables: Disposable[] = []
   public viewExportSVG: ViewExportSVG[] = []
 
-  private readonly assetsPathController: AssetsPathsController
-  private readonly lastScanDateController: LastScanDateController
+  private readonly svgComponentHandler: SVGComponentHandler
+  private readonly cacheHandler: CacheHandler
+  private readonly configurationHandler: ConfigurationHandler
+  private readonly assetsHandler: AssetsHandler
+  private readonly uiHandler: UIHandler
+  private readonly messageRouter: MessageRouter
 
   constructor(panel: WebviewPanel, viewExportSVG: ViewExportSVG[]) {
     this._panel = panel
     this.viewExportSVG = viewExportSVG
 
-    this.assetsPathController = new AssetsPathsController()
-    this.lastScanDateController = new LastScanDateController()
+    // Initialize handlers
+    this.svgComponentHandler = new SVGComponentHandler(this._postMessage, this.viewExportSVG)
+    this.cacheHandler = new CacheHandler(this._postMessage)
+    this.configurationHandler = new ConfigurationHandler(this._postMessage)
+    this.assetsHandler = new AssetsHandler(this._postMessage)
+    this.uiHandler = new UIHandler(this._postMessage)
 
-    // Set an event listener to listen for messages passed from the webview context
-    this._setWebviewMessageListener(this._panel.webview)
-  }
-
-  private get _handlersMap(): HandlerReceiveMessage {
-    return {
-      [SVGReceiveMessage.ExtractSVGComponent]: this._extractSVGComponent.bind(this),
-      [SVGReceiveMessage.GetAssetsPath]: this._getAssetsPath.bind(this),
-      [SVGReceiveMessage.GetLanguage]: this._getLanguage.bind(this),
-      [SVGReceiveMessage.GetLastScanDate]: this._getLastScanDate.bind(this),
-      [SVGReceiveMessage.GetSVGComponents]: this._getSVGComponents.bind(this),
-      [SVGReceiveMessage.GetTheme]: this._getTheme.bind(this),
-      [SVGReceiveMessage.GetViewAssets]: this._getViewAssets.bind(this),
-      [SVGReceiveMessage.OpenFile]: openFile.bind(this),
-      [SVGReceiveMessage.PlaygroundSVGComponents]: this._playgroundSVGComponents.bind(this),
-      [SVGReceiveMessage.RemoveAssets]: this._removeAssets.bind(this),
-      [SVGReceiveMessage.ScanWorkspace]: this._scanWorkspace.bind(this),
-      [SVGReceiveMessage.SearchSVGComponents]: this._searchSVGComponents.bind(this),
-      [SVGReceiveMessage.GetEditorConfig]: this._getEditorConfig.bind(this),
-      [SVGReceiveMessage.GetVsCodeStyles]: this._vscodeStyles.bind(this),
-      [SVGReceiveMessage.AddRecentIcon]: this._addIconToCache(true).bind(this),
-      [SVGReceiveMessage.RemoveRecentIcon]: this._removeIconFromCache(true).bind(this),
-      [SVGReceiveMessage.ClearRecentIcons]: this._clearIconsFromCache(true).bind(this),
-      [SVGReceiveMessage.AddFavoriteIcon]: this._addIconToCache(false).bind(this),
-      [SVGReceiveMessage.RemoveFavoriteIcon]: this._removeIconFromCache(false).bind(this),
-      [SVGReceiveMessage.ClearFavoriteIcons]: this._clearIconsFromCache(false).bind(this),
-      [SVGReceiveMessage.GetHomeIcons]: this._getHomeIcons.bind(this),
-      [SVGReceiveMessage.ToggleExpandIcon]: this._toggleExpandIcon.bind(this),
-      [SVGReceiveMessage.ToggleOpenDevTools]: this._toggleOpenDevTools.bind(this),
-      [SVGReceiveMessage.GetExtensionTheme]: this._getExtensionTheme.bind(this),
-      [SVGReceiveMessage.ReloadExtensionTheme]: this._reloadExtensionTheme.bind(this),
-    }
-  }
-
-  /**
-   * Sets up a message listener for the webview panel.
-   * @param webview The webview instance.
-   */
-  private _setWebviewMessageListener(webview: Webview): void {
-    try {
-      const listener = (event: ReceiveMessage): void => {
-        const handler = this._handlersMap[event.type] as (
-          arg0?: HandlerArgs<HandlerReceiveMessage>
-        ) => void
-
-        if (isEmpty(handler) || typeof handler !== 'function') {
-          console.error(l10n.t('No handler found for event:'), event)
-          return
-        }
-
-        if ('data' in event) {
-          handler.call(this, event.data)
-        } else {
-          handler.call(this)
-        }
-      }
-
-      webview.onDidReceiveMessage(listener, undefined, this._disposables)
-    } catch (error) {
-      const errorMessage = l10n.t('Error setting webview message listener')
-      console.error(errorMessage, error)
-      window.showErrorMessage(errorMessage).then(undefined, console.error)
-    }
+    // Initialize message router
+    this.messageRouter = new MessageRouter(this)
+    this.messageRouter.setupMessageListener(this._panel.webview)
   }
 
   /**
@@ -131,25 +56,20 @@ export class ListerWebviewController {
 
   /**
    * Initializes default values for certain calls used in the web view.
-   *
-   * @protected
    */
   protected readonly initialize = (processedFiles: number): void => {
-    this._toggleOpenDevTools(false)
+    this.toggleOpenDevTools(false)
 
     const config = new DefaultExpandAllController()
-
-    this._toggleExpandIcon(config.isExpandAll())
+    this.toggleExpandIcon(config.isExpandAll())
     toggleViewActions(processedFiles > 0).catch(console.error)
   }
 
   /**
    * Updates the state of the webview panel.
-   *
-   * @protected
    */
   protected readonly update = (processedFiles: number): void => {
-    this._toggleOpenDevTools(false)
+    this.toggleOpenDevTools(false)
 
     this._postMessage(SVGPostMessage.SendUpdateConfiguration, {
       renderPath: processedFiles > 0 ? '/dashboard' : '/',
@@ -159,235 +79,80 @@ export class ListerWebviewController {
     toggleViewActions(processedFiles > 0).catch(console.error)
   }
 
-  /**
-   * Extracts SVG components from the given files.
-   * @param files - An array of file paths.
-   */
-  private _extractSVGComponent(files: string[]): void {
-    Promise.all(files.map(pathToSVGFile)).then((resolvedFiles) => {
-      scanningFiles(resolvedFiles.map(svgFileToUri)).catch(console.error)
-    }, console.error)
+  extractSVGComponent(files: string[]): void {
+    this.svgComponentHandler.extractSVGComponent(files).catch(console.error)
+  }
+  getSVGComponents(): void {
+    this.svgComponentHandler.getSVGComponents()
+  }
+  playgroundSVGComponents(component: SVGPlayground): void {
+    this.svgComponentHandler.playgroundSVGComponents(component).catch(console.error)
+  }
+  searchSVGComponents(query: string): void {
+    this.svgComponentHandler.searchSVGComponents(query)
   }
 
-  /**
-   * Retrieves the assets path and sends it as a post message.
-   */
-  private _getAssetsPath(): void {
-    this.assetsPathController.getAssetsPath().then((assetsPath) => {
-      this._postMessage(SVGPostMessage.SendAssetsPath, assetsPath)
-    }, console.error)
+  addRecentIcon(icon: SVGIcon): void {
+    this.cacheHandler.addRecentIcon(icon)
+  }
+  removeRecentIcon(icon: SVGIcon): void {
+    this.cacheHandler.removeRecentIcon(icon)
+  }
+  clearRecentIcons(): void {
+    this.cacheHandler.clearRecentIcons()
+  }
+  addFavoriteIcon(icon: SVGIcon): void {
+    this.cacheHandler.addFavoriteIcon(icon)
+  }
+  removeFavoriteIcon(icon: SVGIcon): void {
+    this.cacheHandler.removeFavoriteIcon(icon)
+  }
+  clearFavoriteIcons(): void {
+    this.cacheHandler.clearFavoriteIcons()
+  }
+  getHomeIcons(): void {
+    this.cacheHandler.getHomeIcons()
   }
 
-  /**
-   * Gets the language for the SVG panel.
-   * If the language is not set, it defaults to 'en'.
-   */
-  private _getLanguage(): void {
-    this._postMessage(SVGPostMessage.SendLanguage, env.language ?? 'en')
+  getLanguage(): void {
+    this.configurationHandler.getLanguage()
+  }
+  getTheme(): void {
+    this.configurationHandler.getTheme()
+  }
+  getEditorConfig(): void {
+    this.configurationHandler.getEditorConfig()
+  }
+  getVsCodeStyles(): void {
+    this.configurationHandler.getVsCodeStyles()
+  }
+  getExtensionTheme(): void {
+    this.configurationHandler.getExtensionTheme()
+  }
+  reloadExtensionTheme(): void {
+    this.configurationHandler.reloadExtensionTheme().catch(console.error)
   }
 
-  /**
-   * Retrieves the last scan date and sends it as a post message.
-   */
-  private _getLastScanDate(): void {
-    const date = this.lastScanDateController._dateString
-    this._postMessage(SVGPostMessage.SendLastScanDate, date)
+  getAssetsPath(): void {
+    this.assetsHandler.getAssetsPath().catch(console.error)
+  }
+  getViewAssets(files: SVGFile[]): void {
+    this.assetsHandler.getViewAssets(files).catch(console.error)
+  }
+  getLastScanDate(): void {
+    this.assetsHandler.getLastScanDate()
+  }
+  removeAssets(files: SVGFile[]): void {
+    this.assetsHandler.removeAssets(files).catch(console.error)
+  }
+  scanWorkspace(): void {
+    this.assetsHandler.scanWorkspace().catch(console.error)
   }
 
-  /**
-   * Retrieves the SVG components and sends them as a post message.
-   */
-  private _getSVGComponents(): void {
-    this._postMessage(SVGPostMessage.SendRunExtraction, true)
-
-    if (!isEmpty(this.viewExportSVG)) {
-      this._postMessage(SVGPostMessage.SendSVGComponents, this.viewExportSVG)
-    } else {
-      this._postMessage(SVGPostMessage.SendSVGError, {
-        location: {},
-        message: l10n.t('No SVG components found...'),
-      })
-    }
+  toggleExpandIcon(isExpanded: boolean): void {
+    this.uiHandler.toggleExpandIcon(isExpanded).catch(console.error)
   }
-
-  /**
-   * Gets the theme and sends it as a post message.
-   */
-  private _getTheme(): void {
-    this._postMessage(SVGPostMessage.SendTheme, getCurrentTheme())
-  }
-
-  /**
-   * Retrieves the view assets for the given SVG files.
-   * @param files - An array of SVG files.
-   */
-  private _getViewAssets(files: SVGFile[]): void {
-    scanningFiles(files.map(svgFileToUri)).catch(console.error)
-  }
-
-  /**
-   * Plays the SVG components in the playground.
-   * @param component - The SVG playground component.
-   */
-  private _playgroundSVGComponents(component: SVGPlayground): void {
-    playground(component)
-      .then((result) => {
-        if ('component' in result) {
-          this._postMessage(SVGPostMessage.SendSVGPlayground, result)
-        } else {
-          this._postMessage(SVGPostMessage.SendPlaygroundError, result)
-        }
-      })
-      .catch((error) => {
-        const errorMessage = l10n.t('Error generating SVG playground {error}', {
-          error: getUnknownError(error),
-        })
-        console.error(errorMessage, error)
-        this._postMessage(SVGPostMessage.SendPlaygroundError, {
-          message: errorMessage,
-          location: {},
-        })
-      })
-  }
-
-  /**
-   * Removes the specified SVG files from the assets.
-   * @param files - An array of SVGFile objects representing the files to be removed.
-   */
-  private _removeAssets(files: SVGFile[]): void {
-    this.assetsPathController.remove(files).then(() => {
-      this._getAssetsPath()
-    }, console.error)
-  }
-
-  /**
-   * Scans the workspace for files and performs necessary operations.
-   */
-  private _scanWorkspace(): void {
-    scanningWorkspace().then(async (files) => {
-      await scanningFiles(files)
-      this._getLastScanDate()
-    }, console.error)
-  }
-
-  /**
-   * Searches for SVG components based on the provided query.
-   * @param query - The search query.
-   */
-  private _searchSVGComponents(query: string): void {
-    const filtered = filteredExports(this.viewExportSVG, query)
-
-    if (Array.isArray(filtered)) {
-      this._postMessage(SVGPostMessage.SendSVGFilteredComponents, filtered)
-    } else {
-      this._postMessage(SVGPostMessage.SendSVGError, filtered)
-    }
-  }
-
-  /**
-   * Retrieves the editor configuration and sends it as a post message.
-   */
-  private _getEditorConfig(): void {
-    const config = getConfigurationEditor()
-    this._postMessage(SVGPostMessage.SendEditorConfig, config)
-  }
-
-  /**
-   * Retrieves the VS Code styles and sends them as a post message.
-   */
-  private _vscodeStyles(): void {
-    const config = getStyles()
-    this._postMessage(SVGPostMessage.SendVsCodeStyles, config)
-  }
-
-  /**
-   * Adds an icon to the cache.
-   * @param isRecent - Whether the icon is recent or favorite.
-   */
-  private _addIconToCache(isRecent: boolean) {
-    return (icon: SVGIcon): void => {
-      const { RecentIconCache, FavoritesIconCache, ComponentsFileCache } = getCacheManager()
-
-      if (isEmpty(workspace.workspaceFolders)) return
-
-      const cache = isRecent ? RecentIconCache : FavoritesIconCache
-      cache.add(workspace.workspaceFolders[0].uri, [icon])
-
-      if (!isRecent) {
-        ComponentsFileCache.toggleFavoriteIcon(icon)
-      }
-    }
-  }
-
-  /**
-   * Removes an icon from the cache.
-   * @param isRecent - Whether the icon is recent or favorite.
-   */
-  private _removeIconFromCache(isRecent: boolean) {
-    return (icon: SVGIcon): void => {
-      const { RecentIconCache, FavoritesIconCache, ComponentsFileCache } = getCacheManager()
-
-      if (isEmpty(workspace.workspaceFolders)) return
-
-      const cache = isRecent ? RecentIconCache : FavoritesIconCache
-      cache.remove(workspace.workspaceFolders[0].uri, icon)
-
-      if (!isRecent) {
-        ComponentsFileCache.toggleFavoriteIcon(icon)
-      }
-
-      this._getHomeIcons()
-    }
-  }
-
-  /**
-   * Gets the home icons for home view.
-   */
-  private _getHomeIcons() {
-    const icons = getIconsFromCache()
-    this._postMessage(SVGPostMessage.SendHomeIcons, icons)
-  }
-
-  /**
-   * Clears the icons from the cache.
-   * @param isRecent - Whether the icons are recent or favorite.
-   */
-  private _clearIconsFromCache(isRecent: boolean) {
-    return (): void => {
-      const { RecentIconCache, FavoritesIconCache } = getCacheManager()
-
-      const cache = isRecent ? RecentIconCache : FavoritesIconCache
-      cache.clear()
-    }
-  }
-
-  /**
-   * Toggles the expand icon context.
-   * @param isExpanded - A boolean indicating whether the icons should be expanded.
-   */
-  private _toggleExpandIcon(isExpanded: boolean): void {
-    expandedIcons(isExpanded).catch(console.error)
-  }
-
-  /**
-   * Toggles the open developer tools context.
-   * @param open - A boolean indicating whether to open or close the developer tools.
-   */
-  private _toggleOpenDevTools(open: boolean): void {
-    toggleDevTools(open).catch(console.error)
-  }
-
-  /**
-   * Retrieves the extension theme and sends it as a post message.
-   */
-  private _getExtensionTheme(): void {
-    this._postMessage(SVGPostMessage.SendExtensionTheme, getExtensionTheme())
-  }
-
-  /**
-   * Reloads the extension theme.
-   */
-  private _reloadExtensionTheme(): void {
-    commands.executeCommand(`${CONFIG_KEY}.reloadTheme`).then(undefined, console.error)
+  toggleOpenDevTools(open: boolean): void {
+    this.uiHandler.toggleOpenDevTools(open).catch(console.error)
   }
 }

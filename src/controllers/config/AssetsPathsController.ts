@@ -4,6 +4,7 @@ import ConfigManagerController from './ConfigManagerController'
 
 import type { SVGFile } from '@/types/ViewExportsSVG'
 import { pathToSVGFile } from '@/utilities/files'
+import { getUnknownError } from '@/utilities/misc'
 
 export class AssetsPathsController extends ConfigManagerController<string[]> {
   /**
@@ -107,7 +108,9 @@ export class AssetsPathsController extends ConfigManagerController<string[]> {
         await this.update(value, ConfigurationTarget.Workspace)
         await this.update(valueUser, ConfigurationTarget.Global)
       } catch (error) {
-        console.error(`${l10n.t('Error removing assets path')}:`, error)
+        console.error(
+          l10n.t('Error removing assets path: {error}', { error: getUnknownError(error) })
+        )
       }
     }
   }
