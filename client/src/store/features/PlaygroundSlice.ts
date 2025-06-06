@@ -1,7 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit'
 
-import { setComponents } from './SVGSlice'
-
 import type { PlaygroundReducers, PlaygroundState } from '@/types/store/features/PlaygroundSlice'
 
 const initialState: PlaygroundState = {
@@ -32,12 +30,6 @@ export const PlaygroundSlice = createSlice({
   name: 'Playground',
   initialState,
   reducers,
-  extraReducers: (builder) => {
-    builder.addCase(setComponents, (state) => {
-      state.isOpenDevTools = false
-      state.recentlySelected = undefined
-    })
-  },
 })
 
 export const {
