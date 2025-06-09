@@ -19,7 +19,7 @@ export function activate(context: ExtensionContext): void {
   initializeCacheManager(context)
   initializeExtensionTheme(context)
 
-  const allCommands = [
+  const allSubscriptions = [
     commands.registerCommand(`${CONFIG_KEY}.showMenu`, async (item: Uri, items: Uri[]) => {
       await showMenu(context, item, items)
     }),
@@ -35,13 +35,13 @@ export function activate(context: ExtensionContext): void {
     commands.registerCommand(`${CONFIG_KEY}.closeDevTools`, async () => {
       await runToggleDevTools(false)
     }),
-    commands.registerCommand(`${CONFIG_KEY}.clearCache`, runClearCache),
     commands.registerCommand(`${CONFIG_KEY}.reloadTheme`, () => {
       runReloadTheme(context)
     }),
+    commands.registerCommand(`${CONFIG_KEY}.clearCache`, runClearCache),
   ]
 
-  context.subscriptions.push(...allCommands)
+  context.subscriptions.push(...allSubscriptions)
 }
 
 /**
