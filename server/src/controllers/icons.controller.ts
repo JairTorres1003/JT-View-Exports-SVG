@@ -18,14 +18,16 @@ export class IconsController {
       return res.status(400).send({ message: 'No workspace folders found' })
     }
 
-    const { cache } = this.getCachedIcons(req.params)
+    const { cache, type } = this.getCachedIcons(req.params)
     cache.add(workspace.workspaceFolders?.[0].uri, [req.body.data])
 
     if (req.params.type === 'favorite') {
       getCacheManager().ComponentsFileCache.toggleFavoriteIcon(req.body.data)
     }
 
-    res.send({ message: 'Icon added' })
+    const icons = getIconsFromCache()
+
+    res.send({ type, data: icons })
   }
 
   /**
