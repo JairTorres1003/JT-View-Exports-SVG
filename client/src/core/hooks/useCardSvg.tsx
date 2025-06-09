@@ -12,7 +12,7 @@ import { copyToClipboard, getUnknownError } from '@/utils/misc'
 interface CardSvgHook {
   handleClick: (icon: SVGIcon) => void
   addRecentComponent: (component: SVGComponent) => void
-  toggleFavorite: (component: SVGComponent) => void
+  toggleFavorite: (component: SVGComponent, executeDispatch?: boolean) => void
 }
 
 export const useCardSvg = (): CardSvgHook => {
@@ -57,8 +57,10 @@ export const useCardSvg = (): CardSvgHook => {
    *
    * @param {SVGComponent} component - The SVG component to toggle favorite status for.
    */
-  const handleToggleFavorite = (component: SVGComponent): void => {
-    dispatch(toggleFavorite(component))
+  const handleToggleFavorite = (component: SVGComponent, executeDispatch = true): void => {
+    if (executeDispatch) {
+      dispatch(toggleFavorite(component))
+    }
 
     const payload = {
       name: component.name,

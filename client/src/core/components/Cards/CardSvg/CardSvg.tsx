@@ -13,6 +13,10 @@ interface CardSvgProps extends Omit<BoxProps, 'component'> {
   children: React.ReactNode
   component: SVGComponent
   disableFavorite?: boolean
+  /**
+   * @default true
+   */
+  executeFavoriteDispatch?: boolean
 }
 
 const CardSvg: FC<Readonly<CardSvgProps>> = ({
@@ -20,6 +24,7 @@ const CardSvg: FC<Readonly<CardSvgProps>> = ({
   component,
   onClick = () => null,
   disableFavorite = false,
+  executeFavoriteDispatch = true,
   ...props
 }) => {
   const { handleClick, addRecentComponent, toggleFavorite } = useCardSvg()
@@ -41,7 +46,7 @@ const CardSvg: FC<Readonly<CardSvgProps>> = ({
               [cardSvgClasses.favoriteActive]: component.isFavorite,
             })}
             onClick={() => {
-              toggleFavorite(component)
+              toggleFavorite(component, executeFavoriteDispatch)
             }}
           >
             {component.isFavorite ? <IconStarFilled size={11} /> : <IconStarOutlined size={11} />}

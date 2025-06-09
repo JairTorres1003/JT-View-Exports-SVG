@@ -23,7 +23,11 @@ const ContainerIcons = (): React.ReactNode => {
           slotProps={{ details: { className: containerIconsClasses.details } }}
         >
           {item.components.map(({ name, ...restComponent }) => (
-            <CardSvg key={name} component={{ ...restComponent, name }}>
+            <CardSvg
+              key={name}
+              executeFavoriteDispatch={false}
+              component={{ ...restComponent, name }}
+            >
               <RenderSvg {...restComponent} name={name} />
             </CardSvg>
           ))}
