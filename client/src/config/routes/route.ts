@@ -7,17 +7,29 @@ interface Route {
   private: boolean
 }
 
+export const pathnames = {
+  home: '/',
+  dashboard: '/dashboard',
+  upload: '/upload',
+}
+
 export const routes: Route[] = [
   {
-    path: '/',
+    path: pathnames.home,
     name: 'Home',
     Component: lazy(async () => await import('@/app/home/Home')),
     private: false,
   },
   {
-    path: '/dashboard',
+    path: pathnames.dashboard,
     name: 'Dashboard',
     Component: lazy(async () => await import('@/app/dashboard/Dashboard')),
+    private: false,
+  },
+  {
+    path: pathnames.upload,
+    name: 'Upload',
+    Component: lazy(async () => await import('@/app/upload/Upload')),
     private: false,
   },
 ]
