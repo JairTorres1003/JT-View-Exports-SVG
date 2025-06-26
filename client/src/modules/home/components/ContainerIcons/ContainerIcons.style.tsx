@@ -1,11 +1,15 @@
-import { Box, styled } from '@mui/material'
+import { Box, type BoxProps, styled } from '@mui/material'
+import type { ComponentType } from 'react'
 
 import { containerIconsClasses } from './ContainerIcons.classes'
 
-export const BoxContainerIcons = styled(Box, {
-  name: containerIconsClasses.root,
-  target: containerIconsClasses.root,
-})(() => ({
+export const BoxContainerIcons = styled<ComponentType<BoxProps>>(
+  (props) => <Box component='section' {...props} />,
+  {
+    name: containerIconsClasses.root,
+    target: containerIconsClasses.root,
+  }
+)(() => ({
   display: 'flex',
   flexDirection: 'column',
   height: '100%',
