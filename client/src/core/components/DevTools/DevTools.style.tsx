@@ -2,18 +2,23 @@ import {
   accordionDetailsClasses,
   accordionSummaryClasses,
   Box,
+  type BoxProps,
   styled,
   typographyClasses,
 } from '@mui/material'
+import type { ComponentType } from 'react'
 
 import { devToolsClasses } from './DevTools.classes'
 
 import { accordionMenuItemClasses } from '@/core/components/Accordion'
 
-export const BoxDevTools = styled(Box, {
-  name: devToolsClasses.root,
-  target: devToolsClasses.root,
-})(() => ({
+export const BoxDevTools = styled<ComponentType<BoxProps>>(
+  (props) => <Box component='aside' {...props} />,
+  {
+    name: devToolsClasses.root,
+    target: devToolsClasses.root,
+  }
+)(() => ({
   width: '100%',
   minWidth: 170,
   maxWidth: '100%',

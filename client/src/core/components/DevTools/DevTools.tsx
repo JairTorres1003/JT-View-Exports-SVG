@@ -13,7 +13,7 @@ const DevTools: FC<{ id: string }> = ({ id }): React.ReactNode => {
 
   return (
     <BoxDevTools id={id}>
-      <Box className={devToolsClasses.header}>
+      <Box component='header' className={devToolsClasses.header}>
         <Tooltip title={t('title')}>
           <Typography variant='h2' className={devToolsClasses.title}>
             {t('title')}
