@@ -4,6 +4,8 @@ import { useTranslation } from 'react-i18next'
 import { dropZoneClasses } from './DropZone.classes'
 import { BoxDropZone } from './DropZone.style'
 
+import { BackdropZone } from '@/core/components/Backdrop/BackdropZone'
+
 const DropZone = () => {
   const { t } = useTranslation(undefined, { keyPrefix: 'DropZone' })
 
@@ -20,6 +22,7 @@ const DropZone = () => {
           <Typography className={dropZoneClasses.text}>{t('or drop the files here')}</Typography>
         </Box>
       </Box>
+      <BackdropZone />
     </BoxDropZone>
   )
 }
