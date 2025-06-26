@@ -91,5 +91,11 @@
         }
       }
     }
+  },
+  "DropZone": {
+    "title": "Upload your JS, JSX, TS, or TSX files and easily discover the SVG components they contain.",
+    "Select files": "Select files",
+    "or drop the files here": "or drop the files here",
+    "Let it go!": "Let it go!"
   }
 }
