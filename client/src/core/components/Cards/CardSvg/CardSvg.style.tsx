@@ -1,11 +1,15 @@
-import { Box, styled } from '@mui/material'
+import { Box, type BoxProps, styled } from '@mui/material'
+import type { ComponentType } from 'react'
 
 import { cardSvgClasses } from './CardSvg.classes'
 
-export const BoxCardSvg = styled(Box, {
-  name: cardSvgClasses.root,
-  target: cardSvgClasses.root,
-})(({ theme: { vars, shape } }) => ({
+export const BoxCardSvg = styled<ComponentType<BoxProps>>(
+  (props) => <Box component='article' {...props} />,
+  {
+    name: cardSvgClasses.root,
+    target: cardSvgClasses.root,
+  }
+)(({ theme: { vars, shape } }) => ({
   display: 'flex',
   flexDirection: 'column',
   justifyContent: 'flex-start',
