@@ -49,6 +49,22 @@
         "FailedToActivateExtensionTheme": {
           "type": "string",
           "default": "Failed to activate extension theme"
+        },
+        "FailedToFetchExtensionTheme": {
+          "type": "string",
+          "default": "Failed to fetch extension theme"
+        },
+        "FailedToInitializeEditor": {
+          "type": "string",
+          "default": "Failed to initialize editor"
+        },
+        "ErrorApplyingInitialColor": {
+          "type": "string",
+          "default": "Error applying initial color"
+        },
+        "TheFollowingFilesAreNotSupported": {
+          "type": "string",
+          "default": "The following files are not supported:"
         }
       },
       "required": [
@@ -62,7 +78,11 @@
         "FailedToUpdateUserConfiguration",
         "FailedToUpdateUserKeybindings",
         "EditorReferenceIsNotAvailable",
-        "FailedToActivateExtensionTheme"
+        "FailedToActivateExtensionTheme",
+        "FailedToFetchExtensionTheme",
+        "FailedToInitializeEditor",
+        "ErrorApplyingInitialColor",
+        "TheFollowingFilesAreNotSupported"
       ]
     },
     "labels": {
@@ -165,13 +185,135 @@
             "ReloadEditor": {
               "type": "string",
               "default": "Reload editor"
+            },
+            "DisableWordWrap": {
+              "type": "string",
+              "default": "Disable word wrap"
+            },
+            "EnableWordWrap": {
+              "type": "string",
+              "default": "Enable word wrap"
             }
           },
-          "required": ["ReloadPlayground", "ReloadEditor"]
+          "required": ["ReloadPlayground", "ReloadEditor", "DisableWordWrap", "EnableWordWrap"]
+        },
+        "editor": {
+          "type": "object",
+          "properties": {
+            "suggestions": {
+              "type": "object",
+              "properties": {
+                "components": {
+                  "type": "object",
+                  "properties": {
+                    "details": {
+                      "type": "object",
+                      "properties": {
+                        "static": {
+                          "type": "string",
+                          "default": "SVG Component"
+                        },
+                        "animated": {
+                          "type": "string",
+                          "default": "Animated SVG Component"
+                        }
+                      },
+                      "required": ["static", "animated"]
+                    },
+                    "documentation": {
+                      "type": "array",
+                      "items": {
+                        "type": "string"
+                      },
+                      "default": [
+                        "---",
+                        "**🧩 SVG Component Preview**\\",
+                        "This is a dynamic SVG component. You can modify its code and instantly preview the result.\\",
+                        "\\",
+                        "**🎛️ Customization**\\",
+                        "Pass properties (props) to change the appearance or behavior of the component.\\",
+                        "\\",
+                        "**Usage Example:**",
+                        "```jsx",
+                        "<{{name}} {{propertyValue}} />",
+                        "```",
+                        "\\",
+                        "**🔍 More Info:** [{{fileName}}]({{link}} \"file://{{filePath}}\")\\",
+                        "Hover over the component or open the file for complete documentation."
+                      ]
+                    },
+                    "documentation_withRestProps": {
+                      "type": "array",
+                      "items": {
+                        "type": "string"
+                      },
+                      "default": [
+                        "---",
+                        "**🧩 SVG Component Preview**\\",
+                        "This is a dynamic SVG component. You can modify its code and instantly preview the result.\\",
+                        "\\",
+                        "**🎛️ Customization**\\",
+                        "You can pass specific properties as well as *any valid SVG attributes* (rest props) to customize the component further.\\",
+                        "\\",
+                        "**Usage Example:**",
+                        "```jsx",
+                        "<{{name}} {{propertyValue}} />",
+                        "```",
+                        "\\",
+                        "**🔍 More Info:** [{{fileName}}]({{link}} \"file://{{filePath}}\")\\",
+                        "Hover over the component or open the file for complete documentation."
+                      ]
+                    }
+                  },
+                  "required": ["details", "documentation", "documentation_withRestProps"]
+                },
+                "properties": {
+                  "type": "object",
+                  "properties": {
+                    "details": {
+                      "type": "object",
+                      "properties": {
+                        "static": {
+                          "type": "string",
+                          "default": "(property) {{name}}: {{type}}"
+                        }
+                      },
+                      "required": ["static"]
+                    }
+                  },
+                  "required": ["details"]
+                }
+              },
+              "required": ["components", "properties"]
+            }
+          },
+          "required": ["suggestions"]
         }
       },
-      "required": ["title", "playground", "menu"]
+      "required": ["title", "playground", "menu", "editor"]
+    },
+    "DropZone": {
+      "type": "object",
+      "properties": {
+        "title": {
+          "type": "string",
+          "default": "Upload your JS, JSX, TS, or TSX files and easily discover the SVG components they contain."
+        },
+        "Select files": {
+          "type": "string",
+          "default": "Select files"
+        },
+        "or drop the files here": {
+          "type": "string",
+          "default": "or drop the files here"
+        },
+        "Let it go!": {
+          "type": "string",
+          "default": "Let it go!"
+        }
+      },
+      "required": ["title", "Select files", "or drop the files here", "Let it go!"]
     }
   },
-  "required": ["errors", "labels", "pickers", "DevTools"]
+  "required": ["errors", "labels", "pickers", "DevTools", "DropZone"]
 }
