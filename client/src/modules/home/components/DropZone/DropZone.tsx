@@ -44,6 +44,7 @@ const DropZone = () => {
               id='file-input'
               type='file'
               style={{ display: 'none' }}
+              accept='.js,.ts,.jsx,.tsx'
               onChange={(e) => {
                 onNavigate(handleSelectFiles(e), 'onInput')
               }}
