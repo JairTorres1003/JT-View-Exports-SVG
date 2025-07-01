@@ -26,9 +26,8 @@ function SlideTransition(props: SlideProps): React.ReactNode {
  * @returns The rendered SnackbarAlert component.
  */
 const SnackbarAlert = (): React.ReactNode => {
-  const { content, duration, open, action, icon, position, severity } = useSelector(
-    (state) => state.global.snackbarAlert
-  )
+  const { content, duration, open, action, icon, position, severity, showCloseButton, maxWidth } =
+    useSelector((state) => state.global.snackbarAlert)
 
   const [key, setKey] = useState<string>('')
   const [currentContent, setCurrentContent] = useState<typeof content>('')
@@ -53,7 +52,20 @@ const SnackbarAlert = (): React.ReactNode => {
         transition: SlideTransition,
       }}
     >
-      <Alert severity={severity} action={action} icon={icon} elevation={5}>
+      <Alert
+        severity={severity}
+        action={action}
+        icon={icon}
+        sx={{ maxWidth }}
+        elevation={5}
+        onClose={
+          showCloseButton
+            ? (e) => {
+                onClose(e, 'timeout')
+              }
+            : undefined
+        }
+      >
         {content}
       </Alert>
     </Snackbar>

@@ -1,7 +1,7 @@
-import { SVGComponent } from '@api/types/ViewExportsSVG'
-import { AlertProps, SnackbarOrigin } from '@mui/material'
-import { type CaseReducer, type PayloadAction } from '@reduxjs/toolkit'
-import { ReactNode } from 'react'
+import type { SVGComponent } from '@api/types/ViewExportsSVG'
+import type { AlertProps, SnackbarOrigin } from '@mui/material'
+import type { CaseReducer, PayloadAction } from '@reduxjs/toolkit'
+import type { CSSProperties, ReactNode } from 'react'
 
 export interface GlobalState {
   snackbarAlert: {
@@ -33,6 +33,12 @@ export interface GlobalState {
      * @default { vertical: 'bottom', horizontal: 'center' }
      */
     position?: SnackbarOrigin
+    /**
+     * Whether to show the close button on the alert.
+     * @default false
+     */
+    showCloseButton?: boolean
+    maxWidth?: CSSProperties['maxWidth']
   }
   configuration: {
     /**
