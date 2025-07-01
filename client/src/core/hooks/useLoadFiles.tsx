@@ -1,6 +1,14 @@
+import { List, ListItem, ListItemText, Stack, Typography } from '@mui/material'
+import { useTranslation } from 'react-i18next'
+
+import { useAlert } from './useAlert'
+
 const ALLOWED_EXTENSIONS = ['.js', '.ts', '.jsx', '.tsx']
 
 export const useLoadFiles = () => {
+  const { t } = useTranslation()
+  const { onOpen } = useAlert()
+
   /**
    * Validates and loads files based on allowed extensions.
    * @param files - Array of files to be validated and loaded.
@@ -19,6 +27,28 @@ export const useLoadFiles = () => {
       }
     })
 
+    if (invalidFiles.length > 0) {
+      onOpen(
+        <Stack spacing={1}>
+          <Typography variant='body2' color='error'>
+            {t('errors.TheFollowingFilesAreNotSupported')}
+          </Typography>
+          <List dense>
+            {invalidFiles.map((fileName) => (
+              <ListItem key={fileName}>
+                <ListItemText sx={{ m: 0 }} primary={fileName} />
+              </ListItem>
+            ))}
+          </List>
+        </Stack>,
+        {
+          severity: 'error',
+          position: { horizontal: 'left', vertical: 'top' },
+          maxWidth: 600,
+        }
+      )
+    }
+
     return validFiles
   }
 
@@ -28,8 +58,10 @@ export const useLoadFiles = () => {
    * @returns - An array of valid files.
    */
   const handleSelectFiles = (event: React.ChangeEvent<HTMLInputElement>) => {
-    const files = event.target.files
-    return handleFiles(files)
+    const files = handleFiles(event.target.files)
+    // Reset the input value to allow re-selection of the same file
+    event.target.value = ''
+    return files
   }
 
   /**
