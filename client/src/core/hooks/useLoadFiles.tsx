@@ -1,9 +1,11 @@
 import { List, ListItem, ListItemText, Stack, Typography } from '@mui/material'
 import { useTranslation } from 'react-i18next'
 
-import { getFileExtension } from '../utils/file'
+import { createMakeupFile } from '../utils/file'
 
 import { useAlert } from './useAlert'
+
+import type { IMakeupFile } from '@/types/misc'
 
 const ALLOWED_EXTENSIONS = ['.js', '.ts', '.jsx', '.tsx']
 
@@ -17,15 +19,15 @@ export const useLoadFiles = () => {
    * @returns  - An object containing either an error message or the valid files.
    */
   const loadFiles = (files: File[]) => {
-    const validFiles: File[] = []
+    const validFiles: IMakeupFile[] = []
     const invalidFiles: string[] = []
 
     files.forEach((file) => {
-      const fileExtension = getFileExtension(file)
-      if (ALLOWED_EXTENSIONS.includes(`.${fileExtension}`)) {
-        validFiles.push(file)
+      const makeFile = createMakeupFile(file)
+      if (ALLOWED_EXTENSIONS.includes(`.${makeFile.extension}`)) {
+        validFiles.push(makeFile)
       } else {
-        invalidFiles.push(file.name)
+        invalidFiles.push(makeFile.name)
       }
     })
 

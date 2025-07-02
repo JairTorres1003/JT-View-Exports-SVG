@@ -111,6 +111,10 @@
         "Close": {
           "type": "string",
           "default": "Close"
+        },
+        "DeleteThisFile": {
+          "type": "string",
+          "default": "Delete this file"
         }
       },
       "required": [
@@ -119,7 +123,8 @@
         "Search",
         "Clear",
         "Copied {{value}} to clipboard",
-        "Close"
+        "Close",
+        "DeleteThisFile"
       ]
     },
     "pickers": {

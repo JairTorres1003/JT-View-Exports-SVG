@@ -13,3 +13,8 @@ export type PartialExcept<T, K extends keyof T> = Partial<Pick<T, K>> & Omit<T, 
  * @template K - The keys of `T` that should remain optional.
  */
 export type RequiredExcept<T, K extends keyof T> = Required<Pick<T, K>> & Omit<T, K>
+
+interface IMakeupFile extends File {
+  readonly extension: string
+  readonly path?: string
+}
