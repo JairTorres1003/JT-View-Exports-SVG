@@ -1,6 +1,8 @@
 import { List, ListItem, ListItemText, Stack, Typography } from '@mui/material'
 import { useTranslation } from 'react-i18next'
 
+import { getFileExtension } from '../utils/file'
+
 import { useAlert } from './useAlert'
 
 const ALLOWED_EXTENSIONS = ['.js', '.ts', '.jsx', '.tsx']
@@ -19,7 +21,7 @@ export const useLoadFiles = () => {
     const invalidFiles: string[] = []
 
     files.forEach((file) => {
-      const fileExtension = file.name.slice(((file.name.lastIndexOf('.') - 1) >>> 0) + 2)
+      const fileExtension = getFileExtension(file)
       if (ALLOWED_EXTENSIONS.includes(`.${fileExtension}`)) {
         validFiles.push(file)
       } else {
