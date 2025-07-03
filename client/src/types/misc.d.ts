@@ -16,5 +16,6 @@ export type RequiredExcept<T, K extends keyof T> = Required<Pick<T, K>> & Omit<T
 
 interface IMakeupFile extends File {
   readonly extension: string
+  readonly uuid: string
   readonly path?: string
 }

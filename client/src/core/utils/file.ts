@@ -1,3 +1,5 @@
+import { v4 as uuidv4 } from 'uuid'
+
 import type { IMakeupFile } from '@/types/misc'
 
 /**
@@ -22,13 +24,31 @@ const getFileExtension = (file: File): string => {
  * @returns A new File object with the new porperties added.
  */
 export const createMakeupFile = (file: File): IMakeupFile => {
-  const auxFile = file
+  const auxFile = file as IMakeupFile
 
   Object.defineProperty(auxFile, 'extension', {
     get: () => getFileExtension(file),
     enumerable: true,
-    writable: false,
   })
 
-  return auxFile as IMakeupFile
+  Object.defineProperty(auxFile, 'uuid', {
+    value: uuidv4(),
+    enumerable: true,
+  })
+
+  return auxFile
+}
+
+/**
+ * Generates a unique key for the given file based on its properties.
+ *
+ * @param file - The file object for which to generate a unique key.
+ * @returns A string that uniquely identifies the file.
+ */
+export const getUniqueKey = (file: IMakeupFile): string => {
+  if (file.path) {
+    return file.path
+  }
+
+  return `${file.name}-${file.size}-${file.lastModified}`
 }

@@ -83,7 +83,8 @@ export class ListerWebviewController {
   }
 
   extractSVGComponent(files: string[]): void {
-    this.svgComponentHandler.extractSVGComponent(files).catch(console.error)
+    console.info('🚀 ~ ListerWebviewController ~ extractSVGComponent ~ files:', files)
+    // this.svgComponentHandler.extractSVGComponent(files).catch(console.error)
   }
   getSVGComponents(): void {
     this.svgComponentHandler.getSVGComponents()

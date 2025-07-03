@@ -23,6 +23,7 @@ vsc-extension-quickstart.md
 **/vite.config.ts
 .eslintignore
 **/.eslintrc.json
+**/eslint.config.mjs
 **/*.map
 **/*.ts
 **/.husky/**

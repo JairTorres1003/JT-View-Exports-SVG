@@ -1,19 +1,17 @@
 import { Stack } from '@mui/material'
-import React, { useEffect } from 'react'
-import { useLocation } from 'react-router-dom'
+import React from 'react'
+
+import { BackdropZone } from '@/core/components/Backdrop/BackdropZone'
+import { FileList } from '@/modules/upload/components/FileList'
+import { useUpload } from '@/modules/upload/hooks/useUpload'
 
 const UploadPage: React.FC = () => {
-  const { state } = useLocation()
-
-  useEffect(() => {
-    if (state) {
-      console.info('Received state:', state)
-    }
-  }, [state])
+  const { files, handleRemoveFile, onDropZone } = useUpload()
 
   return (
     <Stack height='100%' overflow='hidden'>
-      upload
+      <FileList files={files} onRemoveFile={handleRemoveFile} />
+      <BackdropZone onFiles={onDropZone} />
     </Stack>
   )
 }
