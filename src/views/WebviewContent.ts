@@ -18,12 +18,14 @@ export class WebviewContent {
   private content = ''
   private readonly manifest: ManifestContent
   private readonly _processedFiles: number
+  private readonly _nonce: string
 
   public constructor(webview: Webview, extensionUri: Uri, processedFiles: number) {
     this._webview = webview
     this._extensionUri = extensionUri
     this.manifest = this.getManifest()
     this._processedFiles = processedFiles
+    this._nonce = getNonce()
 
     this.generateContent()
   }
@@ -95,6 +97,19 @@ export class WebviewContent {
     }
   }
 
+  private getCSP(): string {
+    return `
+      default-src 'none';
+      connect-src ${this._webview.cspSource} extension-file:;
+      style-src ${this._webview.cspSource} 'unsafe-inline';
+      font-src ${this._webview.cspSource};
+      img-src ${this._webview.cspSource} https:;
+      script-src ${this._webview.cspSource} 'nonce-${this._nonce}' 'unsafe-eval';
+    `
+      .replace(/\s{2,}/g, ' ')
+      .trim()
+  }
+
   /**
    * Generates a script tag containing the initial configuration for the webview.
    * The configuration includes localized view name and default settings for
@@ -108,11 +123,10 @@ export class WebviewContent {
     const config = new DefaultExpandAllController()
     const devConfig = new DefaultClickToOpenDevToolsController()
     const recentConfig = new RecentIconsShowController()
-    const nonce = getNonce()
     const initialPath = this._processedFiles > 0 ? '/dashboard' : '/'
 
     return /* html */ `
-      <script nonce="${nonce}">
+      <script nonce="${this._nonce}">
         window.ViewExportsSVG = {
           name: "${l10n.t('View Exports SVG')}",
           initConfiguration: {
@@ -131,14 +145,15 @@ export class WebviewContent {
    */
   private generateContent(): void {
     const { index, favicon, styles } = this.getWebviewAssets()
-    const nonce = getNonce()
     const script = this.scriptConfiguration()
+    const cspContent = this.getCSP()
 
     this.content = /* html */ `
       <!DOCTYPE html>
       <html lang="${env.language ?? 'en'}">
         <head>
           <meta charset="UTF-8" />
+          <meta http-equiv="Content-Security-Policy" content="${cspContent}" />
           <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no" />
           <link rel="icon" type="image/x-icon" href="${favicon}" />
           ${styles}
@@ -149,7 +164,7 @@ export class WebviewContent {
           <div id="overflow_widgets_dom_node" class="monaco-editor"></div>
           <noscript>You need to enable JavaScript to run this app.</noscript>
           ${script}
-          <script type="module" nonce="${nonce}" src="${index}"></script>
+          <script type="module" nonce="${this._nonce}" src="${index}"></script>
         </body>
       </html>
     `
