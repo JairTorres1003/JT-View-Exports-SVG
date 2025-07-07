@@ -1,11 +1,14 @@
+import { SVGPostMessage, SVGReceiveMessage } from '@api/enums/ViewExportsSVG'
 import { List, ListItem, ListItemText, Stack, Typography } from '@mui/material'
+import { useEffect, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 
-import { createMakeupFile } from '../utils/file'
+import { getFileExtension, getFileName } from '../utils/file'
 
 import { useAlert } from './useAlert'
 
-import type { IMakeupFile } from '@/types/misc'
+import { vscode } from '@/services/vscode'
+import type { IFile } from '@/types/misc'
 
 const ALLOWED_EXTENSIONS = ['.js', '.ts', '.jsx', '.tsx']
 
@@ -13,21 +16,28 @@ export const useLoadFiles = () => {
   const { t } = useTranslation()
   const { onOpen } = useAlert()
 
+  const [files, setFiles] = useState<IFile[]>([])
+
   /**
-   * Validates and loads files based on allowed extensions.
-   * @param files - Array of files to be validated and loaded.
-   * @returns  - An object containing either an error message or the valid files.
+   * Loads files from the provided array, filtering out invalid file types.
+   * Displays an alert for unsupported file types and updates the state with valid files.
+   * @param files - Array of file paths to be loaded.
    */
-  const loadFiles = (files: File[]) => {
-    const validFiles: IMakeupFile[] = []
+  const loadFiles = (files: string[]) => {
+    const validFiles: IFile[] = []
     const invalidFiles: string[] = []
 
     files.forEach((file) => {
-      const makeFile = createMakeupFile(file)
-      if (ALLOWED_EXTENSIONS.includes(`.${makeFile.extension}`)) {
-        validFiles.push(makeFile)
+      const fileName = getFileName(file)
+      const extension = getFileExtension(fileName)
+      if (ALLOWED_EXTENSIONS.includes(`.${extension}`)) {
+        validFiles.push({
+          extension,
+          name: fileName,
+          path: file,
+        })
       } else {
-        invalidFiles.push(makeFile.name)
+        invalidFiles.push(fileName)
       }
     })
 
@@ -53,32 +63,47 @@ export const useLoadFiles = () => {
       )
     }
 
-    return validFiles
+    if (validFiles.length > 0) {
+      updateFiles(validFiles)
+    }
   }
 
   /**
-   * Handles file selection from an input element.
-   * @param event - The change event from the file input.
-   * @returns - An array of valid files.
+   * Updates the state with new files, ensuring no duplicates.
+   * @param newFiles - Array of new files to be added to the state.
    */
-  const handleSelectFiles = (event: React.ChangeEvent<HTMLInputElement>) => {
-    const files = handleFiles(event.target.files)
-    // Reset the input value to allow re-selection of the same file
-    event.target.value = ''
-    return files
+  const updateFiles = (newFiles: IFile[]) => {
+    setFiles((prevFiles) => {
+      const filteredPrevFiles = prevFiles.filter(
+        (prevFile) => !newFiles.some((newFile) => prevFile.path === newFile.path)
+      )
+      return [...filteredPrevFiles, ...newFiles]
+    })
   }
 
   /**
-   * Handles files from a FileList object.
-   * @param files - The FileList object containing selected files.
-   * @returns - An array of valid files.
+   * Removes a file from the state based on its path.
+   * @param file - The file to be removed.
    */
-  const handleFiles = (files: FileList | null) => {
-    if (!files) return []
-
-    const fileArray = Array.from(files)
-    return loadFiles(fileArray)
+  const removeFile = (file: IFile) => {
+    setFiles((prevFiles) => prevFiles.filter((f) => f.path !== file.path))
   }
 
-  return { loadFiles, handleSelectFiles, handleFiles }
+  /**
+   * Opens a file dialog to select files.
+   * This function sends a message to the VS Code extension to open the file dialog.
+   */
+  const handleOpenDialog = () => {
+    vscode.postMessage(SVGReceiveMessage.RequestFileOpen)
+  }
+
+  useEffect(() => {
+    vscode.onMessage(SVGPostMessage.SendOpenFiles, loadFiles)
+
+    return () => {
+      vscode.unregisterMessage(SVGPostMessage.SendOpenFiles)
+    }
+  }, [])
+
+  return { loadFiles, handleOpenDialog, files, updateFiles, removeFile }
 }

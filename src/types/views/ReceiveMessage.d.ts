@@ -16,6 +16,7 @@ export type ReceiveMessage =
   | { type: SVGReceiveMessage.GetTheme }
   | { type: SVGReceiveMessage.GetViewAssets; data: SVGFile[] }
   | { type: SVGReceiveMessage.OpenFile; data: OpenFile }
+  | { type: SVGReceiveMessage.RequestFileOpen }
   | { type: SVGReceiveMessage.PlaygroundSVGComponents; data: SVGPlayground }
   | { type: SVGReceiveMessage.RemoveAssets; data: SVGFile[] }
   | { type: SVGReceiveMessage.ScanWorkspace }
@@ -73,6 +74,10 @@ export interface HandlerReceiveMessage {
    * @param file - The SVG file to open.
    */
   [SVGReceiveMessage.OpenFile]: (file: OpenFile) => void
+  /**
+   * Requests the file to be opened.
+   */
+  [SVGReceiveMessage.RequestFileOpen]: VoidFunction
   /**
    * Sends the SVG components to the webview.
    * @param component - The SVG components to send.

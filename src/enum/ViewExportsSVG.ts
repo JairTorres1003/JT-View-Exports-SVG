@@ -25,6 +25,8 @@ export enum SVGPostMessage {
   SendLastScanDate = 'send/scan/last-date',
 
   SendHomeIcons = 'send/icons/home',
+
+  SendOpenFiles = 'send/file/open',
 }
 
 export enum SVGReceiveMessage {
@@ -50,6 +52,7 @@ export enum SVGReceiveMessage {
   ScanWorkspace = 'scan/workspace',
 
   OpenFile = 'file/open',
+  RequestFileOpen = 'file/request-open',
 
   AddRecentIcon = 'icons/recent/add',
   RemoveRecentIcon = 'icons/recent/remove',

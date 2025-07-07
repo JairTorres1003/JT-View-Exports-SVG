@@ -32,6 +32,7 @@ export class MessageRouter {
 
     return {
       [SVGReceiveMessage.OpenFile]: openFile.bind(this),
+      [SVGReceiveMessage.RequestFileOpen]: handlers.requestFileOpen.bind(handlers),
 
       [SVGReceiveMessage.ExtractSVGComponent]: handlers.extractSVGComponent.bind(handlers),
       [SVGReceiveMessage.GetSVGComponents]: handlers.getSVGComponents.bind(handlers),

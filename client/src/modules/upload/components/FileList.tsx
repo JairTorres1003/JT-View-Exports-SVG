@@ -14,11 +14,11 @@ import {
 } from '@/assets/icons/files'
 import { IconClose } from '@/assets/icons/functionalities'
 import type { IconBaseProps } from '@/types/BaseProps'
-import type { IMakeupFile } from '@/types/misc'
+import type { IFile } from '@/types/misc'
 
 interface FileListProps {
-  files: IMakeupFile[]
-  onRemoveFile?: (file: IMakeupFile) => void
+  files: IFile[]
+  onRemoveFile?: (file: IFile) => void
 }
 
 const fileIconTypes: Record<string, React.FC<IconBaseProps>> = {
@@ -53,7 +53,7 @@ export const FileList: FC<FileListProps> = ({ files, onRemoveFile = () => null }
             </Tooltip>
             <IconFileComponent size={80} />
             <Tooltip title={file.name} placement='top'>
-              <Typography variant='body1' noWrap width='100%'>
+              <Typography variant='body1' noWrap width='100%' zIndex={1}>
                 {file.name}
               </Typography>
             </Tooltip>

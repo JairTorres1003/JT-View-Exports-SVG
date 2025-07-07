@@ -1,15 +1,10 @@
-import { v4 as uuidv4 } from 'uuid'
-
-import type { IMakeupFile } from '@/types/misc'
-
 /**
- * Returns the file extension of the given File object.
+ * Returns the file extension from a given file name.
  *
- * @param file - The File object whose extension is to be extracted.
+ * @param fileName - The name of the file from which to extract the extension.
  * @returns The file extension as a string, or an empty string if no extension is found.
  */
-const getFileExtension = (file: File): string => {
-  const fileName = file.name
+export const getFileExtension = (fileName: string): string => {
   const lastDotIndex = fileName.lastIndexOf('.')
 
   if (lastDotIndex <= 0) return ''
@@ -18,37 +13,15 @@ const getFileExtension = (file: File): string => {
 }
 
 /**
- * Creates a new File object with an additional properties.
+ * Returns the file name from a given file path.
  *
- * @param file - The original File object to be extended.
- * @returns A new File object with the new porperties added.
+ * @param filePath - The path of the file from which to extract the name.
+ * @returns The file name as a string, or the original path if no slashes are found.
  */
-export const createMakeupFile = (file: File): IMakeupFile => {
-  const auxFile = file as IMakeupFile
+export const getFileName = (filePath: string): string => {
+  const lastSlashIndex = filePath.lastIndexOf('/')
 
-  Object.defineProperty(auxFile, 'extension', {
-    get: () => getFileExtension(file),
-    enumerable: true,
-  })
+  if (lastSlashIndex < 0) return filePath
 
-  Object.defineProperty(auxFile, 'uuid', {
-    value: uuidv4(),
-    enumerable: true,
-  })
-
-  return auxFile
-}
-
-/**
- * Generates a unique key for the given file based on its properties.
- *
- * @param file - The file object for which to generate a unique key.
- * @returns A string that uniquely identifies the file.
- */
-export const getUniqueKey = (file: IMakeupFile): string => {
-  if (file.path) {
-    return file.path
-  }
-
-  return `${file.name}-${file.size}-${file.lastModified}`
+  return filePath.slice(lastSlashIndex + 1)
 }

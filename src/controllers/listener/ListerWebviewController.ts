@@ -159,4 +159,7 @@ export class ListerWebviewController {
   toggleOpenDevTools(open: boolean): void {
     this.uiHandler.toggleOpenDevTools(open).catch(console.error)
   }
+  requestFileOpen(): void {
+    this.uiHandler.dialogOpenFile()
+  }
 }

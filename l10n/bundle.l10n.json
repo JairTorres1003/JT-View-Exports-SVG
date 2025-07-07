@@ -43,5 +43,6 @@
   "No theme found for the current workspace": "No theme found for the current workspace",
   "{kind} icons": "{kind} icons",
   "Favorite": "Favorite",
-  "Recent": "Recent"
+  "Recent": "Recent",
+  "Select files": "Select files"
 }

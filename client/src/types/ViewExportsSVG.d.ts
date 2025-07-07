@@ -57,6 +57,7 @@ export interface FuncOnMessage {
     type: SVGPostMessage.SendUpdateConfiguration,
     handler: (data: Record<string, unknown>) => void
   ): void
+  (type: SVGPostMessage.SendOpenFiles, handler: (data: string[]) => void): void
 }
 
 /**
@@ -73,6 +74,7 @@ export interface FuncPostMessage {
   (type: SVGReceiveMessage.GetEditorConfig): void
   (type: SVGReceiveMessage.GetVsCodeStyles): void
   (type: SVGReceiveMessage.OpenFile, data: OpenFile): void
+  (type: SVGReceiveMessage.RequestFileOpen): void
   (type: SVGReceiveMessage.PlaygroundSVGComponents, data: SVGPlayground): void
   (type: SVGReceiveMessage.RemoveAssets, data: SVGFile[]): void
   (type: SVGReceiveMessage.ScanWorkspace): void

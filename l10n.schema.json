@@ -267,6 +267,11 @@
       "type": "string",
       "description": "Label for the recent icon",
       "default": "Recent"
+    },
+    "Select files": {
+      "type": "string",
+      "description": "Label for the file selection dialog",
+      "default": "Select files"
     }
   },
   "required": [
@@ -314,6 +319,7 @@
     "No theme found for the current workspace",
     "{kind} icons",
     "Favorite",
-    "Recent"
+    "Recent",
+    "Select files"
   ]
 }

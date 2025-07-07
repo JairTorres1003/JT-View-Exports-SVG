@@ -14,8 +14,8 @@ export type PartialExcept<T, K extends keyof T> = Partial<Pick<T, K>> & Omit<T, 
  */
 export type RequiredExcept<T, K extends keyof T> = Required<Pick<T, K>> & Omit<T, K>
 
-interface IMakeupFile extends File {
-  readonly extension: string
-  readonly uuid: string
-  readonly path?: string
+export interface IFile {
+  name: string
+  path: string
+  extension: string
 }
