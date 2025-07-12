@@ -19,7 +19,8 @@ interface RenderSvgProps {
  * @throws Throws an error if the component is empty.
  * @returns The rendered SVG component.
  */
-const DynamicTagComponent = forwardRef<RenderSvgProps, RenderSvgProps>(function RenderSvg(
+// eslint-disable-next-line @typescript-eslint/no-explicit-any -- this is a dynamic component with different tags
+const DynamicTagComponent = forwardRef<any, RenderSvgProps>(function RenderSvg(
   { component, className },
   ref
 ) {
@@ -49,36 +50,37 @@ const DynamicTagComponent = forwardRef<RenderSvgProps, RenderSvgProps>(function 
 /**
  * Renders an SVG component.
  */
-const RenderSvg = forwardRef<SVGComponent, SVGComponent & { className?: string }>(
-  function RenderSvg({ component, hasErrors, errors, className }, ref) {
-    const { onOpen } = useAlert()
+const RenderSvg = forwardRef<SVGElement, SVGComponent & { className?: string }>(function RenderSvg(
+  { component, hasErrors, errors, className },
+  ref
+) {
+  const { onOpen } = useAlert()
 
-    /**
-     * Handles the error component by displaying an alert with the error message.
-     */
-    const handleErrorComponent = () => {
-      if (!errors) return
+  /**
+   * Handles the error component by displaying an alert with the error message.
+   */
+  const handleErrorComponent = () => {
+    if (!errors) return
 
-      onOpen(errors.message, {
-        severity: 'error',
-        position: { vertical: 'top', horizontal: 'right' },
-      })
-    }
-
-    useEffect(() => {
-      handleErrorComponent()
-    }, [errors])
-
-    if (isEmpty(component) || hasErrors) {
-      return <SVGError />
-    }
-
-    return (
-      <ErrorBoundary fallback={<SVGError />}>
-        <DynamicTagComponent ref={ref} className={className} component={component} />
-      </ErrorBoundary>
-    )
+    onOpen(errors.message, {
+      severity: 'error',
+      position: { vertical: 'top', horizontal: 'right' },
+    })
   }
-)
+
+  useEffect(() => {
+    handleErrorComponent()
+  }, [errors])
+
+  if (isEmpty(component) || hasErrors) {
+    return <SVGError />
+  }
+
+  return (
+    <ErrorBoundary fallback={<SVGError />}>
+      <DynamicTagComponent ref={ref} className={className} component={component} />
+    </ErrorBoundary>
+  )
+})
 
 export default RenderSvg
