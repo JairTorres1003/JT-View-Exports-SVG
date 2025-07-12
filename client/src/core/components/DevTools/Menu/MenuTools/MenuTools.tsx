@@ -2,8 +2,6 @@ import { IconButton, Menu, MenuItem, Portal, Tooltip } from '@mui/material'
 import type { FC } from 'react'
 import { useTranslation } from 'react-i18next'
 
-import { useMenuToolsStyles } from './MenuTools.style'
-
 import { IconKebabHorizontal } from '@/assets/icons/navigation'
 import { Show } from '@/core/helpers'
 import { useMenuTools } from '@/core/hooks/DevTools/useMenuTools'
@@ -17,7 +15,6 @@ interface MenuToolsProps {
 
 const MenuTools: FC<MenuToolsProps> = ({ containerId, editorRef, resetPlaygroundColor }) => {
   const { t } = useTranslation(undefined, { keyPrefix: 'DevTools' })
-  const { classes } = useMenuToolsStyles()
 
   const {
     anchorEl,
@@ -52,25 +49,19 @@ const MenuTools: FC<MenuToolsProps> = ({ containerId, editorRef, resetPlayground
         anchorEl={anchorEl}
         open={open}
         onClose={handleClose}
-        marginThreshold={0}
         anchorOrigin={{ vertical: 'bottom', horizontal: 'right' }}
         transformOrigin={{ vertical: 'top', horizontal: 'right' }}
         slotProps={{
-          list: { 'aria-labelledby': 'playground-settings-button', sx: { p: '5px' } },
-          paper: { className: classes.paper },
+          list: { 'aria-labelledby': 'playground-settings-button' },
         }}
       >
-        <MenuItem className={classes.menuItem} onClick={onReloadPlayground}>
-          {t('menu.ReloadPlayground')}
-        </MenuItem>
+        <MenuItem onClick={onReloadPlayground}>{t('menu.ReloadPlayground')}</MenuItem>
         <Show>
           <Show.When isTrue={!!editorRef?.current}>
-            <MenuItem className={classes.menuItem} onClick={toogleWordWrap}>
+            <MenuItem onClick={toogleWordWrap}>
               {isWordWrap ? t('menu.DisableWordWrap') : t('menu.EnableWordWrap')}
             </MenuItem>
-            <MenuItem className={classes.menuItem} onClick={onReloadEditor}>
-              {t('menu.ReloadEditor')}
-            </MenuItem>
+            <MenuItem onClick={onReloadEditor}>{t('menu.ReloadEditor')}</MenuItem>
           </Show.When>
         </Show>
       </Menu>
