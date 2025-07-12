@@ -30,6 +30,7 @@ export interface ColorPickerHook {
 
 export interface ColorPickerHookProps {
   currentColor?: AnyColor
+  onChange?: (color: RgbaColor, stringColor: string) => void
 }
 
 export interface ColorPickerProps

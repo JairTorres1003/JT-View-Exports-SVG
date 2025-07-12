@@ -24,6 +24,7 @@ const ORDERED_LIST: ColorizeOrderedList = [
 
 export const useColorPicker = ({
   currentColor = INITIAL_COLOR,
+  onChange: onChangeCallback = () => null,
 }: ColorPickerHookProps): ColorPickerHook => {
   const [color, setColor] = useState<RgbaColor>(INITIAL_COLOR)
   const [oldColor, setOldColor] = useState<RgbaColor>(INITIAL_COLOR)
@@ -95,13 +96,14 @@ export const useColorPicker = ({
    */
   const handleColorChange = (newColor: RgbaColor): void => {
     setColor(newColor)
+    onChangeCallback(newColor, getStringColor(newColor))
   }
 
   /**
    * Restores the color to its previous value.
    */
   const applyOldColor = (): void => {
-    setColor(oldColor)
+    handleColorChange(oldColor)
   }
 
   /**

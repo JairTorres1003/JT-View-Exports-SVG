@@ -24,7 +24,7 @@ const ColorPicker = forwardRef<HTMLDivElement, ColorPickerProps>(function ColorP
     currentValueColor,
     handleChangeList,
     handleHueChange,
-  } = useColorPicker({ currentColor })
+  } = useColorPicker({ currentColor, onChange })
 
   return (
     <ColorPickerBox ref={ref} sx={sx} style={style} className={className}>
@@ -52,10 +52,7 @@ const ColorPicker = forwardRef<HTMLDivElement, ColorPickerProps>(function ColorP
           {...props}
           className={colorPickerClasses.picker}
           color={color}
-          onChange={(newColor) => {
-            handleColorChange(newColor)
-            onChange(newColor, getStringColor(newColor))
-          }}
+          onChange={handleColorChange}
         />
         <Box className={colorPickerClasses.sliders}>
           <VerticalPickerSlider
