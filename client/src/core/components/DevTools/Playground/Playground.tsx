@@ -3,7 +3,7 @@ import type { FC } from 'react'
 import { useTranslation } from 'react-i18next'
 
 import CodeEditor from '../CodeEditor/CodeEditor'
-import { MenuTools } from '../Menu'
+import { MenuMoreActions, MenuTools } from '../Menu'
 
 import { playgroundClasses } from './Playground.classes'
 import { BoxPlayground } from './Playground.style'
@@ -71,6 +71,9 @@ const Playground: FC<PlaygroundProps> = ({ actionsId = 'playground-actions' }) =
                 <IconRefresh size={16} sx={{ transform: 'rotate(90deg)' }} />
               </IconButton>
             </Tooltip>
+          </Grid>
+          <Grid size='auto'>
+            <MenuMoreActions svgRef={svgRef} />
           </Grid>
         </Grid>
 

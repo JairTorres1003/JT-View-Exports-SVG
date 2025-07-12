@@ -38,7 +38,11 @@
       "ShowCode": "Show code",
       "CopyCode": "Copy code",
       "ResetCode": "Reset code",
-      "MoreActions": "More actions..."
+      "MoreActions": "More actions...",
+      "CopyAsSVG": "Copy as SVG",
+      "CopyAsPNG": "Copy as PNG",
+      "DownloadAsSVG": "Download as SVG",
+      "DownloadAsPNG": "Download as PNG"
     },
     "menu": {
       "ReloadPlayground": "Reload playground",

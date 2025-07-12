@@ -20,7 +20,7 @@ export const BoxDevTools = styled<ComponentType<BoxProps>>(
   }
 )(() => ({
   width: '100%',
-  minWidth: 170,
+  minWidth: 190,
   maxWidth: '100%',
   height: '100%',
   backgroundColor: 'var(--JT-SVG-vscode-sideBarTitle-background)',

@@ -176,9 +176,36 @@
             "MoreActions": {
               "type": "string",
               "default": "More actions..."
+            },
+            "CopyAsSVG": {
+              "type": "string",
+              "default": "Copy as SVG"
+            },
+            "CopyAsPNG": {
+              "type": "string",
+              "default": "Copy as PNG"
+            },
+            "DownloadAsSVG": {
+              "type": "string",
+              "default": "Download as SVG"
+            },
+            "DownloadAsPNG": {
+              "type": "string",
+              "default": "Download as PNG"
             }
           },
-          "required": ["title", "HideCode", "ShowCode", "CopyCode", "ResetCode", "MoreActions"]
+          "required": [
+            "title",
+            "HideCode",
+            "ShowCode",
+            "CopyCode",
+            "ResetCode",
+            "MoreActions",
+            "CopyAsSVG",
+            "CopyAsPNG",
+            "DownloadAsSVG",
+            "DownloadAsPNG"
+          ]
         },
         "menu": {
           "type": "object",

@@ -1,4 +1,4 @@
-import { menuItemClasses, tooltipClasses } from '@mui/material'
+import { dividerClasses, menuItemClasses, tooltipClasses } from '@mui/material'
 
 import { IconError, IconInfo, IconWarning } from '@/assets/icons/indicators'
 import type { CustomizationsFunction } from '@/types/BaseProps'
@@ -156,6 +156,9 @@ export const dataDisplayCustomizations: CustomizationsFunction = (styles) => ({
           '&:hover': {
             backgroundColor: palette.primary.main,
             color: palette.primary.contrastText,
+          },
+          [`&+.${dividerClasses.root}`]: {
+            margin: '4px 10px',
           },
         },
       }),
