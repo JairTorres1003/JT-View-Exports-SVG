@@ -2,6 +2,8 @@ import { SVGReceiveMessage } from '@api/enums/ViewExportsSVG'
 import * as monaco from 'monaco-editor'
 import { useEffect, useState } from 'react'
 
+import { useMenu } from '../useMenu'
+
 import type { TypeEditorRef } from '@/core/types/components/vs/Editor'
 import { vscode } from '@/services/vscode'
 
@@ -14,24 +16,9 @@ export const useMenuTools = ({
   resetPlaygroundColor = () => null,
   editorRef,
 }: MenuToolsHookProps) => {
-  const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null)
+  const { handleClose, ...restMenu } = useMenu()
+
   const [isWordWrap, setIsWordWrap] = useState(false)
-  const open = Boolean(anchorEl)
-
-  /**
-   * Opens the menu by setting the anchor element to the current target of the event.
-   * @param event - The mouse event that triggered the menu opening.
-   */
-  const handleClick = (event: React.MouseEvent<HTMLButtonElement>) => {
-    setAnchorEl(event.currentTarget)
-  }
-
-  /**
-   * Closes the menu by setting the anchor element to null.
-   */
-  const handleClose = () => {
-    setAnchorEl(null)
-  }
 
   /**
    * Reloads the playground by resetting the color and calling the reload method on the editor instance.
@@ -84,9 +71,7 @@ export const useMenuTools = ({
   }, [editorRef?.current])
 
   return {
-    open,
-    anchorEl,
-    handleClick,
+    ...restMenu,
     handleClose,
     onReloadEditor,
     onReloadPlayground,
