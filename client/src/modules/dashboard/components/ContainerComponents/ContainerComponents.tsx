@@ -6,8 +6,7 @@ import { BoxContainerComponents } from './ContainerComponents.style'
 
 import { IconWarning } from '@/assets/icons/indicators'
 import { AccordionMenuItem } from '@/core/components/Accordion'
-import { CardSvg } from '@/core/components/Cards/CardSvg'
-import { RenderSvg } from '@/core/components/SVG/RenderSvg'
+import CardSvgRenderMemo from '@/core/components/Cards/CardSvgRenderMemo/CardSvgRenderMemo'
 import { useExpandedComponents } from '@/core/hooks/useExpandedComponents'
 
 const ContainerComponents = (): React.ReactNode => {
@@ -37,10 +36,8 @@ const ContainerComponents = (): React.ReactNode => {
           expanded={isExpanded.includes(item.groupKind.id)}
           slotProps={{ details: { className: containerComponentsClasses.details } }}
         >
-          {item.components.map(({ name, ...restComponent }) => (
-            <CardSvg key={name} component={{ ...restComponent, name }}>
-              <RenderSvg {...restComponent} name={name} />
-            </CardSvg>
+          {item.components.map((c) => (
+            <CardSvgRenderMemo key={c.name} component={c} />
           ))}
         </AccordionMenuItem>
       ))}

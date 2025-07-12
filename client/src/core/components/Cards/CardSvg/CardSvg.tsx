@@ -9,14 +9,10 @@ import { BoxCardSvg } from './CardSvg.style'
 import { IconStarFilled, IconStarOutlined } from '@/assets/icons/indicators'
 import { useCardSvg } from '@/core/hooks/useCardSvg'
 
-interface CardSvgProps extends Omit<BoxProps, 'component'> {
+export interface CardSvgProps extends Omit<BoxProps, 'component'> {
   children: React.ReactNode
   component: SVGComponent
   disableFavorite?: boolean
-  /**
-   * @default true
-   */
-  executeFavoriteDispatch?: boolean
 }
 
 const CardSvg: FC<Readonly<CardSvgProps>> = ({
@@ -24,17 +20,18 @@ const CardSvg: FC<Readonly<CardSvgProps>> = ({
   component,
   onClick = () => null,
   disableFavorite = false,
-  executeFavoriteDispatch = true,
   ...props
 }) => {
-  const { handleClick, addRecentComponent, toggleFavorite } = useCardSvg()
+  const { handleClick, addRecentComponent, toggleFavorite, isFavorite } = useCardSvg({
+    favorite: component.isFavorite,
+  })
 
   return (
     <BoxCardSvg
       {...props}
       onClick={(...args) => {
         onClick(...args)
-        addRecentComponent(component)
+        addRecentComponent({ ...component, isFavorite })
         handleClick({ name: component.name, location: component.location })
       }}
     >
@@ -43,13 +40,13 @@ const CardSvg: FC<Readonly<CardSvgProps>> = ({
           <IconButton
             size='small'
             className={cn(cardSvgClasses.favorite, {
-              [cardSvgClasses.favoriteActive]: component.isFavorite,
+              [cardSvgClasses.favoriteActive]: isFavorite,
             })}
             onClick={() => {
-              toggleFavorite(component, executeFavoriteDispatch)
+              toggleFavorite({ ...component, isFavorite })
             }}
           >
-            {component.isFavorite ? <IconStarFilled size={11} /> : <IconStarOutlined size={11} />}
+            {isFavorite ? <IconStarFilled size={11} /> : <IconStarOutlined size={11} />}
           </IconButton>
         )}
         <Box className={cardSvgClasses.container}>{children}</Box>

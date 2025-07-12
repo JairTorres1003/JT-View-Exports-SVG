@@ -17,18 +17,6 @@ const reducers: SVGReducers = {
   setErrors: (state, { payload }) => {
     state.errors = payload
   },
-  toggleFavorite: (state, { payload }) => {
-    state.components.forEach((c) => {
-      const component = c.components.find(
-        ({ name, location }) =>
-          name === payload.name && location.file.absolutePath === payload.location.file.absolutePath
-      )
-
-      if (component) {
-        component.isFavorite = !component.isFavorite
-      }
-    })
-  },
 }
 
 /**
@@ -41,7 +29,7 @@ export const SVGSlice = createSlice({
 })
 
 export const {
-  actions: { setComponents, setSearch, setErrors, toggleFavorite },
+  actions: { setComponents, setSearch, setErrors },
 } = SVGSlice
 
 export const { reducer: SVGReducer } = SVGSlice

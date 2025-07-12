@@ -1,26 +1,33 @@
 import { SVGReceiveMessage } from '@api/enums/ViewExportsSVG'
 import type { SVGComponent, SVGIcon } from '@api/types/ViewExportsSVG'
+import React from 'react'
 import { Trans, useTranslation } from 'react-i18next'
 import { useDispatch } from 'react-redux'
 
 import { useAlert } from '@/core/hooks/useAlert'
 import { vscode } from '@/services/vscode'
 import { setRecentlySelected } from '@/store/features/PlaygroundSlice'
-import { toggleFavorite } from '@/store/features/SVGSlice'
 import { copyToClipboard, getUnknownError } from '@/utils/misc'
 
 interface CardSvgHook {
   handleClick: (icon: SVGIcon) => void
   addRecentComponent: (component: SVGComponent) => void
-  toggleFavorite: (component: SVGComponent, executeDispatch?: boolean) => void
+  toggleFavorite: (component: SVGComponent) => void
+  isFavorite: boolean
 }
 
-export const useCardSvg = (): CardSvgHook => {
+interface UseCardSvgProps {
+  favorite?: boolean
+}
+
+export const useCardSvg = ({ favorite = false }: UseCardSvgProps = {}): CardSvgHook => {
   const { onOpen } = useAlert()
 
   const { t } = useTranslation(undefined, { keyPrefix: 'labels' })
 
   const dispatch = useDispatch()
+
+  const [isFavorite, setIsFavorite] = React.useState(false)
 
   /**
    * Handles the click event on an SVG icon.
@@ -57,10 +64,8 @@ export const useCardSvg = (): CardSvgHook => {
    *
    * @param {SVGComponent} component - The SVG component to toggle favorite status for.
    */
-  const handleToggleFavorite = (component: SVGComponent, executeDispatch = true): void => {
-    if (executeDispatch) {
-      dispatch(toggleFavorite(component))
-    }
+  const handleToggleFavorite = (component: SVGComponent): void => {
+    setIsFavorite(!isFavorite)
 
     const payload = {
       name: component.name,
@@ -74,5 +79,9 @@ export const useCardSvg = (): CardSvgHook => {
     }
   }
 
-  return { handleClick, addRecentComponent, toggleFavorite: handleToggleFavorite }
+  React.useEffect(() => {
+    setIsFavorite(favorite)
+  }, [favorite])
+
+  return { handleClick, addRecentComponent, toggleFavorite: handleToggleFavorite, isFavorite }
 }

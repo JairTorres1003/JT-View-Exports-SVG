@@ -4,8 +4,7 @@ import { containerIconsClasses } from './ContainerIcons.classes'
 import { BoxContainerIcons } from './ContainerIcons.style'
 
 import { AccordionMenuItem } from '@/core/components/Accordion'
-import { CardSvg } from '@/core/components/Cards/CardSvg'
-import { RenderSvg } from '@/core/components/SVG/RenderSvg'
+import CardSvgRenderMemo from '@/core/components/Cards/CardSvgRenderMemo/CardSvgRenderMemo'
 import { useExpandedComponents } from '@/core/hooks/useExpandedComponents'
 
 const ContainerIcons = (): React.ReactNode => {
@@ -22,14 +21,8 @@ const ContainerIcons = (): React.ReactNode => {
           expanded={isExpanded.includes(item.groupKind.id)}
           slotProps={{ details: { className: containerIconsClasses.details } }}
         >
-          {item.components.map(({ name, ...restComponent }) => (
-            <CardSvg
-              key={name}
-              executeFavoriteDispatch={false}
-              component={{ ...restComponent, name }}
-            >
-              <RenderSvg {...restComponent} name={name} />
-            </CardSvg>
+          {item.components.map((c) => (
+            <CardSvgRenderMemo key={c.name} component={c} />
           ))}
         </AccordionMenuItem>
       ))}
