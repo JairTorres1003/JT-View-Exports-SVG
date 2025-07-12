@@ -18,6 +18,7 @@ interface PlaygroundHook {
   onChangeColor: (color: string) => void
   initialColor: string
   editorRef: React.RefObject<TypeEditorRef>
+  svgRef: React.RefObject<SVGElement | null>
   handleCopyCode: VoidFunction
   handleResetCode: VoidFunction
   resetPlaygroundColor: VoidFunction
@@ -39,6 +40,7 @@ export const usePlayground = (): PlaygroundHook => {
   const { onOpen } = useAlert()
 
   const editorRef = useRef<TypeEditorRef>(null)
+  const svgRef = useRef<SVGElement>(null)
 
   /**
    * Toggles the expanded state.
@@ -186,6 +188,7 @@ export const usePlayground = (): PlaygroundHook => {
     onChangeColor,
     initialColor,
     editorRef,
+    svgRef,
     handleCopyCode,
     handleResetCode,
     valueColor,

@@ -1,14 +1,13 @@
 import { Card, Collapse, Divider, Grid, IconButton, Tooltip } from '@mui/material'
 import type { FC } from 'react'
 import { useTranslation } from 'react-i18next'
-import { useSelector } from 'react-redux'
 
-import { RenderSvg } from '../../SVG/RenderSvg'
 import CodeEditor from '../CodeEditor/CodeEditor'
 import { MenuTools } from '../Menu'
 
 import { playgroundClasses } from './Playground.classes'
-import { BoxPlayground, BoxPlaygroundCardSvg } from './Playground.style'
+import { BoxPlayground } from './Playground.style'
+import PlaygroundCardSvg from './PlaygroundCardSvg/PlaygroundCardSvg'
 
 import { IconCodeTag, IconCopy, IconRefresh } from '@/assets/icons/functionalities'
 import { SelectPickerColor } from '@/core/components/Select'
@@ -19,8 +18,6 @@ interface PlaygroundProps {
 }
 
 const Playground: FC<PlaygroundProps> = ({ actionsId = 'playground-actions' }) => {
-  const recentlySelected = useSelector((state) => state.playground.recentlySelected)
-
   const { t } = useTranslation(undefined, { keyPrefix: 'DevTools' })
 
   const {
@@ -35,14 +32,13 @@ const Playground: FC<PlaygroundProps> = ({ actionsId = 'playground-actions' }) =
     onChangeCompleteColor,
     valueColor,
     resetPlaygroundColor,
+    svgRef,
   } = usePlayground()
 
   return (
     <BoxPlayground>
       <Card variant='outlined' className={playgroundClasses.card}>
-        <BoxPlaygroundCardSvg bgColor={backgroundColor}>
-          {recentlySelected && <RenderSvg {...recentlySelected} />}
-        </BoxPlaygroundCardSvg>
+        <PlaygroundCardSvg bgColor={backgroundColor} ref={svgRef} />
 
         <Divider className={playgroundClasses.divider} />
 
