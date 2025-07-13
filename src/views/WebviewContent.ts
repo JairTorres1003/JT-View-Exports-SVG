@@ -103,7 +103,7 @@ export class WebviewContent {
       connect-src ${this._webview.cspSource} extension-file:;
       style-src ${this._webview.cspSource} 'unsafe-inline';
       font-src ${this._webview.cspSource};
-      img-src ${this._webview.cspSource} https:;
+      img-src ${this._webview.cspSource} https: blob:;
       script-src ${this._webview.cspSource} 'nonce-${this._nonce}' 'unsafe-eval';
     `
       .replace(/\s{2,}/g, ' ')
