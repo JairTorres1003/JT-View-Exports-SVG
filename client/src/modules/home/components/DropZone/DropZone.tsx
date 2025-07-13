@@ -6,7 +6,7 @@ import { useNavigate } from 'react-router-dom'
 import { dropZoneClasses } from './DropZone.classes'
 import { BoxDropZone } from './DropZone.style'
 
-// import { BackdropZone } from '@/core/components/Backdrop/BackdropZone'
+import { BackdropZone } from '@/core/components/Backdrop/BackdropZone'
 import { useLoadFiles } from '@/core/hooks/useLoadFiles'
 
 const DropZone = () => {
@@ -40,7 +40,17 @@ const DropZone = () => {
           <Typography className={dropZoneClasses.text}>{t('or drop the files here')}</Typography>
         </Box>
       </Box>
-      {/* <BackdropZone onFiles={onDropZone('onFiles')} /> */}
+      <BackdropZone
+        onFiles={(f) => {
+          console.info('🚀 ~ onFiles ~ f:', f)
+        }}
+        onText={(text) => {
+          console.info('🚀 ~ onText ~ text:', text)
+        }}
+        onUri={(url) => {
+          console.info('🚀 ~ onUri ~ url:', url)
+        }}
+      />
     </BoxDropZone>
   )
 }

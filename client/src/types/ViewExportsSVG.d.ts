@@ -31,6 +31,7 @@ export interface MessageHandlersView {
   [SVGPostMessage.SendToggleOpenDevTools]?: (data: boolean) => void
   [SVGPostMessage.SendExtensionTheme]?: (data: ExtensionManage) => void
   [SVGPostMessage.SendUpdateConfiguration]?: (data: Record<string, unknown>) => void
+  [SVGPostMessage.SendOpenFiles]?: (data: string[]) => void
 }
 
 /**

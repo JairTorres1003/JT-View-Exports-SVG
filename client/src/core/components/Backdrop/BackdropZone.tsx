@@ -1,10 +1,10 @@
 import { Backdrop, Typography } from '@mui/material'
 import type { FC } from 'react'
 import { useTranslation } from 'react-i18next'
-import { useDrop } from 'react-use'
-import type { DropAreaOptions } from 'react-use/lib/useDrop'
 
-interface BackdropZoneProp extends DropAreaOptions {}
+import { useDrop, type UseDropOptions } from '@/core/hooks/useDrop'
+
+interface BackdropZoneProp extends UseDropOptions {}
 
 export const BackdropZone: FC<BackdropZoneProp> = (props) => {
   const { t } = useTranslation(undefined, { keyPrefix: 'DropZone' })
