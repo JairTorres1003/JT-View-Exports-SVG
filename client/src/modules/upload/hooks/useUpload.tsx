@@ -5,7 +5,7 @@ import { useLoadFiles } from '@/core/hooks/useLoadFiles'
 
 export const useUpload = () => {
   const { state } = useLocation()
-  const { files, updateFiles, removeFile } = useLoadFiles()
+  const { files, updateFiles, removeFile, ...restLoadFiles } = useLoadFiles()
 
   useEffect(() => {
     if (state?.files && Array.isArray(state.files)) {
@@ -13,5 +13,5 @@ export const useUpload = () => {
     }
   }, [state])
 
-  return { files, removeFile }
+  return { files, removeFile, ...restLoadFiles }
 }

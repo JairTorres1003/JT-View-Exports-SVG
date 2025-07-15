@@ -17,6 +17,7 @@ export const useLoadFiles = () => {
   const { onOpen } = useAlert()
 
   const [files, setFiles] = useState<IFile[]>([])
+  const [sorted, setSorted] = useState<false | 'asc' | 'desc'>(false)
 
   /**
    * Loads files from the provided array, filtering out invalid file types.
@@ -90,6 +91,23 @@ export const useLoadFiles = () => {
   }
 
   /**
+   * Sorts the files in ascending or descending order based on their names.
+   * @param sortOrder - The order to sort the files ('asc' for ascending, 'desc' for descending).
+   */
+  const onSortFiles = (sortOrder: 'asc' | 'desc') => () => {
+    setSorted(sortOrder)
+    setFiles((prevFiles) => {
+      return [...prevFiles].sort((a, b) => {
+        const nameA = a.name.toLowerCase()
+        const nameB = b.name.toLowerCase()
+        if (nameA < nameB) return sortOrder === 'asc' ? -1 : 1
+        if (nameA > nameB) return sortOrder === 'asc' ? 1 : -1
+        return 0
+      })
+    })
+  }
+
+  /**
    * Opens a file dialog to select files.
    * This function sends a message to the VS Code extension to open the file dialog.
    */
@@ -105,5 +123,5 @@ export const useLoadFiles = () => {
     }
   }, [])
 
-  return { loadFiles, handleOpenDialog, files, updateFiles, removeFile }
+  return { loadFiles, handleOpenDialog, files, updateFiles, removeFile, onSortFiles, sorted }
 }

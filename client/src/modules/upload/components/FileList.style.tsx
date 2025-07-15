@@ -14,6 +14,7 @@ export const BoxFileList = styled<ComponentType<BoxProps>>(
   flexWrap: 'wrap',
   gap: '24px',
   height: '100%',
+  width: '100%',
   overflowY: 'auto',
   justifyContent: 'center',
   alignItems: 'flex-start',

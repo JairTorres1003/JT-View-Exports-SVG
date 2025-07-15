@@ -96,6 +96,10 @@
           "type": "string",
           "default": "Extracting components..."
         },
+        "ExtractComponents": {
+          "type": "string",
+          "default": "Extract components"
+        },
         "Search": {
           "type": "string",
           "default": "Search"
@@ -115,16 +119,27 @@
         "DeleteThisFile": {
           "type": "string",
           "default": "Delete this file"
+        },
+        "AddMoreFiles": {
+          "type": "string",
+          "default": "Add more files"
+        },
+        "SortFilesByName": {
+          "type": "string",
+          "default": "Sort files by name"
         }
       },
       "required": [
         "Loading",
         "ExtractingComponents",
+        "ExtractComponents",
         "Search",
         "Clear",
         "Copied {{value}} to clipboard",
         "Close",
-        "DeleteThisFile"
+        "DeleteThisFile",
+        "AddMoreFiles",
+        "SortFilesByName"
       ]
     },
     "pickers": {

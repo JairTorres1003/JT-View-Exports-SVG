@@ -19,11 +19,14 @@
   "labels": {
     "Loading": "Loading...",
     "ExtractingComponents": "Extracting components...",
+    "ExtractComponents": "Extract components",
     "Search": "Search",
     "Clear": "Clear",
     "Copied {{value}} to clipboard": "Copied <b>{{value}}</b> to clipboard",
     "Close": "Close",
-    "DeleteThisFile": "Delete this file"
+    "DeleteThisFile": "Delete this file",
+    "AddMoreFiles": "Add more files",
+    "SortFilesByName": "Sort files by name"
   },
   "pickers": {
     "color": {

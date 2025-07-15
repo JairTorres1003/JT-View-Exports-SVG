@@ -49,22 +49,7 @@ export const BoxDropZone = styled<ComponentType<BoxProps>>(
   [`& .${dropZoneClasses.button}`]: {
     textTransform: 'Capitalize',
     maxWidth: '230px',
-    fontWeight: 'bold',
-    padding: '12px 16px',
-    fontSize: 16,
-    background: 'var(--JT-SVG-vscode-sideBarSectionHeader-background)',
-    border: '1px solid var(--JT-SVG-vscode-sideBarSectionHeader-border, rgb(255 255 255 / 16%))',
     boxShadow: shadows[1],
-    '&:before': {
-      content: '""',
-      position: 'absolute',
-      inset: 0,
-      background: 'rgb(255 255 255 / 2%)',
-      borderRadius: 'inherit',
-    },
-    '&:hover:before': {
-      background: 'rgb(255 255 255 / 6%)',
-    },
   },
   [`& .${dropZoneClasses.text}`]: {
     fontSize: 11,
