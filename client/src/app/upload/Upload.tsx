@@ -11,7 +11,7 @@ const UploadPage: React.FC = () => {
   return (
     <Stack height='100%' overflow='hidden'>
       <FileList files={files} onRemoveFile={removeFile} />
-      {/* <BackdropZone onFiles={onDropZone} /> */}
+      {/* <BackdropZone /> */}
     </Stack>
   )
 }
