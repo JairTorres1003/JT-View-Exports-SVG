@@ -139,7 +139,7 @@ export const IconAdd: FC<IconBaseProps> = ({
   >
     <path
       d='M28 15.0769V16.9231H16.9231V28H15.0769V16.9231H4V15.0769H15.0769V4H16.9231V15.0769H28Z'
-      stroke={color}
+      fill={color}
     />
   </svg>
 )
