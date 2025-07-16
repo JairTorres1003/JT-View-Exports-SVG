@@ -12,6 +12,8 @@ interface VSCodeInternalAPIWrapperMessage {
   data?: unknown
 }
 
+const CUSTOM_EVENTS = [SVGReceiveMessage.RequestFileOpen]
+
 class VSCodeInternalAPIWrapper<T = unknown> {
   private currentState: T | undefined = undefined
 
@@ -61,22 +63,8 @@ class VSCodeInternalAPIWrapper<T = unknown> {
       return
     }
 
-    if (message.type === SVGReceiveMessage.RequestFileOpen) {
-      const inputFile = document.createElement('input')
-      inputFile.type = 'file'
-      inputFile.multiple = true
-      inputFile.accept = '.js,.ts,.jsx,.tsx'
-      inputFile.onchange = (event) => {
-        const files = Array.from((event.target as HTMLInputElement).files || []).map(
-          (file) => file.name
-        )
-        window.postMessage({
-          type: SVGPostMessage.SendOpenFiles,
-          data: files,
-        })
-      }
-      inputFile.click()
-
+    if (CUSTOM_EVENTS.includes(message.type)) {
+      this.customEventListener(message)
       return
     }
 
@@ -100,6 +88,36 @@ class VSCodeInternalAPIWrapper<T = unknown> {
   private readonly setState = <TState extends T | undefined>(newState: TState): TState => {
     this.currentState = newState
     return newState
+  }
+
+  /**
+   * Custom event listener for handling specific messages.
+   * Currently handles the RequestFileOpen message to open a file input dialog.
+   *
+   * @param message - The message received from the VSCode internal API.
+   */
+  private readonly customEventListener = (message: VSCodeInternalAPIWrapperMessage): void => {
+    switch (message.type) {
+      case SVGReceiveMessage.RequestFileOpen: {
+        const inputFile = document.createElement('input')
+        inputFile.type = 'file'
+        inputFile.multiple = true
+        inputFile.accept = '.js,.ts,.jsx,.tsx'
+        inputFile.onchange = (event) => {
+          const files = Array.from((event.target as HTMLInputElement).files || []).map(
+            (file) => file.name
+          )
+          window.postMessage({
+            type: SVGPostMessage.SendOpenFiles,
+            data: files,
+          })
+        }
+        inputFile.click()
+        break
+      }
+      default:
+        console.warn(`Unhandled custom event: ${message.type}`)
+    }
   }
 
   /**
