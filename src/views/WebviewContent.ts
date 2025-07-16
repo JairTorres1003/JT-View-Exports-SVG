@@ -70,7 +70,7 @@ export class WebviewContent {
    * @returns {string} A string containing HTML link elements for the CSS files.
    */
   private generateCssLinks(): string {
-    const cssPaths = this.manifest['index.html'].css
+    const cssPaths = this.manifest['index.html'].css ?? []
     const cssLinks = cssPaths.map((path) => {
       return /* html */ `<link rel="stylesheet" type="text/css" href="${this.getAssetUri(path).toString()}" />`
     })
