@@ -9,6 +9,7 @@ import { isEmpty } from '@/utils/misc'
 
 const RouteManager = () => {
   const { renderPath } = useSelector((state) => state.global.configuration)
+  const renderOptions = useSelector((state) => state.global.renderOptions)
 
   const navigate = useNavigate()
   const dispatch = useDispatch()
@@ -23,7 +24,7 @@ const RouteManager = () => {
     dispatch(setRecentlySelected())
     dispatch(setIsOpenDevTools(false))
 
-    void navigate(newPath)
+    void navigate(newPath, renderOptions)
   }
 
   useEffect(() => {

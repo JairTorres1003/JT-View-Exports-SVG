@@ -1,4 +1,4 @@
-import type { SVGReceiveMessage } from '@api/enums/ViewExportsSVG'
+import { SVGPostMessage, SVGReceiveMessage } from '@api/enums/ViewExportsSVG'
 import type { AxiosResponse } from 'axios'
 import i18next from 'i18next'
 import type { WebviewApi } from 'vscode-webview'
@@ -58,6 +58,25 @@ class VSCodeInternalAPIWrapper<T = unknown> {
   private readonly postMessage = (message: VSCodeInternalAPIWrapperMessage): void => {
     if (isEmpty(message.type)) {
       console.warn(i18next.t('errors.NoMessageTypeProvided'))
+      return
+    }
+
+    if (message.type === SVGReceiveMessage.RequestFileOpen) {
+      const inputFile = document.createElement('input')
+      inputFile.type = 'file'
+      inputFile.multiple = true
+      inputFile.accept = '.js,.ts,.jsx,.tsx'
+      inputFile.onchange = (event) => {
+        const files = Array.from((event.target as HTMLInputElement).files || []).map(
+          (file) => file.name
+        )
+        window.postMessage({
+          type: SVGPostMessage.SendOpenFiles,
+          data: files,
+        })
+      }
+      inputFile.click()
+
       return
     }
 

@@ -36,6 +36,10 @@ const reducers: GlobalReducers = {
   setConfiguration: (state, { payload }) => {
     state.configuration = { ...state.configuration, ...payload }
   },
+  setRenderPath: (state, { payload }) => {
+    state.configuration.renderPath = payload.path
+    state.renderOptions = payload.options
+  },
 }
 
 /**
@@ -48,7 +52,7 @@ export const GlobalSlice = createSlice({
 })
 
 export const {
-  actions: { openAlert, closeAlert, setConfiguration },
+  actions: { openAlert, closeAlert, setConfiguration, setRenderPath },
 } = GlobalSlice
 
 export const { reducer: GlobalReducer } = GlobalSlice

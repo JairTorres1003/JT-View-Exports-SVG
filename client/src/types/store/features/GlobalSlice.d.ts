@@ -2,6 +2,7 @@ import type { SVGComponent } from '@api/types/ViewExportsSVG'
 import type { AlertProps, SnackbarOrigin } from '@mui/material'
 import type { CaseReducer, PayloadAction } from '@reduxjs/toolkit'
 import type { CSSProperties, ReactNode } from 'react'
+import type { NavigateOptions } from 'react-router-dom'
 
 export interface GlobalState {
   snackbarAlert: {
@@ -62,6 +63,7 @@ export interface GlobalState {
      */
     showRecentIcons: boolean
   }
+  renderOptions?: NavigateOptions
 }
 
 export interface GlobalReducers {
@@ -77,6 +79,14 @@ export interface GlobalReducers {
    * Set the configuration property.
    */
   setConfiguration: CaseReducer<GlobalState, PayloadAction<Partial<GlobalState['configuration']>>>
+
+  /**
+   * Set render path for the SVG component.
+   */
+  setRenderPath: CaseReducer<
+    GlobalState,
+    PayloadAction<{ path: string; options?: NavigateOptions }>
+  >
 
   [key: string]: CaseReducer<GlobalState, PayloadAction<any>>
 }

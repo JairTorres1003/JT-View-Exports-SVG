@@ -1,23 +1,24 @@
 import { Box, Button, Typography } from '@mui/material'
 import { useEffect } from 'react'
 import { useTranslation } from 'react-i18next'
-import { useNavigate } from 'react-router-dom'
+import { useDispatch } from 'react-redux'
 
 import { dropZoneClasses } from './DropZone.classes'
 import { BoxDropZone } from './DropZone.style'
 
 // import { BackdropZone } from '@/core/components/Backdrop/BackdropZone'
 import { useLoadFiles } from '@/core/hooks/useLoadFiles'
+import { setRenderPath } from '@/store/features/GlobalSlice'
 
 const DropZone = () => {
   const { t } = useTranslation(undefined, { keyPrefix: 'DropZone' })
 
   const { files, handleOpenDialog } = useLoadFiles()
-  const navigate = useNavigate()
+  const dispatch = useDispatch()
 
   useEffect(() => {
     if (files.length > 0) {
-      void navigate('/upload', { state: { files } })
+      dispatch(setRenderPath({ path: '/upload', options: { state: { files } } }))
     }
   }, [files])
 
