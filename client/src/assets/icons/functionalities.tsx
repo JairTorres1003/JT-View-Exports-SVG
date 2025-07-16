@@ -129,17 +129,18 @@ export const IconAdd: FC<IconBaseProps> = ({
   sx = {},
 }) => (
   <svg
-    stroke={color}
-    fill={color}
     width={size}
     height={size}
+    fill='none'
     style={sx}
     className={className}
-    strokeWidth='0'
-    viewBox='0 0 16 16'
+    viewBox='0 0 32 32'
     xmlns='http://www.w3.org/2000/svg'
   >
-    <path d='M14 7v1H8v6H7V8H1V7h6V1h1v6h6z'></path>
+    <path
+      d='M28 15.0769V16.9231H16.9231V28H15.0769V16.9231H4V15.0769H15.0769V4H16.9231V15.0769H28Z'
+      stroke={color}
+    />
   </svg>
 )
 
