@@ -1,4 +1,4 @@
-import { Card, IconButton, Tooltip, Typography } from '@mui/material'
+import { Card, IconButton, Stack, Tooltip, Typography } from '@mui/material'
 import type { FC } from 'react'
 import { useTranslation } from 'react-i18next'
 
@@ -13,6 +13,7 @@ import {
   IconFileTS,
 } from '@/assets/icons/files'
 import { IconClose } from '@/assets/icons/functionalities'
+import { IconEmptyBox } from '@/assets/icons/indicators'
 import type { IconBaseProps } from '@/types/BaseProps'
 import type { IFile } from '@/types/misc'
 
@@ -31,7 +32,23 @@ const fileIconTypes: Record<string, React.FC<IconBaseProps>> = {
 export const FileList: FC<FileListProps> = ({ files, onRemoveFile = () => null }) => {
   const { t } = useTranslation()
 
-  if (files.length === 0) return null
+  if (files.length === 0) {
+    return (
+      <BoxFileList>
+        <Stack height='100%' gap={2}>
+          <Typography variant='h1' textAlign='center' fontSize={14} maxWidth={440}>
+            {t('DropZone.title')}
+          </Typography>
+          <Stack alignItems='center' justifyContent='center' gap={2} my='auto'>
+            <IconEmptyBox size={200} sx={{ opacity: 0.5 }} />
+            <Typography variant='body1' textAlign='center' color='text.secondary'>
+              {t('labels.NoFilesSelected')}
+            </Typography>
+          </Stack>
+        </Stack>
+      </BoxFileList>
+    )
+  }
 
   return (
     <BoxFileList>

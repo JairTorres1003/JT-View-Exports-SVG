@@ -26,7 +26,10 @@
     "Close": "Close",
     "DeleteThisFile": "Delete this file",
     "AddMoreFiles": "Add more files",
-    "SortFilesByName": "Sort files by name"
+    "FilesLoaded": "{{count}} file loaded",
+    "FilesLoaded2": "{{count}} files loaded",
+    "SortFilesByName": "Sort files by name",
+    "NoFilesSelected": "No files selected"
   },
   "pickers": {
     "color": {

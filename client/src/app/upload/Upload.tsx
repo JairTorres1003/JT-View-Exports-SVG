@@ -9,37 +9,46 @@ import { useUpload } from '@/modules/upload/hooks/useUpload'
 
 const UploadPage: React.FC = () => {
   const { files, removeFile, handleOpenDialog, sorted, onSortFiles } = useUpload()
-  const { t } = useTranslation(undefined, { keyPrefix: 'labels' })
+  const { t } = useTranslation()
 
   return (
-    <Stack height='100%' overflow='hidden' gap={2}>
-      <Stack direction='row' gap={2} height='100%' overflow='hidden'>
+    <Stack direction='row' height='100%' overflow='hidden' gap={2}>
+      <Stack gap={2} height='100%' overflow='hidden' width='100%'>
         <FileList files={files} onRemoveFile={removeFile} />
-        <Stack p='24px 8px 24px 0' gap={2}>
-          <Tooltip title={t('AddMoreFiles')} placement='left'>
-            <Badge badgeContent={files.length} overlap='circular'>
-              <IconButton onClick={handleOpenDialog}>
-                <IconAdd size={26} />
-              </IconButton>
-            </Badge>
-          </Tooltip>
-          {files.length > 1 && (
-            <Tooltip title={t('SortFilesByName')} placement='left'>
-              <IconButton onClick={onSortFiles(sorted === 'asc' ? 'desc' : 'asc')}>
-                {sorted === 'asc' ? <IconSortAsc size={26} /> : <IconSortDesc size={26} />}
-              </IconButton>
-            </Tooltip>
-          )}
-        </Stack>
+
+        <Button
+          fullWidth
+          disabled={files.length === 0}
+          variant={files.length === 0 ? 'outlined' : 'contained'}
+          sx={{ maxWidth: 224, mx: 'auto', mb: 1 }}
+        >
+          {t('labels.ExtractComponents')}
+        </Button>
       </Stack>
-      <Button
-        fullWidth
-        size='large'
-        disabled={files.length === 0}
-        sx={{ maxWidth: 224, mx: 'auto' }}
-      >
-        {t('ExtractComponents')}
-      </Button>
+
+      <Stack p='24px 16px 24px 0' gap={2}>
+        <Tooltip title={t('labels.AddMoreFiles')} placement='left'>
+          <Badge badgeContent={files.length} overlap='circular'>
+            <IconButton
+              onClick={handleOpenDialog}
+              aria-label={t(`labels.FilesLoaded${files.length > 1 ? '2' : ''}`, {
+                count: files.length,
+              })}
+            >
+              <IconAdd size={26} />
+            </IconButton>
+          </Badge>
+        </Tooltip>
+
+        {files.length > 1 && (
+          <Tooltip title={t('labels.SortFilesByName')} placement='left'>
+            <IconButton onClick={onSortFiles(sorted === 'asc' ? 'desc' : 'asc')}>
+              {sorted === 'asc' ? <IconSortAsc size={26} /> : <IconSortDesc size={26} />}
+            </IconButton>
+          </Tooltip>
+        )}
+      </Stack>
+
       {/* <BackdropZone /> */}
     </Stack>
   )

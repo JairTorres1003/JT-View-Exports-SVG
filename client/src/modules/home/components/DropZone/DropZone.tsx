@@ -31,6 +31,7 @@ const DropZone = () => {
           <Button
             fullWidth
             size='large'
+            variant='contained'
             onClick={handleOpenDialog}
             className={dropZoneClasses.button}
           >

@@ -124,9 +124,21 @@
           "type": "string",
           "default": "Add more files"
         },
+        "FilesLoaded": {
+          "type": "string",
+          "default": "{{count}} file loaded"
+        },
+        "FilesLoaded2": {
+          "type": "string",
+          "default": "{{count}} files loaded"
+        },
         "SortFilesByName": {
           "type": "string",
           "default": "Sort files by name"
+        },
+        "NoFilesSelected": {
+          "type": "string",
+          "default": "No files selected"
         }
       },
       "required": [
@@ -139,6 +151,8 @@
         "Close",
         "DeleteThisFile",
         "AddMoreFiles",
+        "FilesLoaded",
+        "FilesLoaded2",
         "SortFilesByName"
       ]
     },

@@ -82,6 +82,17 @@ export const inputsCustomizations: CustomizationsFunction = (styles) => ({
           },
         },
       },
+      {
+        props: { variant: 'contained' },
+        style: {
+          background: 'var(--JT-SVG-vscode-button-background)',
+          border: 'none',
+          color: 'var(--JT-SVG-vscode-button-foreground)',
+          '&:hover': {
+            background: 'var(--JT-SVG-vscode-button-hoverBackground)',
+          },
+        },
+      },
     ],
   },
 })

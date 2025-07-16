@@ -51,6 +51,12 @@ html:root {
   --JT-SVG-vscode-toolbar-hoverOutline: var(--vscode-toolbar-hoverOutline);
 
   --JT-SVG-vscode-extensionIcon-starForeground: var(--vscode-extensionIcon-starForeground, #f1c40f);
+  --JT-SVG-vscode-button-background: var(--vscode-button-background, #c4c4c4);
+  --JT-SVG-vscode-button-hoverBackground: var(--vscode-button-hoverBackground, #bbbbbb);
+  --JT-SVG-vscode-button-foreground: var(--vscode-button-foreground);
+
+  --JT-SVG-vscode-activityBarBadge-background: var(--vscode-activityBarBadge-background, #4d78cc);
+  --JT-SVG-vscode-activityBarBadge-foreground: var(--vscode-activityBarBadge-foreground, #f8fafd);
 }
 
 body {

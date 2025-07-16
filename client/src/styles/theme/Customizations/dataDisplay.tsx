@@ -72,6 +72,29 @@ export const dataDisplayCustomizations: CustomizationsFunction = (styles) => ({
       },
     ],
   },
+  MuiBadge: {
+    defaultProps: {
+      anchorOrigin: {
+        vertical: 'bottom',
+        horizontal: 'right',
+      },
+    },
+    styleOverrides: {
+      badge: {
+        backgroundColor: 'var(--JT-SVG-vscode-activityBarBadge-background)',
+        color: 'var(--JT-SVG-vscode-activityBarBadge-foreground)',
+        fontSize: '9px',
+        fontWeight: 600,
+        minWidth: '16px',
+        height: '16px',
+        lineHeight: '16px',
+        padding: '0 4px',
+        borderRadius: '20px',
+        textAlign: 'center',
+        boder: '1px solid var(--JT-SVG-vscode-panel-border)',
+      },
+    },
+  },
   MuiTooltip: {
     defaultProps: {
       arrow: true,
