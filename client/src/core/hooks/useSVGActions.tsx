@@ -58,14 +58,9 @@ export const useSVGActions = ({ svgRef }: UseSVGActionsProps) => {
     const svgString = serializeSVG(svgRef.current)
     if (!svgString) return
 
-    navigator.clipboard
-      .writeText(svgString)
-      .then(() => {
-        console.info('SVG copied to clipboard')
-      })
-      .catch((err) => {
-        console.error('Failed to copy SVG:', err)
-      })
+    navigator.clipboard.writeText(svgString).catch((err) => {
+      console.error('Failed to copy SVG:', err)
+    })
   }
 
   /**
