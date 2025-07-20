@@ -44,5 +44,6 @@
   "{kind} icons": "{kind} icons",
   "Favorite": "Favorite",
   "Recent": "Recent",
-  "Select files": "Select files"
+  "Select files": "Select files",
+  "Error creating temporary files": "Error creating temporary files"
 }

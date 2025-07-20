@@ -14,7 +14,8 @@
     "FailedToFetchExtensionTheme": "Failed to fetch extension theme",
     "FailedToInitializeEditor": "Failed to initialize editor",
     "ErrorApplyingInitialColor": "Error applying initial color",
-    "TheFollowingFilesAreNotSupported": "The following files are not supported:"
+    "TheFollowingFilesAreNotSupported": "The following files are not supported:",
+    "ErrorCreatingTemporaryFile": "Error creating temporary file {name}"
   },
   "labels": {
     "Loading": "Loading...",

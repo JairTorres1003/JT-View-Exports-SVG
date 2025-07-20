@@ -65,6 +65,10 @@
         "TheFollowingFilesAreNotSupported": {
           "type": "string",
           "default": "The following files are not supported:"
+        },
+        "ErrorCreatingTemporaryFile": {
+          "type": "string",
+          "default": "Error creating temporary file {name}"
         }
       },
       "required": [
@@ -82,7 +86,8 @@
         "FailedToFetchExtensionTheme",
         "FailedToInitializeEditor",
         "ErrorApplyingInitialColor",
-        "TheFollowingFilesAreNotSupported"
+        "TheFollowingFilesAreNotSupported",
+        "ErrorCreatingTemporaryFile"
       ]
     },
     "labels": {

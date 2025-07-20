@@ -53,6 +53,7 @@ export enum SVGReceiveMessage {
 
   OpenFile = 'file/open',
   RequestFileOpen = 'file/request-open',
+  CreateTempFiles = 'file/create-temp',
 
   AddRecentIcon = 'icons/recent/add',
   RemoveRecentIcon = 'icons/recent/remove',

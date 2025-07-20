@@ -272,6 +272,11 @@
       "type": "string",
       "description": "Label for the file selection dialog",
       "default": "Select files"
+    },
+    "Error creating temporary files": {
+      "type": "string",
+      "description": "Error message displayed when creating temporary files fails",
+      "default": "Error creating temporary files"
     }
   },
   "required": [
@@ -320,6 +325,7 @@
     "{kind} icons",
     "Favorite",
     "Recent",
-    "Select files"
+    "Select files",
+    "Error creating temporary files"
   ]
 }

@@ -1,4 +1,5 @@
 import { SVGPostMessage, SVGReceiveMessage } from '@api/enums/ViewExportsSVG'
+import type { FileTemporary } from '@api/types/views/content'
 import { List, ListItem, ListItemText, Stack, Typography } from '@mui/material'
 import { useEffect, useState } from 'react'
 import { useTranslation } from 'react-i18next'
@@ -115,6 +116,47 @@ export const useLoadFiles = () => {
     vscode.postMessage(SVGReceiveMessage.RequestFileOpen)
   }
 
+  /**
+   * Handles file drop events, reading the files and sending their content to the VS Code extension.
+   * @param files - The files dropped into the drop zone.
+   *
+   * @remark
+   * Due to VS Code security restrictions, it is currently not possible to directly obtain the file path on the OS for dropped files.
+   * As a workaround, the contents of dropped files are read and sent using `postMessage` to create a temporary file.\
+   * This approach is not ideal and has certain limitations. For more information, see:
+   * - GitHub issue: {@link [#255608](https://github.com/microsoft/vscode/issues/255608)}
+   * - Project wiki: {@link [Limitations](https://github.com/JairTorres1003/JT-View-Exports-SVG/wiki/Limitations#drop-and-drag-files)}
+   */
+  const onDrop = (files: File[]) => {
+    const filePromises = files
+      .filter((file) => ALLOWED_EXTENSIONS.includes(`.${getFileExtension(file.name)}`))
+      .map(async (file) => {
+        return await new Promise<FileTemporary>((resolve, reject) => {
+          const reader = new FileReader()
+
+          reader.onload = (loadEvent) => {
+            const fileContent = loadEvent.target?.result
+            if (fileContent) {
+              resolve({ name: file.name, content: fileContent })
+            }
+          }
+
+          reader.onerror = (errorEvent) => {
+            console.error(t('errors.ErrorCreatingTemporaryFile', { name: file.name }), errorEvent)
+            reject(new Error(`Error reading file: ${file.name}`))
+          }
+
+          reader.readAsArrayBuffer(file)
+        })
+      })
+
+    Promise.all(filePromises)
+      .then((filesData) => {
+        vscode.postMessage(SVGReceiveMessage.CreateTempFiles, filesData)
+      })
+      .catch(console.error)
+  }
+
   useEffect(() => {
     vscode.onMessage(SVGPostMessage.SendOpenFiles, loadFiles)
 
@@ -123,5 +165,14 @@ export const useLoadFiles = () => {
     }
   }, [])
 
-  return { loadFiles, handleOpenDialog, files, updateFiles, removeFile, onSortFiles, sorted }
+  return {
+    loadFiles,
+    handleOpenDialog,
+    files,
+    updateFiles,
+    removeFile,
+    onSortFiles,
+    sorted,
+    onDrop,
+  }
 }

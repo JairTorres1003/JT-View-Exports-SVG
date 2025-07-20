@@ -14,3 +14,8 @@ export interface AssetPath {
   workspace: SVGFile[]
   user: SVGFile[]
 }
+
+export interface FileTemporary {
+  name: string
+  content: ArrayBuffer | string
+}

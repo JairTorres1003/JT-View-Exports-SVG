@@ -1,9 +1,14 @@
+import * as fs from 'node:fs'
+import * as os from 'node:os'
+import * as path from 'node:path'
+
 import { l10n, type OpenDialogOptions, window } from 'vscode'
 
 import { expandedIcons, runToggleDevTools } from '@/commands'
 import { toggleViewActions } from '@/commands/editorTitleActions'
 import { DISABLED_PLAYGROUND_IN_PATH } from '@/constants/misc'
 import { SVGPostMessage } from '@/enum/ViewExportsSVG'
+import type { FileTemporary } from '@/types/views/content'
 import type { FuncPostMessage } from '@/types/views/PostMessage'
 
 export class UIHandler {
@@ -44,5 +49,24 @@ export class UIHandler {
 
   changeViewPath(newPath: string): void {
     toggleViewActions(!DISABLED_PLAYGROUND_IN_PATH.includes(newPath)).catch(console.error)
+  }
+
+  async createTempFiles(files: FileTemporary[]): Promise<void> {
+    try {
+      const filePaths = await Promise.all(
+        files.map(async ({ name, content }) => {
+          const tempFilePath = path.join(os.tmpdir(), name)
+          const fileBuffer =
+            typeof content === 'string' ? Buffer.from(content, 'utf8') : Buffer.from(content)
+
+          await fs.promises.writeFile(tempFilePath, fileBuffer)
+          return tempFilePath
+        })
+      )
+
+      this.postMessage(SVGPostMessage.SendOpenFiles, filePaths)
+    } catch (error) {
+      console.error(l10n.t('Error creating temporary files'), error)
+    }
   }
 }

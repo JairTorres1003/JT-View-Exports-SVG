@@ -12,6 +12,7 @@ import { MessageRouter } from './MessageRouterController'
 import { toggleViewActions } from '@/commands/editorTitleActions'
 import { SVGPostMessage } from '@/enum/ViewExportsSVG'
 import type { SVGFile, SVGIcon, SVGPlayground, ViewExportSVG } from '@/types/ViewExportsSVG'
+import type { FileTemporary } from '@/types/views/content'
 import type { FuncPostMessage } from '@/types/views/PostMessage'
 
 export class ListerWebviewController {
@@ -163,5 +164,8 @@ export class ListerWebviewController {
   }
   changeViewRenderPath(newPath: string): void {
     this.uiHandler.changeViewPath(newPath)
+  }
+  createTempFiles(data: FileTemporary[]): void {
+    this.uiHandler.createTempFiles(data).catch(console.error)
   }
 }

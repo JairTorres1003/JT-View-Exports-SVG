@@ -2,13 +2,13 @@ import { Badge, Button, IconButton, Stack, Tooltip } from '@mui/material'
 import React from 'react'
 import { useTranslation } from 'react-i18next'
 
-// import { BackdropZone } from '@/core/components/Backdrop/BackdropZone'
 import { IconAdd, IconSortAsc, IconSortDesc } from '@/assets/icons/functionalities'
+import { BackdropZone } from '@/core/components/Backdrop/BackdropZone'
 import { FileList } from '@/modules/upload/components/FileList'
 import { useUpload } from '@/modules/upload/hooks/useUpload'
 
 const UploadPage: React.FC = () => {
-  const { files, removeFile, handleOpenDialog, sorted, onSortFiles, onExtractComponents } =
+  const { files, removeFile, handleOpenDialog, sorted, onSortFiles, onExtractComponents, onDrop } =
     useUpload()
   const { t } = useTranslation()
 
@@ -51,7 +51,7 @@ const UploadPage: React.FC = () => {
         )}
       </Stack>
 
-      {/* <BackdropZone /> */}
+      <BackdropZone onFiles={onDrop} />
     </Stack>
   )
 }

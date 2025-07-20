@@ -1,8 +1,8 @@
-import { type SVGFile, type SVGIcon, type SVGPlayground } from '../ViewExportsSVG'
+import type { SVGFile, SVGIcon, SVGPlayground } from '../ViewExportsSVG'
 
-import { type OpenFile } from './content'
+import type { FileTemporary, OpenFile } from './content'
 
-import { type SVGReceiveMessage } from '@/enum/ViewExportsSVG'
+import type { SVGReceiveMessage } from '@/enum/ViewExportsSVG'
 
 /**
  * The message to receive from the webview.
@@ -17,6 +17,7 @@ export type ReceiveMessage =
   | { type: SVGReceiveMessage.GetViewAssets; data: SVGFile[] }
   | { type: SVGReceiveMessage.OpenFile; data: OpenFile }
   | { type: SVGReceiveMessage.RequestFileOpen }
+  | { type: SVGReceiveMessage.CreateTempFiles; data: FileTemporary[] }
   | { type: SVGReceiveMessage.PlaygroundSVGComponents; data: SVGPlayground }
   | { type: SVGReceiveMessage.RemoveAssets; data: SVGFile[] }
   | { type: SVGReceiveMessage.ScanWorkspace }
@@ -79,6 +80,11 @@ export interface HandlerReceiveMessage {
    * Requests the file to be opened.
    */
   [SVGReceiveMessage.RequestFileOpen]: VoidFunction
+  /**
+   * Creates a temporary file with the given name and content.
+   * @param data - The name and content of the temporary file.
+   */
+  [SVGReceiveMessage.CreateTempFiles]: (data: FileTemporary[]) => void
   /**
    * Sends the SVG components to the webview.
    * @param component - The SVG components to send.

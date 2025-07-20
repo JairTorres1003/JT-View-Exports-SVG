@@ -6,14 +6,14 @@ import { useDispatch } from 'react-redux'
 import { dropZoneClasses } from './DropZone.classes'
 import { BoxDropZone } from './DropZone.style'
 
-// import { BackdropZone } from '@/core/components/Backdrop/BackdropZone'
+import { BackdropZone } from '@/core/components/Backdrop/BackdropZone'
 import { useLoadFiles } from '@/core/hooks/useLoadFiles'
 import { setRenderPath } from '@/store/features/GlobalSlice'
 
 const DropZone = () => {
   const { t } = useTranslation(undefined, { keyPrefix: 'DropZone' })
 
-  const { files, handleOpenDialog } = useLoadFiles()
+  const { files, handleOpenDialog, onDrop } = useLoadFiles()
   const dispatch = useDispatch()
 
   useEffect(() => {
@@ -43,7 +43,7 @@ const DropZone = () => {
           </Typography>
         </Box>
       </Box>
-      {/* <BackdropZone /> */}
+      <BackdropZone onFiles={onDrop} />
     </BoxDropZone>
   )
 }

@@ -7,7 +7,7 @@ import {
   SVGPlayground,
   ViewExportSVG,
 } from '@api/types/ViewExportsSVG'
-import { AssetPath, OpenFile } from '@api/types/views/content'
+import { AssetPath, FileTemporary, OpenFile } from '@api/types/views/content'
 import { ExtensionManage, ThemeMode, VsCodeStyles } from '@api/types/vscode'
 
 /**
@@ -76,6 +76,7 @@ export interface FuncPostMessage {
   (type: SVGReceiveMessage.GetVsCodeStyles): void
   (type: SVGReceiveMessage.OpenFile, data: OpenFile): void
   (type: SVGReceiveMessage.RequestFileOpen): void
+  (type: SVGReceiveMessage.CreateTempFiles, data: FileTemporary[]): void
   (type: SVGReceiveMessage.PlaygroundSVGComponents, data: SVGPlayground): void
   (type: SVGReceiveMessage.RemoveAssets, data: SVGFile[]): void
   (type: SVGReceiveMessage.ScanWorkspace): void
