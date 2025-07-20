@@ -1,4 +1,4 @@
-import { workspace } from 'vscode'
+import { l10n, window, workspace } from 'vscode'
 
 import { getCacheManager } from '../cache'
 
@@ -41,6 +41,15 @@ export class CacheHandler {
   }
 
   private addIconToCache(icon: SVGIcon, isRecent: boolean): void {
+    if (icon.location.file.isTemporary) {
+      window.showWarningMessage(
+        isRecent
+          ? l10n.t('Cannot add temporary icons to recent icons.')
+          : l10n.t('Cannot add temporary icons to favorites.')
+      )
+      return
+    }
+
     const { RecentIconCache, FavoritesIconCache, ComponentsFileCache } = getCacheManager()
 
     if (isEmpty(workspace.workspaceFolders)) return
@@ -56,6 +65,8 @@ export class CacheHandler {
   }
 
   private removeIconFromCache(icon: SVGIcon, isRecent: boolean): void {
+    if (icon.location.file.isTemporary) return
+
     const { RecentIconCache, FavoritesIconCache, ComponentsFileCache } = getCacheManager()
 
     if (isEmpty(workspace.workspaceFolders)) return

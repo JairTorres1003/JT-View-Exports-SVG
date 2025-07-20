@@ -1,4 +1,5 @@
 import * as fs from 'node:fs'
+import * as os from 'node:os'
 import * as path from 'node:path'
 
 import { l10n, Position, Selection, TextEditorRevealType, Uri, window, workspace } from 'vscode'
@@ -53,8 +54,9 @@ export async function pathToSVGFile(filePath: string): Promise<SVGFile> {
   const dirname = path.dirname(absolutePath)
   const relativePath = path.relative(workspacePath, absolutePath)
   const language = await getLanguageFromFile(Uri.file(absolutePath))
+  const isTemporary = dirname.startsWith(os.tmpdir())
 
-  return { absolutePath, basename, dirname, relativePath, language }
+  return { absolutePath, basename, dirname, relativePath, language, isTemporary }
 }
 
 /**

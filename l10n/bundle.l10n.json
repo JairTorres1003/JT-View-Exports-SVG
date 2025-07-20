@@ -45,5 +45,7 @@
   "Favorite": "Favorite",
   "Recent": "Recent",
   "Select files": "Select files",
-  "Error creating temporary files": "Error creating temporary files"
+  "Error creating temporary files": "Error creating temporary files",
+  "Cannot add temporary icons to favorites.": "Cannot add temporary icons to favorites.",
+  "Cannot add temporary icons to recent icons.": "Cannot add temporary icons to recent icons."
 }

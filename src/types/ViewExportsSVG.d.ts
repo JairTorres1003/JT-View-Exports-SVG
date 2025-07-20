@@ -32,6 +32,10 @@ export interface ViewExportSVG {
    * Indicates whether the SVG components that are not exported should be shown.
    */
   isShowNoExports: boolean
+  /**
+   * Indicates if the file is located in a temporary directory.
+   */
+  isTemporaryDirectory: boolean
 }
 
 export interface SVGFile {
@@ -56,6 +60,10 @@ export interface SVGFile {
    * @default 'javascript'
    */
   language?: string
+  /**
+   * Indicates whether the file is located in a temporary directory.
+   */
+  isTemporary: boolean
 }
 
 export interface SVGComponent {
