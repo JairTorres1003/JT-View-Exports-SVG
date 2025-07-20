@@ -44,8 +44,8 @@ export class CacheHandler {
     if (icon.location.file.isTemporary) {
       window.showWarningMessage(
         isRecent
-          ? l10n.t('Cannot add temporary icons to recent icons.')
-          : l10n.t('Cannot add temporary icons to favorites.')
+          ? l10n.t('Icons in the temp directory cannot be added to recent icons.')
+          : l10n.t('Icons in the temp directory cannot be added to favorites.')
       )
       return
     }

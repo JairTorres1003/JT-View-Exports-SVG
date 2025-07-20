@@ -65,7 +65,9 @@ export const useCardSvg = ({ favorite = false }: UseCardSvgProps = {}): CardSvgH
    * @param {SVGComponent} component - The SVG component to toggle favorite status for.
    */
   const handleToggleFavorite = (component: SVGComponent): void => {
-    setIsFavorite(!isFavorite)
+    if (!component.location.file.isTemporary) {
+      setIsFavorite(!isFavorite)
+    }
 
     const payload = {
       name: component.name,

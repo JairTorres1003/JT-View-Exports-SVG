@@ -278,15 +278,15 @@
       "description": "Error message displayed when creating temporary files fails",
       "default": "Error creating temporary files"
     },
-    "Cannot add temporary icons to recent icons.": {
+    "Icons in the temp directory cannot be added to recent icons.": {
       "type": "string",
       "description": "Error message displayed when trying to add temporary icons to recent icons",
-      "default": "Cannot add temporary icons to recent icons."
+      "default": "Icons in the temp directory cannot be added to recent icons."
     },
-    "Cannot add temporary icons to favorites.": {
+    "Icons in the temp directory cannot be added to favorites.": {
       "type": "string",
       "description": "Error message displayed when trying to add temporary icons to favorites",
-      "default": "Cannot add temporary icons to favorites."
+      "default": "Icons in the temp directory cannot be added to favorites."
     }
   },
   "required": [
@@ -337,7 +337,7 @@
     "Recent",
     "Select files",
     "Error creating temporary files",
-    "Cannot add temporary icons to recent icons.",
-    "Cannot add temporary icons to favorites."
+    "Icons in the temp directory cannot be added to recent icons.",
+    "Icons in the temp directory cannot be added to favorites."
   ]
 }
