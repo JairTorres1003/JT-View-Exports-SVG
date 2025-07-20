@@ -17,4 +17,7 @@ export const BoxViewPanels = styled(Box, {
       backgroundColor: 'var(--JT-SVG-vscode-sash-hoverBorder)',
     },
   },
+  [`& .${viewPanelsClasses.contentPanel}`]: {
+    paddingBottom: '16px',
+  },
 }))
