@@ -5,6 +5,7 @@ interface Route {
   name: string
   Component: React.LazyExoticComponent<React.FC>
   private: boolean
+  devtools?: boolean
 }
 
 export const pathnames = {
@@ -19,17 +20,20 @@ export const routes: Route[] = [
     name: 'Home',
     Component: lazy(async () => await import('@/app/home/Home')),
     private: false,
+    devtools: true,
   },
   {
     path: pathnames.dashboard,
     name: 'Dashboard',
     Component: lazy(async () => await import('@/app/dashboard/Dashboard')),
     private: false,
+    devtools: true,
   },
   {
     path: pathnames.upload,
     name: 'Upload',
     Component: lazy(async () => await import('@/app/upload/Upload')),
     private: false,
+    devtools: false,
   },
 ]

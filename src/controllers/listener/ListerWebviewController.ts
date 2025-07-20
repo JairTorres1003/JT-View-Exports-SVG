@@ -162,4 +162,7 @@ export class ListerWebviewController {
   requestFileOpen(): void {
     this.uiHandler.dialogOpenFile()
   }
+  changeViewRenderPath(newPath: string): void {
+    this.uiHandler.changeViewPath(newPath)
+  }
 }

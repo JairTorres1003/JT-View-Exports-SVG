@@ -1,9 +1,12 @@
+import { SVGReceiveMessage } from '@api/enums/ViewExportsSVG'
 import { Button, Stack, Typography } from '@mui/material'
 import { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
 
 import { routes } from '@/config/routes/route'
+import { vscode } from '@/services/vscode'
+import { setRenderPath } from '@/store/features/GlobalSlice'
 import { setIsOpenDevTools, setRecentlySelected } from '@/store/features/PlaygroundSlice'
 import { isEmpty } from '@/utils/misc'
 
@@ -25,6 +28,8 @@ const RouteManager = () => {
     dispatch(setIsOpenDevTools(false))
 
     void navigate(newPath, renderOptions)
+
+    vscode.postMessage(SVGReceiveMessage.ViewRenderPath, newPath)
   }
 
   useEffect(() => {
@@ -55,7 +60,7 @@ const RouteManager = () => {
             variant='outlined'
             sx={{ minWidth: '100px' }}
             onClick={() => {
-              handleChangePath(route.path)
+              dispatch(setRenderPath({ path: route.path }))
             }}
           >
             {route.name}

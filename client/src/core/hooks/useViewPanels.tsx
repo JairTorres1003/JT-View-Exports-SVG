@@ -1,14 +1,18 @@
 import { SVGPostMessage, SVGReceiveMessage } from '@api/enums/ViewExportsSVG'
-import { useEffect, useRef } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import type { ImperativePanelHandle, PanelOnResize } from 'react-resizable-panels'
 
+import { routes } from '@/config/routes/route'
 import { vscode } from '@/services/vscode'
 import { setIsOpenDevTools } from '@/store/features/PlaygroundSlice'
+import { isEmpty } from '@/utils/misc'
 
 export const useViewPanels = () => {
   const sidePanelRef = useRef<ImperativePanelHandle>(null)
   const isOpenDevTools = useSelector((state) => state.playground.isOpenDevTools)
+  const renderPath = useSelector((state) => state.global.configuration.renderPath)
+  const [isShowSidePanel, setIsShowSidePanel] = useState(true)
 
   const dispatch = useDispatch()
 
@@ -42,6 +46,17 @@ export const useViewPanels = () => {
     }
   }
 
+  /**
+   * Handles the change of path based on the provided new path.
+   * @param newPath - The new path to navigate to.
+   */
+  const handleChangePath = (newPath: string) => {
+    if (isEmpty(newPath)) return
+
+    const route = routes.find((route) => route.path === newPath)
+    setIsShowSidePanel(route?.devtools ?? false)
+  }
+
   useEffect(() => {
     vscode.onMessage(SVGPostMessage.SendToggleOpenDevTools, toggleSidePanel)
 
@@ -57,9 +72,13 @@ export const useViewPanels = () => {
     }
   }, [isOpenDevTools])
 
+  useEffect(() => {
+    handleChangePath(renderPath)
+  }, [renderPath])
   return {
     sidePanelRef,
     onResize,
     toggleSidePanel,
+    isShowSidePanel,
   }
 }

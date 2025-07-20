@@ -42,3 +42,5 @@ export const DEFAULT_ICON_PROPERTIES = {
 
 export const DEFAULT_FONT_FAMILY =
   "-apple-system, 'system-ui', sans-serif, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue'"
+
+export const DISABLED_PLAYGROUND_IN_PATH = ['/upload']

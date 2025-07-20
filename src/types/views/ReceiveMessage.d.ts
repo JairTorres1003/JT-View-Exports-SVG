@@ -34,6 +34,7 @@ export type ReceiveMessage =
   | { type: SVGReceiveMessage.ToggleOpenDevTools; data: boolean }
   | { type: SVGReceiveMessage.GetExtensionTheme }
   | { type: SVGReceiveMessage.ReloadExtensionTheme }
+  | { type: SVGReceiveMessage.ViewRenderPath; data: string }
 
 /**
  * The handler for receiving messages from the webview.
@@ -151,4 +152,9 @@ export interface HandlerReceiveMessage {
    * Reloads the extension theme.
    */
   [SVGReceiveMessage.ReloadExtensionTheme]: VoidFunction
+  /**
+   * Changes the view render path.
+   * @param newPath - The new path to set for the view.
+   */
+  [SVGReceiveMessage.ViewRenderPath]: (newPath: string) => void
 }

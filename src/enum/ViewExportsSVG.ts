@@ -61,4 +61,6 @@ export enum SVGReceiveMessage {
   RemoveFavoriteIcon = 'icons/favorite/remove',
   ClearFavoriteIcons = 'icons/favorite/clear',
   GetHomeIcons = 'icons/home/get',
+
+  ViewRenderPath = 'view/render-path/change',
 }

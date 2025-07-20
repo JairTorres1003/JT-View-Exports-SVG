@@ -91,4 +91,5 @@ export interface FuncPostMessage {
   (type: SVGReceiveMessage.ToggleOpenDevTools, data: boolean): void
   (type: SVGReceiveMessage.GetExtensionTheme): void
   (type: SVGReceiveMessage.ReloadExtensionTheme): void
+  (type: SVGReceiveMessage.ViewRenderPath, data: string): void
 }

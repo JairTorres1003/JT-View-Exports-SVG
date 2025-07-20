@@ -1,6 +1,8 @@
 import { l10n, type OpenDialogOptions, window } from 'vscode'
 
 import { expandedIcons, runToggleDevTools } from '@/commands'
+import { toggleViewActions } from '@/commands/editorTitleActions'
+import { DISABLED_PLAYGROUND_IN_PATH } from '@/constants/misc'
 import { SVGPostMessage } from '@/enum/ViewExportsSVG'
 import type { FuncPostMessage } from '@/types/views/PostMessage'
 
@@ -38,5 +40,9 @@ export class UIHandler {
         this.postMessage(SVGPostMessage.SendOpenFiles, filePaths)
       }
     })
+  }
+
+  changeViewPath(newPath: string): void {
+    toggleViewActions(!DISABLED_PLAYGROUND_IN_PATH.includes(newPath)).catch(console.error)
   }
 }
