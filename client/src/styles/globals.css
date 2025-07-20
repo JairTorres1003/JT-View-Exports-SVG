@@ -63,6 +63,7 @@ body {
   height: 100vh;
   max-height: 100vh;
   background-color: var(--JT-SVG-vscode-editor-background);
+  color: var(--JT-SVG-palette-text-secondary);
   padding: 0 !important;
   overflow: hidden;
 }
