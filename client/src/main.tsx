@@ -14,8 +14,11 @@ if (!container) {
   throw new Error(i18next.t('errors.FailedToFindTheRootElement'))
 }
 
-container.addEventListener('contextmenu', (e) => {
-  e.preventDefault()
+document.addEventListener('contextmenu', (e) => {
+  const allowedElement = (e.target as HTMLElement).closest('input')
+  if (!allowedElement) {
+    e.preventDefault()
+  }
 })
 
 createRoot(container).render(
