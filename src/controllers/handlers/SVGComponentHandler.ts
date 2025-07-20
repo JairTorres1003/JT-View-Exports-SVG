@@ -22,7 +22,7 @@ export class SVGComponentHandler {
     this.viewExportSVG = viewExportSVG
   }
 
-  async extractSVGComponent(files: string[]): Promise<void> {
+  async extractSVGComponentFromFiles(files: string[]): Promise<void> {
     try {
       const resolvedFiles = await Promise.all(files.map(pathToSVGFile))
       await scanningFiles(resolvedFiles.map(svgFileToUri))

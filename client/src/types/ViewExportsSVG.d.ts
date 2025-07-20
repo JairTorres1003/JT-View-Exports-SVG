@@ -65,7 +65,7 @@ export interface FuncOnMessage {
  * The message to send to the webview.
  */
 export interface FuncPostMessage {
-  (type: SVGReceiveMessage.ExtractSVGComponent, data: string[]): void
+  (type: SVGReceiveMessage.ExtractSVGComponentFromFiles, data: string[]): void
   (type: SVGReceiveMessage.GetAssetsPath): void
   (type: SVGReceiveMessage.GetLanguage): void
   (type: SVGReceiveMessage.GetLastScanDate): void

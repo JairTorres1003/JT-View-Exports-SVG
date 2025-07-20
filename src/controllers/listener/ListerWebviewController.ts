@@ -82,9 +82,8 @@ export class ListerWebviewController {
     toggleViewActions(processedFiles > 0).catch(console.error)
   }
 
-  extractSVGComponent(files: string[]): void {
-    console.info('🚀 ~ ListerWebviewController ~ extractSVGComponent ~ files:', files)
-    // this.svgComponentHandler.extractSVGComponent(files).catch(console.error)
+  extractSVGComponentFromFiles(files: string[]): void {
+    this.svgComponentHandler.extractSVGComponentFromFiles(files).catch(console.error)
   }
   getSVGComponents(): void {
     this.svgComponentHandler.getSVGComponents()

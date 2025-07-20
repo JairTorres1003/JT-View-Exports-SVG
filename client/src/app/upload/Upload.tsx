@@ -8,7 +8,8 @@ import { FileList } from '@/modules/upload/components/FileList'
 import { useUpload } from '@/modules/upload/hooks/useUpload'
 
 const UploadPage: React.FC = () => {
-  const { files, removeFile, handleOpenDialog, sorted, onSortFiles } = useUpload()
+  const { files, removeFile, handleOpenDialog, sorted, onSortFiles, onExtractComponents } =
+    useUpload()
   const { t } = useTranslation()
 
   return (
@@ -18,6 +19,7 @@ const UploadPage: React.FC = () => {
 
         <Button
           fullWidth
+          onClick={onExtractComponents}
           disabled={files.length === 0}
           variant={files.length === 0 ? 'outlined' : 'contained'}
           sx={{ maxWidth: 224, mx: 'auto', mb: 1 }}

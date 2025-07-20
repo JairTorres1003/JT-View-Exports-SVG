@@ -30,7 +30,7 @@ export enum SVGPostMessage {
 }
 
 export enum SVGReceiveMessage {
-  ExtractSVGComponent = 'svg/extract-component',
+  ExtractSVGComponentFromFiles = 'svg/extract-components-from-files',
   GetSVGComponents = 'svg/get-components',
   SearchSVGComponents = 'svg/search-components',
   PlaygroundSVGComponents = 'svg/playground-component',

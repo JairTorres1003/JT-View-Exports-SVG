@@ -8,7 +8,7 @@ import { type SVGReceiveMessage } from '@/enum/ViewExportsSVG'
  * The message to receive from the webview.
  */
 export type ReceiveMessage =
-  | { type: SVGReceiveMessage.ExtractSVGComponent; data: string[] }
+  | { type: SVGReceiveMessage.ExtractSVGComponentFromFiles; data: string[] }
   | { type: SVGReceiveMessage.GetAssetsPath }
   | { type: SVGReceiveMessage.GetLanguage }
   | { type: SVGReceiveMessage.GetLastScanDate }
@@ -44,7 +44,7 @@ export interface HandlerReceiveMessage {
    * Extracts the SVG component from the file.
    * @param files - The SVG file to extract the SVG component from.
    */
-  [SVGReceiveMessage.ExtractSVGComponent]: (files: string[]) => void
+  [SVGReceiveMessage.ExtractSVGComponentFromFiles]: (files: string[]) => void
   /**
    * Gets the assets path for the workspace and user.
    */

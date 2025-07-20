@@ -35,7 +35,8 @@ export class MessageRouter {
       [SVGReceiveMessage.RequestFileOpen]: handlers.requestFileOpen.bind(handlers),
       [SVGReceiveMessage.ViewRenderPath]: handlers.changeViewRenderPath.bind(handlers),
 
-      [SVGReceiveMessage.ExtractSVGComponent]: handlers.extractSVGComponent.bind(handlers),
+      [SVGReceiveMessage.ExtractSVGComponentFromFiles]:
+        handlers.extractSVGComponentFromFiles.bind(handlers),
       [SVGReceiveMessage.GetSVGComponents]: handlers.getSVGComponents.bind(handlers),
       [SVGReceiveMessage.PlaygroundSVGComponents]: handlers.playgroundSVGComponents.bind(handlers),
       [SVGReceiveMessage.SearchSVGComponents]: handlers.searchSVGComponents.bind(handlers),
