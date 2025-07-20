@@ -1,4 +1,4 @@
-import * as fs from 'fs'
+import * as fs from 'node:fs'
 
 import { Uri, commands, l10n, window, workspace } from 'vscode'
 

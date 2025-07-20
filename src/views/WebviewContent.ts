@@ -1,4 +1,4 @@
-import * as fs from 'fs'
+import * as fs from 'node:fs'
 
 import { type Webview, type Uri, env, l10n } from 'vscode'
 

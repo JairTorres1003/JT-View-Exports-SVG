@@ -1,4 +1,4 @@
-import * as fs from 'fs'
+import * as fs from 'node:fs'
 
 import * as babelParser from '@babel/parser'
 import type * as t from '@babel/types'
