@@ -53,6 +53,7 @@ export const useViewPanels = () => {
   useEffect(() => {
     if (isOpenDevTools && sidePanelRef.current) {
       sidePanelRef.current.expand()
+      vscode.postMessage(SVGReceiveMessage.ToggleOpenDevTools, true)
     }
   }, [isOpenDevTools])
 
