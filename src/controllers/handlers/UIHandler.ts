@@ -6,7 +6,7 @@ import { l10n, type OpenDialogOptions, window } from 'vscode'
 
 import { expandedIcons, runToggleDevTools } from '@/commands'
 import { toggleViewActions } from '@/commands/editorTitleActions'
-import { DISABLED_PLAYGROUND_IN_PATH } from '@/constants/misc'
+import { CONFIG_KEY, DISABLED_PLAYGROUND_IN_PATH } from '@/constants/misc'
 import { SVGPostMessage } from '@/enum/ViewExportsSVG'
 import type { FileTemporary } from '@/types/views/content'
 import type { FuncPostMessage } from '@/types/views/PostMessage'
@@ -55,7 +55,7 @@ export class UIHandler {
     try {
       const filePaths = await Promise.all(
         files.map(async ({ name, content }) => {
-          const tempFilePath = path.join(os.tmpdir(), name)
+          const tempFilePath = path.join(os.tmpdir(), CONFIG_KEY, name)
           const fileBuffer =
             typeof content === 'string' ? Buffer.from(content, 'utf8') : Buffer.from(content)
 
