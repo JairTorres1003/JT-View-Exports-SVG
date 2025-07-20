@@ -26,5 +26,59 @@
   {
     "key": "",
     "command": "-workbench.action.selectTheme"
+  },
+  {
+    "key": "ctrl+c",
+    "mac": "cmd+c",
+    "command": "editor.action.clipboardCopyAction",
+    "when": "editorTextFocus"
+  },
+  {
+    "key": "ctrl+x",
+    "mac": "cmd+x",
+    "command": "editor.action.clipboardCutAction",
+    "when": "editorTextFocus"
+  },
+  {
+    "key": "ctrl+v",
+    "mac": "cmd+v",
+    "command": "editor.action.clipboardPasteAction",
+    "when": "editorTextFocus"
+  },
+  {
+    "key": "ctrl+a",
+    "mac": "cmd+a",
+    "command": "editor.action.selectAll",
+    "when": "editorTextFocus"
+  },
+  {
+    "key": "ctrl+z",
+    "mac": "cmd+z",
+    "command": "undo",
+    "when": "editorTextFocus"
+  },
+  {
+    "key": "ctrl+y",
+    "mac": "cmd+shift+z",
+    "command": "redo",
+    "when": "editorTextFocus"
+  },
+  {
+    "key": "ctrl+f",
+    "mac": "cmd+f",
+    "command": "actions.find",
+    "when": "editorFocus"
+  },
+  {
+    "key": "f3",
+    "mac": "cmd+g",
+    "command": "editor.action.nextMatchFindAction",
+    "when": "editorFocus && findWidgetVisible"
+  },
+  {
+    "key": "shift+f3",
+    "mac": "cmd+shift+g",
+    "command": "editor.action.previousMatchFindAction",
+    "when": "editorFocus && findWidgetVisible"
   }
 ]
