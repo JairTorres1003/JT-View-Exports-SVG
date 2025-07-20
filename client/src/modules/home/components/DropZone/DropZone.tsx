@@ -14,7 +14,7 @@ import { setRenderPath } from '@/store/features/GlobalSlice'
 const DropZone = () => {
   const { t } = useTranslation(undefined, { keyPrefix: 'DropZone' })
 
-  const { files, handleOpenDialog, onDrop } = useLoadFiles()
+  const { files, handleOpenDialog, onDrop, onUri } = useLoadFiles()
   const dispatch = useDispatch()
 
   useEffect(() => {
@@ -44,7 +44,7 @@ const DropZone = () => {
           </Typography>
         </Box>
       </Box>
-      <BackdropZone onFiles={onDrop} />
+      <BackdropZone onFiles={onDrop} onUri={onUri} />
     </BoxDropZone>
   )
 }

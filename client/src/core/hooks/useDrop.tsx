@@ -6,7 +6,7 @@ export interface UseDropOptions {
   anchorEl?: HTMLElement | Document
   onFiles?: (files: File[], event?: Event) => void
   onText?: (text: string, event?: Event) => void
-  onUri?: (url: string, event?: Event) => void
+  onUri?: (url: string[], event?: Event) => void
 }
 
 /**
@@ -22,10 +22,12 @@ export interface UseDropOptions {
  * @returns A function that processes an event and its DataTransfer, invoking the relevant callback.
  */
 const createProcess = (options: UseDropOptions) => (event: Event, dataTransfer: DataTransfer) => {
+  const codeUris = dataTransfer.getData('application/vnd.code.uri-list')
   const uri = dataTransfer.getData('text/uri-list')
 
-  if (uri) {
-    options?.onUri?.(uri, event)
+  if (codeUris || uri) {
+    const uriList = (codeUris || uri)?.split(/\r\n|\n/).filter((u) => u && !u.startsWith('#'))
+    options?.onUri?.(uriList, event)
     return
   }
 
@@ -88,8 +90,7 @@ export const useDrop = (options: UseDropOptions = {}) => {
     anchorEl.addEventListener('dragleave', onDragLeave)
     anchorEl.addEventListener('dragexit', onDragExit)
     anchorEl.addEventListener('drop', onDrop)
-
-    if (onText) anchorEl.addEventListener('paste', onPaste)
+    anchorEl.addEventListener('paste', onPaste)
 
     return () => {
       anchorEl.removeEventListener('dragover', onDragOver)

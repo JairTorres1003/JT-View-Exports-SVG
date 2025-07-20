@@ -36,7 +36,7 @@ export const useLoadFiles = () => {
         validFiles.push({
           extension,
           name: fileName,
-          path: file,
+          path: file.replace('file://', ''),
         })
       } else {
         invalidFiles.push(fileName)
@@ -157,6 +157,15 @@ export const useLoadFiles = () => {
       .catch(console.error)
   }
 
+  /**
+   * Handles URI input, typically from a drag-and-drop operation.
+   * It processes the URIs to extract file paths and loads the files.
+   * @param uriList - List of URIs to be processed.
+   */
+  const onUri = (uriList: string[]) => {
+    loadFiles(uriList)
+  }
+
   useEffect(() => {
     vscode.onMessage(SVGPostMessage.SendOpenFiles, loadFiles)
 
@@ -174,5 +183,6 @@ export const useLoadFiles = () => {
     onSortFiles,
     sorted,
     onDrop,
+    onUri,
   }
 }

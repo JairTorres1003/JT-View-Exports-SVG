@@ -8,8 +8,16 @@ import { FileList } from '@/modules/upload/components/FileList'
 import { useUpload } from '@/modules/upload/hooks/useUpload'
 
 const UploadPage: React.FC = () => {
-  const { files, removeFile, handleOpenDialog, sorted, onSortFiles, onExtractComponents, onDrop } =
-    useUpload()
+  const {
+    files,
+    removeFile,
+    handleOpenDialog,
+    sorted,
+    onSortFiles,
+    onExtractComponents,
+    onDrop,
+    onUri,
+  } = useUpload()
   const { t } = useTranslation()
 
   return (
@@ -51,7 +59,7 @@ const UploadPage: React.FC = () => {
         )}
       </Stack>
 
-      <BackdropZone onFiles={onDrop} />
+      <BackdropZone onFiles={onDrop} onUri={onUri} />
     </Stack>
   )
 }
