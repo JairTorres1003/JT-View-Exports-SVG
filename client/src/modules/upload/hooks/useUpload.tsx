@@ -1,13 +1,18 @@
 import { SVGReceiveMessage } from '@api/enums/ViewExportsSVG'
 import { useEffect } from 'react'
+import { useDispatch } from 'react-redux'
 import { useLocation } from 'react-router-dom'
 
+import { pathnames } from '@/config/routes/route'
 import { useLoadFiles } from '@/core/hooks/useLoadFiles'
 import { vscode } from '@/services/vscode'
+import { setRenderPath } from '@/store/features/GlobalSlice'
 
 export const useUpload = () => {
   const { state } = useLocation()
   const { files, updateFiles, removeFile, ...restLoadFiles } = useLoadFiles()
+
+  const dispatch = useDispatch()
 
   /**
    * Handles the extraction of SVG components from the selected files.
@@ -18,6 +23,7 @@ export const useUpload = () => {
       SVGReceiveMessage.ExtractSVGComponentFromFiles,
       files.map((file) => file.path)
     )
+    dispatch(setRenderPath({ path: pathnames.dashboard }))
   }
 
   useEffect(() => {

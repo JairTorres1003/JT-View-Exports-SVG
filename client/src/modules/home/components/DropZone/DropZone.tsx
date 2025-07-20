@@ -6,6 +6,7 @@ import { useDispatch } from 'react-redux'
 import { dropZoneClasses } from './DropZone.classes'
 import { BoxDropZone } from './DropZone.style'
 
+import { pathnames } from '@/config/routes/route'
 import { BackdropZone } from '@/core/components/Backdrop/BackdropZone'
 import { useLoadFiles } from '@/core/hooks/useLoadFiles'
 import { setRenderPath } from '@/store/features/GlobalSlice'
@@ -18,7 +19,7 @@ const DropZone = () => {
 
   useEffect(() => {
     if (files.length > 0) {
-      dispatch(setRenderPath({ path: '/upload', options: { state: { files } } }))
+      dispatch(setRenderPath({ path: pathnames.upload, options: { state: { files } } }))
     }
   }, [files])
 
