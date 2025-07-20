@@ -3,8 +3,8 @@ import { MemoryRouter, Route, Routes } from 'react-router-dom'
 
 import Providers from '@/config/provider'
 import { routes } from '@/config/routes/route'
-import { Container } from '@/core/components/DevTools'
 import { LoadingPage } from '@/core/components/LoadingPage'
+import ViewPanels from '@/core/components/ViewPanels/ViewPanels'
 
 const config = window.ViewExportsSVG.initConfiguration
 
@@ -12,7 +12,7 @@ const RouteManager = lazy(async () => await import('./RouteManager'))
 
 const Layout = () => (
   <Providers>
-    <Container>
+    <ViewPanels>
       <MemoryRouter initialEntries={[config._INITIAL_RENDER_PATH]} initialIndex={0}>
         <Suspense fallback={null}>
           <RouteManager />
@@ -25,7 +25,7 @@ const Layout = () => (
           </Routes>
         </Suspense>
       </MemoryRouter>
-    </Container>
+    </ViewPanels>
   </Providers>
 )
 

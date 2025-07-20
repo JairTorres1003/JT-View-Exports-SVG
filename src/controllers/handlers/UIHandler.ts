@@ -1,6 +1,6 @@
 import { l10n, type OpenDialogOptions, window } from 'vscode'
 
-import { expandedIcons, toggleDevTools } from '@/commands'
+import { expandedIcons, runToggleDevTools } from '@/commands'
 import { SVGPostMessage } from '@/enum/ViewExportsSVG'
 import type { FuncPostMessage } from '@/types/views/PostMessage'
 
@@ -17,7 +17,7 @@ export class UIHandler {
 
   async toggleOpenDevTools(open: boolean): Promise<void> {
     try {
-      await toggleDevTools(open)
+      await runToggleDevTools(open)
     } catch (error) {
       console.error(error)
     }
