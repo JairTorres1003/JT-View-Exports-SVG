@@ -67,6 +67,7 @@ suite('pathToSVGFile Utility Function', () => {
     dirname: path.dirname(tempFile),
     relativePath,
     language: 'typescriptreact',
+    isTemporary: false,
   }
 
   test('it should convert an absolute file path to an SVGFile object', async () => {
@@ -87,6 +88,7 @@ suite('openFile Utility Function', () => {
     basename,
     dirname: path.dirname(currentFile),
     relativePath: path.relative(testFolderUri.fsPath, currentFile),
+    isTemporary: false,
   }
 
   openFile({ file, position: { column: 14, line: 43, index: 3 } })

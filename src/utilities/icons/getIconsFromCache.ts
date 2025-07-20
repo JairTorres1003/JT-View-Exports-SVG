@@ -68,6 +68,7 @@ export const getIconsFromCache = (): ViewExportSVG[] => {
       components,
       isShowNoExports,
       totalSVG: components.length,
+      isTemporaryDirectory: false,
       ...otherTotal,
       groupKind: {
         id: workspaceFolderUri ? cache.getId(workspaceFolderUri) : `icon-${index}`,

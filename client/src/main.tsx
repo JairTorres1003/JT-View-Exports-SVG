@@ -14,6 +14,10 @@ if (!container) {
   throw new Error(i18next.t('errors.FailedToFindTheRootElement'))
 }
 
+container.addEventListener('contextmenu', (e) => {
+  e.preventDefault()
+})
+
 createRoot(container).render(
   <StrictMode>
     <Layout />

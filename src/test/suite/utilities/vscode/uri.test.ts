@@ -19,6 +19,7 @@ suite('URI Utility', () => {
       dirname: path.dirname(file),
       relativePath: path.relative(testFolderUri.fsPath, file),
       language: 'typescript',
+      isTemporary: false,
     }
 
     const result = svgFileToUri(svgFile)
@@ -32,6 +33,7 @@ suite('URI Utility', () => {
       basename,
       dirname: path.dirname(file),
       relativePath: path.relative(testFolderUri.fsPath, file),
+      isTemporary: false,
     }
 
     const result = svgFileToUri(svgFile)
@@ -45,6 +47,7 @@ suite('URI Utility', () => {
       basename,
       dirname: path.dirname(file),
       relativePath: '',
+      isTemporary: false,
     }
 
     const result = svgFileToUri(svgFile)
