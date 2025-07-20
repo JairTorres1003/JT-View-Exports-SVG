@@ -38,7 +38,9 @@ const DropZone = () => {
           >
             {t('Select files')}
           </Button>
-          <Typography className={dropZoneClasses.text}>{t('or drop the files here')}</Typography>
+          <Typography textAlign='center' className={dropZoneClasses.text}>
+            {t('or drop the files here')}
+          </Typography>
         </Box>
       </Box>
       {/* <BackdropZone /> */}
