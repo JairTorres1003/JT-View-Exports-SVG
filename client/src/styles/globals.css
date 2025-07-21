@@ -4,6 +4,10 @@ html {
 }
 
 html:root {
+  --JT-SVG-vscode-font-family: var(--vscode-font-family);
+  --JT-SVG-vscode-font-weight: var(--vscode-font-weight);
+  --JT-SVG-vscode-font-size: var(--vscode-font-size, 13px);
+
   --JT-SVG-palette-text-primary: var(--vscode-input-foreground);
   --JT-SVG-palette-primary-main: var(--vscode-input-foreground);
   --JT-SVG-palette-text-secondary: var(--vscode-input-foreground);
@@ -57,6 +61,15 @@ html:root {
 
   --JT-SVG-vscode-activityBarBadge-background: var(--vscode-activityBarBadge-background, #4d78cc);
   --JT-SVG-vscode-activityBarBadge-foreground: var(--vscode-activityBarBadge-foreground, #f8fafd);
+
+  --JT-SVG-vscode-menu-foreground: var(--vscode-menu-foreground);
+  --JT-SVG-vscode-menu-background: var(--vscode-menu-background);
+  --JT-SVG-vscode-menu-selectionForeground: var(--vscode-menu-selectionForeground);
+  --JT-SVG-vscode-menu-selectionBackground: var(--vscode-menu-selectionBackground);
+  --JT-SVG-vscode-menu-separatorBackground: var(--vscode-menu-separatorBackground);
+  --JT-SVG-vscode-menu-border: var(--vscode-menu-border);
+  --JT-SVG-vscode-menu-selectionBorder: var(--vscode-menu-selectionBorder);
+  --JT-SVG-vscode-widget-shadow: var(--vscode-widget-shadow);
 }
 
 body {
