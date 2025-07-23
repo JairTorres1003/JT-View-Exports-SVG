@@ -74,7 +74,9 @@ const completionComponentsManager = (
               ),
               isTrusted: true,
             },
-            detail: t(`${prefixT}.details.${c.isAnimated ? 'animated' : 'static'}`),
+            detail: t(
+              `${prefixT}.details.${c.location.file.isTemporary ? 'temporary-' : ''}${c.isAnimated ? 'animated' : 'static'}`
+            ),
             command: {
               id: `${__APP_NAME}-default.action.triggerSuggestComponents`,
               title: 'Select component',

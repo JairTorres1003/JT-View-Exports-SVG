@@ -64,7 +64,9 @@
         "components": {
           "details": {
             "static": "SVG Component",
-            "animated": "Animated SVG Component"
+            "animated": "Animated SVG Component",
+            "temporary-static": "(Temporary) SVG Component",
+            "temporary-animated": "(Temporary) Animated SVG Component"
           },
           "documentation": [
             "---",

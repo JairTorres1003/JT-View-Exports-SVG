@@ -292,9 +292,17 @@
                         "animated": {
                           "type": "string",
                           "default": "Animated SVG Component"
+                        },
+                        "temporary-static": {
+                          "type": "string",
+                          "default": "(Temporary) SVG Component"
+                        },
+                        "temporary-animated": {
+                          "type": "string",
+                          "default": "(Temporary) Animated SVG Component"
                         }
                       },
-                      "required": ["static", "animated"]
+                      "required": ["static", "animated", "temporary-static", "temporary-animated"]
                     },
                     "documentation": {
                       "type": "array",
