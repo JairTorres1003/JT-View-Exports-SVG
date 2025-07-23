@@ -59,7 +59,7 @@ export class MessageRouter {
 
       [SVGReceiveMessage.ToggleExpandIcon]: handlers.toggleExpandIcon.bind(handlers),
       [SVGReceiveMessage.ToggleOpenDevTools]: handlers.toggleOpenDevTools.bind(handlers),
-      [SVGReceiveMessage.OpenFile]: handlers.openFileInEditor.bind(this),
+      [SVGReceiveMessage.OpenFile]: handlers.openFileInEditor.bind(handlers),
       [SVGReceiveMessage.RequestFileOpen]: handlers.requestFileOpen.bind(handlers),
       [SVGReceiveMessage.CreateTempFiles]: handlers.createTempFiles.bind(handlers),
       [SVGReceiveMessage.ViewRenderPath]: handlers.changeViewRenderPath.bind(handlers),
