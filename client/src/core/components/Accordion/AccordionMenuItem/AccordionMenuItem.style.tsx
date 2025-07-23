@@ -19,6 +19,12 @@ export const BoxAccordionMenuItem = styled(
   }
 )(({ theme: { vars } }) => ({
   padding: 0,
+  '&:hover': {
+    backgroundColor: 'var(--JT-SVG-vscode-list-hoverBackground)',
+  },
+  [`& .${accordionSummaryClasses.root}:hover`]: {
+    backgroundColor: 'transparent',
+  },
   [`&.${accordionMenuItemClasses.withActions}`]: {
     paddingRight: `calc(2 * ${vars.spacing})`,
     [`& .${accordionSummaryClasses.root}`]: {
