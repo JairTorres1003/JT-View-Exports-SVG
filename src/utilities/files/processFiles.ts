@@ -82,7 +82,7 @@ export async function processFiles(
                 totalSVG,
                 groupKind: { id: file.absolutePath, label: file.relativePath },
                 isShowNoExports: configShowNoExports.isShow(),
-                isTemporaryDirectory: file.isTemporary,
+                files: [file],
               }
 
               ComponentsFileCache.set(file.absolutePath, result, lastModified)

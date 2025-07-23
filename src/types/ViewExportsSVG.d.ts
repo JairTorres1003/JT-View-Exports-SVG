@@ -33,9 +33,9 @@ export interface ViewExportSVG {
    */
   isShowNoExports: boolean
   /**
-   * Indicates if the file is located in a temporary directory.
+   * This is an array of SVG files that are associated with the group of exports (groupKind).
    */
-  isTemporaryDirectory: boolean
+  files: SVGFile[]
 }
 
 export interface SVGFile {

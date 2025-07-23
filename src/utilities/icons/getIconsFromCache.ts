@@ -7,7 +7,7 @@ import { getCacheManager } from '@/controllers/cache'
 import { RecentIconsShowController, ShowNotExportedIconsController } from '@/controllers/config'
 import { CacheIconKind } from '@/enum/cache'
 import type { SVGIconCache } from '@/types/cache'
-import type { SVGComponent, ViewExportSVG } from '@/types/ViewExportsSVG'
+import type { SVGComponent, SVGFile, ViewExportSVG } from '@/types/ViewExportsSVG'
 
 const valideteShowIcons = (): Partial<Record<CacheIconKind, boolean>> => {
   const configRecent = new RecentIconsShowController()
@@ -40,7 +40,8 @@ export const getIconsFromCache = (): ViewExportSVG[] => {
     const isShowNoExports = configShowNoExports.isShow()
 
     const components: SVGComponent[] = []
-    const otherTotal = {
+    const files = new Map<string, SVGFile[]>()
+    const otherProps: Pick<ViewExportSVG, 'totalExports' | 'totalNoExports'> = {
       totalExports: 0,
       totalNoExports: 0,
     }
@@ -58,18 +59,24 @@ export const getIconsFromCache = (): ViewExportSVG[] => {
       if (component) {
         components.push(component)
 
-        otherTotal[component.isExported ? 'totalExports' : 'totalNoExports']++
+        otherProps[component.isExported ? 'totalExports' : 'totalNoExports']++
+
+        if (!files.has(location.file.absolutePath)) {
+          files.set(location.file.absolutePath, [])
+        }
+
+        files.get(location.file.absolutePath)?.push(location.file)
       } else if (!isEmpty(workspaceFolderUri)) {
         cache.remove(workspaceFolderUri, { location, name })
       }
     })
 
     result.push({
+      ...otherProps,
       components,
       isShowNoExports,
       totalSVG: components.length,
-      isTemporaryDirectory: false,
-      ...otherTotal,
+      files: [...files.values()].flat(),
       groupKind: {
         id: workspaceFolderUri ? cache.getId(workspaceFolderUri) : `icon-${index}`,
         label: l10n.t('{kind} icons', {

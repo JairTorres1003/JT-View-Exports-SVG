@@ -29,12 +29,13 @@ export function groupIconsByPattern(SVGExports: ViewExportSVG[]): ViewExportSVG[
         const current = groupedIcons.get(auxPatternLabel)
 
         groupedIcons.set(auxPatternLabel, {
-          ...(current ?? rest),
           components: [...(current?.components ?? []), ...components],
           groupKind: { id: patternKey, label: auxPatternLabel },
           totalExports: (current?.totalExports ?? 0) + rest.totalExports,
           totalNoExports: (current?.totalNoExports ?? 0) + rest.totalNoExports,
           totalSVG: (current?.totalSVG ?? 0) + rest.totalSVG,
+          files: [...(current?.files ?? []), ...exportSVG.files],
+          isShowNoExports: rest.isShowNoExports,
         })
 
         matchedGroup = true
