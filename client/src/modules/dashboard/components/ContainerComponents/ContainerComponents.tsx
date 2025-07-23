@@ -36,7 +36,11 @@ const ContainerComponents = (): React.ReactNode => {
           label={item.groupKind.label}
           onChange={toggleExpanded(item.groupKind.id)}
           expanded={isExpanded.includes(item.groupKind.id)}
-          slotProps={{ details: { className: containerComponentsClasses.details } }}
+          className={containerComponentsClasses.accordion}
+          slotProps={{
+            details: { className: containerComponentsClasses.details },
+            actions: { className: containerComponentsClasses.actions },
+          }}
           actions={<ActionsAccordion data={item} key={item.groupKind.id} />}
         >
           {item.components.map((c) => (

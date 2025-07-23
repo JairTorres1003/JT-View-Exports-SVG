@@ -31,4 +31,10 @@ export const BoxContainerComponents = styled<ComponentType<BoxProps>>(
     gridTemplateColumns: 'repeat(auto-fill, minmax(100px, 1fr))',
     gap: '12px',
   },
+  [`& .${containerComponentsClasses.actions}`]: {
+    display: 'none',
+  },
+  [`.${containerComponentsClasses.accordion}:hover .${containerComponentsClasses.actions}`]: {
+    display: 'flex',
+  },
 }))
