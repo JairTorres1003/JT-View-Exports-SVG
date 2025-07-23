@@ -1,6 +1,8 @@
 import { ListItem, ListItemIcon, ListItemText } from '@mui/material'
 import { useSelector } from 'react-redux'
 
+import ActionsAccordion from '../ActionsAccordion/ActionsAccordion'
+
 import { containerComponentsClasses } from './ContainerComponents.classes'
 import { BoxContainerComponents } from './ContainerComponents.style'
 
@@ -35,6 +37,7 @@ const ContainerComponents = (): React.ReactNode => {
           onChange={toggleExpanded(item.groupKind.id)}
           expanded={isExpanded.includes(item.groupKind.id)}
           slotProps={{ details: { className: containerComponentsClasses.details } }}
+          actions={<ActionsAccordion data={item} key={item.groupKind.id} />}
         >
           {item.components.map((c) => (
             <CardSvgRenderMemo key={c.name} component={c} />

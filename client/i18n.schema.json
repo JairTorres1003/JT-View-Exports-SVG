@@ -113,6 +113,14 @@
           "type": "string",
           "default": "Clear"
         },
+        "Info": {
+          "type": "string",
+          "default": "Info"
+        },
+        "OpenFile": {
+          "type": "string",
+          "default": "Open file"
+        },
         "Copied {{value}} to clipboard": {
           "type": "string",
           "default": "Copied <b>{{value}}</b> to clipboard"
@@ -152,6 +160,8 @@
         "ExtractComponents",
         "Search",
         "Clear",
+        "Info",
+        "OpenFile",
         "Copied {{value}} to clipboard",
         "Close",
         "DeleteThisFile",

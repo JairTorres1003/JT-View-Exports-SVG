@@ -1,3 +1,8 @@
+import { SVGReceiveMessage } from '@api/enums/ViewExportsSVG'
+import type { SVGFile, Position } from '@api/types/ViewExportsSVG'
+
+import { vscode } from '@/services/vscode'
+
 /**
  * Returns the file extension from a given file name.
  *
@@ -24,4 +29,17 @@ export const getFileName = (filePath: string): string => {
   if (lastSlashIndex < 0) return filePath
 
   return filePath.slice(lastSlashIndex + 1)
+}
+
+/**
+ * Opens a file in the editor at a specified position.
+ *
+ * @param file - The SVG file to open.
+ * @param position - The position in the file to open (default is { column: 0, line: 0, index: 0 }).
+ */
+export const openFileInPosition = (
+  file: SVGFile,
+  position: Position = { column: 0, line: 0, index: 0 }
+): void => {
+  vscode.postMessage(SVGReceiveMessage.OpenFile, { file, position })
 }

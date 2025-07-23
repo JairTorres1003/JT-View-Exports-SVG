@@ -1,4 +1,3 @@
-import { SVGReceiveMessage } from '@api/enums/ViewExportsSVG'
 import type { SVGComponent, SVGLocation } from '@api/types/ViewExportsSVG'
 import {
   registerExtension,
@@ -7,7 +6,7 @@ import {
   type RegisterLocalProcessExtensionResult,
 } from '@codingame/monaco-vscode-api/extensions'
 
-import { vscode } from '@/services/vscode'
+import { openFileInPosition } from '@/core/utils/file'
 import { setRecentlySelected } from '@/store/features/PlaygroundSlice'
 import { store } from '@/store/store'
 
@@ -43,10 +42,7 @@ async function activate() {
   commands.registerCommand(
     `${manifest.name}.action.clicLinkDocumentation`,
     ({ location }: { location: SVGLocation }) => {
-      vscode.postMessage(SVGReceiveMessage.OpenFile, {
-        file: location.file,
-        position: location.start,
-      })
+      openFileInPosition(location.file, location.start)
     }
   )
 }

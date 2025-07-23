@@ -12,7 +12,7 @@ import { MessageRouter } from './MessageRouterController'
 import { toggleViewActions } from '@/commands/editorTitleActions'
 import { SVGPostMessage } from '@/enum/ViewExportsSVG'
 import type { SVGFile, SVGIcon, SVGPlayground, ViewExportSVG } from '@/types/ViewExportsSVG'
-import type { FileTemporary } from '@/types/views/content'
+import type { FileTemporary, OpenFile } from '@/types/views/content'
 import type { FuncPostMessage } from '@/types/views/PostMessage'
 
 export class ListerWebviewController {
@@ -158,6 +158,9 @@ export class ListerWebviewController {
   }
   toggleOpenDevTools(open: boolean): void {
     this.uiHandler.toggleOpenDevTools(open).catch(console.error)
+  }
+  openFileInEditor(options: OpenFile): void {
+    this.uiHandler.openFileInEditor(options)
   }
   requestFileOpen(): void {
     this.uiHandler.dialogOpenFile()

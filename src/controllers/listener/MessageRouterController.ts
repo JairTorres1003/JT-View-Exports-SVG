@@ -5,7 +5,6 @@ import type { ListerWebviewController } from './ListerWebviewController'
 import { SVGReceiveMessage } from '@/enum/ViewExportsSVG'
 import type { HandlerArgs } from '@/types/misc'
 import type { HandlerReceiveMessage, ReceiveMessage } from '@/types/views/ReceiveMessage'
-import { openFile } from '@/utilities/files'
 import { isEmpty } from '@/utilities/misc'
 
 type ReceiveMessageHandler = (arg0?: HandlerArgs<HandlerReceiveMessage>) => void
@@ -31,11 +30,6 @@ export class MessageRouter {
     const handlers = this.handlers
 
     return {
-      [SVGReceiveMessage.OpenFile]: openFile.bind(this),
-      [SVGReceiveMessage.RequestFileOpen]: handlers.requestFileOpen.bind(handlers),
-      [SVGReceiveMessage.CreateTempFiles]: handlers.createTempFiles.bind(handlers),
-      [SVGReceiveMessage.ViewRenderPath]: handlers.changeViewRenderPath.bind(handlers),
-
       [SVGReceiveMessage.ExtractSVGComponentFromFiles]:
         handlers.extractSVGComponentFromFiles.bind(handlers),
       [SVGReceiveMessage.GetSVGComponents]: handlers.getSVGComponents.bind(handlers),
@@ -65,6 +59,10 @@ export class MessageRouter {
 
       [SVGReceiveMessage.ToggleExpandIcon]: handlers.toggleExpandIcon.bind(handlers),
       [SVGReceiveMessage.ToggleOpenDevTools]: handlers.toggleOpenDevTools.bind(handlers),
+      [SVGReceiveMessage.OpenFile]: handlers.openFileInEditor.bind(this),
+      [SVGReceiveMessage.RequestFileOpen]: handlers.requestFileOpen.bind(handlers),
+      [SVGReceiveMessage.CreateTempFiles]: handlers.createTempFiles.bind(handlers),
+      [SVGReceiveMessage.ViewRenderPath]: handlers.changeViewRenderPath.bind(handlers),
     }
   }
 

@@ -8,8 +8,9 @@ import { expandedIcons, runToggleDevTools } from '@/commands'
 import { toggleViewActions } from '@/commands/editorTitleActions'
 import { CONFIG_KEY, DISABLED_PLAYGROUND_IN_PATH } from '@/constants/misc'
 import { SVGPostMessage } from '@/enum/ViewExportsSVG'
-import type { FileTemporary } from '@/types/views/content'
+import type { FileTemporary, OpenFile } from '@/types/views/content'
 import type { FuncPostMessage } from '@/types/views/PostMessage'
+import { openFile } from '@/utilities/files'
 
 export class UIHandler {
   constructor(private readonly postMessage: FuncPostMessage) {}
@@ -27,6 +28,19 @@ export class UIHandler {
       await runToggleDevTools(open)
     } catch (error) {
       console.error(error)
+    }
+  }
+
+  openFileInEditor(options: OpenFile): void {
+    if (options.file.isTemporary) {
+      const message = l10n.t('This file is temporary. Do you want to continue?')
+      window.showWarningMessage(message, l10n.t('Yes'), l10n.t('No')).then((selection) => {
+        if (selection === l10n.t('Yes')) {
+          openFile(options)
+        }
+      })
+    } else {
+      openFile(options)
     }
   }
 
