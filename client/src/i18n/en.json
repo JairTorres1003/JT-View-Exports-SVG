@@ -25,6 +25,7 @@
     "Clear": "Clear",
     "Info": "Info",
     "OpenFile": "Open file",
+    "OpenManyFiles": "Open many files",
     "Copied {{value}} to clipboard": "Copied <b>{{value}}</b> to clipboard",
     "Close": "Close",
     "DeleteThisFile": "Delete this file",

@@ -121,6 +121,10 @@
           "type": "string",
           "default": "Open file"
         },
+        "OpenManyFiles": {
+          "type": "string",
+          "default": "Open many files"
+        },
         "Copied {{value}} to clipboard": {
           "type": "string",
           "default": "Copied <b>{{value}}</b> to clipboard"
@@ -162,6 +166,7 @@
         "Clear",
         "Info",
         "OpenFile",
+        "OpenManyFiles",
         "Copied {{value}} to clipboard",
         "Close",
         "DeleteThisFile",
