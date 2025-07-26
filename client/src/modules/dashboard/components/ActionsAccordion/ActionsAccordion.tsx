@@ -13,18 +13,19 @@ const ActionsAccordion: FC<{ data: ViewExportSVG }> = ({ data }) => {
   return (
     <Stack direction='row' spacing={0.5} alignItems='center'>
       <Tooltip
-        title={t(`labels.${data.files.length > 1 ? 'OpenManyFiles' : 'OpenFile'}`)}
         placement='top'
-        onClick={() => {
-          openFileInPosition(data.files[0])
-        }}
+        title={t(`labels.${data.files.length > 1 ? 'OpenManyFiles' : 'OpenFile'}`)}
       >
         <IconButton
           aria-label={t(`labels.${data.files.length > 1 ? 'OpenManyFiles' : 'OpenFile'}`)}
+          onClick={() => {
+            openFileInPosition(data.files[0])
+          }}
         >
           {data.files.length > 1 ? <IconGoToManyFiles size={16} /> : <IconGoToFile size={16} />}
         </IconButton>
       </Tooltip>
+
       <Tooltip title={t('labels.Info')} placement='top'>
         <IconButton aria-label={t('labels.Info')}>
           <IconInfo size={16} />
