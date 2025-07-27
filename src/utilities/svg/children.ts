@@ -107,6 +107,8 @@ export function getChildAttributes(
       } else if (typeof value === 'object' && t.isJSXFragment(value)) {
         const childs = getChildFragments(value.children, file)
         components.push(...getChildAttributes(childs, file).children)
+      } else if (typeof value === 'string') {
+        components.push(value)
       } else if (!['undefined', 'null', 'boolean'].includes(typeof value)) {
         hasErrors = true
         errors = {
