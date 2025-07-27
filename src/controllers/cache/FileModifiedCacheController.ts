@@ -73,9 +73,12 @@ export class FileModifiedCacheController<T> {
    * Deletes a cache entry for the specified key (file path).
    * @param key - The key (file path) to delete from the cache.
    */
-  delete(key: string): void {
-    const { [key]: _omitted, ...rest } = this.cache
-    this.cache = rest
+  delete(keys: string | string[]): void {
+    const keysToDelete = Array.isArray(keys) ? keys : [keys]
+    keysToDelete.forEach((key) => {
+      const { [key]: _omitted, ...rest } = this.cache
+      this.cache = rest
+    })
     this.saveCache()
   }
 

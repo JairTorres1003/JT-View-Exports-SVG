@@ -84,14 +84,17 @@ export class IconCacheController extends FileModifiedCacheController<SVGIconCach
    * @param icon - The icon to be removed from the cache.
    * @returns The new list of icons after the specified icon has been removed.
    */
-  remove(folder: Uri, icon: SVGIcon): SVGIconCache[] {
+  remove(folder: Uri, icon: SVGIcon | SVGIcon[]): SVGIconCache[] {
     const currentKey = this.getId(folder)
     const current = super.get(currentKey, 0) ?? []
 
-    const newValue = current.filter(
-      ({ name, location }) =>
-        !(name === icon.name && location.file.absolutePath === icon.location.file.absolutePath)
-    )
+    const iconsToRemove = Array.isArray(icon) ? icon : [icon]
+
+    const newValue = current.filter(({ name, location }) => {
+      return !iconsToRemove.some(
+        (i) => i.name === name && i.location.file.absolutePath === location.file.absolutePath
+      )
+    })
 
     super.set(currentKey, newValue, 0)
 
