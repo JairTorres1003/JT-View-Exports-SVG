@@ -185,7 +185,7 @@ export const dataDisplayCustomizations: CustomizationsFunction = (styles) => ({
             outlineOffset: '-1px',
           },
           [`&+.${dividerClasses.root}`]: {
-            margin: '4px 0px',
+            margin: '4px -5px',
             backgroundColor: 'var(--JT-SVG-vscode-menu-separatorBackground, #e7e6e5)',
           },
         },
