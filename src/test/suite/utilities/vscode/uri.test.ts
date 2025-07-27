@@ -16,6 +16,7 @@ suite('URI Utility', () => {
     const svgFile: SVGFile = {
       absolutePath: file,
       basename,
+      extension: 'tsx',
       dirname: path.dirname(file),
       relativePath: path.relative(testFolderUri.fsPath, file),
       language: 'typescript',
@@ -31,6 +32,7 @@ suite('URI Utility', () => {
     const svgFile: SVGFile = {
       absolutePath: '',
       basename,
+      extension: 'tsx',
       dirname: path.dirname(file),
       relativePath: path.relative(testFolderUri.fsPath, file),
       isTemporary: false,
@@ -46,6 +48,7 @@ suite('URI Utility', () => {
       absolutePath: '',
       basename,
       dirname: path.dirname(file),
+      extension: 'tsx',
       relativePath: '',
       isTemporary: false,
     }

@@ -192,4 +192,56 @@ export const dataDisplayCustomizations: CustomizationsFunction = (styles) => ({
       }),
     },
   },
+  MuiDialog: {
+    styleOverrides: {
+      paper: {
+        backgroundColor: 'var(--JT-SVG-vscode-editor-background)',
+        color: 'var(--JT-SVG-palette-text-secondary)',
+      },
+    },
+  },
+  MuiDialogTitle: {
+    styleOverrides: {
+      root: ({ theme: { vars } }) => ({
+        fontSize: 14,
+        color: vars.palette.text.primary,
+        fontWeight: 600,
+      }),
+    },
+  },
+  MuiListItemButton: {
+    defaultProps: { dense: true },
+    styleOverrides: {
+      root: {
+        paddingTop: 0,
+        paddingBottom: 0,
+        '& .MuiListItemIcon-jtActions': {
+          display: 'none',
+        },
+        '&:not(.Mui-selected):hover': {
+          color: 'var(--JT-SVG-vscode-list-hoverForeground)',
+          backgroundColor: 'var(--JT-SVG-vscode-list-hoverBackground)',
+          outline: '1px dashed var(--JT-SVG-vscode-contrastActiveBorder)',
+          outlineOffset: '-1px',
+          '& .MuiListItemIcon-jtActions': {
+            display: 'flex',
+          },
+        },
+        '&.Mui-selected': {
+          backgroundColor: 'var(--JT-SVG-vscode-list-inactiveSelectionBackground, #dcdcdc)',
+          color: 'var(--JT-SVG-vscode-list-inactiveSelectionForeground)',
+          outline:
+            '1px dotted var(--JT-SVG-vscode-contrastActiveBorder, var(--JT-SVG-vscode-list-inactiveFocusOutline))',
+          outlineOffset: '-1px',
+          '&:hover': {
+            backgroundColor: 'var(--JT-SVG-vscode-list-inactiveSelectionBackground, #dcdcdc)',
+            color: 'var(--JT-SVG-vscode-list-inactiveSelectionForeground)',
+          },
+          '& .MuiListItemIcon-jtActions': {
+            display: 'flex',
+          },
+        },
+      },
+    },
+  },
 })

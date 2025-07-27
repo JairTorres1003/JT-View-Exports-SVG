@@ -62,6 +62,13 @@ html:root {
   --JT-SVG-vscode-activityBarBadge-background: var(--vscode-activityBarBadge-background, #4d78cc);
   --JT-SVG-vscode-activityBarBadge-foreground: var(--vscode-activityBarBadge-foreground, #f8fafd);
 
+  --JT-SVG-vscode-list-inactiveSelectionForeground: var(--vscode-list-inactiveSelectionForeground);
+  --JT-SVG-vscode-list-inactiveSelectionBackground: var(--vscode-list-inactiveSelectionBackground);
+  --JT-SVG-vscode-list-hoverForeground: var(--vscode-list-hoverForeground);
+  --JT-SVG-vscode-list-hoverBackground: var(--vscode-list-hoverBackground);
+  --JT-SVG-vscode-contrastActiveBorder: var(--vscode-contrastActiveBorder);
+  --JT-SVG-vscode-list-inactiveFocusOutline: var(--vscode-list-inactiveFocusOutline);
+
   --JT-SVG-vscode-menu-foreground: var(--vscode-menu-foreground);
   --JT-SVG-vscode-menu-background: var(--vscode-menu-background);
   --JT-SVG-vscode-menu-selectionForeground: var(--vscode-menu-selectionForeground);

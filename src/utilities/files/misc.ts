@@ -51,12 +51,13 @@ export async function pathToSVGFile(filePath: string): Promise<SVGFile> {
 
   const absolutePath = path.isAbsolute(filePath) ? filePath : path.join(workspacePath, filePath)
   const basename = path.basename(absolutePath)
+  const extension = path.extname(absolutePath).slice(1)
   const dirname = path.dirname(absolutePath)
   const relativePath = path.relative(workspacePath, absolutePath)
   const language = await getLanguageFromFile(Uri.file(absolutePath))
   const isTemporary = dirname.startsWith(os.tmpdir())
 
-  return { absolutePath, basename, dirname, relativePath, language, isTemporary }
+  return { absolutePath, basename, dirname, relativePath, language, isTemporary, extension }
 }
 
 /**

@@ -21,4 +21,10 @@ export const BoxContainerIcons = styled<ComponentType<BoxProps>>(
     gridTemplateColumns: 'repeat(auto-fill, minmax(100px, 1fr))',
     gap: '12px',
   },
+  [`& .${containerIconsClasses.actions}`]: {
+    display: 'none',
+  },
+  [`.${containerIconsClasses.accordion}:hover .${containerIconsClasses.actions}`]: {
+    display: 'flex',
+  },
 }))

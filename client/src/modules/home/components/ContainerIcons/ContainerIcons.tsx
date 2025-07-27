@@ -3,7 +3,7 @@ import { useSelector } from 'react-redux'
 import { containerIconsClasses } from './ContainerIcons.classes'
 import { BoxContainerIcons } from './ContainerIcons.style'
 
-import { AccordionMenuItem } from '@/core/components/Accordion'
+import { AccordionActionsSVG, AccordionMenuItem } from '@/core/components/Accordion'
 import CardSvgRenderMemo from '@/core/components/Cards/CardSvgRenderMemo/CardSvgRenderMemo'
 import { useExpandedComponents } from '@/core/hooks/useExpandedComponents'
 
@@ -19,7 +19,12 @@ const ContainerIcons = (): React.ReactNode => {
           label={item.groupKind.label}
           onChange={toggleExpanded(item.groupKind.id)}
           expanded={isExpanded.includes(item.groupKind.id)}
-          slotProps={{ details: { className: containerIconsClasses.details } }}
+          className={containerIconsClasses.accordion}
+          actions={<AccordionActionsSVG data={item} key={item.groupKind.id} />}
+          slotProps={{
+            details: { className: containerIconsClasses.details },
+            actions: { className: containerIconsClasses.actions },
+          }}
         >
           {item.components.map((c) => (
             <CardSvgRenderMemo key={c.name} component={c} />

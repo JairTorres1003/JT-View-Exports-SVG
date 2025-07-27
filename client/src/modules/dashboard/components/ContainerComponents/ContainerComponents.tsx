@@ -1,13 +1,11 @@
 import { ListItem, ListItemIcon, ListItemText } from '@mui/material'
 import { useSelector } from 'react-redux'
 
-import ActionsAccordion from '../ActionsAccordion/ActionsAccordion'
-
 import { containerComponentsClasses } from './ContainerComponents.classes'
 import { BoxContainerComponents } from './ContainerComponents.style'
 
 import { IconWarning } from '@/assets/icons/indicators'
-import { AccordionMenuItem } from '@/core/components/Accordion'
+import { AccordionActionsSVG, AccordionMenuItem } from '@/core/components/Accordion'
 import CardSvgRenderMemo from '@/core/components/Cards/CardSvgRenderMemo/CardSvgRenderMemo'
 import { useExpandedComponents } from '@/core/hooks/useExpandedComponents'
 
@@ -37,11 +35,11 @@ const ContainerComponents = (): React.ReactNode => {
           onChange={toggleExpanded(item.groupKind.id)}
           expanded={isExpanded.includes(item.groupKind.id)}
           className={containerComponentsClasses.accordion}
+          actions={<AccordionActionsSVG data={item} key={item.groupKind.id} />}
           slotProps={{
             details: { className: containerComponentsClasses.details },
             actions: { className: containerComponentsClasses.actions },
           }}
-          actions={<ActionsAccordion data={item} key={item.groupKind.id} />}
         >
           {item.components.map((c) => (
             <CardSvgRenderMemo key={c.name} component={c} />

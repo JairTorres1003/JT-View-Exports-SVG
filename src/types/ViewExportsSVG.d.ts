@@ -52,6 +52,10 @@ export interface SVGFile {
    */
   basename: string
   /**
+   * The extension of the SVG file.
+   */
+  extension: string
+  /**
    * The dirname of the SVG file.
    */
   dirname: string

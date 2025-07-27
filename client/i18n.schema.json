@@ -68,7 +68,7 @@
         },
         "ErrorCreatingTemporaryFile": {
           "type": "string",
-          "default": "Error creating temporary file {name}"
+          "default": "Error creating temporary file {{name}}"
         }
       },
       "required": [
@@ -125,6 +125,10 @@
           "type": "string",
           "default": "Open many files"
         },
+        "ListOfAssociatedFilesFor": {
+          "type": "string",
+          "default": "List of associated files for \"{{name}}\""
+        },
         "Copied {{value}} to clipboard": {
           "type": "string",
           "default": "Copied <b>{{value}}</b> to clipboard"
@@ -167,6 +171,7 @@
         "Info",
         "OpenFile",
         "OpenManyFiles",
+        "ListOfAssociatedFilesFor",
         "Copied {{value}} to clipboard",
         "Close",
         "DeleteThisFile",
