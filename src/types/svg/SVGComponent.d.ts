@@ -11,3 +11,5 @@ export interface GetChildAttributes {
   hasErrors: boolean
   errors?: SVGErrors
 }
+
+export type IValue = t.JSXElement | t.JSXFragment | string | number | boolean

@@ -77,7 +77,7 @@ export function analyzeExportType(
     let element: t.JSXElement | undefined = undefined
 
     if (t.isJSXElement(node.body) || t.isJSXFragment(node.body)) {
-      element = getChildFragments([node.body], file)
+      element = getChildFragments([node.body], file)[0]
     } else if (t.isBlockStatement(node.body)) {
       const body = [...node.body.body].reverse()
       const returnStatement = body.find((bd) => t.isReturnStatement(bd))
@@ -86,7 +86,7 @@ export function analyzeExportType(
         !isEmpty(returnStatement) &&
         (t.isJSXElement(returnStatement.argument) || t.isJSXFragment(returnStatement.argument))
       ) {
-        element = getChildFragments([returnStatement.argument], file)
+        element = getChildFragments([returnStatement.argument], file)[0]
       }
     }
 

@@ -1,3 +1,4 @@
+/* eslint-disable complexity --  This function handles various cases and is complex by nature */
 import * as t from '@babel/types'
 import { camelCase } from 'lodash'
 
@@ -39,6 +40,9 @@ export function getPropertyValues(
     case 'StringLiteral':
     case 'DecimalLiteral':
       return value.value
+    case 'JSXElement':
+    case 'JSXFragment':
+      return value
     case 'Identifier':
       return properties[value.name] ?? restProps[value.name] ?? defaultProps[value.name]
     case 'JSXExpressionContainer':

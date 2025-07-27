@@ -1,44 +1,41 @@
 import * as t from '@babel/types'
 import { l10n } from 'vscode'
 
-import { getUnknownError, isEmpty } from '../misc'
+import { isEmpty } from '../misc'
 import { getProperties, getPropertyValues, propertyManager } from '../properties'
 
 import { getSVGTagName } from './tags'
 
-import type { GetChildAttributes } from '@/types/svg/SVGComponent'
+import type { GetChildAttributes, IValue } from '@/types/svg/SVGComponent'
 import type { SVGComponentProps, SVGErrors, SVGFile } from '@/types/ViewExportsSVG'
 
 /**
- * Retrieves the first JSX element from an array of JSX elements' children that contains child fragments.
+ * Recursively retrieves all non-Fragment JSX elements from a given array of JSX children.
+ * If a Fragment is encountered, its children are flattened into the result.
  *
- * @param children - The children of a JSX element.
- * @returns The first JSX element that contains child fragments, or undefined if none is found.
+ * @param children - The array of JSX children to process.
+ * @param file - The SVG file context used for tag name resolution.
+ * @returns An array of JSX elements, excluding Fragments, with nested children flattened.
  */
 export function getChildFragments(
   children: t.JSXElement['children'],
   file: SVGFile
-): t.JSXElement | undefined {
-  if (isEmpty(children)) return undefined
+): t.JSXElement[] {
+  if (isEmpty(children)) return []
 
-  let element: t.JSXElement | undefined = undefined
+  const element: t.JSXElement[] = []
 
   for (const child of children) {
-    if (!isEmpty(element)) {
-      element = undefined
-      break
-    }
-
-    if (t.isJSXElement(child) && child.children.length > 0) {
+    if (t.isJSXElement(child)) {
       const tag = getSVGTagName(child.openingElement, file)
 
       if (tag.name === 'Fragment') {
-        element = getChildFragments(child.children, file)
+        element.push(...getChildFragments(child.children, file))
       } else {
-        element = child
+        element.push(child)
       }
     } else if (t.isJSXFragment(child) && child.children.length > 0) {
-      element = getChildFragments(child.children, file)
+      element.push(...getChildFragments(child.children, file))
     }
   }
 
@@ -103,26 +100,20 @@ export function getChildAttributes(
     } else if (t.isJSXText(child) && !isEmpty(child.value.trim())) {
       components.push(child.value)
     } else if (t.isJSXExpressionContainer(child)) {
-      const value = getPropertyValues(child.expression, params) as
-        | t.JSXElement
-        | t.JSXFragment
-        | string
-        | number
-        | boolean
+      const value = getPropertyValues(child.expression, params) as IValue
 
       if (typeof value === 'object' && t.isJSXElement(value)) {
         processElement(value)
-      } else {
-        try {
-          components.push(value as string)
-        } catch (error) {
-          hasErrors = true
-          errors = {
-            message: l10n.t('Error processing JSX expression container: {error}', {
-              error: getUnknownError(error),
-            }),
-            location: { start: child.loc?.start, end: child.loc?.end },
-          }
+      } else if (typeof value === 'object' && t.isJSXFragment(value)) {
+        const childs = getChildFragments(value.children, file)
+        components.push(...getChildAttributes(childs, file).children)
+      } else if (!['undefined', 'null', 'boolean'].includes(typeof value)) {
+        hasErrors = true
+        errors = {
+          message: l10n.t('Error processing JSX expression container: {error}', {
+            error: typeof value,
+          }),
+          location: { start: child.loc?.start, end: child.loc?.end },
         }
       }
     }
