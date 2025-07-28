@@ -1,16 +1,19 @@
 import { SVGReceiveMessage } from '@api/enums/ViewExportsSVG'
-import { Button, Stack, Typography } from '@mui/material'
-import { useEffect } from 'react'
+import { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
 
+import { IconClose, IconNavigateFill } from '@/assets/icons/functionalities'
 import { routes } from '@/config/routes/route'
+import DraggableSpeedDial from '@/core/components/SpeedDial/DraggableSpeedDial/DraggableSpeedDial'
 import { vscode } from '@/services/vscode'
 import { setRenderPath } from '@/store/features/GlobalSlice'
 import { setIsOpenDevTools, setRecentlySelected } from '@/store/features/PlaygroundSlice'
 import { isEmpty } from '@/utils/misc'
 
 const RouteManager = () => {
+  const [open, setOpen] = useState(false)
+
   const { renderPath } = useSelector((state) => state.global.configuration)
   const renderOptions = useSelector((state) => state.global.renderOptions)
 
@@ -41,33 +44,22 @@ const RouteManager = () => {
   }
 
   return (
-    <Stack
-      p={1}
-      spacing={1}
-      width='100%'
-      direction='row'
-      alignItems='center'
-      borderBottom='1px solid var(--JT-SVG-vscode-panel-border, #ccc)'
-    >
-      <Typography variant='h1' color='textSecondary' fontWeight='bold'>
-        Route Manager
-      </Typography>
-      <Stack spacing={1} direction='row'>
-        {routes.map((route) => (
-          <Button
-            size='small'
-            key={route.path}
-            variant='outlined'
-            sx={{ minWidth: '100px' }}
-            onClick={() => {
-              dispatch(setRenderPath({ path: route.path }))
-            }}
-          >
-            {route.name}
-          </Button>
-        ))}
-      </Stack>
-    </Stack>
+    <DraggableSpeedDial
+      actions={routes}
+      ariaLabel='SpeedDial route manager'
+      icon={<IconNavigateFill sx={{ transform: 'rotate(45deg) translate(0px, -2px)' }} />}
+      openIcon={<IconClose />}
+      open={open}
+      onClose={() => {
+        setOpen(false)
+      }}
+      onOpen={() => {
+        setOpen(true)
+      }}
+      onSelected={(_, action) => {
+        dispatch(setRenderPath({ path: action.path }))
+      }}
+    />
   )
 }
 
