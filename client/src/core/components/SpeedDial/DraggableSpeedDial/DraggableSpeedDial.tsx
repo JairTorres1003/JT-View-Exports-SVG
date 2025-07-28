@@ -20,7 +20,7 @@ export default function DraggableSpeedDial<
   hideBackdrop = false,
   open = false,
   style,
-  onMouseDown = () => null,
+  FabProps,
   onClose = () => null,
   onSelected = () => null,
   ...props
@@ -38,8 +38,11 @@ export default function DraggableSpeedDial<
 
   return (
     <>
-      {!hideBackdrop && (
-        <Backdrop open={open} sx={(theme) => ({ zIndex: theme.zIndex.speedDial - 1 })} />
+      {(!hideBackdrop || isDragging) && (
+        <Backdrop
+          open={open || isDragging}
+          sx={(theme) => ({ zIndex: theme.zIndex.speedDial - 1 })}
+        />
       )}
       {cornerPositions.map((corner) => (
         <CornerIndicator
@@ -58,9 +61,12 @@ export default function DraggableSpeedDial<
         isDragging={isDragging}
         open={open && !isDragging}
         onClose={onClose}
-        onMouseDown={(e) => {
-          handleMouseDown(e)
-          onMouseDown(e)
+        FabProps={{
+          ...FabProps,
+          onMouseDown: (e) => {
+            FabProps?.onMouseDown?.(e)
+            handleMouseDown(e)
+          },
         }}
         style={{
           ...style,
