@@ -24,6 +24,7 @@
     "Search": "Search",
     "Clear": "Clear",
     "Info": "Info",
+    "Refresh": "Refresh",
     "OpenFile": "Open file",
     "OpenManyFiles": "Open many files",
     "ListOfAssociatedFilesFor": "List of associated files for \"{{name}}\"",

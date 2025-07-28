@@ -34,6 +34,7 @@ export class MessageRouter {
         handlers.extractSVGComponentFromFiles.bind(handlers),
       [SVGReceiveMessage.GetSVGComponents]: handlers.getSVGComponents.bind(handlers),
       [SVGReceiveMessage.PlaygroundSVGComponents]: handlers.playgroundSVGComponents.bind(handlers),
+      [SVGReceiveMessage.RefreshSVGComponents]: handlers.refreshSVGComponents.bind(handlers),
       [SVGReceiveMessage.SearchSVGComponents]: handlers.searchSVGComponents.bind(handlers),
 
       [SVGReceiveMessage.AddRecentIcon]: handlers.addRecentIcon.bind(handlers),

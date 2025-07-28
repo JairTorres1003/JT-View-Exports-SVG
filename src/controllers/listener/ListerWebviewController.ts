@@ -92,6 +92,9 @@ export class ListerWebviewController {
   playgroundSVGComponents(component: SVGPlayground): void {
     this.svgComponentHandler.playgroundSVGComponents(component).catch(console.error)
   }
+  refreshSVGComponents(files: SVGFile[]): void {
+    this.svgComponentHandler.refreshSVGComponents(files).catch(console.error)
+  }
   searchSVGComponents(query: string): void {
     this.svgComponentHandler.searchSVGComponents(query)
   }

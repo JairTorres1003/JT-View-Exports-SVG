@@ -1,8 +1,10 @@
 import { SVGPostMessage, SVGReceiveMessage } from '@api/enums/ViewExportsSVG'
+import type { ViewExportSVG } from '@api/types/ViewExportsSVG'
 import { type SyntheticEvent, useEffect, useState } from 'react'
-import { useSelector } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 
 import { vscode } from '@/services/vscode'
+import { setRefreshComponents } from '@/store/features/SVGSlice'
 
 interface ExpandedComponentsHook {
   isExpanded: string[]
@@ -13,6 +15,8 @@ export const useExpandedComponents = (): ExpandedComponentsHook => {
   const [expandedItems, setExpandedItems] = useState<string[]>([])
   const { defaultExpandAll } = useSelector((state) => state.global.configuration)
   const { components } = useSelector((state) => state.svg)
+
+  const dispatch = useDispatch()
 
   /**
    * Toggles the expanded state of a container component.
@@ -38,10 +42,8 @@ export const useExpandedComponents = (): ExpandedComponentsHook => {
   /**
    * Handles the expansion or collapse of all items in VS Code.
    *
-   * @param {boolean} isExpanded - A boolean indicating whether to expand or collapse all items.
+   * @param isExpanded - A boolean indicating whether to expand or collapse all items.
    * If true, all items will be expanded. If false, all items will be collapsed.
-   *
-   * @returns {void}
    */
   const handleVsCodeExpandAll = (isExpanded: boolean): void => {
     if (isExpanded) {
@@ -49,6 +51,15 @@ export const useExpandedComponents = (): ExpandedComponentsHook => {
     } else {
       setExpandedItems([])
     }
+  }
+
+  /**
+   * Handles the refresh of SVG components.
+   *
+   * @param data - The data to refresh the SVG components with.
+   */
+  const handleRefreshSVGComponents = (data: ViewExportSVG[]): void => {
+    dispatch(setRefreshComponents(data))
   }
 
   useEffect(() => {
@@ -59,9 +70,11 @@ export const useExpandedComponents = (): ExpandedComponentsHook => {
 
   useEffect(() => {
     vscode.onMessage(SVGPostMessage.SendExpandAllIcons, handleVsCodeExpandAll)
+    vscode.onMessage(SVGPostMessage.SendRefreshSVGComponents, handleRefreshSVGComponents)
 
     return () => {
       vscode.unregisterMessage(SVGPostMessage.SendExpandAllIcons)
+      vscode.unregisterMessage(SVGPostMessage.SendRefreshSVGComponents)
     }
   }, [])
 

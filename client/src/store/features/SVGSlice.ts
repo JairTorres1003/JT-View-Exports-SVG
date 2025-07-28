@@ -4,6 +4,7 @@ import type { SVGReducers, SVGState } from '@/types/store/features/SvgSlice'
 
 const initialState: SVGState = {
   components: [],
+  componentsPendingRefresh: [],
   search: '',
 }
 
@@ -17,6 +18,26 @@ const reducers: SVGReducers = {
   setErrors: (state, { payload }) => {
     state.errors = payload
   },
+  setRefreshComponents: (state, { payload }) => {
+    state.components = state.components.map((component) => {
+      const newComponent = payload.find((item) => item.groupKind.id === component.groupKind.id)
+
+      if (newComponent) {
+        state.componentsPendingRefresh = state.componentsPendingRefresh.filter(
+          (id) => id !== newComponent.groupKind.id
+        )
+
+        return newComponent
+      }
+
+      return component
+    })
+  },
+  addPendingRefresh: (state, { payload }) => {
+    if (!state.componentsPendingRefresh.includes(payload.id)) {
+      state.componentsPendingRefresh.push(payload.id)
+    }
+  },
 }
 
 /**
@@ -29,7 +50,7 @@ export const SVGSlice = createSlice({
 })
 
 export const {
-  actions: { setComponents, setSearch, setErrors },
+  actions: { setComponents, setSearch, setErrors, setRefreshComponents, addPendingRefresh },
 } = SVGSlice
 
 export const { reducer: SVGReducer } = SVGSlice

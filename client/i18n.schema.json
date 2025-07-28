@@ -117,6 +117,10 @@
           "type": "string",
           "default": "Info"
         },
+        "Refresh": {
+          "type": "string",
+          "default": "Refresh"
+        },
         "OpenFile": {
           "type": "string",
           "default": "Open file"
@@ -169,6 +173,7 @@
         "Search",
         "Clear",
         "Info",
+        "Refresh",
         "OpenFile",
         "OpenManyFiles",
         "ListOfAssociatedFilesFor",

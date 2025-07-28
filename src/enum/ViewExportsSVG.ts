@@ -6,6 +6,7 @@ export enum SVGDeclaration {
 export enum SVGPostMessage {
   SendSVGComponents = 'send/svg/components',
   SendSVGError = 'send/svg/error',
+  SendRefreshSVGComponents = 'send/svg/refresh-components',
   SendSVGFilteredComponents = 'send/svg/filtered-components',
   SendSVGPlayground = 'send/svg/playground',
   SendPlaygroundError = 'send/svg/playground-error',
@@ -34,6 +35,7 @@ export enum SVGReceiveMessage {
   GetSVGComponents = 'svg/get-components',
   SearchSVGComponents = 'svg/search-components',
   PlaygroundSVGComponents = 'svg/playground-component',
+  RefreshSVGComponents = 'svg/refresh-components',
 
   GetAssetsPath = 'assets/paths',
   RemoveAssets = 'assets/remove',

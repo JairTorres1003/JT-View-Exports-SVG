@@ -77,6 +77,8 @@ html:root {
   --JT-SVG-vscode-menu-border: var(--vscode-menu-border);
   --JT-SVG-vscode-menu-selectionBorder: var(--vscode-menu-selectionBorder);
   --JT-SVG-vscode-widget-shadow: var(--vscode-widget-shadow);
+
+  --JT-SVG-vscode-progressBar-background: var(--vscode-progressBar-background);
 }
 
 body {

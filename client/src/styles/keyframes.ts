@@ -15,6 +15,18 @@ export const loadingCodePad = keyframes({
   },
 })
 
+export const progress = keyframes({
+  '0%': {
+    transform: 'translate(0) scaleX(1)',
+  },
+  '50%': {
+    transform: 'translate(2500%) scaleX(3)',
+  },
+  '100%': {
+    transform: 'translate(4900%) scaleX(1)',
+  },
+})
+
 export const linearProgressBarLoad = keyframes({
   from: {
     backgroundPositionX: 0,

@@ -1,6 +1,8 @@
 import { ListItem, ListItemIcon, ListItemText } from '@mui/material'
 import { useSelector } from 'react-redux'
 
+import ProgressBarInRefresh from '../ProgressBarInRefresh/ProgressBarInRefresh'
+
 import { containerComponentsClasses } from './ContainerComponents.classes'
 import { BoxContainerComponents } from './ContainerComponents.style'
 
@@ -34,8 +36,12 @@ const ContainerComponents = (): React.ReactNode => {
           label={item.groupKind.label}
           onChange={toggleExpanded(item.groupKind.id)}
           expanded={isExpanded.includes(item.groupKind.id)}
+          loading={isExpanded.includes(item.groupKind.id)}
           className={containerComponentsClasses.accordion}
           actions={<AccordionActionsSVG data={item} key={item.groupKind.id} />}
+          loadingComonent={
+            <ProgressBarInRefresh groupKind={item.groupKind} key={item.groupKind.id} />
+          }
           slotProps={{
             details: { className: containerComponentsClasses.details },
             actions: { className: containerComponentsClasses.actions },

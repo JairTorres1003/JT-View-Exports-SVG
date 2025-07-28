@@ -7,5 +7,6 @@ export const accordionMenuItemClasses = {
   summary: 'AccordionMenuItem__summary',
   actions: 'AccordionMenuItem__actions',
   details: 'AccordionMenuItem__details',
+  loading: 'AccordionMenuItem__loading',
   withActions: 'AccordionMenuItem--withActions',
 }

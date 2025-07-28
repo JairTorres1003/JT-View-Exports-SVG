@@ -20,6 +20,7 @@ export interface MessageHandlersView {
   [SVGPostMessage.SendPlaygroundError]?: (data: SVGErrors) => void
   [SVGPostMessage.SendRunExtraction]?: (data: boolean) => void
   [SVGPostMessage.SendSVGComponents]?: (data: ViewExportSVG[]) => void
+  [SVGPostMessage.SendRefreshSVGComponents]?: (data: ViewExportSVG[]) => void
   [SVGPostMessage.SendSVGError]?: (data: SVGErrors) => void
   [SVGPostMessage.SendSVGFilteredComponents]?: (data: ViewExportSVG[]) => void
   [SVGPostMessage.SendSVGPlayground]?: (data: SVGComponent) => void
@@ -44,6 +45,7 @@ export interface FuncOnMessage {
   (type: SVGPostMessage.SendPlaygroundError, handler: (data: SVGErrors) => void): void
   (type: SVGPostMessage.SendRunExtraction, handler: (data: boolean) => void): void
   (type: SVGPostMessage.SendSVGComponents, handler: (data: ViewExportSVG[]) => void): void
+  (type: SVGPostMessage.SendRefreshSVGComponents, handler: (data: ViewExportSVG[]) => void): void
   (type: SVGPostMessage.SendSVGError, handler: (data: SVGErrors) => void): void
   (type: SVGPostMessage.SendSVGFilteredComponents, handler: (data: ViewExportSVG[]) => void): void
   (type: SVGPostMessage.SendSVGPlayground, handler: (data: SVGComponent) => void): void
@@ -78,6 +80,7 @@ export interface FuncPostMessage {
   (type: SVGReceiveMessage.RequestFileOpen): void
   (type: SVGReceiveMessage.CreateTempFiles, data: FileTemporary[]): void
   (type: SVGReceiveMessage.PlaygroundSVGComponents, data: SVGPlayground): void
+  (type: SVGReceiveMessage.RefreshSVGComponents, data: SVGFile[]): void
   (type: SVGReceiveMessage.RemoveAssets, data: SVGFile[]): void
   (type: SVGReceiveMessage.ScanWorkspace): void
   (type: SVGReceiveMessage.SearchSVGComponents, data: string): void

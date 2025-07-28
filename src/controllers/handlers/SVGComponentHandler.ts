@@ -1,9 +1,11 @@
 import { l10n } from 'vscode'
 
+import { getCacheManager } from '../cache'
+
 import { SVGPostMessage } from '@/enum/ViewExportsSVG'
-import type { SVGPlayground, ViewExportSVG } from '@/types/ViewExportsSVG'
+import type { SVGFile, SVGPlayground, ViewExportSVG } from '@/types/ViewExportsSVG'
 import type { FuncPostMessage } from '@/types/views/PostMessage'
-import { pathToSVGFile, scanningFiles } from '@/utilities/files'
+import { pathToSVGFile, processFiles, scanningFiles } from '@/utilities/files'
 import { getUnknownError, isEmpty } from '@/utilities/misc'
 import { filteredExports, playground } from '@/utilities/svg'
 import { svgFileToUri } from '@/utilities/vscode'
@@ -29,6 +31,18 @@ export class SVGComponentHandler {
     } catch (error) {
       console.error(error)
     }
+  }
+
+  async refreshSVGComponents(files: SVGFile[]): Promise<void> {
+    const { ComponentsFileCache } = getCacheManager()
+    ComponentsFileCache.delete(files.map((file) => file.absolutePath))
+
+    const operation = (result: ViewExportSVG[]): void => {
+      this.postMessage(SVGPostMessage.SendRefreshSVGComponents, result)
+      this.viewExportSVG = result
+    }
+
+    await processFiles(files.map(svgFileToUri), operation)
   }
 
   getSVGComponents(): void {

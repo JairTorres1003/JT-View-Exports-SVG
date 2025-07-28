@@ -13,6 +13,7 @@ export type PostMessage =
   | { type: SVGPostMessage.SendPlaygroundError; data: SVGErrors }
   | { type: SVGPostMessage.SendRunExtraction; data: boolean }
   | { type: SVGPostMessage.SendSVGComponents; data: ViewExportSVG[] }
+  | { type: SVGPostMessage.SendRefreshSVGComponents; data: ViewExportSVG[] }
   | { type: SVGPostMessage.SendSVGError; data: SVGErrors }
   | { type: SVGPostMessage.SendSVGFilteredComponents; data: ViewExportSVG[] }
   | { type: SVGPostMessage.SendSVGPlayground; data: SVGComponent }
@@ -50,6 +51,11 @@ export interface FuncPostMessage {
    * @param data - The SVG components.
    */
   (type: SVGPostMessage.SendSVGComponents, data: ViewExportSVG[]): void
+  /**
+   * Sends the updated SVG components to the webview.
+   * @param data - The updated SVG components.
+   */
+  (type: SVGPostMessage.SendRefreshSVGComponents, data: ViewExportSVG[]): void
   /**
    * Sends an error message to the webview.
    * @param data - The error data.

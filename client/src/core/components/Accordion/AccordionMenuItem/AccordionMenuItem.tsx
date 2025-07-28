@@ -11,6 +11,9 @@ import {
   Grid,
   AccordionActions,
   type AccordionActionsProps,
+  Box,
+  LinearProgress,
+  type LinearProgressProps,
 } from '@mui/material'
 import cn from 'classnames'
 import { forwardRef, useId, useState } from 'react'
@@ -35,7 +38,10 @@ export interface AccordionMenuItemProps extends AccordionProps {
     details?: Partial<Omit<AccordionDetailsProps, 'children'>>
     tooltip?: Partial<Omit<TooltipProps, 'title'>>
     summary?: Partial<Omit<AccordionSummaryProps, 'children' | 'component'>>
+    loading?: Partial<LinearProgressProps>
   }
+  loading?: boolean
+  loadingComonent?: React.ReactNode
 }
 
 const AccordionMenuItem = forwardRef<HTMLDivElement, AccordionMenuItemProps>(
@@ -47,6 +53,8 @@ const AccordionMenuItem = forwardRef<HTMLDivElement, AccordionMenuItemProps>(
       slotProps = {},
       enableEmptyActions = false,
       hideActionsWhenCollapsed = false,
+      loading = false,
+      loadingComonent,
       ...props
     },
     ref
@@ -88,6 +96,7 @@ const AccordionMenuItem = forwardRef<HTMLDivElement, AccordionMenuItemProps>(
               </Typography>
             </Tooltip>
           </Grid>
+
           {(actions ?? enableEmptyActions) && (
             <Grid
               size='auto'
@@ -105,6 +114,12 @@ const AccordionMenuItem = forwardRef<HTMLDivElement, AccordionMenuItemProps>(
             >
               {actions}
             </Grid>
+          )}
+
+          {loading && (
+            <Box className={accordionMenuItemClasses.loading}>
+              {loadingComonent ?? <LinearProgress {...slotProps.loading} />}
+            </Box>
           )}
         </BoxAccordionMenuItem>
         <AccordionDetails

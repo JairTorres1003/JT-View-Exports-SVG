@@ -19,6 +19,7 @@ export type ReceiveMessage =
   | { type: SVGReceiveMessage.RequestFileOpen }
   | { type: SVGReceiveMessage.CreateTempFiles; data: FileTemporary[] }
   | { type: SVGReceiveMessage.PlaygroundSVGComponents; data: SVGPlayground }
+  | { type: SVGReceiveMessage.RefreshSVGComponents; data: SVGFile[] }
   | { type: SVGReceiveMessage.RemoveAssets; data: SVGFile[] }
   | { type: SVGReceiveMessage.ScanWorkspace }
   | { type: SVGReceiveMessage.SearchSVGComponents; data: string }
@@ -90,6 +91,11 @@ export interface HandlerReceiveMessage {
    * @param component - The SVG components to send.
    */
   [SVGReceiveMessage.PlaygroundSVGComponents]: (component: SVGPlayground) => void
+  /**
+   * Refreshes the SVG components.
+   * @param files - The SVG files to refresh.
+   */
+  [SVGReceiveMessage.RefreshSVGComponents]: (files: SVGFile[]) => void
   /**
    * Removes the assets from the workspace and user.
    * @param files - The SVG files to remove.
