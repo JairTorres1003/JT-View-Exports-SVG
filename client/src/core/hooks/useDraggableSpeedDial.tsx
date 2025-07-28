@@ -16,11 +16,12 @@ const LONG_PRESS_DURATION = 3000 // Duration in milliseconds to recognize a long
  * Loads the saved position of the SpeedDial from local storage.
  * If no position is saved, it defaults to 'bottom-right'.
  *
+ * @param key - The key under which the position is saved in local storage.
  * @returns The saved or default position as a CornerPosition.
  */
-const loadPositionFromStorage = (): CornerPosition => {
+const loadPositionFromStorage = (key: string): CornerPosition => {
   if (typeof window !== 'undefined') {
-    const saved = localStorage.getItem('JT-SVG-speedDial-position')
+    const saved = localStorage.getItem(key)
     if (saved && Object.keys(cornerPositions).includes(saved)) {
       return saved as CornerPosition
     }
@@ -32,16 +33,17 @@ const loadPositionFromStorage = (): CornerPosition => {
  * Saves the current position of the SpeedDial to local storage.
  * This allows the position to persist across page reloads.
  *
+ * @param key - The key under which to save the position in local storage.
  * @param newPosition - The new position to save.
  */
-const savePositionToStorage = (newPosition: CornerPosition) => {
+const savePositionToStorage = (key: string, newPosition: CornerPosition) => {
   if (typeof window !== 'undefined') {
-    localStorage.setItem('JT-SVG-speedDial-position', newPosition)
+    localStorage.setItem(key, newPosition)
   }
 }
 
-export const useDraggableSpeedDial = () => {
-  const [position, setPosition] = useState<CornerPosition>(loadPositionFromStorage)
+export const useDraggableSpeedDial = (key: string) => {
+  const [position, setPosition] = useState<CornerPosition>(loadPositionFromStorage(key))
   const [isDragging, setIsDragging] = useState(false)
   const [isPressed, setIsPressed] = useState(false)
   const [dragPosition, setDragPosition] = useState({ x: 0, y: 0 })
@@ -157,7 +159,7 @@ export const useDraggableSpeedDial = () => {
 
     if (isDragging && hoveredCorner) {
       setPosition(hoveredCorner)
-      savePositionToStorage(hoveredCorner)
+      savePositionToStorage(key, hoveredCorner)
     }
 
     setIsDragging(false)

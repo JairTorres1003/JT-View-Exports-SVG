@@ -46,6 +46,7 @@ const RouteManager = () => {
   return (
     <DraggableSpeedDial
       actions={routes}
+      storeKey='JT-SVG-speedDial-routeManager-position'
       ariaLabel='SpeedDial route manager'
       icon={<IconNavigateFill sx={{ transform: 'rotate(45deg) translate(0px, -2px)' }} />}
       openIcon={<IconClose />}

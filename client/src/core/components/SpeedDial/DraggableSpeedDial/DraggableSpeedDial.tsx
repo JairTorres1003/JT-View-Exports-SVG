@@ -11,6 +11,7 @@ interface DraggableSpeedDialProps<TAction extends { icon: FC<IconBaseProps>; nam
   actions: TAction[]
   hideBackdrop?: boolean
   onSelected?: (event: React.MouseEvent<HTMLDivElement>, action: TAction) => void
+  storeKey: string
 }
 
 export default function DraggableSpeedDial<
@@ -23,6 +24,7 @@ export default function DraggableSpeedDial<
   FabProps,
   onClose = () => null,
   onSelected = () => null,
+  storeKey,
   ...props
 }: DraggableSpeedDialProps<TAction>) {
   const {
@@ -34,7 +36,7 @@ export default function DraggableSpeedDial<
     dragPosition,
     position,
     positions,
-  } = useDraggableSpeedDial()
+  } = useDraggableSpeedDial(storeKey)
 
   return (
     <>
