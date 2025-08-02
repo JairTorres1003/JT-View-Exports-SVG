@@ -39,7 +39,10 @@ export class SVGComponentHandler {
 
     const operation = (result: ViewExportSVG[]): void => {
       this.postMessage(SVGPostMessage.SendRefreshSVGComponents, result)
-      this.viewExportSVG = result
+      this.viewExportSVG = this.viewExportSVG.map((item) => {
+        const newItem = result.find((r) => r.groupKind.id === item.groupKind.id)
+        return newItem ?? item
+      })
     }
 
     await processFiles(files.map(svgFileToUri), operation)
