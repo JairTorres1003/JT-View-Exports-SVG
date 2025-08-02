@@ -71,7 +71,7 @@ export const usePlayground = (): PlaygroundHook => {
   const applyInitialColor = useCallback(() => {
     try {
       setInitialColor('#fff')
-      const root = document.documentElement
+      const root = document.body || document.documentElement
       const mainColor = getComputedStyle(root).getPropertyValue(CSS_VAR_MAIN)
       const secondaryColor = getComputedStyle(root).getPropertyValue(CSS_VAR_SECONDARY)
 
