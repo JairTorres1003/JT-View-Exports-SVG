@@ -56,3 +56,5 @@ declare module '@jt/view-exports-svg/utilities/vscode/theme.js' {
 declare module '@jt/view-exports-svg/utilities/vscode/uri.js' {
   export * from '@jt/view-exports-svg/utilities/vscode/uri.d.ts'
 }
+
+export * from '@jt/view-exports-svg/types/ViewExportsSVG.d.ts'

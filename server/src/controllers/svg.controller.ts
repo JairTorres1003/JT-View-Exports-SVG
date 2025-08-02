@@ -3,6 +3,8 @@ import { Request, Response } from 'express'
 import * as path from 'path'
 import { l10n } from 'vscode'
 
+import { getCacheManager } from '@jt/view-exports-svg/controllers/cache/CacheManagerController.js'
+
 import { pathToSVGFile } from '@jt/view-exports-svg/utilities/files/misc.js'
 import { processFiles } from '@jt/view-exports-svg/utilities/files/processFiles.js'
 import { filteredExports } from '@jt/view-exports-svg/utilities/svg/filtered.js'
@@ -12,9 +14,10 @@ import { SVGPostMessage } from '@jt/view-exports-svg/enum/ViewExportsSVG.js'
 
 import { getFilesFrontDirectory } from '@/utilities/getFilesFrontDirectory.ts'
 import { getUnknownError } from '@jt/view-exports-svg/utilities/misc.js'
+import { SVGFile, ViewExportSVG } from '../types.d.ts'
 
 export class SvgController {
-  private viewExportSVG: unknown[] = []
+  private viewExportSVG: ViewExportSVG[] = []
 
   /**
    * Handles the retrieval of SVG components from the specified directories.
@@ -38,7 +41,7 @@ export class SvgController {
 
       const svgFiles = await Promise.all(allFiles.map(svgFileToUri))
 
-      const operation = (data: unknown[]): void => {
+      const operation = (data: ViewExportSVG[]): void => {
         this.viewExportSVG = data
         res.send({ type: SVGPostMessage.SendSVGComponents, data })
       }
@@ -112,5 +115,46 @@ export class SvgController {
           },
         })
       })
+  }
+
+  /**
+   * Refreshes the SVG components based on the provided request body data.
+   *
+   * @param req - The request object containing the files to refresh in `req.body.data`.
+   * @param res - The response object used to send back the refreshed components or an error message.
+   *
+   * This method deletes the specified files from the cache and processes them again,
+   * sending the refreshed components back in the response.
+   */
+  public refreshComponents = async (req: Request, res: Response) => {
+    try {
+      const files = req.body.data as SVGFile[]
+
+      const { ComponentsFileCache } = getCacheManager()
+      ComponentsFileCache.delete(files.map((file) => file.absolutePath))
+
+      const operation = (result: ViewExportSVG[]): void => {
+        res.send({ type: SVGPostMessage.SendRefreshSVGComponents, data: result })
+
+        this.viewExportSVG = this.viewExportSVG.map((item) => {
+          const newItem = result.find((r) => r.groupKind.id === item.groupKind.id)
+          return newItem ?? item
+        })
+      }
+
+      await processFiles(files.map(svgFileToUri), operation)
+    } catch (error) {
+      console.error('Error refreshing SVG components:', error)
+      res.status(500).send({
+        type: SVGPostMessage.SendSVGError,
+        data: {
+          location: {},
+          message: l10n.t('Error refreshing SVG components: {error}', {
+            error: getUnknownError(error),
+          }),
+          error,
+        },
+      })
+    }
   }
 }
