@@ -1,5 +1,7 @@
 import * as path from 'path'
 
+const ALLOWED_EXTENSIONS = ['.js', '.ts', '.jsx', '.tsx']
+
 /**
  * Recursively retrieves all files from a given directory and its subdirectories.
  *
@@ -17,7 +19,11 @@ export const getFilesFrontDirectory = (
     if (dirEntry.isDirectory) {
       arrayOfFiles = getFilesFrontDirectory(path.join(directory, dirEntry.name), arrayOfFiles)
     } else {
-      arrayOfFiles.push(path.join(directory, dirEntry.name))
+      const filePath = path.join(directory, dirEntry.name)
+
+      if (ALLOWED_EXTENSIONS.includes(path.extname(filePath)) && !dirEntry.name.endsWith('.d.ts')) {
+        arrayOfFiles.push(filePath)
+      }
     }
   }
 
