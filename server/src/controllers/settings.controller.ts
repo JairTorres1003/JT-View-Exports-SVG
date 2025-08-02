@@ -119,4 +119,20 @@ export class SettingsController {
     const themeKind = getCurrentTheme()
     res.status(200).json({ type: SVGPostMessage.SendTheme, data: themeKind })
   }
+
+  /**
+   * Handles the request to reload the extension theme.
+   *
+   * @param _ - The request object (not used).
+   * @param res - The response object used to send back the reloaded editor configuration.
+   *
+   * @returns A JSON response with the reloaded editor configuration if successful, or an error message if an error occurs.
+   */
+  public reloadExtensionTheme = (_: Request, res: Response) => {
+    try {
+      this.getEditorConfig(_, res)
+    } catch (error) {
+      console.error('Error reloading extension theme:', error)
+    }
+  }
 }

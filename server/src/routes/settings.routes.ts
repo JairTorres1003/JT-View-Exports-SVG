@@ -12,5 +12,6 @@ router.get('/extension-theme', settingsController.getExtensionTheme)
 router.get('/theme', settingsController.getTheme)
 router.get('/vscode-styles', settingsController.getVscodeStyles)
 router.post('/toggle-open-dev-tools', settingsController.toggleOpenDevTools)
+router.get('/reload-extension-theme', settingsController.reloadExtensionTheme)
 
 export const settingsRoutes = Router().use('/settings', router)
