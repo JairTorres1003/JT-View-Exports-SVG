@@ -1,5 +1,6 @@
 import {
   SpeedDial,
+  speedDialActionClasses,
   speedDialClasses,
   SpeedDialIcon,
   type SpeedDialProps,
@@ -27,17 +28,34 @@ export const BoxDraggableSpeedDial = styled(
       />
     )
   })
-)(({ theme: { palette }, isDragging }) => ({
+)(({ isDragging }) => ({
   position: 'absolute',
   bottom: 16,
   right: 16,
   [`& .${speedDialClasses.fab}`]: {
-    backgroundColor: palette.primary.main,
-    '&:hover': { backgroundColor: palette.primary.dark },
+    backgroundColor: 'var(--JT-SVG-vscode-editorWidget-background)',
+    color: 'var(--JT-SVG-vscode-editorWidget-foreground)',
+    border: `1px solid var(--JT-SVG-vscode-sideBarSectionHeader-border)`,
+    '&:hover': {
+      backgroundColor: 'var(--JT-SVG-vscode-editorHoverWidget-background)',
+      color: 'var(--JT-SVG-vscode-editorHoverWidget-foreground)',
+    },
     userSelect: isDragging ? 'none' : undefined,
     cursor: isDragging ? 'grabbing' : 'pointer',
     boxShadow: isDragging ? '0 8px 25px rgba(0,0,0,0.3)' : undefined,
     transform: isDragging ? 'scale(1.25) !important' : undefined,
+  },
+  [`& .${speedDialActionClasses.fab}`]: {
+    backgroundColor: 'var(--JT-SVG-vscode-button-background)',
+    color: 'var(--JT-SVG-vscode-button-foreground)',
+    '&:hover': { backgroundColor: 'var(--JT-SVG-vscode-button-hoverBackground)' },
+  },
+  [`& .${speedDialActionClasses.staticTooltipLabel}`]: {
+    backgroundColor: 'var(--JT-SVG-vscode-editorHoverWidget-background)',
+    border: '1px solid var(--JT-SVG-vscode-editorHoverWidget-border)',
+    color: 'var(--JT-SVG-vscode-editorHoverWidget-foreground, #ffffff)',
+    boxShadow: '0 2px 8px var(--JT-SVG-vscode-widget-shadow)',
+    padding: '4px 8px',
   },
   variants: [
     {

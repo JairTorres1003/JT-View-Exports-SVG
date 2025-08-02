@@ -45,6 +45,9 @@ body {
   --JT-SVG-vscode-editorHoverWidget-border: var(--vscode-editorHoverWidget-border);
   --JT-SVG-vscode-editorHoverWidget-foreground: var(--vscode-editorHoverWidget-foreground);
   --JT-SVG-vscode-widget-shadow: var(--vscode-widget-shadow);
+  --JT-SVG-vscode-editorWidget-background: var(--vscode-editorWidget-background);
+  --JT-SVG-vscode-editorWidget-border: var(--vscode-editorWidget-border);
+  --JT-SVG-vscode-editorWidget-foreground: var(--vscode-editorWidget-foreground);
   --JT-SVG-vscode-sideBarTitle-background: var(--vscode-sideBarTitle-background, #fff);
   --JT-SVG-vscode-sideBarSectionHeader-border: var(--vscode-sideBarSectionHeader-border);
   --JT-SVG-vscode-sideBarSectionHeader-background: var(
