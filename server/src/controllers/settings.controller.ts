@@ -20,7 +20,10 @@ export class SettingsController {
     try {
       const editorConfig = getConfigurationEditor()
 
-      res.status(200).json({ type: SVGPostMessage.SendEditorConfig, data: editorConfig })
+      res.status(200).json({
+        type: SVGPostMessage.SendEditorConfig,
+        data: { ...editorConfig, 'workbench.colorTheme': 'default-theme-one-dark' },
+      })
     } catch (error) {
       console.error(error)
       res.status(500).json({ message: SVGPostMessage.SendEditorConfig, data: {} })

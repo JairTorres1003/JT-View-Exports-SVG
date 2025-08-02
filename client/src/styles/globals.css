@@ -3,7 +3,7 @@ html {
   font-family: var(--vscode-editor-font-family, Arial);
 }
 
-html:root {
+body {
   --JT-SVG-vscode-font-family: var(--vscode-font-family);
   --JT-SVG-vscode-font-weight: var(--vscode-font-weight);
   --JT-SVG-vscode-font-size: var(--vscode-font-size, 13px);
@@ -79,9 +79,7 @@ html:root {
   --JT-SVG-vscode-widget-shadow: var(--vscode-widget-shadow);
 
   --JT-SVG-vscode-progressBar-background: var(--vscode-progressBar-background);
-}
 
-body {
   height: 100vh;
   max-height: 100vh;
   background-color: var(--JT-SVG-vscode-editor-background);
