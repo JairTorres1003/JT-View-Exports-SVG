@@ -412,7 +412,84 @@
         }
       },
       "required": ["title", "Select files", "or drop the files here", "Let it go!"]
+    },
+    "modalInfo": {
+      "type": "object",
+      "properties": {
+        "title": {
+          "type": "string",
+          "default": "Info"
+        },
+        "FileName": {
+          "type": "string",
+          "default": "File name:"
+        },
+        "Language": {
+          "type": "string",
+          "default": "Language:"
+        },
+        "IsTemporaryFile": {
+          "type": "string",
+          "default": "Is temporary?:"
+        },
+        "IncludesTemporaryFiles": {
+          "type": "string",
+          "default": "Includes temporary files:"
+        },
+        "Yes": {
+          "type": "string",
+          "default": "Yes"
+        },
+        "No": {
+          "type": "string",
+          "default": "No"
+        },
+        "Path": {
+          "type": "string",
+          "default": "Path:"
+        },
+        "ShowNoExports": {
+          "type": "string",
+          "default": "Show non-exported components:"
+        },
+        "ComponentsExported": {
+          "type": "string",
+          "default": "Total components exported:"
+        },
+        "ComponentsNotExported": {
+          "type": "string",
+          "default": "Total non-exported components:"
+        },
+        "TotalComponents": {
+          "type": "string",
+          "default": "Total components:"
+        },
+        "FilesCount": {
+          "type": "string",
+          "default": "Files count:"
+        },
+        "GroupKindName": {
+          "type": "string",
+          "default": "Group name:"
+        }
+      },
+      "required": [
+        "title",
+        "FileName",
+        "Language",
+        "IsTemporaryFile",
+        "IncludesTemporaryFiles",
+        "Yes",
+        "No",
+        "Path",
+        "ShowNoExports",
+        "ComponentsExported",
+        "ComponentsNotExported",
+        "TotalComponents",
+        "FilesCount",
+        "GroupKindName"
+      ]
     }
   },
-  "required": ["errors", "labels", "pickers", "DevTools", "DropZone"]
+  "required": ["errors", "labels", "pickers", "DevTools", "DropZone", "modalInfo"]
 }

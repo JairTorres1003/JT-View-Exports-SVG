@@ -38,7 +38,13 @@ const ContainerComponents = (): React.ReactNode => {
           expanded={isExpanded.includes(item.groupKind.id)}
           loading={isExpanded.includes(item.groupKind.id)}
           className={containerComponentsClasses.accordion}
-          actions={<AccordionActionsSVG data={item} key={item.groupKind.id} />}
+          actions={
+            <AccordionActionsSVG
+              data={item}
+              key={item.groupKind.id}
+              isGrouped={item.files.length > 1}
+            />
+          }
           loadingComonent={
             <ProgressBarInRefresh groupKind={item.groupKind} key={item.groupKind.id} />
           }

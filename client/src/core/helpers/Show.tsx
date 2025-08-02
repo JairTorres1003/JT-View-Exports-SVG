@@ -9,7 +9,7 @@ interface ShowWhenProps {
   /**
    * The condition to evaluate.
    */
-  isTrue: boolean
+  condition: boolean
 }
 
 interface ShowElseProps {
@@ -23,7 +23,7 @@ interface ShowElseProps {
  * @example
  * ```tsx
  * <Show>
- *   <Show.When isTrue={true}>
+ *   <Show.When condition={true}>
  *     <p>Rendered</p>
  *   </Show.When>
  *   <Show.Else>
@@ -49,9 +49,9 @@ export const Show: FC<ShowProps> & {
     if (React.isValidElement(child)) {
       const clonedChild = child as React.ReactElement<ShowWhenProps | ShowElseProps>
 
-      if (!('isTrue' in clonedChild.props)) {
+      if (!('condition' in clonedChild.props)) {
         otherwise = clonedChild
-      } else if (!when && clonedChild.props.isTrue) {
+      } else if (!when && clonedChild.props.condition) {
         when = child
       }
     }
@@ -60,7 +60,7 @@ export const Show: FC<ShowProps> & {
   return when ?? otherwise ?? null
 }
 
-const ShowWhen: FC<ShowWhenProps> = ({ children, isTrue }): ReactNode => isTrue && children
+const ShowWhen: FC<ShowWhenProps> = ({ children, condition }): ReactNode => condition && children
 const ShowElse: FC<ShowElseProps> = ({ children }): ReactNode => children
 
 Show.When = ShowWhen

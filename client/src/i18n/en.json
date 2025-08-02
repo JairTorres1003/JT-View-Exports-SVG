@@ -117,5 +117,21 @@
     "Select files": "Select files",
     "or drop the files here": "or drop the files here",
     "Let it go!": "Let it go!"
+  },
+  "modalInfo": {
+    "title": "Info",
+    "ComponentsExported": "Total components exported:",
+    "ComponentsNotExported": "Total non-exported components:",
+    "FileName": "File name:",
+    "IsTemporaryFile": "Is it a temporary file?:",
+    "IncludesTemporaryFiles": "Includes temporary files:",
+    "Yes": "Yes",
+    "No": "No",
+    "Language": "Language:",
+    "Path": "Path:",
+    "ShowNoExports": "Show non-exported components:",
+    "TotalComponents": "Total components:",
+    "FilesCount": "Files count:",
+    "GroupKindName": "Group name:"
   }
 }

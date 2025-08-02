@@ -20,7 +20,9 @@ const ContainerIcons = (): React.ReactNode => {
           onChange={toggleExpanded(item.groupKind.id)}
           expanded={isExpanded.includes(item.groupKind.id)}
           className={containerIconsClasses.accordion}
-          actions={<AccordionActionsSVG data={item} hideRefresh key={item.groupKind.id} />}
+          actions={
+            <AccordionActionsSVG data={item} hideRefresh key={item.groupKind.id} isGrouped />
+          }
           slotProps={{
             details: { className: containerIconsClasses.details },
             actions: { className: containerIconsClasses.actions },
