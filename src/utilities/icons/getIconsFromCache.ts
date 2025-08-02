@@ -76,7 +76,7 @@ export const getIconsFromCache = (): ViewExportSVG[] => {
     const isShowNoExports = configShowNoExports.isShow()
 
     const components: SVGComponent[] = []
-    const files = new Map<string, SVGFile[]>()
+    const files = new Map<string, SVGFile>()
     const otherProps: Pick<ViewExportSVG, 'totalExports' | 'totalNoExports'> = {
       totalExports: 0,
       totalNoExports: 0,
@@ -100,11 +100,7 @@ export const getIconsFromCache = (): ViewExportSVG[] => {
 
         otherProps[component.isExported ? 'totalExports' : 'totalNoExports']++
 
-        if (!files.has(location.file.absolutePath)) {
-          files.set(location.file.absolutePath, [])
-        }
-
-        files.get(location.file.absolutePath)?.push(location.file)
+        files.set(location.file.absolutePath, location.file)
       } else if (!isEmpty(workspaceFolderUri)) {
         cache.remove(workspaceFolderUri, { location, name })
       }
