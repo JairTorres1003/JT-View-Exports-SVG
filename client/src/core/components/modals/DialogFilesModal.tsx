@@ -8,7 +8,6 @@ import {
   ListItemIcon,
   ListItemText,
   Tooltip,
-  Typography,
 } from '@mui/material'
 import { type FC, useState } from 'react'
 import { useTranslation } from 'react-i18next'
@@ -76,18 +75,16 @@ export const DialogFilesModal: FC<DialogFilesModalProps> = ({
                   </ListItemIcon>
                   <Tooltip title={file.absolutePath} enterDelay={500} placement='bottom-start'>
                     <ListItemText
-                      slotProps={{ primary: { noWrap: true } }}
+                      primary={file.basename}
+                      secondary={file.dirname}
+                      sx={{ display: 'flex', gap: 1, alignItems: 'flex-end' }}
+                      slotProps={{
+                        primary: { sx: { whiteSpace: 'nowrap' }, fontSize: '.75rem' },
+                        secondary: { noWrap: true, sx: { opacity: 0.8 }, fontSize: '.7rem' },
+                      }}
                       onClick={() => {
                         setSelectedIndex(index)
                       }}
-                      primary={
-                        <>
-                          {file.basename}{' '}
-                          <Typography component='span' fontSize='.9em' sx={{ opacity: 0.8 }}>
-                            {file.absolutePath.replace(`/${file.basename}`, '')}
-                          </Typography>
-                        </>
-                      }
                     />
                   </Tooltip>
                   <ListItemIcon
