@@ -170,6 +170,10 @@ export class Editor {
       this._configurations.onChange?.(value)
     })
 
+    Array.from(editor.getContainerDomNode().querySelectorAll('textarea')).forEach((textarea) => {
+      textarea.setAttribute('aria-label', 'Editor Text Area')
+    })
+
     return editor
   }
 

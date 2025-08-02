@@ -124,6 +124,7 @@ const AccordionMenuItem = forwardRef<HTMLDivElement, AccordionMenuItemProps>(
         </BoxAccordionMenuItem>
         <AccordionDetails
           {...(slotProps.details ?? {})}
+          id={`${id}content`}
           className={cn(accordionMenuItemClasses.details, slotProps.details?.className)}
         >
           {children}
