@@ -1,8 +1,8 @@
-import { SVGDeclaration } from '@/enum/ViewExportsSVG'
+import type { SVGDeclaration } from '@/enum/ViewExportsSVG'
 
-import { SVGTagName } from './svg/tags'
-import { DeclarationExport } from './svg/extracts'
-import { ParamsTypes } from './misc'
+import type { SVGTagName } from './svg/tags'
+import type { DeclarationExport } from './svg/extracts'
+import type { ParamsTypes } from './misc'
 
 export interface ViewExportSVG {
   /**

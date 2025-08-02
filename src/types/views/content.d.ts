@@ -1,4 +1,4 @@
-import { Position, SVGFile } from '../ViewExportsSVG'
+import type { Position, SVGFile } from '../ViewExportsSVG'
 
 export interface GetWebviewAssets {
   favicon: string

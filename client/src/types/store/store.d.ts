@@ -1,7 +1,7 @@
-import { GlobalState } from './features/GlobalSlice'
-import { PlaygroundState } from './features/PlaygroundSlice'
-import { SVGState } from './features/SvgSlice'
-import { VsCodeState } from './features/VsCodeSlice'
+import type { GlobalState } from './features/GlobalSlice'
+import type { PlaygroundState } from './features/PlaygroundSlice'
+import type { SVGState } from './features/SvgSlice'
+import type { VsCodeState } from './features/VsCodeSlice'
 
 export interface RootStoreState {
   svg: SVGState

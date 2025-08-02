@@ -1,5 +1,5 @@
-import { SVGPostMessage, SVGReceiveMessage } from '@api/enums/ViewExportsSVG'
-import {
+import type { SVGPostMessage, SVGReceiveMessage } from '@api/enums/ViewExportsSVG'
+import type {
   SVGComponent,
   SVGErrors,
   SVGFile,
@@ -7,8 +7,8 @@ import {
   SVGPlayground,
   ViewExportSVG,
 } from '@api/types/ViewExportsSVG'
-import { AssetPath, FileTemporary, OpenFile } from '@api/types/views/content'
-import { ExtensionManage, ThemeMode, VsCodeStyles } from '@api/types/vscode'
+import type { AssetPath, FileTemporary, OpenFile } from '@api/types/views/content'
+import type { ExtensionManage, ThemeMode, VsCodeStyles } from '@api/types/vscode'
 
 /**
  * The message to receive from the webview.

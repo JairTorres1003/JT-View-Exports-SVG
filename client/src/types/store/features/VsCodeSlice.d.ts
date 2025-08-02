@@ -1,5 +1,5 @@
-import { ExtensionManage, ThemeMode, VsCodeStyles } from '@api/types/vscode'
-import { type CaseReducer, type PayloadAction } from '@reduxjs/toolkit'
+import type { ExtensionManage, ThemeMode, VsCodeStyles } from '@api/types/vscode'
+import type { CaseReducer, PayloadAction } from '@reduxjs/toolkit'
 
 export interface VsCodeState {
   styles: Partial<VsCodeStyles>

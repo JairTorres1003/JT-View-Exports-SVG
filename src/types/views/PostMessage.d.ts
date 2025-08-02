@@ -1,7 +1,7 @@
-import { SVGPostMessage } from '@/enum/ViewExportsSVG'
-import { SVGComponent, SVGErrors, ViewExportSVG } from '../ViewExportsSVG'
-import { ExtensionManage, ThemeMode, VsCodeStyles } from '../vscode'
-import { AssetPath } from './content'
+import type { SVGPostMessage } from '@/enum/ViewExportsSVG'
+import type { SVGComponent, SVGErrors, ViewExportSVG } from '../ViewExportsSVG'
+import type { ExtensionManage, ThemeMode, VsCodeStyles } from '../vscode'
+import type { AssetPath } from './content'
 
 /**
  * The message to send to the webview.

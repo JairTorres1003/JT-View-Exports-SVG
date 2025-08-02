@@ -1,4 +1,4 @@
-import { type Extension } from 'vscode'
+import type { Extension } from 'vscode'
 
 /**
  * Represents a language file.

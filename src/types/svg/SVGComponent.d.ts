@@ -1,4 +1,4 @@
-import { SVGComponent, SVGComponentProps, SVGErrors } from '../ViewExportsSVG'
+import type { SVGComponent, SVGComponentProps, SVGErrors } from '../ViewExportsSVG'
 
 export interface GetSVGComponent extends Pick<SVGComponent, 'component' | 'isAnimated' | 'params'> {
   hasErrors: boolean
