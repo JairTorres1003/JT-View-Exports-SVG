@@ -18,7 +18,7 @@ import {
 import { type FC, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 
-import { OpenFileButton } from '../../Buttons/OpenFileButton'
+import { OpenFileButton } from '../Buttons/OpenFileButton'
 
 import { IconAnyFile, IconJS, IconReact, IconReactTS, IconTS } from '@/assets/icons/files'
 import { IconClose } from '@/assets/icons/functionalities'
@@ -72,7 +72,7 @@ export const DialogFilesModal: FC<DialogFilesModalProps> = ({
       </Tooltip>
 
       <DialogTitle textAlign='center'>
-        {t('labels.ListOfAssociatedFilesFor', { name: groupKind.label })}
+        {t('labels.ListOfAssociatedFilesFor', { name: groupKind.label?.split('/').pop() })}
       </DialogTitle>
 
       <Divider sx={{ borderColor: 'var(--JT-SVG-vscode-panel-border)', borderWidth: '1px' }} />
