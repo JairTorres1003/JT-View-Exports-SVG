@@ -57,6 +57,9 @@
       "DownloadAsSVG": "Download as SVG",
       "DownloadAsPNG": "Download as PNG"
     },
+    "info": {
+      "title": "Info component"
+    },
     "menu": {
       "ReloadPlayground": "Reload playground",
       "ReloadEditor": "Reload editor",

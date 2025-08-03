@@ -271,6 +271,16 @@
             "DownloadAsPNG"
           ]
         },
+        "info": {
+          "type": "object",
+          "properties": {
+            "title": {
+              "type": "string",
+              "default": "Info component"
+            }
+          },
+          "required": ["title"]
+        },
         "menu": {
           "type": "object",
           "properties": {
@@ -394,7 +404,7 @@
           "required": ["suggestions"]
         }
       },
-      "required": ["title", "playground", "menu", "editor"]
+      "required": ["title", "playground", "menu", "editor", "info"]
     },
     "DropZone": {
       "type": "object",

@@ -79,7 +79,7 @@ const DevTools: FC<{ id: string; onClose?: VoidFunction }> = ({
                 tooltip: { placement: 'bottom-start', arrow: false },
               }}
             >
-              {t('DevTools.info.title')}
+              {' '}
             </AccordionMenuItem>
           </Panel>
         </PanelGroup>
