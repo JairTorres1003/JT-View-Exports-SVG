@@ -49,6 +49,7 @@ const DevTools: FC<{ id: string; onClose?: VoidFunction }> = ({
             defaultSize={100}
           >
             <AccordionMenuItem
+              defaultExpanded
               enableEmptyActions
               hideActionsWhenCollapsed
               label={t('DevTools.playground.title')}
