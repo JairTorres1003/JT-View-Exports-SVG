@@ -3,6 +3,7 @@ import {
   accordionSummaryClasses,
   Box,
   type BoxProps,
+  collapseClasses,
   styled,
   typographyClasses,
 } from '@mui/material'
@@ -12,13 +13,10 @@ import { devToolsClasses } from './DevTools.classes'
 
 import { accordionMenuItemClasses } from '@/core/components/Accordion'
 
-export const BoxDevTools = styled<ComponentType<BoxProps>>(
-  (props) => <Box component='aside' {...props} />,
-  {
-    name: devToolsClasses.root,
-    target: devToolsClasses.root,
-  }
-)(() => ({
+export const BoxDevTools = styled<ComponentType<BoxProps>>((props) => <Box {...props} />, {
+  name: devToolsClasses.root,
+  target: devToolsClasses.root,
+})(() => ({
   width: '100%',
   minWidth: 190,
   maxWidth: '100%',
@@ -50,7 +48,7 @@ export const BoxDevTools = styled<ComponentType<BoxProps>>(
   },
   [`& .${devToolsClasses.content}`]: {
     display: 'grid',
-    height: 'min-content',
+    height: '100%',
     maxHeight: '100%',
     overflow: 'hidden',
     [`& .${devToolsClasses.accordion}`]: {
@@ -58,11 +56,15 @@ export const BoxDevTools = styled<ComponentType<BoxProps>>(
       flexDirection: 'column',
       backgroundColor: 'var(--JT-SVG-vscode-sideBarTitle-background)',
       maxWidth: '100%',
+      height: '100%',
       overflow: 'hidden',
       '&::before': {
         backgroundColor: 'var(--JT-SVG-vscode-sideBarSectionHeader-border)',
         height: '0.5px',
         opacity: 1,
+      },
+      [`& .${collapseClasses.root}`]: {
+        overflow: 'auto',
       },
       [`& .${accordionMenuItemClasses.summary}`]: {
         padding: 0,
@@ -80,6 +82,24 @@ export const BoxDevTools = styled<ComponentType<BoxProps>>(
       [`& .${accordionDetailsClasses.root}`]: {
         padding: 0,
       },
+    },
+  },
+  [`& .${devToolsClasses.panel}`]: {
+    minHeight: 22,
+    [`&.${devToolsClasses.panelTransition}`]: {
+      transition: 'flex 0.2s ease-out',
+    },
+    [`&.${devToolsClasses.panelMinHeight}`]: {
+      minHeight: '20%',
+    },
+  },
+  [`& .${devToolsClasses.resizeHandle}`]: {
+    transition: 'background-color 0.1s ease-out',
+    height: 'var(--JT-SVG-vscode-sash-size)',
+    marginBottom: 'calc(var(--JT-SVG-vscode-sash-size) * -1)',
+    zIndex: 1,
+    '&:hover': {
+      backgroundColor: 'var(--JT-SVG-vscode-sash-hoverBorder)',
     },
   },
 }))
