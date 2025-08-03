@@ -19,6 +19,8 @@ const MenuMoreActions: FC<MenuToolsProps> = ({ svgRef }) => {
 
   const nameComponent = useSelector((state) => state.playground.recentlySelected?.name)
 
+  if (!nameComponent) return null
+
   return (
     <>
       <Tooltip title={t('playground.MoreActions')} placement='bottom-end'>
