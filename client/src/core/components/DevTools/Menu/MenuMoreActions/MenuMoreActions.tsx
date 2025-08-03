@@ -17,9 +17,9 @@ const MenuMoreActions: FC<MenuToolsProps> = ({ svgRef }) => {
   const { anchorEl, handleClick, handleClose, open } = useMenu()
   const actions = useSVGActions({ svgRef })
 
-  const nameComponent = useSelector((state) => state.playground.recentlySelected?.name)
+  const recentlySelected = useSelector((state) => state.playground.recentlySelected)
 
-  if (!nameComponent) return null
+  if (!recentlySelected) return null
 
   return (
     <>
@@ -53,7 +53,7 @@ const MenuMoreActions: FC<MenuToolsProps> = ({ svgRef }) => {
             <MenuItem
               key={action.label}
               onClick={() => {
-                action.onClick?.(nameComponent)
+                action.onClick?.(recentlySelected)
                 handleClose()
               }}
             >

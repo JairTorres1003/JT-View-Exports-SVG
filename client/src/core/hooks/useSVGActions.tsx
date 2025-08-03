@@ -1,5 +1,7 @@
+import type { SVGComponent } from '@api/types/ViewExportsSVG'
 import { useTranslation } from 'react-i18next'
 
+import { openFileInPosition } from '../utils/file'
 import {
   createCanvasFromImage,
   getSVGBlobUrl,
@@ -17,18 +19,18 @@ export const useSVGActions = ({ svgRef }: UseSVGActionsProps) => {
   /**
    * Downloads the current SVG as a `.svg` file.
    */
-  const downloadAsSVG = (name = 'image') => {
+  const downloadAsSVG = (component: SVGComponent) => {
     const svgString = serializeSVG(svgRef.current)
     if (!svgString) return
 
     const url = getSVGBlobUrl(svgString)
-    triggerDownload(url, `${name}.svg`)
+    triggerDownload(url, `${component.name}.svg`)
   }
 
   /**
    * Downloads the current SVG rendered as a PNG image file.
    */
-  const downloadAsPNG = (name = 'image') => {
+  const downloadAsPNG = (component: SVGComponent) => {
     const svgString = serializeSVG(svgRef.current)
     if (!svgString) return
 
@@ -41,7 +43,7 @@ export const useSVGActions = ({ svgRef }: UseSVGActionsProps) => {
       URL.revokeObjectURL(url)
 
       const pngUrl = canvas.toDataURL('image/png')
-      triggerDownload(pngUrl, `${name}.png`)
+      triggerDownload(pngUrl, `${component.name}.png`)
     }
 
     img.onerror = (err) => {
@@ -95,7 +97,16 @@ export const useSVGActions = ({ svgRef }: UseSVGActionsProps) => {
     img.src = url
   }
 
+  /**
+   * Opens the SVG component in the editor at its start position.
+   */
+  const openInEditor = (component: SVGComponent) => {
+    openFileInPosition(component.location.file, component.location.start)
+  }
+
   return [
+    { label: t('OpenInEditor'), onClick: openInEditor },
+    { isDivider: true },
     { label: t('CopyAsSVG'), onClick: copyAsSVG },
     { label: t('CopyAsPNG'), onClick: copyAsPNG },
     { isDivider: true },

@@ -236,6 +236,10 @@
               "type": "string",
               "default": "More actions..."
             },
+            "OpenInEditor": {
+              "type": "string",
+              "default": "Open in editor"
+            },
             "CopyAsSVG": {
               "type": "string",
               "default": "Copy as SVG"
@@ -260,6 +264,7 @@
             "CopyCode",
             "ResetCode",
             "MoreActions",
+            "OpenInEditor",
             "CopyAsSVG",
             "CopyAsPNG",
             "DownloadAsSVG",
