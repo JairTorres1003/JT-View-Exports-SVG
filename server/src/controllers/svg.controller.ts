@@ -130,8 +130,11 @@ export class SvgController {
     try {
       const files = req.body.data as SVGFile[]
 
-      const { ComponentsFileCache } = getCacheManager()
-      ComponentsFileCache.delete(files.map((file) => file.absolutePath))
+      const { ComponentsFileCache, DeclarationFileCache } = getCacheManager()
+      const removedFiles = files.map((file) => file.absolutePath)
+
+      ComponentsFileCache.delete(removedFiles)
+      DeclarationFileCache.delete(removedFiles)
 
       const operation = (result: ViewExportSVG[]): void => {
         res.send({ type: SVGPostMessage.SendRefreshSVGComponents, data: result })
