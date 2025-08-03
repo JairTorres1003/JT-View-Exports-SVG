@@ -3,8 +3,7 @@ html {
   font-family: var(--vscode-editor-font-family, Arial);
 }
 
-html:root,
-body {
+html:root {
   --JT-SVG-vscode-font-family: var(--vscode-font-family);
   --JT-SVG-vscode-font-weight: var(--vscode-font-weight);
   --JT-SVG-vscode-font-size: var(--vscode-font-size, 13px);
