@@ -45,17 +45,17 @@ export const useDevTools = () => {
         )
       }
 
-      if (newValue.includes('playground-panel')) {
-        panel1?.classList.add(devToolsClasses.panelMinHeight)
-      }
-
-      if (newValue.includes('info-panel')) {
-        panel2?.classList.add(devToolsClasses.panelMinHeight)
-      }
-
       setTimeout(() => {
         panel1?.classList.remove(devToolsClasses.panelTransition)
         panel2?.classList.remove(devToolsClasses.panelTransition)
+
+        if (newValue.includes('playground-panel')) {
+          panel1?.classList.add(devToolsClasses.panelMinHeight)
+        }
+
+        if (newValue.includes('info-panel')) {
+          panel2?.classList.add(devToolsClasses.panelMinHeight)
+        }
       }, 200)
 
       return newValue
