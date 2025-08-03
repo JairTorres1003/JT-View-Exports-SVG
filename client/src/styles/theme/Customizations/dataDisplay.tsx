@@ -178,7 +178,7 @@ export const dataDisplayCustomizations: CustomizationsFunction = (styles) => ({
           fontFamily: 'var(--JT-SVG-vscode-font-family)',
           fontWeight: 'var(--JT-SVG-vscode-font-weight)',
           fontSize: 'calc(var(--JT-SVG-vscode-font-size) + 1px)',
-          '&:hover': {
+          [`&:hover, &.${menuItemClasses.focusVisible}`]: {
             backgroundColor: 'var(--JT-SVG-vscode-menu-selectionBackground)',
             color: 'var(--JT-SVG-vscode-menu-selectionForeground)',
             outline: '1px solid var(--JT-SVG-vscode-menu-selectionBorder, transparent)',
