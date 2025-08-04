@@ -13,6 +13,7 @@ export const SVGError: FC<Omit<IconBaseProps, 'color'>> = ({
     height={size}
     className={className}
     viewBox='0 0 232 232'
+    data-testid='svg-error'
     fill='none'
     xmlns='http://www.w3.org/2000/svg'
   >
