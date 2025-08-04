@@ -78,6 +78,8 @@ function devActivate() {
 
   const extensionTheme = registerExtension(manifest, ExtensionHostKind.LocalProcess)
   extensionTheme.registerFileUrl(themePath, new URL(themePath, window.location.href).href)
+
+  document.documentElement.classList.add('monaco-workbench')
 }
 
 export default activate
