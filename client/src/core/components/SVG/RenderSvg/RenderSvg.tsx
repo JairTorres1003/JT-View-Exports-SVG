@@ -50,17 +50,17 @@ const DynamicTagComponent = forwardRef<any, RenderSvgProps>(function RenderSvg(
 /**
  * Renders an SVG component.
  */
-const RenderSvg = forwardRef<SVGElement, SVGComponent & { className?: string }>(function RenderSvg(
-  { component, hasErrors, errors, className },
-  ref
-) {
+const RenderSvg = forwardRef<
+  SVGElement,
+  SVGComponent & { className?: string; showErrors?: boolean }
+>(function RenderSvg({ component, hasErrors, errors, className, showErrors = true }, ref) {
   const { onOpen } = useAlert()
 
   /**
    * Handles the error component by displaying an alert with the error message.
    */
   const handleErrorComponent = () => {
-    if (!errors) return
+    if (!errors || !showErrors) return
 
     onOpen(errors.message, {
       severity: 'error',

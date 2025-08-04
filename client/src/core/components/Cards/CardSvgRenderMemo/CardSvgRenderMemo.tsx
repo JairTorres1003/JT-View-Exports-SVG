@@ -25,7 +25,7 @@ const CardSvgRenderMemo = React.memo(({ component, ...props }: Omit<CardSvgProps
   return (
     <>
       <CardSvg component={component} {...props} onContextMenu={handleContextMenu}>
-        <RenderSvg {...component} ref={svgRef} />
+        <RenderSvg {...component} ref={svgRef} showErrors={false} />
       </CardSvg>
       <ContextMenu
         svgRef={svgRef}
