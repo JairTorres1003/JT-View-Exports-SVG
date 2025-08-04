@@ -35,7 +35,10 @@
     "FilesLoaded": "{{count}} file loaded",
     "FilesLoaded2": "{{count}} files loaded",
     "SortFilesByName": "Sort files by name",
-    "NoFilesSelected": "No files selected"
+    "NoFilesSelected": "No files selected",
+    "Yes": "Yes",
+    "No": "No",
+    "Errors": "Errors"
   },
   "pickers": {
     "color": {
@@ -58,7 +61,12 @@
       "DownloadAsPNG": "Download as PNG"
     },
     "info": {
-      "title": "Info component"
+      "title": "Info component",
+      "componentName": "Component name:",
+      "isAnimated": "Is animated?:",
+      "isExported": "Is exported?:",
+      "isFavorite": "Is favorite?:",
+      "typeDeclaration": "Type declaration:"
     },
     "menu": {
       "ReloadPlayground": "Reload playground",
@@ -129,8 +137,6 @@
     "FileName": "File name:",
     "IsTemporaryFile": "Is it a temporary file?:",
     "IncludesTemporaryFiles": "Includes temporary files:",
-    "Yes": "Yes",
-    "No": "No",
     "Language": "Language:",
     "Path": "Path:",
     "ShowNoExports": "Show non-exported components:",

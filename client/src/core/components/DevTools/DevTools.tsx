@@ -5,6 +5,7 @@ import { Panel, PanelGroup, PanelResizeHandle } from 'react-resizable-panels'
 
 import { devToolsClasses } from './DevTools.classes'
 import { BoxDevTools } from './DevTools.style'
+import { InfoComponent } from './InfoComponent/InfoComponent'
 import { Playground } from './Playground'
 
 import { IconClose } from '@/assets/icons/functionalities'
@@ -12,6 +13,7 @@ import { AccordionMenuItem } from '@/core/components/Accordion'
 import { useDevTools } from '@/core/hooks/DevTools/useDevTools'
 
 const MemoPlayground = memo(Playground)
+const MemoInfoComponent = memo(InfoComponent)
 
 const DevTools: FC<{ id: string; onClose?: VoidFunction }> = ({
   id,
@@ -79,7 +81,7 @@ const DevTools: FC<{ id: string; onClose?: VoidFunction }> = ({
                 tooltip: { placement: 'bottom-start', arrow: false },
               }}
             >
-              {' '}
+              <MemoInfoComponent />
             </AccordionMenuItem>
           </Panel>
         </PanelGroup>

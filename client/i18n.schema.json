@@ -164,6 +164,18 @@
         "NoFilesSelected": {
           "type": "string",
           "default": "No files selected"
+        },
+        "Yes": {
+          "type": "string",
+          "default": "Yes"
+        },
+        "No": {
+          "type": "string",
+          "default": "No"
+        },
+        "Errors": {
+          "type": "string",
+          "default": "Errors"
         }
       },
       "required": [
@@ -183,7 +195,11 @@
         "AddMoreFiles",
         "FilesLoaded",
         "FilesLoaded2",
-        "SortFilesByName"
+        "SortFilesByName",
+        "NoFilesSelected",
+        "Yes",
+        "No",
+        "Errors"
       ]
     },
     "pickers": {
@@ -277,9 +293,36 @@
             "title": {
               "type": "string",
               "default": "Info component"
+            },
+            "componentName": {
+              "type": "string",
+              "default": "Component name:"
+            },
+            "typeDeclaration": {
+              "type": "string",
+              "default": "Type declaration:"
+            },
+            "isExported": {
+              "type": "string",
+              "default": "Is exported?:"
+            },
+            "isAnimated": {
+              "type": "string",
+              "default": "Is animated?:"
+            },
+            "isFavorite": {
+              "type": "string",
+              "default": "Is favorite?:"
             }
           },
-          "required": ["title"]
+          "required": [
+            "title",
+            "componentName",
+            "typeDeclaration",
+            "isExported",
+            "isAnimated",
+            "isFavorite"
+          ]
         },
         "menu": {
           "type": "object",
@@ -451,14 +494,6 @@
           "type": "string",
           "default": "Includes temporary files:"
         },
-        "Yes": {
-          "type": "string",
-          "default": "Yes"
-        },
-        "No": {
-          "type": "string",
-          "default": "No"
-        },
         "Path": {
           "type": "string",
           "default": "Path:"
@@ -494,8 +529,6 @@
         "Language",
         "IsTemporaryFile",
         "IncludesTemporaryFiles",
-        "Yes",
-        "No",
         "Path",
         "ShowNoExports",
         "ComponentsExported",
