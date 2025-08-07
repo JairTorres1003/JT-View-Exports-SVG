@@ -35,5 +35,5 @@ yarn-error.log*
 *.vsix
 
 .eslintcache
-
+.husky/node-version-cache.txt
 .unlighthouse
