@@ -36,7 +36,7 @@ i18n
       transKeepBasicHtmlNodesFor: ['b', 'strong', 'i'],
     },
     backend: {
-      loadPath: '/locales/{{lng}}.json',
+      loadPath: '/assets/locales/{{lng}}.json',
     },
   })
   .catch((err) => {

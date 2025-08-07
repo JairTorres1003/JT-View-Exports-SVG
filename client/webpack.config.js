@@ -1,14 +1,16 @@
-import dotenv from 'dotenv'
+import { createRequire } from 'module'
 import { EsbuildPlugin } from 'esbuild-loader'
+import { fileURLToPath } from 'url'
+import { WebpackManifestPlugin } from 'webpack-manifest-plugin'
+import CopyWebpackPlugin from 'copy-webpack-plugin'
+import dotenv from 'dotenv'
 import HtmlWebpackPlugin from 'html-webpack-plugin'
+import JsonMinimizerPlugin from 'json-minimizer-webpack-plugin'
 import MiniCssExtractPlugin from 'mini-css-extract-plugin'
 import path from 'path'
 import TsconfigPathsPlugin from 'tsconfig-paths-webpack-plugin'
-import { fileURLToPath } from 'url'
 import webpack from 'webpack'
-import { WebpackManifestPlugin } from 'webpack-manifest-plugin'
 
-import { createRequire } from 'module'
 const require = createRequire(import.meta.url)
 const pkg = require('../package.json')
 
@@ -38,6 +40,7 @@ export default {
         minify: true,
         css: true,
       }),
+      new JsonMinimizerPlugin(),
     ],
   },
   resolve: {
@@ -102,6 +105,14 @@ export default {
     }),
     new webpack.ProvidePlugin({
       React: 'react',
+    }),
+    new CopyWebpackPlugin({
+      patterns: [
+        {
+          from: path.resolve(__dirname, 'public/locales'),
+          to: 'assets/locales/[path][name][ext]',
+        },
+      ],
     }),
     new WebpackManifestPlugin({
       generate: (_, files) => {
