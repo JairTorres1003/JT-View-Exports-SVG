@@ -104,6 +104,7 @@ export const InfoComponent = () => {
             }
             sx={{
               position: 'relative',
+              wordWrap: 'break-word',
               '& > *': { zIndex: 1 },
               '&:before': {
                 content: '""',
