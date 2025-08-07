@@ -1,6 +1,6 @@
 import { SVGPostMessage, SVGReceiveMessage } from '@api/enums/ViewExportsSVG'
 import type { ViewExportSVG } from '@api/types/ViewExportsSVG'
-import { useEffect } from 'react'
+import { useEffect, useRef } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 
 import useDebounce from '@/core/hooks/useDebounce'
@@ -17,6 +17,8 @@ export const useSearchBar = (): SearchBarHook => {
   const { search } = useSelector((state) => state.svg)
   const debouncedSearch = useDebounce(search, 500)
   const dispatch = useDispatch()
+
+  const mountedRef = useRef(false)
 
   /**
    * Handles the search input.
@@ -47,6 +49,8 @@ export const useSearchBar = (): SearchBarHook => {
   }
 
   useEffect(() => {
+    if (!mountedRef.current) return
+
     vscode.postMessage(SVGReceiveMessage.SearchSVGComponents, debouncedSearch)
     vscode.onMessage(SVGPostMessage.SendSVGFilteredComponents, getSVGComponents)
 
@@ -54,6 +58,14 @@ export const useSearchBar = (): SearchBarHook => {
       vscode.unregisterMessage(SVGPostMessage.SendSVGFilteredComponents)
     }
   }, [debouncedSearch])
+
+  useEffect(() => {
+    mountedRef.current = true
+
+    return () => {
+      mountedRef.current = false
+    }
+  }, [])
 
   return { search, handleSearch, handleClear }
 }
