@@ -274,15 +274,16 @@
     "client:format": "cd client && npm run format",
     "client:build": "cd client && npm run build",
     "client:dev": "cd client && npm run dev",
-    "prepare": "husky"
+    "prepare": "husky",
+    "postinstall": "npm dedupe"
   },
   "devDependencies": {
     "@babel/types": "^7.28.1",
     "@eslint/js": "^9.28.0",
     "@stylistic/eslint-plugin": "^5.0.0",
-    "@types/babel__traverse": "^7.20.7",
+    "@types/babel__traverse": "^7.28.0",
     "@types/lodash": "^4.17.20",
-    "@types/node": "^24.0.15",
+    "@types/node": "^24.2.0",
     "@types/sinon": "^17.0.4",
     "@types/vscode": "^1.80.0",
     "@typescript-eslint/eslint-plugin": "^8.33.0",
@@ -295,7 +296,7 @@
     "eslint": "^9.28.0",
     "eslint-config-love": "^121.0.0",
     "eslint-config-prettier": "^10.1.8",
-    "eslint-plugin-prettier": "^5.5.3",
+    "eslint-plugin-prettier": "^5.5.4",
     "glob": "^11.0.3",
     "globals": "^16.3.0",
     "husky": "^9.1.7",
