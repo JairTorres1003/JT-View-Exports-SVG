@@ -1,7 +1,23 @@
 import i18n from 'i18next'
 import LanguageDetector from 'i18next-browser-languagedetector'
-import Backend from 'i18next-http-backend'
 import { initReactI18next } from 'react-i18next'
+
+const Backend = {
+  type: 'backend' as const,
+  read: (
+    language: string,
+    _namespace: string,
+    callback: (error: Error | null, translations: unknown) => void
+  ) => {
+    import(`./locales/${language}.json`)
+      .then((translations) => {
+        callback(null, translations)
+      })
+      .catch((error) => {
+        callback(error, null)
+      })
+  },
+}
 
 /**
  * Initializes the i18n library with the specified configuration.
@@ -13,30 +29,11 @@ i18n
   .use(initReactI18next)
   .init({
     fallbackLng: 'en',
-    supportedLngs: [
-      'cs',
-      'de',
-      'en',
-      'es',
-      'fr',
-      'it',
-      'ja',
-      'ko',
-      'pl',
-      'pt-BR',
-      'ru',
-      'tr',
-      'zh-CN',
-      'zh-TW',
-    ],
     interpolation: {
       escapeValue: false,
     },
     react: {
       transKeepBasicHtmlNodesFor: ['b', 'strong', 'i'],
-    },
-    backend: {
-      loadPath: '/assets/locales/{{lng}}.json',
     },
   })
   .catch((err) => {
