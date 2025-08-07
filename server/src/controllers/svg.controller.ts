@@ -73,10 +73,15 @@ export class SvgController {
     const query = req.body.data
     const filtered = filteredExports(this.viewExportSVG, query)
 
-    if (Array.isArray(filtered)) {
+    if (Array.isArray(filtered) && filtered.length > 0) {
       res.send({ type: SVGPostMessage.SendSVGFilteredComponents, data: filtered })
     } else {
-      res.send({ type: SVGPostMessage.SendSVGError, data: filtered })
+      res.send({
+        type: SVGPostMessage.SendSVGError,
+        data: !Array.isArray(filtered)
+          ? filtered
+          : { message: l10n.t('No SVG components found...'), location: {}, data: filtered },
+      })
     }
   }
 
