@@ -1,0 +1,147 @@
+{
+  "errors": {
+    "FailedToFindTheRootElement": "Nie znaleziono elementu głównego",
+    "UnknownError": "Nieznany błąd",
+    "TheComponentIsEmpty": "Komponent jest pusty",
+    "VSCodeApiIsNotAvailable": "Interfejs API VSCode jest niedostępny",
+    "NoResponse": "Brak odpowiedzi",
+    "NoMessageTypeProvided": "Nie podano typu wiadomości",
+    "FailedToReloadEditor": "Nie udało się przeładować edytora",
+    "FailedToUpdateUserConfiguration": "Nie udało się zaktualizować konfiguracji użytkownika",
+    "FailedToUpdateUserKeybindings": "Nie udało się zaktualizować skrótów klawiszowych użytkownika",
+    "EditorReferenceIsNotAvailable": "Odniesienie do edytora jest niedostępne",
+    "FailedToActivateExtensionTheme": "Nie udało się aktywować motywu rozszerzenia",
+    "FailedToFetchExtensionTheme": "Nie udało się pobrać motywu rozszerzenia",
+    "FailedToInitializeEditor": "Nie udało się zainicjować edytora",
+    "ErrorApplyingInitialColor": "Błąd podczas stosowania koloru początkowego",
+    "TheFollowingFilesAreNotSupported": "Następujące pliki nie są obsługiwane:",
+    "ErrorCreatingTemporaryFile": "Błąd podczas tworzenia pliku tymczasowego {{name}}"
+  },
+  "labels": {
+    "Loading": "Ładowanie...",
+    "ExtractingComponents": "Wyodrębnianie komponentów...",
+    "ExtractComponents": "Wyodrębnij komponenty",
+    "Search": "Szukaj",
+    "Clear": "Wyczyść",
+    "Info": "Informacje",
+    "Refresh": "Odśwież",
+    "OpenFile": "Otwórz plik",
+    "OpenManyFiles": "Otwórz wiele plików",
+    "ListOfAssociatedFilesFor": "Lista powiązanych plików dla \"{{name}}\"",
+    "Copied {{value}} to clipboard": "Skopiowano <b>{{value}}</b> do schowka",
+    "Close": "Zamknij",
+    "DeleteThisFile": "Usuń ten plik",
+    "AddMoreFiles": "Dodaj więcej plików",
+    "FilesLoaded": "{{count}} plik załadowany",
+    "FilesLoaded2": "{{count}} pliki załadowane",
+    "SortFilesByName": "Sortuj pliki według nazwy",
+    "NoFilesSelected": "Nie wybrano plików",
+    "Yes": "Tak",
+    "No": "Nie",
+    "Errors": "Błędy"
+  },
+  "pickers": {
+    "color": {
+      "title": "Wybierz kolor"
+    }
+  },
+  "DevTools": {
+    "title": "Narzędzia programistyczne",
+    "playground": {
+      "title": "Plac zabaw",
+      "HideCode": "Ukryj kod",
+      "ShowCode": "Pokaż kod",
+      "CopyCode": "Kopiuj kod",
+      "ResetCode": "Resetuj kod",
+      "MoreActions": "Więcej akcji...",
+      "OpenInEditor": "Otwórz w edytorze",
+      "CopyAsSVG": "Kopiuj jako SVG",
+      "CopyAsPNG": "Kopiuj jako PNG",
+      "DownloadAsSVG": "Pobierz jako SVG",
+      "DownloadAsPNG": "Pobierz jako PNG"
+    },
+    "info": {
+      "title": "Komponent Info",
+      "componentName": "Nazwa komponentu:",
+      "isAnimated": "Czy jest animowany?:",
+      "isExported": "Czy jest eksportowany?:",
+      "isFavorite": "Czy jest ulubiony?:",
+      "typeDeclaration": "Deklaracja typu:"
+    },
+    "menu": {
+      "ReloadPlayground": "Odśwież plac zabaw",
+      "ReloadEditor": "Odśwież edytor",
+      "DisableWordWrap": "Wyłącz zawijanie wierszy",
+      "EnableWordWrap": "Włącz zawijanie wierszy"
+    },
+    "editor": {
+      "suggestions": {
+        "components": {
+          "details": {
+            "static": "Komponent SVG",
+            "animated": "Animowany komponent SVG",
+            "temporary-static": "(Tymczasowy) komponent SVG",
+            "temporary-animated": "(Tymczasowy) animowany komponent SVG"
+          },
+          "documentation": [
+            "---",
+            "**🧩 Podgląd komponentu SVG**\\",
+            "To jest dynamiczny komponent SVG. Możesz modyfikować jego kod i natychmiast podglądać wynik.\\",
+            "\\",
+            "**🎛️ Dostosowywanie**\\",
+            "Przekaż właściwości (props), aby zmienić wygląd lub zachowanie komponentu.\\",
+            "\\",
+            "**Przykład użycia:**",
+            "```jsx",
+            "<{{name}} {{propertyValue}} />",
+            "```",
+            "\\",
+            "**🔍 Więcej informacji:** [{{fileName}}]({{link}} \"file://{{filePath}}\")\\",
+            "Najedź kursorem na komponent lub otwórz plik, aby zobaczyć pełną dokumentację."
+          ],
+          "documentation_withRestProps": [
+            "---",
+            "**🧩 Podgląd komponentu SVG**\\",
+            "To jest dynamiczny komponent SVG. Możesz modyfikować jego kod i natychmiast podglądać wynik.\\",
+            "\\",
+            "**🎛️ Dostosowywanie**\\",
+            "Możesz przekazać konkretne właściwości, a także *wszystkie ważne atrybuty SVG* (rest props), aby jeszcze bardziej dostosować komponent.\\",
+            "\\",
+            "**Przykład użycia:**",
+            "```jsx",
+            "<{{name}} {{propertyValue}} />",
+            "```",
+            "\\",
+            "**🔍 Więcej informacji:** [{{fileName}}]({{link}} \"file://{{filePath}}\")\\",
+            "Najedź kursorem na komponent lub otwórz plik, aby zobaczyć pełną dokumentację."
+          ]
+        },
+        "properties": {
+          "details": {
+            "static": "(właściwość) {{name}}: {{type}}"
+          }
+        }
+      }
+    }
+  },
+  "DropZone": {
+    "title": "Prześlij swoje pliki JS, JSX, TS lub TSX i łatwo odkryj zawarte w nich komponenty SVG.",
+    "Select files": "Wybierz pliki",
+    "or drop the files here": "lub upuść pliki tutaj",
+    "Let it go!": "Niech to będzie!"
+  },
+  "modalInfo": {
+    "title": "Informacje",
+    "ComponentsExported": "Łączna liczba wyeksportowanych komponentów:",
+    "ComponentsNotExported": "Łączna liczba niewyeksportowanych komponentów:",
+    "FileName": "Nazwa pliku:",
+    "IsTemporaryFile": "Czy jest to plik tymczasowy?:",
+    "IncludesTemporaryFiles": "Zawiera pliki tymczasowe:",
+    "Language": "Język:",
+    "Path": "Ścieżka:",
+    "ShowNoExports": "Pokaż niewyeksportowane komponenty:",
+    "TotalComponents": "Łączna liczba komponentów:",
+    "FilesCount": "Łączna liczba plików:",
+    "GroupKindName": "Nazwa grupy:"
+  }
+}

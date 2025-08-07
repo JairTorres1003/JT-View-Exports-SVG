@@ -1,0 +1,147 @@
+{
+  "errors": {
+    "FailedToFindTheRootElement": "No se pudo encontrar el elemento raíz.",
+    "UnknownError": "Error desconocido",
+    "TheComponentIsEmpty": "El componente está vacío",
+    "VSCodeApiIsNotAvailable": "La API de VSCode no está disponible",
+    "NoResponse": "Sin respuesta",
+    "NoMessageTypeProvided": "No se proporcionó tipo de mensaje",
+    "FailedToReloadEditor": "No se pudo recargar el editor",
+    "FailedToUpdateUserConfiguration": "No se pudo actualizar la configuración del usuario",
+    "FailedToUpdateUserKeybindings": "No se pudieron actualizar las combinaciones de teclas del usuario",
+    "EditorReferenceIsNotAvailable": "La referencia del editor no está disponible",
+    "FailedToActivateExtensionTheme": "No se pudo activar el tema de la extensión",
+    "FailedToFetchExtensionTheme": "No se pudo obtener el tema de la extensión",
+    "FailedToInitializeEditor": "No se pudo inicializar el editor",
+    "ErrorApplyingInitialColor": "Error al aplicar el color inicial",
+    "TheFollowingFilesAreNotSupported": "Los siguientes archivos no son compatibles:",
+    "ErrorCreatingTemporaryFile": "Error al crear el archivo temporal {{name}}"
+  },
+  "labels": {
+    "Loading": "Cargando...",
+    "ExtractingComponents": "Extrayendo componentes...",
+    "ExtractComponents": "Extraer componentes",
+    "Search": "Buscar",
+    "Clear": "Borrar",
+    "Info": "Información",
+    "Refresh": "Actualizar",
+    "OpenFile": "Abrir archivo",
+    "OpenManyFiles": "Abrir muchos archivos",
+    "ListOfAssociatedFilesFor": "Lista de archivos asociados para \"{{name}}\"",
+    "Copied {{value}} to clipboard": "Copiado <b>{{value}}</b> al portapapeles",
+    "Close": "Cerrar",
+    "DeleteThisFile": "Eliminar este archivo",
+    "AddMoreFiles": "Agregar más archivos",
+    "FilesLoaded": "{{count}} archivo cargado",
+    "FilesLoaded2": "{{count}} archivos cargados",
+    "SortFilesByName": "Ordenar archivos por nombre",
+    "NoFilesSelected": "No se seleccionaron archivos",
+    "Yes": "Sí",
+    "No": "No",
+    "Errors": "Errores"
+  },
+  "pickers": {
+    "color": {
+      "title": "Seleccionar un color"
+    }
+  },
+  "DevTools": {
+    "title": "Herramientas de desarrollo",
+    "playground": {
+      "title": "Área de pruebas",
+      "HideCode": "Ocultar código",
+      "ShowCode": "Mostrar código",
+      "CopyCode": "Copiar código",
+      "ResetCode": "Restablecer código",
+      "MoreActions": "Más acciones...",
+      "OpenInEditor": "Abrir en el editor",
+      "CopyAsSVG": "Copiar como SVG",
+      "CopyAsPNG": "Copiar como PNG",
+      "DownloadAsSVG": "Descargar como SVG",
+      "DownloadAsPNG": "Descargar como PNG"
+    },
+    "info": {
+      "title": "Información del componente",
+      "componentName": "Nombre del componente:",
+      "isAnimated": "¿Está animado?:",
+      "isExported": "¿Está exportado?:",
+      "isFavorite": "¿Es favorito?:",
+      "typeDeclaration": "Tipo de declaración:"
+    },
+    "menu": {
+      "ReloadPlayground": "Recargar área de pruebas",
+      "ReloadEditor": "Recargar editor",
+      "DisableWordWrap": "Deshabilitar ajuste de línea",
+      "EnableWordWrap": "Habilitar ajuste de línea"
+    },
+    "editor": {
+      "suggestions": {
+        "components": {
+          "details": {
+            "static": "Componente SVG",
+            "animated": "Componente SVG animado",
+            "temporary-static": "(Temporal) Componente SVG",
+            "temporary-animated": "(Temporal) Componente SVG animado"
+          },
+          "documentation": [
+            "---",
+            "**🧩 Vista previa del componente SVG**\\",
+            "Este es un componente SVG dinámico. Puede modificar su código y ver instantáneamente el resultado en la vista previa.\\",
+            "\\",
+            "**🎛️ Personalización**\\",
+            "Pase propiedades (props) para cambiar la apariencia o el comportamiento del componente.\\",
+            "\\",
+            "**Ejemplo de uso:**",
+            "```jsx",
+            "<{{name}} {{propertyValue}} />",
+            "```",
+            "\\",
+            "**🔍 Más información:** [{{fileName}}]({{link}} \"file://{{filePath}}\")\\",
+            "Pase el mouse sobre el componente o abra el archivo para ver la documentación completa."
+          ],
+          "documentation_withRestProps": [
+            "---",
+            "**🧩 Vista previa del componente SVG**\\",
+            "Este es un componente SVG dinámico. Puede modificar su código y ver instantáneamente el resultado en la vista previa.\\",
+            "\\",
+            "**🎛️ Personalización**\\",
+            "Puede pasar propiedades específicas así como *cualquier atributo SVG válido* (rest props) para personalizar aún más el componente.\\",
+            "\\",
+            "**Ejemplo de uso:**",
+            "```jsx",
+            "<{{name}} {{propertyValue}} />",
+            "```",
+            "\\",
+            "**🔍 Más información:** [{{fileName}}]({{link}} \"file://{{filePath}}\")\\",
+            "Pase el mouse sobre el componente o abra el archivo para ver la documentación completa."
+          ]
+        },
+        "properties": {
+          "details": {
+            "static": "(propiedad) {{name}}: {{type}}"
+          }
+        }
+      }
+    }
+  },
+  "DropZone": {
+    "title": "Sube tus archivos JS, JSX, TS o TSX y descubre fácilmente los componentes SVG que contienen.",
+    "Select files": "Seleccionar archivos",
+    "or drop the files here": "o suelta los archivos aquí",
+    "Let it go!": "¡Déjalo ir!"
+  },
+  "modalInfo": {
+    "title": "Información",
+    "ComponentsExported": "Total de componentes exportados:",
+    "ComponentsNotExported": "Total de componentes no exportados:",
+    "FileName": "Nombre del archivo:",
+    "IsTemporaryFile": "¿Es un archivo temporal?:",
+    "IncludesTemporaryFiles": "Incluye archivos temporales:",
+    "Language": "Lenguaje:",
+    "Path": "Ruta:",
+    "ShowNoExports": "Mostrar componentes no exportados:",
+    "TotalComponents": "Total de componentes:",
+    "FilesCount": "Total de archivos:",
+    "GroupKindName": "Nombre del grupo:"
+  }
+}

@@ -1,0 +1,147 @@
+{
+  "errors": {
+    "FailedToFindTheRootElement": "루트 요소를 찾을 수 없습니다.",
+    "UnknownError": "알 수 없는 오류",
+    "TheComponentIsEmpty": "구성 요소가 비어 있습니다.",
+    "VSCodeApiIsNotAvailable": "VSCode API를 사용할 수 없습니다.",
+    "NoResponse": "응답 없음",
+    "NoMessageTypeProvided": "메시지 유형이 제공되지 않았습니다.",
+    "FailedToReloadEditor": "편집기를 다시 로드하지 못했습니다.",
+    "FailedToUpdateUserConfiguration": "사용자 구성을 업데이트하지 못했습니다.",
+    "FailedToUpdateUserKeybindings": "사용자 키 바인딩을 업데이트하지 못했습니다.",
+    "EditorReferenceIsNotAvailable": "편집기 참조를 사용할 수 없습니다.",
+    "FailedToActivateExtensionTheme": "확장 테마를 활성화하지 못했습니다.",
+    "FailedToFetchExtensionTheme": "확장 테마를 가져오지 못했습니다.",
+    "FailedToInitializeEditor": "편집기를 초기화하지 못했습니다.",
+    "ErrorApplyingInitialColor": "초기 색상 적용 중 오류가 발생했습니다.",
+    "TheFollowingFilesAreNotSupported": "다음 파일은 지원되지 않습니다.",
+    "ErrorCreatingTemporaryFile": "임시 파일 {{name}} 생성 중 오류가 발생했습니다."
+  },
+  "labels": {
+    "Loading": "로딩 중...",
+    "ExtractingComponents": "구성 요소 추출 중...",
+    "ExtractComponents": "구성 요소 추출",
+    "Search": "검색",
+    "Clear": "지우기",
+    "Info": "정보",
+    "Refresh": "새로 고침",
+    "OpenFile": "파일 열기",
+    "OpenManyFiles": "여러 파일 열기",
+    "ListOfAssociatedFilesFor": "\"{{name}}\"의 관련 파일 목록",
+    "Copied {{value}} to clipboard": "<b>{{value}}</b>를 클립보드에 복사했습니다.",
+    "Close": "닫기",
+    "DeleteThisFile": "이 파일 삭제",
+    "AddMoreFiles": "파일 추가",
+    "FilesLoaded": "{{count}} 파일이 로드되었습니다.",
+    "FilesLoaded2": "{{count}} 파일이 로드되었습니다.",
+    "SortFilesByName": "이름으로 파일 정렬",
+    "NoFilesSelected": "선택된 파일이 없습니다.",
+    "Yes": "예",
+    "No": "아니오",
+    "Errors": "오류"
+  },
+  "pickers": {
+    "color": {
+      "title": "색상 선택"
+    }
+  },
+  "DevTools": {
+    "title": "개발자 도구",
+    "playground": {
+      "title": "운동장",
+      "HideCode": "코드 숨기기",
+      "ShowCode": "코드 표시",
+      "CopyCode": "코드 복사",
+      "ResetCode": "코드 재설정",
+      "MoreActions": "기타 작업...",
+      "OpenInEditor": "편집기에서 열기",
+      "CopyAsSVG": "SVG로 복사",
+      "CopyAsPNG": "PNG로 복사",
+      "DownloadAsSVG": "SVG로 다운로드",
+      "DownloadAsPNG": "PNG로 다운로드"
+    },
+    "info": {
+      "title": "정보 구성 요소",
+      "componentName": "구성 요소 이름:",
+      "isAnimated": "애니메이션 여부:",
+      "isExported": "내보내기 여부:",
+      "isFavorite": "즐겨찾기 여부:",
+      "typeDeclaration": "유형 선언:"
+    },
+    "menu": {
+      "ReloadPlayground": "운동장 새로 고침",
+      "ReloadEditor": "편집기 새로 고침",
+      "DisableWordWrap": "줄 바꿈 비활성화",
+      "EnableWordWrap": "줄 바꿈 활성화"
+    },
+    "editor": {
+      "suggestions": {
+        "components": {
+          "details": {
+            "static": "SVG 구성 요소",
+            "animated": "애니메이션 SVG 구성 요소",
+            "temporary-static": "(임시) SVG 구성 요소",
+            "temporary-animated": "(임시) 애니메이션 SVG 구성 요소"
+          },
+          "documentation": [
+            "---",
+            "**🧩 SVG 구성 요소 미리보기**\\",
+            "이것은 동적 SVG 구성 요소입니다. 코드를 수정하면 결과를 즉시 미리 볼 수 있습니다.\\",
+            "\\",
+            "**🎛️ 사용자 정의**\\",
+            "속성(props)을 전달하여 구성 요소의 모양이나 동작을 변경할 수 있습니다.\\",
+            "\\",
+            "**사용 예:**",
+            "```jsx",
+            "<{{name}} {{propertyValue}} />",
+            "```",
+            "\\",
+            "**🔍 더 많은 정보:** [{{fileName}}]({{link}} \"file://{{filePath}}\")\\",
+            "구성 요소 위에 마우스를 올려놓거나 파일을 열어 전체 문서를 확인하세요."
+          ],
+          "documentation_withRestProps": [
+            "---",
+            "**🧩 SVG 구성 요소 미리보기**\\",
+            "이것은 동적 SVG 구성 요소입니다. 코드를 수정하면 결과를 즉시 미리 볼 수 있습니다.\\",
+            "\\",
+            "**🎛️ 사용자 정의**\\",
+            "구성 요소를 더욱 구체적으로 사용자 정의하기 위해 특정 속성뿐만 아니라 *유효한 SVG 속성*(rest props)도 전달할 수 있습니다.\\",
+            "\\",
+            "**사용 예:**",
+            "```jsx",
+            "<{{name}} {{propertyValue}} />",
+            "```",
+            "\\",
+            "**🔍 더 많은 정보:** [{{fileName}}]({{link}} \"file://{{filePath}}\")\\",
+            "구성 요소 위에 마우스를 올려놓거나 파일을 열어 전체 문서를 확인하세요."
+          ]
+        },
+        "properties": {
+          "details": {
+            "static": "(재산) {{name}}: {{type}}"
+          }
+        }
+      }
+    }
+  },
+  "DropZone": {
+    "title": "JS, JSX, TS 또는 TSX 파일을 업로드하고 해당 파일에 포함된 SVG 구성 요소를 쉽게 찾아보세요.",
+    "Select files": "파일 선택",
+    "or drop the files here": "또는 여기에 파일을 드롭하세요.",
+    "Let it go!": "놓아주세요!"
+  },
+  "modalInfo": {
+    "title": "정보",
+    "ComponentsExported": "내보낸 구성 요소 수:",
+    "ComponentsNotExported": "내보내지 않은 구성 요소 수:",
+    "FileName": "파일 이름:",
+    "IsTemporaryFile": "임시 파일인가요?:",
+    "IncludesTemporaryFiles": "임시 파일 포함:",
+    "Language": "언어:",
+    "Path": "경로:",
+    "ShowNoExports": "내보내지 않은 구성 요소 표시:",
+    "TotalComponents": "총 구성 요소:",
+    "FilesCount": "파일 수:",
+    "GroupKindName": "그룹 이름:"
+  }
+}

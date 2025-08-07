@@ -1,0 +1,147 @@
+{
+  "errors": {
+    "FailedToFindTheRootElement": "Falha ao encontrar o elemento raiz",
+    "UnknownError": "Erro desconhecido",
+    "TheComponentIsEmpty": "O componente está vazio",
+    "VSCodeApiIsNotAvailable": "A API do VSCode não está disponível",
+    "NoResponse": "Sem resposta",
+    "NoMessageTypeProvided": "Nenhum tipo de mensagem fornecido",
+    "FailedToReloadEditor": "Falha ao recarregar o editor",
+    "FailedToUpdateUserConfiguration": "Falha ao atualizar a configuração do usuário",
+    "FailedToUpdateUserKeybindings": "Falha ao atualizar as combinações de teclas do usuário",
+    "EditorReferenceIsNotAvailable": "A referência do editor não está disponível",
+    "FailedToActivateExtensionTheme": "Falha ao ativar o tema da extensão",
+    "FailedToFetchExtensionTheme": "Falha ao buscar o tema da extensão",
+    "FailedToInitializeEditor": "Falha ao inicializar o editor",
+    "ErrorApplyingInitialColor": "Erro ao aplicar a cor inicial",
+    "TheFollowingFilesAreNotSupported": "Os seguintes arquivos não são suportados:",
+    "ErrorCreatingTemporaryFile": "Erro ao criar o arquivo temporário {{name}}"
+  },
+  "labels": {
+    "Loading": "Carregando...",
+    "ExtractingComponents": "Extraindo componentes...",
+    "ExtractComponents": "Extrair componentes",
+    "Search": "Pesquisar",
+    "Clear": "Limpar",
+    "Info": "Informações",
+    "Refresh": "Atualizar",
+    "OpenFile": "Abrir arquivo",
+    "OpenManyFiles": "Abrir vários arquivos",
+    "ListOfAssociatedFilesFor": "Lista de arquivos associados a \"{{name}}\"",
+    "Copied {{value}} to clipboard": "Copiado <b>{{value}}</b> para a área de transferência",
+    "Close": "Fechar",
+    "DeleteThisFile": "Excluir este arquivo",
+    "AddMoreFiles": "Adicionar mais arquivos",
+    "FilesLoaded": "{{count}} arquivo carregado",
+    "FilesLoaded2": "{{count}} arquivos carregados",
+    "SortFilesByName": "Classificar arquivos por nome",
+    "NoFilesSelected": "Nenhum arquivo selecionado",
+    "Yes": "Sim",
+    "No": "Não",
+    "Errors": "Erros"
+  },
+  "pickers": {
+    "color": {
+      "title": "Selecionar uma cor"
+    }
+  },
+  "DevTools": {
+    "title": "Ferramentas de desenvolvimento",
+    "playground": {
+      "title": "Parque infantil",
+      "HideCode": "Ocultar código",
+      "ShowCode": "Mostrar código",
+      "CopyCode": "Copiar código",
+      "ResetCode": "Redefinir código",
+      "MoreActions": "Mais ações...",
+      "OpenInEditor": "Abrir no editor",
+      "CopyAsSVG": "Copiar como SVG",
+      "CopyAsPNG": "Copiar como PNG",
+      "DownloadAsSVG": "Baixar como SVG",
+      "DownloadAsPNG": "Baixar como PNG"
+    },
+    "info": {
+      "title": "Informações do componente",
+      "componentName": "Nome do componente:",
+      "isAnimated": "Está animado?:",
+      "isExported": "Está exportado?:",
+      "isFavorite": "É favorito?:",
+      "typeDeclaration": "Declaração de tipo:"
+    },
+    "menu": {
+      "ReloadPlayground": "Recarregar playground",
+      "ReloadEditor": "Recarregar editor",
+      "DisableWordWrap": "Desativar quebra de linha",
+      "EnableWordWrap": "Ativar quebra de linha"
+    },
+    "editor": {
+      "suggestions": {
+        "components": {
+          "details": {
+            "static": "Componente SVG",
+            "animated": "Componente SVG Animado",
+            "temporary-static": "(Temporário) Componente SVG",
+            "temporary-animated": "(Temporário) Componente SVG Animado"
+          },
+          "documentation": [
+            "---",
+            "**🧩 Visualização do componente SVG**\\",
+            "Este é um componente SVG dinâmico. Você pode modificar seu código e visualizar o resultado instantaneamente.\\",
+            "\\",
+            "**🎛️ Personalização**\\",
+            "Passe propriedades (props) para alterar a aparência ou o comportamento do componente.\\",
+            "\\",
+            "**Exemplo de uso:**",
+            "```jsx",
+            "<{{name}} {{propertyValue}} />",
+            "```",
+            "\\",
+            "**🔍 Mais informações:** [{{fileName}}]({{link}} \"file://{{filePath}}\")\\",
+            "Passe o mouse sobre o componente ou abra o arquivo para ver a documentação completa."
+          ],
+          "documentation_withRestProps": [
+            "---",
+            "**🧩 Visualização do componente SVG**\\",
+            "Este é um componente SVG dinâmico. Você pode modificar seu código e visualizar o resultado instantaneamente.\\",
+            "\\",
+            "**🎛️ Personalização**\\",
+            "Você pode passar propriedades específicas, bem como *qualquer atributo SVG válido* (rest props) para personalizar ainda mais o componente.\\",
+            "\\",
+            "**Exemplo de uso:**",
+            "```jsx",
+            "<{{name}} {{propertyValue}} />",
+            "```",
+            "\\",
+            "**🔍 Mais informações:** [{{fileName}}]({{link}} \"file://{{filePath}}\")\\",
+            "Passe o mouse sobre o componente ou abra o arquivo para ver a documentação completa."
+          ]
+        },
+        "properties": {
+          "details": {
+            "static": "(propriedade) {{name}}: {{type}}"
+          }
+        }
+      }
+    }
+  },
+  "DropZone": {
+    "title": "Faça upload dos seus arquivos JS, JSX, TS ou TSX e descubra facilmente os componentes SVG que eles contêm.",
+    "Select files": "Selecionar arquivos",
+    "or drop the files here": "ou solte os arquivos aqui",
+    "Let it go!": "Deixe-o ir!"
+  },
+  "modalInfo": {
+    "title": "Informações",
+    "ComponentsExported": "Total de componentes exportados:",
+    "ComponentsNotExported": "Total de componentes não exportados:",
+    "FileName": "Nome do arquivo:",
+    "IsTemporaryFile": "É um arquivo temporário?:",
+    "IncludesTemporaryFiles": "Inclui arquivos temporários:",
+    "Language": "Idioma:",
+    "Path": "Caminho:",
+    "ShowNoExports": "Mostrar componentes não exportados:",
+    "TotalComponents": "Total de componentes:",
+    "FilesCount": "Total de arquivos:",
+    "GroupKindName": "Nome do grupo:"
+  }
+}

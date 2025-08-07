@@ -1,0 +1,147 @@
+{
+  "errors": {
+    "FailedToFindTheRootElement": "Stammelement konnte nicht gefunden werden.",
+    "UnknownError": "Unbekannter Fehler",
+    "TheComponentIsEmpty": "Die Komponente ist leer.",
+    "VSCodeApiIsNotAvailable": "Die VSCode-API ist nicht verfügbar.",
+    "NoResponse": "Keine Antwort.",
+    "NoMessageTypeProvided": "Kein Nachrichtentyp angegeben.",
+    "FailedToReloadEditor": "Editor konnte nicht neu geladen werden.",
+    "FailedToUpdateUserConfiguration": "Benutzerkonfiguration konnte nicht aktualisiert werden.",
+    "FailedToUpdateUserKeybindings": "Benutzertastenbelegungen konnten nicht aktualisiert werden.",
+    "EditorReferenceIsNotAvailable": "Editor-Referenz ist nicht verfügbar.",
+    "FailedToActivateExtensionTheme": "Erweiterungsdesign konnte nicht aktiviert werden.",
+    "FailedToFetchExtensionTheme": "Erweiterungsdesign konnte nicht abgerufen werden.",
+    "FailedToInitializeEditor": "Editor konnte nicht initialisiert werden.",
+    "ErrorApplyingInitialColor": "Fehler beim Anwenden der Anfangsfarbe.",
+    "TheFollowingFilesAreNotSupported": "Folgende Dateien werden nicht unterstützt:",
+    "ErrorCreatingTemporaryFile": "Fehler beim Erstellen der temporären Datei {{name}}"
+  },
+  "labels": {
+    "Loading": "Laden...",
+    "ExtractingComponents": "Komponenten werden extrahiert...",
+    "ExtractComponents": "Komponenten extrahieren",
+    "Search": "Suchen",
+    "Clear": "Löschen",
+    "Info": "Info",
+    "Refresh": "Aktualisieren",
+    "OpenFile": "Datei öffnen",
+    "OpenManyFiles": "Viele Dateien öffnen",
+    "ListOfAssociatedFilesFor": "Liste der zugehörigen Dateien für \"{{name}}\"",
+    "Copied {{value}} to clipboard": "Kopiert <b>{{value}}</b> in die Zwischenablage",
+    "Close": "Schließen",
+    "DeleteThisFile": "Diese Datei löschen",
+    "AddMoreFiles": "Weitere Dateien hinzufügen",
+    "FilesLoaded": "{{count}} Datei geladen",
+    "FilesLoaded2": "{{count}} Dateien geladen",
+    "SortFilesByName": "Dateien nach Name sortieren",
+    "NoFilesSelected": "Keine Dateien ausgewählt",
+    "Yes": "Ja",
+    "No": "Nein",
+    "Errors": "Fehler"
+  },
+  "pickers": {
+    "color": {
+      "title": "Wählen Sie eine Farbe"
+    }
+  },
+  "DevTools": {
+    "title": "Entwicklertools",
+    "playground": {
+      "title": "Spielplatz",
+      "HideCode": "Code ausblenden",
+      "ShowCode": "Code anzeigen",
+      "CopyCode": "Code kopieren",
+      "ResetCode": "Code zurücksetzen",
+      "MoreActions": "Weitere Aktionen...",
+      "OpenInEditor": "Im Editor öffnen",
+      "CopyAsSVG": "Als SVG kopieren",
+      "CopyAsPNG": "Als PNG kopieren",
+      "DownloadAsSVG": "Als SVG herunterladen",
+      "DownloadAsPNG": "Als PNG herunterladen"
+    },
+    "info": {
+      "title": "Info-Komponente",
+      "componentName": "Komponentenname:",
+      "isAnimated": "Ist animiert?:",
+      "isExported": "Ist exportiert?:",
+      "isFavorite": "Ist Favorit?:",
+      "typeDeclaration": "Typdeklaration:"
+    },
+    "menu": {
+      "ReloadPlayground": "Spielplatz neu laden",
+      "ReloadEditor": "Editor neu laden",
+      "DisableWordWrap": "Zeilenumbruch deaktivieren",
+      "EnableWordWrap": "Zeilenumbruch aktivieren"
+    },
+    "editor": {
+      "suggestions": {
+        "components": {
+          "details": {
+            "static": "SVG Komponente",
+            "animated": "Animierte SVG Komponente",
+            "temporary-static": "(Temporäre) SVG Komponente",
+            "temporary-animated": "(Temporäre) Animierte SVG Komponente"
+          },
+          "documentation": [
+            "---",
+            "**🧩 SVG-Komponentenvorschau**\\",
+            "Dies ist eine dynamische SVG-Komponente. Sie können den Code ändern und das Ergebnis sofort in der Vorschau anzeigen.\\",
+            "\\",
+            "**🎛️ Anpassung**\\",
+            "Übergeben Sie Eigenschaften (props), um das Aussehen oder Verhalten der Komponente zu ändern.\\",
+            "\\",
+            "**Beispiel Verwendung:**",
+            "```jsx",
+            "<{{name}} {{propertyValue}} />",
+            "```",
+            "\\",
+            "**🔍 Mehr Infos:** [{{fileName}}]({{link}} \"file://{{filePath}}\")\\",
+            "Bewegen Sie den Mauszeiger über die Komponente oder öffnen Sie die Datei, um die vollständige Dokumentation zu erhalten."
+          ],
+          "documentation_withRestProps": [
+            "---",
+            "**🧩 SVG-Komponentenvorschau**\\",
+            "Dies ist eine dynamische SVG-Komponente. Sie können den Code ändern und das Ergebnis sofort in der Vorschau anzeigen.\\",
+            "\\",
+            "**🎛️ Anpassung**\\",
+            "Sie können bestimmte Eigenschaften sowie *alle gültigen SVG-Attribute* (Rest-Props) übergeben, um die Komponente weiter anzupassen.\\",
+            "\\",
+            "**Beispiel Verwendung:**",
+            "```jsx",
+            "<{{name}} {{propertyValue}} />",
+            "```",
+            "\\",
+            "**🔍 Mehr Infos:** [{{fileName}}]({{link}} \"file://{{filePath}}\")\\",
+            "Bewegen Sie den Mauszeiger über die Komponente oder öffnen Sie die Datei, um die vollständige Dokumentation zu erhalten."
+          ]
+        },
+        "properties": {
+          "details": {
+            "static": "(Eigenschaft) {{name}}: {{type}}"
+          }
+        }
+      }
+    }
+  },
+  "DropZone": {
+    "title": "Laden Sie Ihre JS-, JSX-, TS- oder TSX-Dateien hoch und entdecken Sie ganz einfach die darin enthaltenen SVG-Komponenten.",
+    "Select files": "Dateien auswählen",
+    "or drop the files here": "oder ziehen Sie die Dateien hierher",
+    "Let it go!": "Loslassen!"
+  },
+  "modalInfo": {
+    "title": "Info",
+    "ComponentsExported": "Anzahl exportierter Komponenten:",
+    "ComponentsNotExported": "Anzahl nicht exportierter Komponenten:",
+    "FileName": "Dateiname:",
+    "IsTemporaryFile": "Ist es eine temporäre Datei?:",
+    "IncludesTemporaryFiles": "Beinhaltet temporäre Dateien:",
+    "Language": "Sprache:",
+    "Path": "Pfad:",
+    "ShowNoExports": "Nicht exportierte Komponenten anzeigen:",
+    "TotalComponents": "Anzahl Komponenten:",
+    "FilesCount": "Anzahl Dateien:",
+    "GroupKindName": "Gruppenname:"
+  }
+}

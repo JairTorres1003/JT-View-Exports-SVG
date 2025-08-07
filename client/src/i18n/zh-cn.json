@@ -1,0 +1,147 @@
+{
+  "errors": {
+    "FailedToFindTheRootElement": "找不到根元素",
+    "UnknownError": "未知错误",
+    "TheComponentIsEmpty": "组件为空",
+    "VSCodeApiIsNotAvailable": "VSCode API 不可用",
+    "NoResponse": "无响应",
+    "NoMessageTypeProvided": "未提供消息类型",
+    "FailedToReloadEditor": "无法重新加载编辑器",
+    "FailedToUpdateUserConfiguration": "无法更新用户配置",
+    "FailedToUpdateUserKeybindings": "无法更新用户按键绑定",
+    "EditorReferenceIsNotAvailable": "编辑器参考不可用",
+    "FailedToActivateExtensionTheme": "无法激活扩展主题",
+    "FailedToFetchExtensionTheme": "无法获取扩展主题",
+    "FailedToInitializeEditor": "无法初始化编辑器",
+    "ErrorApplyingInitialColor": "应用初始颜色时出错",
+    "TheFollowingFilesAreNotSupported": "不支持以下文件：",
+    "ErrorCreatingTemporaryFile": "创建临时文件 {{name}} 时出错"
+  },
+  "labels": {
+    "Loading": "加载中...",
+    "ExtractingComponents": "提取组件中...",
+    "ExtractComponents": "提取组件",
+    "Search": "搜索",
+    "Clear": "清除",
+    "Info": "信息",
+    "Refresh": "刷新",
+    "OpenFile": "打开文件",
+    "OpenManyFiles": "打开多个文件",
+    "ListOfAssociatedFilesFor": "\"{{name}}\" 的关联文件列表",
+    "Copied {{value}} to clipboard": "已复制 <b>{{value}}</b> 到剪贴板",
+    "Close": "关闭",
+    "DeleteThisFile": "删除此文件",
+    "AddMoreFiles": "添加更多文件",
+    "FilesLoaded": "{{count}} 个文件已加载",
+    "FilesLoaded2": "{{count}} 个文件已加载",
+    "SortFilesByName": "按名称排序文件",
+    "NoFilesSelected": "未选择任何文件",
+    "Yes": "是",
+    "No": "否",
+    "Errors": "错误"
+  },
+  "pickers": {
+    "color": {
+      "title": "选择颜色"
+    }
+  },
+  "DevTools": {
+    "title": "开发者工具",
+    "playground": {
+      "title": "游乐场",
+      "HideCode": "隐藏代码",
+      "ShowCode": "显示代码",
+      "CopyCode": "复制代码",
+      "ResetCode": "重置代码",
+      "MoreActions": "更多操作...",
+      "OpenInEditor": "在编辑器中打开",
+      "CopyAsSVG": "复制为 SVG",
+      "CopyAsPNG": "复制为 PNG",
+      "DownloadAsSVG": "下载为 SVG",
+      "DownloadAsPNG": "下载为 PNG"
+    },
+    "info": {
+      "title": "信息组件",
+      "componentName": "组件名称:",
+      "isAnimated": "是否动画化?:",
+      "isExported": "是否导出?:",
+      "isFavorite": "是否为收藏?:",
+      "typeDeclaration": "类型声明:"
+    },
+    "menu": {
+      "ReloadPlayground": "重新加载游乐场",
+      "ReloadEditor": "重新加载编辑器",
+      "DisableWordWrap": "禁用换行",
+      "EnableWordWrap": "启用换行"
+    },
+    "editor": {
+      "suggestions": {
+        "components": {
+          "details": {
+            "static": "SVG 组件",
+            "animated": "动画 SVG 组件",
+            "temporary-static": "(临时) SVG 组件",
+            "temporary-animated": "(临时) 动画 SVG 组件"
+          },
+          "documentation": [
+            "---",
+            "**🧩 SVG 组件预览**\\",
+            "这是一个动态 SVG 组件。您可以修改其代码并立即预览结果。\\",
+            "\\",
+            "**🎛️ 自定义**\\",
+            "传递属性 (props) 以更改组件的外观或行为。\\",
+            "\\",
+            "**用法示例:**",
+            "```jsx",
+            "<{{name}} {{propertyValue}} />",
+            "```",
+            "\\",
+            "**🔍 更多信息:** [{{fileName}}]({{link}} \"file://{{filePath}}\")\\",
+            "将鼠标悬停在组件上或打开文件以获取完整文档。"
+          ],
+          "documentation_withRestProps": [
+            "---",
+            "**🧩 SVG 组件预览**\\",
+            "这是一个动态 SVG 组件。您可以修改其代码并立即预览结果。\\",
+            "\\",
+            "**🎛️ 自定义**\\",
+            "您可以传递特定属性以及 *任何有效的 SVG 属性* (rest props) 以进一步自定义组件。\\",
+            "\\",
+            "**用法示例:**",
+            "```jsx",
+            "<{{name}} {{propertyValue}} />",
+            "```",
+            "\\",
+            "**🔍 更多信息:** [{{fileName}}]({{link}} \"file://{{filePath}}\")\\",
+            "将鼠标悬停在组件上或打开文件以获取完整文档。"
+          ]
+        },
+        "properties": {
+          "details": {
+            "static": "(财产) {{name}}: {{type}}"
+          }
+        }
+      }
+    }
+  },
+  "DropZone": {
+    "title": "上传您的 JS、JSX、TS 或 TSX 文件，轻松发现它们包含的 SVG 组件。",
+    "Select files": "选择文件",
+    "or drop the files here": "或将文件拖放到此处",
+    "Let it go!": "放手吧！"
+  },
+  "modalInfo": {
+    "title": "信息",
+    "ComponentsExported": "已导出组件总数:",
+    "ComponentsNotExported": "未导出组件总数:",
+    "FileName": "文件名:",
+    "IsTemporaryFile": "是否为临时文件?:",
+    "IncludesTemporaryFiles": "是否包含临时文件:",
+    "Language": "语言:",
+    "Path": "路径:",
+    "ShowNoExports": "显示未导出组件:",
+    "TotalComponents": "组件总数:",
+    "FilesCount": "文件数量:",
+    "GroupKindName": "组名称:"
+  }
+}
