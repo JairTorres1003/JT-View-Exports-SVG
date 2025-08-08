@@ -1,5 +1,6 @@
 import { workspace } from 'vscode'
 
+import { getExtensionTheme } from './extensions'
 import { getCurrentTheme } from './theme'
 
 /**
@@ -35,16 +36,17 @@ export function getConfigurationEditor(): Record<string, unknown> {
   }
 
   const kind = getCurrentTheme()
+  const extensionTheme = getExtensionTheme()
+  const defTheme = kind === 'dark' ? 'Default Dark+' : 'Default Light+'
 
   return {
     ...editorConfig,
     'editor.folding': false,
     'editor.glyphMargin': false,
     'editor.lineNumbers': 'off',
-    'workbench.colorTheme': workbenchConfiguration.get(
-      'colorTheme',
-      kind === 'dark' ? 'Default Dark+' : 'Default Light+'
-    ),
+    'workbench.colorTheme': extensionTheme
+      ? workbenchConfiguration.get('colorTheme', defTheme)
+      : defTheme,
     'workbench.iconTheme': workbenchConfiguration.get('iconTheme'),
     'workbench.colorCustomizations': workbenchConfiguration.get('colorCustomizations'),
   }
