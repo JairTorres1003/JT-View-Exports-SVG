@@ -29,7 +29,7 @@ suite('getFileTimestamp Utility Function', () => {
 
   test('it should return the last modification timestamp of a file', async () => {
     const filePath1 = Uri.joinPath(folderUri, 'test-1.js').fsPath
-    const expectedTimestamp1 = 1720802491
+    const expectedTimestamp1 = 1754596807997
     const timestamp = await getFileTimestamp(filePath1)
 
     statSyncStub?.withArgs(filePath1).returns({ mtime: { getTime: () => expectedTimestamp1 } })
