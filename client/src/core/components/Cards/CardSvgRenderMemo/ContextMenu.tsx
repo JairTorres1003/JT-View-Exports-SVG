@@ -71,6 +71,8 @@ export const ContextMenu: FC<ContextMenuProps> = ({
         {t('CopyName')}
       </MenuItem>
 
+      <Divider />
+
       {actions.map((action, index) => {
         if (action.isDivider) return <Divider key={`divider-${index}`} />
 
