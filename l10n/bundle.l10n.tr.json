@@ -49,5 +49,8 @@
   "Icons in the temp directory cannot be added to favorites.": "Geçici dizindeki simgeler favorilere eklenemez.",
   "Icons in the temp directory cannot be added to recent icons.": "Geçici dizindeki simgeler son simgelere eklenemez.",
   "This file is temporary. Do you want to continue?": "Bu dosya geçicidir. Devam etmek istiyor musunuz?",
-  "Reloading...": "Yeniden yükleniyor..."
+  "Reloading...": "Yeniden yükleniyor...",
+  "Error toggling favorite status for icon {name}": "İkon {name} için favori durumunu değiştirme hatası",
+  "Error retrieving icons: {error}": "İkonları alırken hata oluştu: {error}",
+  "Missing index.html file in manifest": "Manifesto içinde index.html dosyası eksik"
 }

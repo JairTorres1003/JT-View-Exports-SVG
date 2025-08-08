@@ -1,6 +1,4 @@
-import * as fs from 'node:fs'
-
-import { l10n, workspace } from 'vscode'
+import { l10n, Uri, workspace } from 'vscode'
 
 import { getFileTimestamp } from '../files'
 import { isEmpty } from '../misc'
@@ -22,16 +20,23 @@ const removeElementsCache: { files: string[]; icons: SVGIcon[] } = {
  * @param filePath - The absolute path of the file to check.
  * @returns A boolean indicating whether the file exists.
  */
-const checkFileExists = (filePath: string): boolean => {
+const checkFileExists = async (filePath: string): Promise<boolean> => {
   if (filesExists[filePath] !== undefined) return filesExists[filePath]
 
-  const exists = fs.existsSync(filePath)
+  let exists = false
+  try {
+    await workspace.fs.stat(Uri.file(filePath))
+    exists = true
+  } catch {
+    exists = false
+  }
 
   if (!exists) {
     removeElementsCache.files.push(filePath)
   }
 
   filesExists[filePath] = exists
+
   return exists
 }
 
@@ -39,7 +44,7 @@ const checkFileExists = (filePath: string): boolean => {
  * Validates whether the icons should be shown based on the configuration.
  * @returns An object indicating whether recent and favorite icons should be shown.
  */
-const valideteShowIcons = (): Partial<Record<CacheIconKind, boolean>> => {
+const validateShowIcons = (): Partial<Record<CacheIconKind, boolean>> => {
   const configRecent = new RecentIconsShowController()
 
   return {
@@ -49,86 +54,104 @@ const valideteShowIcons = (): Partial<Record<CacheIconKind, boolean>> => {
 }
 
 /**
+ * Retrieves a component from the cache based on the provided icon.
+ * @param icon - The SVGIconCache object containing the icon's metadata.
+ * @returns The SVGComponent if found in the cache, otherwise undefined.
+ */
+const getComponentCache = async (icon: SVGIconCache) => {
+  const { location, name } = icon
+
+  const existFile = await checkFileExists(location.file.absolutePath)
+  if (!existFile) {
+    removeElementsCache.icons.push({ name, location })
+    return
+  }
+
+  const { ComponentsFileCache } = getCacheManager()
+
+  const lastModified = await getFileTimestamp(location.file.absolutePath)
+  const cachedFile = ComponentsFileCache.get(location.file.absolutePath, lastModified)
+
+  if (!cachedFile) return
+
+  return cachedFile.components.find((c) => c.name === name)
+}
+
+/**
  * Retrieves icons from the cache and processes them into a structured format.
  * @returns An array of ViewExportSVG objects containing the icons and their metadata.
  */
-export const getIconsFromCache = (): ViewExportSVG[] => {
+export const getIconsFromCache = async (): Promise<ViewExportSVG[]> => {
   const { RecentIconCache, FavoritesIconCache } = getCacheManager()
-  const validateShow = valideteShowIcons()
+  const validateShow = validateShowIcons()
 
   const cacheList = [RecentIconCache, FavoritesIconCache]
   const result: ViewExportSVG[] = []
 
   const { ComponentsFileCache } = getCacheManager()
 
-  cacheList.forEach((cache, index) => {
-    const kind = cache.getKind()
-    if (!validateShow[kind]) return
+  await Promise.all(
+    cacheList.map(async (cache, index) => {
+      const kind = cache.getKind()
+      if (!validateShow[kind]) return
 
-    let icons: SVGIconCache[] = []
-    const workspaceFolderUri = workspace.workspaceFolders?.[0]?.uri
+      let icons: SVGIconCache[] = []
+      const workspaceFolderUri = workspace.workspaceFolders?.[0]?.uri
 
-    if (!isEmpty(workspaceFolderUri)) {
-      icons = cache.getIcons(workspaceFolderUri) ?? []
-    }
-
-    const configShowNoExports = new ShowNotExportedIconsController()
-    const isShowNoExports = configShowNoExports.isShow()
-
-    const components: SVGComponent[] = []
-    const files = new Map<string, SVGFile>()
-    const otherProps: Pick<ViewExportSVG, 'totalExports' | 'totalNoExports'> = {
-      totalExports: 0,
-      totalNoExports: 0,
-    }
-
-    icons?.forEach(({ location, name }) => {
-      if (!checkFileExists(location.file.absolutePath)) {
-        removeElementsCache.icons.push({ name, location })
-        return
+      if (!isEmpty(workspaceFolderUri)) {
+        icons = cache.getIcons(workspaceFolderUri) ?? []
       }
 
-      const lastModified = getFileTimestamp(location.file.absolutePath)
-      const cachedFile = ComponentsFileCache.get(location.file.absolutePath, lastModified)
-
-      if (!cachedFile) return
-
-      const component = cachedFile.components.find((c) => c.name === name)
-
-      if (component) {
-        components.push(component)
-
-        otherProps[component.isExported ? 'totalExports' : 'totalNoExports']++
-
-        files.set(location.file.absolutePath, location.file)
-      } else if (!isEmpty(workspaceFolderUri)) {
-        cache.remove(workspaceFolderUri, { location, name })
+      const components: SVGComponent[] = []
+      const files = new Map<string, SVGFile>()
+      const otherProps: Pick<ViewExportSVG, 'totalExports' | 'totalNoExports'> = {
+        totalExports: 0,
+        totalNoExports: 0,
       }
-    })
 
-    if (removeElementsCache.icons.length > 0 && !isEmpty(workspaceFolderUri)) {
-      cache.remove(workspaceFolderUri, removeElementsCache.icons)
-      removeElementsCache.icons = []
-    }
+      await Promise.all(
+        icons.map(async (icon) => {
+          const component = await getComponentCache(icon)
 
-    const sortedFiles = [...files.values()].flat().sort((a, b) => {
-      return a.absolutePath.localeCompare(b.absolutePath)
-    })
+          if (component) {
+            components.push(component)
 
-    result.push({
-      ...otherProps,
-      components,
-      isShowNoExports,
-      totalSVG: components.length,
-      files: sortedFiles,
-      groupKind: {
-        id: workspaceFolderUri ? cache.getId(workspaceFolderUri) : `icon-${index}`,
-        label: l10n.t('{kind} icons', {
-          kind: l10n.t(kind).charAt(0).toUpperCase() + l10n.t(kind).slice(1),
-        }),
-      },
+            otherProps[component.isExported ? 'totalExports' : 'totalNoExports']++
+
+            files.set(icon.location.file.absolutePath, icon.location.file)
+          } else if (!isEmpty(workspaceFolderUri)) {
+            cache.remove(workspaceFolderUri, icon)
+          }
+        })
+      )
+
+      if (removeElementsCache.icons.length > 0 && !isEmpty(workspaceFolderUri)) {
+        cache.remove(workspaceFolderUri, removeElementsCache.icons)
+        removeElementsCache.icons = []
+      }
+
+      const sortedFiles = [...files.values()].flat().sort((a, b) => {
+        return a.absolutePath.localeCompare(b.absolutePath)
+      })
+
+      const configShowNoExports = new ShowNotExportedIconsController()
+      const isShowNoExports = configShowNoExports.isShow()
+
+      result.push({
+        ...otherProps,
+        components,
+        isShowNoExports,
+        totalSVG: components.length,
+        files: sortedFiles,
+        groupKind: {
+          id: workspaceFolderUri ? cache.getId(workspaceFolderUri) : `icon-${index}`,
+          label: l10n.t('{kind} icons', {
+            kind: l10n.t(kind).charAt(0).toUpperCase() + l10n.t(kind).slice(1),
+          }),
+        },
+      })
     })
-  })
+  )
 
   if (removeElementsCache.files.length > 0) {
     ComponentsFileCache.delete(removeElementsCache.files)

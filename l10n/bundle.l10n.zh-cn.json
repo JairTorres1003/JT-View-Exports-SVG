@@ -49,5 +49,8 @@
   "Icons in the temp directory cannot be added to favorites.": "临时目录中的图标无法添加到收藏夹。",
   "Icons in the temp directory cannot be added to recent icons.": "临时目录中的图标无法添加到最近使用的图标。",
   "This file is temporary. Do you want to continue?": "此文件是临时的。您想继续吗？",
-  "Reloading...": "重新加载中..."
+  "Reloading...": "重新加载中...",
+  "Error toggling favorite status for icon {name}": "切换图标 {name} 的收藏状态时出错",
+  "Error retrieving icons: {error}": "获取图标时出错: {error}",
+  "Missing index.html file in manifest": "清单中缺少 index.html 文件"
 }

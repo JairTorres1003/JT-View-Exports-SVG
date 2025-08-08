@@ -49,5 +49,8 @@
   "Icons in the temp directory cannot be added to favorites.": "一時ディレクトリ内のアイコンはお気に入りに追加できません。",
   "Icons in the temp directory cannot be added to recent icons.": "一時ディレクトリ内のアイコンは最近のアイコンに追加できません。",
   "This file is temporary. Do you want to continue?": "このファイルは一時的なものです。続行しますか？",
-  "Reloading...": "リロード中..."
+  "Reloading...": "リロード中...",
+  "Error toggling favorite status for icon {name}": "アイコン {name} のお気に入り状態の切り替え中にエラーが発生しました",
+  "Error retrieving icons: {error}": "アイコンの取得中にエラーが発生しました: {error}",
+  "Missing index.html file in manifest": "マニフェストにindex.htmlファイルが見つかりません"
 }

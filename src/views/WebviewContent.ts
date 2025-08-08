@@ -1,6 +1,4 @@
-import * as fs from 'node:fs'
-
-import { type Webview, type Uri, env, l10n } from 'vscode'
+import { Uri, type Webview, env, l10n, workspace } from 'vscode'
 
 import {
   DefaultClickToOpenDevToolsController,
@@ -10,23 +8,26 @@ import {
 import type { GetWebviewAssets } from '@/types/views/content'
 import type { ManifestContent } from '@/types/views/WebviewContent'
 import { getNonce } from '@/utilities/files'
+import { isEmpty } from '@/utilities/misc'
 import { getUri } from '@/utilities/vscode'
 
 export class WebviewContent {
   private readonly _webview: Webview
   private readonly _extensionUri: Uri
   private content = ''
-  private readonly manifest: ManifestContent
+  private manifest?: ManifestContent
   private readonly _processedFiles: number
   private readonly _nonce: string
 
   public constructor(webview: Webview, extensionUri: Uri, processedFiles: number) {
     this._webview = webview
     this._extensionUri = extensionUri
-    this.manifest = this.getManifest()
     this._processedFiles = processedFiles
     this._nonce = getNonce()
+  }
 
+  public async initialize(): Promise<void> {
+    this.manifest = await this.getManifest()
     this.generateContent()
   }
 
@@ -55,10 +56,11 @@ export class WebviewContent {
    * @returns {ManifestContent} The parsed JSON content of the manifest file.
    * @throws Will throw an error if the manifest file cannot be read or parsed.
    */
-  private getManifest(): ManifestContent {
-    const path = this.getAssetUri('manifest.json').fsPath
-    const manifest = fs.readFileSync(path, 'utf-8')
-    return JSON.parse(manifest)
+  private async getManifest(): Promise<ManifestContent> {
+    const path = Uri.file(this.getAssetUri('manifest.json').fsPath)
+    const manifestBytes = await workspace.fs.readFile(path)
+    const manifestString = Buffer.from(manifestBytes).toString('utf8')
+    return JSON.parse(manifestString)
   }
 
   /**
@@ -70,7 +72,7 @@ export class WebviewContent {
    * @returns {string} A string containing HTML link elements for the CSS files.
    */
   private generateCssLinks(): string {
-    const cssPaths = this.manifest['index.html'].css ?? []
+    const cssPaths = this.manifest?.['index.html'].css ?? []
     const cssLinks = cssPaths.map((path) => {
       return /* html */ `<link rel="stylesheet" type="text/css" href="${this.getAssetUri(path).toString()}" />`
     })
@@ -87,8 +89,12 @@ export class WebviewContent {
    * @returns {GetWebviewAssets} An object containing the URIs for the webview assets.
    */
   private getWebviewAssets(): GetWebviewAssets {
-    const manifestIndex = this.manifest['index.html']
-    const manifestIco = this.manifest['favicon.ico']
+    const manifestIndex = this.manifest?.['index.html'] ?? { file: '' }
+    const manifestIco = this.manifest?.['favicon.ico'] ?? { file: '' }
+
+    if (isEmpty(manifestIndex.file)) {
+      console.warn('Missing index.html file in manifest')
+    }
 
     return {
       index: this.getAssetUri(manifestIndex.file).toString(),

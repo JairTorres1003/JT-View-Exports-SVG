@@ -60,6 +60,7 @@ export default tseslint.config(
       '@typescript-eslint/prefer-nullish-coalescing': STATE.OFF,
       '@typescript-eslint/no-unsafe-call': STATE.OFF,
       '@typescript-eslint/use-unknown-in-catch-callback-variable': STATE.OFF,
+      'import/enforce-node-protocol-usage': STATE.OFF,
       '@typescript-eslint/no-unused-vars': [
         STATE.ERROR,
         { argsIgnorePattern: '^_', varsIgnorePattern: '^_' },

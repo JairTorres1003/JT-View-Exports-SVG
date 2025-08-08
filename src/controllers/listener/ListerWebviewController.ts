@@ -83,7 +83,7 @@ export class ListerWebviewController {
       showRecentIcons: new RecentIconsShowController().isShow(),
     })
 
-    toggleViewActions(processedFiles > 0).catch(console.error)
+    toggleViewActions(true).catch(console.error)
   }
 
   /**

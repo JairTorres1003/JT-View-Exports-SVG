@@ -1,8 +1,4 @@
-import * as fs from 'node:fs'
-
 import { Uri, commands, l10n, window, workspace } from 'vscode'
-
-import { isEmpty } from '../misc'
 
 /**
  * Saves the response data as a JSON file.
@@ -17,15 +13,7 @@ export async function saveResponseFile(data: object, name: string, path?: string
   const filePath = path ?? workspace.workspaceFolders?.[0].uri.fsPath + `/${name}.json`
 
   try {
-    await new Promise((resolve, reject) => {
-      fs.writeFile(filePath, content, (err) => {
-        if (!isEmpty(err)) {
-          reject(err)
-        } else {
-          resolve(l10n.t('File saved successfully.'))
-        }
-      })
-    })
+    await workspace.fs.writeFile(Uri.file(filePath), new TextEncoder().encode(content))
 
     const result = await window.showInformationMessage(
       l10n.t('The file was saved successfully at: {filePath}', { filePath }),

@@ -49,5 +49,8 @@
   "Icons in the temp directory cannot be added to favorites.": "Icons in the temp directory cannot be added to favorites.",
   "Icons in the temp directory cannot be added to recent icons.": "Icons in the temp directory cannot be added to recent icons.",
   "This file is temporary. Do you want to continue?": "This file is temporary. Do you want to continue?",
-  "Reloading...": "Reloading..."
+  "Reloading...": "Reloading...",
+  "Error toggling favorite status for icon {name}": "Error toggling favorite status for icon {name}",
+  "Error retrieving icons: {error}": "Error retrieving icons: {error}",
+  "Missing index.html file in manifest": "Missing index.html file in manifest"
 }

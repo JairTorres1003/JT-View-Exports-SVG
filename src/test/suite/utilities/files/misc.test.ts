@@ -1,6 +1,6 @@
-import * as assert from 'node:assert'
-import * as fs from 'node:fs'
-import * as path from 'node:path'
+import * as assert from 'assert'
+import * as fs from 'fs'
+import * as path from 'path'
 
 import * as sinon from 'sinon'
 import { Uri, window } from 'vscode'
@@ -27,19 +27,21 @@ suite('getFileTimestamp Utility Function', () => {
     statSyncStub?.restore()
   })
 
-  test('it should return the last modification timestamp of a file', () => {
+  test('it should return the last modification timestamp of a file', async () => {
     const filePath1 = Uri.joinPath(folderUri, 'test-1.js').fsPath
     const expectedTimestamp1 = 1720802491
+    const timestamp = await getFileTimestamp(filePath1)
 
     statSyncStub?.withArgs(filePath1).returns({ mtime: { getTime: () => expectedTimestamp1 } })
-    assert.strictEqual(getFileTimestamp(filePath1), expectedTimestamp1)
+    assert.strictEqual(timestamp, expectedTimestamp1)
   })
 
-  test('it should return 0 if the file does not exist', () => {
+  test('it should return 0 if the file does not exist', async () => {
     const filePath2 = Uri.joinPath(folderUri, 'nonexistent.ts').fsPath
+    const timestamp = await getFileTimestamp(filePath2)
 
     statSyncStub?.withArgs(filePath2).throws(new Error('File not found'))
-    assert.strictEqual(getFileTimestamp(filePath2), 0)
+    assert.strictEqual(timestamp, 0)
   })
 })
 

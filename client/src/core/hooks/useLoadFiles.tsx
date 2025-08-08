@@ -51,7 +51,7 @@ export const useLoadFiles = () => {
           </Typography>
           <List dense>
             {invalidFiles.map((fileName) => (
-              <ListItem key={fileName}>
+              <ListItem key={fileName} disablePadding>
                 <ListItemText sx={{ m: 0 }} primary={fileName} />
               </ListItem>
             ))}

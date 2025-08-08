@@ -1,7 +1,6 @@
-import * as fs from 'node:fs'
-import * as path from 'node:path'
+import * as path from 'path'
 
-import { type ExtensionContext, extensions, l10n, workspace } from 'vscode'
+import { type ExtensionContext, extensions, FileType, l10n, Uri, workspace } from 'vscode'
 
 import { getCacheManager } from '@/controllers/cache'
 import type { ExtensionManage } from '@/types/vscode'
@@ -35,11 +34,11 @@ const CACHE_KEY = 'CurrentExtensionTheme'
  * - The `workspace` and `extensions` objects are used to interact with the VSCode API.
  * - The cache key used for storing the theme details is defined by `CACHE_KEY`.
  */
-export function initializeExtensionTheme(context: ExtensionContext): void {
+export async function initializeExtensionTheme(context: ExtensionContext): Promise<void> {
   try {
     const cachedTheme = getCacheManager().ExtensionCache
-
-    if (cachedTheme.has(CACHE_KEY) && extensionThemePath(context)) {
+    const exists = await extensionThemePath(context)
+    if (cachedTheme.has(CACHE_KEY) && exists) {
       return
     }
 
@@ -61,7 +60,7 @@ export function initializeExtensionTheme(context: ExtensionContext): void {
         const { id, extensionUri, extensionPath, isActive } = themeExtension
 
         cachedTheme.set(CACHE_KEY, { id, extensionUri, extensionPath, isActive }, 0)
-        cloneThemeExtension(context, extensionPath)
+        await cloneThemeExtension(context, extensionPath)
       } else {
         cachedTheme.set(CACHE_KEY, undefined, 0)
       }
@@ -76,9 +75,9 @@ export function initializeExtensionTheme(context: ExtensionContext): void {
  *
  * @param context - The extension context.
  */
-export function reloadExtensionTheme(context: ExtensionContext): void {
+export async function reloadExtensionTheme(context: ExtensionContext): Promise<void> {
   getCacheManager().ExtensionCache.delete(CACHE_KEY)
-  initializeExtensionTheme(context)
+  await initializeExtensionTheme(context)
 }
 
 /**
@@ -100,35 +99,45 @@ export function getExtensionTheme(): ExtensionManage | undefined {
  * @param context - The VS Code extension context, used to determine the target directory for cloning.
  * @param extensionPath - The file system path to the source extension or its `package.json` file.
  */
-function cloneThemeExtension(context: ExtensionContext, extensionPath: string): void {
-  const folder = path.join(context.extensionPath, 'client/dist/assets/extensions/theme')
+async function cloneThemeExtension(
+  context: ExtensionContext,
+  extensionPath: string
+): Promise<void> {
+  const folder = Uri.joinPath(context.extensionUri, 'client/dist/assets/extensions/theme')
 
-  if (!fs.existsSync(folder)) {
-    fs.mkdirSync(folder, { recursive: true })
+  try {
+    await workspace.fs.stat(folder)
+  } catch {
+    await workspace.fs.createDirectory(folder)
   }
 
   const file = !extensionPath?.endsWith('.json') ? `${extensionPath}/package.json` : extensionPath
-  const manifest = fs.readFileSync(file, 'utf-8')
+  const manifestData = await workspace.fs.readFile(Uri.file(file))
 
-  fs.writeFileSync(`${folder}/package.json`, manifest, 'utf-8')
+  await workspace.fs.writeFile(Uri.joinPath(folder, 'package.json'), manifestData)
 
+  const manifest = new TextDecoder('utf-8').decode(manifestData)
   const themes = JSON.parse(manifest).contributes.themes
 
-  themes.forEach((theme: { path: string }) => {
-    const newThemeFilePath = path.join(folder, theme.path)
-    const themePath = path.join(extensionPath, theme.path)
-    const newThemeDir = path.dirname(newThemeFilePath)
+  await Promise.all(
+    themes.map(async (theme: { path: string }) => {
+      const newThemeFilePath = Uri.joinPath(folder, theme.path)
+      const themePath = Uri.file(path.join(extensionPath, theme.path))
+      const newThemeDir = Uri.file(path.dirname(newThemeFilePath.fsPath))
 
-    if (!fs.existsSync(newThemeDir)) {
-      fs.mkdirSync(newThemeDir, { recursive: true })
-    }
+      try {
+        await workspace.fs.stat(newThemeDir)
+      } catch {
+        await workspace.fs.createDirectory(newThemeDir)
+      }
 
-    if (fs.existsSync(themePath)) {
-      const themeFile = fs.readFileSync(themePath, 'utf-8')
+      const stat = await workspace.fs.stat(themePath)
 
-      fs.writeFileSync(newThemeFilePath, themeFile, 'utf-8')
-    }
-  })
+      if (stat.type === FileType.File) {
+        await workspace.fs.copy(themePath, newThemeFilePath)
+      }
+    })
+  )
 }
 
 /**
@@ -137,8 +146,13 @@ function cloneThemeExtension(context: ExtensionContext, extensionPath: string): 
  * @param context - The extension context.
  * @returns `true` if the theme path exists, `false` otherwise.
  */
-function extensionThemePath(context: ExtensionContext): boolean {
-  const folder = path.join(context.extensionPath, 'client/dist/assets/extensions/theme')
+async function extensionThemePath(context: ExtensionContext): Promise<boolean> {
+  const folder = Uri.joinPath(context.extensionUri, 'client/dist/assets/extensions/theme')
 
-  return fs.existsSync(folder)
+  try {
+    await workspace.fs.stat(folder)
+    return true
+  } catch {
+    return false
+  }
 }

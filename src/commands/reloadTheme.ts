@@ -9,9 +9,9 @@ import { getExtensionTheme, reloadExtensionTheme } from '@/utilities/vscode/exte
 /**
  * Reloads the extension theme and sends it to the current panel if it exists.
  */
-export const runReloadTheme = (context: ExtensionContext): void => {
+export const runReloadTheme = async (context: ExtensionContext): Promise<void> => {
   if (!isEmpty(ViewExportsSVGController.currentPanel)) {
-    reloadExtensionTheme(context)
+    await reloadExtensionTheme(context)
 
     const theme = getExtensionTheme()
 

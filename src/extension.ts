@@ -16,9 +16,9 @@ import { initializeExtensionTheme } from './utilities/vscode/extensions/theme'
  * This method is called when your extension is activated.
  * @param context The extension context.
  */
-export function activate(context: ExtensionContext): void {
-  initializeCacheManager(context)
-  initializeExtensionTheme(context)
+export async function activate(context: ExtensionContext) {
+  await initializeCacheManager(context)
+  await initializeExtensionTheme(context)
 
   const allSubscriptions = [
     commands.registerCommand(`${CONFIG_KEY}.showMenu`, async (item: Uri, items: Uri[]) => {
@@ -39,8 +39,8 @@ export function activate(context: ExtensionContext): void {
     commands.registerCommand(`${CONFIG_KEY}.closeDevTools`, async () => {
       await runToggleDevTools(false)
     }),
-    commands.registerCommand(`${CONFIG_KEY}.reloadTheme`, () => {
-      runReloadTheme(context)
+    commands.registerCommand(`${CONFIG_KEY}.reloadTheme`, async () => {
+      await runReloadTheme(context)
     }),
     commands.registerCommand(`${CONFIG_KEY}.clearCache`, runClearCache),
   ]

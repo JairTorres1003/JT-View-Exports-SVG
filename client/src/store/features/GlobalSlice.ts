@@ -18,7 +18,7 @@ const initialState: GlobalState = {
     renderPath: config._INITIAL_RENDER_PATH,
     showRecentIcons: config._RECENT_ICONS_SHOW,
   },
-  loading: false,
+  loading: true,
   isMounted: false,
 }
 

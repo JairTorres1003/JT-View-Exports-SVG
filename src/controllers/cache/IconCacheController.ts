@@ -19,11 +19,7 @@ export class IconCacheController extends FileModifiedCacheController<SVGIconCach
    * @param cacheFilePath - The file path where the cache is stored.
    * @param savedIconLimit - Optional limit on the number of saved icons.
    */
-  constructor(
-    cacheFilePath: string,
-    kind: CacheIconKind,
-    savedIconLimit?: number | (() => number)
-  ) {
+  constructor(cacheFilePath: Uri, kind: CacheIconKind, savedIconLimit?: number | (() => number)) {
     super(cacheFilePath)
     this.kind = kind
     this.savedIconLimit = savedIconLimit

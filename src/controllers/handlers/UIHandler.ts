@@ -1,8 +1,7 @@
-import * as fs from 'node:fs'
-import * as os from 'node:os'
-import * as path from 'node:path'
+import * as os from 'os'
+import * as path from 'path'
 
-import { l10n, type OpenDialogOptions, window } from 'vscode'
+import { l10n, type OpenDialogOptions, Uri, window, workspace } from 'vscode'
 
 import { expandedIcons, runToggleDevTools } from '@/commands'
 import { toggleViewActions } from '@/commands/editorTitleActions'
@@ -69,12 +68,12 @@ export class UIHandler {
     try {
       const filePaths = await Promise.all(
         files.map(async ({ name, content }) => {
-          const tempFilePath = path.join(os.tmpdir(), CONFIG_KEY, name)
+          const tempFilePath = Uri.file(path.join(os.tmpdir(), CONFIG_KEY, name))
           const fileBuffer =
             typeof content === 'string' ? Buffer.from(content, 'utf8') : Buffer.from(content)
 
-          await fs.promises.writeFile(tempFilePath, fileBuffer)
-          return tempFilePath
+          await workspace.fs.writeFile(tempFilePath, fileBuffer)
+          return tempFilePath.fsPath
         })
       )
 

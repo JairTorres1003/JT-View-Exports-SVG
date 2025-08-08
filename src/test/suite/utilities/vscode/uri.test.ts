@@ -1,5 +1,5 @@
-import * as assert from 'node:assert'
-import * as path from 'node:path'
+import * as assert from 'assert'
+import * as path from 'path'
 
 import { Uri } from 'vscode'
 

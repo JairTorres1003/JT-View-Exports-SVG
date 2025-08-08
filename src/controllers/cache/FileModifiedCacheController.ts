@@ -1,6 +1,4 @@
-import * as fs from 'node:fs'
-
-import { l10n } from 'vscode'
+import { l10n, type Uri, workspace } from 'vscode'
 
 /**
  * A caching mechanism for values associated with files using their modification timestamps.
@@ -14,14 +12,13 @@ export class FileModifiedCacheController<T> {
   /**
    * The file path of the cache file.
    */
-  private readonly cacheFilePath: string
+  private readonly cacheFilePath: Uri
 
   /**
    * Loads the cache from the cache file.
    */
-  constructor(cacheFilePath: string) {
+  constructor(cacheFilePath: Uri) {
     this.cacheFilePath = cacheFilePath
-    this.loadCache()
   }
 
   /**
@@ -101,7 +98,10 @@ export class FileModifiedCacheController<T> {
    */
   private saveCache(): void {
     try {
-      fs.writeFileSync(this.cacheFilePath, JSON.stringify(this.cache), 'utf-8')
+      workspace.fs.writeFile(
+        this.cacheFilePath,
+        new TextEncoder().encode(JSON.stringify(this.cache))
+      )
     } catch (error) {
       console.error(`${l10n.t('Error saving cache')}:`, error)
     }
@@ -116,11 +116,14 @@ export class FileModifiedCacheController<T> {
    *
    * @throws Will log an error message if there is an issue reading or parsing the cache file.
    */
-  private loadCache(): void {
+  public async loadCache(): Promise<void> {
     try {
-      if (fs.existsSync(this.cacheFilePath)) {
-        const data = fs.readFileSync(this.cacheFilePath, 'utf-8')
-        this.cache = JSON.parse(data)
+      const stat = await workspace.fs.stat(this.cacheFilePath)
+
+      if (stat) {
+        const data = await workspace.fs.readFile(this.cacheFilePath)
+        const jsonString = new TextDecoder().decode(data)
+        this.cache = JSON.parse(jsonString)
       }
     } catch (error) {
       console.error(`${l10n.t('Error loading cache')}:`, error)

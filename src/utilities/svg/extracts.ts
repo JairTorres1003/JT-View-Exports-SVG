@@ -65,7 +65,7 @@ export async function extractSVGComponent(
  */
 export async function extractSVGData(file: SVGFile): Promise<ExtractSVGExports> {
   try {
-    const ast = parseFileContent(file.absolutePath)
+    const ast = await parseFileContent(file.absolutePath)
     const base: ExtractSVGExports['base'] = {}
     const exportComponents: SVGComponent[] = []
     const noExportComponents: SVGComponent[] = []

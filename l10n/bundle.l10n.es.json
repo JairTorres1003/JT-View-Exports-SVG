@@ -49,5 +49,8 @@
   "Icons in the temp directory cannot be added to favorites.": "Los iconos en el directorio temporal no se pueden agregar a favoritos.",
   "Icons in the temp directory cannot be added to recent icons.": "Los iconos en el directorio temporal no se pueden agregar a iconos recientes.",
   "This file is temporary. Do you want to continue?": "Este archivo es temporal. ¿Quieres continuar?",
-  "Reloading...": "Recargando..."
+  "Reloading...": "Recargando...",
+  "Error toggling favorite status for icon {name}": "Error al cambiar el estado de favorito del icono {name}",
+  "Error retrieving icons: {error}": "Error al recuperar los iconos: {error}",
+  "Missing index.html file in manifest": "Falta el archivo index.html en el manifiesto"
 }

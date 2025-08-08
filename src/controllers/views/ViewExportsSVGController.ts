@@ -11,13 +11,16 @@ import { WebviewContent } from '@/views/WebviewContent'
 export class ViewExportsSVGController extends ListerWebviewController {
   public static currentPanel: ViewExportsSVGController | undefined
   public static readonly configName: string = CONFIG_KEY
+  private readonly webviewContent: WebviewContent
 
-  private constructor(
-    panel: WebviewPanel,
-    extensionUri: Uri,
-    viewExportSVG: ViewExportSVG[],
+  private constructor(options: {
+    panel: WebviewPanel
+    extensionUri: Uri
+    viewExportSVG: ViewExportSVG[]
     processedFiles: number
-  ) {
+  }) {
+    const { panel, extensionUri, viewExportSVG, processedFiles } = options
+
     super(panel, viewExportSVG)
 
     // Listen for when the panel is disposed
@@ -30,9 +33,7 @@ export class ViewExportsSVGController extends ListerWebviewController {
       this._disposables
     )
 
-    // Set the HTML content for the webview panel
-    const webviewContent = new WebviewContent(this._panel.webview, extensionUri, processedFiles)
-    this._panel.webview.html = webviewContent._content
+    this.webviewContent = new WebviewContent(this._panel.webview, extensionUri, processedFiles)
   }
 
   /**
@@ -55,10 +56,10 @@ export class ViewExportsSVGController extends ListerWebviewController {
   /**
    * Initializes the panel and starts the extraction process.
    */
-  public init(): void {
+  public init(pathname = '/dashboard'): void {
     if (!isEmpty(ViewExportsSVGController.currentPanel)) {
       ViewExportsSVGController.currentPanel._panel.reveal(ViewColumn.Active)
-      this._postMessage(SVGPostMessage.SendRunLoading, '/dashboard')
+      this._postMessage(SVGPostMessage.SendRunLoading, pathname)
     }
   }
 
@@ -68,11 +69,11 @@ export class ViewExportsSVGController extends ListerWebviewController {
    * @param extensionUri The URI of the directory containing the extension.
    * @param svgComponents The array of SVG exports or an SvgExportErrors object.
    */
-  public static render(
+  public static async render(
     extensionUri: Uri,
     viewExportSVG: ViewExportSVG[],
     processedFiles = 0
-  ): void {
+  ) {
     const column = window.activeTextEditor?.viewColumn ?? ViewColumn.One
 
     // If we already have a panel, show it
@@ -99,12 +100,16 @@ export class ViewExportsSVGController extends ListerWebviewController {
     )
     panel.iconPath = Uri.joinPath(extensionUri, 'assets', 'JT View Exports SVG - ICON.svg')
 
-    ViewExportsSVGController.currentPanel = new ViewExportsSVGController(
+    ViewExportsSVGController.currentPanel = new ViewExportsSVGController({
       panel,
       extensionUri,
       viewExportSVG,
-      processedFiles
-    )
+      processedFiles,
+    })
+
+    await ViewExportsSVGController.currentPanel.webviewContent.initialize()
+    ViewExportsSVGController.currentPanel._panel.webview.html =
+      ViewExportsSVGController.currentPanel.webviewContent._content
 
     ViewExportsSVGController.currentPanel.initialize(processedFiles)
   }

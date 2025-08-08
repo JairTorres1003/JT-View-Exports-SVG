@@ -30,6 +30,15 @@
       "runtimeExecutable": "/Users/jairalexandretorrescaviedes/.deno/bin/deno",
       "runtimeArgs": ["run", "-A", "--unstable-sloppy-imports", "--inspect-wait"],
       "attachSimplePort": 9229
+    },
+    {
+      "name": "Run Web Extension in VS Code",
+      "type": "pwa-extensionHost",
+      "debugWebWorkerHost": true,
+      "request": "launch",
+      "args": ["--extensionDevelopmentPath=${workspaceFolder}", "--extensionDevelopmentKind=web"],
+      "outFiles": ["${workspaceFolder}/out/cjs/web/**/*.js"],
+      "preLaunchTask": "npm: watch:package-web"
     }
   ]
 }

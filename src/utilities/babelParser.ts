@@ -1,7 +1,6 @@
-import * as fs from 'node:fs'
-
 import * as babelParser from '@babel/parser'
 import type * as t from '@babel/types'
+import { Uri, workspace } from 'vscode'
 
 /**
  * Parses the content using Babel parser.
@@ -20,12 +19,12 @@ export function parserContent(content: string): t.Node {
 /**
  * Parse the content of a file and return the AST (Abstract Syntax Tree).
  *
- * @param {string} filePath - The path to the file.
- * @returns {t.Node} The AST representing the file content.
+ * @param filePath - The path to the file.
+ * @returns  The AST representing the file content.
  */
-export function parseFileContent(filePath: string): t.Node {
-  // Read the file content synchronously
-  const fileContent = fs.readFileSync(filePath, 'utf8')
+export async function parseFileContent(filePath: string): Promise<t.Node> {
+  const data = await workspace.fs.readFile(Uri.file(filePath))
+  const fileContent = new TextDecoder().decode(data)
 
   return parserContent(fileContent)
 }

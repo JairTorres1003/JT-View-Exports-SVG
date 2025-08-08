@@ -8,7 +8,7 @@ import { scanningFiles, scanningWorkspace } from '@/utilities/files'
  */
 export const runScanningWorkspace = async (context: ExtensionContext): Promise<void> => {
   if (!ViewExportsSVGController.currentPanel) {
-    ViewExportsSVGController.render(context.extensionUri, [], 0)
+    await ViewExportsSVGController.render(context.extensionUri, [], 1)
   }
 
   ViewExportsSVGController.currentPanel?.init()

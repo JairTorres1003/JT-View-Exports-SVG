@@ -6,7 +6,7 @@ import { SVGPostMessage } from '@/enum/ViewExportsSVG'
 import type { SVGIcon } from '@/types/ViewExportsSVG'
 import type { FuncPostMessage } from '@/types/views/PostMessage'
 import { getIconsFromCache } from '@/utilities/icons/getIconsFromCache'
-import { isEmpty } from '@/utilities/misc'
+import { getUnknownError, isEmpty } from '@/utilities/misc'
 
 export class CacheHandler {
   constructor(private readonly postMessage: FuncPostMessage) {}
@@ -36,8 +36,15 @@ export class CacheHandler {
   }
 
   getHomeIcons(): void {
-    const icons = getIconsFromCache()
-    this.postMessage(SVGPostMessage.SendHomeIcons, icons)
+    getIconsFromCache()
+      .then((icons) => {
+        this.postMessage(SVGPostMessage.SendHomeIcons, icons)
+      })
+      .catch((e) => {
+        window.showErrorMessage(
+          l10n.t('Error retrieving icons: {error}', { error: getUnknownError(e) })
+        )
+      })
   }
 
   private addIconToCache(icon: SVGIcon, isRecent: boolean): void {

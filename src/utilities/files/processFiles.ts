@@ -1,4 +1,4 @@
-import * as path from 'node:path'
+import * as path from 'path'
 
 import { ProgressLocation, type Uri, window, type ProgressOptions, l10n } from 'vscode'
 
@@ -55,7 +55,7 @@ export async function processFiles(
           try {
             const { DeclarationFileCache, ComponentsFileCache } = getCacheManager()
             const file = await pathToSVGFile(f.fsPath)
-            const lastModified = getFileTimestamp(file.absolutePath)
+            const lastModified = await getFileTimestamp(file.absolutePath)
             const cachedFile = ComponentsFileCache.get(file.absolutePath, lastModified)
 
             if (cachedFile && configShowNoExports.isShow() === cachedFile.isShowNoExports) {

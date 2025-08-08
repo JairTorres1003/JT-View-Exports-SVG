@@ -72,5 +72,5 @@ if (!extension.isActive) {
 // create a mock extension context
 const context = createMockExtensionContext(extension, tempDir)
 
-initializeCacheManager(context)
-initializeExtensionTheme(context)
+await initializeCacheManager(context)
+await initializeExtensionTheme(context)

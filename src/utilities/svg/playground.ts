@@ -20,7 +20,7 @@ export async function playground(icon: SVGPlayground): Promise<SVGComponent | SV
 
   try {
     const { DeclarationFileCache, ComponentsFileCache } = getCacheManager()
-    const lastModified = getFileTimestamp(location.file.absolutePath)
+    const lastModified = await getFileTimestamp(location.file.absolutePath)
     const declarationCache = DeclarationFileCache.get(location.file.absolutePath, lastModified)
     const componentsCache = ComponentsFileCache.get(location.file.absolutePath, lastModified)
 

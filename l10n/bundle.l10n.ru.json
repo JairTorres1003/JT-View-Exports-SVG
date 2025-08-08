@@ -49,5 +49,8 @@
   "Icons in the temp directory cannot be added to favorites.": "Иконки в временной директории не могут быть добавлены в избранное.",
   "Icons in the temp directory cannot be added to recent icons.": "Иконки в временной директории не могут быть добавлены в недавние иконки.",
   "This file is temporary. Do you want to continue?": "Этот файл временный. Вы хотите продолжить?",
-  "Reloading...": "Перезагрузка..."
+  "Reloading...": "Перезагрузка...",
+  "Error toggling favorite status for icon {name}": "Ошибка при переключении статуса избранного для иконки {name}",
+  "Error retrieving icons: {error}": "Ошибка при получении иконок: {error}",
+  "Missing index.html file in manifest": "Отсутствует файл index.html в манифесте"
 }

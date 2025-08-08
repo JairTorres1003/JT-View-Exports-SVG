@@ -1,3 +1,5 @@
+import { l10n } from 'vscode'
+
 import { FileModifiedCacheController } from './FileModifiedCacheController'
 
 import type { SVGIcon, ViewExportSVG } from '@/types/ViewExportsSVG'
@@ -18,18 +20,23 @@ export class ComponentsCacheController extends FileModifiedCacheController<ViewE
 
     if (!absolutePath) return
 
-    const lastModified = getFileTimestamp(absolutePath)
-    const current = this.get(absolutePath, lastModified)
+    getFileTimestamp(absolutePath)
+      .then((lastModified) => {
+        const current = this.get(absolutePath, lastModified)
 
-    if (!current) return
+        if (!current) return
 
-    const component = current.components.find(
-      (c) => c.name === icon.name && c.location.file.absolutePath === absolutePath
-    )
+        const component = current.components.find(
+          (c) => c.name === icon.name && c.location.file.absolutePath === absolutePath
+        )
 
-    if (component) {
-      component.isFavorite = !component.isFavorite
-      this.set(absolutePath, current, lastModified)
-    }
+        if (component) {
+          component.isFavorite = !component.isFavorite
+          this.set(absolutePath, current, lastModified)
+        }
+      })
+      .catch(() => {
+        console.error(l10n.t('Error toggling favorite status for icon {name}', { name: icon.name }))
+      })
   }
 }
