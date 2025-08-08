@@ -10,7 +10,6 @@ import type { SVGReceiveMessage } from '@/enum/ViewExportsSVG'
 export type ReceiveMessage =
   | { type: SVGReceiveMessage.ExtractSVGComponentFromFiles; data: string[] }
   | { type: SVGReceiveMessage.GetAssetsPath }
-  | { type: SVGReceiveMessage.GetLanguage }
   | { type: SVGReceiveMessage.GetLastScanDate }
   | { type: SVGReceiveMessage.GetSVGComponents }
   | { type: SVGReceiveMessage.GetTheme }
@@ -51,10 +50,6 @@ export interface HandlerReceiveMessage {
    * Gets the assets path for the workspace and user.
    */
   [SVGReceiveMessage.GetAssetsPath]: VoidFunction
-  /**
-   * Gets the language.
-   */
-  [SVGReceiveMessage.GetLanguage]: VoidFunction
   /**
    * Gets the last scan date.
    */

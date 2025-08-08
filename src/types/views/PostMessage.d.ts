@@ -8,7 +8,6 @@ import type { AssetPath } from './content'
  */
 export type PostMessage =
   | { type: SVGPostMessage.SendAssetsPath; data: AssetPath }
-  | { type: SVGPostMessage.SendLanguage; data: string }
   | { type: SVGPostMessage.SendLastScanDate; data: string }
   | { type: SVGPostMessage.SendPlaygroundError; data: SVGErrors }
   | { type: SVGPostMessage.SendRunExtraction; data: boolean }
@@ -36,11 +35,6 @@ export interface FuncPostMessage {
    * @param data - The assets path for the workspace and user.
    */
   (type: SVGPostMessage.SendAssetsPath, data: AssetPath): void
-  /**
-   * Sends the language to the webview.
-   * @param data - The language.
-   */
-  (type: SVGPostMessage.SendLanguage, data: string): void
   /**
    * Sends the last scan date to the webview.
    * @param data - The last scan date.

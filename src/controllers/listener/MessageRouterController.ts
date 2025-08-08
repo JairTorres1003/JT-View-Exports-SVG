@@ -45,7 +45,6 @@ export class MessageRouter {
       [SVGReceiveMessage.ClearFavoriteIcons]: handlers.clearFavoriteIcons.bind(handlers),
       [SVGReceiveMessage.GetHomeIcons]: handlers.getHomeIcons.bind(handlers),
 
-      [SVGReceiveMessage.GetLanguage]: handlers.getLanguage.bind(handlers),
       [SVGReceiveMessage.GetTheme]: handlers.getTheme.bind(handlers),
       [SVGReceiveMessage.GetEditorConfig]: handlers.getEditorConfig.bind(handlers),
       [SVGReceiveMessage.GetVsCodeStyles]: handlers.getVsCodeStyles.bind(handlers),

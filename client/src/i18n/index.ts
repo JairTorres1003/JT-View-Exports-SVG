@@ -1,5 +1,4 @@
 import i18n from 'i18next'
-import LanguageDetector from 'i18next-browser-languagedetector'
 import { initReactI18next } from 'react-i18next'
 
 const Backend = {
@@ -9,7 +8,7 @@ const Backend = {
     _namespace: string,
     callback: (error: Error | null, translations: unknown) => void
   ) => {
-    import(`./locales/${language}.json`)
+    import(`./locales/${language?.toLowerCase()}.json`)
       .then((translations) => {
         callback(null, translations)
       })
@@ -25,10 +24,10 @@ const Backend = {
  */
 i18n
   .use(Backend)
-  .use(LanguageDetector)
   .use(initReactI18next)
   .init({
-    fallbackLng: 'en',
+    lng: window.ViewExportsSVG.initConfiguration._LANGUAGE || 'en',
+    fallbackLng: window.ViewExportsSVG.initConfiguration._LANGUAGE || 'en',
     interpolation: {
       escapeValue: false,
     },

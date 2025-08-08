@@ -121,9 +121,6 @@ export class ListerWebviewController {
     this.cacheHandler.getHomeIcons()
   }
 
-  getLanguage(): void {
-    this.configurationHandler.getLanguage()
-  }
   getTheme(): void {
     this.configurationHandler.getTheme()
   }

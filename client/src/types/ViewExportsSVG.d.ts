@@ -15,7 +15,6 @@ import type { ExtensionManage, ThemeMode, VsCodeStyles } from '@api/types/vscode
  */
 export interface MessageHandlersView {
   [SVGPostMessage.SendAssetsPath]?: (data: AssetPath) => void
-  [SVGPostMessage.SendLanguage]?: (data: string) => void
   [SVGPostMessage.SendLastScanDate]?: (data: string) => void
   [SVGPostMessage.SendPlaygroundError]?: (data: SVGErrors) => void
   [SVGPostMessage.SendRunExtraction]?: (data: boolean) => void
@@ -40,7 +39,6 @@ export interface MessageHandlersView {
  */
 export interface FuncOnMessage {
   (type: SVGPostMessage.SendAssetsPath, handler: (data: AssetPath) => void): void
-  (type: SVGPostMessage.SendLanguage, handler: (data: string) => void): void
   (type: SVGPostMessage.SendLastScanDate, handler: (data: string) => void): void
   (type: SVGPostMessage.SendPlaygroundError, handler: (data: SVGErrors) => void): void
   (type: SVGPostMessage.SendRunExtraction, handler: (data: boolean) => void): void
@@ -69,7 +67,6 @@ export interface FuncOnMessage {
 export interface FuncPostMessage {
   (type: SVGReceiveMessage.ExtractSVGComponentFromFiles, data: string[]): void
   (type: SVGReceiveMessage.GetAssetsPath): void
-  (type: SVGReceiveMessage.GetLanguage): void
   (type: SVGReceiveMessage.GetLastScanDate): void
   (type: SVGReceiveMessage.GetSVGComponents): void
   (type: SVGReceiveMessage.GetTheme): void

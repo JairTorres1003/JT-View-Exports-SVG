@@ -1,4 +1,4 @@
-import { commands, env } from 'vscode'
+import { commands } from 'vscode'
 
 import { CONFIG_KEY } from '@/constants/misc'
 import { SVGPostMessage } from '@/enum/ViewExportsSVG'
@@ -8,10 +8,6 @@ import { getExtensionTheme as getExtTheme } from '@/utilities/vscode/extensions'
 
 export class ConfigurationHandler {
   constructor(private readonly postMessage: FuncPostMessage) {}
-
-  getLanguage(): void {
-    this.postMessage(SVGPostMessage.SendLanguage, env.language ?? 'en')
-  }
 
   getTheme(): void {
     this.postMessage(SVGPostMessage.SendTheme, getCurrentTheme())

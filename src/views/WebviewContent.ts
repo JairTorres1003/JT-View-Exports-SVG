@@ -134,6 +134,7 @@ export class WebviewContent {
             _DEFAULT_CLIC_TO_OPEN_DEV_TOOLS: ${devConfig.isDefaultOpen()},
             _INITIAL_RENDER_PATH: "${initialPath}",
             _RECENT_ICONS_SHOW: ${recentConfig.isShow()},
+            _LANGUAGE: "${env.language ?? 'en'}",
           }
         };
       </script>

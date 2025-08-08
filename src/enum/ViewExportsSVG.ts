@@ -14,7 +14,6 @@ export enum SVGPostMessage {
   SendAssetsPath = 'send/assets/paths',
 
   SendRunExtraction = 'send/svg/run-extraction',
-  SendLanguage = 'send/settings/language',
   SendTheme = 'send/settings/theme',
   SendEditorConfig = 'send/settings/editor-config',
   SendVsCodeStyles = 'send/settings/vscode-styles',
@@ -41,7 +40,6 @@ export enum SVGReceiveMessage {
   RemoveAssets = 'assets/remove',
   GetViewAssets = 'assets/views',
 
-  GetLanguage = 'settings/language',
   GetTheme = 'settings/theme',
   GetEditorConfig = 'settings/editor-config',
   GetVsCodeStyles = 'settings/vscode-styles',
