@@ -37,3 +37,4 @@ yarn-error.log*
 .eslintcache
 .husky/node-version-cache.txt
 .unlighthouse
+*.tsbuildinfo
