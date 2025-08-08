@@ -26,8 +26,8 @@ i18n
   .use(Backend)
   .use(initReactI18next)
   .init({
-    lng: window.ViewExportsSVG.initConfiguration._LANGUAGE || 'en',
-    fallbackLng: window.ViewExportsSVG.initConfiguration._LANGUAGE || 'en',
+    lng: window.ViewExportsSVG?.initConfiguration._LANGUAGE || 'en',
+    fallbackLng: window.ViewExportsSVG?.initConfiguration._LANGUAGE || 'en',
     interpolation: {
       escapeValue: false,
     },
