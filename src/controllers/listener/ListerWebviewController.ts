@@ -83,6 +83,14 @@ export class ListerWebviewController {
     toggleViewActions(processedFiles > 0).catch(console.error)
   }
 
+  /**
+   * Reloads the webview panel.
+   */
+  reload(): void {
+    this.update(0, [])
+    this._postMessage(SVGPostMessage.SendReloadWebview, l10n.t('Reloading...'))
+  }
+
   extractSVGComponentFromFiles(files: string[]): void {
     this.svgComponentHandler.extractSVGComponentFromFiles(files).catch(console.error)
   }

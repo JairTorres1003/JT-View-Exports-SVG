@@ -21,6 +21,7 @@ export enum SVGPostMessage {
   SendToggleOpenDevTools = 'send/settings/toggle-open-dev-tools',
   SendExtensionTheme = 'send/settings/extension-theme',
   SendUpdateConfiguration = 'send/update-configuration',
+  SendReloadWebview = 'send/reload-webview',
 
   SendLastScanDate = 'send/scan/last-date',
 

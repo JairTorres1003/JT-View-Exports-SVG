@@ -31,6 +31,7 @@ export interface MessageHandlersView {
   [SVGPostMessage.SendToggleOpenDevTools]?: (data: boolean) => void
   [SVGPostMessage.SendExtensionTheme]?: (data: ExtensionManage) => void
   [SVGPostMessage.SendUpdateConfiguration]?: (data: Record<string, unknown>) => void
+  [SVGPostMessage.SendReloadWebview]?: (data: string) => void
   [SVGPostMessage.SendOpenFiles]?: (data: string[]) => void
 }
 
@@ -58,6 +59,7 @@ export interface FuncOnMessage {
     type: SVGPostMessage.SendUpdateConfiguration,
     handler: (data: Record<string, unknown>) => void
   ): void
+  (type: SVGPostMessage.SendReloadWebview, handler: (data: string) => void): void
   (type: SVGPostMessage.SendOpenFiles, handler: (data: string[]) => void): void
 }
 

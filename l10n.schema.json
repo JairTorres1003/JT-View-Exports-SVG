@@ -292,6 +292,11 @@
       "type": "string",
       "description": "Message displayed when trying to open a temporary file",
       "default": "This file is temporary. Do you want to continue?"
+    },
+    "Reloading...": {
+      "type": "string",
+      "description": "Message displayed when reloading the webview",
+      "default": "Reloading..."
     }
   },
   "required": [
@@ -344,6 +349,7 @@
     "Error creating temporary files",
     "Icons in the temp directory cannot be added to recent icons.",
     "Icons in the temp directory cannot be added to favorites.",
-    "This file is temporary. Do you want to continue?"
+    "This file is temporary. Do you want to continue?",
+    "Reloading..."
   ]
 }

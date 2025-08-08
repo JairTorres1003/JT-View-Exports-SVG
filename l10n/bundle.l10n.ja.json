@@ -48,5 +48,6 @@
   "Error creating temporary files": "一時ファイルの作成中にエラーが発生しました",
   "Icons in the temp directory cannot be added to favorites.": "一時ディレクトリ内のアイコンはお気に入りに追加できません。",
   "Icons in the temp directory cannot be added to recent icons.": "一時ディレクトリ内のアイコンは最近のアイコンに追加できません。",
-  "This file is temporary. Do you want to continue?": "このファイルは一時的なものです。続行しますか？"
+  "This file is temporary. Do you want to continue?": "このファイルは一時的なものです。続行しますか？",
+  "Reloading...": "リロード中..."
 }

@@ -48,5 +48,6 @@
   "Error creating temporary files": "Errore durante la creazione di file temporanei",
   "Icons in the temp directory cannot be added to favorites.": "Le icone nella directory temporanea non possono essere aggiunte ai preferiti.",
   "Icons in the temp directory cannot be added to recent icons.": "Le icone nella directory temporanea non possono essere aggiunte alle icone recenti.",
-  "This file is temporary. Do you want to continue?": "Questo file è temporaneo. Vuoi continuare?"
+  "This file is temporary. Do you want to continue?": "Questo file è temporaneo. Vuoi continuare?",
+  "Reloading...": "Ricaricamento..."
 }

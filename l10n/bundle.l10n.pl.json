@@ -48,5 +48,6 @@
   "Error creating temporary files": "Błąd podczas tworzenia plików tymczasowych",
   "Icons in the temp directory cannot be added to favorites.": "Ikony w katalogu tymczasowym nie mogą być dodawane do ulubionych.",
   "Icons in the temp directory cannot be added to recent icons.": "Ikony w katalogu tymczasowym nie mogą być dodawane do ostatnich ikon.",
-  "This file is temporary. Do you want to continue?": "Ten plik jest tymczasowy. Czy chcesz kontynuować?"
+  "This file is temporary. Do you want to continue?": "Ten plik jest tymczasowy. Czy chcesz kontynuować?",
+  "Reloading...": "Przeładowywanie..."
 }

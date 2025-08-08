@@ -24,6 +24,7 @@ export type PostMessage =
   | { type: SVGPostMessage.SendToggleOpenDevTools; data: boolean }
   | { type: SVGPostMessage.SendExtensionTheme; data: ExtensionManage }
   | { type: SVGPostMessage.SendUpdateConfiguration; data: Record<string, unknown> }
+  | { type: SVGPostMessage.SendReloadWebview; data: string }
   | { type: SVGPostMessage.SendOpenFiles; data: string[] }
 
 /**
@@ -115,6 +116,12 @@ export interface FuncPostMessage {
    * @param data - The initial configuration.
    */
   (type: SVGPostMessage.SendUpdateConfiguration, data: Record<string, unknown>): void
+
+  /**
+   * Sends the reload webview message to the webview.
+   */
+  (type: SVGPostMessage.SendReloadWebview, data: string): void
+
   /**
    * Sends the open files to the webview.
    * @param data - The open files.

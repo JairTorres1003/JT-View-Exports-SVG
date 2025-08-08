@@ -48,5 +48,6 @@
   "Error creating temporary files": "創建臨時文件時出錯",
   "Icons in the temp directory cannot be added to favorites.": "臨時目錄中的圖標無法添加到收藏夾。",
   "Icons in the temp directory cannot be added to recent icons.": "臨時目錄中的圖標無法添加到最近使用的圖標。",
-  "This file is temporary. Do you want to continue?": "此文件是臨時的。您想繼續嗎？"
+  "This file is temporary. Do you want to continue?": "此文件是臨時的。您想繼續嗎？",
+  "Reloading...": "重新加載中..."
 }

@@ -48,5 +48,6 @@
   "Error creating temporary files": "Error creating temporary files",
   "Icons in the temp directory cannot be added to favorites.": "Icons in the temp directory cannot be added to favorites.",
   "Icons in the temp directory cannot be added to recent icons.": "Icons in the temp directory cannot be added to recent icons.",
-  "This file is temporary. Do you want to continue?": "This file is temporary. Do you want to continue?"
+  "This file is temporary. Do you want to continue?": "This file is temporary. Do you want to continue?",
+  "Reloading...": "Reloading..."
 }
