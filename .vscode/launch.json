@@ -38,7 +38,7 @@
       "request": "launch",
       "args": ["--extensionDevelopmentPath=${workspaceFolder}", "--extensionDevelopmentKind=web"],
       "outFiles": ["${workspaceFolder}/out/cjs/web/**/*.js"],
-      "preLaunchTask": "npm: watch:package-web"
+      "preLaunchTask": "npm: watch:esbuild:web"
     }
   ]
 }
