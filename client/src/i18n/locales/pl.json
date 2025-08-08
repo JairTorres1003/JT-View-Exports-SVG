@@ -29,6 +29,7 @@
     "OpenManyFiles": "Otwórz wiele plików",
     "ListOfAssociatedFilesFor": "Lista powiązanych plików dla \"{{name}}\"",
     "Copied {{value}} to clipboard": "Skopiowano <b>{{value}}</b> do schowka",
+    "CopyName": "Kopírovat název",
     "Close": "Zamknij",
     "DeleteThisFile": "Usuń ten plik",
     "AddMoreFiles": "Dodaj więcej plików",

@@ -29,6 +29,7 @@
     "OpenManyFiles": "여러 파일 열기",
     "ListOfAssociatedFilesFor": "\"{{name}}\"의 관련 파일 목록",
     "Copied {{value}} to clipboard": "<b>{{value}}</b>를 클립보드에 복사했습니다.",
+    "CopyName": "이름 복사",
     "Close": "닫기",
     "DeleteThisFile": "이 파일 삭제",
     "AddMoreFiles": "파일 추가",

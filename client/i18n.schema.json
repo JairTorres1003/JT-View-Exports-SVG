@@ -137,6 +137,10 @@
           "type": "string",
           "default": "Copied <b>{{value}}</b> to clipboard"
         },
+        "CopyName": {
+          "type": "string",
+          "default": "Copy name"
+        },
         "Close": {
           "type": "string",
           "default": "Close"
@@ -190,6 +194,7 @@
         "OpenManyFiles",
         "ListOfAssociatedFilesFor",
         "Copied {{value}} to clipboard",
+        "CopyName",
         "Close",
         "DeleteThisFile",
         "AddMoreFiles",

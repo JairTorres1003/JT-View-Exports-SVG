@@ -29,6 +29,7 @@
     "OpenManyFiles": "Otevřít více souborů",
     "ListOfAssociatedFilesFor": "Seznam souvisejících souborů pro \"{{name}}\"",
     "Copied {{value}} to clipboard": "Zkopírováno <b>{{value}}</b> do schránky",
+    "CopyName": "Kopírovat název",
     "Close": "Zavřít",
     "DeleteThisFile": "Smazat tento soubor",
     "AddMoreFiles": "Přidat další soubory",

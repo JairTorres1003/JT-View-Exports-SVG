@@ -29,6 +29,7 @@
     "OpenManyFiles": "Abrir muchos archivos",
     "ListOfAssociatedFilesFor": "Lista de archivos asociados para \"{{name}}\"",
     "Copied {{value}} to clipboard": "Copiado <b>{{value}}</b> al portapapeles",
+    "CopyName": "Copiar nombre",
     "Close": "Cerrar",
     "DeleteThisFile": "Eliminar este archivo",
     "AddMoreFiles": "Agregar más archivos",
