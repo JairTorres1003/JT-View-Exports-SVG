@@ -34,7 +34,7 @@
   "Error reading directory \"{file}\":": "Erreur lors de la lecture du répertoire \"{file}\":",
   "Error removing assets path: {error}": "Erreur lors de la suppression du chemin des actifs : {error}",
   "Error getting assets path: {error}": "Erreur lors de l'obtention du chemin des actifs : {error}",
-  "Method not implemented": "méthode non implémentée",
+  "Method not implemented": "Méthode non implémentée",
   "Error saving cache": "Erreur lors de l'enregistrement du cache",
   "Error loading cache": "Erreur lors du chargement du cache",
   "Cache cleared successfully!": "Cache vidé avec succès !",
