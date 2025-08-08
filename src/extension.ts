@@ -25,7 +25,7 @@ export function activate(context: ExtensionContext): void {
       await showMenu(context, item, items)
     }),
     commands.registerCommand(`${CONFIG_KEY}.scanning`, async () => {
-      await runScanningWorkspace()
+      await runScanningWorkspace(context)
     }),
     commands.registerCommand(`${CONFIG_KEY}.collapseAll`, async () => {
       await runToggleExpandIcon(false)

@@ -52,8 +52,7 @@
         "command": "JT-View-Exports-SVG.scanning",
         "title": "%extension.commands.scanning.title%",
         "icon": "$(search)",
-        "category": "View Exports SVG",
-        "enablement": "activeWebviewPanelId == 'JT-View-Exports-SVG'"
+        "category": "View Exports SVG"
       },
       {
         "command": "JT-View-Exports-SVG.reloadTheme",
