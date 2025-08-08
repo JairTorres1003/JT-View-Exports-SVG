@@ -49,6 +49,13 @@
         }
       },
       {
+        "command": "JT-View-Exports-SVG.scanning",
+        "title": "%extension.commands.scanning.title%",
+        "icon": "$(search)",
+        "category": "View Exports SVG",
+        "enablement": "activeWebviewPanelId == 'JT-View-Exports-SVG'"
+      },
+      {
         "command": "JT-View-Exports-SVG.reloadTheme",
         "title": "%extension.commands.reloadTheme.title%",
         "icon": "$(sync)",
@@ -261,7 +268,7 @@
     "compile:esm": "TS_FILE=./tsconfig.esm.json npm run compile:root",
     "compile:types": "TS_FILE=./tsconfig.types.json npm run compile:root",
     "compile:clean": "rimraf ./out",
-    "watch:root": "npm run copy-types && concurrently \"tsc -w --sourceMap -p $npm_config_ts_file\" \"tsc-alias -w -p $npm_config_ts_file\"",
+    "watch:root": "npm run copy-types && concurrently \"tsc -w --sourceMap -p $TS_FILE\" \"tsc-alias -w -p $TS_FILE\"",
     "watch:esbuild": "node esbuild.config.js --watch",
     "watch": "TS_FILE=./tsconfig.cjs.json npm run watch:root",
     "watch:esm": "TS_FILE=./tsconfig.esm.json npm run watch:root",

@@ -69,7 +69,10 @@ export class ListerWebviewController {
   /**
    * Updates the state of the webview panel.
    */
-  protected readonly update = (processedFiles: number, viewExportSVG: ViewExportSVG[]): void => {
+  protected readonly updateLayout = (
+    processedFiles: number,
+    viewExportSVG: ViewExportSVG[]
+  ): void => {
     this.viewExportSVG = viewExportSVG
     this.svgComponentHandler.updateSVGComponents(viewExportSVG)
 
@@ -87,7 +90,7 @@ export class ListerWebviewController {
    * Reloads the webview panel.
    */
   reload(): void {
-    this.update(0, [])
+    this.updateLayout(0, [])
     this._postMessage(SVGPostMessage.SendReloadWebview, l10n.t('Reloading...'))
   }
 

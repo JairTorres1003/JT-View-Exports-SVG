@@ -2,6 +2,7 @@
   "extension.title": "エクスポートSVGを表示します",
   "extension.description": "✨「エクスポートSVGを表示します」は、SVGアイコンへのアクセスと活用プロセスを効率化するために設計されたVisual Studio Code拡張機能です。この拡張機能を使用すると、プロジェクト内のSVGアイコンを簡単に検索・探索できるため、アイコンを見つけてプロジェクトに統合する作業が簡素化されます。",
   "extension.commands.showMenu.title": "エクスポートSVGを表示します 🔍",
+  "extension.commands.scanning.title": "スキャンを開始",
   "extension.commands.collapseAll.title": "すべてのアイコンを折りたたむ",
   "extension.commands.expandAll.title": "すべてのアイコンを展開する",
   "extension.commands.reloadTheme.title": "プレイグラウンドで組み込みエディタテーマをリロードする",

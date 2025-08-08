@@ -20,14 +20,19 @@ export const showMenu = async (
 ): Promise<void> => {
   const filesToProcess = !isEmpty(items) ? items : !isEmpty(item) ? [item] : []
 
-  ViewExportsSVGController.render(context.extensionUri, [], filesToProcess.length)
-
-  if (!isEmpty(ViewExportsSVGController.currentPanel)) {
-    ViewExportsSVGController.currentPanel.RunExtraction()
+  if (!ViewExportsSVGController.currentPanel) {
+    ViewExportsSVGController.render(context.extensionUri, [], filesToProcess.length)
   }
 
+  if (filesToProcess.length === 0) {
+    ViewExportsSVGController.update([], 0)
+    return
+  }
+
+  ViewExportsSVGController.currentPanel?.init()
+
   const operation = (result: ViewExportSVG[]): void => {
-    ViewExportsSVGController.render(context.extensionUri, result, filesToProcess.length)
+    ViewExportsSVGController.update(result, filesToProcess.length)
   }
 
   await processFiles(filesToProcess, operation)

@@ -64,6 +64,8 @@ export interface GlobalState {
     showRecentIcons: boolean
   }
   renderOptions?: NavigateOptions
+  loading: boolean
+  isMounted: boolean
 }
 
 export interface GlobalReducers {
@@ -87,6 +89,9 @@ export interface GlobalReducers {
     GlobalState,
     PayloadAction<{ path: string; options?: NavigateOptions }>
   >
+  setInitLoading: CaseReducer<GlobalState, PayloadAction<string>>
+  unsetInitLoading: CaseReducer<GlobalState>
+  setIsMounted: CaseReducer<GlobalState>
 
   [key: string]: CaseReducer<GlobalState, PayloadAction<any>>
 }

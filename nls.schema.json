@@ -18,6 +18,11 @@
       "description": "The title of the command to show the menu",
       "default": "View Exports SVG 🔍"
     },
+    "extension.commands.scanning.title": {
+      "type": "string",
+      "description": "The title of the command to start the scanning process",
+      "default": "Start Scanning"
+    },
     "extension.commands.collapseAll.title": {
       "type": "string",
       "description": "The title of the command to collapse all items",
@@ -153,6 +158,7 @@
     "extension.title",
     "extension.description",
     "extension.commands.showMenu.title",
+    "extension.commands.scanning.title",
     "extension.commands.collapseAll.title",
     "extension.commands.expandAll.title",
     "extension.commands.reloadTheme.title",

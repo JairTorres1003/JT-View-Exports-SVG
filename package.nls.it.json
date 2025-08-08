@@ -2,6 +2,7 @@
   "extension.title": "Visualizza le esportazioni Svg",
   "extension.description": "✨ 'Visualizza le esportazioni Svg' è un'estensione di Visual Studio Code progettata per semplificare il processo di accesso e utilizzo delle icone SVG. Con questa estensione, puoi esplorare e cercare facilmente le icone SVG all'interno del tuo progetto, semplificando così il compito di trovarle e integrarle nel tuo progetto.",
   "extension.commands.showMenu.title": "Visualizza le esportazioni Svg 🔍",
+  "extension.commands.scanning.title": "Inizia scansione",
   "extension.commands.collapseAll.title": "Riduci tutte le icone",
   "extension.commands.expandAll.title": "Espandi tutte le icone",
   "extension.commands.reloadTheme.title": "Ricarica il tema dell'editor integrato nel playground",

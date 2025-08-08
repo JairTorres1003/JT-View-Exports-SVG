@@ -10,7 +10,7 @@ export type PostMessage =
   | { type: SVGPostMessage.SendAssetsPath; data: AssetPath }
   | { type: SVGPostMessage.SendLastScanDate; data: string }
   | { type: SVGPostMessage.SendPlaygroundError; data: SVGErrors }
-  | { type: SVGPostMessage.SendRunExtraction; data: boolean }
+  | { type: SVGPostMessage.SendRunLoading; data: string }
   | { type: SVGPostMessage.SendSVGComponents; data: ViewExportSVG[] }
   | { type: SVGPostMessage.SendRefreshSVGComponents; data: ViewExportSVG[] }
   | { type: SVGPostMessage.SendSVGError; data: SVGErrors }
@@ -72,10 +72,10 @@ export interface FuncPostMessage {
    */
   (type: SVGPostMessage.SendPlaygroundError, data: SVGErrors): void
   /**
-   * Sends the start extraction message to the webview.
-   * @param data - The theme mode.
+   * Sends the start loading message to the webview.
+   * @param data - The loading state.
    */
-  (type: SVGPostMessage.SendRunExtraction, data: boolean): void
+  (type: SVGPostMessage.SendRunLoading, data: string): void
   /**
    * Sends the current theme to the webview.
    * @param data - The theme mode.

@@ -6,6 +6,7 @@ import {
   runToggleExpandIcon,
   showMenu,
   runClearCache,
+  runScanningWorkspace,
 } from './commands'
 import { CONFIG_KEY } from './constants/misc'
 import { initializeCacheManager } from './controllers/cache'
@@ -22,6 +23,9 @@ export function activate(context: ExtensionContext): void {
   const allSubscriptions = [
     commands.registerCommand(`${CONFIG_KEY}.showMenu`, async (item: Uri, items: Uri[]) => {
       await showMenu(context, item, items)
+    }),
+    commands.registerCommand(`${CONFIG_KEY}.scanning`, async () => {
+      await runScanningWorkspace()
     }),
     commands.registerCommand(`${CONFIG_KEY}.collapseAll`, async () => {
       await runToggleExpandIcon(false)

@@ -1,9 +1,10 @@
-import { SVGReceiveMessage, SVGPostMessage } from '@api/enums/ViewExportsSVG'
+import { SVGPostMessage, SVGReceiveMessage } from '@api/enums/ViewExportsSVG'
 import type { SVGErrors, ViewExportSVG } from '@api/types/ViewExportsSVG'
-import { useEffect, useState } from 'react'
-import { useDispatch } from 'react-redux'
+import { useEffect } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
 
 import { vscode } from '@/services/vscode'
+import { setIsMounted, unsetInitLoading } from '@/store/features/GlobalSlice'
 import { setComponents, setErrors, setSearch } from '@/store/features/SVGSlice'
 
 interface DashboardHook {
@@ -11,7 +12,8 @@ interface DashboardHook {
 }
 
 export const useDashboard = (): DashboardHook => {
-  const [loading, setLoading] = useState<boolean>(true)
+  const loading = useSelector((state) => state.global.loading)
+  const isMounted = useSelector((state) => state.global.isMounted)
   const dispatch = useDispatch()
 
   /**
@@ -23,39 +25,28 @@ export const useDashboard = (): DashboardHook => {
     dispatch(setComponents(data))
     dispatch(setSearch(''))
     dispatch(setErrors())
-    setLoading(false)
-  }
-
-  /**
-   * Sets the loading state.
-   *
-   * @param state - The state to set.
-   */
-  const onRunExtraction = (state: boolean): void => {
-    setLoading(state)
+    dispatch(unsetInitLoading())
+    dispatch(setIsMounted())
   }
 
   /**
    * Handles errors related to SVG components.
    *
-   * @param {SVGErrors} [error] - Optional error object containing details about the SVG error.
-   * @returns {void}
+   * @param error - Optional error object containing details about the SVG error.
    */
   const onErrorSVGComponents = (error?: SVGErrors): void => {
     dispatch(setErrors(error))
-    setLoading(false)
+    dispatch(unsetInitLoading())
   }
 
   useEffect(() => {
-    vscode.postMessage(SVGReceiveMessage.GetSVGComponents)
+    if (!isMounted) vscode.postMessage(SVGReceiveMessage.GetSVGComponents)
     vscode.onMessage(SVGPostMessage.SendSVGComponents, getSVGComponents)
     vscode.onMessage(SVGPostMessage.SendSVGError, onErrorSVGComponents)
-    vscode.onMessage(SVGPostMessage.SendRunExtraction, onRunExtraction)
 
     return () => {
       vscode.unregisterMessage(SVGPostMessage.SendSVGComponents)
       vscode.unregisterMessage(SVGPostMessage.SendSVGError)
-      vscode.unregisterMessage(SVGPostMessage.SendRunExtraction)
     }
   }, [])
 

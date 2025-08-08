@@ -53,12 +53,12 @@ export class ViewExportsSVGController extends ListerWebviewController {
   }
 
   /**
-   * Runs the extraction process for the current panel.
+   * Initializes the panel and starts the extraction process.
    */
-  public RunExtraction(): void {
+  public init(): void {
     if (!isEmpty(ViewExportsSVGController.currentPanel)) {
       ViewExportsSVGController.currentPanel._panel.reveal(ViewColumn.Active)
-      this._postMessage(SVGPostMessage.SendRunExtraction, true)
+      this._postMessage(SVGPostMessage.SendRunLoading, '/dashboard')
     }
   }
 
@@ -115,7 +115,7 @@ export class ViewExportsSVGController extends ListerWebviewController {
    */
   public static update(viewExportSVG: ViewExportSVG[], processedFiles: number): void {
     if (!isEmpty(ViewExportsSVGController.currentPanel)) {
-      ViewExportsSVGController.currentPanel.update(processedFiles, viewExportSVG)
+      ViewExportsSVGController.currentPanel.updateLayout(processedFiles, viewExportSVG)
 
       if (!isEmpty(viewExportSVG)) {
         ViewExportsSVGController.currentPanel._postMessage(

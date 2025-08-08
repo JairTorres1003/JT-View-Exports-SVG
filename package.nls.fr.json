@@ -2,6 +2,7 @@
   "extension.title": "Afficher les exportations SVG",
   "extension.description": "✨ 'Afficher les exportations SVG' est une extension Visual Studio Code conçue pour rationaliser le processus d'accès et d'utilisation des icônes SVG. Avec cette extension, vous pouvez explorer et rechercher facilement des icônes SVG dans votre projet, simplifiant ainsi la tâche de les trouver et de les intégrer dans votre projet.",
   "extension.commands.showMenu.title": "Afficher les exportations SVG 🔍",
+  "extension.commands.scanning.title": "Démarrer l'analyse",
   "extension.commands.collapseAll.title": "Réduire toutes les icônes",
   "extension.commands.expandAll.title": "Développer toutes les icônes",
   "extension.commands.reloadTheme.title": "Recharger le thème intégré de l'éditeur dans le terrain de jeu",

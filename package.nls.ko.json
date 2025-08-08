@@ -2,6 +2,7 @@
   "extension.title": "SVG 내보내기 보기",
   "extension.description": "✨ 'SVG 내보내기 보기'는 SVG 아이콘에 대한 액세스 및 활용 프로세스를 간소화하도록 설계된 Visual Studio Code 확장입니다. 이 확장을 사용하면 프로젝트 내에서 SVG 아이콘을 쉽게 탐색하고 검색할 수 있으므로 아이콘을 찾고 프로젝트에 통합하는 작업이 간소화됩니다.",
   "extension.commands.showMenu.title": "SVG 내보내기 보기 🔍",
+  "extension.commands.scanning.title": "스캔을 시작",
   "extension.commands.collapseAll.title": "모든 아이콘 축소",
   "extension.commands.expandAll.title": "모든 아이콘 확장",
   "extension.commands.reloadTheme.title": "플레이그라운드에서 내장 편집기 테마 다시 로드",

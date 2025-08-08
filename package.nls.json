@@ -2,6 +2,7 @@
   "extension.title": "View Exports SVG",
   "extension.description": "✨ 'View Exports SVG' is a Visual Studio Code extension designed to streamline the process of accessing and utilizing SVG icons. With this extension, you can effortlessly explore and search for SVG icons within your project, simplifying the task of finding and integrating them into your project.",
   "extension.commands.showMenu.title": "View Exports SVG 🔍",
+  "extension.commands.scanning.title": "Start Scanning",
   "extension.commands.collapseAll.title": "Collapse All Icons",
   "extension.commands.expandAll.title": "Expand All Icons",
   "extension.commands.reloadTheme.title": "Reload the built-in editor theme in the playground",

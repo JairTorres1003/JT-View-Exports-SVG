@@ -52,8 +52,6 @@ export class SVGComponentHandler {
   }
 
   getSVGComponents(): void {
-    this.postMessage(SVGPostMessage.SendRunExtraction, true)
-
     if (!isEmpty(this.viewExportSVG)) {
       this.postMessage(SVGPostMessage.SendSVGComponents, this.viewExportSVG)
     } else {

@@ -2,6 +2,7 @@
   "extension.title": "Zobrazit export SVG",
   "extension.description": "✨ 'Zobrazit export SVG' je rozšíření vizuálního studia navrženého tak, aby zefektivnilo proces přístupu a využití ikon SVG.S tímto rozšířením můžete bez námahy prozkoumat a hledat ikony SVG v rámci svého projektu a zjednodušit úkol je hledat a integrovat do vašeho projektu.",
   "extension.commands.showMenu.title": "Zobrazit export SVG 🔍",
+  "extension.commands.scanning.title": "Spustit skenování",
   "extension.commands.collapseAll.title": "Sbalení všech ikon",
   "extension.commands.expandAll.title": "Rozbalte všechny ikony",
   "extension.commands.reloadTheme.title": "Znovu načtěte vestavěný motiv editoru na hřišti",

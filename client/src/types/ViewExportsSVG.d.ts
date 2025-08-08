@@ -17,7 +17,7 @@ export interface MessageHandlersView {
   [SVGPostMessage.SendAssetsPath]?: (data: AssetPath) => void
   [SVGPostMessage.SendLastScanDate]?: (data: string) => void
   [SVGPostMessage.SendPlaygroundError]?: (data: SVGErrors) => void
-  [SVGPostMessage.SendRunExtraction]?: (data: boolean) => void
+  [SVGPostMessage.SendRunLoading]?: (data: string) => void
   [SVGPostMessage.SendSVGComponents]?: (data: ViewExportSVG[]) => void
   [SVGPostMessage.SendRefreshSVGComponents]?: (data: ViewExportSVG[]) => void
   [SVGPostMessage.SendSVGError]?: (data: SVGErrors) => void
@@ -42,7 +42,7 @@ export interface FuncOnMessage {
   (type: SVGPostMessage.SendAssetsPath, handler: (data: AssetPath) => void): void
   (type: SVGPostMessage.SendLastScanDate, handler: (data: string) => void): void
   (type: SVGPostMessage.SendPlaygroundError, handler: (data: SVGErrors) => void): void
-  (type: SVGPostMessage.SendRunExtraction, handler: (data: boolean) => void): void
+  (type: SVGPostMessage.SendRunLoading, handler: (data: string) => void): void
   (type: SVGPostMessage.SendSVGComponents, handler: (data: ViewExportSVG[]) => void): void
   (type: SVGPostMessage.SendRefreshSVGComponents, handler: (data: ViewExportSVG[]) => void): void
   (type: SVGPostMessage.SendSVGError, handler: (data: SVGErrors) => void): void

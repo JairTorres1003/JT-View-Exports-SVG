@@ -13,7 +13,7 @@ export enum SVGPostMessage {
 
   SendAssetsPath = 'send/assets/paths',
 
-  SendRunExtraction = 'send/svg/run-extraction',
+  SendRunLoading = 'send/settings/run-loading',
   SendTheme = 'send/settings/theme',
   SendEditorConfig = 'send/settings/editor-config',
   SendVsCodeStyles = 'send/settings/vscode-styles',

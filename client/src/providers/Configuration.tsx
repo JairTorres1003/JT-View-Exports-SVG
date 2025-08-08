@@ -2,9 +2,10 @@ import { SVGPostMessage } from '@api/enums/ViewExportsSVG'
 import { type FC, useEffect, useState } from 'react'
 import { useDispatch } from 'react-redux'
 
+import { pathnames } from '@/config/routes/route'
 import { LoadingPage } from '@/core/components/LoadingPage'
 import { vscode } from '@/services/vscode'
-import { setConfiguration } from '@/store/features/GlobalSlice'
+import { setConfiguration, setInitLoading, setRenderPath } from '@/store/features/GlobalSlice'
 import type { ProviderProps } from '@/types/BaseProps'
 
 /**
@@ -24,6 +25,7 @@ export const ConfigurationProvider: FC<ProviderProps> = ({ children }): React.Re
    */
   const handleReload = (message: string) => {
     setRefresh({ loading: true, message })
+    dispatch(setRenderPath({ path: pathnames.home }))
 
     setTimeout(() => {
       setRefresh({ loading: false })
@@ -35,10 +37,15 @@ export const ConfigurationProvider: FC<ProviderProps> = ({ children }): React.Re
       dispatch(setConfiguration(data))
     })
 
+    vscode.onMessage(SVGPostMessage.SendRunLoading, (path: string) => {
+      dispatch(setInitLoading(path))
+    })
+
     vscode.onMessage(SVGPostMessage.SendReloadWebview, handleReload)
 
     return () => {
       vscode.unregisterMessage(SVGPostMessage.SendUpdateConfiguration)
+      vscode.unregisterMessage(SVGPostMessage.SendRunLoading)
       vscode.unregisterMessage(SVGPostMessage.SendReloadWebview)
     }
   }, [dispatch])
