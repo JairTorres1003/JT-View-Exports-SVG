@@ -6,7 +6,7 @@
   "Error setting webview message listener": "Erreur lors de la configuration de l'écouteur de messages de la vue web",
   "Error generating SVG playground {error}": "Erreur lors de la génération de l'aire de jeu SVG {error}",
   "An unknown error occurred": "Une erreur inconnue est survenue",
-  "Declaration named {name} not found in file {file}": "éclaration nommée {name} non trouvée dans le fichier {file}",
+  "Declaration named {name} not found in file {file}": "Déclaration nommée {name} non trouvée dans le fichier {file}",
   "SVG components not found in file {file}": "Composants SVG non trouvés dans le fichier {file}",
   "SVG component named {name} not found in file {file}": "Composant SVG nommé {name} non trouvé dans le fichier {file}",
   "Error extracting SVG component: {name}": "Erreur lors de l'extraction du composant SVG : {name}",
