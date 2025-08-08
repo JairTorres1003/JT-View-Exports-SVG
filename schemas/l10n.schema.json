@@ -211,12 +211,15 @@
     "Error removing assets path: {error}": {
       "type": "string",
       "description": "Error message displayed when removing the assets path fails",
-      "default": "Error removing assets path: {error}"
+      "default": "Error removing assets path: {error}",
+      "pattern": ".*\\{error\\}.*",
+      "patternErrorMessage": "The message must contain the variable {error}"
     },
     "Error getting assets path: {error}": {
-      "type": "string",
+      "default": "Error getting assets path: {error}",
       "description": "Error message displayed when getting the assets path fails",
-      "default": "Error getting assets path: {error}"
+      "pattern": ".*\\{error\\}.*",
+      "patternErrorMessage": "The message must contain the variable {error}"
     },
     "Method not implemented": {
       "type": "string",
@@ -256,7 +259,9 @@
     "{kind} icons": {
       "type": "string",
       "description": "Label for the icon type",
-      "default": "{kind} icons"
+      "default": "{kind} icons",
+      "pattern": ".*\\{kind\\}.*",
+      "patternErrorMessage": "The message must contain the variable {kind}"
     },
     "Favorite": {
       "type": "string",

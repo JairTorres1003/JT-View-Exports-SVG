@@ -63,11 +63,11 @@
   "json.schemas": [
     {
       "fileMatch": ["/l10n/bundle.l10n*.json"],
-      "url": "./l10n.schema.json"
+      "url": ".schemas/l10n.schema.json"
     },
     {
       "fileMatch": ["/package.nls*.json"],
-      "url": "./nls.schema.json"
+      "url": ".schemas/nls.schema.json"
     },
     {
       "fileMatch": ["client/src/i18n/*.json"],

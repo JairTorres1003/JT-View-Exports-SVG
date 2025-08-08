@@ -35,7 +35,6 @@ LEARN.md
 .prettierignore
 tsconfig*.json
 .github/
-l10n.schema.json
-nls.schema.json
-esbuild.config.js
+**/*.schema.json
+**/*.config.js
 package-lock.json
