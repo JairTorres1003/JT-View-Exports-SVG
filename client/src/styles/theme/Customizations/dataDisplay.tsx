@@ -91,7 +91,7 @@ export const dataDisplayCustomizations: CustomizationsFunction = (styles) => ({
         padding: '0 4px',
         borderRadius: '20px',
         textAlign: 'center',
-        boder: '1px solid var(--JT-SVG-vscode-panel-border)',
+        border: '1px solid var(--JT-SVG-vscode-panel-border)',
       },
     },
   },
