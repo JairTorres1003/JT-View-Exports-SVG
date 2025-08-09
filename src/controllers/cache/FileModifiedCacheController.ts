@@ -118,12 +118,25 @@ export class FileModifiedCacheController<T> {
    */
   public async loadCache(): Promise<void> {
     try {
-      const stat = await workspace.fs.stat(this.cacheFilePath)
+      let stat = false
+
+      try {
+        await workspace.fs.stat(this.cacheFilePath)
+        stat = true
+      } catch {
+        stat = false
+      }
 
       if (stat) {
         const data = await workspace.fs.readFile(this.cacheFilePath)
         const jsonString = new TextDecoder().decode(data)
         this.cache = JSON.parse(jsonString)
+      } else {
+        await workspace.fs.writeFile(
+          this.cacheFilePath,
+          new TextEncoder().encode(JSON.stringify({}))
+        )
+        this.cache = {}
       }
     } catch (error) {
       console.error(`${l10n.t('Error loading cache')}:`, error)
