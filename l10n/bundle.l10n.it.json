@@ -52,5 +52,5 @@
   "Reloading...": "Ricaricamento...",
   "Error toggling favorite status for icon {name}": "Errore durante il cambio di stato preferito per l'icona {name}",
   "Error retrieving icons: {error}": "Errore durante il recupero delle icone: {error}",
-  "Missing index.html file in manifest": "Fichier index.html manquant dans le manifeste"
+  "Missing index.html file in manifest": "File index.html mancante nel manifesto"
 }

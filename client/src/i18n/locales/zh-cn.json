@@ -119,7 +119,7 @@
         },
         "properties": {
           "details": {
-            "static": "(财产) {{name}}: {{type}}"
+            "static": "(属性) {{name}}: {{type}}"
           }
         }
       }
