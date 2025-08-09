@@ -1,5 +1,4 @@
 import { SVGPostMessage, SVGReceiveMessage } from '@api/enums/ViewExportsSVG'
-import type { AxiosResponse } from 'axios'
 import i18next from 'i18next'
 import type { WebviewApi } from 'vscode-webview'
 
@@ -33,7 +32,7 @@ class VSCodeInternalAPIWrapper<T = unknown> {
     data = undefined,
   }: VSCodeInternalAPIWrapperMessage): Promise<void> => {
     try {
-      let request: () => Promise<AxiosResponse> = async () => await axiosInstance.get(type)
+      let request = async () => await axiosInstance.get(type)
 
       if (data !== undefined) {
         request = async () => await axiosInstance.post(type, { data })
