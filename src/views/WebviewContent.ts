@@ -1,4 +1,4 @@
-import { Uri, type Webview, env, l10n, workspace } from 'vscode'
+import { type Uri, type Webview, env, l10n, workspace } from 'vscode'
 
 import {
   DefaultClickToOpenDevToolsController,
@@ -57,7 +57,7 @@ export class WebviewContent {
    * @throws Will throw an error if the manifest file cannot be read or parsed.
    */
   private async getManifest(): Promise<ManifestContent> {
-    const path = Uri.file(this.getAssetUri('manifest.json').fsPath)
+    const path = this.getAssetUri('manifest.json')
     const manifestBytes = await workspace.fs.readFile(path)
     const manifestString = Buffer.from(manifestBytes).toString('utf8')
     return JSON.parse(manifestString)
