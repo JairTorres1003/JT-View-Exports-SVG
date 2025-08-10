@@ -25,7 +25,6 @@ export async function processFiles(
   operation: (result: ViewExportSVG[]) => void
 ): Promise<void> {
   try {
-    const fileSelected: Uri[] = []
     const progressOptions: ProgressOptions = {
       location: ProgressLocation.Notification,
       title: l10n.t('Icon extraction in progress...'),
@@ -38,21 +37,16 @@ export async function processFiles(
       const SVGFiles: SVGFile[] = []
       const SVGExports: ViewExportSVG[] = []
 
-      items.forEach((item) => {
-        if (item.scheme === 'file') {
-          const absolutePath = item.fsPath
-          const extname = path.extname(absolutePath)
-
-          if (REGEX_FILE.test(extname)) {
-            fileSelected.push(item)
-          }
-        }
-      })
-
       // Extract SVG exports from the selected files
       await Promise.all(
-        fileSelected.map(async (f) => {
+        items.map(async (f) => {
           try {
+            const extname = path.extname(f.fsPath)
+
+            if (!REGEX_FILE.test(extname)) {
+              return
+            }
+
             const { DeclarationFileCache, ComponentsFileCache } = getCacheManager()
             const file = await pathToSVGFile(f.fsPath)
             const lastModified = await getFileTimestamp(file.absolutePath)
