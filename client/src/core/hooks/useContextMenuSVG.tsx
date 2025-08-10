@@ -38,7 +38,7 @@ export const useContextMenuSVG = (options: UseSVGActionsProps): UseSVGActionsRet
 
   return [
     { label: t('CopyName'), onClick: onCopyName },
-    { label: t('CopyFragment'), onClick: onCopyFragment },
+    { label: t('CopyCodeSnippet'), onClick: onCopyFragment },
     { isDivider: true },
     ...actions,
   ]

@@ -30,6 +30,7 @@
     "ListOfAssociatedFilesFor": "\"{{name}}\" için ilişkili dosyaların listesi",
     "Copied {{value}} to clipboard": "<b>{{value}}</b> panoya kopyalandı",
     "CopyName": "Adı kopyala",
+    "CopyCodeSnippet": "Kodu kopyala",
     "Close": "Kapat",
     "DeleteThisFile": "Bu dosyayı sil",
     "AddMoreFiles": "Daha fazla dosya ekle",

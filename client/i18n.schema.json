@@ -141,6 +141,10 @@
           "type": "string",
           "default": "Copy name"
         },
+        "CopyCodeSnippet": {
+          "type": "string",
+          "default": "Copy code snippet"
+        },
         "Close": {
           "type": "string",
           "default": "Close"
@@ -195,6 +199,7 @@
         "ListOfAssociatedFilesFor",
         "Copied {{value}} to clipboard",
         "CopyName",
+        "CopyCodeSnippet",
         "Close",
         "DeleteThisFile",
         "AddMoreFiles",

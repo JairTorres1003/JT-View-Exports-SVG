@@ -30,6 +30,7 @@
     "ListOfAssociatedFilesFor": "List of associated files for \"{{name}}\"",
     "Copied {{value}} to clipboard": "Copied <b>{{value}}</b> to clipboard",
     "CopyName": "Copy name",
+    "CopyCodeSnippet": "Copy code snippet",
     "Close": "Close",
     "DeleteThisFile": "Delete this file",
     "AddMoreFiles": "Add more files",

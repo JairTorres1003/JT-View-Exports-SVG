@@ -30,6 +30,7 @@
     "ListOfAssociatedFilesFor": "\"{{name}}\" 的关联文件列表",
     "Copied {{value}} to clipboard": "已复制 <b>{{value}}</b> 到剪贴板",
     "CopyName": "复制名称",
+    "CopyCodeSnippet": "复制代码片段",
     "Close": "关闭",
     "DeleteThisFile": "删除此文件",
     "AddMoreFiles": "添加更多文件",

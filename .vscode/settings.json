@@ -70,7 +70,7 @@
       "url": "./schemas/nls.schema.json"
     },
     {
-      "fileMatch": ["client/src/i18n/*.json"],
+      "fileMatch": ["client/src/i18n/locales/*.json"],
       "url": "./client/i18n.schema.json"
     },
     {

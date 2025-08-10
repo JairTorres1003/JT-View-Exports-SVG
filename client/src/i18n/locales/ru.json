@@ -30,6 +30,7 @@
     "ListOfAssociatedFilesFor": "Список связанных файлов для \"{{name}}\"",
     "Copied {{value}} to clipboard": "Скопировано <b>{{value}}</b> в буфер обмена",
     "CopyName": "Копировать имя",
+    "CopyCodeSnippet": "Копировать фрагмент кода",
     "Close": "Закрыть",
     "DeleteThisFile": "Удалить этот файл",
     "AddMoreFiles": "Добавить больше файлов",

@@ -30,6 +30,7 @@
     "ListOfAssociatedFilesFor": "Lista de archivos asociados para \"{{name}}\"",
     "Copied {{value}} to clipboard": "Copiado <b>{{value}}</b> al portapapeles",
     "CopyName": "Copiar nombre",
+    "CopyCodeSnippet": "Copiar fragmento de código",
     "Close": "Cerrar",
     "DeleteThisFile": "Eliminar este archivo",
     "AddMoreFiles": "Agregar más archivos",
