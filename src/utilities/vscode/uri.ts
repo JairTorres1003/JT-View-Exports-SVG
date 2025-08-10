@@ -1,6 +1,6 @@
 import * as path from 'path'
 
-import { Uri, type Webview } from 'vscode'
+import { UIKind, Uri, type Webview, env } from 'vscode'
 
 import { isEmpty } from '../misc'
 
@@ -39,4 +39,21 @@ export function svgFileToUri(svgFile: SVGFile): Uri {
   }
 
   return Uri.file(path.join(svgFile.dirname, svgFile.basename))
+}
+
+/**
+ * Parses a given `Uri` object and returns a new `Uri` instance.
+ *
+ * - In web environments (`UIKind.Web`), parses the URI using its string representation.
+ * - In other environments, parses the URI using its file system path.
+ *
+ * @param uri - The `Uri` object to be parsed.
+ * @returns A new `Uri` instance parsed from the input.
+ */
+export const uriParse = (uri: Uri): Uri => {
+  if (env.uiKind === UIKind.Web) {
+    return Uri.parse(uri.toString())
+  }
+
+  return Uri.parse(uri.fsPath)
 }

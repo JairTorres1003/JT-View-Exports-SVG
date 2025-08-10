@@ -1,4 +1,4 @@
-import { Uri, type Webview, env, l10n, workspace } from 'vscode'
+import { type Uri, type Webview, env, l10n, workspace } from 'vscode'
 
 import {
   DefaultClickToOpenDevToolsController,
@@ -9,7 +9,7 @@ import type { GetWebviewAssets } from '@/types/views/content'
 import type { ManifestContent } from '@/types/views/WebviewContent'
 import { getNonce } from '@/utilities/files'
 import { isEmpty } from '@/utilities/misc'
-import { getUri } from '@/utilities/vscode'
+import { getUri, uriParse } from '@/utilities/vscode'
 
 export class WebviewContent {
   private readonly _webview: Webview
@@ -57,8 +57,8 @@ export class WebviewContent {
    * @throws Will throw an error if the manifest file cannot be read or parsed.
    */
   private async getManifest(): Promise<ManifestContent> {
-    const path = this.getAssetUri('manifest.json')
-    const manifestBytes = await workspace.fs.readFile(Uri.parse(path.fsPath))
+    const path = uriParse(this.getAssetUri('manifest.json'))
+    const manifestBytes = await workspace.fs.readFile(path)
     const manifestString = Buffer.from(manifestBytes).toString('utf8')
     return JSON.parse(manifestString)
   }
