@@ -14,6 +14,7 @@ suite('URI Utility', () => {
 
   test('it should convert an SVGFile to a Uri', () => {
     const svgFile: SVGFile = {
+      uri: `file://${file}`,
       absolutePath: file,
       basename,
       extension: 'tsx',
@@ -30,6 +31,7 @@ suite('URI Utility', () => {
 
   test('it should convert an SVGFile to a Uri with a workspace path', () => {
     const svgFile: SVGFile = {
+      uri: `file://${file}`,
       absolutePath: '',
       basename,
       extension: 'tsx',
@@ -45,6 +47,7 @@ suite('URI Utility', () => {
 
   test('it should convert an SVGFile to a Uri with a workspace path (no relative path)', () => {
     const svgFile: SVGFile = {
+      uri: `file://${file}`,
       absolutePath: '',
       basename,
       dirname: path.dirname(file),

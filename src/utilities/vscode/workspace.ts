@@ -1,4 +1,4 @@
-import { workspace } from 'vscode'
+import { env, UIKind, workspace } from 'vscode'
 
 import { isEmpty } from '../misc'
 
@@ -13,9 +13,12 @@ export function getWorkspacePath(): string {
 
     if (!isEmpty(workspaceFolders)) {
       const firstWorkspaceFolder = workspaceFolders[0]
-      const workspaceFolderPath = firstWorkspaceFolder.uri.fsPath
 
-      return workspaceFolderPath
+      if (env.uiKind === UIKind.Web) {
+        return firstWorkspaceFolder.uri.toString()
+      }
+
+      return firstWorkspaceFolder.uri.fsPath
     }
 
     return '/'

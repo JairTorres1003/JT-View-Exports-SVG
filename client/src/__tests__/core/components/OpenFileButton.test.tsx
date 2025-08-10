@@ -8,6 +8,7 @@ import { openFileInPosition } from '@/core/utils/file'
 
 describe('OpenFileButton', () => {
   const mockFile: SVGFile = {
+    uri: 'file:///path/to/file.tsx',
     absolutePath: '/path/to/file.tsx',
     relativePath: 'file.tsx',
     basename: 'file.tsx',

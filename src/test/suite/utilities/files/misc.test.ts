@@ -64,6 +64,7 @@ suite('pathToSVGFile Utility Function', () => {
 
   const relativePath = path.relative(testFolderUri.fsPath, tempFile)
   const expectedSVGFile: SVGFile = {
+    uri: `file://${tempFile}`,
     absolutePath: tempFile,
     basename,
     dirname: path.dirname(tempFile),
@@ -87,6 +88,7 @@ suite('openFile Utility Function', () => {
   const currentFile = Uri.joinPath(testFolderUri, 'assets', basename).fsPath
 
   const file: SVGFile = {
+    uri: `file://${currentFile}`,
     absolutePath: currentFile,
     basename,
     dirname: path.dirname(currentFile),

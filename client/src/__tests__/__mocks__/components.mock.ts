@@ -4,6 +4,7 @@ const location: SVGComponent['location'] = {
   start: { line: 1, column: 1, index: 1 },
   end: { line: 1, column: 1, index: 1 },
   file: {
+    uri: 'file:///path/to/file.tsx',
     absolutePath: '/path/to/file.tsx',
     relativePath: 'file.tsx',
     basename: 'file.tsx',

@@ -1,7 +1,8 @@
-import { l10n, Uri, workspace } from 'vscode'
+import { l10n, type Uri, workspace } from 'vscode'
 
 import { getFileTimestamp } from '../files'
 import { isEmpty } from '../misc'
+import { svgFileToUri } from '../vscode'
 
 import { getCacheManager } from '@/controllers/cache'
 import { RecentIconsShowController, ShowNotExportedIconsController } from '@/controllers/config'
@@ -9,7 +10,7 @@ import { CacheIconKind } from '@/enum/cache'
 import type { SVGIconCache } from '@/types/cache'
 import type { SVGComponent, SVGFile, SVGIcon, ViewExportSVG } from '@/types/ViewExportsSVG'
 
-const filesExists: Record<string, boolean> = {}
+let filesExists: Record<string, boolean> = {}
 const removeElementsCache: { files: string[]; icons: SVGIcon[] } = {
   files: [],
   icons: [],
@@ -17,15 +18,17 @@ const removeElementsCache: { files: string[]; icons: SVGIcon[] } = {
 
 /**
  * Checks if a file exists in the cache and updates the cache if it doesn't.
- * @param filePath - The absolute path of the file to check.
+ * @param uirFile - The absolute path of the file to check.
  * @returns A boolean indicating whether the file exists.
  */
-const checkFileExists = async (filePath: string): Promise<boolean> => {
+const checkFileExists = async (uirFile: Uri): Promise<boolean> => {
+  const filePath = uirFile.toString()
+
   if (filesExists[filePath] !== undefined) return filesExists[filePath]
 
   let exists = false
   try {
-    await workspace.fs.stat(Uri.file(filePath))
+    await workspace.fs.stat(uirFile)
     exists = true
   } catch {
     exists = false
@@ -61,7 +64,9 @@ const validateShowIcons = (): Partial<Record<CacheIconKind, boolean>> => {
 const getComponentCache = async (icon: SVGIconCache) => {
   const { location, name } = icon
 
-  const existFile = await checkFileExists(location.file.absolutePath)
+  const uri = svgFileToUri(location.file)
+
+  const existFile = await checkFileExists(uri)
   if (!existFile) {
     removeElementsCache.icons.push({ name, location })
     return
@@ -156,6 +161,8 @@ export const getIconsFromCache = async (): Promise<ViewExportSVG[]> => {
   if (removeElementsCache.files.length > 0) {
     ComponentsFileCache.delete(removeElementsCache.files)
   }
+
+  filesExists = {}
 
   return result
 }

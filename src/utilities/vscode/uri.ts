@@ -1,10 +1,4 @@
-import * as path from 'path'
-
 import { UIKind, Uri, type Webview, env } from 'vscode'
-
-import { isEmpty } from '../misc'
-
-import { getWorkspacePath } from './workspace'
 
 import type { SVGFile } from '@/types/ViewExportsSVG'
 
@@ -30,15 +24,7 @@ export function getUri(webview: Webview, extensionUri: Uri, pathList: string[]):
  * @returns A Uri pointing to the SVG file.
  */
 export function svgFileToUri(svgFile: SVGFile): Uri {
-  const workspacePath = getWorkspacePath()
-
-  if (!isEmpty(svgFile.absolutePath)) {
-    return Uri.file(svgFile.absolutePath)
-  } else if (!isEmpty(svgFile.relativePath) && !isEmpty(workspacePath)) {
-    return Uri.file(path.join(workspacePath, svgFile.relativePath))
-  }
-
-  return Uri.file(path.join(svgFile.dirname, svgFile.basename))
+  return Uri.parse(svgFile.uri)
 }
 
 /**

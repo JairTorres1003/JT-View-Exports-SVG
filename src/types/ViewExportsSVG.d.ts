@@ -39,6 +39,7 @@ export interface ViewExportSVG {
 }
 
 export interface SVGFile {
+  uri: string
   /**
    * The absolute path of the SVG file.
    */
