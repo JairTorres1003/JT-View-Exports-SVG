@@ -58,7 +58,6 @@ export class ViewExportsSVGController extends ListerWebviewController {
    */
   public init(pathname = '/dashboard'): void {
     if (!isEmpty(ViewExportsSVGController.currentPanel)) {
-      ViewExportsSVGController.currentPanel._panel.reveal(ViewColumn.Active)
       this._postMessage(SVGPostMessage.SendRunLoading, pathname)
     }
   }
@@ -120,6 +119,7 @@ export class ViewExportsSVGController extends ListerWebviewController {
    */
   public static update(viewExportSVG: ViewExportSVG[], processedFiles: number): void {
     if (!isEmpty(ViewExportsSVGController.currentPanel)) {
+      ViewExportsSVGController.currentPanel._panel.reveal(ViewColumn.Active)
       ViewExportsSVGController.currentPanel.updateLayout(processedFiles, viewExportSVG)
 
       if (!isEmpty(viewExportSVG)) {
