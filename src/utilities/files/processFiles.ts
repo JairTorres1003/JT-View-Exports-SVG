@@ -65,7 +65,7 @@ export async function processFiles(
               return
             }
 
-            const { base, svg } = await extractSVGData(file)
+            const { base, svg } = await extractSVGData(file, f)
             const totalExports = svg.exportComponents.length
             const totalNoExports = svg.noExportComponents.length
             const totalSVG = totalExports + totalNoExports

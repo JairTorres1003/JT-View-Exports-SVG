@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/require-await -- This function is designed to be asynchronous */
 import traverse from '@babel/traverse'
 import * as t from '@babel/types'
-import { l10n, workspace } from 'vscode'
+import { l10n, type Uri, workspace } from 'vscode'
 
 import { parseFileContent, parserContent } from '../babelParser'
 import { getUnknownError, isEmpty } from '../misc'
@@ -63,9 +63,9 @@ export async function extractSVGComponent(
  * @param file - The path to the file.
  * @returns A promise that resolves to an object containing the extracted SVG.
  */
-export async function extractSVGData(file: SVGFile): Promise<ExtractSVGExports> {
+export async function extractSVGData(file: SVGFile, uriFile: Uri): Promise<ExtractSVGExports> {
   try {
-    const ast = await parseFileContent(file.absolutePath)
+    const ast = await parseFileContent(uriFile)
     const base: ExtractSVGExports['base'] = {}
     const exportComponents: SVGComponent[] = []
     const noExportComponents: SVGComponent[] = []
