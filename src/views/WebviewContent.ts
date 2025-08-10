@@ -1,4 +1,4 @@
-import { type Uri, type Webview, env, l10n, workspace } from 'vscode'
+import { Uri, type Webview, env, l10n, workspace } from 'vscode'
 
 import {
   DefaultClickToOpenDevToolsController,
@@ -58,7 +58,7 @@ export class WebviewContent {
    */
   private async getManifest(): Promise<ManifestContent> {
     const path = this.getAssetUri('manifest.json')
-    const manifestBytes = await workspace.fs.readFile(path)
+    const manifestBytes = await workspace.fs.readFile(Uri.parse(path.fsPath))
     const manifestString = Buffer.from(manifestBytes).toString('utf8')
     return JSON.parse(manifestString)
   }
