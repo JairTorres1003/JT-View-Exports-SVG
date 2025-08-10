@@ -155,7 +155,7 @@ export class IconCacheController extends FileModifiedCacheController<SVGIconCach
    * @returns A string in the format `[kind]-[folder.fsPath]` representing the unique identifier.
    */
   getId(folder: Uri): string {
-    return `[${this.kind}]-[${folder.fsPath}]`
+    return `[${this.kind}]-[${folder.toString()}]`
   }
 
   /**
