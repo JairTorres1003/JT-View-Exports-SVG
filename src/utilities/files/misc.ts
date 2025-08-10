@@ -4,7 +4,6 @@ import * as path from 'path'
 import { l10n, Position, Selection, TextEditorRevealType, Uri, window, workspace } from 'vscode'
 
 import { getUnknownError } from '../misc'
-import { getWorkspacePath } from '../vscode'
 
 import type { SVGFile } from '@/types/ViewExportsSVG'
 import type { OpenFile } from '@/types/views/content'
@@ -45,12 +44,13 @@ export async function getLanguageFromFile(file: Uri): Promise<string> {
  * @returns The SVGFile object containing information about the file.
  */
 export async function pathToSVGFile(filePath: string): Promise<SVGFile> {
-  const workspacePath = getWorkspacePath()
+  const workspaceUri = workspace.workspaceFolders?.[0]?.uri
+  const workspacePath = workspaceUri?.fsPath ?? ''
 
   const absolutePath = path.isAbsolute(filePath) ? filePath : path.join(workspacePath, filePath)
   const dirname = path.dirname(absolutePath)
   const language = await getLanguageFromFile(Uri.file(absolutePath))
-  const uri = Uri.parse(workspacePath).with({ path: absolutePath }).toString()
+  const uri = workspaceUri?.with({ path: absolutePath })?.toString() ?? ''
 
   return {
     uri,

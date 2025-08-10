@@ -1,4 +1,4 @@
-import { l10n, type Uri } from 'vscode'
+import { l10n, type WorkspaceFolder, type Uri } from 'vscode'
 
 import { FileModifiedCacheController } from './FileModifiedCacheController'
 
@@ -43,7 +43,7 @@ export class IconCacheController extends FileModifiedCacheController<SVGIconCach
    * @param value - An array of SVG icons to be added to the cache.
    * @returns The new list of icons after the specified icons have been added.
    */
-  add(folder: Uri, value: SVGIcon[]): SVGIconCache[] {
+  add(folder: WorkspaceFolder, value: SVGIcon[]): SVGIconCache[] {
     const currentKey = this.getId(folder)
 
     const current = super.get(currentKey, 0) ?? []
@@ -76,11 +76,11 @@ export class IconCacheController extends FileModifiedCacheController<SVGIconCach
    * Removes an icon from the cache.
    *
    * @param key - The key under which the icon is cached.
-   * @param folder - The folder URI to which the icon belongs.
+   * @param folder - The workspace folder to which the icon belongs.
    * @param icon - The icon to be removed from the cache.
    * @returns The new list of icons after the specified icon has been removed.
    */
-  remove(folder: Uri, icon: SVGIcon | SVGIcon[]): SVGIconCache[] {
+  remove(folder: WorkspaceFolder, icon: SVGIcon | SVGIcon[]): SVGIconCache[] {
     const currentKey = this.getId(folder)
     const current = super.get(currentKey, 0) ?? []
 
@@ -102,10 +102,10 @@ export class IconCacheController extends FileModifiedCacheController<SVGIconCach
    * Each icon in the value array is augmented with the current timestamp.
    *
    * @param key - The key under which the value should be stored.
-   * @param folder - The folder URI to which the icons belong.
+   * @param folder - The workspace folder to which the icons belong.
    * @param value - An array of SVGIcon objects to be stored in the cache.
    */
-  public setIcons(folder: Uri, value: SVGIcon[]): void {
+  public setIcons(folder: WorkspaceFolder, value: SVGIcon[]): void {
     const newValue = value.map((icon) => ({ ...icon, dateAdd: Date.now() }))
 
     super.set(this.getId(folder), newValue, 0)
@@ -114,11 +114,11 @@ export class IconCacheController extends FileModifiedCacheController<SVGIconCach
   /**
    * Checks if the specified icon exists in the cache for the given folder.
    *
-   * @param folder - The folder URI to check for the icon.
+   * @param folder - The workspace folder for which to check the icon.
    * @param icon - The SVGIcon object to check for existence in the cache.
    * @returns `true` if the icon exists in the cache, otherwise `false`.
    */
-  public hasIcon(folder: Uri, icon: SVGIcon): boolean {
+  public hasIcon(folder: WorkspaceFolder, icon: SVGIcon): boolean {
     const currentKey = this.getId(folder)
     const current = super.get(currentKey, 0) ?? []
 
@@ -130,32 +130,36 @@ export class IconCacheController extends FileModifiedCacheController<SVGIconCach
   }
 
   /**
-   * Retrieves the cached value for the specified key.
+   * Retrieves the cached value for the specified folder.
    *
-   * @param key - The key to look up in the cache.
+   * @param folder - The workspace folder for which to retrieve the cached value.
    * @returns The cached value if found, or `undefined` if not found.
    */
-  getIcons(folder: Uri): SVGIconCache[] | undefined {
+  getIcons(folder: WorkspaceFolder): SVGIconCache[] | undefined {
     return super.get(this.getId(folder), 0)
   }
 
   /**
-   * Deletes the cache entry for the specified key.
+   * Deletes the cache entry for the specified folder.
    *
-   * @param key - The key to delete from the cache.
+   * @param folder - The workspace folder for which to delete the cache entry.
    */
-  deleteIcons(folder: Uri): void {
+  deleteIcons(folder: WorkspaceFolder): void {
     super.delete(this.getId(folder))
   }
 
   /**
-   * Generates a unique identifier string for the given folder based on its file system path and the current kind.
+   * Generates a unique identifier string for a given workspace folder.
    *
-   * @param folder - The URI of the folder for which to generate the identifier.
-   * @returns A string in the format `[kind]-[folder.fsPath]` representing the unique identifier.
+   * The identifier is composed of the controller's kind, the folder's name,
+   * and an encoded representation of the folder's URI.
+   *
+   * @param folder - The workspace folder for which to generate the identifier.
+   * @returns A unique string identifier for the specified folder.
    */
-  getId(folder: Uri): string {
-    return `[${this.kind}]-[${folder.toString()}]`
+  getId(folder: WorkspaceFolder): string {
+    const folderEncode = encodeURIComponent(folder.uri.toString())
+    return `[${this.kind}]-[${folder.name}]-[${folderEncode}]`
   }
 
   /**

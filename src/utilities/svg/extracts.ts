@@ -90,7 +90,7 @@ export async function extractSVGData(file: SVGFile, uriFile: Uri): Promise<Extra
         let isFavorite = false
 
         if (!isEmpty(workspace.workspaceFolders)) {
-          isFavorite = FavoritesIconCache.hasIcon(workspace.workspaceFolders[0].uri, {
+          isFavorite = FavoritesIconCache.hasIcon(workspace.workspaceFolders[0], {
             location: svgResult.location,
             name: svgResult.name,
           })

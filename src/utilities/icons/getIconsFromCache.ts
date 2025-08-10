@@ -101,7 +101,7 @@ export const getIconsFromCache = async (): Promise<ViewExportSVG[]> => {
       if (!validateShow[kind]) return
 
       let icons: SVGIconCache[] = []
-      const workspaceFolderUri = workspace.workspaceFolders?.[0]?.uri
+      const workspaceFolderUri = workspace.workspaceFolders?.[0]
 
       if (!isEmpty(workspaceFolderUri)) {
         icons = cache.getIcons(workspaceFolderUri) ?? []

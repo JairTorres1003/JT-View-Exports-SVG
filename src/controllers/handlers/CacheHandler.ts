@@ -1,4 +1,4 @@
-import { l10n, window, workspace } from 'vscode'
+import { l10n, window, workspace, type WorkspaceFolder } from 'vscode'
 
 import { getCacheManager } from '../cache'
 
@@ -6,10 +6,14 @@ import { SVGPostMessage } from '@/enum/ViewExportsSVG'
 import type { SVGIcon } from '@/types/ViewExportsSVG'
 import type { FuncPostMessage } from '@/types/views/PostMessage'
 import { getIconsFromCache } from '@/utilities/icons/getIconsFromCache'
-import { getUnknownError, isEmpty } from '@/utilities/misc'
+import { getUnknownError } from '@/utilities/misc'
 
 export class CacheHandler {
-  constructor(private readonly postMessage: FuncPostMessage) {}
+  private readonly currentFolder: WorkspaceFolder | undefined
+
+  constructor(private readonly postMessage: FuncPostMessage) {
+    this.currentFolder = workspace.workspaceFolders?.[0]
+  }
 
   addRecentIcon(icon: SVGIcon): void {
     this.addIconToCache(icon, true)
@@ -59,10 +63,10 @@ export class CacheHandler {
 
     const { RecentIconCache, FavoritesIconCache, ComponentsFileCache } = getCacheManager()
 
-    if (isEmpty(workspace.workspaceFolders)) return
+    if (!this.currentFolder) return
 
     const cache = isRecent ? RecentIconCache : FavoritesIconCache
-    cache.add(workspace.workspaceFolders[0].uri, [icon])
+    cache.add(this.currentFolder, [icon])
 
     if (!isRecent) {
       ComponentsFileCache.toggleFavoriteIcon(icon)
@@ -76,10 +80,10 @@ export class CacheHandler {
 
     const { RecentIconCache, FavoritesIconCache, ComponentsFileCache } = getCacheManager()
 
-    if (isEmpty(workspace.workspaceFolders)) return
+    if (!this.currentFolder) return
 
     const cache = isRecent ? RecentIconCache : FavoritesIconCache
-    cache.remove(workspace.workspaceFolders[0].uri, icon)
+    cache.remove(this.currentFolder, icon)
 
     if (!isRecent) {
       ComponentsFileCache.toggleFavoriteIcon(icon)
