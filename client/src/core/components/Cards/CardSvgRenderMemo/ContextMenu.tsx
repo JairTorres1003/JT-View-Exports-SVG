@@ -1,11 +1,8 @@
 import type { SVGComponent } from '@api/types/ViewExportsSVG'
 import { Divider, Menu, MenuItem, type MenuProps } from '@mui/material'
 import type { FC } from 'react'
-import { Trans, useTranslation } from 'react-i18next'
 
-import { useAlert } from '@/core/hooks/useAlert'
-import { useSVGActions } from '@/core/hooks/useSVGActions'
-import { copyToClipboard, getUnknownError } from '@/utils/misc'
+import { useContextMenuSVG } from '@/core/hooks/useContextMenuSVG'
 
 interface ContextMenuProps
   extends Omit<
@@ -24,9 +21,7 @@ export const ContextMenu: FC<ContextMenuProps> = ({
   svgRef,
   ...props
 }) => {
-  const { onOpen } = useAlert()
-  const actions = useSVGActions({ svgRef })
-  const { t } = useTranslation(undefined, { keyPrefix: 'labels' })
+  const actions = useContextMenuSVG({ svgRef })
 
   /**
    * Handles the closing of the menu component.
@@ -50,31 +45,8 @@ export const ContextMenu: FC<ContextMenuProps> = ({
         contextMenu !== null ? { top: contextMenu.mouseY, left: contextMenu.mouseX } : undefined
       }
     >
-      <MenuItem
-        onClick={() => {
-          copyToClipboard(component.name)
-            .then(() => {
-              onOpen(
-                <Trans
-                  t={t}
-                  i18nKey='Copied {{value}} to clipboard'
-                  values={{ value: component.name }}
-                />,
-                { severity: 'success' }
-              )
-            })
-            .catch((error) => {
-              onOpen(getUnknownError(error), { severity: 'error' })
-            })
-        }}
-      >
-        {t('CopyName')}
-      </MenuItem>
-
-      <Divider />
-
       {actions.map((action, index) => {
-        if (action.isDivider) return <Divider key={`divider-${index}`} />
+        if ('isDivider' in action) return <Divider key={`divider-${index}`} />
 
         return (
           <MenuItem

@@ -9,11 +9,19 @@ import {
   triggerDownload,
 } from '../utils/svg-actions'
 
-interface UseSVGActionsProps {
+export interface UseSVGActionsProps {
   svgRef: React.RefObject<SVGElement | null>
 }
 
-export const useSVGActions = ({ svgRef }: UseSVGActionsProps) => {
+export type UseSVGActionsReturn = Array<
+  | {
+      label: string
+      onClick: (component: SVGComponent) => void
+    }
+  | { isDivider: true }
+>
+
+export const useSVGActions = ({ svgRef }: UseSVGActionsProps): UseSVGActionsReturn => {
   const { t } = useTranslation(undefined, { keyPrefix: 'DevTools.playground' })
 
   /**
