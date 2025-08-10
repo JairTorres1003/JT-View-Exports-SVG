@@ -1,9 +1,9 @@
 import type { FC } from 'react'
 import { useSelector } from 'react-redux'
 
-import { BoxPlaygroundCardSvg } from './PlaygroundCardSvg.style'
-
 import { RenderSvg } from '@/core/components/SVG/RenderSvg'
+
+import { BoxPlaygroundCardSvg } from './PlaygroundCardSvg.style'
 
 interface PlaygroundCardSvgProps {
   bgColor: string

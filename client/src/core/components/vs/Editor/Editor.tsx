@@ -1,11 +1,11 @@
 import { Box, LinearProgress } from '@mui/material'
 import { forwardRef } from 'react'
 
-import { editorClasses } from './Editor.classes'
-import { BoxEditor } from './Editor.style'
-
 import { useEditor } from '@/core/hooks/vs/useEditor'
 import type { EditorProps, TypeEditorRef } from '@/core/types/components/vs/Editor'
+
+import { editorClasses } from './Editor.classes'
+import { BoxEditor } from './Editor.style'
 
 const Editor = forwardRef<TypeEditorRef, EditorProps>(({ className, ...rest }, forwardedRef) => {
   const { id, rootRef, loading, progress } = useEditor({ forwardedRef, ...rest })

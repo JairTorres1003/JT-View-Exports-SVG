@@ -7,9 +7,9 @@ import {
 } from '@mui/material'
 import cn from 'classnames'
 
-import { accordionMenuItemClasses } from './AccordionMenuItem.classes'
-
 import { progress } from '@/styles/keyframes'
+
+import { accordionMenuItemClasses } from './AccordionMenuItem.classes'
 
 export const BoxAccordionMenuItem = styled(
   (props: GridProps) => (

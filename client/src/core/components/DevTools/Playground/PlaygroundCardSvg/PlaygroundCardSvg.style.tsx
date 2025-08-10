@@ -1,9 +1,9 @@
 import { Box, type BoxProps, styled } from '@mui/material'
 import { forwardRef } from 'react'
 
-import { playgroundClasses } from '../Playground.classes'
-
 import bgTransparent from '@/assets/images/bg-transparent.png'
+
+import { playgroundClasses } from '../Playground.classes'
 
 export const BoxPlaygroundCardSvg = styled(
   forwardRef<HTMLButtonElement, BoxProps & { bgColor: string }>(function BoxPlaygroundCardSvg(

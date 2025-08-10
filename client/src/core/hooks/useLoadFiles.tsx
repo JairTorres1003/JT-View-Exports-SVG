@@ -4,12 +4,12 @@ import { List, ListItem, ListItemText, Stack, Typography } from '@mui/material'
 import { useEffect, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 
+import { vscode } from '@/services/vscode'
+import type { IFile } from '@/types/misc'
+
 import { getFileExtension, getFileName } from '../utils/file'
 
 import { useAlert } from './useAlert'
-
-import { vscode } from '@/services/vscode'
-import type { IFile } from '@/types/misc'
 
 const ALLOWED_EXTENSIONS = ['.js', '.ts', '.jsx', '.tsx']
 

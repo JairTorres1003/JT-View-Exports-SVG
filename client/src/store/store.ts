@@ -1,11 +1,11 @@
 import { type Reducer, type Store, combineReducers, configureStore } from '@reduxjs/toolkit'
 
+import type { RootStoreState } from '@/types/store/store'
+
 import { GlobalReducer } from './features/GlobalSlice'
 import { PlaygroundReducer } from './features/PlaygroundSlice'
 import { SVGReducer } from './features/SVGSlice'
 import { VsCodeReducer } from './features/VsCodeSlice'
-
-import type { RootStoreState } from '@/types/store/store'
 
 /**
  * Root reducer function that combines all the reducers.

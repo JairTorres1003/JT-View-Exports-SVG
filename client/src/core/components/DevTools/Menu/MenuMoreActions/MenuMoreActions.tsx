@@ -47,7 +47,7 @@ const MenuMoreActions: FC<MenuToolsProps> = ({ svgRef }) => {
         }}
       >
         {actions.map((action, index) => {
-          if (action.isDivider) return <Divider key={`divider-${index}`} />
+          if ('isDivider' in action) return <Divider key={`divider-${index}`} />
 
           return (
             <MenuItem

@@ -9,9 +9,9 @@ import {
 } from '@mui/material'
 import type { ComponentType } from 'react'
 
-import { devToolsClasses } from './DevTools.classes'
-
 import { accordionMenuItemClasses } from '@/core/components/Accordion'
+
+import { devToolsClasses } from './DevTools.classes'
 
 export const BoxDevTools = styled<ComponentType<BoxProps>>((props) => <Box {...props} />, {
   name: devToolsClasses.root,

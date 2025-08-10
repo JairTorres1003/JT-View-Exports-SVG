@@ -1,9 +1,9 @@
 import { Box, type BoxProps, styled, typographyClasses } from '@mui/material'
 import type { ComponentType } from 'react'
 
-import { colorPickerClasses, reactColorfulClasses } from './ColorPicker.classes'
-
 import bgTransparent from '@/assets/images/bg-transparent.png'
+
+import { colorPickerClasses, reactColorfulClasses } from './ColorPicker.classes'
 
 export const ColorPickerBox = styled(Box, {
   name: colorPickerClasses.root,

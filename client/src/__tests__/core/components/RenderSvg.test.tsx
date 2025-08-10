@@ -2,9 +2,8 @@ import { render } from '@testing-library/react'
 import { Provider } from 'react-redux'
 import { describe, expect, test } from 'vitest'
 
-import RenderSvg from '../../../core/components/SVG/RenderSvg/RenderSvg'
-
 import { mockSvgComponents } from '@/__tests__/__mocks__/components.mock'
+import { RenderSvg } from '@/core/components/SVG/RenderSvg'
 import { store } from '@/store/store'
 
 const renderWithProvider = (ui: React.ReactElement) => {

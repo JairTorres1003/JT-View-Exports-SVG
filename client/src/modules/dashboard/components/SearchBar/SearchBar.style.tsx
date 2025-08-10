@@ -8,9 +8,9 @@ import {
 } from '@mui/material'
 import type { ComponentType } from 'react'
 
-import { searchBarClasses } from './SearchBar.classes'
-
 import { IconLupe } from '@/assets/icons/functionalities'
+
+import { searchBarClasses } from './SearchBar.classes'
 
 export const BoxSearchBar = styled(Box, {
   name: searchBarClasses.root,

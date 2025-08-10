@@ -2,9 +2,9 @@ import { SVGPostMessage, SVGReceiveMessage } from '@api/enums/ViewExportsSVG'
 import i18next from 'i18next'
 import type { WebviewApi } from 'vscode-webview'
 
-import { axiosInstance } from '../instance'
-
 import { getUnknownError, isEmpty } from '@/utils/misc'
+
+import { axiosInstance } from '../instance'
 
 interface VSCodeInternalAPIWrapperMessage {
   type: SVGReceiveMessage

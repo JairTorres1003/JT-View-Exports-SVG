@@ -3,14 +3,14 @@ import { memo, type FC } from 'react'
 import { useTranslation } from 'react-i18next'
 import { Panel, PanelGroup, PanelResizeHandle } from 'react-resizable-panels'
 
+import { IconClose } from '@/assets/icons/functionalities'
+import { AccordionMenuItem } from '@/core/components/Accordion'
+import { useDevTools } from '@/core/hooks/DevTools/useDevTools'
+
 import { devToolsClasses } from './DevTools.classes'
 import { BoxDevTools } from './DevTools.style'
 import { InfoComponent } from './InfoComponent/InfoComponent'
 import { Playground } from './Playground'
-
-import { IconClose } from '@/assets/icons/functionalities'
-import { AccordionMenuItem } from '@/core/components/Accordion'
-import { useDevTools } from '@/core/hooks/DevTools/useDevTools'
 
 const MemoPlayground = memo(Playground)
 const MemoInfoComponent = memo(InfoComponent)

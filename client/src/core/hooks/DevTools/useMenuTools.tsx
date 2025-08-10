@@ -2,10 +2,10 @@ import { SVGReceiveMessage } from '@api/enums/ViewExportsSVG'
 import * as monaco from 'monaco-editor'
 import { useEffect, useState } from 'react'
 
-import { useMenu } from '../useMenu'
-
 import type { TypeEditorRef } from '@/core/types/components/vs/Editor'
 import { vscode } from '@/services/vscode'
+
+import { useMenu } from '../useMenu'
 
 interface MenuToolsHookProps {
   editorRef?: React.RefObject<TypeEditorRef>

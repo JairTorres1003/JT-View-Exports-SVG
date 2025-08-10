@@ -2,10 +2,10 @@ import { Box, Typography } from '@mui/material'
 import type { FC } from 'react'
 import { useTranslation } from 'react-i18next'
 
+import { isEmpty } from '@/utils/misc'
+
 import { loadingPageClasses } from './LoadingPage.classes'
 import { BoxLoadingPage } from './LoadingPage.style'
-
-import { isEmpty } from '@/utils/misc'
 
 interface LoadingPageProps {
   className?: string

@@ -1,15 +1,15 @@
 import { ListItem, ListItemIcon, ListItemText } from '@mui/material'
 import { useSelector } from 'react-redux'
 
-import ProgressBarInRefresh from '../ProgressBarInRefresh/ProgressBarInRefresh'
-
-import { containerComponentsClasses } from './ContainerComponents.classes'
-import { BoxContainerComponents } from './ContainerComponents.style'
-
 import { IconWarning } from '@/assets/icons/indicators'
 import { AccordionActionsSVG, AccordionMenuItem } from '@/core/components/Accordion'
 import CardSvgRenderMemo from '@/core/components/Cards/CardSvgRenderMemo/CardSvgRenderMemo'
 import { useExpandedComponents } from '@/core/hooks/useExpandedComponents'
+
+import ProgressBarInRefresh from '../ProgressBarInRefresh/ProgressBarInRefresh'
+
+import { containerComponentsClasses } from './ContainerComponents.classes'
+import { BoxContainerComponents } from './ContainerComponents.style'
 
 const ContainerComponents = (): React.ReactNode => {
   const { isExpanded, toggleExpanded } = useExpandedComponents()

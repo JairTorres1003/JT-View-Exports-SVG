@@ -2,10 +2,10 @@ import { alpha, Slider, sliderClasses, styled } from '@mui/material'
 import cn from 'classnames'
 import type { ComponentType } from 'react'
 
-import { verticalPickerSliderClasses } from './ColorPicker.classes'
-
 import bgTransparent from '@/assets/images/bg-transparent.png'
 import type { VerticalPickerSliderProps } from '@/core/types/components/vs/ColorPicker'
+
+import { verticalPickerSliderClasses } from './ColorPicker.classes'
 
 export const VerticalPickerSlider = styled<ComponentType<VerticalPickerSliderProps>>(
   ({ variant = 'hue', alphaColor, className, style, ...props }) => (

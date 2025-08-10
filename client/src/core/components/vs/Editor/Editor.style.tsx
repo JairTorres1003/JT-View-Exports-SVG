@@ -1,9 +1,9 @@
 import { Box, type BoxProps, linearProgressClasses, styled } from '@mui/material'
 import { forwardRef } from 'react'
 
-import { editorClasses } from './Editor.classes'
-
 import { linearProgressBarLoad } from '@/styles/keyframes'
+
+import { editorClasses } from './Editor.classes'
 
 export const BoxEditor = styled(
   forwardRef<HTMLDivElement, BoxProps>(function BoxEditor(props, ref) {

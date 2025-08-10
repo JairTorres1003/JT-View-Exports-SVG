@@ -1,10 +1,10 @@
 import React, { lazy, Suspense } from 'react'
 import { Panel, PanelGroup, PanelResizeHandle } from 'react-resizable-panels'
 
+import { useViewPanels } from '@/core/hooks/useViewPanels'
+
 import { viewPanelsClasses } from './ViewPanels.classes'
 import { BoxViewPanels } from './ViewPanels.style'
-
-import { useViewPanels } from '@/core/hooks/useViewPanels'
 
 const devToolsPanelId = 'devTools-panel'
 

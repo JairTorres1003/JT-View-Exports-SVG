@@ -3,11 +3,11 @@ import { Box, type BoxProps, Card, IconButton, Tooltip, Typography } from '@mui/
 import cn from 'classnames'
 import type { FC } from 'react'
 
-import { cardSvgClasses } from './CardSvg.classes'
-import { BoxCardSvg } from './CardSvg.style'
-
 import { IconStarFilled, IconStarOutlined } from '@/assets/icons/indicators'
 import { useCardSvg } from '@/core/hooks/useCardSvg'
+
+import { cardSvgClasses } from './CardSvg.classes'
+import { BoxCardSvg } from './CardSvg.style'
 
 export interface CardSvgProps extends Omit<BoxProps, 'component'> {
   children: React.ReactNode

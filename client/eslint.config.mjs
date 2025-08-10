@@ -1,11 +1,12 @@
-import js from '@eslint/js'
-import stylistic from '@stylistic/eslint-plugin'
 import eslintConfigLove from 'eslint-config-love'
+import eslintPluginImport from 'eslint-plugin-import'
 import eslintPluginPrettier from 'eslint-plugin-prettier/recommended'
 import eslintPluginReact from 'eslint-plugin-react'
+import globals from 'globals'
+import js from '@eslint/js'
 import reactHooks from 'eslint-plugin-react-hooks'
 import reactRefresh from 'eslint-plugin-react-refresh'
-import globals from 'globals'
+import stylistic from '@stylistic/eslint-plugin'
 import tseslint from 'typescript-eslint'
 
 const STATE = {
@@ -52,14 +53,21 @@ export default tseslint.config(
       'react-hooks': reactHooks,
       'react-refresh': reactRefresh,
       '@stylistic': stylistic,
+      import: eslintPluginImport,
     },
     settings: {
       react: {
         version: 'detect',
       },
+      'import/resolver': {
+        typescript: {
+          project: './tsconfig.json',
+        },
+      },
     },
     rules: {
       ...reactHooks.configs.recommended.rules,
+      'import/no-unresolved': ['error', { caseSensitive: true }],
       'promise/avoid-new': STATE.OFF,
       'react-refresh/only-export-components': STATE.WARN,
       'no-console': [STATE.ERROR, { allow: ['warn', 'error', 'info'] }],

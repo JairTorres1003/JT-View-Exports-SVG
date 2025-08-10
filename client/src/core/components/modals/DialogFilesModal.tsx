@@ -12,12 +12,12 @@ import {
 import { type FC, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 
+import { IconAnyFile, IconJS, IconReact, IconReactTS, IconTS } from '@/assets/icons/files'
+import type { IconBaseProps } from '@/types/BaseProps'
+
 import { OpenFileButton } from '../Buttons/OpenFileButton'
 
 import { DialogModal } from './DialogModal'
-
-import { IconAnyFile, IconJS, IconReact, IconReactTS, IconTS } from '@/assets/icons/files'
-import type { IconBaseProps } from '@/types/BaseProps'
 
 interface DialogFilesModalProps extends DialogProps {
   files: SVGFile[]

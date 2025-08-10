@@ -1,11 +1,11 @@
 import { useSelector } from 'react-redux'
 
-import { containerIconsClasses } from './ContainerIcons.classes'
-import { BoxContainerIcons } from './ContainerIcons.style'
-
 import { AccordionActionsSVG, AccordionMenuItem } from '@/core/components/Accordion'
 import CardSvgRenderMemo from '@/core/components/Cards/CardSvgRenderMemo/CardSvgRenderMemo'
 import { useExpandedComponents } from '@/core/hooks/useExpandedComponents'
+
+import { containerIconsClasses } from './ContainerIcons.classes'
+import { BoxContainerIcons } from './ContainerIcons.style'
 
 const ContainerIcons = (): React.ReactNode => {
   const { isExpanded, toggleExpanded } = useExpandedComponents()

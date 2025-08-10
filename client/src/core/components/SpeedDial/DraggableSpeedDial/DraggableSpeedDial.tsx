@@ -1,10 +1,10 @@
 import { Backdrop, SpeedDialAction, type SpeedDialProps } from '@mui/material'
 import type { FC } from 'react'
 
-import { BoxDraggableSpeedDial, CornerIndicator } from './DraggableSpeedDial.style'
-
 import { useDraggableSpeedDial } from '@/core/hooks/useDraggableSpeedDial'
 import type { IconBaseProps } from '@/types/BaseProps'
+
+import { BoxDraggableSpeedDial, CornerIndicator } from './DraggableSpeedDial.style'
 
 interface DraggableSpeedDialProps<TAction extends { icon: FC<IconBaseProps>; name: string }>
   extends Omit<SpeedDialProps, 'children'> {

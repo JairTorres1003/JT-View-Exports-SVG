@@ -12,10 +12,6 @@ import getQuickAccessServiceOverride from '@codingame/monaco-vscode-quickaccess-
 import getTextMateServiceOverride from '@codingame/monaco-vscode-textmate-service-override'
 import getThemeServiceOverride from '@codingame/monaco-vscode-theme-service-override'
 import * as monaco from 'monaco-editor'
-import keybindings from 'public/vs/userConfiguration/keybindings.json'
-
-import { contextMenuServiceOverride } from './contextMenu'
-import { activateDefaultExtensions } from './extensions/init'
 
 import type {
   EditorConfigurations,
@@ -25,6 +21,10 @@ import type {
 import i18next from '@/i18n'
 import type { RequiredExcept } from '@/types/misc'
 import { getUnknownError } from '@/utils/misc'
+import keybindings from 'public/vs/userConfiguration/keybindings.json'
+
+import { contextMenuServiceOverride } from './contextMenu'
+import { activateDefaultExtensions } from './extensions/init'
 
 const OVERRIDES: IEditorOverrideServices = {
   ...getConfigurationServiceOverride(),

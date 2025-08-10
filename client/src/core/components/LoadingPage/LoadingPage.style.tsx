@@ -1,8 +1,8 @@
 import { Box, styled } from '@mui/material'
 
-import { loadingPageClasses } from './LoadingPage.classes'
-
 import { loadingCodePad } from '@/styles/keyframes'
+
+import { loadingPageClasses } from './LoadingPage.classes'
 
 export const BoxLoadingPage = styled(Box, {
   name: loadingPageClasses.root,

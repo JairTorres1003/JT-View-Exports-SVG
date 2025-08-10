@@ -9,7 +9,7 @@ import type {
   IStandaloneCodeEditor,
   TypeEditorRef,
 } from '@/core/types/components/vs/Editor'
-import { Editor } from '@/core/utils/vs/editor/createEditor'
+import { Editor } from '@/core/utils/vs/Editor/createEditor'
 import { setInitializedEditor } from '@/store/features/PlaygroundSlice'
 import { getUnknownError, isEmpty } from '@/utils/misc'
 

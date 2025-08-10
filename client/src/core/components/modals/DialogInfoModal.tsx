@@ -12,9 +12,9 @@ import {
 import type { FC } from 'react'
 import { useTranslation } from 'react-i18next'
 
-import { DialogModal } from './DialogModal'
-
 import { Show } from '@/core/helpers'
+
+import { DialogModal } from './DialogModal'
 
 interface DialogInfoModalProps extends DialogProps {
   data: ViewExportSVG

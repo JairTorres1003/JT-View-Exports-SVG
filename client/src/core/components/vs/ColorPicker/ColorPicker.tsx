@@ -2,13 +2,13 @@ import { Box, Typography } from '@mui/material'
 import { forwardRef } from 'react'
 import { RgbaColorPicker } from 'react-colorful'
 
-import { colorPickerClasses } from './ColorPicker.classes'
-import { BoxInfoPickerColor, ColorPickerBox } from './ColorPicker.style'
-import { VerticalPickerSlider } from './VerticalPickerSlider'
-
 import { IconMode } from '@/assets/icons/indicators'
 import { useColorPicker } from '@/core/hooks/vs/useColorPicker'
 import type { ColorPickerProps } from '@/core/types/components/vs/ColorPicker'
+
+import { colorPickerClasses } from './ColorPicker.classes'
+import { BoxInfoPickerColor, ColorPickerBox } from './ColorPicker.style'
+import { VerticalPickerSlider } from './VerticalPickerSlider'
 
 const ColorPicker = forwardRef<HTMLDivElement, ColorPickerProps>(function ColorPicker(
   { className, onChange = () => null, currentColor, style, sx, ...props },

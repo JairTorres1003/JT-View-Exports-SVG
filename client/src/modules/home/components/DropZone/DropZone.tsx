@@ -3,13 +3,13 @@ import { useEffect } from 'react'
 import { useTranslation } from 'react-i18next'
 import { useDispatch } from 'react-redux'
 
-import { dropZoneClasses } from './DropZone.classes'
-import { BoxDropZone } from './DropZone.style'
-
 import { pathnames } from '@/config/routes/route'
 import { BackdropZone } from '@/core/components/Backdrop/BackdropZone'
 import { useLoadFiles } from '@/core/hooks/useLoadFiles'
 import { setRenderPath } from '@/store/features/GlobalSlice'
+
+import { dropZoneClasses } from './DropZone.classes'
+import { BoxDropZone } from './DropZone.style'
 
 const DropZone = () => {
   const { t } = useTranslation(undefined, { keyPrefix: 'DropZone' })

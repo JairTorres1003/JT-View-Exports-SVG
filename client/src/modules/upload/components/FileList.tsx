@@ -2,9 +2,6 @@ import { Card, IconButton, Stack, Tooltip, Typography } from '@mui/material'
 import type { FC } from 'react'
 import { useTranslation } from 'react-i18next'
 
-import { fileListClasses } from './FileList.classes'
-import { BoxFileList } from './FileList.style'
-
 import {
   IconAnyFile,
   IconFileJS,
@@ -16,6 +13,9 @@ import { IconClose } from '@/assets/icons/functionalities'
 import { IconEmptyBox } from '@/assets/icons/indicators'
 import type { IconBaseProps } from '@/types/BaseProps'
 import type { IFile } from '@/types/misc'
+
+import { fileListClasses } from './FileList.classes'
+import { BoxFileList } from './FileList.style'
 
 interface FileListProps {
   files: IFile[]

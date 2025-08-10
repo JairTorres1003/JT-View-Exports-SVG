@@ -1,7 +1,7 @@
 import type { SVGComponent } from '@api/types/ViewExportsSVG'
 import * as monaco from 'monaco-editor'
 
-import { createInsertText } from '@/core/utils/vs/editor'
+import { createInsertText } from '@/core/utils/vs/Editor'
 import i18next from '@/i18n'
 
 const tagParsingCache = new Map<string, { isInside: boolean; tagContent: string }>()
