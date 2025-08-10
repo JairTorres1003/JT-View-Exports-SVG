@@ -8,22 +8,17 @@ import { isEmpty } from '../misc'
  * @returns The path of the current workspace, or an empty string if no workspace is open.
  */
 export function getWorkspacePath(): string {
-  try {
-    const workspaceFolders = workspace.workspaceFolders
+  const workspaceFolders = workspace.workspaceFolders
 
-    if (!isEmpty(workspaceFolders)) {
-      const firstWorkspaceFolder = workspaceFolders[0]
+  if (!isEmpty(workspaceFolders)) {
+    const firstWorkspaceFolder = workspaceFolders[0]
 
-      if (env.uiKind === UIKind.Web) {
-        return firstWorkspaceFolder.uri.toString()
-      }
-
-      return firstWorkspaceFolder.uri.fsPath
+    if (env.uiKind === UIKind.Web) {
+      return firstWorkspaceFolder.uri.toString()
     }
 
-    return '/'
-  } catch (error) {
-    console.error(error)
-    return '/'
+    return firstWorkspaceFolder.uri.fsPath
   }
+
+  return '/'
 }
