@@ -283,7 +283,7 @@
     "client:format": "cd client && npm run format",
     "client:build": "cd client && npm run build",
     "client:dev": "cd client && npm run dev",
-    "open-in-browser": "vscode-test-web --extensionDevelopmentPath=. .",
+    "open-in-browser": "vscode-test-web --extensionDevelopmentPath=. $FOLDER_EXAMPLE",
     "prepare": "husky",
     "postinstall": "npm dedupe"
   },
