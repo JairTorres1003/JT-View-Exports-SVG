@@ -1,14 +1,14 @@
 import { l10n } from 'vscode'
 
-import { getFileTimestamp } from '../files'
-import { getUnknownError, isEmpty } from '../misc'
-
-import { extractIconComponent, extractSVGComponent } from './extracts'
-
 import { REST_PROPS_KEY } from '@/constants/misc'
 import { REGEX_TAG_NAME } from '@/constants/regex'
 import { getCacheManager } from '@/controllers/cache'
 import type { SVGErrors, SVGComponent, SVGPlayground } from '@/types/ViewExportsSVG'
+
+import { getFileTimestamp } from '../files'
+import { getUnknownError, isEmpty } from '../misc'
+
+import { extractIconComponent, extractSVGComponent } from './extracts'
 
 /**
  * Generates an SVG component or returns an error message based on the provided parameters.

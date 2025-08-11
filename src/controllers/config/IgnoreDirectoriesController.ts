@@ -1,7 +1,7 @@
-import ConfigManagerController from './ConfigManagerController'
-
 import { IGNORE_DIRECTORIES } from '@/constants/misc'
 import { isEmpty } from '@/utilities/misc'
+
+import ConfigManagerController from './ConfigManagerController'
 
 export class IgnoreDirectoriesController extends ConfigManagerController<string[]> {
   /**

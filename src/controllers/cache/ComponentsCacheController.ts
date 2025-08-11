@@ -1,9 +1,9 @@
 import { l10n } from 'vscode'
 
-import { FileModifiedCacheController } from './FileModifiedCacheController'
-
 import type { SVGIcon, ViewExportSVG } from '@/types/ViewExportsSVG'
 import { getFileTimestamp } from '@/utilities/files'
+
+import { FileModifiedCacheController } from './FileModifiedCacheController'
 
 export class ComponentsCacheController extends FileModifiedCacheController<ViewExportSVG> {
   /**

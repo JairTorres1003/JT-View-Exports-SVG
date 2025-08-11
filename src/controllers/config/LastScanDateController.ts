@@ -1,8 +1,8 @@
 import { ConfigurationTarget, env } from 'vscode'
 
-import ConfigManagerController from './ConfigManagerController'
-
 import { formatDate } from '@/utilities/misc'
+
+import ConfigManagerController from './ConfigManagerController'
 
 export class LastScanDateController extends ConfigManagerController<string> {
   /**

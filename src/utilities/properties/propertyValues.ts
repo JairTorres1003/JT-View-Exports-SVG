@@ -2,15 +2,15 @@
 import * as t from '@babel/types'
 import { camelCase } from 'lodash'
 
+import { REST_PROPS_KEY } from '@/constants/misc'
+import { DefaultIconPropertiesController } from '@/controllers/config'
+import type { PropertyValue } from '@/types/properties/propertyValues'
+
 import { isEmpty } from '../misc'
 
 import { getBinaryExpression } from './binaryExpression'
 import { getLogicalExpression } from './logicalExpression'
 import { getUnaryExpression } from './unaryExpression'
-
-import { REST_PROPS_KEY } from '@/constants/misc'
-import { DefaultIconPropertiesController } from '@/controllers/config'
-import type { PropertyValue } from '@/types/properties/propertyValues'
 
 /**
  * Retrieves the property values based on the provided value and properties.

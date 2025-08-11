@@ -3,6 +3,12 @@ import traverse from '@babel/traverse'
 import * as t from '@babel/types'
 import { l10n, type Uri, workspace } from 'vscode'
 
+import { REST_PROPS_KEY } from '@/constants/misc'
+import { getCacheManager } from '@/controllers/cache'
+import { SVGDeclaration } from '@/enum/ViewExportsSVG'
+import type { HandlersDeclaration, DeclarationExport, ExtractComponent } from '@/types/svg/extracts'
+import type { SVGComponent, ExtractSVGExports, SVGFile, SVGLocation } from '@/types/ViewExportsSVG'
+
 import { parseFileContent, parserContent } from '../babelParser'
 import { getUnknownError, isEmpty } from '../misc'
 import { getProperties, propertyManager } from '../properties'
@@ -10,12 +16,6 @@ import { getProperties, propertyManager } from '../properties'
 import { analyzeExportType, getNodeTypes } from './analyze'
 import { getSVGComponent } from './SVGComponent'
 import { getTagName } from './tags'
-
-import { REST_PROPS_KEY } from '@/constants/misc'
-import { getCacheManager } from '@/controllers/cache'
-import { SVGDeclaration } from '@/enum/ViewExportsSVG'
-import type { HandlersDeclaration, DeclarationExport, ExtractComponent } from '@/types/svg/extracts'
-import type { SVGComponent, ExtractSVGExports, SVGFile, SVGLocation } from '@/types/ViewExportsSVG'
 
 /**
  * Extracts an SVG component from a declaration export.

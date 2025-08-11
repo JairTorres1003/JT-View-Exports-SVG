@@ -1,14 +1,14 @@
 import type * as t from '@babel/types'
 import { l10n } from 'vscode'
 
+import type { GetSVGComponent } from '@/types/svg/SVGComponent'
+import type { SVGErrors, SVGComponentProps, SVGFile } from '@/types/ViewExportsSVG'
+
 import { isEmpty } from '../misc'
 import { getProperties, propertyManager } from '../properties'
 
 import { getChildAttributes } from './children'
 import { getSVGTagName } from './tags'
-
-import type { GetSVGComponent } from '@/types/svg/SVGComponent'
-import type { SVGErrors, SVGComponentProps, SVGFile } from '@/types/ViewExportsSVG'
 
 /**
  * Retrieves the SVG component from a JSX element.

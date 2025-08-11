@@ -2,9 +2,9 @@ import * as assert from 'assert'
 
 import { Uri } from 'vscode'
 
-import { testFolderUri } from '../../main.test'
-
 import { allowedFilesInFolder } from '@/utilities/files/allowedFilesInFolder'
+
+import { testFolderUri } from '../../main.test'
 
 suite('allowedFilesInFolder Utility Function', () => {
   test('it should return an array of URIs representing the allowed files', async () => {

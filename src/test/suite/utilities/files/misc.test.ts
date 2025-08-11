@@ -5,8 +5,6 @@ import * as path from 'path'
 import * as sinon from 'sinon'
 import { Uri, window } from 'vscode'
 
-import { testFolderUri } from '../../main.test'
-
 import type { SVGFile } from '@/types/ViewExportsSVG'
 import {
   getFileTimestamp,
@@ -14,6 +12,8 @@ import {
   pathToSVGFile,
   openFile,
 } from '@/utilities/files/misc'
+
+import { testFolderUri } from '../../main.test'
 
 suite('getFileTimestamp Utility Function', () => {
   const folderUri = Uri.joinPath(testFolderUri, 'assets')

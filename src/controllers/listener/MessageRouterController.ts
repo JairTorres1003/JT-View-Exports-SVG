@@ -1,11 +1,11 @@
 import { l10n, type Webview, window, type Disposable } from 'vscode'
 
-import type { ListerWebviewController } from './ListerWebviewController'
-
 import { SVGReceiveMessage } from '@/enum/ViewExportsSVG'
 import type { HandlerArgs } from '@/types/misc'
 import type { HandlerReceiveMessage, ReceiveMessage } from '@/types/views/ReceiveMessage'
 import { isEmpty } from '@/utilities/misc'
+
+import type { ListerWebviewController } from './ListerWebviewController'
 
 type ReceiveMessageHandler = (arg0?: HandlerArgs<HandlerReceiveMessage>) => void
 

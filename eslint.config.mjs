@@ -1,5 +1,6 @@
 import js from '@eslint/js'
 import stylistic from '@stylistic/eslint-plugin'
+import eslintPluginImport from 'eslint-plugin-import'
 import eslintConfigLove from 'eslint-config-love'
 import eslintPluginPrettier from 'eslint-plugin-prettier/recommended'
 import globals from 'globals'
@@ -47,10 +48,18 @@ export default tseslint.config(
         ...globals.es2021,
       },
     },
+    settings: {
+      'import/resolver': {
+        typescript: {
+          project: './tsconfig.json',
+        },
+      },
+    },
     extends: [js.configs.recommended, ...tseslint.configs.recommended],
     plugins: {
       '@typescript-eslint': tseslint.plugin,
       '@stylistic': stylistic,
+      import: eslintPluginImport,
     },
     rules: {
       'promise/avoid-new': STATE.OFF,

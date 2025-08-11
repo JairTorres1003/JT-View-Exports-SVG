@@ -2,10 +2,10 @@ import * as path from 'path'
 
 import { FileType, l10n, Uri, workspace } from 'vscode'
 
-import { isEmpty, matchesPattern } from '../misc'
-
 import { REGEX_FILE } from '@/constants/regex'
 import { IgnoreDirectoriesController } from '@/controllers/config'
+
+import { isEmpty, matchesPattern } from '../misc'
 
 /**
  * Gets the list of allowed files in a folder and its subfolders,

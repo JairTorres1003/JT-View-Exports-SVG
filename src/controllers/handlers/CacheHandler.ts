@@ -1,12 +1,12 @@
 import { l10n, window, workspace, type WorkspaceFolder } from 'vscode'
 
-import { getCacheManager } from '../cache'
-
 import { SVGPostMessage } from '@/enum/ViewExportsSVG'
 import type { SVGIcon } from '@/types/ViewExportsSVG'
 import type { FuncPostMessage } from '@/types/views/PostMessage'
 import { getIconsFromCache } from '@/utilities/icons/getIconsFromCache'
 import { getUnknownError } from '@/utilities/misc'
+
+import { getCacheManager } from '../cache'
 
 export class CacheHandler {
   private readonly currentFolder: WorkspaceFolder | undefined

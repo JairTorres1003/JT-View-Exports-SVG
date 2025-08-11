@@ -1,13 +1,13 @@
 import { l10n } from 'vscode'
 
-import { AssetsPathsController, LastScanDateController } from '../config'
-
 import { SVGPostMessage } from '@/enum/ViewExportsSVG'
 import type { SVGFile } from '@/types/ViewExportsSVG'
 import type { FuncPostMessage } from '@/types/views/PostMessage'
 import { scanningFiles, scanningWorkspace } from '@/utilities/files'
 import { getUnknownError } from '@/utilities/misc'
 import { svgFileToUri } from '@/utilities/vscode'
+
+import { AssetsPathsController, LastScanDateController } from '../config'
 
 export class AssetsHandler {
   private readonly assetsPathController: AssetsPathsController

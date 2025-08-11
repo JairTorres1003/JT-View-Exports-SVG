@@ -1,13 +1,13 @@
 import * as t from '@babel/types'
 import { l10n } from 'vscode'
 
+import type { GetChildAttributes, IValue } from '@/types/svg/SVGComponent'
+import type { SVGComponentProps, SVGErrors, SVGFile } from '@/types/ViewExportsSVG'
+
 import { isEmpty } from '../misc'
 import { getProperties, getPropertyValues, propertyManager } from '../properties'
 
 import { getSVGTagName } from './tags'
-
-import type { GetChildAttributes, IValue } from '@/types/svg/SVGComponent'
-import type { SVGComponentProps, SVGErrors, SVGFile } from '@/types/ViewExportsSVG'
 
 /**
  * Recursively retrieves all non-Fragment JSX elements from a given array of JSX children.

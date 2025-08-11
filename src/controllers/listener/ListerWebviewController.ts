@@ -1,5 +1,11 @@
 import { type Disposable, l10n, type WebviewPanel } from 'vscode'
 
+import { toggleViewActions } from '@/commands/editorTitleActions'
+import { SVGPostMessage } from '@/enum/ViewExportsSVG'
+import type { SVGFile, SVGIcon, SVGPlayground, ViewExportSVG } from '@/types/ViewExportsSVG'
+import type { FileTemporary, OpenFile } from '@/types/views/content'
+import type { FuncPostMessage } from '@/types/views/PostMessage'
+
 import { DefaultExpandAllController, RecentIconsShowController } from '../config'
 import { AssetsHandler } from '../handlers/AssetsHandler'
 import { CacheHandler } from '../handlers/CacheHandler'
@@ -8,12 +14,6 @@ import { SVGComponentHandler } from '../handlers/SVGComponentHandler'
 import { UIHandler } from '../handlers/UIHandler'
 
 import { MessageRouter } from './MessageRouterController'
-
-import { toggleViewActions } from '@/commands/editorTitleActions'
-import { SVGPostMessage } from '@/enum/ViewExportsSVG'
-import type { SVGFile, SVGIcon, SVGPlayground, ViewExportSVG } from '@/types/ViewExportsSVG'
-import type { FileTemporary, OpenFile } from '@/types/views/content'
-import type { FuncPostMessage } from '@/types/views/PostMessage'
 
 export class ListerWebviewController {
   public readonly _panel: WebviewPanel

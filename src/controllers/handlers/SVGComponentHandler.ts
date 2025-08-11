@@ -1,7 +1,5 @@
 import { l10n } from 'vscode'
 
-import { getCacheManager } from '../cache'
-
 import { SVGPostMessage } from '@/enum/ViewExportsSVG'
 import type { SVGFile, SVGPlayground, ViewExportSVG } from '@/types/ViewExportsSVG'
 import type { FuncPostMessage } from '@/types/views/PostMessage'
@@ -9,6 +7,8 @@ import { pathToSVGFile, processFiles, scanningFiles } from '@/utilities/files'
 import { getUnknownError, isEmpty } from '@/utilities/misc'
 import { filteredExports, playground } from '@/utilities/svg'
 import { svgFileToUri } from '@/utilities/vscode'
+
+import { getCacheManager } from '../cache'
 
 export class SVGComponentHandler {
   private viewExportSVG: ViewExportSVG[]

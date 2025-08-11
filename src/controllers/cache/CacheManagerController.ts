@@ -1,15 +1,15 @@
 import { l10n, Uri, type ExtensionContext, workspace } from 'vscode'
 
+import { CacheIconKind } from '@/enum/cache'
+import type { ExtractSVGExports } from '@/types/ViewExportsSVG'
+import type { ExtensionManage } from '@/types/vscode'
+
 import { isEmpty } from '../../utilities/misc'
 import { RecentIconsLimitController } from '../config'
 
 import { ComponentsCacheController } from './ComponentsCacheController'
 import { FileModifiedCacheController } from './FileModifiedCacheController'
 import { IconCacheController } from './IconCacheController'
-
-import { CacheIconKind } from '@/enum/cache'
-import type { ExtractSVGExports } from '@/types/ViewExportsSVG'
-import type { ExtensionManage } from '@/types/vscode'
 
 /**
  * Cache manager to handle multiple file caches, one for each type.

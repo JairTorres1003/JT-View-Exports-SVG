@@ -1,13 +1,13 @@
 import { l10n, window, workspace, type Uri } from 'vscode'
 
+import { LastScanDateController } from '@/controllers/config'
+import { ViewExportsSVGController } from '@/controllers/views'
+import type { ViewExportSVG } from '@/types/ViewExportsSVG'
+
 import { getUnknownError, isEmpty } from '../misc'
 
 import { allowedFilesInFolder } from './allowedFilesInFolder'
 import { processFiles } from './processFiles'
-
-import { LastScanDateController } from '@/controllers/config'
-import { ViewExportsSVGController } from '@/controllers/views'
-import type { ViewExportSVG } from '@/types/ViewExportsSVG'
 
 /**
  * Scans the workspace

@@ -1,6 +1,6 @@
-import ConfigManagerController from './ConfigManagerController'
-
 import { DEFAULT_ICON_PROPERTIES } from '@/constants/misc'
+
+import ConfigManagerController from './ConfigManagerController'
 
 /**
  * Default properties for the icons.

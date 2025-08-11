@@ -3,10 +3,10 @@ import * as path from 'path'
 
 import { Uri } from 'vscode'
 
-import { testFolderUri } from '../../main.test'
-
 import type { SVGFile } from '@/types/ViewExportsSVG'
 import { svgFileToUri } from '@/utilities/vscode/uri'
+
+import { testFolderUri } from '../../main.test'
 
 suite('URI Utility', () => {
   const basename = 'test-2.tsx'

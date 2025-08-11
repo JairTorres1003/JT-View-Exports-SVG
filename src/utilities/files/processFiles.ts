@@ -2,16 +2,16 @@ import * as path from 'path'
 
 import { ProgressLocation, type Uri, window, type ProgressOptions, l10n } from 'vscode'
 
+import { REGEX_FILE } from '@/constants/regex'
+import { getCacheManager } from '@/controllers/cache'
+import { AssetsPathsController, ShowNotExportedIconsController } from '@/controllers/config'
+import type { SVGFile, ViewExportSVG } from '@/types/ViewExportsSVG'
+
 import { isEmpty } from '../misc'
 import { extractSVGData } from '../svg'
 
 import { groupIconsByPattern } from './groupIconsByPattern'
 import { getFileTimestamp, pathToSVGFile } from './misc'
-
-import { REGEX_FILE } from '@/constants/regex'
-import { getCacheManager } from '@/controllers/cache'
-import { AssetsPathsController, ShowNotExportedIconsController } from '@/controllers/config'
-import type { SVGFile, ViewExportSVG } from '@/types/ViewExportsSVG'
 
 /**
  * Processes the selected files and extracts SVG exports from them.

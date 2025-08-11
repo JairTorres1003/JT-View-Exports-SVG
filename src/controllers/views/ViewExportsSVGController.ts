@@ -1,12 +1,12 @@
 import { type WebviewPanel, Uri, ViewColumn, window, l10n } from 'vscode'
 
-import { ListerWebviewController } from '../listener'
-
 import { CONFIG_KEY } from '@/constants/misc'
 import { SVGPostMessage } from '@/enum/ViewExportsSVG'
 import type { SVGErrors, ViewExportSVG } from '@/types/ViewExportsSVG'
 import { isEmpty } from '@/utilities/misc'
 import { WebviewContent } from '@/views/WebviewContent'
+
+import { ListerWebviewController } from '../listener'
 
 export class ViewExportsSVGController extends ListerWebviewController {
   public static currentPanel: ViewExportsSVGController | undefined

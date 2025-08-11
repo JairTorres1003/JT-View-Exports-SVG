@@ -1,9 +1,9 @@
 import { minimatch } from 'minimatch'
 
-import { isEmpty } from '../misc'
-
 import { GroupPatternsController } from '@/controllers/config'
 import type { ViewExportSVG } from '@/types/ViewExportsSVG'
+
+import { isEmpty } from '../misc'
 
 /**
  * Groups SVG exports by matching their groupKind with predefined patterns.
