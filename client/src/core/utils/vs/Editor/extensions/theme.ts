@@ -1,3 +1,4 @@
+import type { ExtensionManage } from '@api/types/vscode'
 import {
   registerExtension,
   ExtensionHostKind,
@@ -16,7 +17,7 @@ import { getUnknownError } from '@/utils/misc'
  * @async
  * @throws Logs an error if the manifest cannot be fetched or processed.
  */
-async function activate() {
+async function activate(_themeConfig?: ExtensionManage) {
   try {
     if (import.meta.env.DEV) {
       devActivate()

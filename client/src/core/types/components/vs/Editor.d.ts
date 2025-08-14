@@ -1,3 +1,4 @@
+import { PartialExcept, RequiredExcept } from '@/types/misc'
 import type { ExtensionManage } from '@api/types/vscode'
 import type * as monaco from 'monaco-editor'
 
@@ -7,12 +8,17 @@ export interface EditorProps {
   onChange?: (value: string) => void
 }
 
+type IUpdateConfig = PartialExcept<
+  Omit<EditorConfigurations, 'onChange' | 'language'>,
+  'extensionTheme'
+>
+
 export interface IStandaloneCodeEditor extends monaco.editor.IStandaloneCodeEditor {
   setDefaultValue: (value: string) => void
   getDefaultValue: () => string
   resetValue: VoidFunction
   api: {
-    updateUserConfiguration: (userConfiguration: Record<string, unknown>) => Promise<void>
+    updateUserConfiguration: (userConfiguration: IUpdateConfig) => Promise<void>
     registerCompletionItemProvider: (
       name: string,
       provider: monaco.languages.CompletionItemProvider

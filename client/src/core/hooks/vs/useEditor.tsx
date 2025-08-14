@@ -19,17 +19,17 @@ export const useEditor = ({
   onChange = () => null,
 }: EditorHookProps): EditorHook => {
   const { editorConfig, extensionTheme } = useSelector((state) => state.vsCode)
-  const isInitialized = useSelector((state) => state.playground.isInitialized)
 
   const [editorInstance, setEditorInstance] = useState<IStandaloneCodeEditor | undefined>(undefined)
   const [loading, setLoading] = useState(false)
   const [progress, setProgress] = useState(0)
 
+  const isMounted = useRef(false)
+
   const editorRef = useRef<TypeEditorRef>(null)
   const forkedRef = useForkRef(editorRef, forwardedRef)
 
   const id = useId()
-  const editorInitialized = isInitialized[id] || false
 
   const dispatch = useDispatch()
 
@@ -114,9 +114,11 @@ export const useEditor = ({
   const updateEditor = useCallback(() => {
     if (isEmpty(editorRef.current) || isEmpty(editorConfig)) return
 
-    editorRef.current?.editor?.api.updateUserConfiguration(editorConfig).catch((error) => {
-      console.error(getUnknownError(error))
-    })
+    editorRef.current?.editor?.api
+      .updateUserConfiguration({ userConfiguration: editorConfig, extensionTheme })
+      .catch((error) => {
+        console.error(getUnknownError(error))
+      })
   }, [editorRef, editorConfig])
 
   useEffect(() => {
@@ -149,16 +151,17 @@ export const useEditor = ({
   }, [editorConfig])
 
   useEffect(() => {
-    if (!editorInitialized) return
+    if (isMounted.current || !editorRef.current || !extensionTheme) return
 
     initializeEditor()
       .then((editor) => {
         setEditorInstance(editor)
+        isMounted.current = true
       })
       .catch((error) => {
         console.error(`${i18next.t('errors.FailedToInitializeEditor')}: ${getUnknownError(error)}`)
       })
-  }, [editorInitialized])
+  }, [editorRef, extensionTheme, isMounted])
 
   useEffect(() => {
     if (isEmpty(editorRef.current) || isEmpty(editorConfig)) return

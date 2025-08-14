@@ -16,6 +16,7 @@ import * as monaco from 'monaco-editor'
 import type {
   EditorConfigurations,
   IStandaloneCodeEditor,
+  IUpdateConfig,
   TypeEditorRef,
 } from '@/core/types/components/vs/Editor'
 import i18next from '@/i18n'
@@ -89,7 +90,7 @@ export class Editor {
 
     const editor = this._create()
 
-    await activateDefaultExtensions()
+    await activateDefaultExtensions(this._configurations)
 
     this._editorInstance = editor
 
@@ -183,11 +184,10 @@ export class Editor {
    * @param userConfiguration - The new user configuration to apply.
    * @returns A promise that resolves when the user configuration has been updated.
    */
-  private async _updateUserConfiguration(
-    userConfiguration: Record<string, unknown>
-  ): Promise<void> {
-    this._userConfiguration = userConfiguration
-    this._configurations.userConfiguration = userConfiguration
+  private async _updateUserConfiguration(config: IUpdateConfig): Promise<void> {
+    this._userConfiguration = config.userConfiguration
+    this._configurations.userConfiguration = config.userConfiguration
+    this._configurations.extensionTheme = config.extensionTheme
 
     if (!this._editorInstance) {
       throw new Error(i18next.t('errors.EditorReferenceIsNotAvailable'))
@@ -213,7 +213,7 @@ export class Editor {
     const settingsId = themes.map((theme) => theme.settingsId)
 
     if (!settingsId.includes(currentThemeId)) {
-      await activateDefaultExtensions()
+      await activateDefaultExtensions(config)
     }
 
     const defaultValue = this._editorInstance?.getDefaultValue() ?? ''
