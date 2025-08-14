@@ -1,4 +1,4 @@
-import { type WebviewPanel, Uri, ViewColumn, window, l10n } from 'vscode'
+import { type WebviewPanel, Uri, ViewColumn, window, l10n, type ExtensionContext } from 'vscode'
 
 import { CONFIG_KEY } from '@/constants/misc'
 import { SVGPostMessage } from '@/enum/ViewExportsSVG'
@@ -15,11 +15,11 @@ export class ViewExportsSVGController extends ListerWebviewController {
 
   private constructor(options: {
     panel: WebviewPanel
-    extensionUri: Uri
+    context: ExtensionContext
     viewExportSVG: ViewExportSVG[]
     processedFiles: number
   }) {
-    const { panel, extensionUri, viewExportSVG, processedFiles } = options
+    const { panel, context, viewExportSVG, processedFiles } = options
 
     super(panel, viewExportSVG)
 
@@ -33,7 +33,7 @@ export class ViewExportsSVGController extends ListerWebviewController {
       this._disposables
     )
 
-    this.webviewContent = new WebviewContent(this._panel.webview, extensionUri, processedFiles)
+    this.webviewContent = new WebviewContent(this._panel.webview, context, processedFiles)
   }
 
   /**
@@ -65,21 +65,22 @@ export class ViewExportsSVGController extends ListerWebviewController {
   /**
    * Renders the current webview panel if it exists, otherwise a new webview panel
    * will be created and displayed.
-   * @param extensionUri The URI of the directory containing the extension.
+   * @param context - The extension context.
    * @param svgComponents The array of SVG exports or an SvgExportErrors object.
    */
   public static async render(
-    extensionUri: Uri,
+    context: ExtensionContext,
     viewExportSVG: ViewExportSVG[],
     processedFiles = 0
   ) {
-    const column = window.activeTextEditor?.viewColumn ?? ViewColumn.One
-
     // If we already have a panel, show it
     if (!isEmpty(ViewExportsSVGController.currentPanel)) {
       this.update(viewExportSVG, processedFiles)
       return
     }
+
+    const column = window.activeTextEditor?.viewColumn ?? ViewColumn.One
+    const extensionUri = context.extensionUri
 
     // Otherwise, create a new panel
     const panel = window.createWebviewPanel(
@@ -101,7 +102,7 @@ export class ViewExportsSVGController extends ListerWebviewController {
 
     ViewExportsSVGController.currentPanel = new ViewExportsSVGController({
       panel,
-      extensionUri,
+      context,
       viewExportSVG,
       processedFiles,
     })

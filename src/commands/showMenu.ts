@@ -21,7 +21,7 @@ export const showMenu = async (
   const filesToProcess = !isEmpty(items) ? items : !isEmpty(item) ? [item] : []
 
   if (!ViewExportsSVGController.currentPanel) {
-    await ViewExportsSVGController.render(context.extensionUri, [], filesToProcess.length)
+    await ViewExportsSVGController.render(context, [], filesToProcess.length)
   }
 
   if (filesToProcess.length === 0) {

@@ -1,4 +1,4 @@
-import { type Uri, type Webview, env, l10n, workspace } from 'vscode'
+import { type ExtensionContext, type Uri, type Webview, env, l10n, workspace } from 'vscode'
 
 import {
   DefaultClickToOpenDevToolsController,
@@ -19,9 +19,9 @@ export class WebviewContent {
   private readonly _processedFiles: number
   private readonly _nonce: string
 
-  public constructor(webview: Webview, extensionUri: Uri, processedFiles: number) {
+  public constructor(webview: Webview, context: ExtensionContext, processedFiles: number) {
     this._webview = webview
-    this._extensionUri = extensionUri
+    this._extensionUri = context.extensionUri
     this._processedFiles = processedFiles
     this._nonce = getNonce()
   }

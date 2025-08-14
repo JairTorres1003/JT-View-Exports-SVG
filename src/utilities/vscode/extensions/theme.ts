@@ -1,6 +1,14 @@
 import * as path from 'path'
 
-import { type ExtensionContext, extensions, FileType, l10n, Uri, workspace } from 'vscode'
+import {
+  type ExtensionContext,
+  extensions,
+  type FileStat,
+  FileType,
+  l10n,
+  Uri,
+  workspace,
+} from 'vscode'
 
 import { getCacheManager } from '@/controllers/cache'
 import type { ExtensionManage } from '@/types/vscode'
@@ -131,10 +139,17 @@ async function cloneThemeExtension(
         await workspace.fs.createDirectory(newThemeDir)
       }
 
-      const stat = await workspace.fs.stat(themePath)
+      let stat: FileStat | null = null
 
-      if (stat.type === FileType.File) {
-        await workspace.fs.copy(themePath, newThemeFilePath)
+      try {
+        stat = await workspace.fs.stat(themePath)
+      } catch {
+        stat = null
+      }
+
+      if (stat?.type === FileType.File) {
+        const themeData = await workspace.fs.readFile(themePath)
+        await workspace.fs.writeFile(newThemeFilePath, themeData)
       }
     })
   )
