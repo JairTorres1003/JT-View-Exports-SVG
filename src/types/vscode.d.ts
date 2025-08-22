@@ -30,4 +30,4 @@ export type ExtensionManage = Pick<
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   Extension<any>,
   'id' | 'extensionUri' | 'extensionPath' | 'isActive'
->
+> & { isValid: boolean }

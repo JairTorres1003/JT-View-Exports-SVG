@@ -24,6 +24,8 @@ async function activate(_themeConfig?: ExtensionManage) {
       return
     }
 
+    if (!_themeConfig?.isValid) return
+
     const urlTemp = new URL('favicon.ico', import.meta.url).href
     const baseUrl = urlTemp.substring(0, urlTemp.lastIndexOf('/'))
 

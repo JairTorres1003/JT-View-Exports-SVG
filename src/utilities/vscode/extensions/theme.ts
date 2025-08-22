@@ -64,13 +64,23 @@ export async function initializeExtensionTheme(context: ExtensionContext): Promi
         return false
       })
 
-      if (themeExtension != null) {
+      if (themeExtension) {
         const { id, extensionUri, extensionPath, isActive } = themeExtension
 
-        cachedTheme.set(CACHE_KEY, { id, extensionUri, extensionPath, isActive }, 0)
+        cachedTheme.set(CACHE_KEY, { id, extensionUri, extensionPath, isActive, isValid: true }, 0)
         await cloneThemeExtension(context, extensionPath)
       } else {
-        cachedTheme.set(CACHE_KEY, undefined, 0)
+        cachedTheme.set(
+          CACHE_KEY,
+          {
+            id: '',
+            extensionUri: Uri.file(''),
+            extensionPath: '',
+            isActive: false,
+            isValid: false,
+          },
+          0
+        )
       }
     }
   } catch {
