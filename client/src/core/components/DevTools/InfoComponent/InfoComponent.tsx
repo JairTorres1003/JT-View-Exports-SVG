@@ -28,6 +28,8 @@ export const InfoComponent = () => {
 
   const { t } = useTranslation()
 
+  if (!recentlySelected) return null
+
   return (
     <Stack p='12px 22px' spacing={2}>
       <List
