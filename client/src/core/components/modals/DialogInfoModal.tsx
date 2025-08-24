@@ -74,7 +74,7 @@ export const DialogInfoModal: FC<DialogInfoModalProps> = ({
             <ListItem>
               <ListItemText
                 primary={t('modalInfo.IsTemporaryFile')}
-                secondary={data.files[0]?.isTemporary ? t('modalInfo.Yes') : t('modalInfo.No')}
+                secondary={data.files[0]?.isTemporary ? t('labels.Yes') : t('labels.No')}
                 slotProps={commonSlotProps}
               />
             </ListItem>
@@ -113,9 +113,7 @@ export const DialogInfoModal: FC<DialogInfoModalProps> = ({
               <ListItemText
                 primary={t('modalInfo.IncludesTemporaryFiles')}
                 secondary={
-                  data.files.some((file) => file.isTemporary)
-                    ? t('modalInfo.Yes')
-                    : t('modalInfo.No')
+                  data.files.some((file) => file.isTemporary) ? t('labels.Yes') : t('labels.No')
                 }
                 slotProps={commonSlotProps}
               />
@@ -126,7 +124,7 @@ export const DialogInfoModal: FC<DialogInfoModalProps> = ({
         <ListItem>
           <ListItemText
             primary={t('modalInfo.ShowNoExports')}
-            secondary={data.isShowNoExports ? t('modalInfo.Yes') : t('modalInfo.No')}
+            secondary={data.isShowNoExports ? t('labels.Yes') : t('labels.No')}
             slotProps={commonSlotProps}
           />
         </ListItem>
