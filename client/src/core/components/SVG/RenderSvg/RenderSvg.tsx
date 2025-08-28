@@ -1,6 +1,7 @@
 import type { SVGComponent, SVGComponentProps } from '@api/types/ViewExportsSVG'
 import cn from 'classnames'
-import { createElement, forwardRef, useEffect } from 'react'
+import { motion } from 'framer-motion'
+import React, { createElement, forwardRef, type SVGElementType, useEffect } from 'react'
 import { useTranslation } from 'react-i18next'
 
 import { SVGError } from '@/assets/icons/indicators'
@@ -32,8 +33,10 @@ const DynamicTagComponent = forwardRef<any, RenderSvgProps>(function RenderSvg(
 
   const c = cn(className, component.props.className)
 
+  const Tag = component.isMotion ? motion[component.tag as SVGElementType] : component.tag
+
   const Component = createElement(
-    component.tag,
+    Tag as React.ElementType,
     {
       ...component.props,
       className: isEmpty(c) ? undefined : c,
