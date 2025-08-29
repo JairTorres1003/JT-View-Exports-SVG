@@ -29,6 +29,7 @@ export const mockSvgComponents = {
         xmlns: 'http://www.w3.org/2000/svg',
       },
       isMotion: false,
+      isAnimated: false,
       children: [
         {
           props: {
@@ -36,6 +37,7 @@ export const mockSvgComponents = {
             fill: 'currentColor',
           },
           isMotion: false,
+          isAnimated: false,
           tag: 'path',
           children: [],
         },
@@ -75,6 +77,7 @@ export const mockSvgComponents = {
         xmlns: 'http://www.w3.org/2000/svg',
       },
       isMotion: false,
+      isAnimated: false,
       children: [
         {
           props: {
@@ -83,6 +86,7 @@ export const mockSvgComponents = {
             strokeWidth: '2',
           },
           isMotion: false,
+          isAnimated: false,
           tag: 'path',
           children: [],
         },
@@ -93,6 +97,7 @@ export const mockSvgComponents = {
             strokeWidth: '2',
           },
           isMotion: false,
+          isAnimated: false,
           tag: 'path',
           children: [],
         },

@@ -128,6 +128,7 @@ export interface SVGComponent {
 export interface SVGComponentProps {
   tag: string | SVGTagName
   isMotion: boolean
+  isAnimated: boolean
   children: Array<SVGComponentProps | string>
   props: {
     className?: string

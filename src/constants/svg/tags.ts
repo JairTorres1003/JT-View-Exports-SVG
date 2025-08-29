@@ -65,3 +65,9 @@ export const SVG_TAGS: Record<SVGTagName, SVGTagName> = {
   use: 'use',
   view: 'view',
 }
+
+export const ANIMATED_SVG_TAGS: Partial<Record<SVGTagName, SVGTagName>> = {
+  animate: 'animate',
+  animateMotion: 'animateMotion',
+  animateTransform: 'animateTransform',
+}

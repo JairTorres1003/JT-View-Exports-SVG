@@ -7,6 +7,7 @@ import type { SVGComponentProps, SVGErrors, SVGFile } from '@/types/ViewExportsS
 import { isEmpty } from '../misc'
 import { getProperties, getPropertyValues, propertyManager } from '../properties'
 
+import { isElementAnimated } from './is-animate'
 import { getSVGTagName } from './tags'
 
 /**
@@ -57,6 +58,7 @@ export function getChildAttributes(
   let errors: SVGErrors | undefined = undefined
   let hasErrors = false
   let isMotion = false
+  let isAnimated = false
 
   /**
    * Processes a JSX element and extracts its properties, attributes, and children.
@@ -76,7 +78,11 @@ export function getChildAttributes(
       errors = childAttrs.errors
     }
 
-    isMotion = tag.isMotion || childAttrs.isMotion
+    const internalAnimation = isElementAnimated({ tag, props, childAttrs })
+    const internalMotion = tag.isMotion || childAttrs.isMotion
+
+    isAnimated ||= internalAnimation
+    isMotion ||= internalMotion
 
     if (!tag.isValid || tag.name === 'Fragment' || isEmpty(tag.name)) {
       hasErrors = true
@@ -87,7 +93,8 @@ export function getChildAttributes(
     } else {
       components.push({
         props,
-        isMotion,
+        isMotion: internalMotion,
+        isAnimated: internalAnimation,
         tag: tag.name,
         children: childAttrs.children,
       })
@@ -121,5 +128,5 @@ export function getChildAttributes(
     }
   })
 
-  return { children: components, isMotion, hasErrors, errors }
+  return { children: components, isMotion, hasErrors, errors, isAnimated }
 }

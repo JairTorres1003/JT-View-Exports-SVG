@@ -20,7 +20,13 @@ export function getSVGComponent(element: t.JSXElement, file: SVGFile): GetSVGCom
   const params = (propertyManager.get() ?? {}) as Record<string, unknown>
   let isAnimated = false
   let hasErrors = false
-  let component: SVGComponentProps = { children: [], isMotion: false, props: {}, tag: 'svg' }
+  let component: SVGComponentProps = {
+    children: [],
+    isMotion: false,
+    props: {},
+    tag: 'svg',
+    isAnimated: false,
+  }
   let errors: SVGErrors | undefined = undefined
 
   if (!isEmpty(openingElement)) {
@@ -46,13 +52,14 @@ export function getSVGComponent(element: t.JSXElement, file: SVGFile): GetSVGCom
     } else if (children.length > 0) {
       const child = getChildAttributes(children, file)
 
-      isAnimated = tag.isMotion || child.isMotion
+      isAnimated = tag.isMotion || child.isMotion || child.isAnimated
       hasErrors = child.hasErrors
       errors = child.errors
       component = {
         tag: tag.name,
         props: svgProps,
         isMotion: tag.isMotion,
+        isAnimated: child.isAnimated,
         children: child.children,
       }
     }
