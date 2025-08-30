@@ -68,7 +68,7 @@ export const DialogFilesModal: FC<DialogFilesModalProps> = ({
             const IconComponent = iconTypes[file.extension] ?? IconAnyFile
 
             return (
-              <ListItem key={file.absolutePath} disablePadding>
+              <ListItem key={file.uri} disablePadding>
                 <ListItemButton role={undefined} selected={selectedIndex === index}>
                   <ListItemIcon sx={{ minWidth: 16, mr: 1 }}>
                     <IconComponent size={16} />

@@ -19,7 +19,7 @@ const PlaygroundCardSvg: FC<PlaygroundCardSvgProps> = ({ bgColor, ref }) => {
         <RenderSvg
           {...recentlySelected}
           ref={ref}
-          key={`${recentlySelected.name} - ${recentlySelected.location.file.absolutePath}`}
+          key={`${recentlySelected.name} - ${recentlySelected.location.file.uri}`}
         />
       )}
     </BoxPlaygroundCardSvg>
