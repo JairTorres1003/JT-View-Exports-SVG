@@ -22,6 +22,15 @@ document.addEventListener('contextmenu', (e) => {
   }
 })
 
+document.addEventListener('click', (event) => {
+  const target = event.target as HTMLElement
+  const commandLink = target.closest('a[href^="command:"], a[data-href^="command:"]')
+  if (commandLink) {
+    event.preventDefault()
+    event.stopPropagation()
+  }
+})
+
 createRoot(container).render(
   <StrictMode>
     <Layout />
