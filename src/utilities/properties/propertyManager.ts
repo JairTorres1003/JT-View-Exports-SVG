@@ -8,9 +8,11 @@ class PropertyManager {
    * @param key - Key of the property to retrieve (optional).
    * @returns - The value of the property or an object with all properties.
    */
-  get(key?: string): unknown {
+  get<T = unknown>(key: string): T
+  get(): Record<string, unknown>
+  get<T = unknown>(key?: string): T | Record<string, unknown> {
     if (key) {
-      return this.properties[key]
+      return this.properties[key] as T
     }
 
     return this.properties

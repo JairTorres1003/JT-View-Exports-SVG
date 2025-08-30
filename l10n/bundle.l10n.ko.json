@@ -52,5 +52,6 @@
   "Reloading...": "리로드 중...",
   "Error toggling favorite status for icon {name}": "아이콘 {name} 의 즐겨찾기 상태를 전환하는 중 오류가 발생했습니다",
   "Error retrieving icons: {error}": "아이콘을 검색하는 중 오류가 발생했습니다: {error}",
-  "Missing index.html file in manifest": "마니페스트에 index.html 파일이 없습니다"
+  "Missing index.html file in manifest": "마니페스트에 index.html 파일이 없습니다",
+  "Empty opening element": "빈 열기 요소"
 }

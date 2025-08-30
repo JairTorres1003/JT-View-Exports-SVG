@@ -321,6 +321,11 @@
       "type": "string",
       "description": "Error message displayed when the index.html file is missing in the manifest",
       "default": "Missing index.html file in manifest"
+    },
+    "Empty opening element": {
+      "type": "string",
+      "description": "Error message displayed when an opening element is empty",
+      "default": "Empty opening element"
     }
   },
   "required": [
@@ -377,6 +382,7 @@
     "Reloading...",
     "Error toggling favorite status for icon {name}",
     "Error retrieving icons: {error}",
-    "Missing index.html file in manifest"
+    "Missing index.html file in manifest",
+    "Empty opening element"
   ]
 }

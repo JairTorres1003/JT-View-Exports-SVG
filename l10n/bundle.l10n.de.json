@@ -52,5 +52,6 @@
   "Reloading...": "Wird neu geladen...",
   "Error toggling favorite status for icon {name}": "Fehler beim Umschalten des Favoritenstatus für das Symbol {name}",
   "Error retrieving icons: {error}": "Fehler beim Abrufen der Icons: {error}",
-  "Missing index.html file in manifest": "Fehler: index.html-Datei im Manifest fehlt"
+  "Missing index.html file in manifest": "Fehler: index.html-Datei im Manifest fehlt",
+  "Empty opening element": "Leeres öffnendes Element"
 }

@@ -41,7 +41,10 @@ export async function extractSVGComponent(
         const analysis = analyzeExportType(node, file, parameters)
 
         if (!isEmpty(analysis)) {
-          const component = getSVGComponent(analysis, file)
+          const { tag, ...component } = getSVGComponent(analysis, file)
+
+          if (component.hasErrors && !tag?.isValid) return
+
           const types = getNodeTypes(component.params)
           const withRestProps = REST_PROPS_KEY in component.params
 

@@ -33,5 +33,11 @@
   "material-icon-theme.folders.associations": {
     "workers": "gh-workflows",
     "vs": "vscode"
-  }
+  },
+  "JT-View-Exports-SVG.assetsPath": [
+    "src/assets/icons/files.tsx",
+    "src/assets/icons/functionalities.tsx",
+    "src/assets/icons/indicators.tsx",
+    "src/assets/icons/navigation.tsx"
+  ]
 }
