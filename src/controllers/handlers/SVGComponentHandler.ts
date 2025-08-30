@@ -35,7 +35,7 @@ export class SVGComponentHandler {
 
   async refreshSVGComponents(files: SVGFile[]): Promise<void> {
     const { ComponentsFileCache, DeclarationFileCache } = getCacheManager()
-    const removedFiles = files.map((file) => file.absolutePath)
+    const removedFiles = files.map((file) => file.uri)
 
     ComponentsFileCache.delete(removedFiles)
     DeclarationFileCache.delete(removedFiles)

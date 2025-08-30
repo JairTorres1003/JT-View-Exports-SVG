@@ -51,9 +51,7 @@ export class IconCacheController extends FileModifiedCacheController<SVGIconCach
 
     value.forEach((icon) => {
       const existing = current.findIndex(
-        (item) =>
-          item.name === icon.name &&
-          item.location.file.absolutePath === icon.location.file.absolutePath
+        (item) => item.name === icon.name && item.location.file.uri === icon.location.file.uri
       )
 
       if (existing !== -1) {
@@ -88,7 +86,7 @@ export class IconCacheController extends FileModifiedCacheController<SVGIconCach
 
     const newValue = current.filter(({ name, location }) => {
       return !iconsToRemove.some(
-        (i) => i.name === name && i.location.file.absolutePath === location.file.absolutePath
+        (i) => i.name === name && i.location.file.uri === location.file.uri
       )
     })
 
@@ -123,9 +121,7 @@ export class IconCacheController extends FileModifiedCacheController<SVGIconCach
     const current = super.get(currentKey, 0) ?? []
 
     return current.some(
-      (item) =>
-        item.name === icon.name &&
-        item.location.file.absolutePath === icon.location.file.absolutePath
+      (item) => item.name === icon.name && item.location.file.uri === icon.location.file.uri
     )
   }
 

@@ -74,8 +74,8 @@ const getComponentCache = async (icon: SVGIconCache) => {
 
   const { ComponentsFileCache } = getCacheManager()
 
-  const lastModified = await getFileTimestamp(location.file.absolutePath)
-  const cachedFile = ComponentsFileCache.get(location.file.absolutePath, lastModified)
+  const lastModified = await getFileTimestamp(location.file.uri)
+  const cachedFile = ComponentsFileCache.get(location.file.uri, lastModified)
 
   if (!cachedFile) return
 
@@ -123,7 +123,7 @@ export const getIconsFromCache = async (): Promise<ViewExportSVG[]> => {
 
             otherProps[component.isExported ? 'totalExports' : 'totalNoExports']++
 
-            files.set(icon.location.file.absolutePath, icon.location.file)
+            files.set(icon.location.file.uri, icon.location.file)
           } else if (!isEmpty(workspaceFolderUri)) {
             cache.remove(workspaceFolderUri, icon)
           }
@@ -136,7 +136,7 @@ export const getIconsFromCache = async (): Promise<ViewExportSVG[]> => {
       }
 
       const sortedFiles = [...files.values()].flat().sort((a, b) => {
-        return a.absolutePath.localeCompare(b.absolutePath)
+        return a.uri.localeCompare(b.uri)
       })
 
       const configShowNoExports = new ShowNotExportedIconsController()

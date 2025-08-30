@@ -9,6 +9,7 @@ import type { SVGFile, ViewExportSVG } from '@/types/ViewExportsSVG'
 
 import { isEmpty } from '../misc'
 import { extractSVGData } from '../svg'
+import { getUriPath } from '../vscode'
 
 import { groupIconsByPattern } from './groupIconsByPattern'
 import { getFileTimestamp, pathToSVGFile } from './misc'
@@ -48,9 +49,9 @@ export async function processFiles(
             }
 
             const { DeclarationFileCache, ComponentsFileCache } = getCacheManager()
-            const file = await pathToSVGFile(f.fsPath)
-            const lastModified = await getFileTimestamp(file.absolutePath)
-            const cachedFile = ComponentsFileCache.get(file.absolutePath, lastModified)
+            const file = await pathToSVGFile(getUriPath(f))
+            const lastModified = await getFileTimestamp(file.uri)
+            const cachedFile = ComponentsFileCache.get(file.uri, lastModified)
 
             if (cachedFile && configShowNoExports.isShow() === cachedFile.isShowNoExports) {
               SVGExports.push(cachedFile)
@@ -74,13 +75,13 @@ export async function processFiles(
                 totalExports,
                 totalNoExports,
                 totalSVG,
-                groupKind: { id: file.absolutePath, label: file.relativePath },
+                groupKind: { id: file.uri, label: file.relativePath },
                 isShowNoExports: configShowNoExports.isShow(),
                 files: [file],
               }
 
-              ComponentsFileCache.set(file.absolutePath, result, lastModified)
-              DeclarationFileCache.set(file.absolutePath, base, lastModified)
+              ComponentsFileCache.set(file.uri, result, lastModified)
+              DeclarationFileCache.set(file.uri, base, lastModified)
               SVGExports.push(result)
               SVGFiles.push(file)
             }

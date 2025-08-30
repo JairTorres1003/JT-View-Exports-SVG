@@ -20,9 +20,9 @@ export async function playground(icon: SVGPlayground): Promise<SVGComponent | SV
 
   try {
     const { DeclarationFileCache, ComponentsFileCache } = getCacheManager()
-    const lastModified = await getFileTimestamp(location.file.absolutePath)
-    const declarationCache = DeclarationFileCache.get(location.file.absolutePath, lastModified)
-    const componentsCache = ComponentsFileCache.get(location.file.absolutePath, lastModified)
+    const lastModified = await getFileTimestamp(location.file.uri)
+    const declarationCache = DeclarationFileCache.get(location.file.uri, lastModified)
+    const componentsCache = ComponentsFileCache.get(location.file.uri, lastModified)
 
     let currentName = name
     const tagName = value.match(REGEX_TAG_NAME)?.[1] ?? ''

@@ -1,6 +1,3 @@
-import * as os from 'os'
-import * as path from 'path'
-
 import { l10n, type OpenDialogOptions, Uri, window, workspace } from 'vscode'
 
 import { expandedIcons, runToggleDevTools } from '@/commands'
@@ -54,8 +51,8 @@ export class UIHandler {
 
     window.showOpenDialog(options).then((uris) => {
       if (uris && uris.length > 0) {
-        const filePaths = uris.map((uri) => uri.fsPath)
-        this.postMessage(SVGPostMessage.SendOpenFiles, filePaths)
+        const fileUris = uris.map((uri) => uri.toString())
+        this.postMessage(SVGPostMessage.SendOpenFiles, fileUris)
       }
     })
   }
@@ -66,18 +63,22 @@ export class UIHandler {
 
   async createTempFiles(files: FileTemporary[]): Promise<void> {
     try {
-      const filePaths = await Promise.all(
+      const uris = await Promise.all(
         files.map(async ({ name, content }) => {
-          const tempFilePath = Uri.file(path.join(os.tmpdir(), CONFIG_KEY, name))
+          const tempUri = Uri.parse(`scheme-${CONFIG_KEY}:/${name}`)
+
           const fileBuffer =
             typeof content === 'string' ? Buffer.from(content, 'utf8') : Buffer.from(content)
 
-          await workspace.fs.writeFile(tempFilePath, fileBuffer)
-          return tempFilePath.fsPath
+          await workspace.fs.writeFile(tempUri, fileBuffer)
+
+          await workspace.openTextDocument(tempUri)
+
+          return tempUri.toString()
         })
       )
 
-      this.postMessage(SVGPostMessage.SendOpenFiles, filePaths)
+      this.postMessage(SVGPostMessage.SendOpenFiles, uris)
     } catch (error) {
       console.error(l10n.t('Error creating temporary files'), error)
     }

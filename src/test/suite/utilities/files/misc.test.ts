@@ -28,7 +28,7 @@ suite('getFileTimestamp Utility Function', () => {
   })
 
   test('it should return the last modification timestamp of a file', async () => {
-    const filePath1 = Uri.joinPath(folderUri, 'test-1.js').fsPath
+    const filePath1 = Uri.joinPath(folderUri, 'test-1.js').toString()
     const expectedTimestamp1 = 1754596807997
     const timestamp = await getFileTimestamp(filePath1)
 
@@ -37,7 +37,7 @@ suite('getFileTimestamp Utility Function', () => {
   })
 
   test('it should return 0 if the file does not exist', async () => {
-    const filePath2 = Uri.joinPath(folderUri, 'nonexistent.ts').fsPath
+    const filePath2 = Uri.joinPath(folderUri, 'nonexistent.ts').toString()
     const timestamp = await getFileTimestamp(filePath2)
 
     statSyncStub?.withArgs(filePath2).throws(new Error('File not found'))

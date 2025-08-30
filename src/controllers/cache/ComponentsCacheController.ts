@@ -16,23 +16,23 @@ export class ComponentsCacheController extends FileModifiedCacheController<ViewE
    * @param icon - The SVG icon whose favorite status should be toggled.
    */
   toggleFavoriteIcon(icon: SVGIcon) {
-    const absolutePath = icon.location?.file?.absolutePath
+    const uri = icon.location?.file?.uri
 
-    if (!absolutePath) return
+    if (!uri) return
 
-    getFileTimestamp(absolutePath)
+    getFileTimestamp(uri)
       .then((lastModified) => {
-        const current = this.get(absolutePath, lastModified)
+        const current = this.get(uri, lastModified)
 
         if (!current) return
 
         const component = current.components.find(
-          (c) => c.name === icon.name && c.location.file.absolutePath === absolutePath
+          (c) => c.name === icon.name && c.location.file.uri === uri
         )
 
         if (component) {
           component.isFavorite = !component.isFavorite
-          this.set(absolutePath, current, lastModified)
+          this.set(uri, current, lastModified)
         }
       })
       .catch(() => {

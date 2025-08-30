@@ -1,8 +1,8 @@
-import * as os from 'os'
 import * as path from 'path'
 
 import { l10n, Position, Selection, TextEditorRevealType, Uri, window, workspace } from 'vscode'
 
+import { CONFIG_KEY } from '@/constants/misc'
 import type { SVGFile } from '@/types/ViewExportsSVG'
 import type { OpenFile } from '@/types/views/content'
 
@@ -10,12 +10,12 @@ import { getUnknownError } from '../misc'
 
 /**
  * Gets the last modification timestamp of a file.
- * @param filePath - The path to the file.
+ * @param fileUri - The uri to the file.
  * @returns The last modification timestamp as a Unix timestamp in milliseconds, or 0 if the file doesn't exist or an error occurs.
  */
-export async function getFileTimestamp(filePath: string): Promise<number> {
+export async function getFileTimestamp(fileUri: string): Promise<number> {
   try {
-    const stats = await workspace.fs.stat(Uri.file(filePath))
+    const stats = await workspace.fs.stat(Uri.parse(fileUri))
     return stats.mtime
   } catch {
     return 0
@@ -26,7 +26,9 @@ export async function getFileTimestamp(filePath: string): Promise<number> {
  * Retrieves the language of a file based on its extension.
  * @returns The language ID (e.g., 'typescriptreact'), or 'unknown' if it cannot be determined.
  */
-export async function getLanguageFromFile(file: Uri): Promise<string> {
+export async function getLanguageFromFile(file?: Uri): Promise<string> {
+  if (!file) return 'unknown'
+
   try {
     const document = await workspace.openTextDocument(file)
     return document.languageId ?? 'unknown'
@@ -44,20 +46,31 @@ export async function pathToSVGFile(filePath: string): Promise<SVGFile> {
   const workspaceUri = workspace.workspaceFolders?.[0]?.uri
   const workspacePath = workspaceUri?.fsPath ?? ''
 
-  const absolutePath = path.isAbsolute(filePath) ? filePath : path.join(workspacePath, filePath)
+  const isTemporary = filePath.includes(`scheme-${CONFIG_KEY}:`)
+
+  let absolutePath = filePath
+  let uri: Uri | undefined = undefined
+
+  if (isTemporary) {
+    uri = Uri.parse(filePath)
+    absolutePath = uri.fsPath
+  } else {
+    absolutePath = path.isAbsolute(filePath) ? filePath : path.join(workspacePath, filePath)
+    uri = workspaceUri?.with({ path: absolutePath })
+  }
+
   const dirname = path.dirname(absolutePath)
-  const language = await getLanguageFromFile(Uri.file(absolutePath))
-  const uri = workspaceUri?.with({ path: absolutePath })?.toString() ?? ''
+  const language = await getLanguageFromFile(uri)
 
   return {
-    uri,
+    uri: uri?.toString() ?? '',
     absolutePath,
     dirname,
     language,
     basename: path.basename(absolutePath),
     extension: path.extname(absolutePath).slice(1),
-    relativePath: path.relative(workspacePath, absolutePath),
-    isTemporary: dirname.startsWith(os.tmpdir()),
+    relativePath: isTemporary ? absolutePath : path.relative(workspacePath, absolutePath),
+    isTemporary,
   }
 }
 
@@ -67,11 +80,10 @@ export async function pathToSVGFile(filePath: string): Promise<SVGFile> {
  * @param position - The position in the file to navigate to (optional).
  */
 export function openFile({ file, position = { column: 1, line: 1, index: 1 } }: OpenFile): void {
-  const { absolutePath } = file
-  let fileUri = Uri.parse(absolutePath)
+  let fileUri = Uri.parse(file.uri)
 
   const workspaceUri = workspace.workspaceFolders?.[0]?.uri
-  if (workspaceUri) {
+  if (workspaceUri && fileUri.scheme !== `scheme-${CONFIG_KEY}`) {
     fileUri = fileUri.with({ authority: workspaceUri.authority, scheme: workspaceUri.scheme })
   }
 
@@ -97,15 +109,15 @@ export function openFile({ file, position = { column: 1, line: 1, index: 1 } }: 
       editor.revealRange(new Selection(pos, pos), TextEditorRevealType.AtTop)
     } else {
       window
-        .showErrorMessage(l10n.t('File does not exist: {file}', { file: absolutePath }))
+        .showErrorMessage(l10n.t('File does not exist: {file}', { file: file.absolutePath }))
         .then(undefined, console.error)
     }
   }
 
   onOpen().catch((e) => {
-    console.error(`Error opening file ${absolutePath} in editor: `, getUnknownError(e))
+    console.error(`Error opening file ${file.absolutePath} in editor: `, getUnknownError(e))
     window
-      .showErrorMessage(l10n.t('Error opening file: {file}', { file: absolutePath }))
+      .showErrorMessage(l10n.t('Error opening file: {file}', { file: file.absolutePath }))
       .then(undefined, console.error)
   })
 }

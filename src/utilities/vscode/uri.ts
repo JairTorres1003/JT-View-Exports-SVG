@@ -1,5 +1,6 @@
 import { UIKind, Uri, type Webview, env } from 'vscode'
 
+import { CONFIG_KEY } from '@/constants/misc'
 import type { SVGFile } from '@/types/ViewExportsSVG'
 
 /**
@@ -42,4 +43,21 @@ export const uriParse = (uri: Uri): Uri => {
   }
 
   return Uri.parse(uri.fsPath)
+}
+
+/**
+ * Returns the path representation of a given VSCode `Uri`.
+ *
+ * If the URI's scheme matches the custom scheme (`scheme-${CONFIG_KEY}`), the full URI string is returned.
+ * Otherwise, the file system path (`fsPath`) of the URI is returned.
+ *
+ * @param uri - The VSCode `Uri` object to extract the path from.
+ * @returns The string representation of the URI's path or the full URI string for custom schemes.
+ */
+export const getUriPath = (uri: Uri): string => {
+  if (uri.scheme === `scheme-${CONFIG_KEY}`) {
+    return uri.toString()
+  }
+
+  return uri.fsPath
 }

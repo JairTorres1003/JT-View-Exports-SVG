@@ -1,4 +1,4 @@
-import { commands, type ExtensionContext, type Uri } from 'vscode'
+import { commands, workspace, type ExtensionContext, type Uri } from 'vscode'
 
 import {
   runReloadTheme,
@@ -10,6 +10,7 @@ import {
 } from './commands'
 import { CONFIG_KEY } from './constants/misc'
 import { initializeCacheManager } from './controllers/cache'
+import { InMemoryFileSystemProvider } from './providers/InMemoryFileSystemProvider'
 import { initializeExtensionTheme } from './utilities/vscode/extensions/theme'
 
 /**
@@ -20,7 +21,10 @@ export async function activate(context: ExtensionContext) {
   await initializeCacheManager(context)
   await initializeExtensionTheme(context)
 
+  const provider = new InMemoryFileSystemProvider()
+
   const allSubscriptions = [
+    // commands
     commands.registerCommand(`${CONFIG_KEY}.showMenu`, async (item: Uri, items: Uri[]) => {
       await showMenu(context, item, items)
     }),
@@ -43,6 +47,11 @@ export async function activate(context: ExtensionContext) {
       await runReloadTheme(context)
     }),
     commands.registerCommand(`${CONFIG_KEY}.clearCache`, runClearCache),
+
+    // providers
+    workspace.registerFileSystemProvider(`scheme-${CONFIG_KEY}`, provider, {
+      isCaseSensitive: true,
+    }),
   ]
 
   context.subscriptions.push(...allSubscriptions)
