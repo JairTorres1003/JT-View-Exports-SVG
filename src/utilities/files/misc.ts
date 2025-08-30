@@ -16,9 +16,7 @@ import { getUnknownError } from '../misc'
 export async function getFileTimestamp(filePath: string): Promise<number> {
   try {
     const stats = await workspace.fs.stat(Uri.file(filePath))
-
-    const timestamp = stats.mtime
-    return timestamp
+    return stats.mtime
   } catch {
     return 0
   }
@@ -26,15 +24,14 @@ export async function getFileTimestamp(filePath: string): Promise<number> {
 
 /**
  * Retrieves the language of a file based on its extension.
- * @param fileName - The name of the file.
- * @returns The language of the file, or 'javascript' if no matching language is found.
+ * @returns The language ID (e.g., 'typescriptreact'), or 'unknown' if it cannot be determined.
  */
 export async function getLanguageFromFile(file: Uri): Promise<string> {
   try {
     const document = await workspace.openTextDocument(file)
-    return document.languageId ?? 'javascript'
+    return document.languageId ?? 'unknown'
   } catch {
-    return 'javascript'
+    return 'unknown'
   }
 }
 
