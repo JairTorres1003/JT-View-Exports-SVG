@@ -130,6 +130,7 @@ button {
 }
 
 a {
+  cursor: pointer;
   color: inherit;
   text-decoration: none;
   -webkit-text-stroke: inherit;
