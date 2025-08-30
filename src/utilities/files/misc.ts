@@ -71,7 +71,12 @@ export async function pathToSVGFile(filePath: string): Promise<SVGFile> {
  */
 export function openFile({ file, position = { column: 1, line: 1, index: 1 } }: OpenFile): void {
   const { absolutePath } = file
-  const fileUri = Uri.file(absolutePath)
+  let fileUri = Uri.parse(absolutePath)
+
+  const workspaceUri = workspace.workspaceFolders?.[0]?.uri
+  if (workspaceUri) {
+    fileUri = fileUri.with({ authority: workspaceUri.authority, scheme: workspaceUri.scheme })
+  }
 
   const onOpen = async () => {
     let stat = false
@@ -84,7 +89,7 @@ export function openFile({ file, position = { column: 1, line: 1, index: 1 } }: 
     }
 
     if (stat) {
-      const document = await workspace.openTextDocument(absolutePath)
+      const document = await workspace.openTextDocument(fileUri)
       const editor = await window.showTextDocument(document)
       const line = position.line > 0 ? position.line - 1 : 0
       const column = position.column > 0 ? position.column - 1 : 0
