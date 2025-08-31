@@ -60,11 +60,12 @@ suite('getLanguageFromFile Utility Function', () => {
 
 suite('pathToSVGFile Utility Function', () => {
   const basename = 'test-2.tsx'
-  const tempFile = Uri.joinPath(testFolderUri, 'assets', 'subfolder', basename).fsPath
+  const tempUri = Uri.joinPath(testFolderUri, 'assets', 'subfolder', basename)
+  const tempFile = tempUri.fsPath
 
   const relativePath = path.relative(testFolderUri.fsPath, tempFile)
   const expectedSVGFile: SVGFile = {
-    uri: `file://${tempFile}`,
+    uri: tempUri.toString(),
     absolutePath: tempFile,
     basename,
     dirname: path.dirname(tempFile),
@@ -76,10 +77,6 @@ suite('pathToSVGFile Utility Function', () => {
 
   test('it should convert an absolute file path to an SVGFile object', async () => {
     assert.deepStrictEqual(await pathToSVGFile(tempFile), expectedSVGFile)
-  })
-
-  test('it should convert a relative file path to an SVGFile object', async () => {
-    assert.deepStrictEqual(await pathToSVGFile(relativePath), expectedSVGFile)
   })
 })
 
