@@ -38,8 +38,13 @@ class VSCodeAPIWrapper {
         arg0: HandlerArgs<Required<MessageHandlersView>>
       ) => void
 
-      if (typeof handler === 'function') {
+      if (
+        Object.prototype.hasOwnProperty.call(this.messageHandlers, type) &&
+        typeof handler === 'function'
+      ) {
         handler(event.data.data)
+      } else {
+        console.warn('[VSCodeAPIWrapper] Ignored message with invalid handler:', type)
       }
     })
   }
