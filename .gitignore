@@ -8,10 +8,12 @@
 
 # Testing
 /coverage
-/out
+/out*
 /dist
 .vscode-test/
-/test/responseFile.json
+.vscode-test-web/
+src/test/.temp
+
 
 # Production
 /build
@@ -20,10 +22,7 @@
 # Miscellaneous
 .DS_Store
 .env
-.env.local
-.env.development.local
-.env.test.local
-.env.production.local
+.env*.local
 
 # Logs
 npm-debug.log*
@@ -37,3 +36,6 @@ yarn-error.log*
 *.vsix
 
 .eslintcache
+.husky/node-version-cache.txt
+.unlighthouse
+*.tsbuildinfo

@@ -1,0 +1,145 @@
+import { l10n, type Uri, workspace } from 'vscode'
+
+/**
+ * A caching mechanism for values associated with files using their modification timestamps.
+ * @template T - The type of the cached value.
+ */
+export class FileModifiedCacheController<T> {
+  /**
+   * The cache stores data as an object where keys are file paths, and values are objects containing `value` and `lastModified`.
+   */
+  private cache: Record<string, { value: T; lastModified: number }> = {}
+  /**
+   * The file path of the cache file.
+   */
+  private readonly cacheFilePath: Uri
+
+  /**
+   * Loads the cache from the cache file.
+   */
+  constructor(cacheFilePath: Uri) {
+    this.cacheFilePath = cacheFilePath
+  }
+
+  /**
+   * Sets a new cache entry or updates an existing one.
+   * @param key - The key (file path) under which to store the value.
+   * @param value - The value to be cached.
+   * @param lastModified - The last modification timestamp of the associated file.
+   */
+  set(key: string, value: T, lastModified: number): void {
+    this.cache[key] = { value, lastModified }
+    this.saveCache()
+  }
+
+  /**
+   * Retrieves a cached value if it exists and if the file's last modification timestamp matches or is more recent than `lastModified`.
+   * @param key - The key (file path) to look up in the cache.
+   * @param lastModified - The last modification timestamp of the file that is compared against the cache entry.
+   * @returns The cached value if valid, or `undefined` if not found or invalid.
+   */
+  get(key: string, lastModified: number): T | undefined {
+    const item = this.cache[key]
+
+    if (!item) return
+
+    if (lastModified > item.lastModified) {
+      if (key in this.cache) {
+        // Remove the entry if file has been modified
+        const { [key]: _omitted, ...rest } = this.cache
+        this.cache = rest
+        this.saveCache()
+      }
+
+      return
+    }
+
+    return item.value
+  }
+
+  /**
+   * Checks if a cache entry exists for the specified key (file path).
+   * @param key - The key (file path) to check in the cache.
+   * @returns `true` if the key exists in the cache, `false` otherwise.
+   */
+  has(key: string): boolean {
+    return key in this.cache
+  }
+
+  /**
+   * Deletes a cache entry for the specified key (file path).
+   * @param key - The key (file path) to delete from the cache.
+   */
+  delete(keys: string | string[]): void {
+    const keysToDelete = Array.isArray(keys) ? keys : [keys]
+    keysToDelete.forEach((key) => {
+      const { [key]: _omitted, ...rest } = this.cache
+      this.cache = rest
+    })
+    this.saveCache()
+  }
+
+  /**
+   * Clears the cache by removing all entries.
+   */
+  clear(): void {
+    this.cache = {}
+    this.saveCache()
+  }
+
+  /**
+   * Saves the current cache to a file.
+   *
+   * This method serializes the cache object to a JSON string and writes it to the file
+   * specified by `this.cacheFilePath`. If an error occurs during the write operation,
+   * it logs an error message to the console.
+   *
+   * @throws Will log an error message if the file write operation fails.
+   */
+  private saveCache(): void {
+    try {
+      workspace.fs.writeFile(
+        this.cacheFilePath,
+        new TextEncoder().encode(JSON.stringify(this.cache))
+      )
+    } catch (error) {
+      console.error(`${l10n.t('Error saving cache')}:`, error)
+    }
+  }
+
+  /**
+   * Loads the cache from the file system if it exists.
+   *
+   * This method checks if the cache file exists at the specified path. If it does,
+   * it reads the file content, parses it as JSON, and assigns it to the cache.
+   * If an error occurs during this process, it logs an error message.
+   *
+   * @throws Will log an error message if there is an issue reading or parsing the cache file.
+   */
+  public async loadCache(): Promise<void> {
+    try {
+      let stat = false
+
+      try {
+        await workspace.fs.stat(this.cacheFilePath)
+        stat = true
+      } catch {
+        stat = false
+      }
+
+      if (stat) {
+        const data = await workspace.fs.readFile(this.cacheFilePath)
+        const jsonString = new TextDecoder().decode(data)
+        this.cache = JSON.parse(jsonString)
+      } else {
+        await workspace.fs.writeFile(
+          this.cacheFilePath,
+          new TextEncoder().encode(JSON.stringify({}))
+        )
+        this.cache = {}
+      }
+    } catch (error) {
+      console.error(`${l10n.t('Error loading cache')}:`, error)
+    }
+  }
+}

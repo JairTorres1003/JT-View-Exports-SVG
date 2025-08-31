@@ -1,1 +1,75 @@
+#!/bin/bash
+set -e
+
+# Check if there are staged files
+if git diff --cached --quiet; then
+  echo "✅ No changes to validate."
+  exit 0
+fi
+
+# Use cache if already validated before
+CACHE_FILE=".husky/node-version-cache.txt"
+if [ -f "$CACHE_FILE" ]; then
+  CACHED_VERSION=$(cat "$CACHE_FILE")
+  CURRENT_VERSION=$(node -v 2>/dev/null | tr -d 'v')
+  if [ "$CACHED_VERSION" = "$CURRENT_VERSION" ]; then
+    npx lint-staged
+    exit $?
+  fi
+fi
+
+# Get required version
+if [ -f ".nvmrc" ]; then
+  NODE_REQUIRED_VERSION=$(cat .nvmrc | tr -d 'v' | tr -d '\n')
+else
+  echo "❌ Error: .nvmrc file not found."
+  exit 1
+fi
+
+command_exists() {
+  command -v "$1" >/dev/null 2>&1
+}
+
+version_gte() {
+  # Check if version $1 is greater than or equal to $2
+  [ "$(printf '%s\n' "$2" "$1" | sort -V | head -n1)" = "$2" ]
+}
+
+check_system_node_version() {
+  if command_exists node; then
+    CURRENT_VERSION=$(node -v | tr -d 'v')
+    if version_gte "$CURRENT_VERSION" "$NODE_REQUIRED_VERSION"; then
+      echo "$CURRENT_VERSION" > "$CACHE_FILE"
+    else
+      echo "❌ Node.js installed ($CURRENT_VERSION) is less than the required ($NODE_REQUIRED_VERSION)."
+      exit 1
+    fi
+  else
+    echo "❌ Error: Node.js is not installed or not found in PATH."
+    exit 1
+  fi
+}
+
+# Check if NVM is installed
+if [ -s "$HOME/.nvm/nvm.sh" ]; then
+  export NVM_DIR="$HOME/.nvm"
+  . "$NVM_DIR/nvm.sh" --no-use
+
+  if nvm ls "$NODE_REQUIRED_VERSION" >/dev/null 2>&1; then
+    nvm use "$NODE_REQUIRED_VERSION" >/dev/null 2>&1
+    echo "$NODE_REQUIRED_VERSION" > "$CACHE_FILE"
+  elif check_system_node_version; then
+    echo "✅ Using system Node.js: $(node -v)"
+  else
+    echo "⚠️ Node.js $NODE_REQUIRED_VERSION is not installed."
+    echo "You can install it with: nvm install $NODE_REQUIRED_VERSION"
+    exit 1
+  fi
+
+# If no nvm, use system node and compare versions
+else
+  check_system_node_version
+fi
+
+# Run linters
 npx lint-staged

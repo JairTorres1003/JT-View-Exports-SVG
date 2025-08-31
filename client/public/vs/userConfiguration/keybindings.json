@@ -1,0 +1,120 @@
+[
+  {
+    "key": "",
+    "command": "-workbench.action.showCommands"
+  },
+  {
+    "key": "",
+    "command": "-workbench.action.quickOpen"
+  },
+  {
+    "key": "",
+    "command": "-workbench.action.selectIconTheme"
+  },
+  {
+    "key": "",
+    "command": "-editor.action.accessibleViewGoToSymbol"
+  },
+  {
+    "key": "",
+    "command": "-workbench.action.gotoSymbol"
+  },
+  {
+    "key": "",
+    "command": "-workbench.action.gotoLine"
+  },
+  {
+    "key": "",
+    "command": "-workbench.action.selectTheme"
+  },
+  {
+    "key": "cmd+c",
+    "command": "editor.action.clipboardCopyAction",
+    "when": "editorTextFocus && isMac"
+  },
+  {
+    "key": "ctrl+c",
+    "command": "editor.action.clipboardCopyAction",
+    "when": "editorTextFocus && !isMac"
+  },
+  {
+    "key": "cmd+x",
+    "command": "editor.action.clipboardCutAction",
+    "when": "editorTextFocus && isMac"
+  },
+  {
+    "key": "ctrl+x",
+    "command": "editor.action.clipboardCutAction",
+    "when": "editorTextFocus && !isMac"
+  },
+  {
+    "key": "cmd+v",
+    "command": "editor.action.clipboardPasteAction",
+    "when": "editorTextFocus && isMac"
+  },
+  {
+    "key": "ctrl+v",
+    "command": "editor.action.clipboardPasteAction",
+    "when": "editorTextFocus && !isMac"
+  },
+  {
+    "key": "cmd+a",
+    "command": "editor.action.selectAll",
+    "when": "editorTextFocus && isMac"
+  },
+  {
+    "key": "ctrl+a",
+    "command": "editor.action.selectAll",
+    "when": "editorTextFocus && !isMac"
+  },
+  {
+    "key": "cmd+z",
+    "command": "undo",
+    "when": "editorTextFocus && isMac"
+  },
+  {
+    "key": "ctrl+z",
+    "command": "undo",
+    "when": "editorTextFocus && !isMac"
+  },
+  {
+    "key": "cmd+shift+z",
+    "command": "redo",
+    "when": "editorTextFocus && isMac"
+  },
+  {
+    "key": "ctrl+y",
+    "command": "redo",
+    "when": "editorTextFocus && !isMac"
+  },
+  {
+    "key": "cmd+f",
+    "command": "actions.find",
+    "when": "editorFocus && isMac"
+  },
+  {
+    "key": "ctrl+f",
+    "command": "actions.find",
+    "when": "editorFocus && !isMac"
+  },
+  {
+    "key": "cmd+g",
+    "command": "editor.action.nextMatchFindAction",
+    "when": "editorFocus && findWidgetVisible && isMac"
+  },
+  {
+    "key": "f3",
+    "command": "editor.action.nextMatchFindAction",
+    "when": "editorFocus && findWidgetVisible && !isMac"
+  },
+  {
+    "key": "cmd+shift+g",
+    "command": "editor.action.previousMatchFindAction",
+    "when": "editorFocus && findWidgetVisible && isMac"
+  },
+  {
+    "key": "shift+f3",
+    "command": "editor.action.previousMatchFindAction",
+    "when": "editorFocus && findWidgetVisible && !isMac"
+  }
+]

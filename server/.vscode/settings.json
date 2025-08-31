@@ -1,0 +1,29 @@
+{
+  "deno.enable": true,
+  "deno.config": "./deno.json",
+  "workbench.tree.enableStickyScroll": true,
+  "editor.defaultFormatter": "esbenp.prettier-vscode",
+  "editor.detectIndentation": true,
+  "editor.tabSize": 2,
+  "editor.formatOnSave": true,
+  "editor.fontLigatures": true,
+  "editor.cursorBlinking": "expand",
+  "editor.linkedEditing": true,
+  "editor.guides.bracketPairs": true,
+  "editor.cursorSmoothCaretAnimation": "on",
+  "explorer.fileNesting.enabled": true,
+  "explorer.fileNesting.patterns": {
+    "*.tsx": "${capture}.tsx",
+    "package.json": "package-lock.json, yarn.lock, pnpm-lock.yaml, bun.lockb, .*"
+  },
+  "files.trimTrailingWhitespace": true,
+  "files.insertFinalNewline": true,
+  "terminal.integrated.profiles.osx": {
+    "bash": null,
+    "zsh": {
+      "path": "/bin/zsh",
+      "icon": "terminal-bash",
+      "color": "terminal.ansiGreen"
+    }
+  }
+}

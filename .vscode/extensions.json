@@ -9,12 +9,14 @@
     "meganrogge.template-string-converter",
     "MS-CEINTL.vscode-language-pack-es",
     "quicktype.quicktype",
-    "rvest.vs-code-prettier-eslint",
     "streetsidesoftware.code-spell-checker-spanish",
     "streetsidesoftware.code-spell-checker",
     "usernamehw.errorlens",
     "WallabyJs.console-ninja",
     "wix.vscode-import-cost",
-    "YoavBls.pretty-ts-errorsn"
+    "YoavBls.pretty-ts-errorsn",
+    "christian-kohler.path-intellisense",
+    "MylesMurphy.prettify-ts",
+    "OmriGrossman.live-code-metric"
   ]
 }

@@ -1,0 +1,167 @@
+html {
+  box-sizing: border-box;
+  font-family: var(--vscode-editor-font-family, Arial);
+}
+
+html:root {
+  --JT-SVG-vscode-font-family: var(--vscode-font-family);
+  --JT-SVG-vscode-font-weight: var(--vscode-font-weight);
+  --JT-SVG-vscode-font-size: var(--vscode-font-size, 13px);
+
+  --JT-SVG-palette-text-primary: var(--vscode-input-foreground);
+  --JT-SVG-palette-primary-main: var(--vscode-input-foreground);
+  --JT-SVG-palette-text-secondary: var(--vscode-input-foreground);
+  --JT-SVG-palette-action-active: var(--vscode-icon-foreground);
+  /* VS Code Colors */
+  --JT-SVG-vscode-editor-background: var(--vscode-editor-background, rgba(0, 0, 0, 0.03));
+  --JT-SVG-vscode-panel-border: var(--vscode-panel-border);
+  --JT-SVG-vscode-sash-hoverBorder: var(--vscode-sash-hoverBorder, #3e4452);
+  --JT-SVG-vscode-sash-size: var(--vscode-sash-size, 4px);
+  --JT-SVG-vscode-sash-hover-size: var(--vscode-sash-hover-size, 4px);
+  --JT-SVG-vscode-input-border: var(--vscode-input-border);
+  --JT-SVG-vscode-focusBorder: var(--vscode-focusBorder, var(--JT-SVG-vscode-input-border));
+  --JT-SVG-vscode-input-background: var(--vscode-input-background);
+  --JT-SVG-vscode-input-foreground: var(--vscode-input-foreground, #3e4452);
+  --JT-SVG-vscode-list-hoverBackground: var(--vscode-list-hoverBackground, #2c313a0d);
+  --JT-SVG-vscode-notifications-background: var(--vscode-notifications-background);
+  --JT-SVG-vscode-notifications-foreground: var(--vscode-notifications-foreground);
+  --JT-SVG-vscode-notificationsErrorIcon-foreground: var(
+    --vscode-notificationsErrorIcon-foreground,
+    var(--JT-SVG-palette-Alert-errorIconColor)
+  );
+  --JT-SVG-vscode-notificationsInfoIcon-foreground: var(
+    --vscode-notificationsInfoIcon-foreground,
+    var(--JT-SVG-palette-Alert-infoIconColor)
+  );
+  --JT-SVG-vscode-notificationsSuccessIcon-foreground: var(
+    --vscode-notificationsSuccessIcon-foreground,
+    var(--JT-SVG-palette-Alert-successIconColor)
+  );
+  --JT-SVG-vscode-notificationsWarningIcon-foreground: var(
+    --vscode-notificationsWarningIcon-foreground,
+    var(--JT-SVG-palette-Alert-warningIconColor)
+  );
+  --JT-SVG-vscode-editorHoverWidget-background: var(--vscode-editorHoverWidget-background, #616161);
+  --JT-SVG-vscode-editorHoverWidget-border: var(--vscode-editorHoverWidget-border);
+  --JT-SVG-vscode-editorHoverWidget-foreground: var(--vscode-editorHoverWidget-foreground);
+  --JT-SVG-vscode-widget-shadow: var(--vscode-widget-shadow);
+  --JT-SVG-vscode-editorWidget-background: var(--vscode-editorWidget-background);
+  --JT-SVG-vscode-editorWidget-border: var(--vscode-editorWidget-border);
+  --JT-SVG-vscode-editorWidget-foreground: var(--vscode-editorWidget-foreground);
+  --JT-SVG-vscode-sideBarTitle-background: var(--vscode-sideBarTitle-background, #fff);
+  --JT-SVG-vscode-sideBarSectionHeader-border: var(--vscode-sideBarSectionHeader-border);
+  --JT-SVG-vscode-sideBarSectionHeader-background: var(
+    --vscode-sideBarSectionHeader-background,
+    var(--JT-SVG-vscode-editor-background)
+  );
+  --JT-SVG-vscode-toolbar-hoverBackground: var(--vscode-toolbar-hoverBackground);
+  --JT-SVG-vscode-toolbar-hoverOutline: var(--vscode-toolbar-hoverOutline);
+
+  --JT-SVG-vscode-extensionIcon-starForeground: var(--vscode-extensionIcon-starForeground, #f1c40f);
+  --JT-SVG-vscode-button-background: var(--vscode-button-background, #c4c4c4);
+  --JT-SVG-vscode-button-hoverBackground: var(--vscode-button-hoverBackground, #bbbbbb);
+  --JT-SVG-vscode-button-foreground: var(--vscode-button-foreground);
+
+  --JT-SVG-vscode-activityBarBadge-background: var(--vscode-activityBarBadge-background, #4d78cc);
+  --JT-SVG-vscode-activityBarBadge-foreground: var(--vscode-activityBarBadge-foreground, #f8fafd);
+
+  --JT-SVG-vscode-list-inactiveSelectionForeground: var(--vscode-list-inactiveSelectionForeground);
+  --JT-SVG-vscode-list-inactiveSelectionBackground: var(--vscode-list-inactiveSelectionBackground);
+  --JT-SVG-vscode-list-hoverForeground: var(--vscode-list-hoverForeground);
+  --JT-SVG-vscode-list-hoverBackground: var(--vscode-list-hoverBackground);
+  --JT-SVG-vscode-contrastActiveBorder: var(--vscode-contrastActiveBorder);
+  --JT-SVG-vscode-list-inactiveFocusOutline: var(--vscode-list-inactiveFocusOutline);
+
+  --JT-SVG-vscode-menu-foreground: var(--vscode-menu-foreground);
+  --JT-SVG-vscode-menu-background: var(--vscode-menu-background);
+  --JT-SVG-vscode-menu-selectionForeground: var(--vscode-menu-selectionForeground);
+  --JT-SVG-vscode-menu-selectionBackground: var(--vscode-menu-selectionBackground);
+  --JT-SVG-vscode-menu-separatorBackground: var(--vscode-menu-separatorBackground);
+  --JT-SVG-vscode-menu-border: var(--vscode-menu-border);
+  --JT-SVG-vscode-menu-selectionBorder: var(--vscode-menu-selectionBorder);
+  --JT-SVG-vscode-widget-shadow: var(--vscode-widget-shadow);
+
+  --JT-SVG-vscode-progressBar-background: var(--vscode-progressBar-background);
+}
+
+body {
+  height: 100vh;
+  max-height: 100vh;
+  background-color: var(--JT-SVG-vscode-editor-background);
+  color: var(--JT-SVG-palette-text-secondary);
+  padding: 0 !important;
+  overflow: hidden;
+}
+
+#root {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  max-height: 100%;
+  overflow: hidden;
+}
+
+*,
+*:before,
+*:after {
+  box-sizing: inherit;
+}
+
+* {
+  margin: 0px;
+  padding: 0px;
+}
+
+ul,
+li,
+h1,
+h2,
+h3,
+p,
+button {
+  margin: 0;
+  padding: 0;
+}
+
+button {
+  border: 0;
+  outline: 0;
+  background: transparent;
+}
+
+a {
+  cursor: pointer;
+  color: inherit;
+  text-decoration: none;
+  -webkit-text-stroke: inherit;
+}
+
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus,
+textarea:-webkit-autofill,
+textarea:-webkit-autofill:hover,
+textarea:-webkit-autofill:focus,
+select:-webkit-autofill,
+select:-webkit-autofill:hover,
+select:-webkit-autofill:focus {
+  caret-color: inherit !important;
+  -webkit-text-fill-color: inherit !important;
+  transition: background-color 99999s ease-in-out 0s;
+}
+
+/* clears the 'X' from Internet Explorer */
+input[type='search']::-ms-clear,
+input[type='search']::-ms-reveal {
+  width: 0;
+  height: 0;
+  display: none;
+}
+
+/* clears the 'X' from Chrome */
+input[type='search']::-webkit-search-decoration,
+input[type='search']::-webkit-search-cancel-button,
+input[type='search']::-webkit-search-results-button,
+input[type='search']::-webkit-search-results-decoration {
+  display: none;
+}
