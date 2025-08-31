@@ -48,15 +48,11 @@ export async function pathToSVGFile(filePath: string): Promise<SVGFile> {
 
   const isTemporary = filePath.includes(`scheme-${CONFIG_KEY}:`)
 
-  let absolutePath = filePath
-  let uri: Uri | undefined = undefined
+  const uri: Uri = Uri.parse(filePath)
+  let absolutePath = uri.fsPath
 
-  if (isTemporary) {
-    uri = Uri.parse(filePath)
-    absolutePath = uri.fsPath
-  } else {
-    absolutePath = path.isAbsolute(filePath) ? filePath : path.join(workspacePath, filePath)
-    uri = workspaceUri?.with({ path: absolutePath })
+  if (!isTemporary) {
+    absolutePath = path.isAbsolute(uri.fsPath) ? uri.fsPath : path.join(workspacePath, uri.fsPath)
   }
 
   const dirname = path.dirname(absolutePath)

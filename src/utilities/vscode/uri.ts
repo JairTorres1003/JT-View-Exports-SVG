@@ -55,7 +55,7 @@ export const uriParse = (uri: Uri): Uri => {
  * @returns The string representation of the URI's path or the full URI string for custom schemes.
  */
 export const getUriPath = (uri: Uri): string => {
-  if (uri.scheme === `scheme-${CONFIG_KEY}`) {
+  if (uri.scheme === `scheme-${CONFIG_KEY}` || env.uiKind === UIKind.Web) {
     return uri.toString()
   }
 
