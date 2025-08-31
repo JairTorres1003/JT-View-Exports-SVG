@@ -1,3 +1,6 @@
+import { minimatch } from 'minimatch'
+import { l10n } from 'vscode'
+
 /**
  * Checks if a value is empty.
  * @param value - The value to check.
@@ -5,7 +8,7 @@
  */
 export const isEmpty = (
   value: unknown
-): value is null | undefined | '' | [] | Record<string, unknown> => {
+): value is null | undefined | '' | [] | Record<string, never> => {
   if (value === null || value === undefined) return true
 
   if (typeof value === 'string' && value.trim() === '') return true
@@ -31,9 +34,9 @@ export const isEmpty = (
  * @param error - The unknown error from which to retrieve the message.
  * @returns The error message.
  */
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
-export const getUnknownError = (error: any): string => {
-  if (isEmpty(error)) return 'Unknown error'
+export const getUnknownError = (error: unknown): string => {
+  const unknownError = l10n.t('An unknown error occurred')
+  if (isEmpty(error)) return unknownError
 
   if (typeof error === 'string') {
     return error
@@ -44,28 +47,37 @@ export const getUnknownError = (error: any): string => {
   }
 
   if (error instanceof Error || error instanceof TypeError) {
-    return error.message
+    return getUnknownError('response' in error ? error.response : error.message)
   }
 
-  if ('data' in error) {
-    const message = error.data.message
-    if (typeof message === 'string') {
-      return message
-    } else if (Array.isArray(message) && message.length > 0) {
-      return Object.values(message[0] as string[])[0]
+  if (typeof error === 'object' && error instanceof Object) {
+    const auxError = error as Record<string, unknown>
+
+    if ('error_description' in error && !isEmpty(auxError?.error_description)) {
+      return getUnknownError(auxError?.error_description)
     }
+
+    return getUnknownError(auxError?.message ?? auxError.data ?? auxError?.statusText)
   }
 
-  if ('message' in error) {
-    const message = error.message
-    if (typeof message === 'string') {
-      return message
-    } else if (Array.isArray(message) && message.length > 0) {
-      return Object.values(message[0] as string[])[0]
+  return unknownError
+}
+
+/**
+ * Checks if a given value is a valid date.
+ * @param date - The value to be checked.
+ * @returns A boolean indicating whether the value is a valid date.
+ */
+export const isValidDate = (date: Date | string): boolean => {
+  try {
+    if (date instanceof Date) {
+      return !isNaN(date.getTime())
     }
-  }
 
-  return 'Unknown error'
+    return !isNaN(new Date(date).getTime())
+  } catch {
+    return false
+  }
 }
 
 /**
@@ -74,9 +86,17 @@ export const getUnknownError = (error: any): string => {
  * @param language - The language used for formatting the date.
  * @returns The formatted date as a string.
  */
-export const formatDate = (date: Date, language: string): string => {
+export const formatDate = (
+  date: Date,
+  language: string,
+  options?: Intl.DateTimeFormatOptions
+): string => {
+  if (!isValidDate(date)) {
+    return ''
+  }
+
   // Definir opciones para formatear fecha y hora
-  const options: Intl.DateTimeFormatOptions = {
+  const opt: Intl.DateTimeFormatOptions = {
     year: 'numeric',
     month: 'long',
     day: 'numeric',
@@ -86,7 +106,17 @@ export const formatDate = (date: Date, language: string): string => {
     hour12: false,
   }
 
-  const formatter = new Intl.DateTimeFormat(language, options)
+  const formatter = new Intl.DateTimeFormat(language, options ?? opt)
 
   return formatter.format(date)
+}
+
+/**
+ * Checks if a path matches any of the given patterns.
+ * @param patterns - An array of patterns.
+ * @param pathToCheck - The path to check.
+ * @returns `true` if the path matches any pattern, `false` otherwise.
+ */
+export const matchesPattern = (patterns: string[], pathToCheck: string): boolean => {
+  return patterns.some((pattern) => minimatch(pathToCheck, pattern))
 }

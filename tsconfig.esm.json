@@ -1,0 +1,12 @@
+{
+  "extends": "./tsconfig.json",
+  "compilerOptions": {
+    "sourceMap": true,
+    "module": "ES2020",
+    "outDir": "./out/esm",
+    "moduleResolution": "node",
+    "declaration": true
+  },
+  "include": ["src/types/**/*", "src/**/*"],
+  "exclude": ["client", "examples/*", "server/*", "src/test/**/*"]
+}

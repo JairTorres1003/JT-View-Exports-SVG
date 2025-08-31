@@ -128,8 +128,8 @@ export const CircleBlue = () => (
 | g              | image            | line               | linearGradient      |
 | marker         | mask             | metadata           | mpath               |
 | path           | pattern          | polygon            | polyline            |
-| radialGradient | rect             | stop               | switch              |
-| symbol         | text             | textPath           | tspan               |
-| use            | view             |                    |                     |
+| radialGradient | rect             | stop               | style               |
+| switch         | symbol           | text               | textPath            |
+| tspan          | use              | view               |                     |
 
 The extension ensures that the SVG components use only the tags listed above. If any other unsupported tags are used, the extension will raise validation errors to maintain the integrity of the SVG components and ensure they adhere to SVG specifications. Components with invalid tags will not be displayed in the "**View Exports SVG**" panel.

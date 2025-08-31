@@ -4,13 +4,10 @@
   "version": "2.0.0",
   "tasks": [
     {
+      "label": "TaskTest",
       "type": "npm",
-      "script": "watch",
-      "problemMatcher": "$tsc-watch",
-      "isBackground": true,
-      "presentation": {
-        "reveal": "never"
-      },
+      "script": "compile",
+      "problemMatcher": "$tsc",
       "group": {
         "kind": "build",
         "isDefault": true

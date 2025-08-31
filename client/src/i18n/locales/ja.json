@@ -1,0 +1,149 @@
+{
+  "errors": {
+    "FailedToFindTheRootElement": "ルート要素が見つかりませんでした",
+    "UnknownError": "不明なエラー",
+    "TheComponentIsEmpty": "コンポーネントが空です",
+    "VSCodeApiIsNotAvailable": "VSCode API が利用できません",
+    "NoResponse": "応答がありません",
+    "NoMessageTypeProvided": "メッセージタイプが指定されていません",
+    "FailedToReloadEditor": "エディターの再読み込みに失敗しました",
+    "FailedToUpdateUserConfiguration": "ユーザー設定の更新に失敗しました",
+    "FailedToUpdateUserKeybindings": "ユーザーのキーバインドの更新に失敗しました",
+    "EditorReferenceIsNotAvailable": "エディター参照が利用できません",
+    "FailedToActivateExtensionTheme": "拡張機能テーマの有効化に失敗しました",
+    "FailedToFetchExtensionTheme": "拡張機能テーマの取得に失敗しました",
+    "FailedToInitializeEditor": "エディターの初期化に失敗しました",
+    "ErrorApplyingInitialColor": "初期色の適用中にエラーが発生しました",
+    "TheFollowingFilesAreNotSupported": "以下のファイルはサポートされていません:",
+    "ErrorCreatingTemporaryFile": "一時ファイル {{name}} の作成中にエラーが発生しました"
+  },
+  "labels": {
+    "Loading": "読み込み中...",
+    "ExtractingComponents": "コンポーネントを抽出中...",
+    "ExtractComponents": "コンポーネントを抽出",
+    "Search": "検索",
+    "Clear": "クリア",
+    "Info": "情報",
+    "Refresh": "更新",
+    "OpenFile": "ファイルを開く",
+    "OpenManyFiles": "複数のファイルを開く",
+    "ListOfAssociatedFilesFor": "\"{{name}}\" の関連ファイルのリスト",
+    "Copied {{value}} to clipboard": "<b>{{value}}</b> をクリップボードにコピーしました",
+    "CopyName": "名前をコピー",
+    "CopyCodeSnippet": "コードスニペットをコピー",
+    "Close": "閉じる",
+    "DeleteThisFile": "このファイルを削除",
+    "AddMoreFiles": "さらにファイルを追加",
+    "FilesLoaded": "{{count}} ファイルが読み込まれました",
+    "FilesLoaded2": "{{count}} ファイルが読み込まれました",
+    "SortFilesByName": "ファイルを名前でソート",
+    "NoFilesSelected": "ファイルが選択されていません",
+    "Yes": "はい",
+    "No": "いいえ",
+    "Errors": "エラー"
+  },
+  "pickers": {
+    "color": {
+      "title": "色を選択"
+    }
+  },
+  "DevTools": {
+    "title": "開発者ツール",
+    "playground": {
+      "title": "プレイグラウンド",
+      "HideCode": "コードを隠す",
+      "ShowCode": "コードを表示",
+      "CopyCode": "コードをコピー",
+      "ResetCode": "コードをリセット",
+      "MoreActions": "その他のアクション...",
+      "OpenInEditor": "エディターで開く",
+      "CopyAsSVG": "SVGとしてコピー",
+      "CopyAsPNG": "PNGとしてコピー",
+      "DownloadAsSVG": "SVGとしてダウンロード",
+      "DownloadAsPNG": "PNGとしてダウンロード"
+    },
+    "info": {
+      "title": "情報コンポーネント",
+      "componentName": "コンポーネント名:",
+      "isAnimated": "アニメーション化されていますか?:",
+      "isExported": "エクスポートされていますか?:",
+      "isFavorite": "お気に入りですか?:",
+      "typeDeclaration": "型宣言:"
+    },
+    "menu": {
+      "ReloadPlayground": "プレイグラウンドをリロード",
+      "ReloadEditor": "エディターをリロード",
+      "DisableWordWrap": "折り返しを無効にする",
+      "EnableWordWrap": "折り返しを有効にする"
+    },
+    "editor": {
+      "suggestions": {
+        "components": {
+          "details": {
+            "static": "SVG コンポーネント",
+            "animated": "アニメーション SVG コンポーネント",
+            "temporary-static": "(一時的) SVG コンポーネント",
+            "temporary-animated": "(一時的) アニメーション SVG コンポーネント"
+          },
+          "documentation": [
+            "---",
+            "**🧩 SVG コンポーネントのプレビュー**\\",
+            "これは動的な SVG コンポーネントです。コードを変更すると、結果を即座にプレビューできます。\\",
+            "\\",
+            "**🎛️ カスタマイズ**\\",
+            "プロパティ (props) を渡して、コンポーネントの外観や動作を変更します。\\",
+            "\\",
+            "**使用例:**",
+            "```jsx",
+            "<{{name}} {{propertyValue}} />",
+            "```",
+            "\\",
+            "**🔍 詳細情報:** [{{fileName}}]({{link}} \"file://{{filePath}}\")\\",
+            "コンポーネントにカーソルを合わせるか、ファイルを開いて完全なドキュメントを表示します。"
+          ],
+          "documentation_withRestProps": [
+            "---",
+            "**🧩 SVG コンポーネントのプレビュー**\\",
+            "これは動的な SVG コンポーネントです。コードを変更すると、結果を即座にプレビューできます。\\",
+            "\\",
+            "**🎛️ カスタマイズ**\\",
+            "特定のプロパティと *任意の有効な SVG 属性* (rest props) を渡して、コンポーネントをさらにカスタマイズできます。\\",
+            "\\",
+            "**使用例:**",
+            "```jsx",
+            "<{{name}} {{propertyValue}} />",
+            "```",
+            "\\",
+            "**🔍 詳細情報:** [{{fileName}}]({{link}} \"file://{{filePath}}\")\\",
+            "コンポーネントにカーソルを合わせるか、ファイルを開いて完全なドキュメントを表示します。"
+          ]
+        },
+        "properties": {
+          "details": {
+            "static": "(プロパティ) {{name}}: {{type}}"
+          }
+        }
+      }
+    }
+  },
+  "DropZone": {
+    "title": "JS、JSX、TS、または TSX ファイルをアップロードして、それらに含まれる SVG コンポーネントを簡単に発見できます。",
+    "Select files": "ファイルを選択",
+    "or drop the files here": "またはここにファイルをドロップ",
+    "Let it go!": "ドロップして解放!"
+  },
+  "modalInfo": {
+    "title": "情報",
+    "ComponentsExported": "エクスポートされたコンポーネントの合計:",
+    "ComponentsNotExported": "エクスポートされていないコンポーネントの合計:",
+    "FileName": "ファイル名:",
+    "IsTemporaryFile": "一時ファイルですか?:",
+    "IncludesTemporaryFiles": "一時ファイルを含みます:",
+    "Language": "言語:",
+    "Path": "パス:",
+    "ShowNoExports": "エクスポートされていないコンポーネントを表示:",
+    "TotalComponents": "合計コンポーネント:",
+    "FilesCount": "ファイル数:",
+    "GroupKindName": "グループ名:"
+  }
+}

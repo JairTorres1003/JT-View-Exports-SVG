@@ -1,14 +1,8 @@
-// Place your settings in this file to overwrite default and user settings.
 {
-  "files.exclude": {
-    "out": false // set this to true to hide the "out" folder with the compiled JS files
-  },
   "search.exclude": {
-    "out": true // set this to false to include "out" folder in search results
+    "out": true
   },
-  // Turn off tsc task auto detection since we have the necessary tasks as npm scripts
   "typescript.tsc.autoDetect": "off",
-
   "cSpell.language": "en,es-ES",
   "cSpell.ignoreWords": ["Jair", "arrowParens", "ecmaVersion", "esnext", "mpath", "quasis"],
   "cSpell.ignorePaths": [
@@ -20,10 +14,11 @@
     ".vscode-insiders",
     ".github",
     "**/tsconfig.json",
-    "**/.eslintrc.cjs",
-    "**/.eslintrc",
     ".prettierrc"
   ],
+  "deno.enable": true,
+  "deno.config": "./server/deno.json",
+  "deno.enablePaths": ["server"],
   "workbench.tree.enableStickyScroll": true,
   "editor.defaultFormatter": "esbenp.prettier-vscode",
   "editor.detectIndentation": true,
@@ -43,58 +38,11 @@
   "explorer.fileNesting.enabled": true,
   "explorer.fileNesting.patterns": {
     "*.tsx": "${capture}.tsx",
-    "package.json": "package-lock.json, yarn.lock, pnpm-lock.yaml, bun.lockb, .*"
+    "package.json": "package-lock.json, yarn.lock, pnpm-lock.yaml, bun.lockb, .*",
+    "package.nls.json": "package.nls*.json"
   },
   "files.trimTrailingWhitespace": true,
   "files.insertFinalNewline": true,
-  "[javascript]": {
-    "editor.tabSize": 2,
-    "editor.formatOnSave": true,
-    "editor.defaultFormatter": "esbenp.prettier-vscode",
-    "editor.codeActionsOnSave": {
-      "source.fixAll": "always"
-    }
-  },
-  "[javascriptreact]": {
-    "editor.tabSize": 2,
-    "editor.formatOnSave": true,
-    "editor.defaultFormatter": "esbenp.prettier-vscode",
-    "editor.codeActionsOnSave": {
-      "source.fixAll": "always"
-    }
-  },
-  "[typescript]": {
-    "editor.tabSize": 2,
-    "editor.formatOnSave": true,
-    "editor.defaultFormatter": "esbenp.prettier-vscode",
-    "editor.codeActionsOnSave": {
-      "source.fixAll": "always"
-    }
-  },
-  "[typescriptreact]": {
-    "editor.tabSize": 2,
-    "editor.formatOnSave": true,
-    "editor.defaultFormatter": "esbenp.prettier-vscode",
-    "editor.codeActionsOnSave": {
-      "source.fixAll": "always"
-    }
-  },
-  "[markdown]": {
-    "editor.tabSize": 2,
-    "editor.formatOnSave": true,
-    "editor.defaultFormatter": "esbenp.prettier-vscode",
-    "editor.codeActionsOnSave": {
-      "source.fixAll": "always"
-    }
-  },
-  "[mdx]": {
-    "editor.tabSize": 2,
-    "editor.formatOnSave": true,
-    "editor.defaultFormatter": "esbenp.prettier-vscode",
-    "editor.codeActionsOnSave": {
-      "source.fixAll": "always"
-    }
-  },
   "terminal.integrated.profiles.osx": {
     "bash": null,
     "zsh": {
@@ -104,8 +52,6 @@
     }
   },
   "files.readonlyInclude": {
-    ".eslintrc.cjs": true,
-    ".eslintignore": true,
     ".prettierrc": true,
     ".prettierignore": true,
     ".lintstagedrc": true,
@@ -114,5 +60,32 @@
     ".vscode/settings.json": true,
     ".vscode/extensions.json": true
   },
-  "JT-View-Exports-SVG.assetsPath": ["webview-ui/src/icons/index.tsx"]
+  "json.schemas": [
+    {
+      "fileMatch": ["/l10n/bundle.l10n*.json"],
+      "url": "./schemas/l10n.schema.json"
+    },
+    {
+      "fileMatch": ["/package.nls*.json"],
+      "url": "./schemas/nls.schema.json"
+    },
+    {
+      "fileMatch": ["client/src/i18n/locales/*.json"],
+      "url": "./client/i18n.schema.json"
+    },
+    {
+      "fileMatch": ["client/public/vs/userConfiguration/keybindings.json"],
+      "url": "vscode://schemas/keybindings"
+    }
+  ],
+  "material-icon-theme.files.associations": {
+    "i18n.schema.json": "i18n",
+    "l10n.schema.json": "i18n",
+    "nls.schema.json": "i18n",
+    "tsconfig.types.json": "tsconfig"
+  },
+  "material-icon-theme.folders.associations": {
+    "workers": "gh-workflows",
+    "vs": "vscode"
+  }
 }

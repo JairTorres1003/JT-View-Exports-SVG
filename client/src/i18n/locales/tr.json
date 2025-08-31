@@ -1,0 +1,149 @@
+{
+  "errors": {
+    "FailedToFindTheRootElement": "Kök öğe bulunamadı",
+    "UnknownError": "Bilinmeyen hata",
+    "TheComponentIsEmpty": "Bileşen boş",
+    "VSCodeApiIsNotAvailable": "VSCode API mevcut değil",
+    "NoResponse": "Yanıt yok",
+    "NoMessageTypeProvided": "Mesaj türü sağlanmadı",
+    "FailedToReloadEditor": "Düzenleyici yeniden yüklenemedi",
+    "FailedToUpdateUserConfiguration": "Kullanıcı yapılandırması güncellenemedi",
+    "FailedToUpdateUserKeybindings": "Kullanıcı tuş atamaları güncellenemedi",
+    "EditorReferenceIsNotAvailable": "Düzenleyici referansı mevcut değil",
+    "FailedToActivateExtensionTheme": "Uzantı teması etkinleştirilemedi",
+    "FailedToFetchExtensionTheme": "Uzantı teması getirilemedi",
+    "FailedToInitializeEditor": "Düzenleyici başlatılamadı",
+    "ErrorApplyingInitialColor": "İlk renk uygulanırken hata oluştu",
+    "TheFollowingFilesAreNotSupported": "Aşağıdaki dosyalar desteklenmiyor:",
+    "ErrorCreatingTemporaryFile": "Geçici dosya {{name}} oluşturulurken hata oluştu"
+  },
+  "labels": {
+    "Loading": "Yükleniyor...",
+    "ExtractingComponents": "Bileşenler çıkarılıyor...",
+    "ExtractComponents": "Bileşenleri çıkar",
+    "Search": "Ara",
+    "Clear": "Temizle",
+    "Info": "Bilgi",
+    "Refresh": "Yenile",
+    "OpenFile": "Dosyayı aç",
+    "OpenManyFiles": "Birden fazla dosyayı aç",
+    "ListOfAssociatedFilesFor": "\"{{name}}\" için ilişkili dosyaların listesi",
+    "Copied {{value}} to clipboard": "<b>{{value}}</b> panoya kopyalandı",
+    "CopyName": "Adı kopyala",
+    "CopyCodeSnippet": "Kodu kopyala",
+    "Close": "Kapat",
+    "DeleteThisFile": "Bu dosyayı sil",
+    "AddMoreFiles": "Daha fazla dosya ekle",
+    "FilesLoaded": "{{count}} dosya yüklendi",
+    "FilesLoaded2": "{{count}} dosya yüklendi",
+    "SortFilesByName": "Dosyaları isme göre sırala",
+    "NoFilesSelected": "Hiçbir dosya seçilmedi",
+    "Yes": "Evet",
+    "No": "Hayır",
+    "Errors": "Hatalar"
+  },
+  "pickers": {
+    "color": {
+      "title": "Bir renk seç"
+    }
+  },
+  "DevTools": {
+    "title": "Geliştirici Araçları",
+    "playground": {
+      "title": "Oyun Alanı",
+      "HideCode": "Kodu Gizle",
+      "ShowCode": "Kodu Göster",
+      "CopyCode": "Kodu Kopyala",
+      "ResetCode": "Kodu Sıfırla",
+      "MoreActions": "Diğer işlemler...",
+      "OpenInEditor": "Düzenleyicide Aç",
+      "CopyAsSVG": "SVG Olarak Kopyala",
+      "CopyAsPNG": "PNG Olarak Kopyala",
+      "DownloadAsSVG": "SVG Olarak İndir",
+      "DownloadAsPNG": "PNG Olarak İndir"
+    },
+    "info": {
+      "title": "Bileşen Bilgisi",
+      "componentName": "Bileşen adı:",
+      "isAnimated": "Animasyonlu mu?:",
+      "isExported": "Dışa aktarıldı mı?:",
+      "isFavorite": "Favori mi?:",
+      "typeDeclaration": "Tür bildirimi:"
+    },
+    "menu": {
+      "ReloadPlayground": "Oyun alanını yeniden yükle",
+      "ReloadEditor": "Düzenleyiciyi yeniden yükle",
+      "DisableWordWrap": "Satır kaydırmayı devre dışı bırak",
+      "EnableWordWrap": "Satır kaydırmayı etkinleştir"
+    },
+    "editor": {
+      "suggestions": {
+        "components": {
+          "details": {
+            "static": "SVG Bileşeni",
+            "animated": "Animasyonlu SVG Bileşeni",
+            "temporary-static": "(Geçici) SVG Bileşeni",
+            "temporary-animated": "(Geçici) Animasyonlu SVG Bileşeni"
+          },
+          "documentation": [
+            "---",
+            "**🧩 SVG Bileşeni Önizleme**\\",
+            "Bu dinamik bir SVG bileşenidir. Kodunu değiştirebilir ve sonucu anında önizleyebilirsiniz.\\",
+            "\\",
+            "**🎛️ Özelleştirme**\\",
+            "Bileşenin görünümünü veya davranışını değiştirmek için özellikler (props) geçirin.\\",
+            "\\",
+            "**Kullanım Örneği:**",
+            "```jsx",
+            "<{{name}} {{propertyValue}} />",
+            "```",
+            "\\",
+            "**🔍 Daha Fazla Bilgi:** [{{fileName}}]({{link}} \"file://{{filePath}}\")\\",
+            "Bileşenin üzerine gelin veya tam belgeler için dosyayı açın."
+          ],
+          "documentation_withRestProps": [
+            "---",
+            "**🧩 SVG Bileşeni Önizleme**\\",
+            "Bu dinamik bir SVG bileşenidir. Kodunu değiştirebilir ve sonucu anında önizleyebilirsiniz.\\",
+            "\\",
+            "**🎛️ Özelleştirme**\\",
+            "Belirli özelliklerin yanı sıra *herhangi bir geçerli SVG özniteliği* (rest props) geçirerek bileşeni daha da özelleştirebilirsiniz.\\",
+            "\\",
+            "**Kullanım Örneği:**",
+            "```jsx",
+            "<{{name}} {{propertyValue}} />",
+            "```",
+            "\\",
+            "**🔍 Daha Fazla Bilgi:** [{{fileName}}]({{link}} \"file://{{filePath}}\")\\",
+            "Bileşenin üzerine gelin veya tam belgeler için dosyayı açın."
+          ]
+        },
+        "properties": {
+          "details": {
+            "static": "(mülk) {{name}}: {{type}}"
+          }
+        }
+      }
+    }
+  },
+  "DropZone": {
+    "title": "JS, JSX, TS veya TSX dosyalarınızı yükleyin ve içerdikleri SVG bileşenlerini kolayca keşfedin.",
+    "Select files": "Dosyaları seçin",
+    "or drop the files here": "veya dosyaları buraya bırakın",
+    "Let it go!": "Bırakın gitsin!"
+  },
+  "modalInfo": {
+    "title": "Bilgi",
+    "ComponentsExported": "Toplam dışa aktarılan bileşenler:",
+    "ComponentsNotExported": "Toplam dışa aktarılmayan bileşenler:",
+    "FileName": "Dosya adı:",
+    "IsTemporaryFile": "Geçici bir dosya mı?:",
+    "IncludesTemporaryFiles": "Geçici dosyaları içerir:",
+    "Language": "Dil:",
+    "Path": "Yol:",
+    "ShowNoExports": "Dışa aktarılmayan bileşenleri göster:",
+    "TotalComponents": "Toplam bileşenler:",
+    "FilesCount": "Dosya sayısı:",
+    "GroupKindName": "Grup adı:"
+  }
+}
