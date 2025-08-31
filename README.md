@@ -85,7 +85,7 @@ Want to contribute to the development? Follow these steps:
 
 1.  Clone the repository:
     ```bash
-    git clone [https://github.com/JairTorres1003/JT-View-Exports-SVG.git](https://github.com/JairTorres1003/JT-View-Exports-SVG.git)
+    git clone https://github.com/JairTorres1003/JT-View-Exports-SVG.git
     ```
 2.  Install all dependencies:
     ```bash
