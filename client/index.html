@@ -1,0 +1,26 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="ico" href="./favicon.ico" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>View Exports SVG</title>
+  </head>
+  <body>
+    <div id="root"></div>
+    <div id="overflow_widgets_dom_node" class="monaco-editor"></div>
+    <script>
+      window.ViewExportsSVG = {
+        name: 'View Exports SVG',
+        initConfiguration: {
+          _DEFAULT_EXPAND_ALL: true,
+          _DEFAULT_CLIC_TO_OPEN_DEV_TOOLS: true,
+          _INITIAL_RENDER_PATH: '/',
+          _RECENT_ICONS_SHOW: true,
+          _LANGUAGE: 'en',
+        },
+      }
+    </script>
+    <script type="module" src="/src/main.tsx"></script>
+  </body>
+</html>

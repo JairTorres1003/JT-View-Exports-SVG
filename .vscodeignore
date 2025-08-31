@@ -3,14 +3,17 @@
 
 # Ignore test files
 .vscode-test/**
-out/test/**
-out/utilities/saveResponseFiles.js
+.temp
+out/cjs/test/**
+out/cjs/utilities/files/saveResponseFiles.js
+workspaceTest.code-workspace
 
 # Ignore source code
 src/**
-!src/i18n
-webview-ui/**
-!webview-ui/build
+server/**
+client/**
+!client/dist
+client/dist/index.html
 
 # Ignore Misc
 .yarnrc
@@ -18,6 +21,20 @@ vsc-extension-quickstart.md
 **/.gitignore
 **/tsconfig.json
 **/vite.config.ts
+.eslintignore
 **/.eslintrc.json
+**/eslint.config.mjs
 **/*.map
 **/*.ts
+**/.husky/**
+**/node_modules/**
+LEARN.md
+.lintstagedrc
+.nvmrc
+.prettierrc
+.prettierignore
+tsconfig*.json
+.github/
+**/*.schema.json
+**/*.config.js
+package-lock.json

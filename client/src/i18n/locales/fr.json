@@ -1,0 +1,149 @@
+{
+  "errors": {
+    "FailedToFindTheRootElement": "Échec de la recherche de l'élément racine",
+    "UnknownError": "Erreur inconnue",
+    "TheComponentIsEmpty": "Le composant est vide",
+    "VSCodeApiIsNotAvailable": "L'API VSCode n'est pas disponible",
+    "NoResponse": "Aucune réponse",
+    "NoMessageTypeProvided": "Aucun type de message fourni",
+    "FailedToReloadEditor": "Échec du rechargement de l'éditeur",
+    "FailedToUpdateUserConfiguration": "Échec de la mise à jour de la configuration utilisateur",
+    "FailedToUpdateUserKeybindings": "Échec de la mise à jour des raccourcis clavier utilisateur",
+    "EditorReferenceIsNotAvailable": "Référence de l'éditeur indisponible",
+    "FailedToActivateExtensionTheme": "Échec de l'activation du thème d'extension",
+    "FailedToFetchExtensionTheme": "Échec de la récupération du thème d'extension",
+    "FailedToInitializeEditor": "Échec de l'initialisation de l'éditeur",
+    "ErrorApplyingInitialColor": "Erreur lors de l'application de la couleur initiale",
+    "TheFollowingFilesAreNotSupported": "Les fichiers suivants ne sont pas pris en charge:",
+    "ErrorCreatingTemporaryFile": "Erreur lors de la création du fichier temporaire {{name}}"
+  },
+  "labels": {
+    "Loading": "Chargement...",
+    "ExtractingComponents": "Extraction des composants...",
+    "ExtractComponents": "Extraire les composants",
+    "Search": "Rechercher",
+    "Clear": "Effacer",
+    "Info": "Informations",
+    "Refresh": "Actualiser",
+    "OpenFile": "Ouvrir le fichier",
+    "OpenManyFiles": "Ouvrir plusieurs fichiers",
+    "ListOfAssociatedFilesFor": "Liste des fichiers associés pour \"{{name}}\"",
+    "Copied {{value}} to clipboard": "Copié <b>{{value}}</b> dans le presse-papiers",
+    "CopyName": "Copier le nom",
+    "CopyCodeSnippet": "Copier le code",
+    "Close": "Fermer",
+    "DeleteThisFile": "Supprimer ce fichier",
+    "AddMoreFiles": "Ajouter plus de fichiers",
+    "FilesLoaded": "{{count}} fichier chargé",
+    "FilesLoaded2": "{{count}} fichiers chargés",
+    "SortFilesByName": "Trier les fichiers par nom",
+    "NoFilesSelected": "Aucun fichier sélectionné",
+    "Yes": "Oui",
+    "No": "Non",
+    "Errors": "Erreurs"
+  },
+  "pickers": {
+    "color": {
+      "title": "Sélectionner une couleur"
+    }
+  },
+  "DevTools": {
+    "title": "Outils de développement",
+    "playground": {
+      "title": "Aire de jeux",
+      "HideCode": "Masquer le code",
+      "ShowCode": "Afficher le code",
+      "CopyCode": "Copier le code",
+      "ResetCode": "Réinitialiser le code",
+      "MoreActions": "Plus d'actions...",
+      "OpenInEditor": "Ouvrir dans l'éditeur",
+      "CopyAsSVG": "Copier en tant que SVG",
+      "CopyAsPNG": "Copier en tant que PNG",
+      "DownloadAsSVG": "Télécharger en tant que SVG",
+      "DownloadAsPNG": "Télécharger en tant que PNG"
+    },
+    "info": {
+      "title": "Composant d'information",
+      "componentName": "Nom du composant:",
+      "isAnimated": "Est animé?:",
+      "isExported": "Est exporté?:",
+      "isFavorite": "Est favori?:",
+      "typeDeclaration": "Déclaration de type:"
+    },
+    "menu": {
+      "ReloadPlayground": "Recharger l'aire de jeux",
+      "ReloadEditor": "Recharger l'éditeur",
+      "DisableWordWrap": "Désactiver le retour à la ligne",
+      "EnableWordWrap": "Activer le retour à la ligne"
+    },
+    "editor": {
+      "suggestions": {
+        "components": {
+          "details": {
+            "static": "Composant SVG",
+            "animated": "Composant SVG animé",
+            "temporary-static": "(Temporaire) Composant SVG",
+            "temporary-animated": "(Temporaire) Composant SVG animé"
+          },
+          "documentation": [
+            "---",
+            "**🧩 Aperçu du composant SVG**\\",
+            "C'est un composant SVG dynamique. Vous pouvez modifier son code et prévisualiser instantanément le résultat.\\",
+            "\\",
+            "**🎛️ Personnalisation**\\",
+            "Passez des propriétés (props) pour changer l'apparence ou le comportement du composant.\\",
+            "\\",
+            "**Exemple d'utilisation :**",
+            "```jsx",
+            "<{{name}} {{propertyValue}} />",
+            "```",
+            "\\",
+            "**🔍 Plus d'infos :** [{{fileName}}]({{link}} \"file://{{filePath}}\")\\",
+            "Survolez le composant ou ouvrez le fichier pour voir la documentation complète."
+          ],
+          "documentation_withRestProps": [
+            "---",
+            "**🧩 Aperçu du composant SVG**\\",
+            "C'est un composant SVG dynamique. Vous pouvez modifier son code et prévisualiser instantanément le résultat.\\",
+            "\\",
+            "**🎛️ Personnalisation**\\",
+            "Vous pouvez passer des propriétés spécifiques ainsi que *tous les attributs SVG valides* (rest props) pour personnaliser encore plus le composant.\\",
+            "\\",
+            "**Exemple d'utilisation :**",
+            "```jsx",
+            "<{{name}} {{propertyValue}} />",
+            "```",
+            "\\",
+            "**🔍 Plus d'infos :** [{{fileName}}]({{link}} \"file://{{filePath}}\")\\",
+            "Survolez le composant ou ouvrez le fichier pour voir la documentation complète."
+          ]
+        },
+        "properties": {
+          "details": {
+            "static": "(propriété) {{name}}: {{type}}"
+          }
+        }
+      }
+    }
+  },
+  "DropZone": {
+    "title": "Téléchargez vos fichiers JS, JSX, TS ou TSX et découvrez facilement les composants SVG qu'ils contiennent.",
+    "Select files": "Sélectionner des fichiers",
+    "or drop the files here": "ou déposez les fichiers ici",
+    "Let it go!": "Lâchez prise!"
+  },
+  "modalInfo": {
+    "title": "Informations",
+    "ComponentsExported": "Total des composants exportés:",
+    "ComponentsNotExported": "Total des composants non exportés:",
+    "FileName": "Nom du fichier:",
+    "IsTemporaryFile": "Est-ce un fichier temporaire?:",
+    "IncludesTemporaryFiles": "Inclut des fichiers temporaires:",
+    "Language": "Langue:",
+    "Path": "Chemin:",
+    "ShowNoExports": "Afficher les composants non exportés:",
+    "TotalComponents": "Total des composants:",
+    "FilesCount": "Total des fichiers:",
+    "GroupKindName": "Nom du groupe:"
+  }
+}

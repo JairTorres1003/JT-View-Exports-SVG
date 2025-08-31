@@ -10,7 +10,7 @@ If you encounter a bug or have an idea for a new feature, please [create an issu
 
 If you want to contribute code, follow these steps:
 
-1. Fork the View Exports SVG repository.
+1. Fork the 'View Exports SVG' repository.
 
 2. Clone your fork to your local machine:
 
@@ -59,7 +59,7 @@ If you want to run the extension in your local environment to test your changes,
 3. Build the webview UI:
 
    ```bash
-   npm run build:webview
+   npm run client:build
    ```
 
 4. Compile the extension:

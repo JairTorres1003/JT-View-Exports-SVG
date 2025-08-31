@@ -1,33 +1,71 @@
-### Learn How to Use View Exports SVG
+# Learn How to Use View Exports SVG
 
-Welcome to **View Exports SVG**, a Visual Studio Code extension that makes it easy to explore and manage your SVG icons right from your project. Let's learn how to make the most out of this tool.
+Welcome to **View Exports SVG**, a Visual Studio Code extension designed to streamline how you discover, manage, and use SVG icons directly within your project.
+
+This guide will walk you through its features to help you enhance your development workflow.
+
+### Key Features
+
+- **Instant Discovery:** Find all exported SVG components within your files or entire workspace.
+- **Interactive Playground:** Preview, customize, and edit your components in real-time.
+- **Advanced DevTools:** A powerful, dockable panel with search, favorites, and component management.
+- **Drag & Drop:** Quickly add SVG files to the viewer by dragging them into the panel.
+- **Multi-language Support:** The interface is available in over 15 languages.
+- **Native Theming:** The extension's appearance seamlessly integrates with your VS Code theme.
 
 ### Installation
 
-1. **Open Visual Studio Code.**
-2. Go to the Extensions view by clicking on the corresponding icon in the sidebar of the window.
-3. Search for "View Exports SVG" in the Extensions view search box.
-4. Click on "Install" to add the extension to your development environment.
+1.  **Open Visual Studio Code.**
+2.  Navigate to the **Extensions** view (or press `Ctrl+Shift+X`).
+3.  Search for "View Exports SVG" in the marketplace.
+4.  Click **Install** to add it to your editor.
 
-### Usage
+### How to Use
 
-1. Seleccione uno o más archivos que contengan íconos SVG en su espacio de trabajo de Visual Studio Code. ([see SVG support](SVG%20SUPPORT.md)).
-2. Right-click on the selected files.
-3. In the context menu, choose the "**View SVG Exports 🔍**" option.
-4. A panel will appear showing all the SVG icons found.
-5. Use the search bar in the panel to quickly find icons by their names.
-6. Click on an SVG icon to automatically copy its name to the clipboard.
+#### 1. Viewing Icons from Files
 
-### Playground
+This is the most direct way to inspect specific files.
 
-Discover and experiment with the new Playground functionality located in the upper right corner. This tool allows you to represent your SVG icons and, through its integrated code editor, can customize them in real-time based on the attributes defined in the props of the selected SVG icon.
+1.  In the Explorer, select one or more files or folders that contain SVG components ([see SVG support](SVG%20SUPPORT.md)).
+2.  Right-click on your selection.
+3.  Choose "**View Exports SVG 🔍**" from the context menu.
+4.  A new panel will open, displaying all the icons found in the selected files.
 
-### Explore and Enjoy
+#### 2. Scanning the Entire Workspace
 
-You are now ready to efficiently explore and enjoy your SVG icons in Visual Studio Code! Make the most out of this extension to enhance your workflow and bring your projects to life.
+To get a complete overview of all icons in your project:
+
+1.  Open the **Command Palette** (`Ctrl+Shift+P`).
+2.  Type and select "**View Exports SVG: Start Scanning**".
+3.  The extension will scan your entire project and display all found icons.
+
+#### 3. Using the DevTools Panel
+
+The DevTools panel is your central hub for managing icons.
+
+- **Search:** Use the search bar at the top to instantly filter icons by name.
+- **Copy Name:** Simply click on any icon card to copy its component name to the clipboard.
+- **Playground:** Select an icon to see it in the Playground. Here, you can edit its props in the code editor and see your changes applied in real-time.
+- **Actions Menu:** Hover over an icon and use the context menu (`...`) to access actions like:
+  - Copy as SVG/PNG.
+  - Download as SVG/PNG.
+  - Mark as Favorite.
+  - Open in Editor.
+- **Favorites & Recent:** Quickly access your most used or recently selected icons in their respective sections.
+
+#### 4. Drag and Drop
+
+You can also add files directly to the webview panel.
+
+1.  Open the **View Exports SVG** panel.
+2.  Drag SVG files from your computer or the VS Code Explorer and drop them onto the panel.
+
+> **Note:** Due to VS Code security restrictions, it is not possible to directly obtain the file path on the OS for dropped files. As a workaround, the contents of dropped files are read and sent via `postMessage` to create a temporary file. For more details, see the issue on [GitHub](https://github.com/microsoft/vscode/issues/255608).
 
 ### Keep Learning
 
-For more information on updates and changes, check the [changelog file (CHANGELOG.md)](CHANGELOG.md).
+For detailed information on version updates and new features, please check the [changelog (CHANGELOG.md)](CHANGELOG.md).
 
-Remember, you can always experiment and learn more by exploring the source code of the project on [GitHub](https://github.com/JairTorres1003/JT-View-Exports-SVG). Have fun learning and developing!
+This is an open-source project, and you are welcome to explore the code, report issues, or contribute. Visit the project repository on [GitHub](https://github.com/JairTorres1003/JT-View-Exports-SVG).
+
+Happy developing!

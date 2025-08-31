@@ -1,0 +1,553 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "JSON schema for i18n in View Exports SVG (client) extension for Visual Studio Code",
+  "type": "object",
+  "properties": {
+    "errors": {
+      "type": "object",
+      "properties": {
+        "FailedToFindTheRootElement": {
+          "type": "string",
+          "default": "Failed to find the root element"
+        },
+        "UnknownError": {
+          "type": "string",
+          "default": "Unknown error"
+        },
+        "TheComponentIsEmpty": {
+          "type": "string",
+          "default": "The component is empty"
+        },
+        "VSCodeApiIsNotAvailable": {
+          "type": "string",
+          "default": "VSCode API is not available"
+        },
+        "NoResponse": {
+          "type": "string",
+          "default": "No response"
+        },
+        "NoMessageTypeProvided": {
+          "type": "string",
+          "default": "No message type provided"
+        },
+        "FailedToReloadEditor": {
+          "type": "string",
+          "default": "Failed to reload editor"
+        },
+        "FailedToUpdateUserConfiguration": {
+          "type": "string",
+          "default": "Failed to update user configuration"
+        },
+        "FailedToUpdateUserKeybindings": {
+          "type": "string",
+          "default": "Failed to update user keybindings"
+        },
+        "EditorReferenceIsNotAvailable": {
+          "type": "string",
+          "default": "Editor reference is not available"
+        },
+        "FailedToActivateExtensionTheme": {
+          "type": "string",
+          "default": "Failed to activate extension theme"
+        },
+        "FailedToFetchExtensionTheme": {
+          "type": "string",
+          "default": "Failed to fetch extension theme"
+        },
+        "FailedToInitializeEditor": {
+          "type": "string",
+          "default": "Failed to initialize editor"
+        },
+        "ErrorApplyingInitialColor": {
+          "type": "string",
+          "default": "Error applying initial color"
+        },
+        "TheFollowingFilesAreNotSupported": {
+          "type": "string",
+          "default": "The following files are not supported:"
+        },
+        "ErrorCreatingTemporaryFile": {
+          "type": "string",
+          "default": "Error creating temporary file {{name}}"
+        }
+      },
+      "required": [
+        "FailedToFindTheRootElement",
+        "UnknownError",
+        "TheComponentIsEmpty",
+        "VSCodeApiIsNotAvailable",
+        "NoResponse",
+        "NoMessageTypeProvided",
+        "FailedToReloadEditor",
+        "FailedToUpdateUserConfiguration",
+        "FailedToUpdateUserKeybindings",
+        "EditorReferenceIsNotAvailable",
+        "FailedToActivateExtensionTheme",
+        "FailedToFetchExtensionTheme",
+        "FailedToInitializeEditor",
+        "ErrorApplyingInitialColor",
+        "TheFollowingFilesAreNotSupported",
+        "ErrorCreatingTemporaryFile"
+      ]
+    },
+    "labels": {
+      "type": "object",
+      "properties": {
+        "Loading": {
+          "type": "string",
+          "default": "Loading..."
+        },
+        "ExtractingComponents": {
+          "type": "string",
+          "default": "Extracting components..."
+        },
+        "ExtractComponents": {
+          "type": "string",
+          "default": "Extract components"
+        },
+        "Search": {
+          "type": "string",
+          "default": "Search"
+        },
+        "Clear": {
+          "type": "string",
+          "default": "Clear"
+        },
+        "Info": {
+          "type": "string",
+          "default": "Info"
+        },
+        "Refresh": {
+          "type": "string",
+          "default": "Refresh"
+        },
+        "OpenFile": {
+          "type": "string",
+          "default": "Open file"
+        },
+        "OpenManyFiles": {
+          "type": "string",
+          "default": "Open many files"
+        },
+        "ListOfAssociatedFilesFor": {
+          "type": "string",
+          "default": "List of associated files for \"{{name}}\""
+        },
+        "Copied {{value}} to clipboard": {
+          "type": "string",
+          "default": "Copied <b>{{value}}</b> to clipboard"
+        },
+        "CopyName": {
+          "type": "string",
+          "default": "Copy name"
+        },
+        "CopyCodeSnippet": {
+          "type": "string",
+          "default": "Copy code snippet"
+        },
+        "Close": {
+          "type": "string",
+          "default": "Close"
+        },
+        "DeleteThisFile": {
+          "type": "string",
+          "default": "Delete this file"
+        },
+        "AddMoreFiles": {
+          "type": "string",
+          "default": "Add more files"
+        },
+        "FilesLoaded": {
+          "type": "string",
+          "default": "{{count}} file loaded"
+        },
+        "FilesLoaded2": {
+          "type": "string",
+          "default": "{{count}} files loaded"
+        },
+        "SortFilesByName": {
+          "type": "string",
+          "default": "Sort files by name"
+        },
+        "NoFilesSelected": {
+          "type": "string",
+          "default": "No files selected"
+        },
+        "Yes": {
+          "type": "string",
+          "default": "Yes"
+        },
+        "No": {
+          "type": "string",
+          "default": "No"
+        },
+        "Errors": {
+          "type": "string",
+          "default": "Errors"
+        }
+      },
+      "required": [
+        "Loading",
+        "ExtractingComponents",
+        "ExtractComponents",
+        "Search",
+        "Clear",
+        "Info",
+        "Refresh",
+        "OpenFile",
+        "OpenManyFiles",
+        "ListOfAssociatedFilesFor",
+        "Copied {{value}} to clipboard",
+        "CopyName",
+        "CopyCodeSnippet",
+        "Close",
+        "DeleteThisFile",
+        "AddMoreFiles",
+        "FilesLoaded",
+        "FilesLoaded2",
+        "SortFilesByName",
+        "NoFilesSelected",
+        "Yes",
+        "No",
+        "Errors"
+      ]
+    },
+    "pickers": {
+      "type": "object",
+      "properties": {
+        "color": {
+          "type": "object",
+          "properties": {
+            "title": {
+              "type": "string",
+              "default": "Select a color"
+            }
+          },
+          "required": ["title"]
+        }
+      },
+      "required": ["color"]
+    },
+    "DevTools": {
+      "type": "object",
+      "properties": {
+        "title": {
+          "type": "string",
+          "default": "DevTools"
+        },
+        "playground": {
+          "type": "object",
+          "properties": {
+            "title": {
+              "type": "string",
+              "default": "Playground"
+            },
+            "HideCode": {
+              "type": "string",
+              "default": "Hide code"
+            },
+            "ShowCode": {
+              "type": "string",
+              "default": "Show code"
+            },
+            "CopyCode": {
+              "type": "string",
+              "default": "Copy code"
+            },
+            "ResetCode": {
+              "type": "string",
+              "default": "Reset code"
+            },
+            "MoreActions": {
+              "type": "string",
+              "default": "More actions..."
+            },
+            "OpenInEditor": {
+              "type": "string",
+              "default": "Open in editor"
+            },
+            "CopyAsSVG": {
+              "type": "string",
+              "default": "Copy as SVG"
+            },
+            "CopyAsPNG": {
+              "type": "string",
+              "default": "Copy as PNG"
+            },
+            "DownloadAsSVG": {
+              "type": "string",
+              "default": "Download as SVG"
+            },
+            "DownloadAsPNG": {
+              "type": "string",
+              "default": "Download as PNG"
+            }
+          },
+          "required": [
+            "title",
+            "HideCode",
+            "ShowCode",
+            "CopyCode",
+            "ResetCode",
+            "MoreActions",
+            "OpenInEditor",
+            "CopyAsSVG",
+            "CopyAsPNG",
+            "DownloadAsSVG",
+            "DownloadAsPNG"
+          ]
+        },
+        "info": {
+          "type": "object",
+          "properties": {
+            "title": {
+              "type": "string",
+              "default": "Info component"
+            },
+            "componentName": {
+              "type": "string",
+              "default": "Component name:"
+            },
+            "typeDeclaration": {
+              "type": "string",
+              "default": "Type declaration:"
+            },
+            "isExported": {
+              "type": "string",
+              "default": "Is exported?:"
+            },
+            "isAnimated": {
+              "type": "string",
+              "default": "Is animated?:"
+            },
+            "isFavorite": {
+              "type": "string",
+              "default": "Is favorite?:"
+            }
+          },
+          "required": [
+            "title",
+            "componentName",
+            "typeDeclaration",
+            "isExported",
+            "isAnimated",
+            "isFavorite"
+          ]
+        },
+        "menu": {
+          "type": "object",
+          "properties": {
+            "ReloadPlayground": {
+              "type": "string",
+              "default": "Reload playground"
+            },
+            "ReloadEditor": {
+              "type": "string",
+              "default": "Reload editor"
+            },
+            "DisableWordWrap": {
+              "type": "string",
+              "default": "Disable word wrap"
+            },
+            "EnableWordWrap": {
+              "type": "string",
+              "default": "Enable word wrap"
+            }
+          },
+          "required": ["ReloadPlayground", "ReloadEditor", "DisableWordWrap", "EnableWordWrap"]
+        },
+        "editor": {
+          "type": "object",
+          "properties": {
+            "suggestions": {
+              "type": "object",
+              "properties": {
+                "components": {
+                  "type": "object",
+                  "properties": {
+                    "details": {
+                      "type": "object",
+                      "properties": {
+                        "static": {
+                          "type": "string",
+                          "default": "SVG Component"
+                        },
+                        "animated": {
+                          "type": "string",
+                          "default": "Animated SVG Component"
+                        },
+                        "temporary-static": {
+                          "type": "string",
+                          "default": "(Temporary) SVG Component"
+                        },
+                        "temporary-animated": {
+                          "type": "string",
+                          "default": "(Temporary) Animated SVG Component"
+                        }
+                      },
+                      "required": ["static", "animated", "temporary-static", "temporary-animated"]
+                    },
+                    "documentation": {
+                      "type": "array",
+                      "items": {
+                        "type": "string"
+                      },
+                      "default": [
+                        "---",
+                        "**🧩 SVG Component Preview**\\",
+                        "This is a dynamic SVG component. You can modify its code and instantly preview the result.\\",
+                        "\\",
+                        "**🎛️ Customization**\\",
+                        "Pass properties (props) to change the appearance or behavior of the component.\\",
+                        "\\",
+                        "**Usage Example:**",
+                        "```jsx",
+                        "<{{name}} {{propertyValue}} />",
+                        "```",
+                        "\\",
+                        "**🔍 More Info:** [{{fileName}}]({{link}} \"file://{{filePath}}\")\\",
+                        "Hover over the component or open the file for complete documentation."
+                      ]
+                    },
+                    "documentation_withRestProps": {
+                      "type": "array",
+                      "items": {
+                        "type": "string"
+                      },
+                      "default": [
+                        "---",
+                        "**🧩 SVG Component Preview**\\",
+                        "This is a dynamic SVG component. You can modify its code and instantly preview the result.\\",
+                        "\\",
+                        "**🎛️ Customization**\\",
+                        "You can pass specific properties as well as *any valid SVG attributes* (rest props) to customize the component further.\\",
+                        "\\",
+                        "**Usage Example:**",
+                        "```jsx",
+                        "<{{name}} {{propertyValue}} />",
+                        "```",
+                        "\\",
+                        "**🔍 More Info:** [{{fileName}}]({{link}} \"file://{{filePath}}\")\\",
+                        "Hover over the component or open the file for complete documentation."
+                      ]
+                    }
+                  },
+                  "required": ["details", "documentation", "documentation_withRestProps"]
+                },
+                "properties": {
+                  "type": "object",
+                  "properties": {
+                    "details": {
+                      "type": "object",
+                      "properties": {
+                        "static": {
+                          "type": "string",
+                          "default": "(property) {{name}}: {{type}}"
+                        }
+                      },
+                      "required": ["static"]
+                    }
+                  },
+                  "required": ["details"]
+                }
+              },
+              "required": ["components", "properties"]
+            }
+          },
+          "required": ["suggestions"]
+        }
+      },
+      "required": ["title", "playground", "menu", "editor", "info"]
+    },
+    "DropZone": {
+      "type": "object",
+      "properties": {
+        "title": {
+          "type": "string",
+          "default": "Upload your JS, JSX, TS, or TSX files and easily discover the SVG components they contain."
+        },
+        "Select files": {
+          "type": "string",
+          "default": "Select files"
+        },
+        "or drop the files here": {
+          "type": "string",
+          "default": "or drop the files here"
+        },
+        "Let it go!": {
+          "type": "string",
+          "default": "Let it go!"
+        }
+      },
+      "required": ["title", "Select files", "or drop the files here", "Let it go!"]
+    },
+    "modalInfo": {
+      "type": "object",
+      "properties": {
+        "title": {
+          "type": "string",
+          "default": "Info"
+        },
+        "FileName": {
+          "type": "string",
+          "default": "File name:"
+        },
+        "Language": {
+          "type": "string",
+          "default": "Language:"
+        },
+        "IsTemporaryFile": {
+          "type": "string",
+          "default": "Is temporary?:"
+        },
+        "IncludesTemporaryFiles": {
+          "type": "string",
+          "default": "Includes temporary files:"
+        },
+        "Path": {
+          "type": "string",
+          "default": "Path:"
+        },
+        "ShowNoExports": {
+          "type": "string",
+          "default": "Show non-exported components:"
+        },
+        "ComponentsExported": {
+          "type": "string",
+          "default": "Total components exported:"
+        },
+        "ComponentsNotExported": {
+          "type": "string",
+          "default": "Total non-exported components:"
+        },
+        "TotalComponents": {
+          "type": "string",
+          "default": "Total components:"
+        },
+        "FilesCount": {
+          "type": "string",
+          "default": "Files count:"
+        },
+        "GroupKindName": {
+          "type": "string",
+          "default": "Group name:"
+        }
+      },
+      "required": [
+        "title",
+        "FileName",
+        "Language",
+        "IsTemporaryFile",
+        "IncludesTemporaryFiles",
+        "Path",
+        "ShowNoExports",
+        "ComponentsExported",
+        "ComponentsNotExported",
+        "TotalComponents",
+        "FilesCount",
+        "GroupKindName"
+      ]
+    }
+  },
+  "required": ["errors", "labels", "pickers", "DevTools", "DropZone", "modalInfo"]
+}

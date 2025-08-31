@@ -1,0 +1,149 @@
+{
+  "errors": {
+    "FailedToFindTheRootElement": "Nepodařilo se najít kořenový element",
+    "UnknownError": "Neznámá chyba",
+    "TheComponentIsEmpty": "Komponenta je prázdná",
+    "VSCodeApiIsNotAvailable": "VSCode API není k dispozici",
+    "NoResponse": "Žádná odpověď",
+    "NoMessageTypeProvided": "Nebyl poskytnut žádný typ zprávy",
+    "FailedToReloadEditor": "Nepodařilo se znovu načíst editor",
+    "FailedToUpdateUserConfiguration": "Nepodařilo se aktualizovat uživatelskou konfiguraci",
+    "FailedToUpdateUserKeybindings": "Nepodařilo se aktualizovat uživatelské klávesové zkratky",
+    "EditorReferenceIsNotAvailable": "Odkaz na editor není k dispozici",
+    "FailedToActivateExtensionTheme": "Nepodařilo se aktivovat téma rozšíření",
+    "FailedToFetchExtensionTheme": "Nepodařilo se načíst téma rozšíření",
+    "FailedToInitializeEditor": "Nepodařilo se inicializovat editor",
+    "ErrorApplyingInitialColor": "Chyba při aplikaci počáteční barvy",
+    "TheFollowingFilesAreNotSupported": "Následující soubory nejsou podporovány:",
+    "ErrorCreatingTemporaryFile": "Chyba při vytváření dočasného souboru {{name}}"
+  },
+  "labels": {
+    "Loading": "Načítání...",
+    "ExtractingComponents": "Extrahování komponentů...",
+    "ExtractComponents": "Extrahovat komponenty...",
+    "Search": "Hledat",
+    "Clear": "Vymazat",
+    "Info": "Informace",
+    "Refresh": "Obnovit",
+    "OpenFile": "Otevřít soubor",
+    "OpenManyFiles": "Otevřít více souborů",
+    "ListOfAssociatedFilesFor": "Seznam souvisejících souborů pro \"{{name}}\"",
+    "Copied {{value}} to clipboard": "Zkopírováno <b>{{value}}</b> do schránky",
+    "CopyName": "Kopírovat název",
+    "CopyCodeSnippet": "Kopírovat kódový úryvek",
+    "Close": "Zavřít",
+    "DeleteThisFile": "Smazat tento soubor",
+    "AddMoreFiles": "Přidat další soubory",
+    "FilesLoaded": "{{count}} soubor načten",
+    "FilesLoaded2": "{{count}} soubory načteny",
+    "SortFilesByName": "Třídit soubory podle názvu",
+    "NoFilesSelected": "Žádné soubory nejsou vybrány",
+    "Yes": "Ano",
+    "No": "Ne",
+    "Errors": "Chyby"
+  },
+  "pickers": {
+    "color": {
+      "title": "Vyberte barvu"
+    }
+  },
+  "DevTools": {
+    "title": "Nástroje pro vývojáře",
+    "playground": {
+      "title": "Dětské hřiště",
+      "HideCode": "Skrýt kód",
+      "ShowCode": "Zobrazit kód",
+      "CopyCode": "Kopírovat kód",
+      "ResetCode": "Resetovat kód",
+      "MoreActions": "Další akce...",
+      "OpenInEditor": "Otevřít v editoru",
+      "CopyAsSVG": "Kopírovat jako SVG",
+      "CopyAsPNG": "Kopírovat jako PNG",
+      "DownloadAsSVG": "Stáhnout jako SVG",
+      "DownloadAsPNG": "Stáhnout jako PNG"
+    },
+    "info": {
+      "title": "Informační komponenta",
+      "componentName": "Název komponenty:",
+      "isAnimated": "Je animovaná?:",
+      "isExported": "Je exportována?:",
+      "isFavorite": "Je oblíbená?:",
+      "typeDeclaration": "Deklarace typu:"
+    },
+    "menu": {
+      "ReloadPlayground": "Obnovit dětské hřiště",
+      "ReloadEditor": "Obnovit editor",
+      "DisableWordWrap": "Zakázat zalamování textu",
+      "EnableWordWrap": "Povolit zalamování textu"
+    },
+    "editor": {
+      "suggestions": {
+        "components": {
+          "details": {
+            "static": "SVG komponenta",
+            "animated": "Animovaná SVG komponenta",
+            "temporary-static": "(Dočasná) SVG komponenta",
+            "temporary-animated": "(Dočasná) Animovaná SVG komponenta"
+          },
+          "documentation": [
+            "---",
+            "**🧩 Náhled SVG komponenty**\\",
+            "Toto je dynamická SVG komponenta. Její kód můžete upravovat a okamžitě si prohlédnout náhled výsledku.\\",
+            "\\",
+            "**🎛️ Přizpůsobení**\\",
+            "Předávejte vlastnosti (props) pro změnu vzhledu nebo chování komponenty.\\",
+            "\\",
+            "**Příklad použití:**",
+            "```jsx",
+            "<{{name}} {{propertyValue}} />",
+            "```",
+            "\\",
+            "**🔍 Více informací:** [{{fileName}}]({{link}} \"file://{{filePath}}\")\\",
+            "Pro zobrazení kompletní dokumentace najeďte myší na komponentu nebo otevřete soubor."
+          ],
+          "documentation_withRestProps": [
+            "---",
+            "**🧩 Náhled SVG komponenty**\\",
+            "Toto je dynamická SVG komponenta. Její kód můžete upravovat a okamžitě si prohlédnout náhled výsledku.\\",
+            "\\",
+            "**🎛️ Přizpůsobení**\\",
+            "Můžete předat konkrétní vlastnosti a také *jakékoli platné SVG atributy* (rest props) pro další přizpůsobení komponenty.\\",
+            "\\",
+            "**Příklad použití:**",
+            "```jsx",
+            "<{{name}} {{propertyValue}} />",
+            "```",
+            "\\",
+            "**🔍 Více informací:** [{{fileName}}]({{link}} \"file://{{filePath}}\")\\",
+            "Pro zobrazení kompletní dokumentace najeďte myší na komponentu nebo otevřete soubor."
+          ]
+        },
+        "properties": {
+          "details": {
+            "static": "(vlastnost) {{name}}: {{type}}"
+          }
+        }
+      }
+    }
+  },
+  "DropZone": {
+    "title": "Nahrajte své soubory JS, JSX, TS nebo TSX a snadno objevte komponenty SVG, které obsahují.",
+    "Select files": "Vyberte soubory",
+    "or drop the files here": "nebo sem přetáhněte soubory",
+    "Let it go!": "Pusťte to!"
+  },
+  "modalInfo": {
+    "title": "Informace",
+    "ComponentsExported": "Celkový počet exportovaných komponent:",
+    "ComponentsNotExported": "Celkový počet neexportovaných komponent:",
+    "FileName": "Název souboru:",
+    "IsTemporaryFile": "Je to dočasný soubor?:",
+    "IncludesTemporaryFiles": "Zahrnuje dočasné soubory:",
+    "Language": "Jazyk:",
+    "Path": "Cesta:",
+    "ShowNoExports": "Zobrazit neexportované komponenty:",
+    "TotalComponents": "Celkový počet komponent:",
+    "FilesCount": "Počet souborů:",
+    "GroupKindName": "Název skupiny:"
+  }
+}

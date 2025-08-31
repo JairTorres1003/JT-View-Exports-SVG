@@ -1,0 +1,138 @@
+// @ts-types="npm:@types/express@4.17.15"
+import { Request, Response } from 'express'
+import { getConfigurationEditor } from '@jt/view-exports-svg/utilities/vscode/config.js'
+import { getCurrentTheme, getStyles } from '@jt/view-exports-svg/utilities/vscode/theme.js'
+import { expandedIcons } from '@jt/view-exports-svg/commands/expandedIcons.js'
+import { toggleDevTools } from '@jt/view-exports-svg/commands/devTools.js'
+import { SVGPostMessage } from '@jt/view-exports-svg/enum/ViewExportsSVG.js'
+import { getExtensionTheme as _getExtensionTheme } from '@jt/view-exports-svg/utilities/vscode/extensions/theme.js'
+
+export class SettingsController {
+  /**
+   * Handles the request to get the editor configuration.
+   *
+   * @param _ - The request object (not used).
+   * @param res - The response object used to send back the editor configuration.
+   *
+   * @returns A JSON response with the editor configuration if successful, or an error message if an error occurs.
+   */
+  public getEditorConfig = (_: Request, res: Response) => {
+    try {
+      const editorConfig = getConfigurationEditor()
+
+      res.status(200).json({
+        type: SVGPostMessage.SendEditorConfig,
+        data: { ...editorConfig, 'workbench.colorTheme': 'default-theme-one-dark' },
+      })
+    } catch (error) {
+      console.error(error)
+      res.status(500).json({ message: SVGPostMessage.SendEditorConfig, data: {} })
+    }
+  }
+
+  /**
+   * Handles the request to toggle the expand all icons setting.
+   *
+   * @param req - The request object containing the new value for the expand all icons setting.
+   * @param res - The response object used to send back a success message if the setting was updated.
+   *
+   * @returns A JSON response with a success message if the setting was updated, or an error message if an error occurs.
+   */
+  public toggleExpandAll = (req: Request, res: Response) => {
+    const isExpanded = req.body.data
+    expandedIcons(isExpanded)
+      .then(() => {
+        res.send({ message: 'Expanded icons updated' })
+      })
+      .catch((error) => {
+        console.error(error)
+        res.status(500).send({ message: 'Error updating expanded icons' })
+      })
+  }
+
+  /**
+   * Handles the request to get the extension theme.
+   *
+   * @param _ - The request object (not used).
+   * @param res - The response object used to send back the extension theme.
+   *
+   * @returns A JSON response with the extension theme if successful, or an error message if an error occurs.
+   */
+  public getExtensionTheme = (_: Request, res: Response) => {
+    try {
+      const theme = _getExtensionTheme()
+      res.status(200).json({ type: SVGPostMessage.SendExtensionTheme, data: theme })
+    } catch (error) {
+      console.error(error)
+      res.status(500).json({ message: SVGPostMessage.SendExtensionTheme, data: {} })
+    }
+  }
+
+  /**
+   * Handles the request to get the VS Code styles.
+   *
+   * @param _ - The request object (not used).
+   * @param res - The response object used to send back the VS Code styles.
+   *
+   * @returns A JSON response with the VS Code styles if successful, or an error message if an error occurs.
+   */
+  public getVscodeStyles = (_: Request, res: Response) => {
+    try {
+      const config = getStyles()
+
+      res.status(200).json({ type: SVGPostMessage.SendVsCodeStyles, data: config })
+    } catch (error) {
+      console.error(error)
+      res.status(500).json({ message: SVGPostMessage.SendVsCodeStyles, data: {} })
+    }
+  }
+
+  /**
+   * Handles the request to toggle the open developer tools setting.
+   *
+   * @param req - The request object containing the new value for the open developer tools setting.
+   * @param res - The response object used to send back a success message if the setting was updated.
+   *
+   * @returns A JSON response with a success message if the setting was updated, or an error message if an error occurs.
+   */
+  public toggleOpenDevTools = (req: Request, res: Response) => {
+    const isOpen = req.body.data
+    toggleDevTools(isOpen)
+      .then(() => {
+        res.send({ message: 'Open developer tools updated' })
+      })
+      .catch((error) => {
+        console.error(error)
+        res.status(500).send({ message: 'Error updating open developer tools' })
+      })
+  }
+
+  /**
+   * Handles the request to get the current theme.
+   *
+   * @param _ - The request object (not used).
+   * @param res - The response object used to send back the current theme.
+   *
+   * @returns A JSON response with the current theme if successful, or an error message if an error occurs.
+   */
+  public getTheme = (_: Request, res: Response) => {
+    const themeKind = getCurrentTheme()
+    res.status(200).json({ type: SVGPostMessage.SendTheme, data: themeKind })
+  }
+
+  /**
+   * Handles the request to reload the extension theme.
+   *
+   * @param _ - The request object (not used).
+   * @param res - The response object used to send back the reloaded editor configuration.
+   *
+   * @returns A JSON response with the reloaded editor configuration if successful, or an error message if an error occurs.
+   */
+  public reloadExtensionTheme = (_: Request, res: Response) => {
+    try {
+      this.getEditorConfig(_, res)
+    } catch (error) {
+      console.error('Error reloading extension theme:', error)
+    }
+  }
+}

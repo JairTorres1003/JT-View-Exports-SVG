@@ -1,0 +1,149 @@
+{
+  "errors": {
+    "FailedToFindTheRootElement": "Failed to find the root element",
+    "UnknownError": "Unknown error",
+    "TheComponentIsEmpty": "The component is empty",
+    "VSCodeApiIsNotAvailable": "VSCode API is not available",
+    "NoResponse": "No response",
+    "NoMessageTypeProvided": "No message type provided",
+    "FailedToReloadEditor": "Failed to reload editor",
+    "FailedToUpdateUserConfiguration": "Failed to update user configuration",
+    "FailedToUpdateUserKeybindings": "Failed to update user keybindings",
+    "EditorReferenceIsNotAvailable": "Editor reference is not available",
+    "FailedToActivateExtensionTheme": "Failed to activate extension theme",
+    "FailedToFetchExtensionTheme": "Failed to fetch extension theme",
+    "FailedToInitializeEditor": "Failed to initialize editor",
+    "ErrorApplyingInitialColor": "Error applying initial color",
+    "TheFollowingFilesAreNotSupported": "The following files are not supported:",
+    "ErrorCreatingTemporaryFile": "Error creating temporary file {{name}}"
+  },
+  "labels": {
+    "Loading": "Loading...",
+    "ExtractingComponents": "Extracting components...",
+    "ExtractComponents": "Extract components",
+    "Search": "Search",
+    "Clear": "Clear",
+    "Info": "Info",
+    "Refresh": "Refresh",
+    "OpenFile": "Open file",
+    "OpenManyFiles": "Open many files",
+    "ListOfAssociatedFilesFor": "List of associated files for \"{{name}}\"",
+    "Copied {{value}} to clipboard": "Copied <b>{{value}}</b> to clipboard",
+    "CopyName": "Copy name",
+    "CopyCodeSnippet": "Copy code snippet",
+    "Close": "Close",
+    "DeleteThisFile": "Delete this file",
+    "AddMoreFiles": "Add more files",
+    "FilesLoaded": "{{count}} file loaded",
+    "FilesLoaded2": "{{count}} files loaded",
+    "SortFilesByName": "Sort files by name",
+    "NoFilesSelected": "No files selected",
+    "Yes": "Yes",
+    "No": "No",
+    "Errors": "Errors"
+  },
+  "pickers": {
+    "color": {
+      "title": "Select a color"
+    }
+  },
+  "DevTools": {
+    "title": "DevTools",
+    "playground": {
+      "title": "Playground",
+      "HideCode": "Hide code",
+      "ShowCode": "Show code",
+      "CopyCode": "Copy code",
+      "ResetCode": "Reset code",
+      "MoreActions": "More actions...",
+      "OpenInEditor": "Open in editor",
+      "CopyAsSVG": "Copy as SVG",
+      "CopyAsPNG": "Copy as PNG",
+      "DownloadAsSVG": "Download as SVG",
+      "DownloadAsPNG": "Download as PNG"
+    },
+    "info": {
+      "title": "Info component",
+      "componentName": "Component name:",
+      "isAnimated": "Is animated?:",
+      "isExported": "Is exported?:",
+      "isFavorite": "Is favorite?:",
+      "typeDeclaration": "Type declaration:"
+    },
+    "menu": {
+      "ReloadPlayground": "Reload playground",
+      "ReloadEditor": "Reload editor",
+      "DisableWordWrap": "Disable word wrap",
+      "EnableWordWrap": "Enable word wrap"
+    },
+    "editor": {
+      "suggestions": {
+        "components": {
+          "details": {
+            "static": "SVG Component",
+            "animated": "Animated SVG Component",
+            "temporary-static": "(Temporary) SVG Component",
+            "temporary-animated": "(Temporary) Animated SVG Component"
+          },
+          "documentation": [
+            "---",
+            "**🧩 SVG Component Preview**\\",
+            "This is a dynamic SVG component. You can modify its code and instantly preview the result.\\",
+            "\\",
+            "**🎛️ Customization**\\",
+            "Pass properties (props) to change the appearance or behavior of the component.\\",
+            "\\",
+            "**Usage Example:**",
+            "```jsx",
+            "<{{name}} {{propertyValue}} />",
+            "```",
+            "\\",
+            "**🔍 More Info:** [{{fileName}}]({{link}} \"file://{{filePath}}\")\\",
+            "Hover over the component or open the file for complete documentation."
+          ],
+          "documentation_withRestProps": [
+            "---",
+            "**🧩 SVG Component Preview**\\",
+            "This is a dynamic SVG component. You can modify its code and instantly preview the result.\\",
+            "\\",
+            "**🎛️ Customization**\\",
+            "You can pass specific properties as well as *any valid SVG attributes* (rest props) to customize the component further.\\",
+            "\\",
+            "**Usage Example:**",
+            "```jsx",
+            "<{{name}} {{propertyValue}} />",
+            "```",
+            "\\",
+            "**🔍 More Info:** [{{fileName}}]({{link}} \"file://{{filePath}}\")\\",
+            "Hover over the component or open the file for complete documentation."
+          ]
+        },
+        "properties": {
+          "details": {
+            "static": "(property) {{name}}: {{type}}"
+          }
+        }
+      }
+    }
+  },
+  "DropZone": {
+    "title": "Upload your JS, JSX, TS, or TSX files and easily discover the SVG components they contain.",
+    "Select files": "Select files",
+    "or drop the files here": "or drop the files here",
+    "Let it go!": "Let it go!"
+  },
+  "modalInfo": {
+    "title": "Info",
+    "ComponentsExported": "Total components exported:",
+    "ComponentsNotExported": "Total non-exported components:",
+    "FileName": "File name:",
+    "IsTemporaryFile": "Is it a temporary file?:",
+    "IncludesTemporaryFiles": "Includes temporary files:",
+    "Language": "Language:",
+    "Path": "Path:",
+    "ShowNoExports": "Show non-exported components:",
+    "TotalComponents": "Total components:",
+    "FilesCount": "Files count:",
+    "GroupKindName": "Group name:"
+  }
+}

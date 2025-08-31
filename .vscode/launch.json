@@ -1,7 +1,3 @@
-// A launch configuration that compiles the extension and then opens it inside a new window
-// Use IntelliSense to learn about possible attributes.
-// Hover to view descriptions of existing attributes.
-// For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
 {
   "version": "0.2.0",
   "configurations": [
@@ -10,8 +6,7 @@
       "type": "extensionHost",
       "request": "launch",
       "args": ["--extensionDevelopmentPath=${workspaceFolder}"],
-      "outFiles": ["${workspaceFolder}/out/**/*.js"],
-      "preLaunchTask": "${defaultBuildTask}"
+      "outFiles": ["${workspaceFolder}/out/cjs/**/*.js"]
     },
     {
       "name": "Extension Tests",
@@ -19,10 +14,31 @@
       "request": "launch",
       "args": [
         "--extensionDevelopmentPath=${workspaceFolder}",
-        "--extensionTestsPath=${workspaceFolder}/out/test/suite/index"
+        "--extensionTestsPath=${workspaceFolder}/out/cjs/test/suite/index",
+        "${workspaceFolder}/workspaceTest.code-workspace"
       ],
-      "outFiles": ["${workspaceFolder}/out/test/**/*.js"],
-      "preLaunchTask": "${defaultBuildTask}"
+      "outFiles": ["${workspaceFolder}/out/cjs/test/**/*.js"],
+      "preLaunchTask": "TaskTest"
+    },
+    {
+      "type": "node",
+      "request": "launch",
+      "name": "Launch Deno Program",
+      "program": "${workspaceFolder}/server/src/server.ts",
+      "cwd": "${workspaceFolder}/server",
+      "env": {},
+      "runtimeExecutable": "/Users/jairalexandretorrescaviedes/.deno/bin/deno",
+      "runtimeArgs": ["run", "-A", "--unstable-sloppy-imports", "--inspect-wait"],
+      "attachSimplePort": 9229
+    },
+    {
+      "name": "Run Web Extension in VS Code",
+      "type": "pwa-extensionHost",
+      "debugWebWorkerHost": true,
+      "request": "launch",
+      "args": ["--extensionDevelopmentPath=${workspaceFolder}", "--extensionDevelopmentKind=web"],
+      "outFiles": ["${workspaceFolder}/out/cjs/web/**/*.js"],
+      "preLaunchTask": "npm: watch:esbuild:web"
     }
   ]
 }

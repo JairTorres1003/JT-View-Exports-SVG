@@ -1,5 +1,44 @@
 # View Exports SVG - Changelog
 
+## 4.0.0
+
+_Aug 30, 2025_
+
+#### ✨ Features
+
+- **Multi-language Support (i18n):** A comprehensive internationalization system has been integrated throughout the extension. The interface now supports over 15 languages, including Spanish, Portuguese, Chinese (Simplified and Traditional), Russian, German, French, and more.
+- **New Developer Tools Panel (DevTools):** An advanced, resizable developer tools panel has been added within the webview, which includes:
+  - An **SVG Playground** to preview and edit components in real-time.
+  - A **context menu** with quick actions like "Open in editor" and copy/download as SVG/PNG.
+  - Management of favorite and recently viewed components.
+- **Scanning and Search Functionality:** It is now possible to scan the workspace for SVG components and search for them directly from the interface.
+- **Improved File Management:** A Drag and Drop zone has been implemented, supporting multiple files and type validation.
+  > **Note:** Due to VS Code security restrictions, it is currently not possible to directly obtain the file path on the OS for dropped files. As a workaround, the contents of dropped files are read and sent via `postMessage` to create a temporary file. For more details, see the issue on [GitHub](https://github.com/microsoft/vscode/issues/255608).
+
+#### 🚀 Enhancements
+
+- **Performance:**
+  - Lazy loading of components has been implemented to improve initial load times.
+  - SVG component rendering has been optimized using memoization techniques (`CardSvgRenderMemo`).
+  - `Terser` has been replaced with `Esbuild` for faster JavaScript and CSS minification.
+- **User Experience (UX):**
+  - Keyboard shortcuts have been added for common actions like copy, paste, and navigation.
+  - UI components now use VS Code's theme variables for a native and consistent look.
+  - Error handling has been improved throughout the application with clearer user notifications and messages.
+- **Code Organization:**
+  - A massive refactoring was done to use `import type` where possible, improving build times.
+  - The project structure has been reorganized, moving types and components for better clarity and maintenance.
+  - A centralized cache system (`CacheManager`) has been adopted to manage icons, modified files, and more, improving consistency.
+
+#### 🐛 Bug Fixes
+
+- **Display:**
+  - Corrected multiple flaws in the CSS structure and styles to ensure proper display of panels and elements.
+  - Ensured the correct application of the VS Code theme upon extension startup.
+- **Functionality:**
+  - Resolved a component lifecycle issue that could cause unexpected behavior in the search bar.
+  - Adjusted the Content Security Policy (CSP) to allow loading images from `blob` URLs.
+
 ## 3.1.1
 
 _Jun 23, 2024_

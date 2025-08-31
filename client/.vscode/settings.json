@@ -1,0 +1,43 @@
+{
+  "workbench.tree.enableStickyScroll": true,
+  "editor.defaultFormatter": "esbenp.prettier-vscode",
+  "editor.detectIndentation": true,
+  "editor.tabSize": 2,
+  "editor.formatOnSave": true,
+  "editor.fontLigatures": true,
+  "eslint.enable": true,
+  "eslint.lintTask.enable": true,
+  "editor.cursorBlinking": "expand",
+  "editor.linkedEditing": true,
+  "editor.guides.bracketPairs": true,
+  "editor.cursorSmoothCaretAnimation": "on",
+  "explorer.fileNesting.enabled": true,
+  "files.trimTrailingWhitespace": true,
+  "files.insertFinalNewline": true,
+  "editor.codeActionsOnSave": {
+    "source.fixAll": "always"
+  },
+  "json.schemas": [
+    {
+      "fileMatch": ["/src/i18n/*.json"],
+      "url": "./i18n.schema.json"
+    },
+    {
+      "fileMatch": ["/public/vs/userConfiguration/keybindings.json"],
+      "url": "vscode://schemas/keybindings"
+    }
+  ],
+  "material-icon-theme.files.associations": {
+    "i18n.schema.json": "i18n"
+  },
+  "material-icon-theme.folders.associations": {
+    "workers": "gh-workflows",
+    "vs": "vscode"
+  },
+  "JT-View-Exports-SVG.assetsPath": [
+    "src/assets/icons/files.tsx",
+    "src/assets/icons/functionalities.tsx",
+    "src/assets/icons/indicators.tsx",
+    "src/assets/icons/navigation.tsx"
+  ]
+}

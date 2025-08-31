@@ -1,4 +1,3 @@
-export * from './configurationVsCode'
-export * from './extensionConfig'
-export * from './localeLanguage'
+export * from './config'
 export * from './theme'
+export * from './uri'

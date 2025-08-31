@@ -1,4 +1,6 @@
 {
   "*.{ts,tsx}": "eslint --cache --fix",
-  "*.{ts,tsx,css,md,json}": "prettier --write"
+  "*.{ts,tsx,css,md,json}": "prettier --write",
+  "./client/**/*.{ts,tsx}": "eslint --cache --fix",
+  "./client/**/*.{ts,tsx,css,md,json}": "prettier --write"
 }
