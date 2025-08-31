@@ -34,9 +34,19 @@
   "categories": [
     "Other"
   ],
-  "activationEvents": [],
+  "activationEvents": [
+    "onCommand:JT-View-Exports-SVG.showMenu",
+    "onCommand:JT-View-Exports-SVG.scanning",
+    "onCommand:JT-View-Exports-SVG.reloadTheme",
+    "onCommand:JT-View-Exports-SVG.collapseAll",
+    "onCommand:JT-View-Exports-SVG.expandAll",
+    "onCommand:JT-View-Exports-SVG.openDevTools",
+    "onCommand:JT-View-Exports-SVG.closeDevTools",
+    "onCommand:JT-View-Exports-SVG.clearCache"
+  ],
   "icon": "icon.png",
   "main": "./out/cjs/extension.js",
+  "browser": "./out/cjs/web/extension.js",
   "l10n": "./l10n",
   "contributes": {
     "commands": [
@@ -276,7 +286,7 @@
     "watch:esbuild:web": "node esbuild.config.js --watch --web-mode",
     "test": "node ./out/cjs/test/runTest.js --verbose",
     "pretest": "npm-run-all compile:clean client:build compile",
-    "vscode:prepublish": "npm-run-all lint test compile:clean compile:esbuild",
+    "vscode:prepublish": "npm-run-all lint test compile:clean compile:esbuild compile:esbuild:web",
     "client:lint": "cd client && npm run lint",
     "client:lint:fix": "cd client && npm run lint:fix",
     "client:format:check": "cd client && npm run format:check",
