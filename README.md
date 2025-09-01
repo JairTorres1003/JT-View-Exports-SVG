@@ -5,10 +5,11 @@
   <p>The ultimate tool to discover, visualize, and manage your SVG component library directly within Visual Studio Code.</p>
 
   <p>
-    <a href="https://marketplace.visualstudio.com/items?itemName=JairTorres1003.jt-view-exports-svg"><img src="https://img.shields.io/visual-studio-marketplace/v/JairTorres1003.jt-view-exports-svg?style=for-the-badge" alt="Marketplace Version"></a>
-    <a href="https://marketplace.visualstudio.com/items?itemName=JairTorres1003.jt-view-exports-svg"><img src="https://img.shields.io/visual-studio-marketplace/d/JairTorres1003.jt-view-exports-svg?style=for-the-badge" alt="Marketplace Downloads"></a>
-    <a href="https://marketplace.visualstudio.com/items?itemName=JairTorres1003.jt-view-exports-svg&ssr=false#review-details"><img src="https://img.shields.io/visual-studio-marketplace/r/JairTorres1003.jt-view-exports-svg?style=for-the-badge" alt="Marketplace Rating"></a>
-    <a href="https://github.com/JairTorres1003/JT-View-Exports-SVG/blob/main/LICENSE"><img src="https://img.shields.io/github/license/JairTorres1003/JT-View-Exports-SVG?style=for-the-badge" alt="License"></a>
+    <a href="https://deepwiki.com/JairTorres1003/JT-View-Exports-SVG"><img src="https://deepwiki.com/badge.svg" alt="Ask DeepWiki"></a>
+    <a href="https://marketplace.visualstudio.com/items?itemName=JairTorres1003.jt-view-exports-svg"><img src="https://img.shields.io/visual-studio-marketplace/v/JairTorres1003.jt-view-exports-svg" alt="Marketplace Version"></a>
+    <a href="https://marketplace.visualstudio.com/items?itemName=JairTorres1003.jt-view-exports-svg"><img src="https://img.shields.io/visual-studio-marketplace/d/JairTorres1003.jt-view-exports-svg" alt="Marketplace Downloads"></a>
+    <a href="https://marketplace.visualstudio.com/items?itemName=JairTorres1003.jt-view-exports-svg&ssr=false#review-details"><img src="https://img.shields.io/visual-studio-marketplace/r/JairTorres1003.jt-view-exports-svg" alt="Marketplace Rating"></a>
+    <a href="https://github.com/JairTorres1003/JT-View-Exports-SVG/blob/main/LICENSE"><img src="https://img.shields.io/github/license/JairTorres1003/JT-View-Exports-SVG" alt="License"></a>
   </p>
 </div>
 
