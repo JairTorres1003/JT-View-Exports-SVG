@@ -1,5 +1,22 @@
 # View Exports SVG - Changelog
 
+## 4.0.1
+
+_Oct 9, 2025_
+
+#### 🚀 Enhancements
+
+- **Development Environment:**
+  - Added `express-rate-limit` middleware to improve request handling during local development (used only when running the standalone browser server).
+  - Updated dependencies and improved overall build performance.
+  - Refactored nonce generation for better clarity.
+  - Simplified `isAnimated` logic and introduced a new `hasMotion` helper to detect motion in SVG elements.
+
+#### 🐛 Bug Fixes
+
+- **Autocomplete:** Fixed issue causing duplicate suggestions in completion items.
+- **Cache Statistics:** Corrected increment logic for `totalExports` and `totalNoExports` in `getIconsFromCache`.
+
 ## 4.0.0
 
 _Aug 30, 2025_
