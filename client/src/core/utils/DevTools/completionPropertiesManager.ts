@@ -177,9 +177,9 @@ function findTagEnd(text: string, startOffset: number, componentName: string): n
 
     if (!inString) {
       if (char === '{') {
-        bracketDepth++
+        bracketDepth += 1
       } else if (char === '}') {
-        bracketDepth--
+        bracketDepth -= 1
       } else if (bracketDepth === 0) {
         if (char === '/' && nextChar === '>') {
           return i + 1
@@ -192,7 +192,7 @@ function findTagEnd(text: string, startOffset: number, componentName: string): n
       }
     }
 
-    i++
+    i += 1
   }
 
   return -1
