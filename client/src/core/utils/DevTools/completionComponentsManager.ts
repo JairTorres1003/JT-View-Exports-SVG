@@ -33,12 +33,17 @@ const completionComponentsManager = (
       }
 
       const suggestions: monaco.languages.CompletionItem[] = []
+      const suggestedAdded = new Set<string>()
 
       const word = model.getWordUntilPosition(position)
       const completeWord = model.getWordAtPosition(position)
 
       components.forEach((group) => {
         group.components.forEach((c) => {
+          const key = `${c.name}-${c.location.file?.uri}`
+          if (suggestedAdded.has(key)) return
+          suggestedAdded.add(key)
+
           const property = Object.keys(c.types)[0]
 
           const translationKeys = {
