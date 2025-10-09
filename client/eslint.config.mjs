@@ -67,8 +67,13 @@ export default tseslint.config(
     },
     rules: {
       ...reactHooks.configs.recommended.rules,
-      'import/no-unresolved': ['error', { caseSensitive: true }],
+      'import/no-unresolved': [STATE.ERROR, { caseSensitive: true }],
       'promise/avoid-new': STATE.OFF,
+      'no-negated-condition': STATE.OFF,
+      'no-param-reassign': [
+        STATE.ERROR,
+        { props: true, ignorePropertyModificationsFor: ['state'] },
+      ],
       'react-refresh/only-export-components': STATE.WARN,
       'no-console': [STATE.ERROR, { allow: ['warn', 'error', 'info'] }],
       '@typescript-eslint/prefer-destructuring': STATE.OFF,

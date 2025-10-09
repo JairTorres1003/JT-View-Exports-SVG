@@ -64,6 +64,7 @@ export default tseslint.config(
     rules: {
       'promise/avoid-new': STATE.OFF,
       'no-console': [STATE.ERROR, { allow: ['warn', 'error', 'info'] }],
+      'no-negated-condition': STATE.OFF,
       '@typescript-eslint/prefer-destructuring': STATE.OFF,
       '@typescript-eslint/explicit-function-return-type': STATE.OFF,
       '@typescript-eslint/prefer-nullish-coalescing': STATE.OFF,

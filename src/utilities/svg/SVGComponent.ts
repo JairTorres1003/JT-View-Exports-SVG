@@ -123,18 +123,20 @@ export function getSVGComponent(element: t.JSXElement, file: SVGFile): GetSVGCom
   const childInfo = getChildAttributes(children, file)
 
   const { tag, props, params } = validation
+  const isAnimated = tag.isMotion || childInfo.isMotion || childInfo.isAnimated
+
   const component: SVGComponentProps = {
     tag: tag.name as string,
     props,
     isMotion: tag.isMotion,
-    isAnimated: childInfo.isAnimated,
+    isAnimated,
     children: childInfo.children,
   }
 
   if (childInfo.hasErrors) {
     return {
       component,
-      isAnimated: tag.isMotion || childInfo.isMotion || childInfo.isAnimated,
+      isAnimated,
       params,
       hasErrors: true,
       errors: childInfo.errors,
@@ -144,7 +146,7 @@ export function getSVGComponent(element: t.JSXElement, file: SVGFile): GetSVGCom
 
   return {
     component,
-    isAnimated: component.isMotion || component.isAnimated,
+    isAnimated,
     params,
     hasErrors: false,
     errors: undefined,

@@ -121,7 +121,7 @@ export const getIconsFromCache = async (): Promise<ViewExportSVG[]> => {
           if (component) {
             components.push(component)
 
-            otherProps[component.isExported ? 'totalExports' : 'totalNoExports']++
+            otherProps[component.isExported ? 'totalExports' : 'totalNoExports'] += 1
 
             files.set(icon.location.file.uri, icon.location.file)
           } else if (!isEmpty(workspaceFolderUri)) {

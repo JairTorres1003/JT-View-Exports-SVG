@@ -13,6 +13,7 @@ import { getUriPath } from '../vscode'
 
 import { groupIconsByPattern } from './groupIconsByPattern'
 import { getFileTimestamp, pathToSVGFile } from './misc'
+import { saveResponseFile } from './saveResponseFiles'
 
 /**
  * Processes the selected files and extracts SVG exports from them.
@@ -101,6 +102,9 @@ export async function processFiles(
       // Group the SVG exports by pattern
       const groupedSVGExports = groupIconsByPattern(SVGExports)
 
+      saveResponseFile(groupedSVGExports, 'prueba').catch((error) => {
+        console.error(l10n.t('Error saving response file'), error)
+      })
       // Process the SVG exports
       operation(groupedSVGExports)
 
