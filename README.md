@@ -1,5 +1,5 @@
 <div align="center">
-  <img src="./assets/JT View Exports SVG - ICON.png" alt="Logo View Exports SVG" width="180" height="180">
+  <img src="https://raw.githubusercontent.com/JairTorres1003/JT-View-Exports-SVG/main/assets/JT%20View%20Exports%20SVG%20-%20ICON.png" alt="Logo View Exports SVG" width="180" height="180">
   <br>
   <h1>View Exports SVG</h1>
   <p>The ultimate tool to discover, visualize, and manage your SVG component library directly within Visual Studio Code.</p>
@@ -29,8 +29,8 @@
 ## 🚀 In Action
 
 <div align="center">
-  <video src="https://github.com/user-attachments/assets/66020180-98ca-4ff8-adf4-0cc56526e6e3" controls>
-    <source src="https://github.com/user-attachments/assets/66020180-98ca-4ff8-adf4-0cc56526e6e3" type="video/mp4" />
+  <video src="https://raw.githubusercontent.com/JairTorres1003/JT-View-Exports-SVG/main/assets/JT%20View%20Exports%20SVG%20-%20Demo.mp4" controls>
+    <source src="https://raw.githubusercontent.com/JairTorres1003/JT-View-Exports-SVG/main/assets/JT%20View%20Exports%20SVG%20-%20Demo.mp4" type="video/mp4" />
     Your browser does not support the video tag.
   </video>
 </div>
