@@ -12,6 +12,14 @@ const hasAnimatedFlag = ({ childAttrs }: SVGElementInfo): boolean => {
 }
 
 /**
+ * Checks if the element or any of its children have motion capabilities.
+ * @returns `true` if the element or its children are marked as motion.
+ */
+const hasMotion = (elementInfo: SVGElementInfo): boolean => {
+  return elementInfo.tag.isMotion || elementInfo.childAttrs.isMotion
+}
+
+/**
  * Checks if the element is a native SVG animation tag (e.g., `<animate>`).
  * @returns `true` if the tag is a dedicated animation tag.
  */
@@ -56,6 +64,7 @@ const hasKeyframeStylesInContent = ({ tag, props, childAttrs }: SVGElementInfo):
 // Array of all check functions. This declarative approach makes it easy to extend in the future.
 const animationChecks = [
   hasAnimatedFlag,
+  hasMotion,
   isDedicatedAnimationTag,
   hasInlineAnimationStyles,
   hasKeyframeStylesInContent,
