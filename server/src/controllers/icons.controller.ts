@@ -13,19 +13,19 @@ interface IconParamsRequest {
 }
 
 export class IconsController {
-  public addIcon = (req: Request<IconParamsRequest>, res: Response) => {
-    if (isEmpty(workspace.workspaceFolders)) {
+  public addIcon = async (req: Request<IconParamsRequest>, res: Response) => {
+    if (isEmpty(workspace.workspaceFolders) || !workspace.workspaceFolders?.[0]) {
       return res.status(400).send({ message: 'No workspace folders found' })
     }
 
     const { cache, type } = this.getCachedIcons(req.params)
-    cache.add(workspace.workspaceFolders?.[0].uri, [req.body.data])
+    cache.add(workspace.workspaceFolders?.[0], [req.body.data])
 
     if (req.params.type === 'favorite') {
       getCacheManager().ComponentsFileCache.toggleFavoriteIcon(req.body.data)
     }
 
-    const icons = getIconsFromCache()
+    const icons = await getIconsFromCache()
 
     res.send({ type, data: icons })
   }
@@ -38,19 +38,19 @@ export class IconsController {
    *
    * @returns A response with the updated icons data.
    */
-  public removeIcon = (req: Request<IconParamsRequest>, res: Response) => {
-    if (isEmpty(workspace.workspaceFolders)) {
+  public removeIcon = async (req: Request<IconParamsRequest>, res: Response) => {
+    if (isEmpty(workspace.workspaceFolders) || !workspace.workspaceFolders?.[0]) {
       return res.status(400).send({ message: 'No workspace folders found' })
     }
 
     const { cache, type } = this.getCachedIcons(req.params)
-    cache.remove(workspace.workspaceFolders?.[0].uri, req.body.data)
+    cache.remove(workspace.workspaceFolders?.[0], req.body.data)
 
     if (req.params.type === 'favorite') {
       getCacheManager().ComponentsFileCache.toggleFavoriteIcon(req.body.data)
     }
 
-    const icons = getIconsFromCache()
+    const icons = await getIconsFromCache()
 
     res.send({ type, data: icons })
   }
@@ -63,14 +63,14 @@ export class IconsController {
    *
    * @returns A response with the requested icons data.
    */
-  public getIcons = (req: Request<IconParamsRequest>, res: Response) => {
+  public getIcons = async (req: Request<IconParamsRequest>, res: Response) => {
     if (isEmpty(workspace.workspaceFolders)) {
       return res.status(400).send({ message: 'No workspace folders found' })
     }
 
     const { type } = this.getCachedIcons(req.params)
 
-    const icons = getIconsFromCache()
+    const icons = await getIconsFromCache()
 
     res.send({ type, data: icons })
   }
