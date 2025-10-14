@@ -1,5 +1,5 @@
 import { lazy, Suspense } from 'react'
-import { MemoryRouter, Route, Routes } from 'react-router-dom'
+import { MemoryRouter, Route, Routes } from 'react-router'
 
 import Providers from '@/config/provider'
 import { routes } from '@/config/routes/route'

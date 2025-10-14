@@ -1,7 +1,7 @@
 import { SVGReceiveMessage } from '@api/enums/ViewExportsSVG'
 import { useEffect } from 'react'
 import { useDispatch } from 'react-redux'
-import { useLocation } from 'react-router-dom'
+import { useLocation } from 'react-router'
 
 import { pathnames } from '@/config/routes/route'
 import { useLoadFiles } from '@/core/hooks/useLoadFiles'
