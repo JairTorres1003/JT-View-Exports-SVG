@@ -8,7 +8,7 @@ import type { SVGComponent, SVGFile, SVGIcon, ViewExportSVG } from '@/types/View
 
 import { getFileTimestamp } from '../files'
 import { isEmpty } from '../misc'
-import { svgFileToUri } from '../vscode'
+import { svgFileToUri } from '../vscode/uri'
 
 let filesExists: Record<string, boolean> = {}
 const removeElementsCache: { files: string[]; icons: SVGIcon[] } = {

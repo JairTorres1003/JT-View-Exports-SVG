@@ -8,7 +8,7 @@ class PropertyManager {
    * @param key - Key of the property to retrieve (optional).
    * @returns - The value of the property or an object with all properties.
    */
-  get<T = unknown>(key: string): T
+  get(key: string): unknown
   get(): Record<string, unknown>
   get<T = unknown>(key?: string): T | Record<string, unknown> {
     if (key) {

@@ -2,7 +2,7 @@ import type * as t from '@babel/types'
 import { l10n } from 'vscode'
 
 import type { GetSVGComponent, ValidationResult } from '@/types/svg/SVGComponent'
-import type { GetSVGTagName } from '@/types/svg/tags'
+import type { GetSVGTagName, SVGTagName } from '@/types/svg/tags'
 import type { SVGComponentProps, SVGFile } from '@/types/ViewExportsSVG'
 
 import { isEmpty } from '../misc'
@@ -81,7 +81,7 @@ function defaultSvgComponent(
       isAnimated: false,
       isMotion: false,
       props: {},
-      tag: tag?.name ?? 'Fragment',
+      tag: (tag?.name ?? 'Fragment') as SVGTagName,
     },
     tag: {
       isMotion: false,
@@ -126,7 +126,7 @@ export function getSVGComponent(element: t.JSXElement, file: SVGFile): GetSVGCom
   const isAnimated = tag.isMotion || childInfo.isMotion || childInfo.isAnimated
 
   const component: SVGComponentProps = {
-    tag: tag.name as string,
+    tag: tag.name as SVGTagName,
     props,
     isMotion: tag.isMotion,
     isAnimated,

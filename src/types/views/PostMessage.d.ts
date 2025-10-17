@@ -1,6 +1,9 @@
+/* eslint-disable @typescript-eslint/unified-signatures -- Intentionally disabled to allow distinct JSDoc comments for each overload when generating documentation */
 import type { SVGPostMessage } from '@/enum/ViewExportsSVG'
+
 import type { SVGComponent, SVGErrors, ViewExportSVG } from '../ViewExportsSVG'
 import type { ExtensionManage, ThemeMode, VsCodeStyles } from '../vscode'
+
 import type { AssetPath } from './content'
 
 /**

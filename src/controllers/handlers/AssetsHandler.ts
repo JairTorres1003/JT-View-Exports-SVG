@@ -5,7 +5,7 @@ import type { SVGFile } from '@/types/ViewExportsSVG'
 import type { FuncPostMessage } from '@/types/views/PostMessage'
 import { scanningFiles, scanningWorkspace } from '@/utilities/files'
 import { getUnknownError } from '@/utilities/misc'
-import { svgFileToUri } from '@/utilities/vscode'
+import { svgFileToUri } from '@/utilities/vscode/uri'
 
 import { AssetsPathsController, LastScanDateController } from '../config'
 

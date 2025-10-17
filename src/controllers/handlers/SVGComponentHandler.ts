@@ -6,7 +6,7 @@ import type { FuncPostMessage } from '@/types/views/PostMessage'
 import { pathToSVGFile, processFiles, scanningFiles } from '@/utilities/files'
 import { getUnknownError, isEmpty } from '@/utilities/misc'
 import { filteredExports, playground } from '@/utilities/svg'
-import { svgFileToUri } from '@/utilities/vscode'
+import { svgFileToUri } from '@/utilities/vscode/uri'
 
 import { getCacheManager } from '../cache'
 

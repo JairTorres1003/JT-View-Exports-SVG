@@ -9,7 +9,7 @@ import type { SVGFile, ViewExportSVG } from '@/types/ViewExportsSVG'
 
 import { isEmpty } from '../misc'
 import { extractSVGData } from '../svg'
-import { getUriPath } from '../vscode'
+import { getUriPath } from '../vscode/uri'
 
 import { groupIconsByPattern } from './groupIconsByPattern'
 import { getFileTimestamp, pathToSVGFile } from './misc'
