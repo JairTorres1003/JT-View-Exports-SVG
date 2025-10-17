@@ -29,7 +29,7 @@ class VSCodeAPIWrapper {
     if (typeof acquireVsCodeApi === 'function') {
       this.vsCodeApi = acquireVsCodeApi()
     } else if (import.meta.env.DEV) {
-      this.vsCodeApi = vscodeInternal.api
+      this.vsCodeApi = vscodeInternal
     }
 
     window.addEventListener('message', (event: MessageEvent<PostMessage>) => {

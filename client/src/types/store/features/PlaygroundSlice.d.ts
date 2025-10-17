@@ -1,7 +1,5 @@
 import type { SVGComponent } from '@api/types/ViewExportsSVG'
-import type { AlertProps, SnackbarOrigin } from '@mui/material'
 import type { CaseReducer, PayloadAction } from '@reduxjs/toolkit'
-import type { ReactNode } from 'react'
 
 export interface PlaygroundState {
   recentlySelected?: SVGComponent

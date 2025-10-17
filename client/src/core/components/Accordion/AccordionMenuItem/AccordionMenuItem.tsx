@@ -41,7 +41,7 @@ export interface AccordionMenuItemProps extends AccordionProps {
     loading?: Partial<LinearProgressProps>
   }
   loading?: boolean
-  loadingComonent?: React.ReactNode
+  loadingComponent?: React.ReactNode
 }
 
 const AccordionMenuItem = forwardRef<HTMLDivElement, AccordionMenuItemProps>(
@@ -54,7 +54,7 @@ const AccordionMenuItem = forwardRef<HTMLDivElement, AccordionMenuItemProps>(
       enableEmptyActions = false,
       hideActionsWhenCollapsed = false,
       loading = false,
-      loadingComonent,
+      loadingComponent,
       ...props
     },
     ref
@@ -118,7 +118,7 @@ const AccordionMenuItem = forwardRef<HTMLDivElement, AccordionMenuItemProps>(
 
           {loading && (
             <Box className={accordionMenuItemClasses.loading}>
-              {loadingComonent ?? <LinearProgress {...slotProps.loading} />}
+              {loadingComponent ?? <LinearProgress {...slotProps.loading} />}
             </Box>
           )}
         </BoxAccordionMenuItem>

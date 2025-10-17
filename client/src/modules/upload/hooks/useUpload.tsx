@@ -7,9 +7,10 @@ import { pathnames } from '@/config/routes/route'
 import { useLoadFiles } from '@/core/hooks/useLoadFiles'
 import { vscode } from '@/services/vscode'
 import { setRenderPath } from '@/store/features/GlobalSlice'
+import type { IFile } from '@/types/misc'
 
 export const useUpload = () => {
-  const { state } = useLocation()
+  const { state } = useLocation() as { state: { files?: IFile[] } }
   const { files, updateFiles, removeFile, ...restLoadFiles } = useLoadFiles()
 
   const dispatch = useDispatch()
