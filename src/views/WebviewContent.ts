@@ -7,7 +7,7 @@ import {
 } from '@/controllers/config'
 import type { GetWebviewAssets } from '@/types/views/content'
 import type { ManifestContent } from '@/types/views/WebviewContent'
-import { getNonce } from '@/utilities/files'
+import { getNonce } from '@/utilities/files/nonce'
 import { isEmpty } from '@/utilities/misc'
 import { getUri, uriParse } from '@/utilities/vscode/uri'
 

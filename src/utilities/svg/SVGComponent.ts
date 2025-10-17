@@ -6,7 +6,8 @@ import type { GetSVGTagName, SVGTagName } from '@/types/svg/tags'
 import type { SVGComponentProps, SVGFile } from '@/types/ViewExportsSVG'
 
 import { isEmpty } from '../misc'
-import { getProperties, propertyManager } from '../properties'
+import { getProperties } from '../properties/getProperties'
+import { propertyManager } from '../properties/propertyManager'
 
 import { getChildAttributes } from './children'
 import { getSVGTagName } from './tags'

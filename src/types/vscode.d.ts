@@ -30,3 +30,18 @@ export type ExtensionManage = Pick<
   Extension<any>,
   'id' | 'extensionUri' | 'extensionPath' | 'isActive'
 > & { isValid: boolean }
+
+export interface IPackageJSON {
+  contributes?: {
+    themes?: Array<{
+      label: string
+      uiTheme: string
+      path: string
+      id: string
+    }>
+  }
+}
+
+export interface IExtension extends Omit<Extension<unknown>, 'packageJSON'> {
+  packageJSON: IPackageJSON
+}

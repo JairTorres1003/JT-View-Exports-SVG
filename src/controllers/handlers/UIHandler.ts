@@ -6,7 +6,7 @@ import { CONFIG_KEY, DISABLED_PLAYGROUND_IN_PATH } from '@/constants/misc'
 import { SVGPostMessage } from '@/enum/ViewExportsSVG'
 import type { FileTemporary, OpenFile } from '@/types/views/content'
 import type { FuncPostMessage } from '@/types/views/PostMessage'
-import { openFile } from '@/utilities/files'
+import { openFile } from '@/utilities/files/misc'
 
 export class UIHandler {
   constructor(private readonly postMessage: FuncPostMessage) {}

@@ -11,7 +11,8 @@ import type { SVGComponent, ExtractSVGExports, SVGFile, SVGLocation } from '@/ty
 
 import { parseFileContent, parserContent } from '../babelParser'
 import { getUnknownError, isEmpty } from '../misc'
-import { getProperties, propertyManager } from '../properties'
+import { getProperties } from '../properties/getProperties'
+import { propertyManager } from '../properties/propertyManager'
 
 import { analyzeExportType, getNodeTypes } from './analyze'
 import { getSVGComponent } from './SVGComponent'

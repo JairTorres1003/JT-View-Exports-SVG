@@ -1,7 +1,6 @@
 import * as path from 'path'
 
 import {
-  type Extension,
   type ExtensionContext,
   extensions,
   type FileStat,
@@ -12,22 +11,7 @@ import {
 } from 'vscode'
 
 import { getCacheManager } from '@/controllers/cache'
-import type { ExtensionManage } from '@/types/vscode'
-
-interface IPackageJSON {
-  contributes?: {
-    themes?: Array<{
-      label: string
-      uiTheme: string
-      path: string
-      id: string
-    }>
-  }
-}
-
-interface IExtension extends Omit<Extension<unknown>, 'packageJSON'> {
-  packageJSON: IPackageJSON
-}
+import type { ExtensionManage, IExtension, IPackageJSON } from '@/types/vscode'
 
 const CACHE_KEY = 'CurrentExtensionTheme'
 

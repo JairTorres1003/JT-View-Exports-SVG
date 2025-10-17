@@ -5,7 +5,8 @@ import { REST_PROPS_KEY } from '@/constants/misc'
 import type { ParamsTypes } from '@/types/misc'
 import type { SVGFile } from '@/types/ViewExportsSVG'
 
-import { getPropertyValues, propertyManager } from '../properties'
+import { propertyManager } from '../properties/propertyManager'
+import { getPropertyValues } from '../properties/propertyValues'
 
 import { getChildFragments } from './children'
 

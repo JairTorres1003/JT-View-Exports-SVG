@@ -1,6 +1,6 @@
 import { workspace } from 'vscode'
 
-import { getExtensionTheme } from './extensions'
+import { getExtensionTheme } from './extensions/theme'
 import { getCurrentTheme } from './theme'
 
 /**
