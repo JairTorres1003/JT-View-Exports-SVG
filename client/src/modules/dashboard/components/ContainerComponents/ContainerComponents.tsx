@@ -45,7 +45,7 @@ const ContainerComponents = (): React.ReactNode => {
               isGrouped={item.files.length > 1}
             />
           }
-          loadingComonent={
+          loadingComponent={
             <ProgressBarInRefresh groupKind={item.groupKind} key={item.groupKind.id} />
           }
           slotProps={{

@@ -30,6 +30,29 @@ export const InfoComponent = () => {
 
   if (!recentlySelected) return null
 
+  const infoList: Array<{ primary: string; secondary: string }> = [
+    {
+      primary: t('DevTools.info.componentName'),
+      secondary: recentlySelected.name,
+    },
+    {
+      primary: t('DevTools.info.typeDeclaration'),
+      secondary: recentlySelected.declaration,
+    },
+    {
+      primary: t('DevTools.info.isExported'),
+      secondary: recentlySelected.isExported ? t('labels.Yes') : t('labels.No'),
+    },
+    {
+      primary: t('DevTools.info.isAnimated'),
+      secondary: recentlySelected.isAnimated ? t('labels.Yes') : t('labels.No'),
+    },
+    {
+      primary: t('DevTools.info.isFavorite'),
+      secondary: recentlySelected?.isFavorite ? t('labels.Yes') : t('labels.No'),
+    },
+  ]
+
   return (
     <Stack p='12px 22px' spacing={2}>
       <List
@@ -40,41 +63,15 @@ export const InfoComponent = () => {
           [`& .${listItemTextClasses.root}`]: { display: 'flex', gap: 1 },
         }}
       >
-        <ListItem>
-          <ListItemText
-            primary={t('DevTools.info.componentName')}
-            secondary={recentlySelected?.name}
-            slotProps={commonSlotProps}
-          />
-        </ListItem>
-        <ListItem>
-          <ListItemText
-            primary={t('DevTools.info.typeDeclaration')}
-            secondary={recentlySelected?.declaration}
-            slotProps={commonSlotProps}
-          />
-        </ListItem>
-        <ListItem>
-          <ListItemText
-            primary={t('DevTools.info.isExported')}
-            secondary={recentlySelected?.isExported ? t('labels.Yes') : t('labels.No')}
-            slotProps={commonSlotProps}
-          />
-        </ListItem>
-        <ListItem>
-          <ListItemText
-            primary={t('DevTools.info.isAnimated')}
-            secondary={recentlySelected?.isAnimated ? t('labels.Yes') : t('labels.No')}
-            slotProps={commonSlotProps}
-          />
-        </ListItem>
-        <ListItem>
-          <ListItemText
-            primary={t('DevTools.info.isFavorite')}
-            secondary={recentlySelected?.isFavorite ? t('labels.Yes') : t('labels.No')}
-            slotProps={commonSlotProps}
-          />
-        </ListItem>
+        {infoList.map((info) => (
+          <ListItem key={info.primary}>
+            <ListItemText
+              primary={info.primary}
+              secondary={info.secondary}
+              slotProps={commonSlotProps}
+            />
+          </ListItem>
+        ))}
       </List>
       {recentlySelected?.hasErrors && (
         <Stack spacing={1}>

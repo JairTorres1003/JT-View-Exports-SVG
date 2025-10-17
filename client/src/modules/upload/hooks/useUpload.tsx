@@ -1,15 +1,16 @@
 import { SVGReceiveMessage } from '@api/enums/ViewExportsSVG'
 import { useEffect } from 'react'
 import { useDispatch } from 'react-redux'
-import { useLocation } from 'react-router-dom'
+import { useLocation } from 'react-router'
 
 import { pathnames } from '@/config/routes/route'
 import { useLoadFiles } from '@/core/hooks/useLoadFiles'
 import { vscode } from '@/services/vscode'
 import { setRenderPath } from '@/store/features/GlobalSlice'
+import type { IFile } from '@/types/misc'
 
 export const useUpload = () => {
-  const { state } = useLocation()
+  const { state } = useLocation() as { state: { files?: IFile[] } }
   const { files, updateFiles, removeFile, ...restLoadFiles } = useLoadFiles()
 
   const dispatch = useDispatch()

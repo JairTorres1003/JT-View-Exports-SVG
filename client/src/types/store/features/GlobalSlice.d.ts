@@ -1,8 +1,7 @@
-import type { SVGComponent } from '@api/types/ViewExportsSVG'
 import type { AlertProps, SnackbarOrigin } from '@mui/material'
 import type { CaseReducer, PayloadAction } from '@reduxjs/toolkit'
 import type { CSSProperties, ReactNode } from 'react'
-import type { NavigateOptions } from 'react-router-dom'
+import type { NavigateOptions } from 'react-router'
 
 export interface GlobalState {
   snackbarAlert: {

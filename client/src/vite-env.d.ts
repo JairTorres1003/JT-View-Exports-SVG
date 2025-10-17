@@ -11,10 +11,10 @@ export declare module 'react-redux' {
   interface UseSelector extends ReduxSelector<RootStoreState> {}
 }
 
+type CSSPropertiesWithVars = Record<`--${string}`, string | number | undefined>
+
 declare module 'react' {
-  interface CSSProperties {
-    [key: `--${string}`]: string | number | undefined
-  }
+  interface CSSProperties extends CSSPropertiesWithVars {}
 }
 declare global {
   const __APP_NAME: string

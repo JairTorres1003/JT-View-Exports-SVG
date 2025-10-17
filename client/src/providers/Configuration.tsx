@@ -6,14 +6,15 @@ import { pathnames } from '@/config/routes/route'
 import { LoadingPage } from '@/core/components/LoadingPage'
 import { vscode } from '@/services/vscode'
 import { setConfiguration, setInitLoading, setRenderPath } from '@/store/features/GlobalSlice'
-import type { ProviderProps } from '@/types/BaseProps'
 
 /**
  * ConfigurationProvider component is a context provider that listens for
  * configuration messages from VSCode and dispatches the configuration data
  * to the Redux store.
  */
-export const ConfigurationProvider: FC<ProviderProps> = ({ children }): React.ReactNode => {
+export const ConfigurationProvider: FC<React.PropsWithChildren> = ({
+  children,
+}): React.ReactNode => {
   const [refresh, setRefresh] = useState<{ loading: boolean; message?: string }>({ loading: false })
   const dispatch = useDispatch()
 

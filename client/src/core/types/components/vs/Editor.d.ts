@@ -1,6 +1,7 @@
-import { PartialExcept, RequiredExcept } from '@/types/misc'
 import type { ExtensionManage } from '@api/types/vscode'
 import type * as monaco from 'monaco-editor'
+
+import type { PartialExcept } from '@/types/misc'
 
 export interface EditorProps {
   className?: string
@@ -25,7 +26,7 @@ export interface IStandaloneCodeEditor extends monaco.editor.IStandaloneCodeEdit
     ) => monaco.IDisposable | undefined
   }
   _themeService: {
-    getColorThemes: () => Promise<{ settingsId: string }[]>
+    getColorThemes: () => Promise<Array<{ settingsId: string }>>
   }
 }
 

@@ -1,10 +1,6 @@
 import type { VsCodeStyles } from '@api/types/vscode'
 import type { Theme, Components } from '@mui/material/styles'
 
-export interface ProviderProps {
-  readonly children: React.ReactNode
-}
-
 /**
  * Represents the base props for an icon.
  */

@@ -8,10 +8,9 @@ import type {
 
 export type ColorizeParam = Parameters<typeof Colorize>[0]
 
-export type ColorizeOrderedList = (
-  | ((color: ColorizeParam) => string)
-  | ((color: ColorizeParam) => ColorInstance)
-)[]
+export type ColorizeOrderedList = Array<
+  ((color: ColorizeParam) => string) | ((color: ColorizeParam) => ColorInstance)
+>
 
 export interface ColorPickerHook {
   oldColor: RgbaColor

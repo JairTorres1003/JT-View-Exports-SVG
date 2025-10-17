@@ -1,7 +1,7 @@
 import { SVGReceiveMessage } from '@api/enums/ViewExportsSVG'
 import { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { useNavigate } from 'react-router-dom'
+import { useNavigate } from 'react-router'
 
 import { IconClose, IconNavigateFill } from '@/assets/icons/functionalities'
 import { routes } from '@/config/routes/route'
