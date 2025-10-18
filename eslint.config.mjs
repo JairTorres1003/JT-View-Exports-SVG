@@ -29,6 +29,7 @@ export default defineConfig([
     'server/**',
     '**/*.{dev,config}.{js,mjs,ts}',
     'src/test/assets/**',
+    'prepare-readme.js',
   ]),
   eslintConfigLove,
   eslintPluginPrettier,
