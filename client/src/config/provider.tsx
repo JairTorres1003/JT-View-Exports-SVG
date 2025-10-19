@@ -5,14 +5,13 @@ import { Provider } from 'react-redux'
 import { ConfigurationProvider, SnackbarProvider } from '@/providers'
 import { store } from '@/store/store'
 import { useCustomTheme } from '@/styles/theme/theme'
-import type { ProviderProps } from '@/types/BaseProps'
 
 /**
  * ReduxProvider component.
  *
  * @returns The JSX element representing the ReduxProvider.
  */
-const ReduxProvider: FC<ProviderProps> = ({ children }) => {
+const ReduxProvider: FC<React.PropsWithChildren> = ({ children }) => {
   if (typeof window === 'undefined') return <>{children}</>
 
   return <Provider store={store}>{children}</Provider>
@@ -23,7 +22,7 @@ const ReduxProvider: FC<ProviderProps> = ({ children }) => {
  *
  * @returns The JSX element representing the MuiThemeProvider.
  */
-const MuiThemeProvider: FC<ProviderProps> = ({ children }) => {
+const MuiThemeProvider: FC<React.PropsWithChildren> = ({ children }) => {
   const { theme } = useCustomTheme()
 
   return <ThemeProvider theme={theme}>{children}</ThemeProvider>
@@ -34,7 +33,7 @@ const MuiThemeProvider: FC<ProviderProps> = ({ children }) => {
  *
  * @returns The JSX element representing the Providers.
  */
-export default function Providers({ children }: ProviderProps): ReactNode {
+export default function Providers({ children }: React.PropsWithChildren): ReactNode {
   return (
     <ReduxProvider>
       <MuiThemeProvider>

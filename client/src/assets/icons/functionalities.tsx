@@ -254,7 +254,7 @@ export const IconGoToManyFiles: FC<IconBaseProps> = ({
   </svg>
 )
 
-export const IconNavigateFill: React.FC<IconBaseProps> = ({
+export const IconNavigateFill: FC<IconBaseProps> = ({
   size = 32,
   color = 'currentColor',
   sx = {},

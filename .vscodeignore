@@ -38,3 +38,4 @@ tsconfig*.json
 **/*.schema.json
 **/*.config.js
 package-lock.json
+prepare-readme.js

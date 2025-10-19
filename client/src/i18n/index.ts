@@ -12,7 +12,7 @@ const Backend = {
       .then((translations) => {
         callback(null, translations)
       })
-      .catch((error) => {
+      .catch((error: Error) => {
         callback(error, null)
       })
   },

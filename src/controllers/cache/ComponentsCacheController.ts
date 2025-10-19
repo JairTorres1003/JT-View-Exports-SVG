@@ -1,7 +1,7 @@
 import { l10n } from 'vscode'
 
 import type { SVGIcon, ViewExportSVG } from '@/types/ViewExportsSVG'
-import { getFileTimestamp } from '@/utilities/files'
+import { getFileTimestamp } from '@/utilities/files/misc'
 
 import { FileModifiedCacheController } from './FileModifiedCacheController'
 

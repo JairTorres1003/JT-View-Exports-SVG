@@ -1,7 +1,7 @@
 import { ConfigurationTarget, l10n, workspace } from 'vscode'
 
 import type { SVGFile } from '@/types/ViewExportsSVG'
-import { pathToSVGFile } from '@/utilities/files'
+import { pathToSVGFile } from '@/utilities/files/misc'
 import { getUnknownError } from '@/utilities/misc'
 
 import ConfigManagerController from './ConfigManagerController'

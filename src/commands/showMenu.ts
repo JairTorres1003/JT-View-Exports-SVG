@@ -2,7 +2,7 @@ import type { ExtensionContext, Uri } from 'vscode'
 
 import { ViewExportsSVGController } from '@/controllers/views'
 import type { ViewExportSVG } from '@/types/ViewExportsSVG'
-import { processFiles } from '@/utilities/files'
+import { processFiles } from '@/utilities/files/processFiles'
 import { isEmpty } from '@/utilities/misc'
 
 /**

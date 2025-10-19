@@ -1,3 +1,5 @@
+import type * as t from '@babel/types'
+
 import type { SVGComponent, SVGComponentProps, SVGErrors } from '../ViewExportsSVG'
 
 import type { GetSVGTagName } from './tags'

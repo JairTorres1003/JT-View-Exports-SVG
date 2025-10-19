@@ -1,8 +1,8 @@
 import type { SVGDeclaration } from '@/enum/ViewExportsSVG'
 
-import type { SVGTagName } from './svg/tags'
-import type { DeclarationExport } from './svg/extracts'
 import type { ParamsTypes } from './misc'
+import type { DeclarationExport } from './svg/extracts'
+import type { SVGTagName } from './svg/tags'
 
 export interface ViewExportSVG {
   /**
@@ -126,7 +126,7 @@ export interface SVGComponent {
 }
 
 export interface SVGComponentProps {
-  tag: string | SVGTagName
+  tag: SVGTagName
   isMotion: boolean
   isAnimated: boolean
   children: Array<SVGComponentProps | string>

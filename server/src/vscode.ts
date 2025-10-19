@@ -36,7 +36,7 @@ await initialize(
     workspaceProvider: {
       trusted: true,
       workspace: {
-        workspaceUri: Uri.file(tempDir),
+        // workspaceUri: Uri.file(tempDir),
         label: 'Test Workspace',
         folderUri: Uri.file(tempDir),
       },
@@ -63,11 +63,11 @@ if (!extension) {
   throw new Error(`Extension ${extensionId} not found`)
 }
 
-await extension.activate()
+// await extension.activate()
 
-if (!extension.isActive) {
-  throw new Error(`Extension ${extensionId} failed to activate`)
-}
+// if (!extension.isActive) {
+//   throw new Error(`Extension ${extensionId} failed to activate`)
+// }
 
 // create a mock extension context
 const context = createMockExtensionContext(extension, tempDir)

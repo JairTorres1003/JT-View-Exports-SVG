@@ -1,20 +1,15 @@
 import React, { type ReactNode, type FC } from 'react'
 
-interface ShowProps {
-  readonly children: ReactNode
-}
+type ShowProps = React.PropsWithChildren
 
-interface ShowWhenProps {
-  readonly children: ReactNode
+type ShowWhenProps = React.PropsWithChildren<{
   /**
    * The condition to evaluate.
    */
   condition: boolean
-}
+}>
 
-interface ShowElseProps {
-  readonly children: ReactNode
-}
+type ShowElseProps = ShowProps
 
 /**
  * Renders the first child component that satisfies a condition, or a fallback component if no condition is met.
@@ -41,7 +36,7 @@ export const Show: FC<ShowProps> & {
    * Renders a child component if no other condition is met.
    */
   Else: FC<ShowElseProps>
-} = ({ children }) => {
+} = ({ children }: ShowProps) => {
   let when: ReactNode = null
   let otherwise: ReactNode = null
 

@@ -13,24 +13,51 @@ interface VSCodeInternalAPIWrapperMessage {
 
 const CUSTOM_EVENTS = [SVGReceiveMessage.RequestFileOpen]
 
-class VSCodeInternalAPIWrapper<T = unknown> {
+class VSCodeInternalAPIWrapper<T = unknown> implements WebviewApi<T> {
   private currentState: T | undefined = undefined
+
+  /**
+   * Sends a message to the VSCode internal API.
+   *
+   * @param message - The message to be sent. It must include a type property.
+   * @throws Will warn if the message type is not provided.
+   */
+  postMessage(message: VSCodeInternalAPIWrapperMessage): void {
+    if (isEmpty(message.type)) {
+      console.warn(i18next.t('errors.NoMessageTypeProvided'))
+      return
+    }
+    if (CUSTOM_EVENTS.includes(message.type)) {
+      this.customEventListener(message)
+      return
+    }
+
+    this.requestCurl(message).catch(getUnknownError)
+  }
+
+  getState(): T | undefined {
+    return this.currentState
+  }
+  setState<TState extends T | undefined>(newState: TState): TState {
+    this.currentState = newState
+    return newState
+  }
 
   /**
    * Sends an HTTP request using Axios based on the provided type and data.
    * If data is provided, a POST request is made; otherwise, a GET request is made.
    * The response is then posted to the window.
    *
-   * @param {Object} param0 - The request parameters.
-   * @param {string} param0.type - The type of the request, used as the endpoint.
-   * @param {any} [param0.data] - Optional data to be sent with the request.
-   * @returns {Promise<void>} - A promise that resolves when the request is complete.
-   * @throws {Error} - Throws an error if the response status is not 200 or if the response data is empty.
+   * @param param0 - The request parameters.
+   * @param param0.type - The type of the request, used as the endpoint.
+   * @param [param0.data] - Optional data to be sent with the request.
+   * @returns A promise that resolves when the request is complete.
+   * @throws Throws an error if the response status is not 200 or if the response data is empty.
    */
-  private readonly requestCurl = async ({
+  private async requestCurl({
     type,
     data = undefined,
-  }: VSCodeInternalAPIWrapperMessage): Promise<void> => {
+  }: VSCodeInternalAPIWrapperMessage): Promise<void> {
     try {
       let request = async () => await axiosInstance.get(type)
 
@@ -51,51 +78,12 @@ class VSCodeInternalAPIWrapper<T = unknown> {
   }
 
   /**
-   * Sends a message to the VSCode internal API.
-   *
-   * @param message - The message to be sent. It must include a type property.
-   * @throws Will warn if the message type is not provided.
-   */
-  private readonly postMessage = (message: VSCodeInternalAPIWrapperMessage): void => {
-    if (isEmpty(message.type)) {
-      console.warn(i18next.t('errors.NoMessageTypeProvided'))
-      return
-    }
-
-    if (CUSTOM_EVENTS.includes(message.type)) {
-      this.customEventListener(message)
-      return
-    }
-
-    this.requestCurl(message).catch(getUnknownError)
-  }
-
-  /**
-   * Retrieves the current state.
-   *
-   * @returns The current state of type `T`, or `undefined` if no state is set.
-   */
-  private readonly getState = (): T | undefined => this.currentState
-
-  /**
-   * Updates the current state with the provided new state and returns the new state.
-   *
-   * @template TState - The type of the new state, which extends the type of the current state or undefined.
-   * @param {TState} newState - The new state to set.
-   * @returns {TState} - The updated state.
-   */
-  private readonly setState = <TState extends T | undefined>(newState: TState): TState => {
-    this.currentState = newState
-    return newState
-  }
-
-  /**
    * Custom event listener for handling specific messages.
    * Currently handles the RequestFileOpen message to open a file input dialog.
    *
    * @param message - The message received from the VSCode internal API.
    */
-  private readonly customEventListener = (message: VSCodeInternalAPIWrapperMessage): void => {
+  private customEventListener(message: VSCodeInternalAPIWrapperMessage) {
     switch (message.type) {
       case SVGReceiveMessage.RequestFileOpen: {
         const inputFile = document.createElement('input')
@@ -103,7 +91,7 @@ class VSCodeInternalAPIWrapper<T = unknown> {
         inputFile.multiple = true
         inputFile.accept = '.js,.ts,.jsx,.tsx'
         inputFile.onchange = (event) => {
-          const files = Array.from((event.target as HTMLInputElement).files || []).map(
+          const files = Array.from((event.target as HTMLInputElement).files ?? []).map(
             (file) => file.name
           )
           window.postMessage({
@@ -116,22 +104,6 @@ class VSCodeInternalAPIWrapper<T = unknown> {
       }
       default:
         console.warn(`Unhandled custom event: ${message.type}`)
-    }
-  }
-
-  /**
-   * Provides access to the Webview API.
-   *
-   * @returns {WebviewApi<T>} An object containing methods to interact with the webview.
-   * @property {Function} postMessage - Sends a message to the webview.
-   * @property {Function} getState - Retrieves the current state from the webview.
-   * @property {Function} setState - Sets the state in the webview.
-   */
-  get api(): WebviewApi<T> {
-    return {
-      postMessage: this.postMessage,
-      getState: this.getState,
-      setState: this.setState,
     }
   }
 }

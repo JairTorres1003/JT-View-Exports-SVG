@@ -1,8 +1,8 @@
+import type { SVGReceiveMessage } from '@/enum/ViewExportsSVG'
+
 import type { SVGFile, SVGIcon, SVGPlayground } from '../ViewExportsSVG'
 
 import type { FileTemporary, OpenFile } from './content'
-
-import type { SVGReceiveMessage } from '@/enum/ViewExportsSVG'
 
 /**
  * The message to receive from the webview.

@@ -1,7 +1,7 @@
 import type { ExtensionContext } from 'vscode'
 
 import { ViewExportsSVGController } from '@/controllers/views'
-import { scanningFiles, scanningWorkspace } from '@/utilities/files'
+import { scanningFiles, scanningWorkspace } from '@/utilities/files/scanning'
 
 /**
  * Runs the scanning process for the current workspace.

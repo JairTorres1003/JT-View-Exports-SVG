@@ -4,7 +4,6 @@ import { useSelector } from 'react-redux'
 import { v4 as uuidv4 } from 'uuid'
 
 import { useAlert } from '@/core/hooks/useAlert'
-import type { ProviderProps } from '@/types/BaseProps'
 
 /**
  * SlideTransition component.
@@ -72,7 +71,7 @@ const SnackbarAlert = (): React.ReactNode => {
   )
 }
 
-export const SnackbarProvider: FC<ProviderProps> = ({ children }): React.ReactNode => (
+export const SnackbarProvider: FC<React.PropsWithChildren> = ({ children }): React.ReactNode => (
   <Fragment>
     {children}
     <SnackbarAlert />

@@ -3,8 +3,9 @@ import { commands } from 'vscode'
 import { CONFIG_KEY } from '@/constants/misc'
 import { SVGPostMessage } from '@/enum/ViewExportsSVG'
 import type { FuncPostMessage } from '@/types/views/PostMessage'
-import { getConfigurationEditor, getCurrentTheme, getStyles } from '@/utilities/vscode'
-import { getExtensionTheme as getExtTheme } from '@/utilities/vscode/extensions'
+import { getConfigurationEditor } from '@/utilities/vscode/config'
+import { getExtensionTheme as getExtTheme } from '@/utilities/vscode/extensions/theme'
+import { getCurrentTheme, getStyles } from '@/utilities/vscode/theme'
 
 export class ConfigurationHandler {
   constructor(private readonly postMessage: FuncPostMessage) {}
