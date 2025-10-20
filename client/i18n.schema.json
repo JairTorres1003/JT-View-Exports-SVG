@@ -22,6 +22,18 @@
           "type": "string",
           "default": "VSCode API is not available"
         },
+        "[VSCodeAPIWrapper]IgnoredMessageWithUnknownType:": {
+          "type": "string",
+          "default": "[VSCodeAPIWrapper] Ignored message with unknown type:"
+        },
+        "[VSCodeAPIWrapper]ErrorOccurredWhileHandlingMessage:": {
+          "type": "string",
+          "default": "[VSCodeAPIWrapper] Error occurred while handling message:"
+        },
+        "[VSCodeAPIWrapper]NoHandlerRegisteredForMessageType:": {
+          "type": "string",
+          "default": "[VSCodeAPIWrapper] No handler registered for message type:"
+        },
         "NoResponse": {
           "type": "string",
           "default": "No response"
@@ -76,6 +88,9 @@
         "UnknownError",
         "TheComponentIsEmpty",
         "VSCodeApiIsNotAvailable",
+        "[VSCodeAPIWrapper]IgnoredMessageWithUnknownType:",
+        "[VSCodeAPIWrapper]ErrorOccurredWhileHandlingMessage:",
+        "[VSCodeAPIWrapper]NoHandlerRegisteredForMessageType:",
         "NoResponse",
         "NoMessageTypeProvided",
         "FailedToReloadEditor",

@@ -34,17 +34,27 @@ class VSCodeAPIWrapper {
 
     window.addEventListener('message', (event: MessageEvent<PostMessage>) => {
       const type: SVGPostMessage = event.data.type
+
+      if (!Object.prototype.hasOwnProperty.call(this.messageHandlers, type)) {
+        console.warn(i18next.t('errors.[VSCodeAPIWrapper]IgnoredMessageWithUnknownType:'), type)
+        return
+      }
+
       const handler = this.messageHandlers[type] as (
         arg0: HandlerArgs<Required<MessageHandlersView>>
       ) => void
 
-      if (
-        Object.prototype.hasOwnProperty.call(this.messageHandlers, type) &&
-        typeof handler === 'function'
-      ) {
-        handler(event.data.data)
+      if (typeof handler === 'function') {
+        try {
+          handler(event.data.data)
+        } catch (error) {
+          console.error(
+            i18next.t('errors.[VSCodeAPIWrapper]ErrorOccurredWhileHandlingMessage:'),
+            error
+          )
+        }
       } else {
-        console.warn('[VSCodeAPIWrapper] Ignored message with invalid handler:', type)
+        console.warn(i18next.t('errors.[VSCodeAPIWrapper]NoHandlerRegisteredForMessageType:'), type)
       }
     })
   }

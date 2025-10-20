@@ -19,7 +19,7 @@
   "license": "MIT",
   "author": "Jair Torres",
   "publisher": "JairTorres1003",
-  "version": "4.0.1",
+  "version": "4.0.2",
   "repository": {
     "type": "git",
     "url": "https://github.com/JairTorres1003/JT-View-Exports-SVG.git"
@@ -294,6 +294,10 @@
     "client:build": "cd client && npm run build",
     "client:dev": "cd client && npm run dev",
     "open-in-browser": "vscode-test-web --extensionDevelopmentPath=. $FOLDER_EXAMPLE",
+    "prepare-readme": "node prepare-readme.js",
+    "prepare-readme:restore": "node prepare-readme.js --restore",
+    "run:package": "vsce package",
+    "package": "npm-run-all prepare-readme run:package prepare-readme:restore",
     "prepare": "husky",
     "postinstall": "npm dedupe"
   },
@@ -311,7 +315,7 @@
     "@typescript-eslint/eslint-plugin": "^8.33.0",
     "@typescript-eslint/parser": "^8.33.0",
     "@vscode/l10n-dev": "^0.0.35",
-    "@vscode/test-cli": "^0.0.11",
+    "@vscode/test-cli": "^0.0.12",
     "@vscode/test-electron": "^2.5.2",
     "@vscode/test-web": "^0.0.74",
     "concurrently": "^9.2.0",

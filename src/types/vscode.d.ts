@@ -27,7 +27,21 @@ export interface VsCodeStyles {
 }
 
 export type ExtensionManage = Pick<
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   Extension<any>,
   'id' | 'extensionUri' | 'extensionPath' | 'isActive'
 > & { isValid: boolean }
+
+export interface IPackageJSON {
+  contributes?: {
+    themes?: Array<{
+      label: string
+      uiTheme: string
+      path: string
+      id: string
+    }>
+  }
+}
+
+export interface IExtension extends Omit<Extension<unknown>, 'packageJSON'> {
+  packageJSON: IPackageJSON
+}

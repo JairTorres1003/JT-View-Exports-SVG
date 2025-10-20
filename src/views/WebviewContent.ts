@@ -7,9 +7,9 @@ import {
 } from '@/controllers/config'
 import type { GetWebviewAssets } from '@/types/views/content'
 import type { ManifestContent } from '@/types/views/WebviewContent'
-import { getNonce } from '@/utilities/files'
+import { getNonce } from '@/utilities/files/nonce'
 import { isEmpty } from '@/utilities/misc'
-import { getUri, uriParse } from '@/utilities/vscode'
+import { getUri, uriParse } from '@/utilities/vscode/uri'
 
 export class WebviewContent {
   private readonly _webview: Webview
@@ -60,7 +60,7 @@ export class WebviewContent {
     const path = uriParse(this.getAssetUri('manifest.json'))
     const manifestBytes = await workspace.fs.readFile(path)
     const manifestString = Buffer.from(manifestBytes).toString('utf8')
-    return JSON.parse(manifestString)
+    return JSON.parse(manifestString) as ManifestContent
   }
 
   /**

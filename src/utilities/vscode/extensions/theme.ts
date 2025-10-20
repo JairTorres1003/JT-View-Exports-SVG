@@ -11,18 +11,7 @@ import {
 } from 'vscode'
 
 import { getCacheManager } from '@/controllers/cache'
-import type { ExtensionManage } from '@/types/vscode'
-
-interface ThemeExtensionPackageJSON {
-  contributes?: {
-    themes?: Array<{
-      label: string
-      uiTheme: string
-      path: string
-      id: string
-    }>
-  }
-}
+import type { ExtensionManage, IExtension, IPackageJSON } from '@/types/vscode'
 
 const CACHE_KEY = 'CurrentExtensionTheme'
 
@@ -54,8 +43,8 @@ export async function initializeExtensionTheme(context: ExtensionContext): Promi
     const theme: string = configuration.get('colorTheme') ?? ''
 
     if (theme !== '') {
-      const themeExtension = extensions.all.find((ext) => {
-        const contributes: ThemeExtensionPackageJSON['contributes'] = ext.packageJSON?.contributes
+      const themeExtension = extensions.all.find((ext: IExtension) => {
+        const { contributes } = ext.packageJSON
 
         if (contributes?.themes != null) {
           return contributes.themes.some((t) => t.label === theme)
@@ -135,7 +124,7 @@ async function cloneThemeExtension(
   await workspace.fs.writeFile(Uri.joinPath(folder, 'package.json'), manifestData)
 
   const manifest = new TextDecoder('utf-8').decode(manifestData)
-  const themes = JSON.parse(manifest).contributes.themes
+  const themes = (JSON.parse(manifest) as IPackageJSON)?.contributes?.themes ?? []
 
   await Promise.all(
     themes.map(async (theme: { path: string }) => {

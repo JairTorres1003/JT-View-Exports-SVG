@@ -5,7 +5,9 @@ import type { GetChildAttributes, IValue } from '@/types/svg/SVGComponent'
 import type { SVGComponentProps, SVGErrors, SVGFile } from '@/types/ViewExportsSVG'
 
 import { isEmpty } from '../misc'
-import { getProperties, getPropertyValues, propertyManager } from '../properties'
+import { getProperties } from '../properties/getProperties'
+import { propertyManager } from '../properties/propertyManager'
+import { getPropertyValues } from '../properties/propertyValues'
 
 import { isElementAnimated } from './is-animate'
 import { getSVGTagName } from './tags'

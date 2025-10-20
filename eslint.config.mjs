@@ -1,7 +1,8 @@
 import js from '@eslint/js'
 import stylistic from '@stylistic/eslint-plugin'
-import eslintPluginImport from 'eslint-plugin-import'
+import { defineConfig, globalIgnores } from 'eslint/config'
 import eslintConfigLove from 'eslint-config-love'
+import eslintPluginImport from 'eslint-plugin-import'
 import eslintPluginPrettier from 'eslint-plugin-prettier/recommended'
 import globals from 'globals'
 import tseslint from 'typescript-eslint'
@@ -20,18 +21,16 @@ const CONFIG_STATES = {
   IGNORED: 'ignored',
 }
 
-export default tseslint.config(
-  {
-    ignores: [
-      'node_modules',
-      'client/**',
-      'server/**',
-      'src/test/assets/**',
-      'out/**',
-      '**/*.d.ts',
-      '**/*.{dev,config}.{js,mjs,ts}',
-    ],
-  },
+export default defineConfig([
+  globalIgnores([
+    'out',
+    'node_modules',
+    'client/**',
+    'server/**',
+    '**/*.{dev,config}.{js,mjs,ts}',
+    'src/test/assets/**',
+    'prepare-readme.js',
+  ]),
   eslintConfigLove,
   eslintPluginPrettier,
   {
@@ -67,8 +66,7 @@ export default tseslint.config(
       'no-negated-condition': STATE.OFF,
       '@typescript-eslint/prefer-destructuring': STATE.OFF,
       '@typescript-eslint/explicit-function-return-type': STATE.OFF,
-      '@typescript-eslint/prefer-nullish-coalescing': STATE.OFF,
-      '@typescript-eslint/no-unsafe-call': STATE.OFF,
+      '@typescript-eslint/prefer-nullish-coalescing': [STATE.WARN, { ignorePrimitives: true }],
       '@typescript-eslint/use-unknown-in-catch-callback-variable': STATE.OFF,
       'import/enforce-node-protocol-usage': STATE.OFF,
       '@typescript-eslint/no-unused-vars': [
@@ -77,14 +75,10 @@ export default tseslint.config(
       ],
       '@typescript-eslint/no-magic-numbers': STATE.OFF,
       '@typescript-eslint/no-misused-promises': [STATE.ERROR, { checksVoidReturn: false }],
-      '@typescript-eslint/no-unsafe-argument': STATE.OFF,
       '@typescript-eslint/strict-boolean-expressions': STATE.OFF,
-      '@typescript-eslint/no-unsafe-return': STATE.OFF,
       '@typescript-eslint/class-methods-use-this': STATE.OFF,
       '@typescript-eslint/no-unnecessary-condition': STATE.OFF,
       '@typescript-eslint/no-unsafe-type-assertion': STATE.OFF,
-      '@typescript-eslint/no-unsafe-member-access': STATE.OFF,
-      '@typescript-eslint/no-unnecessary-type-parameters': STATE.OFF,
       '@typescript-eslint/no-unsafe-assignment': STATE.OFF,
       '@stylistic/lines-around-comment': [STATE.ERROR, { beforeBlockComment: false }],
       complexity: [STATE.WARN, { max: 30 }],
@@ -97,5 +91,11 @@ export default tseslint.config(
         },
       ],
     },
-  }
-)
+  },
+  {
+    files: ['**/*.d.ts'],
+    rules: {
+      '@typescript-eslint/no-explicit-any': STATE.OFF,
+    },
+  },
+])

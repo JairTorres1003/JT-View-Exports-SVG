@@ -1,5 +1,7 @@
 import type * as t from '@babel/types'
+
 import type { SVGErrors } from '../ViewExportsSVG'
+
 import type { GetTagName } from './tags'
 
 export type DeclarationExport =

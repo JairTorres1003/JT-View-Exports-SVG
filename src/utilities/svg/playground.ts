@@ -5,7 +5,7 @@ import { REGEX_TAG_NAME } from '@/constants/regex'
 import { getCacheManager } from '@/controllers/cache'
 import type { SVGErrors, SVGComponent, SVGPlayground } from '@/types/ViewExportsSVG'
 
-import { getFileTimestamp } from '../files'
+import { getFileTimestamp } from '../files/misc'
 import { getUnknownError, isEmpty } from '../misc'
 
 import { extractIconComponent, extractSVGComponent } from './extracts'

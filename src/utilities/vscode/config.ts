@@ -1,6 +1,6 @@
 import { workspace } from 'vscode'
 
-import { getExtensionTheme } from './extensions'
+import { getExtensionTheme } from './extensions/theme'
 import { getCurrentTheme } from './theme'
 
 /**
@@ -30,7 +30,7 @@ export function getConfigurationEditor(): Record<string, unknown> {
   }
 
   if (typeof editorConfig['editor.minimap'] === 'object') {
-    editorConfig['editor.minimap'].enabled = false
+    ;(editorConfig['editor.minimap'] as { enabled?: boolean }).enabled = false
   } else {
     editorConfig['editor.minimap.enabled'] = false
   }

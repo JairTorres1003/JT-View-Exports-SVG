@@ -6,9 +6,9 @@ import { CacheIconKind } from '@/enum/cache'
 import type { SVGIconCache } from '@/types/cache'
 import type { SVGComponent, SVGFile, SVGIcon, ViewExportSVG } from '@/types/ViewExportsSVG'
 
-import { getFileTimestamp } from '../files'
+import { getFileTimestamp } from '../files/misc'
 import { isEmpty } from '../misc'
-import { svgFileToUri } from '../vscode'
+import { svgFileToUri } from '../vscode/uri'
 
 let filesExists: Record<string, boolean> = {}
 const removeElementsCache: { files: string[]; icons: SVGIcon[] } = {
