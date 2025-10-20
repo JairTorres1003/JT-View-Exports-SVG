@@ -1,5 +1,25 @@
 # View Exports SVG - Changelog
 
+## 4.0.2
+
+_Oct 20, 2025_
+
+#### ✨ Features
+
+- **Error Handling for VSCode API Wrapper:**
+  - Added multi-language support for error handling messages in the `VSCodeAPIWrapper`, improving user feedback and clarity when the API is not available or throws exceptions.
+  - Ensures better debugging information in development mode.
+
+#### 🚀 Enhancements
+
+- **Documentation:**
+  - Added a dedicated README for the **VSCode Extension Dev Server**, including setup and usage instructions for Deno-based local development.
+  - Introduced a `prepare-readme` script to automatically manage video URLs in the README and restore default placeholders when building for production.
+
+- **Build System:**
+  - Improved the development workflow by refining the Deno server integration for ESM builds.
+  - Updated project dependencies for improved compatibility and stability.
+
 ## 4.0.1
 
 _Oct 9, 2025_
