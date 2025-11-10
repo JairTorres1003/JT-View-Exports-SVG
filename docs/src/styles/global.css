@@ -24,6 +24,16 @@
     background-color: var(--sl-color-bg);
   }
 
+  main {
+    display: flex;
+    flex-direction: column;
+  }
+
+  main > .content-panel:first-child h1,
+  main > .content-panel:not(:first-child) .sl-container > .sl-markdown-content {
+    margin-top: 0;
+  }
+
   .content-panel {
     border-top: none;
   }
