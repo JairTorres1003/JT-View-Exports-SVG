@@ -1,0 +1,144 @@
+---
+title: DevTools Panel
+tagline: Explore the features and functionalities of the DevTools panel.
+description: Learn how to use the DevTools panel to inspect, edit, and manage your SVG components in real time.
+---
+
+import { Aside, Card, CardGrid } from '@astrojs/starlight/components'
+import { LinkCard } from 'starlight-theme-nova/components'
+
+import DevToolsLocation from '../../../assets/screens/devtools-location.webp'
+import DevToolsOverview from '../../../assets/screens/devtools-overview.mp4'
+import PlaygroundColorPicker from '../../../assets/screens/playground-color-picker.webp'
+import Figure from '../../../components/Figure.astro'
+import Shortcut from '../../../components/Shortcut.astro'
+
+The **DevTools panel** is where you can inspect, preview, and edit your SVG components directly from within **Visual Studio Code**.
+It's divided into two main sections: the **Playground** and the **Component Info** panel.
+
+---
+
+## 📍 Location in the UI
+
+To access the DevTools panel, first open the `View Exports SVG` panel. Then, you can open the DevTools in any of the following ways:
+
+1. Click the icon of the component you want to view or edit.
+2. Click the button located in the top-right corner of the panel.
+3. Drag from the right edge to dock or undock the panel.
+
+The image labels the points that indicate where each action is located.
+
+<div align='center'>
+  <Figure
+    src={DevToolsLocation}
+    caption='Location of the DevTools in the "View Exports SVG" panel.'
+  />
+</div>
+
+---
+
+## 🧩 Playground Overview
+
+The **Playground** lets you test and preview your icons dynamically.
+It includes a live editor, background color selector, and several quick actions.
+
+### ✏️ Real-time Editing
+
+Use the built-in editor to modify your icon's props in real time. The playground updates instantly.
+
+You can toggle or adjust the preview's background color to visualize icons under different contrast conditions.
+
+<div align='center'>
+  <video src={DevToolsOverview} controls muted class='videoScreen' />
+  <div style='opacity: 0.75; font-size: 0.9rem;'>
+    Editing the <code>&lt;Dribbble /&gt;</code> component live in the Playground editor.
+  </div>
+</div>
+
+<Aside type='tip' title='Pro tip'>
+  The editor includes autocomplete and contextual suggestions. You can see them by typing the name
+  of a property inside the component or by opening the `<` symbol to show suggestions for all
+  components.
+</Aside>
+
+#### Quick editor actions
+
+In the editor toolbar you'll find several quick-access buttons:
+
+- Hide/Show code — Toggles the editor's visibility.
+- Copy code — Copies the current code to the clipboard.
+- Reset code — Restores the editor to its initial state.
+- More actions (three dots icon) — Opens a menu with additional options:
+  - **Open in Editor** — Jump directly to the component's source file.
+  - **Copy as SVG / PNG** — Copies the rendered version to clipboard.
+  - **Download as SVG / PNG** — Saves the icon to your local machine.
+
+### 🎨 Background & Color Picker
+
+<div class='device-table'>
+  <CardGrid>
+    <Figure
+      src={PlaygroundColorPicker}
+      caption='Background color picker in the DevTools Playground.'
+    />
+    <div>
+      Use the color picker to set a custom background color for the playground. This is especially
+      useful when working with icons that have transparent or semi-transparent elements.
+      <br />
+      In addition to those scenarios, it's also useful for testing different color combinations and
+      contrast levels.
+    </div>
+  </CardGrid>
+</div>
+
+### 🧰 Playground Menu Actions
+
+At the top-right of the Playground, you'll find an **actions menu** (three dots icon) for managing the environment.
+
+The menu includes the following options:
+
+- **Reload Playground** — Resets the preview and editor.
+- **Enable Word Wrap** — Toggles line wrapping in the editor.
+- **Reload Editor** — Rebuilds the code editor.
+
+---
+
+## ℹ️ Info Component Overview
+
+Below the Playground, you'll find the **Component Info** section.
+
+It displays metadata about the selected component, including:
+
+| Field                | Description                                      |
+| -------------------- | ------------------------------------------------ |
+| **Component name**   | The exported name of the icon component.         |
+| **Type declaration** | Whether it's defined as a variable or function.  |
+| **Is exported?**     | Indicates if the component is publicly exported. |
+| **Is animated?**     | Detects motion or animation within the SVG.      |
+| **Is favorite?**     | Shows whether it's marked as favorite.           |
+
+<Aside type='note'>
+  🧠 This panel is purely informative and automatically updates when you select another icon.
+</Aside>
+
+---
+
+## 🧭 Next Steps
+
+<CardGrid stagger>
+  <LinkCard
+    title='🧠 Usage Guide'
+    description="Learn how to open, navigate, and interact with the extension's main features."
+    href='/guides/usage'
+  />
+  <LinkCard
+    title='🧩 SVG Support'
+    description='See which SVG elements and React component structures are supported.'
+    href='/guides/svg-support'
+  />
+  <LinkCard
+    title='💬 Troubleshooting'
+    description='Find solutions to common issues and frequent questions.'
+    href='/guides/troubleshooting'
+  />
+</CardGrid>

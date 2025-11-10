@@ -1,0 +1,113 @@
+---
+title: Home
+description: Discover, preview, and manage your SVG components effortlessly with View Exports SVG for Visual Studio Code.
+template: splash
+pagination: false
+hero:
+  title: View Exports SVG
+  tagline: 🚀 The ultimate tool to explore and manage SVG components directly in Visual Studio Code.
+  image:
+    file: ../../assets/JT View Exports SVG - ICON.svg
+    alt: View Exports SVG logo
+  actions:
+    - text: Get Started
+      link: /getting-started/
+      icon: right-arrow
+    - text: View on Marketplace
+      link: https://marketplace.visualstudio.com/items?itemName=JairTorres1003.jt-view-exports-svg
+      icon: external
+      variant: minimal
+---
+
+import { Card, CardGrid } from '@astrojs/starlight/components'
+import { LinkCard } from 'starlight-theme-nova/components'
+
+import VideoDemo from '../../assets/JT View Exports SVG - Demo.mp4'
+
+## ✨ Overview
+
+**View Exports SVG** is a powerful Visual Studio Code extension that revolutionizes how developers interact with SVG components.
+It goes far beyond simple file previews — offering a complete workflow for **discovering**, **inspecting**, and **managing** your SVG assets without leaving your editor.
+
+Whether you're working on a large icon library or dynamic SVG components, View Exports SVG gives you the visualization power and DevTools you need.
+
+---
+
+## 🔍 Key Features
+
+<CardGrid>
+  <Card title='Advanced DevTools Panel'>
+    A fully dockable, feature-rich panel to browse and manage SVG components.
+  </Card>
+  <Card title='Interactive Playground'>
+    Edit and preview SVG components in real-time using an integrated code editor.
+  </Card>
+  <Card title='Workspace Scanning'>
+    Automatically detect all exported SVG components across your entire project.
+  </Card>
+  <Card title='Favorites & Recent'>Quickly access your most used or recently opened icons.</Card>
+  <Card title='Context Menu & Commands'>
+    Launch the viewer via right-click menu, Command Palette, or drag & drop.
+  </Card>
+  <Card title='Framework Compatibility'>
+    Works seamlessly with JavaScript and TypeScript projects using React, Preact, and more.
+  </Card>
+</CardGrid>
+
+---
+
+<section style={{ textAlign: 'center', margin: '3rem 0' }}>
+  <h2>🚀 See It in Action</h2>
+  <p style={{ marginBottom: '1.5rem', color: 'var(--sl-color-text-secondary)' }}>
+    Discover how View Exports SVG helps you explore and manage your icons effortlessly.
+  </p>
+
+  <div align='center'>
+    <video src={VideoDemo} controls muted class='videoScreen' />
+  </div>
+</section>
+
+---
+
+## 🧭 Explore the Docs
+
+<CardGrid stagger>
+  <LinkCard
+    title='🚀 Getting Started'
+    description='Learn how to install and set up the extension.'
+    href='/getting-started'
+  />
+  <LinkCard
+    title='🧠 Usage Guide'
+    description='Explore how to scan your workspace and preview components.'
+    href='/guides/usage'
+  />
+  <LinkCard
+    title='⚙️ DevTools Panel'
+    description='Discover all tools available inside the DevTools panel.'
+    href='/guides/devtools'
+  />
+  <LinkCard
+    title='🧩 SVG Support'
+    description='Understand which SVG formats and tags are supported.'
+    href='/guides/svg-support'
+  />
+  <LinkCard
+    title='💬 FAQ & Troubleshooting'
+    description='Find answers to common questions and known issues.'
+    href='/guides/troubleshooting'
+  />
+</CardGrid>
+
+---
+
+## 🤝 Contributing
+
+This project is open source and welcomes contributions from the community.
+If you'd like to report an issue or add a feature, visit the [**GitHub repository**](https://github.com/JairTorres1003/JT-View-Exports-SVG).
+
+---
+
+## 📜 License
+
+Released under the [MIT License](https://github.com/JairTorres1003/JT-View-Exports-SVG/blob/main/LICENSE). © 2025 Jair Torres

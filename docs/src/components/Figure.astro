@@ -1,0 +1,45 @@
+---
+import type { LocalImageProps } from 'astro:assets'
+import { Image } from 'astro:assets'
+import { Zoom } from 'starlight-image-zoom/components'
+
+type Props = LocalImageProps & {
+  caption?: string
+}
+
+const { caption, class: className, alt: altText, ...attributes } = Astro.props
+---
+
+<figure class='Figure'>
+  <Zoom label={caption ?? altText ?? 'Figure image'}>
+    <Image
+      layout='full-width'
+      loading='eager'
+      {...attributes}
+      alt={caption ?? altText}
+      class:list={['Figure__image', className]}
+    />
+  </Zoom>
+  {caption && <figcaption class='Figure__caption' set:html={caption} />}
+</figure>
+
+<style>
+  .Figure {
+    margin: 0;
+    text-align: center;
+    width: 100%;
+  }
+
+  .Figure__image {
+    border-radius: 12px;
+    box-shadow: 0 4px 18px rgba(0, 0, 0, 0.15);
+    width: 100%;
+    height: auto;
+  }
+
+  .Figure__caption {
+    opacity: 0.75;
+    font-size: 0.9rem;
+    margin-top: 0.5rem;
+  }
+</style>

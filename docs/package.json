@@ -1,0 +1,62 @@
+{
+  "name": "jt-view-exports-svg--docs",
+  "displayName": "View Exports SVG (Docs)",
+  "description": "View Exports SVG (Docs)",
+  "keywords": [
+    "view-exports-svg",
+    "SVG icons",
+    "TypeScript",
+    "TSX",
+    "React",
+    "JavaScript",
+    "JSX",
+    "icon management",
+    "icon assets",
+    "UI",
+    "documentation",
+    "static site",
+    "Astro"
+  ],
+  "type": "module",
+  "version": "1.0.0",
+  "private": true,
+  "license": "MIT",
+  "author": "Jair Torres",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/JairTorres1003/JT-View-Exports-SVG.git"
+  },
+  "bugs": {
+    "url": "https://github.com/JairTorres1003/JT-View-Exports-SVG/issues"
+  },
+  "homepage": "https://github.com/JairTorres1003/JT-View-Exports-SVG/tree/main/docs#readme",
+  "scripts": {
+    "dev": "astro dev",
+    "start": "astro dev",
+    "build": "astro build",
+    "preview": "astro preview",
+    "astro": "astro"
+  },
+  "dependencies": {
+    "@astrojs/react": "^4.4.2",
+    "@astrojs/starlight": "^0.36.2",
+    "@astrojs/starlight-tailwind": "^4.0.2",
+    "@heroui/kbd": "^2.2.22",
+    "@heroui/system": "^2.4.23",
+    "@heroui/theme": "^2.4.23",
+    "@tailwindcss/vite": "^4.0.7",
+    "astro": "^5.6.1",
+    "framer-motion": "^12.23.24",
+    "react": "^19.2.0",
+    "react-dom": "^19.2.0",
+    "sharp": "^0.34.2",
+    "starlight-changelogs": "^0.2.3",
+    "starlight-image-zoom": "^0.13.2",
+    "starlight-theme-nova": "^0.9.5",
+    "tailwindcss": "^4.1.17"
+  },
+  "devDependencies": {
+    "@types/react": "^19.2.2",
+    "@types/react-dom": "^19.2.2"
+  }
+}

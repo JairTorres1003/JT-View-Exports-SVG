@@ -1,0 +1,42 @@
+@layer base, starlight, theme, components, utilities;
+
+@import '@astrojs/starlight-tailwind';
+@import 'tailwindcss/theme.css' layer(theme);
+@import 'tailwindcss/utilities.css' layer(utilities);
+
+@plugin './hero.ts';
+@source '../../node_modules/@heroui/theme/dist/components/kbd.js';
+@custom-variant dark (&:is(.dark *));
+
+@theme {
+}
+
+.videoScreen {
+  width: 100%;
+  max-width: 1024px;
+  aspect-ratio: 691/432;
+  border-radius: 1rem;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.15);
+}
+
+@layer nova {
+  html {
+    background-color: var(--sl-color-bg);
+  }
+
+  .content-panel {
+    border-top: none;
+  }
+  .content-panel:not(:first-child) {
+    padding-top: 0;
+  }
+}
+
+@layer custom.components {
+  @media (min-width: 35rem) {
+    .device-table .card-grid {
+      grid-template-columns: 1fr 1fr;
+      gap: 1.5rem;
+    }
+  }
+}

@@ -1,6 +1,7 @@
 {
   "search.exclude": {
-    "out": true
+    "out": true,
+    "**/.astro": true
   },
   "typescript.tsc.autoDetect": "off",
   "cSpell.language": "en,es-ES",

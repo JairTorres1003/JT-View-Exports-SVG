@@ -1,0 +1,85 @@
+---
+title: Getting Started
+description: Learn how to install and run View Exports SVG for the first time in Visual Studio Code.
+---
+
+import { Card, CardGrid, Steps } from '@astrojs/starlight/components'
+import { LinkCard } from 'starlight-theme-nova/components'
+
+import InstallationComponent from '../../components/Installation.astro'
+import Shortcut from '../../components/Shortcut.astro'
+
+**View Exports SVG** is a Visual Studio Code extension that lets you scan, preview, and manage your SVG components without leaving the editor.
+
+This quick start will help you install it and open the panel for the first time.
+
+---
+
+<Steps>
+  1. ## 🧩 Installation
+      <InstallationComponent />
+  2. ## ⚙️ Opening the Extension
+      After installation, you can activate View Exports SVG in one of the following ways:
+
+      <Card title='From the Explorer' icon='seti:folder'>
+        Right-click any folder or file containing SVG components and select
+        <strong>"View Exports SVG 🔍"</strong> from the context menu.
+      </Card>
+      <Card title='From the Command Palette' icon='seti:powershell'>
+        {'Open the '}
+        <strong>Command Palette</strong>
+        {' ( '}
+        <Shortcut mac={['command', 'shift']} windows={['ctrl', 'shift']}>
+          P
+        </Shortcut>
+        {'), type '}
+        <strong>"View Exports SVG: Start Scanning"</strong>
+        {' and press Enter.'}
+      </Card>
+      <Card title='From the Activity Bar' icon='seti:config'>
+        Click the **View Exports SVG** icon in the sidebar to open the panel manually.
+      </Card>
+
+</Steps>
+
+---
+
+## 🧠 First Run
+
+Once opened, the extension will:
+
+- Scan your project for exported SVG components (`.jsx`, `.tsx`, `.js`, `.ts`).
+- Display them in a dedicated DevTools panel.
+- Let you preview icons instantly.
+
+You can start interacting right away, or explore advanced features next.
+
+---
+
+## 🎉 You're All Set!
+
+Congratulations! You have successfully installed and opened `View Exports SVG`. Start exploring your SVG components directly within Visual Studio Code.
+
+For more detailed instructions and advanced usage, check out the rest of the documentation.
+
+---
+
+## 🧭 Next Steps
+
+<CardGrid stagger>
+  <LinkCard
+    title='📚 Usage Guide'
+    description='Learn how to make the most of View Exports SVG features.'
+    href='/guides/usage'
+  />
+  <LinkCard
+    title='⚙️ DevTools Panel'
+    description='Explore the full-featured panel for managing, previewing, and editing icons.'
+    href='/guides/devtools'
+  />
+  <LinkCard
+    title='🧩 SVG Support'
+    description='See what types of SVGs and React components are supported.'
+    href='/guides/svg-support'
+  />
+</CardGrid>
