@@ -13,7 +13,7 @@ export default defineConfig({
   integrations: [
     starlight({
       plugins: [starlightImageZoom(), starlightThemeNova(), starlightChangelogs()],
-      favicon: '/favicon.svg',
+      favicon: 'favicon.ico',
       logo: {
         src: './src/assets/JT View Exports SVG - ICON.svg',
         alt: 'View Exports SVG Logo',
