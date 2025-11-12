@@ -10,7 +10,7 @@
   "extension.commands.closeDevTools.title": "Zamknij narzędzia deweloperskie",
   "extension.commands.clearCache.title": "Wyczyść pamięć podręczną",
   "extension.config.defaultExpandAll.title": "Domyślnie rozwijaj wszystkie ikony",
-  "extension.config.defaultExpandAll.description": "Określa, czy domyślnie rozwijać wszystkie elementy.",
+  "extension.config.defaultExpandAll.description": "Określa, czy wszystkie ikony powinny być domyślnie rozwinięte po otwarciu rozszerzenia.",
   "extension.config.defaultClickToOpenDevTools.title": "Domyślnie kliknij, aby otworzyć narzędzia deweloperskie",
   "extension.config.defaultClickToOpenDevTools.description": "Określa, czy domyślnie otwierać narzędzia deweloperskie.",
   "extension.config.assetsPath.title": "Ścieżka zasobów",

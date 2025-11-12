@@ -10,7 +10,7 @@
   "extension.commands.closeDevTools.title": "開発者ツールを閉じる",
   "extension.commands.clearCache.title": "キャッシュをクリア",
   "extension.config.defaultExpandAll.title": "デフォルトですべてのアイコンを展開",
-  "extension.config.defaultExpandAll.description": "デフォルトで全アイテムを展開するかどうかを示します。",
+  "extension.config.defaultExpandAll.description": "拡張機能が開かれたときに、すべてのアイコンをデフォルトで展開するかどうかを決定します。",
   "extension.config.defaultClickToOpenDevTools.title": "デフォルトのクリックでDevToolsを開く",
   "extension.config.defaultClickToOpenDevTools.description": "デフォルトで開発者ツールを開くかどうかを示します。",
   "extension.config.assetsPath.title": "アセットパス",

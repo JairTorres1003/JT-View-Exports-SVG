@@ -10,7 +10,7 @@
   "extension.commands.closeDevTools.title": "Zavřít Nástroje pro vývojáře",
   "extension.commands.clearCache.title": "Vymazat mezipaměť",
   "extension.config.defaultExpandAll.title": "Výchozí Rozbalit všechny ikony",
-  "extension.config.defaultExpandAll.description": "Určuje, zda se mají ve výchozím nastavení rozbalit všechny položky.",
+  "extension.config.defaultExpandAll.description": "Určuje, zda by měly být všechny ikony ve výchozím nastavení rozbaleny při otevření rozšíření.",
   "extension.config.defaultClickToOpenDevTools.title": "Výchozí Kliknutím otevřete DevTools",
   "extension.config.defaultClickToOpenDevTools.description": "Určuje, zda se mají ve výchozím nastavení otevřít nástroje pro vývojáře.",
   "extension.config.assetsPath.title": "Cesta k datovým zdrojům",

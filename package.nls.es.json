@@ -10,7 +10,7 @@
   "extension.commands.closeDevTools.title": "Cerrar herramientas de desarrollador",
   "extension.commands.clearCache.title": "Borrar caché",
   "extension.config.defaultExpandAll.title": "Expandir Todos los Iconos por Defecto",
-  "extension.config.defaultExpandAll.description": "Indica si se deben expandir todos los elementos de forma predeterminada.",
+  "extension.config.defaultExpandAll.description": "Determina si todos los iconos deben expandirse de forma predeterminada cuando se abre la extensión.",
   "extension.config.defaultClickToOpenDevTools.description": "Indica si se deben abrir o no las herramientas de desarrollador de forma predeterminada.",
   "extension.config.defaultClickToOpenDevTools.title": "Hacer clic para abrir las herramientas de desarrollo",
   "extension.config.assetsPath.title": "Ruta de Recursos",
