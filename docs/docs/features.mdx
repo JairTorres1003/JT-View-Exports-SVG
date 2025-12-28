@@ -1,0 +1,107 @@
+---
+title: Features
+description: Discover all the powerful tools included in View Exports SVG for Visual Studio Code.
+---
+
+**View Exports SVG** extends Visual Studio Code with a complete toolkit for discovering, previewing, and managing SVG components in your workspace.
+
+This page provides an overview of the key features that make it an essential tool for frontend developers and design systems.
+
+---
+
+import DocCard from '@site/src/components/DocCard'
+import {
+  FeaturesDevtools,
+  FeaturesProductivity,
+  FeaturesThemeSupport,
+  FeaturesWorkspace,
+} from '@site/src/constants/features'
+
+## 🧭 Workspace Scanning
+
+Scan your entire project to automatically detect all exported SVG components.
+
+<div className='grid grid-cols-1 md:grid-cols-2 gap-6 my-4 mb-12'>
+  {FeaturesWorkspace.map((feature) => (
+    <DocCard key={feature.title} {...feature} />
+  ))}
+</div>
+
+---
+
+## ⚙️ DevTools Panel
+
+The **DevTools Panel** is the visual heart of the extension — a fully dockable interface that lets you browse and manage all discovered icons.
+
+<div className='grid grid-cols-1 md:grid-cols-2 gap-6 my-4 mb-12'>
+  {FeaturesDevtools.map((feature) => (
+    <DocCard key={feature.title} {...feature} />
+  ))}
+</div>
+
+---
+
+## 🧠 Productivity Tools
+
+View Exports SVG goes beyond simple previews — it provides developer-focused utilities that streamline your workflow.
+
+<div className='grid grid-cols-1 md:grid-cols-2 gap-6 my-4 mb-12'>
+  {FeaturesProductivity.map((feature) => (
+    <DocCard key={feature.title} {...feature} />
+  ))}
+</div>
+
+---
+
+## 🧩 Framework Compatibility
+
+The extension supports modern frontend stacks by analyzing exported components in multiple frameworks.
+
+- **React** (default support)
+- **Preact**
+- **TypeScript and JavaScript**
+
+:::tip Pro tip
+Even if your project mixes `.js`, `.jsx`, `.ts`, and `.tsx` files, View Exports SVG can still
+detect and display all exported components seamlessly.
+:::
+
+---
+
+## 🎨 Theme Compatibility
+
+**View Exports SVG** is designed to adapt visually to the majority of VS Code themes — both light and dark.
+
+<div className='grid grid-cols-1 md:grid-cols-2 gap-6 my-4 mb-12'>
+  {FeaturesThemeSupport.map((feature) => (
+    <DocCard key={feature.title} {...feature} />
+  ))}
+</div>
+
+---
+
+## 🧭 Next Steps
+
+import { Bug, LandPlot, Puzzle } from 'lucide-react'
+import GridStagger from '@site/src/components/GridStagger'
+
+<GridStagger>
+  <DocCard
+    icon={<LandPlot />}
+    title='Getting Started'
+    description='Learn how to install and set up the extension.'
+    link='/docs/getting-started'
+  />
+  <DocCard
+    icon={<Bug />}
+    title='Troubleshooting'
+    description='Find solutions to common issues and frequent questions.'
+    link='/docs/resources/troubleshooting'
+  />
+  <DocCard
+    icon={<Puzzle />}
+    title='SVG Support'
+    description='See which SVG elements and structures are supported'
+    link='/docs/resources/svg-support'
+  />
+</GridStagger>

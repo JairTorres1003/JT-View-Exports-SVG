@@ -1,0 +1,99 @@
+---
+title: Getting Started
+description: Learn how to install and run View Exports SVG for the first time in Visual Studio Code.
+---
+
+Quick Start Guide to Getting Started with "View Exports SVG" in Your Project.
+
+## What is View Exports SVG?
+
+**View Exports SVG** is a Visual Studio Code extension designed to streamline the process of accessing and utilizing SVG icons.
+With this extension, you can effortlessly explore and search for SVG icons within your project.
+
+---
+
+import { Tabs, Tab } from '@heroui/tabs'
+import MDXHeading from '@theme/MDXComponents/Heading'
+import DocCard from '@site/src/components/DocCard'
+import { Steps, StepItem } from '@site/src/components/Steps'
+import { ActivationMethods, InstallationMethods } from '@site/src/constants/getting-started'
+
+<Steps>
+  <StepItem>
+    <MDXHeading as='h2' id='installation' className='mt-1'>🧩 Installation</MDXHeading>
+
+    <div className='border-2 border-primary/20 rounded-md'>
+      <Tabs
+        items={InstallationMethods}
+        aria-label="Installation Methods"
+        variant="underlined"
+        classNames={{
+          tabList: 'pb-0',
+          tabContent: 'text-foreground/60 group-data-[selected=true]:text-foreground pb-2',
+          panel: 'p-4 border-t-2 border-primary/20 -mt-[2px] bg-content1 rounded-b-md',
+        }}
+      >
+        {(item) => (<Tab key={item.title} {...item} />)}
+      </Tabs>
+    </div>
+
+  </StepItem>
+  <StepItem>
+    <MDXHeading as='h2' id='opening-extension' className='mt-1'>⚙️ Opening the Extension</MDXHeading>
+
+    After installation, you can activate View Exports SVG in one of the following ways:
+
+    <div className='grid grid-cols-1 gap-6 my-4 pb-4'>
+      {ActivationMethods.map((feature) => (<DocCard key={feature.title} {...feature} />))}
+    </div>
+
+  </StepItem>
+</Steps>
+
+---
+
+## 🧠 First Run
+
+Once opened, the extension will:
+
+- Scan your project for exported SVG components (`.jsx`, `.tsx`, `.js`, `.ts`).
+- Display them in a dedicated DevTools panel.
+- Let you preview icons instantly.
+
+You can start interacting right away, or explore advanced features next.
+
+---
+
+## 🎉 You're All Set!
+
+Congratulations! You have successfully installed and opened `View Exports SVG`. Start exploring your SVG components directly within Visual Studio Code.
+
+For more detailed instructions and advanced usage, check out the rest of the documentation.
+
+---
+
+## 🧭 Next Steps
+
+import { LibraryBig, Puzzle, ToolCase } from 'lucide-react'
+import GridStagger from '@site/src/components/GridStagger'
+
+<GridStagger>
+  <DocCard
+    icon={<LibraryBig />}
+    title='Usage Guide'
+    description='Learn how to make the most of View Exports SVG features.'
+    link='/docs/guides/usage'
+  />
+  <DocCard
+    icon={<Puzzle />}
+    title='SVG Support'
+    description='See which SVG elements and structures are supported'
+    link='/docs/resources/svg-support'
+  />
+  <DocCard
+    icon={<ToolCase />}
+    title='DevTools Panel'
+    description='Explore the full-featured panel for managing, previewing, and editing icons.'
+    link='/docs/guides/devtools'
+  />
+</GridStagger>

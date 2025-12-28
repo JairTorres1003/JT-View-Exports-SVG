@@ -25,6 +25,7 @@ export default defineConfig([
   globalIgnores([
     'out',
     'node_modules',
+    'docs/**',
     'client/**',
     'server/**',
     '**/*.{dev,config}.{js,mjs,ts}',

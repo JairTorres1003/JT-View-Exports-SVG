@@ -1,0 +1,131 @@
+---
+title: Home
+description: Discover, preview, and manage your SVG components effortlessly with View Exports SVG for Visual Studio Code.
+hide_table_of_contents: true
+---
+
+import HeroSection from '@site/src/components/HeroSection/HeroSection'
+
+<HeroSection
+  title='View Exports SVG'
+  description='🚀 The ultimate tool to explore and manage SVG components directly in Visual Studio Code.'
+  logo={{
+    img: '/img/logo.svg',
+    alt: 'View Exports SVG Logo',
+    width: '100%',
+    height: '100%',
+  }}
+  links={[
+    {
+      label: 'Get Started',
+      href: '/docs/getting-started',
+      icon: 'arrow-right',
+      color: 'primary',
+      className: 'group',
+      iconClassName: 'group-hover:translate-x-1 transition-transform',
+    },
+    {
+      label: 'Install Extension',
+      href: 'https://marketplace.visualstudio.com/items?itemName=JairTorres1003.jt-view-exports-svg',
+      icon: 'download',
+      iconPosition: 'start',
+      variant: 'bordered',
+      target: '_blank',
+    },
+  ]}
+/>
+
+<div align='center'>
+
+## ✨ Overview
+
+</div>
+
+**View Exports SVG** is a powerful Visual Studio Code extension that revolutionizes how developers interact with SVG components.
+It goes far beyond simple file previews — offering a complete workflow for **discovering**, **inspecting**, and **managing** your SVG assets without leaving your editor.
+
+Whether you're working on a large icon library or dynamic SVG components, View Exports SVG gives you the visualization power and DevTools you need.
+
+---
+
+<div align='center'>
+
+## 🔍 Key Features
+
+Explore the powerful features that make View Exports SVG an essential tool for managing your SVG
+components directly within Visual Studio Code.
+
+</div>
+
+import DocCard from '@site/src/components/DocCard'
+import { Book, CodeSquare, ScanSearch, SquareMenu, Star, ToolCase } from 'lucide-react'
+
+export const KeyFeatures = [
+  {
+    icon: <ToolCase />,
+    title: 'Advanced DevTools Panel',
+    description: 'A fully dockable, feature-rich panel to browse and manage SVG components.',
+  },
+  {
+    icon: <CodeSquare />,
+    title: 'Interactive Playground',
+    description: 'Edit and preview SVG components in real-time using an integrated code editor.',
+  },
+  {
+    icon: <ScanSearch />,
+    title: 'Workspace Scanning',
+    description: 'Automatically detect all exported SVG components across your entire project.',
+  },
+  {
+    icon: <Star />,
+    title: 'Favorites & Recent',
+    description: 'Quickly access your most used or recently opened icons.',
+  },
+  {
+    icon: <SquareMenu />,
+    title: 'Context Menu & Commands',
+    description: 'Launch the viewer via right-click menu, Command Palette, or drag & drop.',
+  },
+  {
+    icon: <Book />,
+    title: 'Framework Compatibility',
+    description:
+      'Works seamlessly with JavaScript and TypeScript projects using React, Preact, and more.',
+  },
+]
+
+<div className='grid grid-cols-1 md:grid-cols-2 gap-6 my-4 mb-12'>
+  {KeyFeatures.map((feature) => (
+    <DocCard key={feature.title} {...feature} />
+  ))}
+</div>
+
+---
+
+<section style={{ textAlign: 'center', margin: '3rem 0' }}>
+
+  ## 🚀 See It in Action
+
+  Discover how View Exports SVG helps you explore and manage your icons effortlessly.
+
+  <div align='center' className='mt-8'>
+    <video src='/video/JT View Exports SVG - Demo.mp4' controls muted />
+  </div>
+</section>
+
+---
+
+<HeroSection
+  title='Ready to streamline your workflow?'
+  description='Start using View Exports SVG today and see how it transforms the way you work with icons in VS Code.'
+  links={[
+    {
+      label: 'Get Started',
+      href: '/docs/getting-started',
+      icon: 'arrow-right',
+      color: 'primary',
+      className: 'group',
+      iconClassName: 'group-hover:translate-x-1 transition-transform',
+    },
+  ]}
+/>

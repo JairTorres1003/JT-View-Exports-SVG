@@ -1,0 +1,115 @@
+---
+title: Usage
+description: Learn how to use View Exports SVG to preview, browse, and manage SVG components in Visual Studio Code.
+---
+
+Once **View Exports SVG** is installed, you can explore, preview, and manage your SVG components directly within Visual Studio Code.
+
+This guide focuses on how to **open**, **navigate**, and **interact** with the extension's main features.
+
+---
+
+import Shortcut from '@site/src/components/Shortcut'
+
+## 🧭 Opening the Extension
+
+You can open **View Exports SVG** in several ways depending on your workflow.
+
+### From the Context Menu
+
+Right-click one or more files and select **"View Exports SVG 🔍"** from the context menu to scan and display available components.
+
+<div className='grid grid-cols-1 md:grid-cols-2 gap-6 my-4'
+>![The "View Exports SVG 🔍" command in the Explorer context menu (view 1).](/screens/context-menu-in-explorer.webp)
+  ![The "View Exports SVG 🔍" command in the Editor context menu (view 2).](/screens/context-menu-in-editor.webp)</div>
+
+### From the Command Palette
+
+Open the Command Palette (press <Shortcut mac={['command', 'shift']} windows={['ctrl', 'shift']}>P</Shortcut>), then type and run `View Exports SVG: Start Scanning` to scan your entire workspace.
+
+Alternatively, run `View Exports SVG 🔍` to access recent and favorite icons.
+
+<div align='center' className='mt-4'>
+  <video src='/screens/command-palette.webm' controls muted />
+  <p className='mt-2 text-sm text-gray-600 dark:text-gray-400'>Using the Command Palette to open panel "View Exports SVG".</p>
+</div>
+
+---
+
+## ⚙️ Browsing and Managing Icons
+
+Once opened, the `View Exports SVG` panel displays all detected SVG components from the scanned files.
+
+Each icon appears in a grid view with its preview, component name, and available actions.
+
+<div align='center' className='mt-4'>![The main UI of the View Exports SVG panel showing a grid of SVG icons.](/screens/principal-ui.webp)</div>
+
+### Common actions
+
+- Click actions on an icon
+  - Copy the name to the clipboard.
+  - Open the DevTools ([**see next section**](/docs/guides/devtools)).
+  - Add to the recent icons list (configurable option — [**Go to settings**](/docs/guides/settings#recent-icons)).
+- Mark / unmark as favorite
+  - Hover over the icon and click the star in the top-right corner to toggle.
+- Context menu (right-click on an icon)
+  - Copy name or code snippet.
+  - Open the icon in the editor.
+  - Copy the icon to the clipboard as PNG or SVG.
+  - Download the icon as PNG or SVG.
+
+---
+
+## 🧩 Drag & Drop Support
+
+To load and analyze files, execute from the Command Palette, run `View Exports SVG 🔍`.
+
+On the start screen you can drag and drop one or more files; the extension will read their contents, search for SVG icon components, and make them available for preview and management.
+
+<div align='center' className='mt-4'>
+  <video src='/screens/upload-files-drag-drop.webm' controls muted />
+  <p className='mt-2 text-sm text-gray-600 dark:text-gray-400'>Drag & Drop files into the View Exports SVG panel to preview their SVG components.</p>
+</div>
+
+:::caution Security Limitation
+Due to VS Code's WebView sandbox restrictions, direct access to file paths is blocked.\
+When you drag and drop files into the panel, the extension reads their contents and creates temporary
+in-memory versions for safe preview.
+
+<p className='ml-auto'>[Read more →](/docs/resources/troubleshooting#why-cant-i-load-files-from-my-computer-into-the-panel)</p>
+:::
+
+---
+
+## 🧭 Next Steps
+
+import DocCard from '@site/src/components/DocCard'
+import GridStagger from '@site/src/components/GridStagger'
+import { Bug, Puzzle, Settings, ToolCase } from 'lucide-react'
+
+<GridStagger>
+  <DocCard
+    icon={<ToolCase />}
+    title='DevTools Panel'
+    description='Explore the full-featured panel for managing, previewing, and editing icons.'
+    link='/docs/guides/devtools'
+  />
+  <DocCard
+    icon={<Puzzle />}
+    title='SVG Support'
+    description='See which SVG elements and structures are supported'
+    link='/docs/resources/svg-support'
+  />
+  <DocCard
+    icon={<Bug />}
+    title='Troubleshooting'
+    description='Find solutions to common issues and frequent questions.'
+    link='/docs/resources/troubleshooting'
+  />
+  <DocCard
+    icon={<Settings />}
+    title='Settings'
+    description='Customize the extension to fit your workflow.'
+    link='/docs/guides/settings'
+  />
+</GridStagger>
