@@ -19,6 +19,7 @@ export default function DocSidebarItemLink({
   const { href, label, className, autoAddBaseUrl } = item
   const isActive = isActiveSidebarItem(item, activePath)
   const isInternalLink = isInternalUrl(href)
+
   return (
     <li
       key={`sidebar-item-link-${level}-${index}-[${label}]`}
@@ -26,7 +27,7 @@ export default function DocSidebarItemLink({
       className={cn(
         ThemeClassNames.docs.docSidebarItemLink,
         ThemeClassNames.docs.docSidebarItemLinkLevel(level),
-        `rounded-md cursor-pointer my-1 transition-all ml-${level > 1 ? level : 0} relative`,
+        `rounded-md cursor-pointer my-1 transition-all relative`,
         {
           'opacity-70 font-normal hover:bg-primary/10 hover:opacity-100': !isActive,
           'opacity-100 font-medium bg-[#0d59f2]/10': isActive,
@@ -36,7 +37,7 @@ export default function DocSidebarItemLink({
     >
       {isActive && (
         <span
-          className={`absolute -left-${(level > 1 ? level : 0) + 2} top-0 bottom-0 my-1 w-0.5 bg-[#0d59f2] rounded-md`}
+          className={cn(`absolute top-0 bottom-0 my-1 w-0.5 bg-[#0d59f2] rounded-md -left-2`)}
         ></span>
       )}
       <HeroLink

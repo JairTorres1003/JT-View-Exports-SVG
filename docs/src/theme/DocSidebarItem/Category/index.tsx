@@ -157,7 +157,7 @@ function DocSidebarItemCategoryCollapsible({
       className={cn(
         ThemeClassNames.docs.docSidebarItemCategory,
         ThemeClassNames.docs.docSidebarItemCategoryLevel(level),
-        'menu__list-item',
+        'menu__list-item [&_>ul]:pl-2',
         { 'menu__list-item--collapsed': collapsed },
         className
       )}

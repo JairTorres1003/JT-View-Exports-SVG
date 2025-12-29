@@ -107,4 +107,8 @@ button {
       mask-size: 200vmax;
     }
   }
+
+  .table-of-contents__link--active {
+    @apply text-[#0d59f2];
+  }
 }
