@@ -47,7 +47,7 @@ function TOCItemTree({ toc, className, linkClassName, isChild }: Props): ReactNo
         <span
           ref={spanRef}
           className={cn(
-            'opacity-0 absolute left-0 top-0 bottom-0 w-0.5 bg-[#0d59f2] rounded-md transition-transform duration-300 ease-out'
+            'opacity-0 absolute left-0 top-0 bottom-0 w-0.5 bg-[#0d59f2] rounded-md transition-transform duration-300 ease-out pointer-events-none'
           )}
         ></span>
       )}

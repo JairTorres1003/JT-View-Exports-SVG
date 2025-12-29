@@ -36,9 +36,7 @@ export default function DocSidebarItemLink({
       )}
     >
       {isActive && (
-        <span
-          className={cn(`absolute top-0 bottom-0 my-1 w-0.5 bg-[#0d59f2] rounded-md -left-2`)}
-        ></span>
+        <span className='absolute top-0 bottom-0 my-1 w-0.5 bg-[#0d59f2] rounded-md -left-2 pointer-events-none'></span>
       )}
       <HeroLink
         as={Link}
