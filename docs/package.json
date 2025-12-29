@@ -20,6 +20,7 @@
     "@docusaurus/core": "3.9.2",
     "@docusaurus/plugin-ideal-image": "^3.9.2",
     "@docusaurus/preset-classic": "3.9.2",
+    "@heroui/breadcrumbs": "^2.2.24",
     "@heroui/button": "^2.2.27",
     "@heroui/card": "^2.2.25",
     "@heroui/code": "^2.2.21",
