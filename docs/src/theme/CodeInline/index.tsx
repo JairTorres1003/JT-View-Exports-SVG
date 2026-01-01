@@ -7,7 +7,7 @@ export default function CodeInline({ className, ...props }: CodeProps): ReactNod
     <Code
       {...props}
       className={cn(
-        'bg-primary/10 text-primary dark:bg-foreground/10 dark:text-foreground/80 px-2 py-1 ',
+        'bg-primary/10 text-primary dark:bg-foreground/10 dark:text-foreground/80 px-2 py-1',
         className
       )}
     />

@@ -76,7 +76,7 @@ export const InstallationMethods = [
     children: (
       <CodeBlock
         language='bash-vscode'
-        className='-m-4 [&_pre]:!bg-transparent'
+        className='-m-4 [&_pre]:!border-0'
       >{`code --install-extension JairTorres1003.jt-view-exports-svg`}</CodeBlock>
     ),
   },
