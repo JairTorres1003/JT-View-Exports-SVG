@@ -31,7 +31,7 @@ export default function BackToTopButton(): ReactNode {
         })}
         className={cn(
           ThemeClassNames.common.backToTopButton,
-          'fixed bottom-5 right-5 z-50 h-10 w-10 rounded-full scale-0 transition-transform duration-300 ease-in-out',
+          'fixed bottom-5 right-5 z-30 h-10 w-10 rounded-full scale-0 transition-transform duration-300 ease-in-out',
           shown && 'scale-100'
         )}
       >

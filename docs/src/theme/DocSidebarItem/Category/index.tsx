@@ -170,7 +170,7 @@ function DocSidebarItemCategoryCollapsible({
         aria-label={label}
         className='w-full px-2 py-1 rounded-md cursor-pointer transition-all flex items-center justify-between gap-2 hover:bg-primary/10'
       >
-        <p className='m-0 font-medium text-foreground leading-[1.5rem]'>{label}</p>
+        <p className='m-0 font-medium text-foreground leading-[1.5rem] text-[1rem]'>{label}</p>
         <ChevronRight
           size='1rem'
           className={cn('transition-transform inline-block', {

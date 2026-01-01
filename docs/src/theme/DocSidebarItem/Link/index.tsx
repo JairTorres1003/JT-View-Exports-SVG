@@ -23,7 +23,6 @@ export default function DocSidebarItemLink({
   return (
     <li
       key={`sidebar-item-link-${level}-${index}-[${label}]`}
-      onClick={isInternalLink ? () => onItemClick(item) : undefined}
       className={cn(
         ThemeClassNames.docs.docSidebarItemLink,
         ThemeClassNames.docs.docSidebarItemLinkLevel(level),
@@ -48,6 +47,7 @@ export default function DocSidebarItemLink({
         aria-current={isActive ? 'page' : undefined}
         className={cn('w-full px-2 py-1 transition-all', { 'text-[#0d59f2]': isActive })}
         {...props}
+        onClick={isInternalLink ? () => onItemClick(item) : undefined}
       >
         {label}
       </HeroLink>
