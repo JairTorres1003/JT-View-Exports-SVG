@@ -182,12 +182,17 @@ function DocSidebarItemCategoryCollapsible({
       )}
     >
       <div
-        role={href ? undefined : 'button'}
+        role={href || !collapsible ? undefined : 'button'}
         onClick={handleItemClick}
         aria-current={isCurrentPage ? 'page' : undefined}
         aria-expanded={collapsible ? !collapsed : undefined}
         aria-label={label}
-        className='w-full px-2 py-1 rounded-md cursor-pointer transition-all flex items-center justify-between gap-2 hover:bg-primary/10 relative'
+        className={cn(
+          'w-full px-2 py-1 rounded-md transition-all flex items-center justify-between gap-2 relative',
+          {
+            'cursor-pointer hover:bg-primary/10': collapsible,
+          }
+        )}
       >
         {href ? (
           <>
@@ -210,13 +215,16 @@ function DocSidebarItemCategoryCollapsible({
         ) : (
           <p className='m-0 font-medium text-foreground leading-[1.5rem] text-[1rem]'>{label}</p>
         )}
-        <ChevronRight
-          size='1rem'
-          className={cn('transition-transform inline-block', {
-            'rotate-0': collapsed,
-            'rotate-90': !collapsed,
-          })}
-        />
+
+        {collapsible && (
+          <ChevronRight
+            size='1rem'
+            className={cn('transition-transform inline-block', {
+              'rotate-0': collapsed,
+              'rotate-90': !collapsed,
+            })}
+          />
+        )}
       </div>
 
       <Collapsible lazy as='ul' className='menu__list' collapsed={collapsed}>

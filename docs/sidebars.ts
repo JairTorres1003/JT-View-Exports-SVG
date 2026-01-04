@@ -14,12 +14,16 @@ import type { SidebarsConfig } from '@docusaurus/plugin-content-docs'
  */
 const sidebars: SidebarsConfig = {
   main: [
-    'getting-started',
-    'features',
     {
       type: 'category',
-      label: 'Guides',
-      items: ['guides/usage', 'guides/devtools'],
+      label: 'Introduction',
+      collapsed: false,
+      items: ['intro/overview', 'intro/why-view-exports-svg', 'intro/why-use-it'],
+    },
+    {
+      type: 'category',
+      label: 'Getting Started',
+      items: ['getting-started/installation', 'getting-started/your-first-svg'],
     },
   ],
 }
