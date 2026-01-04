@@ -23,7 +23,18 @@ const sidebars: SidebarsConfig = {
     {
       type: 'category',
       label: 'Getting Started',
+      link: { type: 'doc', id: 'getting-started/index' },
       items: ['getting-started/installation', 'getting-started/your-first-svg'],
+    },
+    {
+      type: 'category',
+      label: 'Guides',
+      items: ['guides/usage', 'guides/devtools'],
+    },
+    {
+      type: 'category',
+      label: 'Resources',
+      items: ['resources/features'],
     },
   ],
 }

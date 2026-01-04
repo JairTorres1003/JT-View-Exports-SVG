@@ -9,10 +9,10 @@ import { Link } from '@heroui/link'
 export const ActivationMethods = [
   {
     icon: <FolderCode />,
-    title: 'From the Explorer',
+    title: 'From the Explorer or Editor',
     description: (
       <>
-        Right-click any folder or file containing SVG components and select{' '}
+        Right-click any file containing SVG components and select{' '}
         <strong>"View Exports SVG 🔍"</strong> from the context menu.
       </>
     ),

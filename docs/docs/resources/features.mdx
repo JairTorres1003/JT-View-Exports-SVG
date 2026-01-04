@@ -77,31 +77,3 @@ detect and display all exported components seamlessly.
     <DocCard key={feature.title} {...feature} />
   ))}
 </div>
-
----
-
-## 🧭 Next Steps
-
-import { Bug, LandPlot, Puzzle } from 'lucide-react'
-import GridStagger from '@site/src/components/GridStagger'
-
-<GridStagger>
-  <DocCard
-    icon={<LandPlot />}
-    title='Getting Started'
-    description='Learn how to install and set up the extension.'
-    link='/docs/getting-started'
-  />
-  <DocCard
-    icon={<Bug />}
-    title='Troubleshooting'
-    description='Find solutions to common issues and frequent questions.'
-    link='/docs/resources/troubleshooting'
-  />
-  <DocCard
-    icon={<Puzzle />}
-    title='SVG Support'
-    description='See which SVG elements and structures are supported'
-    link='/docs/resources/svg-support'
-  />
-</GridStagger>

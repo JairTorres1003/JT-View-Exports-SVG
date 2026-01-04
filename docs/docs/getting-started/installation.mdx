@@ -1,14 +1,25 @@
 ---
-title: Getting Started
-description: Learn how to install and run View Exports SVG for the first time in Visual Studio Code.
+title: Installation
+description: Install View Exports SVG in Visual Studio Code and get ready to scan your SVG components.
 ---
 
-Quick Start Guide to Getting Started with "View Exports SVG" in Your Project.
+**View Exports SVG** can be installed directly from the Visual Studio Code Marketplace or via the command line.
 
-## What is View Exports SVG?
+Choose the method that best fits your workflow.
 
-**View Exports SVG** is a Visual Studio Code extension designed to streamline the process of accessing and utilizing SVG icons.
-With this extension, you can effortlessly explore and search for SVG icons within your project.
+---
+
+## ✅ System Requirements
+
+Before installing, make sure your environment meets the following requirements:
+
+- **Visual Studio Code** version **1.80.0 or later**
+- Supported operating systems:
+  - Windows
+  - macOS
+  - Linux
+
+No additional dependencies or frameworks are required.
 
 ---
 
@@ -19,7 +30,7 @@ import { ActivationMethods, InstallationMethods } from '@site/src/constants/gett
 
 <Steps>
   <StepItem>
-    ## 🧩 Installation
+    ## 🧩 Installation Methods
 
     <div className='border-2 border-primary/20 rounded-md'>
       <Tabs
@@ -51,19 +62,7 @@ import { ActivationMethods, InstallationMethods } from '@site/src/constants/gett
 
 ---
 
-## 🧠 First Run
-
-Once opened, the extension will:
-
-- Scan your project for exported SVG components (`.jsx`, `.tsx`, `.js`, `.ts`).
-- Display them in a dedicated DevTools panel.
-- Let you preview icons instantly.
-
-You can start interacting right away, or explore advanced features next.
-
----
-
-## 🎉 You're All Set!
+## 🎉 Installation Complete
 
 Congratulations! You have successfully installed and opened `View Exports SVG`. Start exploring your SVG components directly within Visual Studio Code.
 
@@ -73,7 +72,7 @@ For more detailed instructions and advanced usage, check out the rest of the doc
 
 ## 🧭 Next Steps
 
-import { LibraryBig, Puzzle, ToolCase } from 'lucide-react'
+import { LibraryBig, Rocket, ToolCase } from 'lucide-react'
 import GridStagger from '@site/src/components/GridStagger'
 
 <GridStagger>
@@ -84,15 +83,15 @@ import GridStagger from '@site/src/components/GridStagger'
     link='/docs/guides/usage'
   />
   <DocCard
-    icon={<Puzzle />}
-    title='SVG Support'
-    description='See which SVG elements and structures are supported'
-    link='/docs/resources/svg-support'
-  />
-  <DocCard
     icon={<ToolCase />}
     title='DevTools Panel'
     description='Explore the full-featured panel for managing, previewing, and editing icons.'
     link='/docs/guides/devtools'
+  />
+  <DocCard
+    icon={<Rocket />}
+    title='Features'
+    description='Explore all the powerful features that View Exports SVG offers.'
+    link='/docs/resources/features'
   />
 </GridStagger>
