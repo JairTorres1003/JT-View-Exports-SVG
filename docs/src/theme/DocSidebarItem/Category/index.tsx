@@ -198,7 +198,7 @@ function DocSidebarItemCategoryCollapsible({
               as={Link}
               to={collapsible ? (hrefWithSSRFallback ?? '#') : hrefWithSSRFallback}
               color={isCurrentPage ? 'primary' : 'foreground'}
-              className={cn('w-full px-2 py-1 -mx-2 -my-1 transition-all ', {
+              className={cn('w-full px-2 py-1 -mx-2 -my-1 transition-all font-medium', {
                 'text-[#0d59f2]': isCurrentPage,
               })}
               {...props}
