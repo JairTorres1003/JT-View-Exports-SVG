@@ -1,4 +1,4 @@
-import React, { type ReactNode, useEffect } from 'react'
+import React, { type ReactNode, useEffect, useMemo } from 'react'
 import {
   ThemeClassNames,
   useThemeConfig,
@@ -9,9 +9,12 @@ import {
 import { isSamePath } from '@docusaurus/theme-common/internal'
 import {
   isActiveSidebarItem,
+  findFirstSidebarItemLink,
   useDocSidebarItemsExpandedState,
   useVisibleSidebarItems,
 } from '@docusaurus/plugin-content-docs/client'
+import Link from '@docusaurus/Link'
+import useIsBrowser from '@docusaurus/useIsBrowser'
 import DocSidebarItems from '@theme/DocSidebarItems'
 import DocSidebarItemLink from '@theme/DocSidebarItem/Link'
 import type { Props } from '@theme/DocSidebarItem/Category'
@@ -19,6 +22,7 @@ import type { Props } from '@theme/DocSidebarItem/Category'
 import type { PropSidebarItemCategory, PropSidebarItemLink } from '@docusaurus/plugin-content-docs'
 import { cn } from '@site/src/lib/utils'
 import { ChevronRight } from 'lucide-react'
+import { Link as HeroLink } from '@heroui/link'
 
 // If we navigate to a category and it becomes active, it should automatically
 // expand itself
@@ -44,6 +48,29 @@ function useAutoExpandActiveCategory({
   }, [isActive, wasActive, collapsed, updateCollapsed, activePath, previousActivePath])
 }
 
+/**
+ * When a collapsible category has no link, we still link it to its first child
+ * during SSR as a temporary fallback. This allows to be able to navigate inside
+ * the category even when JS fails to load, is delayed or simply disabled
+ * React hydration becomes an optional progressive enhancement
+ * see https://github.com/facebookincubator/infima/issues/36#issuecomment-772543188
+ * see https://github.com/facebook/docusaurus/issues/3030
+ */
+function useCategoryHrefWithSSRFallback(item: Props['item']): string | undefined {
+  const isBrowser = useIsBrowser()
+  return useMemo(() => {
+    if (item.href && !item.linkUnlisted) {
+      return item.href
+    }
+    // In these cases, it's not necessary to render a fallback
+    // We skip the "findFirstCategoryLink" computation
+    if (isBrowser || !item.collapsible) {
+      return undefined
+    }
+    return findFirstSidebarItemLink(item)
+  }, [item, isBrowser])
+}
+
 export default function DocSidebarItemCategory(props: Props): ReactNode {
   const visibleChildren = useVisibleSidebarItems(props.item.items, props.activePath)
   if (visibleChildren.length === 0) {
@@ -67,18 +94,8 @@ function DocSidebarItemCategoryEmpty({ item, ...props }: Props): ReactNode {
     return null
   }
   // We remove props that don't make sense for a link and forward the rest
-  const {
-    type: _type,
-    collapsed: _collapsed,
-    collapsible: _collapsible,
-    items: _items,
-    linkUnlisted: _linkUnlisted,
-    ...forwardableProps
-  } = item
-  const linkItem: PropSidebarItemLink = {
-    type: 'link',
-    ...forwardableProps,
-  }
+  const { type, collapsed, collapsible, items, linkUnlisted, ...forwardProps } = item
+  const linkItem: PropSidebarItemLink = { type: 'link', ...forwardProps }
   return <DocSidebarItemLink item={linkItem} {...props} />
 }
 
@@ -88,6 +105,7 @@ function DocSidebarItemCategoryCollapsible({
   activePath,
   level,
   index,
+  ...props
 }: Props): ReactNode {
   const { items, label, collapsible, className, href } = item
   const {
@@ -95,6 +113,7 @@ function DocSidebarItemCategoryCollapsible({
       sidebar: { autoCollapseCategories },
     },
   } = useThemeConfig()
+  const hrefWithSSRFallback = useCategoryHrefWithSSRFallback(item)
 
   const isActive = isActiveSidebarItem(item, activePath)
   const isCurrentPage = isSamePath(href, activePath)
@@ -128,7 +147,7 @@ function DocSidebarItemCategoryCollapsible({
     }
   }, [collapsible, expandedItem, index, setCollapsed, autoCollapseCategories])
 
-  const handleItemClick = (e: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
+  const handleItemClick = (e: React.MouseEvent<HTMLElement, MouseEvent>) => {
     onItemClick?.(item)
     if (collapsible) {
       if (href) {
@@ -163,14 +182,34 @@ function DocSidebarItemCategoryCollapsible({
       )}
     >
       <div
-        role='button'
+        role={href ? undefined : 'button'}
         onClick={handleItemClick}
         aria-current={isCurrentPage ? 'page' : undefined}
         aria-expanded={collapsible ? !collapsed : undefined}
         aria-label={label}
-        className='w-full px-2 py-1 rounded-md cursor-pointer transition-all flex items-center justify-between gap-2 hover:bg-primary/10'
+        className='w-full px-2 py-1 rounded-md cursor-pointer transition-all flex items-center justify-between gap-2 hover:bg-primary/10 relative'
       >
-        <p className='m-0 font-medium text-foreground leading-[1.5rem] text-[1rem]'>{label}</p>
+        {href ? (
+          <>
+            {isCurrentPage && (
+              <span className='absolute top-0 bottom-0 my-1 w-0.5 bg-[#0d59f2] rounded-md -left-2 pointer-events-none'></span>
+            )}
+            <HeroLink
+              as={Link}
+              to={collapsible ? (hrefWithSSRFallback ?? '#') : hrefWithSSRFallback}
+              color={isCurrentPage ? 'primary' : 'foreground'}
+              className={cn('w-full px-2 py-1 -mx-2 -my-1 transition-all ', {
+                'text-[#0d59f2]': isCurrentPage,
+              })}
+              {...props}
+              onClick={handleItemClick}
+            >
+              {label}
+            </HeroLink>
+          </>
+        ) : (
+          <p className='m-0 font-medium text-foreground leading-[1.5rem] text-[1rem]'>{label}</p>
+        )}
         <ChevronRight
           size='1rem'
           className={cn('transition-transform inline-block', {
