@@ -6,6 +6,8 @@ import type {} from 'docusaurus-plugin-image-zoom'
 
 // This runs in Node.js - Don't use client-side code here (browser APIs, JSX...)
 
+const copyright = `© ${new Date().getFullYear()} View Exports SVG. Creado con ❤️ por <a href="https://github.com/JairTorres1003" class="font-semibold">Jair Torres</a>. Todos los derechos reservados.`
+
 const config: Config = {
   title: 'View Exports SVG',
   tagline:
@@ -42,6 +44,31 @@ const config: Config = {
     './src/plugins/tailwind-config.ts',
     '@docusaurus/plugin-ideal-image',
     'docusaurus-plugin-image-zoom',
+    [
+      './src/plugins/changelog/index.ts',
+      {
+        blogTitle: 'View Exports SVG - Changelog',
+        // Not useful, but permits to run git commands earlier
+        // Otherwise the sitemap plugin will run them in postBuild()
+        blogDescription:
+          'Stay updated with the latest changes, improvements, and fixes in View Exports SVG through our comprehensive changelog.',
+        blogSidebarCount: 'ALL',
+        pageBasePath: '/',
+        blogSidebarTitle: 'Changelog',
+        routeBasePath: '/changelog',
+        showReadingTime: false,
+        postsPerPage: 20,
+        archiveBasePath: null,
+        onInlineAuthors: 'warn',
+        feedOptions: {
+          type: ['atom', 'rss', 'json'],
+          title: 'View Exports SVG - Changelog',
+          description:
+            'Stay updated with the latest changes, improvements, and fixes in View Exports SVG through our comprehensive changelog.',
+          copyright,
+        },
+      },
+    ],
   ],
 
   presets: [
@@ -100,7 +127,7 @@ const config: Config = {
       sidebar: { hideable: true },
     },
     footer: {
-      copyright: `© ${new Date().getFullYear()} View Exports SVG. Creado con ❤️ por <a href="https://github.com/JairTorres1003" class="font-semibold">Jair Torres</a>. Todos los derechos reservados.`,
+      copyright,
     },
     prism: {
       additionalLanguages: ['bash'],
