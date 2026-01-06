@@ -5,6 +5,7 @@ type ChangelogEntry = {
   version: string
   date: string
   content: string
+  startLine: number
 }
 
 function parseDate(raw: string): string {
@@ -13,6 +14,7 @@ function parseDate(raw: string): string {
 
 function parseSingleChangelog(fileContent: string): ChangelogEntry[] {
   const sections = fileContent.split(/^## /gm).filter(Boolean)
+  let countStartLine = 3 // Start after front-matter lines
 
   if (sections.length > 0 && !sections[0].startsWith('v')) {
     sections.shift()
@@ -20,7 +22,6 @@ function parseSingleChangelog(fileContent: string): ChangelogEntry[] {
 
   return sections.map((section) => {
     const lines = section.trim().split('\n')
-
     const version = lines[0].trim()
 
     const dateLine = lines.find((l) => l.startsWith('_') && l.endsWith('_'))
@@ -29,6 +30,9 @@ function parseSingleChangelog(fileContent: string): ChangelogEntry[] {
       throw new Error(`No date found for version ${version}`)
     }
 
+    const startLine = countStartLine
+    countStartLine += lines.length + 1
+
     const date = parseDate(dateLine.replace(/_/g, ''))
 
     const content = lines
@@ -36,7 +40,7 @@ function parseSingleChangelog(fileContent: string): ChangelogEntry[] {
       .join('\n')
       .trim()
 
-    return { version, date, content }
+    return { version, date, content, startLine }
   })
 }
 

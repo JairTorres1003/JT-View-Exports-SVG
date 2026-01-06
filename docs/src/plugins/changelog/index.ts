@@ -55,6 +55,7 @@ const ChangelogPlugin: typeof pluginContentBlog = async function ChangelogPlugin
     },
   })
   const changelogFiles = await getChangelogFiles()
+
   return {
     ...blogPlugin,
     name: 'changelog-plugin',
@@ -76,6 +77,9 @@ const ChangelogPlugin: typeof pluginContentBlog = async function ChangelogPlugin
           options.routeBasePath,
           pageIndex === 0 ? '/' : `/page/${pageIndex + 1}`,
         ])
+
+        // @ts-expect-error: TODO Docusaurus use interface declaration merging
+        post.metadata.editUrl = options.editUrl + `#L${changelogEntries[index].startLine}`
       })
       return content
     },

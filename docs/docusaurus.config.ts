@@ -60,6 +60,7 @@ const config: Config = {
         postsPerPage: 20,
         archiveBasePath: null,
         onInlineAuthors: 'warn',
+        editUrl: 'https://github.com/JairTorres1003/JT-View-Exports-SVG/edit/main/CHANGELOG.md',
         feedOptions: {
           type: ['atom', 'rss', 'json'],
           title: 'View Exports SVG - Changelog',
