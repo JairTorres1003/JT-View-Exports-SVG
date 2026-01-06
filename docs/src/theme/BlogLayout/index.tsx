@@ -44,7 +44,15 @@ const useSidebar = (sidebar: Props['sidebar']) => {
       {}
     )
 
-    return Object.values(groupedSidebarItems).sort((a, b) => Number(b.label) - Number(a.label))
+    return [
+      mapLinkItem({
+        title: 'All Posts',
+        permalink: `/${sidebar.items[0]?.permalink.split('/')[1]}`,
+        date: '',
+        unlisted: false,
+      }),
+      ...Object.values(groupedSidebarItems).sort((a, b) => Number(b.label) - Number(a.label)),
+    ]
   }, [sidebar])
 
   return {
