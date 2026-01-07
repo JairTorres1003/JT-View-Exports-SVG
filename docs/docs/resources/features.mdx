@@ -1,11 +1,11 @@
 ---
 title: Features
-description: Discover all the powerful tools included in View Exports SVG for Visual Studio Code.
+description: Explore the full set of features included in View Exports SVG for Visual Studio Code.
 ---
 
-**View Exports SVG** extends Visual Studio Code with a complete toolkit for discovering, previewing, and managing SVG components in your workspace.
+**View Exports SVG** provides a focused set of tools for discovering, previewing, and working with SVG components directly inside Visual Studio Code.
 
-This page provides an overview of the key features that make it an essential tool for frontend developers and design systems.
+This page lists the core features available in the extension and how they are grouped by functionality.
 
 ---
 
@@ -19,7 +19,7 @@ import {
 
 ## 🧭 Workspace Scanning
 
-Scan your entire project to automatically detect all exported SVG components.
+Automatically scans your workspace to detect all exported SVG components.
 
 <div className='grid grid-cols-1 md:grid-cols-2 gap-6 my-4 mb-12'>
   {FeaturesWorkspace.map((feature) => (
@@ -31,7 +31,7 @@ Scan your entire project to automatically detect all exported SVG components.
 
 ## ⚙️ DevTools Panel
 
-The **DevTools Panel** is the visual heart of the extension — a fully dockable interface that lets you browse and manage all discovered icons.
+A fully dockable panel that acts as the central interface for exploring and interacting with SVG components.
 
 <div className='grid grid-cols-1 md:grid-cols-2 gap-6 my-4 mb-12'>
   {FeaturesDevtools.map((feature) => (
@@ -43,7 +43,7 @@ The **DevTools Panel** is the visual heart of the extension — a fully dockable
 
 ## 🧠 Productivity Tools
 
-View Exports SVG goes beyond simple previews — it provides developer-focused utilities that streamline your workflow.
+Utilities designed to reduce repetitive tasks and speed up SVG-related workflows.
 
 <div className='grid grid-cols-1 md:grid-cols-2 gap-6 my-4 mb-12'>
   {FeaturesProductivity.map((feature) => (
@@ -55,25 +55,34 @@ View Exports SVG goes beyond simple previews — it provides developer-focused u
 
 ## 🧩 Framework Compatibility
 
-The extension supports modern frontend stacks by analyzing exported components in multiple frameworks.
+View Exports SVG analyzes exported components across common frontend stacks:
 
-- **React** (default support)
+- **React**
 - **Preact**
-- **TypeScript and JavaScript**
+- **JavaScript & TypeScript**
 
-:::tip Pro tip
-Even if your project mixes `.js`, `.jsx`, `.ts`, and `.tsx` files, View Exports SVG can still
-detect and display all exported components seamlessly.
+:::tip
+Projects mixing `.js`, `.jsx`, `.ts`, and `.tsx` files are fully supported.
 :::
 
 ---
 
 ## 🎨 Theme Compatibility
 
-**View Exports SVG** is designed to adapt visually to the majority of VS Code themes — both light and dark.
+The extension adapts its UI to match your current VS Code theme.
 
 <div className='grid grid-cols-1 md:grid-cols-2 gap-6 my-4 mb-12'>
   {FeaturesThemeSupport.map((feature) => (
     <DocCard key={feature.title} {...feature} />
   ))}
 </div>
+
+---
+
+## 🗂 Feature History
+
+View Exports SVG is actively evolving, with features being refined and expanded over time.
+
+If you're curious about **when a feature was introduced**, recent improvements, or breaking changes,
+you can explore the full release history in the
+[**Changelog**](/changelog).
