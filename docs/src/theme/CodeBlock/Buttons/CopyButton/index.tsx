@@ -59,7 +59,6 @@ export default function CopyButton({ className }: Props): ReactNode {
         isIconOnly
         onPress={copyCode}
         aria-label={ariaLabel(isCopied)}
-        title={title()}
         size='sm'
         className={cn(
           'group bg-foreground/10 dark:bg-secondary-200/80 hover:bg-foreground/20 dark:hover:bg-secondary-200/90 transition-colors',
