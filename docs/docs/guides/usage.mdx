@@ -3,68 +3,89 @@ title: Usage
 description: Learn how to use View Exports SVG to preview, browse, and manage SVG components in Visual Studio Code.
 ---
 
-Once **View Exports SVG** is installed, you can explore, preview, and manage your SVG components directly within Visual Studio Code.
+Once **View Exports SVG** is installed and running, you can browse, preview, and manage SVG components directly inside Visual Studio Code.
 
-This guide focuses on how to **open**, **navigate**, and **interact** with the extension's main features.
+This guide focuses on the **day-to-day workflow**: how to explore icons, interact with them, and use them efficiently in your project.
 
 ---
 
-import Shortcut from '@site/src/components/Shortcut'
+## 🔄 Core Workflow
+
+The typical workflow with View Exports SVG looks like this:
+
+1. Open the extension (context menu or command palette)
+2. Browse detected SVG components in a grid
+3. Preview icons visually
+4. Copy, export, or edit them using built-in tools
+
+The following sections explain each step in detail.
+
+---
 
 ## 🧭 Opening the Extension
 
-You can open **View Exports SVG** in several ways depending on your workflow.
+You can open **View Exports SVG** at any time using:
 
-### From the Context Menu
+- The **context menu** on files or folders
+- The **Command Palette**
 
-Right-click one or more files and select **"View Exports SVG 🔍"** from the context menu to scan and display available components.
-
-<div className='grid grid-cols-1 md:grid-cols-2 gap-6 my-4'
->![The "View Exports SVG 🔍" command in the Explorer context menu (view 1).](/screens/context-menu-in-explorer.webp)
-  ![The "View Exports SVG 🔍" command in the Editor context menu (view 2).](/screens/context-menu-in-editor.webp)</div>
-
-### From the Command Palette
-
-Open the Command Palette (press <Shortcut mac={['command', 'shift']} windows={['ctrl', 'shift']}>P</Shortcut>), then type and run `View Exports SVG: Start Scanning` to scan your entire workspace.
-
-Alternatively, run `View Exports SVG 🔍` to access recent and favorite icons.
-
-<div align='center' className='mt-4'>
-  <video src='/screens/command-palette.webm' controls muted />
-  <p className='mt-2 text-sm text-gray-600 dark:text-gray-400'>Using the Command Palette to open panel "View Exports SVG".</p>
-</div>
+If this is your first time, make sure you've completed the [**Getting Started**](/docs/getting-started) guide.
 
 ---
 
-## ⚙️ Browsing and Managing Icons
+## ⚙️ Browsing Icons
 
-Once opened, the `View Exports SVG` panel displays all detected SVG components from the scanned files.
+Once opened, the panel displays all detected SVG components in a grid layout.
 
-Each icon appears in a grid view with its preview, component name, and available actions.
+Each item shows:
+- A live preview
+- The component name
+- Quick actions
 
 <div align='center' className='mt-4'>![The main UI of the View Exports SVG panel showing a grid of SVG icons.](/screens/principal-ui.webp)</div>
 
-### Common actions
+---
 
-- Click actions on an icon
-  - Copy the name to the clipboard.
-  - Open the DevTools ([**see next section**](/docs/guides/devtools)).
-  - Add to the recent icons list (configurable option — [**Go to settings**](/docs/guides/settings#replace-real-path)).
-- Mark / unmark as favorite
-  - Hover over the icon and click the star in the top-right corner to toggle.
-- Context menu (right-click on an icon)
-  - Copy name or code snippet.
-  - Open the icon in the editor.
-  - Copy the icon to the clipboard as PNG or SVG.
-  - Download the icon as PNG or SVG.
+## 🎯 Interacting with Icons
+
+### Click Actions
+- Copy component name to clipboard
+- Open the DevTools panel
+- Add to recent icons (configurable)
+
+### Favorites
+- Hover an icon
+- Click the ⭐ star to mark or unmark
+
+### Context Menu
+Right-click an icon to:
+- Copy name or code snippet
+- Open in editor
+- Copy as PNG or SVG
+- Download as PNG or SVG
 
 ---
 
-## 🧩 Drag & Drop Support
+## 👁 Previewing and Editing Icons
 
-To load and analyze files, execute from the Command Palette, run `View Exports SVG 🔍`.
+Selecting an icon opens the **DevTools panel**, where you can:
 
-On the start screen you can drag and drop one or more files; the extension will read their contents, search for SVG icon components, and make them available for preview and management.
+- Preview icons in real time
+- Edit props in the playground
+- Reset or export results
+
+For advanced editing features, see:
+[**DevTools Panel →**](/docs/guides/devtools)
+
+---
+
+## 🧩 Alternative Workflow: Drag & Drop
+
+You can also drag and drop files directly into the extension start screen.
+
+This workflow is useful when:
+- Exploring icons outside the workspace
+- Testing individual files quickly
 
 <div align='center' className='mt-4'>
   <video src='/screens/upload-files-drag-drop.webm' controls muted />
