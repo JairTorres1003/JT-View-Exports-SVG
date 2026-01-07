@@ -4,36 +4,37 @@ tagline: Explore the features and functionalities of the DevTools panel.
 description: Learn how to use the DevTools panel to inspect, edit, and manage your SVG components in real time.
 ---
 
-The **DevTools panel** is where you can inspect, preview, and edit your SVG components directly from within **Visual Studio Code**.
+The **DevTools panel** is the advanced workspace where you can inspect, preview, and edit SVG components in real time—without leaving Visual Studio Code.
 
----
-
-## 📍 Location in the UI
-
-To access the DevTools panel, first open the `View Exports SVG` panel. Then, you can open the DevTools in any of the following ways:
-
-1. Click the icon of the component you want to view or edit.
-2. Click the button located in the top-right corner of the panel.
-3. Drag from the right edge to dock or undock the panel.
-
-The image labels the points that indicate where each action is located.
-
-<div align='center' className='mt-4'>![Location of the DevTools in the "View Exports SVG" panel.](/screens/devtools-location.webp)</div>
+It is designed to help you:
+- Visually validate icons before using them
+- Experiment with props and styles
+- Inspect component metadata and structure
 
 ---
 
 import CodeInline from '@theme/CodeInline'
 
-## 🧩 Playground Overview
+## 🧠 DevTools Overview
 
-The **Playground** lets you test and preview your icons dynamically.
-It includes a live editor, background color selector, and several quick actions.
+The DevTools panel is divided into two main sections:
+
+- **Playground** — Interactive editor and live preview
+- **Component Info** — Read-only metadata about the selected icon
+
+Each section updates automatically when you select a different component.
+
+---
+
+## 🧩 Playground
+
+The **Playground** lets you experiment with SVG components dynamically.
+It combines a live preview, a real-time code editor, and quick-access actions.
 
 ### ✏️ Real-time Editing
 
-Use the built-in editor to modify your icon's props in real time. The playground updates instantly.
-
-You can toggle or adjust the preview's background color to visualize icons under different contrast conditions.
+Use the built-in editor to modify your component props.
+All changes are reflected instantly in the preview.
 
 <div align='center' className='mt-4'>
   <video src='/screens/devtools-overview.mp4' controls muted />
@@ -46,19 +47,21 @@ of a property inside the component or by opening the `<` symbol to show suggesti
 components.
 :::
 
-#### Quick editor actions
+### ⚡ Quick Editor Actions
 
-In the editor toolbar you'll find several quick-access buttons:
+The editor toolbar provides quick access to common actions:
 
-- Hide/Show code — Toggles the editor's visibility.
-- Copy code — Copies the current code to the clipboard.
-- Reset code — Restores the editor to its initial state.
-- More actions (three dots icon) — Opens a menu with additional options:
-  - **Open in Editor** — Jump directly to the component's source file.
-  - **Copy as SVG / PNG** — Copies the rendered version to clipboard.
-  - **Download as SVG / PNG** — Saves the icon to your local machine.
+- **Show / Hide code** — Toggle editor visibility
+- **Copy code** — Copy the current editor content
+- **Reset code** — Restore the initial state
 
-### 🎨 Background & Color Picker
+Additional actions are available under the **More actions** menu:
+
+- **Open in Editor**
+- **Copy as SVG / PNG**
+- **Download as SVG / PNG**
+
+### 🎨 Background & Contrast Testing
 
 <div className='grid grid-cols-1 md:grid-cols-2 gap-6 my-4'>
   <div>![Background color picker in the DevTools Playground.](/screens/playground-color-picker.webp)</div>
@@ -70,6 +73,7 @@ In the editor toolbar you'll find several quick-access buttons:
     contrast levels.
   </div>
 </div>
+
 
 ### 🧰 Playground Menu Actions
 
@@ -83,11 +87,9 @@ The menu includes the following options:
 
 ---
 
-## ℹ️ Info Component Overview
+## ℹ️ Component Info
 
-Below the Playground, you'll find the **Component Info** section.
-
-It displays metadata about the selected component, including:
+The **Component Info** section displays read-only metadata about the selected icon.
 
 | Field                | Description                                      |
 | -------------------- | ------------------------------------------------ |
@@ -99,9 +101,21 @@ It displays metadata about the selected component, including:
 
 <div className='max-w-fit mt-3'>
 :::note
-This panel is purely informative and automatically updates when you select another icon.
+This section is informational only and updates automatically when you select another component.
 :::
 </div>
+
+---
+
+## 📍 DevTools Location in the UI
+
+You can open the DevTools panel in several ways:
+
+1. Click an icon card
+2. Use the top-right toggle button
+3. Drag from the right edge to dock or undock
+
+<div align='center' className='mt-4'>![Location of the DevTools in the "View Exports SVG" panel.](/screens/devtools-location.webp)</div>
 
 ---
 
