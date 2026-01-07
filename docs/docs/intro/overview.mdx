@@ -5,39 +5,39 @@ description: An overview of View Exports SVG, a VS Code extension for managing S
 
 # Overview
 
-**View Exports SVG** is a Visual Studio Code extension that simplifies how developers discover, visualize, and manage SVG component libraries in modern front-end projects.
+**View Exports SVG** is a Visual Studio Code extension that helps developers discover, preview, and manage SVG component libraries in modern front-end projects.
 
-Managing large collections of SVG icons can quickly become a productivity bottleneck. View Exports SVG addresses this by providing a unified interface to explore, preview, and interact with SVG components directly inside VS Code.
+In projects with growing icon sets, understanding what SVG components exist and how they are structured can become difficult. View Exports SVG provides a unified, editor-native interface to explore SVG components without leaving VS Code.
 
 ## What It Does
 
-The extension scans your workspace and extracts SVG component exports from:
+The extension scans your workspace and extracts exported SVG components from:
 
 - JavaScript (`.js`)
 - TypeScript (`.ts`)
 - JSX / TSX (`.jsx`, `.tsx`)
 
-It uses **Babel AST traversal** to accurately detect exported SVG components in React, Preact, and other JSX-based frameworks.
+It uses **Babel AST traversal** to accurately detect SVG components in React, Preact, and other JSX-based frameworks.
 
 ## Key Capabilities
 
-View Exports SVG provides a complete toolset for SVG component management:
+View Exports SVG provides tools for working with SVG components at scale:
 
 - **Workspace-wide Discovery**
-  Automatically finds all exported SVG components across your project.
+  Scans the entire project and lists all exported SVG components.
 
 - **Interactive DevTools Panel**
-  A dockable panel with component previews, search, and quick actions.
+  A dockable panel for previewing components and accessing related actions.
 
 - **Real-time Playground**
-  Modify component properties in a editor and preview changes instantly.
+  Edit component properties in an embedded editor and preview changes instantly.
 
-- **Component Management**
-  Mark favorites, track recently used icons, and organize components efficiently.
+- **Component Metadata**
+  Displays export type, animation detection, and usage status.
 
 - **Multi-language Support**
   Interface available in over 15 languages.
 
 :::note
-View Exports SVG is designed to scale from small projects to large icon libraries, offering simple discovery for beginners and advanced features like custom grouping patterns and performance optimizations for power users.
+View Exports SVG is designed to work with both small projects and large icon libraries, adapting to different project structures and export patterns.
 :::
