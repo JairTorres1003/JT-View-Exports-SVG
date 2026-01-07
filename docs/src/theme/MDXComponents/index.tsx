@@ -13,6 +13,7 @@ import Mermaid from '@theme/Mermaid'
 import type { MDXComponentsObject } from '@theme/MDXComponents'
 import { cn } from '@site/src/lib/utils'
 import MDXTable from '@site/src/components/MDXComponents/Table'
+import { Blockquote } from './Blockquote'
 
 const MDXComponents: MDXComponentsObject = {
   Head,
@@ -40,6 +41,7 @@ const MDXComponents: MDXComponentsObject = {
   admonition: Admonition,
   mermaid: Mermaid,
   table: MDXTable,
+  blockquote: Blockquote,
 }
 
 export default MDXComponents
