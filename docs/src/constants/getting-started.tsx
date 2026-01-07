@@ -12,8 +12,8 @@ export const ActivationMethods = [
     title: 'From the Explorer or Editor',
     description: (
       <>
-        Right-click any file containing SVG components and select{' '}
-        <strong>"View Exports SVG 🔍"</strong> from the context menu.
+        Right-click any file containing SVG components and select (
+        <CodeInline>View Exports SVG 🔍</CodeInline>) from the context menu.
       </>
     ),
   },
@@ -22,11 +22,24 @@ export const ActivationMethods = [
     title: 'From the Command Palette',
     description: (
       <>
-        Open the <strong>Command Palette</strong> (
-        <Shortcut mac={['command', 'shift']} windows={['ctrl', 'shift']}>
-          P
-        </Shortcut>
-        ), type <strong>"View Exports SVG: Start Scanning"</strong> and press Enter.
+        Open the <strong>Command Palette</strong>{' '}
+        <span translate='no'>
+          (
+          <Shortcut mac={['command', 'shift']} windows={['ctrl', 'shift']}>
+            P
+          </Shortcut>
+          )
+        </span>
+        , then use one of these commands:
+        <ul className='list-disc pl-6 [&_li]:mt-2 mt-2'>
+          <li>
+            <CodeInline>View Exports SVG: Scan Workspace 🔍</CodeInline> — Scan your workspace for
+            SVG components.
+          </li>
+          <li>
+            <CodeInline>View Exports SVG 🔍</CodeInline> — Open the start screen.
+          </li>
+        </ul>
       </>
     ),
   },
