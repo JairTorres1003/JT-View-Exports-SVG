@@ -121,27 +121,6 @@ You can open the DevTools panel in several ways:
 
 ## 🧭 Next Steps
 
-import DocCard from '@site/src/components/DocCard'
-import GridStagger from '@site/src/components/GridStagger'
-import { Bug, Puzzle, LibraryBig } from 'lucide-react'
+import NextStepList from '@site/src/components/NextStepList'
 
-<GridStagger>
-  <DocCard
-    icon={<LibraryBig />}
-    title='Usage Guide'
-    description='Learn how to make the most of View Exports SVG features.'
-    link='/docs/guides/usage'
-  />
-  <DocCard
-    icon={<Puzzle />}
-    title='SVG Support'
-    description='See which SVG elements and structures are supported'
-    link='/docs/resources/svg-support'
-  />
-  <DocCard
-    icon={<Bug />}
-    title='Troubleshooting'
-    description='Find solutions to common issues and frequent questions.'
-    link='/docs/resources/troubleshooting'
-  />
-</GridStagger>
+<NextStepList list={['usage', 'svg-support', 'troubleshooting']} />

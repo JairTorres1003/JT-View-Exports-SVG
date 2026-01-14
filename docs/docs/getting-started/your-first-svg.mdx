@@ -53,27 +53,6 @@ No guessing, no typos, no trial-and-error imports.
 
 ## 🧭 Next Steps
 
-import { LibraryBig, ToolCase, Puzzle } from 'lucide-react'
-import DocCard from '@site/src/components/DocCard'
-import GridStagger from '@site/src/components/GridStagger'
+import NextStepList from '@site/src/components/NextStepList'
 
-<GridStagger>
-  <DocCard
-    icon={<LibraryBig />}
-    title='Usage Guide'
-    description='Learn all the ways to browse, manage, and organize your SVG icons.'
-    link='/docs/guides/usage'
-  />
-  <DocCard
-    icon={<ToolCase />}
-    title='DevTools Panel'
-    description='Dive deeper into the playground, editor actions, and utilities.'
-    link='/docs/guides/devtools'
-  />
-  <DocCard
-    icon={<Puzzle />}
-    title='SVG Support'
-    description='Understand which SVG patterns and component structures are supported.'
-    link='/docs/resources/svg-support'
-  />
-</GridStagger>
+<NextStepList list={['usage', 'devtools', 'svg-support']} />

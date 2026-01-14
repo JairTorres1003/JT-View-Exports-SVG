@@ -72,26 +72,6 @@ For more detailed instructions and advanced usage, check out the rest of the doc
 
 ## 🧭 Next Steps
 
-import { LibraryBig, Rocket, ToolCase } from 'lucide-react'
-import GridStagger from '@site/src/components/GridStagger'
+import NextStepList from '@site/src/components/NextStepList'
 
-<GridStagger>
-  <DocCard
-    icon={<LibraryBig />}
-    title='Usage Guide'
-    description='Learn how to make the most of View Exports SVG features.'
-    link='/docs/guides/usage'
-  />
-  <DocCard
-    icon={<ToolCase />}
-    title='DevTools Panel'
-    description='Explore the full-featured panel for managing, previewing, and editing icons.'
-    link='/docs/guides/devtools'
-  />
-  <DocCard
-    icon={<Rocket />}
-    title='Features'
-    description='Explore all the powerful features that View Exports SVG offers.'
-    link='/docs/resources/features'
-  />
-</GridStagger>
+<NextStepList list={['usage', 'devtools', 'features']} />

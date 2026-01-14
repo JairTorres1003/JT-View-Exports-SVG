@@ -104,33 +104,6 @@ in-memory versions for safe preview.
 
 ## 🧭 Next Steps
 
-import DocCard from '@site/src/components/DocCard'
-import GridStagger from '@site/src/components/GridStagger'
-import { Bug, Puzzle, Settings, ToolCase } from 'lucide-react'
+import NextStepList from '@site/src/components/NextStepList'
 
-<GridStagger>
-  <DocCard
-    icon={<ToolCase />}
-    title='DevTools Panel'
-    description='Explore the full-featured panel for managing, previewing, and editing icons.'
-    link='/docs/guides/devtools'
-  />
-  <DocCard
-    icon={<Puzzle />}
-    title='SVG Support'
-    description='See which SVG elements and structures are supported'
-    link='/docs/resources/svg-support'
-  />
-  <DocCard
-    icon={<Bug />}
-    title='Troubleshooting'
-    description='Find solutions to common issues and frequent questions.'
-    link='/docs/resources/troubleshooting'
-  />
-  <DocCard
-    icon={<Settings />}
-    title='Settings'
-    description='Customize the extension to fit your workflow.'
-    link='/docs/guides/settings'
-  />
-</GridStagger>
+<NextStepList list={['devtools', 'svg-support', 'troubleshooting', 'settings']} />
