@@ -1,4 +1,12 @@
-import { Bug, LibraryBig, Puzzle, Rocket, Settings, ToolCase } from 'lucide-react'
+import {
+  Bug,
+  LibraryBig,
+  MessageCircleQuestion,
+  Puzzle,
+  Rocket,
+  Settings,
+  ToolCase,
+} from 'lucide-react'
 
 export const NEXT_STEPS = {
   usage: {
@@ -29,13 +37,19 @@ export const NEXT_STEPS = {
     icon: Bug,
     title: 'Troubleshooting',
     description: 'Find solutions to common issues and frequent questions.',
-    link: '/docs/resources/troubleshooting',
+    link: '/docs/guides/troubleshooting',
   },
   settings: {
     icon: Settings,
     title: 'Settings',
     description: 'Customize the extension to fit your workflow.',
     link: '/docs/guides/settings',
+  },
+  faq: {
+    icon: MessageCircleQuestion,
+    title: 'FAQ',
+    description: 'Get answers to frequently asked questions about View Exports SVG.',
+    link: '/docs/guides/faq',
   },
 }
 

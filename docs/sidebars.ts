@@ -29,12 +29,18 @@ const sidebars: SidebarsConfig = {
     {
       type: 'category',
       label: 'Guides',
-      items: ['guides/usage', 'guides/devtools'],
+      items: [
+        'guides/usage',
+        'guides/devtools',
+        'guides/settings',
+        'guides/troubleshooting',
+        'guides/faq',
+      ],
     },
     {
       type: 'category',
       label: 'Resources',
-      items: ['resources/features'],
+      items: ['resources/features', 'resources/svg-support'],
     },
   ],
 }

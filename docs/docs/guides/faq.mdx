@@ -1,0 +1,152 @@
+---
+title: FAQ
+description: Frequently asked questions about View Exports SVG.
+---
+
+This page answers the most common questions about **View Exports SVG**, including usage, compatibility, and troubleshooting.
+
+If you are new to the extension, start with [**Getting Started**](/docs/getting-started/index) before reading this page.
+
+---
+
+## ❓ General Questions
+
+### What is View Exports SVG?
+
+View Exports SVG is a **Visual Studio Code extension** that helps developers discover, preview, and manage SVG components exported from:
+
+- JavaScript
+- JSX files
+- TypeScript
+- TSX files
+
+It scans your workspace and displays SVG components in a visual panel, removing the need to manually import and run code just to preview icons.
+
+---
+
+### How does the extension work?
+
+The extension:
+
+1. Scans your workspace using **AST analysis**
+2. Detects exported SVG components
+3. Displays them inside a **VS Code WebView**
+4. Provides tools for previewing, copying, exporting, and editing props
+
+---
+
+### How do I install the extension?
+
+Follow the steps in the **Installation** guide:
+
+- [Getting Started → <strong className='ml-1'> Installation</strong>](/docs/getting-started/installation?meta-props=[anchorIcon=Link;showAnchorIcon=true])
+
+---
+
+## 🧩 Framework & Compatibility
+
+### Is View Exports SVG React-only?
+
+No — although it is optimized for **React**, it also works with:
+
+- Preact
+- JavaScript & TypeScript projects
+- Any framework exporting JSX-based SVG components
+
+---
+
+### Does it support mixed projects?
+
+Yes. Projects mixing:
+
+- `.js`
+- `.jsx`
+- `.ts`
+- `.tsx`
+
+are fully supported.
+
+---
+
+## 🛠️ Usage & Features
+
+### How can I open the extension?
+
+import Shortcut from '@site/src/components/Shortcut'
+
+You can open View Exports SVG in multiple ways:
+
+1. Right-click files → `View Exports SVG 🔍`
+2. Command Palette (<Shortcut mac={['command', 'shift']} windows={['ctrl', 'shift']}>P</Shortcut>) → `View Exports SVG: Start Scanning`
+
+More details here:
+
+- [Usage Guide](/docs/guides/usage?meta-props=[anchorIcon=Link;showAnchorIcon=true])
+
+---
+
+### Can I customize SVG appearance?
+
+Yes. You can modify:
+
+- Size
+- Color
+- Stroke
+- Props
+- Styles
+
+using the **Playground Editor** inside DevTools.
+
+- [DevTools → <strong className='ml-1'> Playground</strong>](/docs/guides/devtools?meta-props=[anchorIcon=Link;showAnchorIcon=true]#-playground)
+
+---
+
+## 🚧 Troubleshooting
+
+### Why don't my icons appear?
+
+The most common reasons are:
+
+- The component is not exported
+- The SVG structure is unsupported
+- The file is inside an ignored directory
+
+See:
+
+- [Troubleshooting](/docs/guides/troubleshooting?meta-props=[anchorIcon=Link;showAnchorIcon=true])
+- [SVG Support](/docs/resources/svg-support?meta-props=[anchorIcon=Link;showAnchorIcon=true])
+
+---
+
+### Why does Drag & Drop lose the file path?
+
+This is a **VS Code WebView security limitation**.
+
+Dropped files are read in-memory and do not expose their real OS path.
+
+More details:
+
+- [Troubleshooting → <strong className='ml-1'> Drag & Drop</strong>](/docs/guides/troubleshooting?meta-props=[anchorIcon=Link;showAnchorIcon=true]#%EF%B8%8F-drag--drop-files-lose-original-path)
+
+---
+
+## 📦 Additional Support
+
+If your question is not covered here:
+
+- Open an issue on [GitHub](https://github.com/JairTorres1003/JT-View-Exports-SVG/issues?meta-props=[isExternal=true;showAnchorIcon=true])
+
+Please include:
+
+- VS Code version
+- Extension version
+- Sample file (if possible)
+- Steps to reproduce
+
+---
+
+## 🧭 Related Pages
+
+import NextStepList from '@site/src/components/NextStepList'
+
+<NextStepList list={['usage', 'devtools', 'settings', 'troubleshooting']} />

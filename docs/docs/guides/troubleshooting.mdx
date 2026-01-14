@@ -1,0 +1,221 @@
+---
+title: Troubleshooting
+description: Common issues, limitations, and solutions when using View Exports SVG.
+---
+
+This page helps you diagnose and resolve common issues when working with **View Exports SVG**.
+
+Most problems are related to **export patterns**, **unsupported SVG structures**, or **VS Code WebView limitations**.
+
+---
+
+## 🔍 Icons Are Not Detected
+
+### Problem
+
+The extension scans your files, but no icons appear in the panel.
+
+### Possible Causes
+
+- The SVG component is **not exported**
+- The file does not contain a valid JSX-based SVG component
+- The file is located inside an ignored directory
+
+### What to Check
+
+1. Ensure the component is exported:
+
+   ```tsx
+   export const MyIcon = () => <svg>...</svg>
+   ```
+
+2. Verify the file type:
+   - `.js`, `.jsx`, `.ts`, `.tsx` only
+
+3. Confirm the directory is not ignored:
+
+   ```json
+   "JT-View-Exports-SVG.ignoreDirectories": [
+     "**/dist",
+     "**/node_modules"
+   ]
+   ```
+
+4. Check supported SVG structures. See [**SVG Support →**](/docs/resources/svg-support)
+
+---
+
+## 🚫 Icons Exist but Do Not Render
+
+### Problem
+
+Icons appear in the panel but show empty previews or render incorrectly.
+
+### Explanation
+
+View Exports SVG only supports **valid SVG JSX structures**.
+Unsupported tags or malformed attributes can prevent rendering.
+
+### Common Causes
+
+- Unsupported SVG elements
+- Dynamic SVG generation
+- Invalid JSX attributes
+
+### Solution
+
+- Simplify the SVG structure
+- Replace unsupported tags
+- Verify attributes match JSX syntax
+
+Further details on supported structures can be found in [**SVG Support →**](/docs/resources/svg-support).
+
+---
+
+## 🧠 Not Exported Icons Not Showing
+
+### Problem
+
+You know the icon exists in the file, but it does not appear.
+
+### Explanation
+
+By default, **only exported components are shown**.
+
+### Solution
+
+Enable this option:
+
+```json
+"JT-View-Exports-SVG.showNotExportedIcons": true
+```
+
+---
+
+## 🖱️ Drag & Drop Files Lose Original Path
+
+### Problem
+
+After dragging files into the panel, the original file path is lost.
+
+### Why This Happens
+
+This is a **VS Code WebView security restriction**.
+
+WebViews do not have permission to access real OS file paths when files are dropped into them.
+
+### How the Extension Handles It
+
+To safely preview dropped files, View Exports SVG:
+
+- Reads the file content
+- Sends it via `postMessage`
+- Creates a **temporary in-memory representation**
+- Renders the SVG without accessing the real file system
+
+This approach ensures security while still allowing previews.
+
+### VS Code Limitation (Reference)
+
+:::caution Known Limitation
+This behavior is a known limitation in VS Code WebViews.
+You can follow the technical discussion and current status on [**GitHub**](https://github.com/microsoft/vscode/issues/255608?meta-props=[isExternal=true;showAnchorIcon=true])
+:::
+
+### Related Reading
+
+- [Usage →<strong className='ml-1'> Alternative Workflow: Drag & Drop</strong>](/docs/guides/usage?meta-props=[anchorIcon=Link;showAnchorIcon=true]#-alternative-workflow-drag--drop)
+
+---
+
+## ⚙️ DevTools Do Not Open Automatically
+
+### Problem
+
+Clicking an icon does not open the DevTools panel.
+
+### Solution
+
+Check this setting:
+
+```json
+"JT-View-Exports-SVG.defaultClickToOpenDevTools": true
+```
+
+Or open DevTools manually from:
+
+- Icon actions menu
+- Panel toolbar
+
+See [**DevTools Panel →**](/docs/guides/devtools)
+
+---
+
+## 🧪 Playground Editor Issues
+
+### Problem
+
+The playground editor behaves unexpectedly or becomes unresponsive.
+
+### Recommended Actions
+
+- Use **Reload Playground**
+- Use **Reload Editor**
+- Disable **Word Wrap** if layout breaks
+
+All options are available in the [**Playground Menu**](/docs/guides/devtools#-playground-menu-actions).
+
+---
+
+## 🧹 Cache or Scan Feels Outdated
+
+### Problem
+
+New icons are not detected or removed icons still appear.
+
+### Explanation
+
+The extension uses **smart caching** for performance.
+
+### Solution
+
+Run these commands in order:
+
+1. `View Exports SVG: Clear Cache`
+2. `View Exports SVG: Start Scanning`
+
+This ensures the cache is cleared before rescanning your files.
+
+---
+
+## 🛠️ Debugging Errors
+
+### If You See Errors
+
+1. Open VS Code Developer Tools
+   (`Help → Toggle Developer Tools`)
+2. Check the **Console** for logs
+3. Look for parsing or AST-related errors
+
+---
+
+## Still Having Issues?
+
+If your issue is not covered here:
+
+- Open a [**GitHub issue**](https://github.com/JairTorres1003/JT-View-Exports-SVG/issues?meta-props=[isExternal=true;showAnchorIcon=true])
+
+Please include:
+
+- VS Code version
+- Extension version
+- File example (if possible)
+- Steps to reproduce
+
+---
+
+## 🧭 Related Pages
+
+import NextStepList from '@site/src/components/NextStepList'
+
+<NextStepList list={['usage', 'devtools', 'settings', 'svg-support']} />

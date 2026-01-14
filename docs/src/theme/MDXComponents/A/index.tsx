@@ -60,7 +60,7 @@ export default function MDXA({ className, style, href, ...props }: MDXAProps): R
       anchorIcon={
         metaLinkData?.metaLink?.anchorIcon && (
           <Suspense>
-            <metaLinkData.metaLink.anchorIcon size='1rem' />
+            <metaLinkData.metaLink.anchorIcon size='1rem' className='mx-1' />
           </Suspense>
         )
       }
