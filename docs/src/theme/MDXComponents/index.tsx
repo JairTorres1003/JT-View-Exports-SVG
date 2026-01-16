@@ -40,7 +40,7 @@ const MDXComponents: MDXComponentsObject = {
   h6: (props: ComponentProps<'h6'>) => <MDXHeading as='h6' {...props} />,
   admonition: Admonition,
   mermaid: Mermaid,
-  table: MDXTable,
+  AdvancedTable: MDXTable,
   blockquote: Blockquote,
 }
 

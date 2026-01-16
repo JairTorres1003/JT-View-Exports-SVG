@@ -3,6 +3,7 @@ import type { Config } from '@docusaurus/types'
 import type * as Preset from '@docusaurus/preset-classic'
 import type {} from '@docusaurus/plugin-ideal-image'
 import type {} from 'docusaurus-plugin-image-zoom'
+import remarkAdvancedTablePlugin from './src/plugins/remark/table'
 
 // This runs in Node.js - Don't use client-side code here (browser APIs, JSX...)
 
@@ -79,6 +80,7 @@ const config: Config = {
         docs: {
           sidebarPath: './sidebars.ts',
           editUrl: 'https://github.com/JairTorres1003/JT-View-Exports-SVG/edit/main/docs',
+          remarkPlugins: [remarkAdvancedTablePlugin],
         },
         theme: {
           customCss: './src/css/custom.css',
