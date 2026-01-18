@@ -1,6 +1,46 @@
 import { valueToEstree } from 'estree-util-value-to-estree'
+import type { Program } from 'estree'
 
-import type { Align, Cell, NodeCell, NodeParent, NodeRow, ParsedCell, Row } from './types'
+import type { Align, Cell, NodeCell, NodeRow, ParsedCell, Row } from './types'
+
+/**
+ * Extracts plain text from cell nodes recursively
+ */
+function extractTextFromNodes(nodes: NodeCell['children']): string {
+  return nodes
+    .map((n) => {
+      if (n.type === 'text') {
+        return n.value ?? ''
+      }
+      if ('children' in n) {
+        return extractTextFromNodes(n.children)
+      }
+      return ''
+    })
+    .join('')
+    .trim()
+}
+
+/**
+ * Cleans the children nodes by removing control characters from text nodes
+ */
+function cleanChildren(nodes: NodeCell['children']): NodeCell['children'] {
+  return nodes.map((n) => {
+    if (n.type === 'text' && n.value) {
+      let cleanedValue = n.value.replace(/[<>]/g, '')
+
+      // Clean col align symbols (:)
+      cleanedValue = cleanedValue.replace(/^:/, '').replace(/:$/, '')
+
+      return {
+        ...n,
+        value: cleanedValue,
+      }
+    }
+
+    return n
+  })
+}
 
 /**
  * Parses a table cell node and extracts its content and formatting information.
@@ -9,7 +49,7 @@ import type { Align, Cell, NodeCell, NodeParent, NodeRow, ParsedCell, Row } from
  * @returns A parsed cell object containing the raw value, cleaned value, alignment, and colspan indicators
  */
 export function parseCell(node: NodeCell): ParsedCell {
-  const rawCell = node.children[0]?.value ?? ''
+  const rawCell = extractTextFromNodes(node.children)
   let raw = rawCell.trim()
 
   const colspanStart = raw.includes('>')
@@ -33,6 +73,7 @@ export function parseCell(node: NodeCell): ParsedCell {
   return {
     raw: rawCell,
     value,
+    children: cleanChildren(node.children),
     align,
     colspanStart,
     colspanEnd,
@@ -68,8 +109,8 @@ export function resolveRowColspans(cells: ParsedCell[], aligns: Align[]): Cell[]
     if (!cell.colspanStart || i === cells.length - 1) {
       result.push({
         key: `cell-${i}`,
-        value: cell?.value,
-        style: { textAlign: cell?.align || aligns?.[i] },
+        children: cell?.children,
+        style: { textAlign: cell?.align || aligns?.[i] || 'left' },
       })
       i++
       continue
@@ -93,8 +134,8 @@ export function resolveRowColspans(cells: ParsedCell[], aligns: Align[]): Cell[]
     // Insert the main cell first
     result.push({
       key: `cell-${i}`,
-      value: cell?.value,
-      style: { textAlign: cell?.align || aligns?.[i] },
+      children: cell?.children,
+      style: { textAlign: cell?.align || aligns?.[i] || 'left' },
       colSpan,
     })
 
@@ -102,8 +143,8 @@ export function resolveRowColspans(cells: ParsedCell[], aligns: Align[]): Cell[]
     for (let k = i + 1; k <= j && k < cells.length; k++) {
       result.push({
         key: `cell-${k}`,
-        value: cells[k]?.value ?? '',
-        style: { textAlign: cells[k]?.align || aligns?.[k], display: 'none' },
+        children: cells[k]?.children ?? [],
+        style: { textAlign: cells[k]?.align || aligns?.[k] || 'left', display: 'none' },
       })
     }
 
@@ -119,7 +160,7 @@ export function resolveRowColspans(cells: ParsedCell[], aligns: Align[]): Cell[]
  * @param value - The JavaScript value to convert
  * @returns An ESTree Program node representing the value as an expression
  */
-export function expressionToEstree(value: unknown) {
+export function expressionToEstree(value: unknown): Program {
   return {
     type: 'Program',
     sourceType: 'module',

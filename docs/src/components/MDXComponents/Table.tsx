@@ -11,6 +11,7 @@ import React, { useId } from 'react'
 
 import { cn } from '@site/src/lib/utils'
 import { Cell, Row } from '@site/src/plugins/remark/table/types'
+import { renderHast } from '@site/src/lib/render-hast'
 
 interface MDXTableProps {
   className?: string
@@ -24,9 +25,9 @@ const MDXTable: React.FC<MDXTableProps> = ({ className, columns, rows }) => {
   return (
     <Table className={cn('mt-4 w-fit', className)} aria-label={`Table-${id}`} id={id}>
       <TableHeader columns={columns}>
-        {({ value, ...columns }) => (
+        {({ children, ...columns }) => (
           <TableColumn {...columns} key={columns.key}>
-            {value}
+            {renderHast(children)}
           </TableColumn>
         )}
       </TableHeader>
@@ -34,11 +35,11 @@ const MDXTable: React.FC<MDXTableProps> = ({ className, columns, rows }) => {
         {(item) => (
           <TableRow key={item.key}>
             {(columnKey) => {
-              const { value, ...cell }: Cell = getKeyValue(item, columnKey)
+              const { children, ...cell }: Cell = getKeyValue(item, columnKey)
 
               return (
                 <TableCell {...cell} key={cell.key}>
-                  {value}
+                  {renderHast(children || [])}
                 </TableCell>
               )
             }}
