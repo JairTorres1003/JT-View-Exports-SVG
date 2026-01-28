@@ -4,10 +4,11 @@
  * This source code is licensed under the MIT license found in the
  * LICENSE file in the root directory of this source tree.
  */
-import path from 'path'
-import fs from 'fs-extra'
+
+import path from 'node:path'
 import pluginContentBlog from '@docusaurus/plugin-content-blog'
 import { aliasedSitePath, docuHash, normalizeUrl, safeGlobby } from '@docusaurus/utils'
+import fs from 'fs-extra'
 import { createBlogFiles, toChangelogEntries } from './utils'
 
 const MonorepoRoot = path.resolve(path.join(__dirname, '../../../..'))
@@ -50,6 +51,7 @@ const ChangelogPlugin: typeof pluginContentBlog = async function ChangelogPlugin
     blogAuthorsListComponent: '@theme/Blog/Pages/BlogAuthorsListPage',
     blogTagsListComponent: '@theme/BlogTagsListPage',
     blogTagsPostsComponent: '@theme/BlogTagsPostsPage',
+    admonitions: { keywords: ['note', 'tip', 'danger', 'info', 'caution', 'warning'] },
     processBlogPosts: async ({ blogPosts }) => {
       // Sort by date descending
       return blogPosts?.sort((a, b) => b.metadata.date.getTime() - a.metadata.date.getTime())
