@@ -14,22 +14,7 @@
     "bracketSpacing": true,
     "expand": "auto",
     "useEditorconfig": true,
-    "includes": [
-      "**",
-      "!./node_modules",
-      "!./.pnp",
-      "!**/.pnp.js",
-      "!./coverage",
-      "!./build",
-      "!./dist",
-      "!**/*.vsix",
-      "!**/.DS_Store",
-      "!**/.env",
-      "!**/.env*.local",
-      "!**/npm-debug.log*",
-      "!**/yarn-debug.log*",
-      "!**/yarn-error.log*"
-    ]
+    "includes": ["./src/**/*"]
   },
   "linter": {
     "enabled": true,
