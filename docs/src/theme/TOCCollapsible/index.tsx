@@ -1,10 +1,9 @@
-import React, { useEffect, useState, type ReactNode } from 'react'
-import { useCollapsible, Collapsible } from '@docusaurus/theme-common'
-import TOCItems from '@theme/TOCItems'
-import CollapseButton from '@theme/TOCCollapsible/CollapseButton'
-import type { Props } from '@theme/TOCCollapsible'
-
+import { Collapsible, useCollapsible } from '@docusaurus/theme-common'
 import { cn } from '@site/src/lib/utils'
+import type { Props } from '@theme/TOCCollapsible'
+import CollapseButton from '@theme/TOCCollapsible/CollapseButton'
+import TOCItems from '@theme/TOCItems'
+import { type ReactNode, useEffect, useState } from 'react'
 
 export default function TOCCollapsible({
   toc,

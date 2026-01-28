@@ -1,3 +1,4 @@
+import CodeInline from '@theme/CodeInline'
 import {
   Blocks,
   ClipboardCopy,
@@ -13,7 +14,6 @@ import {
   SunMoon,
   Terminal,
 } from 'lucide-react'
-import CodeInline from '@theme/CodeInline'
 
 export const FeaturesWorkspace = [
   {

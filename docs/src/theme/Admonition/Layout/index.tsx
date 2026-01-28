@@ -1,7 +1,7 @@
-import React, { type ReactNode } from 'react'
 import { Card, CardBody, CardHeader } from '@heroui/card'
-import type { Props } from '@theme/Admonition/Layout'
 import { cn } from '@site/src/lib/utils'
+import type { Props } from '@theme/Admonition/Layout'
+import type { ReactNode } from 'react'
 
 const iconColors: Record<string, string> = {
   caution: 'text-yellow-500 dark:text-yellow-400',

@@ -1,12 +1,11 @@
-import React, { type ReactNode } from 'react'
+import { translate } from '@docusaurus/Translate'
 import { useThemeConfig } from '@docusaurus/theme-common'
 import { useHideableNavbar, useNavbarMobileSidebar } from '@docusaurus/theme-common/internal'
-import { translate } from '@docusaurus/Translate'
-import NavbarMobileSidebar from '@theme/Navbar/MobileSidebar'
-import type { Props } from '@theme/Navbar/Layout'
-
 import { Navbar } from '@heroui/navbar'
 import { cn } from '@site/src/lib/utils'
+import type { Props } from '@theme/Navbar/Layout'
+import NavbarMobileSidebar from '@theme/Navbar/MobileSidebar'
+import type { ReactNode } from 'react'
 
 export default function NavbarLayout({ children }: Props): ReactNode {
   const {

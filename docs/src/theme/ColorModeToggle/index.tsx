@@ -1,13 +1,12 @@
-import React, { FC, useEffect } from 'react'
-import useIsBrowser from '@docusaurus/useIsBrowser'
 import { translate } from '@docusaurus/Translate'
 import type { ColorMode } from '@docusaurus/theme-common'
-
-import { Moon, Sun } from 'lucide-react'
+import useIsBrowser from '@docusaurus/useIsBrowser'
+import { Button } from '@heroui/button'
+import { Tooltip, type TooltipPlacement } from '@heroui/tooltip'
 import { useAnimatedThemeToggler } from '@site/src/hooks/useAnimatedThemeToggler'
 import { cn } from '@site/src/lib/utils'
-import { Button } from '@heroui/button'
-import { Tooltip, TooltipPlacement } from '@heroui/tooltip'
+import { Moon, Sun } from 'lucide-react'
+import React, { type FC, useEffect } from 'react'
 
 function getColorModeLabel(colorMode: ColorMode | null): string {
   switch (colorMode) {
@@ -67,7 +66,7 @@ export const AnimatedThemeToggler: FC<AnimatedThemeTogglerProps> = ({
   useEffect(() => {
     if (!isBrowser) return
     onChange(isDark ? 'dark' : 'light')
-  }, [isDark])
+  }, [isBrowser, isDark, onChange])
 
   return (
     <Tooltip

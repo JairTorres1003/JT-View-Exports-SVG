@@ -1,8 +1,8 @@
-import React, { type ReactNode } from 'react'
-import useBrokenLinks from '@docusaurus/useBrokenLinks'
 import { useAnchorTargetClassName } from '@docusaurus/theme-common'
-import type { Props } from '@theme/MDXComponents/Li'
+import useBrokenLinks from '@docusaurus/useBrokenLinks'
 import { cn } from '@site/src/lib/utils'
+import type { Props } from '@theme/MDXComponents/Li'
+import type { ReactNode } from 'react'
 
 export default function MDXLi(props: Props): ReactNode | undefined {
   // MDX Footnotes have ids such as <li id="user-content-fn-1-953011">

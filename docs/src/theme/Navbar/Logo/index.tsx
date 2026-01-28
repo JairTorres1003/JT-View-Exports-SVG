@@ -1,9 +1,9 @@
-import React, { type ReactNode } from 'react'
-import { useThemeConfig } from '@docusaurus/theme-common'
 import Link from '@docusaurus/Link'
+import { useThemeConfig } from '@docusaurus/theme-common'
 import useBaseUrl from '@docusaurus/useBaseUrl'
-import Image from '@theme/IdealImage'
 import { NavbarBrand } from '@heroui/navbar'
+import Image from '@theme/IdealImage'
+import type { ReactNode } from 'react'
 
 export default function NavbarLogo(): ReactNode {
   const {

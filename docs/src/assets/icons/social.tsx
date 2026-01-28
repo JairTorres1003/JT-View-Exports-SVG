@@ -1,5 +1,5 @@
-import { IconProps } from '@site/src/types/types'
-import React, { FC } from 'react'
+import type { IconProps } from '@site/src/types/types'
+import type { FC } from 'react'
 
 export const GithubIcon: FC<IconProps> = ({
   color = 'currentColor',

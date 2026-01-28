@@ -1,8 +1,7 @@
-import React, { type ReactNode } from 'react'
+import { cn } from '@site/src/lib/utils'
 import Image from '@theme/IdealImage'
 import type { Props } from '@theme/MDXComponents/Img'
-
-import { cn } from '@site/src/lib/utils'
+import type { ReactNode } from 'react'
 
 function decodeHTMLEntities(value: string) {
   const textarea = document.createElement('textarea')

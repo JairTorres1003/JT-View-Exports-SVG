@@ -1,13 +1,12 @@
-import React, { type ReactNode } from 'react'
 import { useThemeConfig } from '@docusaurus/theme-common'
 import { splitNavbarItems, useNavbarMobileSidebar } from '@docusaurus/theme-common/internal'
-import NavbarLogo from '@theme/Navbar/Logo'
-
 import { NavbarContent, NavbarMenuToggle } from '@heroui/navbar'
-import { NavbarItemComponentProps } from './types'
-import NavbarContentItems from './NavbarContentItems'
-import { Menu, XIcon } from 'lucide-react'
 import { cn } from '@site/src/lib/utils'
+import NavbarLogo from '@theme/Navbar/Logo'
+import { Menu, XIcon } from 'lucide-react'
+import type { ReactNode } from 'react'
+import NavbarContentItems from './NavbarContentItems'
+import type { NavbarItemComponentProps } from './types'
 
 export default function NavbarContentTheme(): ReactNode {
   const { navbar: { items = [] } = {} } = useThemeConfig()

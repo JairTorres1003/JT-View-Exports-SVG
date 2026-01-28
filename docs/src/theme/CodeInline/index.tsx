@@ -1,6 +1,6 @@
-import React, { type ReactNode } from 'react'
-import { Code, CodeProps } from '@heroui/code'
+import { Code, type CodeProps } from '@heroui/code'
 import { cn } from '@site/src/lib/utils'
+import type { ReactNode } from 'react'
 
 export default function CodeInline({ className, ...props }: CodeProps): ReactNode {
   return (

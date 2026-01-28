@@ -1,12 +1,12 @@
-import React, { type ReactNode } from 'react'
+import Link from '@docusaurus/Link'
 import { translate } from '@docusaurus/Translate'
 import { useAnchorTargetClassName } from '@docusaurus/theme-common'
-import Link from '@docusaurus/Link'
-import { Link as HeroLink } from '@heroui/link'
 import useBrokenLinks from '@docusaurus/useBrokenLinks'
+import { Link as HeroLink } from '@heroui/link'
+import { cn } from '@site/src/lib/utils'
 import type { Props } from '@theme/Heading'
 import { LinkIcon } from 'lucide-react'
-import { cn } from '@site/src/lib/utils'
+import type { ReactNode } from 'react'
 
 export default function Heading({ as: As, id, className, ...props }: Props): ReactNode {
   const brokenLinks = useBrokenLinks()

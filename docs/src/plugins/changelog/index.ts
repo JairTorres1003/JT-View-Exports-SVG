@@ -69,8 +69,13 @@ const ChangelogPlugin: typeof pluginContentBlog = async function ChangelogPlugin
       // We have to create intermediate files here
       // Unfortunately Docusaurus doesn't have yet any concept of virtual file
       await createBlogFiles(generateDir, changelogEntries)
+
+      if (!blogPlugin.loadContent) {
+        throw new Error('Blog plugin loadContent is undefined')
+      }
+
       // Read the files we actually just wrote
-      const content = (await blogPlugin.loadContent?.())!
+      const content = await blogPlugin.loadContent()
 
       content.blogPosts.forEach((post, index) => {
         const pageIndex = Math.floor(index / (options.postsPerPage as number))
@@ -82,7 +87,7 @@ const ChangelogPlugin: typeof pluginContentBlog = async function ChangelogPlugin
         ])
 
         // @ts-expect-error: TODO Docusaurus use interface declaration merging
-        post.metadata.editUrl = options.editUrl + `#L${changelogEntries[index].startLine}`
+        post.metadata.editUrl = `${options.editUrl}#L${changelogEntries[index].startLine}`
       })
       return content
     },

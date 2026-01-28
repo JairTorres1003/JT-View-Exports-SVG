@@ -1,4 +1,4 @@
-import { PluginModule } from '@docusaurus/types'
+import type { PluginModule } from '@docusaurus/types'
 
 const tailwindConfigPlugin: PluginModule = () => {
   return {

@@ -1,9 +1,9 @@
+import type { Root } from 'hast'
 import { visit } from 'unist-util-visit'
-import { Root } from 'hast'
 
-import { isValidAttribute, mapToHastCell } from './utils'
+import type { Cell, Row } from '../../remark/table/types'
 import { expressionToEstree } from '../../remark/table/utils'
-import { Cell, Row } from '../../remark/table/types'
+import { isValidAttribute, mapToHastCell } from './utils'
 
 function rehypeAdvancedTablePlugin() {
   return (tree: Root) => {

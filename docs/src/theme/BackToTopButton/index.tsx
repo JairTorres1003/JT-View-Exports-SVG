@@ -1,12 +1,11 @@
-import React, { type ReactNode } from 'react'
 import { translate } from '@docusaurus/Translate'
 import { ThemeClassNames } from '@docusaurus/theme-common'
 import { useBackToTopButton } from '@docusaurus/theme-common/internal'
-
 import { Button } from '@heroui/button'
-import { ChevronUp } from 'lucide-react'
-import { cn } from '@site/src/lib/utils'
 import { Tooltip } from '@heroui/tooltip'
+import { cn } from '@site/src/lib/utils'
+import { ChevronUp } from 'lucide-react'
+import type { ReactNode } from 'react'
 
 export default function BackToTopButton(): ReactNode {
   const { shown, scrollToTop } = useBackToTopButton({ threshold: 300 })

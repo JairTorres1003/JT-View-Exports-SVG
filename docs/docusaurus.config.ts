@@ -1,10 +1,10 @@
-import { themes as prismThemes } from 'prism-react-renderer'
-import type { Config } from '@docusaurus/types'
-import type * as Preset from '@docusaurus/preset-classic'
 import type {} from '@docusaurus/plugin-ideal-image'
+import type * as Preset from '@docusaurus/preset-classic'
+import type { Config } from '@docusaurus/types'
 import type {} from 'docusaurus-plugin-image-zoom'
-import remarkAdvancedTablePlugin from './src/plugins/remark/table'
+import { themes as prismThemes } from 'prism-react-renderer'
 import rehypeAdvancedTablePlugin from './src/plugins/rehype/table'
+import remarkAdvancedTablePlugin from './src/plugins/remark/table'
 
 // This runs in Node.js - Don't use client-side code here (browser APIs, JSX...)
 
@@ -113,6 +113,7 @@ const config: Config = {
           icon: 'vscode',
           label: 'VS Code Marketplace',
           href: 'https://marketplace.visualstudio.com/items?itemName=JairTorres1003.jt-view-exports-svg',
+          id: 'vscode-marketplace',
         },
         {
           type: 'custom-social',
@@ -120,11 +121,13 @@ const config: Config = {
           icon: 'github',
           label: 'GitHub',
           href: 'https://github.com/JairTorres1003/JT-View-Exports-SVG',
+          id: 'github',
         },
         {
           type: 'custom-dark-mode-toggle',
           position: 'right',
           placement: 'bottom-end',
+          id: 'dark-mode-toggle',
         },
       ],
     },

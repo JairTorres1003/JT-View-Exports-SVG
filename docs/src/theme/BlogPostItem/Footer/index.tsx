@@ -1,11 +1,10 @@
-import React, { type ReactNode } from 'react'
-import clsx from 'clsx'
 import { useBlogPost } from '@docusaurus/plugin-content-blog/client'
 import { ThemeClassNames } from '@docusaurus/theme-common'
+import { cn } from '@site/src/lib/utils'
+import ReadMoreLink from '@theme/BlogPostItem/Footer/ReadMoreLink'
 import EditMetaRow from '@theme/EditMetaRow'
 import TagsListInline from '@theme/TagsListInline'
-import ReadMoreLink from '@theme/BlogPostItem/Footer/ReadMoreLink'
-import { cn } from '@site/src/lib/utils'
+import type { ReactNode } from 'react'
 
 export default function BlogPostItemFooter(): ReactNode {
   const { metadata, isBlogPostPage } = useBlogPost()

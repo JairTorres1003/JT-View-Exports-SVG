@@ -1,67 +1,10 @@
-import React, { useCallback, useMemo, useState, type ReactNode } from 'react'
-import Layout from '@theme/Layout'
-import DocSidebar from '@theme/DocRoot/Layout/Sidebar'
-import type { PropSidebarItemCategory, PropSidebarItemLink } from '@docusaurus/plugin-content-docs'
 import { DocsSidebarProvider } from '@docusaurus/plugin-content-docs/client'
-
-import type { Props } from '@theme/BlogLayout'
 import { useWindowSize } from '@docusaurus/theme-common'
-
-const useSidebar = (sidebar: Props['sidebar']) => {
-  const [hiddenSidebar, setHiddenSidebar] = useState(false)
-
-  const mapLinkItem = useCallback((item: Props['sidebar']['items'][0]): PropSidebarItemLink => {
-    return {
-      ...item,
-      type: 'link',
-      href: item.permalink,
-      label: item.title,
-      docId: item.permalink,
-      unlisted: false,
-    }
-  }, [])
-
-  const newSidebar = useMemo(() => {
-    if (!sidebar || !sidebar.items) return []
-
-    const groupedSidebarItems: Record<number, PropSidebarItemCategory> = sidebar.items?.reduce(
-      (acc, item) => {
-        const year = new Date(item.date).getFullYear()
-
-        if (!acc[year]) {
-          acc[year] = {
-            type: 'category',
-            label: year.toString(),
-            collapsed: false,
-            items: [],
-            collapsible: true,
-          }
-        }
-
-        acc[year].items.push(mapLinkItem(item))
-        return acc
-      },
-      {}
-    )
-
-    return [
-      mapLinkItem({
-        title: 'All Posts',
-        permalink: `/${sidebar.items[0]?.permalink.split('/')[1]}`,
-        date: '',
-        unlisted: false,
-      }),
-      ...Object.values(groupedSidebarItems).sort((a, b) => Number(b.label) - Number(a.label)),
-    ]
-  }, [sidebar])
-
-  return {
-    docSidebar: newSidebar,
-    hasSidebar: newSidebar.length > 0,
-    hiddenSidebar,
-    setHiddenSidebar,
-  }
-}
+import type { Props } from '@theme/BlogLayout'
+import DocSidebar from '@theme/DocRoot/Layout/Sidebar'
+import Layout from '@theme/Layout'
+import type { ReactNode } from 'react'
+import { useSidebar } from './hooks/useSidebar'
 
 export default function BlogLayout({ sidebar, toc, children, ...layoutProps }: Props): ReactNode {
   const { docSidebar, hiddenSidebar, setHiddenSidebar } = useSidebar(sidebar)

@@ -1,9 +1,9 @@
-import { Card, CardBody } from '@heroui/card'
 import Link from '@docusaurus/Link'
-import type { Props } from '@theme/PaginatorNavLink'
+import { Card, CardBody } from '@heroui/card'
 import { cn } from '@site/src/lib/utils'
-import React, { type ReactNode } from 'react'
+import type { Props } from '@theme/PaginatorNavLink'
 import { ChevronLeft, ChevronRight } from 'lucide-react'
+import type { ReactNode } from 'react'
 
 export default function PaginatorNavLink({ permalink, title, subLabel, isNext }: Props): ReactNode {
   return (

@@ -1,9 +1,9 @@
-import React, { type ReactNode } from 'react'
-import Translate, { translate } from '@docusaurus/Translate'
 import Link from '@docusaurus/Link'
+import Translate, { translate } from '@docusaurus/Translate'
+import { Link as HeroLink, type LinkProps } from '@heroui/link'
 import type { Props } from '@theme/BlogPostItem/Footer/ReadMoreLink'
-import { Link as HeroLink, LinkProps } from '@heroui/link'
 import { ArrowRight } from 'lucide-react'
+import type { ReactNode } from 'react'
 
 export default function BlogPostItemFooterReadMoreLink({
   blogPostTitle,

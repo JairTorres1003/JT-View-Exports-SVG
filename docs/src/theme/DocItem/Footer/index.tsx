@@ -1,10 +1,9 @@
-import React, { type ReactNode } from 'react'
-import { ThemeClassNames } from '@docusaurus/theme-common'
 import { useDoc } from '@docusaurus/plugin-content-docs/client'
-import TagsListInline from '@theme/TagsListInline'
-
-import EditMetaRow from '@theme/EditMetaRow'
+import { ThemeClassNames } from '@docusaurus/theme-common'
 import { cn } from '@site/src/lib/utils'
+import EditMetaRow from '@theme/EditMetaRow'
+import TagsListInline from '@theme/TagsListInline'
+import type { ReactNode } from 'react'
 
 export default function DocItemFooter(): ReactNode {
   const { metadata } = useDoc()

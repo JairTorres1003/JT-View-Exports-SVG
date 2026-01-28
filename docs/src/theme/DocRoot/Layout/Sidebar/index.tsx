@@ -1,11 +1,11 @@
-import React, { type ReactNode, useState, useCallback } from 'react'
-import clsx from 'clsx'
-import { prefersReducedMotion, ThemeClassNames } from '@docusaurus/theme-common'
 import { useDocsSidebar } from '@docusaurus/plugin-content-docs/client'
 import { useLocation } from '@docusaurus/router'
-import DocSidebar from '@theme/DocSidebar'
-import ExpandButton from '@theme/DocRoot/Layout/Sidebar/ExpandButton'
+import { prefersReducedMotion, ThemeClassNames } from '@docusaurus/theme-common'
 import type { Props } from '@theme/DocRoot/Layout/Sidebar'
+import ExpandButton from '@theme/DocRoot/Layout/Sidebar/ExpandButton'
+import DocSidebar from '@theme/DocSidebar'
+import clsx from 'clsx'
+import React, { type ReactNode, useCallback, useState } from 'react'
 
 import styles from './styles.module.css'
 
@@ -45,7 +45,7 @@ export default function DocRootLayoutSidebar({
         hiddenSidebarContainer && styles.docSidebarContainerHidden
       )}
       onTransitionEnd={(e) => {
-        if (!e.currentTarget.classList.contains(styles.docSidebarContainer!)) {
+        if (!e.currentTarget.classList.contains(styles.docSidebarContainer)) {
           return
         }
 

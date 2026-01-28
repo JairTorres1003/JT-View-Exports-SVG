@@ -1,8 +1,8 @@
 @import 'tailwindcss';
 
-@config "../../tailwind.config.ts";
-
 @import 'tw-animate-css';
+
+@config '../../tailwind.config.ts';
 
 button {
   cursor: pointer;
@@ -69,7 +69,7 @@ button {
 
   video {
     @apply w-full max-w-[1048px] rounded-xl shadow-xl;
-    aspect-ratio: 691/432;
+    aspect-ratio: 691 / 432;
   }
 
   .StepsItem-root .StepsItem-content > :first-of-type {

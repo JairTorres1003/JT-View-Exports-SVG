@@ -1,10 +1,9 @@
-import React, { type ReactNode } from 'react'
-import { ThemeClassNames } from '@docusaurus/theme-common'
 import { translate } from '@docusaurus/Translate'
-import DocSidebarItems from '@theme/DocSidebarItems'
-import type { Props } from '@theme/DocSidebar/Desktop/Content'
-
+import { ThemeClassNames } from '@docusaurus/theme-common'
 import { cn } from '@site/src/lib/utils'
+import type { Props } from '@theme/DocSidebar/Desktop/Content'
+import DocSidebarItems from '@theme/DocSidebarItems'
+import type { ReactNode } from 'react'
 
 export default function DocSidebarDesktopContent({ path, sidebar, className }: Props): ReactNode {
   return (

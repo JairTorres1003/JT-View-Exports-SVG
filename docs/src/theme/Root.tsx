@@ -1,4 +1,3 @@
-import React from 'react'
 import { HtmlClassNameProvider } from '@docusaurus/theme-common'
 
 export default function Root({ children }) {

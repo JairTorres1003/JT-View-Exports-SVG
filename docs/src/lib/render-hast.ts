@@ -1,8 +1,8 @@
-import { toJsxRuntime } from 'hast-util-to-jsx-runtime'
-import * as runtime from 'react/jsx-runtime'
 import MDXComponents from '@theme/MDXComponents'
-import type { RootContent } from 'mdast'
 import type { Nodes } from 'hast'
+import { toJsxRuntime } from 'hast-util-to-jsx-runtime'
+import type { RootContent } from 'mdast'
+import * as runtime from 'react/jsx-runtime'
 
 /**
  * Renders HAST nodes to React components using MDX components.

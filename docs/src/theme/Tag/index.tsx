@@ -1,10 +1,9 @@
-import React, { type ReactNode } from 'react'
 import Link from '@docusaurus/Link'
-import type { Props } from '@theme/Tag'
 import { Link as HeroLink } from '@heroui/link'
 import { Tooltip } from '@heroui/tooltip'
-
 import { cn } from '@site/src/lib/utils'
+import type { Props } from '@theme/Tag'
+import type { ReactNode } from 'react'
 
 export default function Tag({ permalink, label, count, description }: Props): ReactNode {
   return (

@@ -1,11 +1,10 @@
-import React, { FC } from 'react'
-import { NavbarContent, NavbarContentProps } from '@heroui/navbar'
-import NavbarColorModeToggle from '@theme/Navbar/ColorModeToggle'
-
-import SocialButton from '@site/src/components/SocialButton'
-import { NavbarItemComponentProps } from './types'
-import { NavbarItemLink } from './NavbarItem'
 import { Divider } from '@heroui/divider'
+import { NavbarContent, type NavbarContentProps } from '@heroui/navbar'
+import SocialButton from '@site/src/components/SocialButton'
+import NavbarColorModeToggle from '@theme/Navbar/ColorModeToggle'
+import type { FC } from 'react'
+import { NavbarItemLink } from './NavbarItem'
+import type { NavbarItemComponentProps } from './types'
 
 interface NavbarContentItemsProps extends Omit<NavbarContentProps, 'children'> {
   items?: NavbarItemComponentProps[]
@@ -22,15 +21,17 @@ const NavbarContentItems: FC<NavbarContentItemsProps> = ({ items, ...props }) =>
 
   return (
     <NavbarContent {...props}>
-      {items.map((item, i) => {
+      {items.map((item) => {
         if (item.type.startsWith('custom-')) {
           const CustomComponent = CUSTOM_COMPONENTS[item.type]
-          return CustomComponent ? <CustomComponent key={i} config={item} /> : null
+          return CustomComponent ? (
+            <CustomComponent key={`${item.type}-${item.id}`} config={item} />
+          ) : null
         }
 
         if (!item.sidebarId) return null
 
-        return <NavbarItemLink key={i} {...item} />
+        return <NavbarItemLink key={`${item.type}-${item.id}`} {...item} />
       })}
     </NavbarContent>
   )

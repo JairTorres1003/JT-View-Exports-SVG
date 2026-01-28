@@ -1,10 +1,10 @@
-import React, { lazy, Suspense, type ReactNode, type ComponentType } from 'react'
 import Link from '@docusaurus/Link'
-import { Link as HeroLink, LinkProps } from '@heroui/link'
-
 import { useAnchorTargetClassName } from '@docusaurus/theme-common'
-import type { Props } from '@theme/MDXComponents/A'
+import { Link as HeroLink, type LinkProps } from '@heroui/link'
 import { cn } from '@site/src/lib/utils'
+import type { Props } from '@theme/MDXComponents/A'
+import type { LucideIcon } from 'lucide-react'
+import { lazy, type ReactNode, Suspense } from 'react'
 
 interface MDXAProps extends Omit<Props, 'color'> {
   color?: LinkProps['color']
@@ -37,7 +37,7 @@ function getMetaLink(href: string) {
           ? lazy(
               async () =>
                 await import('lucide-react')?.then((mod) => ({
-                  default: mod[metaLinkObj.anchorIcon as string] as ComponentType<any>,
+                  default: mod[metaLinkObj.anchorIcon as string] as LucideIcon,
                 }))
             )
           : undefined,

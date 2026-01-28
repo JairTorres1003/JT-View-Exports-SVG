@@ -1,7 +1,7 @@
-import React, { type ReactNode } from 'react'
-import clsx from 'clsx'
 import Container from '@theme/CodeBlock/Container'
 import type { Props } from '@theme/CodeBlock/Content/Element'
+import clsx from 'clsx'
+import type { ReactNode } from 'react'
 
 import styles from './styles.module.css'
 

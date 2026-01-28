@@ -1,7 +1,7 @@
-import React, { type ReactNode } from 'react'
-import clsx from 'clsx'
 import { ThemeClassNames } from '@docusaurus/theme-common'
 import type { Props } from '@theme/Footer/Layout'
+import clsx from 'clsx'
+import type { ReactNode } from 'react'
 
 export default function FooterLayout({ links, logo, copyright }: Props): ReactNode {
   return (

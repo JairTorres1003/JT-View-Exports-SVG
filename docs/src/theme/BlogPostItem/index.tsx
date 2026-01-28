@@ -1,10 +1,10 @@
-import React, { type ReactNode } from 'react'
+import { cn } from '@site/src/lib/utils'
+import type { Props } from '@theme/BlogPostItem'
 import BlogPostItemContainer from '@theme/BlogPostItem/Container'
-import BlogPostItemHeader from '@theme/BlogPostItem/Header'
 import BlogPostItemContent from '@theme/BlogPostItem/Content'
 import BlogPostItemFooter from '@theme/BlogPostItem/Footer'
-import type { Props } from '@theme/BlogPostItem'
-import { cn } from '@site/src/lib/utils'
+import BlogPostItemHeader from '@theme/BlogPostItem/Header'
+import type { ReactNode } from 'react'
 
 export default function BlogPostItem({ children, className }: Props): ReactNode {
   return (

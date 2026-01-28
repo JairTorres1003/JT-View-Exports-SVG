@@ -1,11 +1,11 @@
-import React, { type ReactNode } from 'react'
 import { translate } from '@docusaurus/Translate'
 import { useCodeBlockContext } from '@docusaurus/theme-common/internal'
-import type { Props } from '@theme/CodeBlock/Buttons/WordWrapButton'
-import { cn } from '@site/src/lib/utils'
 import { Button } from '@heroui/button'
-import { TextWrap } from 'lucide-react'
 import { Tooltip } from '@heroui/tooltip'
+import { cn } from '@site/src/lib/utils'
+import type { Props } from '@theme/CodeBlock/Buttons/WordWrapButton'
+import { TextWrap } from 'lucide-react'
+import type { ReactNode } from 'react'
 
 export default function WordWrapButton({ className }: Props): ReactNode {
   const { wordWrap } = useCodeBlockContext()

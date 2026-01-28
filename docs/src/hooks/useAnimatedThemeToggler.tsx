@@ -53,7 +53,7 @@ export const useAnimatedThemeToggler = () => {
         localStorage.setItem('theme', newTheme ? 'dark' : 'light')
       })
     }).ready
-  }, [isDark])
+  }, [isDark, setTheme])
 
   return { isDark, toggleTheme }
 }

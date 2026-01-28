@@ -1,9 +1,8 @@
-import React, { type ReactNode } from 'react'
 import Translate from '@docusaurus/Translate'
-import type { Props } from '@theme/TOCCollapsible/CollapseButton'
-
 import { cn } from '@site/src/lib/utils'
+import type { Props } from '@theme/TOCCollapsible/CollapseButton'
 import { ChevronDown } from 'lucide-react'
+import type { ReactNode } from 'react'
 
 export default function TOCCollapsibleCollapseButton({
   collapsed,

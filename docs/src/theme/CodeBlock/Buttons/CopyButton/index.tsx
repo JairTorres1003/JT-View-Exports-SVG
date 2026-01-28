@@ -1,11 +1,11 @@
-import React, { useCallback, useState, useRef, useEffect, type ReactNode } from 'react'
 import { translate } from '@docusaurus/Translate'
 import { useCodeBlockContext } from '@docusaurus/theme-common/internal'
-import type { Props } from '@theme/CodeBlock/Buttons/CopyButton'
 import { Button } from '@heroui/button'
-import { Check, Copy } from 'lucide-react'
-import { cn } from '@site/src/lib/utils'
 import { Tooltip } from '@heroui/tooltip'
+import { cn } from '@site/src/lib/utils'
+import type { Props } from '@theme/CodeBlock/Buttons/CopyButton'
+import { Check, Copy } from 'lucide-react'
+import { type ReactNode, useCallback, useEffect, useRef, useState } from 'react'
 
 function title() {
   return translate({

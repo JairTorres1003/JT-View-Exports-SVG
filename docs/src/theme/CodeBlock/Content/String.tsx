@@ -1,4 +1,3 @@
-import React, { type ReactNode } from 'react'
 import { useThemeConfig } from '@docusaurus/theme-common'
 import {
   CodeBlockContextProvider,
@@ -8,6 +7,7 @@ import {
 } from '@docusaurus/theme-common/internal'
 import type { Props } from '@theme/CodeBlock/Content/String'
 import CodeBlockLayout from '@theme/CodeBlock/Layout'
+import type { ReactNode } from 'react'
 
 function useCodeBlockMetadata(props: Props): CodeBlockMetadata {
   const { prism } = useThemeConfig()

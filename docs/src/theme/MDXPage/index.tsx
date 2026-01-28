@@ -1,13 +1,12 @@
-import React, { type ReactNode } from 'react'
-import clsx from 'clsx'
-import { PageMetadata, HtmlClassNameProvider, ThemeClassNames } from '@docusaurus/theme-common'
+import { HtmlClassNameProvider, PageMetadata, ThemeClassNames } from '@docusaurus/theme-common'
+import ContentVisibility from '@theme/ContentVisibility'
+import EditMetaRow from '@theme/EditMetaRow'
 import Layout from '@theme/Layout'
 import MDXContent from '@theme/MDXContent'
-import TOC from '@theme/TOC'
-import ContentVisibility from '@theme/ContentVisibility'
 import type { Props } from '@theme/MDXPage'
-
-import EditMetaRow from '@theme/EditMetaRow'
+import TOC from '@theme/TOC'
+import clsx from 'clsx'
+import type { ReactNode } from 'react'
 
 export default function MDXPage(props: Props): ReactNode {
   const { content: MDXPageContent } = props

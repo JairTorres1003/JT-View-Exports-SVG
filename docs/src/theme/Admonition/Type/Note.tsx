@@ -1,9 +1,9 @@
-import React, { type ReactNode } from 'react'
 import Translate from '@docusaurus/Translate'
-import type { Props } from '@theme/Admonition/Type/Note'
-import AdmonitionLayout from '@theme/Admonition/Layout'
-import { Info } from 'lucide-react'
 import { cn } from '@site/src/lib/utils'
+import AdmonitionLayout from '@theme/Admonition/Layout'
+import type { Props } from '@theme/Admonition/Type/Note'
+import { Info } from 'lucide-react'
+import type { ReactNode } from 'react'
 
 const classNames = 'bg-[purple]/10 border border-[purple]'
 

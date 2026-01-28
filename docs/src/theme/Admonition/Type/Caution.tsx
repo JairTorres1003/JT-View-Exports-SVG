@@ -1,9 +1,9 @@
-import React, { type ReactNode } from 'react'
 import Translate from '@docusaurus/Translate'
-import type { Props } from '@theme/Admonition/Type/Caution'
-import AdmonitionLayout from '@theme/Admonition/Layout'
-import { TriangleAlert } from 'lucide-react'
 import { cn } from '@site/src/lib/utils'
+import AdmonitionLayout from '@theme/Admonition/Layout'
+import type { Props } from '@theme/Admonition/Type/Caution'
+import { TriangleAlert } from 'lucide-react'
+import type { ReactNode } from 'react'
 
 const classNames = 'bg-warning/10 border border-warning'
 

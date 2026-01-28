@@ -1,5 +1,5 @@
 import { cn } from '@site/src/lib/utils'
-import React, { FC } from 'react'
+import React, { type FC } from 'react'
 
 type StepsItemProps = React.PropsWithChildren<{
   className?: string

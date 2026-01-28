@@ -1,11 +1,9 @@
-import React, { type ReactNode } from 'react'
 import BrowserOnly from '@docusaurus/BrowserOnly'
-
+import { cn } from '@site/src/lib/utils'
+import type { Props } from '@theme/CodeBlock/Buttons'
 import CopyButton from '@theme/CodeBlock/Buttons/CopyButton'
 import WordWrapButton from '@theme/CodeBlock/Buttons/WordWrapButton'
-import type { Props } from '@theme/CodeBlock/Buttons'
-
-import { cn } from '@site/src/lib/utils'
+import type { ReactNode } from 'react'
 
 import styles from './styles.module.css'
 

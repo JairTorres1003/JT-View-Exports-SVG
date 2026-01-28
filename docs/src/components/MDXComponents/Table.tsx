@@ -7,11 +7,10 @@ import {
   TableHeader,
   TableRow,
 } from '@heroui/table'
-import React, { useId } from 'react'
-
-import { cn } from '@site/src/lib/utils'
-import { Cell, Row } from '@site/src/plugins/remark/table/types'
 import { renderHast } from '@site/src/lib/render-hast'
+import { cn } from '@site/src/lib/utils'
+import type { Cell, Row } from '@site/src/plugins/remark/table/types'
+import { useId } from 'react'
 
 interface MDXTableProps {
   className?: string

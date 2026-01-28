@@ -1,10 +1,10 @@
 import Link from '@docusaurus/Link'
 import { Button } from '@heroui/button'
-import { ButtonVariantProps } from '@heroui/theme'
+import type { ButtonVariantProps } from '@heroui/theme'
 import { cn } from '@site/src/lib/utils'
 import Image from '@theme/IdealImage'
 import { ArrowRight, Download, ExternalLink } from 'lucide-react'
-import React, { FC } from 'react'
+import type { FC } from 'react'
 
 interface HeroSectionProps {
   title: string

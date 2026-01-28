@@ -1,9 +1,8 @@
-import React, { type ReactNode } from 'react'
 import Translate from '@docusaurus/Translate'
 import Tag from '@theme/Tag'
 import type { Props } from '@theme/TagsListInline'
-
 import { Tags } from 'lucide-react'
+import type { ReactNode } from 'react'
 
 export default function TagsListInline({ tags }: Props): ReactNode {
   return (

@@ -1,13 +1,12 @@
-import React, { type ReactNode } from 'react'
-import { useSidebarBreadcrumbs } from '@docusaurus/plugin-content-docs/client'
 import Link from '@docusaurus/Link'
+import { useSidebarBreadcrumbs } from '@docusaurus/plugin-content-docs/client'
 import { translate } from '@docusaurus/Translate'
-import DocBreadcrumbsStructuredData from '@theme/DocBreadcrumbs/StructuredData'
-
-import { BreadcrumbItem, Breadcrumbs } from '@heroui/breadcrumbs'
-import { House } from 'lucide-react'
 import useBaseUrl from '@docusaurus/useBaseUrl'
+import { BreadcrumbItem, Breadcrumbs } from '@heroui/breadcrumbs'
 import { Link as HeroLink } from '@heroui/link'
+import DocBreadcrumbsStructuredData from '@theme/DocBreadcrumbs/StructuredData'
+import { House } from 'lucide-react'
+import type { ReactNode } from 'react'
 
 export default function DocBreadcrumbs(): ReactNode {
   const breadcrumbs = useSidebarBreadcrumbs()

@@ -1,10 +1,9 @@
-import React, { type ReactNode } from 'react'
 import { translate } from '@docusaurus/Translate'
-import type { Props } from '@theme/DocSidebar/Desktop/CollapseButton'
-
-import { cn } from '@site/src/lib/utils'
-import { ChevronsLeft } from 'lucide-react'
 import { Tooltip } from '@heroui/tooltip'
+import { cn } from '@site/src/lib/utils'
+import type { Props } from '@theme/DocSidebar/Desktop/CollapseButton'
+import { ChevronsLeft } from 'lucide-react'
+import type { ReactNode } from 'react'
 
 export default function CollapseButton({ onClick }: Props): ReactNode {
   return (

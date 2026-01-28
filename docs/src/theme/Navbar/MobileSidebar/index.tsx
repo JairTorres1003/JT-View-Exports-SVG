@@ -1,8 +1,7 @@
-import React, { type ReactNode } from 'react'
 import { useNavbarMobileSidebar } from '@docusaurus/theme-common/internal'
 import { NavbarMenu, NavbarMenuItem } from '@heroui/navbar'
-
 import NavbarMobileSidebarSecondaryMenu from '@theme/Navbar/MobileSidebar/SecondaryMenu'
+import type { ReactNode } from 'react'
 
 export default function NavbarMobileSidebar(): ReactNode {
   const mobileSidebar = useNavbarMobileSidebar()

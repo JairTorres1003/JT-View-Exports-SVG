@@ -1,5 +1,5 @@
-import { valueToEstree } from 'estree-util-value-to-estree'
 import type { Program } from 'estree'
+import { valueToEstree } from 'estree-util-value-to-estree'
 
 import type { Align, Cell, NodeCell, NodeRow, ParsedCell, Row } from './types'
 
@@ -58,7 +58,7 @@ export function parseCell(node: NodeCell): ParsedCell {
   // Remove control symbols (> <)
   raw = raw.replace(/[<>]/g, '').trim()
 
-  let align: Align | undefined = undefined
+  let align: Align | undefined
 
   const startsWithColon = raw.startsWith(':')
   const endsWithColon = raw.endsWith(':')

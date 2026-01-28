@@ -1,5 +1,5 @@
 import { cn } from '@site/src/lib/utils'
-import { type ComponentProps } from 'react'
+import type { ComponentProps } from 'react'
 
 export const Blockquote = ({ className, ...props }: ComponentProps<'blockquote'>) => {
   return (

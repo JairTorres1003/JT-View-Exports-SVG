@@ -1,11 +1,11 @@
+import Link from '@docusaurus/Link'
 import {
   useActiveDocContext,
   useLayoutDocsSidebar,
 } from '@docusaurus/plugin-content-docs/lib/client/index.js'
 import { NavbarItem as HeroNavbarItem } from '@heroui/navbar'
-import React, { FC } from 'react'
-import { NavbarItemComponentProps } from './types'
-import Link from '@docusaurus/Link'
+import type { FC } from 'react'
+import type { NavbarItemComponentProps } from './types'
 
 export const NavbarItemLink: FC<NavbarItemComponentProps> = ({
   label,

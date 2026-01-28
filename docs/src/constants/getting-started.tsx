@@ -1,10 +1,9 @@
+import { Link } from '@heroui/link'
 import CodeBlock from '@theme/CodeBlock'
 import CodeInline from '@theme/CodeInline'
-
 import { FolderCode, Terminal } from 'lucide-react'
 
 import Shortcut from '../components/Shortcut'
-import { Link } from '@heroui/link'
 
 export const ActivationMethods = [
   {
@@ -20,17 +19,19 @@ export const ActivationMethods = [
   {
     icon: <Terminal />,
     title: 'From the Command Palette',
-    description: (
+    children: (
       <>
-        Open the <strong>Command Palette</strong>{' '}
-        <span translate='no'>
-          (
-          <Shortcut mac={['command', 'shift']} windows={['ctrl', 'shift']}>
-            P
-          </Shortcut>
-          )
-        </span>
-        , then use one of these commands:
+        <p className='m-0'>
+          Open the <strong>Command Palette</strong>{' '}
+          <span translate='no'>
+            (
+            <Shortcut mac={['command', 'shift']} windows={['ctrl', 'shift']}>
+              P
+            </Shortcut>
+            )
+          </span>
+          , then use one of these commands:
+        </p>
         <ul className='list-disc pl-6 [&_li]:mt-2 mt-2'>
           <li>
             <CodeInline>View Exports SVG: Scan Workspace 🔍</CodeInline> — Scan your workspace for

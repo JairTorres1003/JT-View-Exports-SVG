@@ -1,12 +1,11 @@
-import React, { type ReactNode } from 'react'
-import { ThemeClassNames } from '@docusaurus/theme-common'
-import { isActiveSidebarItem } from '@docusaurus/plugin-content-docs/client'
-import Link from '@docusaurus/Link'
 import isInternalUrl from '@docusaurus/isInternalUrl'
-import type { Props } from '@theme/DocSidebarItem/Link'
+import Link from '@docusaurus/Link'
+import { isActiveSidebarItem } from '@docusaurus/plugin-content-docs/client'
+import { ThemeClassNames } from '@docusaurus/theme-common'
 import { Link as HeroLink } from '@heroui/link'
-
 import { cn } from '@site/src/lib/utils'
+import type { Props } from '@theme/DocSidebarItem/Link'
+import type { ReactNode } from 'react'
 
 export default function DocSidebarItemLink({
   item,

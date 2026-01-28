@@ -1,7 +1,7 @@
 import { toHast } from 'mdast-util-to-hast'
 
-import { Attr, IMdxJsxAttribute } from './types'
-import { Cell } from '../../remark/table/types'
+import type { Cell } from '../../remark/table/types'
+import type { Attr, IMdxJsxAttribute } from './types'
 
 const propsToParse = ['columns', 'rows']
 

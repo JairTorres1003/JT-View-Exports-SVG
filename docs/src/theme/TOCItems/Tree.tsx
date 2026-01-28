@@ -1,7 +1,7 @@
-import React, { useEffect, type ReactNode } from 'react'
 import Link from '@docusaurus/Link'
-import type { Props } from '@theme/TOCItems/Tree'
 import { cn } from '@site/src/lib/utils'
+import type { Props } from '@theme/TOCItems/Tree'
+import React, { type ReactNode, useEffect } from 'react'
 
 // Recursive component rendering the toc tree
 function TOCItemTree({ toc, className, linkClassName, isChild }: Props): ReactNode {
@@ -19,11 +19,11 @@ function TOCItemTree({ toc, className, linkClassName, isChild }: Props): ReactNo
       if (!activeLink) return
 
       const linkRect = activeLink.getBoundingClientRect()
-      const ulRect = ulRef.current!.getBoundingClientRect()
+      const ulRect = ulRef.current?.getBoundingClientRect()
 
-      spanRef.current!.style.transform = `translateY(${linkRect.top - ulRect.top}px)`
-      spanRef.current!.style.height = `${linkRect.height}px`
-      spanRef.current!.style.opacity = '1'
+      spanRef.current.style.transform = `translateY(${linkRect.top - ulRect.top}px)`
+      spanRef.current.style.height = `${linkRect.height}px`
+      spanRef.current.style.opacity = '1'
     }
 
     updateIndicator()
@@ -57,6 +57,7 @@ function TOCItemTree({ toc, className, linkClassName, isChild }: Props): ReactNo
             <Link
               to={`#${heading.id}`}
               className={cn(linkClassName ?? undefined, 'px-3 py-1')}
+              // biome-ignore lint/security/noDangerouslySetInnerHtml: In this case, the content is generated from markdown headings
               dangerouslySetInnerHTML={{ __html: heading.value }}
             />
             <TOCItemTree

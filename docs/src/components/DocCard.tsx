@@ -1,9 +1,8 @@
 import Link from '@docusaurus/Link'
 import { Card, CardBody, CardHeader } from '@heroui/card'
-import React, { FC } from 'react'
+import { ArrowRight } from 'lucide-react'
 
 import { cn } from '../lib/utils'
-import { ArrowRight } from 'lucide-react'
 
 interface DocCardProps {
   title: React.ReactNode
@@ -15,7 +14,7 @@ interface DocCardProps {
   style?: React.CSSProperties
 }
 
-const DocCard: FC<DocCardProps> = ({
+const DocCard: React.FC<DocCardProps> = ({
   title,
   description,
   icon,
@@ -53,9 +52,7 @@ const DocCard: FC<DocCardProps> = ({
           </div>
         ) : null}
       </CardHeader>
-      <CardBody>
-        <p className='m-0'>{children ?? description}</p>
-      </CardBody>
+      <CardBody>{children ?? <p className='m-0'>{description}</p>}</CardBody>
     </Card>
   )
 }

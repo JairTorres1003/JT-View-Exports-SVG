@@ -1,10 +1,9 @@
-import React, { type ReactNode } from 'react'
 import { translate } from '@docusaurus/Translate'
-import type { Props } from '@theme/DocRoot/Layout/Sidebar/ExpandButton'
-
 import { Tooltip } from '@heroui/tooltip'
 import { cn } from '@site/src/lib/utils'
+import type { Props } from '@theme/DocRoot/Layout/Sidebar/ExpandButton'
 import { ChevronsRight } from 'lucide-react'
+import type { ReactNode } from 'react'
 
 export default function DocRootLayoutSidebarExpandButton({ toggleSidebar }: Props): ReactNode {
   return (

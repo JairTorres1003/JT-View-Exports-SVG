@@ -1,8 +1,9 @@
 import Link from '@docusaurus/Link'
 import { Button } from '@heroui/button'
-import React, { FC } from 'react'
+import { Tooltip, type TooltipPlacement } from '@heroui/tooltip'
+import React, { type FC } from 'react'
+
 import { GithubIcon, LinkedInIcon, VsCodeIcon } from '../assets/icons/social'
-import { Tooltip, TooltipPlacement } from '@heroui/tooltip'
 
 const SOCIAL_ICONS = {
   github: GithubIcon,

@@ -1,4 +1,4 @@
-import React, { FC } from 'react'
+import React, { type FC } from 'react'
 import { cn } from '../lib/utils'
 
 const GridStagger: FC<React.PropsWithChildren<{ className?: string }>> = ({
@@ -18,7 +18,7 @@ const GridStagger: FC<React.PropsWithChildren<{ className?: string }>> = ({
           if (!React.isValidElement(child)) return child
 
           return React.cloneElement(child, {
-            key: index,
+            key: `grid-stagger-child-[${child.key || index}]`,
             style: {
               ...child.props.style,
               gridArea: `${index + 1} / ${(index % 2) + 1} / ${index + 3} / ${(index % 2) + 2}`,

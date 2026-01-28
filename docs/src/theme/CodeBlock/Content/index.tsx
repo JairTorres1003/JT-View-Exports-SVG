@@ -1,11 +1,11 @@
-import React, { type ComponentProps, type ReactNode } from 'react'
-import clsx from 'clsx'
-import { useCodeBlockContext } from '@docusaurus/theme-common/internal'
 import { usePrismTheme } from '@docusaurus/theme-common'
-import { Highlight } from 'prism-react-renderer'
+import { useCodeBlockContext } from '@docusaurus/theme-common/internal'
+import Prism from '@site/src/lib/prismjs/loader'
 import type { Props } from '@theme/CodeBlock/Content'
 import Line from '@theme/CodeBlock/Line'
-import Prism from '@site/src/lib/prismjs/loader'
+import clsx from 'clsx'
+import { Highlight } from 'prism-react-renderer'
+import React, { type ComponentProps, type ReactNode } from 'react'
 
 import styles from './styles.module.css'
 
@@ -14,8 +14,7 @@ const Pre = React.forwardRef<HTMLPreElement, ComponentProps<'pre'>>((props, ref)
   return (
     <pre
       ref={ref}
-      /* eslint-disable-next-line jsx-a11y/no-noninteractive-tabindex */
-      tabIndex={0}
+      tabIndex={-1}
       {...props}
       className={clsx(
         props.className,
@@ -59,7 +58,8 @@ export default function CodeBlockContent({ className: classNameProp }: Props): R
           <Code>
             {lines.map((line, i) => (
               <Line
-                key={i}
+                // biome-ignore lint/suspicious/noArrayIndexKey: It's fine in this case
+                key={`line-${i}`}
                 line={line}
                 getLineProps={getLineProps}
                 getTokenProps={getTokenProps}

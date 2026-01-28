@@ -1,8 +1,8 @@
-import React, { type ReactNode } from 'react'
 import { BlogPostProvider } from '@docusaurus/plugin-content-blog/client'
+import { Card, CardBody } from '@heroui/card'
 import BlogPostItem from '@theme/BlogPostItem'
 import type { Props } from '@theme/BlogPostItems'
-import { Card, CardBody } from '@heroui/card'
+import type { ReactNode } from 'react'
 
 export default function BlogPostItems({
   items,

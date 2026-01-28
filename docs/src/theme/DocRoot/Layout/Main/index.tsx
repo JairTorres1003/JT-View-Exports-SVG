@@ -1,5 +1,5 @@
-import React, { type ReactNode } from 'react'
 import type { Props } from '@theme/DocRoot/Layout/Main'
+import type { ReactNode } from 'react'
 
 export default function DocRootLayoutMain({ children }: Props): ReactNode {
   return (

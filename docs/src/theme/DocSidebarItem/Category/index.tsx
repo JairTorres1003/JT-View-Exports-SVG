@@ -1,28 +1,27 @@
-import React, { type ReactNode, useEffect, useMemo } from 'react'
+import Link from '@docusaurus/Link'
+import type { PropSidebarItemCategory, PropSidebarItemLink } from '@docusaurus/plugin-content-docs'
 import {
-  ThemeClassNames,
-  useThemeConfig,
-  usePrevious,
-  Collapsible,
-  useCollapsible,
-} from '@docusaurus/theme-common'
-import { isSamePath } from '@docusaurus/theme-common/internal'
-import {
-  isActiveSidebarItem,
   findFirstSidebarItemLink,
+  isActiveSidebarItem,
   useDocSidebarItemsExpandedState,
   useVisibleSidebarItems,
 } from '@docusaurus/plugin-content-docs/client'
-import Link from '@docusaurus/Link'
+import {
+  Collapsible,
+  ThemeClassNames,
+  useCollapsible,
+  usePrevious,
+  useThemeConfig,
+} from '@docusaurus/theme-common'
+import { isSamePath } from '@docusaurus/theme-common/internal'
 import useIsBrowser from '@docusaurus/useIsBrowser'
-import DocSidebarItems from '@theme/DocSidebarItems'
-import DocSidebarItemLink from '@theme/DocSidebarItem/Link'
-import type { Props } from '@theme/DocSidebarItem/Category'
-
-import type { PropSidebarItemCategory, PropSidebarItemLink } from '@docusaurus/plugin-content-docs'
-import { cn } from '@site/src/lib/utils'
-import { ChevronRight } from 'lucide-react'
 import { Link as HeroLink } from '@heroui/link'
+import { cn } from '@site/src/lib/utils'
+import type { Props } from '@theme/DocSidebarItem/Category'
+import DocSidebarItemLink from '@theme/DocSidebarItem/Link'
+import DocSidebarItems from '@theme/DocSidebarItems'
+import { ChevronRight } from 'lucide-react'
+import React, { type ReactNode, useEffect, useMemo } from 'react'
 
 // If we navigate to a category and it becomes active, it should automatically
 // expand itself
@@ -131,7 +130,7 @@ function DocSidebarItemCategoryCollapsible({
 
   const { expandedItem, setExpandedItem } = useDocSidebarItemsExpandedState()
   // Use this instead of `setCollapsed`, because it is also reactive
-  const updateCollapsed = (toCollapsed: boolean = !collapsed) => {
+  const updateCollapsed = (toCollapsed = !collapsed) => {
     setExpandedItem(toCollapsed ? null : index)
     setCollapsed(toCollapsed)
   }
@@ -181,7 +180,8 @@ function DocSidebarItemCategoryCollapsible({
         className
       )}
     >
-      <div
+      <button
+        type='button'
         role={href || !collapsible ? undefined : 'button'}
         onClick={handleItemClick}
         aria-current={isCurrentPage ? 'page' : undefined}
@@ -225,7 +225,7 @@ function DocSidebarItemCategoryCollapsible({
             })}
           />
         )}
-      </div>
+      </button>
 
       <Collapsible lazy as='ul' className='menu__list' collapsed={collapsed}>
         <DocSidebarItems
