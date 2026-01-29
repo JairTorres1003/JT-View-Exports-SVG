@@ -1,7 +1,7 @@
 {
   "search.exclude": {
     "out": true,
-    "**/.astro": true
+    "**/.docusaurus": true
   },
   "typescript.tsc.autoDetect": "off",
   "cSpell.language": "en,es-ES",
