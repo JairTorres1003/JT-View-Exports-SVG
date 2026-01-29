@@ -1,46 +1,44 @@
 import Head from '@docusaurus/Head'
-import MDXTable from '@site/src/components/MDXComponents/Table'
 import { cn } from '@site/src/lib/utils'
-import Admonition from '@theme/Admonition'
 import type { MDXComponentsObject } from '@theme/MDXComponents'
-import MDXA from '@theme/MDXComponents/A'
-import MDXCode from '@theme/MDXComponents/Code'
-import MDXDetails from '@theme/MDXComponents/Details'
-import MDXHeading from '@theme/MDXComponents/Heading'
-import MDXImg from '@theme/MDXComponents/Img'
-import MDXLi from '@theme/MDXComponents/Li'
-import MDXPre from '@theme/MDXComponents/Pre'
-import Mermaid from '@theme/Mermaid'
-import type { ComponentProps } from 'react'
-import { Blockquote } from './Blockquote'
+import { Props } from '@theme/MDXComponents/Heading'
+import { lazy, type ComponentProps } from 'react'
+
+function lazyHeading<T extends Props['as']>(as: T) {
+  return lazy(async () => {
+    const module = await import('@theme/MDXComponents/Heading')
+    return {
+      default: (props: ComponentProps<T>) => <module.default as={as} {...props} />,
+    }
+  })
+}
 
 const MDXComponents: MDXComponentsObject = {
   Head,
-  details: MDXDetails, // For MD mode support, see https://github.com/facebook/docusaurus/issues/9092#issuecomment-1602902274
-  Details: MDXDetails,
-  code: MDXCode,
-  a: MDXA,
-  Link: MDXA,
-  pre: MDXPre,
+  details: lazy(async () => await import('@theme/MDXComponents/Details')), // For MD mode support, see https://github.com/facebook/docusaurus/issues/9092#issuecomment-1602902274
+  Details: lazy(async () => await import('@theme/MDXComponents/Details')),
+  code: lazy(async () => await import('@theme/MDXComponents/Code')),
+  a: lazy(async () => await import('@theme/MDXComponents/A')),
+  Link: lazy(async () => await import('@theme/MDXComponents/A')),
+  pre: lazy(async () => await import('@theme/MDXComponents/Pre')),
   ul: ({ className, ...props }: ComponentProps<'ul'>) => (
     <ul className={cn('list-disc pl-6', className)} {...props} />
   ),
   ol: ({ className, ...props }: ComponentProps<'ol'>) => (
     <ol className={cn('list-decimal pl-6', className)} {...props} />
   ),
-  li: MDXLi,
-  img: MDXImg,
-  h1: (props: ComponentProps<'h1'>) => <MDXHeading as='h1' {...props} />,
-  h2: (props: ComponentProps<'h2'>) => <MDXHeading as='h2' {...props} />,
-  H2: (props: ComponentProps<'h2'>) => <MDXHeading as='h2' {...props} />,
-  h3: (props: ComponentProps<'h3'>) => <MDXHeading as='h3' {...props} />,
-  h4: (props: ComponentProps<'h4'>) => <MDXHeading as='h4' {...props} />,
-  h5: (props: ComponentProps<'h5'>) => <MDXHeading as='h5' {...props} />,
-  h6: (props: ComponentProps<'h6'>) => <MDXHeading as='h6' {...props} />,
-  admonition: Admonition,
-  mermaid: Mermaid,
-  AdvancedTable: MDXTable,
-  blockquote: Blockquote,
+  li: lazy(async () => await import('@theme/MDXComponents/Li')),
+  img: lazy(async () => await import('@theme/MDXComponents/Img')),
+  h1: lazyHeading('h1'),
+  h2: lazyHeading('h2'),
+  h3: lazyHeading('h3'),
+  h4: lazyHeading('h4'),
+  h5: lazyHeading('h5'),
+  h6: lazyHeading('h6'),
+  admonition: lazy(async () => await import('@theme/Admonition')),
+  mermaid: lazy(async () => await import('@theme/Mermaid')),
+  AdvancedTable: lazy(async () => await import('@site/src/components/MDXComponents/Table')),
+  blockquote: lazy(async () => await import('./Blockquote')),
 }
 
 export default MDXComponents

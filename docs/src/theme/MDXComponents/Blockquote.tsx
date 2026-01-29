@@ -1,7 +1,7 @@
 import { cn } from '@site/src/lib/utils'
 import type { ComponentProps } from 'react'
 
-export const Blockquote = ({ className, ...props }: ComponentProps<'blockquote'>) => {
+const Blockquote = ({ className, ...props }: ComponentProps<'blockquote'>) => {
   return (
     <blockquote
       className={cn(
@@ -13,3 +13,5 @@ export const Blockquote = ({ className, ...props }: ComponentProps<'blockquote'>
     />
   )
 }
+
+export default Blockquote
