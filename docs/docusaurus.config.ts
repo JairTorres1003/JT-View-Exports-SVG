@@ -8,7 +8,7 @@ import remarkAdvancedTablePlugin from './src/plugins/remark/table'
 
 // This runs in Node.js - Don't use client-side code here (browser APIs, JSX...)
 
-const copyright = `© ${new Date().getFullYear()} View Exports SVG. Creado con ❤️ por <a href="https://github.com/JairTorres1003" class="font-semibold">Jair Torres</a>. Todos los derechos reservados.`
+const copyright = `© ${new Date().getFullYear()} View Exports SVG. Built with ❤️ by <a href="https://github.com/JairTorres1003" class="font-semibold">Jair Torres</a>. All rights reserved.`
 
 const config: Config = {
   title: 'View Exports SVG',
