@@ -1,9 +1,10 @@
-name: Deploy Docusaurus to GitHub Pages
+name: Deploy Documentation
 
 on:
   push:
-    branches:
-      - main
+    branches: ['main']
+  pull_request:
+    branches: ['main']
 
 permissions:
   contents: read
