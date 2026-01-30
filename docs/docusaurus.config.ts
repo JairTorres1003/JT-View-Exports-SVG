@@ -64,7 +64,7 @@ const config: Config = {
         onInlineAuthors: 'warn',
         editUrl: 'https://github.com/JairTorres1003/JT-View-Exports-SVG/edit/main/CHANGELOG.md',
         feedOptions: {
-          type: ['atom', 'rss', 'json'],
+          type: ['json'],
           title: 'View Exports SVG - Changelog',
           description:
             'Stay updated with the latest changes, improvements, and fixes in View Exports SVG through our comprehensive changelog.',

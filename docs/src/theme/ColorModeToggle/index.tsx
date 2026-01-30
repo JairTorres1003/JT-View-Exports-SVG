@@ -1,3 +1,4 @@
+import BrowserOnly from '@docusaurus/BrowserOnly'
 import { translate } from '@docusaurus/Translate'
 import type { ColorMode } from '@docusaurus/theme-common'
 import useIsBrowser from '@docusaurus/useIsBrowser'
@@ -55,7 +56,7 @@ interface AnimatedThemeTogglerProps
   }
 }
 
-export const AnimatedThemeToggler: FC<AnimatedThemeTogglerProps> = ({
+const AnimatedThemeToggler: FC<AnimatedThemeTogglerProps> = ({
   className,
   onChange = () => null,
   config,
@@ -88,7 +89,6 @@ export const AnimatedThemeToggler: FC<AnimatedThemeTogglerProps> = ({
       <Button
         isIconOnly
         size='sm'
-        // ref={buttonRef}
         onPress={toggleTheme}
         disabled={!isBrowser}
         className={cn('bg-transparent hover:bg-gray-700/10 dark:hover:bg-foreground/15', className)}
@@ -101,4 +101,8 @@ export const AnimatedThemeToggler: FC<AnimatedThemeTogglerProps> = ({
   )
 }
 
-export default React.memo(AnimatedThemeToggler)
+const ThemeToggler: FC<AnimatedThemeTogglerProps> = (props) => {
+  return <BrowserOnly>{() => <AnimatedThemeToggler {...props} />}</BrowserOnly>
+}
+
+export default React.memo(ThemeToggler)

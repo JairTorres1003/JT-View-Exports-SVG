@@ -1,8 +1,8 @@
 import Head from '@docusaurus/Head'
 import { cn } from '@site/src/lib/utils'
 import type { MDXComponentsObject } from '@theme/MDXComponents'
-import { Props } from '@theme/MDXComponents/Heading'
-import { lazy, type ComponentProps } from 'react'
+import type { Props } from '@theme/MDXComponents/Heading'
+import { type ComponentProps, lazy } from 'react'
 
 function lazyHeading<T extends Props['as']>(as: T) {
   return lazy(async () => {

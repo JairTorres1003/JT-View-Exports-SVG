@@ -1,9 +1,12 @@
+import ExecutionEnvironment from '@docusaurus/ExecutionEnvironment'
 import { cn } from '@site/src/lib/utils'
 import Image from '@theme/IdealImage'
 import type { Props } from '@theme/MDXComponents/Img'
 import type { ReactNode } from 'react'
 
 function decodeHTMLEntities(value: string) {
+  if (!ExecutionEnvironment.canUseDOM) return value
+
   const textarea = document.createElement('textarea')
   textarea.innerHTML = value
   return textarea.value

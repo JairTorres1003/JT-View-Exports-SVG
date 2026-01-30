@@ -1,5 +1,5 @@
 import type { LucideIcon } from 'lucide-react'
-import { lazy, type LazyExoticComponent } from 'react'
+import { type LazyExoticComponent, lazy } from 'react'
 
 /**
  * Parses a metadata string and extracts key-value pairs into an object.
@@ -70,7 +70,7 @@ function getLazyIconComponent(iconKey: string) {
     iconComponentCache.set(iconKey, iconComponent)
   }
 
-  return iconComponentCache.get(iconKey)!
+  return iconComponentCache.get(iconKey)
 }
 
 /**

@@ -1,10 +1,10 @@
-import React, { type ReactNode } from 'react'
-import Translate from '@docusaurus/Translate'
-import type { Props } from '@theme/NotFound/Content'
-import { Button } from '@heroui/button'
-import { Home } from 'lucide-react'
 import Link from '@docusaurus/Link'
+import Translate from '@docusaurus/Translate'
+import { Button } from '@heroui/button'
 import { cn } from '@site/src/lib/utils'
+import type { Props } from '@theme/NotFound/Content'
+import { Home } from 'lucide-react'
+import type { ReactNode } from 'react'
 
 export default function NotFoundContent({ className }: Props): ReactNode {
   return (
