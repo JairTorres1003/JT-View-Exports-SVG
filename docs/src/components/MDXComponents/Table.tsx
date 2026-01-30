@@ -22,7 +22,7 @@ const MDXTable: React.FC<MDXTableProps> = ({ className, columns, rows }) => {
   const id = useId()
 
   return (
-    <Table className={cn('mt-4 w-fit', className)} aria-label={`Table-${id}`} id={id}>
+    <Table className={cn('mt-4 w-fit max-w-full', className)} aria-label={`Table-${id}`} id={id}>
       <TableHeader columns={columns}>
         {({ children, ...columns }) => (
           <TableColumn {...columns} key={columns.key}>
