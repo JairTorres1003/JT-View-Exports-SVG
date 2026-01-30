@@ -24,7 +24,6 @@
   }
 
   .sidebarViewport {
-    padding-top: var(--ifm-navbar-height);
     top: 0;
     position: sticky;
     height: 100%;
