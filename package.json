@@ -34,16 +34,6 @@
   "categories": [
     "Other"
   ],
-  "activationEvents": [
-    "onCommand:JT-View-Exports-SVG.showMenu",
-    "onCommand:JT-View-Exports-SVG.scanning",
-    "onCommand:JT-View-Exports-SVG.reloadTheme",
-    "onCommand:JT-View-Exports-SVG.collapseAll",
-    "onCommand:JT-View-Exports-SVG.expandAll",
-    "onCommand:JT-View-Exports-SVG.openDevTools",
-    "onCommand:JT-View-Exports-SVG.closeDevTools",
-    "onCommand:JT-View-Exports-SVG.clearCache"
-  ],
   "icon": "icon.png",
   "main": "./out/cjs/extension.js",
   "browser": "./out/cjs/web/extension.js",

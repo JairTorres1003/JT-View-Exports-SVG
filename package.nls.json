@@ -10,7 +10,7 @@
   "extension.commands.closeDevTools.title": "Close Developer Tools",
   "extension.commands.clearCache.title": "Clear Cache",
   "extension.config.defaultExpandAll.title": "Default Expand All Icons",
-  "extension.config.defaultExpandAll.description": "Indicates whether or not to expand all items by default.",
+  "extension.config.defaultExpandAll.description": "Determines whether all icons should be expanded by default when the extension is opened.",
   "extension.config.defaultClickToOpenDevTools.title": "Default Click To Open DevTools",
   "extension.config.defaultClickToOpenDevTools.description": "Indicates whether or not to open the developer tools by default.",
   "extension.config.assetsPath.title": "Assets Path",

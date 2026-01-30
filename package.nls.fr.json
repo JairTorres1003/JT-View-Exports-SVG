@@ -10,7 +10,7 @@
   "extension.commands.closeDevTools.title": "Fermer les outils de développement",
   "extension.commands.clearCache.title": "Effacer le cache",
   "extension.config.defaultExpandAll.title": "Développer toutes les icônes par défaut",
-  "extension.config.defaultExpandAll.description": "Indique si toutes les icônes doivent être développées par défaut.",
+  "extension.config.defaultExpandAll.description": "Détermine si toutes les icônes doivent être développées par défaut lorsque l'extension est ouverte.",
   "extension.config.defaultClickToOpenDevTools.title": "Clic par défaut pour ouvrir les outils de développement",
   "extension.config.defaultClickToOpenDevTools.description": "Indique si les outils de développement doivent être ouverts par défaut.",
   "extension.config.assetsPath.title": "Chemin des ressources",

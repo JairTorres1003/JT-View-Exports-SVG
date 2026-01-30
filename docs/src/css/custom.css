@@ -1,0 +1,114 @@
+@import 'tailwindcss';
+
+@import 'tw-animate-css';
+
+@config '../../tailwind.config.mts';
+
+button {
+  cursor: pointer;
+}
+
+:root {
+  --header-height: 4rem;
+  --footer-height: 5.5rem;
+  --ifm-toc-border-color: hsl(var(--heroui-divider) / 0.15);
+  --ifm-color-primary: var(--primary);
+  --ifm-color-primary-dark: var(--primary);
+  --ifm-color-primary-darker: var(--primary);
+  --ifm-color-primary-darkest: var(--primary);
+  --ifm-color-primary-light: var(--primary);
+  --ifm-color-primary-lighter: var(--primary);
+  --ifm-color-primary-lightest: var(--primary);
+
+  --ifm-navbar-height: calc(var(--header-height) + 1px);
+  --ifm-background-color: var(--background);
+  --ifm-font-family-base:
+    Segoe UI, Roboto, Ubuntu, Cantarell, Noto Sans, system-ui, -apple-system, sans-serif,
+    BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif, 'Apple Color Emoji',
+    'Segoe UI Emoji', 'Segoe UI Symbol';
+
+  --docusaurus-highlighted-code-line-bg: color-mix(in srgb, var(--accent) 10%, transparent);
+
+  --ifm-color-secondary: var(--secondary);
+  --ifm-color-info: var(--accent);
+  --ifm-color-success: var(--primary);
+  --ifm-color-danger: var(--destructive);
+}
+
+[data-theme='dark'] {
+  --docusaurus-highlighted-code-line-bg: color-mix(in srgb, var(--accent) 20%, transparent);
+}
+
+@layer base {
+  h1 {
+    @apply my-6 text-4xl font-bold leading-tight;
+  }
+  h2 {
+    @apply my-6 text-3xl font-semibold leading-snug;
+  }
+  h3 {
+    @apply my-6 text-2xl font-semibold leading-snug;
+  }
+  h4 {
+    @apply my-6 text-xl font-medium leading-snug;
+  }
+  h5 {
+    @apply my-6 text-lg font-medium leading-snug;
+  }
+  h6 {
+    @apply my-6 text-base font-medium leading-snug;
+  }
+
+  p {
+    @apply mt-4 font-normal leading-[1.75];
+  }
+
+  hr {
+    @apply my-8 border-t-2 border-t-gray-200 dark:border-t-gray-700;
+  }
+
+  video {
+    @apply w-full max-w-[1048px] rounded-xl shadow-xl;
+    aspect-ratio: 691 / 432;
+  }
+
+  .StepsItem-root .StepsItem-content > :first-of-type {
+    @apply mt-2;
+  }
+
+  .medium-zoom-overlay {
+    @apply backdrop-blur-sm z-50;
+  }
+
+  .medium-zoom-image--opened {
+    @apply rounded-xl shadow-xl z-50;
+  }
+
+  ::view-transition-new(root) {
+    mask: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 40 40"><circle cx="20" cy="20" r="20" fill="white"/></svg>')
+      center / 0 no-repeat;
+    animation: scale 1s;
+    animation-fill-mode: both;
+  }
+
+  ::view-transition-old(root),
+  .dark::view-transition-old(root) {
+    animation: none;
+    animation-fill-mode: both;
+    z-index: -1;
+  }
+  .dark::view-transition-new(root) {
+    animation: scale 1s;
+    animation-fill-mode: both;
+  }
+
+  @keyframes scale {
+    to {
+      mask-size: 200vmax;
+    }
+  }
+
+  .table-of-contents__link--active {
+    @apply text-[#0d59f2];
+  }
+}

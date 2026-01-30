@@ -1,0 +1,55 @@
+import isInternalUrl from '@docusaurus/isInternalUrl'
+import Link from '@docusaurus/Link'
+import { isActiveSidebarItem } from '@docusaurus/plugin-content-docs/client'
+import { ThemeClassNames } from '@docusaurus/theme-common'
+import { Link as HeroLink } from '@heroui/link'
+import { cn } from '@site/src/lib/utils'
+import type { Props } from '@theme/DocSidebarItem/Link'
+import type { ReactNode } from 'react'
+
+export default function DocSidebarItemLink({
+  item,
+  onItemClick = () => null,
+  activePath,
+  level,
+  index,
+  ...props
+}: Props): ReactNode {
+  const { href, label, className, autoAddBaseUrl } = item
+  const isActive = isActiveSidebarItem(item, activePath)
+  const isInternalLink = isInternalUrl(href)
+
+  return (
+    <li
+      key={`sidebar-item-link-${level}-${index}-[${label}]`}
+      className={cn(
+        ThemeClassNames.docs.docSidebarItemLink,
+        ThemeClassNames.docs.docSidebarItemLinkLevel(level),
+        `rounded-md cursor-pointer my-1 transition-all relative`,
+        {
+          'opacity-80 font-normal hover:bg-primary/10 hover:opacity-100': !isActive,
+          'opacity-100 font-medium bg-[#0d59f2]/10': isActive,
+        },
+        className
+      )}
+    >
+      {isActive && (
+        <span className='absolute top-0 bottom-0 my-1 w-0.5 bg-[#0d59f2] rounded-md -left-2 pointer-events-none'></span>
+      )}
+      <HeroLink
+        as={Link}
+        to={href}
+        isExternal={!isInternalLink}
+        showAnchorIcon={!isInternalLink}
+        autoAddBaseUrl={autoAddBaseUrl}
+        color={isActive ? 'primary' : 'foreground'}
+        aria-current={isActive ? 'page' : undefined}
+        className={cn('w-full px-2 py-1 transition-all', { 'text-[#0d59f2]': isActive })}
+        {...props}
+        onClick={isInternalLink ? () => onItemClick(item) : undefined}
+      >
+        {label}
+      </HeroLink>
+    </li>
+  )
+}

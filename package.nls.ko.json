@@ -10,7 +10,7 @@
   "extension.commands.closeDevTools.title": "개발자 도구 닫기",
   "extension.commands.clearCache.title": "캐시 지우기",
   "extension.config.defaultExpandAll.title": "기본값으로 모든 아이콘 확장",
-  "extension.config.defaultExpandAll.description": "기본적으로 모든 항목을 확장할지 여부를 나타냅니다.",
+  "extension.config.defaultExpandAll.description": "확장 프로그램이 열릴 때 모든 아이콘을 기본적으로 확장할지 여부를 결정합니다.",
   "extension.config.defaultClickToOpenDevTools.title": "기본 클릭으로 개발자 도구 열기",
   "extension.config.defaultClickToOpenDevTools.description": "기본적으로 개발자 도구를 열지 여부를 나타냅니다.",
   "extension.config.assetsPath.title": "자산 경로",

@@ -61,7 +61,7 @@
     "extension.config.defaultExpandAll.description": {
       "type": "string",
       "description": "The description of the configuration to indicate whether or not to expand all items by default",
-      "default": "Indicates whether or not to expand all items by default."
+      "default": "Determines whether all icons should be expanded by default when the extension is opened."
     },
     "extension.config.defaultClickToOpenDevTools.title": {
       "type": "string",

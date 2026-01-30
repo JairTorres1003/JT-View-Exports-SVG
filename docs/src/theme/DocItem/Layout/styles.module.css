@@ -1,0 +1,11 @@
+.docItemContainer header + *,
+.docItemContainer article > *:first-child {
+  margin-top: 0;
+}
+
+@media (min-width: 997px) {
+  .docItemCol {
+    /* biome-ignore lint/complexity/noImportantStyles: Important is needed to override Docusaurus default style */
+    max-width: 75% !important;
+  }
+}

@@ -24,7 +24,7 @@ const MenuTools: FC<MenuToolsProps> = ({ containerId, editorRef, resetPlayground
     onReloadEditor,
     onReloadPlayground,
     isWordWrap,
-    toogleWordWrap,
+    toggleWordWrap,
   } = useMenuTools({ editorRef, resetPlaygroundColor })
 
   return (
@@ -58,7 +58,7 @@ const MenuTools: FC<MenuToolsProps> = ({ containerId, editorRef, resetPlayground
         <MenuItem onClick={onReloadPlayground}>{t('menu.ReloadPlayground')}</MenuItem>
         <Show>
           <Show.When condition={!!editorRef?.current}>
-            <MenuItem onClick={toogleWordWrap}>
+            <MenuItem onClick={toggleWordWrap}>
               {isWordWrap ? t('menu.DisableWordWrap') : t('menu.EnableWordWrap')}
             </MenuItem>
             <MenuItem onClick={onReloadEditor}>{t('menu.ReloadEditor')}</MenuItem>

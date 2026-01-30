@@ -10,7 +10,7 @@
   "extension.commands.closeDevTools.title": "Fechar ferramentas de desenvolvedor",
   "extension.commands.clearCache.title": "Limpar cache",
   "extension.config.defaultExpandAll.title": "Expandir todos os ícones por padrão",
-  "extension.config.defaultExpandAll.description": "Indica se todos os itens devem ser expandidos por padrão.",
+  "extension.config.defaultExpandAll.description": "Determina se todos os ícones devem ser expandidos por padrão ao abrir a extensão.",
   "extension.config.defaultClickToOpenDevTools.title": "Clique para abrir ferramentas de desenvolvedor por padrão",
   "extension.config.defaultClickToOpenDevTools.description": "Indica se as ferramentas de desenvolvedor devem ser abertas por padrão.",
   "extension.config.assetsPath.title": "Caminho dos Ativos",

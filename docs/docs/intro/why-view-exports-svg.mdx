@@ -1,0 +1,24 @@
+---
+title: Why View Exports SVG Exists
+description: The motivation behind creating View Exports SVG and the problem it solves.
+---
+
+# Why View Exports SVG Exists
+
+As a front-end developer, I ran into a problem that many teams know too well.
+
+A massive project with a single icon file containing more than **10,000 lines of SVG components**.
+
+Finding the right icon was painful:
+
+- Multiple variants with unclear names
+- No visual reference without importing and running the project
+- Endless cycles of import → compile → check → repeat
+- New icons added even when similar ones already existed
+
+What should have been a simple task became a constant source of wasted time.
+
+This experience revealed a clear gap in the developer workflow:
+there was no fast, visual, and editor-native way to explore SVG components at scale.
+
+**View Exports SVG was created to fill that gap**, bringing visibility and structure to SVG component libraries directly inside Visual Studio Code.

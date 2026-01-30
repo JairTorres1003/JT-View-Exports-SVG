@@ -1,0 +1,88 @@
+---
+title: Features
+description: Explore the full set of features included in View Exports SVG for Visual Studio Code.
+---
+
+**View Exports SVG** provides a focused set of tools for discovering, previewing, and working with SVG components directly inside Visual Studio Code.
+
+This page lists the core features available in the extension and how they are grouped by functionality.
+
+---
+
+import DocCard from '@site/src/components/DocCard'
+import {
+  FeaturesDevtools,
+  FeaturesProductivity,
+  FeaturesThemeSupport,
+  FeaturesWorkspace,
+} from '@site/src/constants/features'
+
+## 🧭 Workspace Scanning
+
+Automatically scans your workspace to detect all exported SVG components.
+
+<div className='grid grid-cols-1 md:grid-cols-2 gap-6 my-4 mb-12'>
+  {FeaturesWorkspace.map((feature) => (
+    <DocCard key={feature.title} {...feature} />
+  ))}
+</div>
+
+---
+
+## ⚙️ DevTools Panel
+
+A fully dockable panel that acts as the central interface for exploring and interacting with SVG components.
+
+<div className='grid grid-cols-1 md:grid-cols-2 gap-6 my-4 mb-12'>
+  {FeaturesDevtools.map((feature) => (
+    <DocCard key={feature.title} {...feature} />
+  ))}
+</div>
+
+---
+
+## 🧠 Productivity Tools
+
+Utilities designed to reduce repetitive tasks and speed up SVG-related workflows.
+
+<div className='grid grid-cols-1 md:grid-cols-2 gap-6 my-4 mb-12'>
+  {FeaturesProductivity.map((feature) => (
+    <DocCard key={feature.title} {...feature} />
+  ))}
+</div>
+
+---
+
+## 🧩 Framework Compatibility
+
+View Exports SVG analyzes exported components across common frontend stacks:
+
+- **React**
+- **Preact**
+- **JavaScript & TypeScript**
+
+:::tip
+Projects mixing `.js`, `.jsx`, `.ts`, and `.tsx` files are fully supported.
+:::
+
+---
+
+## 🎨 Theme Compatibility
+
+The extension adapts its UI to match your current VS Code theme.
+
+<div className='grid grid-cols-1 md:grid-cols-2 gap-6 my-4 mb-12'>
+  {FeaturesThemeSupport.map((feature) => (
+    <DocCard key={feature.title} {...feature} />
+  ))}
+</div>
+
+---
+
+## 🗂 Feature History
+
+View Exports SVG is actively evolving, with features being refined and expanded over time.
+
+If you're curious about **when a feature was introduced**, recent improvements, or breaking changes,
+you can explore the full release history in the
+[**Changelog**](/changelog).
