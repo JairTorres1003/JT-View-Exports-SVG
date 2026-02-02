@@ -5,6 +5,7 @@ import type {} from 'docusaurus-plugin-image-zoom'
 import { themes as prismThemes } from 'prism-react-renderer'
 import rehypeAdvancedTablePlugin from './src/plugins/rehype/table'
 import remarkAdvancedTablePlugin from './src/plugins/remark/table'
+import 'dotenv/config'
 
 // This runs in Node.js - Don't use client-side code here (browser APIs, JSX...)
 
@@ -22,7 +23,7 @@ const config: Config = {
   },
 
   // Set the production url of your site here
-  url: 'https://view-exports-svg.vercel.app',
+  url: process.env.SITE_URL,
   // Set the /<baseUrl>/ pathname under which your site is served
   // For GitHub pages deployment, it is often '/<projectName>/'
   baseUrl: '/',
@@ -108,6 +109,10 @@ const config: Config = {
       },
       items: [
         {
+          type: 'search',
+          position: 'right',
+        },
+        {
           type: 'custom-social',
           position: 'right',
           icon: 'vscode',
@@ -141,6 +146,12 @@ const config: Config = {
       additionalLanguages: ['bash'],
       theme: prismThemes.oneLight,
       darkTheme: prismThemes.oneDark,
+    },
+    algolia: {
+      appId: process.env.ALGOLIA_APP_ID,
+      apiKey: process.env.ALGOLIA_API_KEY,
+      indexName: process.env.ALGOLIA_INDEX_NAME,
+      contextualSearch: true,
     },
     zoom: {
       selector: '.markdown img:not(.no-zoom)',

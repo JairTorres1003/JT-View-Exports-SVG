@@ -76,6 +76,35 @@ html {
     aspect-ratio: 691 / 432;
   }
 
+  .SearchBar-Container {
+    @apply w-full max-w-[200px] md:max-w-[300px] rounded-md overflow-hidden bg-foreground/4 dark:bg-foreground/8;
+  }
+
+  .SearchBar-Container .DocSearch-Button {
+    @apply w-full px-2 py-1;
+  }
+
+  .SearchBar-Container .DocSearch-Button-Container {
+    @apply gap-1;
+  }
+
+  .SearchBar-Container .DocSearch-Button .DocSearch-Button-Keys {
+    @apply bg-primary/10 dark:bg-foreground/10 rounded-sm px-2 py-1 gap-0.5 h-[28px] w-[43px] min-w-[43px] flex items-center justify-center;
+  }
+
+  .SearchBar-Container .DocSearch-Button .DocSearch-Button-Key {
+    @apply bg-transparent text-primary dark:text-foreground/80 p-0;
+  }
+
+  .SearchBar-Container .DocSearch-Button .DocSearch-Button-Key:nth-child(2) {
+    margin-left: -9px;
+  }
+
+  .SearchBar-Container .DocSearch-Button .DocSearch-Button-Key svg {
+    height: 22px;
+    width: 22px;
+  }
+
   .StepsItem-root .StepsItem-content > :first-of-type {
     @apply mt-2;
   }
