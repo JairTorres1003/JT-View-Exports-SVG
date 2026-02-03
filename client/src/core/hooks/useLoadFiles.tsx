@@ -125,7 +125,7 @@ export const useLoadFiles = () => {
    * As a workaround, the contents of dropped files are read and sent using `postMessage` to create a temporary file.\
    * This approach is not ideal and has certain limitations. For more information, see:
    * - GitHub issue: {@link [#255608](https://github.com/microsoft/vscode/issues/255608)}
-   * - Project wiki: {@link [Limitations](https://github.com/JairTorres1003/JT-View-Exports-SVG/wiki/Limitations#drop-and-drag-files)}
+   * - Documentation: {@link [Troubleshooting](https://view-exports-svg.vercel.app/docs/guides/troubleshooting#%EF%B8%8F-drag--drop-files-lose-original-path)}
    */
   const onDrop = (files: File[]) => {
     const filePromises = files

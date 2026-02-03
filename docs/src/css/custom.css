@@ -39,6 +39,10 @@ button {
   --docusaurus-highlighted-code-line-bg: color-mix(in srgb, var(--accent) 20%, transparent);
 }
 
+html {
+  scroll-behavior: smooth;
+}
+
 @layer base {
   h1 {
     @apply my-6 text-4xl font-bold leading-tight;
@@ -110,5 +114,121 @@ button {
 
   .table-of-contents__link--active {
     @apply text-[#0d59f2];
+  }
+}
+
+@layer components {
+  /* =========================
+     SearchBar
+     ========================= */
+  .searchbar-container {
+    @apply w-full max-w-[200px] md:max-w-[300px] rounded-md overflow-hidden bg-content1 border border-divider dark:border-none;
+  }
+
+  .searchbar-container .DocSearch-Button {
+    @apply w-full px-2 py-1;
+  }
+
+  .searchbar-container .DocSearch-Button-Container {
+    @apply gap-1;
+  }
+
+  .searchbar-container .DocSearch-Button-Keys {
+    @apply rounded-sm px-2 py-1 gap-0.5 h-[28px] w-[43px] min-w-[43px] flex items-center justify-center bg-primary/10 dark:bg-foreground/10;
+  }
+
+  .searchbar-container .DocSearch-Button-Keys .DocSearch-Button-Key {
+    --docsearch-key-pressed-shadow: none;
+    @apply bg-transparent text-primary dark:text-foreground/80 w-[12px] h-[12px] relative transition-all;
+  }
+
+  .searchbar-container .DocSearch-Button-Keys .DocSearch-Button-Key::before {
+    @apply w-[calc(100%+4px)] h-[calc(100%+4px)] absolute m-auto;
+    content: '';
+  }
+
+  .searchbar-container .DocSearch-Button-Keys .DocSearch-Button-Key:first-of-type::before {
+    @apply rounded-l-sm -ml-[2px];
+  }
+
+  .searchbar-container .DocSearch-Button-Keys .DocSearch-Button-Key:last-of-type::before {
+    @apply rounded-r-sm -mr-[2px];
+  }
+
+  .searchbar-container
+    .DocSearch-Button-Keys
+    .DocSearch-Button-Key.DocSearch-Button-Key--pressed::before {
+    @apply bg-primary/20 dark:bg-foreground/20;
+  }
+
+  .searchbar-container .DocSearch-Button-Keys .DocSearch-Button-Key svg {
+    @apply absolute w-[22px] h-[22px];
+  }
+
+  /* =========================
+     DocSearch-Modal
+     ========================= */
+
+  /* 60px auto auto */
+  .DocSearch-Modal {
+    @apply m-[60px_auto_auto] rounded-lg bg-content1 border border-divider dark:border-none shadow-xl;
+  }
+
+  .DocSearch-SearchBar .DocSearch-Form {
+    @apply rounded-t-lg border-b border-divider px-4 py-3 bg-transparent gap-2;
+  }
+
+  .DocSearch-Dropdown {
+    @apply px-4 py-3 bg-transparent gap-2;
+  }
+
+  .DocSearch-Hit-source {
+    @apply bg-transparent;
+  }
+
+  li.DocSearch-Hit {
+    @apply font-normal hover:opacity-100 my-2;
+  }
+
+  li.DocSearch-Hit[aria-selected='true'] {
+    @apply opacity-100 font-medium bg-[#0d59f2]/10;
+  }
+
+  li.DocSearch-Hit a {
+    --docsearch-hit-height: 52px;
+    @apply bg-primary/5 dark:bg-foreground/3 px-3 py-1 rounded-md;
+  }
+
+  li.DocSearch-Hit .DocSearch-Hit-Container {
+    @apply gap-2;
+  }
+
+  .DocSearch-Footer {
+    @apply rounded-b-lg border-t border-divider px-4 py-3 bg-transparent gap-2;
+  }
+
+  .DocSearch-Footer .DocSearch-Commands .DocSearch-Commands-Key {
+    @apply bg-primary/10 text-primary dark:bg-foreground/10 dark:text-foreground/80 py-1 rounded-none w-fit;
+  }
+
+  .DocSearch-Footer
+    .DocSearch-Commands
+    .DocSearch-Commands-Key:not(.DocSearch-Commands-Key + .DocSearch-Commands-Key) {
+    @apply rounded-l-md pl-1;
+  }
+
+  .DocSearch-Footer
+    .DocSearch-Commands
+    .DocSearch-Commands-Key:not(:has(+ .DocSearch-Commands-Key)) {
+    @apply rounded-r-md pr-1;
+  }
+
+  .DocSearch-Footer .DocSearch-Commands .DocSearch-Commands-Key svg {
+    width: 16px;
+    height: 16px;
+  }
+
+  .DocSearch-Footer .DocSearch-Commands .DocSearch-Label {
+    @apply ml-2;
   }
 }
