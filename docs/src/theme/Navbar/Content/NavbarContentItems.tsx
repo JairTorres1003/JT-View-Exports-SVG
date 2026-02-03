@@ -1,10 +1,10 @@
 import { NavbarContent, type NavbarContentProps } from '@heroui/navbar'
 import type { FC } from 'react'
 
-import { NavbarItemLink } from './NavbarItem'
-import type { NavbarItemComponentProps } from './types'
 import { CustomComponent } from '../CustomComponent'
 import SearchBar from '../SearchBar/SearchBar'
+import { NavbarItemLink } from './NavbarItem'
+import type { NavbarItemComponentProps } from './types'
 
 interface NavbarContentItemsProps extends Omit<NavbarContentProps, 'children'> {
   items?: NavbarItemComponentProps[]

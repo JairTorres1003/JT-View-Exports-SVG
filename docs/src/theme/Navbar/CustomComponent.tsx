@@ -1,7 +1,7 @@
 import { Divider } from '@heroui/divider'
 import SocialButton from '@site/src/components/SocialButton'
 import NavbarColorModeToggle from '@theme/Navbar/ColorModeToggle'
-import { NavbarItemComponentProps } from './Content/types'
+import type { NavbarItemComponentProps } from './Content/types'
 
 const CUSTOM_COMPONENTS = {
   'custom-divider': () => <Divider orientation='vertical' style={{ height: 34 }} />,
