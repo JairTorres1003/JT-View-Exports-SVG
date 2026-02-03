@@ -2,7 +2,7 @@ import DocSearchBar from '@theme/SearchBar'
 
 const SearchBar = () => {
   return (
-    <div className='SearchBar-Container'>
+    <div className='searchbar-container'>
       <DocSearchBar />
     </div>
   )
