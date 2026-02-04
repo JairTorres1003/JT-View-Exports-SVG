@@ -37,9 +37,9 @@ export default function TOCCollapsible({
       <div id='toc-sticky-sentinel' className='h-px' aria-hidden='true' />
       <div
         className={cn(
-          'bg-foreground/3 rounded-lg mt-3 sticky top-[var(--header-height)] overflow-hidden z-30 backdrop-blur-xl transition-all duration-300',
+          'bg-foreground/3 rounded-lg mt-3 sticky top-[var(--header-height)] overflow-hidden z-30 transition-all duration-300',
           {
-            '-ml-4 w-[calc(100%+2rem)] rounded-none border-t border-b border-divider bg-background/70':
+            '-ml-4 w-[calc(100%+2rem)] rounded-none border-t border-b border-divider bg-background':
               isSticky,
           },
           className

@@ -2,8 +2,11 @@ import Link from '@docusaurus/Link'
 import { useThemeConfig } from '@docusaurus/theme-common'
 import useBaseUrl from '@docusaurus/useBaseUrl'
 import { NavbarBrand } from '@heroui/navbar'
+import { cn } from '@site/src/lib/utils'
 import Image from '@theme/IdealImage'
 import type { ReactNode } from 'react'
+
+import styles from './logo.module.css'
 
 export default function NavbarLogo(): ReactNode {
   const {
@@ -16,7 +19,7 @@ export default function NavbarLogo(): ReactNode {
       as={Link}
       to={logoLink}
       target={logo?.target}
-      className='flex items-center gap-2 mr-2'
+      className={cn('inline-flex items-center gap-2 min-w-8', styles.navbar_brand)}
     >
       {logo && (
         <picture>
@@ -41,7 +44,11 @@ export default function NavbarLogo(): ReactNode {
         </picture>
       )}
 
-      {title && <span className='font-bold text-inherit'>{title}</span>}
+      {title && (
+        <span className={cn('font-bold text-inherit mr-2', styles?.['navbar_brand--label'])}>
+          {title}
+        </span>
+      )}
     </NavbarBrand>
   )
 }
