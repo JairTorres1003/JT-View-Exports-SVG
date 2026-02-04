@@ -81,7 +81,8 @@ html {
   }
 
   .medium-zoom-overlay {
-    @apply backdrop-blur-sm z-50;
+    backdrop-filter: blur(24px);
+    @apply z-50;
   }
 
   .medium-zoom-image--opened {
@@ -174,6 +175,12 @@ html {
     @apply m-[60px_auto_auto] rounded-lg bg-content1 border border-divider dark:border-none shadow-xl;
   }
 
+  @media screen and (max-width: 768px) {
+    .DocSearch-Modal {
+      @apply m-0 rounded-none h-[100vh];
+    }
+  }
+
   .DocSearch-SearchBar .DocSearch-Form {
     @apply rounded-t-lg border-b border-divider px-4 py-3 bg-transparent gap-2;
   }
@@ -201,6 +208,15 @@ html {
 
   li.DocSearch-Hit .DocSearch-Hit-Container {
     @apply gap-2;
+  }
+
+  .DocSearch-NoResults {
+    @apply m-[20px_auto_auto];
+  }
+
+  .DocSearch-Screen-Icon svg,
+  .DocSearch-MagnifierLabel svg {
+    @apply text-primary [stroke:currentColor];
   }
 
   .DocSearch-Footer {

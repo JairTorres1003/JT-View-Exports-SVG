@@ -22,7 +22,9 @@ export default function NavbarLayout({ children }: Props): ReactNode {
       isBordered
       maxWidth='2xl'
       shouldHideOnScroll={hideOnScroll}
-      className={cn('navbar shadow-none', { 'navbar-sidebar--show': mobileSidebar.shown })}
+      className={cn('navbar shadow-none overflow-hidden bg-background', {
+        'navbar-sidebar--show': mobileSidebar.shown,
+      })}
       aria-label={translate({
         id: 'theme.NavBar.navAriaLabel',
         message: 'Main',

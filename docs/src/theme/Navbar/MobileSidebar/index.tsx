@@ -10,6 +10,7 @@ export default function NavbarMobileSidebar(): ReactNode {
 
   return (
     <NavbarMenu
+      className='bg-background'
       motionProps={{
         exit: { x: '-100%' },
         initial: { x: '-100%' },
