@@ -2,10 +2,15 @@ import { useNavbarMobileSidebar } from '@docusaurus/theme-common/internal'
 import { NavbarMenuToggle } from '@heroui/navbar'
 import { cn } from '@site/src/lib/utils'
 import { Menu, XIcon } from 'lucide-react'
+import { useEffect, useState } from 'react'
 
 const MobileSidebarToggle = () => {
   const mobileSidebar = useNavbarMobileSidebar()
-  const isHomepage = window?.location?.pathname === '/'
+  const [isHomepage, setIsHomepage] = useState(false)
+
+  useEffect(() => {
+    setIsHomepage(window.location.pathname === '/')
+  }, [])
 
   if (mobileSidebar.disabled || isHomepage) return
 
