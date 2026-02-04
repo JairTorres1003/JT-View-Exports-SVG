@@ -5,7 +5,7 @@ import { Menu, XIcon } from 'lucide-react'
 
 const MobileSidebarToggle = () => {
   const mobileSidebar = useNavbarMobileSidebar()
-  const isHomepage = window.location.pathname === '/'
+  const isHomepage = window?.location?.pathname === '/'
 
   if (mobileSidebar.disabled || isHomepage) return
 
