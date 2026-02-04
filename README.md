@@ -62,9 +62,9 @@ You can visualize your icons in multiple ways:
 
 Once the panel is open, you can click on any icon to copy its name to the clipboard or select it to start experimenting in the Playground.
 
-## 📚 Wiki & Documentation
+## 📚 Documentation
 
-For more information, detailed guides, and advanced configuration, please check the [**official Wiki**](https://github.com/JairTorres1003/JT-View-Exports-SVG/wiki).
+For more information, detailed guides, and advanced configuration, please visit the [official documentation site](https://view-exports-svg.vercel.app/).
 
 ## 🤝 Contributing
 

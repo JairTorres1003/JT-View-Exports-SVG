@@ -47,7 +47,7 @@ export const useMenuTools = ({
    * If the editor reference is available, it updates the word wrap option based on the current state.
    * Closes the menu after toggling.
    */
-  const toogleWordWrap = () => {
+  const toggleWordWrap = () => {
     if (editorRef?.current) {
       editorRef.current?.editor?.updateOptions({
         wordWrap: isWordWrap ? 'off' : 'on',
@@ -75,7 +75,7 @@ export const useMenuTools = ({
     handleClose,
     onReloadEditor,
     onReloadPlayground,
-    toogleWordWrap,
+    toggleWordWrap,
     isWordWrap,
   }
 }

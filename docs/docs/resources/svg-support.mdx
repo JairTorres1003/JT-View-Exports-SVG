@@ -1,0 +1,366 @@
+---
+title: SVG Support
+description: Learn which SVG structures, export patterns, and component formats are supported by View Exports SVG.
+---
+
+This page explains **what “supported SVG” means** in the context of **View Exports SVG**, and why some icons may not appear in the panel.
+
+Understanding these rules will help you structure your icons in a way that ensures **reliable detection, preview, and editing**.
+
+---
+
+## What "Supported" Means
+
+An SVG is considered **supported** if the extension can:
+
+1. Detect it through static analysis (AST)
+2. Identify it as a valid exported component
+3. Safely render it inside a VS Code WebView
+
+If any of these steps fail, the icon will be ignored or partially rendered.
+
+---
+
+## Supported File Types
+
+The extension scans only the following file types:
+
+- `.js`
+- `.jsx`
+- `.ts`
+- `.tsx`
+
+Other formats (e.g. `.svg`, `.html`) are not analyzed.
+
+---
+
+## Supported Export Patterns
+
+By default, **only exported SVG components** are detected and indexed.
+
+A supported export must meet **all** of the following conditions:
+
+- Be statically analyzable (AST-safe)
+- Resolve directly to a single `<svg>` element
+- Be exported from the same file
+- Use a supported function or variable declaration
+
+### ✅ Supported Exports
+
+The following export patterns are fully supported and recommended.
+
+```tsx
+// Exported arrow function component
+export const IconA = (props) => <svg {...props}>...</svg>
+
+// Exported default function component
+export default function IconB(props) {
+  return <svg {...props}>...</svg>
+}
+
+// Named exports (declared in the same file)
+const IconC = (props) => <svg {...props}>...</svg>
+function IconD(props) {
+  return <svg {...props}>...</svg>
+}
+export { IconC, IconD }
+```
+
+These patterns allow the extension to reliably trace the export and
+extract the SVG structure without runtime evaluation.
+
+### ❌ Unsupported Export Patterns
+
+The following patterns are not supported due to static analysis limitations
+or ambiguity in resolving the SVG root.
+
+```tsx
+// Function expression assigned at export time
+export const IconA = function (props) {
+  return <svg {...props}>...</svg>
+}
+
+// Exporting a reference to another variable
+const IconB = (props) => <svg {...props}>...</svg>
+export const RealIconB = IconB
+
+// Re-exporting from another file
+export { default as IconC } from './IconC'
+
+// Exporting with alias
+const IconD = (props) => <svg {...props}>...</svg>
+export { IconD as RealIconD }
+
+// Exporting a static JSX element
+export const IconE = <svg>...</svg>
+
+// Returning the SVG indirectly
+export const IconF = (props) => {
+  const svgElement = <svg {...props}>...</svg>
+  return svgElement
+}
+```
+
+These patterns prevent the extension from confidently resolving
+the SVG structure during static analysis.
+
+### ❓ Special Case: Non-Exported Components
+
+```tsx
+const IconA = (props) => <svg {...props}>...</svg>
+```
+
+:::tip Tip
+You can include non-exported SVG components by enabling: `"JT-View-Exports-SVG.showNotExportedIcons": true`
+This is useful for private icon sets or internal-only components.
+:::
+
+---
+
+## Component Structure Rules
+
+Once an export is detected, the extension analyzes the resolved JSX tree to locate SVG elements.
+
+### Single SVG Root
+
+The recommended pattern is a component that resolves to a single `<svg>` element.
+
+```tsx
+export const IconA = (props) => (
+  <svg {...props} xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'>
+    <path d='...' />
+  </svg>
+)
+```
+
+This guarantees predictable rendering and full DevTools support.
+
+### Multiple SVG Elements (Limited Support)
+
+Components that resolve to multiple `<svg>` elements are technically supported,
+but only the first detected SVG will be rendered and managed.
+
+**What happens internally**
+
+- The extension traverses the JSX AST
+- The first valid `<svg>` node is selected
+- Remaining SVGs are ignored
+
+:::note
+This behavior is intentional to avoid ambiguity when exporting icons.
+:::
+
+#### Recommendation
+
+If your component represents multiple icons, split them into separate exports:
+
+```tsx
+export const IconPrimary = (props) => <svg {...props}>...</svg>
+export const IconSecondary = (props) => <svg {...props}>...</svg>
+```
+
+### Fragment Support
+
+Fragments are fully supported as long as at least one valid SVG is found.
+
+```tsx
+export const IconC = (props) => (
+  <>
+    <svg {...props}>...</svg>
+  </>
+)
+```
+
+### Why This Limitation Exists
+
+View Exports SVG performs static AST analysis, not runtime rendering.
+
+Supporting multiple SVG outputs would require:
+
+- Runtime evaluation
+- Layout assumptions
+- Multiple preview contexts
+
+Which would negatively impact:
+
+- Performance
+- Predictability
+- WebView safety
+
+For this reason, the extension enforces a single-icon mental model per export.
+
+---
+
+## SVG Attribute Requirements
+
+### Required Attributes
+
+The root `<svg>` element **must declare the SVG namespace**:
+
+```tsx
+<svg xmlns='http://www.w3.org/2000/svg' />
+```
+
+This ensures the element is treated as a valid SVG and not regular JSX.
+
+```tsx
+// ❌ Invalid (missing xmlns)
+<svg viewBox='0 0 24 24' />
+```
+
+---
+
+## Framer Motion Support
+
+View Exports SVG supports SVG components built with **framer-motion**, as long as the motion component resolves to an SVG root.
+
+```tsx
+import { motion } from 'framer-motion'
+
+export const IconMotion = () => (
+  <motion.svg
+    xmlns='http://www.w3.org/2000/svg'
+    viewBox='0 0 24 24'
+    initial={{ opacity: 0 }}
+    animate={{ opacity: 1 }}
+  >
+    <motion.path d='...' />
+  </motion.svg>
+)
+```
+
+---
+
+## Supported SVG Elements
+
+The extension validates SVG elements to ensure predictable rendering and compatibility.
+
+### 🏷️ Supported Tags
+
+| : Tags >:           | >                 | >                  | >              | >        |
+| ------------------- | ----------------- | ------------------ | -------------- | -------- |
+| animate             | feConvolveMatrix  | feMerge            | image          | rect     |
+| animateMotion       | feDiffuseLighting | feMergeNode        | line           | stop     |
+| animateTransform    | feDisplacementMap | feMorphology       | linearGradient | style    |
+| circle              | feDistantLight    | feOffset           | marker         | svg      |
+| clipPath            | feDropShadow      | fePointLight       | mask           | switch   |
+| defs                | feFlood           | feSpecularLighting | metadata       | symbol   |
+| desc                | feFuncA           | feSpotLight        | mpath          | text     |
+| ellipse             | feFuncB           | feTile             | path           | textPath |
+| feBlend             | feFuncG           | feTurbulence       | pattern        | tspan    |
+| feColorMatrix       | feFuncR           | filter             | polygon        | use      |
+| feComponentTransfer | feGaussianBlur    | foreignObject      | polyline       | view     |
+| feComposite         | feImage           | g                  | radialGradient |          |
+
+---
+
+## Supported Patterns with Limitations
+
+View Exports SVG performs static AST analysis.
+This means it can only understand logic that is directly expressed in JSX, without relying on runtime variables or external state.
+
+### ✅ Supported Conditional Logic (Inside SVG)
+
+Conditional rendering inside the SVG tree is fully supported.
+
+#### Inline JSX conditionals
+
+```tsx
+export const IconConditional = ({ isActive }) => (
+  <svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'>
+    {isActive ? <circle cx='12' cy='12' r='10' /> : <rect x='4' y='4' width='16' height='16' />}
+  </svg>
+)
+```
+
+#### Conditional attributes
+
+```tsx
+export const IconConditionalAttr = ({ size, isFilled }) => (
+  <svg
+    xmlns='http://www.w3.org/2000/svg'
+    viewBox='0 0 24 24'
+    width={size || 24}
+    height={size || 24}
+    fill={isFilled ? 'currentColor' : 'none'}
+  >
+    <circle cx='12' cy='12' r='10' />
+  </svg>
+)
+```
+
+These patterns are valid because:
+
+- The logic lives inside JSX
+- No intermediate variables are introduced
+- The SVG root is statically detectable
+
+### 🚫 Unsupported Conditional Patterns
+
+#### Conditional SVG root
+
+```tsx
+export const Icon = (props) => (props.active ? <svg>...</svg> : null)
+```
+
+**Why?**
+
+- The SVG root is conditional
+- The analyzer cannot guarantee an SVG exists
+
+#### Conditional SVG via intermediate variables
+
+```tsx
+export const Icon = (props) => {
+  const isShow = props.isActive
+  return <svg>{isShow ? <path d='...' /> : <path d='...' />}</svg>
+}
+```
+
+**Why?**
+
+- `isShow` is resolved at runtime
+- The AST analyzer cannot trace variable assignments
+- Only direct prop access inside JSX is supported
+
+### 🚫 Other Unsupported Patterns
+
+The following patterns are intentionally not supported:
+
+- Runtime-generated SVG elements
+- SVGs created via helper functions
+- Components wrapped by HOCs
+- Dynamic JSX resolution outside the return statement
+
+```tsx
+// ❌ Helper-generated SVG
+const renderPath = () => <path d='...' />
+
+export const Icon = () => <svg>{renderPath()}</svg>
+```
+
+:::note Design Rule of Thumb
+
+<p>If the SVG exists directly in JSX and all logic is inline, it will be detected.</p>
+<p className='mt-0'>If it relies on runtime state, helpers, or external variables, it will not.</p>
+:::
+
+---
+
+## 🧠 Why These Rules Exist
+
+View Exports SVG relies on **static analysis (AST traversal)** rather than runtime evaluation.
+
+This ensures:
+
+- High performance on large workspaces
+- Predictable detection
+- No code execution
+
+---
+
+## 🧭 Related Pages
+
+import NextStepList from '@site/src/components/NextStepList'
+
+<NextStepList list={['usage', 'devtools', 'troubleshooting', 'settings']} />

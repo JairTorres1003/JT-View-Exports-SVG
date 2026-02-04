@@ -10,7 +10,7 @@
   "extension.commands.closeDevTools.title": "Закрыть инструменты разработчика",
   "extension.commands.clearCache.title": "Очистить кэш",
   "extension.config.defaultExpandAll.title": "Развернуть все иконки по умолчанию",
-  "extension.config.defaultExpandAll.description": "Указывает, следует ли развернуть все элементы по умолчанию.",
+  "extension.config.defaultExpandAll.description": "Определяет, должны ли все иконки быть развернуты по умолчанию при открытии расширения.",
   "extension.config.defaultClickToOpenDevTools.title": "Клик для открытия инструментов разработчика по умолчанию",
   "extension.config.defaultClickToOpenDevTools.description": "Указывает, следует ли открывать инструменты разработчика по умолчанию.",
   "extension.config.assetsPath.title": "Путь к ресурсам",

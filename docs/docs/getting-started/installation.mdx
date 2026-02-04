@@ -1,0 +1,77 @@
+---
+title: Installation
+description: Install View Exports SVG in Visual Studio Code and get ready to scan your SVG components.
+---
+
+**View Exports SVG** can be installed directly from the Visual Studio Code Marketplace or via the command line.
+
+Choose the method that best fits your workflow.
+
+---
+
+## ✅ System Requirements
+
+Before installing, make sure your environment meets the following requirements:
+
+- **Visual Studio Code** version **1.80.0 or later**
+- Supported operating systems:
+  - Windows
+  - macOS
+  - Linux
+
+No additional dependencies or frameworks are required.
+
+---
+
+import { Tabs, Tab } from '@heroui/tabs'
+import DocCard from '@site/src/components/DocCard'
+import { Steps, StepItem } from '@site/src/components/Steps'
+import { ActivationMethods, InstallationMethods } from '@site/src/constants/getting-started'
+
+<Steps>
+  <StepItem>
+    ## 🧩 Installation Methods
+
+    <div className='border-2 border-primary/20 rounded-md'>
+      <Tabs
+        items={InstallationMethods}
+        aria-label="Installation Methods"
+        variant="underlined"
+        classNames={{
+          tabList: 'pb-0',
+          tabContent: 'text-foreground/60 group-data-[selected=true]:text-foreground pb-2',
+          panel: 'p-4 border-t-2 border-primary/20 -mt-[2px] bg-content1 rounded-b-md',
+        }}
+      >
+        {(item) => (<Tab key={item.title} {...item} />)}
+      </Tabs>
+    </div>
+
+  </StepItem>
+  <StepItem>
+    ## ⚙️ Opening the Extension
+
+    After installation, you can activate View Exports SVG in one of the following ways:
+
+    <div className='grid grid-cols-1 gap-6 my-4 pb-4'>
+      {ActivationMethods.map((feature) => (<DocCard key={feature.title} {...feature} />))}
+    </div>
+
+  </StepItem>
+</Steps>
+
+---
+
+## 🎉 Installation Complete
+
+Congratulations! You have successfully installed and opened `View Exports SVG`. Start exploring your SVG components directly within Visual Studio Code.
+
+For more detailed instructions and advanced usage, check out the rest of the documentation.
+
+---
+
+## 🧭 Next Steps
+
+import NextStepList from '@site/src/components/NextStepList'
+
+<NextStepList list={['usage', 'devtools', 'features']} />

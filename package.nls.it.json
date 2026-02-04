@@ -10,7 +10,7 @@
   "extension.commands.closeDevTools.title": "Chiudi gli strumenti di sviluppo",
   "extension.commands.clearCache.title": "Cancella cache",
   "extension.config.defaultExpandAll.title": "Espandi tutte le icone per impostazione predefinita",
-  "extension.config.defaultExpandAll.description": "Indica se espandere o meno tutti gli elementi per impostazione predefinita.",
+  "extension.config.defaultExpandAll.description": "Determina se tutte le icone devono essere espanse per impostazione predefinita quando l'estensione viene aperta.",
   "extension.config.defaultClickToOpenDevTools.title": "Clic per impostazione predefinita per aprire gli strumenti di sviluppo",
   "extension.config.defaultClickToOpenDevTools.description": "Indica se aprire o meno gli strumenti di sviluppo per impostazione predefinita.",
   "extension.config.assetsPath.title": "Percorso delle risorse",

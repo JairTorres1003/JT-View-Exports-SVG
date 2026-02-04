@@ -1,0 +1,14 @@
+.navbar_brand {
+  container-type: inline-size;
+  container-name: brand-container;
+}
+
+.navbar_brand--label {
+  white-space: nowrap;
+}
+
+@container brand-container (max-width: 188px) {
+  .navbar_brand--label {
+    display: none;
+  }
+}

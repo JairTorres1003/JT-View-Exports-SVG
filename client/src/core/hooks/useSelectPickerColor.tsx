@@ -25,12 +25,20 @@ export const useSelectPickerColor = ({
   }
 
   /**
-   * Handle the click away of the color picker
+   * Handle the closing of the color picker
    */
-  const handleClickAway = () => {
+  const onClose = () => {
     setOpen(false)
     setCurrentColor(newColor)
     onChangeComplete(newColor)
+  }
+
+  /**
+   * Handle the key down events
+   * @param event - The keyboard event
+   */
+  const handleKeyDown = (event: React.KeyboardEvent) => {
+    if (['Escape', 'Enter', 'Tab'].includes(event.key)) onClose()
   }
 
   /**
@@ -58,7 +66,8 @@ export const useSelectPickerColor = ({
     anchorEl,
     currentColor,
     handleToggle,
-    handleClickAway,
+    handleKeyDown,
+    handleClickAway: onClose,
     handleChangeColor,
   }
 }

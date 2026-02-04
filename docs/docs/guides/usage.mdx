@@ -1,0 +1,109 @@
+---
+title: Usage
+description: Learn how to use View Exports SVG to preview, browse, and manage SVG components in Visual Studio Code.
+---
+
+Once **View Exports SVG** is installed and running, you can browse, preview, and manage SVG components directly inside Visual Studio Code.
+
+This guide focuses on the **day-to-day workflow**: how to explore icons, interact with them, and use them efficiently in your project.
+
+---
+
+## 🔄 Core Workflow
+
+The typical workflow with View Exports SVG looks like this:
+
+1. Open the extension (context menu or command palette)
+2. Browse detected SVG components in a grid
+3. Preview icons visually
+4. Copy, export, or edit them using built-in tools
+
+The following sections explain each step in detail.
+
+---
+
+## 🧭 Opening the Extension
+
+You can open **View Exports SVG** at any time using:
+
+- The **context menu** on files or folders
+- The **Command Palette**
+
+If this is your first time, make sure you've completed the [**Getting Started**](/docs/getting-started) guide.
+
+---
+
+## ⚙️ Browsing Icons
+
+Once opened, the panel displays all detected SVG components in a grid layout.
+
+Each item shows:
+- A live preview
+- The component name
+- Quick actions
+
+<div align='center' className='mt-4'>![The main UI of the View Exports SVG panel showing a grid of SVG icons.](/screens/principal-ui.webp)</div>
+
+---
+
+## 🎯 Interacting with Icons
+
+### Click Actions
+- Copy component name to clipboard
+- Open the DevTools panel
+- Add to recent icons (configurable)
+
+### Favorites
+- Hover an icon
+- Click the ⭐ star to mark or unmark
+
+### Context Menu
+Right-click an icon to:
+- Copy name or code snippet
+- Open in editor
+- Copy as PNG or SVG
+- Download as PNG or SVG
+
+---
+
+## 👁 Previewing and Editing Icons
+
+Selecting an icon opens the **DevTools panel**, where you can:
+
+- Preview icons in real time
+- Edit props in the playground
+- Reset or export results
+
+For advanced editing features, see:
+[**DevTools Panel →**](/docs/guides/devtools)
+
+---
+
+## 🧩 Alternative Workflow: Drag & Drop
+
+You can also drag and drop files directly into the extension start screen.
+
+This workflow is useful when:
+- Exploring icons outside the workspace
+- Testing individual files quickly
+
+<div align='center' className='mt-4'>
+  <video src='/screens/upload-files-drag-drop.webm' controls muted />
+  <p className='mt-2 text-sm text-gray-600 dark:text-gray-400'>Drag & Drop files into the View Exports SVG panel to preview their SVG components.</p>
+</div>
+
+:::caution Security Limitation
+Due to VS Code's WebView sandbox restrictions, direct access to file paths is blocked.\
+When you drag and drop files into the panel, the extension reads their contents and creates temporary
+in-memory versions for safe preview.
+
+<p className='ml-auto'>[Read more →](/docs/guides/troubleshooting#%EF%B8%8F-drag--drop-files-lose-original-path)</p>
+:::
+
+---
+
+## 🧭 Next Steps
+
+import NextStepList from '@site/src/components/NextStepList'
+
+<NextStepList list={['devtools', 'svg-support', 'troubleshooting', 'settings']} />

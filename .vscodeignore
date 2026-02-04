@@ -12,6 +12,7 @@ workspaceTest.code-workspace
 src/**
 server/**
 client/**
+docs/**
 !client/dist
 client/dist/index.html
 

@@ -19,12 +19,19 @@ const SelectPickerColor: FC<SelectPickerColorProps> = ({
   ...props
 }) => {
   const { t } = useTranslation(undefined, { keyPrefix: 'pickers' })
-  const { open, anchorEl, currentColor, handleToggle, handleClickAway, handleChangeColor } =
-    useSelectPickerColor({
-      onChangeComplete,
-      initialColor,
-      value,
-    })
+  const {
+    open,
+    anchorEl,
+    currentColor,
+    handleToggle,
+    handleKeyDown,
+    handleClickAway,
+    handleChangeColor,
+  } = useSelectPickerColor({
+    onChangeComplete,
+    initialColor,
+    value,
+  })
 
   const id = open ? 'transition-popper' : undefined
 
@@ -37,6 +44,7 @@ const SelectPickerColor: FC<SelectPickerColorProps> = ({
           ref={anchorEl}
           bgColor={currentColor}
           onClick={handleToggle}
+          onKeyDown={handleKeyDown}
         />
       </Tooltip>
       <Popper
@@ -46,6 +54,7 @@ const SelectPickerColor: FC<SelectPickerColorProps> = ({
         open={open}
         anchorEl={anchorEl.current}
         transition
+        onKeyDown={handleKeyDown}
       >
         {({ TransitionProps }) => (
           <Fade {...TransitionProps} timeout={350}>
