@@ -1,6 +1,8 @@
 import { dividerClasses, menuItemClasses, tooltipClasses } from '@mui/material'
 
-import { IconError, IconInfo, IconWarning } from '@/assets/icons/indicators'
+import IconError from '@/assets/icons/indicators/error'
+import IconInfo from '@/assets/icons/indicators/info'
+import IconWarning from '@/assets/icons/indicators/warning'
 import type { CustomizationsFunction } from '@/types/BaseProps'
 
 /**

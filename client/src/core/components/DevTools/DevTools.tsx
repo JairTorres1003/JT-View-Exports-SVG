@@ -3,7 +3,7 @@ import { memo, type FC } from 'react'
 import { useTranslation } from 'react-i18next'
 import { Panel, PanelGroup, PanelResizeHandle } from 'react-resizable-panels'
 
-import { IconClose } from '@/assets/icons/functionalities'
+import IconClose from '@/assets/icons/functionalities/close'
 import { AccordionMenuItem } from '@/core/components/Accordion'
 import { useDevTools } from '@/core/hooks/DevTools/useDevTools'
 

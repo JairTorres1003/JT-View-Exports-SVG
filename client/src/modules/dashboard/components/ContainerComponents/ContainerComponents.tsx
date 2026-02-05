@@ -1,7 +1,7 @@
 import { ListItem, ListItemIcon, ListItemText } from '@mui/material'
 import { useSelector } from 'react-redux'
 
-import { IconWarning } from '@/assets/icons/indicators'
+import IconWarning from '@/assets/icons/indicators/warning'
 import { AccordionActionsSVG, AccordionMenuItem } from '@/core/components/Accordion'
 import CardSvgRenderMemo from '@/core/components/Cards/CardSvgRenderMemo/CardSvgRenderMemo'
 import { useExpandedComponents } from '@/core/hooks/useExpandedComponents'

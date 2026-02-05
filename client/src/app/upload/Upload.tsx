@@ -2,7 +2,9 @@ import { Badge, Button, IconButton, Stack, Tooltip } from '@mui/material'
 import React from 'react'
 import { useTranslation } from 'react-i18next'
 
-import { IconAdd, IconSortAsc, IconSortDesc } from '@/assets/icons/functionalities'
+import IconPlus from '@/assets/icons/functionalities/plus'
+import IconSortAsc from '@/assets/icons/functionalities/sort-asc'
+import IconSortDesc from '@/assets/icons/functionalities/sort-desc'
 import { BackdropZone } from '@/core/components/Backdrop/BackdropZone'
 import { FileList } from '@/modules/upload/components/FileList'
 import { useUpload } from '@/modules/upload/hooks/useUpload'
@@ -45,7 +47,7 @@ const UploadPage: React.FC = () => {
                 count: files.length,
               })}
             >
-              <IconAdd size={26} />
+              <IconPlus size={26} />
             </IconButton>
           </Badge>
         </Tooltip>

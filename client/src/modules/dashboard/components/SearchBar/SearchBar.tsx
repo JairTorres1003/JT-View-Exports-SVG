@@ -1,7 +1,7 @@
 import { IconButton, TextField, Tooltip } from '@mui/material'
 import { useTranslation } from 'react-i18next'
 
-import { IconClose } from '@/assets/icons/functionalities'
+import IconClose from '@/assets/icons/functionalities/close'
 
 import { useSearchBar } from '../../hooks/useSearchBar'
 

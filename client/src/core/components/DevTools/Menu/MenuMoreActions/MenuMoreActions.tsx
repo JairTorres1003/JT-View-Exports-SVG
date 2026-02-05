@@ -3,7 +3,7 @@ import type { FC } from 'react'
 import { useTranslation } from 'react-i18next'
 import { useSelector } from 'react-redux'
 
-import { IconKebabHorizontal } from '@/assets/icons/navigation'
+import IconKebabHorizontal from '@/assets/icons/navigation/kebab-horizontal'
 import { useMenu } from '@/core/hooks/useMenu'
 import { useSVGActions } from '@/core/hooks/useSVGActions'
 

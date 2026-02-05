@@ -8,7 +8,7 @@ import {
 } from '@mui/material'
 import type { ComponentType } from 'react'
 
-import { IconLupe } from '@/assets/icons/functionalities'
+import IconLupe from '@/assets/icons/functionalities/lupe'
 
 import { searchBarClasses } from './SearchBar.classes'
 

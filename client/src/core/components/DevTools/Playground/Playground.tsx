@@ -2,7 +2,9 @@ import { Card, Collapse, Divider, Grid, IconButton, Tooltip } from '@mui/materia
 import type { FC } from 'react'
 import { useTranslation } from 'react-i18next'
 
-import { IconCodeTag, IconCopy, IconRefresh } from '@/assets/icons/functionalities'
+import IconCodeTag from '@/assets/icons/indicators/code-tag'
+import IconCopy from '@/assets/icons/functionalities/copy'
+import IconRefresh from '@/assets/icons/functionalities/refresh'
 import { SelectPickerColor } from '@/core/components/Select'
 import { usePlayground } from '@/core/hooks/DevTools/usePlayground'
 

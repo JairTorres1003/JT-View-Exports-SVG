@@ -4,7 +4,7 @@ import { motion } from 'framer-motion'
 import React, { createElement, forwardRef, type SVGElementType, useEffect } from 'react'
 import { useTranslation } from 'react-i18next'
 
-import { SVGError } from '@/assets/icons/indicators'
+import IconSVGError from '@/assets/icons/indicators/svg-error'
 import { ErrorBoundary } from '@/core/helpers'
 import { useAlert } from '@/core/hooks/useAlert'
 import { isEmpty } from '@/utils/misc'
@@ -76,11 +76,11 @@ const RenderSvg = forwardRef<
   }, [errors])
 
   if (isEmpty(component) || hasErrors) {
-    return <SVGError />
+    return <IconSVGError />
   }
 
   return (
-    <ErrorBoundary fallback={<SVGError />}>
+    <ErrorBoundary fallback={<IconSVGError />}>
       <DynamicTagComponent ref={ref} className={className} component={component} />
     </ErrorBoundary>
   )

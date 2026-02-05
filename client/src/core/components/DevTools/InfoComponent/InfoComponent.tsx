@@ -15,7 +15,7 @@ import {
 import { useTranslation } from 'react-i18next'
 import { useSelector } from 'react-redux'
 
-import { IconGoToFile } from '@/assets/icons/functionalities'
+import IconGoToFile from '@/assets/icons/functionalities/go-to-file'
 import { openFileInPosition } from '@/core/utils/file'
 
 const commonSlotProps: ListItemTextProps['slotProps'] = {

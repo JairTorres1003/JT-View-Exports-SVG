@@ -2,15 +2,13 @@ import { Card, IconButton, Stack, Tooltip, Typography } from '@mui/material'
 import type { FC } from 'react'
 import { useTranslation } from 'react-i18next'
 
-import {
-  IconAnyFile,
-  IconFileJS,
-  IconFileReact,
-  IconFileReactTS,
-  IconFileTS,
-} from '@/assets/icons/files'
-import { IconClose } from '@/assets/icons/functionalities'
-import { IconEmptyBox } from '@/assets/icons/indicators'
+import IconAnyFile from '@/assets/icons/files/any'
+import IconClose from '@/assets/icons/functionalities/close'
+import IconEmptyBox from '@/assets/icons/indicators/empty-box'
+import IconFileJS from '@/assets/icons/files/js'
+import IconFileReact from '@/assets/icons/files/react'
+import IconFileReactTS from '@/assets/icons/files/react-ts'
+import IconFileTS from '@/assets/icons/files/ts'
 import type { IconBaseProps } from '@/types/BaseProps'
 import type { IFile } from '@/types/misc'
 

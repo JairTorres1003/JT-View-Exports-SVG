@@ -1,0 +1,24 @@
+import type { IconBaseProps } from '@/types/BaseProps'
+
+const IconMode: React.FC<IconBaseProps> = ({
+  size = 32,
+  className = '',
+  color = 'currentColor',
+  sx = {},
+}) => (
+  <svg
+    style={sx}
+    width={size}
+    height={size}
+    className={className}
+    stroke={color}
+    fill={color}
+    strokeWidth='0'
+    viewBox='0 0 16 16'
+    xmlns='http://www.w3.org/2000/svg'
+  >
+    <path d='M8 1a7 7 0 1 0 0 14A7 7 0 0 0 8 1zm0 13V2a6 6 0 1 1 0 12z'></path>
+  </svg>
+)
+
+export default IconMode
