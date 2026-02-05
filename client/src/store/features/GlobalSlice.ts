@@ -14,7 +14,7 @@ const initialState: GlobalState = {
   },
   configuration: {
     defaultExpandAll: config._DEFAULT_EXPAND_ALL,
-    defaultClicToOpenDevTools: config._DEFAULT_CLIC_TO_OPEN_DEV_TOOLS,
+    defaultClicToOpenDevTools: config._DEFAULT_CLICK_TO_OPEN_DEV_TOOLS,
     renderPath: config._INITIAL_RENDER_PATH,
     showRecentIcons: config._RECENT_ICONS_SHOW,
   },

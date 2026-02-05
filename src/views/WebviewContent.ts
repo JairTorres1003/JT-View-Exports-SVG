@@ -137,7 +137,7 @@ export class WebviewContent {
           name: "${l10n.t('View Exports SVG')}",
           initConfiguration: {
             _DEFAULT_EXPAND_ALL: ${config.isExpandAll()},
-            _DEFAULT_CLIC_TO_OPEN_DEV_TOOLS: ${devConfig.isDefaultOpen()},
+            _DEFAULT_CLICK_TO_OPEN_DEV_TOOLS: ${devConfig.isDefaultOpen()},
             _INITIAL_RENDER_PATH: "${initialPath}",
             _RECENT_ICONS_SHOW: ${recentConfig.isShow()},
             _LANGUAGE: "${env.language ?? 'en'}",
