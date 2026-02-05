@@ -11,7 +11,8 @@ import type {
 } from '@/core/types/components/vs/Editor'
 import { Editor } from '@/core/utils/vs/Editor/createEditor'
 import { setInitializedEditor } from '@/store/features/PlaygroundSlice'
-import { getUnknownError, isEmpty } from '@/utils/misc'
+import { getUnknownError } from '@/utils/errors'
+import isEmpty from '@/utils/is-empty'
 
 export const useEditor = ({
   forwardedRef,

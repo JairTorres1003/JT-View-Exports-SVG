@@ -9,7 +9,8 @@ import { useAlert } from '@/core/hooks/useAlert'
 import type { TypeEditorRef } from '@/core/types/components/vs/Editor'
 import { vscode } from '@/services/vscode'
 import { setEditorConfig, setExtensionTheme, setThemeKind } from '@/store/features/VsCodeSlice'
-import { copyToClipboard, getUnknownError } from '@/utils/misc'
+import { copyToClipboard } from '@/utils/clipboard'
+import { getUnknownError } from '@/utils/errors'
 
 interface PlaygroundHook {
   backgroundColor: string

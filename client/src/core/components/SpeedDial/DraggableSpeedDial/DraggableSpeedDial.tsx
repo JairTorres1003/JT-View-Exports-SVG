@@ -6,7 +6,7 @@ import type { IconBaseProps } from '@/types/BaseProps'
 
 import { BoxDraggableSpeedDial, CornerIndicator } from './DraggableSpeedDial.style'
 
-interface DraggableSpeedDialProps<TAction extends { icon: FC<IconBaseProps>; name: string }>
+export interface DraggableSpeedDialProps<TAction extends { icon: FC<IconBaseProps>; name: string }>
   extends Omit<SpeedDialProps, 'children'> {
   actions: TAction[]
   hideBackdrop?: boolean

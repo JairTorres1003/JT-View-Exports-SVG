@@ -21,7 +21,7 @@ import type {
 } from '@/core/types/components/vs/Editor'
 import i18next from '@/i18n'
 import type { RequiredExcept } from '@/types/misc'
-import { getUnknownError } from '@/utils/misc'
+import { getUnknownError } from '@/utils/errors'
 import keybindings from 'public/vs/userConfiguration/keybindings.json'
 
 import { contextMenuServiceOverride } from './contextMenu'

@@ -7,7 +7,7 @@ import { useTranslation } from 'react-i18next'
 import IconSVGError from '@/assets/icons/indicators/svg-error'
 import { ErrorBoundary } from '@/core/helpers'
 import { useAlert } from '@/core/hooks/useAlert'
-import { isEmpty } from '@/utils/misc'
+import isEmpty from '@/utils/is-empty'
 
 interface RenderSvgProps {
   component: SVGComponentProps

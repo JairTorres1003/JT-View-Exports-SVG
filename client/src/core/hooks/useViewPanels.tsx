@@ -6,7 +6,7 @@ import type { ImperativePanelHandle, PanelOnResize } from 'react-resizable-panel
 import { routes } from '@/config/routes/route'
 import { vscode } from '@/services/vscode'
 import { setIsOpenDevTools } from '@/store/features/PlaygroundSlice'
-import { isEmpty } from '@/utils/misc'
+import isEmpty from '@/utils/is-empty'
 
 export const useViewPanels = () => {
   const sidePanelRef = useRef<ImperativePanelHandle>(null)

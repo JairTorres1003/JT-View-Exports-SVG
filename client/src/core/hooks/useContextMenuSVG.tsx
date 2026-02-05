@@ -1,7 +1,8 @@
 import type { SVGComponent } from '@api/types/ViewExportsSVG'
 import { Trans, useTranslation } from 'react-i18next'
 
-import { copyToClipboard, getUnknownError } from '@/utils/misc'
+import { copyToClipboard } from '@/utils/clipboard'
+import { getUnknownError } from '@/utils/errors'
 
 import { useAlert } from './useAlert'
 import { useSVGActions, type UseSVGActionsReturn, type UseSVGActionsProps } from './useSVGActions'

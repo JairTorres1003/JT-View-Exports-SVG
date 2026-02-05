@@ -6,7 +6,7 @@ import {
 } from '@codingame/monaco-vscode-api/extensions'
 
 import i18next from '@/i18n'
-import { getUnknownError } from '@/utils/misc'
+import { getUnknownError } from '@/utils/errors'
 
 /**
  * Activates the theme extension by fetching its manifest and registering its themes.

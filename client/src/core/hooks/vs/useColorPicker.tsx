@@ -8,7 +8,8 @@ import type {
   ColorPickerHook,
   ColorPickerHookProps,
 } from '@/core/types/components/vs/ColorPicker'
-import { getUnknownError, isEmpty } from '@/utils/misc'
+import { getUnknownError } from '@/utils/errors'
+import isEmpty from '@/utils/is-empty'
 
 const INITIAL_COLOR = { r: 255, g: 255, b: 255, a: 1 }
 
