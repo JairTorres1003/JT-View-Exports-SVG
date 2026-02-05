@@ -6,8 +6,8 @@ import IconPlus from '@/assets/icons/functionalities/plus'
 import IconSortAsc from '@/assets/icons/functionalities/sort-asc'
 import IconSortDesc from '@/assets/icons/functionalities/sort-desc'
 import { BackdropZone } from '@/core/components/Backdrop/BackdropZone'
-import { FileList } from '@/modules/upload/components/FileList'
-import { useUpload } from '@/modules/upload/hooks/useUpload'
+import { FileList } from '@/features/upload/components/FileList'
+import { useUpload } from '@/features/upload/hooks/useUpload'
 
 const UploadPage: React.FC = () => {
   const {
