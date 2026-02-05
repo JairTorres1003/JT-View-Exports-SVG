@@ -1,7 +1,9 @@
+/// <reference types="vite/client" />
+
 import type { UseSelector as ReduxSelector } from 'react-redux'
 import 'react'
 
-import type { RootStoreState } from './store/store'
+import type { RootStoreState } from './types/store/store'
 
 export declare module 'react-redux' {
   declare const useSelector: ReduxSelector<RootStoreState>
@@ -10,6 +12,8 @@ export declare module 'react-redux' {
 }
 
 type CSSPropertiesWithVars = Record<`--${string}`, string | number | undefined>
+
+declare module '*.css'
 
 declare module 'react' {
   interface CSSProperties extends CSSPropertiesWithVars {}
