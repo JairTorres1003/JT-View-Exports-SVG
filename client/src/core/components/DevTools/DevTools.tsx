@@ -1,6 +1,6 @@
 import { Box, IconButton, Tooltip, Typography } from '@mui/material'
 import cn from 'classnames'
-import { memo, type FC } from 'react'
+import { type FC } from 'react'
 import { useTranslation } from 'react-i18next'
 import { Panel, Group, Separator } from 'react-resizable-panels'
 
@@ -10,11 +10,8 @@ import { useDevTools } from '@/core/hooks/DevTools/useDevTools'
 
 import { devToolsClasses } from './DevTools.classes'
 import { BoxDevTools } from './DevTools.style'
-import { InfoComponent } from './InfoComponent/InfoComponent'
+import InfoComponent from './InfoComponent/InfoComponent'
 import { Playground } from './Playground'
-
-const MemoPlayground = memo(Playground)
-const MemoInfoComponent = memo(InfoComponent)
 
 const DevTools: FC<{ id: string; onClose?: VoidFunction }> = ({
   id,
@@ -36,16 +33,13 @@ const DevTools: FC<{ id: string; onClose?: VoidFunction }> = ({
         </Tooltip>
         <Box className={devToolsClasses.buttonClose}>
           <Tooltip title={t('labels.Close')}>
-            <IconButton
-              onClick={() => {
-                onClose()
-              }}
-            >
+            <IconButton onClick={onClose}>
               <IconClose size={16} />
             </IconButton>
           </Tooltip>
         </Box>
       </Box>
+
       <Box
         className={cn(devToolsClasses.content, {
           [devToolsClasses.separatorDisabled]: expanded.length !== 2,
@@ -72,7 +66,7 @@ const DevTools: FC<{ id: string; onClose?: VoidFunction }> = ({
                 actions: { id: `${id}-playground-actions` },
               }}
             >
-              <MemoPlayground actionsId={`${id}-playground-actions`} />
+              <Playground actionsId={`${id}-playground-actions`} />
             </AccordionMenuItem>
           </Panel>
 
@@ -97,7 +91,7 @@ const DevTools: FC<{ id: string; onClose?: VoidFunction }> = ({
                 tooltip: { placement: 'bottom-start', arrow: false },
               }}
             >
-              <MemoInfoComponent />
+              <InfoComponent />
             </AccordionMenuItem>
           </Panel>
 

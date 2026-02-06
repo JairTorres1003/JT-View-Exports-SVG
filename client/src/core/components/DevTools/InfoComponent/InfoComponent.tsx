@@ -17,13 +17,14 @@ import { useSelector } from 'react-redux'
 
 import IconGoToFile from '@/assets/icons/functionalities/go-to-file'
 import { openFileInPosition } from '@/core/utils/file'
+import React from 'react'
 
 const commonSlotProps: ListItemTextProps['slotProps'] = {
   primary: { component: 'b', fontWeight: 600, sx: { whiteSpace: 'nowrap' } },
   secondary: { noWrap: true, sx: { opacity: 0.8 } },
 }
 
-export const InfoComponent = () => {
+const InfoComponent = () => {
   const recentlySelected = useSelector((state) => state.playground.recentlySelected)
 
   const { t } = useTranslation()
@@ -122,3 +123,9 @@ export const InfoComponent = () => {
     </Stack>
   )
 }
+
+const MemoInfoComponent = React.memo(InfoComponent)
+
+MemoInfoComponent.displayName = 'InfoComponent'
+
+export default MemoInfoComponent

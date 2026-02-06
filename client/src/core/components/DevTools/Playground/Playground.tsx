@@ -14,6 +14,7 @@ import { MenuMoreActions, MenuTools } from '../Menu'
 import { playgroundClasses } from './Playground.classes'
 import { BoxPlayground } from './Playground.style'
 import PlaygroundCardSvg from './PlaygroundCardSvg/PlaygroundCardSvg'
+import React from 'react'
 
 interface PlaygroundProps {
   actionsId?: string
@@ -94,4 +95,8 @@ const Playground: FC<PlaygroundProps> = ({ actionsId = 'playground-actions' }) =
   )
 }
 
-export default Playground
+const MemoPlayground = React.memo(Playground)
+
+MemoPlayground.displayName = 'Playground'
+
+export default MemoPlayground
