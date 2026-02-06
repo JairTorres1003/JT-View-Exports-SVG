@@ -4,6 +4,8 @@ import react from '@vitejs/plugin-react-swc'
 import { defineConfig } from 'vite'
 import tsconfigPaths from 'vite-tsconfig-paths'
 
+import codingameOnigWasmWebFix from './plugins/codingame-onig-wasm-web-fix'
+
 const pkg = JSON.parse(
   fs.readFileSync(new URL('./package.json', import.meta.url).pathname).toString()
 )
@@ -12,21 +14,23 @@ const localDependencies = Object.entries(pkg.dependencies as Record<string, stri
   .filter(([name]) => name.startsWith('@codingame/'))
   .map(([name]) => name)
 
+const optimizeDepsExclude = new Set([
+  '@codingame/monaco-vscode-theme-defaults-default-extension',
+  '@codingame/monaco-vscode-javascript-default-extension',
+  '@codingame/monaco-vscode-typescript-basics-default-extension',
+])
+
+const optimizeDepsInclude = localDependencies.filter((name) => !optimizeDepsExclude.has(name))
+
 // https://vite.dev/config/
 export default defineConfig({
-  plugins: [tsconfigPaths(), react()],
+  plugins: [tsconfigPaths(), react(), codingameOnigWasmWebFix()],
   optimizeDeps: {
-    esbuildOptions: {
+    rolldownOptions: {
       plugins: [importMetaUrlPlugin],
     },
-    exclude: [],
-    include: [
-      ...localDependencies,
-      'vscode-textmate',
-      'vscode-oniguruma',
-      '@vscode/vscode-languagedetection',
-      'marked',
-    ],
+    exclude: Array.from(optimizeDepsExclude),
+    include: optimizeDepsInclude,
   },
   define: {
     rootDirectory: JSON.stringify(__dirname),

@@ -35,6 +35,8 @@ class VSCodeAPIWrapper {
     window.addEventListener('message', (event: MessageEvent<PostMessage>) => {
       const type: SVGPostMessage = event.data.type
 
+      if (!type || Object.entries(this.messageHandlers).length === 0) return
+
       if (!Object.prototype.hasOwnProperty.call(this.messageHandlers, type)) {
         console.warn(i18next.t('errors.[VSCodeAPIWrapper]IgnoredMessageWithUnknownType:'), type)
         return

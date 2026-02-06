@@ -8,7 +8,6 @@ import getKeybindingsServiceOverride, {
   updateUserKeybindings,
 } from '@codingame/monaco-vscode-keybindings-service-override'
 import getLanguagesServiceOverride from '@codingame/monaco-vscode-languages-service-override'
-import getQuickAccessServiceOverride from '@codingame/monaco-vscode-quickaccess-service-override'
 import getTextMateServiceOverride from '@codingame/monaco-vscode-textmate-service-override'
 import getThemeServiceOverride from '@codingame/monaco-vscode-theme-service-override'
 import * as monaco from 'monaco-editor'
@@ -22,7 +21,7 @@ import type {
 import i18next from '@/i18n'
 import type { RequiredExcept } from '@/types/misc'
 import { getUnknownError } from '@/utils/errors'
-import keybindings from 'public/vs/userConfiguration/keybindings.json'
+import keybindings from '@/assets/vs/userConfiguration/keybindings.json'
 
 import { contextMenuServiceOverride } from './contextMenu'
 import { activateDefaultExtensions } from './extensions/init'
@@ -31,9 +30,6 @@ const OVERRIDES: IEditorOverrideServices = {
   ...getConfigurationServiceOverride(),
   ...getTextMateServiceOverride(),
   ...getThemeServiceOverride(),
-  ...getQuickAccessServiceOverride({
-    isKeybindingConfigurationVisible: () => true,
-  }),
   ...getLanguagesServiceOverride(),
   ...getKeybindingsServiceOverride(),
 }
@@ -81,8 +77,8 @@ export class Editor {
     }
 
     if (!initialized) {
-      await this.applyConfigurations()
-
+      await initUserConfiguration(JSON.stringify(this._userConfiguration))
+      await initUserKeybindings(JSON.stringify(keybindings))
       await initialize(OVERRIDES)
 
       initialized = true
@@ -98,23 +94,17 @@ export class Editor {
   }
 
   /**
-   * Applies the user configuration and keybindings to the editor.
+   * Updates user configurations and keybindings asynchronously.
    *
-   * Depending on whether the editor has been initialized, this method will either
-   * initialize or update the user configuration and keybindings.
+   * Attempts to persist the current user configuration and keybindings to storage.
+   * Errors during either operation are caught and logged without throwing.
    *
-   * @param isInitialized - Indicates if the editor has already been initialized.
-   *   If `true`, the method updates the existing configuration and keybindings.
-   *   If `false`, it initializes them.
-   * @returns A promise that resolves when the configurations and keybindings have been applied.
-   * @throws Logs an error to the console if applying the configuration or keybindings fails.
+   * @returns A promise that resolves when both update operations have completed.
+   * @throws Does not throw. Errors are caught and logged to console.
    */
-  public async applyConfigurations(isInitialized = false): Promise<void> {
-    const applyUserConfiguration = isInitialized ? updateUserConfiguration : initUserConfiguration
-    const applyUserKeybindings = isInitialized ? updateUserKeybindings : initUserKeybindings
-
+  public async updateConfigurations(): Promise<void> {
     try {
-      await applyUserConfiguration(JSON.stringify(this._userConfiguration))
+      await updateUserConfiguration(JSON.stringify(this._userConfiguration))
     } catch (error) {
       console.error(
         `${i18next.t('errors.FailedToUpdateUserConfiguration')}: ${getUnknownError(error)}`
@@ -122,7 +112,7 @@ export class Editor {
     }
 
     try {
-      await applyUserKeybindings(JSON.stringify(keybindings))
+      await updateUserKeybindings(JSON.stringify(keybindings))
     } catch (error) {
       console.error(
         `${i18next.t('errors.FailedToUpdateUserKeybindings')}: ${getUnknownError(error)}`
@@ -155,6 +145,7 @@ export class Editor {
 
     contextMenuServiceOverride(editor)
 
+    // Command palette quick access
     const quickAccess = editor.getContribution('editor.controller.quickInput')
     quickAccess?.dispose()
 
@@ -198,7 +189,7 @@ export class Editor {
     })
     this._reference?.style.setProperty('opacity', '0')
 
-    await this.applyConfigurations(true)
+    await this.updateConfigurations()
 
     let currentThemeId = this._userConfiguration?.['workbench.colorTheme'] as string
 

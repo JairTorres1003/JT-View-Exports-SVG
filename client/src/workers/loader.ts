@@ -1,10 +1,13 @@
 export type WorkerLoader = () => Worker
 
+const createEditorWorker = () =>
+  new Worker(new URL('monaco-editor/esm/vs/editor/editor.worker', import.meta.url), {
+    type: 'module',
+  })
+
 const workerLoaders: Partial<Record<string, WorkerLoader>> = {
-  TextEditorWorker: () =>
-    new Worker(new URL('monaco-editor/esm/vs/editor/editor.worker', import.meta.url), {
-      type: 'module',
-    }),
+  TextEditorWorker: createEditorWorker,
+  editorWorkerService: createEditorWorker,
   TextMateWorker: () =>
     new Worker(
       new URL('@codingame/monaco-vscode-textmate-service-override/worker', import.meta.url),
