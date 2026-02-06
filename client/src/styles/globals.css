@@ -13,7 +13,7 @@ html:root {
   --JT-SVG-palette-text-secondary: var(--vscode-input-foreground);
   --JT-SVG-palette-action-active: var(--vscode-icon-foreground);
   /* VS Code Colors */
-  --JT-SVG-vscode-editor-background: var(--vscode-editor-background, rgba(0, 0, 0, 0.03));
+  --JT-SVG-vscode-editor-background: var(--vscode-editor-background, rgb(246, 246, 246));
   --JT-SVG-vscode-panel-border: var(--vscode-panel-border);
   --JT-SVG-vscode-sash-hoverBorder: var(--vscode-sash-hoverBorder, #3e4452);
   --JT-SVG-vscode-sash-size: var(--vscode-sash-size, 4px);

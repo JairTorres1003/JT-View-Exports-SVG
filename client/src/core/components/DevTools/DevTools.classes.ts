@@ -7,7 +7,6 @@ export const devToolsClasses = {
   buttonClose: 'DevTools-buttonClose',
   playground: 'DevTools-playground',
   panel: 'DevTools-panel',
-  panelTransition: 'DevTools-panelTransition',
-  panelMinHeight: 'DevTools-panelMinHeight',
-  resizeHandle: 'DevTools-resizeHandle',
+  separator: 'DevTools-separator',
+  separatorDisabled: 'DevTools-separatorDisabled',
 }

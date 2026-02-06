@@ -84,22 +84,18 @@ export const BoxDevTools = styled<ComponentType<BoxProps>>((props) => <Box {...p
       },
     },
   },
-  [`& .${devToolsClasses.panel}`]: {
-    minHeight: 22,
-    [`&.${devToolsClasses.panelTransition}`]: {
-      transition: 'flex 0.2s ease-out',
-    },
-    [`&.${devToolsClasses.panelMinHeight}`]: {
-      minHeight: '20%',
-    },
-  },
-  [`& .${devToolsClasses.resizeHandle}`]: {
+  [`& .${devToolsClasses.separator}`]: {
     transition: 'background-color 0.1s ease-out',
     height: 'var(--JT-SVG-vscode-sash-size)',
-    marginBottom: 'calc(var(--JT-SVG-vscode-sash-size) * -1)',
+    marginTop: 'calc(var(--JT-SVG-vscode-sash-size) * -1)',
     zIndex: 1,
+    outline: 'none',
     '&:hover': {
       backgroundColor: 'var(--JT-SVG-vscode-sash-hoverBorder)',
     },
   },
+  // [`& .${devToolsClasses.separatorDisabled} .${devToolsClasses.panel} *`]: {
+  //   cursor: 'default !important',
+  //   button: { cursor: 'pointer !important' },
+  // },
 }))

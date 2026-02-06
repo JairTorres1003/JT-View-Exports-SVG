@@ -1,7 +1,7 @@
 import { SVGPostMessage, SVGReceiveMessage } from '@api/enums/ViewExportsSVG'
-import { useEffect, useRef, useState } from 'react'
+import { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import type { ImperativePanelHandle, PanelOnResize } from 'react-resizable-panels'
+import { usePanelRef, type PanelProps } from 'react-resizable-panels'
 
 import { routes } from '@/config/routes/route'
 import { vscode } from '@/services/vscode'
@@ -9,7 +9,7 @@ import { setIsOpenDevTools } from '@/store/features/PlaygroundSlice'
 import isEmpty from '@/utils/is-empty'
 
 export const useViewPanels = () => {
-  const sidePanelRef = useRef<ImperativePanelHandle>(null)
+  const sidePanelRef = usePanelRef()
   const isOpenDevTools = useSelector((state) => state.playground.isOpenDevTools)
   const renderPath = useSelector((state) => state.global.configuration.renderPath)
   const [isShowSidePanel, setIsShowSidePanel] = useState(true)
@@ -36,11 +36,11 @@ export const useViewPanels = () => {
   /**
    * Handles the resize event for a panel and toggles the developer tools panel based on the new size.
    */
-  const onResize: PanelOnResize = (size) => {
-    if (size < 20) {
+  const onResize: PanelProps['onResize'] = (size) => {
+    if (size.inPixels < 200) {
       vscode.postMessage(SVGReceiveMessage.ToggleOpenDevTools, false)
       dispatch(setIsOpenDevTools(false))
-    } else if (size > 20 && !isOpenDevTools) {
+    } else if (size.inPixels >= 200 && !isOpenDevTools) {
       vscode.postMessage(SVGReceiveMessage.ToggleOpenDevTools, true)
       dispatch(setIsOpenDevTools(true))
     }
