@@ -1,5 +1,6 @@
 export interface ManifestContent {
   'index.html': ManifestIndexHTML
+  'style.css'?: ManifestFile
   'favicon.ico': ManifestAsset
 }
 

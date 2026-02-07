@@ -73,6 +73,11 @@ export class WebviewContent {
    */
   private generateCssLinks(): string {
     const cssPaths = this.manifest?.['index.html'].css ?? []
+
+    if (this.manifest?.['style.css']?.file && cssPaths.length === 0) {
+      cssPaths.push(this.manifest['style.css'].file)
+    }
+
     const cssLinks = cssPaths.map((path) => {
       return /* html */ `<link rel="stylesheet" type="text/css" href="${this.getAssetUri(path).toString()}" />`
     })
