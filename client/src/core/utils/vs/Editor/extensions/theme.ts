@@ -26,8 +26,7 @@ async function activate(_themeConfig?: ExtensionManage) {
 
     if (!_themeConfig?.isValid) return
 
-    const urlTemp = new URL('favicon.ico', import.meta.url).href
-    const baseUrl = urlTemp.substring(0, urlTemp.lastIndexOf('/'))
+    const baseUrl = new URL('../assets', import.meta.url).href
 
     const packageJSON = await fetch(`${baseUrl}/extensions/theme/package.json`)
 
