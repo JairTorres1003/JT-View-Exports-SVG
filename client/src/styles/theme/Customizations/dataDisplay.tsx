@@ -2,6 +2,7 @@ import { dividerClasses, menuItemClasses, tooltipClasses } from '@mui/material'
 
 import IconError from '@/assets/icons/indicators/error'
 import IconInfo from '@/assets/icons/indicators/info'
+import IconSuccess from '@/assets/icons/indicators/success'
 import IconWarning from '@/assets/icons/indicators/warning'
 import type { CustomizationsFunction } from '@/types/BaseProps'
 
@@ -15,6 +16,7 @@ export const dataDisplayCustomizations: CustomizationsFunction = (styles) => ({
         error: <IconError size={20} />,
         info: <IconInfo size={20} />,
         warning: <IconWarning size={20} />,
+        success: <IconSuccess size={20} />,
       },
     },
     styleOverrides: {
