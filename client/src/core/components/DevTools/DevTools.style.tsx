@@ -94,8 +94,4 @@ export const BoxDevTools = styled<ComponentType<BoxProps>>((props) => <Box {...p
       backgroundColor: 'var(--JT-SVG-vscode-sash-hoverBorder)',
     },
   },
-  // [`& .${devToolsClasses.separatorDisabled} .${devToolsClasses.panel} *`]: {
-  //   cursor: 'default !important',
-  //   button: { cursor: 'pointer !important' },
-  // },
 }))
