@@ -26,7 +26,7 @@ async function activate(_themeConfig?: ExtensionManage) {
 
     if (!_themeConfig?.isValid) return
 
-    const baseUrl = new URL('../assets', import.meta.url).href
+    const baseUrl = new URL(/* @vite-ignore */ '../assets', import.meta.url).href
 
     const packageJSON = await fetch(`${baseUrl}/extensions/theme/package.json`)
 
