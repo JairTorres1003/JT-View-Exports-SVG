@@ -45,7 +45,7 @@ const DevTools: FC<{ id: string; onClose?: VoidFunction }> = ({
           [devToolsClasses.separatorDisabled]: expanded.length !== 2,
         })}
       >
-        <Group orientation='vertical'>
+        <Group orientation='vertical' disableCursor={expanded.length !== 2}>
           <Panel
             minSize={playgroundPanel ? 200 : 22}
             maxSize={playgroundPanel ? undefined : 22}
