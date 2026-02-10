@@ -149,6 +149,10 @@ export class Editor {
     const quickAccess = editor.getContribution('editor.controller.quickInput')
     quickAccess?.dispose()
 
+    // Find widget quick access
+    const findWidget = editor.getContribution('editor.contrib.findController')
+    findWidget?.dispose()
+
     editor.setDefaultValue = this._setDefaultValue.bind(this)
     editor.getDefaultValue = this._getDefaultValue.bind(this)
     editor.resetValue = this._resetValue.bind(this)

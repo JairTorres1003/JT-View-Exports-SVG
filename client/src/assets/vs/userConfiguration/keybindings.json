@@ -88,33 +88,15 @@
     "when": "editorTextFocus && !isMac"
   },
   {
-    "key": "cmd+f",
-    "command": "actions.find",
-    "when": "editorFocus && isMac"
+    "key": "",
+    "command": "actions.find"
   },
   {
-    "key": "ctrl+f",
-    "command": "actions.find",
-    "when": "editorFocus && !isMac"
+    "key": "",
+    "command": "editor.action.nextMatchFindAction"
   },
   {
-    "key": "cmd+g",
-    "command": "editor.action.nextMatchFindAction",
-    "when": "editorFocus && findWidgetVisible && isMac"
-  },
-  {
-    "key": "f3",
-    "command": "editor.action.nextMatchFindAction",
-    "when": "editorFocus && findWidgetVisible && !isMac"
-  },
-  {
-    "key": "cmd+shift+g",
-    "command": "editor.action.previousMatchFindAction",
-    "when": "editorFocus && findWidgetVisible && isMac"
-  },
-  {
-    "key": "shift+f3",
-    "command": "editor.action.previousMatchFindAction",
-    "when": "editorFocus && findWidgetVisible && !isMac"
+    "key": "",
+    "command": "editor.action.previousMatchFindAction"
   }
 ]

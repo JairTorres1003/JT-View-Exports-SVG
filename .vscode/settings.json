@@ -75,7 +75,7 @@
       "url": "./client/i18n.schema.json"
     },
     {
-      "fileMatch": ["client/public/vs/userConfiguration/keybindings.json"],
+      "fileMatch": ["client/src/assets/vs/userConfiguration/keybindings.json"],
       "url": "vscode://schemas/keybindings"
     }
   ],
