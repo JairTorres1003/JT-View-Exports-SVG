@@ -35,8 +35,11 @@ async function activate(_themeConfig?: ExtensionManage) {
       throw new Error(i18next.t('errors.FailedToFetchExtensionTheme'))
     }
 
-    const manifest: IExtensionManifest = await packageJSON.json()
-
+    const {
+      main: _main,
+      browser: _browser,
+      ...manifest
+    }: IExtensionManifest = await packageJSON.json()
     const { registerFileUrl } = registerExtension(manifest, ExtensionHostKind.LocalProcess)
 
     manifest.contributes?.themes?.forEach((theme) => {
