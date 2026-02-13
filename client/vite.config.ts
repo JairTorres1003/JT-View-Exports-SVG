@@ -6,7 +6,7 @@ import tsconfigPaths from 'vite-tsconfig-paths'
 
 import codingameOnigWasmWebFix from './plugins/codingame-onig-wasm-web-fix'
 import legacyManifest from './plugins/legacy-manifest'
-import removePublicDevFolder from './plugins/remove-public-dev-folder'
+import removeFiles from './plugins/remove-files'
 
 const pkg = JSON.parse(
   fs.readFileSync(new URL('./package.json', import.meta.url).pathname).toString()
@@ -27,13 +27,7 @@ const optimizeDepsInclude = localDependencies.filter((name) => !optimizeDepsExcl
 // https://vite.dev/config/
 export default defineConfig({
   base: './',
-  plugins: [
-    tsconfigPaths(),
-    react(),
-    codingameOnigWasmWebFix(),
-    legacyManifest(),
-    removePublicDevFolder(),
-  ],
+  plugins: [tsconfigPaths(), react(), codingameOnigWasmWebFix(), legacyManifest(), removeFiles()],
   optimizeDeps: {
     rolldownOptions: {
       plugins: [importMetaUrlPlugin],
