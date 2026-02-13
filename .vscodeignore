@@ -13,8 +13,8 @@ src/**
 server/**
 client/**
 docs/**
+schemas/**
 !client/dist
-client/dist/index.html
 
 # Ignore Misc
 .yarnrc
@@ -36,7 +36,6 @@ LEARN.md
 .prettierignore
 tsconfig*.json
 .github/
-**/*.schema.json
 **/*.config.js
 package-lock.json
 prepare-readme.js
