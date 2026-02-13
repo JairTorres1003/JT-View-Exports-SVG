@@ -68,7 +68,7 @@ export default defineConfig({
   },
   worker: {
     format: 'es',
-    rollupOptions: {
+    rolldownOptions: {
       output: {
         entryFileNames: 'chunks/[name]-[hash].js',
         chunkFileNames: 'chunks/[name]-[hash].js',
