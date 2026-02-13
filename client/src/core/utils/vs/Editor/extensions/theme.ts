@@ -20,6 +20,7 @@ import { getUnknownError } from '@/utils/errors'
 async function activate(_themeConfig?: ExtensionManage) {
   try {
     if (import.meta.env.DEV) {
+      const { default: devActivate } = await import('./theme.dev.ts')
       devActivate()
       return
     }
@@ -48,40 +49,6 @@ async function activate(_themeConfig?: ExtensionManage) {
       `${i18next.t('errors.FailedToActivateExtensionTheme')}: ${getUnknownError(error)}`
     )
   }
-}
-
-/**
- * Activates the theme extension in development mode by registering a default theme.
- *
- * This function registers a default theme named "Default Theme One Dark" with the Monaco Editor.
- * It sets the theme's path and other metadata, allowing it to be used in the editor.
- */
-function devActivate() {
-  const themePath = '/vs/theme/default-theme-one-dark.json'
-  const manifest: IExtensionManifest = {
-    name: 'default-theme-one-dark',
-    displayName: 'Default Theme One Dark',
-    publisher: 'zhuangtongfa',
-    version: __APP_VERSION,
-    engines: {
-      vscode: '*',
-    },
-    contributes: {
-      themes: [
-        {
-          label: 'Default Theme One Dark',
-          path: themePath,
-          id: 'default-theme-one-dark',
-          uiTheme: 'vs-dark',
-        },
-      ],
-    },
-  }
-
-  const extensionTheme = registerExtension(manifest, ExtensionHostKind.LocalProcess)
-  extensionTheme.registerFileUrl(themePath, new URL(themePath, window.location.href).href)
-
-  document.documentElement.classList.add('monaco-workbench')
 }
 
 export default activate
