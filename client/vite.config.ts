@@ -45,7 +45,7 @@ export default defineConfig({
     dedupe: ['vscode', 'monaco-editor', ...localDependencies],
   },
   build: {
-    target: 'es2020',
+    target: 'es2022',
     reportCompressedSize: false,
     cssCodeSplit: false,
     assetsInlineLimit: 0,
