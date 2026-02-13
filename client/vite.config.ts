@@ -47,7 +47,7 @@ export default defineConfig({
     target: 'es2020',
     reportCompressedSize: false,
     cssCodeSplit: false,
-    assetsInlineLimit: 2048,
+    assetsInlineLimit: 0,
     manifest: 'manifest.json',
     rolldownOptions: {
       output: {
