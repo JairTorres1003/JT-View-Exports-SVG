@@ -52,6 +52,6 @@
   "Reloading...": "Перезагрузка...",
   "Error toggling favorite status for icon {name}": "Ошибка при переключении статуса избранного для иконки {name}",
   "Error retrieving icons: {error}": "Ошибка при получении иконок: {error}",
-  "Missing index.html file in manifest": "Отсутствует файл index.html в манифесте",
+  "Missing main file in manifest": "Отсутствует файл main в манифесте",
   "Empty opening element": "Пустой элемент открытия"
 }
