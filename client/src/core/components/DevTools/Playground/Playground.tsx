@@ -1,10 +1,10 @@
 import { Card, Collapse, Divider, Grid, IconButton, Tooltip } from '@mui/material'
-import type { FC } from 'react'
+import React from 'react'
 import { useTranslation } from 'react-i18next'
 
-import IconCodeTag from '@/assets/icons/indicators/code-tag'
 import IconCopy from '@/assets/icons/functionalities/copy'
 import IconRefresh from '@/assets/icons/functionalities/refresh'
+import IconCodeTag from '@/assets/icons/indicators/code-tag'
 import { SelectPickerColor } from '@/core/components/Select'
 import { usePlayground } from '@/core/hooks/DevTools/usePlayground'
 
@@ -14,13 +14,12 @@ import { MenuMoreActions, MenuTools } from '../Menu'
 import { playgroundClasses } from './Playground.classes'
 import { BoxPlayground } from './Playground.style'
 import PlaygroundCardSvg from './PlaygroundCardSvg/PlaygroundCardSvg'
-import React from 'react'
 
 interface PlaygroundProps {
   actionsId?: string
 }
 
-const Playground: FC<PlaygroundProps> = ({ actionsId = 'playground-actions' }) => {
+const Playground: React.FC<PlaygroundProps> = ({ actionsId = 'playground-actions' }) => {
   const { t } = useTranslation(undefined, { keyPrefix: 'DevTools' })
 
   const {

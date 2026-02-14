@@ -20,7 +20,7 @@ if (typeof window === 'undefined') {
 }
 
 window.MonacoEnvironment = {
-  getWorker: function (_workerId, label) {
+  getWorker: (_workerId, label) => {
     const workerFactory = workerLoaders[label]
     if (workerFactory != null) {
       return workerFactory()

@@ -1,8 +1,8 @@
 import type { ExtensionManage } from '@api/types/vscode'
 import {
-  registerExtension,
   ExtensionHostKind,
   type IExtensionManifest,
+  registerExtension,
 } from '@codingame/monaco-vscode-api/extensions'
 
 import i18next from '@/i18n'

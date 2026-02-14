@@ -73,7 +73,7 @@ export const DialogFilesModal: FC<DialogFilesModalProps> = ({
 
             return (
               <ListItem key={file.uri} disablePadding>
-                <ListItemButton role={undefined} selected={selectedIndex === index}>
+                <ListItemButton selected={selectedIndex === index}>
                   <ListItemIcon sx={{ minWidth: 16, mr: 1 }}>
                     <IconComponent size={16} />
                   </ListItemIcon>

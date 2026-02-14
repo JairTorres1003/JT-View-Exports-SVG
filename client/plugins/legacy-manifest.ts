@@ -1,6 +1,6 @@
-import { type Plugin, type ResolvedConfig } from 'vite'
-import fs from 'fs'
-import path from 'path'
+import fs from 'node:fs'
+import path from 'node:path'
+import type { Plugin, ResolvedConfig } from 'vite'
 
 interface ViteManifestEntry {
   file: string

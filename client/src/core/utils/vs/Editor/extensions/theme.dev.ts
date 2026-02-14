@@ -1,7 +1,7 @@
 import {
-  registerExtension,
   ExtensionHostKind,
   type IExtensionManifest,
+  registerExtension,
 } from '@codingame/monaco-vscode-api/extensions'
 
 /**

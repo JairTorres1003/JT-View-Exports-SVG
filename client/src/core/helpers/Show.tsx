@@ -1,4 +1,4 @@
-import React, { type ReactNode, type FC } from 'react'
+import React, { type FC, type ReactNode } from 'react'
 
 type ShowProps = React.PropsWithChildren
 

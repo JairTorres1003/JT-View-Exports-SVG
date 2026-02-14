@@ -1,5 +1,4 @@
 import { Stack } from '@mui/material'
-import React from 'react'
 
 import { LoadingPage } from '@/core/components/LoadingPage'
 import ContainerIcons from '@/features/home/components/ContainerIcons/ContainerIcons'

@@ -46,12 +46,12 @@ const MenuMoreActions: FC<MenuToolsProps> = ({ svgRef }) => {
           list: { 'aria-labelledby': 'playground-menu-actions-button' },
         }}
       >
-        {actions.map((action, index) => {
-          if ('isDivider' in action) return <Divider key={`divider-${index}`} />
+        {actions.map((action) => {
+          if ('isDivider' in action) return <Divider key={action.id} />
 
           return (
             <MenuItem
-              key={action.label}
+              key={action.id}
               onClick={() => {
                 action.onClick?.(recentlySelected)
                 handleClose()

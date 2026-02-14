@@ -1,6 +1,6 @@
-import * as fs from 'fs'
-import { glob } from 'fs/promises'
-import * as path from 'path'
+import * as fs from 'node:fs'
+import { glob } from 'node:fs/promises'
+import * as path from 'node:path'
 import type { Plugin } from 'vite'
 
 const filesToRemove = ['dev', 'index.html', 'assets/*.svg']

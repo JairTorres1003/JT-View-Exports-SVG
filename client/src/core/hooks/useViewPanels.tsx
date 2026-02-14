@@ -1,7 +1,7 @@
 import { SVGPostMessage, SVGReceiveMessage } from '@api/enums/ViewExportsSVG'
 import { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { usePanelRef, type PanelProps } from 'react-resizable-panels'
+import { type PanelProps, usePanelRef } from 'react-resizable-panels'
 
 import { routes } from '@/config/routes/route'
 import { vscode } from '@/services/vscode'

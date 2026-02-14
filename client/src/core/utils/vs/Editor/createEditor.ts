@@ -12,6 +12,7 @@ import getTextMateServiceOverride from '@codingame/monaco-vscode-textmate-servic
 import getThemeServiceOverride from '@codingame/monaco-vscode-theme-service-override'
 import * as monaco from 'monaco-editor'
 
+import keybindings from '@/assets/vs/userConfiguration/keybindings.json'
 import type {
   EditorConfigurations,
   IStandaloneCodeEditor,
@@ -21,7 +22,6 @@ import type {
 import i18next from '@/i18n'
 import type { RequiredExcept } from '@/types/misc'
 import { getUnknownError } from '@/utils/errors'
-import keybindings from '@/assets/vs/userConfiguration/keybindings.json'
 
 import { contextMenuServiceOverride } from './contextMenu'
 import { activateDefaultExtensions } from './extensions/init'

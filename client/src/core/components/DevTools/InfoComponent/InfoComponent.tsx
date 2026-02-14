@@ -4,20 +4,20 @@ import {
   IconButton,
   List,
   ListItem,
-  listItemClasses,
   ListItemText,
+  type ListItemTextProps,
+  listItemClasses,
   listItemTextClasses,
   Stack,
   Tooltip,
   Typography,
-  type ListItemTextProps,
 } from '@mui/material'
+import React from 'react'
 import { useTranslation } from 'react-i18next'
 import { useSelector } from 'react-redux'
 
 import IconGoToFile from '@/assets/icons/functionalities/go-to-file'
 import { openFileInPosition } from '@/core/utils/file'
-import React from 'react'
 
 const commonSlotProps: ListItemTextProps['slotProps'] = {
   primary: { component: 'b', fontWeight: 600, sx: { whiteSpace: 'nowrap' } },

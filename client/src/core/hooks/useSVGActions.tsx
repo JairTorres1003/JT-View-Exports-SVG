@@ -15,10 +15,11 @@ export interface UseSVGActionsProps {
 
 export type UseSVGActionsReturn = Array<
   | {
+      id: string
       label: string
       onClick: (component: SVGComponent) => void
     }
-  | { isDivider: true }
+  | { id: string; isDivider: true }
 >
 
 export const useSVGActions = ({ svgRef }: UseSVGActionsProps): UseSVGActionsReturn => {
@@ -113,12 +114,12 @@ export const useSVGActions = ({ svgRef }: UseSVGActionsProps): UseSVGActionsRetu
   }
 
   return [
-    { label: t('OpenInEditor'), onClick: openInEditor },
-    { isDivider: true },
-    { label: t('CopyAsSVG'), onClick: copyAsSVG },
-    { label: t('CopyAsPNG'), onClick: copyAsPNG },
-    { isDivider: true },
-    { label: t('DownloadAsSVG'), onClick: downloadAsSVG },
-    { label: t('DownloadAsPNG'), onClick: downloadAsPNG },
+    { id: 'open-in-editor', label: t('OpenInEditor'), onClick: openInEditor },
+    { id: 'divider-open-copy', isDivider: true },
+    { id: 'copy-as-svg', label: t('CopyAsSVG'), onClick: copyAsSVG },
+    { id: 'copy-as-png', label: t('CopyAsPNG'), onClick: copyAsPNG },
+    { id: 'divider-copy-download', isDivider: true },
+    { id: 'download-as-svg', label: t('DownloadAsSVG'), onClick: downloadAsSVG },
+    { id: 'download-as-png', label: t('DownloadAsPNG'), onClick: downloadAsPNG },
   ]
 }

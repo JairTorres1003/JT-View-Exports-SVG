@@ -5,7 +5,7 @@ import { copyToClipboard } from '@/utils/clipboard'
 import { getUnknownError } from '@/utils/errors'
 
 import { useAlert } from './useAlert'
-import { useSVGActions, type UseSVGActionsReturn, type UseSVGActionsProps } from './useSVGActions'
+import { type UseSVGActionsProps, type UseSVGActionsReturn, useSVGActions } from './useSVGActions'
 
 export const useContextMenuSVG = (options: UseSVGActionsProps): UseSVGActionsReturn => {
   const { onOpen } = useAlert()
@@ -38,9 +38,9 @@ export const useContextMenuSVG = (options: UseSVGActionsProps): UseSVGActionsRet
   }
 
   return [
-    { label: t('CopyName'), onClick: onCopyName },
-    { label: t('CopyCodeSnippet'), onClick: onCopyFragment },
-    { isDivider: true },
+    { id: 'copy-name', label: t('CopyName'), onClick: onCopyName },
+    { id: 'copy-snippet', label: t('CopyCodeSnippet'), onClick: onCopyFragment },
+    { id: 'divider-copy-actions', isDivider: true },
     ...actions,
   ]
 }

@@ -1,6 +1,6 @@
 import type { ViewExportSVG } from '@api/types/ViewExportsSVG'
 import { IconButton, Tooltip } from '@mui/material'
-import { useState, type FC } from 'react'
+import { type FC, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 
 import IconInfo from '@/assets/icons/indicators/info'

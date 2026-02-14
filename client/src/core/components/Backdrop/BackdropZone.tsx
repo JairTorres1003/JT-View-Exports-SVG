@@ -2,7 +2,7 @@ import { Backdrop, Typography } from '@mui/material'
 import type { FC } from 'react'
 import { useTranslation } from 'react-i18next'
 
-import { useDrop, type UseDropOptions } from '@/core/hooks/useDrop'
+import { type UseDropOptions, useDrop } from '@/core/hooks/useDrop'
 
 interface BackdropZoneProp extends UseDropOptions {}
 

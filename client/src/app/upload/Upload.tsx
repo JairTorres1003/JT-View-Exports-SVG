@@ -1,5 +1,4 @@
 import { Badge, Button, IconButton, Stack, Tooltip } from '@mui/material'
-import React from 'react'
 import { useTranslation } from 'react-i18next'
 
 import IconPlus from '@/assets/icons/functionalities/plus'

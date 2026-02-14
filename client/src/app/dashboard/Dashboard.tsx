@@ -1,5 +1,4 @@
 import { Stack } from '@mui/material'
-import React from 'react'
 import { useTranslation } from 'react-i18next'
 
 import { LoadingPage } from '@/core/components/LoadingPage'

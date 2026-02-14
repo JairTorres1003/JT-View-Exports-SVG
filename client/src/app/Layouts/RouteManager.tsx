@@ -3,8 +3,8 @@ import { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
 
-import IconNavigateFill from '@/assets/icons/navigation/navigate-fill'
 import IconClose from '@/assets/icons/functionalities/close'
+import IconNavigateFill from '@/assets/icons/navigation/navigate-fill'
 import { routes } from '@/config/routes/route'
 import DraggableSpeedDial, {
   type DraggableSpeedDialProps,

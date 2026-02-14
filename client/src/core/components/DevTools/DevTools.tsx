@@ -1,8 +1,8 @@
 import { Box, IconButton, Tooltip, Typography } from '@mui/material'
 import cn from 'classnames'
-import { type FC } from 'react'
+import type { FC } from 'react'
 import { useTranslation } from 'react-i18next'
-import { Panel, Group, Separator } from 'react-resizable-panels'
+import { Group, Panel, Separator } from 'react-resizable-panels'
 
 import IconClose from '@/assets/icons/functionalities/close'
 import { AccordionMenuItem } from '@/core/components/Accordion'

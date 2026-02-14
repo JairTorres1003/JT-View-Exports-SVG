@@ -1,5 +1,5 @@
-import type { SnackbarCloseReason, SlideProps, SnackbarOrigin } from '@mui/material'
-import type { SyntheticEvent, ReactNode } from 'react'
+import type { SlideProps, SnackbarCloseReason, SnackbarOrigin } from '@mui/material'
+import type { ReactNode, SyntheticEvent } from 'react'
 import { useDispatch } from 'react-redux'
 
 import { closeAlert, openAlert } from '@/store/features/GlobalSlice'

@@ -92,5 +92,6 @@ export interface GlobalReducers {
   unsetInitLoading: CaseReducer<GlobalState>
   setIsMounted: CaseReducer<GlobalState>
 
+  // biome-ignore lint/suspicious/noExplicitAny: This is a generic reducer for any action type
   [key: string]: CaseReducer<GlobalState, PayloadAction<any>>
 }

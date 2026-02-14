@@ -1,4 +1,3 @@
-import type React from 'react'
 import { useCallback, useState } from 'react'
 import { usePanelRef } from 'react-resizable-panels'
 

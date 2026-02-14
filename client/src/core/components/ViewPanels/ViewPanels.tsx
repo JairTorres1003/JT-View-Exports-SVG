@@ -1,5 +1,5 @@
-import React, { lazy, Suspense } from 'react'
-import { Panel, Group, Separator } from 'react-resizable-panels'
+import { lazy, Suspense } from 'react'
+import { Group, Panel, Separator } from 'react-resizable-panels'
 
 import { useViewPanels } from '@/core/hooks/useViewPanels'
 

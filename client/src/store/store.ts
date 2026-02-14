@@ -1,4 +1,4 @@
-import { type Reducer, type Store, combineReducers, configureStore } from '@reduxjs/toolkit'
+import { combineReducers, configureStore, type Reducer, type Store } from '@reduxjs/toolkit'
 
 import type { RootStoreState } from '@/types/store/store'
 
