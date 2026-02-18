@@ -1,4 +1,4 @@
-import { l10n, window, workspace, type Uri } from 'vscode'
+import { l10n, type Uri, window, workspace } from 'vscode'
 
 import { LastScanDateController } from '@/controllers/config'
 import { ViewExportsSVGController } from '@/controllers/views'

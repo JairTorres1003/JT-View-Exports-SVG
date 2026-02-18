@@ -1,6 +1,5 @@
-import * as assert from 'assert'
-
 import type { LogicalExpression } from '@babel/types'
+import * as assert from 'assert'
 
 import { getLogicalExpression } from '@/utilities/properties/logicalExpression'
 

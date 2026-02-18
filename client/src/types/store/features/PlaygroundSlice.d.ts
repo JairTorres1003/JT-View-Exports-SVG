@@ -22,6 +22,5 @@ export interface PlaygroundReducers {
    */
   setInitializedEditor: CaseReducer<PlaygroundState, PayloadAction<string>>
 
-  // biome-ignore lint/suspicious/noExplicitAny: This is a generic reducer for any action type
   [key: string]: CaseReducer<PlaygroundState, PayloadAction<any>>
 }

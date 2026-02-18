@@ -1,6 +1,7 @@
 // @ts-types="npm:@types/express@4.17.15"
-import { Request, Response } from 'express'
-import * as path from 'path'
+
+import * as path from 'node:path'
+import type { Request, Response } from 'express'
 
 export class FileController {
   /**

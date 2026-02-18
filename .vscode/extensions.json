@@ -1,22 +1,26 @@
 {
   "recommendations": [
-    "dbaeumer.vscode-eslint",
-    "dsznajder.es7-react-js-snippets",
-    "esbenp.prettier-vscode",
-    "JairTorres1003.jt-view-exports-svg",
-    "kisstkondoros.vscode-gutter-preview",
+    "formulahendry.auto-close-tag",
+    "formulahendry.auto-rename-tag",
     "mattpocock.ts-error-translator",
-    "meganrogge.template-string-converter",
-    "MS-CEINTL.vscode-language-pack-es",
-    "quicktype.quicktype",
-    "streetsidesoftware.code-spell-checker-spanish",
+    "biomejs.biome",
     "streetsidesoftware.code-spell-checker",
+    "denoland.vscode-deno",
+    "IronGeek.vscode-env",
     "usernamehw.errorlens",
-    "WallabyJs.console-ninja",
+    "Tobermory.es6-string-html",
+    "dsznajder.es7-react-js-snippets",
     "wix.vscode-import-cost",
-    "YoavBls.pretty-ts-errorsn",
+    "unifiedjs.vscode-mdx",
+    "Cardinal90.multi-cursor-case-preserve",
     "christian-kohler.path-intellisense",
     "MylesMurphy.prettify-ts",
-    "OmriGrossman.live-code-metric"
+    "YoavBls.pretty-ts-errors",
+    "meganrogge.template-string-converter",
+    "ChakrounAnas.turbo-console-log",
+    "pflannery.vscode-versionlens",
+    "JairTorres1003.jt-view-exports-svg",
+    "vitest.explorer",
+    "WallabyJs.console-ninja"
   ]
 }

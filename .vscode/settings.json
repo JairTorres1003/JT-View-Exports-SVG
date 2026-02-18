@@ -14,23 +14,23 @@
     ".vscode",
     ".vscode-insiders",
     ".github",
-    "**/tsconfig.json",
-    ".prettierrc"
+    "**/tsconfig.json"
   ],
+  "biome.enabled": true,
+  "prettier.enable": false,
+  "eslint.enable": false,
   "deno.enable": true,
   "deno.config": "./server/deno.json",
   "deno.enablePaths": ["server"],
   "workbench.tree.enableStickyScroll": true,
-  "editor.defaultFormatter": "esbenp.prettier-vscode",
+  "editor.defaultFormatter": "biomejs.biome",
   "editor.detectIndentation": true,
   "editor.tabSize": 2,
   "editor.formatOnSave": true,
   "editor.fontLigatures": true,
-  "eslint.enable": true,
-  "eslint.lintTask.enable": true,
-  "eslint.validate": ["javascript", "javascriptreact", "typescript", "typescriptreact"],
   "editor.codeActionsOnSave": {
-    "source.fixAll": "always"
+    "source.fixAll.biome": "explicit",
+    "source.organizeImports.biome": "explicit"
   },
   "editor.cursorBlinking": "expand",
   "editor.linkedEditing": true,
@@ -53,8 +53,6 @@
     }
   },
   "files.readonlyInclude": {
-    ".prettierrc": true,
-    ".prettierignore": true,
     ".lintstagedrc": true,
     "tsconfig.json": true,
     ".husky/**": true,
@@ -88,5 +86,14 @@
   "material-icon-theme.folders.associations": {
     "workers": "gh-workflows",
     "vs": "vscode"
+  },
+  "[jsonc]": {
+    "editor.defaultFormatter": "biomejs.biome"
+  },
+  "[typescript]": {
+    "editor.defaultFormatter": "biomejs.biome"
+  },
+  "[json]": {
+    "editor.defaultFormatter": "biomejs.biome"
   }
 }

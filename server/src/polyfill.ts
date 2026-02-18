@@ -1,4 +1,5 @@
-// deno-lint-ignore-file no-explicit-any
+// biome-ignore-all lint/suspicious/noExplicitAny: This file is a polyfill for the `window` object in a Node.js environment, which is necessary for testing purposes. Using `any` is acceptable in this context to allow for flexibility in the properties being added to the global object.
+// biome-ignore-all lint/suspicious/noGlobalAssign: assign the `auxGlobalThis` object to the `globalThis` object
 import { Window } from 'happy-dom'
 
 const window = new Window()

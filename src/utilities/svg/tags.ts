@@ -2,8 +2,8 @@ import * as t from '@babel/types'
 import { camelCase } from 'lodash'
 
 import { SVG_TAGS } from '@/constants/svg/tags'
-import type { SVGTagName, GetSVGTagName, GetTagName } from '@/types/svg/tags'
-import type { SVGLocation, SVGFile } from '@/types/ViewExportsSVG'
+import type { GetSVGTagName, GetTagName, SVGTagName } from '@/types/svg/tags'
+import type { SVGFile, SVGLocation } from '@/types/ViewExportsSVG'
 
 import { isEmpty } from '../misc'
 

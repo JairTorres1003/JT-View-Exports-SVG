@@ -1,14 +1,14 @@
 // @ts-nocheck
-import React, { type FC } from 'react'
+import type React from 'react'
 
 interface IcoProps {
   color?: string
   size?: number
   className?: string
-  sx?: any
+  sx?: React.CSSProperties
 }
 
-export const IconCalendar: FC<IcoProps> = ({
+export const IconCalendar: React.FC<IcoProps> = ({
   color = '#2a2634',
   size = 32,
   className = '',
@@ -34,7 +34,7 @@ export const IconCalendar: FC<IcoProps> = ({
   </svg>
 )
 
-export const IconCalendarLJ: FC<IcoProps> = ({
+export const IconCalendarLJ: React.FC<IcoProps> = ({
   color = '#2a2634',
   size = 32,
   className = '',
@@ -60,7 +60,7 @@ export const IconCalendarLJ: FC<IcoProps> = ({
   </svg>
 )
 
-export const IconCalendarViernes: FC<IcoProps> = ({
+export const IconCalendarViernes: React.FC<IcoProps> = ({
   color = '#2a2634',
   size = 32,
   className = '',
@@ -86,7 +86,7 @@ export const IconCalendarViernes: FC<IcoProps> = ({
   </svg>
 )
 
-export const IconCalendarSabado: FC<IcoProps> = ({
+export const IconCalendarSabado: React.FC<IcoProps> = ({
   color = '#2a2634',
   size = 32,
   className = '',
@@ -112,7 +112,7 @@ export const IconCalendarSabado: FC<IcoProps> = ({
   </svg>
 )
 
-export const IconCalendarDomFes: FC<IcoProps> = ({
+export const IconCalendarDomFes: React.FC<IcoProps> = ({
   color = '#2a2634',
   size = 32,
   className = '',
@@ -138,7 +138,7 @@ export const IconCalendarDomFes: FC<IcoProps> = ({
   </svg>
 )
 
-export const IconCalendarNumber: FC<IcoProps> = ({
+export const IconCalendarNumber: React.FC<IcoProps> = ({
   color = '#2a2634',
   size = 32,
   className = '',
@@ -164,7 +164,7 @@ export const IconCalendarNumber: FC<IcoProps> = ({
   </svg>
 )
 
-export const IconCalendarChecked: FC<IcoProps> = ({
+export const IconCalendarChecked: React.FC<IcoProps> = ({
   color = '#2a2634',
   size = 32,
   className = '',
@@ -190,7 +190,7 @@ export const IconCalendarChecked: FC<IcoProps> = ({
   </svg>
 )
 
-export const IconCalendarOneDay: FC<IcoProps> = ({
+export const IconCalendarOneDay: React.FC<IcoProps> = ({
   color = '#2a2634',
   size = 32,
   className = '',
@@ -217,7 +217,7 @@ export const IconCalendarOneDay: FC<IcoProps> = ({
   </svg>
 )
 
-export const IconDocument: FC<IcoProps> = ({
+export const IconDocument: React.FC<IcoProps> = ({
   color = '#2a2634',
   size = 32,
   className = '',
@@ -239,7 +239,7 @@ export const IconDocument: FC<IcoProps> = ({
   </svg>
 )
 
-export const IconNutricionDoc: FC<IcoProps> = ({
+export const IconNutricionDoc: React.FC<IcoProps> = ({
   color = '#2a2634',
   size = 32,
   className = '',
@@ -269,7 +269,7 @@ export const IconNutricionDoc: FC<IcoProps> = ({
   </svg>
 )
 
-export const IconCotizacionDoc: FC<IcoProps> = ({
+export const IconCotizacionDoc: React.FC<IcoProps> = ({
   color = '#2a2634',
   size = 32,
   className = '',
@@ -295,7 +295,7 @@ export const IconCotizacionDoc: FC<IcoProps> = ({
   </svg>
 )
 
-export const IconDownloadDoc: FC<IcoProps> = ({
+export const IconDownloadDoc: React.FC<IcoProps> = ({
   color = '#2a2634',
   size = 32,
   className = '',
@@ -317,7 +317,7 @@ export const IconDownloadDoc: FC<IcoProps> = ({
   </svg>
 )
 
-export const IconBono: FC<IcoProps> = ({
+export const IconBono: React.FC<IcoProps> = ({
   color = '#2a2634',
   size = 32,
   className = '',
@@ -339,7 +339,7 @@ export const IconBono: FC<IcoProps> = ({
   </svg>
 )
 
-export const IconHeartRith: FC<IcoProps> = ({
+export const IconHeartRith: React.FC<IcoProps> = ({
   color = '#2a2634',
   size = 32,
   className = '',
@@ -365,7 +365,7 @@ export const IconHeartRith: FC<IcoProps> = ({
   </svg>
 )
 
-export const IconHealthyHeart: FC<IcoProps> = ({
+export const IconHealthyHeart: React.FC<IcoProps> = ({
   color = '#2a2634',
   size = 32,
   className = '',
@@ -399,7 +399,7 @@ export const IconHealthyHeart: FC<IcoProps> = ({
   </svg>
 )
 
-export const IconUserOk: FC<IcoProps> = ({
+export const IconUserOk: React.FC<IcoProps> = ({
   color = '#2a2634',
   size = 32,
   className = '',
@@ -429,7 +429,7 @@ export const IconUserOk: FC<IcoProps> = ({
   </svg>
 )
 
-export const IconNewUser: FC<IcoProps> = ({
+export const IconNewUser: React.FC<IcoProps> = ({
   color = '#2a2634',
   size = 32,
   className = '',
@@ -463,7 +463,7 @@ export const IconNewUser: FC<IcoProps> = ({
   </svg>
 )
 
-export const IconAddUser: FC<IcoProps> = ({
+export const IconAddUser: React.FC<IcoProps> = ({
   color = '#2a2634',
   size = 32,
   className = '',
@@ -493,7 +493,7 @@ export const IconAddUser: FC<IcoProps> = ({
   </svg>
 )
 
-export const IconSearchUser: FC<IcoProps> = ({
+export const IconSearchUser: React.FC<IcoProps> = ({
   color = '#2a2634',
   size = 32,
   className = '',
@@ -519,7 +519,7 @@ export const IconSearchUser: FC<IcoProps> = ({
   </svg>
 )
 
-export const IconUser: FC<IcoProps> = ({
+export const IconUser: React.FC<IcoProps> = ({
   color = '#2a2634',
   size = 32,
   className = '',
@@ -545,7 +545,7 @@ export const IconUser: FC<IcoProps> = ({
   </svg>
 )
 
-export const IconChangeUser: FC<IcoProps> = ({
+export const IconChangeUser: React.FC<IcoProps> = ({
   color = '#2a2634',
   size = 32,
   className = '',
@@ -575,7 +575,7 @@ export const IconChangeUser: FC<IcoProps> = ({
   </svg>
 )
 
-export const IconGroupUsers: FC<IcoProps> = ({
+export const IconGroupUsers: React.FC<IcoProps> = ({
   color = '#2a2634',
   size = 32,
   className = '',
@@ -597,7 +597,12 @@ export const IconGroupUsers: FC<IcoProps> = ({
   </svg>
 )
 
-const IconHeight: FC<IcoProps> = ({ color = '#2a2634', size = 32, className = '', sx = {} }) => (
+const _IconHeight: React.FC<IcoProps> = ({
+  color = '#2a2634',
+  size = 32,
+  className = '',
+  sx = {},
+}) => (
   <svg
     xmlns='http://www.w3.org/2000/svg'
     width={size}
@@ -615,7 +620,12 @@ const IconHeight: FC<IcoProps> = ({ color = '#2a2634', size = 32, className = ''
   </svg>
 )
 
-const IconOseo: FC<IcoProps> = ({ color = '#2a2634', size = 32, className = '', sx = {} }) => (
+const _IconOseo: React.FC<IcoProps> = ({
+  color = '#2a2634',
+  size = 32,
+  className = '',
+  sx = {},
+}) => (
   <svg
     xmlns='http://www.w3.org/2000/svg'
     width={size}

@@ -30,6 +30,5 @@ export interface SVGReducers {
    */
   addPendingRefresh: CaseReducer<SVGState, PayloadAction<ViewExportSVG['groupKind']>>
 
-  // biome-ignore lint/suspicious/noExplicitAny: This is a generic reducer for any action type
   [key: string]: CaseReducer<SVGState, PayloadAction<any>>
 }

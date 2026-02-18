@@ -9,15 +9,15 @@ import type { SVGFile } from '@/types/ViewExportsSVG'
 import {
   getFileTimestamp,
   getLanguageFromFile,
-  pathToSVGFile,
   openFile,
+  pathToSVGFile,
 } from '@/utilities/files/misc'
 
 import { testFolderUri } from '../../main.test'
 
 suite('getFileTimestamp Utility Function', () => {
   const folderUri = Uri.joinPath(testFolderUri, 'assets')
-  let statSyncStub: sinon.SinonStub | undefined = undefined
+  let statSyncStub: sinon.SinonStub | undefined
 
   setup(() => {
     statSyncStub = sinon.stub(fs, 'statSync')

@@ -1,9 +1,13 @@
 {
   "$schema": "https://biomejs.dev/schemas/2.4.2/schema.json",
-  "root": false,
-  "extends": ["../biome.json"],
-  "vcs": { "enabled": true, "clientKind": "git", "useIgnoreFile": true },
-  "files": { "ignoreUnknown": false },
+  "vcs": {
+    "enabled": true,
+    "clientKind": "git",
+    "useIgnoreFile": true
+  },
+  "files": {
+    "ignoreUnknown": false
+  },
   "formatter": {
     "enabled": true,
     "formatWithErrors": false,
@@ -15,8 +19,7 @@
     "bracketSameLine": false,
     "bracketSpacing": true,
     "expand": "auto",
-    "useEditorconfig": true,
-    "includes": ["./src/**/*"]
+    "useEditorconfig": true
   },
   "linter": {
     "enabled": true,
@@ -24,20 +27,6 @@
       "recommended": true,
       "a11y": {
         "noSvgWithoutTitle": "off"
-      },
-      "correctness": {
-        "useExhaustiveDependencies": "off"
-      },
-      "style": {
-        "useConsistentCurlyBraces": "error"
-      },
-      "suspicious": {
-        "noConsole": {
-          "level": "warn",
-          "options": {
-            "allow": ["assert", "error", "info", "warn"]
-          }
-        }
       }
     }
   },
@@ -54,23 +43,39 @@
       "bracketSpacing": true
     }
   },
-  "html": {
+  "json": {
     "formatter": {
-      "indentScriptAndStyle": false,
-      "selfCloseVoidElements": "always"
+      "bracketSpacing": true
     }
   },
   "assist": {
     "enabled": true,
-    "actions": { "source": { "organizeImports": "on" } }
-  },
-  "css": {
-    "parser": {
-      "tailwindDirectives": true,
-      "cssModules": true
-    },
-    "formatter": {
-      "quoteStyle": "single"
+    "actions": {
+      "source": {
+        "organizeImports": "on"
+      }
     }
-  }
+  },
+  "overrides": [
+    {
+      "includes": ["./src/**/*.ts"],
+      "linter": {
+        "rules": {
+          "style": {
+            "useNodejsImportProtocol": "off"
+          }
+        }
+      }
+    },
+    {
+      "includes": ["./src/**/*.d.ts"],
+      "linter": {
+        "rules": {
+          "suspicious": {
+            "noExplicitAny": "off"
+          }
+        }
+      }
+    }
+  ]
 }

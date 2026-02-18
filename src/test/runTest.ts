@@ -1,7 +1,6 @@
+import { runTests } from '@vscode/test-electron'
 import * as fs from 'fs'
 import * as path from 'path'
-
-import { runTests } from '@vscode/test-electron'
 import { rimraf } from 'rimraf'
 
 async function main(): Promise<void> {

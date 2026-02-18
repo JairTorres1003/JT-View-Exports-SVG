@@ -1,4 +1,4 @@
-import { l10n, type WorkspaceFolder, type Uri } from 'vscode'
+import { l10n, type Uri, type WorkspaceFolder } from 'vscode'
 
 import type { CacheIconKind } from '@/enum/cache'
 import type { SVGIconCache } from '@/types/cache'

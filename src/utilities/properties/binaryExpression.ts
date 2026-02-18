@@ -1,4 +1,4 @@
-/* eslint-disable @typescript-eslint/no-explicit-any -- This function is designed to handle various types of inputs, including numbers, strings, and booleans. */
+/* biome-ignore-all lint/suspicious/noExplicitAny: This function is designed to handle various types of inputs, including numbers, strings, and booleans. */
 import type { BinaryExpression } from '@babel/types'
 
 /**

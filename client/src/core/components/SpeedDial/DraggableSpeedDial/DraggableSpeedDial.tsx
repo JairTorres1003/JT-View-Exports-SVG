@@ -92,7 +92,6 @@ export default function DraggableSpeedDial<
               onClose(e, 'toggle')
               onSelected(e, { icon: Icon, name, ...actionProps } as unknown as TAction)
             }}
-            // eslint-disable-next-line @typescript-eslint/no-deprecated -- The recommended `slotProps.tooltip.placement` prop is not working correctly.
             tooltipPlacement={position.endsWith('left') ? 'right' : 'left'}
             slotProps={{
               tooltip: {

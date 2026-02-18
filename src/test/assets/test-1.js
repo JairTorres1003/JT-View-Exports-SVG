@@ -477,7 +477,7 @@ export const IconGroupUsers = ({ color = '#2a2634', size = 32, className = '', s
   </svg>
 )
 
-const IconHeight = ({ color = '#2a2634', size = 32, className = '', sx = {} }) => (
+const _IconHeight = ({ color = '#2a2634', size = 32, className = '', sx = {} }) => (
   <svg
     xmlns='http://www.w3.org/2000/svg'
     width={size}
@@ -495,7 +495,7 @@ const IconHeight = ({ color = '#2a2634', size = 32, className = '', sx = {} }) =
   </svg>
 )
 
-const IconOseo = ({ color = '#2a2634', size = 32, className = '', sx = {} }) => (
+const _IconOseo = ({ color = '#2a2634', size = 32, className = '', sx = {} }) => (
   <svg
     xmlns='http://www.w3.org/2000/svg'
     width={size}

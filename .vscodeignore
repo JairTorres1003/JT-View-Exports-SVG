@@ -22,9 +22,6 @@ vsc-extension-quickstart.md
 **/.gitignore
 **/tsconfig.json
 **/vite.config.ts
-.eslintignore
-**/.eslintrc.json
-**/eslint.config.mjs
 **/*.map
 **/*.ts
 **/.husky/**
@@ -32,8 +29,6 @@ vsc-extension-quickstart.md
 LEARN.md
 .lintstagedrc
 .nvmrc
-.prettierrc
-.prettierignore
 tsconfig*.json
 .github/
 **/*.config.js

@@ -1,12 +1,12 @@
-import { commands, workspace, type ExtensionContext, type Uri } from 'vscode'
+import { commands, type ExtensionContext, type Uri, workspace } from 'vscode'
 
 import {
+  runClearCache,
   runReloadTheme,
+  runScanningWorkspace,
   runToggleDevTools,
   runToggleExpandIcon,
   showMenu,
-  runClearCache,
-  runScanningWorkspace,
 } from './commands'
 import { CONFIG_KEY } from './constants/misc'
 import { initializeCacheManager } from './controllers/cache'
@@ -60,5 +60,4 @@ export async function activate(context: ExtensionContext) {
 /**
  * This method is called when your extension is deactivated.
  */
-// eslint-disable-next-line @typescript-eslint/no-empty-function -- This is a placeholder for deactivation logic.
 export function deactivate(): void {}

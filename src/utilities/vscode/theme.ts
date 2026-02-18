@@ -1,7 +1,7 @@
 import { ColorThemeKind, window, workspace } from 'vscode'
 
 import { DEFAULT_FONT_FAMILY } from '@/constants/misc'
-import type { VsCodeStyles, ThemeMode } from '@/types/vscode'
+import type { ThemeMode, VsCodeStyles } from '@/types/vscode'
 
 /**
  * Gets the current color theme of the Visual Studio Code editor.

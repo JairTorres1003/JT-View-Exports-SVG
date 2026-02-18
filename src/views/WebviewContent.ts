@@ -1,4 +1,4 @@
-import { type ExtensionContext, type Uri, type Webview, env, l10n, workspace } from 'vscode'
+import { type ExtensionContext, env, l10n, type Uri, type Webview, workspace } from 'vscode'
 
 import {
   DefaultClickToOpenDevToolsController,

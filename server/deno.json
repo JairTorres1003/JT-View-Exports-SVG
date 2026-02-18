@@ -16,7 +16,6 @@
     "cors": "npm:cors@latest",
     "express": "npm:express@latest",
     "express-rate-limit": "npm:express-rate-limit@latest",
-    "fs": "node:fs",
     "happy-dom": "npm:happy-dom",
     "lodash": "https://cdn.skypack.dev/lodash",
     "minimatch": "npm:minimatch@^10.0.1",

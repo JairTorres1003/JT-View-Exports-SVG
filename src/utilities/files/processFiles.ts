@@ -1,6 +1,6 @@
 import * as path from 'path'
 
-import { ProgressLocation, type Uri, window, type ProgressOptions, l10n } from 'vscode'
+import { l10n, ProgressLocation, type ProgressOptions, type Uri, window } from 'vscode'
 
 import { REGEX_FILE } from '@/constants/regex'
 import { getCacheManager } from '@/controllers/cache'
