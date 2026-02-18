@@ -1,36 +1,41 @@
-# Ignore extension configs
-.vscode/**
+# Development & Configuration
+.vscode/
+.vscode-test/
+.husky/
+.github/
 
-# Ignore test files
-.vscode-test/**
+# Build & Temporary
 .temp
-out/cjs/test/**
-out/cjs/utilities/files/saveResponseFiles.js
+out/cjs/test/
+
+# Source Code (not needed in built extension)
+src/
+server/
+client/
+docs/
+schemas/
+
+# Configuration Files
+tsconfig*.json
+**/*.config.js
+biome.json
+.lintstagedrc
+.yarnrc
+.nvmrc
+package-lock.json
+
+# Development Files
+LEARN.md
+vsc-extension-quickstart.md
+prepare-readme.js
 workspaceTest.code-workspace
 
-# Ignore source code
-src/**
-server/**
-client/**
-docs/**
-schemas/**
-!client/dist
-
-# Ignore Misc
-.yarnrc
-vsc-extension-quickstart.md
+# Source Artifacts
 **/.gitignore
-**/tsconfig.json
-**/vite.config.ts
-**/*.map
 **/*.ts
-**/.husky/**
-**/node_modules/**
-LEARN.md
-.lintstagedrc
-.nvmrc
-tsconfig*.json
-.github/
-**/*.config.js
-package-lock.json
-prepare-readme.js
+**/*.map
+**/node_modules/
+
+# Keep compiled output (required for extension)
+!out/cjs/**
+!client/dist
