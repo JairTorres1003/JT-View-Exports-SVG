@@ -104,7 +104,6 @@ If upgrading from 4.0.x:
    - Code formatting follows Biome rules - run `npm run biome:format` to auto-format.
    - VSCode minimum version updated to 1.109.0.
 
----
 
 ## 4.0.2
 
