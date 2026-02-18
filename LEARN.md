@@ -26,7 +26,7 @@ This guide will walk you through its features to help you enhance your developme
 
 This is the most direct way to inspect specific files.
 
-1.  In the Explorer, select one or more files or folders that contain SVG components ([see SVG support](SVG%20SUPPORT.md)).
+1.  In the Explorer, select one or more files or folders that contain SVG components ([see SVG support](https://view-exports-svg.vercel.app/docs/resources/svg-support)).
 2.  Right-click on your selection.
 3.  Choose "**View Exports SVG 🔍**" from the context menu.
 4.  A new panel will open, displaying all the icons found in the selected files.

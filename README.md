@@ -23,7 +23,7 @@
 - **Component Management:** Mark icons as **favorites**, see your **recently used** components, and get quick access to what matters most.
 - **Multiple Ways to View:** Launch the viewer from the context menu, the command palette, or by dragging and dropping files.
 - **Powerful Actions:** Copy component names, download as SVG/PNG, or open the source file directly from the UI.
-- **Broad Framework Support:** Works out-of-the-box with JavaScript/TypeScript projects using frameworks like React, Preact, and more. ([See Full SVG Support](SVG%20SUPPORT.md)).
+- **Broad Framework Support:** Works out-of-the-box with JavaScript/TypeScript projects using frameworks like React, Preact, and more. ([See Full SVG Support](https://view-exports-svg.vercel.app/docs/resources/svg-support)).
 - **Native Theming:** The interface automatically adapts to your current VS Code theme for a seamless experience.
 
 ## 🚀 In Action
