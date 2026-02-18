@@ -1,5 +1,5 @@
 import { Alert, Slide, type SlideProps, Snackbar } from '@mui/material'
-import { Fragment, useEffect, useState, type FC } from 'react'
+import { type FC, Fragment, useEffect, useState } from 'react'
 import { useSelector } from 'react-redux'
 import { v4 as uuidv4 } from 'uuid'
 

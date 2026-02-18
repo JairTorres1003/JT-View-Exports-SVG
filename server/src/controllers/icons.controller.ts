@@ -1,12 +1,12 @@
 // @ts-types="npm:@types/express@4.17.15"
-import { Request, Response } from 'express'
-import { workspace } from 'vscode'
 
 import { getCacheManager } from '@jt/view-exports-svg/controllers/cache/CacheManagerController.js'
-import { IconCacheController } from '@jt/view-exports-svg/controllers/cache/IconCacheController.js'
-import { getIconsFromCache } from '@jt/view-exports-svg/utilities/icons/getIconsFromCache.js'
+import type { IconCacheController } from '@jt/view-exports-svg/controllers/cache/IconCacheController.js'
 import { SVGPostMessage } from '@jt/view-exports-svg/enum/ViewExportsSVG.js'
+import { getIconsFromCache } from '@jt/view-exports-svg/utilities/icons/getIconsFromCache.js'
 import { isEmpty } from '@jt/view-exports-svg/utilities/misc.js'
+import type { Request, Response } from 'express'
+import { workspace } from 'vscode'
 
 interface IconParamsRequest {
   type: 'recent' | 'favorite'

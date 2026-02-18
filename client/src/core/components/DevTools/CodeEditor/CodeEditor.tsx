@@ -1,4 +1,4 @@
-import { lazy, Suspense, type FC } from 'react'
+import { type FC, lazy, Suspense } from 'react'
 
 import { useCodeEditor } from '@/core/hooks/DevTools/useCodeEditor'
 import type { TypeEditorRef } from '@/core/types/components/vs/Editor'

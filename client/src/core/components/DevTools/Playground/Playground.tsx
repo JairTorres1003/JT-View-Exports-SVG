@@ -1,8 +1,10 @@
 import { Card, Collapse, Divider, Grid, IconButton, Tooltip } from '@mui/material'
-import type { FC } from 'react'
+import React from 'react'
 import { useTranslation } from 'react-i18next'
 
-import { IconCodeTag, IconCopy, IconRefresh } from '@/assets/icons/functionalities'
+import IconCopy from '@/assets/icons/functionalities/copy'
+import IconRefresh from '@/assets/icons/functionalities/refresh'
+import IconCodeTag from '@/assets/icons/indicators/code-tag'
 import { SelectPickerColor } from '@/core/components/Select'
 import { usePlayground } from '@/core/hooks/DevTools/usePlayground'
 
@@ -17,7 +19,7 @@ interface PlaygroundProps {
   actionsId?: string
 }
 
-const Playground: FC<PlaygroundProps> = ({ actionsId = 'playground-actions' }) => {
+const Playground: React.FC<PlaygroundProps> = ({ actionsId = 'playground-actions' }) => {
   const { t } = useTranslation(undefined, { keyPrefix: 'DevTools' })
 
   const {
@@ -92,4 +94,8 @@ const Playground: FC<PlaygroundProps> = ({ actionsId = 'playground-actions' }) =
   )
 }
 
-export default Playground
+const MemoPlayground = React.memo(Playground)
+
+MemoPlayground.displayName = 'Playground'
+
+export default MemoPlayground

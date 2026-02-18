@@ -1,12 +1,11 @@
-import { type ExtensionContext, type Uri, type Webview, env, l10n, workspace } from 'vscode'
+import { type ExtensionContext, env, l10n, type Uri, type Webview, workspace } from 'vscode'
 
 import {
   DefaultClickToOpenDevToolsController,
   DefaultExpandAllController,
   RecentIconsShowController,
 } from '@/controllers/config'
-import type { GetWebviewAssets } from '@/types/views/content'
-import type { ManifestContent } from '@/types/views/WebviewContent'
+import type { ManifestContent } from '@/types/views/content'
 import { getNonce } from '@/utilities/files/nonce'
 import { isEmpty } from '@/utilities/misc'
 import { getUri, uriParse } from '@/utilities/vscode/uri'
@@ -64,42 +63,22 @@ export class WebviewContent {
   }
 
   /**
-   * Generates a string containing HTML link elements for CSS files.
-   *
-   * This method retrieves the CSS file paths from the manifest for 'index.html',
-   * maps each path to a corresponding HTML link element, and joins them into a single string.
-   *
-   * @returns {string} A string containing HTML link elements for the CSS files.
-   */
-  private generateCssLinks(): string {
-    const cssPaths = this.manifest?.['index.html'].css ?? []
-    const cssLinks = cssPaths.map((path) => {
-      return /* html */ `<link rel="stylesheet" type="text/css" href="${this.getAssetUri(path).toString()}" />`
-    })
-
-    return cssLinks.join('\n')
-  }
-
-  /**
    * Retrieves the URIs for the webview assets.
    *
    * This method retrieves the URIs for the 'index.html' file, 'favicon.ico' file,
    * and CSS files from the manifest and returns them as an object.
    *
-   * @returns {GetWebviewAssets} An object containing the URIs for the webview assets.
+   * @returns {ManifestContent} An object containing the URIs for the webview assets.
    */
-  private getWebviewAssets(): GetWebviewAssets {
-    const manifestIndex = this.manifest?.['index.html'] ?? { file: '' }
-    const manifestIco = this.manifest?.['favicon.ico'] ?? { file: '' }
-
-    if (isEmpty(manifestIndex.file)) {
-      console.warn('Missing index.html file in manifest')
+  private getWebviewAssets(): ManifestContent {
+    if (!this.manifest || isEmpty(this.manifest.main)) {
+      throw new Error(l10n.t('Missing main file in manifest'))
     }
 
     return {
-      index: this.getAssetUri(manifestIndex.file).toString(),
-      favicon: this.getAssetUri(manifestIco.file).toString(),
-      styles: this.generateCssLinks(),
+      main: this.getAssetUri(this.manifest.main).toString(),
+      favicon: this.getAssetUri(this.manifest.favicon).toString(),
+      style: this.getAssetUri(this.manifest.style).toString(),
     }
   }
 
@@ -137,7 +116,7 @@ export class WebviewContent {
           name: "${l10n.t('View Exports SVG')}",
           initConfiguration: {
             _DEFAULT_EXPAND_ALL: ${config.isExpandAll()},
-            _DEFAULT_CLIC_TO_OPEN_DEV_TOOLS: ${devConfig.isDefaultOpen()},
+            _DEFAULT_CLICK_TO_OPEN_DEV_TOOLS: ${devConfig.isDefaultOpen()},
             _INITIAL_RENDER_PATH: "${initialPath}",
             _RECENT_ICONS_SHOW: ${recentConfig.isShow()},
             _LANGUAGE: "${env.language ?? 'en'}",
@@ -151,7 +130,7 @@ export class WebviewContent {
    * Generates the content for the webview.
    */
   private generateContent(): void {
-    const { index, favicon, styles } = this.getWebviewAssets()
+    const { main, favicon, style } = this.getWebviewAssets()
     const script = this.scriptConfiguration()
     const cspContent = this.getCSP()
 
@@ -163,7 +142,7 @@ export class WebviewContent {
           <meta http-equiv="Content-Security-Policy" content="${cspContent}" />
           <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no" />
           <link rel="icon" type="image/x-icon" href="${favicon}" />
-          ${styles}
+          <link rel="stylesheet" type="text/css" href="${style}" />
           <title>${l10n.t('View Exports SVG')}</title>
         </head>
         <body>
@@ -171,7 +150,7 @@ export class WebviewContent {
           <div id="overflow_widgets_dom_node" class="monaco-editor"></div>
           <noscript>You need to enable JavaScript to run this app.</noscript>
           ${script}
-          <script type="module" nonce="${this._nonce}" src="${index}"></script>
+          <script type="module" nonce="${this._nonce}" src="${main}"></script>
         </body>
       </html>
     `

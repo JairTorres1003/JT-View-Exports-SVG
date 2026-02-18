@@ -13,9 +13,12 @@ export declare module 'react-redux' {
 
 type CSSPropertiesWithVars = Record<`--${string}`, string | number | undefined>
 
+declare module '*.css'
+
 declare module 'react' {
   interface CSSProperties extends CSSPropertiesWithVars {}
 }
+
 declare global {
   const __APP_NAME: string
   const __APP_PUBLISHER: string
@@ -26,7 +29,7 @@ declare global {
       name: string
       initConfiguration: {
         _DEFAULT_EXPAND_ALL: boolean
-        _DEFAULT_CLIC_TO_OPEN_DEV_TOOLS: boolean
+        _DEFAULT_CLICK_TO_OPEN_DEV_TOOLS: boolean
         _INITIAL_RENDER_PATH: string
         _RECENT_ICONS_SHOW: boolean
         _LANGUAGE: string

@@ -1,4 +1,4 @@
-import { type WebviewPanel, Uri, ViewColumn, window, l10n, type ExtensionContext } from 'vscode'
+import { type ExtensionContext, l10n, Uri, ViewColumn, type WebviewPanel, window } from 'vscode'
 
 import { CONFIG_KEY } from '@/constants/misc'
 import { SVGPostMessage } from '@/enum/ViewExportsSVG'
@@ -75,7 +75,7 @@ export class ViewExportsSVGController extends ListerWebviewController {
   ) {
     // If we already have a panel, show it
     if (!isEmpty(ViewExportsSVGController.currentPanel)) {
-      this.update(viewExportSVG, processedFiles)
+      ViewExportsSVGController.update(viewExportSVG, processedFiles)
       return
     }
 

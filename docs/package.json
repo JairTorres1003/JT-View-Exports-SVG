@@ -1,6 +1,21 @@
 {
-  "name": "docs-2",
-  "version": "0.0.0",
+  "name": "jt-view-exports-svg--docs",
+  "displayName": "View Exports SVG (Docs)",
+  "description": "View Exports SVG (Docs)",
+  "keywords": [
+    "view-exports-svg",
+    "SVG icons",
+    "TypeScript",
+    "TSX",
+    "React",
+    "JavaScript",
+    "JSX",
+    "icon management",
+    "icon assets",
+    "UI",
+    "documentation"
+  ],
+  "version": "1.0.0",
   "private": true,
   "scripts": {
     "docusaurus": "docusaurus",
@@ -40,13 +55,13 @@
     "dompurify": "^3.3.1",
     "estree-util-value-to-estree": "^3.5.0",
     "framer-motion": "^12.29.2",
-    "lucide-react": "^0.563.0",
+    "lucide-react": "^0.564.0",
     "prism-react-renderer": "^2.3.0",
     "react": "^19.2.4",
     "react-dom": "^19.2.4"
   },
   "devDependencies": {
-    "@biomejs/biome": "2.3.13",
+    "@biomejs/biome": "2.4.2",
     "@docusaurus/module-type-aliases": "3.9.2",
     "@docusaurus/tsconfig": "3.9.2",
     "@docusaurus/types": "3.9.2",

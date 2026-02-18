@@ -1,4 +1,4 @@
-import { l10n, window, workspace, type WorkspaceFolder } from 'vscode'
+import { l10n, type WorkspaceFolder, window, workspace } from 'vscode'
 
 import { SVGPostMessage } from '@/enum/ViewExportsSVG'
 import type { SVGIcon } from '@/types/ViewExportsSVG'

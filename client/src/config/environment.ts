@@ -7,7 +7,9 @@ const configSchema = z.object({
   /**
    * The URL of the API that the client will use to communicate with the server.
    */
-  VITE_VSCODE_API_URL: z.url(),
+  VITE_VSCODE_API_URL: z
+    .url()
+    .refine((value) => !value.endsWith('/'), { message: 'URL must not end with a slash' }),
 })
 
 configSchema.parse(import.meta.env)

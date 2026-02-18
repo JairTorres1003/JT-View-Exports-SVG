@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/require-await -- This function is designed to be asynchronous */
 import traverse from '@babel/traverse'
 import * as t from '@babel/types'
 import { l10n, type Uri, workspace } from 'vscode'
@@ -6,8 +5,8 @@ import { l10n, type Uri, workspace } from 'vscode'
 import { REST_PROPS_KEY } from '@/constants/misc'
 import { getCacheManager } from '@/controllers/cache'
 import { SVGDeclaration } from '@/enum/ViewExportsSVG'
-import type { HandlersDeclaration, DeclarationExport, ExtractComponent } from '@/types/svg/extracts'
-import type { SVGComponent, ExtractSVGExports, SVGFile, SVGLocation } from '@/types/ViewExportsSVG'
+import type { DeclarationExport, ExtractComponent, HandlersDeclaration } from '@/types/svg/extracts'
+import type { ExtractSVGExports, SVGComponent, SVGFile, SVGLocation } from '@/types/ViewExportsSVG'
 
 import { parseFileContent, parserContent } from '../babelParser'
 import { getUnknownError, isEmpty } from '../misc'
@@ -217,7 +216,7 @@ export async function extractIconComponent(
   try {
     const ast = parserContent(component)
     let hasErrors = false
-    let errors: ExtractComponent['errors'] = undefined
+    let errors: ExtractComponent['errors']
 
     traverse(ast, {
       JSXElement(path) {

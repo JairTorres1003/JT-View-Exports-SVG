@@ -2,7 +2,7 @@ import { StrictMode } from 'react'
 import { createRoot } from 'react-dom/client'
 
 import Layout from './app/Layouts/main'
-import { cardSvgClasses } from './core/components/Cards/CardSvg'
+import { cardSvgClasses } from './core/components/Cards/CardSvg/CardSvg.classes'
 import i18next from './i18n'
 
 import './config/environment'

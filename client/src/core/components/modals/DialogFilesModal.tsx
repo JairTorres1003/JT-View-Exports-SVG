@@ -12,7 +12,11 @@ import {
 import { type FC, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 
-import { IconAnyFile, IconJS, IconReact, IconReactTS, IconTS } from '@/assets/icons/files'
+import IconAnyFile from '@/assets/icons/files/any'
+import IconJS from '@/assets/icons/logos/js'
+import IconReact from '@/assets/icons/logos/react'
+import IconReactTS from '@/assets/icons/logos/react-ts'
+import IconTS from '@/assets/icons/logos/ts'
 import type { IconBaseProps } from '@/types/BaseProps'
 
 import { OpenFileButton } from '../Buttons/OpenFileButton'
@@ -69,7 +73,7 @@ export const DialogFilesModal: FC<DialogFilesModalProps> = ({
 
             return (
               <ListItem key={file.uri} disablePadding>
-                <ListItemButton role={undefined} selected={selectedIndex === index}>
+                <ListItemButton selected={selectedIndex === index}>
                   <ListItemIcon sx={{ minWidth: 16, mr: 1 }}>
                     <IconComponent size={16} />
                   </ListItemIcon>

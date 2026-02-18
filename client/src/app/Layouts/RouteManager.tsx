@@ -1,17 +1,20 @@
 import { SVGReceiveMessage } from '@api/enums/ViewExportsSVG'
 import { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { useNavigate } from 'react-router'
+import { useNavigate } from 'react-router-dom'
 
-import { IconClose, IconNavigateFill } from '@/assets/icons/functionalities'
+import IconClose from '@/assets/icons/functionalities/close'
+import IconNavigateFill from '@/assets/icons/navigation/navigate-fill'
 import { routes } from '@/config/routes/route'
-import DraggableSpeedDial from '@/core/components/SpeedDial/DraggableSpeedDial/DraggableSpeedDial'
+import DraggableSpeedDial, {
+  type DraggableSpeedDialProps,
+} from '@/core/components/SpeedDial/DraggableSpeedDial/DraggableSpeedDial'
 import { vscode } from '@/services/vscode'
 import { setRenderPath } from '@/store/features/GlobalSlice'
 import { setIsOpenDevTools, setRecentlySelected } from '@/store/features/PlaygroundSlice'
-import { isEmpty } from '@/utils/misc'
+import isEmpty from '@/utils/is-empty'
 
-const RouteManager = () => {
+const useRouteManager = () => {
   const [open, setOpen] = useState(false)
 
   const { renderPath } = useSelector((state) => state.global.configuration)
@@ -35,11 +38,32 @@ const RouteManager = () => {
     vscode.postMessage(SVGReceiveMessage.ViewRenderPath, newPath)
   }
 
+  const onOpen = () => {
+    setOpen(true)
+  }
+
+  const onClose = () => {
+    setOpen(false)
+  }
+
+  const onSelect: DraggableSpeedDialProps<(typeof routes)[number]>['onSelected'] = (
+    _,
+    { path }
+  ) => {
+    dispatch(setRenderPath({ path }))
+  }
+
   useEffect(() => {
     handleChangePath(renderPath)
   }, [renderPath])
 
-  if (process.env.NODE_ENV !== 'development') {
+  return { open, onClose, onOpen, onSelect }
+}
+
+const RouteManager = () => {
+  const { onClose, onOpen, open, onSelect } = useRouteManager()
+
+  if (!import.meta.env.DEV) {
     return null
   }
 
@@ -51,15 +75,9 @@ const RouteManager = () => {
       icon={<IconNavigateFill sx={{ transform: 'rotate(45deg) translate(0px, -2px)' }} />}
       openIcon={<IconClose />}
       open={open}
-      onClose={() => {
-        setOpen(false)
-      }}
-      onOpen={() => {
-        setOpen(true)
-      }}
-      onSelected={(_, action) => {
-        dispatch(setRenderPath({ path: action.path }))
-      }}
+      onClose={onClose}
+      onOpen={onOpen}
+      onSelected={onSelect}
     />
   )
 }

@@ -1,7 +1,7 @@
 import type { AlertProps, SnackbarOrigin } from '@mui/material'
 import type { CaseReducer, PayloadAction } from '@reduxjs/toolkit'
 import type { CSSProperties, ReactNode } from 'react'
-import type { NavigateOptions } from 'react-router'
+import type { NavigateOptions } from 'react-router-dom'
 
 export interface GlobalState {
   snackbarAlert: {

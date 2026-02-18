@@ -1,5 +1,5 @@
-// deno-lint-ignore-file no-explicit-any
-import { Extension, ExtensionContext, ExtensionMode, ExtensionRuntime, Uri } from 'vscode'
+// biome-ignore-all lint/suspicious/noExplicitAny: This is a mock, so using `any` is acceptable in this context.
+import { type Extension, type ExtensionContext, ExtensionMode, ExtensionRuntime, Uri } from 'vscode'
 
 import { createMockEnvironmentVariableCollection } from '@/mocks/EnvironmentVariableCollection.mock.ts'
 import { createExtensionUri } from '@/utilities/createExtensionUri.ts'
@@ -49,7 +49,7 @@ export function createMockExtensionContext(
     },
     environmentVariableCollection: {
       ...environmentVariableCollection,
-      // @ts-ignore - this is a mock
+      // @ts-expect-error - this is a mock
       getScoped: () => environmentVariableCollection,
     },
     secrets: {

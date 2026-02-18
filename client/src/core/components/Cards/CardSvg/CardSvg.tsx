@@ -3,7 +3,8 @@ import { Box, type BoxProps, Card, IconButton, Tooltip, Typography } from '@mui/
 import cn from 'classnames'
 import type { FC } from 'react'
 
-import { IconStarFilled, IconStarOutlined } from '@/assets/icons/indicators'
+import IconStarFilled from '@/assets/icons/indicators/start-filled'
+import IconStarOutlined from '@/assets/icons/indicators/start-outlined'
 import { useCardSvg } from '@/core/hooks/useCardSvg'
 
 import { cardSvgClasses } from './CardSvg.classes'

@@ -1,4 +1,4 @@
-import { l10n, type Webview, window, type Disposable } from 'vscode'
+import { type Disposable, l10n, type Webview, window } from 'vscode'
 
 import { SVGReceiveMessage } from '@/enum/ViewExportsSVG'
 import type { HandlerArgs } from '@/types/misc'

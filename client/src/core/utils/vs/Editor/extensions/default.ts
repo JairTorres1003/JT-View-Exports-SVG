@@ -1,9 +1,9 @@
 import type { SVGComponent, SVGLocation } from '@api/types/ViewExportsSVG'
 import {
-  registerExtension,
   ExtensionHostKind,
   type IExtensionManifest,
   type RegisterLocalProcessExtensionResult,
+  registerExtension,
 } from '@codingame/monaco-vscode-api/extensions'
 
 import { openFileInPosition } from '@/core/utils/file'
@@ -19,7 +19,7 @@ const manifest: IExtensionManifest = {
   },
 }
 
-let extension: RegisterLocalProcessExtensionResult | undefined = undefined
+let extension: RegisterLocalProcessExtensionResult | undefined
 
 async function activate() {
   if (extension) return

@@ -7,7 +7,8 @@ import { useDispatch } from 'react-redux'
 import { useAlert } from '@/core/hooks/useAlert'
 import { vscode } from '@/services/vscode'
 import { setRecentlySelected } from '@/store/features/PlaygroundSlice'
-import { copyToClipboard, getUnknownError } from '@/utils/misc'
+import { copyToClipboard } from '@/utils/clipboard'
+import { getUnknownError } from '@/utils/errors'
 
 interface CardSvgHook {
   handleClick: (icon: SVGIcon) => void

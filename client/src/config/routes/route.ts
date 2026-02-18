@@ -1,6 +1,5 @@
 import { lazy } from 'react'
 
-import { IconDashboard, IconHome, IconUpload } from '@/assets/icons/indicators'
 import type { IconBaseProps } from '@/types/BaseProps'
 
 interface Route {
@@ -22,24 +21,24 @@ export const routes: Route[] = [
   {
     path: pathnames.home,
     name: 'Home',
-    icon: IconHome,
-    Component: lazy(async () => await import('@/app/home/Home')),
+    icon: lazy(() => import('@/assets/icons/indicators/home')),
+    Component: lazy(() => import('@/app/home/Home')),
     private: false,
     devtools: true,
   },
   {
     path: pathnames.dashboard,
     name: 'Dashboard',
-    icon: IconDashboard,
-    Component: lazy(async () => await import('@/app/dashboard/Dashboard')),
+    icon: lazy(() => import('@/assets/icons/indicators/dashboard')),
+    Component: lazy(() => import('@/app/dashboard/Dashboard')),
     private: false,
     devtools: true,
   },
   {
     path: pathnames.upload,
     name: 'Upload',
-    icon: IconUpload,
-    Component: lazy(async () => await import('@/app/upload/Upload')),
+    icon: lazy(() => import('@/assets/icons/indicators/upload')),
+    Component: lazy(() => import('@/app/upload/Upload')),
     private: false,
     devtools: false,
   },

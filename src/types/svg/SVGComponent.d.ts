@@ -20,7 +20,7 @@ export interface GetChildAttributes {
 
 export type IValue = t.JSXElement | t.JSXFragment | string | number | boolean
 
-type ValidationResult =
+export type ValidationResult =
   | {
       isValid: true
       tag: GetSVGTagName

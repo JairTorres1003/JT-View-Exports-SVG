@@ -53,7 +53,7 @@ export function getNodeTypes(params: Record<string, unknown>): ParamsTypes {
     } else {
       types[key] = {
         type: typeof value,
-        // eslint-disable-next-line @typescript-eslint/no-explicit-any -- It's a workaround for the type issue
+        // biome-ignore lint/suspicious/noExplicitAny: It's a workaround for the type issue
         default: value as any,
       }
     }
@@ -75,7 +75,7 @@ export function analyzeExportType(
   params?: Record<string, unknown>
 ): t.JSXElement | undefined {
   if (t.isArrowFunctionExpression(node) || t.isFunctionDeclaration(node)) {
-    let element: t.JSXElement | undefined = undefined
+    let element: t.JSXElement | undefined
 
     if (t.isJSXElement(node.body) || t.isJSXFragment(node.body)) {
       element = getChildFragments([node.body], file)[0]

@@ -52,6 +52,6 @@
   "Reloading...": "Načítání...",
   "Error toggling favorite status for icon {name}": "Chyba při přepínání stavu oblíbenosti ikony {name}",
   "Error retrieving icons: {error}": "Chyba při získávání ikon: {error}",
-  "Missing index.html file in manifest": "Chybí soubor index.html v manifestu",
+  "Missing main file in manifest": "Chybí soubor main v manifestu",
   "Empty opening element": "Prázdný otevírací prvek"
 }

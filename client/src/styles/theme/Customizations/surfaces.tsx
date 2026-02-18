@@ -1,6 +1,6 @@
 import { accordionSummaryClasses } from '@mui/material'
 
-import { IconForward } from '@/assets/icons/navigation'
+import IconForward from '@/assets/icons/navigation/forward'
 import type { CustomizationsFunction } from '@/types/BaseProps'
 
 /**

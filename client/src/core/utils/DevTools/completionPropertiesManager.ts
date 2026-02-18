@@ -119,9 +119,10 @@ function isInsideComponentTag(
   }
 
   let lastOpenTag: RegExpExecArray | null = null
-  let match: RegExpExecArray | null = null
 
-  while ((match = openTagRegex.exec(beforeCursor)) !== null) {
+  while (true) {
+    const match = openTagRegex.exec(beforeCursor)
+    if (!match) break
     lastOpenTag = match
   }
 
@@ -219,9 +220,10 @@ function getUsedProperties(tagContent: string): Set<string> {
   const attributesText = attributesMatch[1]
 
   const propPattern = /\s([a-zA-Z_][a-zA-Z0-9_]*)\s*(?==|(?=\s)|(?=$)|(?=\/>)|(?=>))/g
-  let match: RegExpExecArray | null = null
 
-  while ((match = propPattern.exec(attributesText)) !== null) {
+  while (true) {
+    const match = propPattern.exec(attributesText)
+    if (!match) break
     usedProps.add(match[1])
   }
 
@@ -234,8 +236,11 @@ function getUsedProperties(tagContent: string): Set<string> {
 function isInsideValueZone(tagContent: string, relativeCursorOffset: number): boolean {
   const uptoCursor = tagContent.slice(0, relativeCursorOffset)
   const assignmentRegex = /([a-zA-Z_][a-zA-Z0-9_]*)\s*=\s*("[^"]*|'[^']*|\{[^}]*\}?|\{{[^}]*\}}?)$/g
-  let match: RegExpExecArray | null = null
-  while ((match = assignmentRegex.exec(uptoCursor)) !== null) {
+
+  while (true) {
+    const match = assignmentRegex.exec(uptoCursor)
+    if (!match) break
+
     const start = match.index + match[0].indexOf('=') + 1
     const end = relativeCursorOffset
     if (end > start) {

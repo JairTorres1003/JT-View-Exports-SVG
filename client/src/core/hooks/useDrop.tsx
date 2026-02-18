@@ -1,6 +1,6 @@
 import { useCallback, useEffect, useMemo, useState } from 'react'
 
-import { isEmpty } from '@/utils/misc'
+import isEmpty from '@/utils/is-empty'
 
 export interface UseDropOptions {
   anchorEl?: HTMLElement | Document

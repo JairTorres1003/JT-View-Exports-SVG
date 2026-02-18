@@ -35,7 +35,6 @@ yarn-error.log*
 # Extension-specific
 *.vsix
 
-.eslintcache
 .husky/node-version-cache.txt
 .unlighthouse
 *.tsbuildinfo

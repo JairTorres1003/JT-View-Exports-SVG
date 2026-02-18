@@ -1,5 +1,5 @@
 import type { SVGFile, ViewExportSVG } from '@api/types/ViewExportsSVG'
-import { useState, type FC } from 'react'
+import { type FC, useState } from 'react'
 
 import { OpenFileButton } from '@/core/components/Buttons/OpenFileButton'
 import { DialogFilesModal } from '@/core/components/modals/DialogFilesModal'

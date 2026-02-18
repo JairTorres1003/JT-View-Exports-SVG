@@ -1,4 +1,3 @@
-/* eslint-disable complexity --  This function handles various cases and is complex by nature */
 import * as t from '@babel/types'
 import { camelCase } from 'lodash'
 
@@ -30,9 +29,9 @@ export function getPropertyValues(
   const defaultProps = config.getAllProperties()
 
   const restProps = (properties[REST_PROPS_KEY] ?? {}) as Record<string, unknown>
-  let valueA: unknown = undefined
-  let valueB: unknown = undefined
-  let valueAny: boolean | Record<string, unknown> | unknown[] | string | undefined = undefined
+  let valueA: unknown
+  let valueB: unknown
+  let valueAny: boolean | Record<string, unknown> | unknown[] | string | undefined
 
   switch (value.type) {
     case 'BooleanLiteral':

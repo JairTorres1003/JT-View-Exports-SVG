@@ -52,6 +52,6 @@
   "Reloading...": "Chargement...",
   "Error toggling favorite status for icon {name}": "Erreur lors du changement de statut favori pour l'icône {name}",
   "Error retrieving icons: {error}": "Erreur lors de la récupération des icônes : {error}",
-  "Missing index.html file in manifest": "Fichier index.html manquant dans le manifeste",
+  "Missing main file in manifest": "Fichier main manquant dans le manifeste",
   "Empty opening element": "Élément d'ouverture vide"
 }

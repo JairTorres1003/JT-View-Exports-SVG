@@ -1,5 +1,6 @@
 import type { SliderProps, SxProps } from '@mui/material'
-import type Colorize, { ColorInstance } from 'color'
+import type Colorize from 'color'
+import type { ColorInstance } from 'color'
 import type {
   AnyColor,
   ColorPickerBaseProps,

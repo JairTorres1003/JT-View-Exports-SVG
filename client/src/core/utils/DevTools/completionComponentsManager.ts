@@ -20,6 +20,10 @@ const completionComponentsManager = (
   return {
     triggerCharacters: ['<'],
     provideCompletionItems: (model, position) => {
+      if (components.length === 0) {
+        return { suggestions: [] }
+      }
+
       const textUntilPosition = model.getValueInRange({
         startLineNumber: position.lineNumber,
         startColumn: 1,

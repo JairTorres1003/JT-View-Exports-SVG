@@ -1,4 +1,4 @@
-import { l10n, Uri, type ExtensionContext, workspace } from 'vscode'
+import { type ExtensionContext, l10n, Uri, workspace } from 'vscode'
 
 import { CacheIconKind } from '@/enum/cache'
 import type { ExtractSVGExports } from '@/types/ViewExportsSVG'
@@ -104,7 +104,7 @@ class CacheManagerController {
   }
 }
 
-let cacheManager: CacheManagerController | undefined = undefined
+let cacheManager: CacheManagerController | undefined
 
 /**
  * Initializes the cache manager. Should be called once from the `activate` function of your extension.

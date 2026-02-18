@@ -1,6 +1,6 @@
 export const viewPanelsClasses = {
   root: 'BoxViewPanels',
-  resizeHandle: 'BoxViewPanels__resizeHandle',
-  contentPanel: 'BoxViewPanels__contentPanel',
+  separator: 'BoxViewPanels__separator',
+  mainPanel: 'BoxViewPanels__mainPanel',
   sidePanel: 'BoxViewPanels__sidePanel',
 }

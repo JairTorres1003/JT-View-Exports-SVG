@@ -28,7 +28,7 @@ export function contextMenuServiceOverride(editor: monaco.editor.IStandaloneCode
 
   const realMethod = contextmenu._getMenuActions
 
-  contextmenu._getMenuActions = function (...args) {
+  contextmenu._getMenuActions = (...args) => {
     const items = realMethod.apply(contextmenu, args)
     return items.filter((item) => keepIds.includes(item.id))
   }

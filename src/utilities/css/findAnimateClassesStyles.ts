@@ -10,9 +10,12 @@
 export function findAnimateClassesStyles(css: string): string[] {
   const animateClasses: string[] = []
   const regex = /\.([a-zA-Z0-9_-]+)\s*{([^}]*\b(?:animation|animation-name)\s*:)/g
-  let match: RegExpExecArray | null = null
 
-  while ((match = regex.exec(css)) !== null) {
+  while (true) {
+    const match = regex.exec(css)
+
+    if (!match) break
+
     animateClasses.push(match[1])
   }
 

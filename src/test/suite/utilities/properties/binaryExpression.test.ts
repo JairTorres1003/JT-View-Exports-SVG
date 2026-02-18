@@ -1,6 +1,5 @@
-import * as assert from 'assert'
-
 import type { BinaryExpression } from '@babel/types'
+import * as assert from 'assert'
 
 import { getBinaryExpression } from '@/utilities/properties/binaryExpression'
 

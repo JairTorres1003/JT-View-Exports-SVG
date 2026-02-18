@@ -52,6 +52,6 @@
   "Reloading...": "Reloading...",
   "Error toggling favorite status for icon {name}": "Error toggling favorite status for icon {name}",
   "Error retrieving icons: {error}": "Error retrieving icons: {error}",
-  "Missing index.html file in manifest": "Missing index.html file in manifest",
+  "Missing main file in manifest": "Missing main file in manifest",
   "Empty opening element": "Empty opening element"
 }

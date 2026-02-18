@@ -1,9 +1,9 @@
 import {
   SpeedDial,
-  speedDialActionClasses,
-  speedDialClasses,
   SpeedDialIcon,
   type SpeedDialProps,
+  speedDialActionClasses,
+  speedDialClasses,
   styled,
 } from '@mui/material'
 import { forwardRef } from 'react'

@@ -1,13 +1,13 @@
+import * as path from 'node:path'
 import cors from 'cors'
 // @ts-types="npm:@types/express@4.17.15"
 import express from 'express'
 import rateLimit from 'express-rate-limit'
-import * as path from 'path'
 
-import { svgRoutes } from '@/routes/svg.routes.ts'
+import { fileRoutes } from '@/routes/file.routes.ts'
 import { iconsRoutes } from '@/routes/icons.routes.ts'
 import { settingsRoutes } from '@/routes/settings.routes.ts'
-import { fileRoutes } from '@/routes/file.routes.ts'
+import { svgRoutes } from '@/routes/svg.routes.ts'
 import { viewRoutes } from '@/routes/view.routes.ts'
 
 const app = express()

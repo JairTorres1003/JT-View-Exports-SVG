@@ -29,7 +29,7 @@ export class DefaultIconPropertiesController extends ConfigManagerController<
     }
 
     for (const key in properties) {
-      if (Object.prototype.hasOwnProperty.call(properties, key)) {
+      if (Object.hasOwn(properties, key)) {
         try {
           properties[key] = JSON.parse(properties[key] as string)
         } catch {
