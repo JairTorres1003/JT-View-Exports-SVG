@@ -78,7 +78,6 @@ const DevTools: FC<{ id: string; onClose?: VoidFunction }> = ({
             id='info-panel'
             className={devToolsClasses.panel}
             panelRef={ref.info}
-            style={{ backgroundColor: 'blue' }}
           >
             <AccordionMenuItem
               enableEmptyActions
