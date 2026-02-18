@@ -71,10 +71,10 @@ export const getUnknownError = (error: unknown): string => {
 export const isValidDate = (date: Date | string): boolean => {
   try {
     if (date instanceof Date) {
-      return !isNaN(date.getTime())
+      return !Number.isNaN(date.getTime())
     }
 
-    return !isNaN(new Date(date).getTime())
+    return !Number.isNaN(new Date(date).getTime())
   } catch {
     return false
   }

@@ -14,7 +14,7 @@ import {
 import type { FC } from 'react'
 import { useTranslation } from 'react-i18next'
 
-import { IconClose } from '@/assets/icons/functionalities'
+import IconClose from '@/assets/icons/functionalities/close'
 
 interface DialogModalProps extends Omit<DialogProps, 'title'> {
   hideDivider?: boolean

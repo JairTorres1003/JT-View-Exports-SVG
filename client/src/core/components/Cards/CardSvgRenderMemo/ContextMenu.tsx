@@ -45,12 +45,12 @@ export const ContextMenu: FC<ContextMenuProps> = ({
         contextMenu !== null ? { top: contextMenu.mouseY, left: contextMenu.mouseX } : undefined
       }
     >
-      {actions.map((action, index) => {
-        if ('isDivider' in action) return <Divider key={`divider-${index}`} />
+      {actions.map((action) => {
+        if ('isDivider' in action) return <Divider key={action.id} />
 
         return (
           <MenuItem
-            key={action.label}
+            key={action.id}
             onClick={(e) => {
               action.onClick?.(component)
               handleClose(e, 'backdropClick')

@@ -27,7 +27,7 @@ export default function PaginatorNavLink({ permalink, title, subLabel, isNext }:
               {subLabel}
             </p>
           )}
-          <p className='m-0 text-xl'>{title}</p>
+          <p className='m-0 text-lg md:text-xl'>{title}</p>
         </div>
         {isNext && (
           <ChevronRight size={26} className='group-hover:translate-x-1 transition-transform mb-1' />

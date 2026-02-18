@@ -3,7 +3,8 @@ import { IconButton, type IconButtonProps, Tooltip, type TooltipProps } from '@m
 import type { FC } from 'react'
 import { useTranslation } from 'react-i18next'
 
-import { IconGoToFile, IconGoToManyFiles } from '@/assets/icons/functionalities'
+import IconGoToFile from '@/assets/icons/functionalities/go-to-file'
+import IconGoToManyFiles from '@/assets/icons/functionalities/go-to-many-files'
 import { openFileInPosition } from '@/core/utils/file'
 
 interface OpenFileButtonProps extends Omit<IconButtonProps, 'children'> {

@@ -1,4 +1,4 @@
-import { UIKind, Uri, type Webview, env } from 'vscode'
+import { env, UIKind, Uri, type Webview } from 'vscode'
 
 import { CONFIG_KEY } from '@/constants/misc'
 import type { SVGFile } from '@/types/ViewExportsSVG'

@@ -52,6 +52,6 @@
   "Reloading...": "Yeniden yükleniyor...",
   "Error toggling favorite status for icon {name}": "İkon {name} için favori durumunu değiştirme hatası",
   "Error retrieving icons: {error}": "İkonları alırken hata oluştu: {error}",
-  "Missing index.html file in manifest": "Manifesto içinde index.html dosyası eksik",
+  "Missing main file in manifest": "Manifesto içinde main dosyası eksik",
   "Empty opening element": "Boş açılış öğesi"
 }

@@ -8,16 +8,17 @@ export const BoxViewPanels = styled(Box, {
 })(() => ({
   display: 'flex',
   height: '100%',
-  [`& .${viewPanelsClasses.resizeHandle}`]: {
+  [`& .${viewPanelsClasses.separator}`]: {
     transition: 'background-color 0.1s ease-out',
     width: 'var(--JT-SVG-vscode-sash-size)',
     marginLeft: 'calc(var(--JT-SVG-vscode-sash-size) * -1)',
+    outline: 'none',
     zIndex: 1,
     '&:hover': {
       backgroundColor: 'var(--JT-SVG-vscode-sash-hoverBorder)',
     },
   },
-  [`& .${viewPanelsClasses.contentPanel}`]: {
+  [`& .${viewPanelsClasses.mainPanel}`]: {
     paddingBottom: '16px',
   },
 }))

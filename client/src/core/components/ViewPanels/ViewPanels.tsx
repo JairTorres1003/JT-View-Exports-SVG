@@ -1,5 +1,5 @@
-import React, { lazy, Suspense } from 'react'
-import { Panel, PanelGroup, PanelResizeHandle } from 'react-resizable-panels'
+import { lazy, Suspense } from 'react'
+import { Group, Panel, Separator } from 'react-resizable-panels'
 
 import { useViewPanels } from '@/core/hooks/useViewPanels'
 
@@ -17,28 +17,24 @@ const ViewPanels: React.FC<Readonly<ViewPanelsProps>> = ({ children, className }
 
   return (
     <BoxViewPanels className={className}>
-      <PanelGroup direction='horizontal'>
+      <Group>
         <Panel
-          collapsible
           id='contentPanel'
-          maxSize={100}
-          minSize={20}
-          defaultSize={100}
-          className={viewPanelsClasses.contentPanel}
+          minSize={250}
+          defaultSize='100%'
+          className={viewPanelsClasses.mainPanel}
         >
           {children}
         </Panel>
         {isShowSidePanel && (
           <>
-            <PanelResizeHandle className={viewPanelsClasses.resizeHandle} />
+            <Separator className={viewPanelsClasses.separator} />
             <Panel
               collapsible
               defaultSize={0}
               id='sidePanel'
-              maxSize={80}
-              minSize={20}
-              tagName='aside'
-              ref={sidePanelRef}
+              minSize={200}
+              panelRef={sidePanelRef}
               className={viewPanelsClasses.sidePanel}
               onResize={onResize}
             >
@@ -48,7 +44,7 @@ const ViewPanels: React.FC<Readonly<ViewPanelsProps>> = ({ children, className }
             </Panel>
           </>
         )}
-      </PanelGroup>
+      </Group>
     </BoxViewPanels>
   )
 }

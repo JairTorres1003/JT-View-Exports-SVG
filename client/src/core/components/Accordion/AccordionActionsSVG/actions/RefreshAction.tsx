@@ -5,7 +5,7 @@ import type { FC } from 'react'
 import { useTranslation } from 'react-i18next'
 import { useDispatch, useSelector } from 'react-redux'
 
-import { IconRefresh } from '@/assets/icons/functionalities'
+import IconRefresh from '@/assets/icons/functionalities/refresh'
 import { vscode } from '@/services/vscode'
 import { addPendingRefresh } from '@/store/features/SVGSlice'
 

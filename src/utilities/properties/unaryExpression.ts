@@ -7,7 +7,7 @@ import type { UnaryExpression } from '@babel/types'
  * @param value - The value of the unary expression.
  * @returns The result of the unary expression, or undefined if the result cannot be determined.
  */
-// eslint-disable-next-line @typescript-eslint/no-explicit-any -- This function is designed to handle various types of inputs, including numbers, strings, and booleans.
+// biome-ignore lint/suspicious/noExplicitAny: This function is designed to handle various types of inputs, including numbers, strings, and booleans.
 export function getUnaryExpression(operator: UnaryExpression['operator'], value: any): any {
   try {
     switch (operator) {

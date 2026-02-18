@@ -1,4 +1,4 @@
-import { EnvironmentVariableCollection } from 'vscode'
+import type { EnvironmentVariableCollection } from 'vscode'
 
 /**
  * Creates a mock implementation of the `EnvironmentVariableCollection` interface.

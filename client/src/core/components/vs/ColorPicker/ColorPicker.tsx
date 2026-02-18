@@ -2,7 +2,7 @@ import { Box, Typography } from '@mui/material'
 import { forwardRef } from 'react'
 import { RgbaColorPicker } from 'react-colorful'
 
-import { IconMode } from '@/assets/icons/indicators'
+import IconMode from '@/assets/icons/indicators/mode'
 import { useColorPicker } from '@/core/hooks/vs/useColorPicker'
 import type { ColorPickerProps } from '@/core/types/components/vs/ColorPicker'
 

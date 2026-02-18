@@ -57,7 +57,7 @@ export function getChildAttributes(
 ): GetChildAttributes {
   const components: SVGComponentProps['children'] = []
   const params = propertyManager.get()
-  let errors: SVGErrors | undefined = undefined
+  let errors: SVGErrors | undefined
   let hasErrors = false
   let isMotion = false
   let isAnimated = false

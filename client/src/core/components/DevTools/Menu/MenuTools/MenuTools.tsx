@@ -2,7 +2,7 @@ import { IconButton, Menu, MenuItem, Portal, Tooltip } from '@mui/material'
 import type { FC } from 'react'
 import { useTranslation } from 'react-i18next'
 
-import { IconKebabHorizontal } from '@/assets/icons/navigation'
+import IconKebabHorizontal from '@/assets/icons/navigation/kebab-horizontal'
 import { Show } from '@/core/helpers'
 import { useMenuTools } from '@/core/hooks/DevTools/useMenuTools'
 import type { TypeEditorRef } from '@/core/types/components/vs/Editor'

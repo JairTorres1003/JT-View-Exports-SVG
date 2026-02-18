@@ -1,6 +1,5 @@
-import * as assert from 'assert'
-
 import type { UnaryExpression } from '@babel/types'
+import * as assert from 'assert'
 
 import { getUnaryExpression } from '@/utilities/properties/unaryExpression'
 

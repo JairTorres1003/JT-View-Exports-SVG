@@ -1,11 +1,10 @@
 import { Stack } from '@mui/material'
-import React from 'react'
 import { useTranslation } from 'react-i18next'
 
 import { LoadingPage } from '@/core/components/LoadingPage'
-import { ContainerComponents } from '@/modules/dashboard/components/ContainerComponents'
-import { SearchBar } from '@/modules/dashboard/components/SearchBar'
-import { useDashboard } from '@/modules/dashboard/hooks/useDashboard'
+import { ContainerComponents } from '@/features/dashboard/components/ContainerComponents'
+import { SearchBar } from '@/features/dashboard/components/SearchBar'
+import { useDashboard } from '@/features/dashboard/hooks/useDashboard'
 
 const DashboardPage: React.FC = () => {
   const { loading } = useDashboard()

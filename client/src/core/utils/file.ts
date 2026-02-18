@@ -1,5 +1,5 @@
 import { SVGReceiveMessage } from '@api/enums/ViewExportsSVG'
-import type { SVGFile, Position } from '@api/types/ViewExportsSVG'
+import type { Position, SVGFile } from '@api/types/ViewExportsSVG'
 
 import { vscode } from '@/services/vscode'
 

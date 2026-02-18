@@ -1,18 +1,16 @@
 import 'vscode/localExtensionHost'
 
-import packageJson from '@jt/view-exports-svg/package' with { type: 'json' }
-import { initializeCacheManager } from '@jt/view-exports-svg/controllers/cache/CacheManagerController.js'
-
 import { tmpdir } from 'node:os'
 import * as path from 'node:path'
-import { initialize } from 'vscode/services'
 import getConfigurationServiceOverride from '@codingame/monaco-vscode-configuration-service-override'
 import getModelServiceOverride from '@codingame/monaco-vscode-model-service-override'
-import { registerExtension, ExtensionHostKind } from 'vscode/extensions'
-import { Uri, workspace } from 'vscode'
-
-import { createMockExtensionContext } from '@/mocks/extensionContext.mock.ts'
+import { initializeCacheManager } from '@jt/view-exports-svg/controllers/cache/CacheManagerController.js'
+import packageJson from '@jt/view-exports-svg/package' with { type: 'json' }
 import { initializeExtensionTheme } from '@jt/view-exports-svg/utilities/vscode/extensions/theme.js'
+import { Uri, workspace } from 'vscode'
+import { ExtensionHostKind, registerExtension } from 'vscode/extensions'
+import { initialize } from 'vscode/services'
+import { createMockExtensionContext } from '@/mocks/extensionContext.mock.ts'
 
 const extensionId = `${packageJson.publisher}.${packageJson.name}`
 const baseTempDir = tmpdir()

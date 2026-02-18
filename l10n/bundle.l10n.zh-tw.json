@@ -52,6 +52,6 @@
   "Reloading...": "重新加載中...",
   "Error toggling favorite status for icon {name}": "切換圖標 {name} 的收藏狀態時出錯",
   "Error retrieving icons: {error}": "獲取圖標時出錯: {error}",
-  "Missing index.html file in manifest": "清單中缺少 index.html 文件",
+  "Missing main file in manifest": "清單中缺少 main 文件",
   "Empty opening element": "空的開口元素"
 }

@@ -4,7 +4,7 @@ import type { PostMessage } from '@api/types/views/PostMessage'
 import i18next from 'i18next'
 import type { WebviewApi } from 'vscode-webview'
 
-import type { FuncPostMessage, FuncOnMessage, MessageHandlersView } from '@/types/ViewExportsSVG'
+import type { FuncOnMessage, FuncPostMessage, MessageHandlersView } from '@/types/ViewExportsSVG'
 
 import { vscodeInternal } from './VSCodeInternal'
 
@@ -35,7 +35,9 @@ class VSCodeAPIWrapper {
     window.addEventListener('message', (event: MessageEvent<PostMessage>) => {
       const type: SVGPostMessage = event.data.type
 
-      if (!Object.prototype.hasOwnProperty.call(this.messageHandlers, type)) {
+      if (!type || Object.entries(this.messageHandlers).length === 0) return
+
+      if (!Object.hasOwn(this.messageHandlers, type)) {
         console.warn(i18next.t('errors.[VSCodeAPIWrapper]IgnoredMessageWithUnknownType:'), type)
         return
       }

@@ -4,18 +4,19 @@ import {
   IconButton,
   List,
   ListItem,
-  listItemClasses,
   ListItemText,
+  type ListItemTextProps,
+  listItemClasses,
   listItemTextClasses,
   Stack,
   Tooltip,
   Typography,
-  type ListItemTextProps,
 } from '@mui/material'
+import React from 'react'
 import { useTranslation } from 'react-i18next'
 import { useSelector } from 'react-redux'
 
-import { IconGoToFile } from '@/assets/icons/functionalities'
+import IconGoToFile from '@/assets/icons/functionalities/go-to-file'
 import { openFileInPosition } from '@/core/utils/file'
 
 const commonSlotProps: ListItemTextProps['slotProps'] = {
@@ -23,7 +24,7 @@ const commonSlotProps: ListItemTextProps['slotProps'] = {
   secondary: { noWrap: true, sx: { opacity: 0.8 } },
 }
 
-export const InfoComponent = () => {
+const InfoComponent = () => {
   const recentlySelected = useSelector((state) => state.playground.recentlySelected)
 
   const { t } = useTranslation()
@@ -122,3 +123,9 @@ export const InfoComponent = () => {
     </Stack>
   )
 }
+
+const MemoInfoComponent = React.memo(InfoComponent)
+
+MemoInfoComponent.displayName = 'InfoComponent'
+
+export default MemoInfoComponent

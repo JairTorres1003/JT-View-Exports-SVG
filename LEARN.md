@@ -1,71 +1,95 @@
 # Learn How to Use View Exports SVG
 
-Welcome to **View Exports SVG**, a Visual Studio Code extension designed to streamline how you discover, manage, and use SVG icons directly within your project.
+Welcome to **View Exports SVG** — your ultimate companion for discovering, managing, and customizing SVG components directly within Visual Studio Code.
 
-This guide will walk you through its features to help you enhance your development workflow.
+> 📚 **Full Documentation**: For comprehensive guides, tutorials, and API references, visit our [official documentation site](https://view-exports-svg.vercel.app/).
 
-### Key Features
+---
 
-- **Instant Discovery:** Find all exported SVG components within your files or entire workspace.
-- **Interactive Playground:** Preview, customize, and edit your components in real-time.
-- **Advanced DevTools:** A powerful, dockable panel with search, favorites, and component management.
-- **Drag & Drop:** Quickly add SVG files to the viewer by dragging them into the panel.
-- **Multi-language Support:** The interface is available in over 15 languages.
-- **Native Theming:** The extension's appearance seamlessly integrates with your VS Code theme.
+## 🚀 Quick Start
 
 ### Installation
 
-1.  **Open Visual Studio Code.**
-2.  Navigate to the **Extensions** view (or press `Ctrl+Shift+X`).
-3.  Search for "View Exports SVG" in the marketplace.
-4.  Click **Install** to add it to your editor.
+1. Open **Visual Studio Code**
+2. Open the Extensions view (`Ctrl+Shift+X` or `Cmd+Shift+X` on macOS)
+3. Search for "**View Exports SVG**"
+4. Click **Install**
 
-### How to Use
+That's it! You're ready to explore your SVG components.
 
-#### 1. Viewing Icons from Files
+---
 
-This is the most direct way to inspect specific files.
+## ✨ Key Features at a Glance
 
-1.  In the Explorer, select one or more files or folders that contain SVG components ([see SVG support](SVG%20SUPPORT.md)).
-2.  Right-click on your selection.
-3.  Choose "**View Exports SVG 🔍**" from the context menu.
-4.  A new panel will open, displaying all the icons found in the selected files.
+- **🔍 Instant Discovery** — Find all exported SVG components in your files or workspace
+- **🎨 Interactive Playground** — Preview and customize components in real-time
+- **🛠️ Advanced DevTools** — Powerful panel with search, favorites, and component management
+- **📂 Drag & Drop** — Add SVG files by dragging them into the panel
+- **🌍 Multi-language** — Available in 15+ languages
+- **🎭 Native Theming** — Seamlessly integrates with your VS Code theme
 
-#### 2. Scanning the Entire Workspace
+[Learn more about all features →](https://view-exports-svg.vercel.app/docs/getting-started/features)
 
-To get a complete overview of all icons in your project:
+---
 
-1.  Open the **Command Palette** (`Ctrl+Shift+P`).
-2.  Type and select "**View Exports SVG: Start Scanning**".
-3.  The extension will scan your entire project and display all found icons.
+## 🎯 Quick Usage Guide
 
-#### 3. Using the DevTools Panel
+### Method 1: View Icons from Specific Files
 
-The DevTools panel is your central hub for managing icons.
+1. In the Explorer, **right-click** on one or more files/folders containing SVG components
+2. Select **"View Exports SVG 🔍"** from the context menu
+3. The panel opens displaying all discovered icons
 
-- **Search:** Use the search bar at the top to instantly filter icons by name.
-- **Copy Name:** Simply click on any icon card to copy its component name to the clipboard.
-- **Playground:** Select an icon to see it in the Playground. Here, you can edit its props in the code editor and see your changes applied in real-time.
-- **Actions Menu:** Hover over an icon and use the context menu (`...`) to access actions like:
-  - Copy as SVG/PNG.
-  - Download as SVG/PNG.
-  - Mark as Favorite.
-  - Open in Editor.
-- **Favorites & Recent:** Quickly access your most used or recently selected icons in their respective sections.
+> 💡 **Tip**: See which [file types are supported](https://view-exports-svg.vercel.app/docs/resources/svg-support).
 
-#### 4. Drag and Drop
+### Method 2: Scan Entire Workspace
 
-You can also add files directly to the webview panel.
+1. Open the **Command Palette** (`Ctrl+Shift+P` or `Cmd+Shift+P`)
+2. Run **"View Exports SVG: Start Scanning"**
+3. All icons in your project will be indexed and displayed
 
-1.  Open the **View Exports SVG** panel.
-2.  Drag SVG files from your computer or the VS Code Explorer and drop them onto the panel.
+### Method 3: Drag & Drop
 
-> **Note:** Due to VS Code security restrictions, it is not possible to directly obtain the file path on the OS for dropped files. As a workaround, the contents of dropped files are read and sent via `postMessage` to create a temporary file. For more details, see the issue on [GitHub](https://github.com/microsoft/vscode/issues/255608).
+Simply drag SVG files from your computer or Explorer and drop them onto the extension panel!
 
-### Keep Learning
+---
 
-For detailed information on version updates and new features, please check the [changelog (CHANGELOG.md)](CHANGELOG.md).
+## 🎮 Using the DevTools Panel
 
-This is an open-source project, and you are welcome to explore the code, report issues, or contribute. Visit the project repository on [GitHub](https://github.com/JairTorres1003/JT-View-Exports-SVG).
+The DevTools panel is your command center:
 
-Happy developing!
+| Feature | Action |
+|---------|--------|
+| **Search** | Type in the search bar to filter icons instantly |
+| **Copy Name** | Click any icon card to copy its component name |
+| **Playground** | Select an icon to edit props and see live updates |
+| **Actions Menu** | Hover over an icon → click `...` for copy/download/favorite options |
+| **Favorites** | Quick access to your starred icons |
+| **Recent** | View recently used components |
+
+[Explore DevTools in detail →](https://view-exports-svg.vercel.app/docs/guides/devtools)
+
+---
+
+## 📖 Learn More
+
+### Documentation Resources
+
+- **[Getting Started Guide](https://view-exports-svg.vercel.app/docs/getting-started/installation)** — Step-by-step setup and first use
+- **[User Guides](https://view-exports-svg.vercel.app/docs/guides/usage)** — Detailed walkthroughs for all features
+- **[Settings](https://view-exports-svg.vercel.app/docs/guides/settings)** — Customize the extension to your needs
+- **[SVG Support](https://view-exports-svg.vercel.app/docs/resources/svg-support)** — Supported formats and frameworks
+- **[Troubleshooting](https://view-exports-svg.vercel.app/docs/guides/troubleshooting)** — Common issues and solutions
+- **[Changelog](https://view-exports-svg.vercel.app/changelog)** — Version history and new features
+
+### Community & Support
+
+- 🐛 **Found a bug?** [Report it on GitHub](https://github.com/JairTorres1003/JT-View-Exports-SVG/issues)
+- 💡 **Have an idea?** [Share your feature request](https://github.com/JairTorres1003/JT-View-Exports-SVG/issues/new)
+- 🤝 **Want to contribute?** Check out our [contribution guidelines](https://github.com/JairTorres1003/JT-View-Exports-SVG/blob/main/CONTRIBUTING.md)
+- 📦 **Explore the code** on [GitHub](https://github.com/JairTorres1003/JT-View-Exports-SVG)
+
+**Happy coding!** 🚀
+
+*Built with ❤️ as a passion project. Updates and new features are released as time permits.*
+

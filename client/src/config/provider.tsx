@@ -1,5 +1,5 @@
 import { ThemeProvider } from '@mui/material'
-import type { ReactNode, FC } from 'react'
+import type { FC, ReactNode } from 'react'
 import { Provider } from 'react-redux'
 
 import { ConfigurationProvider, SnackbarProvider } from '@/providers'

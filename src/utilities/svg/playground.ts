@@ -3,7 +3,7 @@ import { l10n } from 'vscode'
 import { REST_PROPS_KEY } from '@/constants/misc'
 import { REGEX_TAG_NAME } from '@/constants/regex'
 import { getCacheManager } from '@/controllers/cache'
-import type { SVGErrors, SVGComponent, SVGPlayground } from '@/types/ViewExportsSVG'
+import type { SVGComponent, SVGErrors, SVGPlayground } from '@/types/ViewExportsSVG'
 
 import { getFileTimestamp } from '../files/misc'
 import { getUnknownError, isEmpty } from '../misc'

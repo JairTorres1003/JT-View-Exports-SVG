@@ -9,15 +9,15 @@ import type { SVGFile } from '@/types/ViewExportsSVG'
 import {
   getFileTimestamp,
   getLanguageFromFile,
-  pathToSVGFile,
   openFile,
+  pathToSVGFile,
 } from '@/utilities/files/misc'
 
 import { testFolderUri } from '../../main.test'
 
 suite('getFileTimestamp Utility Function', () => {
   const folderUri = Uri.joinPath(testFolderUri, 'assets')
-  let statSyncStub: sinon.SinonStub | undefined = undefined
+  let statSyncStub: sinon.SinonStub | undefined
 
   setup(() => {
     statSyncStub = sinon.stub(fs, 'statSync')
@@ -29,7 +29,7 @@ suite('getFileTimestamp Utility Function', () => {
 
   test('it should return the last modification timestamp of a file', async () => {
     const filePath1 = Uri.joinPath(folderUri, 'test-1.js').toString()
-    const expectedTimestamp1 = 1756613204238
+    const expectedTimestamp1 = 1771383553215
     const timestamp = await getFileTimestamp(filePath1)
 
     statSyncStub?.withArgs(filePath1).returns({ mtime: { getTime: () => expectedTimestamp1 } })

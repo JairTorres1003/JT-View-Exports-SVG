@@ -1,4 +1,4 @@
-import { Uri, commands, l10n, window, workspace } from 'vscode'
+import { commands, l10n, Uri, window, workspace } from 'vscode'
 
 /**
  * Saves the response data as a JSON file.
@@ -10,7 +10,7 @@ import { Uri, commands, l10n, window, workspace } from 'vscode'
  */
 export async function saveResponseFile(data: object, name: string, path?: string): Promise<void> {
   const content = JSON.stringify(data, null, 2)
-  const filePath = path ?? workspace.workspaceFolders?.[0].uri.fsPath + `/${name}.json`
+  const filePath = path ?? `${workspace.workspaceFolders?.[0].uri.fsPath}/${name}.json`
 
   try {
     await workspace.fs.writeFile(Uri.file(filePath), new TextEncoder().encode(content))

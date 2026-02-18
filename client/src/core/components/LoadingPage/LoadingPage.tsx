@@ -2,7 +2,7 @@ import { Box, Typography } from '@mui/material'
 import type { FC } from 'react'
 import { useTranslation } from 'react-i18next'
 
-import { isEmpty } from '@/utils/misc'
+import isEmpty from '@/utils/is-empty'
 
 import { loadingPageClasses } from './LoadingPage.classes'
 import { BoxLoadingPage } from './LoadingPage.style'

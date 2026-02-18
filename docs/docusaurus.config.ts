@@ -43,6 +43,16 @@ const config: Config = {
     locales: ['en'],
   },
 
+  headTags: [
+    {
+      tagName: 'meta',
+      attributes: {
+        name: 'algolia-site-verification',
+        content: process.env.ALGOLIA_SITE_VERIFICATION ?? '',
+      },
+    },
+  ],
+
   plugins: [
     './src/plugins/tailwind-config.ts',
     '@docusaurus/plugin-ideal-image',

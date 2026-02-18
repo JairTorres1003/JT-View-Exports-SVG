@@ -1,8 +1,12 @@
-import * as fs from 'fs'
+import * as fs from 'node:fs'
 import importMetaUrlPlugin from '@codingame/esbuild-import-meta-url-plugin'
 import react from '@vitejs/plugin-react-swc'
 import { defineConfig } from 'vite'
 import tsconfigPaths from 'vite-tsconfig-paths'
+
+import codingameOnigWasmWebFix from './plugins/codingame-onig-wasm-web-fix'
+import legacyManifest from './plugins/legacy-manifest'
+import removeFiles from './plugins/remove-files'
 
 const pkg = JSON.parse(
   fs.readFileSync(new URL('./package.json', import.meta.url).pathname).toString()
@@ -12,21 +16,24 @@ const localDependencies = Object.entries(pkg.dependencies as Record<string, stri
   .filter(([name]) => name.startsWith('@codingame/'))
   .map(([name]) => name)
 
+const optimizeDepsExclude = new Set([
+  '@codingame/monaco-vscode-theme-defaults-default-extension',
+  '@codingame/monaco-vscode-javascript-default-extension',
+  '@codingame/monaco-vscode-typescript-basics-default-extension',
+])
+
+const optimizeDepsInclude = localDependencies.filter((name) => !optimizeDepsExclude.has(name))
+
 // https://vite.dev/config/
 export default defineConfig({
-  plugins: [tsconfigPaths(), react()],
+  base: './',
+  plugins: [tsconfigPaths(), react(), codingameOnigWasmWebFix(), legacyManifest(), removeFiles()],
   optimizeDeps: {
-    esbuildOptions: {
+    rolldownOptions: {
       plugins: [importMetaUrlPlugin],
     },
-    exclude: [],
-    include: [
-      ...localDependencies,
-      'vscode-textmate',
-      'vscode-oniguruma',
-      '@vscode/vscode-languagedetection',
-      'marked',
-    ],
+    exclude: Array.from(optimizeDepsExclude),
+    include: optimizeDepsInclude,
   },
   define: {
     rootDirectory: JSON.stringify(__dirname),
@@ -38,12 +45,12 @@ export default defineConfig({
     dedupe: ['vscode', 'monaco-editor', ...localDependencies],
   },
   build: {
-    target: 'es2020',
+    target: 'es2022',
     reportCompressedSize: false,
     cssCodeSplit: false,
-    assetsInlineLimit: 2048,
+    assetsInlineLimit: 0,
     manifest: 'manifest.json',
-    rollupOptions: {
+    rolldownOptions: {
       output: {
         chunkFileNames: 'chunks/[hash].js',
         assetFileNames: 'assets/[hash].[ext]',
@@ -55,7 +62,7 @@ export default defineConfig({
   },
   worker: {
     format: 'es',
-    rollupOptions: {
+    rolldownOptions: {
       output: {
         entryFileNames: 'chunks/[name]-[hash].js',
         chunkFileNames: 'chunks/[name]-[hash].js',

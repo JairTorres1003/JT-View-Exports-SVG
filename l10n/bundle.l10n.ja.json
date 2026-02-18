@@ -52,6 +52,6 @@
   "Reloading...": "リロード中...",
   "Error toggling favorite status for icon {name}": "アイコン {name} のお気に入り状態の切り替え中にエラーが発生しました",
   "Error retrieving icons: {error}": "アイコンの取得中にエラーが発生しました: {error}",
-  "Missing index.html file in manifest": "マニフェストにindex.htmlファイルが見つかりません",
+  "Missing main file in manifest": "マニフェストにmainファイルが見つかりません",
   "Empty opening element": "空の開く要素"
 }

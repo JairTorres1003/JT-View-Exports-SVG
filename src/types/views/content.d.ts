@@ -1,10 +1,11 @@
 import type { Position, SVGFile } from '../ViewExportsSVG'
 
-export interface GetWebviewAssets {
+export interface ManifestContent {
   favicon: string
-  index: string
-  styles: string
+  main: string
+  style: string
 }
+
 export interface OpenFile {
   file: SVGFile
   position?: Position
