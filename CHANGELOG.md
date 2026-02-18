@@ -1,5 +1,111 @@
 # View Exports SVG - Changelog
 
+## 4.1.0
+
+_Feb 18, 2026_
+
+#### ✨ Features
+
+- **Build System Migration (Webpack → Vite):**
+  - Migrated client build system from Webpack to Vite for significantly faster development and production builds.
+  - Integrated Vite plugins for improved asset handling and WASM support (`codingame-onig-wasm-web-fix`).
+  - Added legacy manifest plugin and automatic file removal during build.
+  - Development hot module replacement (HMR) now provides instant feedback during development.
+
+- **Code Quality - Biome Integration:**
+  - Replaced ESLint and Prettier with Biome for unified linting and formatting.
+  - Simplified configuration management with centralized `biome.json`.
+  - Improved lint-staged integration for consistent pre-commit checks.
+
+- **Enhanced Development Experience:**
+  - Added development mode theme activation for Monaco Editor with default One Dark theme.
+  - Improved error handling with safe `window` object access for SSR compatibility.
+  - New vite ignore comments and improved base URL construction.
+
+#### 🚀 Enhancements
+
+- **Dependencies Update:**
+  - Updated VSCode engine from `^1.80.0` to `^1.109.0` for access to latest APIs and features.
+  - Updated TypeScript from `^5.5.4` to `^5.9.3` with ES2022 target.
+  - Canvas rendering library updates: `@codingame/monaco-vscode` from `^21.6.0` to `^26.1.2`.
+  - UI libraries: `@mui/material` to `^7.3.7`, `lucide-react` to `^0.562.0`.
+  - State management: `@reduxjs/toolkit` to `^2.11.2`.
+  - Routing: `react-router-dom` to `^7.13.0`.
+  - Build tools: `esbuild` to `^0.27.3`, `@vscode/test-web` to `^0.0.79`.
+
+- **UI/UX Improvements:**
+  - Improved layout and responsive design with `react-resizable-panels` update (`^3.0.6` → `^4.6.0`).
+
+- **Component Refactoring:**
+  - Replaced memoized component exports with direct exports for improved readability.
+  - Updated DevTools and ViewPanels components with new separator and group structure.
+  - Improved key handling in SelectPickerColor and context menus.
+  - Reorganized imports to use `node:` prefix for Node.js modules.
+
+- **Build Configuration:**
+  - Migrated TypeScript target from ES2020 to **ES2022** for modern JavaScript features.
+  - Updated multiple `tsconfig.json` files for consistency.
+  - Improved asset inline handling in Vite configuration.
+  - Better handling of CSS and asset inlining.
+
+#### 🐛 Bug Fixes
+
+- **Component Fixes:**
+  - Fixed typo in `toggleWordWrap` method naming in MenuTools.
+  - Fixed handling of empty components array in completion item provider.
+  - Fixed manifest property destructuring for clarity in theme activation.
+
+- **Configuration Fixes:**
+  - Corrected typo in initConfiguration for "click to open DevTools" setting.
+  - Fixed assetsInlineLimit configuration in Vite.
+  - Migrated worker configuration from Rollup to Rolldown compiler for improved build performance.
+
+- **Build Fixes:**
+  - Fixed file removal plugin for proper cleanup during build.
+  - Fixed CSS link generation for optional `style.css` support in manifests.
+
+#### 📈 Performance Improvements
+
+- **Build Performance:**
+  - ~50% faster development and production builds with Vite.
+  - ~5-10% smaller bundle sizes with improved esbuild optimization.
+  - Faster module resolution with improved bundler mode configuration.
+  - Improved build performance with Rolldown compiler migration.
+
+#### ⚠️ Breaking Changes
+
+- **VSCode Engine:** Minimum VSCode version now `^1.109.0` (was `^1.80.0`).
+- **Build Tool:** Client development now uses Vite instead of Webpack. Custom Webpack configurations will not work.
+- **Biome Rules:** Linting rules have changed from ESLint to Biome. Some formatting rules may differ.
+- **Node.js Version:** Recommended Node.js 22.x for compatibility (updated from 20.x).
+
+#### 📚 Documentation
+
+A new external documentation project has been created to provide comprehensive guides and usage instructions:
+
+- **Docusaurus-based Documentation:** New dedicated documentation site with:
+  - "Getting Started" guide with installation instructions.
+  - Detailed "Usage Guide" with core workflow and interaction steps.
+  - FAQ section with common questions and troubleshooting.
+  - Settings guide and troubleshooting documentation.
+  - Feature history and release history sections.
+  - Integrated changelog viewer.
+- **Documentation Deployment:** Hosted on Vercel for easy access and updates.
+- **Multi-language Support:** Documentation supports all extension languages.
+
+#### 📝 Migration Guide
+
+If upgrading from 4.0.x:
+
+1. **For Users:** Simply update the extension from the VS Code Marketplace. No configuration changes needed.
+2. **For Contributors:**
+   - Run `npm install` to update all dependencies.
+   - Build system now uses Vite - no breaking changes to source code.
+   - Code formatting follows Biome rules - run `npm run biome:format` to auto-format.
+   - VSCode minimum version updated to 1.109.0.
+
+---
+
 ## 4.0.2
 
 _Oct 20, 2025_
