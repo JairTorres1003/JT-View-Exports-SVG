@@ -255,8 +255,6 @@
     "install:all": "npm install && cd client && npm install",
     "biome:check": "biome check --write",
     "biome:format": "biome format --write",
-    "format:check": "prettier --check \"**/*.{ts,json,md,yml,cjs}\"",
-    "format": "prettier --write \"**/*.{ts,json,md,yml,cjs}\"",
     "copy-types": "mkdir -p $(jq -r .compilerOptions.outDir $TS_FILE)/types && cp -r ./src/types $(jq -r .compilerOptions.outDir $TS_FILE);",
     "compile:clean": "rimraf ./out",
     "compile:root": "tsc -b $TS_FILE && npm run copy-types && tsc-alias -p $TS_FILE",
@@ -274,7 +272,7 @@
     "watch:esbuild:web": "node esbuild.config.js --watch --web-mode",
     "test": "node ./out/cjs/test/runTest.js --verbose",
     "pretest": "npm-run-all compile:clean client:build compile",
-    "vscode:prepublish": "npm-run-all lint test compile:clean compile:esbuild compile:esbuild:web",
+    "vscode:prepublish": "npm-run-all biome:check test compile:clean compile:esbuild compile:esbuild:web",
     "client:build": "cd client && npm run build",
     "client:dev": "cd client && npm run dev",
     "open-in-browser": "vscode-test-web --extensionDevelopmentPath=. $FOLDER_EXAMPLE",
@@ -282,8 +280,7 @@
     "prepare-readme:restore": "node prepare-readme.js --restore",
     "run:package": "vsce package",
     "package": "npm-run-all prepare-readme run:package prepare-readme:restore",
-    "prepare": "husky",
-    "postinstall": "npm dedupe"
+    "prepare": "husky"
   },
   "devDependencies": {
     "@babel/types": "^7.28.1",
