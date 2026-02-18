@@ -1,5 +1,20 @@
 {
-  "name": "docs-2",
+  "name": "jt-view-exports-svg--docs",
+  "displayName": "View Exports SVG (Docs)",
+  "description": "View Exports SVG (Docs)",
+  "keywords": [
+    "view-exports-svg",
+    "SVG icons",
+    "TypeScript",
+    "TSX",
+    "React",
+    "JavaScript",
+    "JSX",
+    "icon management",
+    "icon assets",
+    "UI",
+    "documentation"
+  ],
   "version": "1.0.0",
   "private": true,
   "scripts": {
