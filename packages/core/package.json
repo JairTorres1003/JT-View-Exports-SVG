@@ -24,7 +24,7 @@
     "build": "npm-run-all clean build:enums copy:types",
     "build:enums": "tsc",
     "copy:types": "cp -r src/types dist/",
-    "clean": "rm -rf dist",
+    "clean": "rimraf dist",
     "watch": "tsc --watch",
     "typecheck": "tsc --noEmit"
   },
