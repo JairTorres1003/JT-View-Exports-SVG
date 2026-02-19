@@ -1,0 +1,35 @@
+{
+  "name": "@jt-view-exports-svg/core",
+  "version": "1.0.0",
+  "type": "module",
+  "description": "Core types, enums and utilities for JT View Exports SVG",
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "import": "./dist/index.js",
+      "types": "./dist/index.d.ts"
+    },
+    "./types": {
+      "import": "./dist/types/index.js",
+      "types": "./dist/types/index.d.ts"
+    },
+    "./enums": {
+      "import": "./dist/enums/index.js",
+      "types": "./dist/enums/index.d.ts"
+    }
+  },
+  "files": ["dist"],
+  "scripts": {
+    "build": "npm run build:enums && npm run copy:types",
+    "build:enums": "tsc",
+    "copy:types": "cp -r src/types dist/",
+    "clean": "rm -rf dist",
+    "watch": "tsc --watch",
+    "typecheck": "tsc --noEmit"
+  },
+  "devDependencies": {
+    "typescript": "^5.0.0",
+    "@types/node": "^22.0.0"
+  }
+}
