@@ -1,6 +1,5 @@
+import type { SVGComponent, SVGErrors, ViewExportSVG } from '@jt-view-exports-svg/core'
 import { l10n } from 'vscode'
-
-import type { SVGComponent, SVGErrors, ViewExportSVG } from '@/types/ViewExportsSVG'
 
 /**
  * Filters the array of `SVGComponent` objects based on the provided query.

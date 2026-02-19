@@ -1,10 +1,8 @@
+import type { OpenFile, SVGFile } from '@jt-view-exports-svg/core'
 import * as path from 'path'
-
 import { l10n, Position, Selection, TextEditorRevealType, Uri, window, workspace } from 'vscode'
 
 import { CONFIG_KEY } from '@/constants/misc'
-import type { SVGFile } from '@/types/ViewExportsSVG'
-import type { OpenFile } from '@/types/views/content'
 
 import { getUnknownError } from '../misc'
 

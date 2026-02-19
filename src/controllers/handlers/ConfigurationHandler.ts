@@ -1,8 +1,7 @@
+import { type FuncPostMessage, SVGPostMessage } from '@jt-view-exports-svg/core'
 import { commands } from 'vscode'
 
 import { CONFIG_KEY } from '@/constants/misc'
-import { SVGPostMessage } from '@/enum/ViewExportsSVG'
-import type { FuncPostMessage } from '@/types/views/PostMessage'
 import { getConfigurationEditor } from '@/utilities/vscode/config'
 import { getExtensionTheme as getExtTheme } from '@/utilities/vscode/extensions/theme'
 import { getCurrentTheme, getStyles } from '@/utilities/vscode/theme'
@@ -25,7 +24,9 @@ export class ConfigurationHandler {
   }
 
   getExtensionTheme(): void {
-    this.postMessage(SVGPostMessage.SendExtensionTheme, getExtTheme())
+    const theme = getExtTheme()
+    if (!theme) return
+    this.postMessage(SVGPostMessage.SendExtensionTheme, theme)
   }
 
   async reloadExtensionTheme(): Promise<void> {

@@ -1,9 +1,14 @@
 import * as t from '@babel/types'
+import type {
+  GetSVGTagName,
+  GetTagName,
+  SVGFile,
+  SVGLocation,
+  SVGTagName,
+} from '@jt-view-exports-svg/core'
 import { camelCase } from 'lodash'
 
 import { SVG_TAGS } from '@/constants/svg/tags'
-import type { GetSVGTagName, GetTagName, SVGTagName } from '@/types/svg/tags'
-import type { SVGFile, SVGLocation } from '@/types/ViewExportsSVG'
 
 import { isEmpty } from '../misc'
 

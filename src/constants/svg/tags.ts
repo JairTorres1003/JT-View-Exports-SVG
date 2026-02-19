@@ -1,4 +1,4 @@
-import type { SVGTagName } from '@/types/svg/tags'
+import type { SVGTagName } from '@jt-view-exports-svg/core'
 
 /**
  * Mapping of SVG tag names to their corresponding string representations.

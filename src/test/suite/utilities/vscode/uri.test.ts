@@ -1,9 +1,9 @@
+import type { SVGFile } from '@jt-view-exports-svg/core'
 import * as assert from 'assert'
 import * as path from 'path'
 
 import { Uri } from 'vscode'
 
-import type { SVGFile } from '@/types/ViewExportsSVG'
 import { svgFileToUri } from '@/utilities/vscode/uri'
 
 import { testFolderUri } from '../../main.test'

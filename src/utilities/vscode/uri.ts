@@ -1,7 +1,7 @@
+import type { SVGFile } from '@jt-view-exports-svg/core'
 import { env, UIKind, Uri, type Webview } from 'vscode'
 
 import { CONFIG_KEY } from '@/constants/misc'
-import type { SVGFile } from '@/types/ViewExportsSVG'
 
 /**
  * A helper function which will get the webview URI of a given file or resource.

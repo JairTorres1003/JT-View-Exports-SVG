@@ -1,10 +1,16 @@
+import {
+  type FileTemporary,
+  type FuncPostMessage,
+  type OpenFile,
+  type SVGFile,
+  type SVGIcon,
+  type SVGPlayground,
+  SVGPostMessage,
+  type ViewExportSVG,
+} from '@jt-view-exports-svg/core'
 import { type Disposable, l10n, type WebviewPanel } from 'vscode'
 
 import { toggleViewActions } from '@/commands/editorTitleActions'
-import { SVGPostMessage } from '@/enum/ViewExportsSVG'
-import type { SVGFile, SVGIcon, SVGPlayground, ViewExportSVG } from '@/types/ViewExportsSVG'
-import type { FileTemporary, OpenFile } from '@/types/views/content'
-import type { FuncPostMessage } from '@/types/views/PostMessage'
 
 import { DefaultExpandAllController, RecentIconsShowController } from '../config'
 import { AssetsHandler } from '../handlers/AssetsHandler'
@@ -49,7 +55,7 @@ export class ListerWebviewController {
    * @param type - The type of the message.
    * @param data - The data to be sent with the message.
    */
-  public readonly _postMessage: FuncPostMessage = (type, data) => {
+  public readonly _postMessage: FuncPostMessage = (type, data?) => {
     this._panel.webview.postMessage({ type, data }).then(undefined, (error) => {
       console.error(l10n.t('Error posting message to webview:'), error)
     })

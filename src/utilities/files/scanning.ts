@@ -1,8 +1,8 @@
+import type { ViewExportSVG } from '@jt-view-exports-svg/core'
 import { l10n, type Uri, window, workspace } from 'vscode'
 
 import { LastScanDateController } from '@/controllers/config'
 import { ViewExportsSVGController } from '@/controllers/views'
-import type { ViewExportSVG } from '@/types/ViewExportsSVG'
 
 import { getUnknownError, isEmpty } from '../misc'
 

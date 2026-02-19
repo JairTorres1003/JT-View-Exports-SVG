@@ -1,3 +1,4 @@
+import type { SVGFile } from '@jt-view-exports-svg/core'
 import * as assert from 'assert'
 import * as fs from 'fs'
 import * as path from 'path'
@@ -5,7 +6,6 @@ import * as path from 'path'
 import * as sinon from 'sinon'
 import { Uri, window } from 'vscode'
 
-import type { SVGFile } from '@/types/ViewExportsSVG'
 import {
   getFileTimestamp,
   getLanguageFromFile,

@@ -1,12 +1,19 @@
 import traverse from '@babel/traverse'
 import * as t from '@babel/types'
+import {
+  type DeclarationExport,
+  type ExtractComponent,
+  type ExtractSVGExports,
+  type HandlersDeclaration,
+  type SVGComponent,
+  SVGDeclaration,
+  type SVGFile,
+  type SVGLocation,
+} from '@jt-view-exports-svg/core'
 import { l10n, type Uri, workspace } from 'vscode'
 
 import { REST_PROPS_KEY } from '@/constants/misc'
 import { getCacheManager } from '@/controllers/cache'
-import { SVGDeclaration } from '@/enum/ViewExportsSVG'
-import type { DeclarationExport, ExtractComponent, HandlersDeclaration } from '@/types/svg/extracts'
-import type { ExtractSVGExports, SVGComponent, SVGFile, SVGLocation } from '@/types/ViewExportsSVG'
 
 import { parseFileContent, parserContent } from '../babelParser'
 import { getUnknownError, isEmpty } from '../misc'

@@ -1,8 +1,6 @@
+import { type FuncPostMessage, type SVGIcon, SVGPostMessage } from '@jt-view-exports-svg/core'
 import { l10n, type WorkspaceFolder, window, workspace } from 'vscode'
 
-import { SVGPostMessage } from '@/enum/ViewExportsSVG'
-import type { SVGIcon } from '@/types/ViewExportsSVG'
-import type { FuncPostMessage } from '@/types/views/PostMessage'
 import { getIconsFromCache } from '@/utilities/icons/getIconsFromCache'
 import { getUnknownError } from '@/utilities/misc'
 

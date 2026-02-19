@@ -1,7 +1,7 @@
+import type { ThemeMode, VsCodeStyles } from '@jt-view-exports-svg/core'
 import { ColorThemeKind, window, workspace } from 'vscode'
 
 import { DEFAULT_FONT_FAMILY } from '@/constants/misc'
-import type { ThemeMode, VsCodeStyles } from '@/types/vscode'
 
 /**
  * Gets the current color theme of the Visual Studio Code editor.

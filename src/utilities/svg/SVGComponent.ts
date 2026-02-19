@@ -1,9 +1,13 @@
 import type * as t from '@babel/types'
+import type {
+  GetSVGComponent,
+  GetSVGTagName,
+  SVGComponentProps,
+  SVGFile,
+  SVGTagName,
+  ValidationResult,
+} from '@jt-view-exports-svg/core'
 import { l10n } from 'vscode'
-
-import type { GetSVGComponent, ValidationResult } from '@/types/svg/SVGComponent'
-import type { GetSVGTagName, SVGTagName } from '@/types/svg/tags'
-import type { SVGComponentProps, SVGFile } from '@/types/ViewExportsSVG'
 
 import { isEmpty } from '../misc'
 import { getProperties } from '../properties/getProperties'

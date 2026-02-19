@@ -1,7 +1,7 @@
+import { SVGPostMessage } from '@jt-view-exports-svg/core'
 import { type ExtensionContext, l10n, window } from 'vscode'
 
 import { ViewExportsSVGController } from '@/controllers/views'
-import { SVGPostMessage } from '@/enum/ViewExportsSVG'
 import { isEmpty } from '@/utilities/misc'
 import { getConfigurationEditor } from '@/utilities/vscode/config'
 import { getExtensionTheme, reloadExtensionTheme } from '@/utilities/vscode/extensions/theme'

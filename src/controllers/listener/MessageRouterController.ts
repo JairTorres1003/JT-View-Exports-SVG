@@ -1,8 +1,11 @@
+import {
+  type HandlerArgs,
+  type HandlerReceiveMessage,
+  type ReceiveMessage,
+  SVGReceiveMessage,
+} from '@jt-view-exports-svg/core'
 import { type Disposable, l10n, type Webview, window } from 'vscode'
 
-import { SVGReceiveMessage } from '@/enum/ViewExportsSVG'
-import type { HandlerArgs } from '@/types/misc'
-import type { HandlerReceiveMessage, ReceiveMessage } from '@/types/views/ReceiveMessage'
 import { isEmpty } from '@/utilities/misc'
 
 import type { ListerWebviewController } from './ListerWebviewController'

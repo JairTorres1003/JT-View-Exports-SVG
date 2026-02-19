@@ -1,10 +1,15 @@
+import {
+  CacheIconKind,
+  type SVGComponent,
+  type SVGFile,
+  type SVGIcon,
+  type SVGIconCache,
+  type ViewExportSVG,
+} from '@jt-view-exports-svg/core'
 import { l10n, type Uri, workspace } from 'vscode'
 
 import { getCacheManager } from '@/controllers/cache'
 import { RecentIconsShowController, ShowNotExportedIconsController } from '@/controllers/config'
-import { CacheIconKind } from '@/enum/cache'
-import type { SVGIconCache } from '@/types/cache'
-import type { SVGComponent, SVGFile, SVGIcon, ViewExportSVG } from '@/types/ViewExportsSVG'
 
 import { getFileTimestamp } from '../files/misc'
 import { isEmpty } from '../misc'

@@ -1,5 +1,5 @@
+import type { ExtensionManage, IExtension, IPackageJSON } from '@jt-view-exports-svg/core'
 import * as path from 'path'
-
 import {
   type ExtensionContext,
   extensions,
@@ -11,7 +11,6 @@ import {
 } from 'vscode'
 
 import { getCacheManager } from '@/controllers/cache'
-import type { ExtensionManage, IExtension, IPackageJSON } from '@/types/vscode'
 
 const CACHE_KEY = 'CurrentExtensionTheme'
 

@@ -1,5 +1,6 @@
+import type { SVGElementInfo } from '@jt-view-exports-svg/core'
+
 import { ANIMATED_SVG_TAGS } from '@/constants/svg/tags'
-import type { SVGElementInfo } from '@/types/svg/is-animate'
 
 import { findAnimateClassesStyles } from '../css/findAnimateClassesStyles'
 

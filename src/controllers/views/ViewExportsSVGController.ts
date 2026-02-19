@@ -1,8 +1,7 @@
+import { type SVGErrors, SVGPostMessage, type ViewExportSVG } from '@jt-view-exports-svg/core'
 import { type ExtensionContext, l10n, Uri, ViewColumn, type WebviewPanel, window } from 'vscode'
 
 import { CONFIG_KEY } from '@/constants/misc'
-import { SVGPostMessage } from '@/enum/ViewExportsSVG'
-import type { SVGErrors, ViewExportSVG } from '@/types/ViewExportsSVG'
 import { isEmpty } from '@/utilities/misc'
 import { WebviewContent } from '@/views/WebviewContent'
 

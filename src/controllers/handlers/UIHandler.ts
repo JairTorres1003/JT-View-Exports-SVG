@@ -1,11 +1,14 @@
+import {
+  type FileTemporary,
+  type FuncPostMessage,
+  type OpenFile,
+  SVGPostMessage,
+} from '@jt-view-exports-svg/core'
 import { l10n, type OpenDialogOptions, Uri, window, workspace } from 'vscode'
 
 import { expandedIcons, runToggleDevTools } from '@/commands'
 import { toggleViewActions } from '@/commands/editorTitleActions'
 import { CONFIG_KEY, DISABLED_PLAYGROUND_IN_PATH } from '@/constants/misc'
-import { SVGPostMessage } from '@/enum/ViewExportsSVG'
-import type { FileTemporary, OpenFile } from '@/types/views/content'
-import type { FuncPostMessage } from '@/types/views/PostMessage'
 import { openFile } from '@/utilities/files/misc'
 
 export class UIHandler {

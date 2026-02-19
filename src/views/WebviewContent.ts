@@ -1,3 +1,4 @@
+import type { ManifestContent } from '@jt-view-exports-svg/core'
 import { type ExtensionContext, env, l10n, type Uri, type Webview, workspace } from 'vscode'
 
 import {
@@ -5,7 +6,6 @@ import {
   DefaultExpandAllController,
   RecentIconsShowController,
 } from '@/controllers/config'
-import type { ManifestContent } from '@/types/views/content'
 import { getNonce } from '@/utilities/files/nonce'
 import { isEmpty } from '@/utilities/misc'
 import { getUri, uriParse } from '@/utilities/vscode/uri'

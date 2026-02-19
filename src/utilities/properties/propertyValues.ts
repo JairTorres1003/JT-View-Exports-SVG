@@ -1,9 +1,9 @@
 import * as t from '@babel/types'
+import type { PropertyValue } from '@jt-view-exports-svg/core'
 import { camelCase } from 'lodash'
 
 import { REST_PROPS_KEY } from '@/constants/misc'
 import { DefaultIconPropertiesController } from '@/controllers/config'
-import type { PropertyValue } from '@/types/properties/propertyValues'
 
 import { isEmpty } from '../misc'
 

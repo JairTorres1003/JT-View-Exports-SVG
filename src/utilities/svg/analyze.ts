@@ -1,9 +1,8 @@
 import * as t from '@babel/types'
+import type { ParamsTypes, SVGFile } from '@jt-view-exports-svg/core'
 import { isEmpty } from 'lodash'
 
 import { REST_PROPS_KEY } from '@/constants/misc'
-import type { ParamsTypes } from '@/types/misc'
-import type { SVGFile } from '@/types/ViewExportsSVG'
 
 import { propertyManager } from '../properties/propertyManager'
 import { getPropertyValues } from '../properties/propertyValues'

@@ -1,8 +1,6 @@
+import { type FuncPostMessage, type SVGFile, SVGPostMessage } from '@jt-view-exports-svg/core'
 import { l10n } from 'vscode'
 
-import { SVGPostMessage } from '@/enum/ViewExportsSVG'
-import type { SVGFile } from '@/types/ViewExportsSVG'
-import type { FuncPostMessage } from '@/types/views/PostMessage'
 import { scanningFiles, scanningWorkspace } from '@/utilities/files/scanning'
 import { getUnknownError } from '@/utilities/misc'
 import { svgFileToUri } from '@/utilities/vscode/uri'

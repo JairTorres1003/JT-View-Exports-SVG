@@ -1,8 +1,9 @@
+import {
+  CacheIconKind,
+  type ExtensionManage,
+  type ExtractSVGExports,
+} from '@jt-view-exports-svg/core'
 import { type ExtensionContext, l10n, Uri, workspace } from 'vscode'
-
-import { CacheIconKind } from '@/enum/cache'
-import type { ExtractSVGExports } from '@/types/ViewExportsSVG'
-import type { ExtensionManage } from '@/types/vscode'
 
 import { isEmpty } from '../../utilities/misc'
 import { RecentIconsLimitController } from '../config'

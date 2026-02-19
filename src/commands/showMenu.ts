@@ -1,7 +1,7 @@
+import type { ViewExportSVG } from '@jt-view-exports-svg/core'
 import type { ExtensionContext, Uri } from 'vscode'
 
 import { ViewExportsSVGController } from '@/controllers/views'
-import type { ViewExportSVG } from '@/types/ViewExportsSVG'
 import { processFiles } from '@/utilities/files/processFiles'
 import { isEmpty } from '@/utilities/misc'
 

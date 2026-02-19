@@ -1,8 +1,12 @@
 import * as t from '@babel/types'
+import type {
+  GetChildAttributes,
+  IValue,
+  SVGComponentProps,
+  SVGErrors,
+  SVGFile,
+} from '@jt-view-exports-svg/core'
 import { l10n } from 'vscode'
-
-import type { GetChildAttributes, IValue } from '@/types/svg/SVGComponent'
-import type { SVGComponentProps, SVGErrors, SVGFile } from '@/types/ViewExportsSVG'
 
 import { isEmpty } from '../misc'
 import { getProperties } from '../properties/getProperties'

@@ -1,8 +1,12 @@
+import {
+  type FuncPostMessage,
+  type SVGFile,
+  type SVGPlayground,
+  SVGPostMessage,
+  type ViewExportSVG,
+} from '@jt-view-exports-svg/core'
 import { l10n } from 'vscode'
 
-import { SVGPostMessage } from '@/enum/ViewExportsSVG'
-import type { SVGFile, SVGPlayground, ViewExportSVG } from '@/types/ViewExportsSVG'
-import type { FuncPostMessage } from '@/types/views/PostMessage'
 import { pathToSVGFile } from '@/utilities/files/misc'
 import { processFiles } from '@/utilities/files/processFiles'
 import { scanningFiles } from '@/utilities/files/scanning'

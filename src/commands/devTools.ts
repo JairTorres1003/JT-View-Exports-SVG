@@ -1,8 +1,8 @@
+import { SVGPostMessage } from '@jt-view-exports-svg/core'
 import { commands } from 'vscode'
 
 import { CONFIG_KEY } from '@/constants/misc'
 import { ViewExportsSVGController } from '@/controllers/views'
-import { SVGPostMessage } from '@/enum/ViewExportsSVG'
 import { isEmpty } from '@/utilities/misc'
 
 /**

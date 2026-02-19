@@ -1,7 +1,7 @@
+import type { ViewExportSVG } from '@jt-view-exports-svg/core'
 import { minimatch } from 'minimatch'
 
 import { GroupPatternsController } from '@/controllers/config'
-import type { ViewExportSVG } from '@/types/ViewExportsSVG'
 
 import { isEmpty } from '../misc'
 

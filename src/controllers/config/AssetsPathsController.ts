@@ -1,6 +1,6 @@
+import type { SVGFile } from '@jt-view-exports-svg/core'
 import { ConfigurationTarget, l10n, workspace } from 'vscode'
 
-import type { SVGFile } from '@/types/ViewExportsSVG'
 import { pathToSVGFile } from '@/utilities/files/misc'
 import { getUnknownError } from '@/utilities/misc'
 

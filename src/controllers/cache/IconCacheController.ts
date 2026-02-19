@@ -1,8 +1,5 @@
+import type { CacheIconKind, SVGIcon, SVGIconCache } from '@jt-view-exports-svg/core'
 import { l10n, type Uri, type WorkspaceFolder } from 'vscode'
-
-import type { CacheIconKind } from '@/enum/cache'
-import type { SVGIconCache } from '@/types/cache'
-import type { SVGIcon } from '@/types/ViewExportsSVG'
 
 import { FileModifiedCacheController } from './FileModifiedCacheController'
 

@@ -1,11 +1,10 @@
+import type { SVGFile, ViewExportSVG } from '@jt-view-exports-svg/core'
 import * as path from 'path'
-
 import { l10n, ProgressLocation, type ProgressOptions, type Uri, window } from 'vscode'
 
 import { REGEX_FILE } from '@/constants/regex'
 import { getCacheManager } from '@/controllers/cache'
 import { AssetsPathsController, ShowNotExportedIconsController } from '@/controllers/config'
-import type { SVGFile, ViewExportSVG } from '@/types/ViewExportsSVG'
 
 import { isEmpty } from '../misc'
 import { extractSVGData } from '../svg/extracts'
