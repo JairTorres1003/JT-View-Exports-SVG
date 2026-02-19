@@ -10,18 +10,18 @@
       "import": "./dist/index.js",
       "types": "./dist/index.d.ts"
     },
+    "./constants": {
+      "import": "./dist/constants/index.js",
+      "types": "./dist/constants/index.d.ts"
+    },
     "./types": {
       "import": "./dist/types/index.js",
       "types": "./dist/types/index.d.ts"
-    },
-    "./enums": {
-      "import": "./dist/enums/index.js",
-      "types": "./dist/enums/index.d.ts"
     }
   },
   "files": ["dist"],
   "scripts": {
-    "build": "npm run build:enums && npm run copy:types",
+    "build": "npm-run-all clean build:enums copy:types",
     "build:enums": "tsc",
     "copy:types": "cp -r src/types dist/",
     "clean": "rm -rf dist",

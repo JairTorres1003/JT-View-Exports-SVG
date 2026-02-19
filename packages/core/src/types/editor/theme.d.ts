@@ -1,38 +1,24 @@
 import type { Extension } from 'vscode'
 
 /**
- * Represents a language file.
+ * Theme mode (dark or light)
  */
-export interface LanguageFile {
-  /**
-   * The name of the language.
-   */
-  name: string
-  /**
-   * The file extensions associated with the language.
-   */
-  extensions: string[]
-}
-
 export type ThemeMode = 'dark' | 'light'
 
-export interface VsCodeStyles {
-  fontFamily: string
-  fontSize: number
-  fontWeight: string | number
-  letterSpacing: number
-  tabSize: number
-  fontFeatureSettings: string
-  [key: string]: unknown
-}
-
+/**
+ * Extension management information
+ */
 export type ExtensionManage = Pick<
-  Extension<any>,
+  Extension<unknown>,
   'id' | 'extensionUri' | 'extensionPath' | 'isActive'
 > & { isValid: boolean }
 
+/**
+ * Package JSON structure for theme extensions
+ */
 export interface IPackageJSON {
   contributes?: {
+    /** Theme definitions */
     themes?: Array<{
       label: string
       uiTheme: string
@@ -42,6 +28,10 @@ export interface IPackageJSON {
   }
 }
 
+/**
+ * Extension with typed package.json
+ */
 export interface IExtension extends Omit<Extension<unknown>, 'packageJSON'> {
+  /** Typed package.json */
   packageJSON: IPackageJSON
 }
