@@ -1,4 +1,5 @@
-export type HandlerArgs<T extends Record<keyof T, (...args: unknown[]) => unknown>> = Parameters<
+// biome-ignore lint/suspicious/noExplicitAny: This utility type is designed to be flexible and work with any handler function, so using `any` here is intentional to allow for a wide range of function signatures.
+export type HandlerArgs<T extends Record<keyof T, (...args: any) => any>> = Parameters<
   T[keyof T]
 >[0]
 
