@@ -23,12 +23,14 @@ const sidebars: SidebarsConfig = {
     {
       type: 'category',
       label: 'Getting Started',
+      collapsed: false,
       link: { type: 'doc', id: 'getting-started/index' },
       items: ['getting-started/installation', 'getting-started/your-first-svg'],
     },
     {
       type: 'category',
       label: 'Guides',
+      collapsed: false,
       items: [
         'guides/usage',
         'guides/devtools',
@@ -40,6 +42,7 @@ const sidebars: SidebarsConfig = {
     {
       type: 'category',
       label: 'Resources',
+      collapsed: false,
       items: ['resources/features', 'resources/svg-support'],
     },
   ],
