@@ -1,6 +1,6 @@
 # @jt-view-exports-svg/core
 
-Shared types, constants, and utilities for the JT View Exports SVG extension ecosystem. This package provides a centralized, organized, and type-safe interface for all core functionality.
+Shared types, constants, and utilities for the **View Exports SVG** extension ecosystem. This package provides a centralized, organized, and type-safe interface for all core functionality.
 
 ## Installation
 
@@ -168,5 +168,3 @@ dist/
     ├── cache/
     └── [All .d.ts files only]
 ```
-
-Total: ~136KB, 34 files
