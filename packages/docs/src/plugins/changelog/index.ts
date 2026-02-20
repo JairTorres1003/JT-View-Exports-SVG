@@ -11,7 +11,7 @@ import { aliasedSitePath, docuHash, normalizeUrl, safeGlobby } from '@docusaurus
 import fs from 'fs-extra'
 import { createBlogFiles, toChangelogEntries } from './utils'
 
-const MonorepoRoot = path.resolve(path.join(__dirname, '../../../..'))
+const MonorepoRoot = path.resolve(path.join(__dirname, '../../../../..'))
 
 const ChangelogFilePattern = 'CHANGELOG(-v[0-9]*)?.md'
 
