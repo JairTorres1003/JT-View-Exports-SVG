@@ -15,7 +15,6 @@
       "types": "./dist/constants/index.d.ts"
     },
     "./types": {
-      "import": "./dist/types/index.js",
       "types": "./dist/types/index.d.ts"
     }
   },

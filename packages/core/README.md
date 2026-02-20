@@ -31,25 +31,6 @@ import { SVGPostMessage, SVGReceiveMessage, CacheIconKind } from '@jt-view-expor
 import type { SVGFile, SVGIcon, PostMessage, ReceiveMessage } from '@jt-view-exports-svg/core/types'
 ```
 
-### Import from Specific Domains
-
-```typescript
-// Common base types
-import type { SVGFile, Position } from '@jt-view-exports-svg/core/types/common'
-
-// SVG component types
-import type { SVGComponent, ViewExportSVG } from '@jt-view-exports-svg/core/types/svg'
-
-// Generic messaging system
-import type { PostMessage, ReceiveMessage } from '@jt-view-exports-svg/core/types/messaging'
-
-// Editor/VSCode specific types
-import type { VsCodeStyles, ThemeMode } from '@jt-view-exports-svg/core/types/editor'
-
-// Icon cache types
-import type { SVGIconCache } from '@jt-view-exports-svg/core/types/cache'
-```
-
 ## Structure
 
 ```
@@ -141,7 +122,7 @@ npm run clean
 |--------|------|----------|
 | `@jt-view-exports-svg/core` | Full | Entire package (types + constants) |
 | `@jt-view-exports-svg/core/constants` | ~2KB | Only messaging/configuration constants |
-| `@jt-view-exports-svg/core/types` | ~43KB | Only type definitions (no runtime) |
+| `@jt-view-exports-svg/core/types` | Types only | All type definitions (no runtime) |
 
 ## Key Features
 
