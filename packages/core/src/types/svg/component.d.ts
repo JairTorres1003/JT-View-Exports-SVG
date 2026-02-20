@@ -1,7 +1,7 @@
 import type { SVGDeclaration } from '../../constants/declarations'
 
 import type { SVGErrors, SVGLocation } from '../common'
-import type { ParamsTypes } from '../misc'
+import type { ParamsTypes } from '../utils'
 import type { GetSVGTagName, SVGTagName } from './tags'
 
 /**

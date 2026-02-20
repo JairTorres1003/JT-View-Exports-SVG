@@ -1,12 +1,7 @@
-/**
- * Post message type definitions (Extension → Webview)
- *
- * Types for messages sent from the extension to the webview
- */
-
 import type { SVGPostMessage } from '../../constants/messages'
+import type { SVGErrors } from '../common'
 import type { ExtensionManage, ThemeMode, VsCodeStyles } from '../editor'
-import type { SVGComponent, SVGErrors, ViewExportSVG } from '../svg'
+import type { SVGComponent, ViewExportSVG } from '../svg'
 
 import type { AssetPath, MessageFnMap, MessagesUnion } from './base'
 
