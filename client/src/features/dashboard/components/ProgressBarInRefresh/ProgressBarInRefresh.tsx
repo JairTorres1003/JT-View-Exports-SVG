@@ -1,4 +1,4 @@
-import type { ViewExportSVG } from '@api/types/ViewExportsSVG'
+import type { ViewExportSVG } from '@jt-view-exports-svg/core'
 import { LinearProgress } from '@mui/material'
 import type { FC } from 'react'
 import { useSelector } from 'react-redux'

@@ -1,5 +1,4 @@
-import { SVGPostMessage, SVGReceiveMessage } from '@api/enums/ViewExportsSVG'
-import type { FileTemporary } from '@api/types/views/content'
+import { type FileTemporary, SVGPostMessage, SVGReceiveMessage } from '@jt-view-exports-svg/core'
 import { List, ListItem, ListItemText, Stack, Typography } from '@mui/material'
 import { useEffect, useState } from 'react'
 import { useTranslation } from 'react-i18next'

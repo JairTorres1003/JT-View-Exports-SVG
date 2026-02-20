@@ -27,9 +27,7 @@
     /* Paths */
     "baseUrl": ".",
     "paths": {
-      "@/*": ["src/*"],
-      "@api/enums/*": ["../src/enum/*"],
-      "@api/types/*": ["../src/types/*"]
+      "@/*": ["src/*"]
     }
   },
   "include": ["src", "../src/enum", "../src/types"]

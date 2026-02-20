@@ -1,4 +1,4 @@
-import type { ViewExportSVG } from '@api/types/ViewExportsSVG'
+import type { ViewExportSVG } from '@jt-view-exports-svg/core'
 import { IconButton, Tooltip } from '@mui/material'
 import { type FC, useState } from 'react'
 import { useTranslation } from 'react-i18next'

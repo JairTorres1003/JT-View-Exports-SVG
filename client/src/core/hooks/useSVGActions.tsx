@@ -1,4 +1,4 @@
-import type { SVGComponent } from '@api/types/ViewExportsSVG'
+import type { SVGComponent } from '@jt-view-exports-svg/core'
 import { useTranslation } from 'react-i18next'
 
 import { openFileInPosition } from '../utils/file'

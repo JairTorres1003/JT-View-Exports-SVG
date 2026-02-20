@@ -1,4 +1,4 @@
-import { SVGReceiveMessage } from '@api/enums/ViewExportsSVG'
+import { SVGReceiveMessage } from '@jt-view-exports-svg/core'
 import * as monaco from 'monaco-editor'
 import { useEffect, useState } from 'react'
 

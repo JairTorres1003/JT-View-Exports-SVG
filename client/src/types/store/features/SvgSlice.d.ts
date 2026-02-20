@@ -1,4 +1,4 @@
-import type { SVGErrors, ViewExportSVG } from '@api/types/ViewExportsSVG'
+import type { SVGErrors, ViewExportSVG } from '@jt-view-exports-svg/core'
 import type { CaseReducer, PayloadAction } from '@reduxjs/toolkit'
 
 export interface SVGState {

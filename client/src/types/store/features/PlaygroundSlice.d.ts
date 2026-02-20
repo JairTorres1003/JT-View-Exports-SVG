@@ -1,4 +1,4 @@
-import type { SVGComponent } from '@api/types/ViewExportsSVG'
+import type { SVGComponent } from '@jt-view-exports-svg/core'
 import type { CaseReducer, PayloadAction } from '@reduxjs/toolkit'
 
 export interface PlaygroundState {

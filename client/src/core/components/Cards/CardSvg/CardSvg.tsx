@@ -1,4 +1,4 @@
-import type { SVGComponent } from '@api/types/ViewExportsSVG'
+import type { SVGComponent } from '@jt-view-exports-svg/core'
 import { Box, type BoxProps, Card, IconButton, Tooltip, Typography } from '@mui/material'
 import cn from 'classnames'
 import type { FC } from 'react'

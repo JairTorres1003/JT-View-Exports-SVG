@@ -1,5 +1,4 @@
-import { SVGReceiveMessage } from '@api/enums/ViewExportsSVG'
-import type { SVGFile, ViewExportSVG } from '@api/types/ViewExportsSVG'
+import { type SVGFile, SVGReceiveMessage, type ViewExportSVG } from '@jt-view-exports-svg/core'
 import { IconButton, Tooltip } from '@mui/material'
 import type { FC } from 'react'
 import { useTranslation } from 'react-i18next'

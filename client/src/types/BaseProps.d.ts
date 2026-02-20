@@ -1,5 +1,5 @@
-import type { VsCodeStyles } from '@api/types/vscode'
-import type { Theme, Components } from '@mui/material/styles'
+import type { VsCodeStyles } from '@jt-view-exports-svg/core'
+import type { Components, Theme } from '@mui/material/styles'
 
 /**
  * Represents the base props for an icon.

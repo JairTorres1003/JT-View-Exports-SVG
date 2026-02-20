@@ -1,4 +1,4 @@
-import type { SVGComponent } from '@api/types/ViewExportsSVG'
+import type { SVGComponent } from '@jt-view-exports-svg/core'
 import { Divider, Menu, MenuItem, type MenuProps } from '@mui/material'
 import type { FC } from 'react'
 

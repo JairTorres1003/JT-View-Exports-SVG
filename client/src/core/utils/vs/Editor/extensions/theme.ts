@@ -1,9 +1,9 @@
-import type { ExtensionManage } from '@api/types/vscode'
 import {
   ExtensionHostKind,
   type IExtensionManifest,
   registerExtension,
 } from '@codingame/monaco-vscode-api/extensions'
+import type { ExtensionManage } from '@jt-view-exports-svg/core'
 
 import i18next from '@/i18n'
 import { getUnknownError } from '@/utils/errors'

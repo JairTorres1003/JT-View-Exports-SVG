@@ -1,5 +1,4 @@
-import { SVGReceiveMessage } from '@api/enums/ViewExportsSVG'
-import type { Position, SVGFile } from '@api/types/ViewExportsSVG'
+import { type Position, type SVGFile, SVGReceiveMessage } from '@jt-view-exports-svg/core'
 
 import { vscode } from '@/services/vscode'
 

@@ -1,4 +1,4 @@
-import { SVGPostMessage } from '@api/enums/ViewExportsSVG'
+import { SVGPostMessage } from '@jt-view-exports-svg/core'
 import { type FC, useEffect, useState } from 'react'
 import { useDispatch } from 'react-redux'
 

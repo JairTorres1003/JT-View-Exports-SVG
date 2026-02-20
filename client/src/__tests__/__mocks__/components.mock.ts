@@ -1,4 +1,4 @@
-import type { SVGComponent } from '@api/types/ViewExportsSVG'
+import type { SVGComponent } from '@jt-view-exports-svg/core'
 
 const location: SVGComponent['location'] = {
   start: { line: 1, column: 1, index: 1 },

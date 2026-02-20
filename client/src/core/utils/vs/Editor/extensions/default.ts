@@ -1,10 +1,10 @@
-import type { SVGComponent, SVGLocation } from '@api/types/ViewExportsSVG'
 import {
   ExtensionHostKind,
   type IExtensionManifest,
   type RegisterLocalProcessExtensionResult,
   registerExtension,
 } from '@codingame/monaco-vscode-api/extensions'
+import type { SVGComponent, SVGLocation } from '@jt-view-exports-svg/core'
 
 import { openFileInPosition } from '@/core/utils/file'
 import { setRecentlySelected } from '@/store/features/PlaygroundSlice'

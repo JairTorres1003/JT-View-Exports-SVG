@@ -1,14 +1,19 @@
-import type { SVGPostMessage, SVGReceiveMessage } from '@api/enums/ViewExportsSVG'
-import type {
-  SVGComponent,
-  SVGErrors,
-  SVGFile,
-  SVGIcon,
-  SVGPlayground,
-  ViewExportSVG,
-} from '@api/types/ViewExportsSVG'
-import type { AssetPath, FileTemporary, OpenFile } from '@api/types/views/content'
-import type { ExtensionManage, ThemeMode, VsCodeStyles } from '@api/types/vscode'
+import {
+  type AssetPath,
+  type ExtensionManage,
+  type FileTemporary,
+  type OpenFile,
+  type SVGComponent,
+  type SVGErrors,
+  type SVGFile,
+  type SVGIcon,
+  type SVGPlayground,
+  SVGPostMessage,
+  type SVGReceiveMessage,
+  type ThemeMode,
+  type ViewExportSVG,
+  type VsCodeStyles,
+} from '@jt-view-exports-svg/core'
 
 /**
  * The message to receive from the webview.

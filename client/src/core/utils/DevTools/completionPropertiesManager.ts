@@ -1,4 +1,4 @@
-import type { SVGComponent } from '@api/types/ViewExportsSVG'
+import type { SVGComponent } from '@jt-view-exports-svg/core'
 import * as monaco from 'monaco-editor'
 
 import { createInsertText } from '@/core/utils/vs/Editor'

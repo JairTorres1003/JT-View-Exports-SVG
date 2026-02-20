@@ -1,5 +1,9 @@
-import { SVGPostMessage, SVGReceiveMessage } from '@api/enums/ViewExportsSVG'
-import type { ExtensionManage, ThemeMode } from '@api/types/vscode'
+import {
+  type ExtensionManage,
+  SVGPostMessage,
+  SVGReceiveMessage,
+  type ThemeMode,
+} from '@jt-view-exports-svg/core'
 import i18next from 'i18next'
 import { useCallback, useEffect, useRef, useState } from 'react'
 import { Trans, useTranslation } from 'react-i18next'

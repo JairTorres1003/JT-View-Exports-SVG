@@ -1,4 +1,4 @@
-import type { ExtensionManage } from '@api/types/vscode'
+import type { ExtensionManage } from '@jt-view-exports-svg/core'
 import type * as monaco from 'monaco-editor'
 
 import type { PartialExcept } from '@/types/misc'

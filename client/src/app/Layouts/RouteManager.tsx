@@ -1,4 +1,4 @@
-import { SVGReceiveMessage } from '@api/enums/ViewExportsSVG'
+import { SVGReceiveMessage } from '@jt-view-exports-svg/core'
 import { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom'

@@ -1,4 +1,4 @@
-import type { ParamDefinition } from '@api/types/misc'
+import type { ParamDefinition } from '@jt-view-exports-svg/core'
 
 /**
  * Generates a snippet string for inserting a property into code,

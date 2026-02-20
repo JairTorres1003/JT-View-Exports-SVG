@@ -1,4 +1,4 @@
-import type { ExtensionManage, ThemeMode, VsCodeStyles } from '@api/types/vscode'
+import type { ExtensionManage, ThemeMode, VsCodeStyles } from '@jt-view-exports-svg/core'
 import type { CaseReducer, PayloadAction } from '@reduxjs/toolkit'
 
 export interface VsCodeState {

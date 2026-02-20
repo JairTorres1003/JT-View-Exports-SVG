@@ -1,4 +1,4 @@
-import { SVGPostMessage, SVGReceiveMessage } from '@api/enums/ViewExportsSVG'
+import { SVGPostMessage, SVGReceiveMessage } from '@jt-view-exports-svg/core'
 import { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { type PanelProps, usePanelRef } from 'react-resizable-panels'

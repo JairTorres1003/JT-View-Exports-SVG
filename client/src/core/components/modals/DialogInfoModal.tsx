@@ -1,4 +1,4 @@
-import type { ViewExportSVG } from '@api/types/ViewExportsSVG'
+import type { ViewExportSVG } from '@jt-view-exports-svg/core'
 import {
   type DialogProps,
   List,

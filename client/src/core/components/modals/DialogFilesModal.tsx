@@ -1,4 +1,4 @@
-import type { SVGFile, ViewExportSVG } from '@api/types/ViewExportsSVG'
+import type { SVGFile, ViewExportSVG } from '@jt-view-exports-svg/core'
 import {
   ClickAwayListener,
   type DialogProps,

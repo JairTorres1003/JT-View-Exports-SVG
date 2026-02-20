@@ -1,4 +1,4 @@
-import type { SVGComponent, SVGComponentProps } from '@api/types/ViewExportsSVG'
+import type { SVGComponent, SVGComponentProps } from '@jt-view-exports-svg/core'
 import cn from 'classnames'
 import { motion } from 'framer-motion'
 import React, { createElement, forwardRef, type SVGElementType, useEffect } from 'react'

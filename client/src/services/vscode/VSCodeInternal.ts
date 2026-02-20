@@ -1,4 +1,4 @@
-import { SVGPostMessage, SVGReceiveMessage } from '@api/enums/ViewExportsSVG'
+import { SVGPostMessage, SVGReceiveMessage } from '@jt-view-exports-svg/core'
 import i18next from 'i18next'
 import type { WebviewApi } from 'vscode-webview'
 

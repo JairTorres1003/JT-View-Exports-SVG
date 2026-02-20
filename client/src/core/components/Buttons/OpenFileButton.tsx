@@ -1,4 +1,4 @@
-import type { SVGFile } from '@api/types/ViewExportsSVG'
+import type { SVGFile } from '@jt-view-exports-svg/core'
 import { IconButton, type IconButtonProps, Tooltip, type TooltipProps } from '@mui/material'
 import type { FC } from 'react'
 import { useTranslation } from 'react-i18next'
