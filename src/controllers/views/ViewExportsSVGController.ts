@@ -93,7 +93,7 @@ export class ViewExportsSVGController extends ListerWebviewController {
         localResourceRoots: [
           Uri.joinPath(extensionUri, 'assets'),
           Uri.joinPath(extensionUri, 'out/cjs'),
-          Uri.joinPath(extensionUri, 'client/dist'),
+          Uri.joinPath(extensionUri, 'dist/webview'),
         ],
       }
     )

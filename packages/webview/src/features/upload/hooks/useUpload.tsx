@@ -1,7 +1,7 @@
 import { SVGReceiveMessage } from '@jt-view-exports-svg/core'
 import { useEffect } from 'react'
 import { useDispatch } from 'react-redux'
-import { useLocation } from 'react-router'
+import { useLocation } from 'react-router-dom'
 
 import { pathnames } from '@/config/routes/route'
 import { useLoadFiles } from '@/core/hooks/useLoadFiles'

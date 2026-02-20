@@ -1,4 +1,5 @@
 import * as fs from 'node:fs'
+import path from 'node:path'
 import importMetaUrlPlugin from '@codingame/esbuild-import-meta-url-plugin'
 import react from '@vitejs/plugin-react-swc'
 import { defineConfig } from 'vite'
@@ -46,6 +47,8 @@ export default defineConfig({
   },
   build: {
     target: 'es2022',
+    emptyOutDir: true,
+    outDir: path.join(__dirname, '../../dist/webview'),
     reportCompressedSize: false,
     cssCodeSplit: false,
     assetsInlineLimit: 0,
