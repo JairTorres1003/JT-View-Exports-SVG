@@ -12,6 +12,7 @@ export const BoxEditor = styled(
   { name: editorClasses.root, target: editorClasses.root }
 )(({ theme: { vars } }) => ({
   minHeight: 150,
+  maxHeight: 350,
   width: '100%',
   position: 'relative',
   '--JT-SVG-monaco-margin': '10px',
@@ -21,6 +22,7 @@ export const BoxEditor = styled(
     width: '100%',
     resize: 'vertical',
     overflow: 'auto',
+    maxHeight: 'inherit',
   },
   [`& .${editorClasses.loader}`]: {
     minHeight: 'inherit',

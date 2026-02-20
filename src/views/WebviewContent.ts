@@ -46,7 +46,7 @@ export class WebviewContent {
    * @returns {Uri} The constructed URI for the specified asset.
    */
   private getAssetUri(...path: string[]): Uri {
-    return getUri(this._webview, this._extensionUri, ['client', 'dist', ...path])
+    return getUri(this._webview, this._extensionUri, ['dist/webview', ...path])
   }
 
   /**

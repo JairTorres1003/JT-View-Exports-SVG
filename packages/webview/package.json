@@ -1,7 +1,7 @@
 {
-  "name": "jt-view-exports-svg--client",
-  "displayName": "View Exports SVG (Client)",
-  "description": "View Exports SVG (Client)",
+  "name": "@jt-view-exports-svg/webview",
+  "displayName": "View Exports SVG Webview",
+  "description": "Webview component for View Exports SVG, a TypeScript library for managing SVG icons in React projects.",
   "keywords": [
     "view-exports-svg",
     "SVG icons",
@@ -16,7 +16,6 @@
   ],
   "type": "module",
   "private": true,
-  "workspaces": ["../packages/*"],
   "license": "MIT",
   "author": "Jair Torres",
   "version": "4.1.0",
@@ -27,7 +26,7 @@
   "bugs": {
     "url": "https://github.com/JairTorres1003/JT-View-Exports-SVG/issues"
   },
-  "homepage": "https://github.com/JairTorres1003/JT-View-Exports-SVG/tree/main/client#readme",
+  "homepage": "https://github.com/JairTorres1003/JT-View-Exports-SVG/tree/main/packages/webview#readme",
   "scripts": {
     "dev": "vite",
     "build": "tsc -b && vite build",

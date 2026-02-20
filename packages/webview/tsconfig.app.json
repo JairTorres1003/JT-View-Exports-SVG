@@ -30,5 +30,5 @@
       "@/*": ["src/*"]
     }
   },
-  "include": ["src", "../src/enum", "../src/types"]
+  "include": ["src"]
 }

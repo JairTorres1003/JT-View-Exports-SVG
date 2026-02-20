@@ -9,6 +9,15 @@ const configSchema = z.object({
    */
   VITE_VSCODE_API_URL: z
     .url()
+    .refine(
+      (value) => {
+        if (import.meta.env.DEV) {
+          return true
+        }
+        return value !== undefined
+      },
+      { message: 'VITE_VSCODE_API_URL is required in development' }
+    )
     .refine((value) => !value.endsWith('/'), { message: 'URL must not end with a slash' }),
 })
 
