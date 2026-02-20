@@ -1,41 +1,58 @@
-# Website
+# View Exports SVG: Documentation Site
 
-This website is built using [Docusaurus](https://docusaurus.io/), a modern static website generator.
+Welcome to the `packages/docs` workspace. This folder contains the documentation and marketing site for the View Exports SVG extension. The site is a Docusaurus app with a custom changelog pipeline and a UI layer that mirrors the extension's brand.
 
-## Installation
+## What lives here
+
+- Product documentation, guides, and usage examples.
+- A changelog section generated from the root `CHANGELOG.md` files.
+- Custom plugins and theming (Tailwind, HeroUI components, and Docusaurus theme config).
+
+## Tech stack
+
+- Docusaurus 3
+- React + TypeScript
+- Tailwind CSS + HeroUI
+
+## Local development
+
+From the repo root, install dependencies:
 
 ```bash
-yarn
+pnpm install
 ```
 
-## Local Development
+Start the docs site:
 
 ```bash
-yarn start
+pnpm --filter @jt-view-exports-svg/docs start
 ```
 
-This command starts a local development server and opens up a browser window. Most changes are reflected live without having to restart the server.
+The dev server runs on `http://localhost:3000` by default and reloads on file changes.
 
 ## Build
 
 ```bash
-yarn build
+pnpm --filter @jt-view-exports-svg/docs build
 ```
 
-This command generates static content into the `build` directory and can be served using any static contents hosting service.
+The build output is written to `packages/docs/build`.
 
-## Deployment
+## Environment variables (optional)
 
-Using SSH:
+These variables are only needed for production or search indexing:
 
 ```bash
-USE_SSH=true yarn deploy
+SITE_URL=https://your-domain.example
+ALGOLIA_APP_ID=...
+ALGOLIA_API_KEY=...
+ALGOLIA_INDEX_NAME=...
+ALGOLIA_SITE_VERIFICATION=...
 ```
 
-Not using SSH:
+If these are not set, the local dev server still works; search and verification tags will be skipped.
 
-```bash
-GIT_USER=<Your GitHub username> yarn deploy
-```
+## Notes for contributors
 
-If you are using GitHub pages for hosting, this command is a convenient way to build the website and push to the `gh-pages` branch.
+- The changelog is sourced from the repository root. Update `CHANGELOG.md` and the docs site will reflect it.
+- Custom plugins live in `packages/docs/src/plugins`.
