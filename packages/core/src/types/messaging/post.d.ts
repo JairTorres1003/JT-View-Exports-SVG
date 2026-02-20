@@ -3,7 +3,14 @@ import type { SVGErrors } from '../common'
 import type { ExtensionManage, ThemeMode, VsCodeStyles } from '../editor'
 import type { SVGComponent, ViewExportSVG } from '../svg'
 
-import type { AssetPath, MessageFnMap, MessagesUnion } from './base'
+import type {
+  AssetPath,
+  HandlerArgs,
+  HandlersMap,
+  MessageEmitter,
+  MessageSubscriber,
+  MessagesUnion,
+} from './base'
 
 /**
  * Map of post message types to their data payloads
@@ -36,7 +43,26 @@ export type PostMessageMap = {
 export type PostMessage = MessagesUnion<PostMessageMap>
 
 /**
- * Function type for posting messages to the webview
+ * Handler interface for all post messages
  * Auto-generated from PostMessageMap
  */
-export type FuncPostMessage = MessageFnMap<PostMessageMap>
+export type HandlerPostMessage = HandlersMap<PostMessageMap>
+
+/**
+ * Callback function that handles incoming messages.
+ * @param arg0 - Optional arguments containing the post message handler data.
+ * @returns void
+ */
+export type OnMessagePosted = (arg0?: HandlerArgs<HandlerPostMessage>) => void
+
+/**
+ * Message emitter function type for sending messages to the webview.
+ * Auto-generated from PostMessageMap
+ */
+export type PostMessageEmitter = MessageEmitter<PostMessageMap>
+
+/**
+ * Message subscriber function type for subscribing to messages from the webview.
+ * Auto-generated from PostMessageMap
+ */
+export type PostMessageSubscriber = MessageSubscriber<PostMessageMap>

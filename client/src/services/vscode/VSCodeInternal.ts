@@ -12,7 +12,7 @@ interface VSCodeInternalAPIWrapperMessage {
   data?: unknown
 }
 
-const CUSTOM_EVENTS = [SVGReceiveMessage.RequestFileOpen]
+const CUSTOM_EVENTS: SVGReceiveMessage[] = [SVGReceiveMessage.RequestFileOpen]
 
 class VSCodeInternalAPIWrapper<T = unknown> implements WebviewApi<T> {
   private currentState: T | undefined = undefined

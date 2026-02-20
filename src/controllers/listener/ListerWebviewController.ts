@@ -1,7 +1,7 @@
 import {
   type FileTemporary,
-  type FuncPostMessage,
   type OpenFile,
+  type PostMessageEmitter,
   type SVGFile,
   type SVGIcon,
   type SVGPlayground,
@@ -55,7 +55,7 @@ export class ListerWebviewController {
    * @param type - The type of the message.
    * @param data - The data to be sent with the message.
    */
-  public readonly _postMessage: FuncPostMessage = (type, data?) => {
+  public readonly _postMessage: PostMessageEmitter = (type, data?) => {
     this._panel.webview.postMessage({ type, data }).then(undefined, (error) => {
       console.error(l10n.t('Error posting message to webview:'), error)
     })

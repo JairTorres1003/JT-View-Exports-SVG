@@ -3,7 +3,7 @@ import type { SVGReceiveMessage } from '../../constants/messages'
 import type { FileTemporary, OpenFile, SVGFile } from '../common'
 import type { SVGIcon, SVGPlayground } from '../svg'
 
-import type { HandlersMap, MessagesUnion } from './base'
+import type { HandlerArgs, HandlersMap, MessageEmitter, MessagesUnion } from './base'
 
 /**
  * Map of receive message types to their data payloads
@@ -49,3 +49,16 @@ export type ReceiveMessage = MessagesUnion<ReceiveMessageMap>
  * Auto-generated from ReceiveMessageMap
  */
 export type HandlerReceiveMessage = HandlersMap<ReceiveMessageMap>
+
+/**
+ * Callback function that handles incoming messages.
+ * @param arg0 - Optional arguments containing the received message handler data.
+ * @returns void
+ */
+export type OnMessageReceived = (arg0?: HandlerArgs<HandlerReceiveMessage>) => void
+
+/**
+ * Message emitter function type for sending messages to the extension.
+ * Auto-generated from ReceiveMessageMap
+ */
+export type ReceiveMessageEmitter = MessageEmitter<ReceiveMessageMap>

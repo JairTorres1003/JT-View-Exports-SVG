@@ -1,8 +1,13 @@
-import type { HandlerArgs, PostMessage, SVGPostMessage } from '@jt-view-exports-svg/core'
+import type {
+  HandlerPostMessage,
+  OnMessagePosted,
+  PostMessage,
+  PostMessageSubscriber,
+  ReceiveMessageEmitter,
+  SVGPostMessage,
+} from '@jt-view-exports-svg/core'
 import i18next from 'i18next'
 import type { WebviewApi } from 'vscode-webview'
-
-import type { FuncOnMessage, FuncPostMessage, MessageHandlersView } from '@/types/ViewExportsSVG'
 
 import { vscodeInternal } from './VSCodeInternal'
 
@@ -18,7 +23,7 @@ class VSCodeAPIWrapper {
   /**
    * Mapping of message commands to their corresponding handlers.
    */
-  private readonly messageHandlers: MessageHandlersView = {}
+  private readonly messageHandlers: Partial<HandlerPostMessage> = {}
 
   /**
    * Creates an instance of `VSCodeAPIWrapper`.
@@ -40,9 +45,7 @@ class VSCodeAPIWrapper {
         return
       }
 
-      const handler = this.messageHandlers[type] as (
-        arg0: HandlerArgs<Required<MessageHandlersView>>
-      ) => void
+      const handler = this.messageHandlers[type] as OnMessagePosted
 
       if (typeof handler === 'function') {
         try {
@@ -65,7 +68,7 @@ class VSCodeAPIWrapper {
    * @param type - The type of SVG post message.
    * @param data - The data to send with the post message.
    */
-  public postMessage: FuncPostMessage = (type, data = undefined) => {
+  public postMessage: ReceiveMessageEmitter = (type, data = undefined) => {
     if (!this.vsCodeApi) {
       console.warn(i18next.t('errors.VSCodeApiIsNotAvailable'), { type })
       return
@@ -80,10 +83,8 @@ class VSCodeAPIWrapper {
    * @param type - The type of SVG post message.
    * @param handler - The callback function to handle the post message.
    */
-  public onMessage: FuncOnMessage = (type, handler) => {
-    this.messageHandlers[type] = handler as (
-      arg0: HandlerArgs<Required<MessageHandlersView>>
-    ) => void
+  public onMessage: PostMessageSubscriber = (type, handler) => {
+    this.messageHandlers[type] = handler as OnMessagePosted
   }
 
   /**

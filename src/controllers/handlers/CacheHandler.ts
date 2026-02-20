@@ -1,4 +1,4 @@
-import { type FuncPostMessage, type SVGIcon, SVGPostMessage } from '@jt-view-exports-svg/core'
+import { type PostMessageEmitter, type SVGIcon, SVGPostMessage } from '@jt-view-exports-svg/core'
 import { l10n, type WorkspaceFolder, window, workspace } from 'vscode'
 
 import { getIconsFromCache } from '@/utilities/icons/getIconsFromCache'
@@ -9,7 +9,7 @@ import { getCacheManager } from '../cache'
 export class CacheHandler {
   private readonly currentFolder: WorkspaceFolder | undefined
 
-  constructor(private readonly postMessage: FuncPostMessage) {
+  constructor(private readonly postMessage: PostMessageEmitter) {
     this.currentFolder = workspace.workspaceFolders?.[0]
   }
 

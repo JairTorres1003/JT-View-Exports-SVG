@@ -1,4 +1,4 @@
-import { type FuncPostMessage, type SVGFile, SVGPostMessage } from '@jt-view-exports-svg/core'
+import { type PostMessageEmitter, type SVGFile, SVGPostMessage } from '@jt-view-exports-svg/core'
 import { l10n } from 'vscode'
 
 import { scanningFiles, scanningWorkspace } from '@/utilities/files/scanning'
@@ -11,7 +11,7 @@ export class AssetsHandler {
   private readonly assetsPathController: AssetsPathsController
   private readonly lastScanDateController: LastScanDateController
 
-  constructor(private readonly postMessage: FuncPostMessage) {
+  constructor(private readonly postMessage: PostMessageEmitter) {
     this.assetsPathController = new AssetsPathsController()
     this.lastScanDateController = new LastScanDateController()
   }

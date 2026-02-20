@@ -1,4 +1,4 @@
-import { type FuncPostMessage, SVGPostMessage } from '@jt-view-exports-svg/core'
+import { type PostMessageEmitter, SVGPostMessage } from '@jt-view-exports-svg/core'
 import { commands } from 'vscode'
 
 import { CONFIG_KEY } from '@/constants/misc'
@@ -7,7 +7,7 @@ import { getExtensionTheme as getExtTheme } from '@/utilities/vscode/extensions/
 import { getCurrentTheme, getStyles } from '@/utilities/vscode/theme'
 
 export class ConfigurationHandler {
-  constructor(private readonly postMessage: FuncPostMessage) {}
+  constructor(private readonly postMessage: PostMessageEmitter) {}
 
   getTheme(): void {
     this.postMessage(SVGPostMessage.SendTheme, getCurrentTheme())

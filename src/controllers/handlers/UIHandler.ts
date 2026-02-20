@@ -1,7 +1,7 @@
 import {
   type FileTemporary,
-  type FuncPostMessage,
   type OpenFile,
+  type PostMessageEmitter,
   SVGPostMessage,
 } from '@jt-view-exports-svg/core'
 import { l10n, type OpenDialogOptions, Uri, window, workspace } from 'vscode'
@@ -12,7 +12,7 @@ import { CONFIG_KEY, DISABLED_PLAYGROUND_IN_PATH } from '@/constants/misc'
 import { openFile } from '@/utilities/files/misc'
 
 export class UIHandler {
-  constructor(private readonly postMessage: FuncPostMessage) {}
+  constructor(private readonly postMessage: PostMessageEmitter) {}
 
   async toggleExpandIcon(isExpanded: boolean): Promise<void> {
     try {

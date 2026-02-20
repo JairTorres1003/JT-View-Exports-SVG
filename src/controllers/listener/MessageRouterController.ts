@@ -1,6 +1,6 @@
 import {
-  type HandlerArgs,
   type HandlerReceiveMessage,
+  type OnMessageReceived,
   type ReceiveMessage,
   SVGReceiveMessage,
 } from '@jt-view-exports-svg/core'
@@ -9,8 +9,6 @@ import { type Disposable, l10n, type Webview, window } from 'vscode'
 import { isEmpty } from '@/utilities/misc'
 
 import type { ListerWebviewController } from './ListerWebviewController'
-
-type ReceiveMessageHandler = (arg0?: HandlerArgs<HandlerReceiveMessage>) => void
 
 export class MessageRouter {
   constructor(private readonly handlers: ListerWebviewController) {}
@@ -70,7 +68,7 @@ export class MessageRouter {
   }
 
   private handleMessage(event: ReceiveMessage): void {
-    const handler = this._handlersMap[event.type] as ReceiveMessageHandler
+    const handler = this._handlersMap[event.type] as OnMessageReceived
 
     if (isEmpty(handler) || typeof handler !== 'function') {
       console.error(l10n.t('No handler found for event:'), event)

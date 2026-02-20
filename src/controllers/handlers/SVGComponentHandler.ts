@@ -1,5 +1,5 @@
 import {
-  type FuncPostMessage,
+  type PostMessageEmitter,
   type SVGFile,
   type SVGPlayground,
   SVGPostMessage,
@@ -21,7 +21,7 @@ export class SVGComponentHandler {
   private viewExportSVG: ViewExportSVG[]
 
   constructor(
-    private readonly postMessage: FuncPostMessage,
+    private readonly postMessage: PostMessageEmitter,
     viewExportSVG: ViewExportSVG[]
   ) {
     this.viewExportSVG = viewExportSVG
