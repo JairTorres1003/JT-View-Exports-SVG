@@ -1,4 +1,4 @@
-import type { SVGLocation } from '../ViewExportsSVG'
+import type { SVGLocation } from '../common'
 
 export interface GetSVGTagName {
   name?: SVGTagName | 'Fragment'
