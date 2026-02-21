@@ -254,15 +254,17 @@
   "scripts": {
     "biome:check": "biome check --write",
     "biome:format": "biome format --write",
-    "dev": "tsc && tsc-alias",
-    "dev:esbuild": "node esbuild.config.js",
+    "dev:tsc": "tsc && tsc-alias",
+    "watch:tsc": "concurrently \"tsc -w --sourceMap\" \"tsc-alias -w\"",
+    "dev": "node esbuild.config.js",
     "watch": "node esbuild.config.js --watch",
     "compile": "node esbuild.config.js --production",
     "web:dev": "node esbuild.config.js --web-mode",
     "web:watch": "node esbuild.config.js --web-mode --watch",
     "web:compile": "node esbuild.config.js --production --web-mode",
-    "pretest": "pnpm run dev",
-    "test": "node ../../dist/test/runTest.js --verbose"
+    "pretest": "pnpm run dev:tsc",
+    "test": "node ../../dist/test/runTest.js --verbose",
+    "test:web": "vscode-test-web --extensionDevelopmentPath=. $FOLDER_EXAMPLE"
   },
   "devDependencies": {
     "@babel/types": "^7.29.0",

@@ -1,0 +1,17 @@
+{
+  "$schema": "https://biomejs.dev/schemas/2.4.2/schema.json",
+  "root": false,
+  "extends": ["../../biome.json"],
+  "overrides": [
+    {
+      "includes": ["./src/**/*.ts"],
+      "linter": {
+        "rules": {
+          "style": {
+            "useNodejsImportProtocol": "off"
+          }
+        }
+      }
+    }
+  ]
+}
