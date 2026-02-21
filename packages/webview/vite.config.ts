@@ -28,7 +28,13 @@ const optimizeDepsInclude = localDependencies.filter((name) => !optimizeDepsExcl
 // https://vite.dev/config/
 export default defineConfig({
   base: './',
-  plugins: [tsconfigPaths(), react(), codingameOnigWasmWebFix(), legacyManifest(), removeFiles()],
+  plugins: [
+    tsconfigPaths({ root: __dirname }),
+    react(),
+    codingameOnigWasmWebFix(),
+    legacyManifest(),
+    removeFiles()
+  ],
   optimizeDeps: {
     rolldownOptions: {
       plugins: [importMetaUrlPlugin],
