@@ -3,10 +3,10 @@
   "compilerOptions": {
     "sourceMap": true,
     "module": "ES2022",
-    "outDir": "./out/esm",
+    "outDir": "./dist",
     "moduleResolution": "node",
     "declaration": true
   },
-  "include": ["src/types/**/*", "src/**/*"],
-  "exclude": ["client", "examples/*", "server/*", "src/test/**/*"]
+  "include": ["src/**/*"],
+  "exclude": ["src/test/**/*"]
 }
