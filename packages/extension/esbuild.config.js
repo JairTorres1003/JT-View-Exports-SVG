@@ -29,14 +29,14 @@ const esbuildProblemMatcherPlugin = {
 /** @type {import('esbuild').BuildOptions} */
 const options = {
   platform: 'node',
-  outfile: '../../dist/extension.js',
+  outfile: './dist/extension.js',
   plugins: [esbuildProblemMatcherPlugin],
 }
 
 /** @type {import('esbuild').BuildOptions} */
 const webOptions = {
   platform: 'browser',
-  outfile: '../../dist/web/extension.js',
+  outfile: './dist/web/extension.js',
   define: {
     global: 'globalThis',
   },

@@ -92,7 +92,7 @@ export class ViewExportsSVGController extends ListerWebviewController {
         // Restrict the webview to only load content from the extension's directories
         localResourceRoots: [
           Uri.joinPath(extensionUri, 'assets'),
-          Uri.joinPath(extensionUri, '../../dist'),
+          Uri.joinPath(extensionUri, 'dist'),
         ],
       }
     )

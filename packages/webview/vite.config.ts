@@ -54,7 +54,7 @@ export default defineConfig({
   build: {
     target: 'es2022',
     emptyOutDir: true,
-    outDir: path.join(__dirname, '../../dist/webview'),
+    outDir: path.join(__dirname, '../extension/dist/webview'),
     reportCompressedSize: false,
     cssCodeSplit: false,
     assetsInlineLimit: 0,

@@ -1,41 +1,19 @@
-# Development & Configuration
-.vscode/
-.vscode-test/
-.husky/
-.github/
-
-# Build & Temporary
-.temp
-out/cjs/test/
-
-# Source Code (not needed in built extension)
-src/
-server/
-client/
-docs/
-schemas/
-
-# Configuration Files
-tsconfig*.json
-**/*.config.js
-biome.json
-.lintstagedrc
-.yarnrc
-.nvmrc
-package-lock.json
-
-# Development Files
-LEARN.md
-vsc-extension-quickstart.md
-prepare-readme.js
+# Development & Testing
+.vscode
+.vscode-test
+.vscode-test-web
+.gitignore
 workspaceTest.code-workspace
 
-# Source Artifacts
-**/.gitignore
+# Dependencies (included via bundle)
+node_modules/
+
+# Source Code (compiled to dist/)
+src/
 **/*.ts
 **/*.map
-**/node_modules/
 
-# Keep compiled output (required for extension)
-!out/cjs/**
-!client/dist
+# Build & Configuration
+biome.json
+tsconfig*.json
+**.config.js

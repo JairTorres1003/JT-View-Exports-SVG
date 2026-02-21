@@ -6,7 +6,7 @@
       "type": "extensionHost",
       "request": "launch",
       "args": ["--extensionDevelopmentPath=${workspaceFolder}/packages/extension"],
-      "outFiles": ["${workspaceFolder}/dist/**/*.js"]
+      "outFiles": ["${workspaceFolder}/packages/extension/dist/**/*.js"]
     },
     {
       "name": "Run Web Extension",
@@ -17,7 +17,7 @@
         "--extensionDevelopmentPath=${workspaceFolder}/packages/extension",
         "--extensionDevelopmentKind=web"
       ],
-      "outFiles": ["${workspaceFolder}/dist/web/**/*.js"]
+      "outFiles": ["${workspaceFolder}/packages/extension/dist/web/**/*.js"]
     },
     {
       "name": "Extension Tests",
@@ -25,10 +25,10 @@
       "request": "launch",
       "args": [
         "--extensionDevelopmentPath=${workspaceFolder}/packages/extension",
-        "--extensionTestsPath=${workspaceFolder}/dist/test/suite/index",
+        "--extensionTestsPath=${workspaceFolder}/packages/extension/dist/test/suite/index",
         "${workspaceFolder}/packages/extension/workspaceTest.code-workspace"
       ],
-      "outFiles": ["${workspaceFolder}/dist/test/**/*.js"],
+      "outFiles": ["${workspaceFolder}/packages/extension/dist/test/**/*.js"],
       "preLaunchTask": "TaskTest"
     },
     {

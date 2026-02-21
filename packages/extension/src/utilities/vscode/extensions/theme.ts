@@ -99,7 +99,7 @@ export function getExtensionTheme(): ExtensionManage | undefined {
  * Clones a VS Code theme extension's manifest and theme files into a target directory within the current extension.
  *
  * This function copies the `package.json` manifest and all theme files defined in the `contributes.themes` section
- * from the specified `extensionPath` into the `../../dist/webview/extensions/theme` directory of the current extension context.
+ * from the specified `extensionPath` into the `dist/webview/extensions/theme` directory of the current extension context.
  * It creates any necessary directories recursively.
  *
  * @param context - The VS Code extension context, used to determine the target directory for cloning.
@@ -109,7 +109,7 @@ async function cloneThemeExtension(
   context: ExtensionContext,
   extensionPath: string
 ): Promise<void> {
-  const folder = Uri.joinPath(context.extensionUri, '../../dist/webview/assets/extensions/theme')
+  const folder = Uri.joinPath(context.extensionUri, 'dist/webview/assets/extensions/theme')
 
   try {
     await workspace.fs.stat(folder)
@@ -160,7 +160,7 @@ async function cloneThemeExtension(
  * @returns `true` if the theme path exists, `false` otherwise.
  */
 async function extensionThemePath(context: ExtensionContext): Promise<boolean> {
-  const folder = Uri.joinPath(context.extensionUri, '../../dist/webview/assets/extensions/theme')
+  const folder = Uri.joinPath(context.extensionUri, 'dist/webview/assets/extensions/theme')
 
   try {
     await workspace.fs.stat(folder)
