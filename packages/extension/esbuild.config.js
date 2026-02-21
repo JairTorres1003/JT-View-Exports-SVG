@@ -5,6 +5,7 @@ const polyfillModules = require('@esbuild-plugins/node-modules-polyfill')
 const production = process.argv.includes('--production')
 const watch = process.argv.includes('--watch')
 const webMode = process.argv.includes('--web-mode')
+const prefix = webMode ? '[web:watch]' : '[watch]'
 
 /** @type {import('esbuild').Plugin} */
 const esbuildProblemMatcherPlugin = {
@@ -12,7 +13,7 @@ const esbuildProblemMatcherPlugin = {
 
   setup(build) {
     build.onStart(() => {
-      console.log('[watch] build started')
+      console.log(`${prefix} Build started`)
     })
     build.onEnd((result) => {
       result.errors.forEach(({ text, location }) => {
@@ -20,7 +21,7 @@ const esbuildProblemMatcherPlugin = {
         if (location == null) return
         console.error(`    ${location.file}:${location.line}:${location.column}:`)
       })
-      console.log('[watch] build finished')
+      console.log(`${prefix} Build finished`)
     })
   },
 }
@@ -65,11 +66,11 @@ async function main() {
 
   if (watch) {
     await ctx.watch()
-    console.log('[watch] Watching for changes...')
+    console.log(`${prefix} Watching for changes...`)
   } else {
     await ctx.rebuild()
     await ctx.dispose()
-    console.log('[build] Build complete.')
+    console.log(`${prefix} Build complete.`)
   }
 }
 
