@@ -1,40 +1,36 @@
-+# IDE files
-#.vscode/
-
 # Dependencies
 /node_modules
 .pnp
 .pnp.js
 
-# Testing
-/coverage
-/out*
+# Build Output
 /dist
-.vscode-test/
-.vscode-test-web/
-src/test/.temp
-
-
-# Production
 /build
-/dist
-
-# Miscellaneous
-.DS_Store
-.env
-.env*.local
 
 # Logs
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
+pnpm-debug.log*
+lerna-debug.log*
 
-# IDE-specific
+# Testing
+/coverage
+.vscode-test/
+.vscode-test-web/
+
+# IDE
+.vscode/
 .idea/
 
-# Extension-specific
-*.vsix
+# OS
+.DS_Store
+Thumbs.db
 
+# Environment
+.env
+.env*.local
+
+# Temp Files
 .husky/node-version-cache.txt
-.unlighthouse
-*.tsbuildinfo
+*.vsix

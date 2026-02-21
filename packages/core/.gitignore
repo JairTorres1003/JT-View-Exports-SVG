@@ -1,4 +1,10 @@
-dist/
+# Build Output
 node_modules/
+dist/
+
+# Logs & Artifacts
 *.log
 *.tsbuildinfo
+
+# OS
+.DS_Store
