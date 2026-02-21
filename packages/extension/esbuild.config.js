@@ -69,7 +69,7 @@ async function main() {
   } else {
     await ctx.rebuild()
     await ctx.dispose()
-    console.log('[build] Web build complete.')
+    console.log('[build] Build complete.')
   }
 }
 

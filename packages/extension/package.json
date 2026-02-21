@@ -260,7 +260,9 @@
     "compile": "node esbuild.config.js --production",
     "web:dev": "node esbuild.config.js --web-mode",
     "web:watch": "node esbuild.config.js --web-mode --watch",
-    "web:compile": "node esbuild.config.js --production --web-mode"
+    "web:compile": "node esbuild.config.js --production --web-mode",
+    "pretest": "pnpm run dev",
+    "test": "node ../../dist/test/runTest.js --verbose"
   },
   "devDependencies": {
     "@babel/types": "^7.29.0",
@@ -269,7 +271,6 @@
     "@esbuild-plugins/node-modules-polyfill": "^0.2.2",
     "@types/babel__traverse": "^7.28.0",
     "@types/lodash": "^4.17.23",
-    "@types/mocha": "^10.0.10",
     "@types/node": "22.19.11",
     "@types/sinon": "^21.0.0",
     "@types/vscode": "^1.109.0",

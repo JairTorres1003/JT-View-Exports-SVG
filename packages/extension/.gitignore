@@ -1,3 +1,7 @@
 dist/
 node_modules/
 *.tsbuildinfo
+
+# Testing
+.vscode-test/
+.vscode-test-web/
