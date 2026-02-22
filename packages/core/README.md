@@ -1,170 +1,268 @@
 # @jt-view-exports-svg/core
 
-Shared types, constants, and utilities for the **View Exports SVG** extension ecosystem. This package provides a centralized, organized, and type-safe interface for all core functionality.
+Shared types, constants, and utilities for the **View Exports SVG** extension ecosystem. This package provides a centralized, type-safe foundation for all core functionality across the extension, webview, and other packages.
 
-## Installation
+---
 
-This is an internal workspace package. Install dependencies in the workspace root:
+## 📦 Installation
+
+This is an internal workspace package. Install dependencies from the workspace root:
 
 ```bash
-npm install
+pnpm install
 ```
 
-## Usage
+---
 
-### Main Export (Types + Constants)
+## 🚀 Usage
+
+### Import Everything (Types + Constants)
 
 ```typescript
-import { SVGPostMessage, SVGReceiveMessage } from '@jt-view-exports-svg/core'
-import type { SVGComponent, ViewExportSVG } from '@jt-view-exports-svg/core'
+import { SVGPostMessage, SVGReceiveMessage, CacheIconKind } from '@jt-view-exports-svg/core'
+import type { SVGComponent, ViewExportSVG, PostMessage } from '@jt-view-exports-svg/core'
 ```
 
 ### Import Constants Only
 
 ```typescript
-import { SVGPostMessage, SVGReceiveMessage, CacheIconKind } from '@jt-view-exports-svg/core/constants'
+import { SVGPostMessage, SVGReceiveMessage, CacheIconKind, SVGDeclaration } from '@jt-view-exports-svg/core/constants'
 ```
 
 ### Import Types Only
 
 ```typescript
-import type { SVGFile, SVGIcon, PostMessage, ReceiveMessage } from '@jt-view-exports-svg/core/types'
+import type {
+  SVGFile,
+  SVGIcon,
+  PostMessage,
+  ReceiveMessage,
+  EditorConfig,
+  ThemeColors
+} from '@jt-view-exports-svg/core/types'
 ```
 
-## Structure
+---
+
+## 📁 Project Structure
 
 ```
 src/
-├── constants/              # Runtime constants (no TypeScript enums)
-│   ├── cache.ts           # Cache configuration constants
-│   ├── declarations.ts    # SVG declaration types constants
+├── constants/             # Runtime constants (replaces TypeScript enums)
+│   ├── cache.ts           # Cache configuration (favorite, recent)
+│   ├── declarations.ts    # SVG declaration types (function, variable)
 │   ├── messages.ts        # Messaging constants (Post/Receive)
 │   └── index.ts           # Barrel export
-├── types/                 # Type definitions only (no runtime)
-│   ├── utils.d.ts         # Utility and generic types
-│   ├── misc.d.ts          # Miscellaneous types
-│   ├── index.d.ts         # Main barrel export
+│
+├── types/                 # Type definitions only (zero runtime cost)
 │   ├── common/            # Base types used across domains
 │   │   ├── file.d.ts      # File and SVG file types
 │   │   ├── location.d.ts  # Position and location types
-│   │   ├── error.d.ts     # Error types
-│   │   └── index.d.ts     # Barrel export
+│   │   ├── error.d.ts     # Error handling types
+│   │   └── index.d.ts
+│   │
 │   ├── svg/               # SVG-specific types
-│   │   ├── component.d.ts # SVG component types
+│   │   ├── component.d.ts # SVG component definitions
 │   │   ├── icon.d.ts      # SVG icon types
 │   │   ├── export.d.ts    # Export-related types
 │   │   ├── parsing.d.ts   # Parsing types
 │   │   ├── tags.d.ts      # SVG tag types
-│   │   └── index.d.ts     # Barrel export
+│   │   └── index.d.ts
+│   │
 │   ├── messaging/         # Generic messaging system
 │   │   ├── base.d.ts      # Base generic message types
-│   │   ├── post.d.ts      # Post message (Extension → Webview)
-│   │   ├── receive.d.ts   # Receive message (Webview → Extension)
-│   │   └── index.d.ts     # Barrel export
+│   │   ├── post.d.ts      # Post messages (Extension → Webview)
+│   │   ├── receive.d.ts   # Receive messages (Webview → Extension)
+│   │   └── index.d.ts
+│   │
 │   ├── editor/            # VSCode editor types
-│   │   ├── config.d.ts    # Editor configuration types
-│   │   ├── theme.d.ts     # Theme-related types
+│   │   ├── config.d.ts    # Editor configuration
+│   │   ├── theme.d.ts     # Theme definitions
 │   │   ├── language.d.ts  # Language file types
-│   │   └── index.d.ts     # Barrel export
+│   │   └── index.d.ts
+│   │
 │   ├── cache/             # Cache types
 │   │   ├── icons.d.ts     # Icon cache types
-│   │   └── index.d.ts     # Barrel export
-│   └── properties/        # Property types
-│       └── propertyValues.d.ts
-└── index.ts              # Main entry point
+│   │   └── index.d.ts
+│   │
+│   ├── properties/        # Property types
+│   │   └── propertyValues.d.ts
+│   │
+│   ├── utils.d.ts         # Utility and generic types
+│   └── index.d.ts         # Main barrel export
+│
+└── index.ts               # Main entry point (re-exports all)
 ```
 
-## Build Process
+---
 
-### Two-Step Build
+## 🔧 Build System
 
-1. **Constants** (`tsc`): Compiles TypeScript constants to JavaScript
-   - Input: `src/constants/**/*.ts`
-   - Output: `dist/constants/**/*.js` + `dist/constants/**/*.d.ts`
-   - Includes runtime values needed for bundle
+### Compilation Strategy
 
-2. **Types** (`cp`): Copies type definitions (no compilation)
-   - Input: `src/types/**/*.d.ts`
-   - Output: `dist/types/**/*.d.ts`
-   - Type-only, no runtime cost
+The package uses a **dual-mode build** to optimize both bundle size and type safety:
 
-### Why This Approach?
+#### 1. **Constants** (TypeScript → JavaScript)
+- **Input:** `src/constants/**/*.ts`
+- **Output:**
+  - `dist/cjs/constants/**/*.js` (CommonJS)
+  - `dist/esm/constants/**/*.js` (ES Modules)
+  - `dist/types/constants/**/*.d.ts` (Type definitions)
+- **Why:** Runtime values needed for bundle; using `const` objects with `as const` instead of enums saves ~2KB and enables better tree-shaking
 
-- **Enums → Constants**: Using `const` with `as const` instead of TypeScript enums saves ~2KB bundle size and provides better tree-shaking
-- **Type-Only Copies**: `.d.ts` files don't need compilation, reducing build time
-- **Separate Entry Points**: Different import paths for different use cases (optimize bundle size per consumer)
+#### 2. **Types** (Copy Only)
+- **Input:** `src/types/**/*.d.ts`
+- **Output:** `dist/types/types/**/*.d.ts`
+- **Why:** Type definitions don't compile to JavaScript, reducing build time and ensuring zero runtime cost
 
-## Scripts
+### Build Scripts
 
 ```bash
-# Build everything
-npm run build
+# Full build (clean + compile + copy)
+pnpm run build
 
-# Compile constants only
-npm run build:enums
+# Individual build steps
+pnpm run build:esm        # Compile to ES Modules
+pnpm run build:cjs        # Compile to CommonJS
+pnpm run build:types      # Generate type definitions
+pnpm run copy:types       # Copy .d.ts files
 
-# Copy types only
-npm run copy:types
-
-# Watch mode (constants only)
-npm run watch
-
-# Type check without emitting
-npm run typecheck
-
-# Clean build artifacts
-npm run clean
+# Utilities
+pnpm run clean            # Remove dist/ folder
 ```
 
-## Export Points
+---
 
-| Export | Size | Use Case |
-|--------|------|----------|
-| `@jt-view-exports-svg/core` | Full | Entire package (types + constants) |
-| `@jt-view-exports-svg/core/constants` | ~2KB | Only messaging/configuration constants |
-| `@jt-view-exports-svg/core/types` | Types only | All type definitions (no runtime) |
+## 📤 Export Points
 
-## Key Features
+| Export Path | Size | Contents | Use Case |
+|-------------|------|----------|----------|
+| `@jt-view-exports-svg/core` | ~3KB | All types + constants | Main import for extension/webview |
+| `@jt-view-exports-svg/core/constants` | ~2KB | Runtime constants only | Lightweight imports for messaging |
+| `@jt-view-exports-svg/core/types` | 0KB | Type definitions only | Type-only imports (no bundle cost) |
 
-### Generic Messaging System
-
-Replaces duplicate message interfaces with templated types:
+### Examples
 
 ```typescript
-// Before: Separate interfaces for each message type
-interface PostMessageData { type: SVGPostMessage; data: any }
-interface ReceiveMessageData { type: SVGReceiveMessage; data: any }
+// Full import (types + constants)
+import { SVGPostMessage, CacheIconKind } from '@jt-view-exports-svg/core'
+import type { SVGComponent } from '@jt-view-exports-svg/core'
 
-// After: Single generic Message<T, D> type
-type PostMessage = Message<SVGPostMessage, PostMessageDataMap>
-type ReceiveMessage = Message<SVGReceiveMessage, ReceiveMessageDataMap>
+// Constants only (smaller bundle)
+import { SVGPostMessage } from '@jt-view-exports-svg/core/constants'
+
+// Types only (zero runtime cost)
+import type { PostMessage, ReceiveMessage } from '@jt-view-exports-svg/core/types'
 ```
 
-Benefits: -15-20% type definition duplication, stronger type safety
+---
 
-### Domain Organization
+## 🎯 Key Features
 
-Types are organized by domain (common, svg, messaging, editor, cache) instead of by file purpose. This makes it easier to:
-- Find related types
-- Understand relationships
-- Create focused interfaces
+### ✅ Type-Safe Messaging System
 
-## Output
+Generic message types replace duplicate interfaces:
+
+```typescript
+// Generic Message<T, D> type system
+type PostMessage = Message<SVGPostMessage, PostMessageDataMap>
+type ReceiveMessage = Message<SVGReceiveMessage, ReceiveMessageDataMap>
+
+// Usage with full type safety
+const message: PostMessage = {
+  type: SVGPostMessage.SendSVGComponents,
+  data: { components: [...] } // Strongly typed based on message type
+}
+```
+
+**Benefits:**
+- ✅ Eliminates 15-20% type duplication
+- ✅ Stronger compile-time type checking
+- ✅ Auto-complete for message data based on type
+
+### ✅ Domain-Organized Types
+
+Types are grouped by domain (common, svg, messaging, editor, cache) for:
+- 🔍 Easier discovery
+- 🧩 Clear relationships
+- 📦 Focused interfaces
+- 🚀 Better maintainability
+
+### ✅ Zero Runtime Type Cost
+
+All type definitions are in `.d.ts` files, ensuring:
+- No JavaScript output for types
+- Zero bundle size impact
+- Fast build times
+- Full TypeScript IntelliSense
+
+### ✅ Enum Replacement Strategy
+
+Using `const` objects instead of TypeScript enums:
+
+```typescript
+// ❌ Old: TypeScript enum (adds ~500 bytes runtime code)
+enum MessageType {
+  SendData = 'send/data'
+}
+
+// ✅ New: Const object with as const (zero runtime overhead)
+export const MessageType = {
+  SendData: 'send/data'
+} as const
+```
+
+**Savings:** ~2KB bundle reduction + better tree-shaking
+
+---
+
+## 📦 Build Output
 
 ```
 dist/
-├── index.js                    # Main entry point (re-exports everything)
-├── index.d.ts
-├── constants/
-│   ├── cache.js                # Runtime constant (2.8KB)
-│   ├── declarations.js         # Runtime constant (2.3KB)
-│   ├── messages.js             # Runtime constant (14.3KB)
-│   └── index.js
-└── types/
-    ├── common/
-    ├── svg/
-    ├── messaging/
-    ├── editor/
-    ├── cache/
-    └── [All .d.ts files only]
+├── cjs/                       # CommonJS builds
+│   ├── index.js
+│   └── constants/
+│       ├── cache.js
+│       ├── declarations.js
+│       ├── messages.js
+│       └── index.js
+│
+├── esm/                       # ES Module builds
+│   ├── index.js
+│   └── constants/
+│       ├── cache.js
+│       ├── declarations.js
+│       ├── messages.js
+│       └── index.js
+│
+└── types/                     # Type definitions
+    ├── index.d.ts
+    ├── constants/
+    │   ├── cache.d.ts
+    │   ├── declarations.d.ts
+    │   ├── messages.d.ts
+    │   └── index.d.ts
+    └── types/
+        ├── common/
+        ├── svg/
+        ├── messaging/
+        ├── editor/
+        ├── cache/
+        ├── properties/
+        └── utils.d.ts
 ```
+
+---
+
+## 🔗 Related Packages
+
+- **[jt-view-exports-svg](../extension)** - VS Code extension (main package)
+- **[@jt-view-exports-svg/webview](../webview)** - Webview UI (React + Vite)
+- **[@jt-view-exports-svg/docs](../docs)** - Documentation site (Docusaurus)
+
+---
+
+## 📄 License
+
+MIT © Jair Torres
