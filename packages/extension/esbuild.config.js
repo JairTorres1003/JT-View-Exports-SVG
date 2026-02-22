@@ -5,6 +5,7 @@ const polyfillModules = require('@esbuild-plugins/node-modules-polyfill')
 const production = process.argv.includes('--production')
 const watch = process.argv.includes('--watch')
 const webMode = process.argv.includes('--web-mode')
+const prefix = webMode ? '[web:watch]' : '[watch]'
 
 /** @type {import('esbuild').Plugin} */
 const esbuildProblemMatcherPlugin = {
@@ -12,7 +13,7 @@ const esbuildProblemMatcherPlugin = {
 
   setup(build) {
     build.onStart(() => {
-      console.log('[watch] build started')
+      console.log(`${prefix} Build started`)
     })
     build.onEnd((result) => {
       result.errors.forEach(({ text, location }) => {
@@ -20,7 +21,7 @@ const esbuildProblemMatcherPlugin = {
         if (location == null) return
         console.error(`    ${location.file}:${location.line}:${location.column}:`)
       })
-      console.log('[watch] build finished')
+      console.log(`${prefix} Build finished`)
     })
   },
 }
@@ -28,14 +29,14 @@ const esbuildProblemMatcherPlugin = {
 /** @type {import('esbuild').BuildOptions} */
 const options = {
   platform: 'node',
-  outfile: 'out/cjs/extension.js',
+  outfile: './dist/extension.js',
   plugins: [esbuildProblemMatcherPlugin],
 }
 
 /** @type {import('esbuild').BuildOptions} */
 const webOptions = {
   platform: 'browser',
-  outfile: 'out/cjs/web/extension.js',
+  outfile: './dist/web/extension.js',
   define: {
     global: 'globalThis',
   },
@@ -59,17 +60,17 @@ async function main() {
     sourcesContent: false,
     external: ['vscode'],
     logLevel: 'warning',
-    tsconfig: './tsconfig.cjs.json',
+    tsconfig: './tsconfig.json',
     ...(webMode ? webOptions : options),
   })
 
   if (watch) {
     await ctx.watch()
-    console.log('[watch] Watching for changes...')
+    console.log(`${prefix} Watching for changes...`)
   } else {
     await ctx.rebuild()
     await ctx.dispose()
-    console.log('[build] Web build complete.')
+    console.log(`${prefix} Build complete.`)
   }
 }
 

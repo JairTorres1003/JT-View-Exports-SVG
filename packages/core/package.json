@@ -1,31 +1,33 @@
 {
   "name": "@jt-view-exports-svg/core",
-  "version": "1.0.0",
-  "type": "module",
+  "version": "2.0.0",
   "description": "Core types, enums and utilities for JT View Exports SVG",
-  "main": "./dist/index.js",
-  "types": "./dist/index.d.ts",
+  "main": "./dist/cjs/index.js",
+  "module": "./dist/esm/index.js",
+  "types": "./dist/types/index.d.ts",
   "exports": {
     ".": {
-      "import": "./dist/index.js",
-      "types": "./dist/index.d.ts"
+      "types": "./dist/types/index.d.ts",
+      "require": "./dist/cjs/index.js",
+      "import": "./dist/esm/index.js"
     },
     "./constants": {
-      "import": "./dist/constants/index.js",
-      "types": "./dist/constants/index.d.ts"
+      "types": "./dist/types/constants/index.d.ts",
+      "require": "./dist/cjs/constants/index.js",
+      "import": "./dist/esm/constants/index.js"
     },
     "./types": {
-      "types": "./dist/types/index.d.ts"
+      "types": "./dist/types/types/index.d.ts"
     }
   },
   "files": ["dist"],
   "scripts": {
-    "build": "npm-run-all clean build:enums copy:types",
-    "build:enums": "tsc",
-    "copy:types": "cp -r src/types dist/",
     "clean": "rimraf dist",
-    "watch": "tsc --watch",
-    "typecheck": "tsc --noEmit"
+    "build:esm": "tsc -p tsconfig.esm.json",
+    "build:cjs": "tsc -p tsconfig.cjs.json",
+    "build:types": "tsc -p tsconfig.types.json",
+    "copy:types": "cp -r src/types dist/types",
+    "build": "npm-run-all clean build:esm build:cjs build:types copy:types"
   },
   "devDependencies": {
     "typescript": "^5.0.0",

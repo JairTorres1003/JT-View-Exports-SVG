@@ -1,0 +1,19 @@
+# Development & Testing
+.vscode
+.vscode-test
+.vscode-test-web
+.gitignore
+workspaceTest.code-workspace
+
+# Dependencies (included via bundle)
+node_modules/
+
+# Source Code (compiled to dist/)
+src/
+**/*.ts
+**/*.map
+
+# Build & Configuration
+biome.json
+tsconfig*.json
+**.config.js

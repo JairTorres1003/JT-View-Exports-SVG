@@ -3,7 +3,7 @@
     "target": "ES2022",
     "lib": ["ES2022", "dom"],
     "module": "commonjs",
-    "outDir": "./out",
+    "outDir": "./dist",
     "rootDir": "./src",
     "baseUrl": ".",
     "paths": {
@@ -12,6 +12,5 @@
     "strict": true,
     "skipLibCheck": true
   },
-  "include": ["src/**/*"],
-  "exclude": ["client", "examples/*", "server/*"]
+  "include": ["src/**/*"]
 }

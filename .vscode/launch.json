@@ -5,19 +5,30 @@
       "name": "Run Extension",
       "type": "extensionHost",
       "request": "launch",
-      "args": ["--extensionDevelopmentPath=${workspaceFolder}"],
-      "outFiles": ["${workspaceFolder}/out/cjs/**/*.js"]
+      "args": ["--extensionDevelopmentPath=${workspaceFolder}/packages/extension"],
+      "outFiles": ["${workspaceFolder}/packages/extension/dist/**/*.js"]
+    },
+    {
+      "name": "Run Web Extension",
+      "type": "pwa-extensionHost",
+      "debugWebWorkerHost": true,
+      "request": "launch",
+      "args": [
+        "--extensionDevelopmentPath=${workspaceFolder}/packages/extension",
+        "--extensionDevelopmentKind=web"
+      ],
+      "outFiles": ["${workspaceFolder}/packages/extension/dist/web/**/*.js"]
     },
     {
       "name": "Extension Tests",
       "type": "extensionHost",
       "request": "launch",
       "args": [
-        "--extensionDevelopmentPath=${workspaceFolder}",
-        "--extensionTestsPath=${workspaceFolder}/out/cjs/test/suite/index",
-        "${workspaceFolder}/workspaceTest.code-workspace"
+        "--extensionDevelopmentPath=${workspaceFolder}/packages/extension",
+        "--extensionTestsPath=${workspaceFolder}/packages/extension/dist/test/suite/index",
+        "${workspaceFolder}/packages/extension/workspaceTest.code-workspace"
       ],
-      "outFiles": ["${workspaceFolder}/out/cjs/test/**/*.js"],
+      "outFiles": ["${workspaceFolder}/packages/extension/dist/test/**/*.js"],
       "preLaunchTask": "TaskTest"
     },
     {
@@ -30,15 +41,6 @@
       "runtimeExecutable": "/Users/jairalexandretorrescaviedes/.deno/bin/deno",
       "runtimeArgs": ["run", "-A", "--unstable-sloppy-imports", "--inspect-wait"],
       "attachSimplePort": 9229
-    },
-    {
-      "name": "Run Web Extension in VS Code",
-      "type": "pwa-extensionHost",
-      "debugWebWorkerHost": true,
-      "request": "launch",
-      "args": ["--extensionDevelopmentPath=${workspaceFolder}", "--extensionDevelopmentKind=web"],
-      "outFiles": ["${workspaceFolder}/out/cjs/web/**/*.js"],
-      "preLaunchTask": "npm: watch:esbuild:web"
     }
   ]
 }

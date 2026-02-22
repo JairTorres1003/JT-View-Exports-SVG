@@ -28,7 +28,13 @@ const optimizeDepsInclude = localDependencies.filter((name) => !optimizeDepsExcl
 // https://vite.dev/config/
 export default defineConfig({
   base: './',
-  plugins: [tsconfigPaths(), react(), codingameOnigWasmWebFix(), legacyManifest(), removeFiles()],
+  plugins: [
+    tsconfigPaths({ root: __dirname }),
+    react(),
+    codingameOnigWasmWebFix(),
+    legacyManifest(),
+    removeFiles()
+  ],
   optimizeDeps: {
     rolldownOptions: {
       plugins: [importMetaUrlPlugin],
@@ -48,7 +54,7 @@ export default defineConfig({
   build: {
     target: 'es2022',
     emptyOutDir: true,
-    outDir: path.join(__dirname, '../../dist/webview'),
+    outDir: path.join(__dirname, '../extension/dist/webview'),
     reportCompressedSize: false,
     cssCodeSplit: false,
     assetsInlineLimit: 0,
