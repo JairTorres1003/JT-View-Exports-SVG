@@ -13,18 +13,24 @@
   </p>
 </div>
 
-'**View Exports SVG**' is a powerful Visual Studio Code extension that transforms how you interact with SVG icons in your projects. It goes beyond simple viewing, offering a complete suite of tools to scan your workspace, preview components in an interactive playground, and manage your assets with an intuitive DevTools panel.
+---
+
+**View Exports SVG** is a powerful Visual Studio Code extension that transforms how you interact with SVG icons in your projects. It goes beyond simple viewing, offering a complete suite of tools to scan your workspace, preview components in an interactive playground, and manage your assets with an intuitive DevTools panel.
+
+---
 
 ## ✨ Key Features
 
-- **Advanced DevTools Panel:** A dockable, full-featured panel with a component viewer, search, and management tools.
-- **Interactive Playground:** Select any icon to preview it, edit its properties in a real-time code editor, and see your changes instantly.
-- **Workspace-wide Scanning:** Automatically discover all SVG components across your entire project, not just in specific files.
-- **Component Management:** Mark icons as **favorites**, see your **recently used** components, and get quick access to what matters most.
-- **Multiple Ways to View:** Launch the viewer from the context menu, the command palette, or by dragging and dropping files.
-- **Powerful Actions:** Copy component names, download as SVG/PNG, or open the source file directly from the UI.
-- **Broad Framework Support:** Works out-of-the-box with JavaScript/TypeScript projects using frameworks like React, Preact, and more. ([See Full SVG Support](https://view-exports-svg.vercel.app/docs/resources/svg-support)).
-- **Native Theming:** The interface automatically adapts to your current VS Code theme for a seamless experience.
+- **Advanced DevTools Panel** - A dockable, full-featured panel with a component viewer, search, and management tools
+- **Interactive Playground** - Select any icon to preview it, edit its properties in a real-time code editor, and see your changes instantly
+- **Workspace-wide Scanning** - Automatically discover all SVG components across your entire project, not just in specific files
+- **Component Management** - Mark icons as **favorites**, see your **recently used** components, and get quick access to what matters most
+- **Multiple Ways to View** - Launch the viewer from the context menu, the command palette, or by dragging and dropping files
+- **Powerful Actions** - Copy component names, download as SVG/PNG, or open the source file directly from the UI
+- **Broad Framework Support** - Works out-of-the-box with JavaScript/TypeScript projects using frameworks like React, Preact, and more ([See Full SVG Support](https://view-exports-svg.vercel.app/docs/resources/svg-support))
+- **Native Theming** - The interface automatically adapts to your current VS Code theme for a seamless experience
+
+---
 
 ## 🚀 In Action
 
@@ -35,36 +41,143 @@
   </video>
 </div>
 
-## Getting Started
+---
 
-### Installation
+## 📦 Installation
 
-1.  Open **Visual Studio Code**.
-2.  Go to the **Extensions** view (`Ctrl+Shift+X`).
-3.  Search for `View Exports SVG`.
-4.  Click **Install**.
+1. Open **Visual Studio Code**
+2. Go to the **Extensions** view (`Ctrl+Shift+X` or `Cmd+Shift+X`)
+3. Search for `View Exports SVG`
+4. Click **Install**
 
-### Usage
+---
+
+## 🎯 Usage
 
 You can visualize your icons in multiple ways:
 
-- **From the Explorer (Context Menu):**
-  1.  Right-click on a file, a folder, or a selection of multiple files.
-  2.  Select **View Exports SVG 🔍**.
+### From the Explorer (Context Menu)
+1. Right-click on a file, a folder, or a selection of multiple files
+2. Select **View Exports SVG 🔍**
 
-- **From the Command Palette:**
-  1.  Open the Command Palette (`Ctrl+Shift+P`).
-  2.  Run the command **`View Exports SVG: Start Scanning`** to discover all icons in your project.
+### From the Command Palette
+1. Open the Command Palette (`Ctrl+Shift+P` or `Cmd+Shift+P`)
+2. Run the command **`View Exports SVG: Start Scanning`** to discover all icons in your project
 
-- **Via Drag and Drop:**
-  1.  Open the viewer using one of the methods above.
-  2.  Drag and drop SVG files directly onto the panel to add them.
+### Via Drag and Drop
+1. Open the viewer using one of the methods above
+2. Drag and drop SVG files directly onto the panel to add them
 
 Once the panel is open, you can click on any icon to copy its name to the clipboard or select it to start experimenting in the Playground.
+
+---
 
 ## 📚 Documentation
 
 For more information, detailed guides, and advanced configuration, please visit the [official documentation site](https://view-exports-svg.vercel.app/).
+
+---
+
+## 🛠️ Development
+
+Want to contribute to the development? Follow these steps:
+
+### Prerequisites
+
+- **Node.js** >= 22.0.0
+- **pnpm** >= 10.0.0
+
+### Setup
+
+1. **Clone the repository:**
+   ```bash
+   git clone https://github.com/JairTorres1003/JT-View-Exports-SVG.git
+   cd JT-View-Exports-SVG
+   ```
+
+2. **Install dependencies:**
+   ```bash
+   pnpm install
+   ```
+
+3. **Build the core package:**
+   ```bash
+   pnpm run build:core
+   ```
+
+4. **Build the webview:**
+   ```bash
+   pnpm run build:webview
+   ```
+
+5. **Compile the extension:**
+   ```bash
+   cd packages/extension
+   pnpm run compile
+   ```
+
+6. **Run the extension:**
+   - Press `F5` to open a new VS Code window with the extension loaded for testing
+
+### Available Scripts
+
+From the **workspace root**:
+
+```bash
+# Build everything
+pnpm run release              # Full build: core → webview → extension
+
+# Individual builds
+pnpm run build:core           # Build @jt-view-exports-svg/core
+pnpm run build:webview        # Build webview UI (Vite)
+pnpm run package:extension    # Package extension as .vsix
+
+# Testing
+pnpm run test:extension       # Run extension tests
+
+# Linting & Formatting
+pnpm run lint                 # Run Biome linter
+pnpm run format               # Format code with Biome
+
+# Clean
+pnpm run clean                # Remove all build artifacts
+```
+
+From **packages/extension**:
+
+```bash
+# Development
+pnpm run dev                  # Build extension (development mode)
+pnpm run watch                # Watch mode for extension
+pnpm run compile              # Build extension (production mode)
+
+# Web Extension
+pnpm run web:dev              # Build web extension
+pnpm run web:watch            # Watch mode for web extension
+pnpm run web:compile          # Build web extension (production)
+
+# Testing
+pnpm run test                 # Run extension tests
+pnpm run test:web             # Run web extension tests
+
+# Package
+pnpm run package              # Create .vsix package
+```
+
+### Project Structure
+
+```
+JT-View-Exports-SVG/
+├── packages/
+│   ├── core/               # Shared types & constants
+│   ├── docs/               # Documentation site (Docusaurus)
+│   ├── extension/          # VS Code extension (Node.js & Web)
+│   │   └──dist/            # Compiled output
+│   ├── server/             # Development server (Deno)
+│   └── webview/            # Webview UI (React + Vite)
+```
+
+---
 
 ## 🤝 Contributing
 
@@ -72,32 +185,35 @@ Contributions are what make the open-source community such an amazing place to l
 
 If you have a suggestion that would make this better, please fork the repo and create a pull request. You can also simply open an issue with the "feature request" tag.
 
-## 📜 License
+1. Fork the Project
+2. Create your Feature Branch (`git checkout -b feature/AmazingFeature`)
+3. Commit your Changes (`git commit -m 'Add some AmazingFeature'`)
+4. Push to the Branch (`git push origin feature/AmazingFeature`)
+5. Open a Pull Request
+
+---
+
+## 📄 License
 
 This extension is available under the [MIT License](LICENSE). See the `LICENSE` file for more details.
 
-## CHANGELOG
+---
 
-You can find details of all changes and updates in the [CHANGELOG.md](CHANGELOG.md) file.
+## 📝 Changelog
 
-## Development
+You can find details of all changes and updates in the [CHANGELOG.md](../../CHANGELOG.md) file.
 
-Want to contribute to the development? Follow these steps:
+---
 
-1.  Clone the repository:
-    ```bash
-    git clone https://github.com/JairTorres1003/JT-View-Exports-SVG.git
-    ```
-2.  Install all dependencies:
-    ```bash
-    npm run install:all
-    ```
-3.  Build the webview UI:
-    ```bash
-    npm run client:build
-    ```
-4.  Compile the extension:
-    ```bash
-    npm run compile
-    ```
-5.  Press `F5` to open a new VS Code window with the extension loaded for testing.
+## 🔗 Links
+
+- [Marketplace](https://marketplace.visualstudio.com/items?itemName=JairTorres1003.jt-view-exports-svg)
+- [Documentation](https://view-exports-svg.vercel.app/)
+- [GitHub Repository](https://github.com/JairTorres1003/JT-View-Exports-SVG)
+- [Issues](https://github.com/JairTorres1003/JT-View-Exports-SVG/issues)
+
+---
+
+<div align="center">
+  Made with ❤️ by <a href="https://github.com/JairTorres1003">Jair Torres</a>
+</div>
