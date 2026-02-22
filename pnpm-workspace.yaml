@@ -1,0 +1,11 @@
+packages:
+  - packages/*
+
+onlyBuiltDependencies:
+  - '@heroui/shared-utils'
+  - '@playwright/browser-chromium'
+  - '@swc/core'
+  - core-js
+  - core-js-pure
+  - esbuild
+  - sharp
