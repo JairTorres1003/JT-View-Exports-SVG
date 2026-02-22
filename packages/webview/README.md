@@ -49,4 +49,4 @@ The client is designed to feel like a native part of the VS Code editor.
 - **UI Components:** Material-UI (MUI)
 - **State Management:** Redux Toolkit
 
-This README provides a high-level overview for developers navigating the client-side codebase. For more information on the extension as a whole, please refer to the main [README.md](../README.md) in the root directory.
+This README provides a high-level overview for developers navigating the client-side codebase. For more information on the extension as a whole, please refer to the main [README.md](../extension/README.md) in the root directory.
