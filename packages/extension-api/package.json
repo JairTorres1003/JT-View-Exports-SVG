@@ -1,0 +1,321 @@
+{
+  "name": "@jt-view-exports-svg/extension-api",
+  "version": "4.1.0",
+  "description": "API surface of JT View Exports SVG extension (v4.1.0). Auto-generated from extension build.",
+  "type": "module",
+  "private": false,
+  "license": "MIT",
+  "author": "Jair Torres",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/JairTorres1003/JT-View-Exports-SVG.git",
+    "directory": "packages/extension-api"
+  },
+  "main": "./dist/extension.js",
+  "types": "./dist/extension.d.ts",
+  "exports": {
+    ".": {
+      "import": "./dist/extension.js",
+      "types": "./dist/extension.d.ts"
+    },
+    "./commands/cache": {
+      "import": "./dist/commands/cache.js",
+      "types": "./dist/commands/cache.d.ts"
+    },
+    "./commands/devTools": {
+      "import": "./dist/commands/devTools.js",
+      "types": "./dist/commands/devTools.d.ts"
+    },
+    "./commands/editorTitleActions": {
+      "import": "./dist/commands/editorTitleActions.js",
+      "types": "./dist/commands/editorTitleActions.d.ts"
+    },
+    "./commands/expandedIcons": {
+      "import": "./dist/commands/expandedIcons.js",
+      "types": "./dist/commands/expandedIcons.d.ts"
+    },
+    "./commands": {
+      "import": "./dist/commands/index.js",
+      "types": "./dist/commands/index.d.ts"
+    },
+    "./commands/reloadTheme": {
+      "import": "./dist/commands/reloadTheme.js",
+      "types": "./dist/commands/reloadTheme.d.ts"
+    },
+    "./commands/scanning": {
+      "import": "./dist/commands/scanning.js",
+      "types": "./dist/commands/scanning.d.ts"
+    },
+    "./commands/showMenu": {
+      "import": "./dist/commands/showMenu.js",
+      "types": "./dist/commands/showMenu.d.ts"
+    },
+    "./constants/misc": {
+      "import": "./dist/constants/misc.js",
+      "types": "./dist/constants/misc.d.ts"
+    },
+    "./constants/regex": {
+      "import": "./dist/constants/regex.js",
+      "types": "./dist/constants/regex.d.ts"
+    },
+    "./constants/svg/tags": {
+      "import": "./dist/constants/svg/tags.js",
+      "types": "./dist/constants/svg/tags.d.ts"
+    },
+    "./controllers/cache/CacheManagerController": {
+      "import": "./dist/controllers/cache/CacheManagerController.js",
+      "types": "./dist/controllers/cache/CacheManagerController.d.ts"
+    },
+    "./controllers/cache/ComponentsCacheController": {
+      "import": "./dist/controllers/cache/ComponentsCacheController.js",
+      "types": "./dist/controllers/cache/ComponentsCacheController.d.ts"
+    },
+    "./controllers/cache/FileModifiedCacheController": {
+      "import": "./dist/controllers/cache/FileModifiedCacheController.js",
+      "types": "./dist/controllers/cache/FileModifiedCacheController.d.ts"
+    },
+    "./controllers/cache/IconCacheController": {
+      "import": "./dist/controllers/cache/IconCacheController.js",
+      "types": "./dist/controllers/cache/IconCacheController.d.ts"
+    },
+    "./controllers/cache": {
+      "import": "./dist/controllers/cache/index.js",
+      "types": "./dist/controllers/cache/index.d.ts"
+    },
+    "./controllers/config/AssetsPathsController": {
+      "import": "./dist/controllers/config/AssetsPathsController.js",
+      "types": "./dist/controllers/config/AssetsPathsController.d.ts"
+    },
+    "./controllers/config/ConfigManagerController": {
+      "import": "./dist/controllers/config/ConfigManagerController.js",
+      "types": "./dist/controllers/config/ConfigManagerController.d.ts"
+    },
+    "./controllers/config/DefaultClickToOpenDevTools": {
+      "import": "./dist/controllers/config/DefaultClickToOpenDevTools.js",
+      "types": "./dist/controllers/config/DefaultClickToOpenDevTools.d.ts"
+    },
+    "./controllers/config/DefaultExpandAllController": {
+      "import": "./dist/controllers/config/DefaultExpandAllController.js",
+      "types": "./dist/controllers/config/DefaultExpandAllController.d.ts"
+    },
+    "./controllers/config/DefaultIconPropertiesController": {
+      "import": "./dist/controllers/config/DefaultIconPropertiesController.js",
+      "types": "./dist/controllers/config/DefaultIconPropertiesController.d.ts"
+    },
+    "./controllers/config/GroupPatternsController": {
+      "import": "./dist/controllers/config/GroupPatternsController.js",
+      "types": "./dist/controllers/config/GroupPatternsController.d.ts"
+    },
+    "./controllers/config/IgnoreDirectoriesController": {
+      "import": "./dist/controllers/config/IgnoreDirectoriesController.js",
+      "types": "./dist/controllers/config/IgnoreDirectoriesController.d.ts"
+    },
+    "./controllers/config/LastScanDateController": {
+      "import": "./dist/controllers/config/LastScanDateController.js",
+      "types": "./dist/controllers/config/LastScanDateController.d.ts"
+    },
+    "./controllers/config/RecentIconsController": {
+      "import": "./dist/controllers/config/RecentIconsController.js",
+      "types": "./dist/controllers/config/RecentIconsController.d.ts"
+    },
+    "./controllers/config/ShowNotExportedIconsController": {
+      "import": "./dist/controllers/config/ShowNotExportedIconsController.js",
+      "types": "./dist/controllers/config/ShowNotExportedIconsController.d.ts"
+    },
+    "./controllers/config": {
+      "import": "./dist/controllers/config/index.js",
+      "types": "./dist/controllers/config/index.d.ts"
+    },
+    "./controllers/handlers/AssetsHandler": {
+      "import": "./dist/controllers/handlers/AssetsHandler.js",
+      "types": "./dist/controllers/handlers/AssetsHandler.d.ts"
+    },
+    "./controllers/handlers/CacheHandler": {
+      "import": "./dist/controllers/handlers/CacheHandler.js",
+      "types": "./dist/controllers/handlers/CacheHandler.d.ts"
+    },
+    "./controllers/handlers/ConfigurationHandler": {
+      "import": "./dist/controllers/handlers/ConfigurationHandler.js",
+      "types": "./dist/controllers/handlers/ConfigurationHandler.d.ts"
+    },
+    "./controllers/handlers/SVGComponentHandler": {
+      "import": "./dist/controllers/handlers/SVGComponentHandler.js",
+      "types": "./dist/controllers/handlers/SVGComponentHandler.d.ts"
+    },
+    "./controllers/handlers/UIHandler": {
+      "import": "./dist/controllers/handlers/UIHandler.js",
+      "types": "./dist/controllers/handlers/UIHandler.d.ts"
+    },
+    "./controllers/listener/ListerWebviewController": {
+      "import": "./dist/controllers/listener/ListerWebviewController.js",
+      "types": "./dist/controllers/listener/ListerWebviewController.d.ts"
+    },
+    "./controllers/listener/MessageRouterController": {
+      "import": "./dist/controllers/listener/MessageRouterController.js",
+      "types": "./dist/controllers/listener/MessageRouterController.d.ts"
+    },
+    "./controllers/listener": {
+      "import": "./dist/controllers/listener/index.js",
+      "types": "./dist/controllers/listener/index.d.ts"
+    },
+    "./controllers/views/ViewExportsSVGController": {
+      "import": "./dist/controllers/views/ViewExportsSVGController.js",
+      "types": "./dist/controllers/views/ViewExportsSVGController.d.ts"
+    },
+    "./controllers/views": {
+      "import": "./dist/controllers/views/index.js",
+      "types": "./dist/controllers/views/index.d.ts"
+    },
+    "./providers/InMemoryFileSystemProvider": {
+      "import": "./dist/providers/InMemoryFileSystemProvider.js",
+      "types": "./dist/providers/InMemoryFileSystemProvider.d.ts"
+    },
+    "./utilities/babelParser": {
+      "import": "./dist/utilities/babelParser.js",
+      "types": "./dist/utilities/babelParser.d.ts"
+    },
+    "./utilities/css/cssStringToObject": {
+      "import": "./dist/utilities/css/cssStringToObject.js",
+      "types": "./dist/utilities/css/cssStringToObject.d.ts"
+    },
+    "./utilities/css/findAnimateClassesStyles": {
+      "import": "./dist/utilities/css/findAnimateClassesStyles.js",
+      "types": "./dist/utilities/css/findAnimateClassesStyles.d.ts"
+    },
+    "./utilities/files/allowedFilesInFolder": {
+      "import": "./dist/utilities/files/allowedFilesInFolder.js",
+      "types": "./dist/utilities/files/allowedFilesInFolder.d.ts"
+    },
+    "./utilities/files/groupIconsByPattern": {
+      "import": "./dist/utilities/files/groupIconsByPattern.js",
+      "types": "./dist/utilities/files/groupIconsByPattern.d.ts"
+    },
+    "./utilities/files/misc": {
+      "import": "./dist/utilities/files/misc.js",
+      "types": "./dist/utilities/files/misc.d.ts"
+    },
+    "./utilities/files/nonce": {
+      "import": "./dist/utilities/files/nonce.js",
+      "types": "./dist/utilities/files/nonce.d.ts"
+    },
+    "./utilities/files/processFiles": {
+      "import": "./dist/utilities/files/processFiles.js",
+      "types": "./dist/utilities/files/processFiles.d.ts"
+    },
+    "./utilities/files/saveResponseFiles": {
+      "import": "./dist/utilities/files/saveResponseFiles.js",
+      "types": "./dist/utilities/files/saveResponseFiles.d.ts"
+    },
+    "./utilities/files/scanning": {
+      "import": "./dist/utilities/files/scanning.js",
+      "types": "./dist/utilities/files/scanning.d.ts"
+    },
+    "./utilities/icons/getIconsFromCache": {
+      "import": "./dist/utilities/icons/getIconsFromCache.js",
+      "types": "./dist/utilities/icons/getIconsFromCache.d.ts"
+    },
+    "./utilities/misc": {
+      "import": "./dist/utilities/misc.js",
+      "types": "./dist/utilities/misc.d.ts"
+    },
+    "./utilities/properties/binaryExpression": {
+      "import": "./dist/utilities/properties/binaryExpression.js",
+      "types": "./dist/utilities/properties/binaryExpression.d.ts"
+    },
+    "./utilities/properties/getProperties": {
+      "import": "./dist/utilities/properties/getProperties.js",
+      "types": "./dist/utilities/properties/getProperties.d.ts"
+    },
+    "./utilities/properties/logicalExpression": {
+      "import": "./dist/utilities/properties/logicalExpression.js",
+      "types": "./dist/utilities/properties/logicalExpression.d.ts"
+    },
+    "./utilities/properties/propertyManager": {
+      "import": "./dist/utilities/properties/propertyManager.js",
+      "types": "./dist/utilities/properties/propertyManager.d.ts"
+    },
+    "./utilities/properties/propertyValues": {
+      "import": "./dist/utilities/properties/propertyValues.js",
+      "types": "./dist/utilities/properties/propertyValues.d.ts"
+    },
+    "./utilities/properties/unaryExpression": {
+      "import": "./dist/utilities/properties/unaryExpression.js",
+      "types": "./dist/utilities/properties/unaryExpression.d.ts"
+    },
+    "./utilities/svg/SVGComponent": {
+      "import": "./dist/utilities/svg/SVGComponent.js",
+      "types": "./dist/utilities/svg/SVGComponent.d.ts"
+    },
+    "./utilities/svg/analyze": {
+      "import": "./dist/utilities/svg/analyze.js",
+      "types": "./dist/utilities/svg/analyze.d.ts"
+    },
+    "./utilities/svg/children": {
+      "import": "./dist/utilities/svg/children.js",
+      "types": "./dist/utilities/svg/children.d.ts"
+    },
+    "./utilities/svg/extracts": {
+      "import": "./dist/utilities/svg/extracts.js",
+      "types": "./dist/utilities/svg/extracts.d.ts"
+    },
+    "./utilities/svg/filtered": {
+      "import": "./dist/utilities/svg/filtered.js",
+      "types": "./dist/utilities/svg/filtered.d.ts"
+    },
+    "./utilities/svg/is-animate": {
+      "import": "./dist/utilities/svg/is-animate.js",
+      "types": "./dist/utilities/svg/is-animate.d.ts"
+    },
+    "./utilities/svg/playground": {
+      "import": "./dist/utilities/svg/playground.js",
+      "types": "./dist/utilities/svg/playground.d.ts"
+    },
+    "./utilities/svg/tags": {
+      "import": "./dist/utilities/svg/tags.js",
+      "types": "./dist/utilities/svg/tags.d.ts"
+    },
+    "./utilities/vscode/config": {
+      "import": "./dist/utilities/vscode/config.js",
+      "types": "./dist/utilities/vscode/config.d.ts"
+    },
+    "./utilities/vscode/extensions/theme": {
+      "import": "./dist/utilities/vscode/extensions/theme.js",
+      "types": "./dist/utilities/vscode/extensions/theme.d.ts"
+    },
+    "./utilities/vscode/theme": {
+      "import": "./dist/utilities/vscode/theme.js",
+      "types": "./dist/utilities/vscode/theme.d.ts"
+    },
+    "./utilities/vscode/uri": {
+      "import": "./dist/utilities/vscode/uri.js",
+      "types": "./dist/utilities/vscode/uri.d.ts"
+    },
+    "./views/WebviewContent": {
+      "import": "./dist/views/WebviewContent.js",
+      "types": "./dist/views/WebviewContent.d.ts"
+    }
+  },
+  "files": ["dist"],
+  "keywords": [
+    "Extension",
+    "Icon assets",
+    "Icon management",
+    "Javascript",
+    "JSX",
+    "React",
+    "SVG icons",
+    "TSX",
+    "TypeScript",
+    "Visual Studio Code",
+    "VSCode",
+    "API",
+    "ESM"
+  ],
+  "scripts": {
+    "clean": "rimraf dist",
+    "build": "pnpm run clean && tsc -p tsconfig.json"
+  },
+  "dependencies": {
+    "@jt-view-exports-svg/core": "workspace:*"
+  }
+}
