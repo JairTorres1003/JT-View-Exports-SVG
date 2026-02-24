@@ -21,7 +21,10 @@ const exportsField = {
 const srcDir = path.join(extensionDir, 'src')
 
 function addExports(relativePath = '') {
-  const entries = fs.readdirSync(path.join(srcDir, relativePath), { withFileTypes: true })
+  const entries = fs.readdirSync(path.join(srcDir, relativePath), {
+    withFileTypes: true,
+  })
+
   for (const entry of entries) {
     const entryPath = path.join(relativePath, entry.name)
     if (exclude.some((ex) => entryPath.startsWith(ex))) {

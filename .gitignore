@@ -19,10 +19,6 @@ lerna-debug.log*
 .vscode-test/
 .vscode-test-web/
 
-# IDE
-.vscode/
-.idea/
-
 # OS
 .DS_Store
 Thumbs.db

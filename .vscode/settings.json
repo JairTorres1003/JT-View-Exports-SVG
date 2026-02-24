@@ -1,82 +1,70 @@
 {
+  "typescript.tsc.autoDetect": "off",
+
+  "cSpell.language": "en,es-ES",
+
   "search.exclude": {
-    "out": true,
+    "**/dist": true,
     "**/.docusaurus": true
   },
-  "typescript.tsc.autoDetect": "off",
-  "cSpell.language": "en,es-ES",
-  "cSpell.ignoreWords": ["Jair", "arrowParens", "ecmaVersion", "esnext", "mpath", "quasis"],
-  "cSpell.ignorePaths": [
-    "package-lock.json",
-    "node_modules",
-    "vscode-extension",
-    ".git/objects",
-    ".vscode",
-    ".vscode-insiders",
-    ".github",
-    "**/tsconfig.json"
-  ],
+
+  "deno.config": "./packages/server/deno.json",
+  "deno.enablePaths": ["./packages/server"],
+
   "biome.enabled": true,
-  "prettier.enable": false,
+  "prettier.enable": true,
   "eslint.enable": false,
-  "deno.enable": true,
-  "deno.config": "./server/deno.json",
-  "deno.enablePaths": ["server"],
-  "workbench.tree.enableStickyScroll": true,
-  "editor.defaultFormatter": "biomejs.biome",
-  "editor.detectIndentation": true,
+
   "editor.tabSize": 2,
   "editor.formatOnSave": true,
   "editor.fontLigatures": true,
+  "editor.linkedEditing": true,
+  "editor.detectIndentation": true,
+  "editor.guides.bracketPairs": true,
+  "editor.cursorBlinking": "expand",
+  "editor.cursorSmoothCaretAnimation": "on",
+  "editor.defaultFormatter": "biomejs.biome",
   "editor.codeActionsOnSave": {
     "source.fixAll.biome": "explicit",
     "source.organizeImports.biome": "explicit"
   },
-  "editor.cursorBlinking": "expand",
-  "editor.linkedEditing": true,
-  "editor.guides.bracketPairs": true,
-  "editor.cursorSmoothCaretAnimation": "on",
+
+  "[jsonc]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[json]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[javascript]": {
+    "editor.defaultFormatter": "biomejs.biome"
+  },
+  "[typescript]": {
+    "editor.defaultFormatter": "biomejs.biome"
+  },
+  "[typescriptreact]": {
+    "editor.defaultFormatter": "biomejs.biome"
+  },
+  "[css]": {
+    "editor.defaultFormatter": "biomejs.biome"
+  },
+
+  "files.trimTrailingWhitespace": true,
+  "files.insertFinalNewline": true,
+  "files.readonlyInclude": {
+    ".lintstagedrc": true,
+    ".husky/**": true,
+    ".vscode/settings.json": true
+  },
+
+  "workbench.tree.enableStickyScroll": true,
+
   "explorer.fileNesting.enabled": true,
   "explorer.fileNesting.patterns": {
     "*.tsx": "${capture}.tsx",
     "package.json": "package-lock.json, yarn.lock, pnpm-lock.yaml, bun.lockb, .*",
     "package.nls.json": "package.nls*.json"
   },
-  "files.trimTrailingWhitespace": true,
-  "files.insertFinalNewline": true,
-  "terminal.integrated.profiles.osx": {
-    "bash": null,
-    "zsh": {
-      "path": "/bin/zsh",
-      "icon": "terminal-bash",
-      "color": "terminal.ansiGreen"
-    }
-  },
-  "files.readonlyInclude": {
-    ".lintstagedrc": true,
-    "tsconfig.json": true,
-    ".husky/**": true,
-    ".vscode/settings.json": true,
-    ".vscode/extensions.json": true
-  },
-  "json.schemas": [
-    {
-      "fileMatch": ["/l10n/bundle.l10n*.json"],
-      "url": "./schemas/l10n.schema.json"
-    },
-    {
-      "fileMatch": ["/package.nls*.json"],
-      "url": "./schemas/nls.schema.json"
-    },
-    {
-      "fileMatch": ["client/src/i18n/locales/*.json"],
-      "url": "./client/i18n.schema.json"
-    },
-    {
-      "fileMatch": ["client/src/assets/vs/userConfiguration/keybindings.json"],
-      "url": "vscode://schemas/keybindings"
-    }
-  ],
+
   "material-icon-theme.files.associations": {
     "i18n.schema.json": "i18n",
     "l10n.schema.json": "i18n",
@@ -84,16 +72,28 @@
     "tsconfig.types.json": "tsconfig"
   },
   "material-icon-theme.folders.associations": {
+    "webview": "client",
+    "extension-api": "api",
     "workers": "gh-workflows",
     "vs": "vscode"
   },
-  "[jsonc]": {
-    "editor.defaultFormatter": "biomejs.biome"
-  },
-  "[typescript]": {
-    "editor.defaultFormatter": "biomejs.biome"
-  },
-  "[json]": {
-    "editor.defaultFormatter": "biomejs.biome"
-  }
+
+  "json.schemas": [
+    {
+      "fileMatch": ["/packages/extension/l10n/bundle.l10n*.json"],
+      "url": "./schemas/l10n.schema.json"
+    },
+    {
+      "fileMatch": ["/packages/extension/package.nls*.json"],
+      "url": "./schemas/nls.schema.json"
+    },
+    {
+      "fileMatch": ["/packages/webview/src/i18n/locales/*.json"],
+      "url": "./schemas/i18n.schema.json"
+    },
+    {
+      "fileMatch": ["/packages/webview/src/assets/vs/userConfiguration/keybindings.json"],
+      "url": "vscode://schemas/keybindings"
+    }
+  ]
 }

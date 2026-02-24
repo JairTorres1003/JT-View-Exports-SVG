@@ -20,7 +20,7 @@
       "outFiles": ["${workspaceFolder}/packages/extension/dist/web/**/*.js"]
     },
     {
-      "name": "Extension Tests",
+      "name": "Run Extension Tests",
       "type": "extensionHost",
       "request": "launch",
       "args": [
@@ -28,17 +28,16 @@
         "--extensionTestsPath=${workspaceFolder}/packages/extension/dist/test/suite/index",
         "${workspaceFolder}/packages/extension/workspaceTest.code-workspace"
       ],
-      "outFiles": ["${workspaceFolder}/packages/extension/dist/test/**/*.js"],
-      "preLaunchTask": "TaskTest"
+      "outFiles": ["${workspaceFolder}/packages/extension/dist/test/**/*.js"]
     },
     {
       "type": "node",
       "request": "launch",
       "name": "Launch Deno Program",
-      "program": "${workspaceFolder}/server/src/server.ts",
-      "cwd": "${workspaceFolder}/server",
+      "program": "${workspaceFolder}/packages/server/src/server.ts",
+      "cwd": "${workspaceFolder}/packages/server",
       "env": {},
-      "runtimeExecutable": "/Users/jairalexandretorrescaviedes/.deno/bin/deno",
+      "runtimeExecutable": "deno",
       "runtimeArgs": ["run", "-A", "--unstable-sloppy-imports", "--inspect-wait"],
       "attachSimplePort": 9229
     }
