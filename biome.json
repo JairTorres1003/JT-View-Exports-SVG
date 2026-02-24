@@ -55,27 +55,5 @@
         "organizeImports": "on"
       }
     }
-  },
-  "overrides": [
-    {
-      "includes": ["./src/**/*.ts"],
-      "linter": {
-        "rules": {
-          "style": {
-            "useNodejsImportProtocol": "off"
-          }
-        }
-      }
-    },
-    {
-      "includes": ["./src/**/*.d.ts"],
-      "linter": {
-        "rules": {
-          "suspicious": {
-            "noExplicitAny": "off"
-          }
-        }
-      }
-    }
-  ]
+  }
 }
