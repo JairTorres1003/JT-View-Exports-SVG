@@ -84,5 +84,10 @@
     "@jt-view-exports-svg/core": "workspace:*",
     "lodash": "^4.17.23",
     "minimatch": "^10.2.2"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged"
+    }
   }
 }

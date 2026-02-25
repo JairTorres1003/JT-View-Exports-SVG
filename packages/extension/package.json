@@ -22,7 +22,8 @@
   "version": "4.1.0",
   "repository": {
     "type": "git",
-    "url": "https://github.com/JairTorres1003/JT-View-Exports-SVG.git"
+    "url": "https://github.com/JairTorres1003/JT-View-Exports-SVG.git",
+    "directory": "packages/extension"
   },
   "bugs": {
     "url": "https://github.com/JairTorres1003/JT-View-Exports-SVG/issues"
@@ -31,7 +32,7 @@
   "engines": {
     "vscode": "^1.109.0"
   },
-  "categories": ["Other"],
+  "categories": ["Visualization"],
   "icon": "icon.png",
   "main": "./dist/extension.js",
   "browser": "./dist/web/extension.js",
@@ -254,8 +255,9 @@
   "scripts": {
     "clean": "rimraf dist",
     "clean:vscode-test": "rimraf .vscode-test .vscode-test-web",
-    "biome:check": "biome check --write",
-    "biome:format": "biome format --write",
+    "typecheck": "tsc",
+    "lint": "biome check --write",
+    "format": "biome format --write",
     "dev:tsc": "tsc && tsc-alias",
     "watch:tsc": "concurrently \"tsc -w --sourceMap\" \"tsc-alias -w\"",
     "dev": "node esbuild.config.js",
@@ -301,11 +303,6 @@
     "@jt-view-exports-svg/core": "workspace:*",
     "lodash": "^4.17.23",
     "minimatch": "^10.2.2"
-  },
-  "husky": {
-    "hooks": {
-      "pre-commit": "lint-staged"
-    }
   },
   "badges": [
     {
