@@ -3,6 +3,7 @@ import { cn } from '@site/src/lib/utils'
 import type { Props } from '@theme/TOC'
 import TOCItems from '@theme/TOCItems'
 import type { ReactNode } from 'react'
+
 import styles from './styles.module.css'
 
 // Using a custom className

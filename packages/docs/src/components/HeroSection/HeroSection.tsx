@@ -4,7 +4,6 @@ import type { ButtonVariantProps } from '@heroui/theme'
 import { cn } from '@site/src/lib/utils'
 import Image from '@theme/IdealImage'
 import { ArrowRight, Download, ExternalLink } from 'lucide-react'
-import type { FC } from 'react'
 
 interface HeroSectionProps {
   title: string
@@ -33,7 +32,13 @@ const icons = {
   download: Download,
 }
 
-const HeroSection: FC<HeroSectionProps> = ({ title, description, logo, className, links }) => {
+const HeroSection: React.FC<HeroSectionProps> = ({
+  title,
+  description,
+  logo,
+  className,
+  links,
+}) => {
   return (
     <section className={cn('@container py-20', className)}>
       <div className='flex flex-col gap-6 items-center justify-center text-center'>

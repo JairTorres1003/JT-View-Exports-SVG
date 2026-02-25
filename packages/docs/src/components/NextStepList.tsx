@@ -1,9 +1,9 @@
 import DocCard from '@site/src/components/DocCard'
 import GridStagger from '@site/src/components/GridStagger'
-import type { FC } from 'react'
+
 import { NEXT_STEPS, type NextStepKey } from '../constants/next-steps'
 
-const NextStepList: FC<{ list: NextStepKey[] }> = ({ list }) => {
+const NextStepList: React.FC<{ list: NextStepKey[] }> = ({ list }) => {
   return (
     <GridStagger>
       {list.map((key) => {

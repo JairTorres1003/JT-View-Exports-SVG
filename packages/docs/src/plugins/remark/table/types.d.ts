@@ -1,5 +1,5 @@
-import type { Literal, Node } from 'unist'
 import type { RootContent } from 'mdast'
+import type { Literal, Node } from 'unist'
 
 interface BuildNode<T extends string, Children extends Node[]> extends Node {
   type: T

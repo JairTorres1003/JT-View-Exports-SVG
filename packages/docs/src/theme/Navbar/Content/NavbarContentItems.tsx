@@ -1,5 +1,4 @@
 import { NavbarContent, type NavbarContentProps } from '@heroui/navbar'
-import type { FC } from 'react'
 
 import { CustomComponent } from '../CustomComponent'
 import SearchBar from '../SearchBar/SearchBar'
@@ -10,7 +9,7 @@ interface NavbarContentItemsProps extends Omit<NavbarContentProps, 'children'> {
   items?: NavbarItemComponentProps[]
 }
 
-const NavbarContentItems: FC<NavbarContentItemsProps> = ({ items, ...props }) => {
+const NavbarContentItems: React.FC<NavbarContentItemsProps> = ({ items, ...props }) => {
   if (!items || items.length === 0) return null
 
   return (

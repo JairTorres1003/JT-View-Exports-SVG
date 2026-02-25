@@ -1,5 +1,6 @@
 import { Kbd, type KbdProps } from '@heroui/kbd'
 import { memo, useEffect, useState } from 'react'
+
 import { cn } from '../lib/utils'
 
 export interface ShortcutProps extends Omit<KbdProps, 'keys'> {

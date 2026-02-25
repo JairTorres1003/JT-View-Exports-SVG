@@ -1,7 +1,6 @@
 import type { IconProps } from '@site/src/types/types'
-import type { FC } from 'react'
 
-export const GithubIcon: FC<IconProps> = ({
+export const GithubIcon: React.FC<IconProps> = ({
   color = 'currentColor',
   size = '1rem',
   className,
@@ -27,7 +26,7 @@ export const GithubIcon: FC<IconProps> = ({
   </svg>
 )
 
-export const LinkedInIcon: FC<IconProps> = ({
+export const LinkedInIcon: React.FC<IconProps> = ({
   color = 'currentColor',
   size = '1rem',
   className,
@@ -48,7 +47,7 @@ export const LinkedInIcon: FC<IconProps> = ({
   </svg>
 )
 
-export const VsCodeIcon: FC<IconProps> = ({
+export const VsCodeIcon: React.FC<IconProps> = ({
   color = 'currentColor',
   size = '1rem',
   className,

@@ -17,6 +17,13 @@
   ],
   "version": "1.0.0",
   "private": true,
+  "license": "MIT",
+  "author": "Jair Torres",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/JairTorres1003/JT-View-Exports-SVG.git",
+    "directory": "packages/docs"
+  },
   "scripts": {
     "docusaurus": "docusaurus",
     "start": "docusaurus start",
@@ -28,8 +35,8 @@
     "write-translations": "docusaurus write-translations",
     "write-heading-ids": "docusaurus write-heading-ids",
     "typecheck": "tsc",
-    "biome:check": "biome check --write ./src",
-    "biome:format": "biome format --write ./src"
+    "lint": "biome check --write ./src",
+    "format": "biome format --write ./src"
   },
   "dependencies": {
     "@docusaurus/core": "3.9.2",
@@ -61,11 +68,14 @@
     "framer-motion": "^12.29.2",
     "fs-extra": "^11.3.3",
     "hast-util-to-jsx-runtime": "^2.3.6",
-    "lucide-react": "^0.564.0",
+    "lucide-react": "^0.575.0",
+    "mdast-util-to-hast": "^13.2.1",
     "prism-react-renderer": "^2.3.0",
     "prismjs": "^1.30.0",
     "react": "^19.2.4",
-    "react-dom": "^19.2.4"
+    "react-dom": "^19.2.4",
+    "unified": "^11.0.5",
+    "unist-util-visit": "^5.1.0"
   },
   "devDependencies": {
     "@biomejs/biome": "2.4.2",
@@ -73,7 +83,13 @@
     "@docusaurus/tsconfig": "3.9.2",
     "@docusaurus/types": "3.9.2",
     "@tailwindcss/postcss": "^4.1.18",
+    "@types/estree": "^1.0.8",
     "@types/fs-extra": "^11.0.4",
+    "@types/hast": "^3.0.4",
+    "@types/mdast": "^4.0.4",
+    "@types/react": "^19.2.14",
+    "@types/react-dom": "^19.2.3",
+    "@types/unist": "^3.0.3",
     "baseline-browser-mapping": "^2.9.19",
     "dotenv": "^17.2.3",
     "postcss": "^8.5.6",

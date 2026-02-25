@@ -4,10 +4,10 @@ import {
   useLayoutDocsSidebar,
 } from '@docusaurus/plugin-content-docs/lib/client/index.js'
 import { NavbarItem as HeroNavbarItem } from '@heroui/navbar'
-import type { FC } from 'react'
+
 import type { NavbarItemComponentProps } from './types'
 
-export const NavbarItemLink: FC<NavbarItemComponentProps> = ({
+export const NavbarItemLink: React.FC<NavbarItemComponentProps> = ({
   label,
   sidebarId = '',
   docsPluginId,

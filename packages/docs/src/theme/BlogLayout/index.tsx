@@ -4,6 +4,7 @@ import type { Props } from '@theme/BlogLayout'
 import DocSidebar from '@theme/DocRoot/Layout/Sidebar'
 import Layout from '@theme/Layout'
 import type { ReactNode } from 'react'
+
 import { useSidebar } from './hooks/useSidebar'
 
 export default function BlogLayout({ sidebar, toc, children, ...layoutProps }: Props): ReactNode {

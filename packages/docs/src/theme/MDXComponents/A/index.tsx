@@ -4,6 +4,7 @@ import { Link as HeroLink, type LinkProps } from '@heroui/link'
 import { cn } from '@site/src/lib/utils'
 import type { Props } from '@theme/MDXComponents/A'
 import { type ReactNode, Suspense, useMemo } from 'react'
+
 import { getMetaLink } from './utils/metadata'
 
 interface MDXAProps extends Omit<Props, 'color'> {

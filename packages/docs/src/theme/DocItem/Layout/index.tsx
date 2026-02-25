@@ -12,6 +12,7 @@ import DocItemTOCMobile from '@theme/DocItem/TOC/Mobile'
 import DocVersionBadge from '@theme/DocVersionBadge'
 import DocVersionBanner from '@theme/DocVersionBanner'
 import type { ReactNode } from 'react'
+
 import styles from './styles.module.css'
 
 /**

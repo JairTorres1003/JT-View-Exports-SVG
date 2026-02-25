@@ -1,4 +1,4 @@
-import { type Props as NavbarItemConfig } from '@theme/NavbarItem'
+import type { Props as NavbarItemConfig } from '@theme/NavbarItem'
 
 export type NavbarItemComponentProps = Partial<Omit<NavbarItemConfig, 'type'>> & {
   sidebarId?: string
