@@ -2,6 +2,13 @@
   "name": "@jt-view-exports-svg/core",
   "version": "2.0.0",
   "description": "Core types, enums and utilities for JT View Exports SVG",
+  "license": "MIT",
+  "author": "Jair Torres",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/JairTorres1003/JT-View-Exports-SVG.git",
+    "directory": "packages/core"
+  },
   "main": "./dist/cjs/index.js",
   "module": "./dist/esm/index.js",
   "types": "./dist/types/index.d.ts",
