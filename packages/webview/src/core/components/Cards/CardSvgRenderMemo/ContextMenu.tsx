@@ -1,6 +1,5 @@
 import type { SVGComponent } from '@jt-view-exports-svg/core'
 import { Divider, Menu, MenuItem, type MenuProps } from '@mui/material'
-import type { FC } from 'react'
 
 import { useContextMenuSVG } from '@/core/hooks/useContextMenuSVG'
 
@@ -14,7 +13,7 @@ interface ContextMenuProps
   svgRef: React.RefObject<SVGElement | null>
 }
 
-export const ContextMenu: FC<ContextMenuProps> = ({
+export const ContextMenu: React.FC<ContextMenuProps> = ({
   contextMenu,
   onClose = () => null,
   component,

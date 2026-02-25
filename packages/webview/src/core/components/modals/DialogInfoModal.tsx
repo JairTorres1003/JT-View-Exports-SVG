@@ -9,7 +9,6 @@ import {
   listItemTextClasses,
   Tooltip,
 } from '@mui/material'
-import type { FC } from 'react'
 import { useTranslation } from 'react-i18next'
 
 import { Show } from '@/core/helpers'
@@ -26,7 +25,7 @@ const commonSlotProps: ListItemTextProps['slotProps'] = {
   secondary: { noWrap: true, sx: { opacity: 0.8 } },
 }
 
-export const DialogInfoModal: FC<DialogInfoModalProps> = ({
+export const DialogInfoModal: React.FC<DialogInfoModalProps> = ({
   data,
   onClose = () => null,
   slotProps,

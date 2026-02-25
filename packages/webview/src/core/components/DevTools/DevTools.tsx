@@ -1,6 +1,5 @@
 import { Box, IconButton, Tooltip, Typography } from '@mui/material'
 import cn from 'classnames'
-import type { FC } from 'react'
 import { useTranslation } from 'react-i18next'
 import { Group, Panel, Separator } from 'react-resizable-panels'
 
@@ -13,7 +12,7 @@ import { BoxDevTools } from './DevTools.style'
 import InfoComponent from './InfoComponent/InfoComponent'
 import { Playground } from './Playground'
 
-const DevTools: FC<{ id: string; onClose?: VoidFunction }> = ({
+const DevTools: React.FC<{ id: string; onClose?: VoidFunction }> = ({
   id,
   onClose = () => null,
 }): React.ReactNode => {

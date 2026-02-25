@@ -1,5 +1,4 @@
 import { Box, ClickAwayListener, Fade, Popper, Tooltip } from '@mui/material'
-import type { FC } from 'react'
 import { useTranslation } from 'react-i18next'
 
 import { useSelectPickerColor } from '@/core/hooks/useSelectPickerColor'
@@ -9,7 +8,7 @@ import { ColorPicker } from '../../vs/ColorPicker'
 
 import { IconButtonPicker } from './SelectPickerColor.style'
 
-const SelectPickerColor: FC<SelectPickerColorProps> = ({
+const SelectPickerColor: React.FC<SelectPickerColorProps> = ({
   initialColor = '#fff',
   onChange = () => null,
   title,

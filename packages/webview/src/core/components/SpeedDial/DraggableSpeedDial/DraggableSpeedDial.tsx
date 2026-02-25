@@ -1,13 +1,13 @@
 import { Backdrop, SpeedDialAction, type SpeedDialProps } from '@mui/material'
-import type { FC } from 'react'
 
 import { useDraggableSpeedDial } from '@/core/hooks/useDraggableSpeedDial'
 import type { IconBaseProps } from '@/types/BaseProps'
 
 import { BoxDraggableSpeedDial, CornerIndicator } from './DraggableSpeedDial.style'
 
-export interface DraggableSpeedDialProps<TAction extends { icon: FC<IconBaseProps>; name: string }>
-  extends Omit<SpeedDialProps, 'children'> {
+export interface DraggableSpeedDialProps<
+  TAction extends { icon: React.FC<IconBaseProps>; name: string },
+> extends Omit<SpeedDialProps, 'children'> {
   actions: TAction[]
   hideBackdrop?: boolean
   onSelected?: (event: React.MouseEvent<HTMLDivElement>, action: TAction) => void
@@ -15,7 +15,7 @@ export interface DraggableSpeedDialProps<TAction extends { icon: FC<IconBaseProp
 }
 
 export default function DraggableSpeedDial<
-  TAction extends { icon: FC<IconBaseProps>; name: string },
+  TAction extends { icon: React.FC<IconBaseProps>; name: string },
 >({
   actions,
   hideBackdrop = false,

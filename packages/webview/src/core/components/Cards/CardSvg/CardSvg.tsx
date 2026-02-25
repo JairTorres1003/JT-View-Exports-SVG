@@ -1,7 +1,6 @@
 import type { SVGComponent } from '@jt-view-exports-svg/core'
 import { Box, type BoxProps, Card, IconButton, Tooltip, Typography } from '@mui/material'
 import cn from 'classnames'
-import type { FC } from 'react'
 
 import IconStarFilled from '@/assets/icons/indicators/start-filled'
 import IconStarOutlined from '@/assets/icons/indicators/start-outlined'
@@ -16,7 +15,7 @@ export interface CardSvgProps extends Omit<BoxProps, 'component'> {
   disableFavorite?: boolean
 }
 
-const CardSvg: FC<Readonly<CardSvgProps>> = ({
+const CardSvg: React.FC<Readonly<CardSvgProps>> = ({
   children,
   component,
   onClick = () => null,

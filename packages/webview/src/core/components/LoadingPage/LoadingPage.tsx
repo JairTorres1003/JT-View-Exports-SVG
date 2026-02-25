@@ -1,5 +1,4 @@
 import { Box, Typography } from '@mui/material'
-import type { FC } from 'react'
 import { useTranslation } from 'react-i18next'
 
 import isEmpty from '@/utils/is-empty'
@@ -12,7 +11,7 @@ interface LoadingPageProps {
   children?: React.ReactNode
 }
 
-const LoadingPage: FC<LoadingPageProps> = ({ className, children }) => {
+const LoadingPage: React.FC<LoadingPageProps> = ({ className, children }) => {
   const { t } = useTranslation(undefined, { keyPrefix: 'labels' })
 
   return (

@@ -31,11 +31,12 @@
     "dev": "vite",
     "build": "tsc -b && vite build",
     "preview": "vite preview",
-    "biome:check": "biome check --write ./src",
-    "biome:format": "biome format --write ./src",
+    "lint": "biome check --write ./src",
+    "format": "biome format --write ./src",
     "test": "vitest",
     "test:ui": "vitest --ui",
-    "test:coverage": "vitest run --coverage"
+    "test:coverage": "vitest run --coverage",
+    "typecheck": "tsc"
   },
   "dependencies": {
     "@codingame/monaco-vscode-api": "^26.1.2",

@@ -11,7 +11,6 @@ import {
   type IconButtonProps,
   Tooltip,
 } from '@mui/material'
-import type { FC } from 'react'
 import { useTranslation } from 'react-i18next'
 
 import IconClose from '@/assets/icons/functionalities/close'
@@ -29,7 +28,7 @@ interface DialogModalProps extends Omit<DialogProps, 'title'> {
   }
 }
 
-export const DialogModal: FC<DialogModalProps> = ({
+export const DialogModal: React.FC<DialogModalProps> = ({
   hideDivider = false,
   hideCloseButton = false,
   hideTitle = false,

@@ -1,5 +1,4 @@
 import { Divider, IconButton, Menu, MenuItem, Tooltip } from '@mui/material'
-import type { FC } from 'react'
 import { useTranslation } from 'react-i18next'
 import { useSelector } from 'react-redux'
 
@@ -11,7 +10,7 @@ interface MenuToolsProps {
   svgRef: React.RefObject<SVGElement | null>
 }
 
-const MenuMoreActions: FC<MenuToolsProps> = ({ svgRef }) => {
+const MenuMoreActions: React.FC<MenuToolsProps> = ({ svgRef }) => {
   const { t } = useTranslation(undefined, { keyPrefix: 'DevTools' })
 
   const { anchorEl, handleClick, handleClose, open } = useMenu()

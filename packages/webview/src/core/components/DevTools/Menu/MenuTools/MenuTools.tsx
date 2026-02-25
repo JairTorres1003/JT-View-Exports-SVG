@@ -1,5 +1,4 @@
 import { IconButton, Menu, MenuItem, Portal, Tooltip } from '@mui/material'
-import type { FC } from 'react'
 import { useTranslation } from 'react-i18next'
 
 import IconKebabHorizontal from '@/assets/icons/navigation/kebab-horizontal'
@@ -13,7 +12,7 @@ interface MenuToolsProps {
   resetPlaygroundColor?: VoidFunction
 }
 
-const MenuTools: FC<MenuToolsProps> = ({ containerId, editorRef, resetPlaygroundColor }) => {
+const MenuTools: React.FC<MenuToolsProps> = ({ containerId, editorRef, resetPlaygroundColor }) => {
   const { t } = useTranslation(undefined, { keyPrefix: 'DevTools' })
 
   const {

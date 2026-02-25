@@ -1,5 +1,4 @@
 import { Card, IconButton, Stack, Tooltip, Typography } from '@mui/material'
-import type { FC } from 'react'
 import { useTranslation } from 'react-i18next'
 
 import IconAnyFile from '@/assets/icons/files/any'
@@ -27,7 +26,7 @@ const fileIconTypes: Record<string, React.FC<IconBaseProps>> = {
   ts: IconFileTS,
 }
 
-export const FileList: FC<FileListProps> = ({ files, onRemoveFile = () => null }) => {
+export const FileList: React.FC<FileListProps> = ({ files, onRemoveFile = () => null }) => {
   const { t } = useTranslation()
 
   if (files.length === 0) {
