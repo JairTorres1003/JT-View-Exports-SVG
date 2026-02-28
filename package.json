@@ -310,7 +310,7 @@
     "@babel/parser": "^7.29.0",
     "@babel/traverse": "^7.29.0",
     "lodash": "^4.17.23",
-    "minimatch": "^10.2.1"
+    "minimatch": "^10.2.4"
   },
   "husky": {
     "hooks": {
