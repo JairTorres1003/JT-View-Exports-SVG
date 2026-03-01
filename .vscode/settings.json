@@ -8,9 +8,6 @@
     "**/.docusaurus": true
   },
 
-  "deno.config": "./packages/server/deno.json",
-  "deno.enablePaths": ["./packages/server"],
-
   "biome.enabled": true,
   "prettier.enable": true,
   "eslint.enable": false,

@@ -48,7 +48,7 @@
     "prerelease": "npm-run-all lint prepare-readme",
     "release": "npm-run-all clean build:core test:extension clean:extension build:webview package:extension",
     "postrelease": "node scripts/prepare-readme.js --restore",
-    "build:extension-api": "node scripts/generate-extension-api-package.js && pnpm -F @jt-view-exports-svg/extension-api run build"
+    "build:extension-api": "node scripts/generate-extension-api-package.js && pnpm -F @jt-view-exports-svg/extension-api run build && node scripts/fix-alias-extension-api.js"
   },
   "devDependencies": {
     "@babel/parser": "^7.29.0",

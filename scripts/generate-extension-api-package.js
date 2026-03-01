@@ -8,52 +8,6 @@ const extensionApiDir = path.join(rootDir, 'packages/extension-api')
 const extensionPkgPath = path.join(extensionDir, 'package.json')
 const extensionPkg = JSON.parse(fs.readFileSync(extensionPkgPath, 'utf8'))
 
-const exclude = ['extension.ts', 'test']
-
-// Generate exports field by including all .ts/.tsx files in src except excluded ones
-const exportsField = {
-  '.': {
-    import: './dist/extension.js',
-    types: './dist/extension.d.ts',
-  },
-}
-
-const srcDir = path.join(extensionDir, 'src')
-
-function addExports(relativePath = '') {
-  const entries = fs.readdirSync(path.join(srcDir, relativePath), {
-    withFileTypes: true,
-  })
-
-  for (const entry of entries) {
-    const entryPath = path.join(relativePath, entry.name)
-    if (exclude.some((ex) => entryPath.startsWith(ex))) {
-      continue
-    }
-    if (entry.isDirectory()) {
-      addExports(entryPath)
-    } else if (entry.isFile() && (entry.name.endsWith('.ts') || entry.name.endsWith('.tsx'))) {
-      if (entry.name.endsWith('.d.ts')) {
-        continue
-      }
-
-      let exportKey = `./${entryPath.replace(/\.(ts|tsx)$/, '')}`
-      const outputPath = entryPath.replace(/\.(ts|tsx)$/, '.js')
-
-      if (exportKey.endsWith('/index')) {
-        exportKey = exportKey.replace(/\/index$/, '')
-      }
-
-      exportsField[exportKey] = {
-        import: `./dist/${outputPath}`,
-        types: `./dist/${outputPath.replace(/\.js$/, '.d.ts')}`,
-      }
-    }
-  }
-}
-
-addExports()
-
 const apiPkg = {
   name: '@jt-view-exports-svg/extension-api',
   version: extensionPkg.version,
@@ -69,12 +23,15 @@ const apiPkg = {
   },
   main: './dist/extension.js',
   types: './dist/extension.d.ts',
-  exports: exportsField,
+  exports: {
+    '.': './dist/extension.js',
+    './*': './dist/*.js',
+  },
   files: ['dist'],
   keywords: [...(extensionPkg.keywords || []), 'API', 'ESM'],
   scripts: {
     clean: 'rimraf dist',
-    build: 'pnpm run clean && tsc -p tsconfig.json',
+    build: 'pnpm run clean && tsc',
   },
   dependencies: {
     '@jt-view-exports-svg/core': 'workspace:*',

@@ -37,7 +37,7 @@
     "build": "npm-run-all clean build:esm build:cjs build:types copy:types"
   },
   "devDependencies": {
-    "typescript": "^5.0.0",
-    "@types/node": "^22.0.0"
+    "@types/node": "^22.0.0",
+    "typescript": "^5.0.0"
   }
 }
