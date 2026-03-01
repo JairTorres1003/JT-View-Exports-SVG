@@ -302,7 +302,7 @@
     "@babel/traverse": "^7.29.0",
     "@jt-view-exports-svg/core": "workspace:*",
     "lodash": "^4.17.23",
-    "minimatch": "^10.2.2"
+    "minimatch": "^10.2.4"
   },
   "badges": [
     {
