@@ -4,8 +4,8 @@
     "formulahendry.auto-rename-tag",
     "mattpocock.ts-error-translator",
     "biomejs.biome",
+    "esbenp.prettier-vscode",
     "streetsidesoftware.code-spell-checker",
-    "denoland.vscode-deno",
     "IronGeek.vscode-env",
     "usernamehw.errorlens",
     "Tobermory.es6-string-html",
@@ -21,6 +21,7 @@
     "pflannery.vscode-versionlens",
     "JairTorres1003.jt-view-exports-svg",
     "vitest.explorer",
-    "WallabyJs.console-ninja"
+    "WallabyJs.console-ninja",
+    "ms-vscode-remote.remote-containers"
   ]
 }
