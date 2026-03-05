@@ -15,10 +15,6 @@
     "indentWidth": 2,
     "lineEnding": "lf",
     "lineWidth": 100,
-    "attributePosition": "auto",
-    "bracketSameLine": false,
-    "bracketSpacing": true,
-    "expand": "auto",
     "useEditorconfig": true
   },
   "linter": {
@@ -37,9 +33,7 @@
       "trailingCommas": "es5",
       "semicolons": "asNeeded",
       "arrowParentheses": "always",
-      "bracketSameLine": false,
       "quoteStyle": "single",
-      "attributePosition": "auto",
       "bracketSpacing": true
     }
   },

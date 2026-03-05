@@ -35,8 +35,8 @@
     "write-translations": "docusaurus write-translations",
     "write-heading-ids": "docusaurus write-heading-ids",
     "typecheck": "tsc",
-    "lint": "biome check --write ./src",
-    "format": "biome format --write ./src"
+    "lint": "biome check --write",
+    "format": "biome format --write"
   },
   "dependencies": {
     "@docusaurus/core": "3.9.2",
