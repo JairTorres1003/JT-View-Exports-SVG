@@ -259,7 +259,7 @@
     "lint": "biome check --write",
     "format": "biome format --write",
     "dev:tsc": "tsc && tsc-alias",
-    "watch:tsc": "concurrently \"tsc -w --sourceMap\" \"tsc-alias -w\"",
+    "watch:tsc": "concurrently \"tsc -w\" \"tsc-alias -w\"",
     "dev": "node esbuild.config.js",
     "watch": "node esbuild.config.js --watch",
     "compile": "node esbuild.config.js --production",

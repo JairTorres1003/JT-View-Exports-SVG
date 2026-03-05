@@ -15,12 +15,16 @@ import {
 
 import { testFolderUri } from '../../main.test'
 
+const fsWrapper = {
+  statSync: (path: string) => fs.statSync(path),
+}
+
 suite('getFileTimestamp Utility Function', () => {
   const folderUri = Uri.joinPath(testFolderUri, 'assets')
   let statSyncStub: sinon.SinonStub | undefined
 
   setup(() => {
-    statSyncStub = sinon.stub(fs, 'statSync')
+    statSyncStub = sinon.stub(fsWrapper, 'statSync')
   })
 
   teardown(() => {

@@ -1,16 +1,24 @@
 {
+  "extends": "../../tsconfig.base.json",
   "compilerOptions": {
     "target": "ES2022",
-    "lib": ["ES2022", "dom"],
-    "module": "commonjs",
+    "module": "CommonJS",
+    "moduleResolution": "node",
+    "lib": ["ES2022", "DOM"],
+    // Extensions emit JavaScript
+    "declaration": true,
+    "sourceMap": true,
+
+    // VS Code extension compatibility
+    "esModuleInterop": true,
+    "allowSyntheticDefaultImports": true,
+
     "outDir": "./dist",
     "rootDir": "./src",
     "baseUrl": ".",
     "paths": {
       "@/*": ["./src/*"]
-    },
-    "strict": true,
-    "skipLibCheck": true
+    }
   },
   "include": ["src/**/*"]
 }

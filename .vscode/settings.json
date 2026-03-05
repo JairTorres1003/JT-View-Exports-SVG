@@ -1,5 +1,5 @@
 {
-  "typescript.tsc.autoDetect": "off",
+  "js/ts.tsc.autoDetect": "off",
 
   "cSpell.language": "en,es-ES",
 

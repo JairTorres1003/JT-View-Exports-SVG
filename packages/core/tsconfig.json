@@ -2,7 +2,10 @@
   "extends": "../../tsconfig.base.json",
   "compilerOptions": {
     "outDir": "./dist",
-    "rootDir": "./src"
+    "rootDir": "./src",
+    "removeComments": true,
+    // Preserves JSDoc comments for API documentation
+    "stripInternal": true
   },
   "include": ["src/**/*.ts"],
   "exclude": ["dist", "node_modules"]

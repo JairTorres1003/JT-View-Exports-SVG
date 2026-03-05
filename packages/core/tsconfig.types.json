@@ -3,6 +3,8 @@
   "compilerOptions": {
     "declaration": true,
     "emitDeclarationOnly": true,
-    "outDir": "./dist/types"
+    "outDir": "./dist/types",
+    "removeComments": false,
+    "stripInternal": false
   }
 }
