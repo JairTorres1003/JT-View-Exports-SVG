@@ -34,6 +34,7 @@
     "clean": "rimraf dist",
     "lint": "biome check --write",
     "format": "biome format --write",
+    "typecheck": "tsc --noEmit",
     "build:esm": "tsc -p tsconfig.esm.json",
     "build:cjs": "tsc -p tsconfig.cjs.json",
     "build:types": "tsc -p tsconfig.types.json",
@@ -41,7 +42,8 @@
     "build": "npm-run-all clean build:esm build:cjs build:types copy:types"
   },
   "devDependencies": {
-    "@types/node": "^22.0.0",
-    "typescript": "^5.0.0"
+    "@babel/types": "^7.29.0",
+    "@types/node": "^25.3.3",
+    "typescript": "^5.9.3"
   }
 }
