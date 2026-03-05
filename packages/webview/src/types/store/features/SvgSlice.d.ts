@@ -30,5 +30,6 @@ export interface SVGReducers {
    */
   addPendingRefresh: CaseReducer<SVGState, PayloadAction<ViewExportSVG['groupKind']>>
 
+  // biome-ignore lint/suspicious/noExplicitAny: This is a catch-all for any additional reducers that may be added in the future.
   [key: string]: CaseReducer<SVGState, PayloadAction<any>>
 }

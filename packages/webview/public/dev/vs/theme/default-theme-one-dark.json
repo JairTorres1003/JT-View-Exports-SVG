@@ -239,10 +239,7 @@
     },
     {
       "name": "java type",
-      "scope": [
-        "storage.type.annotation.java",
-        "storage.type.object.array.java"
-      ],
+      "scope": ["storage.type.annotation.java", "storage.type.object.array.java"],
       "settings": {
         "foreground": "#e5c07b"
       }
@@ -659,11 +656,7 @@
     },
     {
       "name": "Class name",
-      "scope": [
-        "entity.name.class",
-        "variable.other.class.js",
-        "variable.other.class.ts"
-      ],
+      "scope": ["entity.name.class", "variable.other.class.js", "variable.other.class.ts"],
       "settings": {
         "foreground": "#e5c07b"
       }
@@ -1492,20 +1485,14 @@
     },
     {
       "name": "go operator",
-      "scope": [
-        "keyword.operator.arithmetic.go",
-        "keyword.operator.address.go"
-      ],
+      "scope": ["keyword.operator.arithmetic.go", "keyword.operator.address.go"],
       "settings": {
         "foreground": "#c678dd"
       }
     },
     {
       "name": "c arithmetic",
-      "scope": [
-        "keyword.operator.arithmetic.c",
-        "keyword.operator.arithmetic.cpp"
-      ],
+      "scope": ["keyword.operator.arithmetic.c", "keyword.operator.arithmetic.cpp"],
       "settings": {
         "foreground": "#c678dd"
       }
@@ -1809,10 +1796,7 @@
       }
     },
     {
-      "scope": [
-        "constant.language.symbol.elixir",
-        "constant.language.symbol.double-quoted.elixir"
-      ],
+      "scope": ["constant.language.symbol.elixir", "constant.language.symbol.double-quoted.elixir"],
       "settings": {
         "foreground": "#56b6c2"
       }
@@ -1852,10 +1836,7 @@
     },
     {
       "name": "punctuation.section.embedded.begin.php",
-      "scope": [
-        "punctuation.section.embedded.begin.php",
-        "punctuation.section.embedded.end.php"
-      ],
+      "scope": ["punctuation.section.embedded.begin.php", "punctuation.section.embedded.end.php"],
       "settings": {
         "foreground": "#BE5046"
       }
@@ -1965,10 +1946,7 @@
       }
     },
     {
-      "scope": [
-        "support.class.math.block.environment.latex",
-        "constant.other.general.math.tex"
-      ],
+      "scope": ["support.class.math.block.environment.latex", "constant.other.general.math.tex"],
       "settings": {
         "foreground": "#61afef"
       }

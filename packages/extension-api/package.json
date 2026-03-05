@@ -17,7 +17,9 @@
     ".": "./dist/extension.js",
     "./*": "./dist/*.js"
   },
-  "files": ["dist"],
+  "files": [
+    "dist"
+  ],
   "keywords": [
     "Extension",
     "Icon assets",

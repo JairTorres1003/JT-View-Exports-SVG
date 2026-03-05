@@ -12,6 +12,17 @@
   "prettier.enable": true,
   "eslint.enable": false,
 
+  "prettier.printWidth": 100,
+  "prettier.tabWidth": 2,
+  "prettier.useTabs": false,
+  "prettier.semi": false,
+  "prettier.singleQuote": true,
+  "prettier.quoteProps": "as-needed",
+  "prettier.jsxSingleQuote": true,
+  "prettier.trailingComma": "es5",
+  "prettier.bracketSpacing": true,
+  "prettier.arrowParens": "always",
+
   "editor.tabSize": 2,
   "editor.formatOnSave": true,
   "editor.fontLigatures": true,
@@ -58,6 +69,7 @@
   "explorer.fileNesting.enabled": true,
   "explorer.fileNesting.patterns": {
     "*.tsx": "${capture}.tsx",
+    "biome.json": "biome.*.json",
     "package.json": "package-lock.json, yarn.lock, pnpm-lock.yaml, bun.lockb, .*",
     "package.nls.json": "package.nls*.json"
   },

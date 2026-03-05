@@ -32,7 +32,9 @@
   "engines": {
     "vscode": "^1.109.0"
   },
-  "categories": ["Visualization"],
+  "categories": [
+    "Visualization"
+  ],
   "icon": "icon.png",
   "main": "./dist/extension.js",
   "browser": "./dist/web/extension.js",

@@ -26,5 +26,6 @@ export interface VsCodeReducers {
    */
   setThemeKind: CaseReducer<VsCodeState, PayloadAction<ThemeMode>>
 
+  // biome-ignore lint/suspicious/noExplicitAny: This is a catch-all for any additional reducers that may be added in the future.
   [key: string]: CaseReducer<VsCodeState, PayloadAction<any>>
 }

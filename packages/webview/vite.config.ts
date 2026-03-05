@@ -33,7 +33,7 @@ export default defineConfig({
     react(),
     codingameOnigWasmWebFix(),
     legacyManifest(),
-    removeFiles()
+    removeFiles(),
   ],
   optimizeDeps: {
     rolldownOptions: {
