@@ -22,7 +22,6 @@ html:root {
   --JT-SVG-vscode-focusBorder: var(--vscode-focusBorder, var(--JT-SVG-vscode-input-border));
   --JT-SVG-vscode-input-background: var(--vscode-input-background);
   --JT-SVG-vscode-input-foreground: var(--vscode-input-foreground, #3e4452);
-  --JT-SVG-vscode-list-hoverBackground: var(--vscode-list-hoverBackground, #2c313a0d);
   --JT-SVG-vscode-notifications-background: var(--vscode-notifications-background);
   --JT-SVG-vscode-notifications-foreground: var(--vscode-notifications-foreground);
   --JT-SVG-vscode-notificationsErrorIcon-foreground: var(
@@ -44,7 +43,6 @@ html:root {
   --JT-SVG-vscode-editorHoverWidget-background: var(--vscode-editorHoverWidget-background, #616161);
   --JT-SVG-vscode-editorHoverWidget-border: var(--vscode-editorHoverWidget-border);
   --JT-SVG-vscode-editorHoverWidget-foreground: var(--vscode-editorHoverWidget-foreground);
-  --JT-SVG-vscode-widget-shadow: var(--vscode-widget-shadow);
   --JT-SVG-vscode-editorWidget-background: var(--vscode-editorWidget-background);
   --JT-SVG-vscode-editorWidget-border: var(--vscode-editorWidget-border);
   --JT-SVG-vscode-editorWidget-foreground: var(--vscode-editorWidget-foreground);

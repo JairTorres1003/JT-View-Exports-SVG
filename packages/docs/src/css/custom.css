@@ -163,6 +163,11 @@ html {
     @apply bg-primary/20 dark:bg-foreground/20;
   }
 
+  .DocSearch-Screen-Icon svg,
+  .DocSearch-MagnifierLabel svg {
+    @apply text-primary [stroke:currentColor];
+  }
+
   .searchbar-container .DocSearch-Button-Keys .DocSearch-Button-Key svg {
     @apply absolute w-[22px] h-[22px];
   }
@@ -171,7 +176,6 @@ html {
      DocSearch-Modal
      ========================= */
 
-  /* 60px auto auto */
   .DocSearch-Modal {
     @apply m-[60px_auto_auto] rounded-lg bg-content1 border border-divider dark:border-none shadow-xl;
   }
@@ -213,11 +217,6 @@ html {
 
   .DocSearch-NoResults {
     @apply m-[20px_auto_auto];
-  }
-
-  .DocSearch-Screen-Icon svg,
-  .DocSearch-MagnifierLabel svg {
-    @apply text-primary [stroke:currentColor];
   }
 
   .DocSearch-Footer {
