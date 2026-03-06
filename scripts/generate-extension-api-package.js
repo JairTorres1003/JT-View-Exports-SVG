@@ -36,6 +36,9 @@ const apiPkg = {
   dependencies: {
     '@jt-view-exports-svg/core': 'workspace:*',
   },
+  devDependencies: {
+    typescript: '^5.9.3',
+  },
 }
 
 // Ensure output directory exists
