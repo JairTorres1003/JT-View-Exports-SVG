@@ -2,8 +2,7 @@
   <img src="https://raw.githubusercontent.com/JairTorres1003/JT-View-Exports-SVG/main/assets/JT%20View%20Exports%20SVG%20-%20ICON.png" alt="Logo View Exports SVG" width="180" height="180">
   <br>
   <h1>View Exports SVG</h1>
-  <p>The ultimate tool to discover, visualize, and manage your SVG component library directly within Visual Studio Code.</p>
-
+  <p>The ultimate VS Code extension to discover, preview, and manage your SVG component library directly inside your projects.</p>
   <p>
     <a href="https://deepwiki.com/JairTorres1003/JT-View-Exports-SVG"><img src="https://img.shields.io/badge/any_text-Ask_DeepWiki-%232181c2?logo=data%3Aimage%2Fpng%3Bbase64%2CiVBORw0KGgoAAAANSUhEUgAAACwAAAAyCAYAAAAnWDnqAAAAAXNSR0IArs4c6QAAA05JREFUaEPtmUtyEzEQhtWTQyQLHNak2AB7ZnyXZMEjXMGeK%2FAIi%2BQuHrMnbChYY7MIh8g01fJoopFb0uhhEqqcbWTp06%2Fuv1saEDv4O3n3dV60RfP947Mm9%2FSQc0ICFQgzfc4CYZoTPAswgSJCCUJUnAAoRHOAUOcATwbmVLWdGoH%2F%2FPB8mnKqScAhsD0kYP3j%2FYt5LPQe2KvcXmGvRHcDnpxfL2zOYJ1mFwrryWTz0advv1Ut4CJgf5uhDuDj5eUcAUoahrdY%2F56ebRWeraTjMt%2F00Sh3UDtjgHtQNHwcRGOC98BJEAEymycmYcWwOprTgcB6VZ5JK5TAJ%2BfXGLBm3FDAmn6oPPjR4rKCAoJCal2eAiQp2x0vxTPB3ALO2CRkwmDy5WohzBDwSEFKRwPbknEggCPB%2FimwrycgxX2NzoMCHhPkDwqYMr9tRcP5qNrMZHkVnOjRMWwLCcr8ohBVb1OMjxLwGCvjTikrsBOiA6fNyCrm8V1rP93iVPpwaE%2BgO0SsWmPiXB%2Bjikdf6SizrT5qKasx5j8ABbHpFTx%2BvFXp9EnYQmLx02h1QTTrl6eDqxLnGjporxl3NL3agEvXdT0WmEost648sQOYAeJS9Q7bfUVoMGnjo4AZdUMQku50McDcMWcBPvr0SzbTAFDfvJqwLzgxwATnCgnp4wDl6Aa%2BAx283gghmj%2Bvj7feE2KBBRMW3FzOpLOADl0Isb5587h%2FU4gGvkt5v60Z1VLG8BhYjbzRwyQZemwAd6cCR5%2FXFWLYZRIMpX39AR0tjaGGiGzLVyhse5C9RKC6ai42ppWPKiBagOvaYk8lO7DajerabOZP46Lby5wKjw1HCRx7p9sVMOWGzb%2FvA1hwiWc6jm3MvQDTogQkiqIhJV0nBQBTU%2B3okKCFDy9WwferkHjtxib7t3xIUQtHxnIwtx4mpg26%2FHfwVNVDb4oI9RHmx5WGelRVlrtiw43zboCLaxv46AZeB3IlTkwouebTr1y2NjSpHz68WNFjHvupy3q8TFn3Hos2IAk4Ju5dCo8B3wP7VPr%2FFGaKiG%2BT%2Bv%2BTQqIrOqMTL1VdWV1DdmcbO8KXBz6esmYWYKPwDL5b5FA1a0hwapHiom0r%2FcKaoqr%2B27%2FXcrS5UwSMbQAAAABJRU5ErkJggg%3D%3D&label=%20&labelColor=%23111111&cacheSeconds=86400" alt="Ask DeepWiki"></a>
     <a href="https://marketplace.visualstudio.com/items?itemName=JairTorres1003.jt-view-exports-svg"><img src="https://img.shields.io/visual-studio-marketplace/v/JairTorres1003.jt-view-exports-svg" alt="Marketplace Version"></a>
@@ -15,20 +14,19 @@
 
 ---
 
-**View Exports SVG** is a powerful Visual Studio Code extension that transforms how you interact with SVG icons in your projects. It goes beyond simple viewing, offering a complete suite of tools to scan your workspace, preview components in an interactive playground, and manage your assets with an intuitive DevTools panel.
+**View Exports SVG** is a powerful VS Code extension that allows you to **discover, preview, and manage SVG components** in your projects. It provides an **interactive panel** to explore your icons, edit properties, and organize your assets efficiently.
 
 ---
 
 ## ✨ Key Features
 
-- **Advanced DevTools Panel** - A dockable, full-featured panel with a component viewer, search, and management tools
-- **Interactive Playground** - Select any icon to preview it, edit its properties in a real-time code editor, and see your changes instantly
-- **Workspace-wide Scanning** - Automatically discover all SVG components across your entire project, not just in specific files
-- **Component Management** - Mark icons as **favorites**, see your **recently used** components, and get quick access to what matters most
-- **Multiple Ways to View** - Launch the viewer from the context menu, the command palette, or by dragging and dropping files
-- **Powerful Actions** - Copy component names, download as SVG/PNG, or open the source file directly from the UI
-- **Broad Framework Support** - Works out-of-the-box with JavaScript/TypeScript projects using frameworks like React, Preact, and more ([See Full SVG Support](https://view-exports-svg.vercel.app/docs/resources/svg-support))
-- **Native Theming** - The interface automatically adapts to your current VS Code theme for a seamless experience
+- **Interactive Webview Panel** – Preview and manipulate SVG components in real time
+- **Workspace-wide Scanning** – Automatically discover all SVG components in your project
+- **Favorites & Recently Used** – Quickly access the icons that matter most
+- **Multiple Ways to Open** – Command Palette, context menu, or drag-and-drop files
+- **Quick Actions** – Copy component names, download as SVG/PNG, or open source files directly
+- **Native VS Code Theme Support** – The interface adapts seamlessly to your current theme
+- **Broad Framework Compatibility** – Works with JavaScript/TypeScript projects, including React, Preact, and more ([See Full SVG Support](https://view-exports-svg.vercel.app/docs/resources/svg-support))
 
 ---
 
@@ -52,29 +50,32 @@
 
 ---
 
-## 🎯 Usage
+## 🎯 How to Use
 
 You can visualize your icons in multiple ways:
 
 ### From the Explorer (Context Menu)
+
 1. Right-click on a file, a folder, or a selection of multiple files
 2. Select **View Exports SVG 🔍**
 
 ### From the Command Palette
+
 1. Open the Command Palette (`Ctrl+Shift+P` or `Cmd+Shift+P`)
 2. Run the command **`View Exports SVG: Start Scanning`** to discover all icons in your project
 
 ### Via Drag and Drop
-1. Open the viewer using one of the methods above
-2. Drag and drop SVG files directly onto the panel to add them
 
-Once the panel is open, you can click on any icon to copy its name to the clipboard or select it to start experimenting in the Playground.
+1. Open the main viewer using **`View Exports SVG 🔍`**
+2. Drag and drop SVG files directly onto the panel
+
+Once the panel is open, you can instantly preview icons, copy their component names, download them as assets, or open their source files.
 
 ---
 
 ## 📚 Documentation
 
-For more information, detailed guides, and advanced configuration, please visit the [official documentation site](https://view-exports-svg.vercel.app/).
+For more information, detailed guides, and advanced configuration, please visit the [official documentation site](https://view-exports-svg.vercel.app).
 
 ---
 
@@ -90,33 +91,19 @@ Want to contribute to the development? Follow these steps:
 ### Setup
 
 1. **Clone the repository:**
+
    ```bash
    git clone https://github.com/JairTorres1003/JT-View-Exports-SVG.git
    cd JT-View-Exports-SVG
    ```
 
-2. **Install dependencies:**
+2. **Run the setup script to install dependencies and build packages:**
+
    ```bash
-   pnpm install
+   pnpm run setup
    ```
 
-3. **Build the core package:**
-   ```bash
-   pnpm run build:core
-   ```
-
-4. **Build the webview:**
-   ```bash
-   pnpm run build:webview
-   ```
-
-5. **Compile the extension:**
-   ```bash
-   cd packages/extension
-   pnpm run compile
-   ```
-
-6. **Run the extension:**
+3. **Run the extension:**
    - Press `F5` to open a new VS Code window with the extension loaded for testing
 
 ### Available Scripts
@@ -124,57 +111,20 @@ Want to contribute to the development? Follow these steps:
 From the **workspace root**:
 
 ```bash
-# Build everything
 pnpm run release              # Full build: core → webview → extension
 
-# Individual builds
-pnpm run build:core           # Build @jt-view-exports-svg/core
-pnpm run build:webview        # Build webview UI (Vite)
-pnpm run package:extension    # Package extension as .vsix
+# Development
+pnpm run setup                # Install dependencies and build all packages
+pnpm run build:extension-api  # Build the extension API package
+pnpm run dev:webview          # Run server and webview in development mode
 
 # Testing
 pnpm run test:extension       # Run extension tests
+pnpm run test:web-extension   # Run web extension tests
 
 # Linting & Formatting
 pnpm run lint                 # Run Biome linter
 pnpm run format               # Format code with Biome
-
-# Clean
-pnpm run clean                # Remove all build artifacts
-```
-
-From **packages/extension**:
-
-```bash
-# Development
-pnpm run dev                  # Build extension (development mode)
-pnpm run watch                # Watch mode for extension
-pnpm run compile              # Build extension (production mode)
-
-# Web Extension
-pnpm run web:dev              # Build web extension
-pnpm run web:watch            # Watch mode for web extension
-pnpm run web:compile          # Build web extension (production)
-
-# Testing
-pnpm run test                 # Run extension tests
-pnpm run test:web             # Run web extension tests
-
-# Package
-pnpm run package              # Create .vsix package
-```
-
-### Project Structure
-
-```
-JT-View-Exports-SVG/
-├── packages/
-│   ├── core/               # Shared types & constants
-│   ├── docs/               # Documentation site (Docusaurus)
-│   ├── extension/          # VS Code extension (Node.js & Web)
-│   │   └──dist/            # Compiled output
-│   ├── server/             # Development server (Deno)
-│   └── webview/            # Webview UI (React + Vite)
 ```
 
 ---
@@ -184,12 +134,6 @@ JT-View-Exports-SVG/
 Contributions are what make the open-source community such an amazing place to learn, inspire, and create. Any contributions you make are **greatly appreciated**.
 
 If you have a suggestion that would make this better, please fork the repo and create a pull request. You can also simply open an issue with the "feature request" tag.
-
-1. Fork the Project
-2. Create your Feature Branch (`git checkout -b feature/AmazingFeature`)
-3. Commit your Changes (`git commit -m 'Add some AmazingFeature'`)
-4. Push to the Branch (`git push origin feature/AmazingFeature`)
-5. Open a Pull Request
 
 ---
 
@@ -201,14 +145,14 @@ This extension is available under the [MIT License](LICENSE). See the `LICENSE` 
 
 ## 📝 Changelog
 
-You can find details of all changes and updates in the [CHANGELOG.md](../../CHANGELOG.md) file.
+See the full release history and updates in the official documentation: [Changelog](https://view-exports-svg.vercel.app/changelog)
 
 ---
 
 ## 🔗 Links
 
 - [Marketplace](https://marketplace.visualstudio.com/items?itemName=JairTorres1003.jt-view-exports-svg)
-- [Documentation](https://view-exports-svg.vercel.app/)
+- [Documentation](https://view-exports-svg.vercel.app)
 - [GitHub Repository](https://github.com/JairTorres1003/JT-View-Exports-SVG)
 - [Issues](https://github.com/JairTorres1003/JT-View-Exports-SVG/issues)
 
