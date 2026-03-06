@@ -11,7 +11,7 @@ In development mode, it can run against `server` to speed up iteration without r
 ## Dependencies
 
 - Production: `@jt-view-exports-svg/core`
-- Development: requires `@jt-view-exports-svg/server` running on localhost for the fast web workflow
+- Development: works with `@jt-view-exports-svg/server` during the fast web development workflow
 
 ## Basic Usage
 
@@ -32,3 +32,7 @@ Build:
 ```bash
 pnpm run build:webview
 ```
+
+## Build Output
+
+Production assets are emitted to `packages/extension/dist/` and consumed by the extension package.
