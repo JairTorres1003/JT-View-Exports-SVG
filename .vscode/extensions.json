@@ -21,7 +21,6 @@
     "pflannery.vscode-versionlens",
     "JairTorres1003.jt-view-exports-svg",
     "vitest.explorer",
-    "WallabyJs.console-ninja",
-    "ms-vscode-remote.remote-containers"
+    "WallabyJs.console-ninja"
   ]
 }
