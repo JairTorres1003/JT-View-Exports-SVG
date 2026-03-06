@@ -9,6 +9,7 @@ workspaceTest.code-workspace
 node_modules/
 
 # Source Code (compiled to dist/)
+assets/*.mp4
 src/
 **/*.ts
 **/*.map

@@ -44,7 +44,7 @@
     "test:web-extension": "pnpm -F jt-view-exports-svg run test:web",
     "clean:extension": "pnpm -F jt-view-exports-svg run clean",
     "build:webview": "pnpm -F @jt-view-exports-svg/webview run build",
-    "package:extension": "pnpm -F jt-view-exports-svg run package",
+    "package:extension": "pnpm -F jt-view-exports-svg run package -o $(pwd)",
     "prepare-readme": "node scripts/prepare-readme.js",
     "prerelease": "npm-run-all lint prepare-readme",
     "release": "npm-run-all clean build:core test:extension clean:extension build:webview package:extension",
