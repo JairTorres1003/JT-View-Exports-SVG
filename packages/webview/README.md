@@ -1,52 +1,34 @@
-# View Exports SVG: The DevTools Client
+# @jt-view-exports-svg/webview
 
-Welcome to the `client` directory! This folder contains the source code for the interactive webview panel of the **View Exports SVG** extension. This is not just a simple viewer; it's a complete front-end application built with **React** and **TypeScript** to provide a rich, performant, and feature-packed user experience.
+Web UI package for the extension panel, built with Vite + React.
 
-This UI serves as the central hub where users discover, manage, and experiment with their SVG component libraries.
+## Role In The Project
 
-<br>
+This package renders the interactive panel used by `extension`.
 
-<div align="center">
-  <video src="https://github.com/user-attachments/assets/66020180-98ca-4ff8-adf4-0cc56526e6e3" controls>
-    <source src="https://github.com/user-attachments/assets/66020180-98ca-4ff8-adf4-0cc56526e6e3" type="video/mp4" />
-    Your browser does not support the video tag.
-  </video>
-</div>
+In development mode, it can run against `server` to speed up iteration without restarting the extension host.
 
-<br>
+## Dependencies
 
-## Core Features of the Client
+- Production: `@jt-view-exports-svg/core`
+- Development: requires `@jt-view-exports-svg/server` running on localhost for the fast web workflow
 
-The client is architected around several key components to deliver a powerful workflow:
+## Basic Usage
 
-### 1. **Component Explorer**
+Run only webview:
 
-The main view where all discovered SVG icons are displayed in a clean, searchable grid.
+```bash
+pnpm -F @jt-view-exports-svg/webview run dev
+```
 
-- **Instant Search:** A responsive search bar allows users to filter icons by name in real-time.
-- **Favorites & Recents:** Accordion panels provide quick access to frequently used or recently selected icons, streamlining the development process.
-- **Contextual Actions:** Each icon card has a rich context menu with actions like "Copy Name", "Download as PNG/SVG", and "Open in Editor".
+Run fast web development flow (`server` + `webview`):
 
-### 2. **The Interactive Playground**
+```bash
+pnpm run dev:webview
+```
 
-This is the heart of the DevTools panel. When an icon is selected, it's loaded into the Playground, which features:
+Build:
 
-- **Live Preview:** A dedicated area to see the selected component rendered.
-- **Real-time Code Editor:** An integrated Monaco Editor instance allows users to edit the component's props and see the changes reflected instantly in the live preview.
-- **Toolbar Actions:** Quick actions to copy the generated code, reset changes, or toggle editor settings like word wrap.
-
-### 3. **Seamless VS Code Integration**
-
-The client is designed to feel like a native part of the VS Code editor.
-
-- **Adaptive Theming:** The UI automatically inherits colors and styles from the user's active VS Code theme for a consistent look.
-- **Bidirectional Communication:** A robust message-passing system communicates with the extension's backend to fetch data, execute commands, and update state.
-
-## Tech Stack
-
-- **Framework:** React
-- **Language:** TypeScript
-- **UI Components:** Material-UI (MUI)
-- **State Management:** Redux Toolkit
-
-This README provides a high-level overview for developers navigating the client-side codebase. For more information on the extension as a whole, please refer to the main [README.md](../extension/README.md) in the root directory.
+```bash
+pnpm run build:webview
+```
