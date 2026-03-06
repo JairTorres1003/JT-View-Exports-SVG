@@ -50,11 +50,13 @@
     "postrelease": "node scripts/prepare-readme.js --restore",
     "prebuild:extension-api": "node scripts/generate-extension-api-package.js",
     "build:extension-api": "pnpm -F @jt-view-exports-svg/extension-api run build",
-    "postbuild:extension-api": "node scripts/fix-alias-extension-api.js"
+    "postbuild:extension-api": "node scripts/fix-alias-extension-api.js",
+    "dev:webview": "concurrently \"pnpm -F @jt-view-exports-svg/server run dev\" \"pnpm -F @jt-view-exports-svg/webview run dev\""
   },
   "devDependencies": {
     "@biomejs/biome": "2.4.5",
     "@types/node": "^25.3.3",
+    "concurrently": "^9.2.1",
     "glob": "^13.0.6",
     "husky": "^9.1.7",
     "npm-run-all": "^4.1.5",
