@@ -25,7 +25,7 @@ export default function DocSidebarItemLink({
       className={cn(
         ThemeClassNames.docs.docSidebarItemLink,
         ThemeClassNames.docs.docSidebarItemLinkLevel(level),
-        `rounded-md cursor-pointer my-1 transition-all relative`,
+        'rounded-md cursor-pointer my-1 transition-all relative',
         {
           'opacity-80 font-normal hover:bg-primary/10 hover:opacity-100': !isActive,
           'opacity-100 font-medium bg-[#0d59f2]/10': isActive,

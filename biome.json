@@ -23,6 +23,9 @@
       "recommended": true,
       "a11y": {
         "noSvgWithoutTitle": "off"
+      },
+      "style": {
+        "noUnusedTemplateLiteral": "error"
       }
     }
   },

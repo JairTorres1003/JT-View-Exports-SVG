@@ -35,7 +35,7 @@ export const BoxDraggableSpeedDial = styled(
   [`& .${speedDialClasses.fab}`]: {
     backgroundColor: 'var(--JT-SVG-vscode-editorWidget-background)',
     color: 'var(--JT-SVG-vscode-editorWidget-foreground)',
-    border: `1px solid var(--JT-SVG-vscode-sideBarSectionHeader-border)`,
+    border: '1px solid var(--JT-SVG-vscode-sideBarSectionHeader-border)',
     '&:hover': {
       backgroundColor: 'var(--JT-SVG-vscode-editorHoverWidget-background)',
       color: 'var(--JT-SVG-vscode-editorHoverWidget-foreground)',

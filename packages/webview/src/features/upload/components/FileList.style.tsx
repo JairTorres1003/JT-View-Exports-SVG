@@ -37,8 +37,8 @@ export const BoxFileList = styled<ComponentType<BoxProps>>(
   [`& .${fileListClasses.card}`]: {
     position: 'relative',
     borderRadius: `${shape.borderRadius}px`,
-    border: `1px solid var(--JT-SVG-vscode-sideBarSectionHeader-border)`,
-    backgroundColor: `var(--JT-SVG-vscode-sideBarSectionHeader-background)`,
+    border: '1px solid var(--JT-SVG-vscode-sideBarSectionHeader-border)',
+    backgroundColor: 'var(--JT-SVG-vscode-sideBarSectionHeader-background)',
     height: '130px',
     width: '110px',
     padding: '8px',

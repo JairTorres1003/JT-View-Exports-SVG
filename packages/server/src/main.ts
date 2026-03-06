@@ -13,7 +13,7 @@ async function start() {
     await bootstrapVSCode()
 
     app.listen(PORT, () => {
-      console.log(`✅ VS Code Services ready`)
+      console.log('✅ VS Code Services ready')
       console.log(`🚀 Server running on http://localhost:${PORT}`)
     })
   } catch (error) {
