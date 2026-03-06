@@ -1,7 +1,7 @@
 {
   "name": "@jt-view-exports-svg/extension-api",
   "version": "4.1.0",
-  "description": "API surface of JT View Exports SVG extension (v4.1.0). Auto-generated from extension build.",
+  "description": "API surface of the JT View Exports SVG extension. Auto-generated from the extension build.",
   "type": "module",
   "private": false,
   "license": "MIT",
@@ -36,8 +36,7 @@
     "ESM"
   ],
   "scripts": {
-    "clean": "rimraf dist",
-    "build": "pnpm run clean && tsc"
+    "clean": "rimraf dist"
   },
   "dependencies": {
     "@jt-view-exports-svg/core": "workspace:*"

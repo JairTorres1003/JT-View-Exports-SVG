@@ -11,7 +11,8 @@ const extensionPkg = JSON.parse(fs.readFileSync(extensionPkgPath, 'utf8'))
 const apiPkg = {
   name: '@jt-view-exports-svg/extension-api',
   version: extensionPkg.version,
-  description: `API surface of JT View Exports SVG extension (v${extensionPkg.version}). Auto-generated from extension build.`,
+  description:
+    'API surface of the JT View Exports SVG extension. Auto-generated from the extension build.',
   type: 'module',
   private: false,
   license: extensionPkg.license,
@@ -31,7 +32,6 @@ const apiPkg = {
   keywords: [...(extensionPkg.keywords || []), 'API', 'ESM'],
   scripts: {
     clean: 'rimraf dist',
-    build: 'pnpm run clean && tsc',
   },
   dependencies: {
     '@jt-view-exports-svg/core': 'workspace:*',
