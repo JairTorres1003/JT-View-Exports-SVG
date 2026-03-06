@@ -111,6 +111,7 @@ Want to contribute to the development? Follow these steps:
 From the **workspace root**:
 
 ```bash
+# Full Release Build
 pnpm run release              # Full build: core → webview → extension
 
 # Development
