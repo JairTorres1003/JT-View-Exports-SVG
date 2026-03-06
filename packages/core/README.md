@@ -32,8 +32,6 @@ import { SVGPostMessage } from '@jt-view-exports-svg/core/constants'
 import type { SVGComponent } from '@jt-view-exports-svg/core/types'
 ```
 
-For more detailed documentation on available types and constants, see: [Core Documentation](https://view-exports-svg.vercel.app/docs/development/core)
-
 ---
 
 MIT © Jair Torres

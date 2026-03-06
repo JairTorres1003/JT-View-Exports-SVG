@@ -51,11 +51,6 @@ ALGOLIA_SITE_VERIFICATION=...
 
 Local development works without these variables; search and verification features will be skipped.
 
-## More Documentation
-
-Full development docs are published here:
-[Development Documentation](https://view-exports-svg.vercel.app/docs/development)
-
 ## Notes for Contributors
 
 - Changelog is sourced from root `CHANGELOG.md`
