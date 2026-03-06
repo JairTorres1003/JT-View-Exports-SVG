@@ -262,6 +262,8 @@
     "format": "biome format --write",
     "dev:tsc": "tsc && tsc-alias",
     "watch:tsc": "concurrently \"tsc -w\" \"tsc-alias -w\"",
+    "build:api": "tsc -b tsconfig.api.json && tsc-alias -p tsconfig.api.json",
+    "watch:api": "concurrently \"tsc -b tsconfig.api.json -w\" \"tsc-alias -p tsconfig.api.json -w\"",
     "dev": "node esbuild.config.js",
     "watch": "node esbuild.config.js --watch",
     "compile": "node esbuild.config.js --production",
