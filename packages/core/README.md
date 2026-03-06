@@ -9,7 +9,7 @@ This package acts as the common contract between `extension`, `webview`, and `se
 ## Dependencies
 
 - **Production:** none
-- **Consumed by:** `extension`, `webview`, `server`, `extension-api`
+- **Consumed by:** `extension`, `@jt-view-exports-svg/webview`, `@jt-view-exports-svg/server`, `@jt-view-exports-svg/extension-api`
 
 ## Installation
 

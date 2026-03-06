@@ -9,8 +9,8 @@ It exists to expose extension APIs in a consumable ESM format, mainly for `serve
 
 ## Dependencies
 
-- Development: depends on `core` and artifacts from [`extension`](../extension/README.md) build
-- Consumed by: `server`
+- Development: depends on `@jt-view-exports-svg/core` and artifacts from [`extension`](../extension/README.md) build
+- Consumed by: `@jt-view-exports-svg/server`
 
 ## Basic Usage
 
