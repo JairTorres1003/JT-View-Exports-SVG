@@ -41,6 +41,7 @@
     "clean": "pnpm -r --parallel clean",
     "build:core": "pnpm -F @jt-view-exports-svg/core run build",
     "test:extension": "pnpm -F jt-view-exports-svg run test",
+    "test:web-extension": "pnpm -F jt-view-exports-svg run test:web",
     "clean:extension": "pnpm -F jt-view-exports-svg run clean",
     "build:webview": "pnpm -F @jt-view-exports-svg/webview run build",
     "package:extension": "pnpm -F jt-view-exports-svg run package",
@@ -51,7 +52,10 @@
     "prebuild:extension-api": "node scripts/generate-extension-api-package.js",
     "build:extension-api": "pnpm -F @jt-view-exports-svg/extension-api run build",
     "postbuild:extension-api": "node scripts/fix-alias-extension-api.js",
-    "dev:webview": "concurrently \"pnpm -F @jt-view-exports-svg/server run dev\" \"pnpm -F @jt-view-exports-svg/webview run dev\""
+    "dev:webview": "concurrently \"pnpm -F @jt-view-exports-svg/server run dev\" \"pnpm -F @jt-view-exports-svg/webview run dev\"",
+    "dev:extension": "pnpm -F jt-view-exports-svg run dev",
+    "build:extension": "pnpm -F jt-view-exports-svg run compile",
+    "setup": "pnpm install && npm-run-all clean build:core build:webview build:extension"
   },
   "devDependencies": {
     "@biomejs/biome": "2.4.5",
