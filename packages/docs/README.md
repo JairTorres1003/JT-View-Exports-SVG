@@ -1,46 +1,45 @@
-# View Exports SVG: Documentation Site
+# @jt-view-exports-svg/docs
 
-Welcome to the `packages/docs` workspace. This folder contains the documentation and marketing site for the View Exports SVG extension. The site is a Docusaurus app with a custom changelog pipeline and a UI layer that mirrors the extension's brand.
+Documentation website for the **View Exports SVG** project, built with Docusaurus.
 
-## What lives here
+## Role In The Project
 
-- Product documentation, guides, and usage examples.
-- A changelog section generated from the root `CHANGELOG.md` files.
-- Custom plugins and theming (Tailwind, HeroUI components, and Docusaurus theme config).
+This package contains the official guides, development documentation, and resources for all internal packages. It also hosts the changelog and mirrors the extension's brand and UI.
 
-## Tech stack
+## Tech Stack
 
 - Docusaurus 3
 - React + TypeScript
-- Tailwind CSS + HeroUI
+- Tailwind CSS + HeroUI components
 
-## Local development
+## Dependencies
 
-From the repo root, install dependencies:
+- Production: none (does not depend on workspace packages)
+- Runtime stack: Docusaurus + React
+
+## Local Development
+
+From the workspace root, install dependencies:
 
 ```bash
 pnpm install
+pnpm -F @jt-view-exports-svg/docs run start
 ```
 
-Start the docs site:
-
-```bash
-pnpm --filter @jt-view-exports-svg/docs start
-```
-
-The dev server runs on `http://localhost:3000` by default and reloads on file changes.
+- Dev server runs on `http://localhost:3000` by default
+- Hot reloads on file changes
 
 ## Build
 
 ```bash
-pnpm --filter @jt-view-exports-svg/docs build
+pnpm -F @jt-view-exports-svg/docs run build
 ```
 
-The build output is written to `packages/docs/build`.
+- Output is written to `packages/docs/build`
 
-## Environment variables (optional)
+## Environment Variables (Optional)
 
-These variables are only needed for production or search indexing:
+Required only for production or search indexing:
 
 ```bash
 SITE_URL=https://your-domain.example
@@ -50,9 +49,14 @@ ALGOLIA_INDEX_NAME=...
 ALGOLIA_SITE_VERIFICATION=...
 ```
 
-If these are not set, the local dev server still works; search and verification tags will be skipped.
+Local development works without these variables; search and verification features will be skipped.
 
-## Notes for contributors
+## More Documentation
 
-- The changelog is sourced from the repository root. Update `CHANGELOG.md` and the docs site will reflect it.
-- Custom plugins live in `packages/docs/src/plugins`.
+Full development docs are published here:
+[Development Documentation](https://view-exports-svg.vercel.app/docs/development)
+
+## Notes for Contributors
+
+- Changelog is sourced from root `CHANGELOG.md`
+- Custom plugins and theming live in `packages/docs/src/plugins`
