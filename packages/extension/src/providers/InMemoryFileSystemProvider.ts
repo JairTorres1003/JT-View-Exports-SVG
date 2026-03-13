@@ -24,7 +24,7 @@ export class InMemoryFileSystemProvider implements vscode.FileSystemProvider {
   stat(uri: vscode.Uri): vscode.FileStat {
     const file = this.getFile(uri)
     return {
-      type: vscode.FileType.File,
+      type: file.content.byteLength === 0 ? vscode.FileType.Directory : vscode.FileType.File,
       ctime: file.ctime,
       mtime: file.mtime,
       size: file.content.byteLength,
