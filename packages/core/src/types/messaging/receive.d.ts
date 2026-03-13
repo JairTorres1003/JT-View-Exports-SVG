@@ -13,6 +13,7 @@ export type ReceiveMessageMap = {
   [SVGReceiveMessage.ChangeViewPath]: string
   [SVGReceiveMessage.RequestComponents]: undefined
   [SVGReceiveMessage.RequestUserComponents]: undefined
+  [SVGReceiveMessage.SearchComponents]: string
 
   [SVGReceiveMessage.ExtractSVGComponentFromFiles]: string[]
   [SVGReceiveMessage.GetAssetsPath]: undefined
@@ -26,7 +27,6 @@ export type ReceiveMessageMap = {
   [SVGReceiveMessage.RefreshSVGComponents]: SVGFile[]
   [SVGReceiveMessage.RemoveAssets]: SVGFile[]
   [SVGReceiveMessage.ScanWorkspace]: undefined
-  [SVGReceiveMessage.SearchSVGComponents]: string
   [SVGReceiveMessage.GetEditorConfig]: undefined
   [SVGReceiveMessage.GetVsCodeStyles]: undefined
   [SVGReceiveMessage.AddRecentIcon]: SVGIcon

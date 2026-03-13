@@ -11,7 +11,6 @@ import { pathToSVGFile } from '@/utilities/files/misc'
 import { processFiles } from '@/utilities/files/processFiles'
 import { scanningFiles } from '@/utilities/files/scanning'
 import { getUnknownError, isEmpty } from '@/utilities/misc'
-import { filteredExports } from '@/utilities/svg/filtered'
 import { playground } from '@/utilities/svg/playground'
 import { svgFileToUri } from '@/utilities/vscode/uri'
 
@@ -93,13 +92,5 @@ export class SVGComponentHandler {
     }
   }
 
-  searchSVGComponents(query: string): void {
-    const filtered = filteredExports(this.viewExportSVG, query)
-
-    if (Array.isArray(filtered)) {
-      this.postMessage(SVGPostMessage.SendSVGFilteredComponents, filtered)
-    } else {
-      this.postMessage(SVGPostMessage.OnErrorComponents, filtered)
-    }
-  }
+  searchSVGComponents(_query: string): void {}
 }

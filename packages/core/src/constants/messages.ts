@@ -9,11 +9,11 @@ export const SVGPostMessage = {
   // UI-related messages
   LoadComponents: 'send/load-components',
   LoadUserComponents: 'send/load-user-components',
+  FilterComponents: 'send/filter-components',
   OnErrorComponents: 'send/error-components',
 
   // SVG-related messages
   SendRefreshSVGComponents: 'send/svg/refresh-components',
-  SendSVGFilteredComponents: 'send/svg/filtered-components',
   SendSVGPlayground: 'send/svg/playground',
   SendPlaygroundError: 'send/svg/playground-error',
 

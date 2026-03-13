@@ -19,6 +19,7 @@ export type PostMessageMap = {
   [SVGPostMessage.Navigate]: { path: string }
   [SVGPostMessage.LoadComponents]: ViewExportSVG[]
   [SVGPostMessage.LoadUserComponents]: ViewExportSVG[]
+  [SVGPostMessage.FilterComponents]: ViewExportSVG[]
   [SVGPostMessage.OnErrorComponents]: SVGErrors
 
   [SVGPostMessage.SendAssetsPath]: AssetPath
@@ -26,7 +27,6 @@ export type PostMessageMap = {
   [SVGPostMessage.SendPlaygroundError]: SVGErrors
   [SVGPostMessage.SendRunLoading]: string
   [SVGPostMessage.SendRefreshSVGComponents]: ViewExportSVG[]
-  [SVGPostMessage.SendSVGFilteredComponents]: ViewExportSVG[]
   [SVGPostMessage.SendSVGPlayground]: SVGComponent
   [SVGPostMessage.SendTheme]: ThemeMode
   [SVGPostMessage.SendEditorConfig]: Record<string, unknown>

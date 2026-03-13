@@ -50,11 +50,11 @@ export const useSearchBar = (): SearchBarHook => {
   useEffect(() => {
     if (!mountedRef.current) return
 
-    vscode.postMessage(SVGReceiveMessage.SearchSVGComponents, debouncedSearch)
-    vscode.onMessage(SVGPostMessage.SendSVGFilteredComponents, getSVGComponents)
+    vscode.postMessage(SVGReceiveMessage.SearchComponents, debouncedSearch)
+    vscode.onMessage(SVGPostMessage.FilterComponents, getSVGComponents)
 
     return () => {
-      vscode.unregisterMessage(SVGPostMessage.SendSVGFilteredComponents)
+      vscode.unregisterMessage(SVGPostMessage.FilterComponents)
     }
   }, [debouncedSearch])
 
