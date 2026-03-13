@@ -54,7 +54,6 @@ export class MessageRouter {
       [SVGReceiveMessage.RemoveAssets]: handlers.removeAssets.bind(handlers),
       [SVGReceiveMessage.ScanWorkspace]: handlers.scanWorkspace.bind(handlers),
 
-      [SVGReceiveMessage.ToggleOpenDevTools]: handlers.toggleOpenDevTools.bind(handlers),
       [SVGReceiveMessage.OpenFile]: handlers.openFileInEditor.bind(handlers),
       [SVGReceiveMessage.RequestFileOpen]: handlers.requestFileOpen.bind(handlers),
       [SVGReceiveMessage.CreateTempFiles]: handlers.createTempFiles.bind(handlers),

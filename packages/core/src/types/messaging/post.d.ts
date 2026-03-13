@@ -23,6 +23,7 @@ export type PostMessageMap = {
   [SVGPostMessage.OnErrorComponents]: SVGErrors
   [SVGPostMessage.OnReloadComponent]: ViewExportSVG[]
   [SVGPostMessage.ToggleExpandAllComponents]: boolean
+  [SVGPostMessage.ToggleOpenDevTools]: boolean
 
   [SVGPostMessage.SendAssetsPath]: AssetPath
   [SVGPostMessage.SendLastScanDate]: string
@@ -32,7 +33,6 @@ export type PostMessageMap = {
   [SVGPostMessage.SendTheme]: ThemeMode
   [SVGPostMessage.SendEditorConfig]: Record<string, unknown>
   [SVGPostMessage.SendVsCodeStyles]: VsCodeStyles
-  [SVGPostMessage.SendToggleOpenDevTools]: boolean
   [SVGPostMessage.SendExtensionTheme]: ExtensionManage
   [SVGPostMessage.SendUpdateConfiguration]: Record<string, unknown>
   [SVGPostMessage.SendReloadWebview]: string

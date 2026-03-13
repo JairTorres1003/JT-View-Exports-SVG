@@ -14,6 +14,9 @@ export const SVGPostMessage = {
   OnReloadComponent: 'send/reload-component',
   ToggleExpandAllComponents: 'send/toggle-expand-all-components',
 
+  // Developer tools related messages
+  ToggleOpenDevTools: 'send/toggle-open-devtools',
+
   // SVG-related messages
   SendSVGPlayground: 'send/svg/playground',
   SendPlaygroundError: 'send/svg/playground-error',
@@ -26,7 +29,6 @@ export const SVGPostMessage = {
   SendTheme: 'send/settings/theme',
   SendEditorConfig: 'send/settings/editor-config',
   SendVsCodeStyles: 'send/settings/vscode-styles',
-  SendToggleOpenDevTools: 'send/settings/toggle-open-dev-tools',
   SendExtensionTheme: 'send/settings/extension-theme',
   SendUpdateConfiguration: 'send/update-configuration',
   SendReloadWebview: 'send/reload-webview',
@@ -59,6 +61,9 @@ export const SVGReceiveMessage = {
   ReloadComponent: 'ui/reload-component',
   IsExpandComponents: 'ui/is-expand-components',
 
+  // Developer tools related messages
+  IsOpenDevTools: 'devtools/is-open',
+
   // SVG-related messages
   ExtractSVGComponentFromFiles: 'svg/extract-components-from-files',
   PlaygroundSVGComponents: 'svg/playground-component',
@@ -72,7 +77,6 @@ export const SVGReceiveMessage = {
   GetTheme: 'settings/theme',
   GetEditorConfig: 'settings/editor-config',
   GetVsCodeStyles: 'settings/vscode-styles',
-  ToggleOpenDevTools: 'settings/toggle-open-dev-tools',
   GetExtensionTheme: 'settings/extension-theme',
   ReloadExtensionTheme: 'settings/reload-extension-theme',
 
