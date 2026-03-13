@@ -1,18 +1,20 @@
 import { SVGReceiveMessage } from '@jt-view-exports-svg/core'
-import { useEffect, useState } from 'react'
+import { lazy, Suspense, useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
 
 import IconClose from '@/assets/icons/functionalities/close'
 import IconNavigateFill from '@/assets/icons/navigation/navigate-fill'
 import { type Route, routes } from '@/config/routes/route'
-import DraggableSpeedDial, {
-  type DraggableSpeedDialProps,
-} from '@/core/components/SpeedDial/DraggableSpeedDial/DraggableSpeedDial'
+import type { DraggableSpeedDialProps } from '@/core/components/SpeedDial/DraggableSpeedDial/DraggableSpeedDial'
 import { vscode } from '@/services/vscode'
 import { setRenderPath } from '@/store/features/GlobalSlice'
 import { setIsOpenDevTools, setRecentlySelected } from '@/store/features/PlaygroundSlice'
 import isEmpty from '@/utils/is-empty'
+
+const DraggableSpeedDial = import.meta.env.DEV
+  ? lazy(() => import('@/core/components/SpeedDial/DraggableSpeedDial/DraggableSpeedDial'))
+  : () => null
 
 const useRouteManager = () => {
   const [open, setOpen] = useState(false)
@@ -60,22 +62,24 @@ const useRouteManager = () => {
 const RouteManager = () => {
   const { onClose, onOpen, open, onSelect } = useRouteManager()
 
-  if (!import.meta.env.DEV) {
+  if (!import.meta.env.DEV || !DraggableSpeedDial) {
     return null
   }
 
   return (
-    <DraggableSpeedDial
-      actions={routes}
-      storeKey='JT-SVG-speedDial-routeManager-position'
-      ariaLabel='SpeedDial route manager'
-      icon={<IconNavigateFill sx={{ transform: 'rotate(45deg) translate(0px, -2px)' }} />}
-      openIcon={<IconClose />}
-      open={open}
-      onClose={onClose}
-      onOpen={onOpen}
-      onSelected={onSelect}
-    />
+    <Suspense fallback={null}>
+      <DraggableSpeedDial
+        actions={routes}
+        storeKey='JT-SVG-speedDial-routeManager-position'
+        ariaLabel='SpeedDial route manager'
+        icon={<IconNavigateFill sx={{ transform: 'rotate(45deg) translate(0px, -2px)' }} />}
+        openIcon={<IconClose />}
+        open={open}
+        onClose={onClose}
+        onOpen={onOpen}
+        onSelected={onSelect}
+      />
+    </Suspense>
   )
 }
 
