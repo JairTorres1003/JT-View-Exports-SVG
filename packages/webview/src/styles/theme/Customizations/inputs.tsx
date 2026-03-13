@@ -6,6 +6,9 @@ import type { CustomizationsFunction } from '@/types/BaseProps'
  * Customizations for inputs in the theme.
  */
 export const inputsCustomizations: CustomizationsFunction = (styles) => ({
+  MuiFormControlLabel: {
+    styleOverrides: { root: { margin: '0 0 0 -4px' } },
+  },
   MuiIconButton: {
     defaultProps: { size: 'small', disableRipple: true },
     styleOverrides: {
@@ -28,6 +31,7 @@ export const inputsCustomizations: CustomizationsFunction = (styles) => ({
   MuiInputLabel: {
     styleOverrides: {
       root: { fontFamily: styles.fontFamily?.toString() },
+      shrink: { lineHeight: '24px' },
     },
   },
   MuiTextField: {
