@@ -12,6 +12,7 @@ export type ReceiveMessageMap = {
   [SVGReceiveMessage.Ready]: undefined
   [SVGReceiveMessage.ChangeViewPath]: string
   [SVGReceiveMessage.RequestComponents]: undefined
+  [SVGReceiveMessage.RequestUserComponents]: undefined
 
   [SVGReceiveMessage.ExtractSVGComponentFromFiles]: string[]
   [SVGReceiveMessage.GetAssetsPath]: undefined
