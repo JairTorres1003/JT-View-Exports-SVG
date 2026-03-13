@@ -1,3 +1,4 @@
+import { pathnames } from '@jt-view-exports-svg/core'
 import { createSlice } from '@reduxjs/toolkit'
 
 import type { GlobalReducers, GlobalState } from '@/types/store/features/GlobalSlice'
@@ -15,7 +16,7 @@ const initialState: GlobalState = {
   configuration: {
     defaultExpandAll: config._DEFAULT_EXPAND_ALL,
     defaultClicToOpenDevTools: config._DEFAULT_CLICK_TO_OPEN_DEV_TOOLS,
-    renderPath: config._INITIAL_RENDER_PATH,
+    renderPath: pathnames.main,
     showRecentIcons: config._RECENT_ICONS_SHOW,
   },
   loading: true,

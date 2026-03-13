@@ -1,9 +1,8 @@
+import { pathnames } from '@jt-view-exports-svg/core'
 import { Box, Button, Typography } from '@mui/material'
 import { useEffect } from 'react'
 import { useTranslation } from 'react-i18next'
 import { useDispatch } from 'react-redux'
-
-import { pathnames } from '@/config/routes/route'
 import { BackdropZone } from '@/core/components/Backdrop/BackdropZone'
 import { useLoadFiles } from '@/core/hooks/useLoadFiles'
 import { setRenderPath } from '@/store/features/GlobalSlice'

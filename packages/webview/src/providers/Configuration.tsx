@@ -1,8 +1,7 @@
-import { SVGPostMessage } from '@jt-view-exports-svg/core'
+import { pathnames, SVGPostMessage } from '@jt-view-exports-svg/core'
 import { type FC, useEffect, useState } from 'react'
 import { useDispatch } from 'react-redux'
 
-import { pathnames } from '@/config/routes/route'
 import { LoadingPage } from '@/core/components/LoadingPage'
 import { vscode } from '@/services/vscode'
 import { setConfiguration, setInitLoading, setRenderPath } from '@/store/features/GlobalSlice'
