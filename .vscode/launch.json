@@ -31,15 +31,16 @@
       "outFiles": ["${workspaceFolder}/packages/extension/dist/test/**/*.js"]
     },
     {
+      "name": "Run Server",
       "type": "node",
       "request": "launch",
-      "name": "Launch Deno Program",
-      "program": "${workspaceFolder}/packages/server/src/server.ts",
-      "cwd": "${workspaceFolder}/packages/server",
-      "env": {},
-      "runtimeExecutable": "deno",
-      "runtimeArgs": ["run", "-A", "--unstable-sloppy-imports", "--inspect-wait"],
-      "attachSimplePort": 9229
+      "envFile": "${workspaceFolder}/packages/server/.env",
+      "program": "${workspaceFolder}/packages/server/src/main.ts",
+      "runtimeExecutable": "${workspaceFolder}/packages/server/node_modules/.bin/tsx",
+      "console": "integratedTerminal",
+      "runtimeArgs": ["-r", "ignore-styles"],
+      "internalConsoleOptions": "neverOpen",
+      "preLaunchTask": "build:extension-api"
     }
   ]
 }
