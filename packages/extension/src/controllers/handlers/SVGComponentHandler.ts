@@ -50,7 +50,7 @@ export class SVGComponentHandler {
     DeclarationFileCache.delete(removedFiles)
 
     const operation = (result: ViewExportSVG[]): void => {
-      this.postMessage(SVGPostMessage.SendRefreshSVGComponents, result)
+      this.postMessage(SVGPostMessage.OnReloadComponent, result)
       this.viewExportSVG = this.viewExportSVG.map((item) => {
         const newItem = result.find((r) => r.groupKind.id === item.groupKind.id)
         return newItem ?? item

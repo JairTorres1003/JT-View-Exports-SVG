@@ -1,5 +1,6 @@
 import type { WebviewMessenger } from '../../WebviewMessenger'
 
+import { ReloadComponentHandler } from './ReloadComponentHandler'
 import { RequestComponentsHandler } from './RequestComponentsHandler'
 import { RequestUserComponentsHandler } from './RequestUserComponentsHandler'
 import { SearchComponentsHandler } from './SearchComponentsHandler'
@@ -9,5 +10,6 @@ export function createUIHandlers(messenger: WebviewMessenger) {
     new RequestComponentsHandler(messenger),
     new RequestUserComponentsHandler(messenger),
     new SearchComponentsHandler(messenger),
+    new ReloadComponentHandler(messenger),
   ]
 }

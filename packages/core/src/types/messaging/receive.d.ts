@@ -14,6 +14,7 @@ export type ReceiveMessageMap = {
   [SVGReceiveMessage.RequestComponents]: undefined
   [SVGReceiveMessage.RequestUserComponents]: undefined
   [SVGReceiveMessage.SearchComponents]: string
+  [SVGReceiveMessage.ReloadComponent]: SVGFile[]
 
   [SVGReceiveMessage.ExtractSVGComponentFromFiles]: string[]
   [SVGReceiveMessage.GetAssetsPath]: undefined
@@ -24,7 +25,6 @@ export type ReceiveMessageMap = {
   [SVGReceiveMessage.RequestFileOpen]: undefined
   [SVGReceiveMessage.CreateTempFiles]: FileTemporary[]
   [SVGReceiveMessage.PlaygroundSVGComponents]: SVGPlayground
-  [SVGReceiveMessage.RefreshSVGComponents]: SVGFile[]
   [SVGReceiveMessage.RemoveAssets]: SVGFile[]
   [SVGReceiveMessage.ScanWorkspace]: undefined
   [SVGReceiveMessage.GetEditorConfig]: undefined

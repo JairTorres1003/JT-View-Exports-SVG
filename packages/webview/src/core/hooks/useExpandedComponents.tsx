@@ -53,13 +53,15 @@ export const useExpandedComponents = (): ExpandedComponentsHook => {
   }
 
   /**
-   * Handles the refresh of SVG components.
-   *
-   * @param data - The data to refresh the SVG components with.
+   * Handles refreshing components by dispatching an action with the provided data.
+   * @param data - Array of ViewExportSVG objects containing the component data to refresh
    */
-  const handleRefreshSVGComponents = (data: ViewExportSVG[]): void => {
-    dispatch(setRefreshComponents(data))
-  }
+  const handleRefresh = useCallback(
+    (data: ViewExportSVG[]) => {
+      dispatch(setRefreshComponents(data))
+    },
+    [dispatch]
+  )
 
   useEffect(() => {
     if (components.length >= 1 && defaultExpandAll) {
@@ -69,13 +71,13 @@ export const useExpandedComponents = (): ExpandedComponentsHook => {
 
   useEffect(() => {
     vscode.onMessage(SVGPostMessage.SendExpandAllIcons, handleVsCodeExpandAll)
-    vscode.onMessage(SVGPostMessage.SendRefreshSVGComponents, handleRefreshSVGComponents)
+    vscode.onMessage(SVGPostMessage.OnReloadComponent, handleRefresh)
 
     return () => {
       vscode.unregisterMessage(SVGPostMessage.SendExpandAllIcons)
-      vscode.unregisterMessage(SVGPostMessage.SendRefreshSVGComponents)
+      vscode.unregisterMessage(SVGPostMessage.OnReloadComponent)
     }
-  }, [])
+  }, [handleRefresh])
 
   return {
     isExpanded: expandedItems,

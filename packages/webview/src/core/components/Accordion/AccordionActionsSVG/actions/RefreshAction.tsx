@@ -27,7 +27,7 @@ export const RefreshAction: FC<RefreshActionProps> = ({ files, groupKind }) => {
         aria-label={t('labels.Refresh')}
         disabled={inRefresh.includes(groupKind.id)}
         onClick={() => {
-          vscode.postMessage(SVGReceiveMessage.RefreshSVGComponents, files)
+          vscode.postMessage(SVGReceiveMessage.ReloadComponent, files)
           dispatch(addPendingRefresh(groupKind))
         }}
       >

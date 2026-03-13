@@ -21,12 +21,12 @@ export type PostMessageMap = {
   [SVGPostMessage.LoadUserComponents]: ViewExportSVG[]
   [SVGPostMessage.FilterComponents]: ViewExportSVG[]
   [SVGPostMessage.OnErrorComponents]: SVGErrors
+  [SVGPostMessage.OnReloadComponent]: ViewExportSVG[]
 
   [SVGPostMessage.SendAssetsPath]: AssetPath
   [SVGPostMessage.SendLastScanDate]: string
   [SVGPostMessage.SendPlaygroundError]: SVGErrors
   [SVGPostMessage.SendRunLoading]: string
-  [SVGPostMessage.SendRefreshSVGComponents]: ViewExportSVG[]
   [SVGPostMessage.SendSVGPlayground]: SVGComponent
   [SVGPostMessage.SendTheme]: ThemeMode
   [SVGPostMessage.SendEditorConfig]: Record<string, unknown>
