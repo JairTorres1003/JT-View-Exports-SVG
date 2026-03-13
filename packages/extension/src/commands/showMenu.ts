@@ -4,6 +4,7 @@ import { type ExtensionContext, l10n, type Uri } from 'vscode'
 import { PanelController } from '@/controllers/views/PanelController'
 import { viewExportStore } from '@/store/ViewExportStore'
 import { processFiles } from '@/utilities/files/processFiles'
+import { getIconsFromCache } from '@/utilities/icons/getIconsFromCache'
 import { isEmpty } from '@/utilities/misc'
 
 /**
@@ -32,6 +33,9 @@ export const showMenu = async (
   PanelController.navigate(`${pathnames.main}?load-message=${messageEncoded}`)
 
   if (filesToProcess.length === 0) {
+    const userComponent = await getIconsFromCache()
+    viewExportStore.set(userComponent)
+    PanelController.navigate(pathnames.home)
     return
   }
 
