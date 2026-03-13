@@ -34,7 +34,6 @@ export type ReceiveMessageMap = {
   [SVGReceiveMessage.AddFavoriteIcon]: SVGIcon
   [SVGReceiveMessage.RemoveFavoriteIcon]: SVGIcon
   [SVGReceiveMessage.ClearFavoriteIcons]: undefined
-  [SVGReceiveMessage.GetHomeIcons]: undefined
   [SVGReceiveMessage.ToggleExpandIcon]: boolean
   [SVGReceiveMessage.ToggleOpenDevTools]: boolean
   [SVGReceiveMessage.GetExtensionTheme]: undefined

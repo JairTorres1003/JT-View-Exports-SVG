@@ -6,6 +6,9 @@ import { getUnknownError } from '@/utilities/misc'
 
 import { getCacheManager } from '../cache'
 
+/**
+ * @deprecate This handler is deprecated and will be removed in future versions.
+ */
 export class CacheHandler {
   private readonly currentFolder: WorkspaceFolder | undefined
 
@@ -40,7 +43,7 @@ export class CacheHandler {
   getHomeIcons(): void {
     getIconsFromCache()
       .then((icons) => {
-        this.postMessage(SVGPostMessage.SendHomeIcons, icons)
+        this.postMessage(SVGPostMessage.LoadUserComponents, icons)
       })
       .catch((e) => {
         window.showErrorMessage(

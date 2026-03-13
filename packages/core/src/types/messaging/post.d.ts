@@ -18,6 +18,7 @@ import type {
 export type PostMessageMap = {
   [SVGPostMessage.Navigate]: { path: string }
   [SVGPostMessage.LoadComponents]: ViewExportSVG[]
+  [SVGPostMessage.LoadUserComponents]: ViewExportSVG[]
   [SVGPostMessage.OnErrorComponents]: SVGErrors
 
   [SVGPostMessage.SendAssetsPath]: AssetPath
@@ -30,7 +31,6 @@ export type PostMessageMap = {
   [SVGPostMessage.SendTheme]: ThemeMode
   [SVGPostMessage.SendEditorConfig]: Record<string, unknown>
   [SVGPostMessage.SendVsCodeStyles]: VsCodeStyles
-  [SVGPostMessage.SendHomeIcons]: ViewExportSVG[]
   [SVGPostMessage.SendExpandAllIcons]: boolean
   [SVGPostMessage.SendToggleOpenDevTools]: boolean
   [SVGPostMessage.SendExtensionTheme]: ExtensionManage

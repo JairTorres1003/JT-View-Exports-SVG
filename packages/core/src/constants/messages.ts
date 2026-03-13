@@ -8,6 +8,7 @@ export const SVGPostMessage = {
 
   // UI-related messages
   LoadComponents: 'send/load-components',
+  LoadUserComponents: 'send/load-user-components',
   OnErrorComponents: 'send/error-components',
 
   // SVG-related messages
@@ -33,9 +34,6 @@ export const SVGPostMessage = {
   // Scan-related messages
   SendLastScanDate: 'send/scan/last-date',
 
-  // Icons-related messages
-  SendHomeIcons: 'send/icons/home',
-
   // File-related messages
   SendOpenFiles: 'send/file/open',
 } as const
@@ -56,6 +54,7 @@ export const SVGReceiveMessage = {
 
   // UI-related messages
   RequestComponents: 'ui/request-components',
+  RequestUserComponents: 'ui/request-user-components',
 
   // SVG-related messages
   ExtractSVGComponentFromFiles: 'svg/extract-components-from-files',
@@ -93,7 +92,6 @@ export const SVGReceiveMessage = {
   AddFavoriteIcon: 'icons/favorite/add',
   RemoveFavoriteIcon: 'icons/favorite/remove',
   ClearFavoriteIcons: 'icons/favorite/clear',
-  GetHomeIcons: 'icons/home/get',
 } as const
 
 /**
