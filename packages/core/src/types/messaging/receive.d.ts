@@ -15,6 +15,7 @@ export type ReceiveMessageMap = {
   [SVGReceiveMessage.RequestUserComponents]: undefined
   [SVGReceiveMessage.SearchComponents]: string
   [SVGReceiveMessage.ReloadComponent]: SVGFile[]
+  [SVGReceiveMessage.IsExpandComponents]: boolean
 
   [SVGReceiveMessage.ExtractSVGComponentFromFiles]: string[]
   [SVGReceiveMessage.GetAssetsPath]: undefined
@@ -35,7 +36,6 @@ export type ReceiveMessageMap = {
   [SVGReceiveMessage.AddFavoriteIcon]: SVGIcon
   [SVGReceiveMessage.RemoveFavoriteIcon]: SVGIcon
   [SVGReceiveMessage.ClearFavoriteIcons]: undefined
-  [SVGReceiveMessage.ToggleExpandIcon]: boolean
   [SVGReceiveMessage.ToggleOpenDevTools]: boolean
   [SVGReceiveMessage.GetExtensionTheme]: undefined
   [SVGReceiveMessage.ReloadExtensionTheme]: undefined

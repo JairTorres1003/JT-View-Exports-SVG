@@ -2,8 +2,7 @@ import { SVGPostMessage } from '@jt-view-exports-svg/core'
 import { commands } from 'vscode'
 
 import { CONFIG_KEY } from '@/constants/misc'
-import { ViewExportsSVGController } from '@/controllers/views'
-import { isEmpty } from '@/utilities/misc'
+import { PanelController } from '@/controllers/views/PanelController'
 
 /**
  * Sets the context for expanded icons.
@@ -24,10 +23,5 @@ export const expandedIcons = async (isExpanded = true): Promise<void> => {
 export const runToggleExpandIcon = async (isExpanded = true): Promise<void> => {
   await expandedIcons(isExpanded)
 
-  if (!isEmpty(ViewExportsSVGController.currentPanel)) {
-    ViewExportsSVGController.currentPanel._postMessage(
-      SVGPostMessage.SendExpandAllIcons,
-      isExpanded
-    )
-  }
+  PanelController.send(SVGPostMessage.ToggleExpandAllComponents, isExpanded)
 }

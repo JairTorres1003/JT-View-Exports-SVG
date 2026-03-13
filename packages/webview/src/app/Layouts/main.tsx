@@ -7,12 +7,18 @@ import { routes } from '@/config/routes/route'
 import { LoadingPage } from '@/core/components/LoadingPage'
 import ViewPanels from '@/core/components/ViewPanels/ViewPanels'
 
+const NavBarManager = import.meta.env.DEV
+  ? lazy(() => import('@/core/components/Drawer/NavigationDrawer/NavigationDrawer'))
+  : () => null
 const RouteManager = lazy(() => import('./RouteManager'))
 
 const Layout = () => (
   <Providers>
     <ViewPanels>
       <MemoryRouter initialEntries={[pathnames.main]} initialIndex={0}>
+        <Suspense fallback={null}>
+          <NavBarManager />
+        </Suspense>
         <Suspense fallback={null}>
           <RouteManager />
         </Suspense>

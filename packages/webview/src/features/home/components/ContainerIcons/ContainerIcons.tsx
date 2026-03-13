@@ -8,7 +8,7 @@ import { containerIconsClasses } from './ContainerIcons.classes'
 import { BoxContainerIcons } from './ContainerIcons.style'
 
 const ContainerIcons = (): React.ReactNode => {
-  const { isExpanded, toggleExpanded } = useExpandedComponents()
+  const { isExpanded, handleToggle } = useExpandedComponents()
   const { components } = useSelector((state) => state.svg)
 
   return (
@@ -17,7 +17,7 @@ const ContainerIcons = (): React.ReactNode => {
         <AccordionMenuItem
           key={item.groupKind.id}
           label={item.groupKind.label}
-          onChange={toggleExpanded(item.groupKind.id)}
+          onChange={handleToggle(item.groupKind.id)}
           expanded={isExpanded.includes(item.groupKind.id)}
           className={containerIconsClasses.accordion}
           actions={
