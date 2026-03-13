@@ -9,7 +9,7 @@
     "directory": "packages/server"
   },
   "scripts": {
-    "clean": "rimraf dist",
+    "clean": "rimraf dist .cache",
     "lint": "biome check --write",
     "format": "biome format --write",
     "dev": "tsx watch -r ignore-styles src/main.ts",
@@ -21,6 +21,7 @@
     "@codingame/monaco-vscode-api": "^27.0.0",
     "@codingame/monaco-vscode-files-service-override": "^27.0.0",
     "@codingame/monaco-vscode-model-service-override": "^27.0.0",
+    "@jt-view-exports-svg/core": "workspace:*",
     "@jt-view-exports-svg/extension-api": "workspace:*",
     "cors": "^2.8.6",
     "dotenv": "^17.3.1",

@@ -8,3 +8,4 @@ dist/
 
 # OS
 .DS_Store
+.cache/

@@ -317,6 +317,9 @@ importers:
       '@codingame/monaco-vscode-model-service-override':
         specifier: ^27.0.0
         version: 27.0.0
+      '@jt-view-exports-svg/core':
+        specifier: workspace:*
+        version: link:../core
       '@jt-view-exports-svg/extension-api':
         specifier: workspace:*
         version: link:../extension-api
