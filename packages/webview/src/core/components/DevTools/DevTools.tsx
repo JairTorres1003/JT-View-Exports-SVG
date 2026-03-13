@@ -32,7 +32,7 @@ const DevTools: React.FC<{ id: string; onClose?: VoidFunction }> = ({
         </Tooltip>
         <Box className={devToolsClasses.buttonClose}>
           <Tooltip title={t('labels.Close')}>
-            <IconButton onClick={onClose}>
+            <IconButton onClick={() => onClose()}>
               <IconClose size={16} />
             </IconButton>
           </Tooltip>
