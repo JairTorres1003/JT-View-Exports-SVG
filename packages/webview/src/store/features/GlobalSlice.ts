@@ -38,19 +38,15 @@ const reducers: GlobalReducers = {
   },
   setConfiguration: (state, { payload }) => {
     state.configuration = { ...state.configuration, ...payload }
-    window.ViewExportsSVG.initConfiguration._INITIAL_RENDER_PATH =
-      payload.renderPath || state.configuration.renderPath
   },
   setRenderPath: (state, { payload }) => {
     state.configuration.renderPath = payload.path
-    window.ViewExportsSVG.initConfiguration._INITIAL_RENDER_PATH = payload.path
     state.renderOptions = payload.options
   },
   setInitLoading: (state, { payload }) => {
     state.loading = true
     if (payload) {
       state.configuration.renderPath = payload
-      window.ViewExportsSVG.initConfiguration._INITIAL_RENDER_PATH = payload
     }
   },
   unsetInitLoading: (state) => {

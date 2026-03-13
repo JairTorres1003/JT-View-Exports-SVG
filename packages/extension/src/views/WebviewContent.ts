@@ -108,7 +108,6 @@ export class WebviewContent {
     const config = new DefaultExpandAllController()
     const devConfig = new DefaultClickToOpenDevToolsController()
     const recentConfig = new RecentIconsShowController()
-    const initialPath = this._processedFiles > 0 ? '/dashboard' : '/'
 
     return /* html */ `
       <script nonce="${this._nonce}">
@@ -117,7 +116,6 @@ export class WebviewContent {
           initConfiguration: {
             _DEFAULT_EXPAND_ALL: ${config.isExpandAll()},
             _DEFAULT_CLICK_TO_OPEN_DEV_TOOLS: ${devConfig.isDefaultOpen()},
-            _INITIAL_RENDER_PATH: "${initialPath}",
             _RECENT_ICONS_SHOW: ${recentConfig.isShow()},
             _LANGUAGE: "${env.language ?? 'en'}",
           }
