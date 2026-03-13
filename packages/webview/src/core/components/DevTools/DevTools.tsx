@@ -1,5 +1,6 @@
 import { Box, IconButton, Tooltip, Typography } from '@mui/material'
 import cn from 'classnames'
+import { lazy, Suspense } from 'react'
 import { useTranslation } from 'react-i18next'
 import { Group, Panel, Separator } from 'react-resizable-panels'
 
@@ -9,18 +10,19 @@ import { useDevTools } from '@/core/hooks/DevTools/useDevTools'
 
 import { devToolsClasses } from './DevTools.classes'
 import { BoxDevTools } from './DevTools.style'
-import InfoComponent from './InfoComponent/InfoComponent'
-import { Playground } from './Playground'
+
+const InfoComponent = lazy(() => import('./InfoComponent/InfoComponent'))
+const Playground = lazy(() => import('./Playground/Playground'))
 
 const DevTools: React.FC<{ id: string; onClose?: VoidFunction }> = ({
   id,
   onClose = () => null,
 }): React.ReactNode => {
   const { t } = useTranslation()
-  const { expanded, handleExpanded, ref, watchExpanded } = useDevTools()
+  const { expanded, handleExpanded, ref, checkPanelExpanded } = useDevTools()
 
-  const playgroundPanel = watchExpanded('playground-panel')
-  const infoPanel = watchExpanded('info-panel')
+  const playgroundPanel = checkPanelExpanded('playground-panel')
+  const infoPanel = checkPanelExpanded('info-panel')
 
   return (
     <BoxDevTools id={id}>
@@ -65,7 +67,9 @@ const DevTools: React.FC<{ id: string; onClose?: VoidFunction }> = ({
                 actions: { id: `${id}-playground-actions` },
               }}
             >
-              <Playground actionsId={`${id}-playground-actions`} />
+              <Suspense fallback={null}>
+                <Playground actionsId={`${id}-playground-actions`} />
+              </Suspense>
             </AccordionMenuItem>
           </Panel>
 
@@ -89,7 +93,9 @@ const DevTools: React.FC<{ id: string; onClose?: VoidFunction }> = ({
                 tooltip: { placement: 'bottom-start', arrow: false },
               }}
             >
-              <InfoComponent />
+              <Suspense fallback={null}>
+                <InfoComponent />
+              </Suspense>
             </AccordionMenuItem>
           </Panel>
 

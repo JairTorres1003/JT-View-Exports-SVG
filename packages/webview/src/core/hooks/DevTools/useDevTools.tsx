@@ -12,7 +12,7 @@ export const useDevTools = () => {
    * @param panel - The panel identifier to check
    * @returns `true` if the panel is expanded, `false` otherwise
    */
-  const watchExpanded = useCallback(
+  const checkPanelExpanded = useCallback(
     (panel: string) => {
       return expanded.includes(panel)
     },
@@ -33,7 +33,7 @@ export const useDevTools = () => {
   return {
     expanded,
     handleExpanded,
-    watchExpanded,
+    checkPanelExpanded,
     ref: {
       playground: refPanelPlayground,
       info: refPanelInfo,
