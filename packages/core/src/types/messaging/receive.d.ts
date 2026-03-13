@@ -23,7 +23,6 @@ export type ReceiveMessageMap = {
   [SVGReceiveMessage.GetLastScanDate]: undefined
   [SVGReceiveMessage.GetTheme]: undefined
   [SVGReceiveMessage.GetViewAssets]: SVGFile[]
-  [SVGReceiveMessage.OpenFile]: OpenFile
   [SVGReceiveMessage.RequestFileOpen]: undefined
   [SVGReceiveMessage.CreateTempFiles]: FileTemporary[]
   [SVGReceiveMessage.PlaygroundSVGComponents]: SVGPlayground

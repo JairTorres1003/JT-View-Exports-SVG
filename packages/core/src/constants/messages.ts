@@ -65,6 +65,9 @@ export const SVGReceiveMessage = {
   IsOpenDevTools: 'devtools/is-open',
 
   // SVG-related messages
+  // File-related messages
+  OpenFileInEditor: 'file/open-in-editor',
+
   ExtractSVGComponentFromFiles: 'svg/extract-components-from-files',
   PlaygroundSVGComponents: 'svg/playground-component',
 
@@ -84,8 +87,6 @@ export const SVGReceiveMessage = {
   GetLastScanDate: 'scan/last-date',
   ScanWorkspace: 'scan/workspace',
 
-  // File-related messages
-  OpenFile: 'file/open',
   RequestFileOpen: 'file/request-open',
   CreateTempFiles: 'file/create-temp',
 

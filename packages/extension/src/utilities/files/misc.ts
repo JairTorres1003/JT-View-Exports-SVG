@@ -1,4 +1,4 @@
-import type { OpenFile, SVGFile } from '@jt-view-exports-svg/core'
+import type { FileToOpen, SVGFile } from '@jt-view-exports-svg/core'
 import * as path from 'path'
 import { l10n, Position, Selection, TextEditorRevealType, Uri, window, workspace } from 'vscode'
 
@@ -73,7 +73,7 @@ export async function pathToSVGFile(filePath: string): Promise<SVGFile> {
  * @param file - The file to open.
  * @param position - The position in the file to navigate to (optional).
  */
-export function openFile({ file, position = { column: 1, line: 1, index: 1 } }: OpenFile): void {
+export function openFile({ file, position = { column: 1, line: 1, index: 1 } }: FileToOpen): void {
   let fileUri = Uri.parse(file.uri)
 
   const workspaceUri = workspace.workspaceFolders?.[0]?.uri

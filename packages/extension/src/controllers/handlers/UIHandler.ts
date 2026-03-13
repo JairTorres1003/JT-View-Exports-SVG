@@ -1,6 +1,6 @@
 import {
   type FileTemporary,
-  type OpenFile,
+  type FileToOpen,
   type PostMessageEmitter,
   SVGPostMessage,
 } from '@jt-view-exports-svg/core'
@@ -11,6 +11,9 @@ import { toggleViewActions } from '@/commands/editorTitleActions'
 import { CONFIG_KEY, DISABLED_PLAYGROUND_IN_PATH } from '@/constants/misc'
 import { openFile } from '@/utilities/files/misc'
 
+/**
+ * @deprecated This class is deprecated and will be removed in future versions. Please use specific handlers for each UI action instead.
+ */
 export class UIHandler {
   constructor(private readonly postMessage: PostMessageEmitter) {}
 
@@ -30,7 +33,7 @@ export class UIHandler {
     }
   }
 
-  openFileInEditor(options: OpenFile): void {
+  openFileInEditor(options: FileToOpen): void {
     if (options.file.isTemporary) {
       const message = l10n.t('This file is temporary. Do you want to continue?')
       window.showWarningMessage(message, l10n.t('Yes'), l10n.t('No')).then((selection) => {

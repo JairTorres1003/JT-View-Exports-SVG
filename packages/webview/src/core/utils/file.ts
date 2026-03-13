@@ -40,5 +40,5 @@ export const openFileInPosition = (
   file: SVGFile,
   position: Position = { column: 0, line: 0, index: 0 }
 ): void => {
-  vscode.postMessage(SVGReceiveMessage.OpenFile, { file, position })
+  vscode.postMessage(SVGReceiveMessage.OpenFileInEditor, { file, position })
 }

@@ -26,7 +26,7 @@ export interface SVGFile {
 /**
  * Represents a file to be opened with optional position
  */
-export interface OpenFile {
+export interface FileToOpen {
   /** The SVG file to open */
   file: SVGFile
   /** Optional position to navigate to */

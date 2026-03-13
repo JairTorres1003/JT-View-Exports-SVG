@@ -1,6 +1,6 @@
 import {
   type FileTemporary,
-  type OpenFile,
+  type FileToOpen,
   type PostMessageEmitter,
   type SVGFile,
   type SVGIcon,
@@ -21,6 +21,9 @@ import { UIHandler } from '../handlers/UIHandler'
 
 import { MessageRouter } from './MessageRouterController'
 
+/**
+ * @deprecated This class is deprecated and will be removed in future versions. Please use specific controllers for each view instead.
+ */
 export class ListerWebviewController {
   public readonly _panel: WebviewPanel
   public readonly _disposables: Disposable[] = []
@@ -176,7 +179,7 @@ export class ListerWebviewController {
   toggleOpenDevTools(open: boolean): void {
     this.uiHandler.toggleOpenDevTools(open).catch(console.error)
   }
-  openFileInEditor(options: OpenFile): void {
+  openFileInEditor(options: FileToOpen): void {
     this.uiHandler.openFileInEditor(options)
   }
   requestFileOpen(): void {
