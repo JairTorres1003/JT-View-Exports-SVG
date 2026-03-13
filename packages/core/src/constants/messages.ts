@@ -55,10 +55,10 @@ export const SVGReceiveMessage = {
   // UI-related messages
   RequestComponents: 'ui/request-components',
   RequestUserComponents: 'ui/request-user-components',
+  SearchComponents: 'ui/search-components',
 
   // SVG-related messages
   ExtractSVGComponentFromFiles: 'svg/extract-components-from-files',
-  SearchSVGComponents: 'svg/search-components',
   PlaygroundSVGComponents: 'svg/playground-component',
   RefreshSVGComponents: 'svg/refresh-components',
 
