@@ -1,8 +1,7 @@
-import { pathnames, SVGPostMessage } from '@jt-view-exports-svg/core'
-import { type FC, useEffect, useState } from 'react'
+import { SVGPostMessage } from '@jt-view-exports-svg/core'
+import { type FC, useEffect } from 'react'
 import { useDispatch } from 'react-redux'
 
-import { LoadingPage } from '@/core/components/LoadingPage'
 import { vscode } from '@/services/vscode'
 import { setConfiguration, setInitLoading, setRenderPath } from '@/store/features/GlobalSlice'
 
@@ -14,7 +13,7 @@ import { setConfiguration, setInitLoading, setRenderPath } from '@/store/feature
 export const ConfigurationProvider: FC<React.PropsWithChildren> = ({
   children,
 }): React.ReactNode => {
-  const [refresh, setRefresh] = useState<{ loading: boolean; message?: string }>({ loading: false })
+  // const [refresh, setRefresh] = useState<{ loading: boolean; message?: string }>({ loading: false })
   const dispatch = useDispatch()
 
   /**
@@ -23,14 +22,14 @@ export const ConfigurationProvider: FC<React.PropsWithChildren> = ({
    *
    * @param {string} message - The message to display while reloading.
    */
-  const handleReload = (message: string) => {
-    setRefresh({ loading: true, message })
-    dispatch(setRenderPath({ path: pathnames.home }))
+  // const handleReload = (message: string) => {
+  //   setRefresh({ loading: true, message })
+  //   dispatch(setRenderPath({ path: pathnames.home }))
 
-    setTimeout(() => {
-      setRefresh({ loading: false })
-    }, 1000)
-  }
+  //   setTimeout(() => {
+  //     setRefresh({ loading: false })
+  //   }, 1000)
+  // }
 
   useEffect(() => {
     vscode.onMessage(SVGPostMessage.SendUpdateConfiguration, (data) => {
@@ -41,7 +40,12 @@ export const ConfigurationProvider: FC<React.PropsWithChildren> = ({
       dispatch(setInitLoading(path))
     })
 
-    vscode.onMessage(SVGPostMessage.SendReloadWebview, handleReload)
+    // vscode.onMessage(SVGPostMessage.SendReloadWebview, handleReload)
+
+    vscode.onMessage(SVGPostMessage.Navigate, (data) => {
+      console.info('🚀 ~ ConfigurationProvider ~ data:', data)
+      dispatch(setRenderPath(data))
+    })
 
     return () => {
       vscode.unregisterMessage(SVGPostMessage.SendUpdateConfiguration)
@@ -49,8 +53,6 @@ export const ConfigurationProvider: FC<React.PropsWithChildren> = ({
       vscode.unregisterMessage(SVGPostMessage.SendReloadWebview)
     }
   }, [dispatch])
-
-  if (refresh.loading) return <LoadingPage>{refresh.message}</LoadingPage>
 
   return children
 }

@@ -3,6 +3,9 @@
  * Messages sent from the extension to the webview
  */
 export const SVGPostMessage = {
+  // root message types
+  Navigate: 'send/navigate',
+
   // SVG-related messages
   SendSVGComponents: 'send/svg/components',
   SendSVGError: 'send/svg/error',
@@ -45,6 +48,10 @@ export type SVGPostMessage = (typeof SVGPostMessage)[keyof typeof SVGPostMessage
  * Messages sent from the webview to the extension
  */
 export const SVGReceiveMessage = {
+  // root message types
+  Ready: 'ready',
+  ChangeViewPath: 'navigate/change-path',
+  
   // SVG-related messages
   ExtractSVGComponentFromFiles: 'svg/extract-components-from-files',
   GetSVGComponents: 'svg/get-components',
@@ -83,9 +90,6 @@ export const SVGReceiveMessage = {
   RemoveFavoriteIcon: 'icons/favorite/remove',
   ClearFavoriteIcons: 'icons/favorite/clear',
   GetHomeIcons: 'icons/home/get',
-
-  // View-related messages
-  ViewRenderPath: 'view/render-path/change',
 } as const
 
 /**

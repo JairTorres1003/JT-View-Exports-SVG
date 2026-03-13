@@ -27,7 +27,7 @@ export class MessageRouter {
     }
   }
 
-  private get _handlersMap(): HandlerReceiveMessage {
+  private get _handlersMap(): Partial<HandlerReceiveMessage> {
     const handlers = this.handlers
 
     return {
@@ -63,7 +63,7 @@ export class MessageRouter {
       [SVGReceiveMessage.OpenFile]: handlers.openFileInEditor.bind(handlers),
       [SVGReceiveMessage.RequestFileOpen]: handlers.requestFileOpen.bind(handlers),
       [SVGReceiveMessage.CreateTempFiles]: handlers.createTempFiles.bind(handlers),
-      [SVGReceiveMessage.ViewRenderPath]: handlers.changeViewRenderPath.bind(handlers),
+      // [SVGReceiveMessage.ViewRenderPath]: handlers.changeViewRenderPath.bind(handlers),
     }
   }
 

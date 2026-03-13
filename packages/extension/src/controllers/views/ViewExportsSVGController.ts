@@ -7,6 +7,9 @@ import { WebviewContent } from '@/views/WebviewContent'
 
 import { ListerWebviewController } from '../listener'
 
+/**
+ * @deprecated This controller is deprecated and will be removed in a future release. Please use the PanelController instead.
+ */
 export class ViewExportsSVGController extends ListerWebviewController {
   public static currentPanel: ViewExportsSVGController | undefined
   public static readonly configName: string = CONFIG_KEY
@@ -18,7 +21,7 @@ export class ViewExportsSVGController extends ListerWebviewController {
     viewExportSVG: ViewExportSVG[]
     processedFiles: number
   }) {
-    const { panel, context, viewExportSVG, processedFiles } = options
+    const { panel, context, viewExportSVG } = options
 
     super(panel, viewExportSVG)
 
@@ -32,7 +35,7 @@ export class ViewExportsSVGController extends ListerWebviewController {
       this._disposables
     )
 
-    this.webviewContent = new WebviewContent(this._panel.webview, context, processedFiles)
+    this.webviewContent = new WebviewContent(this._panel.webview, context)
   }
 
   /**
@@ -105,9 +108,8 @@ export class ViewExportsSVGController extends ListerWebviewController {
       processedFiles,
     })
 
-    await ViewExportsSVGController.currentPanel.webviewContent.initialize()
     ViewExportsSVGController.currentPanel._panel.webview.html =
-      ViewExportsSVGController.currentPanel.webviewContent._content
+      await ViewExportsSVGController.currentPanel.webviewContent.render()
 
     ViewExportsSVGController.currentPanel.initialize(processedFiles)
   }

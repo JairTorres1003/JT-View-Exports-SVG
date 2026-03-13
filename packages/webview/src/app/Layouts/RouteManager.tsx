@@ -5,7 +5,7 @@ import { useNavigate } from 'react-router-dom'
 
 import IconClose from '@/assets/icons/functionalities/close'
 import IconNavigateFill from '@/assets/icons/navigation/navigate-fill'
-import { routes } from '@/config/routes/route'
+import { type Route, routes } from '@/config/routes/route'
 import DraggableSpeedDial, {
   type DraggableSpeedDialProps,
 } from '@/core/components/SpeedDial/DraggableSpeedDial/DraggableSpeedDial'
@@ -35,7 +35,7 @@ const useRouteManager = () => {
 
     void navigate(newPath, renderOptions)
 
-    vscode.postMessage(SVGReceiveMessage.ViewRenderPath, newPath)
+    vscode.postMessage(SVGReceiveMessage.ChangeViewPath, newPath)
   }
 
   const onOpen = () => {
@@ -46,10 +46,7 @@ const useRouteManager = () => {
     setOpen(false)
   }
 
-  const onSelect: DraggableSpeedDialProps<(typeof routes)[number]>['onSelected'] = (
-    _,
-    { path }
-  ) => {
+  const onSelect: DraggableSpeedDialProps<Route>['onSelected'] = (_, { path }) => {
     dispatch(setRenderPath({ path }))
   }
 

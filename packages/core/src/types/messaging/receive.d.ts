@@ -9,6 +9,9 @@ import type { HandlerArgs, HandlersMap, MessageEmitter, MessagesUnion } from './
  * Map of receive message types to their data payloads
  */
 export type ReceiveMessageMap = {
+  [SVGReceiveMessage.Ready]: undefined
+  [SVGReceiveMessage.ChangeViewPath]: string
+
   [SVGReceiveMessage.ExtractSVGComponentFromFiles]: string[]
   [SVGReceiveMessage.GetAssetsPath]: undefined
   [SVGReceiveMessage.GetLastScanDate]: undefined
@@ -36,7 +39,6 @@ export type ReceiveMessageMap = {
   [SVGReceiveMessage.ToggleOpenDevTools]: boolean
   [SVGReceiveMessage.GetExtensionTheme]: undefined
   [SVGReceiveMessage.ReloadExtensionTheme]: undefined
-  [SVGReceiveMessage.ViewRenderPath]: string
 }
 
 /**

@@ -7,52 +7,38 @@ import {
   RecentIconsShowController,
 } from '@/controllers/config'
 import { getNonce } from '@/utilities/files/nonce'
-import { isEmpty } from '@/utilities/misc'
 import { getUri, uriParse } from '@/utilities/vscode/uri'
 
 export class WebviewContent {
-  private readonly _webview: Webview
-  private readonly _extensionUri: Uri
-  private content = ''
   private manifest?: ManifestContent
-  private readonly _processedFiles: number
   private readonly _nonce: string
 
-  public constructor(webview: Webview, context: ExtensionContext, processedFiles: number) {
-    this._webview = webview
-    this._extensionUri = context.extensionUri
-    this._processedFiles = processedFiles
+  public constructor(
+    private readonly webview: Webview,
+    private readonly context: ExtensionContext
+  ) {
     this._nonce = getNonce()
   }
 
-  public async initialize(): Promise<void> {
+  public async render(): Promise<string> {
     this.manifest = await this.getManifest()
-    this.generateContent()
-  }
-
-  /**
-   * Getter for the content property.
-   *
-   * @returns {string} The current value of the content property.
-   */
-  public get _content(): string {
-    return this.content
+    return this.generateContent()
   }
 
   /**
    * Constructs a URI for an asset within the extension.
    *
-   * @param {...string} path - The path segments to append to the base URI.
-   * @returns {Uri} The constructed URI for the specified asset.
+   * @param path - The path segments to append to the base URI.
+   * @returns The constructed URI for the specified asset.
    */
   private getAssetUri(...path: string[]): Uri {
-    return getUri(this._webview, this._extensionUri, ['dist/webview', ...path])
+    return getUri(this.webview, this.context.extensionUri, ['dist/webview', ...path])
   }
 
   /**
    * Retrieves the manifest content from the specified asset URI.
    *
-   * @returns {ManifestContent} The parsed JSON content of the manifest file.
+   * @returns The parsed JSON content of the manifest file.
    * @throws Will throw an error if the manifest file cannot be read or parsed.
    */
   private async getManifest(): Promise<ManifestContent> {
@@ -68,11 +54,11 @@ export class WebviewContent {
    * This method retrieves the URIs for the 'index.html' file, 'favicon.ico' file,
    * and CSS files from the manifest and returns them as an object.
    *
-   * @returns {ManifestContent} An object containing the URIs for the webview assets.
+   * @returns An object containing the URIs for the webview assets.
    */
   private getWebviewAssets(): ManifestContent {
-    if (!this.manifest || isEmpty(this.manifest.main)) {
-      throw new Error(l10n.t('Missing main file in manifest'))
+    if (!this.manifest?.main || !this.manifest?.style || !this.manifest?.favicon) {
+      throw new Error(l10n.t('Invalid webview manifest'))
     }
 
     return {
@@ -85,11 +71,11 @@ export class WebviewContent {
   private getCSP(): string {
     return `
       default-src 'none';
-      connect-src ${this._webview.cspSource} extension-file:;
-      style-src ${this._webview.cspSource} 'unsafe-inline';
-      font-src ${this._webview.cspSource};
-      img-src ${this._webview.cspSource} https: blob:;
-      script-src ${this._webview.cspSource} 'nonce-${this._nonce}' 'unsafe-eval';
+      connect-src ${this.webview.cspSource} extension-file:;
+      style-src ${this.webview.cspSource} 'unsafe-inline';
+      font-src ${this.webview.cspSource};
+      img-src ${this.webview.cspSource} https: blob:;
+      script-src ${this.webview.cspSource} 'nonce-${this._nonce}' 'unsafe-eval';
     `
       .replace(/\s{2,}/g, ' ')
       .trim()
@@ -100,9 +86,8 @@ export class WebviewContent {
    * The configuration includes localized view name and default settings for
    * expanding all sections and opening developer tools.
    *
-   * @returns {string} An HTML script tag as a string, which sets up the
-   *                   `window.ViewExportsSVG` object with the necessary
-   *                   initialization parameters.
+   * @returns An HTML script tag as a string, which sets up the `window.ViewExportsSVG`
+   *          object with the necessary initialization parameters.
    */
   private scriptConfiguration(): string {
     const config = new DefaultExpandAllController()
@@ -127,12 +112,12 @@ export class WebviewContent {
   /**
    * Generates the content for the webview.
    */
-  private generateContent(): void {
+  private generateContent(): string {
     const { main, favicon, style } = this.getWebviewAssets()
     const script = this.scriptConfiguration()
     const cspContent = this.getCSP()
 
-    this.content = /* html */ `
+    return /* html */ `
       <!DOCTYPE html>
       <html lang="${env.language ?? 'en'}">
         <head>

@@ -16,6 +16,8 @@ import type {
  * Map of post message types to their data payloads
  */
 export type PostMessageMap = {
+  [SVGPostMessage.Navigate]: { path: string }
+
   [SVGPostMessage.SendAssetsPath]: AssetPath
   [SVGPostMessage.SendLastScanDate]: string
   [SVGPostMessage.SendPlaygroundError]: SVGErrors
