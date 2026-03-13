@@ -1,12 +1,14 @@
 import { Badge, Button, IconButton, Stack, Tooltip } from '@mui/material'
+import { lazy, Suspense } from 'react'
 import { useTranslation } from 'react-i18next'
 
 import IconPlus from '@/assets/icons/functionalities/plus'
 import IconSortAsc from '@/assets/icons/functionalities/sort-asc'
 import IconSortDesc from '@/assets/icons/functionalities/sort-desc'
-import { BackdropZone } from '@/core/components/Backdrop/BackdropZone'
 import { FileList } from '@/features/upload/components/FileList'
 import { useUpload } from '@/features/upload/hooks/useUpload'
+
+const BackdropZone = lazy(() => import('@/core/components/Backdrop/BackdropZone'))
 
 const UploadPage: React.FC = () => {
   const {
@@ -60,7 +62,9 @@ const UploadPage: React.FC = () => {
         )}
       </Stack>
 
-      <BackdropZone onFiles={onDrop} onUri={onUri} />
+      <Suspense fallback={null}>
+        <BackdropZone onFiles={onDrop} onUri={onUri} />
+      </Suspense>
     </Stack>
   )
 }
