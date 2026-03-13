@@ -6,9 +6,11 @@ export const SVGPostMessage = {
   // root message types
   Navigate: 'send/navigate',
 
+  // UI-related messages
+  LoadComponents: 'send/load-components',
+  OnErrorComponents: 'send/error-components',
+
   // SVG-related messages
-  SendSVGComponents: 'send/svg/components',
-  SendSVGError: 'send/svg/error',
   SendRefreshSVGComponents: 'send/svg/refresh-components',
   SendSVGFilteredComponents: 'send/svg/filtered-components',
   SendSVGPlayground: 'send/svg/playground',
@@ -51,10 +53,12 @@ export const SVGReceiveMessage = {
   // root message types
   Ready: 'ready',
   ChangeViewPath: 'navigate/change-path',
-  
+
+  // UI-related messages
+  RequestComponents: 'ui/request-components',
+
   // SVG-related messages
   ExtractSVGComponentFromFiles: 'svg/extract-components-from-files',
-  GetSVGComponents: 'svg/get-components',
   SearchSVGComponents: 'svg/search-components',
   PlaygroundSVGComponents: 'svg/playground-component',
   RefreshSVGComponents: 'svg/refresh-components',

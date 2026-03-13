@@ -17,6 +17,9 @@ import { svgFileToUri } from '@/utilities/vscode/uri'
 
 import { getCacheManager } from '../cache'
 
+/**
+ * @deprecated This class is deprecated and will be removed in future versions. Please use the new handlers in the messaging system instead.
+ */
 export class SVGComponentHandler {
   private viewExportSVG: ViewExportSVG[]
 
@@ -60,9 +63,9 @@ export class SVGComponentHandler {
 
   getSVGComponents(): void {
     if (!isEmpty(this.viewExportSVG)) {
-      this.postMessage(SVGPostMessage.SendSVGComponents, this.viewExportSVG)
+      this.postMessage(SVGPostMessage.LoadComponents, this.viewExportSVG)
     } else {
-      this.postMessage(SVGPostMessage.SendSVGError, {
+      this.postMessage(SVGPostMessage.OnErrorComponents, {
         location: {},
         message: l10n.t('No SVG components found...'),
       })
@@ -96,7 +99,7 @@ export class SVGComponentHandler {
     if (Array.isArray(filtered)) {
       this.postMessage(SVGPostMessage.SendSVGFilteredComponents, filtered)
     } else {
-      this.postMessage(SVGPostMessage.SendSVGError, filtered)
+      this.postMessage(SVGPostMessage.OnErrorComponents, filtered)
     }
   }
 }

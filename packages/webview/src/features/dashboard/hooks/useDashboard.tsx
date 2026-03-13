@@ -5,19 +5,12 @@ import {
   type ViewExportSVG,
 } from '@jt-view-exports-svg/core'
 import { useEffect } from 'react'
-import { useDispatch, useSelector } from 'react-redux'
+import { useDispatch } from 'react-redux'
 
 import { vscode } from '@/services/vscode'
-import { setIsMounted, unsetInitLoading } from '@/store/features/GlobalSlice'
 import { setComponents, setErrors, setSearch } from '@/store/features/SVGSlice'
 
-interface DashboardHook {
-  loading: boolean
-}
-
-export const useDashboard = (): DashboardHook => {
-  const loading = useSelector((state) => state.global.loading)
-  const isMounted = useSelector((state) => state.global.isMounted)
+export const useDashboard = () => {
   const dispatch = useDispatch()
 
   /**
@@ -29,8 +22,6 @@ export const useDashboard = (): DashboardHook => {
     dispatch(setComponents(data))
     dispatch(setSearch(''))
     dispatch(setErrors())
-    dispatch(unsetInitLoading())
-    dispatch(setIsMounted())
   }
 
   /**
@@ -40,21 +31,17 @@ export const useDashboard = (): DashboardHook => {
    */
   const onErrorSVGComponents = (error?: SVGErrors): void => {
     dispatch(setErrors(error))
-    dispatch(unsetInitLoading())
   }
 
   useEffect(() => {
-    if (!isMounted) vscode.postMessage(SVGReceiveMessage.GetSVGComponents)
-    vscode.onMessage(SVGPostMessage.SendSVGComponents, getSVGComponents)
-    vscode.onMessage(SVGPostMessage.SendSVGError, onErrorSVGComponents)
+    vscode.postMessage(SVGReceiveMessage.RequestComponents)
+
+    vscode.onMessage(SVGPostMessage.LoadComponents, getSVGComponents)
+    vscode.onMessage(SVGPostMessage.OnErrorComponents, onErrorSVGComponents)
 
     return () => {
-      vscode.unregisterMessage(SVGPostMessage.SendSVGComponents)
-      vscode.unregisterMessage(SVGPostMessage.SendSVGError)
+      vscode.unregisterMessage(SVGPostMessage.LoadComponents)
+      vscode.unregisterMessage(SVGPostMessage.OnErrorComponents)
     }
   }, [])
-
-  return {
-    loading,
-  }
 }

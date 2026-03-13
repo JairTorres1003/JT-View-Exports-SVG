@@ -11,11 +11,11 @@ import type { HandlerArgs, HandlersMap, MessageEmitter, MessagesUnion } from './
 export type ReceiveMessageMap = {
   [SVGReceiveMessage.Ready]: undefined
   [SVGReceiveMessage.ChangeViewPath]: string
+  [SVGReceiveMessage.RequestComponents]: undefined
 
   [SVGReceiveMessage.ExtractSVGComponentFromFiles]: string[]
   [SVGReceiveMessage.GetAssetsPath]: undefined
   [SVGReceiveMessage.GetLastScanDate]: undefined
-  [SVGReceiveMessage.GetSVGComponents]: undefined
   [SVGReceiveMessage.GetTheme]: undefined
   [SVGReceiveMessage.GetViewAssets]: SVGFile[]
   [SVGReceiveMessage.OpenFile]: OpenFile

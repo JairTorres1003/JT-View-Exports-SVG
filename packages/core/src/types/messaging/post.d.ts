@@ -17,14 +17,14 @@ import type {
  */
 export type PostMessageMap = {
   [SVGPostMessage.Navigate]: { path: string }
+  [SVGPostMessage.LoadComponents]: ViewExportSVG[]
+  [SVGPostMessage.OnErrorComponents]: SVGErrors
 
   [SVGPostMessage.SendAssetsPath]: AssetPath
   [SVGPostMessage.SendLastScanDate]: string
   [SVGPostMessage.SendPlaygroundError]: SVGErrors
   [SVGPostMessage.SendRunLoading]: string
-  [SVGPostMessage.SendSVGComponents]: ViewExportSVG[]
   [SVGPostMessage.SendRefreshSVGComponents]: ViewExportSVG[]
-  [SVGPostMessage.SendSVGError]: SVGErrors
   [SVGPostMessage.SendSVGFilteredComponents]: ViewExportSVG[]
   [SVGPostMessage.SendSVGPlayground]: SVGComponent
   [SVGPostMessage.SendTheme]: ThemeMode
