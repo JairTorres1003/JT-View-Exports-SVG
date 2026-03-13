@@ -2,32 +2,24 @@ import { type PostMessageEmitter, SVGPostMessage } from '@jt-view-exports-svg/co
 import { commands } from 'vscode'
 
 import { CONFIG_KEY } from '@/constants/misc'
-import { getConfigurationEditor } from '@/utilities/vscode/config'
-import { getExtensionTheme as getExtTheme } from '@/utilities/vscode/extensions/theme'
-import { getCurrentTheme, getStyles } from '@/utilities/vscode/theme'
+import { getStyles } from '@/utilities/vscode/theme'
 
+/**
+ * @deprecated
+ */
 export class ConfigurationHandler {
   constructor(private readonly postMessage: PostMessageEmitter) {}
 
-  getTheme(): void {
-    this.postMessage(SVGPostMessage.SendTheme, getCurrentTheme())
-  }
+  getTheme(): void {}
 
-  getEditorConfig(): void {
-    const config = getConfigurationEditor()
-    this.postMessage(SVGPostMessage.SendEditorConfig, config)
-  }
+  getEditorConfig(): void {}
 
   getVsCodeStyles(): void {
     const config = getStyles()
     this.postMessage(SVGPostMessage.SendVsCodeStyles, config)
   }
 
-  getExtensionTheme(): void {
-    const theme = getExtTheme()
-    if (!theme) return
-    this.postMessage(SVGPostMessage.SendExtensionTheme, theme)
-  }
+  getExtensionTheme(): void {}
 
   async reloadExtensionTheme(): Promise<void> {
     try {

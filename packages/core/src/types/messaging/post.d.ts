@@ -24,16 +24,16 @@ export type PostMessageMap = {
   [SVGPostMessage.OnReloadComponent]: ViewExportSVG[]
   [SVGPostMessage.ToggleExpandAllComponents]: boolean
   [SVGPostMessage.ToggleOpenDevTools]: boolean
+  [SVGPostMessage.LoadEditorThemeMode]: ThemeMode
+  [SVGPostMessage.LoadEditorConfig]: Record<string, unknown>
+  [SVGPostMessage.LoadExtensionTheme]: ExtensionManage
 
   [SVGPostMessage.SendAssetsPath]: AssetPath
   [SVGPostMessage.SendLastScanDate]: string
   [SVGPostMessage.SendPlaygroundError]: SVGErrors
   [SVGPostMessage.SendRunLoading]: string
   [SVGPostMessage.SendSVGPlayground]: SVGComponent
-  [SVGPostMessage.SendTheme]: ThemeMode
-  [SVGPostMessage.SendEditorConfig]: Record<string, unknown>
   [SVGPostMessage.SendVsCodeStyles]: VsCodeStyles
-  [SVGPostMessage.SendExtensionTheme]: ExtensionManage
   [SVGPostMessage.SendUpdateConfiguration]: Record<string, unknown>
   [SVGPostMessage.SendReloadWebview]: string
   [SVGPostMessage.SendOpenFiles]: string[]

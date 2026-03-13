@@ -1,7 +1,7 @@
 import { workspace } from 'vscode'
 
-import { getExtensionTheme } from './extensions/theme'
-import { getCurrentTheme } from './theme'
+import { getExtensionTheme } from './extensionTheme'
+import { getCurrentThemeMode } from './themeMode'
 
 /**
  * Retrieves the editor configuration settings from the workspace and modifies certain properties.
@@ -35,7 +35,7 @@ export function getConfigurationEditor(): Record<string, unknown> {
     editorConfig['editor.minimap.enabled'] = false
   }
 
-  const kind = getCurrentTheme()
+  const kind = getCurrentThemeMode()
   const extensionTheme = getExtensionTheme()
   const defTheme = kind === 'dark' ? 'Default Dark+' : 'Default Light+'
 

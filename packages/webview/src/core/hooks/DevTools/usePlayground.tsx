@@ -31,6 +31,9 @@ interface PlaygroundHook {
   onChangeCompleteColor: (color: string) => void
 }
 
+/**
+ * CSS variables used to determine the initial playground background color.
+ */
 const CSS_VAR_MAIN = '--JT-SVG-vscode-sideBarTitle-background'
 const CSS_VAR_SECONDARY = '--JT-SVG-vscode-sideBarSectionHeader-background'
 
@@ -67,6 +70,15 @@ export const usePlayground = (): PlaygroundHook => {
   }
 
   /**
+   * Handles the color change by updating the background color state and dispatching the setEditorConfig action.
+   *
+   * @param color - The new color to be set.
+   */
+  const onChangeCompleteColor = (color: string) => {
+    setValueColor(color)
+  }
+
+  /**
    * Applies the initial color to the canvas by retrieving the main and secondary colors
    * from the CSS variables and setting them as the fill style for the canvas context.
    * The resulting color is then set as the initial color and triggers the onChangeColor callback.
@@ -75,31 +87,33 @@ export const usePlayground = (): PlaygroundHook => {
    */
   const applyInitialColor = useCallback(() => {
     try {
-      setInitialColor('#fff')
+      setInitialColor('#fff') // Pendiente evaluar si es necesario mantener este estado o si se puede eliminar y usar directamente el valor calculado
       const root = document.body || document.documentElement
+
       const mainColor = getComputedStyle(root).getPropertyValue(CSS_VAR_MAIN)
       const secondaryColor = getComputedStyle(root).getPropertyValue(CSS_VAR_SECONDARY)
 
       const canvas = document.createElement('canvas')
       canvas.width = 10
       canvas.height = 10
+
       const ctx = canvas.getContext('2d')
+      if (!ctx) return
 
-      if (ctx) {
-        ctx.fillStyle = mainColor !== '' ? mainColor : 'transparent'
-        ctx.fillRect(0, 0, 10, 10)
+      ctx.fillStyle = mainColor || 'transparent'
+      ctx.fillRect(0, 0, 10, 10)
 
-        ctx.fillStyle = secondaryColor !== '' ? secondaryColor : 'transparent'
-        ctx.fillRect(0, 0, 10, 10)
+      ctx.fillStyle = secondaryColor || 'transparent'
+      ctx.fillRect(0, 0, 10, 10)
 
-        const imageData = ctx.getImageData(5, 5, 1, 1)
-        const [r, g, b, a] = imageData.data
-        const initial = `rgba(${r}, ${g}, ${b}, ${a})`
+      const imageData = ctx.getImageData(5, 5, 1, 1)
+      const [r, g, b, a] = imageData.data
 
-        setInitialColor(initial)
-        onChangeColor(initial)
-        onChangeCompleteColor(initial)
-      }
+      const initial = `rgba(${r}, ${g}, ${b}, ${a})`
+
+      setInitialColor(initial)
+      onChangeColor(initial)
+      onChangeCompleteColor(initial)
     } catch (error) {
       console.error(`${i18next.t('errors.ErrorApplyingInitialColor')}:`, getUnknownError(error))
     }
@@ -112,15 +126,6 @@ export const usePlayground = (): PlaygroundHook => {
    */
   const handleEditorConfig = (data: Record<string, unknown>) => {
     dispatch(setEditorConfig(data))
-  }
-
-  /**
-   * Handles the color change by updating the background color state and dispatching the setEditorConfig action.
-   *
-   * @param color - The new color to be set.
-   */
-  const onChangeCompleteColor = (color: string) => {
-    setValueColor(color)
   }
 
   /**
@@ -137,7 +142,7 @@ export const usePlayground = (): PlaygroundHook => {
    *
    * @param theme - The new theme to be set.
    */
-  const handleTheme = (theme: ThemeMode) => {
+  const handleThemeMode = (theme: ThemeMode) => {
     dispatch(setThemeKind(theme))
   }
 
@@ -145,44 +150,43 @@ export const usePlayground = (): PlaygroundHook => {
    * Handles the copying of code from the editor to the clipboard.
    */
   const handleCopyCode = () => {
-    if (editorRef.current?.editor) {
-      const code = editorRef.current.editor.getValue()
-      copyToClipboard(code)
-        .then(() => {
-          onOpen(<Trans t={t} i18nKey='Copied {{value}} to clipboard' values={{ value: '' }} />, {
-            severity: 'success',
-          })
+    const editor = editorRef.current?.editor
+    if (!editor) return
+
+    const code = editor.getValue()
+    copyToClipboard(code)
+      .then(() => {
+        onOpen(<Trans t={t} i18nKey='Copied {{value}} to clipboard' values={{ value: '' }} />, {
+          severity: 'success',
         })
-        .catch((error) => {
-          onOpen(getUnknownError(error), { severity: 'error' })
-        })
-    }
+      })
+      .catch((error) => {
+        onOpen(getUnknownError(error), { severity: 'error' })
+      })
   }
 
   /**
    * Resets the code in the editor to its initial value.
    */
   const handleResetCode = () => {
-    if (editorRef.current?.editor) {
-      editorRef.current.editor.resetValue()
-    }
+    editorRef.current?.editor?.resetValue()
   }
 
   useEffect(() => {
     applyInitialColor()
 
-    vscode.postMessage(SVGReceiveMessage.GetTheme)
-    vscode.postMessage(SVGReceiveMessage.GetEditorConfig)
-    vscode.postMessage(SVGReceiveMessage.GetExtensionTheme)
+    vscode.postMessage(SVGReceiveMessage.RequestEditorThemeMode)
+    vscode.postMessage(SVGReceiveMessage.RequestEditorConfig)
+    vscode.postMessage(SVGReceiveMessage.RequestEditorExtensionTheme)
 
-    vscode.onMessage(SVGPostMessage.SendTheme, handleTheme)
-    vscode.onMessage(SVGPostMessage.SendEditorConfig, handleEditorConfig)
-    vscode.onMessage(SVGPostMessage.SendExtensionTheme, handleExtensionTheme)
+    vscode.onMessage(SVGPostMessage.LoadEditorThemeMode, handleThemeMode)
+    vscode.onMessage(SVGPostMessage.LoadEditorConfig, handleEditorConfig)
+    vscode.onMessage(SVGPostMessage.LoadExtensionTheme, handleExtensionTheme)
 
     return () => {
-      vscode.unregisterMessage(SVGPostMessage.SendTheme)
-      vscode.unregisterMessage(SVGPostMessage.SendEditorConfig)
-      vscode.unregisterMessage(SVGPostMessage.SendExtensionTheme)
+      vscode.unregisterMessage(SVGPostMessage.LoadEditorThemeMode)
+      vscode.unregisterMessage(SVGPostMessage.LoadEditorConfig)
+      vscode.unregisterMessage(SVGPostMessage.LoadExtensionTheme)
     }
   }, [])
 

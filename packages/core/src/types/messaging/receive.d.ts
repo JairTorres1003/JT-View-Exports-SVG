@@ -1,6 +1,6 @@
 import type { SVGReceiveMessage } from '../../constants/messages'
 
-import type { FileTemporary, OpenFile, SVGFile } from '../common'
+import type { FileTemporary, FileToOpen, SVGFile } from '../common'
 import type { SVGIcon, SVGPlayground } from '../svg'
 
 import type { HandlerArgs, HandlersMap, MessageEmitter, MessagesUnion } from './base'
@@ -17,18 +17,20 @@ export type ReceiveMessageMap = {
   [SVGReceiveMessage.ReloadComponent]: SVGFile[]
   [SVGReceiveMessage.IsExpandComponents]: boolean
   [SVGReceiveMessage.IsOpenDevTools]: boolean
+  [SVGReceiveMessage.RequestEditorThemeMode]: undefined
+  [SVGReceiveMessage.RequestEditorConfig]: undefined
+  [SVGReceiveMessage.RequestEditorExtensionTheme]: undefined
+  [SVGReceiveMessage.OpenFileInEditor]: FileToOpen
 
   [SVGReceiveMessage.ExtractSVGComponentFromFiles]: string[]
   [SVGReceiveMessage.GetAssetsPath]: undefined
   [SVGReceiveMessage.GetLastScanDate]: undefined
-  [SVGReceiveMessage.GetTheme]: undefined
   [SVGReceiveMessage.GetViewAssets]: SVGFile[]
   [SVGReceiveMessage.RequestFileOpen]: undefined
   [SVGReceiveMessage.CreateTempFiles]: FileTemporary[]
   [SVGReceiveMessage.PlaygroundSVGComponents]: SVGPlayground
   [SVGReceiveMessage.RemoveAssets]: SVGFile[]
   [SVGReceiveMessage.ScanWorkspace]: undefined
-  [SVGReceiveMessage.GetEditorConfig]: undefined
   [SVGReceiveMessage.GetVsCodeStyles]: undefined
   [SVGReceiveMessage.AddRecentIcon]: SVGIcon
   [SVGReceiveMessage.RemoveRecentIcon]: SVGIcon
@@ -36,7 +38,6 @@ export type ReceiveMessageMap = {
   [SVGReceiveMessage.AddFavoriteIcon]: SVGIcon
   [SVGReceiveMessage.RemoveFavoriteIcon]: SVGIcon
   [SVGReceiveMessage.ClearFavoriteIcons]: undefined
-  [SVGReceiveMessage.GetExtensionTheme]: undefined
   [SVGReceiveMessage.ReloadExtensionTheme]: undefined
 }
 

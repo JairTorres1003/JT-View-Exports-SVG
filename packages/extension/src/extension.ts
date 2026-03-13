@@ -11,7 +11,7 @@ import {
 import { CONFIG_KEY } from './constants/misc'
 import { initializeCacheManager } from './controllers/cache'
 import { InMemoryFileSystemProvider } from './providers/InMemoryFileSystemProvider'
-import { initializeExtensionTheme } from './utilities/vscode/extensions/theme'
+import { initializeExtensionTheme } from './services/vscode/extensionTheme'
 
 /**
  * This method is called when your extension is activated.

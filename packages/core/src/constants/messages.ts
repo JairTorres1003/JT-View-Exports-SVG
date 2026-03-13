@@ -17,7 +17,11 @@ export const SVGPostMessage = {
   // Developer tools related messages
   ToggleOpenDevTools: 'send/toggle-open-devtools',
 
-  // SVG-related messages
+  // Settings-related messages
+  LoadEditorThemeMode: 'send/load-editor-theme-mode',
+  LoadEditorConfig: 'send/load-editor-config',
+  LoadExtensionTheme: 'send/load-extension-theme',
+
   SendSVGPlayground: 'send/svg/playground',
   SendPlaygroundError: 'send/svg/playground-error',
 
@@ -26,10 +30,7 @@ export const SVGPostMessage = {
 
   // Settings-related messages
   SendRunLoading: 'send/settings/run-loading',
-  SendTheme: 'send/settings/theme',
-  SendEditorConfig: 'send/settings/editor-config',
   SendVsCodeStyles: 'send/settings/vscode-styles',
-  SendExtensionTheme: 'send/settings/extension-theme',
   SendUpdateConfiguration: 'send/update-configuration',
   SendReloadWebview: 'send/reload-webview',
 
@@ -64,7 +65,11 @@ export const SVGReceiveMessage = {
   // Developer tools related messages
   IsOpenDevTools: 'devtools/is-open',
 
-  // SVG-related messages
+  // Editor-related messages
+  RequestEditorThemeMode: 'editor/request-theme-mode',
+  RequestEditorConfig: 'editor/request-config',
+  RequestEditorExtensionTheme: 'editor/request-extension-theme',
+
   // File-related messages
   OpenFileInEditor: 'file/open-in-editor',
 
@@ -76,11 +81,7 @@ export const SVGReceiveMessage = {
   RemoveAssets: 'assets/remove',
   GetViewAssets: 'assets/views',
 
-  // Settings-related messages
-  GetTheme: 'settings/theme',
-  GetEditorConfig: 'settings/editor-config',
   GetVsCodeStyles: 'settings/vscode-styles',
-  GetExtensionTheme: 'settings/extension-theme',
   ReloadExtensionTheme: 'settings/reload-extension-theme',
 
   // Scan-related messages
