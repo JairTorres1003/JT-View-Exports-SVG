@@ -19,6 +19,7 @@ const NavigationDrawer = () => {
         onClose={toggleDrawer(false)}
         onOpen={toggleDrawer(true)}
         slotProps={{
+          swipeArea: { hidden: true },
           paper: {
             sx: {
               marginLeft: '20px',
