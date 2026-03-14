@@ -1,5 +1,4 @@
 import { Box, IconButton, Tooltip, Typography } from '@mui/material'
-import cn from 'classnames'
 import { lazy, Suspense } from 'react'
 import { useTranslation } from 'react-i18next'
 import { Group, Panel, Separator } from 'react-resizable-panels'
@@ -41,15 +40,10 @@ const DevTools: React.FC<{ id: string; onClose?: VoidFunction }> = ({
         </Box>
       </Box>
 
-      <Box
-        className={cn(devToolsClasses.content, {
-          [devToolsClasses.separatorDisabled]: expanded.length !== 2,
-        })}
-      >
+      <Box className={devToolsClasses.content}>
         <Group orientation='vertical' disableCursor={expanded.length !== 2}>
           <Panel
             minSize={playgroundPanel ? 200 : 22}
-            maxSize={playgroundPanel ? undefined : 22}
             id='playground-panel'
             className={devToolsClasses.panel}
             panelRef={ref.playground}
@@ -77,7 +71,6 @@ const DevTools: React.FC<{ id: string; onClose?: VoidFunction }> = ({
 
           <Panel
             minSize={infoPanel ? 200 : 22}
-            maxSize={infoPanel ? undefined : 22}
             id='info-panel'
             className={devToolsClasses.panel}
             panelRef={ref.info}

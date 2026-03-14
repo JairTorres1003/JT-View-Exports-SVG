@@ -8,5 +8,4 @@ export const devToolsClasses = {
   playground: 'DevTools-playground',
   panel: 'DevTools-panel',
   separator: 'DevTools-separator',
-  separatorDisabled: 'DevTools-separatorDisabled',
 }
