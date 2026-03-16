@@ -21,6 +21,7 @@ export const SVGPostMessage = {
   LoadEditorThemeMode: 'send/load-editor-theme-mode',
   LoadEditorConfig: 'send/load-editor-config',
   LoadExtensionTheme: 'send/load-extension-theme',
+  LoadEditorStyles: 'send/load-editor-styles',
 
   SendSVGPlayground: 'send/svg/playground',
   SendPlaygroundError: 'send/svg/playground-error',
@@ -30,7 +31,6 @@ export const SVGPostMessage = {
 
   // Settings-related messages
   SendRunLoading: 'send/settings/run-loading',
-  SendVsCodeStyles: 'send/settings/vscode-styles',
   SendUpdateConfiguration: 'send/update-configuration',
   SendReloadWebview: 'send/reload-webview',
 
@@ -69,6 +69,7 @@ export const SVGReceiveMessage = {
   RequestEditorThemeMode: 'editor/request-theme-mode',
   RequestEditorConfig: 'editor/request-config',
   RequestEditorExtensionTheme: 'editor/request-extension-theme',
+  RequestEditorStyles: 'editor/request-styles',
 
   // File-related messages
   OpenFileInEditor: 'file/open-in-editor',
@@ -81,7 +82,6 @@ export const SVGReceiveMessage = {
   RemoveAssets: 'assets/remove',
   GetViewAssets: 'assets/views',
 
-  GetVsCodeStyles: 'settings/vscode-styles',
   ReloadExtensionTheme: 'settings/reload-extension-theme',
 
   // Scan-related messages

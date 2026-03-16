@@ -1,8 +1,8 @@
-import type { ExtensionManage, ThemeMode, VsCodeStyles } from '@jt-view-exports-svg/core'
+import type { EditorStyles, ExtensionManage, ThemeMode } from '@jt-view-exports-svg/core'
 import type { CaseReducer, PayloadAction } from '@reduxjs/toolkit'
 
 export interface VsCodeState {
-  styles: Partial<VsCodeStyles>
+  styles: Partial<EditorStyles>
   editorConfig: Record<string, unknown>
   extensionTheme?: ExtensionManage
   themeKind: ThemeMode
@@ -12,7 +12,7 @@ export interface VsCodeReducers {
   /**
    * Sets the VsCode styles in the state.
    */
-  setVsCodeStyles: CaseReducer<VsCodeState, PayloadAction<VsCodeStyles>>
+  setVsCodeStyles: CaseReducer<VsCodeState, PayloadAction<EditorStyles>>
   /**
    * Sets the editor configuration in the state.
    */

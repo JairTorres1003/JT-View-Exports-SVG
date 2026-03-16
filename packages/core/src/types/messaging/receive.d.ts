@@ -20,6 +20,7 @@ export type ReceiveMessageMap = {
   [SVGReceiveMessage.RequestEditorThemeMode]: undefined
   [SVGReceiveMessage.RequestEditorConfig]: undefined
   [SVGReceiveMessage.RequestEditorExtensionTheme]: undefined
+  [SVGReceiveMessage.RequestEditorStyles]: undefined
   [SVGReceiveMessage.OpenFileInEditor]: FileToOpen
 
   [SVGReceiveMessage.ExtractSVGComponentFromFiles]: string[]
@@ -31,7 +32,6 @@ export type ReceiveMessageMap = {
   [SVGReceiveMessage.PlaygroundSVGComponents]: SVGPlayground
   [SVGReceiveMessage.RemoveAssets]: SVGFile[]
   [SVGReceiveMessage.ScanWorkspace]: undefined
-  [SVGReceiveMessage.GetVsCodeStyles]: undefined
   [SVGReceiveMessage.AddRecentIcon]: SVGIcon
   [SVGReceiveMessage.RemoveRecentIcon]: SVGIcon
   [SVGReceiveMessage.ClearRecentIcons]: undefined

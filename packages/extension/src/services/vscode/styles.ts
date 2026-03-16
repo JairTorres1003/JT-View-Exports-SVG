@@ -1,13 +1,12 @@
-import type { VsCodeStyles } from '@jt-view-exports-svg/core'
+import type { EditorStyles } from '@jt-view-exports-svg/core'
 import { workspace } from 'vscode'
 
 import { DEFAULT_FONT_FAMILY } from '@/constants/misc'
 
 /**
- * Retrieves the styles for the VS Code editor.
- * @returns {VsCodeStyles} The styles for the VS Code editor.
+ * Retrieves the current editor styles configuration from VS Code settings.
  */
-export function getStyles(): VsCodeStyles {
+export function getEditorStyles(): EditorStyles {
   const configuration = workspace.getConfiguration('editor')
 
   return {

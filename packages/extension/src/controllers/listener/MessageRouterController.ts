@@ -42,7 +42,6 @@ export class MessageRouter {
       [SVGReceiveMessage.RemoveFavoriteIcon]: handlers.removeFavoriteIcon.bind(handlers),
       [SVGReceiveMessage.ClearFavoriteIcons]: handlers.clearFavoriteIcons.bind(handlers),
 
-      [SVGReceiveMessage.GetVsCodeStyles]: handlers.getVsCodeStyles.bind(handlers),
       [SVGReceiveMessage.ReloadExtensionTheme]: handlers.reloadExtensionTheme.bind(handlers),
 
       [SVGReceiveMessage.GetAssetsPath]: handlers.getAssetsPath.bind(handlers),

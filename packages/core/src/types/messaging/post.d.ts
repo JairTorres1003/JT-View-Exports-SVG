@@ -1,6 +1,6 @@
 import type { SVGPostMessage } from '../../constants/messages'
 import type { SVGErrors } from '../common'
-import type { ExtensionManage, ThemeMode, VsCodeStyles } from '../editor'
+import type { EditorStyles, ExtensionManage, ThemeMode } from '../editor'
 import type { SVGComponent, ViewExportSVG } from '../svg'
 
 import type {
@@ -27,13 +27,13 @@ export type PostMessageMap = {
   [SVGPostMessage.LoadEditorThemeMode]: ThemeMode
   [SVGPostMessage.LoadEditorConfig]: Record<string, unknown>
   [SVGPostMessage.LoadExtensionTheme]: ExtensionManage
+  [SVGPostMessage.LoadEditorStyles]: EditorStyles
 
   [SVGPostMessage.SendAssetsPath]: AssetPath
   [SVGPostMessage.SendLastScanDate]: string
   [SVGPostMessage.SendPlaygroundError]: SVGErrors
   [SVGPostMessage.SendRunLoading]: string
   [SVGPostMessage.SendSVGPlayground]: SVGComponent
-  [SVGPostMessage.SendVsCodeStyles]: VsCodeStyles
   [SVGPostMessage.SendUpdateConfiguration]: Record<string, unknown>
   [SVGPostMessage.SendReloadWebview]: string
   [SVGPostMessage.SendOpenFiles]: string[]

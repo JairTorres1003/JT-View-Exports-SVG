@@ -43,7 +43,7 @@ export class ListerWebviewController {
     // Initialize handlers
     this.svgComponentHandler = new SVGComponentHandler(this._postMessage, this.viewExportSVG)
     this.cacheHandler = new CacheHandler(this._postMessage)
-    this.configurationHandler = new ConfigurationHandler(this._postMessage)
+    this.configurationHandler = new ConfigurationHandler()
     this.assetsHandler = new AssetsHandler(this._postMessage)
     this.uiHandler = new UIHandler(this._postMessage)
 
