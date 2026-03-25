@@ -1,8 +1,9 @@
-import type { ViewExportSVG } from '@jt-view-exports-svg/core'
+import type { FileIdentifier, SVGFile, ViewExportSVG } from '@jt-view-exports-svg/core'
 
 class ViewExportStore {
   private static instance: ViewExportStore
   private items: ViewExportSVG[] = []
+  private files: Record<FileIdentifier, SVGFile> = {}
   private search: string = ''
   private totalSearchResults: number = 0
 
@@ -19,8 +20,20 @@ class ViewExportStore {
     return this.items
   }
 
-  set(items: ViewExportSVG[]): void {
+  getFiles(): Record<FileIdentifier, SVGFile> {
+    return this.files
+  }
+
+  set(items: ViewExportSVG[], files: SVGFile[] = []): void {
     this.items = items
+
+    this.files = files.reduce(
+      (acc, file) => {
+        acc[file.id] = file
+        return acc
+      },
+      {} as Record<FileIdentifier, SVGFile>
+    )
   }
 
   update(id: string, data: Partial<ViewExportSVG>): void {
@@ -36,6 +49,7 @@ class ViewExportStore {
 
   clear(): void {
     this.items = []
+    this.files = {}
   }
 
   clearSearch(): void {

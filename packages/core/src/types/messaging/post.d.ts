@@ -1,5 +1,5 @@
 import type { SVGPostMessage } from '../../constants/messages'
-import type { SVGErrors } from '../common'
+import type { FileIdentifier, SVGErrors, SVGFile } from '../common'
 import type { EditorStyles, ExtensionManage, ThemeMode } from '../editor'
 import type { SVGComponent, ViewExportSVG } from '../svg'
 
@@ -19,6 +19,7 @@ export type PostMessageMap = {
   [SVGPostMessage.Navigate]: { path: string }
   [SVGPostMessage.LoadComponents]: ViewExportSVG[]
   [SVGPostMessage.LoadUserComponents]: ViewExportSVG[]
+  [SVGPostMessage.LoadFilesComponents]: Record<FileIdentifier, SVGFile>
   [SVGPostMessage.FilterComponents]: ViewExportSVG[]
   [SVGPostMessage.OnErrorComponents]: SVGErrors
   [SVGPostMessage.OnReloadComponent]: ViewExportSVG[]

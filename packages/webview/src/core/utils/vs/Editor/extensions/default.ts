@@ -4,7 +4,7 @@ import {
   type RegisterLocalProcessExtensionResult,
   registerExtension,
 } from '@codingame/monaco-vscode-api/extensions'
-import type { SVGComponent, SVGLocation } from '@jt-view-exports-svg/core'
+import type { LocationIdentifier, SVGComponent } from '@jt-view-exports-svg/core'
 
 import { openFileInPosition } from '@/core/utils/file'
 import { setRecentlySelected } from '@/store/features/PlaygroundSlice'
@@ -41,8 +41,8 @@ async function activate() {
 
   commands.registerCommand(
     `${manifest.name}.action.clicLinkDocumentation`,
-    ({ location }: { location: SVGLocation }) => {
-      openFileInPosition(location.file, location.start)
+    ({ location }: { location: LocationIdentifier }) => {
+      openFileInPosition(location)
     }
   )
 }

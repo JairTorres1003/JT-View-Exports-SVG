@@ -1,4 +1,4 @@
-import type { SVGFile } from '../common'
+import type { FileIdentifier } from '../common'
 import type { SVGComponent } from './component'
 import type { DeclarationExport } from './parsing'
 
@@ -24,7 +24,7 @@ export interface ViewExportSVG {
   /** Indicates whether the SVG components that are not exported should be shown */
   isShowNoExports: boolean
   /** This is an array of SVG files that are associated with the group of exports (groupKind) */
-  files: SVGFile[]
+  files: FileIdentifier[]
 }
 
 /**

@@ -35,13 +35,6 @@ export class MessageRouter {
         handlers.extractSVGComponentFromFiles.bind(handlers),
       [SVGReceiveMessage.PlaygroundSVGComponents]: handlers.playgroundSVGComponents.bind(handlers),
 
-      [SVGReceiveMessage.AddRecentIcon]: handlers.addRecentIcon.bind(handlers),
-      [SVGReceiveMessage.RemoveRecentIcon]: handlers.removeRecentIcon.bind(handlers),
-      [SVGReceiveMessage.ClearRecentIcons]: handlers.clearRecentIcons.bind(handlers),
-      [SVGReceiveMessage.AddFavoriteIcon]: handlers.addFavoriteIcon.bind(handlers),
-      [SVGReceiveMessage.RemoveFavoriteIcon]: handlers.removeFavoriteIcon.bind(handlers),
-      [SVGReceiveMessage.ClearFavoriteIcons]: handlers.clearFavoriteIcons.bind(handlers),
-
       [SVGReceiveMessage.ReloadExtensionTheme]: handlers.reloadExtensionTheme.bind(handlers),
 
       [SVGReceiveMessage.GetAssetsPath]: handlers.getAssetsPath.bind(handlers),

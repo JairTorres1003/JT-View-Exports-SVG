@@ -1,6 +1,5 @@
 import {
   type FileTemporary,
-  type FileToOpen,
   type PostMessageEmitter,
   type SVGFile,
   type SVGIcon,
@@ -179,7 +178,7 @@ export class ListerWebviewController {
   toggleOpenDevTools(open: boolean): void {
     this.uiHandler.toggleOpenDevTools(open).catch(console.error)
   }
-  openFileInEditor(options: FileToOpen): void {
+  openFileInEditor(options: any): void {
     this.uiHandler.openFileInEditor(options)
   }
   requestFileOpen(): void {

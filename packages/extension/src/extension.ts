@@ -9,8 +9,8 @@ import {
   showMenu,
 } from './commands'
 import { CONFIG_KEY } from './constants/misc'
-import { initializeCacheManager } from './controllers/cache'
 import { InMemoryFileSystemProvider } from './providers/InMemoryFileSystemProvider'
+import { initCache } from './services/cache/main'
 import { initializeExtensionTheme } from './services/vscode/extensionTheme'
 
 /**
@@ -18,7 +18,7 @@ import { initializeExtensionTheme } from './services/vscode/extensionTheme'
  * @param context The extension context.
  */
 export async function activate(context: ExtensionContext) {
-  await initializeCacheManager(context)
+  initCache(context)
   await initializeExtensionTheme(context)
 
   const provider = new InMemoryFileSystemProvider()

@@ -2,8 +2,8 @@ import * as t from '@babel/types'
 import type {
   GetSVGTagName,
   GetTagName,
+  LocationIdentifier,
   SVGFile,
-  SVGLocation,
   SVGTagName,
 } from '@jt-view-exports-svg/core'
 import { camelCase } from 'lodash'
@@ -17,11 +17,14 @@ import { isEmpty } from '../misc'
  * @param openingElement The JSXOpeningElement to extract the tag name from.
  * @returns An object containing the tag name, motion flag, location, and validity flag.
  */
-export function getTagName(openingElement: t.JSXOpeningElement, file: SVGFile): GetTagName {
-  const location: SVGLocation = {
+export function getTagName(
+  openingElement: t.JSXOpeningElement,
+  loc: LocationIdentifier
+): GetTagName {
+  const location: LocationIdentifier = {
+    ...loc,
     start: openingElement.loc?.start,
     end: openingElement.loc?.end,
-    file,
   }
   let name: GetTagName['name'] = ''
   let isMotion = false

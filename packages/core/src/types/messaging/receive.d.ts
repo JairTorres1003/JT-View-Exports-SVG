@@ -1,7 +1,8 @@
+import type { IconCollectionKind } from '../../constants'
 import type { SVGReceiveMessage } from '../../constants/messages'
 
-import type { FileTemporary, FileToOpen, SVGFile } from '../common'
-import type { SVGIcon, SVGPlayground } from '../svg'
+import type { FileTemporary, LocationIdentifier, SVGFile } from '../common'
+import type { SVGIconCollection, SVGPlayground } from '../svg'
 
 import type { HandlerArgs, HandlersMap, MessageEmitter, MessagesUnion } from './base'
 
@@ -13,15 +14,19 @@ export type ReceiveMessageMap = {
   [SVGReceiveMessage.ChangeViewPath]: string
   [SVGReceiveMessage.RequestComponents]: undefined
   [SVGReceiveMessage.RequestUserComponents]: undefined
+  [SVGReceiveMessage.RequestFilesComponents]: undefined
   [SVGReceiveMessage.SearchComponents]: string
-  [SVGReceiveMessage.ReloadComponent]: SVGFile[]
+  [SVGReceiveMessage.ReloadComponent]: FileIdentifier[]
   [SVGReceiveMessage.IsExpandComponents]: boolean
+  [SVGReceiveMessage.AddIconToCollection]: SVGIconCollection
+  [SVGReceiveMessage.RemoveIconFromCollection]: SVGIconCollection
+  [SVGReceiveMessage.ClearIconCollection]: IconCollectionKind
   [SVGReceiveMessage.IsOpenDevTools]: boolean
   [SVGReceiveMessage.RequestEditorThemeMode]: undefined
   [SVGReceiveMessage.RequestEditorConfig]: undefined
   [SVGReceiveMessage.RequestEditorExtensionTheme]: undefined
   [SVGReceiveMessage.RequestEditorStyles]: undefined
-  [SVGReceiveMessage.OpenFileInEditor]: FileToOpen
+  [SVGReceiveMessage.OpenFileInEditor]: LocationIdentifier
 
   [SVGReceiveMessage.ExtractSVGComponentFromFiles]: string[]
   [SVGReceiveMessage.GetAssetsPath]: undefined
@@ -32,12 +37,6 @@ export type ReceiveMessageMap = {
   [SVGReceiveMessage.PlaygroundSVGComponents]: SVGPlayground
   [SVGReceiveMessage.RemoveAssets]: SVGFile[]
   [SVGReceiveMessage.ScanWorkspace]: undefined
-  [SVGReceiveMessage.AddRecentIcon]: SVGIcon
-  [SVGReceiveMessage.RemoveRecentIcon]: SVGIcon
-  [SVGReceiveMessage.ClearRecentIcons]: undefined
-  [SVGReceiveMessage.AddFavoriteIcon]: SVGIcon
-  [SVGReceiveMessage.RemoveFavoriteIcon]: SVGIcon
-  [SVGReceiveMessage.ClearFavoriteIcons]: undefined
   [SVGReceiveMessage.ReloadExtensionTheme]: undefined
 }
 

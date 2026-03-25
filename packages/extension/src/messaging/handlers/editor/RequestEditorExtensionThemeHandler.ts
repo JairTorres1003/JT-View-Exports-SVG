@@ -2,8 +2,8 @@ import { SVGPostMessage, SVGReceiveMessage } from '@jt-view-exports-svg/core'
 import { l10n, window } from 'vscode'
 
 import type { WebviewMessenger } from '@/messaging/WebviewMessenger'
-import { getExtensionTheme } from '@/services/vscode/extensionTheme'
-
+import { getCache } from '@/services/cache/main'
+import { CACHE_KEY } from '@/services/vscode/extensionTheme'
 import { BaseHandler } from '../BaseHandler'
 
 export class RequestEditorExtensionThemeHandler extends BaseHandler {
@@ -13,17 +13,27 @@ export class RequestEditorExtensionThemeHandler extends BaseHandler {
     super()
   }
 
+  private showNoThemeMessage() {
+    window
+      .showInformationMessage(l10n.t('No theme found for the current workspace'))
+      .then(undefined, console.error)
+  }
+
   handle() {
-    const theme = getExtensionTheme()
+    const cache = getCache().get('extensionTheme')
 
-    if (!theme) {
-      window
-        .showInformationMessage(l10n.t('No theme found for the current workspace'))
-        .then(undefined, console.error)
-
+    if (!cache.has(CACHE_KEY)) {
+      this.showNoThemeMessage()
       return
     }
 
-    this.messenger.postMessage(SVGPostMessage.LoadExtensionTheme, theme)
+    cache.get(CACHE_KEY).then((theme) => {
+      if (!theme) {
+        this.showNoThemeMessage()
+        return
+      }
+
+      this.messenger.postMessage(SVGPostMessage.LoadExtensionTheme, theme)
+    })
   }
 }

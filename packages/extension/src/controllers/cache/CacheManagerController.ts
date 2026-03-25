@@ -1,5 +1,5 @@
 import {
-  CacheIconKind,
+  IconCollectionKind as CacheIconKind,
   type ExtensionManage,
   type ExtractSVGExports,
 } from '@jt-view-exports-svg/core'
@@ -14,6 +14,8 @@ import { IconCacheController } from './IconCacheController'
 
 /**
  * Cache manager to handle multiple file caches, one for each type.
+ * @deprecated This class is deprecated and will be removed in future versions.
+ * Use CacheManager.ts instead, which provides a more flexible and scalable caching solution.
  */
 class CacheManagerController {
   static DeclarationFileCache: FileModifiedCacheController<ExtractSVGExports['base']>

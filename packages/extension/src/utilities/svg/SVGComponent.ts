@@ -48,7 +48,7 @@ function validateOpeningElement(
       isValid: false,
       tag,
       error: {
-        location: { start: openingElement.loc?.start, end: openingElement.loc?.end },
+        location: { ...openingElement.loc, id: file.id },
         message: l10n.t('Invalid {attr} attribute, expected "{expected}" but got {actual}', {
           attr: 'xmlns',
           expected: 'http://www.w3.org/2000/svg',
@@ -75,7 +75,7 @@ function defaultSvgComponent(
 ): GetSVGComponent {
   const params = propertyManager.get()
   const location = {
-    file,
+    id: file.id,
     start: { column: 0, index: 0, line: 0 },
     end: { column: 0, index: 0, line: 0 },
   }

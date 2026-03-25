@@ -1,4 +1,4 @@
-import type { ExtensionManage, IExtension, IPackageJSON } from '@jt-view-exports-svg/core'
+import type { IExtension, IPackageJSON } from '@jt-view-exports-svg/core'
 import * as path from 'path'
 import {
   type ExtensionContext,
@@ -10,9 +10,9 @@ import {
   workspace,
 } from 'vscode'
 
-import { getCacheManager } from '@/controllers/cache'
+import { getCache } from '../cache/main'
 
-const CACHE_KEY = 'CurrentExtensionTheme'
+export const CACHE_KEY = 'CurrentExtensionTheme'
 
 /**
  * Clones a VS Code theme extension's manifest and theme files into a target directory within the current extension.
@@ -107,10 +107,12 @@ async function extensionThemePath(context: ExtensionContext): Promise<boolean> {
  */
 export async function initializeExtensionTheme(context: ExtensionContext): Promise<void> {
   try {
-    const cachedTheme = getCacheManager().ExtensionCache
-    const exists = await extensionThemePath(context)
-    if (cachedTheme.has(CACHE_KEY) && exists) {
-      return
+    const cache = getCache().get('extensionTheme')
+
+    if (cache.has(CACHE_KEY)) {
+      const exists = await extensionThemePath(context)
+
+      if (exists) return
     }
 
     const configuration = workspace.getConfiguration('workbench')
@@ -130,42 +132,19 @@ export async function initializeExtensionTheme(context: ExtensionContext): Promi
       if (themeExtension) {
         const { id, extensionUri, extensionPath, isActive } = themeExtension
 
-        cachedTheme.set(CACHE_KEY, { id, extensionUri, extensionPath, isActive, isValid: true }, 0)
+        cache.set(CACHE_KEY, { id, extensionUri, extensionPath, isActive, isValid: true })
         await cloneThemeExtension(context, extensionPath)
       } else {
-        cachedTheme.set(
-          CACHE_KEY,
-          {
-            id: '',
-            extensionUri: Uri.file(''),
-            extensionPath: '',
-            isActive: false,
-            isValid: false,
-          },
-          0
-        )
+        cache.set(CACHE_KEY, {
+          id: '',
+          extensionUri: Uri.file(''),
+          extensionPath: '',
+          isActive: false,
+          isValid: false,
+        })
       }
     }
   } catch {
     console.error(l10n.t('Failed to initialize the extension theme'))
   }
-}
-
-/**
- * Clears the cached extension theme.
- *
- * @param context - The extension context.
- */
-export async function reloadExtensionTheme(context: ExtensionContext): Promise<void> {
-  getCacheManager().ExtensionCache.delete(CACHE_KEY)
-  await initializeExtensionTheme(context)
-}
-
-/**
- * Retrieves the cached extension theme.
- *
- * @returns The cached extension theme if found, `undefined` otherwise.
- */
-export function getExtensionTheme(): ExtensionManage | undefined {
-  return getCacheManager().ExtensionCache.get(CACHE_KEY, 0)
 }

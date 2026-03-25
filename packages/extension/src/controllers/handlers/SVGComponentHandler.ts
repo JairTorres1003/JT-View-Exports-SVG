@@ -65,7 +65,6 @@ export class SVGComponentHandler {
       this.postMessage(SVGPostMessage.LoadComponents, this.viewExportSVG)
     } else {
       this.postMessage(SVGPostMessage.OnErrorComponents, {
-        location: {},
         message: l10n.t('No SVG components found...'),
       })
     }
@@ -87,7 +86,6 @@ export class SVGComponentHandler {
       console.error(errorMessage, error)
       this.postMessage(SVGPostMessage.SendPlaygroundError, {
         message: errorMessage,
-        location: {},
       })
     }
   }

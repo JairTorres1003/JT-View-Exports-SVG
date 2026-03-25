@@ -18,7 +18,6 @@ export class RequestComponentsHandler extends BaseHandler {
 
     if (!components.length) {
       this.messenger.postMessage(SVGPostMessage.OnErrorComponents, {
-        location: {},
         message: l10n.t('No SVG components found...'),
       })
       return

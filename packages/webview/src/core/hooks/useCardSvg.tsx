@@ -1,7 +1,13 @@
-import { type SVGComponent, type SVGIcon, SVGReceiveMessage } from '@jt-view-exports-svg/core'
+import {
+  IconCollectionKind,
+  type SVGComponent,
+  type SVGIcon,
+  type SVGIconCollection,
+  SVGReceiveMessage,
+} from '@jt-view-exports-svg/core'
 import React from 'react'
 import { Trans, useTranslation } from 'react-i18next'
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 
 import { useAlert } from '@/core/hooks/useAlert'
 import { vscode } from '@/services/vscode'
@@ -23,6 +29,7 @@ interface UseCardSvgProps {
 export const useCardSvg = ({ favorite = false }: UseCardSvgProps = {}): CardSvgHook => {
   const { onOpen } = useAlert()
 
+  const files = useSelector((state) => state.svg.files)
   const { t } = useTranslation(undefined, { keyPrefix: 'labels' })
 
   const dispatch = useDispatch()
@@ -31,23 +38,25 @@ export const useCardSvg = ({ favorite = false }: UseCardSvgProps = {}): CardSvgH
 
   /**
    * Handles the click event on an SVG icon.
-   *
-   * @param {SVGIcon} param0 - The SVG icon object containing the name and location.
-   * @param {string} param0.name - The name of the SVG icon.
-   * @param {string} param0.location - The location of the SVG icon.
    */
-  const handleClick = ({ name, location }: SVGIcon): void => {
-    copyToClipboard(name)
+  const handleClick = (icon: SVGIcon): void => {
+    copyToClipboard(icon.name)
       .then(() => {
-        onOpen(<Trans t={t} i18nKey='Copied {{value}} to clipboard' values={{ value: name }} />, {
-          severity: 'success',
-        })
+        onOpen(
+          <Trans t={t} i18nKey='Copied {{value}} to clipboard' values={{ value: icon.name }} />,
+          {
+            severity: 'success',
+          }
+        )
       })
       .catch((error) => {
         onOpen(getUnknownError(error), { severity: 'error' })
       })
 
-    vscode.postMessage(SVGReceiveMessage.AddRecentIcon, { name, location })
+    vscode.postMessage(SVGReceiveMessage.AddIconToCollection, {
+      ...icon,
+      collection: IconCollectionKind.RECENT,
+    })
   }
 
   /**
@@ -65,19 +74,22 @@ export const useCardSvg = ({ favorite = false }: UseCardSvgProps = {}): CardSvgH
    * @param {SVGComponent} component - The SVG component to toggle favorite status for.
    */
   const handleToggleFavorite = (component: SVGComponent): void => {
-    if (!component.location.file.isTemporary) {
-      setIsFavorite(!isFavorite)
+    const file = files[component.location.id]
+
+    if (file && !file.isTemporary) {
+      setIsFavorite((prev) => !prev)
     }
 
-    const payload = {
+    const payload: SVGIconCollection = {
+      collection: IconCollectionKind.FAVORITE,
       name: component.name,
       location: component.location,
     }
 
     if (component.isFavorite) {
-      vscode.postMessage(SVGReceiveMessage.RemoveFavoriteIcon, payload)
+      vscode.postMessage(SVGReceiveMessage.RemoveIconFromCollection, payload)
     } else {
-      vscode.postMessage(SVGReceiveMessage.AddFavoriteIcon, payload)
+      vscode.postMessage(SVGReceiveMessage.AddIconToCollection, payload)
     }
   }
 

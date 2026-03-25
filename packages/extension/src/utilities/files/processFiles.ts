@@ -1,17 +1,83 @@
 import type { SVGFile, ViewExportSVG } from '@jt-view-exports-svg/core'
 import * as path from 'path'
-import { l10n, ProgressLocation, type ProgressOptions, type Uri, window } from 'vscode'
+import * as vsc from 'vscode'
 
 import { REGEX_FILE } from '@/constants/regex'
-import { getCacheManager } from '@/controllers/cache'
 import { AssetsPathsController, ShowNotExportedIconsController } from '@/controllers/config'
-
+import { getCache } from '@/services/cache/main'
+import type { ViewExportSVGCache } from '@/services/cache/ViewExportSVGCache'
 import { isEmpty } from '../misc'
 import { extractSVGData } from '../svg/extracts'
 import { getUriPath } from '../vscode/uri'
-
 import { groupIconsByPattern } from './groupIconsByPattern'
-import { getFileTimestamp, pathToSVGFile } from './misc'
+import { pathToSVGFile } from './misc'
+
+interface ProcessResult {
+  exportItem: ViewExportSVG
+  fileItem: SVGFile
+}
+
+interface ProcessFileItemOptions {
+  isShowNoExports: boolean
+  cacheItem: ViewExportSVGCache
+}
+
+/**
+ * Processes a single file to extract SVG information.
+ * Isolated logic for better testability and concurrency management.
+ *
+ * @param uri - The file URI to process.
+ * @param isShowNoExports - Configuration flag to include non-exported components.
+ * @returns A promise that resolves to the process result or null if invalid/error.
+ */
+async function processFileItem(
+  uri: vsc.Uri,
+  options: ProcessFileItemOptions
+): Promise<ProcessResult | null> {
+  try {
+    const extname = path.extname(uri.fsPath)
+
+    if (!REGEX_FILE.test(extname)) return null
+
+    const file = await pathToSVGFile(getUriPath(uri))
+
+    const currentItem = options.cacheItem.transactionGetItem(file)
+
+    if (currentItem) {
+      return { exportItem: currentItem, fileItem: file }
+    }
+
+    const { svg } = await extractSVGData(file, uri)
+
+    const totalExports = svg.exportComponents.length
+    const totalNoExports = svg.noExportComponents.length
+    const totalSVG = totalExports + totalNoExports
+
+    const components = options.isShowNoExports
+      ? [...svg.exportComponents, ...svg.noExportComponents]
+      : svg.exportComponents
+
+    if (components.length > 0) {
+      const exportItem: ViewExportSVG = {
+        components,
+        totalExports,
+        totalNoExports,
+        totalSVG,
+        groupKind: { id: file.id, label: file.relativePath },
+        isShowNoExports: options.isShowNoExports,
+        files: [file.id],
+      }
+
+      options.cacheItem.transactionAdd(file, exportItem)
+
+      return { exportItem, fileItem: file }
+    }
+  } catch (error) {
+    console.error(vsc.l10n.t('Error processing file "{file}"', { file: uri.fsPath }), error)
+  }
+
+  return null
+}
 
 /**
  * Processes the selected files and extracts SVG exports from them.
@@ -21,87 +87,53 @@ import { getFileTimestamp, pathToSVGFile } from './misc'
  * @returns A promise that resolves when the processing is complete.
  */
 export async function processFiles(
-  items: Uri[],
-  operation: (result: ViewExportSVG[]) => void
+  items: vsc.Uri[],
+  operation: (result: ViewExportSVG[], files: SVGFile[]) => void
 ): Promise<void> {
   try {
-    const progressOptions: ProgressOptions = {
-      location: ProgressLocation.Notification,
-      title: l10n.t('Icon extraction in progress...'),
+    const progressOptions: vsc.ProgressOptions = {
+      location: vsc.ProgressLocation.Notification,
+      title: vsc.l10n.t('Icon extraction in progress...'),
       cancellable: false,
     }
 
-    const progress = await window.withProgress(progressOptions, async (progress) => {
+    const progress = await vsc.window.withProgress(progressOptions, async (progress) => {
       const configAssetsPath = new AssetsPathsController()
       const configShowNoExports = new ShowNotExportedIconsController()
-      const SVGFiles: SVGFile[] = []
-      const SVGExports: ViewExportSVG[] = []
+      const isShowNoExports = configShowNoExports.isShow()
+      const cacheItem = getCache().get('viewExports')
 
-      // Extract SVG exports from the selected files
-      await Promise.all(
-        items.map(async (f) => {
-          try {
-            const extname = path.extname(f.fsPath)
+      await cacheItem.transactionInit(vsc.workspace.workspaceFolders?.[0] ?? 'global')
 
-            if (!REGEX_FILE.test(extname)) {
-              return
-            }
-
-            const { DeclarationFileCache, ComponentsFileCache } = getCacheManager()
-            const file = await pathToSVGFile(getUriPath(f))
-            const lastModified = await getFileTimestamp(file.uri)
-            const cachedFile = ComponentsFileCache.get(file.uri, lastModified)
-
-            if (cachedFile && configShowNoExports.isShow() === cachedFile.isShowNoExports) {
-              SVGExports.push(cachedFile)
-              SVGFiles.push(file)
-
-              return
-            }
-
-            const { base, svg } = await extractSVGData(file, f)
-            const totalExports = svg.exportComponents.length
-            const totalNoExports = svg.noExportComponents.length
-            const totalSVG = totalExports + totalNoExports
-
-            const components = configShowNoExports.isShow()
-              ? [...svg.exportComponents, ...svg.noExportComponents]
-              : svg.exportComponents
-
-            if (components.length > 0) {
-              const result: ViewExportSVG = {
-                components,
-                totalExports,
-                totalNoExports,
-                totalSVG,
-                groupKind: { id: file.uri, label: file.relativePath },
-                isShowNoExports: configShowNoExports.isShow(),
-                files: [file],
-              }
-
-              ComponentsFileCache.set(file.uri, result, lastModified)
-              DeclarationFileCache.set(file.uri, base, lastModified)
-              SVGExports.push(result)
-              SVGFiles.push(file)
-            }
-          } catch (error) {
-            console.error(l10n.t('Error processing file "{file}"', { file: f.fsPath }), error)
-          }
-        })
+      // Process files in parallel
+      // Note: For extremely large datasets (thousands of files), consider using a concurrency limit library in the future.
+      const results = await Promise.all(
+        items.map((uri) => processFileItem(uri, { isShowNoExports, cacheItem }))
       )
 
-      if (SVGFiles.length > 0) {
-        // Update the assets path configuration
-        configAssetsPath.set(SVGFiles).catch((error) => {
-          console.error(l10n.t('Error setting assets path'), error)
-        })
+      const validResults = results.filter((item): item is ProcessResult => item !== null)
+
+      const exportItems = validResults.map((r) => r.exportItem)
+      const fileList = validResults.map((r) => r.fileItem)
+
+      if (!fileList.length) {
+        operation([], [])
+        return progress
       }
 
+      cacheItem.transactionCommit().catch((error) => {
+        console.error(vsc.l10n.t('Error committing cache transaction'), error)
+      })
+
+      configAssetsPath.set(fileList).catch((error) => {
+        console.error(vsc.l10n.t('Error setting assets path'), error)
+      })
+
       // Group the SVG exports by pattern
-      const groupedSVGExports = groupIconsByPattern(SVGExports)
+      const groupedSVGExports = groupIconsByPattern(exportItems)
 
       // Process the SVG exports
-      operation(groupedSVGExports)
+      operation(groupedSVGExports, fileList)
 
       return progress
     })
@@ -111,6 +143,6 @@ export async function processFiles(
       progress.report({ increment: 100 })
     }
   } catch (error) {
-    console.error(l10n.t('Error processing files'), error)
+    console.error(vsc.l10n.t('Error processing files'), error)
   }
 }

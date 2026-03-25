@@ -5,15 +5,16 @@ import {
   type ExtractComponent,
   type ExtractSVGExports,
   type HandlersDeclaration,
+  IconCollectionKind,
+  type LocationIdentifier,
   type SVGComponent,
   SVGDeclaration,
   type SVGFile,
-  type SVGLocation,
 } from '@jt-view-exports-svg/core'
 import { l10n, type Uri, workspace } from 'vscode'
 
 import { REST_PROPS_KEY } from '@/constants/misc'
-import { getCacheManager } from '@/controllers/cache'
+import { getCache } from '@/services/cache/main'
 
 import { parseFileContent, parserContent } from '../babelParser'
 import { getUnknownError, isEmpty } from '../misc'
@@ -38,7 +39,11 @@ export async function extractSVGComponent(
 ): Promise<Omit<SVGComponent, 'declaration' | 'isExported'> | undefined> {
   if (t.isFunctionDeclaration(declaration) || t.isVariableDeclarator(declaration)) {
     const name = (declaration.id as t.Identifier)?.name ?? ''
-    const location = { start: declaration.loc?.start, end: declaration.loc?.end, file }
+    const location: LocationIdentifier = {
+      id: file.id,
+      start: declaration.loc?.start,
+      end: declaration.loc?.end,
+    }
     const node = t.isFunctionDeclaration(declaration) ? declaration : declaration.init
 
     propertyManager.clean()
@@ -96,14 +101,20 @@ export async function extractSVGData(file: SVGFile, uriFile: Uri): Promise<Extra
       svgResult?: Omit<SVGComponent, 'declaration' | 'isExported'>
     ): Promise<void> => {
       if (!isEmpty(svgResult)) {
-        const { FavoritesIconCache } = getCacheManager()
+        const cache = getCache().get('icons')
         let isFavorite = false
 
-        if (!isEmpty(workspace.workspaceFolders)) {
-          isFavorite = FavoritesIconCache.hasIcon(workspace.workspaceFolders[0], {
-            location: svgResult.location,
+        const currentWorkspace = workspace.workspaceFolders?.[0]
+
+        if (currentWorkspace) {
+          const existsIcons = await cache.hasIcon(currentWorkspace, {
+            file,
             name: svgResult.name,
+            location: svgResult.location,
+            collection: IconCollectionKind.FAVORITE,
           })
+
+          isFavorite = existsIcons
         }
 
         const result: SVGComponent = {
@@ -214,7 +225,7 @@ export async function extractSVGData(file: SVGFile, uriFile: Uri): Promise<Extra
  */
 export async function extractIconComponent(
   component: string,
-  location: SVGLocation,
+  location: LocationIdentifier,
   params: SVGComponent['params']
 ): Promise<ExtractComponent> {
   let tag: ExtractComponent['tag'] = { name: '', isMotion: false, location, isValid: false }
@@ -230,7 +241,7 @@ export async function extractIconComponent(
         const { node } = path
 
         if (!isEmpty(node.openingElement)) {
-          tag = getTagName(node.openingElement, location.file)
+          tag = getTagName(node.openingElement, location)
           props = getProperties(node.openingElement.attributes, params)
 
           if (!tag.isValid) {

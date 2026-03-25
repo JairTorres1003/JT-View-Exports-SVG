@@ -1,10 +1,10 @@
-import { pathnames, type ViewExportSVG } from '@jt-view-exports-svg/core'
+import { pathnames, type SVGFile, type ViewExportSVG } from '@jt-view-exports-svg/core'
 import { type ExtensionContext, l10n, type Uri } from 'vscode'
 
 import { PanelController } from '@/controllers/views/PanelController'
+import { getIconsCollection } from '@/services/getIconsCollection'
 import { viewExportStore } from '@/store/ViewExportStore'
 import { processFiles } from '@/utilities/files/processFiles'
-import { getIconsFromCache } from '@/utilities/icons/getIconsFromCache'
 import { isEmpty } from '@/utilities/misc'
 
 /**
@@ -33,14 +33,14 @@ export const showMenu = async (
   PanelController.navigate(`${pathnames.main}?load-message=${messageEncoded}`)
 
   if (filesToProcess.length === 0) {
-    const userComponent = await getIconsFromCache()
-    viewExportStore.set(userComponent)
+    const { files, items } = await getIconsCollection()
+    viewExportStore.set(items, files)
     PanelController.navigate(pathnames.home)
     return
   }
 
-  const operation = (result: ViewExportSVG[]): void => {
-    viewExportStore.set(result)
+  const operation = (result: ViewExportSVG[], files: SVGFile[]): void => {
+    viewExportStore.set(result, files)
     PanelController.navigate(pathnames.dashboard)
   }
 

@@ -2,8 +2,9 @@ import { SVGPostMessage } from '@jt-view-exports-svg/core'
 import { type ExtensionContext, l10n, window } from 'vscode'
 
 import { PanelController } from '@/controllers/views/PanelController'
+import { getCache } from '@/services/cache/main'
 import { getConfigurationEditor } from '@/services/vscode/editorConfig'
-import { getExtensionTheme, reloadExtensionTheme } from '@/services/vscode/extensionTheme'
+import { CACHE_KEY, initializeExtensionTheme } from '@/services/vscode/extensionTheme'
 import { getCurrentThemeMode } from '@/services/vscode/themeMode'
 import { isEmpty } from '@/utilities/misc'
 
@@ -11,11 +12,15 @@ import { isEmpty } from '@/utilities/misc'
  * Reloads the extension theme and sends it to the current panel if it exists.
  */
 export const runReloadTheme = async (context: ExtensionContext): Promise<void> => {
-  await reloadExtensionTheme(context)
+  const cache = getCache().get('extensionTheme')
+
+  cache.delete(CACHE_KEY)
+
+  await initializeExtensionTheme(context)
 
   const config = getConfigurationEditor()
   const kind = getCurrentThemeMode()
-  const theme = getExtensionTheme()
+  const theme = await cache.get(CACHE_KEY)
 
   PanelController.send(SVGPostMessage.LoadEditorConfig, config)
   PanelController.send(SVGPostMessage.LoadEditorThemeMode, kind)

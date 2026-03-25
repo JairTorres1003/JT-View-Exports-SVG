@@ -1,6 +1,5 @@
 import {
   type FileTemporary,
-  type FileToOpen,
   type PostMessageEmitter,
   SVGPostMessage,
 } from '@jt-view-exports-svg/core'
@@ -33,7 +32,7 @@ export class UIHandler {
     }
   }
 
-  openFileInEditor(options: FileToOpen): void {
+  openFileInEditor(options: any): void {
     if (options.file.isTemporary) {
       const message = l10n.t('This file is temporary. Do you want to continue?')
       window.showWarningMessage(message, l10n.t('Yes'), l10n.t('No')).then((selection) => {

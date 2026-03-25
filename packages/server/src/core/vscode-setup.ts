@@ -6,7 +6,7 @@ import getFileServiceOverride, {
   registerFileSystemOverlay,
 } from '@codingame/monaco-vscode-files-service-override'
 import getModelServiceOverride from '@codingame/monaco-vscode-model-service-override'
-import { initializeCacheManager } from '@jt-view-exports-svg/extension-api/controllers/cache/CacheManagerController'
+import { initCache } from '@jt-view-exports-svg/extension-api/services/cache/main'
 import { initializeExtensionTheme } from '@jt-view-exports-svg/extension-api/utilities/vscode/extensions/theme'
 
 import { HostFileSystemProvider } from '../providers/HostFileSystemProvider'
@@ -39,17 +39,17 @@ async function bootstrapVSCode() {
     }
   )
 
-  initializeWorkspaceSettings(tempWorkspaceUri)
-
-  const context = createFileSystemContext(tempWorkspaceUri)
-
-  await initializeCacheManager(context)
-  await initializeExtensionTheme(context)
-
   // Enable host file system access
   const hostProvider = new HostFileSystemProvider()
   // biome-ignore lint/suspicious/noExplicitAny: The API requires a specific type that is not compatible with the current implementation, so we need to use 'any' here.
   registerFileSystemOverlay(1, hostProvider as any)
+
+  initializeWorkspaceSettings(tempWorkspaceUri)
+
+  const context = createFileSystemContext(tempWorkspaceUri)
+
+  initCache(context)
+  await initializeExtensionTheme(context)
 }
 
 export default bootstrapVSCode

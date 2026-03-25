@@ -1,4 +1,4 @@
-import type { SVGFile } from '@jt-view-exports-svg/core'
+import type { FileIdentifier } from '@jt-view-exports-svg/core'
 import { IconButton, type IconButtonProps, Tooltip, type TooltipProps } from '@mui/material'
 import type { FC } from 'react'
 import { useTranslation } from 'react-i18next'
@@ -8,7 +8,7 @@ import IconGoToManyFiles from '@/assets/icons/functionalities/go-to-many-files'
 import { openFileInPosition } from '@/core/utils/file'
 
 interface OpenFileButtonProps extends Omit<IconButtonProps, 'children'> {
-  file: SVGFile
+  fileId: FileIdentifier
   multiple?: boolean
   slotProps?: {
     tooltip?: TooltipProps
@@ -16,7 +16,7 @@ interface OpenFileButtonProps extends Omit<IconButtonProps, 'children'> {
 }
 
 export const OpenFileButton: FC<OpenFileButtonProps> = ({
-  file,
+  fileId,
   multiple = false,
   onClick = () => null,
   slotProps = {},
@@ -32,7 +32,7 @@ export const OpenFileButton: FC<OpenFileButtonProps> = ({
         aria-label={title}
         {...props}
         onClick={(e) => {
-          if (!multiple) openFileInPosition(file)
+          if (!multiple) openFileInPosition({ id: fileId })
           onClick?.(e)
         }}
       >

@@ -1,15 +1,23 @@
-import { type FileToOpen, SVGReceiveMessage } from '@jt-view-exports-svg/core'
+import { type LocationIdentifier, SVGReceiveMessage } from '@jt-view-exports-svg/core'
 import { l10n, window } from 'vscode'
 
+import { viewExportStore } from '@/store/ViewExportStore'
 import { openFile } from '@/utilities/files/misc'
+
 import { BaseHandler } from '../BaseHandler'
 
 export class OpenFileInEditorHandler extends BaseHandler {
   readonly type = SVGReceiveMessage.OpenFileInEditor
 
-  handle(params: FileToOpen) {
-    if (!params.file.isTemporary) {
-      openFile(params)
+  handle(location: LocationIdentifier) {
+    const fileList = viewExportStore.getFiles()
+
+    const file = fileList[location.id]
+
+    if (!file) return
+
+    if (!file.isTemporary) {
+      openFile(file, location.start)
       return
     }
 
@@ -21,7 +29,7 @@ export class OpenFileInEditorHandler extends BaseHandler {
       )
       .then((selection) => {
         if (selection === l10n.t('Yes')) {
-          openFile(params)
+          openFile(file, location.start)
         }
       })
   }

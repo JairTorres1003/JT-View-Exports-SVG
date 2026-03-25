@@ -26,7 +26,7 @@ export async function apiHandler(req: Request, res: Response) {
 
     const data = req.method === 'POST' ? req.body?.data : undefined
 
-    const handled = router.route({ type, data })
+    const handled = await router.route({ type, data })
 
     if (!handled) {
       res.status(404).json({ error: `No handler found for message type: ${type}` })

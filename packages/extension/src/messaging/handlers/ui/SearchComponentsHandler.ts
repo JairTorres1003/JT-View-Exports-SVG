@@ -50,7 +50,6 @@ export class SearchComponentsHandler extends BaseHandler {
       this.messenger.postMessage(SVGPostMessage.FilterComponents, result)
     } catch (error) {
       this.messenger.postMessage(SVGPostMessage.OnErrorComponents, {
-        location: {},
         message: getUnknownError(error),
       })
     }

@@ -17,7 +17,7 @@ export class MessageRouter {
    *
    * @param message - The message to be routed, containing a type identifier and optional data.
    */
-  public route(message: ReceiveMessage): boolean {
+  public async route(message: ReceiveMessage): Promise<boolean> {
     const handler = this.handlers.get(message.type)
 
     if (!handler) {
@@ -27,7 +27,7 @@ export class MessageRouter {
 
     const data = Object.hasOwn(message, 'data') ? (message as { data: unknown }).data : undefined
 
-    handler.handle(data as Parameters<BaseHandler['handle']>[0])
+    await handler.handle(data as Parameters<BaseHandler['handle']>[0])
 
     return true
   }

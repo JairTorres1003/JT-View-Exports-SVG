@@ -1,10 +1,12 @@
 import type { SVGIcon, ViewExportSVG } from '@jt-view-exports-svg/core'
-import { l10n } from 'vscode'
-
-import { getFileTimestamp } from '@/utilities/files/misc'
 
 import { FileModifiedCacheController } from './FileModifiedCacheController'
 
+/**
+ * @deprecated This class is deprecated and will be removed in future versions.
+ * Use CacheManager.ts instead, which provides a more flexible and scalable caching solution.
+ * This class specifically manages a cache of SVG components, allowing for toggling of favorite status.
+ */
 export class ComponentsCacheController extends FileModifiedCacheController<ViewExportSVG> {
   /**
    * Toggles the `isFavorite` status of a given SVG icon within the cache.
@@ -16,27 +18,17 @@ export class ComponentsCacheController extends FileModifiedCacheController<ViewE
    * @param icon - The SVG icon whose favorite status should be toggled.
    */
   toggleFavoriteIcon(icon: SVGIcon) {
-    const uri = icon.location?.file?.uri
+    const uri = icon.location?.id
 
-    if (!uri) return
+    const current = this.get(uri, 0)
 
-    getFileTimestamp(uri)
-      .then((lastModified) => {
-        const current = this.get(uri, lastModified)
+    if (!current) return
 
-        if (!current) return
+    const component = current.components.find((c) => c.name === icon.name && c.location.id === uri)
 
-        const component = current.components.find(
-          (c) => c.name === icon.name && c.location.file.uri === uri
-        )
-
-        if (component) {
-          component.isFavorite = !component.isFavorite
-          this.set(uri, current, lastModified)
-        }
-      })
-      .catch(() => {
-        console.error(l10n.t('Error toggling favorite status for icon {name}', { name: icon.name }))
-      })
+    if (component) {
+      component.isFavorite = !component.isFavorite
+      this.set(uri, current, 0)
+    }
   }
 }

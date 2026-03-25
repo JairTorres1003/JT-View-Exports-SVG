@@ -1,9 +1,14 @@
-import type { CacheIconKind, SVGIcon, SVGIconCache } from '@jt-view-exports-svg/core'
+import type { IconCollectionKind as CacheIconKind, SVGIcon } from '@jt-view-exports-svg/core'
 import { l10n, type Uri, type WorkspaceFolder } from 'vscode'
 
 import { FileModifiedCacheController } from './FileModifiedCacheController'
 
-export class IconCacheController extends FileModifiedCacheController<SVGIconCache[]> {
+/**
+ * @deprecated This class is deprecated and will be removed in future versions.
+ * Use CacheManager.ts instead, which provides a more flexible and scalable caching solution.
+ * This class specifically manages a cache of SVG icons, allowing for adding, removing, and checking icons in the cache.
+ */
+export class IconCacheController extends FileModifiedCacheController<SVGIcon[]> {
   private readonly kind: CacheIconKind
   /**
    * The maximum number of saved icons.
@@ -40,7 +45,7 @@ export class IconCacheController extends FileModifiedCacheController<SVGIconCach
    * @param value - An array of SVG icons to be added to the cache.
    * @returns The new list of icons after the specified icons have been added.
    */
-  add(folder: WorkspaceFolder, value: SVGIcon[]): SVGIconCache[] {
+  add(folder: WorkspaceFolder, value: SVGIcon[]): SVGIcon[] {
     const currentKey = this.getId(folder)
 
     const current = super.get(currentKey, 0) ?? []
@@ -48,14 +53,14 @@ export class IconCacheController extends FileModifiedCacheController<SVGIconCach
 
     value.forEach((icon) => {
       const existing = current.findIndex(
-        (item) => item.name === icon.name && item.location.file.uri === icon.location.file.uri
+        (item) => item.name === icon.name && item.location.id === icon.location.id
       )
 
       if (existing !== -1) {
         newValue.splice(existing, 1)
       }
 
-      newValue.unshift({ ...icon, dateAdd: Date.now() })
+      newValue.unshift({ ...icon })
     })
 
     const limitConfig =
@@ -75,16 +80,14 @@ export class IconCacheController extends FileModifiedCacheController<SVGIconCach
    * @param icon - The icon to be removed from the cache.
    * @returns The new list of icons after the specified icon has been removed.
    */
-  remove(folder: WorkspaceFolder, icon: SVGIcon | SVGIcon[]): SVGIconCache[] {
+  remove(folder: WorkspaceFolder, icon: SVGIcon | SVGIcon[]): SVGIcon[] {
     const currentKey = this.getId(folder)
     const current = super.get(currentKey, 0) ?? []
 
     const iconsToRemove = Array.isArray(icon) ? icon : [icon]
 
     const newValue = current.filter(({ name, location }) => {
-      return !iconsToRemove.some(
-        (i) => i.name === name && i.location.file.uri === location.file.uri
-      )
+      return !iconsToRemove.some((i) => i.name === name && i.location.id === location.id)
     })
 
     super.set(currentKey, newValue, 0)
@@ -117,9 +120,7 @@ export class IconCacheController extends FileModifiedCacheController<SVGIconCach
     const currentKey = this.getId(folder)
     const current = super.get(currentKey, 0) ?? []
 
-    return current.some(
-      (item) => item.name === icon.name && item.location.file.uri === icon.location.file.uri
-    )
+    return current.some((item) => item.name === icon.name && item.location.id === icon.location.id)
   }
 
   /**
@@ -128,7 +129,7 @@ export class IconCacheController extends FileModifiedCacheController<SVGIconCach
    * @param folder - The workspace folder for which to retrieve the cached value.
    * @returns The cached value if found, or `undefined` if not found.
    */
-  getIcons(folder: WorkspaceFolder): SVGIconCache[] | undefined {
+  getIcons(folder: WorkspaceFolder): SVGIcon[] | undefined {
     return super.get(this.getId(folder), 0)
   }
 
@@ -174,7 +175,7 @@ export class IconCacheController extends FileModifiedCacheController<SVGIconCach
   /**
    * @deprecated Use `getIcons` instead.
    */
-  get(): SVGIconCache[] | undefined {
+  get(): SVGIcon[] | undefined {
     throw new Error(l10n.t('Method not implemented'))
   }
 

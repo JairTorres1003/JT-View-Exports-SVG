@@ -48,6 +48,7 @@ export class WebviewMessenger {
     if (message?.type === SVGReceiveMessage.Ready) {
       this._isReady = true
       this.flushQueue()
+      return
     }
 
     if (!this.router) {

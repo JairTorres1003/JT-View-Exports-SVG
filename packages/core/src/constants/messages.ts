@@ -9,6 +9,7 @@ export const SVGPostMessage = {
   // UI-related messages
   LoadComponents: 'send/load-components',
   LoadUserComponents: 'send/load-user-components',
+  LoadFilesComponents: 'send/load-files-components',
   FilterComponents: 'send/filter-components',
   OnErrorComponents: 'send/error-components',
   OnReloadComponent: 'send/reload-component',
@@ -58,9 +59,15 @@ export const SVGReceiveMessage = {
   // UI-related messages
   RequestComponents: 'ui/request-components',
   RequestUserComponents: 'ui/request-user-components',
+  RequestFilesComponents: 'ui/request-files-components',
   SearchComponents: 'ui/search-components',
   ReloadComponent: 'ui/reload-component',
   IsExpandComponents: 'ui/is-expand-components',
+
+  // Icons-related messages
+  AddIconToCollection: 'icons/add-to-collection',
+  RemoveIconFromCollection: 'icons/remove-from-collection',
+  ClearIconCollection: 'icons/clear-collection',
 
   // Developer tools related messages
   IsOpenDevTools: 'devtools/is-open',
@@ -90,14 +97,6 @@ export const SVGReceiveMessage = {
 
   RequestFileOpen: 'file/request-open',
   CreateTempFiles: 'file/create-temp',
-
-  // Icons-related messages
-  AddRecentIcon: 'icons/recent/add',
-  RemoveRecentIcon: 'icons/recent/remove',
-  ClearRecentIcons: 'icons/recent/clear',
-  AddFavoriteIcon: 'icons/favorite/add',
-  RemoveFavoriteIcon: 'icons/favorite/remove',
-  ClearFavoriteIcons: 'icons/favorite/clear',
 } as const
 
 /**

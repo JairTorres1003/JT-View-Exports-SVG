@@ -1,4 +1,8 @@
-import { type SVGFile, SVGReceiveMessage, type ViewExportSVG } from '@jt-view-exports-svg/core'
+import {
+  type FileIdentifier,
+  SVGReceiveMessage,
+  type ViewExportSVG,
+} from '@jt-view-exports-svg/core'
 import { IconButton, Tooltip } from '@mui/material'
 import type { FC } from 'react'
 import { useTranslation } from 'react-i18next'
@@ -9,7 +13,7 @@ import { vscode } from '@/services/vscode'
 import { addPendingRefresh } from '@/store/features/SVGSlice'
 
 interface RefreshActionProps {
-  files: SVGFile[]
+  files: FileIdentifier[]
   groupKind: ViewExportSVG['groupKind']
 }
 

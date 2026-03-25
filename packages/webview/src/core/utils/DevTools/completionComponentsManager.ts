@@ -1,4 +1,4 @@
-import type { ViewExportSVG } from '@jt-view-exports-svg/core'
+import type { FileIdentifier, SVGFile, ViewExportSVG } from '@jt-view-exports-svg/core'
 import * as monaco from 'monaco-editor'
 
 import { createInsertText, replaceSnippetValues } from '@/core/utils/vs/Editor'
@@ -12,7 +12,8 @@ import i18next from '@/i18n'
  *                     to be suggested in the editor.
  */
 const completionComponentsManager = (
-  components: ViewExportSVG[]
+  components: ViewExportSVG[],
+  files: Record<FileIdentifier, SVGFile>
 ): monaco.languages.CompletionItemProvider => {
   const { t } = i18next
   const prefixT = 'DevTools.editor.suggestions.components'
@@ -44,16 +45,17 @@ const completionComponentsManager = (
 
       components.forEach((group) => {
         group.components.forEach((c) => {
-          const key = `${c.name}-${c.location.file?.uri}`
+          const key = `${c.name}-${c.location.id}`
           if (suggestedAdded.has(key)) return
           suggestedAdded.add(key)
 
           const property = Object.keys(c.types)[0]
 
+          const file = files[c.location.id]
           const translationKeys = {
             name: c.name,
-            fileName: c.location.file.basename,
-            filePath: c.location.file.absolutePath,
+            fileName: file.basename,
+            filePath: file.absolutePath,
             link: monaco.Uri.parse(
               `command:${__APP_NAME}-default.action.clicLinkDocumentation?${encodeURIComponent(
                 JSON.stringify({ location: c.location })
@@ -84,7 +86,7 @@ const completionComponentsManager = (
               isTrusted: true,
             },
             detail: t(
-              `${prefixT}.details.${c.location.file.isTemporary ? 'temporary-' : ''}${c.isAnimated ? 'animated' : 'static'}`
+              `${prefixT}.details.${file.isTemporary ? 'temporary-' : ''}${c.isAnimated ? 'animated' : 'static'}`
             ),
             command: {
               id: `${__APP_NAME}-default.action.triggerSuggestComponents`,

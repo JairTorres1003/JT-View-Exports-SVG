@@ -128,7 +128,7 @@ export function getChildAttributes(
           message: l10n.t('Error processing JSX expression container: {error}', {
             error: typeof value,
           }),
-          location: { start: child.loc?.start, end: child.loc?.end },
+          location: { start: child.loc?.start, end: child.loc?.end, id: file.id },
         }
       }
     }

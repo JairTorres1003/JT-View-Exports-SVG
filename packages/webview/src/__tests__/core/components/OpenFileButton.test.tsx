@@ -8,6 +8,7 @@ import { openFileInPosition } from '@/core/utils/file'
 
 describe('OpenFileButton', () => {
   const mockFile: SVGFile = {
+    id: 'file-id',
     uri: 'file:///path/to/file.tsx',
     absolutePath: '/path/to/file.tsx',
     relativePath: 'file.tsx',
@@ -16,10 +17,11 @@ describe('OpenFileButton', () => {
     extension: 'tsx',
     isTemporary: false,
     language: 'typescriptreact',
+    lastModified: Date.now(),
   }
 
   test('should render correctly for a single file', async () => {
-    render(<OpenFileButton file={mockFile} data-testid='open-file-button' />)
+    render(<OpenFileButton fileId={mockFile.id} data-testid='open-file-button' />)
 
     const button = screen.getByTestId('open-file-button')
     expect(button).toBeDefined()
@@ -34,7 +36,7 @@ describe('OpenFileButton', () => {
   })
 
   test('should render correctly for multiple files', async () => {
-    render(<OpenFileButton file={mockFile} multiple data-testid='open-many-files-button' />)
+    render(<OpenFileButton fileId={mockFile.id} multiple data-testid='open-many-files-button' />)
 
     const button = screen.getByTestId('open-many-files-button')
     expect(button).toBeDefined()
@@ -50,7 +52,9 @@ describe('OpenFileButton', () => {
 
   test('should call openFileInPosition and onClick when single file button is clicked', async () => {
     const handleClick = vi.fn()
-    render(<OpenFileButton file={mockFile} onClick={handleClick} data-testid='open-file-button' />)
+    render(
+      <OpenFileButton fileId={mockFile.id} onClick={handleClick} data-testid='open-file-button' />
+    )
 
     const button = screen.getByTestId('open-file-button')
     await userEvent.click(button)
@@ -67,7 +71,7 @@ describe('OpenFileButton', () => {
     }
     render(
       <OpenFileButton
-        file={mockFile}
+        fileId={mockFile.id}
         multiple
         onClick={handleClick}
         data-testid='open-many-files-button'
@@ -86,7 +90,7 @@ describe('OpenFileButton', () => {
   test('should pass extra props to IconButton', () => {
     render(
       <OpenFileButton
-        file={mockFile}
+        fileId={mockFile.id}
         data-testid='open-file-button'
         className='extra-class'
         disabled

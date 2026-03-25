@@ -1,8 +1,9 @@
-import type { SVGErrors, ViewExportSVG } from '@jt-view-exports-svg/core'
+import type { FileIdentifier, SVGErrors, SVGFile, ViewExportSVG } from '@jt-view-exports-svg/core'
 import type { CaseReducer, PayloadAction } from '@reduxjs/toolkit'
 
 export interface SVGState {
   components: ViewExportSVG[]
+  files: Record<FileIdentifier, SVGFile>
   componentsPendingRefresh: string[]
   errors?: SVGErrors
   search: string
@@ -13,6 +14,10 @@ export interface SVGReducers {
    * Set the components to the state.
    */
   setComponents: CaseReducer<SVGState, PayloadAction<ViewExportSVG[]>>
+  /**
+   * Set the files to the state.
+   */
+  setFiles: CaseReducer<SVGState, PayloadAction<Record<FileIdentifier, SVGFile>>>
   /**
    * Set the search string to the state.
    */

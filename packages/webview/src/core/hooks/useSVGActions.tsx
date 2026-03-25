@@ -1,6 +1,5 @@
 import type { SVGComponent } from '@jt-view-exports-svg/core'
 import { useTranslation } from 'react-i18next'
-
 import { openFileInPosition } from '../utils/file'
 import {
   createCanvasFromImage,
@@ -110,7 +109,7 @@ export const useSVGActions = ({ svgRef }: UseSVGActionsProps): UseSVGActionsRetu
    * Opens the SVG component in the editor at its start position.
    */
   const openInEditor = (component: SVGComponent) => {
-    openFileInPosition(component.location.file, component.location.start)
+    openFileInPosition(component.location)
   }
 
   return [

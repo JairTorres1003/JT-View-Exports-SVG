@@ -52,7 +52,7 @@ export class Editor {
     this._userConfiguration = config.userConfiguration
     this._configurations = {
       ...config,
-      language: config.language ?? 'javascript',
+      language: config.language ?? 'typescriptreact',
     }
   }
 

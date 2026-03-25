@@ -1,8 +1,5 @@
-import { type PostMessageEmitter, type SVGIcon, SVGPostMessage } from '@jt-view-exports-svg/core'
-import { l10n, type WorkspaceFolder, window, workspace } from 'vscode'
-
-import { getIconsFromCache } from '@/utilities/icons/getIconsFromCache'
-import { getUnknownError } from '@/utilities/misc'
+import type { PostMessageEmitter, SVGIcon } from '@jt-view-exports-svg/core'
+import { type WorkspaceFolder, workspace } from 'vscode'
 
 import { getCacheManager } from '../cache'
 
@@ -40,27 +37,17 @@ export class CacheHandler {
     this.clearIconsFromCache(false)
   }
 
-  getHomeIcons(): void {
-    getIconsFromCache()
-      .then((icons) => {
-        this.postMessage(SVGPostMessage.LoadUserComponents, icons)
-      })
-      .catch((e) => {
-        window.showErrorMessage(
-          l10n.t('Error retrieving icons: {error}', { error: getUnknownError(e) })
-        )
-      })
-  }
+  getHomeIcons(): void {}
 
   private addIconToCache(icon: SVGIcon, isRecent: boolean): void {
-    if (icon.location.file.isTemporary) {
-      window.showWarningMessage(
-        isRecent
-          ? l10n.t('Icons in the temp directory cannot be added to recent icons.')
-          : l10n.t('Icons in the temp directory cannot be added to favorites.')
-      )
-      return
-    }
+    // if (icon.location.file.isTemporary) {
+    //   window.showWarningMessage(
+    //     isRecent
+    //       ? l10n.t('Icons in the temp directory cannot be added to recent icons.')
+    //       : l10n.t('Icons in the temp directory cannot be added to favorites.')
+    //   )
+    //   return
+    // }
 
     const { RecentIconCache, FavoritesIconCache, ComponentsFileCache } = getCacheManager()
 
@@ -77,7 +64,7 @@ export class CacheHandler {
   }
 
   private removeIconFromCache(icon: SVGIcon, isRecent: boolean): void {
-    if (icon.location.file.isTemporary) return
+    // if (icon.location.file.isTemporary) return
 
     const { RecentIconCache, FavoritesIconCache, ComponentsFileCache } = getCacheManager()
 

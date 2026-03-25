@@ -129,7 +129,7 @@ export class ViewExportsSVGController extends ListerWebviewController {
           viewExportSVG
         )
       } else {
-        const error: SVGErrors = { location: {}, message: l10n.t('No SVG components found...') }
+        const error: SVGErrors = { message: l10n.t('No SVG components found...') }
         ViewExportsSVGController.currentPanel._postMessage(SVGPostMessage.OnErrorComponents, error)
       }
     }
