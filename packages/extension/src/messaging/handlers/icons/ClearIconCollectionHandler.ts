@@ -15,6 +15,6 @@ export class ClearIconCollectionHandler extends BaseHandler {
 
     const cache = getCache().get('icons')
 
-    cache.clearCollection(workspace, collection)
+    cache.delete([workspace, collection])
   }
 }

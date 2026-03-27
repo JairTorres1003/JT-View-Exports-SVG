@@ -5,8 +5,8 @@ import type {
   SVGIcon,
   SVGIconCollection,
 } from '@jt-view-exports-svg/core'
-import { exists } from 'fs'
 import type * as vsc from 'vscode'
+
 import { BaseCache } from './BaseCache'
 
 export interface IconCollectionCacheEntry {
@@ -19,7 +19,10 @@ export interface IconEntry extends SVGIconCollection {
   file: SVGFile
 }
 
-export class IconCollectionCache extends BaseCache<IconCollectionCacheEntry> {
+export class IconCollectionCache extends BaseCache<
+  IconCollectionCacheEntry,
+  [vsc.WorkspaceFolder, IconCollectionKind]
+> {
   constructor(
     ctx: vsc.ExtensionContext,
     private readonly maxEntries: number = 0
@@ -27,25 +30,8 @@ export class IconCollectionCache extends BaseCache<IconCollectionCacheEntry> {
     super(ctx, 'icon-collection')
   }
 
-  /**
-   * Creates a unique identifier for a cache entry based on the workspace folder and icon collection kind.
-   *
-   * @param workspace - The workspace folder used to scope the cache entry.
-   * @param kind - The kind of icon collection (e.g., 'project', 'global') used to differentiate cache entries.
-   * @returns A string identifier that uniquely represents the combination of workspace and icon collection kind.
-   */
-  private createIdentifier(workspace: vsc.WorkspaceFolder, kind: IconCollectionKind): string {
-    return `${workspace.uri}::${kind}`
-  }
-
-  /**
-   * Retrieves a cache entry for a given identifier, or initializes a new entry if it does not exist.
-   */
-  private async getEntry(
-    identifier: string,
-    kind: IconCollectionKind
-  ): Promise<IconCollectionCacheEntry> {
-    return (await this.get(identifier)) ?? { name: kind, files: {}, data: [] }
+  protected getIdentifier([workspace, kind]: [vsc.WorkspaceFolder, IconCollectionKind]): string {
+    return `${workspace.uri.toString()}::${kind}`
   }
 
   /**
@@ -100,13 +86,15 @@ export class IconCollectionCache extends BaseCache<IconCollectionCacheEntry> {
    * @param icon - The SVG icon collection item to add to the cache.
    */
   public async add(workspace: vsc.WorkspaceFolder, icon: IconEntry): Promise<void> {
-    const id = this.createIdentifier(workspace, icon.collection)
-    const entry = await this.getEntry(id, icon.collection)
+    const entry = (await this.get([workspace, icon.collection])) ?? {
+      data: [],
+      files: {},
+      name: icon.collection,
+    }
 
     this.removeFromEntry(entry, icon)
 
-    entry.name = icon.collection
-    entry.data.unshift(icon)
+    entry.data.unshift({ name: icon.name, location: icon.location })
     entry.files[icon.location.id] = {
       file: icon.file,
       count: (entry.files[icon.location.id]?.count ?? 0) + 1,
@@ -114,7 +102,7 @@ export class IconCollectionCache extends BaseCache<IconCollectionCacheEntry> {
 
     this.enforceLimit(entry)
 
-    await this.set(id, entry)
+    this.set([workspace, icon.collection], entry)
   }
 
   /**
@@ -124,15 +112,25 @@ export class IconCollectionCache extends BaseCache<IconCollectionCacheEntry> {
    * @param icon - The SVG icon collection item to remove from the cache.
    */
   public async remove(workspace: vsc.WorkspaceFolder, icon: IconEntry): Promise<void> {
-    const id = this.createIdentifier(workspace, icon.collection)
-    const entry = await this.getEntry(id, icon.collection)
+    const entry = await this.get([workspace, icon.collection])
+
+    if (!entry) return
 
     this.removeFromEntry(entry, icon)
 
-    await this.set(id, entry)
+    this.set([workspace, icon.collection], entry)
   }
 
-  public async masiveRemove(workspace: vsc.WorkspaceFolder, icons: IconEntry[]): Promise<void> {
+  /**
+   * Removes multiple icons from the cache in bulk, organized by their collections.
+   *
+   * @param workspace - The workspace folder context for the cache operation
+   * @param icons - Array of icon entries to remove from the cache
+   */
+  public async removeIconsInBulk(
+    workspace: vsc.WorkspaceFolder,
+    icons: IconEntry[]
+  ): Promise<void> {
     if (icons.length === 0) return
 
     const groupedByCollection = icons.reduce(
@@ -144,53 +142,33 @@ export class IconCollectionCache extends BaseCache<IconCollectionCacheEntry> {
       {} as Record<IconCollectionKind, IconEntry[]>
     )
 
-    for (const [collection, icons] of Object.entries(groupedByCollection)) {
-      const id = this.createIdentifier(workspace, collection as IconCollectionKind)
-      const entry = await this.getEntry(id, collection as IconCollectionKind)
+    const entries = Object.entries(groupedByCollection) as [IconCollectionKind, IconEntry[]][]
 
-      for (const icon of icons) {
+    for (const [collection, collectionIcons] of entries) {
+      const entry = await this.get([workspace, collection])
+      if (!entry) continue
+
+      for (const icon of collectionIcons) {
         this.removeFromEntry(entry, icon)
       }
 
-      await this.set(id, entry)
+      this.set([workspace, collection], entry)
     }
   }
 
   /**
-   * Clears all icon collection records from the cache for a specific workspace and collection kind.
+   * Checks if a specific icon collection entry exists in the cache for a given workspace.
    *
-   * @param workspace - The workspace folder used to scope the cache entry.
-   * @param kind - The kind of icon collection (e.g., 'project', 'global') to clear from the cache.
+   * @param workspace - The workspace folder context for the cache lookup
+   * @param icon - The icon collection item to check for existence, identified by name and location id
    */
-  public async clearCollection(
-    workspace: vsc.WorkspaceFolder,
-    kind: IconCollectionKind
-  ): Promise<void> {
-    const id = this.createIdentifier(workspace, kind)
-    await this.delete(id)
-  }
-
-  /**
-   * Retrieves the icon collection cache entry for a specific workspace and collection kind.
-   *
-   * @param workspace - The workspace folder used to scope the cache entry.
-   * @param kind - The kind of icon collection (e.g., 'project', 'global') to retrieve from the cache.
-   */
-  public async getCollection(
-    workspace: vsc.WorkspaceFolder,
-    kind: IconCollectionKind
-  ): Promise<IconCollectionCacheEntry> {
-    const id = this.createIdentifier(workspace, kind)
-    return await this.getEntry(id, kind)
-  }
-
   public async hasIcon(workspace: vsc.WorkspaceFolder, icon: IconEntry): Promise<boolean> {
-    const id = this.createIdentifier(workspace, icon.collection)
-    const entry = await this.getEntry(id, icon.collection)
+    const entry = await this.get([workspace, icon.collection])
 
-    const index = entry.data.findIndex(
-      (item) => item.name === icon.name && item.location.id === icon.location.id
-    )
+    const index =
+      entry?.data.findIndex(
+        (item) => item.name === icon.name && item.location.id === icon.location.id
+      ) ?? -1
 
     return index !== -1
   }

@@ -8,114 +8,76 @@ interface ViewExportSVGCacheEntry {
   data: Record<FileIdentifier, ViewExportSVG>
 }
 
-export class ViewExportSVGCache extends BaseCache<ViewExportSVGCacheEntry> {
-  private transactionInProgress = false
-  private transactionWorkspace: vsc.WorkspaceFolder | 'global' = 'global'
-  private transactionData: ViewExportSVGCacheEntry = { files: {}, data: {} }
+interface DataEntry {
+  file: SVGFile
+  data: ViewExportSVG
+}
 
+export class ViewExportSVGCache extends BaseCache<
+  ViewExportSVGCacheEntry,
+  vsc.WorkspaceFolder | 'global'
+> {
   constructor(ctx: vsc.ExtensionContext) {
-    super(ctx, 'viewExportSVG')
+    super(ctx, 'view_export_svg')
+  }
+
+  protected getIdentifier(id: vsc.WorkspaceFolder | 'global'): string {
+    return typeof id === 'string' ? id : id.uri.toString()
   }
 
   /**
-   * Retrieves a cache entry for the specified identifier.
-   * If no entry exists, returns a new empty cache entry with default structure.
+   * Retrieves cached data for a specific SVG file if it exists and is up-to-date.
    *
-   * @param identifier - The unique identifier for the cache entry
+   * @param workspace - The workspace folder or 'global' to determine the cache scope
+   * @param file - The SVG file for which to retrieve cached data
+   * @returns A promise that resolves to the data entry if found and valid, or undefined if not found or outdated
    */
-  private async getEntry(identifier: string): Promise<ViewExportSVGCacheEntry> {
-    return (await this.get(identifier)) ?? { files: {}, data: {} }
+  public async getByFile(
+    workspace: vsc.WorkspaceFolder | 'global',
+    file: SVGFile
+  ): Promise<DataEntry | undefined> {
+    const entry = await this.get(workspace)
+    const currentFile = entry?.files[file.id]
+
+    if (!currentFile || file.lastModified > currentFile.lastModified) return undefined
+
+    return { file: currentFile, data: entry.data[file.id] }
   }
 
   /**
-   * Gets the transaction identifier from the workspace.
-   */
-  private getIdentifierWorkspace(workspace: vsc.WorkspaceFolder | 'global'): string {
-    return typeof workspace === 'string' ? workspace : workspace.uri.toString()
-  }
-
-  /**
-   * Initiates a transaction for cache operations.
+   * Adds or updates a file entry in the cache for a given workspace.
    *
-   * @param workspace - The workspace folder context for the transaction, or 'global' for global scope.
+   * @param workspace - The workspace folder or 'global' to determine the cache scope
+   * @param data - The data entry containing file information and associated data
    */
-  public async transactionInit(workspace: vsc.WorkspaceFolder | 'global') {
-    this.transactionInProgress = true
-    this.transactionWorkspace = workspace
+  public async add(workspace: vsc.WorkspaceFolder | 'global', data: DataEntry) {
+    const entry = (await this.get(workspace)) ?? { files: {}, data: {} }
 
-    const identifier = this.getIdentifierWorkspace(this.transactionWorkspace)
+    entry.files[data.file.id] = data.file
+    entry.data[data.file.id] = data.data
 
-    this.transactionData = await this.getEntry(identifier)
+    this.set(workspace, entry)
   }
 
   /**
-   * Adds a file and its associated export data to the pending operations transaction.
+   * Removes file entries from the cache for a given workspace based on their IDs.
    *
-   * @param file - The SVG file to be added to the transaction.
-   * @param exportData - The view export SVG data associated with the file.
-   */
-  public transactionAdd(file: SVGFile, exportData: ViewExportSVG) {
-    this.transactionData.files[file.id] = file
-    this.transactionData.data[file.id] = exportData
-  }
-
-  /**
-   * Retrieves the pending export data for a given file from the transaction.
-   *
-   * @param file - The SVG file for which to retrieve the export data.
-   * @returns The associated ViewExportSVG data if it exists and is up-to-date, otherwise `undefined`.
-   */
-  public transactionGetItem(file: SVGFile) {
-    const currentFile = this.transactionData.files[file.id]
-
-    if (!currentFile || file.lastModified > currentFile.lastModified) {
-      return
-    }
-
-    return this.transactionData.data[file.id]
-  }
-
-  /**
-   * Commits the pending operations transaction to the cache.
-   */
-  public async transactionCommit() {
-    if (!this.transactionInProgress) return
-
-    const identifier = this.getIdentifierWorkspace(this.transactionWorkspace)
-
-    await this.set(identifier, this.transactionData)
-
-    this.transactionInProgress = false
-    this.transactionWorkspace = 'global'
-    this.transactionData = { files: {}, data: {} }
-  }
-
-  /**
-   * Removes cache entries for the specified file IDs from a workspace or global storage.
-   * @param workspace - The workspace folder context or 'global' for global storage
-   * @param fileIds - Array of file identifiers to remove from the cache
+   * @param workspace - The workspace folder or 'global' to determine the cache scope
+   * @param fileIds - An array of file IDs to remove from the cache
    */
   public async removeByFileIds(
     workspace: vsc.WorkspaceFolder | 'global',
     fileIds: FileIdentifier[]
   ) {
-    const identifier = this.getIdentifierWorkspace(workspace)
+    const currentEntry = await this.get(workspace)
 
-    const currentEntry = await this.getEntry(identifier)
+    if (!currentEntry) return
 
     fileIds.forEach((id) => {
       delete currentEntry.files[id]
       delete currentEntry.data[id]
     })
 
-    await this.set(identifier, currentEntry)
-  }
-
-  public async getFromWorkspace(
-    workspace: vsc.WorkspaceFolder | 'global'
-  ): Promise<ViewExportSVGCacheEntry> {
-    const identifier = this.getIdentifierWorkspace(workspace)
-
-    return await this.getEntry(identifier)
+    this.set(workspace, currentEntry)
   }
 }

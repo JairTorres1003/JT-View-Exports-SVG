@@ -79,7 +79,7 @@ export class ReloadComponentHandler extends BaseHandler {
    * @returns A promise that resolves to an array of URIs corresponding to the given file identifiers.
    */
   private async getFilesUris(files: FileIdentifier[]): Promise<vsc.Uri[]> {
-    const cachedFiles = await this.viewExportCache?.getFromWorkspace(this.identifierWorkspace)
+    const cachedFiles = await this.viewExportCache?.get(this.identifierWorkspace)
 
     if (!cachedFiles) return []
 

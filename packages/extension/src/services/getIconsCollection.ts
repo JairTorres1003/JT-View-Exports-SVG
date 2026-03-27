@@ -50,7 +50,7 @@ function proccessNotFoundIcons(
   const iconsCache = getCache().get('icons')
   const viewExportCache = getCache().get('viewExports')
 
-  iconsCache.masiveRemove(workspace, notFoundIcons)
+  iconsCache.removeIconsInBulk(workspace, notFoundIcons)
   viewExportCache.removeByFileIds(workspace, fileIds)
 }
 
@@ -73,7 +73,7 @@ const getIconsComponents = async (
   const notFoundIcons: IconEntry[] = []
   const notFoundFileIds: FileIdentifier[] = []
 
-  const { data } = await viewExportCache.getFromWorkspace(workspace)
+  const { data } = (await viewExportCache.get(workspace)) ?? { files: {}, data: {} }
 
   await Promise.all(
     collection.data.map(async (icon) => {
@@ -128,7 +128,9 @@ export const getIconsCollection = async (): Promise<{
 
   await Promise.all(
     collectionList.map(async (collection, index) => {
-      const cacheEntry = await iconsCache.getCollection(currentWorkspace, collection)
+      const cacheEntry = await iconsCache.get([currentWorkspace, collection])
+
+      if (!cacheEntry) return
 
       const components = await getIconsComponents(currentWorkspace, cacheEntry)
 

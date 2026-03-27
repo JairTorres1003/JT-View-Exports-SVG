@@ -19,9 +19,7 @@ export class AddIconToCollectionHandler extends BaseHandler {
       vsc.window.showWarningMessage(
         vsc.l10n.t(
           `Icons in the temp directory cannot be added to the "{collection}" collection.`,
-          {
-            collection: vsc.l10n.t(icon.collection),
-          }
+          { collection: vsc.l10n.t(icon.collection) }
         )
       )
 

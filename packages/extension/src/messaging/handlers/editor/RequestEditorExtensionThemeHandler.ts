@@ -19,7 +19,7 @@ export class RequestEditorExtensionThemeHandler extends BaseHandler {
       .then(undefined, console.error)
   }
 
-  handle() {
+  async handle() {
     const cache = getCache().get('extensionTheme')
 
     if (!cache.has(CACHE_KEY)) {
@@ -27,13 +27,13 @@ export class RequestEditorExtensionThemeHandler extends BaseHandler {
       return
     }
 
-    cache.get(CACHE_KEY).then((theme) => {
-      if (!theme) {
-        this.showNoThemeMessage()
-        return
-      }
+    const theme = await cache.get(CACHE_KEY)
 
-      this.messenger.postMessage(SVGPostMessage.LoadExtensionTheme, theme)
-    })
+    if (!theme) {
+      this.showNoThemeMessage()
+      return
+    }
+
+    this.messenger.postMessage(SVGPostMessage.LoadExtensionTheme, theme)
   }
 }

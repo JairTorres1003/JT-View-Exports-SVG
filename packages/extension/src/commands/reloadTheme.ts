@@ -14,7 +14,7 @@ import { isEmpty } from '@/utilities/misc'
 export const runReloadTheme = async (context: ExtensionContext): Promise<void> => {
   const cache = getCache().get('extensionTheme')
 
-  cache.delete(CACHE_KEY)
+  await cache.delete(CACHE_KEY)
 
   await initializeExtensionTheme(context)
 

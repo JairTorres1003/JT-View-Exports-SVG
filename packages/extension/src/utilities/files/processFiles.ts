@@ -41,10 +41,11 @@ async function processFileItem(
 
     const file = await pathToSVGFile(getUriPath(uri))
 
-    const currentItem = options.cacheItem.transactionGetItem(file)
+    const currentWorkspace = vsc.workspace.workspaceFolders?.[0] ?? 'global'
+    const currentItem = await options.cacheItem.getByFile(currentWorkspace, file)
 
     if (currentItem) {
-      return { exportItem: currentItem, fileItem: file }
+      return { exportItem: currentItem.data, fileItem: file }
     }
 
     const { svg } = await extractSVGData(file, uri)
@@ -68,7 +69,7 @@ async function processFileItem(
         files: [file.id],
       }
 
-      options.cacheItem.transactionAdd(file, exportItem)
+      await options.cacheItem.add(currentWorkspace, { file, data: exportItem })
 
       return { exportItem, fileItem: file }
     }
@@ -103,8 +104,6 @@ export async function processFiles(
       const isShowNoExports = configShowNoExports.isShow()
       const cacheItem = getCache().get('viewExports')
 
-      await cacheItem.transactionInit(vsc.workspace.workspaceFolders?.[0] ?? 'global')
-
       // Process files in parallel
       // Note: For extremely large datasets (thousands of files), consider using a concurrency limit library in the future.
       const results = await Promise.all(
@@ -120,10 +119,6 @@ export async function processFiles(
         operation([], [])
         return progress
       }
-
-      cacheItem.transactionCommit().catch((error) => {
-        console.error(vsc.l10n.t('Error committing cache transaction'), error)
-      })
 
       configAssetsPath.set(fileList).catch((error) => {
         console.error(vsc.l10n.t('Error setting assets path'), error)

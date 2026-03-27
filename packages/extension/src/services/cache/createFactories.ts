@@ -5,7 +5,7 @@ import { ExtensionThemeCache } from './ExtensionThemeCache'
 import { IconCollectionCache } from './IconCollectionCache'
 import { ViewExportSVGCache } from './ViewExportSVGCache'
 
-export type CacheFactoryMap = Record<string, BaseCache<unknown>>
+export type CacheFactoryMap = Record<string, BaseCache<unknown, unknown>>
 
 export function createFactories(ctx: vsc.ExtensionContext) {
   return {
