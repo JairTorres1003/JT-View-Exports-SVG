@@ -52,7 +52,7 @@
     "@mdx-js/react": "^3.0.0",
     "clsx": "^2.0.0",
     "docusaurus-plugin-image-zoom": "^3.0.1",
-    "dompurify": "^3.3.1",
+    "dompurify": "^3.3.2",
     "estree-util-value-to-estree": "^3.5.0",
     "framer-motion": "^12.29.2",
     "lucide-react": "^0.564.0",
