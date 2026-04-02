@@ -1,7 +1,7 @@
 import * as t from '@babel/types'
 import type {
   GetChildAttributes,
-  IValue,
+  IPropertyValue,
   SVGComponentProps,
   SVGErrors,
   SVGFile,
@@ -113,7 +113,7 @@ export function getChildAttributes(
     } else if (t.isJSXText(child) && !isEmpty(child.value.trim())) {
       components.push(child.value)
     } else if (t.isJSXExpressionContainer(child)) {
-      const value = getPropertyValues(child.expression, params) as IValue
+      const value = getPropertyValues(child.expression, params) as IPropertyValue
 
       if (typeof value === 'object' && t.isJSXElement(value)) {
         processElement(value)

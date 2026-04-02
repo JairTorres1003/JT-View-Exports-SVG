@@ -7,7 +7,7 @@ import { AssetsPathsController, ShowNotExportedIconsController } from '@/control
 import { getCache } from '@/services/cache/main'
 import type { ViewExportSVGCache } from '@/services/cache/ViewExportSVGCache'
 import { isEmpty } from '../misc'
-import { extractSVGData } from '../svg/extracts'
+import { extractComponents } from '../svg/extracts'
 import { getUriPath } from '../vscode/uri'
 import { groupIconsByPattern } from './groupIconsByPattern'
 import { pathToSVGFile } from './misc'
@@ -48,31 +48,31 @@ async function processFileItem(
       return { exportItem: currentItem.data, fileItem: file }
     }
 
-    const { svg } = await extractSVGData(file, uri)
+    const { components } = await extractComponents(file, uri)
 
-    const totalExports = svg.exportComponents.length
-    const totalNoExports = svg.noExportComponents.length
+    const componentList = options.isShowNoExports
+      ? [...components.exported, ...components.noExported]
+      : components.exported
+
+    if (componentList.length === 0) return null
+
+    const totalExports = components.exported.length
+    const totalNoExports = components.noExported.length
     const totalSVG = totalExports + totalNoExports
 
-    const components = options.isShowNoExports
-      ? [...svg.exportComponents, ...svg.noExportComponents]
-      : svg.exportComponents
-
-    if (components.length > 0) {
-      const exportItem: ViewExportSVG = {
-        components,
-        totalExports,
-        totalNoExports,
-        totalSVG,
-        groupKind: { id: file.id, label: file.relativePath },
-        isShowNoExports: options.isShowNoExports,
-        files: [file.id],
-      }
-
-      await options.cacheItem.add(currentWorkspace, { file, data: exportItem })
-
-      return { exportItem, fileItem: file }
+    const exportItem: ViewExportSVG = {
+      components: componentList,
+      totalExports,
+      totalNoExports,
+      totalSVG,
+      groupKind: { id: file.id, label: file.relativePath },
+      isShowNoExports: options.isShowNoExports,
+      files: [file.id],
     }
+
+    await options.cacheItem.add(currentWorkspace, { file, data: exportItem })
+
+    return { exportItem, fileItem: file }
   } catch (error) {
     console.error(vsc.l10n.t('Error processing file "{file}"', { file: uri.fsPath }), error)
   }

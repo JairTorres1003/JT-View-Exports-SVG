@@ -1,17 +1,18 @@
 import traverse from '@babel/traverse'
 import * as t from '@babel/types'
 import {
-  type DeclarationExport,
+  type DeclarationType,
   type ExtractComponent,
-  type ExtractSVGExports,
-  type HandlersDeclaration,
+  type ExtractComponentExports,
   IconCollectionKind,
   type LocationIdentifier,
+  type PendingExtraction,
+  type ProcessComponent,
   type SVGComponent,
   SVGDeclaration,
   type SVGFile,
 } from '@jt-view-exports-svg/core'
-import { l10n, type Uri, workspace } from 'vscode'
+import * as vsc from 'vscode'
 
 import { REST_PROPS_KEY } from '@/constants/misc'
 import { getCache } from '@/services/cache/main'
@@ -19,200 +20,155 @@ import { getCache } from '@/services/cache/main'
 import { parseFileContent, parserContent } from '../babelParser'
 import { getUnknownError, isEmpty } from '../misc'
 import { getProperties } from '../properties/getProperties'
-import { propertyManager } from '../properties/propertyManager'
 
 import { analyzeExportType, getNodeTypes } from './analyze'
 import { getSVGComponent } from './SVGComponent'
 import { getTagName } from './tags'
 
 /**
- * Extracts an SVG component from a declaration export.
- *
- * @param declaration - The declaration export to extract the SVG component from.
- * @param parameters - Optional parameters for the SVG component.
- * @returns A promise that resolves to the extracted SVG component, or undefined if extraction fails.
+ * Processes a component node and extracts SVG component information.
  */
-export async function extractSVGComponent(
-  declaration: DeclarationExport,
-  file: SVGFile,
-  parameters?: Record<string, unknown>
-): Promise<Omit<SVGComponent, 'declaration' | 'isExported'> | undefined> {
-  if (t.isFunctionDeclaration(declaration) || t.isVariableDeclarator(declaration)) {
-    const name = (declaration.id as t.Identifier)?.name ?? ''
-    const location: LocationIdentifier = {
-      id: file.id,
-      start: declaration.loc?.start,
-      end: declaration.loc?.end,
+export async function processComponent({
+  file,
+  identifiers,
+  isExported,
+  node,
+  parameters,
+}: ProcessComponent): Promise<{ node: DeclarationType; component: SVGComponent } | null> {
+  const declaration = t.isFunctionDeclaration(node) ? node : node.init
+
+  if (isEmpty(declaration)) return null
+
+  try {
+    const analysis = analyzeExportType(declaration, file, parameters)
+    if (isEmpty(analysis)) return null
+
+    const { tag, ...component } = getSVGComponent(analysis, file)
+    if (component.hasErrors && !tag?.isValid) return null
+
+    const cache = getCache().get('icons')
+    const currentWorkspace = vsc.workspace.workspaceFolders?.[0]
+    const name = (node.id as t.Identifier)?.name ?? ''
+    const location = { id: file.id, start: declaration.loc?.start, end: declaration.loc?.end }
+
+    const isFavorite = currentWorkspace
+      ? await cache.hasIcon(currentWorkspace, {
+          file,
+          name,
+          location,
+          collection: IconCollectionKind.FAVORITE,
+        })
+      : false
+
+    return {
+      node,
+      component: {
+        ...component,
+        name,
+        location,
+        types: getNodeTypes(component.params),
+        withRestProps: REST_PROPS_KEY in component.params,
+        declaration: t.isFunctionDeclaration(declaration)
+          ? SVGDeclaration.Function
+          : SVGDeclaration.Variable,
+        isExported: isExported || identifiers?.has(name) || false,
+        isFavorite,
+      },
     }
-    const node = t.isFunctionDeclaration(declaration) ? declaration : declaration.init
-
-    propertyManager.clean()
-
-    try {
-      if (!isEmpty(node)) {
-        const analysis = analyzeExportType(node, file, parameters)
-
-        if (!isEmpty(analysis)) {
-          const { tag, ...component } = getSVGComponent(analysis, file)
-
-          if (component.hasErrors && !tag?.isValid) return
-
-          const types = getNodeTypes(component.params)
-          const withRestProps = REST_PROPS_KEY in component.params
-
-          return { ...component, name, location, types, withRestProps }
-        }
-      }
-    } catch (error) {
-      console.error(
-        l10n.t('Error extracting SVG component: {error}', { error: getUnknownError(error) })
-      )
-    }
+  } catch (error) {
+    console.error(
+      vsc.l10n.t('Error extracting SVG component: {error}', { error: getUnknownError(error) })
+    )
+    return null
   }
-
-  return undefined
 }
 
 /**
- * Extracts the SVG from the given file.
- * @param file - The path to the file.
- * @returns A promise that resolves to an object containing the extracted SVG.
+ * Extracts SVG component exports from a file by parsing its AST.
+ *
+ * Traverses the AST to identify and process function declarations, variable declarations,
+ * and export specifiers. Separates components into exported and non-exported categories.
+ *
+ * @param file - The SVG file metadata containing component information
+ * @param uriFile - The URI of the file to parse and extract components from
+ * @returns A promise that resolves to an object containing:
+ *   - `components`: An object with `exported` and `noExported` component arrays
+ *   - `travel`: A mapping of exported component names to their declarations and parameters
+ * @throws Does not throw; errors are caught and logged, returning empty components and travel
  */
-export async function extractSVGData(file: SVGFile, uriFile: Uri): Promise<ExtractSVGExports> {
+export async function extractComponents(
+  file: SVGFile,
+  uriFile: vsc.Uri
+): Promise<ExtractComponentExports> {
   try {
     const ast = await parseFileContent(uriFile)
-    const base: ExtractSVGExports['base'] = {}
-    const exportComponents: SVGComponent[] = []
-    const noExportComponents: SVGComponent[] = []
+
+    const pendingExtractions: PendingExtraction[] = []
     const identifiers = new Set<string>()
 
-    /**
-     * Handles the extraction of SVG.
-     * @param declaration - The declaration.
-     * @param SVGdeclaration - The type of SVG declaration.
-     * @param isExported - A boolean indicating if the SVG component is exported.
-     * @param svgResult - The SVG component to be extracted.
-     * @returns A promise that resolves to void.
-     */
-    const handleExtraction = async (
-      declaration: DeclarationExport,
-      SVGdeclaration: SVGDeclaration,
-      isExported: boolean,
-      svgResult?: Omit<SVGComponent, 'declaration' | 'isExported'>
-    ): Promise<void> => {
-      if (!isEmpty(svgResult)) {
-        const cache = getCache().get('icons')
-        let isFavorite = false
+    traverse(ast, {
+      Declaration(path) {
+        const { node, parent } = path
+        if (!t.isProgram(parent) || isEmpty(node)) return
 
-        const currentWorkspace = workspace.workspaceFolders?.[0]
+        const isNamedExport = t.isExportNamedDeclaration(node)
+        const isDefaultExport = t.isExportDefaultDeclaration(node)
+        const isExported = isNamedExport || isDefaultExport
 
-        if (currentWorkspace) {
-          const existsIcons = await cache.hasIcon(currentWorkspace, {
-            file,
-            name: svgResult.name,
-            location: svgResult.location,
-            collection: IconCollectionKind.FAVORITE,
+        const declaration = isExported ? node.declaration : node
+
+        if (t.isFunctionDeclaration(declaration)) {
+          pendingExtractions.push({ node: declaration, isExported })
+        } else if (t.isVariableDeclaration(declaration)) {
+          declaration.declarations.forEach((d) => {
+            if (t.isIdentifier(d.id)) pendingExtractions.push({ node: d, isExported })
           })
-
-          isFavorite = existsIcons
-        }
-
-        const result: SVGComponent = {
-          ...svgResult,
-          declaration: SVGdeclaration,
-          isExported,
-          isFavorite,
-        }
-
-        if (isExported || identifiers.has(svgResult.name)) {
-          exportComponents.push(result)
-          base[svgResult.name] = { declaration, params: svgResult.params }
-        } else {
-          noExportComponents.push(result)
-        }
-      }
-    }
-
-    /**
-     * Handlers for the different types of declarations.
-     */
-    const handlers: HandlersDeclaration = {
-      FunctionDeclaration: async (declaration, isExported) => {
-        extractSVGComponent(declaration, file)
-          .then(async (result) => {
-            await handleExtraction(declaration, SVGDeclaration.Function, isExported, result)
+        } else if (t.isIdentifier(declaration)) {
+          identifiers.add(declaration.name)
+        } else if (t.isObjectExpression(declaration)) {
+          declaration.properties.forEach((property) => {
+            if (t.isObjectProperty(property) && t.isIdentifier(property.key)) {
+              identifiers.add(property.key.name)
+            }
           })
-          .catch(console.error)
-      },
-      VariableDeclaration: async (declaration, isExported) => {
-        for (const d of declaration.declarations) {
-          if (t.isIdentifier(d.id)) {
-            extractSVGComponent(d, file)
-              .then(async (result) => {
-                await handleExtraction(d, SVGDeclaration.Variable, isExported, result)
-              })
-              .catch(console.error)
-          }
-        }
-      },
-      Identifier: (declaration) => {
-        identifiers.add(declaration.name)
-      },
-      ObjectExpression: (declaration) => {
-        declaration.properties.forEach((property) => {
-          if (t.isObjectProperty(property) && t.isIdentifier(property.key)) {
-            identifiers.add(property.key.name)
-          }
-        })
-      },
-      ExportNamedDeclaration: (declaration) => {
-        if (!isEmpty(declaration.specifiers)) {
-          declaration.specifiers.forEach((specifier) => {
-            if (t.isExportSpecifier(specifier) && t.isIdentifier(specifier.exported)) {
-              identifiers.add(specifier.exported.name)
+        } else if (isNamedExport && node.specifiers) {
+          node.specifiers.forEach((s) => {
+            if (t.isExportSpecifier(s) && t.isIdentifier(s.exported)) {
+              identifiers.add(s.exported.name)
             }
           })
         }
       },
-    }
-
-    // Traverse the AST to find export declarations
-    traverse(ast, {
-      Declaration(path) {
-        const { node, parent } = path
-
-        if (t.isProgram(parent) && !isEmpty(node)) {
-          const validExport = t.isExportNamedDeclaration(node) || t.isExportDefaultDeclaration(node)
-
-          let declaration: DeclarationExport = node
-          let isExported = false
-
-          if (validExport && !isEmpty(node.declaration)) {
-            declaration = node.declaration
-            isExported = true
-          }
-
-          if (t.isFunctionDeclaration(declaration)) {
-            handlers.FunctionDeclaration(declaration, isExported).catch(console.error)
-          } else if (t.isVariableDeclaration(declaration)) {
-            handlers.VariableDeclaration(declaration, isExported).catch(console.error)
-          } else if (t.isIdentifier(declaration)) {
-            handlers.Identifier(declaration)
-          } else if (t.isObjectExpression(declaration)) {
-            handlers.ObjectExpression(declaration)
-          } else if (t.isExportNamedDeclaration(declaration)) {
-            handlers.ExportNamedDeclaration(declaration)
-          }
-        }
-      },
     })
 
-    return { svg: { exportComponents, noExportComponents }, base }
-  } catch (error) {
-    console.error(
-      l10n.t('Failed to extract SVG exports: {error}', { error: getUnknownError(error) })
+    const exported: SVGComponent[] = []
+    const noExported: SVGComponent[] = []
+    const baseTravel: ExtractComponentExports['travel'] = {}
+
+    const results = await Promise.all(
+      pendingExtractions.map((item) => processComponent({ ...item, file, identifiers }))
     )
-    return { svg: { exportComponents: [], noExportComponents: [] }, base: {} }
+
+    for (const result of results) {
+      if (!result) continue
+
+      const { component, node } = result
+
+      if (component.isExported) {
+        exported.push(component)
+        baseTravel[component.name] = {
+          declaration: node,
+          params: component.params,
+        }
+      } else {
+        noExported.push(component)
+      }
+    }
+
+    return { components: { exported, noExported }, travel: baseTravel }
+  } catch (error) {
+    console.error(vsc.l10n.t('Failed to extract SVG exports: {0}', getUnknownError(error)))
+    return { components: { exported: [], noExported: [] }, travel: {} }
   }
 }
 
@@ -221,9 +177,10 @@ export async function extractSVGData(file: SVGFile, uriFile: Uri): Promise<Extra
  * @param component - The icon component as a string.
  * @param location - The location of the icon component.
  * @param params - The parameters for the icon component.
+ *
  * @returns A promise that resolves to an object containing the extracted component information.
  */
-export async function extractIconComponent(
+export async function extractIconComponentString(
   component: string,
   location: LocationIdentifier,
   params: SVGComponent['params']
@@ -240,16 +197,16 @@ export async function extractIconComponent(
       JSXElement(path) {
         const { node } = path
 
-        if (!isEmpty(node.openingElement)) {
-          tag = getTagName(node.openingElement, location)
-          props = getProperties(node.openingElement.attributes, params)
+        if (isEmpty(node.openingElement)) return
 
-          if (!tag.isValid) {
-            hasErrors = true
-            errors = {
-              location: tag.location,
-              message: l10n.t('Invalid SVG tag: {tag}', { tag: tag.name ?? 'undefined' }),
-            }
+        tag = getTagName(node.openingElement, location)
+        props = getProperties(node.openingElement.attributes, params)
+
+        if (!tag.isValid) {
+          hasErrors = true
+          errors = {
+            location: tag.location,
+            message: vsc.l10n.t('Invalid SVG tag: {tag}', { tag: tag.name ?? 'undefined' }),
           }
         }
       },
@@ -258,7 +215,7 @@ export async function extractIconComponent(
     return { tag, props, hasErrors, errors }
   } catch (error) {
     console.error(
-      l10n.t('Error extracting icon component: {error}', { error: getUnknownError(error) })
+      vsc.l10n.t('Error extracting icon component: {error}', { error: getUnknownError(error) })
     )
     return {
       tag,
