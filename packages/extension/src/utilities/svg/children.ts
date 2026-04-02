@@ -8,9 +8,10 @@ import type {
 } from '@jt-view-exports-svg/core'
 import { l10n } from 'vscode'
 
+import { propertyStore } from '@/store/PropertyStore'
+
 import { isEmpty } from '../misc'
 import { getProperties } from '../properties/getProperties'
-import { propertyManager } from '../properties/propertyManager'
 import { getPropertyValues } from '../properties/propertyValues'
 
 import { isElementAnimated } from './is-animate'
@@ -57,10 +58,11 @@ export function getChildFragments(
  */
 export function getChildAttributes(
   children: t.JSXElement['children'],
-  file: SVGFile
+  file: SVGFile,
+  name: string
 ): GetChildAttributes {
   const components: SVGComponentProps['children'] = []
-  const params = propertyManager.get()
+  const params = propertyStore.get(file, name)
   let errors: SVGErrors | undefined
   let hasErrors = false
   let isMotion = false
@@ -77,7 +79,7 @@ export function getChildAttributes(
     const openingElement = element.openingElement
     const tag = getSVGTagName(openingElement, file)
     const props = getProperties(openingElement.attributes, params)
-    const childAttrs = getChildAttributes(element.children, file)
+    const childAttrs = getChildAttributes(element.children, file, name)
 
     if (!hasErrors) {
       hasErrors = childAttrs.hasErrors
@@ -119,7 +121,7 @@ export function getChildAttributes(
         processElement(value)
       } else if (typeof value === 'object' && t.isJSXFragment(value)) {
         const childs = getChildFragments(value.children, file)
-        components.push(...getChildAttributes(childs, file).children)
+        components.push(...getChildAttributes(childs, file, name).children)
       } else if (typeof value === 'string') {
         components.push(value)
       } else if (!['undefined', 'null', 'boolean'].includes(typeof value)) {

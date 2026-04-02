@@ -16,6 +16,7 @@ import * as vsc from 'vscode'
 
 import { REST_PROPS_KEY } from '@/constants/misc'
 import { getCache } from '@/services/cache/main'
+import { propertyStore } from '@/store/PropertyStore'
 
 import { parseFileContent, parserContent } from '../babelParser'
 import { getUnknownError, isEmpty } from '../misc'
@@ -95,15 +96,15 @@ export async function processComponent({
   if (isEmpty(declaration)) return null
 
   try {
-    const analysis = analyzeExportType(declaration, file, parameters)
+    const name = (node.id as t.Identifier)?.name ?? ''
+    const analysis = analyzeExportType(declaration, file, name, parameters)
     if (isEmpty(analysis)) return null
 
-    const { tag, ...component } = getSVGComponent(analysis, file)
+    const { tag, ...component } = getSVGComponent(analysis, file, name)
     if (component.hasErrors && !tag?.isValid) return null
 
     const cache = getCache().get('icons')
     const currentWorkspace = vsc.workspace.workspaceFolders?.[0]
-    const name = (node.id as t.Identifier)?.name ?? ''
     const location = { id: file.id, start: declaration.loc?.start, end: declaration.loc?.end }
 
     const isFavorite = currentWorkspace
@@ -157,6 +158,8 @@ export async function extractComponents(
 
     const exported: SVGComponent[] = []
     const noExported: SVGComponent[] = []
+
+    propertyStore.clear()
 
     const results = await Promise.all(
       declarations.map((item) => processComponent({ ...item, file, identifiers }))
