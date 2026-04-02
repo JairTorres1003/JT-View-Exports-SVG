@@ -32,8 +32,7 @@ export interface ViewExportSVG {
  * Represents extracted SVG component exports from parsing
  */
 export interface ExtractComponentExports {
-  /** travel declarations with their metadata */
-  travel: Record<string, { declaration: DeclarationType; params: Record<string, unknown> }>
+  declarations: PendingExtraction[]
   /** SVG component categorization */
   components: {
     /** Components that are exported */
@@ -49,6 +48,11 @@ export interface ExtractComponentExports {
 export interface PendingExtraction {
   node: DeclarationType
   isExported: boolean
+}
+
+export interface ExtractNodeDeclarations {
+  declarations: PendingExtraction[]
+  identifiers: Set<string>
 }
 
 export interface ProcessComponent extends PendingExtraction {

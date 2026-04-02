@@ -74,7 +74,7 @@ export class CacheManager<TFactories extends CacheFactoryMap> {
    * Clears specific caches based on the provided keys.
    * @param keys - An array of keys corresponding to the caches to clear
    */
-  public async clear(keys: (keyof TFactories)[]): Promise<void> {
+  public async clear<K extends keyof TFactories>(keys: K[]): Promise<void> {
     const clearActions = keys.map((key) => this.get(key).clear())
 
     await Promise.all(clearActions)

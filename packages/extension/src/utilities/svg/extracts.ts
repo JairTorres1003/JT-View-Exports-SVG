@@ -1,9 +1,9 @@
 import traverse from '@babel/traverse'
 import * as t from '@babel/types'
 import {
-  type DeclarationType,
   type ExtractComponent,
   type ExtractComponentExports,
+  type ExtractNodeDeclarations,
   IconCollectionKind,
   type LocationIdentifier,
   type PendingExtraction,
@@ -26,6 +26,61 @@ import { getSVGComponent } from './SVGComponent'
 import { getTagName } from './tags'
 
 /**
+ * Parses a source file and extracts top-level declaration nodes and exported identifier names.
+ *
+ * This function traverses the file AST and collects:
+ * - Function declarations and variable declarators as pending extraction entries.
+ * - Identifier names referenced by export declarations (including specifiers and object-style exports).
+ *
+ * Only non-empty, top-level declarations are considered.
+ *
+ * @param uriFile - URI of the file to parse and analyze.
+ */
+export async function extractNodeDeclarations(uriFile: vsc.Uri): Promise<ExtractNodeDeclarations> {
+  const ast = await parseFileContent(uriFile)
+
+  const extractions: PendingExtraction[] = []
+  const identifiers = new Set<string>()
+
+  traverse(ast, {
+    Declaration(path) {
+      const { node, parent } = path
+      if (!t.isProgram(parent) || isEmpty(node)) return
+
+      const isNamedExport = t.isExportNamedDeclaration(node)
+      const isDefaultExport = t.isExportDefaultDeclaration(node)
+      const isExported = isNamedExport || isDefaultExport
+
+      const declaration = isExported ? node.declaration : node
+
+      if (t.isFunctionDeclaration(declaration)) {
+        extractions.push({ node: declaration, isExported })
+      } else if (t.isVariableDeclaration(declaration)) {
+        declaration.declarations.forEach((d) => {
+          if (t.isIdentifier(d.id)) extractions.push({ node: d, isExported })
+        })
+      } else if (t.isIdentifier(declaration)) {
+        identifiers.add(declaration.name)
+      } else if (t.isObjectExpression(declaration)) {
+        declaration.properties.forEach((property) => {
+          if (t.isObjectProperty(property) && t.isIdentifier(property.key)) {
+            identifiers.add(property.key.name)
+          }
+        })
+      } else if (isNamedExport && node.specifiers) {
+        node.specifiers.forEach((s) => {
+          if (t.isExportSpecifier(s) && t.isIdentifier(s.exported)) {
+            identifiers.add(s.exported.name)
+          }
+        })
+      }
+    },
+  })
+
+  return { declarations: extractions, identifiers }
+}
+
+/**
  * Processes a component node and extracts SVG component information.
  */
 export async function processComponent({
@@ -34,7 +89,7 @@ export async function processComponent({
   isExported,
   node,
   parameters,
-}: ProcessComponent): Promise<{ node: DeclarationType; component: SVGComponent } | null> {
+}: ProcessComponent): Promise<SVGComponent | null> {
   const declaration = t.isFunctionDeclaration(node) ? node : node.init
 
   if (isEmpty(declaration)) return null
@@ -61,19 +116,16 @@ export async function processComponent({
       : false
 
     return {
-      node,
-      component: {
-        ...component,
-        name,
-        location,
-        types: getNodeTypes(component.params),
-        withRestProps: REST_PROPS_KEY in component.params,
-        declaration: t.isFunctionDeclaration(declaration)
-          ? SVGDeclaration.Function
-          : SVGDeclaration.Variable,
-        isExported: isExported || identifiers?.has(name) || false,
-        isFavorite,
-      },
+      ...component,
+      name,
+      location,
+      types: getNodeTypes(component.params),
+      withRestProps: REST_PROPS_KEY in component.params,
+      declaration: t.isFunctionDeclaration(declaration)
+        ? SVGDeclaration.Function
+        : SVGDeclaration.Variable,
+      isExported: isExported || identifiers?.has(name) || false,
+      isFavorite,
     }
   } catch (error) {
     console.error(
@@ -101,74 +153,29 @@ export async function extractComponents(
   uriFile: vsc.Uri
 ): Promise<ExtractComponentExports> {
   try {
-    const ast = await parseFileContent(uriFile)
-
-    const pendingExtractions: PendingExtraction[] = []
-    const identifiers = new Set<string>()
-
-    traverse(ast, {
-      Declaration(path) {
-        const { node, parent } = path
-        if (!t.isProgram(parent) || isEmpty(node)) return
-
-        const isNamedExport = t.isExportNamedDeclaration(node)
-        const isDefaultExport = t.isExportDefaultDeclaration(node)
-        const isExported = isNamedExport || isDefaultExport
-
-        const declaration = isExported ? node.declaration : node
-
-        if (t.isFunctionDeclaration(declaration)) {
-          pendingExtractions.push({ node: declaration, isExported })
-        } else if (t.isVariableDeclaration(declaration)) {
-          declaration.declarations.forEach((d) => {
-            if (t.isIdentifier(d.id)) pendingExtractions.push({ node: d, isExported })
-          })
-        } else if (t.isIdentifier(declaration)) {
-          identifiers.add(declaration.name)
-        } else if (t.isObjectExpression(declaration)) {
-          declaration.properties.forEach((property) => {
-            if (t.isObjectProperty(property) && t.isIdentifier(property.key)) {
-              identifiers.add(property.key.name)
-            }
-          })
-        } else if (isNamedExport && node.specifiers) {
-          node.specifiers.forEach((s) => {
-            if (t.isExportSpecifier(s) && t.isIdentifier(s.exported)) {
-              identifiers.add(s.exported.name)
-            }
-          })
-        }
-      },
-    })
+    const { declarations, identifiers } = await extractNodeDeclarations(uriFile)
 
     const exported: SVGComponent[] = []
     const noExported: SVGComponent[] = []
-    const baseTravel: ExtractComponentExports['travel'] = {}
 
     const results = await Promise.all(
-      pendingExtractions.map((item) => processComponent({ ...item, file, identifiers }))
+      declarations.map((item) => processComponent({ ...item, file, identifiers }))
     )
 
     for (const result of results) {
       if (!result) continue
 
-      const { component, node } = result
-
-      if (component.isExported) {
-        exported.push(component)
-        baseTravel[component.name] = {
-          declaration: node,
-          params: component.params,
-        }
+      if (result.isExported) {
+        exported.push(result)
       } else {
-        noExported.push(component)
+        noExported.push(result)
       }
     }
 
-    return { components: { exported, noExported }, travel: baseTravel }
+    return { components: { exported, noExported }, declarations }
   } catch (error) {
     console.error(vsc.l10n.t('Failed to extract SVG exports: {0}', getUnknownError(error)))
-    return { components: { exported: [], noExported: [] }, travel: {} }
+    return { components: { exported: [], noExported: [] }, declarations: [] }
   }
 }
 

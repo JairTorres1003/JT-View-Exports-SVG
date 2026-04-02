@@ -6,6 +6,7 @@ import { REGEX_FILE } from '@/constants/regex'
 import { AssetsPathsController, ShowNotExportedIconsController } from '@/controllers/config'
 import { getCache } from '@/services/cache/main'
 import type { ViewExportSVGCache } from '@/services/cache/ViewExportSVGCache'
+import { componentDeclarationStore } from '@/store/ComponentDeclarationStore'
 import { isEmpty } from '../misc'
 import { extractComponents } from '../svg/extracts'
 import { getUriPath } from '../vscode/uri'
@@ -48,7 +49,7 @@ async function processFileItem(
       return { exportItem: currentItem.data, fileItem: file }
     }
 
-    const { components } = await extractComponents(file, uri)
+    const { components, declarations } = await extractComponents(file, uri)
 
     const componentList = options.isShowNoExports
       ? [...components.exported, ...components.noExported]
@@ -71,6 +72,8 @@ async function processFileItem(
     }
 
     await options.cacheItem.add(currentWorkspace, { file, data: exportItem })
+
+    componentDeclarationStore.set(file.id, declarations)
 
     return { exportItem, fileItem: file }
   } catch (error) {
