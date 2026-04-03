@@ -22,6 +22,11 @@ app.get('/api/ready', (_, res) => {
   res.status(200).json({ ready: true })
 })
 
+app.get('/api/load-components', async (_, res) => {
+  await loadSVGComponents()
+  res.status(200).json({ success: true, message: 'SVG components loaded successfully' })
+})
+
 app.get('/api/*path', apiHandler)
 app.post('/api/*path', apiHandler)
 
