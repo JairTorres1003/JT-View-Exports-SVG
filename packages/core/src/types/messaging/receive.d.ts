@@ -34,7 +34,6 @@ export type ReceiveMessageMap = {
   [SVGReceiveMessage.GetViewAssets]: SVGFile[]
   [SVGReceiveMessage.RequestFileOpen]: undefined
   [SVGReceiveMessage.CreateTempFiles]: FileTemporary[]
-  [SVGReceiveMessage.PlaygroundSVGComponents]: SVGPlayground
   [SVGReceiveMessage.RemoveAssets]: SVGFile[]
   [SVGReceiveMessage.ScanWorkspace]: undefined
   [SVGReceiveMessage.ReloadExtensionTheme]: undefined

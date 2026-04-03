@@ -99,18 +99,18 @@ export const useCodeEditor = (editorRef: React.RefObject<TypeEditorRef>) => {
       return
     }
 
-    vscode.postMessage(SVGReceiveMessage.PlaygroundSVGComponents, {
+    vscode.postMessage(SVGReceiveMessage.EditComponentInPlayground, {
       value: debounceValue,
       name: recentlySelected?.name,
       location: recentlySelected?.location,
     })
 
-    vscode.onMessage(SVGPostMessage.SendSVGPlayground, handleEditComponent)
-    vscode.onMessage(SVGPostMessage.SendPlaygroundError, handleErrorComponent)
+    vscode.onMessage(SVGPostMessage.ComponentEditedInPlayground, handleEditComponent)
+    vscode.onMessage(SVGPostMessage.ErrorEditingComponentInPlayground, handleErrorComponent)
 
     return () => {
-      vscode.unregisterMessage(SVGPostMessage.SendSVGPlayground)
-      vscode.unregisterMessage(SVGPostMessage.SendPlaygroundError)
+      vscode.unregisterMessage(SVGPostMessage.ComponentEditedInPlayground)
+      vscode.unregisterMessage(SVGPostMessage.ErrorEditingComponentInPlayground)
     }
   }, [debounceValue])
 

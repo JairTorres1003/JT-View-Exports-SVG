@@ -90,7 +90,7 @@ export async function playgroundComponent({
 
     return {
       ...component,
-      ...newComponent?.component,
+      ...newComponent,
       types: component.types,
     }
   } catch (error) {

@@ -32,9 +32,7 @@ export type PostMessageMap = {
 
   [SVGPostMessage.SendAssetsPath]: AssetPath
   [SVGPostMessage.SendLastScanDate]: string
-  [SVGPostMessage.SendPlaygroundError]: SVGErrors
   [SVGPostMessage.SendRunLoading]: string
-  [SVGPostMessage.SendSVGPlayground]: SVGComponent
   [SVGPostMessage.SendUpdateConfiguration]: Record<string, unknown>
   [SVGPostMessage.SendReloadWebview]: string
   [SVGPostMessage.SendOpenFiles]: string[]

@@ -17,15 +17,14 @@ export const SVGPostMessage = {
 
   // Developer tools related messages
   ToggleOpenDevTools: 'send/toggle-open-devtools',
+  ComponentEditedInPlayground: 'send/component-edited-in-playground',
+  ErrorEditingComponentInPlayground: 'send/error-editing-component-in-playground',
 
   // Settings-related messages
   LoadEditorThemeMode: 'send/load-editor-theme-mode',
   LoadEditorConfig: 'send/load-editor-config',
   LoadExtensionTheme: 'send/load-extension-theme',
   LoadEditorStyles: 'send/load-editor-styles',
-
-  SendSVGPlayground: 'send/svg/playground',
-  SendPlaygroundError: 'send/svg/playground-error',
 
   // Assets-related messages
   SendAssetsPath: 'send/assets/paths',
@@ -71,6 +70,7 @@ export const SVGReceiveMessage = {
 
   // Developer tools related messages
   IsOpenDevTools: 'devtools/is-open',
+  EditComponentInPlayground: 'devtools/edit-component-in-playground',
 
   // Editor-related messages
   RequestEditorThemeMode: 'editor/request-theme-mode',
@@ -82,7 +82,6 @@ export const SVGReceiveMessage = {
   OpenFileInEditor: 'file/open-in-editor',
 
   ExtractSVGComponentFromFiles: 'svg/extract-components-from-files',
-  PlaygroundSVGComponents: 'svg/playground-component',
 
   // Assets-related messages
   GetAssetsPath: 'assets/paths',

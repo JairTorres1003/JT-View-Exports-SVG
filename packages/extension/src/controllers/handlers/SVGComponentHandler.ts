@@ -6,12 +6,10 @@ import {
   type ViewExportSVG,
 } from '@jt-view-exports-svg/core'
 import { l10n } from 'vscode'
-
 import { pathToSVGFile } from '@/utilities/files/misc'
 import { processFiles } from '@/utilities/files/processFiles'
 import { scanningFiles } from '@/utilities/files/scanning'
-import { getUnknownError, isEmpty } from '@/utilities/misc'
-import { playground } from '@/utilities/svg/playground'
+import { isEmpty } from '@/utilities/misc'
 import { svgFileToUri } from '@/utilities/vscode/uri'
 
 import { getCacheManager } from '../cache'
@@ -70,25 +68,7 @@ export class SVGComponentHandler {
     }
   }
 
-  async playgroundSVGComponents(component: SVGPlayground): Promise<void> {
-    try {
-      const result = await playground(component)
-
-      if ('component' in result) {
-        this.postMessage(SVGPostMessage.SendSVGPlayground, result)
-      } else {
-        this.postMessage(SVGPostMessage.SendPlaygroundError, result)
-      }
-    } catch (error) {
-      const errorMessage = l10n.t('Error generating SVG playground {error}', {
-        error: getUnknownError(error),
-      })
-      console.error(errorMessage, error)
-      this.postMessage(SVGPostMessage.SendPlaygroundError, {
-        message: errorMessage,
-      })
-    }
-  }
+  async playgroundSVGComponents(_component: SVGPlayground): Promise<void> {}
 
   searchSVGComponents(_query: string): void {}
 }

@@ -1,3 +1,4 @@
+import type * as t from '@babel/types'
 import type { FileIdentifier, PendingExtraction } from '@jt-view-exports-svg/core'
 
 /**
@@ -10,7 +11,7 @@ import type { FileIdentifier, PendingExtraction } from '@jt-view-exports-svg/cor
  */
 class ComponentDeclarationStore {
   private static instance: ComponentDeclarationStore
-  private declarations: Record<FileIdentifier, PendingExtraction[]> = {}
+  private declarations: Record<FileIdentifier, Record<string, PendingExtraction>> = {}
 
   static getInstance(): ComponentDeclarationStore {
     if (!ComponentDeclarationStore.instance) {
@@ -19,12 +20,19 @@ class ComponentDeclarationStore {
     return ComponentDeclarationStore.instance
   }
 
-  get(fileId: FileIdentifier): PendingExtraction[] {
-    return this.declarations[fileId] || []
+  get(fileId: FileIdentifier): Record<string, PendingExtraction> | undefined {
+    return this.declarations[fileId]
   }
 
   set(fileId: FileIdentifier, declarations: PendingExtraction[]): void {
-    this.declarations[fileId] = declarations
+    this.declarations[fileId] = declarations.reduce(
+      (acc, decl) => {
+        const name = (decl.node.id as t.Identifier)?.name || 'default'
+        acc[name] = decl
+        return acc
+      },
+      {} as Record<string, PendingExtraction>
+    )
   }
 }
 
