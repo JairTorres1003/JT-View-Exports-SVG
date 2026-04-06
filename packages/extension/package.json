@@ -304,7 +304,7 @@
     "@babel/parser": "^7.29.0",
     "@babel/traverse": "^7.29.0",
     "@jt-view-exports-svg/core": "workspace:*",
-    "lodash": "^4.17.23",
+    "lodash": "^4.18.1",
     "minimatch": "^10.2.4",
     "xxhashjs": "^0.2.2"
   },
