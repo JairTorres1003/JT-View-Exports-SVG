@@ -17,11 +17,11 @@
     "typecheck": "tsc --noEmit"
   },
   "dependencies": {
-    "@codingame/monaco-vscode-configuration-service-override": "^27.0.0",
-    "@codingame/monaco-vscode-api": "^27.0.0",
-    "@codingame/monaco-vscode-files-service-override": "^27.0.0",
-    "@codingame/monaco-vscode-model-service-override": "^27.0.0",
-    "@codingame/monaco-vscode-theme-service-override": "^27.0.0",
+    "@codingame/monaco-vscode-configuration-service-override": "^30.0.0",
+    "@codingame/monaco-vscode-api": "^30.0.0",
+    "@codingame/monaco-vscode-files-service-override": "^30.0.0",
+    "@codingame/monaco-vscode-model-service-override": "^30.0.0",
+    "@codingame/monaco-vscode-theme-service-override": "^30.0.0",
     "@jt-view-exports-svg/core": "workspace:*",
     "@jt-view-exports-svg/extension-api": "workspace:*",
     "cors": "^2.8.6",
@@ -30,7 +30,7 @@
     "express-rate-limit": "^8.3.2",
     "happy-dom": "^20.8.9",
     "ignore-styles": "^5.0.1",
-    "vscode": "npm:@codingame/monaco-vscode-extension-api@^27.0.0"
+    "vscode": "npm:@codingame/monaco-vscode-extension-api@^30.0.0"
   },
   "devDependencies": {
     "@types/cors": "^2.8.19",

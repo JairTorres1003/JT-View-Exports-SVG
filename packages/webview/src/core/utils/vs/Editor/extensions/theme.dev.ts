@@ -18,12 +18,11 @@ export default async function devActivate(): Promise<void> {
 
   const extensionTheme = registerExtension(manifest, ExtensionHostKind.LocalProcess)
 
-  const prefix = '/vs/extensions/theme'
-
   manifest.contributes?.themes?.forEach((theme) => {
     extensionTheme.registerFileUrl(
       theme.path,
-      new URL(`${prefix}/${sanitizePathStart(theme.path)}`, window.location.href).href
+      new URL(`/assets/vs/extensions/theme/${sanitizePathStart(theme.path)}`, window.location.href)
+        .href
     )
   })
 
