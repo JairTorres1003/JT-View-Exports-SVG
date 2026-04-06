@@ -27,8 +27,8 @@
     "cors": "^2.8.6",
     "dotenv": "^17.3.1",
     "express": "^5.2.1",
-    "express-rate-limit": "^8.2.1",
-    "happy-dom": "^20.7.0",
+    "express-rate-limit": "^8.3.2",
+    "happy-dom": "^20.8.9",
     "ignore-styles": "^5.0.1",
     "vscode": "npm:@codingame/monaco-vscode-extension-api@^27.0.0"
   },
