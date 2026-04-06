@@ -27,6 +27,7 @@ const NavigationDrawer = () => {
               minWidth: '90px',
               width: 'fit-content',
               maxWidth: 'calc(100% - 40px)',
+              backgroundColor: 'var(--JT-SVG-vscode-editor-background)',
             },
           },
         }}

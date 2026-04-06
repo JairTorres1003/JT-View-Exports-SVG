@@ -8,6 +8,7 @@ import i18next from './i18n'
 import './config/environment'
 import './styles/globals.css'
 import './workers/loader'
+import './services/fetch/main'
 
 const container = document.getElementById('root')
 

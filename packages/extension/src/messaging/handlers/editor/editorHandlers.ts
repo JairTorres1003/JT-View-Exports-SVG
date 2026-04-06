@@ -1,4 +1,5 @@
 import type { WebviewMessenger } from '../../WebviewMessenger'
+import { ReloadEditorExtensionThemeHandler } from './ReloadEditorExtensionThemeHandler'
 
 import { RequestEditorConfigHandler } from './RequestEditorConfigHandler'
 import { RequestEditorExtensionThemeHandler } from './RequestEditorExtensionThemeHandler'
@@ -11,5 +12,6 @@ export function createEditorHandlers(messenger: WebviewMessenger) {
     new RequestEditorConfigHandler(messenger),
     new RequestEditorExtensionThemeHandler(messenger),
     new RequestEditorStylesHandler(messenger),
+    new ReloadEditorExtensionThemeHandler(),
   ]
 }

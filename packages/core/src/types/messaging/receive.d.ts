@@ -22,11 +22,15 @@ export type ReceiveMessageMap = {
   [SVGReceiveMessage.RemoveIconFromCollection]: SVGIconCollection
   [SVGReceiveMessage.ClearIconCollection]: IconCollectionKind
   [SVGReceiveMessage.IsOpenDevTools]: boolean
+  [SVGReceiveMessage.EditComponentInPlayground]: SVGPlayground
   [SVGReceiveMessage.RequestEditorThemeMode]: undefined
   [SVGReceiveMessage.RequestEditorConfig]: undefined
   [SVGReceiveMessage.RequestEditorExtensionTheme]: undefined
   [SVGReceiveMessage.RequestEditorStyles]: undefined
+  [SVGReceiveMessage.ReloadEditorExtensionTheme]: undefined
   [SVGReceiveMessage.OpenFileInEditor]: LocationIdentifier
+  [SVGReceiveMessage.FetchVSCodeTheme]: undefined
+  [SVGReceiveMessage.FetchVsCodeThemePackage]: undefined
 
   [SVGReceiveMessage.ExtractSVGComponentFromFiles]: string[]
   [SVGReceiveMessage.GetAssetsPath]: undefined
@@ -36,7 +40,6 @@ export type ReceiveMessageMap = {
   [SVGReceiveMessage.CreateTempFiles]: FileTemporary[]
   [SVGReceiveMessage.RemoveAssets]: SVGFile[]
   [SVGReceiveMessage.ScanWorkspace]: undefined
-  [SVGReceiveMessage.ReloadExtensionTheme]: undefined
 }
 
 /**

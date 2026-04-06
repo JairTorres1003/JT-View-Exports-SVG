@@ -1,6 +1,7 @@
 import { ChangeViewPathHandler } from './handlers/ChangeViewPathHandler'
 import { createDevtoolsHandlers } from './handlers/devtools/devtoolsHandlers'
 import { createEditorHandlers } from './handlers/editor/editorHandlers'
+import { createFetchHandlers } from './handlers/fetch/fetchHandlers'
 import { createFileHandlers } from './handlers/files/fileHandlers'
 import { createIconsHandlers } from './handlers/icons/iconsHandler'
 import { createUIHandlers } from './handlers/ui/uiHandlers'
@@ -15,5 +16,6 @@ export function createRouter(messenger: WebviewMessenger): MessageRouter {
     ...createDevtoolsHandlers(messenger),
     ...createEditorHandlers(messenger),
     ...createFileHandlers(),
+    ...createFetchHandlers(messenger),
   ])
 }

@@ -3,7 +3,7 @@ import { glob } from 'node:fs/promises'
 import * as path from 'node:path'
 import type { Plugin } from 'vite'
 
-const filesToRemove = ['dev', 'index.html', 'assets/*.svg']
+const filesToRemove = ['index.html', 'assets/*.svg']
 
 function removeFiles(): Plugin {
   let outDir = 'dist'

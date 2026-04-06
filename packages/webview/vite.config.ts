@@ -10,7 +10,7 @@ import legacyManifest from './plugins/legacy-manifest'
 import removeFiles from './plugins/remove-files'
 
 const pkg = JSON.parse(
-  fs.readFileSync(new URL('./package.json', import.meta.url).pathname).toString()
+  fs.readFileSync(new URL('../extension/package.json', import.meta.url).pathname).toString()
 )
 
 const localDependencies = Object.entries(pkg.dependencies as Record<string, string>)

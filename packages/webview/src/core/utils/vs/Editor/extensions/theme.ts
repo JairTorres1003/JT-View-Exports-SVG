@@ -3,7 +3,7 @@ import {
   type IExtensionManifest,
   registerExtension,
 } from '@codingame/monaco-vscode-api/extensions'
-import type { ExtensionManage } from '@jt-view-exports-svg/core'
+import { type ExtensionManage, sanitizePathStart } from '@jt-view-exports-svg/core'
 
 import i18next from '@/i18n'
 import { getUnknownError } from '@/utils/errors'
@@ -21,7 +21,7 @@ async function activate(_themeConfig?: ExtensionManage) {
   try {
     if (import.meta.env.DEV) {
       const { default: devActivate } = await import('./theme.dev.ts')
-      devActivate()
+      await devActivate()
       return
     }
 
@@ -29,7 +29,7 @@ async function activate(_themeConfig?: ExtensionManage) {
 
     const baseUrl = new URL(/* @vite-ignore */ '../assets', import.meta.url).href
 
-    const packageJSON = await fetch(`${baseUrl}/extensions/theme/package.json`)
+    const packageJSON = await fetch(`${baseUrl}/vs/extensions/theme/package.json`)
 
     if (!packageJSON.ok) {
       throw new Error(i18next.t('errors.FailedToFetchExtensionTheme'))
@@ -43,9 +43,8 @@ async function activate(_themeConfig?: ExtensionManage) {
     const { registerFileUrl } = registerExtension(manifest, ExtensionHostKind.LocalProcess)
 
     manifest.contributes?.themes?.forEach((theme) => {
-      const themePath = theme.path?.slice(theme.path.indexOf('/') + 1)
-      const themeUrl = `${baseUrl}/extensions/theme/${themePath}`
-      registerFileUrl(`/${themePath}`, themeUrl)
+      const themePath = sanitizePathStart(theme.path)
+      registerFileUrl(`/${themePath}`, `${baseUrl}/vs/extensions/theme/${themePath}`)
     })
   } catch (error) {
     console.error(

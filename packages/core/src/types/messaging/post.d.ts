@@ -5,6 +5,7 @@ import type { SVGComponent, ViewExportSVG } from '../svg'
 
 import type {
   AssetPath,
+  FetchResponse,
   HandlerArgs,
   HandlersMap,
   MessageEmitter,
@@ -25,10 +26,14 @@ export type PostMessageMap = {
   [SVGPostMessage.OnReloadComponent]: ViewExportSVG[]
   [SVGPostMessage.ToggleExpandAllComponents]: boolean
   [SVGPostMessage.ToggleOpenDevTools]: boolean
+  [SVGPostMessage.ComponentEditedInPlayground]: SVGComponent
+  [SVGPostMessage.ErrorEditingComponentInPlayground]: SVGErrors
   [SVGPostMessage.LoadEditorThemeMode]: ThemeMode
   [SVGPostMessage.LoadEditorConfig]: Record<string, unknown>
   [SVGPostMessage.LoadExtensionTheme]: ExtensionManage
   [SVGPostMessage.LoadEditorStyles]: EditorStyles
+  [SVGPostMessage.FetchVSCodeTheme]: FetchResponse<Record<string, unknown>>
+  [SVGPostMessage.FetchVsCodeThemePackage]: FetchResponse<Record<string, unknown>>
 
   [SVGPostMessage.SendAssetsPath]: AssetPath
   [SVGPostMessage.SendLastScanDate]: string

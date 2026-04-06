@@ -30,15 +30,9 @@ export const useMenuTools = ({
 
   /**
    * Handles the reload action for the editor.
-   * Sends a message to VSCode to reload the extension theme and closes the current menu or dialog.
-   *
-   * @remarks
-   * This function utilizes the `vscode.postMessage` API to communicate with the VSCode extension host,
-   * specifically triggering the `ReloadExtensionTheme` action. After sending the message, it invokes
-   * `handleClose` to close the menu or dialog associated with the action.
    */
   const onReloadEditor = () => {
-    vscode.postMessage(SVGReceiveMessage.ReloadExtensionTheme)
+    vscode.postMessage(SVGReceiveMessage.ReloadEditorExtensionTheme)
     handleClose()
   }
 

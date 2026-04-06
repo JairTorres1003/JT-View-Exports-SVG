@@ -1,10 +1,11 @@
 import {
   type HandlerPostMessage,
+  isValidSVGPostMessageType,
   type OnMessagePosted,
   type PostMessage,
   type PostMessageSubscriber,
   type ReceiveMessageEmitter,
-  SVGPostMessage,
+  type SVGPostMessage,
   SVGReceiveMessage,
 } from '@jt-view-exports-svg/core'
 
@@ -58,10 +59,7 @@ class VSCodeAPIWrapper {
     const message = event.data
     const type: SVGPostMessage = message.type
 
-    if (!this.isValidType(type)) {
-      console.warn(i18next.t('errors.[VSCodeAPIWrapper]IgnoredMessageWithUnknownType:'), type)
-      return
-    }
+    if (!isValidSVGPostMessageType(type)) return
 
     const handler = this.messageHandlers[type] as OnMessagePosted
 
@@ -112,13 +110,6 @@ class VSCodeAPIWrapper {
 
     this.messageQueue.length = 0
     this.messageQueue.push(...remaining)
-  }
-
-  /**
-   * Validate message type
-   */
-  private isValidType(type: SVGPostMessage): type is SVGPostMessage {
-    return Object.values(SVGPostMessage).includes(type)
   }
 
   /**

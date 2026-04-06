@@ -33,7 +33,6 @@ export class MessageRouter {
     return {
       [SVGReceiveMessage.ExtractSVGComponentFromFiles]:
         handlers.extractSVGComponentFromFiles.bind(handlers),
-      [SVGReceiveMessage.ReloadExtensionTheme]: handlers.reloadExtensionTheme.bind(handlers),
 
       [SVGReceiveMessage.GetAssetsPath]: handlers.getAssetsPath.bind(handlers),
       [SVGReceiveMessage.GetViewAssets]: handlers.getViewAssets.bind(handlers),

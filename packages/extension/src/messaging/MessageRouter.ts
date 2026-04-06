@@ -1,4 +1,8 @@
-import type { ReceiveMessage } from '@jt-view-exports-svg/core'
+import {
+  isDynamicMessage,
+  type ReceiveMessage,
+  restoreDynamicMessage,
+} from '@jt-view-exports-svg/core'
 import { l10n } from 'vscode'
 
 import type { BaseHandler } from './handlers/BaseHandler'
@@ -18,14 +22,29 @@ export class MessageRouter {
    * @param message - The message to be routed, containing a type identifier and optional data.
    */
   public async route(message: ReceiveMessage): Promise<boolean> {
-    const handler = this.handlers.get(message.type)
+    let type = message.type
+    let data = Object.hasOwn(message, 'data') ? (message as { data: unknown }).data : undefined
 
-    if (!handler) {
-      console.warn(l10n.t('No handler found for message type: {0}', message.type))
-      return false
+    const isDynamic = isDynamicMessage(type)
+
+    if (isDynamic) {
+      type = restoreDynamicMessage(type)
+      data = isDynamic.dynamicPart
     }
 
-    const data = Object.hasOwn(message, 'data') ? (message as { data: unknown }).data : undefined
+    const handler = this.handlers.get(type)
+
+    if (process.env.NODE_ENV === 'development') {
+      console.info(
+        `%c[MessageRouter] Routing message of type: ${type}`,
+        `color: ${handler ? '#4CAF50' : '#FF9800'}; font-weight: bold;`
+      )
+    }
+
+    if (!handler) {
+      console.warn(l10n.t('No handler found for message type: {0}', type))
+      return false
+    }
 
     await handler.handle(data as Parameters<BaseHandler['handle']>[0])
 

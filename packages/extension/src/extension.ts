@@ -19,7 +19,7 @@ import { initializeExtensionTheme } from './services/vscode/extensionTheme'
  */
 export async function activate(context: ExtensionContext) {
   initCache(context)
-  await initializeExtensionTheme(context)
+  initializeExtensionTheme()
 
   const provider = new InMemoryFileSystemProvider()
 
@@ -44,7 +44,7 @@ export async function activate(context: ExtensionContext) {
       await runToggleDevTools(false)
     }),
     commands.registerCommand(`${CONFIG_KEY}.reloadTheme`, async () => {
-      await runReloadTheme(context)
+      await runReloadTheme()
     }),
     commands.registerCommand(`${CONFIG_KEY}.clearCache`, runClearCache),
 

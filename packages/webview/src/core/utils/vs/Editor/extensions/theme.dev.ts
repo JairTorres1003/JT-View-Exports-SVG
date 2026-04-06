@@ -3,6 +3,9 @@ import {
   type IExtensionManifest,
   registerExtension,
 } from '@codingame/monaco-vscode-api/extensions'
+import { sanitizePathStart } from '@jt-view-exports-svg/core'
+
+import { axiosInstance } from '@/services/instance'
 
 /**
  * Activates the theme extension in development mode by registering a default theme.
@@ -10,30 +13,19 @@ import {
  * This function registers a default theme named "Default Theme One Dark" with the Monaco Editor.
  * It sets the theme's path and other metadata, allowing it to be used in the editor.
  */
-export default function devActivate(): void {
-  const themePath = '/dev/vs/theme/default-theme-one-dark.json'
-  const manifest: IExtensionManifest = {
-    name: 'default-theme-one-dark',
-    displayName: 'Default Theme One Dark',
-    publisher: 'zhuangtongfa',
-    version: __APP_VERSION,
-    engines: {
-      vscode: '*',
-    },
-    contributes: {
-      themes: [
-        {
-          label: 'Default Theme One Dark',
-          path: themePath,
-          id: 'default-theme-one-dark',
-          uiTheme: 'vs-dark',
-        },
-      ],
-    },
-  }
+export default async function devActivate(): Promise<void> {
+  const manifest = (await axiosInstance.get<IExtensionManifest>('/vs/extension/theme-package')).data
 
   const extensionTheme = registerExtension(manifest, ExtensionHostKind.LocalProcess)
-  extensionTheme.registerFileUrl(themePath, new URL(themePath, window.location.href).href)
+
+  const prefix = '/vs/extensions/theme'
+
+  manifest.contributes?.themes?.forEach((theme) => {
+    extensionTheme.registerFileUrl(
+      theme.path,
+      new URL(`${prefix}/${sanitizePathStart(theme.path)}`, window.location.href).href
+    )
+  })
 
   document.documentElement.classList.add('monaco-workbench')
 }

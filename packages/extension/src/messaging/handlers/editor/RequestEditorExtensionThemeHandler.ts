@@ -4,6 +4,7 @@ import { l10n, window } from 'vscode'
 import type { WebviewMessenger } from '@/messaging/WebviewMessenger'
 import { getCache } from '@/services/cache/main'
 import { CACHE_KEY } from '@/services/vscode/extensionTheme'
+
 import { BaseHandler } from '../BaseHandler'
 
 export class RequestEditorExtensionThemeHandler extends BaseHandler {

@@ -26,6 +26,10 @@ export const SVGPostMessage = {
   LoadExtensionTheme: 'send/load-extension-theme',
   LoadEditorStyles: 'send/load-editor-styles',
 
+  // Fetch-related messages
+  FetchVSCodeTheme: 'send/fetch-vscode-theme/<placeholder>',
+  FetchVsCodeThemePackage: 'send/fetch-vscode-theme-package',
+
   // Assets-related messages
   SendAssetsPath: 'send/assets/paths',
 
@@ -77,9 +81,14 @@ export const SVGReceiveMessage = {
   RequestEditorConfig: 'editor/request-config',
   RequestEditorExtensionTheme: 'editor/request-extension-theme',
   RequestEditorStyles: 'editor/request-styles',
+  ReloadEditorExtensionTheme: 'editor/reload-extension-theme',
 
   // File-related messages
   OpenFileInEditor: 'file/open-in-editor',
+
+  // fetch-related messages
+  FetchVSCodeTheme: 'fetch/request-vscode-theme/<placeholder>',
+  FetchVsCodeThemePackage: 'fetch/request-vscode-theme-package',
 
   ExtractSVGComponentFromFiles: 'svg/extract-components-from-files',
 
@@ -87,8 +96,6 @@ export const SVGReceiveMessage = {
   GetAssetsPath: 'assets/paths',
   RemoveAssets: 'assets/remove',
   GetViewAssets: 'assets/views',
-
-  ReloadExtensionTheme: 'settings/reload-extension-theme',
 
   // Scan-related messages
   GetLastScanDate: 'scan/last-date',
