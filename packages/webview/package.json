@@ -81,14 +81,14 @@
     "@types/uuid": "^10.0.0",
     "@types/vscode-webview": "^1.57.5",
     "@vitejs/plugin-react-swc": "^4.2.2",
-    "@vitest/coverage-v8": "^4.1.0",
-    "@vitest/ui": "^4.1.0",
+    "@vitest/coverage-v8": "^4.1.2",
+    "@vitest/ui": "^4.1.2",
     "axios": "^1.13.5",
     "jsdom": "^29.0.0",
     "typescript": "^5.9.3",
     "vite": "npm:rolldown-vite@7.3.1",
     "vite-tsconfig-paths": "^6.0.5",
-    "vitest": "^4.1.0"
+    "vitest": "^4.1.2"
   },
   "overrides": {
     "vite": "npm:rolldown-vite@7.3.1"
