@@ -68,7 +68,7 @@
     "framer-motion": "^12.29.2",
     "fs-extra": "^11.3.3",
     "hast-util-to-jsx-runtime": "^2.3.6",
-    "lucide-react": "^0.575.0",
+    "lucide-react": "^1.7.0",
     "mdast-util-to-hast": "^13.2.1",
     "prism-react-renderer": "^2.3.0",
     "prismjs": "^1.30.0",
