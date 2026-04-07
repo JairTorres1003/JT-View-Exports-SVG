@@ -1,4 +1,8 @@
-import { type SVGIconCollection, SVGReceiveMessage } from '@jt-view-exports-svg/core'
+import {
+  IconCollectionKind,
+  type SVGIconCollection,
+  SVGReceiveMessage,
+} from '@jt-view-exports-svg/core'
 import * as vsc from 'vscode'
 
 import { getCache } from '@/services/cache/main'
@@ -19,5 +23,10 @@ export class RemoveIconFromCollectionHandler extends BaseHandler {
     const cache = getCache().get('icons')
 
     cache.remove(workspace, { ...icon, file })
+
+    if (icon.collection === IconCollectionKind.FAVORITE) {
+      const exportCache = getCache().get('viewExports')
+      exportCache.toggleIconFavorite(workspace, icon, false)
+    }
   }
 }

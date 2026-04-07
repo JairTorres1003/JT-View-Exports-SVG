@@ -36,7 +36,7 @@ export class AddIconToCollectionHandler extends BaseHandler {
 
     if (icon.collection === IconCollectionKind.FAVORITE) {
       const exportCache = getCache().get('viewExports')
-      exportCache.toggleIconFavorite(workspace, icon)
+      exportCache.toggleIconFavorite(workspace, icon, true)
     }
   }
 }
