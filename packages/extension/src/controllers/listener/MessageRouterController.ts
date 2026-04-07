@@ -30,10 +30,7 @@ export class MessageRouter {
   private get _handlersMap(): Partial<HandlerReceiveMessage> {
     const handlers = this.handlers
 
-    return {
-      [SVGReceiveMessage.GetLastScanDate]: handlers.getLastScanDate.bind(handlers),
-      [SVGReceiveMessage.ScanWorkspace]: handlers.scanWorkspace.bind(handlers),
-    }
+    return {}
   }
 
   private handleMessage(event: ReceiveMessage): void {

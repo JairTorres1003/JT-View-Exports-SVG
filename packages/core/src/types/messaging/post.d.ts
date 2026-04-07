@@ -36,8 +36,7 @@ export type PostMessageMap = {
   [SVGPostMessage.LoadOpenFiles]: string[]
   [SVGPostMessage.FetchVsCodeThemePackage]: FetchResponse<Record<string, unknown>>
 
-  [SVGPostMessage.SendAssetsPath]: AssetPath
-  [SVGPostMessage.SendLastScanDate]: string
+  // Pending review
   [SVGPostMessage.SendUpdateConfiguration]: Record<string, unknown>
 }
 

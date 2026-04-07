@@ -33,14 +33,8 @@ export const SVGPostMessage = {
   FetchVSCodeTheme: 'send/fetch-vscode-theme/<placeholder>',
   FetchVsCodeThemePackage: 'send/fetch-vscode-theme-package',
 
-  // Assets-related messages
-  SendAssetsPath: 'send/assets/paths',
-
   // Settings-related messages
   SendUpdateConfiguration: 'send/update-configuration',
-
-  // Scan-related messages
-  SendLastScanDate: 'send/scan/last-date',
 } as const
 
 /**
@@ -90,10 +84,6 @@ export const SVGReceiveMessage = {
   // fetch-related messages
   FetchVSCodeTheme: 'fetch/request-vscode-theme/<placeholder>',
   FetchVsCodeThemePackage: 'fetch/request-vscode-theme-package',
-
-  // Scan-related messages
-  GetLastScanDate: 'scan/last-date',
-  ScanWorkspace: 'scan/workspace',
 } as const
 
 /**

@@ -34,9 +34,6 @@ export type ReceiveMessageMap = {
   [SVGReceiveMessage.CreateTempFiles]: FileTemporary[]
   [SVGReceiveMessage.FetchVSCodeTheme]: undefined
   [SVGReceiveMessage.FetchVsCodeThemePackage]: undefined
-
-  [SVGReceiveMessage.GetLastScanDate]: undefined
-  [SVGReceiveMessage.ScanWorkspace]: undefined
 }
 
 /**

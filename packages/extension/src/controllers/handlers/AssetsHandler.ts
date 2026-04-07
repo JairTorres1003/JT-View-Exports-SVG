@@ -5,25 +5,16 @@ import { scanningFiles, scanningWorkspace } from '@/utilities/files/scanning'
 import { getUnknownError } from '@/utilities/misc'
 import { svgFileToUri } from '@/utilities/vscode/uri'
 
-import { AssetsPathsController, LastScanDateController } from '../config'
+import { AssetsPathsController } from '../config'
 
 export class AssetsHandler {
   private readonly assetsPathController: AssetsPathsController
-  private readonly lastScanDateController: LastScanDateController
 
   constructor(private readonly postMessage: PostMessageEmitter) {
     this.assetsPathController = new AssetsPathsController()
-    this.lastScanDateController = new LastScanDateController()
   }
 
-  async getAssetsPath(): Promise<void> {
-    try {
-      const assetsPath = await this.assetsPathController.getAssetsPath()
-      this.postMessage(SVGPostMessage.SendAssetsPath, assetsPath)
-    } catch (error) {
-      console.error(l10n.t('Error getting assets path: {error}'), { error: getUnknownError(error) })
-    }
-  }
+  async getAssetsPath(): Promise<void> {}
 
   async getViewAssets(files: SVGFile[]): Promise<void> {
     try {
@@ -33,10 +24,7 @@ export class AssetsHandler {
     }
   }
 
-  getLastScanDate(): void {
-    const date = this.lastScanDateController._dateString
-    this.postMessage(SVGPostMessage.SendLastScanDate, date)
-  }
+  getLastScanDate(): void {}
 
   async removeAssets(files: SVGFile[]): Promise<void> {
     try {
