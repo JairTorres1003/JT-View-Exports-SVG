@@ -34,15 +34,11 @@ export class MessageRouter {
       [SVGReceiveMessage.ExtractSVGComponentFromFiles]:
         handlers.extractSVGComponentFromFiles.bind(handlers),
 
-      [SVGReceiveMessage.GetAssetsPath]: handlers.getAssetsPath.bind(handlers),
-      [SVGReceiveMessage.GetViewAssets]: handlers.getViewAssets.bind(handlers),
       [SVGReceiveMessage.GetLastScanDate]: handlers.getLastScanDate.bind(handlers),
-      [SVGReceiveMessage.RemoveAssets]: handlers.removeAssets.bind(handlers),
       [SVGReceiveMessage.ScanWorkspace]: handlers.scanWorkspace.bind(handlers),
 
       [SVGReceiveMessage.RequestFileOpen]: handlers.requestFileOpen.bind(handlers),
       [SVGReceiveMessage.CreateTempFiles]: handlers.createTempFiles.bind(handlers),
-      // [SVGReceiveMessage.ViewRenderPath]: handlers.changeViewRenderPath.bind(handlers),
     }
   }
 

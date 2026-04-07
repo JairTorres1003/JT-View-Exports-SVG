@@ -90,11 +90,6 @@ export const SVGReceiveMessage = {
 
   ExtractSVGComponentFromFiles: 'svg/extract-components-from-files',
 
-  // Assets-related messages
-  GetAssetsPath: 'assets/paths',
-  RemoveAssets: 'assets/remove',
-  GetViewAssets: 'assets/views',
-
   // Scan-related messages
   GetLastScanDate: 'scan/last-date',
   ScanWorkspace: 'scan/workspace',

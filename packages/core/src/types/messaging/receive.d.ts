@@ -1,7 +1,7 @@
 import type { IconCollectionKind } from '../../constants'
 import type { SVGReceiveMessage } from '../../constants/messages'
 
-import type { FileTemporary, LocationIdentifier, SVGFile } from '../common'
+import type { FileTemporary, LocationIdentifier } from '../common'
 import type { SVGIconCollection, SVGPlayground } from '../svg'
 
 import type { HandlerArgs, HandlersMap, MessageEmitter, MessagesUnion } from './base'
@@ -33,12 +33,9 @@ export type ReceiveMessageMap = {
   [SVGReceiveMessage.FetchVsCodeThemePackage]: undefined
 
   [SVGReceiveMessage.ExtractSVGComponentFromFiles]: string[]
-  [SVGReceiveMessage.GetAssetsPath]: undefined
   [SVGReceiveMessage.GetLastScanDate]: undefined
-  [SVGReceiveMessage.GetViewAssets]: SVGFile[]
   [SVGReceiveMessage.RequestFileOpen]: undefined
   [SVGReceiveMessage.CreateTempFiles]: FileTemporary[]
-  [SVGReceiveMessage.RemoveAssets]: SVGFile[]
   [SVGReceiveMessage.ScanWorkspace]: undefined
 }
 
