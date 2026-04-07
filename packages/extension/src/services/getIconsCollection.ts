@@ -155,5 +155,8 @@ export const getIconsCollection = async (): Promise<{
 
   fileCache.clear()
 
-  return { items: results.items, files: Object.values(results.files) }
+  return {
+    items: results.items.filter((v): v is NonNullable<typeof v> => !!v),
+    files: Object.values(results.files),
+  }
 }
