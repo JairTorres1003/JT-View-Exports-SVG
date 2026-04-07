@@ -1,4 +1,10 @@
-import type { FileIdentifier, SVGFile, ViewExportSVG } from '@jt-view-exports-svg/core'
+import {
+  type FileIdentifier,
+  IconCollectionKind,
+  type SVGFile,
+  type SVGIconCollection,
+  type ViewExportSVG,
+} from '@jt-view-exports-svg/core'
 import type * as vsc from 'vscode'
 
 import { BaseCache } from './BaseCache'
@@ -79,5 +85,42 @@ export class ViewExportSVGCache extends BaseCache<
     })
 
     this.set(workspace, currentEntry)
+  }
+
+  /**
+   * Toggles the favorite state of a specific icon component within a cached workspace entry.
+   *
+   * @param workspace - Target workspace folder cache scope, or `'global'` for shared cache.
+   * @param icon - Icon descriptor used to locate the cached data entry and component to update.
+   * @param isFavorite - Desired favorite state to set for the icon component. Defaults to `false`.
+   */
+  public async toggleIconFavorite(
+    workspace: vsc.WorkspaceFolder,
+    icon: SVGIconCollection,
+    isFavorite = false
+  ) {
+    if (icon.collection !== IconCollectionKind.FAVORITE) return
+
+    const entry = await this.get(workspace)
+    if (!entry) return
+
+    const dataEntry = entry.data[icon.location.id]
+    if (!dataEntry) return
+
+    const index = dataEntry.components.findIndex((i) => i.name === icon.name)
+    if (index === -1 || dataEntry.components[index].isFavorite === isFavorite) return
+
+    const updatedComponents = [...dataEntry.components]
+    updatedComponents[index] = {
+      ...updatedComponents[index],
+      isFavorite,
+    }
+
+    entry.data[icon.location.id] = {
+      ...dataEntry,
+      components: updatedComponents,
+    }
+
+    this.set(workspace, entry)
   }
 }
