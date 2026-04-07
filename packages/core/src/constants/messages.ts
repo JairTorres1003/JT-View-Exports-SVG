@@ -84,6 +84,7 @@ export const SVGReceiveMessage = {
   // File-related messages
   OpenFileInEditor: 'file/open-in-editor',
   OpenDialogFiles: 'file/open-dialog',
+  CreateTempFiles: 'file/create-temp',
 
   // fetch-related messages
   FetchVSCodeTheme: 'fetch/request-vscode-theme/<placeholder>',
@@ -94,8 +95,6 @@ export const SVGReceiveMessage = {
   // Scan-related messages
   GetLastScanDate: 'scan/last-date',
   ScanWorkspace: 'scan/workspace',
-
-  CreateTempFiles: 'file/create-temp',
 } as const
 
 /**

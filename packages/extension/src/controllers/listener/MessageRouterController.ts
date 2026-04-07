@@ -36,8 +36,6 @@ export class MessageRouter {
 
       [SVGReceiveMessage.GetLastScanDate]: handlers.getLastScanDate.bind(handlers),
       [SVGReceiveMessage.ScanWorkspace]: handlers.scanWorkspace.bind(handlers),
-
-      [SVGReceiveMessage.CreateTempFiles]: handlers.createTempFiles.bind(handlers),
     }
   }
 
