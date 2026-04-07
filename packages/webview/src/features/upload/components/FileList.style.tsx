@@ -23,11 +23,8 @@ export const BoxFileList = styled<ComponentType<BoxProps>>(
   [`& .${fileListClasses.removeButton}`]: {
     position: 'absolute',
     display: 'none',
-    padding: 0,
     top: '4px',
     right: '4px',
-    backgroundColor: 'rgb(255 255 255 / 0.5)',
-    borderRadius: '50%',
     zIndex: 1,
     svg: {
       stroke: 'currentColor',
