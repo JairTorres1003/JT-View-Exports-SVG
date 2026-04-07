@@ -18,6 +18,7 @@ export type ReceiveMessageMap = {
   [SVGReceiveMessage.SearchComponents]: string
   [SVGReceiveMessage.ReloadComponent]: FileIdentifier[]
   [SVGReceiveMessage.IsExpandComponents]: boolean
+  [SVGReceiveMessage.ProcessUploadedFiles]: string[]
   [SVGReceiveMessage.AddIconToCollection]: SVGIconCollection
   [SVGReceiveMessage.RemoveIconFromCollection]: SVGIconCollection
   [SVGReceiveMessage.ClearIconCollection]: IconCollectionKind
@@ -34,7 +35,6 @@ export type ReceiveMessageMap = {
   [SVGReceiveMessage.FetchVSCodeTheme]: undefined
   [SVGReceiveMessage.FetchVsCodeThemePackage]: undefined
 
-  [SVGReceiveMessage.ExtractSVGComponentFromFiles]: string[]
   [SVGReceiveMessage.GetLastScanDate]: undefined
   [SVGReceiveMessage.ScanWorkspace]: undefined
 }

@@ -64,6 +64,7 @@ export const SVGReceiveMessage = {
   SearchComponents: 'ui/search-components',
   ReloadComponent: 'ui/reload-component',
   IsExpandComponents: 'ui/is-expand-components',
+  ProcessUploadedFiles: 'ui/process-uploaded-files',
 
   // Icons-related messages
   AddIconToCollection: 'icons/add-to-collection',
@@ -89,8 +90,6 @@ export const SVGReceiveMessage = {
   // fetch-related messages
   FetchVSCodeTheme: 'fetch/request-vscode-theme/<placeholder>',
   FetchVsCodeThemePackage: 'fetch/request-vscode-theme-package',
-
-  ExtractSVGComponentFromFiles: 'svg/extract-components-from-files',
 
   // Scan-related messages
   GetLastScanDate: 'scan/last-date',

@@ -32,6 +32,8 @@ export const showMenu = async (
 
   PanelController.navigate(`${pathnames.main}?load-message=${messageEncoded}`)
 
+  viewExportStore.clear()
+
   if (filesToProcess.length === 0) {
     const { files, items } = await getIconsCollection()
     viewExportStore.set(items, files)

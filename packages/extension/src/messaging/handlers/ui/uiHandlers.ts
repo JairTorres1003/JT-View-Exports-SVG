@@ -1,6 +1,7 @@
 import type { WebviewMessenger } from '../../WebviewMessenger'
 
 import { IsExpandComponentsHandler } from './IsExpandComponentsHandler'
+import { ProcessUploadedFilesHandler } from './ProcessUploadedFilesHandler'
 import { ReloadComponentHandler } from './ReloadComponentHandler'
 import { RequestComponentsHandler } from './RequestComponentsHandler'
 import { RequestFilesComponentsHandler } from './RequestFilesComponentsHandler'
@@ -15,5 +16,6 @@ export function createUIHandlers(messenger: WebviewMessenger) {
     new SearchComponentsHandler(messenger),
     new ReloadComponentHandler(messenger),
     new IsExpandComponentsHandler(),
+    new ProcessUploadedFilesHandler(messenger),
   ]
 }

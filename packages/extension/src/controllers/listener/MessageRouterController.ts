@@ -31,9 +31,6 @@ export class MessageRouter {
     const handlers = this.handlers
 
     return {
-      [SVGReceiveMessage.ExtractSVGComponentFromFiles]:
-        handlers.extractSVGComponentFromFiles.bind(handlers),
-
       [SVGReceiveMessage.GetLastScanDate]: handlers.getLastScanDate.bind(handlers),
       [SVGReceiveMessage.ScanWorkspace]: handlers.scanWorkspace.bind(handlers),
     }
