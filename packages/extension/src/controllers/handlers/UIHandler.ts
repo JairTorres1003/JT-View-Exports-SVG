@@ -57,7 +57,7 @@ export class UIHandler {
     window.showOpenDialog(options).then((uris) => {
       if (uris && uris.length > 0) {
         const fileUris = uris.map((uri) => uri.toString())
-        this.postMessage(SVGPostMessage.SendOpenFiles, fileUris)
+        this.postMessage(SVGPostMessage.LoadOpenFiles, fileUris)
       }
     })
   }
@@ -83,7 +83,7 @@ export class UIHandler {
         })
       )
 
-      this.postMessage(SVGPostMessage.SendOpenFiles, uris)
+      this.postMessage(SVGPostMessage.LoadOpenFiles, uris)
     } catch (error) {
       console.error(l10n.t('Error creating temporary files'), error)
     }

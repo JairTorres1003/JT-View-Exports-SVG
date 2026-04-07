@@ -15,7 +15,7 @@ export function createRouter(messenger: WebviewMessenger): MessageRouter {
     ...createIconsHandlers(),
     ...createDevtoolsHandlers(messenger),
     ...createEditorHandlers(messenger),
-    ...createFileHandlers(),
+    ...createFileHandlers(messenger),
     ...createFetchHandlers(messenger),
   ])
 }

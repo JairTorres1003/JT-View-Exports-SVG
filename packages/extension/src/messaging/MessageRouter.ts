@@ -34,13 +34,6 @@ export class MessageRouter {
 
     const handler = this.handlers.get(type)
 
-    if (process.env.NODE_ENV === 'development') {
-      console.info(
-        `%c[MessageRouter] Routing message of type: ${type}`,
-        `color: ${handler ? '#4CAF50' : '#FF9800'}; font-weight: bold;`
-      )
-    }
-
     if (!handler) {
       console.warn(l10n.t('No handler found for message type: {0}', type))
       return false

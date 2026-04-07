@@ -26,6 +26,9 @@ export const SVGPostMessage = {
   LoadExtensionTheme: 'send/load-extension-theme',
   LoadEditorStyles: 'send/load-editor-styles',
 
+  // File-related messages
+  LoadOpenFiles: 'send/load-open-files',
+
   // Fetch-related messages
   FetchVSCodeTheme: 'send/fetch-vscode-theme/<placeholder>',
   FetchVsCodeThemePackage: 'send/fetch-vscode-theme-package',
@@ -38,9 +41,6 @@ export const SVGPostMessage = {
 
   // Scan-related messages
   SendLastScanDate: 'send/scan/last-date',
-
-  // File-related messages
-  SendOpenFiles: 'send/file/open',
 } as const
 
 /**
@@ -83,6 +83,7 @@ export const SVGReceiveMessage = {
 
   // File-related messages
   OpenFileInEditor: 'file/open-in-editor',
+  OpenDialogFiles: 'file/open-dialog',
 
   // fetch-related messages
   FetchVSCodeTheme: 'fetch/request-vscode-theme/<placeholder>',
@@ -94,7 +95,6 @@ export const SVGReceiveMessage = {
   GetLastScanDate: 'scan/last-date',
   ScanWorkspace: 'scan/workspace',
 
-  RequestFileOpen: 'file/request-open',
   CreateTempFiles: 'file/create-temp',
 } as const
 

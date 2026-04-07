@@ -112,7 +112,7 @@ export const useLoadFiles = () => {
    * This function sends a message to the VS Code extension to open the file dialog.
    */
   const handleOpenDialog = () => {
-    vscode.postMessage(SVGReceiveMessage.RequestFileOpen)
+    vscode.postMessage(SVGReceiveMessage.OpenDialogFiles)
   }
 
   /**
@@ -166,10 +166,10 @@ export const useLoadFiles = () => {
   }
 
   useEffect(() => {
-    vscode.onMessage(SVGPostMessage.SendOpenFiles, loadFiles)
+    vscode.onMessage(SVGPostMessage.LoadOpenFiles, loadFiles)
 
     return () => {
-      vscode.unregisterMessage(SVGPostMessage.SendOpenFiles)
+      vscode.unregisterMessage(SVGPostMessage.LoadOpenFiles)
     }
   }, [])
 

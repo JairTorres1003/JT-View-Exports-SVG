@@ -33,12 +33,12 @@ export type PostMessageMap = {
   [SVGPostMessage.LoadExtensionTheme]: ExtensionManage
   [SVGPostMessage.LoadEditorStyles]: EditorStyles
   [SVGPostMessage.FetchVSCodeTheme]: FetchResponse<Record<string, unknown>>
+  [SVGPostMessage.LoadOpenFiles]: string[]
   [SVGPostMessage.FetchVsCodeThemePackage]: FetchResponse<Record<string, unknown>>
 
   [SVGPostMessage.SendAssetsPath]: AssetPath
   [SVGPostMessage.SendLastScanDate]: string
   [SVGPostMessage.SendUpdateConfiguration]: Record<string, unknown>
-  [SVGPostMessage.SendOpenFiles]: string[]
 }
 
 /**

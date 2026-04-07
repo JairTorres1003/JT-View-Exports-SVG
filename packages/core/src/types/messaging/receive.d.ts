@@ -29,12 +29,12 @@ export type ReceiveMessageMap = {
   [SVGReceiveMessage.RequestEditorStyles]: undefined
   [SVGReceiveMessage.ReloadEditorExtensionTheme]: undefined
   [SVGReceiveMessage.OpenFileInEditor]: LocationIdentifier
+  [SVGReceiveMessage.OpenDialogFiles]: undefined
   [SVGReceiveMessage.FetchVSCodeTheme]: undefined
   [SVGReceiveMessage.FetchVsCodeThemePackage]: undefined
 
   [SVGReceiveMessage.ExtractSVGComponentFromFiles]: string[]
   [SVGReceiveMessage.GetLastScanDate]: undefined
-  [SVGReceiveMessage.RequestFileOpen]: undefined
   [SVGReceiveMessage.CreateTempFiles]: FileTemporary[]
   [SVGReceiveMessage.ScanWorkspace]: undefined
 }
