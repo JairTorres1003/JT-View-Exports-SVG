@@ -34,9 +34,7 @@ export const SVGPostMessage = {
   SendAssetsPath: 'send/assets/paths',
 
   // Settings-related messages
-  SendRunLoading: 'send/settings/run-loading',
   SendUpdateConfiguration: 'send/update-configuration',
-  SendReloadWebview: 'send/reload-webview',
 
   // Scan-related messages
   SendLastScanDate: 'send/scan/last-date',

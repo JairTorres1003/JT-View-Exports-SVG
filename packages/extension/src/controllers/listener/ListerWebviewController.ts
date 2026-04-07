@@ -99,7 +99,6 @@ export class ListerWebviewController {
    */
   reload(): void {
     this.updateLayout(0, [])
-    this._postMessage(SVGPostMessage.SendReloadWebview, l10n.t('Reloading...'))
   }
 
   extractSVGComponentFromFiles(files: string[]): void {

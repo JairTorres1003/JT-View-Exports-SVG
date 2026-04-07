@@ -58,11 +58,7 @@ export class ViewExportsSVGController extends ListerWebviewController {
   /**
    * Initializes the panel and starts the extraction process.
    */
-  public init(pathname = '/dashboard'): void {
-    if (!isEmpty(ViewExportsSVGController.currentPanel)) {
-      this._postMessage(SVGPostMessage.SendRunLoading, pathname)
-    }
-  }
+  public init(_pathname = '/dashboard'): void {}
 
   /**
    * Renders the current webview panel if it exists, otherwise a new webview panel
