@@ -1,23 +1,21 @@
-import { l10n, window } from 'vscode'
+import { pathnames } from '@jt-view-exports-svg/core'
+import * as vsc from 'vscode'
 
-import { getCacheManager } from '@/controllers/cache'
-import { ViewExportsSVGController } from '@/controllers/views'
+import { PanelController } from '@/controllers/views/PanelController'
+import { getCache } from '@/services/cache/main'
 
-/**
- * Clears all cached data by invoking the cache manager's `clearAll` method.
- *
- * This function retrieves the cache manager instance and removes all cached entries.
- */
-export const runClearCache = (): void => {
-  const cacheManager = getCacheManager()
+export const runClearFullCache = async (isFullCache: boolean): Promise<void> => {
+  const messageEncoded = encodeURIComponent(
+    vsc.l10n.t(isFullCache ? 'Clearing full cache...' : 'Clearing cache...')
+  )
 
-  cacheManager.clearAll()
+  PanelController.navigate(`${pathnames.main}?load-message=${messageEncoded}`)
 
-  if (ViewExportsSVGController.currentPanel) {
-    ViewExportsSVGController.currentPanel.reload()
-  }
+  await getCache().clear(['extensionTheme', 'viewExports'])
 
-  window
-    .showInformationMessage(l10n.t('Cache cleared successfully!'))
+  PanelController.navigate(pathnames.home)
+
+  vsc.window
+    .showInformationMessage(vsc.l10n.t('Cache cleared successfully!'))
     .then(undefined, console.error)
 }
