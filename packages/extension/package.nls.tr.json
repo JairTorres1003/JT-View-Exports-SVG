@@ -9,6 +9,8 @@
   "extension.commands.openDevTools.title": "Geliştirici Araçlarını Aç",
   "extension.commands.closeDevTools.title": "Geliştirici Araçlarını Kapat",
   "extension.commands.clearCache.title": "Önbelleği Temizle",
+  "extension.commands.clearFullCache.title": "Tam Önbelleği Temizle",
+  "extension.commands.clearCollectionCache.title": "Koleksiyon Önbelleğini Temizle",
   "extension.config.defaultExpandAll.title": "Varsayılan Olarak Tüm Simgeleri Genişlet",
   "extension.config.defaultExpandAll.description": "Uzantı açıldığında tüm simgelerin varsayılan olarak genişletilip genişletilmeyeceğini belirler.",
   "extension.config.defaultClickToOpenDevTools.title": "Varsayılan Olarak Geliştirici Araçlarını Açmak İçin Tıklayın",

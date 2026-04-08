@@ -95,6 +95,18 @@
         "title": "%extension.commands.clearCache.title%",
         "icon": "$(trash)",
         "category": "View Exports SVG"
+      },
+      {
+        "command": "JT-View-Exports-SVG.clearFullCache",
+        "title": "%extension.commands.clearFullCache.title%",
+        "icon": "$(trash)",
+        "category": "View Exports SVG"
+      },
+      {
+        "command": "JT-View-Exports-SVG.clearCollectionCache",
+        "title": "%extension.commands.clearCollectionCache.title%",
+        "icon": "$(trash)",
+        "category": "View Exports SVG"
       }
     ],
     "menus": {

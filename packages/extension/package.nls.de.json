@@ -9,6 +9,8 @@
   "extension.commands.openDevTools.title": "Entwicklertools öffnen",
   "extension.commands.closeDevTools.title": "Entwicklertools schließen",
   "extension.commands.clearCache.title": "Cache löschen",
+  "extension.commands.clearFullCache.title": "Vollen Cache löschen",
+  "extension.commands.clearCollectionCache.title": "Sammlungscache löschen",
   "extension.config.defaultExpandAll.title": "Standardmäßig alle Symbole erweitern",
   "extension.config.defaultExpandAll.description": "Bestimmt, ob alle Symbole standardmäßig erweitert werden sollen, wenn die Erweiterung geöffnet wird.",
   "extension.config.defaultClickToOpenDevTools.title": "Standardklick zum Öffnen von Devtools",

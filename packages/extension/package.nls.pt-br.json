@@ -9,6 +9,8 @@
   "extension.commands.openDevTools.title": "Abrir ferramentas de desenvolvedor",
   "extension.commands.closeDevTools.title": "Fechar ferramentas de desenvolvedor",
   "extension.commands.clearCache.title": "Limpar cache",
+  "extension.commands.clearFullCache.title": "Limpar cache completo",
+  "extension.commands.clearCollectionCache.title": "Limpar cache de coleção",
   "extension.config.defaultExpandAll.title": "Expandir todos os ícones por padrão",
   "extension.config.defaultExpandAll.description": "Determina se todos os ícones devem ser expandidos por padrão ao abrir a extensão.",
   "extension.config.defaultClickToOpenDevTools.title": "Clique para abrir ferramentas de desenvolvedor por padrão",

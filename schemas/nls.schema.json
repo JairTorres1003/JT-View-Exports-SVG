@@ -53,6 +53,16 @@
       "description": "The title of the configuration to clear the cache",
       "default": "Clear Cache"
     },
+    "extension.commands.clearFullCache.title": {
+      "type": "string",
+      "description": "The title of the configuration to clear the full cache",
+      "default": "Clear Full Cache"
+    },
+    "extension.commands.clearCollectionCache.title": {
+      "type": "string",
+      "description": "The title of the configuration to clear the collection cache",
+      "default": "Clear Collection Cache"
+    },
     "extension.config.defaultExpandAll.title": {
       "type": "string",
       "description": "The title of the configuration to indicate whether or not to expand all items by default",
@@ -165,6 +175,8 @@
     "extension.commands.openDevTools.title",
     "extension.commands.closeDevTools.title",
     "extension.commands.clearCache.title",
+    "extension.commands.clearFullCache.title",
+    "extension.commands.clearCollectionCache.title",
     "extension.config.defaultExpandAll.title",
     "extension.config.defaultExpandAll.description",
     "extension.config.defaultClickToOpenDevTools.title",
