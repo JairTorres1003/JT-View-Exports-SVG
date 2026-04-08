@@ -169,6 +169,7 @@ export abstract class BaseCache<T, Tidentifier = string> {
       // Ignore if the directory doesn't exist
     }
     this.index = {}
+    this.memoryCache.clear()
     this.persistIndex()
   }
 }
