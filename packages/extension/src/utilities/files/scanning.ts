@@ -3,10 +3,8 @@ import { l10n, type Uri, window, workspace } from 'vscode'
 
 import { LastScanDateController } from '@/controllers/config'
 import { ViewExportsSVGController } from '@/controllers/views'
-
+import { allowedFilesInFolder } from '../../services/allowedFilesInFolder'
 import { getUnknownError, isEmpty } from '../misc'
-
-import { allowedFilesInFolder } from './allowedFilesInFolder'
 import { processFiles } from './processFiles'
 
 /**

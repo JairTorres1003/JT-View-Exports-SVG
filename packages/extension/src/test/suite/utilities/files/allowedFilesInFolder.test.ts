@@ -2,7 +2,7 @@ import * as assert from 'assert'
 
 import { Uri } from 'vscode'
 
-import { allowedFilesInFolder } from '@/utilities/files/allowedFilesInFolder'
+import { allowedFilesInFolder } from '@/services/allowedFilesInFolder'
 
 import { testFolderUri } from '../../main.test'
 
