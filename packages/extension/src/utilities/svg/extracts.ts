@@ -78,6 +78,10 @@ export async function extractNodeDeclarations(uriFile: vsc.Uri): Promise<Extract
     },
   })
 
+  // Help the GC free the AST — on large objects this makes a difference
+  // @ts-expect-error — explicit AST cleanup
+  ast.program = null
+
   return { declarations: extractions, identifiers }
 }
 

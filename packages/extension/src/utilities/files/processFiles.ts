@@ -7,11 +7,14 @@ import { AssetsPathsController, ShowNotExportedIconsController } from '@/control
 import { getCache } from '@/services/cache/main'
 import type { ViewExportSVGCache } from '@/services/cache/ViewExportSVGCache'
 import { componentDeclarationStore } from '@/store/ComponentDeclarationStore'
-import { isEmpty } from '../misc'
+
 import { extractComponents } from '../svg/extracts'
 import { getUriPath } from '../vscode/uri'
 import { groupIconsByPattern } from './groupIconsByPattern'
 import { pathToSVGFile } from './misc'
+
+// Adjustable: 5-15 is the optimal range for I/O + CPU operations (Babel parse)
+const CONCURRENCY_LIMIT = 10
 
 interface ProcessResult {
   exportItem: ViewExportSVG
@@ -21,6 +24,28 @@ interface ProcessResult {
 interface ProcessFileItemOptions {
   isShowNoExports: boolean
   cacheItem: ViewExportSVGCache
+}
+
+/**
+ * Runs async tasks with a maximum concurrency limit.
+ * Avoids external dependencies (e.g. p-limit) to keep Web extension compatibility.
+ */
+async function withConcurrency<T>(
+  items: T[],
+  limit: number,
+  fn: (item: T, index: number) => Promise<void>
+): Promise<void> {
+  let index = 0
+
+  async function worker(): Promise<void> {
+    while (index < items.length) {
+      const current = index++
+      await fn(items[current], current)
+    }
+  }
+
+  const workers = Array.from({ length: Math.min(limit, items.length) }, () => worker())
+  await Promise.all(workers)
 }
 
 /**
@@ -41,7 +66,6 @@ async function processFileItem(
     if (!REGEX_FILE.test(extname)) return null
 
     const file = await pathToSVGFile(getUriPath(uri))
-
     const currentWorkspace = vsc.workspace.workspaceFolders?.[0] ?? 'global'
     const currentItem = await options.cacheItem.getByFile(currentWorkspace, file)
 
@@ -72,23 +96,20 @@ async function processFileItem(
     }
 
     await options.cacheItem.add(currentWorkspace, { file, data: exportItem })
-
     componentDeclarationStore.set(file.id, declarations)
 
     return { exportItem, fileItem: file }
   } catch (error) {
     console.error(vsc.l10n.t('Error processing file "{file}"', { file: uri.fsPath }), error)
+    return null
   }
-
-  return null
 }
 
 /**
- * Processes the selected files and extracts SVG exports from them.
- *
- * @param items - An array of URIs representing the selected files.
- * @param operation - A callback function that will be called with the extracted SVG exports.
- * @returns A promise that resolves when the processing is complete.
+ * Processes an array of URI items and executes an operation with the results.
+ * @param items - Array of VS Code URIs to process
+ * @param operation - Callback function that receives grouped export items and file list
+ * @returns Promise that resolves when all files are processed
  */
 export async function processFiles(
   items: vsc.Uri[],
@@ -101,45 +122,43 @@ export async function processFiles(
       cancellable: false,
     }
 
-    const progress = await vsc.window.withProgress(progressOptions, async (progress) => {
+    await vsc.window.withProgress(progressOptions, async (progress) => {
       const configAssetsPath = new AssetsPathsController()
       const configShowNoExports = new ShowNotExportedIconsController()
       const isShowNoExports = configShowNoExports.isShow()
       const cacheItem = getCache().get('viewExports')
 
-      // Process files in parallel
-      // Note: For extremely large datasets (thousands of files), consider using a concurrency limit library in the future.
-      const results = await Promise.all(
-        items.map((uri) => processFileItem(uri, { isShowNoExports, cacheItem }))
-      )
+      const total = items.length
+      let completed = 0
+      const results: (ProcessResult | null)[] = new Array(total)
+
+      await withConcurrency(items, CONCURRENCY_LIMIT, async (uri, index) => {
+        results[index] = await processFileItem(uri, { isShowNoExports, cacheItem })
+
+        completed++
+        progress.report({
+          increment: (1 / total) * 100,
+          message: `${completed} / ${total}`,
+        })
+      })
 
       const validResults = results.filter((item): item is ProcessResult => item !== null)
-
       const exportItems = validResults.map((r) => r.exportItem)
       const fileList = validResults.map((r) => r.fileItem)
 
       if (!fileList.length) {
         operation([], [])
-        return progress
+        return
       }
 
       configAssetsPath.set(fileList).catch((error) => {
         console.error(vsc.l10n.t('Error setting assets path'), error)
       })
 
-      // Group the SVG exports by pattern
-      const groupedSVGExports = groupIconsByPattern(exportItems)
+      const grouped = groupIconsByPattern(exportItems)
 
-      // Process the SVG exports
-      operation(groupedSVGExports, fileList)
-
-      return progress
+      operation(grouped, fileList)
     })
-
-    // Hide the progress message if it was shown
-    if (!isEmpty(progress)) {
-      progress.report({ increment: 100 })
-    }
   } catch (error) {
     console.error(vsc.l10n.t('Error processing files'), error)
   }
