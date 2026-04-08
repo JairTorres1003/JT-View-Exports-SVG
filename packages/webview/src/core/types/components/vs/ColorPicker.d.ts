@@ -1,11 +1,7 @@
 import type { SliderProps, SxProps } from '@mui/material'
 import type Colorize from 'color'
 import type { ColorInstance } from 'color'
-import type {
-  AnyColor,
-  ColorPickerBaseProps,
-  RgbaColor,
-} from 'node_modules/react-colorful/dist/types'
+import type { AnyColor, ColorPickerBaseProps, RgbaColor } from 'react-colorful'
 
 export type ColorizeParam = Parameters<typeof Colorize>[0]
 

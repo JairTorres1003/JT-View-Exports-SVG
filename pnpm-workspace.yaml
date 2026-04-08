@@ -9,3 +9,5 @@ onlyBuiltDependencies:
   - core-js-pure
   - esbuild
   - sharp
+patchedDependencies:
+  react-colorful: patches/react-colorful.patch

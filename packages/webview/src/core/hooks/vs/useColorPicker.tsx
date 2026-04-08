@@ -1,6 +1,6 @@
 import Colorize from 'color'
-import type { AnyColor, RgbaColor } from 'node_modules/react-colorful/dist/types'
 import { useEffect, useState } from 'react'
+import type { AnyColor, RgbaColor } from 'react-colorful'
 
 import type {
   ColorizeOrderedList,
