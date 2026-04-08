@@ -1,7 +1,7 @@
 import { commands, type ExtensionContext, type Uri, workspace } from 'vscode'
 
 import {
-  runClearCache,
+  runClearFullCache,
   runReloadTheme,
   runScanningWorkspace,
   runToggleDevTools,
@@ -46,7 +46,7 @@ export async function activate(context: ExtensionContext) {
     commands.registerCommand(`${CONFIG_KEY}.reloadTheme`, async () => {
       await runReloadTheme()
     }),
-    commands.registerCommand(`${CONFIG_KEY}.clearCache`, runClearCache),
+    commands.registerCommand(`${CONFIG_KEY}.clearCache`, runClearFullCache),
 
     // providers
     workspace.registerFileSystemProvider(`scheme-${CONFIG_KEY}`, provider, {
