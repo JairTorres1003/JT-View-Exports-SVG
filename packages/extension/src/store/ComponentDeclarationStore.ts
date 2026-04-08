@@ -34,6 +34,10 @@ class ComponentDeclarationStore {
       {} as Record<string, PendingExtraction>
     )
   }
+
+  clear(): void {
+    this.declarations = {}
+  }
 }
 
 export const componentDeclarationStore = ComponentDeclarationStore.getInstance()

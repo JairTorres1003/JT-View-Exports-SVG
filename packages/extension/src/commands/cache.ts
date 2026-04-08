@@ -4,10 +4,16 @@ import * as vsc from 'vscode'
 import { CONFIG_KEY } from '@/constants/misc'
 import { PanelController } from '@/controllers/views/PanelController'
 import { getCache } from '@/services/cache/main'
+import { componentDeclarationStore } from '@/store/ComponentDeclarationStore'
+import { viewExportStore } from '@/store/ViewExportStore'
 
 type CacheType = 'full' | 'partial'
 
 const runBaseClearCache = async (message: string, callback: () => Promise<void>): Promise<void> => {
+  viewExportStore.clear()
+  viewExportStore.clearSearch()
+  componentDeclarationStore.clear()
+
   const messageEncoded = encodeURIComponent(message)
 
   PanelController.navigate(`${pathnames.main}?load-message=${messageEncoded}`)
