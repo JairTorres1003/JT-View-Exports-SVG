@@ -78,18 +78,13 @@ export class ListerWebviewController {
    * Updates the state of the webview panel.
    */
   protected readonly updateLayout = (
-    processedFiles: number,
+    _processedFiles: number,
     viewExportSVG: ViewExportSVG[]
   ): void => {
     this.viewExportSVG = viewExportSVG
     this.svgComponentHandler.updateSVGComponents(viewExportSVG)
 
     this.toggleOpenDevTools(false)
-
-    this._postMessage(SVGPostMessage.SendUpdateConfiguration, {
-      renderPath: processedFiles > 0 ? '/dashboard' : '/',
-      showRecentIcons: new RecentIconsShowController().isShow(),
-    })
 
     toggleViewActions(true).catch(console.error)
   }

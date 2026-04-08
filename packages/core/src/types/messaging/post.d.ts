@@ -4,7 +4,6 @@ import type { EditorStyles, ExtensionManage, ThemeMode } from '../editor'
 import type { SVGComponent, ViewExportSVG } from '../svg'
 
 import type {
-  AssetPath,
   FetchResponse,
   HandlerArgs,
   HandlersMap,
@@ -35,9 +34,6 @@ export type PostMessageMap = {
   [SVGPostMessage.FetchVSCodeTheme]: FetchResponse<Record<string, unknown>>
   [SVGPostMessage.LoadOpenFiles]: string[]
   [SVGPostMessage.FetchVsCodeThemePackage]: FetchResponse<Record<string, unknown>>
-
-  // Pending review
-  [SVGPostMessage.SendUpdateConfiguration]: Record<string, unknown>
 }
 
 /**

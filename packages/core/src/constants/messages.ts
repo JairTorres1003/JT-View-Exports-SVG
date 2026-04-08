@@ -32,9 +32,6 @@ export const SVGPostMessage = {
   // Fetch-related messages
   FetchVSCodeTheme: 'send/fetch-vscode-theme/<placeholder>',
   FetchVsCodeThemePackage: 'send/fetch-vscode-theme-package',
-
-  // Settings-related messages
-  SendUpdateConfiguration: 'send/update-configuration',
 } as const
 
 /**

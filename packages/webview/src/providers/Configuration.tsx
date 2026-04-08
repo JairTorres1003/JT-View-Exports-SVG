@@ -3,7 +3,7 @@ import { type FC, useEffect } from 'react'
 import { useDispatch } from 'react-redux'
 
 import { vscode } from '@/services/vscode'
-import { setConfiguration, setRenderPath } from '@/store/features/GlobalSlice'
+import { setRenderPath } from '@/store/features/GlobalSlice'
 
 /**
  * ConfigurationProvider component is a context provider that listens for
@@ -16,17 +16,11 @@ export const ConfigurationProvider: FC<React.PropsWithChildren> = ({
   const dispatch = useDispatch()
 
   useEffect(() => {
-    vscode.onMessage(SVGPostMessage.SendUpdateConfiguration, (data) => {
-      dispatch(setConfiguration(data))
-    })
-
     vscode.onMessage(SVGPostMessage.Navigate, (data) => {
-      console.info('🚀 ~ ConfigurationProvider ~ data:', data)
       dispatch(setRenderPath(data))
     })
 
     return () => {
-      vscode.unregisterMessage(SVGPostMessage.SendUpdateConfiguration)
       vscode.unregisterMessage(SVGPostMessage.Navigate)
     }
   }, [dispatch])
