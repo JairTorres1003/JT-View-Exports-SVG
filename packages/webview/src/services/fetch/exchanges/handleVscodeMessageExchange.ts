@@ -49,7 +49,7 @@ export type VscodeMessageExchangePayload<
  * @returns A JSON `Response` representing either a success payload or an error payload.
  */
 function createResponse(data: FetchResponse<unknown> | null): Response {
-  if (!data || !data.success || !data.data) {
+  if (!data?.success || !data?.data) {
     return new Response(
       JSON.stringify({
         success: false,
