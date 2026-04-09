@@ -70,8 +70,8 @@ export const DialogFilesModal: FC<DialogFilesModalProps> = ({
                       secondary={file.dirname}
                       sx={{ display: 'flex', gap: 1, alignItems: 'flex-end' }}
                       slotProps={{
-                        primary: { sx: { whiteSpace: 'nowrap' }, fontSize: '.75rem' },
-                        secondary: { noWrap: true, sx: { opacity: 0.8 }, fontSize: '.7rem' },
+                        primary: { sx: { whiteSpace: 'nowrap', fontSize: '.75rem' } },
+                        secondary: { noWrap: true, sx: { opacity: 0.8, fontSize: '.7rem' } },
                       }}
                       onClick={onSelected(index)}
                     />

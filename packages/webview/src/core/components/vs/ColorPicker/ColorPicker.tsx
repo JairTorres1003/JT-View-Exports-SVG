@@ -31,10 +31,10 @@ const ColorPicker = forwardRef<HTMLDivElement, ColorPickerProps>(function ColorP
       <Box className={colorPickerClasses.header}>
         <BoxInfoPickerColor
           alpha={color.a}
-          width='calc(100% - 74px)'
           bgColor={getStringColor(color)}
           isLight={currentValueColor.isLight}
           onClick={handleChangeList}
+          sx={{ width: 'calc(100% - 74px)' }}
         >
           <IconMode size={16} />
           <Typography
@@ -45,7 +45,11 @@ const ColorPicker = forwardRef<HTMLDivElement, ColorPickerProps>(function ColorP
             {currentValueColor.value}
           </Typography>
         </BoxInfoPickerColor>
-        <BoxInfoPickerColor width={74} bgColor={getStringColor(oldColor)} onClick={applyOldColor} />
+        <BoxInfoPickerColor
+          sx={{ width: 74 }}
+          onClick={applyOldColor}
+          bgColor={getStringColor(oldColor)}
+        />
       </Box>
       <Box className={colorPickerClasses.body}>
         <RgbaColorPicker

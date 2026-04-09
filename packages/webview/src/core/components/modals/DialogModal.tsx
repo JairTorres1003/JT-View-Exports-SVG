@@ -59,7 +59,7 @@ export const DialogModal: React.FC<DialogModalProps> = ({
       )}
 
       {!hideTitle && (
-        <DialogTitle textAlign='center' {...dialogTitle}>
+        <DialogTitle sx={{ textAlign: 'center' }} {...dialogTitle}>
           {title}
         </DialogTitle>
       )}

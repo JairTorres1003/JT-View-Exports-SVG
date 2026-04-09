@@ -8,7 +8,7 @@ const DashboardPage: React.FC = () => {
   useDashboard()
 
   return (
-    <Stack height='100%' overflow='hidden'>
+    <Stack sx={{ height: '100%', overflow: 'hidden' }}>
       <SearchBar />
       <ContainerComponents />
     </Stack>

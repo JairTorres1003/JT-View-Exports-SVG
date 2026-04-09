@@ -28,7 +28,7 @@ const DropZone = () => {
     <BoxDropZone>
       <Box className={dropZoneClasses.border}>
         <Box className={dropZoneClasses.content}>
-          <Typography variant='h1' className={dropZoneClasses.title} textAlign='center'>
+          <Typography variant='h1' className={dropZoneClasses.title} sx={{ textAlign: 'center' }}>
             {t('title')}
           </Typography>
           <Button
@@ -40,7 +40,7 @@ const DropZone = () => {
           >
             {t('Select files')}
           </Button>
-          <Typography textAlign='center' className={dropZoneClasses.text}>
+          <Typography sx={{ textAlign: 'center' }} className={dropZoneClasses.text}>
             {t('or drop the files here')}
           </Typography>
         </Box>

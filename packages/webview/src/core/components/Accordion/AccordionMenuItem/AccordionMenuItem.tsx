@@ -100,7 +100,7 @@ const AccordionMenuItem = forwardRef<HTMLDivElement, AccordionMenuItemProps>(
           {(actions ?? enableEmptyActions) && (
             <Grid
               size='auto'
-              padding={0}
+              sx={{ p: 0 }}
               component={AccordionActions}
               {...(slotProps.actions ?? {})}
               style={{

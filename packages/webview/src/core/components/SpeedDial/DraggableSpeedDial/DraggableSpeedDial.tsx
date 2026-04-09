@@ -89,11 +89,11 @@ export default function DraggableSpeedDial<TAction extends Route>({
               onClose(e, 'toggle')
               onSelected(e, { icon: Icon, name, ...actionProps } as unknown as TAction)
             }}
-            tooltipPlacement={position.endsWith('left') ? 'right' : 'left'}
             slotProps={{
               tooltip: {
                 title: name,
                 open: true,
+                placement: position.endsWith('left') ? 'right' : 'left',
               },
             }}
           />

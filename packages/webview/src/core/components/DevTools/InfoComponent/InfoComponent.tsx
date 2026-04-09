@@ -20,7 +20,7 @@ import IconGoToFile from '@/assets/icons/functionalities/go-to-file'
 import { openFileInPosition } from '@/core/utils/file'
 
 const commonSlotProps: ListItemTextProps['slotProps'] = {
-  primary: { component: 'b', fontWeight: 600, sx: { whiteSpace: 'nowrap' } },
+  primary: { sx: { whiteSpace: 'nowrap', fontWeight: 600 } },
   secondary: { noWrap: true, sx: { opacity: 0.8 } },
 }
 
@@ -55,7 +55,7 @@ const InfoComponent = () => {
   ]
 
   return (
-    <Stack p='12px 22px' spacing={2}>
+    <Stack spacing={2} sx={{ p: '12px 22px' }}>
       <List
         dense
         disablePadding
@@ -69,6 +69,7 @@ const InfoComponent = () => {
             <ListItemText
               primary={info.primary}
               secondary={info.secondary}
+              slots={{ primary: 'b' }}
               slotProps={commonSlotProps}
             />
           </ListItem>
@@ -84,7 +85,7 @@ const InfoComponent = () => {
             }}
           />
 
-          <Typography fontWeight={600}>{t('labels.Errors')}</Typography>
+          <Typography sx={{ fontWeight: 600 }}>{t('labels.Errors')}</Typography>
 
           <Alert
             severity='error'

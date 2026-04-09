@@ -15,10 +15,8 @@ const BackdropZone: FC<BackdropZoneProp> = (props) => {
     <Backdrop open={over} sx={{ zIndex: (theme) => theme.zIndex.drawer + 1 }}>
       <Typography
         variant='h1'
-        fontSize={24}
-        fontWeight='bold'
-        textAlign='center'
         color='var(--JT-SVG-palette-text-primary, currentColor))'
+        sx={{ fontSize: 24, fontWeight: 'bold', textAlign: 'center' }}
       >
         {t('Let it go!')}
       </Typography>

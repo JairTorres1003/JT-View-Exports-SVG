@@ -33,11 +33,9 @@ const NavigationDrawer = () => {
         }}
       >
         <Stack
-          gap={0.5}
-          p='12px 24px'
           direction='row'
-          justifyContent='flex-start'
           onMouseLeave={toggleDrawer(false)}
+          sx={{ gap: 0.5, p: '12px 24px', justifyContent: 'flex-start' }}
         >
           <IconButton aria-label='Toggle Expanded Components' onClick={toggleExpanded}>
             {isExpanded ? <IconCollapse size={16} /> : <IconExpand size={16} />}

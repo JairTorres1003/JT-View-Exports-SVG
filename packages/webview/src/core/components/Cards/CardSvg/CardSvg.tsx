@@ -53,11 +53,10 @@ const CardSvg: React.FC<Readonly<CardSvgProps>> = ({
       </Card>
       <Tooltip placement='top' title={component.name}>
         <Typography
-          variant='caption'
           noWrap
-          textAlign='center'
-          padding='0 4px'
+          variant='caption'
           className={cardSvgClasses.label}
+          sx={{ textAlign: 'center', p: '0 4px' }}
         >
           {component.name}
         </Typography>

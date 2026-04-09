@@ -28,7 +28,7 @@ export const LabelSearchBar = styled<
   ComponentType<Omit<BoxProps, 'component' | 'children'> & { label: React.ReactNode }>
 >(
   ({ label, ...props }) => (
-    <Box component='span' display='flex' alignItems='center' gap='8px' {...props}>
+    <Box component='span' sx={{ display: 'flex', alignItems: 'center', gap: '8px' }} {...props}>
       <IconLupe size={16} className={searchBarClasses.labelicon} />
       <Typography component='span' variant='inherit' className={searchBarClasses.label}>
         {label}

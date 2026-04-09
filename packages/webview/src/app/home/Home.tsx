@@ -8,7 +8,7 @@ const HomePage: React.FC = () => {
   useHome()
 
   return (
-    <Stack height='100%' overflow='hidden'>
+    <Stack sx={{ height: '100%', overflow: 'hidden' }}>
       <DropZone />
       <ContainerIcons />
     </Stack>

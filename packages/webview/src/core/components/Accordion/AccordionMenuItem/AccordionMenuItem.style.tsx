@@ -16,7 +16,6 @@ export const BoxAccordionMenuItem = styled(
     <Grid
       container
       spacing={0.5}
-      alignItems='center'
       {...props}
       className={cn(accordionMenuItemClasses.summary, props.className)}
     />
@@ -28,6 +27,7 @@ export const BoxAccordionMenuItem = styled(
 )(({ theme: { vars, palette } }) => ({
   padding: 0,
   position: 'relative',
+  alignItems: 'center',
   '&:hover': {
     backgroundColor: 'var(--JT-SVG-vscode-list-hoverBackground)',
   },

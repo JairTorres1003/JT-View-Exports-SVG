@@ -32,13 +32,13 @@ export const FileList: React.FC<FileListProps> = ({ files, onRemoveFile = () => 
   if (files.length === 0) {
     return (
       <BoxFileList>
-        <Stack height='100%' gap={2}>
-          <Typography variant='h1' textAlign='center' fontSize={14} maxWidth={440}>
+        <Stack sx={{ height: '100%', gap: 2 }}>
+          <Typography variant='h1' sx={{ textAlign: 'center', fontSize: 14, maxWidth: 440 }}>
             {t('DropZone.title')}
           </Typography>
-          <Stack alignItems='center' justifyContent='center' gap={2} my='auto'>
+          <Stack sx={{ alignItems: 'center', justifyContent: 'center', gap: 2, my: 'auto' }}>
             <IconEmptyBox size={200} sx={{ opacity: 0.5 }} />
-            <Typography variant='body1' textAlign='center' color='text.secondary'>
+            <Typography variant='body1' color='text.secondary' sx={{ textAlign: 'center' }}>
               {t('labels.NoFilesSelected')}
             </Typography>
           </Stack>
@@ -67,7 +67,7 @@ export const FileList: React.FC<FileListProps> = ({ files, onRemoveFile = () => 
             </Tooltip>
             <IconFileComponent size={80} />
             <Tooltip title={file.name} placement='top'>
-              <Typography variant='body1' noWrap width='100%' zIndex={1}>
+              <Typography variant='body1' noWrap sx={{ width: '100%', zIndex: 1 }}>
                 {file.name}
               </Typography>
             </Tooltip>

@@ -12,7 +12,7 @@ const AccordionActionsSVG: FC<{
   isGrouped?: boolean
 }> = ({ data, hideRefresh = false, isGrouped = false }) => {
   return (
-    <Stack direction='row' spacing={0.5} alignItems='center'>
+    <Stack direction='row' spacing={0.5} sx={{ alignItems: 'center' }}>
       {!hideRefresh && <RefreshAction files={data.files} groupKind={data.groupKind} />}
 
       <FilesAction files={data.files} groupKind={data.groupKind} />

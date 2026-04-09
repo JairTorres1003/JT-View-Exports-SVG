@@ -21,7 +21,7 @@ interface DialogInfoModalProps extends DialogProps {
 }
 
 const commonSlotProps: ListItemTextProps['slotProps'] = {
-  primary: { component: 'b', fontWeight: 600, sx: { whiteSpace: 'nowrap' } },
+  primary: { sx: { whiteSpace: 'nowrap', fontWeight: 600 } },
   secondary: { noWrap: true, sx: { opacity: 0.8 } },
 }
 
@@ -66,6 +66,7 @@ export const DialogInfoModal: React.FC<DialogInfoModalProps> = ({
               <ListItemText
                 primary={t('modalInfo.FileName')}
                 secondary={fileList[0]?.basename}
+                slots={{ primary: 'b' }}
                 slotProps={commonSlotProps}
               />
             </ListItem>
@@ -73,6 +74,7 @@ export const DialogInfoModal: React.FC<DialogInfoModalProps> = ({
               <ListItemText
                 primary={t('modalInfo.Language')}
                 secondary={fileList[0]?.language}
+                slots={{ primary: 'b' }}
                 slotProps={commonSlotProps}
               />
             </ListItem>
@@ -80,6 +82,7 @@ export const DialogInfoModal: React.FC<DialogInfoModalProps> = ({
               <ListItemText
                 primary={t('modalInfo.IsTemporaryFile')}
                 secondary={fileList[0]?.isTemporary ? t('labels.Yes') : t('labels.No')}
+                slots={{ primary: 'b' }}
                 slotProps={commonSlotProps}
               />
             </ListItem>
@@ -91,6 +94,7 @@ export const DialogInfoModal: React.FC<DialogInfoModalProps> = ({
                     <span>{fileList[0]?.dirname}</span>
                   </Tooltip>
                 }
+                slots={{ primary: 'b' }}
                 slotProps={commonSlotProps}
               />
             </ListItem>
@@ -100,6 +104,7 @@ export const DialogInfoModal: React.FC<DialogInfoModalProps> = ({
               <ListItemText
                 primary={t('modalInfo.FilesCount')}
                 secondary={fileList.length}
+                slots={{ primary: 'b' }}
                 slotProps={commonSlotProps}
               />
             </ListItem>
@@ -111,6 +116,7 @@ export const DialogInfoModal: React.FC<DialogInfoModalProps> = ({
                     <span>{data.groupKind.label}</span>
                   </Tooltip>
                 }
+                slots={{ primary: 'b' }}
                 slotProps={commonSlotProps}
               />
             </ListItem>
@@ -120,6 +126,7 @@ export const DialogInfoModal: React.FC<DialogInfoModalProps> = ({
                 secondary={
                   fileList.some((file) => file.isTemporary) ? t('labels.Yes') : t('labels.No')
                 }
+                slots={{ primary: 'b' }}
                 slotProps={commonSlotProps}
               />
             </ListItem>
@@ -130,6 +137,7 @@ export const DialogInfoModal: React.FC<DialogInfoModalProps> = ({
           <ListItemText
             primary={t('modalInfo.ShowNoExports')}
             secondary={data.isShowNoExports ? t('labels.Yes') : t('labels.No')}
+            slots={{ primary: 'b' }}
             slotProps={commonSlotProps}
           />
         </ListItem>
@@ -137,6 +145,7 @@ export const DialogInfoModal: React.FC<DialogInfoModalProps> = ({
           <ListItemText
             primary={t('modalInfo.ComponentsExported')}
             secondary={data.totalExports}
+            slots={{ primary: 'b' }}
             slotProps={commonSlotProps}
           />
         </ListItem>
@@ -144,6 +153,7 @@ export const DialogInfoModal: React.FC<DialogInfoModalProps> = ({
           <ListItemText
             primary={t('modalInfo.ComponentsNotExported')}
             secondary={data.totalNoExports}
+            slots={{ primary: 'b' }}
             slotProps={commonSlotProps}
           />
         </ListItem>
@@ -151,6 +161,7 @@ export const DialogInfoModal: React.FC<DialogInfoModalProps> = ({
           <ListItemText
             primary={t('modalInfo.TotalComponents')}
             secondary={data.totalSVG}
+            slots={{ primary: 'b' }}
             slotProps={commonSlotProps}
           />
         </ListItem>

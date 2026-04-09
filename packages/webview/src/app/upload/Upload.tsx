@@ -24,8 +24,8 @@ const UploadPage: React.FC = () => {
   const { t } = useTranslation()
 
   return (
-    <Stack direction='row' height='100%' overflow='hidden' gap={2}>
-      <Stack gap={2} height='100%' overflow='hidden' width='100%'>
+    <Stack direction='row' sx={{ height: '100%', overflow: 'hidden', gap: 2 }}>
+      <Stack sx={{ height: '100%', overflow: 'hidden', width: '100%', gap: 2 }}>
         <FileList files={files} onRemoveFile={removeFile} />
 
         <Button
@@ -39,7 +39,7 @@ const UploadPage: React.FC = () => {
         </Button>
       </Stack>
 
-      <Stack p='24px 16px 24px 0' gap={2}>
+      <Stack sx={{ gap: 2, p: '24px 16px 24px 0' }}>
         <Tooltip title={t('labels.AddMoreFiles')} placement='left'>
           <Badge badgeContent={files.length} overlap='circular'>
             <IconButton
