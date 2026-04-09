@@ -10,6 +10,6 @@ export class HttpMessenger {
       return
     }
 
-    this.res.status(200).json({ type, data }).send()
+    this.res.status(200).json({ type, data })
   }
 }

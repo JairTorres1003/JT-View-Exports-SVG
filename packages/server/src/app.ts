@@ -31,7 +31,7 @@ app.get('/api/vs/theme/one-dark.json', (_, res) => {
 })
 
 app.get('/api/vs/extension/theme-package', (_, res) => {
-  res.json(manifestTheme).send()
+  res.json(manifestTheme)
 })
 
 // extension api
