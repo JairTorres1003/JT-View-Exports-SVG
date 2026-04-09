@@ -23,13 +23,13 @@ export const runScanningWorkspace = async (context: vsc.ExtensionContext): Promi
 
   await PanelController.render(context)
 
+  viewExportStore.clear()
+
   const messageEncoded = encodeURIComponent(vsc.l10n.t('Scanning workspace...'))
 
   PanelController.navigate(`${pathnames.main}?load-message=${messageEncoded}`)
 
   const files = await allowedFilesInFolder(currentWorkspace.uri)
-
-  viewExportStore.clear()
 
   if (files.length === 0) {
     const { files, items } = await getIconsCollection()
