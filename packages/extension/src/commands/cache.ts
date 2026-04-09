@@ -22,9 +22,10 @@ const runBaseClearCache = async (message: string, callback: () => Promise<void>)
 
   if (PanelController.currentPanel) {
     await vsc.commands.executeCommand(`${CONFIG_KEY}.reloadTheme`)
+    await vsc.commands.executeCommand(`${CONFIG_KEY}.showMenu`)
+  } else {
+    PanelController.navigate(pathnames.home)
   }
-
-  PanelController.navigate(pathnames.home)
 
   vsc.window
     .showInformationMessage(vsc.l10n.t('Cache cleared successfully!'))
