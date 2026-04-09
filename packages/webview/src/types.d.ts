@@ -1,5 +1,3 @@
-/// <reference types="vite/client" />
-
 import type { UseSelector as ReduxSelector } from 'react-redux'
 import 'react'
 

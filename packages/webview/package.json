@@ -69,28 +69,28 @@
     "zod": "^4.3.6"
   },
   "devDependencies": {
+    "@babel/core": "^7.29.0",
     "@codingame/esbuild-import-meta-url-plugin": "^1.0.3",
+    "@rolldown/plugin-babel": "^0.2.2",
     "@testing-library/dom": "^10.4.1",
     "@testing-library/jest-dom": "^6.9.1",
     "@testing-library/react": "^16.3.2",
     "@testing-library/user-event": "^14.6.1",
+    "@types/babel__core": "^7.20.5",
     "@types/color": "^4.2.0",
     "@types/node": "^25.3.3",
     "@types/react": "^19.2.5",
     "@types/react-dom": "^19.2.3",
     "@types/uuid": "^10.0.0",
     "@types/vscode-webview": "^1.57.5",
-    "@vitejs/plugin-react-swc": "^4.2.2",
-    "@vitest/coverage-v8": "^4.1.2",
-    "@vitest/ui": "^4.1.2",
+    "@vitejs/plugin-react": "^6.0.1",
+    "@vitest/coverage-v8": "^4.1.4",
+    "@vitest/ui": "^4.1.4",
     "axios": "^1.13.5",
+    "babel-plugin-react-compiler": "^1.0.0",
     "jsdom": "^29.0.0",
     "typescript": "^5.9.3",
-    "vite": "npm:rolldown-vite@7.3.1",
-    "vite-tsconfig-paths": "^6.0.5",
-    "vitest": "^4.1.2"
-  },
-  "overrides": {
-    "vite": "npm:rolldown-vite@7.3.1"
+    "vite": "^8.0.8",
+    "vitest": "^4.1.4"
   }
 }

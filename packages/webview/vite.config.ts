@@ -1,9 +1,9 @@
 import * as fs from 'node:fs'
 import path from 'node:path'
 import importMetaUrlPlugin from '@codingame/esbuild-import-meta-url-plugin'
-import react from '@vitejs/plugin-react-swc'
+import babel from '@rolldown/plugin-babel'
+import react, { reactCompilerPreset } from '@vitejs/plugin-react'
 import { defineConfig } from 'vite'
-import tsconfigPaths from 'vite-tsconfig-paths'
 
 import codingameOnigWasmWebFix from './plugins/codingame-onig-wasm-web-fix'
 import legacyManifest from './plugins/legacy-manifest'
@@ -29,8 +29,8 @@ const optimizeDepsInclude = localDependencies.filter((name) => !optimizeDepsExcl
 export default defineConfig({
   base: './',
   plugins: [
-    tsconfigPaths({ root: __dirname }),
     react(),
+    babel({ presets: [reactCompilerPreset()] }),
     codingameOnigWasmWebFix(),
     legacyManifest(),
     removeFiles(),
@@ -49,6 +49,7 @@ export default defineConfig({
     __APP_VERSION: JSON.stringify(pkg.version),
   },
   resolve: {
+    tsconfigPaths: true,
     dedupe: ['vscode', 'monaco-editor', ...localDependencies],
   },
   build: {
@@ -65,9 +66,6 @@ export default defineConfig({
         assetFileNames: 'assets/[hash].[ext]',
       },
     },
-  },
-  esbuild: {
-    minifySyntax: false,
   },
   worker: {
     format: 'es',
