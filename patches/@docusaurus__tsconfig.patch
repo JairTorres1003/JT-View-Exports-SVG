@@ -1,0 +1,12 @@
+diff --git a/tsconfig.json b/tsconfig.json
+index b89e41d756c252a99c4a856ec4225690cec6f126..96c569a5eb6fc454cfc39ba4dabd4cc5ddaef7f2 100644
+--- a/tsconfig.json
++++ b/tsconfig.json
+@@ -11,7 +11,6 @@
+     "moduleResolution": "bundler",
+     "module": "esnext",
+     "noEmit": true,
+-    "baseUrl": ".",
+     "paths": {
+       "@site/*": ["./*"]
+     },

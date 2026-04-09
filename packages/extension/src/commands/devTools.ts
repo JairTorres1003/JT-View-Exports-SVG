@@ -2,8 +2,7 @@ import { SVGPostMessage } from '@jt-view-exports-svg/core'
 import { commands } from 'vscode'
 
 import { CONFIG_KEY } from '@/constants/misc'
-import { ViewExportsSVGController } from '@/controllers/views'
-import { isEmpty } from '@/utilities/misc'
+import { PanelController } from '@/controllers/views/PanelController'
 
 /**
  * Toggles the developer tools in the application.
@@ -24,7 +23,5 @@ export const toggleDevTools = async (open: boolean): Promise<void> => {
 export const runToggleDevTools = async (open: boolean): Promise<void> => {
   await toggleDevTools(open)
 
-  if (!isEmpty(ViewExportsSVGController.currentPanel)) {
-    ViewExportsSVGController.currentPanel._postMessage(SVGPostMessage.SendToggleOpenDevTools, open)
-  }
+  PanelController.send(SVGPostMessage.ToggleOpenDevTools, open)
 }

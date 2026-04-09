@@ -9,6 +9,8 @@
   "extension.commands.openDevTools.title": "打開開發者工具",
   "extension.commands.closeDevTools.title": "關閉開發者工具",
   "extension.commands.clearCache.title": "清除緩存",
+  "extension.commands.clearFullCache.title": "清除完整緩存",
+  "extension.commands.clearCollectionCache.title": "清除集合緩存",
   "extension.config.defaultExpandAll.title": "默認展開所有圖標",
   "extension.config.defaultExpandAll.description": "確定在打開擴展時是否應默認展開所有圖標。",
   "extension.config.defaultClickToOpenDevTools.title": "默認點擊打開開發者工具",

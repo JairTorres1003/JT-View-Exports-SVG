@@ -17,7 +17,7 @@ import { setRecentlySelected } from '@/store/features/PlaygroundSlice'
 
 export const useCodeEditor = (editorRef: React.RefObject<TypeEditorRef>) => {
   const { recentlySelected } = useSelector((state) => state.playground)
-  const { components } = useSelector((state) => state.svg)
+  const { components, files } = useSelector((state) => state.svg)
   const [value, setValue] = useState<string>('')
 
   const debounceValue = useDebounce(value, 600)
@@ -67,7 +67,7 @@ export const useCodeEditor = (editorRef: React.RefObject<TypeEditorRef>) => {
     if (!editorRef.current) return
     editorRef.current.editor?.api.registerCompletionItemProvider(
       'components',
-      completionComponentsManager(components)
+      completionComponentsManager(components, files)
     )
   }
 
@@ -99,18 +99,18 @@ export const useCodeEditor = (editorRef: React.RefObject<TypeEditorRef>) => {
       return
     }
 
-    vscode.postMessage(SVGReceiveMessage.PlaygroundSVGComponents, {
+    vscode.postMessage(SVGReceiveMessage.EditComponentInPlayground, {
       value: debounceValue,
       name: recentlySelected?.name,
       location: recentlySelected?.location,
     })
 
-    vscode.onMessage(SVGPostMessage.SendSVGPlayground, handleEditComponent)
-    vscode.onMessage(SVGPostMessage.SendPlaygroundError, handleErrorComponent)
+    vscode.onMessage(SVGPostMessage.ComponentEditedInPlayground, handleEditComponent)
+    vscode.onMessage(SVGPostMessage.ErrorEditingComponentInPlayground, handleErrorComponent)
 
     return () => {
-      vscode.unregisterMessage(SVGPostMessage.SendSVGPlayground)
-      vscode.unregisterMessage(SVGPostMessage.SendPlaygroundError)
+      vscode.unregisterMessage(SVGPostMessage.ComponentEditedInPlayground)
+      vscode.unregisterMessage(SVGPostMessage.ErrorEditingComponentInPlayground)
     }
   }, [debounceValue])
 

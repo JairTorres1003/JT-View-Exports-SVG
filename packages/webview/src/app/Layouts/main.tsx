@@ -1,3 +1,4 @@
+import { pathnames } from '@jt-view-exports-svg/core'
 import { lazy, Suspense } from 'react'
 import { MemoryRouter, Route, Routes } from 'react-router-dom'
 
@@ -6,14 +7,18 @@ import { routes } from '@/config/routes/route'
 import { LoadingPage } from '@/core/components/LoadingPage'
 import ViewPanels from '@/core/components/ViewPanels/ViewPanels'
 
-const config = window.ViewExportsSVG.initConfiguration
-
-const RouteManager = lazy(async () => await import('./RouteManager'))
+const NavBarManager = import.meta.env.DEV
+  ? lazy(() => import('@/core/components/Drawer/NavigationDrawer/NavigationDrawer'))
+  : () => null
+const RouteManager = lazy(() => import('./RouteManager'))
 
 const Layout = () => (
   <Providers>
     <ViewPanels>
-      <MemoryRouter initialEntries={[config._INITIAL_RENDER_PATH]} initialIndex={0}>
+      <MemoryRouter initialEntries={[pathnames.main]} initialIndex={0}>
+        <Suspense fallback={null}>
+          <NavBarManager />
+        </Suspense>
         <Suspense fallback={null}>
           <RouteManager />
         </Suspense>

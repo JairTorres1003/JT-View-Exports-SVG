@@ -1,3 +1,5 @@
+import type { FileIdentifier } from './file'
+
 /**
  * Represents a position in a file (line, column, index)
  */
@@ -10,14 +12,14 @@ export interface Position {
   index: number
 }
 
-/**
- * Represents a location range in an SVG file
- */
-export interface SVGLocation {
+interface LocationBase {
   /** Start position of the range */
   start?: Position
   /** End position of the range */
   end?: Position
-  /** The file object containing the absolute and relative paths of the SVG file */
-  file: import('./file').SVGFile
+}
+
+export interface LocationIdentifier extends LocationBase {
+  /** A unique identifier for the location, which can be used for caching or referencing */
+  id: FileIdentifier
 }

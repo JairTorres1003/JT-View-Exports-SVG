@@ -1,4 +1,3 @@
-export * from './cache'
 export * from './common'
 export * from './editor'
 export * from './messaging'

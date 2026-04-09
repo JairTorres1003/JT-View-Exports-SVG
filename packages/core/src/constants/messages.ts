@@ -3,36 +3,35 @@
  * Messages sent from the extension to the webview
  */
 export const SVGPostMessage = {
-  // SVG-related messages
-  SendSVGComponents: 'send/svg/components',
-  SendSVGError: 'send/svg/error',
-  SendRefreshSVGComponents: 'send/svg/refresh-components',
-  SendSVGFilteredComponents: 'send/svg/filtered-components',
-  SendSVGPlayground: 'send/svg/playground',
-  SendPlaygroundError: 'send/svg/playground-error',
+  // root message types
+  Navigate: 'send/navigate',
 
-  // Assets-related messages
-  SendAssetsPath: 'send/assets/paths',
+  // UI-related messages
+  LoadComponents: 'send/load-components',
+  LoadUserComponents: 'send/load-user-components',
+  LoadFilesComponents: 'send/load-files-components',
+  FilterComponents: 'send/filter-components',
+  OnErrorComponents: 'send/error-components',
+  OnReloadComponent: 'send/reload-component',
+  ToggleExpandAllComponents: 'send/toggle-expand-all-components',
+
+  // Developer tools related messages
+  ToggleOpenDevTools: 'send/toggle-open-devtools',
+  ComponentEditedInPlayground: 'send/component-edited-in-playground',
+  ErrorEditingComponentInPlayground: 'send/error-editing-component-in-playground',
 
   // Settings-related messages
-  SendRunLoading: 'send/settings/run-loading',
-  SendTheme: 'send/settings/theme',
-  SendEditorConfig: 'send/settings/editor-config',
-  SendVsCodeStyles: 'send/settings/vscode-styles',
-  SendExpandAllIcons: 'send/settings/expand-all',
-  SendToggleOpenDevTools: 'send/settings/toggle-open-dev-tools',
-  SendExtensionTheme: 'send/settings/extension-theme',
-  SendUpdateConfiguration: 'send/update-configuration',
-  SendReloadWebview: 'send/reload-webview',
-
-  // Scan-related messages
-  SendLastScanDate: 'send/scan/last-date',
-
-  // Icons-related messages
-  SendHomeIcons: 'send/icons/home',
+  LoadEditorThemeMode: 'send/load-editor-theme-mode',
+  LoadEditorConfig: 'send/load-editor-config',
+  LoadExtensionTheme: 'send/load-extension-theme',
+  LoadEditorStyles: 'send/load-editor-styles',
 
   // File-related messages
-  SendOpenFiles: 'send/file/open',
+  LoadOpenFiles: 'send/load-open-files',
+
+  // Fetch-related messages
+  FetchVSCodeTheme: 'send/fetch-vscode-theme/<placeholder>',
+  FetchVsCodeThemePackage: 'send/fetch-vscode-theme-package',
 } as const
 
 /**
@@ -45,47 +44,43 @@ export type SVGPostMessage = (typeof SVGPostMessage)[keyof typeof SVGPostMessage
  * Messages sent from the webview to the extension
  */
 export const SVGReceiveMessage = {
-  // SVG-related messages
-  ExtractSVGComponentFromFiles: 'svg/extract-components-from-files',
-  GetSVGComponents: 'svg/get-components',
-  SearchSVGComponents: 'svg/search-components',
-  PlaygroundSVGComponents: 'svg/playground-component',
-  RefreshSVGComponents: 'svg/refresh-components',
+  // root message types
+  Ready: 'ready',
+  ChangeViewPath: 'navigate/change-path',
 
-  // Assets-related messages
-  GetAssetsPath: 'assets/paths',
-  RemoveAssets: 'assets/remove',
-  GetViewAssets: 'assets/views',
-
-  // Settings-related messages
-  GetTheme: 'settings/theme',
-  GetEditorConfig: 'settings/editor-config',
-  GetVsCodeStyles: 'settings/vscode-styles',
-  ToggleExpandIcon: 'settings/expand-all/toggle',
-  ToggleOpenDevTools: 'settings/toggle-open-dev-tools',
-  GetExtensionTheme: 'settings/extension-theme',
-  ReloadExtensionTheme: 'settings/reload-extension-theme',
-
-  // Scan-related messages
-  GetLastScanDate: 'scan/last-date',
-  ScanWorkspace: 'scan/workspace',
-
-  // File-related messages
-  OpenFile: 'file/open',
-  RequestFileOpen: 'file/request-open',
-  CreateTempFiles: 'file/create-temp',
+  // UI-related messages
+  RequestComponents: 'ui/request-components',
+  RequestUserComponents: 'ui/request-user-components',
+  RequestFilesComponents: 'ui/request-files-components',
+  SearchComponents: 'ui/search-components',
+  ReloadComponent: 'ui/reload-component',
+  IsExpandComponents: 'ui/is-expand-components',
+  ProcessUploadedFiles: 'ui/process-uploaded-files',
 
   // Icons-related messages
-  AddRecentIcon: 'icons/recent/add',
-  RemoveRecentIcon: 'icons/recent/remove',
-  ClearRecentIcons: 'icons/recent/clear',
-  AddFavoriteIcon: 'icons/favorite/add',
-  RemoveFavoriteIcon: 'icons/favorite/remove',
-  ClearFavoriteIcons: 'icons/favorite/clear',
-  GetHomeIcons: 'icons/home/get',
+  AddIconToCollection: 'icons/add-to-collection',
+  RemoveIconFromCollection: 'icons/remove-from-collection',
+  ClearIconCollection: 'icons/clear-collection',
 
-  // View-related messages
-  ViewRenderPath: 'view/render-path/change',
+  // Developer tools related messages
+  IsOpenDevTools: 'devtools/is-open',
+  EditComponentInPlayground: 'devtools/edit-component-in-playground',
+
+  // Editor-related messages
+  RequestEditorThemeMode: 'editor/request-theme-mode',
+  RequestEditorConfig: 'editor/request-config',
+  RequestEditorExtensionTheme: 'editor/request-extension-theme',
+  RequestEditorStyles: 'editor/request-styles',
+  ReloadEditorExtensionTheme: 'editor/reload-extension-theme',
+
+  // File-related messages
+  OpenFileInEditor: 'file/open-in-editor',
+  OpenDialogFiles: 'file/open-dialog',
+  CreateTempFiles: 'file/create-temp',
+
+  // fetch-related messages
+  FetchVSCodeTheme: 'fetch/request-vscode-theme/<placeholder>',
+  FetchVsCodeThemePackage: 'fetch/request-vscode-theme-package',
 } as const
 
 /**

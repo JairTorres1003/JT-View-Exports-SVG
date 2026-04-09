@@ -1,7 +1,9 @@
-import type { ViewExportSVG } from '@jt-view-exports-svg/core'
-import type { ExtensionContext, Uri } from 'vscode'
+import { pathnames, type SVGFile, type ViewExportSVG } from '@jt-view-exports-svg/core'
+import { type ExtensionContext, l10n, type Uri } from 'vscode'
 
-import { ViewExportsSVGController } from '@/controllers/views'
+import { PanelController } from '@/controllers/views/PanelController'
+import { getIconsCollection } from '@/services/getIconsCollection'
+import { viewExportStore } from '@/store/ViewExportStore'
 import { processFiles } from '@/utilities/files/processFiles'
 import { isEmpty } from '@/utilities/misc'
 
@@ -18,21 +20,30 @@ export const showMenu = async (
   item: Uri | null = null,
   items: Uri[] = []
 ): Promise<void> => {
+  await PanelController.render(context)
+
   const filesToProcess = !isEmpty(items) ? items : !isEmpty(item) ? [item] : []
 
-  if (!ViewExportsSVGController.currentPanel) {
-    await ViewExportsSVGController.render(context, [], filesToProcess.length)
-  }
+  const loadMessage = filesToProcess.length
+    ? l10n.t('Processing {0} file(s)...', filesToProcess.length)
+    : l10n.t('Loading...')
+
+  const messageEncoded = encodeURIComponent(loadMessage)
+
+  PanelController.navigate(`${pathnames.main}?load-message=${messageEncoded}`)
+
+  viewExportStore.clear()
 
   if (filesToProcess.length === 0) {
-    ViewExportsSVGController.update([], 0)
+    const { files, items } = await getIconsCollection()
+    viewExportStore.set(items, files)
+    PanelController.navigate(pathnames.home)
     return
   }
 
-  ViewExportsSVGController.currentPanel?.init()
-
-  const operation = (result: ViewExportSVG[]): void => {
-    ViewExportsSVGController.update(result, filesToProcess.length)
+  const operation = (result: ViewExportSVG[], files: SVGFile[]): void => {
+    viewExportStore.set(result, files)
+    PanelController.navigate(pathnames.dashboard)
   }
 
   await processFiles(filesToProcess, operation)

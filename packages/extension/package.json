@@ -95,6 +95,18 @@
         "title": "%extension.commands.clearCache.title%",
         "icon": "$(trash)",
         "category": "View Exports SVG"
+      },
+      {
+        "command": "JT-View-Exports-SVG.clearFullCache",
+        "title": "%extension.commands.clearFullCache.title%",
+        "icon": "$(trash)",
+        "category": "View Exports SVG"
+      },
+      {
+        "command": "JT-View-Exports-SVG.clearCollectionCache",
+        "title": "%extension.commands.clearCollectionCache.title%",
+        "icon": "$(trash)",
+        "category": "View Exports SVG"
       }
     ],
     "menus": {
@@ -132,12 +144,33 @@
           "when": "activeWebviewPanelId == 'JT-View-Exports-SVG' && JT-View-Exports-SVG.isOpenDevTools && JT-View-Exports-SVG.showActions"
         },
         {
-          "command": "JT-View-Exports-SVG.clearCache",
+          "submenu": "clearCacheMenu",
           "group": "navigation@3",
           "when": "activeWebviewPanelId == 'JT-View-Exports-SVG'"
         }
+      ],
+      "clearCacheMenu": [
+        {
+          "command": "JT-View-Exports-SVG.clearCache",
+          "group": "navigation@3"
+        },
+        {
+          "command": "JT-View-Exports-SVG.clearFullCache",
+          "group": "navigation@3"
+        },
+        {
+          "command": "JT-View-Exports-SVG.clearCollectionCache",
+          "group": "navigation@3"
+        }
       ]
     },
+    "submenus": [
+      {
+        "id": "clearCacheMenu",
+        "label": "%extension.commands.clearCache.title%",
+        "icon": "$(trash)"
+      }
+    ],
     "configuration": [
       {
         "title": "%extension.title%",
@@ -287,6 +320,7 @@
     "@types/node": "^25.3.3",
     "@types/sinon": "^21.0.0",
     "@types/vscode": "^1.109.0",
+    "@types/xxhashjs": "^0.2.4",
     "@vscode/l10n-dev": "^0.0.35",
     "@vscode/test-cli": "^0.0.12",
     "@vscode/test-electron": "^2.5.2",
@@ -303,8 +337,9 @@
     "@babel/parser": "^7.29.0",
     "@babel/traverse": "^7.29.0",
     "@jt-view-exports-svg/core": "workspace:*",
-    "lodash": "^4.17.23",
-    "minimatch": "^10.2.4"
+    "lodash": "^4.18.1",
+    "minimatch": "^10.2.5",
+    "xxhashjs": "^0.2.2"
   },
   "badges": [
     {

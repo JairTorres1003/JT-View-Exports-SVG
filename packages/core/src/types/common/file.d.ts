@@ -1,7 +1,11 @@
+export type FileIdentifier = `file-${string}`
+
 /**
  * Represents an SVG file with metadata
  */
 export interface SVGFile {
+  /** Unique identifier for the file, formatted as 'file-{hash}' */
+  id: FileIdentifier
   /** URI of the file */
   uri: string
   /** The absolute path of the SVG file */
@@ -21,16 +25,8 @@ export interface SVGFile {
   language?: string
   /** Indicates whether the file is located in a temporary directory */
   isTemporary: boolean
-}
-
-/**
- * Represents a file to be opened with optional position
- */
-export interface OpenFile {
-  /** The SVG file to open */
-  file: SVGFile
-  /** Optional position to navigate to */
-  position?: import('./location').Position
+  /** Timestamp of the last modification */
+  lastModified: number
 }
 
 /**

@@ -3,16 +3,7 @@ import type { SVGComponent } from '@jt-view-exports-svg/core'
 const location: SVGComponent['location'] = {
   start: { line: 1, column: 1, index: 1 },
   end: { line: 1, column: 1, index: 1 },
-  file: {
-    uri: 'file:///path/to/file.tsx',
-    absolutePath: '/path/to/file.tsx',
-    relativePath: 'file.tsx',
-    basename: 'file.tsx',
-    dirname: '/path/to',
-    extension: 'tsx',
-    isTemporary: false,
-    language: 'typescriptreact',
-  },
+  id: 'file-id',
 }
 
 export const mockSvgComponents = {

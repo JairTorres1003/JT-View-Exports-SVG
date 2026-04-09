@@ -1,72 +1,119 @@
-import type {
-  HandlerPostMessage,
-  OnMessagePosted,
-  PostMessage,
-  PostMessageSubscriber,
-  ReceiveMessageEmitter,
-  SVGPostMessage,
+import {
+  type HandlerPostMessage,
+  isValidSVGPostMessageType,
+  type OnMessagePosted,
+  type PostMessage,
+  type PostMessageSubscriber,
+  type ReceiveMessageEmitter,
+  type SVGPostMessage,
+  SVGReceiveMessage,
 } from '@jt-view-exports-svg/core'
+
 import i18next from 'i18next'
 import type { WebviewApi } from 'vscode-webview'
 
 import { vscodeInternal } from './VSCodeInternal'
 
-/**
- * Wrapper class for the VSCode API, providing methods for communication between the webview and the extension.
- */
 class VSCodeAPIWrapper {
-  /**
-   * The VSCode API instance obtained from `acquireVsCodeApi`.
-   */
   private readonly vsCodeApi: WebviewApi<unknown> | undefined
 
   /**
-   * Mapping of message commands to their corresponding handlers.
+   * Registered message handlers
    */
   private readonly messageHandlers: Partial<HandlerPostMessage> = {}
 
   /**
-   * Creates an instance of `VSCodeAPIWrapper`.
+   * Queue for messages received before handlers are registered
    */
+  private readonly messageQueue: PostMessage[] = []
+
   constructor() {
-    if (typeof acquireVsCodeApi === 'function') {
-      this.vsCodeApi = acquireVsCodeApi()
-    } else if (import.meta.env.DEV) {
-      this.vsCodeApi = vscodeInternal
-    }
+    this.vsCodeApi = this.resolveVSCodeAPI()
 
-    window.addEventListener('message', (event: MessageEvent<PostMessage>) => {
-      const type: SVGPostMessage = event.data.type
+    window.addEventListener('message', this.handleWindowMessage)
 
-      if (!type || Object.entries(this.messageHandlers).length === 0) return
-
-      if (!Object.hasOwn(this.messageHandlers, type)) {
-        console.warn(i18next.t('errors.[VSCodeAPIWrapper]IgnoredMessageWithUnknownType:'), type)
-        return
-      }
-
-      const handler = this.messageHandlers[type] as OnMessagePosted
-
-      if (typeof handler === 'function') {
-        try {
-          handler(event.data.data)
-        } catch (error) {
-          console.error(
-            i18next.t('errors.[VSCodeAPIWrapper]ErrorOccurredWhileHandlingMessage:'),
-            error
-          )
-        }
-      } else {
-        console.warn(i18next.t('errors.[VSCodeAPIWrapper]NoHandlerRegisteredForMessageType:'), type)
-      }
+    window.addEventListener('DOMContentLoaded', () => {
+      this.postMessage(SVGReceiveMessage.Ready)
     })
   }
 
   /**
-   * Sends a message to the VSCode extension.
-   *
-   * @param type - The type of SVG post message.
-   * @param data - The data to send with the post message.
+   * Resolve VSCode API depending on environment
+   */
+  private resolveVSCodeAPI(): WebviewApi<unknown> | undefined {
+    if (typeof acquireVsCodeApi === 'function') {
+      return acquireVsCodeApi()
+    }
+
+    if (import.meta.env.DEV) {
+      return vscodeInternal
+    }
+
+    return undefined
+  }
+
+  /**
+   * Handle messages coming from the extension
+   */
+  private handleWindowMessage = (event: MessageEvent<PostMessage>): void => {
+    const message = event.data
+    const type: SVGPostMessage = message.type
+
+    if (!isValidSVGPostMessageType(type)) return
+
+    const handler = this.messageHandlers[type] as OnMessagePosted
+
+    if (!handler) {
+      this.enqueueMessage(message)
+      return
+    }
+
+    this.executeHandler(handler, message.data)
+  }
+
+  /**
+   * Execute handler safely
+   */
+  private executeHandler(handler: OnMessagePosted, data: Parameters<OnMessagePosted>[0]): void {
+    try {
+      handler(data)
+    } catch (error) {
+      console.error(i18next.t('errors.[VSCodeAPIWrapper]ErrorOccurredWhileHandlingMessage:'), error)
+    }
+  }
+
+  /**
+   * Enqueue message when handler is not ready
+   */
+  private enqueueMessage(message: PostMessage): void {
+    this.messageQueue.push(message)
+  }
+
+  /**
+   * Flush queued messages when handlers become available
+   */
+  private flushQueue(): void {
+    if (this.messageQueue.length === 0) return
+
+    const remaining: PostMessage[] = []
+
+    for (const message of this.messageQueue) {
+      const handler = this.messageHandlers[message.type] as OnMessagePosted
+
+      if (!handler) {
+        remaining.push(message)
+        continue
+      }
+
+      this.executeHandler(handler, message.data)
+    }
+
+    this.messageQueue.length = 0
+    this.messageQueue.push(...remaining)
+  }
+
+  /**
+   * Send message to extension
    */
   public postMessage: ReceiveMessageEmitter = (type, data = undefined) => {
     if (!this.vsCodeApi) {
@@ -78,35 +125,27 @@ class VSCodeAPIWrapper {
   }
 
   /**
-   * Registers a message handler for a specific type of SVG post message.
-   *
-   * @param type - The type of SVG post message.
-   * @param handler - The callback function to handle the post message.
+   * Register message handler
    */
   public onMessage: PostMessageSubscriber = (type, handler) => {
     this.messageHandlers[type] = handler as OnMessagePosted
+
+    this.flushQueue()
   }
 
   /**
-   * Unregister a message handler for a specific SVG post message type.
-   *
-   * @param type - The type of SVG post message.
+   * Unregister message handler
    */
   public unregisterMessage(type: SVGPostMessage): void {
     this.messageHandlers[type] = undefined
   }
 
   /**
-   * Getter for the VS Code API.
-   *
-   * @returns The VS Code API instance, or undefined if not available.
+   * Expose API instance (readonly)
    */
-  get _api(): Readonly<WebviewApi<unknown> | undefined> {
+  get api(): Readonly<WebviewApi<unknown> | undefined> {
     return this.vsCodeApi
   }
 }
 
-/**
- * Wrapper instance for the VSCode API.
- */
 export const vscode = new VSCodeAPIWrapper()

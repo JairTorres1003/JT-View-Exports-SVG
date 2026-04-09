@@ -9,9 +9,10 @@ import type {
 } from '@jt-view-exports-svg/core'
 import { l10n } from 'vscode'
 
+import { propertyStore } from '@/store/PropertyStore'
+
 import { isEmpty } from '../misc'
 import { getProperties } from '../properties/getProperties'
-import { propertyManager } from '../properties/propertyManager'
 
 import { getChildAttributes } from './children'
 import { getSVGTagName } from './tags'
@@ -26,7 +27,8 @@ import { getSVGTagName } from './tags'
  */
 function validateOpeningElement(
   openingElement: t.JSXOpeningElement,
-  file: SVGFile
+  file: SVGFile,
+  name: string
 ): ValidationResult {
   const tag = getSVGTagName(openingElement, file)
 
@@ -41,14 +43,14 @@ function validateOpeningElement(
     }
   }
 
-  const params = propertyManager.get()
+  const params = propertyStore.get(file, name)
   const props = getProperties(openingElement.attributes, params)
   if (props.xmlns !== 'http://www.w3.org/2000/svg') {
     return {
       isValid: false,
       tag,
       error: {
-        location: { start: openingElement.loc?.start, end: openingElement.loc?.end },
+        location: { ...openingElement.loc, id: file.id },
         message: l10n.t('Invalid {attr} attribute, expected "{expected}" but got {actual}', {
           attr: 'xmlns',
           expected: 'http://www.w3.org/2000/svg',
@@ -64,18 +66,20 @@ function validateOpeningElement(
 /**
  * Creates a default SVG component structure, typically used for error cases.
  * @param file - The file context for location information.
+ * @param name - The name of the SVG component.
  * @param tag - The SVG tag name.
  * @param attr - Optional partial attributes to override the default component structure.
  * @returns A default `GetSVGComponent` object representing an empty or invalid component, with `hasErrors` set to true.
  */
 function defaultSvgComponent(
   file: SVGFile,
+  name: string,
   tag?: Partial<GetSVGTagName>,
   attr?: Partial<GetSVGComponent>
 ): GetSVGComponent {
-  const params = propertyManager.get()
+  const params = propertyStore.get(file, name)
   const location = {
-    file,
+    id: file.id,
     start: { column: 0, index: 0, line: 0 },
     end: { column: 0, index: 0, line: 0 },
   }
@@ -109,23 +113,29 @@ function defaultSvgComponent(
  * It processes the main SVG tag, its properties, and its children recursively.
  * @param element - The root JSX element of the SVG component.
  * @param file - The file context for location and tag resolution.
+ * @param name - The name of the SVG component.
+ *
  * @returns An object representing the structured SVG component. This includes the component's
  * structure (`component`), its animation status (`isAnimated`), its parameters (`params`),
  * and any errors encountered (`hasErrors`, `errors`).
  */
-export function getSVGComponent(element: t.JSXElement, file: SVGFile): GetSVGComponent {
+export function getSVGComponent(
+  element: t.JSXElement,
+  file: SVGFile,
+  name: string
+): GetSVGComponent {
   const { openingElement, children } = element
 
   if (isEmpty(openingElement)) {
-    return defaultSvgComponent(file)
+    return defaultSvgComponent(file, name)
   }
 
-  const validation = validateOpeningElement(openingElement, file)
+  const validation = validateOpeningElement(openingElement, file, name)
   if (!validation.isValid) {
-    return defaultSvgComponent(file, validation.tag, { errors: validation.error })
+    return defaultSvgComponent(file, name, validation.tag, { errors: validation.error })
   }
 
-  const childInfo = getChildAttributes(children, file)
+  const childInfo = getChildAttributes(children, file, name)
 
   const { tag, props, params } = validation
   const isAnimated = tag.isMotion || childInfo.isMotion || childInfo.isAnimated

@@ -1,4 +1,4 @@
-import type { VsCodeStyles } from '@jt-view-exports-svg/core'
+import type { EditorStyles } from '@jt-view-exports-svg/core'
 import type { Components, Theme } from '@mui/material/styles'
 
 /**
@@ -28,4 +28,4 @@ export interface IconBaseProps {
   sx?: React.CSSProperties
 }
 
-export type CustomizationsFunction = (styles: Partial<VsCodeStyles>) => Components<Theme>
+export type CustomizationsFunction = (styles: Partial<EditorStyles>) => Components<Theme>

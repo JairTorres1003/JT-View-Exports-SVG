@@ -1,4 +1,4 @@
-import { type Position, type SVGFile, SVGReceiveMessage } from '@jt-view-exports-svg/core'
+import { type LocationIdentifier, SVGReceiveMessage } from '@jt-view-exports-svg/core'
 
 import { vscode } from '@/services/vscode'
 
@@ -36,9 +36,6 @@ export const getFileName = (filePath: string): string => {
  * @param file - The SVG file to open.
  * @param position - The position in the file to open (default is { column: 0, line: 0, index: 0 }).
  */
-export const openFileInPosition = (
-  file: SVGFile,
-  position: Position = { column: 0, line: 0, index: 0 }
-): void => {
-  vscode.postMessage(SVGReceiveMessage.OpenFile, { file, position })
+export const openFileInPosition = (location: LocationIdentifier): void => {
+  vscode.postMessage(SVGReceiveMessage.OpenFileInEditor, location)
 }

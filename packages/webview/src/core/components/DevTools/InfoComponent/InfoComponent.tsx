@@ -92,10 +92,7 @@ const InfoComponent = () => {
               <Tooltip title={t('DevTools.playground.OpenInEditor')} placement='top'>
                 <IconButton
                   onClick={() => {
-                    openFileInPosition(
-                      recentlySelected.location.file,
-                      recentlySelected.location.start
-                    )
+                    openFileInPosition(recentlySelected.location)
                   }}
                 >
                   <IconGoToFile size={16} />

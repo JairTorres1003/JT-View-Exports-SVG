@@ -2,6 +2,7 @@ import { commands, type ExtensionContext, type Uri, workspace } from 'vscode'
 
 import {
   runClearCache,
+  runClearCollectionCache,
   runReloadTheme,
   runScanningWorkspace,
   runToggleDevTools,
@@ -9,17 +10,17 @@ import {
   showMenu,
 } from './commands'
 import { CONFIG_KEY } from './constants/misc'
-import { initializeCacheManager } from './controllers/cache'
 import { InMemoryFileSystemProvider } from './providers/InMemoryFileSystemProvider'
-import { initializeExtensionTheme } from './utilities/vscode/extensions/theme'
+import { initCache } from './services/cache/main'
+import { initializeExtensionTheme } from './services/vscode/extensionTheme'
 
 /**
  * This method is called when your extension is activated.
  * @param context The extension context.
  */
 export async function activate(context: ExtensionContext) {
-  await initializeCacheManager(context)
-  await initializeExtensionTheme(context)
+  initCache(context)
+  initializeExtensionTheme()
 
   const provider = new InMemoryFileSystemProvider()
 
@@ -44,10 +45,11 @@ export async function activate(context: ExtensionContext) {
       await runToggleDevTools(false)
     }),
     commands.registerCommand(`${CONFIG_KEY}.reloadTheme`, async () => {
-      await runReloadTheme(context)
+      await runReloadTheme()
     }),
     commands.registerCommand(`${CONFIG_KEY}.clearCache`, runClearCache),
-
+    commands.registerCommand(`${CONFIG_KEY}.clearFullCache`, () => runClearCache('full')),
+    commands.registerCommand(`${CONFIG_KEY}.clearCollectionCache`, runClearCollectionCache),
     // providers
     workspace.registerFileSystemProvider(`scheme-${CONFIG_KEY}`, provider, {
       isCaseSensitive: true,

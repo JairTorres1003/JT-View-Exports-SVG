@@ -1,7 +1,7 @@
 /**
  * VS Code editor styles
  */
-export interface VsCodeStyles {
+export interface EditorStyles {
   fontFamily: string
   fontSize: number
   fontWeight: string | number

@@ -1,16 +1,17 @@
 import * as t from '@babel/types'
 import type {
   GetChildAttributes,
-  IValue,
+  IPropertyValue,
   SVGComponentProps,
   SVGErrors,
   SVGFile,
 } from '@jt-view-exports-svg/core'
 import { l10n } from 'vscode'
 
+import { propertyStore } from '@/store/PropertyStore'
+
 import { isEmpty } from '../misc'
 import { getProperties } from '../properties/getProperties'
-import { propertyManager } from '../properties/propertyManager'
 import { getPropertyValues } from '../properties/propertyValues'
 
 import { isElementAnimated } from './is-animate'
@@ -57,10 +58,11 @@ export function getChildFragments(
  */
 export function getChildAttributes(
   children: t.JSXElement['children'],
-  file: SVGFile
+  file: SVGFile,
+  name: string
 ): GetChildAttributes {
   const components: SVGComponentProps['children'] = []
-  const params = propertyManager.get()
+  const params = propertyStore.get(file, name)
   let errors: SVGErrors | undefined
   let hasErrors = false
   let isMotion = false
@@ -77,7 +79,7 @@ export function getChildAttributes(
     const openingElement = element.openingElement
     const tag = getSVGTagName(openingElement, file)
     const props = getProperties(openingElement.attributes, params)
-    const childAttrs = getChildAttributes(element.children, file)
+    const childAttrs = getChildAttributes(element.children, file, name)
 
     if (!hasErrors) {
       hasErrors = childAttrs.hasErrors
@@ -113,13 +115,13 @@ export function getChildAttributes(
     } else if (t.isJSXText(child) && !isEmpty(child.value.trim())) {
       components.push(child.value)
     } else if (t.isJSXExpressionContainer(child)) {
-      const value = getPropertyValues(child.expression, params) as IValue
+      const value = getPropertyValues(child.expression, params) as IPropertyValue
 
       if (typeof value === 'object' && t.isJSXElement(value)) {
         processElement(value)
       } else if (typeof value === 'object' && t.isJSXFragment(value)) {
         const childs = getChildFragments(value.children, file)
-        components.push(...getChildAttributes(childs, file).children)
+        components.push(...getChildAttributes(childs, file, name).children)
       } else if (typeof value === 'string') {
         components.push(value)
       } else if (!['undefined', 'null', 'boolean'].includes(typeof value)) {
@@ -128,7 +130,7 @@ export function getChildAttributes(
           message: l10n.t('Error processing JSX expression container: {error}', {
             error: typeof value,
           }),
-          location: { start: child.loc?.start, end: child.loc?.end },
+          location: { start: child.loc?.start, end: child.loc?.end, id: file.id },
         }
       }
     }

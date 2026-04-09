@@ -1,10 +1,10 @@
 import type { SVGPostMessage } from '../../constants/messages'
-import type { SVGErrors } from '../common'
-import type { ExtensionManage, ThemeMode, VsCodeStyles } from '../editor'
+import type { FileIdentifier, SVGErrors, SVGFile } from '../common'
+import type { EditorStyles, ExtensionManage, ThemeMode } from '../editor'
 import type { SVGComponent, ViewExportSVG } from '../svg'
 
 import type {
-  AssetPath,
+  FetchResponse,
   HandlerArgs,
   HandlersMap,
   MessageEmitter,
@@ -16,25 +16,24 @@ import type {
  * Map of post message types to their data payloads
  */
 export type PostMessageMap = {
-  [SVGPostMessage.SendAssetsPath]: AssetPath
-  [SVGPostMessage.SendLastScanDate]: string
-  [SVGPostMessage.SendPlaygroundError]: SVGErrors
-  [SVGPostMessage.SendRunLoading]: string
-  [SVGPostMessage.SendSVGComponents]: ViewExportSVG[]
-  [SVGPostMessage.SendRefreshSVGComponents]: ViewExportSVG[]
-  [SVGPostMessage.SendSVGError]: SVGErrors
-  [SVGPostMessage.SendSVGFilteredComponents]: ViewExportSVG[]
-  [SVGPostMessage.SendSVGPlayground]: SVGComponent
-  [SVGPostMessage.SendTheme]: ThemeMode
-  [SVGPostMessage.SendEditorConfig]: Record<string, unknown>
-  [SVGPostMessage.SendVsCodeStyles]: VsCodeStyles
-  [SVGPostMessage.SendHomeIcons]: ViewExportSVG[]
-  [SVGPostMessage.SendExpandAllIcons]: boolean
-  [SVGPostMessage.SendToggleOpenDevTools]: boolean
-  [SVGPostMessage.SendExtensionTheme]: ExtensionManage
-  [SVGPostMessage.SendUpdateConfiguration]: Record<string, unknown>
-  [SVGPostMessage.SendReloadWebview]: string
-  [SVGPostMessage.SendOpenFiles]: string[]
+  [SVGPostMessage.Navigate]: { path: string }
+  [SVGPostMessage.LoadComponents]: ViewExportSVG[]
+  [SVGPostMessage.LoadUserComponents]: ViewExportSVG[]
+  [SVGPostMessage.LoadFilesComponents]: Record<FileIdentifier, SVGFile>
+  [SVGPostMessage.FilterComponents]: ViewExportSVG[]
+  [SVGPostMessage.OnErrorComponents]: SVGErrors
+  [SVGPostMessage.OnReloadComponent]: ViewExportSVG[]
+  [SVGPostMessage.ToggleExpandAllComponents]: boolean
+  [SVGPostMessage.ToggleOpenDevTools]: boolean
+  [SVGPostMessage.ComponentEditedInPlayground]: SVGComponent
+  [SVGPostMessage.ErrorEditingComponentInPlayground]: SVGErrors
+  [SVGPostMessage.LoadEditorThemeMode]: ThemeMode
+  [SVGPostMessage.LoadEditorConfig]: Record<string, unknown>
+  [SVGPostMessage.LoadExtensionTheme]: ExtensionManage
+  [SVGPostMessage.LoadEditorStyles]: EditorStyles
+  [SVGPostMessage.FetchVSCodeTheme]: FetchResponse<Record<string, unknown>>
+  [SVGPostMessage.LoadOpenFiles]: string[]
+  [SVGPostMessage.FetchVsCodeThemePackage]: FetchResponse<Record<string, unknown>>
 }
 
 /**

@@ -1,33 +1,35 @@
 import { SVGPostMessage } from '@jt-view-exports-svg/core'
-import { type ExtensionContext, l10n, window } from 'vscode'
+import { l10n, window } from 'vscode'
 
-import { ViewExportsSVGController } from '@/controllers/views'
+import { PanelController } from '@/controllers/views/PanelController'
+import { getCache } from '@/services/cache/main'
+import { getConfigurationEditor } from '@/services/vscode/editorConfig'
+import { CACHE_KEY, initializeExtensionTheme } from '@/services/vscode/extensionTheme'
+import { getCurrentThemeMode } from '@/services/vscode/themeMode'
 import { isEmpty } from '@/utilities/misc'
-import { getConfigurationEditor } from '@/utilities/vscode/config'
-import { getExtensionTheme, reloadExtensionTheme } from '@/utilities/vscode/extensions/theme'
-import { getCurrentTheme } from '@/utilities/vscode/theme'
 
 /**
  * Reloads the extension theme and sends it to the current panel if it exists.
  */
-export const runReloadTheme = async (context: ExtensionContext): Promise<void> => {
-  if (!isEmpty(ViewExportsSVGController.currentPanel)) {
-    await reloadExtensionTheme(context)
+export const runReloadTheme = async (): Promise<void> => {
+  const cache = getCache().get('extensionTheme')
 
-    const theme = getExtensionTheme()
+  await cache.delete(CACHE_KEY)
 
-    if (!isEmpty(theme)) {
-      ViewExportsSVGController.currentPanel._postMessage(SVGPostMessage.SendExtensionTheme, theme)
-    } else {
-      window
-        .showInformationMessage(l10n.t('No theme found for the current workspace'))
-        .then(undefined, console.error)
-    }
+  initializeExtensionTheme()
 
-    const config = getConfigurationEditor()
-    const kind = getCurrentTheme()
+  const config = getConfigurationEditor()
+  const kind = getCurrentThemeMode()
+  const theme = await cache.get(CACHE_KEY)
 
-    ViewExportsSVGController.currentPanel._postMessage(SVGPostMessage.SendEditorConfig, config)
-    ViewExportsSVGController.currentPanel._postMessage(SVGPostMessage.SendTheme, kind)
+  PanelController.send(SVGPostMessage.LoadEditorConfig, config)
+  PanelController.send(SVGPostMessage.LoadEditorThemeMode, kind)
+
+  if (!isEmpty(theme)) {
+    PanelController.send(SVGPostMessage.LoadExtensionTheme, theme)
+  } else {
+    window
+      .showInformationMessage(l10n.t('No theme found for the current workspace'))
+      .then(undefined, console.error)
   }
 }

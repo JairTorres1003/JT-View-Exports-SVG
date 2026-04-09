@@ -1,6 +1,7 @@
-import type { SVGFile } from '../common'
-import type { SVGComponent } from './component'
-import type { DeclarationExport } from './parsing'
+import type { FileIdentifier, SVGFile } from '../common'
+import type { GetChildAttributes, SVGComponent } from './component'
+import type { DeclarationType } from './parsing'
+import type { GetSVGTagName } from './tags'
 
 /**
  * Represents a grouped view of SVG exports
@@ -24,20 +25,50 @@ export interface ViewExportSVG {
   /** Indicates whether the SVG components that are not exported should be shown */
   isShowNoExports: boolean
   /** This is an array of SVG files that are associated with the group of exports (groupKind) */
-  files: SVGFile[]
+  files: FileIdentifier[]
 }
 
 /**
- * Represents extracted SVG exports from parsing
+ * Represents extracted SVG component exports from parsing
  */
-export interface ExtractSVGExports {
-  /** Base declarations with their metadata */
-  base: Record<string, { declaration: DeclarationExport; params: Record<string, unknown> }>
+export interface ExtractComponentExports {
+  declarations: PendingExtraction[]
   /** SVG component categorization */
-  svg: {
+  components: {
     /** Components that are exported */
-    exportComponents: SVGComponent[]
+    exported: SVGComponent[]
     /** Components that are not exported */
-    noExportComponents: SVGComponent[]
+    noExported: SVGComponent[]
   }
+}
+
+/**
+ * Represents a pending extraction during parsing
+ */
+export interface PendingExtraction {
+  node: DeclarationType
+  isExported: boolean
+}
+
+export interface ExtractNodeDeclarations {
+  declarations: PendingExtraction[]
+  identifiers: Set<string>
+}
+
+export interface ProcessComponent extends PendingExtraction {
+  file: SVGFile
+  identifiers?: Set<string>
+  parameters?: Record<string, unknown>
+}
+
+/**
+ * SVG element information during parsing
+ */
+export interface SVGElementInfo {
+  /** Tag information */
+  tag: GetSVGTagName
+  /** Element props */
+  props: Record<string, unknown>
+  /** Child attributes */
+  childAttrs: GetChildAttributes
 }

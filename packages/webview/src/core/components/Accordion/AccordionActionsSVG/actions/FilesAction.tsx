@@ -1,11 +1,11 @@
-import type { SVGFile, ViewExportSVG } from '@jt-view-exports-svg/core'
+import type { FileIdentifier, ViewExportSVG } from '@jt-view-exports-svg/core'
 import { type FC, useState } from 'react'
 
 import { OpenFileButton } from '@/core/components/Buttons/OpenFileButton'
 import { DialogFilesModal } from '@/core/components/modals/DialogFilesModal'
 
 interface FilesActionProps {
-  files: SVGFile[]
+  files: FileIdentifier[]
   groupKind: ViewExportSVG['groupKind']
 }
 
@@ -17,7 +17,7 @@ export const FilesAction: FC<FilesActionProps> = ({ files, groupKind }) => {
   return (
     <>
       <OpenFileButton
-        file={files[0]}
+        fileId={files[0]}
         multiple={files.length > 1}
         onClick={() => {
           if (files.length > 1) setOpen(true)

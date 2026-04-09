@@ -3,8 +3,8 @@ import type { ParamsTypes, SVGFile } from '@jt-view-exports-svg/core'
 import { isEmpty } from 'lodash'
 
 import { REST_PROPS_KEY } from '@/constants/misc'
+import { propertyStore } from '@/store/PropertyStore'
 
-import { propertyManager } from '../properties/propertyManager'
 import { getPropertyValues } from '../properties/propertyValues'
 
 import { getChildFragments } from './children'
@@ -13,20 +13,26 @@ import { getChildFragments } from './children'
  * Analyzes the parameters of a node and performs certain actions based on the parameter type.
  * @param params - An array of parameters to analyze.
  */
-export function getNodeParams(params: Array<t.Identifier | t.Pattern | t.RestElement>): void {
-  params.forEach((param) => {
-    if (t.isObjectPattern(param) && !isEmpty(param.properties)) {
-      param.properties.forEach((property) => {
-        if (t.isObjectProperty(property) && t.isIdentifier(property.key)) {
-          const { key, value } = property
+export function getNodeParams(
+  params: Array<t.Identifier | t.Pattern | t.RestElement>
+): Record<string, unknown> {
+  const newProperties: Record<string, unknown> = {}
 
-          propertyManager.set(key.name, getPropertyValues(value, {}))
-        } else if (t.isRestElement(property) && t.isIdentifier(property.argument)) {
-          propertyManager.set(REST_PROPS_KEY, { [property.argument.name]: {} })
-        }
-      })
-    }
+  params.forEach((param) => {
+    if (!t.isObjectPattern(param)) return
+
+    param.properties?.forEach((property) => {
+      if (t.isObjectProperty(property) && t.isIdentifier(property.key)) {
+        const { key, value } = property
+
+        newProperties[key.name] = getPropertyValues(value, {})
+      } else if (t.isRestElement(property) && t.isIdentifier(property.argument)) {
+        newProperties[REST_PROPS_KEY] = { [property.argument.name]: {} }
+      }
+    })
   })
+
+  return newProperties
 }
 
 /**
@@ -71,33 +77,29 @@ export function getNodeTypes(params: Record<string, unknown>): ParamsTypes {
 export function analyzeExportType(
   node: t.FunctionDeclaration | t.ArrowFunctionExpression | t.Expression,
   file: SVGFile,
+  name: string,
   params?: Record<string, unknown>
 ): t.JSXElement | undefined {
-  if (t.isArrowFunctionExpression(node) || t.isFunctionDeclaration(node)) {
-    let element: t.JSXElement | undefined
+  if (!t.isArrowFunctionExpression(node) && !t.isFunctionDeclaration(node)) return
 
-    if (t.isJSXElement(node.body) || t.isJSXFragment(node.body)) {
-      element = getChildFragments([node.body], file)[0]
-    } else if (t.isBlockStatement(node.body)) {
-      const body = [...node.body.body].reverse()
-      const returnStatement = body.find((bd) => t.isReturnStatement(bd))
+  let element: t.JSXElement | undefined
 
-      if (
-        !isEmpty(returnStatement) &&
-        (t.isJSXElement(returnStatement.argument) || t.isJSXFragment(returnStatement.argument))
-      ) {
-        element = getChildFragments([returnStatement.argument], file)[0]
-      }
+  if (t.isJSXElement(node.body) || t.isJSXFragment(node.body)) {
+    element = getChildFragments([node.body], file)[0]
+  } else if (t.isBlockStatement(node.body)) {
+    const body = [...node.body.body].reverse()
+    const returnStatement = body.find((bd) => t.isReturnStatement(bd))
+
+    if (
+      !isEmpty(returnStatement) &&
+      (t.isJSXElement(returnStatement.argument) || t.isJSXFragment(returnStatement.argument))
+    ) {
+      element = getChildFragments([returnStatement.argument], file)[0]
     }
-
-    if (!isEmpty(params)) {
-      propertyManager.setAll(params)
-    } else {
-      getNodeParams(node.params ?? [])
-    }
-
-    return element
   }
 
-  return undefined
+  const attr = !isEmpty(params) ? params : getNodeParams(node.params ?? [])
+  propertyStore.set(file, name, attr)
+
+  return element
 }

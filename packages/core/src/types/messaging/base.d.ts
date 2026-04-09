@@ -90,3 +90,12 @@ export interface ManifestContent {
   /** Stylesheet path */
   style: string
 }
+
+export interface FetchResponse<T> {
+  /** Indicates if the fetch was successful */
+  success: boolean
+  /** Data returned from the fetch, if successful */
+  data?: T
+  /** Error message, if the fetch failed */
+  error?: string
+}

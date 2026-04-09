@@ -12,7 +12,7 @@ import { containerComponentsClasses } from './ContainerComponents.classes'
 import { BoxContainerComponents } from './ContainerComponents.style'
 
 const ContainerComponents = (): React.ReactNode => {
-  const { isExpanded, toggleExpanded } = useExpandedComponents()
+  const { handleToggle, isExpanded } = useExpandedComponents()
   const { components, errors } = useSelector((state) => state.svg)
 
   if (errors) {
@@ -34,7 +34,7 @@ const ContainerComponents = (): React.ReactNode => {
         <AccordionMenuItem
           key={item.groupKind.id}
           label={item.groupKind.label}
-          onChange={toggleExpanded(item.groupKind.id)}
+          onChange={handleToggle(item.groupKind.id)}
           expanded={isExpanded.includes(item.groupKind.id)}
           loading={isExpanded.includes(item.groupKind.id)}
           className={containerComponentsClasses.accordion}

@@ -10,8 +10,10 @@ import isEmpty from '@/utils/is-empty'
 
 export const useViewPanels = () => {
   const sidePanelRef = usePanelRef()
+
   const isOpenDevTools = useSelector((state) => state.playground.isOpenDevTools)
   const renderPath = useSelector((state) => state.global.configuration.renderPath)
+
   const [isShowSidePanel, setIsShowSidePanel] = useState(true)
 
   const dispatch = useDispatch()
@@ -38,10 +40,10 @@ export const useViewPanels = () => {
    */
   const onResize: PanelProps['onResize'] = (size) => {
     if (size.inPixels < 200) {
-      vscode.postMessage(SVGReceiveMessage.ToggleOpenDevTools, false)
+      vscode.postMessage(SVGReceiveMessage.IsOpenDevTools, false)
       dispatch(setIsOpenDevTools(false))
     } else if (size.inPixels >= 200 && !isOpenDevTools) {
-      vscode.postMessage(SVGReceiveMessage.ToggleOpenDevTools, true)
+      vscode.postMessage(SVGReceiveMessage.IsOpenDevTools, true)
       dispatch(setIsOpenDevTools(true))
     }
   }
@@ -52,29 +54,31 @@ export const useViewPanels = () => {
    */
   const handleChangePath = (newPath: string) => {
     if (isEmpty(newPath)) return
+    sidePanelRef.current?.collapse()
 
     const route = routes.find((route) => route.path === newPath)
     setIsShowSidePanel(route?.devtools ?? false)
   }
 
   useEffect(() => {
-    vscode.onMessage(SVGPostMessage.SendToggleOpenDevTools, toggleSidePanel)
+    vscode.onMessage(SVGPostMessage.ToggleOpenDevTools, toggleSidePanel)
 
     return () => {
-      vscode.unregisterMessage(SVGPostMessage.SendToggleOpenDevTools)
+      vscode.unregisterMessage(SVGPostMessage.ToggleOpenDevTools)
     }
   }, [])
 
   useEffect(() => {
     if (isOpenDevTools && sidePanelRef.current) {
       sidePanelRef.current.expand()
-      vscode.postMessage(SVGReceiveMessage.ToggleOpenDevTools, true)
+      vscode.postMessage(SVGReceiveMessage.IsOpenDevTools, true)
     }
   }, [isOpenDevTools])
 
   useEffect(() => {
     handleChangePath(renderPath)
   }, [renderPath])
+
   return {
     sidePanelRef,
     onResize,

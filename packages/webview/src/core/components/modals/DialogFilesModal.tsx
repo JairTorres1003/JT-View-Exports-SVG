@@ -1,4 +1,4 @@
-import type { SVGFile, ViewExportSVG } from '@jt-view-exports-svg/core'
+import type { FileIdentifier, ViewExportSVG } from '@jt-view-exports-svg/core'
 import {
   ClickAwayListener,
   type DialogProps,
@@ -9,8 +9,9 @@ import {
   ListItemText,
   Tooltip,
 } from '@mui/material'
-import { type FC, useState } from 'react'
+import { type FC, useMemo, useState } from 'react'
 import { useTranslation } from 'react-i18next'
+import { useSelector } from 'react-redux'
 
 import IconAnyFile from '@/assets/icons/files/any'
 import IconJS from '@/assets/icons/logos/js'
@@ -24,7 +25,7 @@ import { OpenFileButton } from '../Buttons/OpenFileButton'
 import { DialogModal } from './DialogModal'
 
 interface DialogFilesModalProps extends DialogProps {
-  files: SVGFile[]
+  files: FileIdentifier[]
   groupKind: ViewExportSVG['groupKind']
 }
 
@@ -41,20 +42,10 @@ export const DialogFilesModal: FC<DialogFilesModalProps> = ({
   onClose = () => null,
   ...dialogProps
 }) => {
-  const [selectedIndex, setSelectedIndex] = useState<number | false>(false)
-
+  const { fileList, selectedIndex, onKeyDown, onCloseAway, onSelected } = useDialogFilesModal({
+    files,
+  })
   const { t } = useTranslation()
-
-  /**
-   * Handles keyboard navigation within the dialog.
-   */
-  const onKeyDown = (event: React.KeyboardEvent) => {
-    if (event.key === 'ArrowDown') {
-      setSelectedIndex((prev) => (prev === false ? 0 : Math.min(prev + 1, files.length - 1)))
-    } else if (event.key === 'ArrowUp') {
-      setSelectedIndex((prev) => (prev === false ? 0 : Math.max(prev - 1, 0)))
-    }
-  }
 
   return (
     <DialogModal
@@ -62,13 +53,9 @@ export const DialogFilesModal: FC<DialogFilesModalProps> = ({
       {...dialogProps}
       title={t('labels.ListOfAssociatedFilesFor', { name: groupKind.label?.split('/').pop() })}
     >
-      <ClickAwayListener
-        onClickAway={() => {
-          setSelectedIndex(false)
-        }}
-      >
+      <ClickAwayListener onClickAway={onCloseAway}>
         <List onKeyDown={onKeyDown} tabIndex={0}>
-          {files.map((file, index) => {
+          {fileList.map((file, index) => {
             const IconComponent = iconTypes[file.extension] ?? IconAnyFile
 
             return (
@@ -86,16 +73,14 @@ export const DialogFilesModal: FC<DialogFilesModalProps> = ({
                         primary: { sx: { whiteSpace: 'nowrap' }, fontSize: '.75rem' },
                         secondary: { noWrap: true, sx: { opacity: 0.8 }, fontSize: '.7rem' },
                       }}
-                      onClick={() => {
-                        setSelectedIndex(index)
-                      }}
+                      onClick={onSelected(index)}
                     />
                   </Tooltip>
                   <ListItemIcon
                     sx={{ minWidth: 16, ml: 0.5 }}
                     className='MuiListItemIcon-jtActions'
                   >
-                    <OpenFileButton file={file} />
+                    <OpenFileButton fileId={file.id} />
                   </ListItemIcon>
                 </ListItemButton>
               </ListItem>
@@ -105,4 +90,35 @@ export const DialogFilesModal: FC<DialogFilesModalProps> = ({
       </ClickAwayListener>
     </DialogModal>
   )
+}
+
+const useDialogFilesModal = ({ files }: { files: FileIdentifier[] }) => {
+  const filesComponents = useSelector((state) => state.svg.files)
+
+  const [selectedIndex, setSelectedIndex] = useState<number | false>(false)
+
+  const fileList = useMemo(() => {
+    return files.map((fileId) => filesComponents[fileId]).filter((file) => file)
+  }, [files, filesComponents])
+
+  /**
+   * Handles keyboard navigation within the dialog.
+   */
+  const onKeyDown = (event: React.KeyboardEvent) => {
+    if (event.key === 'ArrowDown') {
+      setSelectedIndex((prev) => (prev === false ? 0 : Math.min(prev + 1, files.length - 1)))
+    } else if (event.key === 'ArrowUp') {
+      setSelectedIndex((prev) => (prev === false ? 0 : Math.max(prev - 1, 0)))
+    }
+  }
+
+  const onCloseAway = () => {
+    setSelectedIndex(false)
+  }
+
+  const onSelected = (index: number) => () => {
+    setSelectedIndex(index)
+  }
+
+  return { fileList, selectedIndex, onKeyDown, onCloseAway, onSelected }
 }

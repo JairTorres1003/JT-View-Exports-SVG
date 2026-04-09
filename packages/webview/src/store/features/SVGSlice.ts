@@ -4,6 +4,7 @@ import type { SVGReducers, SVGState } from '@/types/store/features/SvgSlice'
 
 const initialState: SVGState = {
   components: [],
+  files: {},
   componentsPendingRefresh: [],
   search: '',
 }
@@ -11,6 +12,9 @@ const initialState: SVGState = {
 const reducers: SVGReducers = {
   setComponents: (state, { payload }) => {
     state.components = payload
+  },
+  setFiles: (state, { payload }) => {
+    state.files = payload
   },
   setSearch: (state, { payload }) => {
     state.search = payload
@@ -50,7 +54,14 @@ export const SVGSlice = createSlice({
 })
 
 export const {
-  actions: { setComponents, setSearch, setErrors, setRefreshComponents, addPendingRefresh },
+  actions: {
+    setComponents,
+    setFiles,
+    setSearch,
+    setErrors,
+    setRefreshComponents,
+    addPendingRefresh,
+  },
 } = SVGSlice
 
 export const { reducer: SVGReducer } = SVGSlice

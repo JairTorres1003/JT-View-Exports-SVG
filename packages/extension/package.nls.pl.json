@@ -9,6 +9,8 @@
   "extension.commands.openDevTools.title": "Otwórz narzędzia deweloperskie",
   "extension.commands.closeDevTools.title": "Zamknij narzędzia deweloperskie",
   "extension.commands.clearCache.title": "Wyczyść pamięć podręczną",
+  "extension.commands.clearFullCache.title": "Wyczyść pełną pamięć podręczną",
+  "extension.commands.clearCollectionCache.title": "Wyczyść pamięć podręczną kolekcji",
   "extension.config.defaultExpandAll.title": "Domyślnie rozwijaj wszystkie ikony",
   "extension.config.defaultExpandAll.description": "Określa, czy wszystkie ikony powinny być domyślnie rozwinięte po otwarciu rozszerzenia.",
   "extension.config.defaultClickToOpenDevTools.title": "Domyślnie kliknij, aby otworzyć narzędzia deweloperskie",

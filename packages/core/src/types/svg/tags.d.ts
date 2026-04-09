@@ -1,9 +1,9 @@
-import type { SVGLocation } from '../common'
+import type { LocationIdentifier } from '../common'
 
 export interface GetSVGTagName {
   name?: SVGTagName | 'Fragment'
   isMotion: boolean
-  location: SVGLocation
+  location: LocationIdentifier
   isValid: boolean
 }
 

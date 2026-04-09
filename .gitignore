@@ -31,3 +31,4 @@ Thumbs.db
 # Temp Files
 .husky/node-version-cache.txt
 *.vsix
+.cache

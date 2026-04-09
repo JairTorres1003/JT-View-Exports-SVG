@@ -6,7 +6,7 @@ import { type UseDropOptions, useDrop } from '@/core/hooks/useDrop'
 
 interface BackdropZoneProp extends UseDropOptions {}
 
-export const BackdropZone: FC<BackdropZoneProp> = (props) => {
+const BackdropZone: FC<BackdropZoneProp> = (props) => {
   const { t } = useTranslation(undefined, { keyPrefix: 'DropZone' })
 
   const { over } = useDrop(props)
@@ -25,3 +25,5 @@ export const BackdropZone: FC<BackdropZoneProp> = (props) => {
     </Backdrop>
   )
 }
+
+export default BackdropZone

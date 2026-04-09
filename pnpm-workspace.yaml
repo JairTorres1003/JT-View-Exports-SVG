@@ -9,3 +9,6 @@ onlyBuiltDependencies:
   - core-js-pure
   - esbuild
   - sharp
+patchedDependencies:
+  '@docusaurus/tsconfig': patches/@docusaurus__tsconfig.patch
+  react-colorful: patches/react-colorful.patch

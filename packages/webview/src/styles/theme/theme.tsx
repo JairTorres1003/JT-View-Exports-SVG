@@ -1,4 +1,4 @@
-import { SVGPostMessage, SVGReceiveMessage, type VsCodeStyles } from '@jt-view-exports-svg/core'
+import { type EditorStyles, SVGPostMessage, SVGReceiveMessage } from '@jt-view-exports-svg/core'
 import { createTheme, type Theme } from '@mui/material'
 import type {} from '@mui/material/themeCssVarsAugmentation'
 import { useEffect, useMemo } from 'react'
@@ -57,16 +57,16 @@ export const useCustomTheme = (): { theme: Theme } => {
    *
    * @param data - The data to set the VS Code styles.
    */
-  const handleVsCodeStyles = (data: VsCodeStyles): void => {
+  const handleStyles = (data: EditorStyles): void => {
     dispatch(setVsCodeStyles(data))
   }
 
   useEffect(() => {
-    vscode.postMessage(SVGReceiveMessage.GetVsCodeStyles)
-    vscode.onMessage(SVGPostMessage.SendVsCodeStyles, handleVsCodeStyles)
+    vscode.postMessage(SVGReceiveMessage.RequestEditorStyles)
+    vscode.onMessage(SVGPostMessage.LoadEditorStyles, handleStyles)
 
     return () => {
-      vscode.unregisterMessage(SVGPostMessage.SendVsCodeStyles)
+      vscode.unregisterMessage(SVGPostMessage.LoadEditorStyles)
     }
   }, [])
 

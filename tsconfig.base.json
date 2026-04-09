@@ -33,7 +33,6 @@
     "skipLibCheck": true,
 
     // Paths
-    "baseUrl": ".",
     "paths": {}
   }
 }

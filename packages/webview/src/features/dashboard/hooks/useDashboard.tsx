@@ -1,23 +1,18 @@
 import {
+  type FileIdentifier,
   type SVGErrors,
+  type SVGFile,
   SVGPostMessage,
   SVGReceiveMessage,
   type ViewExportSVG,
 } from '@jt-view-exports-svg/core'
 import { useEffect } from 'react'
-import { useDispatch, useSelector } from 'react-redux'
+import { useDispatch } from 'react-redux'
 
 import { vscode } from '@/services/vscode'
-import { setIsMounted, unsetInitLoading } from '@/store/features/GlobalSlice'
-import { setComponents, setErrors, setSearch } from '@/store/features/SVGSlice'
+import { setComponents, setErrors, setFiles, setSearch } from '@/store/features/SVGSlice'
 
-interface DashboardHook {
-  loading: boolean
-}
-
-export const useDashboard = (): DashboardHook => {
-  const loading = useSelector((state) => state.global.loading)
-  const isMounted = useSelector((state) => state.global.isMounted)
+export const useDashboard = () => {
   const dispatch = useDispatch()
 
   /**
@@ -29,8 +24,15 @@ export const useDashboard = (): DashboardHook => {
     dispatch(setComponents(data))
     dispatch(setSearch(''))
     dispatch(setErrors())
-    dispatch(unsetInitLoading())
-    dispatch(setIsMounted())
+  }
+
+  /**
+   * Retrieves SVG file components from the provided data and dispatches an action to set the files.
+   *
+   * @param data - An array of SVGFile objects containing SVG file data.
+   */
+  const getFilesComponents = (data: Record<FileIdentifier, SVGFile>): void => {
+    dispatch(setFiles(data))
   }
 
   /**
@@ -40,21 +42,20 @@ export const useDashboard = (): DashboardHook => {
    */
   const onErrorSVGComponents = (error?: SVGErrors): void => {
     dispatch(setErrors(error))
-    dispatch(unsetInitLoading())
   }
 
   useEffect(() => {
-    if (!isMounted) vscode.postMessage(SVGReceiveMessage.GetSVGComponents)
-    vscode.onMessage(SVGPostMessage.SendSVGComponents, getSVGComponents)
-    vscode.onMessage(SVGPostMessage.SendSVGError, onErrorSVGComponents)
+    vscode.postMessage(SVGReceiveMessage.RequestComponents)
+    vscode.postMessage(SVGReceiveMessage.RequestFilesComponents)
+
+    vscode.onMessage(SVGPostMessage.LoadComponents, getSVGComponents)
+    vscode.onMessage(SVGPostMessage.LoadFilesComponents, getFilesComponents)
+    vscode.onMessage(SVGPostMessage.OnErrorComponents, onErrorSVGComponents)
 
     return () => {
-      vscode.unregisterMessage(SVGPostMessage.SendSVGComponents)
-      vscode.unregisterMessage(SVGPostMessage.SendSVGError)
+      vscode.unregisterMessage(SVGPostMessage.LoadComponents)
+      vscode.unregisterMessage(SVGPostMessage.LoadFilesComponents)
+      vscode.unregisterMessage(SVGPostMessage.OnErrorComponents)
     }
   }, [])
-
-  return {
-    loading,
-  }
 }

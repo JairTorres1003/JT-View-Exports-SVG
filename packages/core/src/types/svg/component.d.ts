@@ -1,6 +1,6 @@
 import type { SVGDeclaration } from '../../constants/declarations'
 
-import type { SVGErrors, SVGLocation } from '../common'
+import type { LocationIdentifier, SVGErrors } from '../common'
 import type { ParamsTypes } from '../utils'
 import type { GetSVGTagName, SVGTagName } from './tags'
 
@@ -13,7 +13,7 @@ export interface SVGComponent {
   /** The name of the SVG component */
   name: string
   /** The location of the SVG component in the file */
-  location: SVGLocation
+  location: LocationIdentifier
   /** The declaration type of the SVG component */
   declaration: SVGDeclaration
   /** Indicates whether the SVG component is exported */

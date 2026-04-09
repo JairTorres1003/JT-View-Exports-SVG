@@ -1,8 +1,9 @@
+import { pathnames } from '@jt-view-exports-svg/core'
 import { lazy } from 'react'
 
 import type { IconBaseProps } from '@/types/BaseProps'
 
-interface Route {
+export interface Route {
   path: string
   name: string
   Component: React.LazyExoticComponent<React.FC>
@@ -11,13 +12,14 @@ interface Route {
   icon: React.FC<IconBaseProps>
 }
 
-export const pathnames = {
-  home: '/',
-  dashboard: '/dashboard',
-  upload: '/upload',
-}
-
 export const routes: Route[] = [
+  {
+    path: pathnames.main,
+    name: 'Main',
+    icon: lazy(() => import('@/assets/icons/navigation/navigate-fill')),
+    Component: lazy(() => import('@/app/page')),
+    private: false,
+  },
   {
     path: pathnames.home,
     name: 'Home',

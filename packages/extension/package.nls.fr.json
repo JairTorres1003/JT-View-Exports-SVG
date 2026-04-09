@@ -9,6 +9,8 @@
   "extension.commands.openDevTools.title": "Ouvrir les outils de développement",
   "extension.commands.closeDevTools.title": "Fermer les outils de développement",
   "extension.commands.clearCache.title": "Effacer le cache",
+  "extension.commands.clearFullCache.title": "Effacer le cache complet",
+  "extension.commands.clearCollectionCache.title": "Effacer le cache de la collection",
   "extension.config.defaultExpandAll.title": "Développer toutes les icônes par défaut",
   "extension.config.defaultExpandAll.description": "Détermine si toutes les icônes doivent être développées par défaut lorsque l'extension est ouverte.",
   "extension.config.defaultClickToOpenDevTools.title": "Clic par défaut pour ouvrir les outils de développement",

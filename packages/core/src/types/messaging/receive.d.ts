@@ -1,7 +1,8 @@
+import type { IconCollectionKind } from '../../constants'
 import type { SVGReceiveMessage } from '../../constants/messages'
 
-import type { FileTemporary, OpenFile, SVGFile } from '../common'
-import type { SVGIcon, SVGPlayground } from '../svg'
+import type { FileTemporary, LocationIdentifier } from '../common'
+import type { SVGIconCollection, SVGPlayground } from '../svg'
 
 import type { HandlerArgs, HandlersMap, MessageEmitter, MessagesUnion } from './base'
 
@@ -9,34 +10,30 @@ import type { HandlerArgs, HandlersMap, MessageEmitter, MessagesUnion } from './
  * Map of receive message types to their data payloads
  */
 export type ReceiveMessageMap = {
-  [SVGReceiveMessage.ExtractSVGComponentFromFiles]: string[]
-  [SVGReceiveMessage.GetAssetsPath]: undefined
-  [SVGReceiveMessage.GetLastScanDate]: undefined
-  [SVGReceiveMessage.GetSVGComponents]: undefined
-  [SVGReceiveMessage.GetTheme]: undefined
-  [SVGReceiveMessage.GetViewAssets]: SVGFile[]
-  [SVGReceiveMessage.OpenFile]: OpenFile
-  [SVGReceiveMessage.RequestFileOpen]: undefined
+  [SVGReceiveMessage.Ready]: undefined
+  [SVGReceiveMessage.ChangeViewPath]: string
+  [SVGReceiveMessage.RequestComponents]: undefined
+  [SVGReceiveMessage.RequestUserComponents]: undefined
+  [SVGReceiveMessage.RequestFilesComponents]: undefined
+  [SVGReceiveMessage.SearchComponents]: string
+  [SVGReceiveMessage.ReloadComponent]: FileIdentifier[]
+  [SVGReceiveMessage.IsExpandComponents]: boolean
+  [SVGReceiveMessage.ProcessUploadedFiles]: string[]
+  [SVGReceiveMessage.AddIconToCollection]: SVGIconCollection
+  [SVGReceiveMessage.RemoveIconFromCollection]: SVGIconCollection
+  [SVGReceiveMessage.ClearIconCollection]: IconCollectionKind
+  [SVGReceiveMessage.IsOpenDevTools]: boolean
+  [SVGReceiveMessage.EditComponentInPlayground]: SVGPlayground
+  [SVGReceiveMessage.RequestEditorThemeMode]: undefined
+  [SVGReceiveMessage.RequestEditorConfig]: undefined
+  [SVGReceiveMessage.RequestEditorExtensionTheme]: undefined
+  [SVGReceiveMessage.RequestEditorStyles]: undefined
+  [SVGReceiveMessage.ReloadEditorExtensionTheme]: undefined
+  [SVGReceiveMessage.OpenFileInEditor]: LocationIdentifier
+  [SVGReceiveMessage.OpenDialogFiles]: undefined
   [SVGReceiveMessage.CreateTempFiles]: FileTemporary[]
-  [SVGReceiveMessage.PlaygroundSVGComponents]: SVGPlayground
-  [SVGReceiveMessage.RefreshSVGComponents]: SVGFile[]
-  [SVGReceiveMessage.RemoveAssets]: SVGFile[]
-  [SVGReceiveMessage.ScanWorkspace]: undefined
-  [SVGReceiveMessage.SearchSVGComponents]: string
-  [SVGReceiveMessage.GetEditorConfig]: undefined
-  [SVGReceiveMessage.GetVsCodeStyles]: undefined
-  [SVGReceiveMessage.AddRecentIcon]: SVGIcon
-  [SVGReceiveMessage.RemoveRecentIcon]: SVGIcon
-  [SVGReceiveMessage.ClearRecentIcons]: undefined
-  [SVGReceiveMessage.AddFavoriteIcon]: SVGIcon
-  [SVGReceiveMessage.RemoveFavoriteIcon]: SVGIcon
-  [SVGReceiveMessage.ClearFavoriteIcons]: undefined
-  [SVGReceiveMessage.GetHomeIcons]: undefined
-  [SVGReceiveMessage.ToggleExpandIcon]: boolean
-  [SVGReceiveMessage.ToggleOpenDevTools]: boolean
-  [SVGReceiveMessage.GetExtensionTheme]: undefined
-  [SVGReceiveMessage.ReloadExtensionTheme]: undefined
-  [SVGReceiveMessage.ViewRenderPath]: string
+  [SVGReceiveMessage.FetchVSCodeTheme]: undefined
+  [SVGReceiveMessage.FetchVsCodeThemePackage]: undefined
 }
 
 /**

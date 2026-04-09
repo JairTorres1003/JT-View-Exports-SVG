@@ -1,3 +1,4 @@
+import type { BlogSidebarItem } from '@docusaurus/plugin-content-blog'
 import type { PropSidebarItemCategory, PropSidebarItemLink } from '@docusaurus/plugin-content-docs'
 import type { Props } from '@theme/BlogLayout'
 import { useCallback, useMemo, useState } from 'react'
@@ -5,7 +6,7 @@ import { useCallback, useMemo, useState } from 'react'
 export const useSidebar = (sidebar: Props['sidebar']) => {
   const [hiddenSidebar, setHiddenSidebar] = useState(false)
 
-  const mapLinkItem = useCallback((item: Props['sidebar']['items'][0]): PropSidebarItemLink => {
+  const mapLinkItem = useCallback((item: BlogSidebarItem): PropSidebarItemLink => {
     return {
       ...item,
       type: 'link',
@@ -17,7 +18,7 @@ export const useSidebar = (sidebar: Props['sidebar']) => {
   }, [])
 
   const newSidebar = useMemo(() => {
-    if (!sidebar || !sidebar.items) return []
+    if (!sidebar?.items) return []
 
     const groupedSidebarItems: Record<number, PropSidebarItemCategory> = sidebar.items?.reduce(
       (acc, item) => {
@@ -36,7 +37,7 @@ export const useSidebar = (sidebar: Props['sidebar']) => {
         acc[year].items.push(mapLinkItem(item))
         return acc
       },
-      {}
+      {} as Record<number, PropSidebarItemCategory>
     )
 
     return [

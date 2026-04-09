@@ -9,10 +9,10 @@ import {
   listItemTextClasses,
   Tooltip,
 } from '@mui/material'
+import { useMemo } from 'react'
 import { useTranslation } from 'react-i18next'
-
+import { useSelector } from 'react-redux'
 import { Show } from '@/core/helpers'
-
 import { DialogModal } from './DialogModal'
 
 interface DialogInfoModalProps extends DialogProps {
@@ -32,6 +32,12 @@ export const DialogInfoModal: React.FC<DialogInfoModalProps> = ({
   isGrouped = false,
   ...dialogProps
 }) => {
+  const filesComponents = useSelector((state) => state.svg.files)
+
+  const fileList = useMemo(() => {
+    return data.files.map((fileId) => filesComponents[fileId]).filter((file) => file)
+  }, [data.files, filesComponents])
+
   const { t } = useTranslation()
 
   return (
@@ -55,25 +61,25 @@ export const DialogInfoModal: React.FC<DialogInfoModalProps> = ({
         }}
       >
         <Show>
-          <Show.When condition={data.files.length === 1 && !isGrouped}>
+          <Show.When condition={fileList.length === 1 && !isGrouped}>
             <ListItem>
               <ListItemText
                 primary={t('modalInfo.FileName')}
-                secondary={data.files[0]?.basename}
+                secondary={fileList[0]?.basename}
                 slotProps={commonSlotProps}
               />
             </ListItem>
             <ListItem>
               <ListItemText
                 primary={t('modalInfo.Language')}
-                secondary={data.files[0]?.language}
+                secondary={fileList[0]?.language}
                 slotProps={commonSlotProps}
               />
             </ListItem>
             <ListItem>
               <ListItemText
                 primary={t('modalInfo.IsTemporaryFile')}
-                secondary={data.files[0]?.isTemporary ? t('labels.Yes') : t('labels.No')}
+                secondary={fileList[0]?.isTemporary ? t('labels.Yes') : t('labels.No')}
                 slotProps={commonSlotProps}
               />
             </ListItem>
@@ -81,8 +87,8 @@ export const DialogInfoModal: React.FC<DialogInfoModalProps> = ({
               <ListItemText
                 primary={t('modalInfo.Path')}
                 secondary={
-                  <Tooltip title={data.files[0]?.absolutePath} placement='top'>
-                    <span>{data.files[0]?.dirname}</span>
+                  <Tooltip title={fileList[0]?.absolutePath} placement='top'>
+                    <span>{fileList[0]?.dirname}</span>
                   </Tooltip>
                 }
                 slotProps={commonSlotProps}
@@ -93,7 +99,7 @@ export const DialogInfoModal: React.FC<DialogInfoModalProps> = ({
             <ListItem>
               <ListItemText
                 primary={t('modalInfo.FilesCount')}
-                secondary={data.files.length}
+                secondary={fileList.length}
                 slotProps={commonSlotProps}
               />
             </ListItem>
@@ -112,7 +118,7 @@ export const DialogInfoModal: React.FC<DialogInfoModalProps> = ({
               <ListItemText
                 primary={t('modalInfo.IncludesTemporaryFiles')}
                 secondary={
-                  data.files.some((file) => file.isTemporary) ? t('labels.Yes') : t('labels.No')
+                  fileList.some((file) => file.isTemporary) ? t('labels.Yes') : t('labels.No')
                 }
                 slotProps={commonSlotProps}
               />
