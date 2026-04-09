@@ -144,12 +144,33 @@
           "when": "activeWebviewPanelId == 'JT-View-Exports-SVG' && JT-View-Exports-SVG.isOpenDevTools && JT-View-Exports-SVG.showActions"
         },
         {
-          "command": "JT-View-Exports-SVG.clearCache",
+          "submenu": "clearCacheMenu",
           "group": "navigation@3",
           "when": "activeWebviewPanelId == 'JT-View-Exports-SVG'"
         }
+      ],
+      "clearCacheMenu": [
+        {
+          "command": "JT-View-Exports-SVG.clearCache",
+          "group": "navigation@3"
+        },
+        {
+          "command": "JT-View-Exports-SVG.clearFullCache",
+          "group": "navigation@3"
+        },
+        {
+          "command": "JT-View-Exports-SVG.clearCollectionCache",
+          "group": "navigation@3"
+        }
       ]
     },
+    "submenus": [
+      {
+        "id": "clearCacheMenu",
+        "label": "%extension.commands.clearCache.title%",
+        "icon": "$(trash)"
+      }
+    ],
     "configuration": [
       {
         "title": "%extension.title%",
