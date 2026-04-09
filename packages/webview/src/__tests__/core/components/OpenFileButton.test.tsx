@@ -59,7 +59,7 @@ describe('OpenFileButton', () => {
     const button = screen.getByTestId('open-file-button')
     await userEvent.click(button)
 
-    expect(openFileInPosition).toHaveBeenCalledWith(mockFile)
+    expect(openFileInPosition).toHaveBeenCalledWith({ id: mockFile.id })
     expect(handleClick).toHaveBeenCalledTimes(1)
   })
 
