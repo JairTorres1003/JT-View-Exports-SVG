@@ -47,7 +47,7 @@ export function isDynamicMessage(type: string): false | { baseType: string; dyna
  * @param type - Message type to validate
  * @returns `true` if valid SVGPostMessage, `false` otherwise
  */
-export function isValidSVGPostMessageType(type: SVGPostMessage): type is SVGPostMessage {
+export function isValidSVGPostMessageType(type: unknown): type is SVGPostMessage {
   if (typeof type !== 'string') return false
 
   let typeAux = type
@@ -57,5 +57,5 @@ export function isValidSVGPostMessageType(type: SVGPostMessage): type is SVGPost
     typeAux = typeAux.replace(/<[^>]+>/, '<placeholder>') as typeof type
   }
 
-  return Object.values(SVGPostMessage).includes(typeAux)
+  return Object.values(SVGPostMessage).includes(typeAux as SVGPostMessage)
 }
