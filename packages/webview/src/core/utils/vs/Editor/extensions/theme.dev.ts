@@ -7,6 +7,8 @@ import { sanitizePathStart } from '@jt-view-exports-svg/core'
 
 import { axiosInstance } from '@/services/instance'
 
+import isExtensionAlreadyInstalled from './is-extension-already-installed'
+
 /**
  * Activates the theme extension in development mode by registering a default theme.
  *
@@ -15,6 +17,14 @@ import { axiosInstance } from '@/services/instance'
  */
 export default async function devActivate(): Promise<void> {
   const manifest = (await axiosInstance.get<IExtensionManifest>('/vs/extension/theme-package')).data
+
+  if (!manifest) {
+    console.error('Failed to fetch the theme extension manifest.')
+    return
+  }
+
+  const isAlreadyRegistered = isExtensionAlreadyInstalled(manifest)
+  if (isAlreadyRegistered) return
 
   const extensionTheme = registerExtension(manifest, ExtensionHostKind.LocalProcess)
 

@@ -8,6 +8,8 @@ import { type ExtensionManage, sanitizePathStart } from '@jt-view-exports-svg/co
 import i18next from '@/i18n'
 import { getUnknownError } from '@/utils/errors'
 
+import isExtensionAlreadyInstalled from './is-extension-already-installed.ts'
+
 /**
  * Activates the theme extension by fetching its manifest and registering its themes.
  *
@@ -40,6 +42,10 @@ async function activate(_themeConfig?: ExtensionManage) {
       browser: _browser,
       ...manifest
     }: IExtensionManifest = await packageJSON.json()
+
+    const isAlreadyRegistered = isExtensionAlreadyInstalled(manifest)
+    if (isAlreadyRegistered) return
+
     const { registerFileUrl } = registerExtension(manifest, ExtensionHostKind.LocalProcess)
 
     manifest.contributes?.themes?.forEach((theme) => {
