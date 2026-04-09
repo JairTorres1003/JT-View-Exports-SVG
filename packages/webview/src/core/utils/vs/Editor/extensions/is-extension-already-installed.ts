@@ -15,11 +15,6 @@ function getExtensionId(publisher: string, name: string): string {
 export default function isExtensionAlreadyInstalled(manifest: IExtensionManifest): boolean {
   const extensionId = getExtensionId(manifest.publisher, manifest.name)
   const existingExtensions = getBuiltinExtensions()
-  console.info(
-    '🚀 ~ isExtensionAlreadyInstalled ~ existingExtensions:',
-    existingExtensions,
-    extensionId
-  )
 
   return existingExtensions.some((ext) => ext.identifier.id === extensionId)
 }
