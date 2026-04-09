@@ -113,7 +113,7 @@ async function processFileItem(
  */
 export async function processFiles(
   items: vsc.Uri[],
-  operation: (result: ViewExportSVG[], files: SVGFile[]) => void
+  operation: (result: ViewExportSVG[], files: SVGFile[]) => void = () => null
 ): Promise<void> {
   try {
     const progressOptions: vsc.ProgressOptions = {
