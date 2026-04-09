@@ -2,6 +2,13 @@ import { SVGPostMessage } from '@jt-view-exports-svg/core'
 import { useState } from 'react'
 import { useSelector } from 'react-redux'
 
+/**
+ * Hook for managing navigation drawer state and interactions.
+ *
+ * @remarks
+ * This hook is intended for development purposes only and should not be included in production builds.
+ * It manages the open/closed state of a navigation drawer and the expanded/collapsed state of its components.
+ */
 const useNavigationDrawer = () => {
   const { defaultExpandAll } = useSelector((state) => state.global.configuration)
 
