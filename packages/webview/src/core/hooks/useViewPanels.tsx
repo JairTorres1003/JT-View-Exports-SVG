@@ -12,7 +12,7 @@ export const useViewPanels = () => {
   const sidePanelRef = usePanelRef()
 
   const isOpenDevTools = useAppSelector((state) => state.playground.isOpenDevTools)
-  const renderPath = useAppSelector((state) => state.global.configuration.renderPath)
+  const renderRoute = useAppSelector((state) => state.global.renderRoute)
 
   const [isShowSidePanel, setIsShowSidePanel] = useState(true)
 
@@ -76,8 +76,8 @@ export const useViewPanels = () => {
   }, [isOpenDevTools])
 
   useEffect(() => {
-    handleChangePath(renderPath)
-  }, [renderPath])
+    handleChangePath(renderRoute.path)
+  }, [renderRoute])
 
   return {
     sidePanelRef,

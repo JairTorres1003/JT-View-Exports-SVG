@@ -5,7 +5,7 @@ import { useLocation } from 'react-router-dom'
 
 import { useLoadFiles } from '@/core/hooks/useLoadFiles'
 import { vscode } from '@/services/vscode'
-import { setRenderPath } from '@/store/features/global/slice'
+import { setRenderRoute } from '@/store/features/global/slice'
 import { useAppDispatch } from '@/store/hooks'
 import type { IFile } from '@/types/misc'
 
@@ -23,7 +23,9 @@ export const useUpload = () => {
   const onExtractComponents = () => {
     const messageEncoded = encodeURIComponent(t('Processing {0} file(s)...', { '0': files.length }))
 
-    dispatch(setRenderPath({ path: `${pathnames.main}?load-message=${messageEncoded}` }))
+    dispatch(
+      setRenderRoute({ path: `${pathnames.main}?load-message=${messageEncoded}`, options: {} })
+    )
     vscode.postMessage(
       SVGReceiveMessage.ProcessUploadedFiles,
       files.map((file) => file.path)

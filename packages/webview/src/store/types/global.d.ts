@@ -18,23 +18,24 @@ export interface SnackbarAlertState {
 export interface GlobalConfigurationState {
   defaultExpandAll: boolean
   defaultClicToOpenDevTools: boolean
-  renderPath: string
   showRecentIcons: boolean
+}
+
+export interface RenderRouteState {
+  path: string
+  options?: NavigateOptions
 }
 
 export interface GlobalState {
   snackbarAlert: SnackbarAlertState
   configuration: GlobalConfigurationState
-  renderOptions?: NavigateOptions
+  renderRoute: RenderRouteState
 }
 
 export interface GlobalReducers {
   openAlert: CaseReducer<GlobalState, PayloadAction<Omit<SnackbarAlertState, 'open'>>>
   closeAlert: CaseReducer<GlobalState>
   setConfiguration: CaseReducer<GlobalState, PayloadAction<Partial<GlobalConfigurationState>>>
-  setRenderPath: CaseReducer<
-    GlobalState,
-    PayloadAction<{ path: string; options?: NavigateOptions }>
-  >
+  setRenderRoute: CaseReducer<GlobalState, PayloadAction<RenderRouteState>>
   [key: string]: CaseReducer<GlobalState, PayloadAction<any>>
 }

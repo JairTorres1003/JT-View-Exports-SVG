@@ -2,7 +2,7 @@ import { SVGPostMessage } from '@jt-view-exports-svg/core'
 import { type FC, useEffect } from 'react'
 
 import { vscode } from '@/services/vscode'
-import { setRenderPath } from '@/store/features/global/slice'
+import { setRenderRoute } from '@/store/features/global/slice'
 import { useAppDispatch } from '@/store/hooks'
 
 /**
@@ -17,7 +17,7 @@ export const ConfigurationProvider: FC<React.PropsWithChildren> = ({
 
   useEffect(() => {
     vscode.onMessage(SVGPostMessage.Navigate, (data) => {
-      dispatch(setRenderPath(data))
+      dispatch(setRenderRoute(data))
     })
 
     return () => {

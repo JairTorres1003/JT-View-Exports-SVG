@@ -4,9 +4,10 @@ import { useNavigate } from 'react-router-dom'
 
 import type { Route } from '@/config/routes/route'
 import { vscode } from '@/services/vscode'
-import { setRenderPath } from '@/store/features/global/slice'
+import { setRenderRoute } from '@/store/features/global/slice'
 import { setIsOpenDevTools, setRecentlySelected } from '@/store/features/playground/slice'
 import { useAppDispatch, useAppSelector } from '@/store/hooks'
+import type { RenderRouteState } from '@/store/types/global'
 import isEmpty from '@/utils/is-empty'
 
 import type { DraggableSpeedDialProps } from '../components/SpeedDial/DraggableSpeedDial/DraggableSpeedDial'
@@ -14,8 +15,7 @@ import type { DraggableSpeedDialProps } from '../components/SpeedDial/DraggableS
 export const useRouteManager = () => {
   const [open, setOpen] = useState(false)
 
-  const { renderPath } = useAppSelector((state) => state.global.configuration)
-  const renderOptions = useAppSelector((state) => state.global.renderOptions)
+  const renderRoute = useAppSelector((state) => state.global.renderRoute)
 
   const navigate = useNavigate()
   const dispatch = useAppDispatch()
@@ -24,15 +24,15 @@ export const useRouteManager = () => {
    * Handles the change of path based on the provided new path.
    * @param newPath - The new path to navigate to.
    */
-  const handleChangePath = (newPath: string) => {
-    if (isEmpty(newPath)) return
+  const handleChangePath = (route: RenderRouteState) => {
+    if (isEmpty(route.path)) return
 
     dispatch(setRecentlySelected())
     dispatch(setIsOpenDevTools(false))
 
-    void navigate(newPath, renderOptions)
+    void navigate(route.path, route.options)
 
-    vscode.postMessage(SVGReceiveMessage.ChangeViewPath, newPath)
+    vscode.postMessage(SVGReceiveMessage.ChangeViewPath, route.path)
   }
 
   const onOpen = () => {
@@ -44,12 +44,12 @@ export const useRouteManager = () => {
   }
 
   const onSelect: DraggableSpeedDialProps<Route>['onSelected'] = (_, { path }) => {
-    dispatch(setRenderPath({ path }))
+    dispatch(setRenderRoute({ path }))
   }
 
   useEffect(() => {
-    handleChangePath(renderPath)
-  }, [renderPath])
+    handleChangePath(renderRoute)
+  }, [renderRoute])
 
   return { open, onClose, onOpen, onSelect }
 }
