@@ -5,7 +5,6 @@ import {
   SVGReceiveMessage,
 } from '@jt-view-exports-svg/core'
 import { useEffect, useMemo, useState } from 'react'
-import { useDispatch, useSelector } from 'react-redux'
 
 import { useAlert } from '@/core/hooks/useAlert'
 import useDebounce from '@/core/hooks/useDebounce'
@@ -13,15 +12,16 @@ import type { TypeEditorRef } from '@/core/types/components/vs/Editor'
 import completionComponentsManager from '@/core/utils/DevTools/completionComponentsManager'
 import completionPropertiesManager from '@/core/utils/DevTools/completionPropertiesManager'
 import { vscode } from '@/services/vscode'
-import { setRecentlySelected } from '@/store/features/PlaygroundSlice'
+import { setRecentlySelected } from '@/store/features/playground/slice'
+import { useAppDispatch, useAppSelector } from '@/store/hooks'
 
 export const useCodeEditor = (editorRef: React.RefObject<TypeEditorRef>) => {
-  const { recentlySelected } = useSelector((state) => state.playground)
-  const { components, files } = useSelector((state) => state.svg)
+  const { recentlySelected } = useAppSelector((state) => state.playground)
+  const { components, files } = useAppSelector((state) => state.svg)
   const [value, setValue] = useState<string>('')
 
   const debounceValue = useDebounce(value, 600)
-  const dispatch = useDispatch()
+  const dispatch = useAppDispatch()
   const { onOpen } = useAlert()
 
   const defaultValue = useMemo(() => {

@@ -10,31 +10,11 @@ export interface SVGState {
 }
 
 export interface SVGReducers {
-  /**
-   * Set the components to the state.
-   */
   setComponents: CaseReducer<SVGState, PayloadAction<ViewExportSVG[]>>
-  /**
-   * Set the files to the state.
-   */
   setFiles: CaseReducer<SVGState, PayloadAction<Record<FileIdentifier, SVGFile>>>
-  /**
-   * Set the search string to the state.
-   */
   setSearch: CaseReducer<SVGState, PayloadAction<string>>
-  /**
-   * Set the errors to the state.
-   */
   setErrors: CaseReducer<SVGState, PayloadAction<SVGErrors | undefined>>
-  /**
-   * Set the refresh state with the new SVG components.
-   */
   setRefreshComponents: CaseReducer<SVGState, PayloadAction<ViewExportSVG[]>>
-  /**
-   * Add a pending refresh for a specific group kind.
-   */
   addPendingRefresh: CaseReducer<SVGState, PayloadAction<ViewExportSVG['groupKind']>>
-
-  // biome-ignore lint/suspicious/noExplicitAny: This is a catch-all for any additional reducers that may be added in the future.
   [key: string]: CaseReducer<SVGState, PayloadAction<any>>
 }

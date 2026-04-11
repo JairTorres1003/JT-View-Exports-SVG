@@ -1,19 +1,19 @@
 import { pathnames, SVGReceiveMessage } from '@jt-view-exports-svg/core'
 import { useEffect } from 'react'
 import { useTranslation } from 'react-i18next'
-import { useDispatch } from 'react-redux'
 import { useLocation } from 'react-router-dom'
 
 import { useLoadFiles } from '@/core/hooks/useLoadFiles'
 import { vscode } from '@/services/vscode'
-import { setRenderPath } from '@/store/features/GlobalSlice'
+import { setRenderRoute } from '@/store/features/global/slice'
+import { useAppDispatch } from '@/store/hooks'
 import type { IFile } from '@/types/misc'
 
 export const useUpload = () => {
   const { state } = useLocation() as { state: { files?: IFile[] } }
   const { files, updateFiles, removeFile, ...restLoadFiles } = useLoadFiles()
 
-  const dispatch = useDispatch()
+  const dispatch = useAppDispatch()
   const { t } = useTranslation()
 
   /**
@@ -23,7 +23,9 @@ export const useUpload = () => {
   const onExtractComponents = () => {
     const messageEncoded = encodeURIComponent(t('Processing {0} file(s)...', { '0': files.length }))
 
-    dispatch(setRenderPath({ path: `${pathnames.main}?load-message=${messageEncoded}` }))
+    dispatch(
+      setRenderRoute({ path: `${pathnames.main}?load-message=${messageEncoded}`, options: {} })
+    )
     vscode.postMessage(
       SVGReceiveMessage.ProcessUploadedFiles,
       files.map((file) => file.path)

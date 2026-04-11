@@ -7,11 +7,11 @@ import {
 } from '@jt-view-exports-svg/core'
 import React from 'react'
 import { Trans, useTranslation } from 'react-i18next'
-import { useDispatch, useSelector } from 'react-redux'
 
 import { useAlert } from '@/core/hooks/useAlert'
 import { vscode } from '@/services/vscode'
-import { setRecentlySelected } from '@/store/features/PlaygroundSlice'
+import { setRecentlySelected } from '@/store/features/playground/slice'
+import { useAppDispatch, useAppSelector } from '@/store/hooks'
 import { copyToClipboard } from '@/utils/clipboard'
 import { getUnknownError } from '@/utils/errors'
 
@@ -29,10 +29,10 @@ interface UseCardSvgProps {
 export const useCardSvg = ({ favorite = false }: UseCardSvgProps = {}): CardSvgHook => {
   const { onOpen } = useAlert()
 
-  const files = useSelector((state) => state.svg.files)
+  const files = useAppSelector((state) => state.svg.files)
   const { t } = useTranslation(undefined, { keyPrefix: 'labels' })
 
-  const dispatch = useDispatch()
+  const dispatch = useAppDispatch()
 
   const [isFavorite, setIsFavorite] = React.useState(false)
 

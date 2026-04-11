@@ -14,10 +14,10 @@ import {
 } from '@mui/material'
 import React from 'react'
 import { useTranslation } from 'react-i18next'
-import { useSelector } from 'react-redux'
 
 import IconGoToFile from '@/assets/icons/functionalities/go-to-file'
 import { openFileInPosition } from '@/core/utils/file'
+import { useAppSelector } from '@/store/hooks'
 
 const commonSlotProps: ListItemTextProps['slotProps'] = {
   primary: { sx: { whiteSpace: 'nowrap', fontWeight: 600 } },
@@ -25,7 +25,7 @@ const commonSlotProps: ListItemTextProps['slotProps'] = {
 }
 
 const InfoComponent = () => {
-  const recentlySelected = useSelector((state) => state.playground.recentlySelected)
+  const recentlySelected = useAppSelector((state) => state.playground.recentlySelected)
 
   const { t } = useTranslation()
 

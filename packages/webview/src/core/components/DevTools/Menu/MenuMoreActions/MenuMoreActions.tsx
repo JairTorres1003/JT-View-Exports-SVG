@@ -1,10 +1,10 @@
 import { Divider, IconButton, Menu, MenuItem, Tooltip } from '@mui/material'
 import { useTranslation } from 'react-i18next'
-import { useSelector } from 'react-redux'
 
 import IconKebabHorizontal from '@/assets/icons/navigation/kebab-horizontal'
 import { useMenu } from '@/core/hooks/useMenu'
 import { useSVGActions } from '@/core/hooks/useSVGActions'
+import { useAppSelector } from '@/store/hooks'
 
 interface MenuToolsProps {
   svgRef: React.RefObject<SVGElement | null>
@@ -16,7 +16,7 @@ const MenuMoreActions: React.FC<MenuToolsProps> = ({ svgRef }) => {
   const { anchorEl, handleClick, handleClose, open } = useMenu()
   const actions = useSVGActions({ svgRef })
 
-  const recentlySelected = useSelector((state) => state.playground.recentlySelected)
+  const recentlySelected = useAppSelector((state) => state.playground.recentlySelected)
 
   if (!recentlySelected) return null
 

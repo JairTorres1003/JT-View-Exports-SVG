@@ -1,9 +1,9 @@
 import { SVGPostMessage, SVGReceiveMessage, type ViewExportSVG } from '@jt-view-exports-svg/core'
 import { useCallback, useEffect, useRef, useState } from 'react'
-import { useDispatch, useSelector } from 'react-redux'
 
 import { vscode } from '@/services/vscode'
-import { setRefreshComponents } from '@/store/features/SVGSlice'
+import { setRefreshComponents } from '@/store/features/svg/slice'
+import { useAppDispatch, useAppSelector } from '@/store/hooks'
 
 interface ExpandedComponentsHook {
   isExpanded: string[]
@@ -12,10 +12,10 @@ interface ExpandedComponentsHook {
 
 export const useExpandedComponents = (): ExpandedComponentsHook => {
   const [expandedItems, setExpandedItems] = useState<string[]>([])
-  const { defaultExpandAll } = useSelector((state) => state.global.configuration)
-  const { components } = useSelector((state) => state.svg)
+  const { defaultExpandAll } = useAppSelector((state) => state.global.configuration)
+  const { components } = useAppSelector((state) => state.svg)
 
-  const dispatch = useDispatch()
+  const dispatch = useAppDispatch()
 
   const hasInitialized = useRef(false)
 

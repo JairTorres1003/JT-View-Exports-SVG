@@ -7,13 +7,13 @@ import {
   type ViewExportSVG,
 } from '@jt-view-exports-svg/core'
 import { useEffect } from 'react'
-import { useDispatch } from 'react-redux'
 
 import { vscode } from '@/services/vscode'
-import { setComponents, setErrors, setFiles, setSearch } from '@/store/features/SVGSlice'
+import { setComponents, setErrors, setFiles, setSearch } from '@/store/features/svg/slice'
+import { useAppDispatch } from '@/store/hooks'
 
 export const useDashboard = () => {
-  const dispatch = useDispatch()
+  const dispatch = useAppDispatch()
 
   /**
    * Retrieves SVG components from the provided data and dispatches an action to set the components.

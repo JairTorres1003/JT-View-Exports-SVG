@@ -2,10 +2,10 @@ import { type EditorStyles, SVGPostMessage, SVGReceiveMessage } from '@jt-view-e
 import { createTheme, type Theme } from '@mui/material'
 import type {} from '@mui/material/themeCssVarsAugmentation'
 import { useEffect, useMemo } from 'react'
-import { useDispatch, useSelector } from 'react-redux'
 
 import { vscode } from '@/services/vscode'
-import { setVsCodeStyles } from '@/store/features/VsCodeSlice'
+import { setVsCodeStyles } from '@/store/features/vsCode/slice'
+import { useAppDispatch, useAppSelector } from '@/store/hooks'
 
 import {
   dataDisplayCustomizations,
@@ -19,9 +19,8 @@ import {
  * @returns The current theme.
  */
 export const useCustomTheme = (): { theme: Theme } => {
-  const { styles } = useSelector((state) => state.vsCode)
-
-  const dispatch = useDispatch()
+  const { styles } = useAppSelector((state) => state.vsCode)
+  const dispatch = useAppDispatch()
 
   const theme = useMemo(
     () =>

@@ -21,7 +21,6 @@ export const SVGPostMessage = {
   ErrorEditingComponentInPlayground: 'send/error-editing-component-in-playground',
 
   // Settings-related messages
-  LoadEditorThemeMode: 'send/load-editor-theme-mode',
   LoadEditorConfig: 'send/load-editor-config',
   LoadExtensionTheme: 'send/load-extension-theme',
   LoadEditorStyles: 'send/load-editor-styles',
@@ -67,7 +66,6 @@ export const SVGReceiveMessage = {
   EditComponentInPlayground: 'devtools/edit-component-in-playground',
 
   // Editor-related messages
-  RequestEditorThemeMode: 'editor/request-theme-mode',
   RequestEditorConfig: 'editor/request-config',
   RequestEditorExtensionTheme: 'editor/request-extension-theme',
   RequestEditorStyles: 'editor/request-styles',

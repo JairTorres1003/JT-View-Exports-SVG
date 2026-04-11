@@ -1,10 +1,10 @@
 import { SVGPostMessage, SVGReceiveMessage, type ViewExportSVG } from '@jt-view-exports-svg/core'
 import { useEffect, useRef } from 'react'
-import { useDispatch, useSelector } from 'react-redux'
 
 import useDebounce from '@/core/hooks/useDebounce'
 import { vscode } from '@/services/vscode'
-import { setComponents, setErrors, setSearch } from '@/store/features/SVGSlice'
+import { setComponents, setErrors, setSearch } from '@/store/features/svg/slice'
+import { useAppDispatch, useAppSelector } from '@/store/hooks'
 
 interface SearchBarHook {
   search: string
@@ -13,9 +13,9 @@ interface SearchBarHook {
 }
 
 export const useSearchBar = (): SearchBarHook => {
-  const { search } = useSelector((state) => state.svg)
+  const { search } = useAppSelector((state) => state.svg)
   const debouncedSearch = useDebounce(search, 500)
-  const dispatch = useDispatch()
+  const dispatch = useAppDispatch()
 
   const mountedRef = useRef(false)
 

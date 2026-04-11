@@ -4,5 +4,17 @@
   "extends": ["../../biome.json", "../../biome.react.json"],
   "files": {
     "includes": ["**", "!!**/dist"]
-  }
+  },
+  "overrides": [
+    {
+      "includes": ["./src/store/types/*.d.ts"],
+      "linter": {
+        "rules": {
+          "suspicious": {
+            "noExplicitAny": "off"
+          }
+        }
+      }
+    }
+  ]
 }

@@ -5,7 +5,6 @@ import { PanelController } from '@/controllers/views/PanelController'
 import { getCache } from '@/services/cache/main'
 import { getConfigurationEditor } from '@/services/vscode/editorConfig'
 import { CACHE_KEY, initializeExtensionTheme } from '@/services/vscode/extensionTheme'
-import { getCurrentThemeMode } from '@/services/vscode/themeMode'
 import { isEmpty } from '@/utilities/misc'
 
 /**
@@ -19,11 +18,9 @@ export const runReloadTheme = async (): Promise<void> => {
   initializeExtensionTheme()
 
   const config = getConfigurationEditor()
-  const kind = getCurrentThemeMode()
   const theme = await cache.get(CACHE_KEY)
 
   PanelController.send(SVGPostMessage.LoadEditorConfig, config)
-  PanelController.send(SVGPostMessage.LoadEditorThemeMode, kind)
 
   if (!isEmpty(theme)) {
     PanelController.send(SVGPostMessage.LoadExtensionTheme, theme)

@@ -1,9 +1,9 @@
 import { Alert, Slide, type SlideProps, Snackbar } from '@mui/material'
 import { type FC, Fragment, useEffect, useState } from 'react'
-import { useSelector } from 'react-redux'
 import { v4 as uuidv4 } from 'uuid'
 
 import { useAlert } from '@/core/hooks/useAlert'
+import { useAppSelector } from '@/store/hooks'
 
 /**
  * SlideTransition component.
@@ -12,7 +12,7 @@ import { useAlert } from '@/core/hooks/useAlert'
  * @returns The rendered Slide component with the specified direction.
  */
 function SlideTransition(props: SlideProps): React.ReactNode {
-  const { position } = useSelector((state) => state.global.snackbarAlert)
+  const { position } = useAppSelector((state) => state.global.snackbarAlert)
 
   const { getTransitionDirection } = useAlert()
 
@@ -25,8 +25,8 @@ function SlideTransition(props: SlideProps): React.ReactNode {
  * @returns The rendered SnackbarAlert component.
  */
 const SnackbarAlert = (): React.ReactNode => {
-  const { content, duration, open, action, icon, position, severity, showCloseButton, maxWidth } =
-    useSelector((state) => state.global.snackbarAlert)
+  const { open, content, maxWidth, showCloseButton, position, duration, ...stateAlert } =
+    useAppSelector((state) => state.global.snackbarAlert)
 
   const [key, setKey] = useState<string>('')
   const [currentContent, setCurrentContent] = useState<typeof content>('')
@@ -52,9 +52,7 @@ const SnackbarAlert = (): React.ReactNode => {
       }}
     >
       <Alert
-        severity={severity}
-        action={action}
-        icon={icon}
+        {...stateAlert}
         sx={{ maxWidth }}
         elevation={5}
         onClose={

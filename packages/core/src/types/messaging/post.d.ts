@@ -1,6 +1,6 @@
 import type { SVGPostMessage } from '../../constants/messages'
 import type { FileIdentifier, SVGErrors, SVGFile } from '../common'
-import type { EditorStyles, ExtensionManage, ThemeMode } from '../editor'
+import type { EditorStyles, ExtensionManage } from '../editor'
 import type { SVGComponent, ViewExportSVG } from '../svg'
 
 import type {
@@ -27,7 +27,6 @@ export type PostMessageMap = {
   [SVGPostMessage.ToggleOpenDevTools]: boolean
   [SVGPostMessage.ComponentEditedInPlayground]: SVGComponent
   [SVGPostMessage.ErrorEditingComponentInPlayground]: SVGErrors
-  [SVGPostMessage.LoadEditorThemeMode]: ThemeMode
   [SVGPostMessage.LoadEditorConfig]: Record<string, unknown>
   [SVGPostMessage.LoadExtensionTheme]: ExtensionManage
   [SVGPostMessage.LoadEditorStyles]: EditorStyles

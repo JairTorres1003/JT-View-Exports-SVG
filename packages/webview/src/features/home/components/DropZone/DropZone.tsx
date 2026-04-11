@@ -2,10 +2,10 @@ import { pathnames } from '@jt-view-exports-svg/core'
 import { Box, Button, Typography } from '@mui/material'
 import { lazy, Suspense, useEffect } from 'react'
 import { useTranslation } from 'react-i18next'
-import { useDispatch } from 'react-redux'
 
 import { useLoadFiles } from '@/core/hooks/useLoadFiles'
-import { setRenderPath } from '@/store/features/GlobalSlice'
+import { setRenderRoute } from '@/store/features/global/slice'
+import { useAppDispatch } from '@/store/hooks'
 
 import { dropZoneClasses } from './DropZone.classes'
 import { BoxDropZone } from './DropZone.style'
@@ -16,11 +16,11 @@ const DropZone = () => {
   const { t } = useTranslation(undefined, { keyPrefix: 'DropZone' })
 
   const { files, handleOpenDialog, onDrop, onUri } = useLoadFiles()
-  const dispatch = useDispatch()
+  const dispatch = useAppDispatch()
 
   useEffect(() => {
     if (files.length > 0) {
-      dispatch(setRenderPath({ path: pathnames.upload, options: { state: { files } } }))
+      dispatch(setRenderRoute({ path: pathnames.upload, options: { state: { files } } }))
     }
   }, [files])
 

@@ -1,63 +1,13 @@
-import { SVGReceiveMessage } from '@jt-view-exports-svg/core'
-import { lazy, Suspense, useEffect, useState } from 'react'
-import { useDispatch, useSelector } from 'react-redux'
-import { useNavigate } from 'react-router-dom'
+import { lazy, Suspense } from 'react'
 
 import IconClose from '@/assets/icons/functionalities/close'
 import IconNavigateFill from '@/assets/icons/navigation/navigate-fill'
-import { type Route, routes } from '@/config/routes/route'
-import type { DraggableSpeedDialProps } from '@/core/components/SpeedDial/DraggableSpeedDial/DraggableSpeedDial'
-import { vscode } from '@/services/vscode'
-import { setRenderPath } from '@/store/features/GlobalSlice'
-import { setIsOpenDevTools, setRecentlySelected } from '@/store/features/PlaygroundSlice'
-import isEmpty from '@/utils/is-empty'
+import { routes } from '@/config/routes/route'
+import { useRouteManager } from '@/core/hooks/useRouteManager'
 
 const DraggableSpeedDial = import.meta.env.DEV
   ? lazy(() => import('@/core/components/SpeedDial/DraggableSpeedDial/DraggableSpeedDial'))
   : () => null
-
-const useRouteManager = () => {
-  const [open, setOpen] = useState(false)
-
-  const { renderPath } = useSelector((state) => state.global.configuration)
-  const renderOptions = useSelector((state) => state.global.renderOptions)
-
-  const navigate = useNavigate()
-  const dispatch = useDispatch()
-
-  /**
-   * Handles the change of path based on the provided new path.
-   * @param newPath - The new path to navigate to.
-   */
-  const handleChangePath = (newPath: string) => {
-    if (isEmpty(newPath)) return
-
-    dispatch(setRecentlySelected())
-    dispatch(setIsOpenDevTools(false))
-
-    void navigate(newPath, renderOptions)
-
-    vscode.postMessage(SVGReceiveMessage.ChangeViewPath, newPath)
-  }
-
-  const onOpen = () => {
-    setOpen(true)
-  }
-
-  const onClose = () => {
-    setOpen(false)
-  }
-
-  const onSelect: DraggableSpeedDialProps<Route>['onSelected'] = (_, { path }) => {
-    dispatch(setRenderPath({ path }))
-  }
-
-  useEffect(() => {
-    handleChangePath(renderPath)
-  }, [renderPath])
-
-  return { open, onClose, onOpen, onSelect }
-}
 
 const RouteManager = () => {
   const { onClose, onOpen, open, onSelect } = useRouteManager()
