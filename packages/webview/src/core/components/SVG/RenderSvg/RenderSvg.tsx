@@ -1,7 +1,7 @@
 import type { SVGComponent, SVGComponentProps } from '@jt-view-exports-svg/core'
 import cn from 'classnames'
-import { motion } from 'framer-motion'
-import React, { createElement, forwardRef, type SVGElementType, useEffect } from 'react'
+import { domAnimation, LazyMotion, m, useReducedMotion } from 'framer-motion'
+import React, { createElement, forwardRef, type SVGElementType, useEffect, useId } from 'react'
 import { useTranslation } from 'react-i18next'
 
 import IconSVGError from '@/assets/icons/indicators/svg-error'
@@ -12,6 +12,7 @@ import isEmpty from '@/utils/is-empty'
 interface RenderSvgProps {
   component: SVGComponentProps
   className?: string
+  rootId?: string
 }
 
 const hashString = (value: string): string => {
@@ -39,11 +40,9 @@ const getChildKey = (child: SVGComponentProps): string => {
  * @throws Throws an error if the component is empty.
  * @returns The rendered SVG component.
  */
-const DynamicTagComponent = forwardRef<unknown, RenderSvgProps>(function RenderSvg(
-  { component, className },
-  ref
-) {
+const DynamicTagComponent = ({ component, className, rootId }: RenderSvgProps) => {
   const { t } = useTranslation(undefined, { keyPrefix: 'errors' })
+  const prefersReducedMotion = useReducedMotion()
 
   if (isEmpty(component)) {
     throw new Error(t('TheComponentIsEmpty'))
@@ -51,14 +50,15 @@ const DynamicTagComponent = forwardRef<unknown, RenderSvgProps>(function RenderS
 
   const c = cn(className, component.props.className)
 
-  const Tag = component.isMotion ? motion[component.tag as SVGElementType] : component.tag
+  const Tag =
+    component.isMotion && !prefersReducedMotion ? m[component.tag as SVGElementType] : component.tag
 
   const Component = createElement(
     Tag as React.ElementType,
     {
       ...component.props,
       className: isEmpty(c) ? undefined : c,
-      ref,
+      ...(rootId ? { 'data-render-svg-id': rootId } : {}),
     },
     component.children.map((child) =>
       typeof child === 'string' ? (
@@ -70,7 +70,7 @@ const DynamicTagComponent = forwardRef<unknown, RenderSvgProps>(function RenderS
   )
 
   return Component
-})
+}
 
 /**
  * Renders an SVG component.
@@ -80,6 +80,7 @@ const RenderSvg = forwardRef<
   SVGComponent & { className?: string; showErrors?: boolean }
 >(function RenderSvg({ component, hasErrors, errors, className, showErrors = true }, ref) {
   const { onOpen } = useAlert()
+  const rootId = useId()
 
   /**
    * Handles the error component by displaying an alert with the error message.
@@ -97,14 +98,35 @@ const RenderSvg = forwardRef<
     handleErrorComponent()
   }, [errors])
 
+  useEffect(() => {
+    const element = document.querySelector(`[data-render-svg-id="${rootId}"]`) as SVGElement | null
+
+    if (typeof ref === 'function') {
+      ref(element)
+      return () => {
+        ref(null)
+      }
+    }
+
+    if (!ref) return
+
+    ref.current = element
+
+    return () => {
+      ref.current = null
+    }
+  }, [ref, rootId])
+
   if (isEmpty(component) || hasErrors) {
     return <IconSVGError />
   }
 
   return (
-    <ErrorBoundary fallback={<IconSVGError />}>
-      <DynamicTagComponent ref={ref} className={className} component={component} />
-    </ErrorBoundary>
+    <LazyMotion features={domAnimation}>
+      <ErrorBoundary fallback={<IconSVGError />}>
+        <DynamicTagComponent rootId={rootId} className={className} component={component} />
+      </ErrorBoundary>
+    </LazyMotion>
   )
 })
 

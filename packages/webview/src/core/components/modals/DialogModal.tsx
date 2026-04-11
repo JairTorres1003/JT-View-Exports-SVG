@@ -33,15 +33,17 @@ export const DialogModal: React.FC<DialogModalProps> = ({
   hideCloseButton = false,
   hideTitle = false,
   title,
-  slotProps: { dialogTitle, dialogContent, divider, closeButton, ...slotProps } = {},
+  slotProps,
   children,
   onClose = () => null,
   ...dialogProps
 }) => {
   const { t } = useTranslation()
 
+  const { dialogTitle, dialogContent, divider, closeButton, ...moreSlotProps } = slotProps || {}
+
   return (
-    <Dialog onClose={onClose} {...dialogProps} slotProps={slotProps}>
+    <Dialog onClose={onClose} {...dialogProps} slotProps={moreSlotProps}>
       {!hideCloseButton && (
         <Tooltip title={t('labels.Close')} placement='top'>
           <IconButton

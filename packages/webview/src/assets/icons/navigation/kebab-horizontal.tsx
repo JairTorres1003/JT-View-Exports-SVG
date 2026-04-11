@@ -4,7 +4,7 @@ const IconKebabHorizontal: React.FC<IconBaseProps> = ({
   size = 32,
   className = '',
   color = 'currentColor',
-  sx = {},
+  sx,
 }) => (
   <svg
     style={sx}

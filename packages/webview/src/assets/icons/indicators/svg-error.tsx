@@ -3,7 +3,7 @@ import type { IconBaseProps } from '@/types/BaseProps'
 const IconSVGError: React.FC<Omit<IconBaseProps, 'color'>> = ({
   size = 32,
   className = '',
-  sx = {},
+  sx,
 }) => (
   <svg
     style={sx}

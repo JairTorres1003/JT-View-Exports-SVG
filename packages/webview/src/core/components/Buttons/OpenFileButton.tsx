@@ -19,7 +19,7 @@ export const OpenFileButton: FC<OpenFileButtonProps> = ({
   fileId,
   multiple = false,
   onClick = () => null,
-  slotProps = {},
+  slotProps,
   ...props
 }) => {
   const { t } = useTranslation()
@@ -27,7 +27,7 @@ export const OpenFileButton: FC<OpenFileButtonProps> = ({
   const title = t(`labels.${multiple ? 'OpenManyFiles' : 'OpenFile'}`)
 
   return (
-    <Tooltip placement='top' title={title} {...slotProps.tooltip}>
+    <Tooltip placement='top' title={title} {...slotProps?.tooltip}>
       <IconButton
         aria-label={title}
         {...props}

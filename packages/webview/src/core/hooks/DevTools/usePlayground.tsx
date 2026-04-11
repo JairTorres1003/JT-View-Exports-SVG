@@ -32,11 +32,42 @@ interface PlaygroundHook {
 const CSS_VAR_MAIN = '--JT-SVG-vscode-sideBarTitle-background'
 const CSS_VAR_SECONDARY = '--JT-SVG-vscode-sideBarSectionHeader-background'
 
+const getInitialPlaygroundColor = () => {
+  const root = document.body || document.documentElement
+  const mainColor = getComputedStyle(root).getPropertyValue(CSS_VAR_MAIN)
+  const secondaryColor = getComputedStyle(root).getPropertyValue(CSS_VAR_SECONDARY)
+  const canvas = document.createElement('canvas')
+  canvas.width = 10
+  canvas.height = 10
+
+  const ctx = canvas.getContext('2d')
+  if (!ctx) {
+    throw new Error(i18next.t('errors.ErrorApplyingInitialColor'))
+  }
+
+  ctx.fillStyle = mainColor || 'transparent'
+  ctx.fillRect(0, 0, 10, 10)
+
+  ctx.fillStyle = secondaryColor || 'transparent'
+  ctx.fillRect(0, 0, 10, 10)
+
+  const imageData = ctx.getImageData(5, 5, 1, 1)
+  const [r, g, b, a] = imageData.data
+
+  return `rgba(${r}, ${g}, ${b}, ${a})`
+}
+
 export const usePlayground = (): PlaygroundHook => {
-  const [backgroundColor, setBackgroundColor] = useState('#fff')
+  const [backgroundColor, setBackgroundColor] = useState(() => {
+    try {
+      return getInitialPlaygroundColor()
+    } catch {
+      return '#fff'
+    }
+  })
   const [expandedCode, setExpandedCode] = useState(true)
-  const [initialColor, setInitialColor] = useState('#fff')
-  const [valueColor, setValueColor] = useState('#fff')
+  const [initialColor, setInitialColor] = useState(backgroundColor)
+  const [valueColor, setValueColor] = useState(backgroundColor)
 
   const { t } = useTranslation(undefined, { keyPrefix: 'labels' })
   const dispatch = useAppDispatch()
@@ -82,32 +113,11 @@ export const usePlayground = (): PlaygroundHook => {
    */
   const applyInitialColor = useCallback(() => {
     try {
-      const root = document.body || document.documentElement
-
-      const mainColor = getComputedStyle(root).getPropertyValue(CSS_VAR_MAIN)
-      const secondaryColor = getComputedStyle(root).getPropertyValue(CSS_VAR_SECONDARY)
-
-      const canvas = document.createElement('canvas')
-      canvas.width = 10
-      canvas.height = 10
-
-      const ctx = canvas.getContext('2d')
-      if (!ctx) return
-
-      ctx.fillStyle = mainColor || 'transparent'
-      ctx.fillRect(0, 0, 10, 10)
-
-      ctx.fillStyle = secondaryColor || 'transparent'
-      ctx.fillRect(0, 0, 10, 10)
-
-      const imageData = ctx.getImageData(5, 5, 1, 1)
-      const [r, g, b, a] = imageData.data
-
-      const initial = `rgba(${r}, ${g}, ${b}, ${a})`
+      const initial = getInitialPlaygroundColor()
 
       setInitialColor(initial)
-      onChangeColor(initial)
-      onChangeCompleteColor(initial)
+      setBackgroundColor(initial)
+      setValueColor(initial)
     } catch (error) {
       setInitialColor('#fff')
       console.error(`${i18next.t('errors.ErrorApplyingInitialColor')}:`, getUnknownError(error))
@@ -159,8 +169,6 @@ export const usePlayground = (): PlaygroundHook => {
   }
 
   useEffect(() => {
-    applyInitialColor()
-
     vscode.postMessage(SVGReceiveMessage.RequestEditorConfig)
     vscode.postMessage(SVGReceiveMessage.RequestEditorExtensionTheme)
 

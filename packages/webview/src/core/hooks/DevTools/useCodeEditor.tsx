@@ -4,7 +4,7 @@ import {
   SVGPostMessage,
   SVGReceiveMessage,
 } from '@jt-view-exports-svg/core'
-import { useEffect, useMemo, useState } from 'react'
+import { useEffect, useState } from 'react'
 
 import { useAlert } from '@/core/hooks/useAlert'
 import useDebounce from '@/core/hooks/useDebounce'
@@ -24,11 +24,7 @@ export const useCodeEditor = (editorRef: React.RefObject<TypeEditorRef>) => {
   const dispatch = useAppDispatch()
   const { onOpen } = useAlert()
 
-  const defaultValue = useMemo(() => {
-    if (!recentlySelected?.name) return ''
-
-    return `<${recentlySelected?.name} />\n`
-  }, [recentlySelected?.name])
+  const defaultValue = recentlySelected?.name ? `<${recentlySelected.name} />\n` : ''
 
   /**
    * Handles the change of the code editor value.
@@ -88,7 +84,7 @@ export const useCodeEditor = (editorRef: React.RefObject<TypeEditorRef>) => {
 
   useEffect(() => {
     onRegisterCompletionsComponent()
-  }, [components, editorRef.current?.editor])
+  }, [components, editorRef.current, files])
 
   useEffect(() => {
     if (defaultValue?.trim() === '') editorRef.current?.editor?.setDefaultValue('')

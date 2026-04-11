@@ -1,6 +1,6 @@
 import type { IconBaseProps } from '@/types/BaseProps'
 
-const IconJS: React.FC<Omit<IconBaseProps, 'color'>> = ({ size = 32, className = '', sx = {} }) => (
+const IconJS: React.FC<Omit<IconBaseProps, 'color'>> = ({ size = 32, className = '', sx }) => (
   <svg
     style={sx}
     width={size}

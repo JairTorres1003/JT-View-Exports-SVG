@@ -97,7 +97,7 @@ export const useEditor = ({
     editorRef.current.editor = instance
 
     return instance
-  }, [editorRef, editorConfig, extensionTheme])
+  }, [editorConfig, extensionTheme, onChange])
 
   /**
    * Updates the editor configuration if the editor reference and configuration are not empty.
@@ -117,7 +117,7 @@ export const useEditor = ({
       .catch((error) => {
         console.error(getUnknownError(error))
       })
-  }, [editorRef, editorConfig])
+  }, [editorConfig, extensionTheme])
 
   useEffect(() => {
     if (editorInstance && defaultValue) {

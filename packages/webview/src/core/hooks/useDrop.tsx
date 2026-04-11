@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useMemo, useState } from 'react'
+import { useEffect, useMemo, useState } from 'react'
 
 import isEmpty from '@/utils/is-empty'
 
@@ -43,12 +43,11 @@ const createProcess = (options: UseDropOptions) => (event: Event, dataTransfer: 
 }
 
 export const useDrop = (options: UseDropOptions = {}) => {
-  const { anchorEl = document, onFiles, onText, onUri } = options
+  const { anchorEl = document } = options
 
-  const [over, setOverRaw] = useState(false)
-  const setOver = useCallback(setOverRaw, [])
+  const [over, setOver] = useState(false)
 
-  const process = useMemo(() => createProcess(options), [onFiles, onText, onUri])
+  const process = useMemo(() => createProcess(options), [options])
 
   useEffect(() => {
     const onDragOver = (event: Event) => {

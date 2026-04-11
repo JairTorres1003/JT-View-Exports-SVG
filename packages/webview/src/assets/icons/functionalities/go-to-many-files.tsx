@@ -4,7 +4,7 @@ const IconGoToManyFiles: React.FC<IconBaseProps> = ({
   className = '',
   color = 'currentcolor',
   size = 32,
-  sx = {},
+  sx,
 }) => (
   <svg
     xmlns='http://www.w3.org/2000/svg'

@@ -43,7 +43,7 @@ const savePositionToStorage = (key: string, newPosition: CornerPosition) => {
 }
 
 export const useDraggableSpeedDial = (key: string) => {
-  const [position, setPosition] = useState<CornerPosition>(loadPositionFromStorage(key))
+  const [position, setPosition] = useState<CornerPosition>(() => loadPositionFromStorage(key))
   const [isDragging, setIsDragging] = useState(false)
   const [isPressed, setIsPressed] = useState(false)
   const [dragPosition, setDragPosition] = useState({ x: 0, y: 0 })
@@ -166,7 +166,7 @@ export const useDraggableSpeedDial = (key: string) => {
     setIsPressed(false)
     setHoveredCorner(null)
     dragActivatedRef.current = false
-  }, [isDragging, hoveredCorner])
+  }, [isDragging, hoveredCorner, key])
 
   useEffect(() => {
     if (isPressed || isDragging) {

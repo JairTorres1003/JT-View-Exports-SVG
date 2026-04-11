@@ -4,7 +4,7 @@ const IconPlus: React.FC<IconBaseProps> = ({
   className = '',
   color = 'currentcolor',
   size = 32,
-  sx = {},
+  sx,
 }) => (
   <svg
     width={size}

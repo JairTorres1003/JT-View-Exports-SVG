@@ -3,7 +3,7 @@ import type { IconBaseProps } from '@/types/BaseProps'
 const IconNavigateFill: React.FC<IconBaseProps> = ({
   size = 32,
   color = 'currentColor',
-  sx = {},
+  sx,
   className = '',
 }) => (
   <svg

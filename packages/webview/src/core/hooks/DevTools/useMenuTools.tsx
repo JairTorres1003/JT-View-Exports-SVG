@@ -1,6 +1,5 @@
 import { SVGReceiveMessage } from '@jt-view-exports-svg/core'
-import * as monaco from 'monaco-editor'
-import { useEffect, useState } from 'react'
+import { useState } from 'react'
 
 import type { TypeEditorRef } from '@/core/types/components/vs/Editor'
 import { vscode } from '@/services/vscode'
@@ -16,9 +15,10 @@ export const useMenuTools = ({
   resetPlaygroundColor = () => null,
   editorRef,
 }: MenuToolsHookProps) => {
-  const { handleClose, ...restMenu } = useMenu()
+  const { handleClick: openMenu, handleClose, ...restMenu } = useMenu()
 
   const [isWordWrap, setIsWordWrap] = useState(false)
+  const [hasEditor, setHasEditor] = useState(false)
 
   /**
    * Reloads the playground by resetting the color and calling the reload method on the editor instance.
@@ -42,34 +42,30 @@ export const useMenuTools = ({
    * Closes the menu after toggling.
    */
   const toggleWordWrap = () => {
-    if (editorRef?.current) {
-      editorRef.current?.editor?.updateOptions({
+    const editor = editorRef?.current?.editor
+    if (editor) {
+      editor.updateOptions({
         wordWrap: isWordWrap ? 'off' : 'on',
       })
     }
     handleClose()
   }
 
-  useEffect(() => {
-    if (editorRef?.current) {
-      const { editor } = editorRef.current
-      const currentOption = monaco.editor.EditorOption.wordWrap
-      setIsWordWrap(editor?.getOption(currentOption) === 'on')
-
-      editor?.onDidChangeConfiguration((e) => {
-        if (e.hasChanged(currentOption)) {
-          setIsWordWrap(editor.getOption(currentOption) === 'on')
-        }
-      })
-    }
-  }, [editorRef?.current])
+  const handleClick = (event: React.MouseEvent<HTMLButtonElement>) => {
+    const editor = editorRef?.current?.editor
+    setHasEditor(Boolean(editor))
+    setIsWordWrap(editor?.getRawOptions().wordWrap === 'on')
+    openMenu(event)
+  }
 
   return {
     ...restMenu,
+    handleClick,
     handleClose,
     onReloadEditor,
     onReloadPlayground,
     toggleWordWrap,
     isWordWrap,
+    hasEditor,
   }
 }

@@ -4,7 +4,7 @@ const IconGoToFile: React.FC<IconBaseProps> = ({
   className = '',
   color = 'currentcolor',
   size = 32,
-  sx = {},
+  sx,
 }) => (
   <svg
     stroke={color}
