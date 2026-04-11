@@ -75,9 +75,6 @@
   },
 
   "material-icon-theme.files.associations": {
-    "i18n.schema.json": "i18n",
-    "l10n.schema.json": "i18n",
-    "nls.schema.json": "i18n",
     "tsconfig.types.json": "tsconfig",
     "tsconfig.api.json": "tsconfig",
     "biome.react.json": "biome"
