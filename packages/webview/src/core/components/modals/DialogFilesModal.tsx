@@ -11,13 +11,13 @@ import {
 } from '@mui/material'
 import { type FC, useMemo, useState } from 'react'
 import { useTranslation } from 'react-i18next'
-import { useSelector } from 'react-redux'
 
 import IconAnyFile from '@/assets/icons/files/any'
 import IconJS from '@/assets/icons/logos/js'
 import IconReact from '@/assets/icons/logos/react'
 import IconReactTS from '@/assets/icons/logos/react-ts'
 import IconTS from '@/assets/icons/logos/ts'
+import { useAppSelector } from '@/store/hooks'
 import type { IconBaseProps } from '@/types/BaseProps'
 
 import { OpenFileButton } from '../Buttons/OpenFileButton'
@@ -93,7 +93,7 @@ export const DialogFilesModal: FC<DialogFilesModalProps> = ({
 }
 
 const useDialogFilesModal = ({ files }: { files: FileIdentifier[] }) => {
-  const filesComponents = useSelector((state) => state.svg.files)
+  const filesComponents = useAppSelector((state) => state.svg.files)
 
   const [selectedIndex, setSelectedIndex] = useState<number | false>(false)
 

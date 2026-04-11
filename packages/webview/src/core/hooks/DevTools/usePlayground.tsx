@@ -1,18 +1,13 @@
-import {
-  type ExtensionManage,
-  SVGPostMessage,
-  SVGReceiveMessage,
-  type ThemeMode,
-} from '@jt-view-exports-svg/core'
+import { type ExtensionManage, SVGPostMessage, SVGReceiveMessage } from '@jt-view-exports-svg/core'
 import i18next from 'i18next'
 import { useCallback, useEffect, useRef, useState } from 'react'
 import { Trans, useTranslation } from 'react-i18next'
-import { useDispatch } from 'react-redux'
 
 import { useAlert } from '@/core/hooks/useAlert'
 import type { TypeEditorRef } from '@/core/types/components/vs/Editor'
 import { vscode } from '@/services/vscode'
-import { setEditorConfig, setExtensionTheme, setThemeKind } from '@/store/features/VsCodeSlice'
+import { setEditorConfig, setExtensionTheme } from '@/store/features/vsCode/slice'
+import { useAppDispatch } from '@/store/hooks'
 import { copyToClipboard } from '@/utils/clipboard'
 import { getUnknownError } from '@/utils/errors'
 
@@ -44,7 +39,7 @@ export const usePlayground = (): PlaygroundHook => {
   const [valueColor, setValueColor] = useState('#fff')
 
   const { t } = useTranslation(undefined, { keyPrefix: 'labels' })
-  const dispatch = useDispatch()
+  const dispatch = useAppDispatch()
   const { onOpen } = useAlert()
 
   const editorRef = useRef<TypeEditorRef>(null)
@@ -87,7 +82,6 @@ export const usePlayground = (): PlaygroundHook => {
    */
   const applyInitialColor = useCallback(() => {
     try {
-      setInitialColor('#fff') // Pendiente evaluar si es necesario mantener este estado o si se puede eliminar y usar directamente el valor calculado
       const root = document.body || document.documentElement
 
       const mainColor = getComputedStyle(root).getPropertyValue(CSS_VAR_MAIN)
@@ -115,6 +109,7 @@ export const usePlayground = (): PlaygroundHook => {
       onChangeColor(initial)
       onChangeCompleteColor(initial)
     } catch (error) {
+      setInitialColor('#fff')
       console.error(`${i18next.t('errors.ErrorApplyingInitialColor')}:`, getUnknownError(error))
     }
   }, [])
@@ -135,15 +130,6 @@ export const usePlayground = (): PlaygroundHook => {
    */
   const handleExtensionTheme = (theme?: ExtensionManage): void => {
     dispatch(setExtensionTheme(theme))
-  }
-
-  /**
-   * Handles the theme change by dispatching the setEditorConfig action with the provided theme.
-   *
-   * @param theme - The new theme to be set.
-   */
-  const handleThemeMode = (theme: ThemeMode) => {
-    dispatch(setThemeKind(theme))
   }
 
   /**
@@ -175,16 +161,13 @@ export const usePlayground = (): PlaygroundHook => {
   useEffect(() => {
     applyInitialColor()
 
-    vscode.postMessage(SVGReceiveMessage.RequestEditorThemeMode)
     vscode.postMessage(SVGReceiveMessage.RequestEditorConfig)
     vscode.postMessage(SVGReceiveMessage.RequestEditorExtensionTheme)
 
-    vscode.onMessage(SVGPostMessage.LoadEditorThemeMode, handleThemeMode)
     vscode.onMessage(SVGPostMessage.LoadEditorConfig, handleEditorConfig)
     vscode.onMessage(SVGPostMessage.LoadExtensionTheme, handleExtensionTheme)
 
     return () => {
-      vscode.unregisterMessage(SVGPostMessage.LoadEditorThemeMode)
       vscode.unregisterMessage(SVGPostMessage.LoadEditorConfig)
       vscode.unregisterMessage(SVGPostMessage.LoadExtensionTheme)
     }

@@ -6,11 +6,11 @@ import {
 import { IconButton, Tooltip } from '@mui/material'
 import type { FC } from 'react'
 import { useTranslation } from 'react-i18next'
-import { useDispatch, useSelector } from 'react-redux'
 
 import IconRefresh from '@/assets/icons/functionalities/refresh'
 import { vscode } from '@/services/vscode'
-import { addPendingRefresh } from '@/store/features/SVGSlice'
+import { addPendingRefresh } from '@/store/features/svg/slice'
+import { useAppDispatch, useAppSelector } from '@/store/hooks'
 
 interface RefreshActionProps {
   files: FileIdentifier[]
@@ -18,10 +18,10 @@ interface RefreshActionProps {
 }
 
 export const RefreshAction: FC<RefreshActionProps> = ({ files, groupKind }) => {
-  const inRefresh = useSelector((state) => state.svg.componentsPendingRefresh)
+  const inRefresh = useAppSelector((state) => state.svg.componentsPendingRefresh)
 
   const { t } = useTranslation()
-  const dispatch = useDispatch()
+  const dispatch = useAppDispatch()
 
   if (files.length === 0) return null
 

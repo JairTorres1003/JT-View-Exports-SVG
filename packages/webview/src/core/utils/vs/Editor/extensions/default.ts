@@ -7,7 +7,7 @@ import {
 import type { LocationIdentifier, SVGComponent } from '@jt-view-exports-svg/core'
 
 import { openFileInPosition } from '@/core/utils/file'
-import { setRecentlySelected } from '@/store/features/PlaygroundSlice'
+import { setRecentlySelected } from '@/store/features/playground/slice'
 import { store } from '@/store/store'
 
 const manifest: IExtensionManifest = {

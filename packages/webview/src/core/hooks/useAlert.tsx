@@ -1,9 +1,9 @@
 import type { SlideProps, SnackbarCloseReason, SnackbarOrigin } from '@mui/material'
 import type { ReactNode, SyntheticEvent } from 'react'
-import { useDispatch } from 'react-redux'
 
-import { closeAlert, openAlert } from '@/store/features/GlobalSlice'
-import type { GlobalState } from '@/types/store/features/GlobalSlice'
+import { closeAlert, openAlert } from '@/store/features/global/slice'
+import { useAppDispatch } from '@/store/hooks'
+import type { GlobalState } from '@/store/types/global'
 
 interface AlertHook {
   onOpen: (
@@ -20,7 +20,7 @@ interface AlertHook {
  * @returns An object with functions to open and close alerts.
  */
 export const useAlert = (): AlertHook => {
-  const dispatch = useDispatch()
+  const dispatch = useAppDispatch()
 
   /**
    * Opens an alert with the specified content and options.

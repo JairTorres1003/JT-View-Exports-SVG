@@ -1,7 +1,6 @@
 import { useForkRef } from '@mui/material'
 import i18next from 'i18next'
 import { useCallback, useEffect, useId, useRef, useState } from 'react'
-import { useDispatch, useSelector } from 'react-redux'
 
 import type {
   EditorHook,
@@ -10,7 +9,7 @@ import type {
   TypeEditorRef,
 } from '@/core/types/components/vs/Editor'
 import { Editor } from '@/core/utils/vs/Editor/createEditor'
-import { setInitializedEditor } from '@/store/features/PlaygroundSlice'
+import { useAppSelector } from '@/store/hooks'
 import { getUnknownError } from '@/utils/errors'
 import isEmpty from '@/utils/is-empty'
 
@@ -19,7 +18,7 @@ export const useEditor = ({
   defaultValue,
   onChange = () => null,
 }: EditorHookProps): EditorHook => {
-  const { editorConfig, extensionTheme } = useSelector((state) => state.vsCode)
+  const { editorConfig, extensionTheme } = useAppSelector((state) => state.vsCode)
 
   const [editorInstance, setEditorInstance] = useState<IStandaloneCodeEditor | undefined>(undefined)
   const [loading, setLoading] = useState(false)
@@ -31,8 +30,6 @@ export const useEditor = ({
   const forkedRef = useForkRef(editorRef, forwardedRef)
 
   const id = useId()
-
-  const dispatch = useDispatch()
 
   /**
    * Provides editor loading state management with progress indication.
@@ -85,7 +82,7 @@ export const useEditor = ({
    *
    * @remarks
    * This function is memoized using `useCallback` to prevent unnecessary re-initializations.
-   * It depends on `isInitialized` and `editorConfig` dependencies.
+   * It depends on the current editor configuration and theme.
    */
   const initializeEditor = useCallback(async () => {
     if (isEmpty(editorRef.current) || isEmpty(editorConfig)) return
@@ -163,12 +160,6 @@ export const useEditor = ({
         console.error(`${i18next.t('errors.FailedToInitializeEditor')}: ${getUnknownError(error)}`)
       })
   }, [editorRef, extensionTheme, isMounted])
-
-  useEffect(() => {
-    if (isEmpty(editorRef.current) || isEmpty(editorConfig)) return
-
-    dispatch(setInitializedEditor(id))
-  }, [editorConfig, editorRef])
 
   return {
     id,

@@ -1,13 +1,4 @@
-import type { UseSelector as ReduxSelector } from 'react-redux'
 import 'react'
-
-import type { RootStoreState } from './types/store/store'
-
-export declare module 'react-redux' {
-  declare const useSelector: ReduxSelector<RootStoreState>
-
-  interface UseSelector extends ReduxSelector<RootStoreState> {}
-}
 
 type CSSPropertiesWithVars = Record<`--${string}`, string | number | undefined>
 

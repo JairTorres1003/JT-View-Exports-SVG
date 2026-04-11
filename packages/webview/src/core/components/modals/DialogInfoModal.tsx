@@ -11,8 +11,9 @@ import {
 } from '@mui/material'
 import { useMemo } from 'react'
 import { useTranslation } from 'react-i18next'
-import { useSelector } from 'react-redux'
+
 import { Show } from '@/core/helpers'
+import { useAppSelector } from '@/store/hooks'
 import { DialogModal } from './DialogModal'
 
 interface DialogInfoModalProps extends DialogProps {
@@ -32,7 +33,7 @@ export const DialogInfoModal: React.FC<DialogInfoModalProps> = ({
   isGrouped = false,
   ...dialogProps
 }) => {
-  const filesComponents = useSelector((state) => state.svg.files)
+  const filesComponents = useAppSelector((state) => state.svg.files)
 
   const fileList = useMemo(() => {
     return data.files.map((fileId) => filesComponents[fileId]).filter((file) => file)

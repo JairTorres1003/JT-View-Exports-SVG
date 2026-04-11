@@ -1,15 +1,14 @@
-import { useSelector } from 'react-redux'
-
 import { AccordionActionsSVG, AccordionMenuItem } from '@/core/components/Accordion'
 import CardSvgRenderMemo from '@/core/components/Cards/CardSvgRenderMemo/CardSvgRenderMemo'
 import { useExpandedComponents } from '@/core/hooks/useExpandedComponents'
+import { useAppSelector } from '@/store/hooks'
 
 import { containerIconsClasses } from './ContainerIcons.classes'
 import { BoxContainerIcons } from './ContainerIcons.style'
 
 const ContainerIcons = (): React.ReactNode => {
   const { isExpanded, handleToggle } = useExpandedComponents()
-  const { components } = useSelector((state) => state.svg)
+  const { components } = useAppSelector((state) => state.svg)
 
   return (
     <BoxContainerIcons>

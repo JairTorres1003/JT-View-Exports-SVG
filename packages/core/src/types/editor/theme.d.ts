@@ -1,11 +1,6 @@
 import type { Extension } from 'vscode'
 
 /**
- * Theme mode (dark or light)
- */
-export type ThemeMode = 'dark' | 'light'
-
-/**
  * Extension management information
  */
 export type ExtensionManage = Pick<

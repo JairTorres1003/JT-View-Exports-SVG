@@ -24,7 +24,6 @@ export type ReceiveMessageMap = {
   [SVGReceiveMessage.ClearIconCollection]: IconCollectionKind
   [SVGReceiveMessage.IsOpenDevTools]: boolean
   [SVGReceiveMessage.EditComponentInPlayground]: SVGPlayground
-  [SVGReceiveMessage.RequestEditorThemeMode]: undefined
   [SVGReceiveMessage.RequestEditorConfig]: undefined
   [SVGReceiveMessage.RequestEditorExtensionTheme]: undefined
   [SVGReceiveMessage.RequestEditorStyles]: undefined

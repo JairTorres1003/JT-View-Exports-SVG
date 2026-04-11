@@ -1,32 +1,12 @@
-import { combineReducers, configureStore, type Reducer, type Store } from '@reduxjs/toolkit'
+import { configureStore } from '@reduxjs/toolkit'
 
-import type { RootStoreState } from '@/types/store/store'
+import rootReducer from './features/reducers'
 
-import { GlobalReducer } from './features/GlobalSlice'
-import { PlaygroundReducer } from './features/PlaygroundSlice'
-import { SVGReducer } from './features/SVGSlice'
-import { VsCodeReducer } from './features/VsCodeSlice'
-
-/**
- * Root reducer function that combines all the reducers.
- * @remarks
- * This function is used to combine all the reducers into a single root reducer.
- */
-const rootReducer: Reducer<RootStoreState> = combineReducers({
-  global: GlobalReducer,
-  playground: PlaygroundReducer,
-  svg: SVGReducer,
-  vsCode: VsCodeReducer,
-})
-
-/**
- * The Redux store configuration.
- * @remarks
- * This store is created using the `configureStore` function from the Redux Toolkit.
- * It includes the reducers and middleware with the `serializableCheck` option disabled.
- */
-export const store: Store<RootStoreState> = configureStore({
+export const store = configureStore({
   reducer: rootReducer,
   middleware: (getDefaultMiddleware) => getDefaultMiddleware({ serializableCheck: false }),
   devTools: import.meta.env.DEV,
 })
+
+export type RootState = ReturnType<typeof store.getState>
+export type AppDispatch = typeof store.dispatch

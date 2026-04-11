@@ -1,22 +1,22 @@
 import { SVGPostMessage, SVGReceiveMessage } from '@jt-view-exports-svg/core'
 import { useEffect, useState } from 'react'
-import { useDispatch, useSelector } from 'react-redux'
 import { type PanelProps, usePanelRef } from 'react-resizable-panels'
 
 import { routes } from '@/config/routes/route'
 import { vscode } from '@/services/vscode'
-import { setIsOpenDevTools } from '@/store/features/PlaygroundSlice'
+import { setIsOpenDevTools } from '@/store/features/playground/slice'
+import { useAppDispatch, useAppSelector } from '@/store/hooks'
 import isEmpty from '@/utils/is-empty'
 
 export const useViewPanels = () => {
   const sidePanelRef = usePanelRef()
 
-  const isOpenDevTools = useSelector((state) => state.playground.isOpenDevTools)
-  const renderPath = useSelector((state) => state.global.configuration.renderPath)
+  const isOpenDevTools = useAppSelector((state) => state.playground.isOpenDevTools)
+  const renderPath = useAppSelector((state) => state.global.configuration.renderPath)
 
   const [isShowSidePanel, setIsShowSidePanel] = useState(true)
 
-  const dispatch = useDispatch()
+  const dispatch = useAppDispatch()
 
   /**
    * Toggles the side panel for the developer tools.

@@ -1,10 +1,10 @@
 import { ListItem, ListItemIcon, ListItemText } from '@mui/material'
-import { useSelector } from 'react-redux'
 
 import IconWarning from '@/assets/icons/indicators/warning'
 import { AccordionActionsSVG, AccordionMenuItem } from '@/core/components/Accordion'
 import CardSvgRenderMemo from '@/core/components/Cards/CardSvgRenderMemo/CardSvgRenderMemo'
 import { useExpandedComponents } from '@/core/hooks/useExpandedComponents'
+import { useAppSelector } from '@/store/hooks'
 
 import ProgressBarInRefresh from '../ProgressBarInRefresh/ProgressBarInRefresh'
 
@@ -13,7 +13,7 @@ import { BoxContainerComponents } from './ContainerComponents.style'
 
 const ContainerComponents = (): React.ReactNode => {
   const { handleToggle, isExpanded } = useExpandedComponents()
-  const { components, errors } = useSelector((state) => state.svg)
+  const { components, errors } = useAppSelector((state) => state.svg)
 
   if (errors) {
     return (

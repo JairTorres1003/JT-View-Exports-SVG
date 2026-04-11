@@ -128,7 +128,7 @@ export class Editor {
       throw new Error(i18next.t('errors.EditorReferenceIsNotAvailable'))
     }
 
-    this._reference?.editorLoader?.().start(1000, () => {
+    this._reference?.editorLoader?.().start(800, () => {
       this._reference?.style.setProperty('opacity', '1')
     })
     this._reference?.style.setProperty('opacity', '0')
@@ -188,7 +188,7 @@ export class Editor {
       throw new Error(i18next.t('errors.EditorReferenceIsNotAvailable'))
     }
 
-    this._reference?.editorLoader?.().start(1000, () => {
+    this._reference?.editorLoader?.().start(800, () => {
       this._reference?.style.setProperty('opacity', '1')
     })
     this._reference?.style.setProperty('opacity', '0')

@@ -1,6 +1,16 @@
-import { workspace } from 'vscode'
+import * as vsc from 'vscode'
 
-import { getCurrentThemeMode } from './themeMode'
+export function getCurrentThemeMode(): 'dark' | 'light' {
+  // Get the current color theme's kind value
+  const currentTheme = vsc.window.activeColorTheme.kind
+
+  // Check if the kind value corresponds to a "light" theme (1, 4) or "dark" theme (2, 3)
+  // and return the appropriate theme name
+  return currentTheme === vsc.ColorThemeKind.Light ||
+    currentTheme === vsc.ColorThemeKind.HighContrastLight
+    ? 'light'
+    : 'dark'
+}
 
 /**
  * Retrieves the editor configuration settings from the workspace and modifies certain properties.
@@ -12,8 +22,8 @@ import { getCurrentThemeMode } from './themeMode'
  * - `editor.lineNumbers` is set to `'off'`.
  */
 export function getConfigurationEditor(): Record<string, unknown> {
-  const configuration = workspace.getConfiguration('editor')
-  const workbenchConfiguration = workspace.getConfiguration('workbench')
+  const configuration = vsc.workspace.getConfiguration('editor')
+  const workbenchConfiguration = vsc.workspace.getConfiguration('workbench')
 
   // biome-ignore lint/suspicious/noExplicitAny: -- This is a workaround for the type issue
   const editorConfig: Record<string, any> = {}

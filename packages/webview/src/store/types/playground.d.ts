@@ -4,24 +4,10 @@ import type { CaseReducer, PayloadAction } from '@reduxjs/toolkit'
 export interface PlaygroundState {
   recentlySelected?: SVGComponent
   isOpenDevTools: boolean
-  isInitialized: Record<string, boolean>
 }
 
 export interface PlaygroundReducers {
-  /**
-   * Set the recently selected component to the state.
-   */
   setRecentlySelected: CaseReducer<PlaygroundState, PayloadAction<SVGComponent | undefined>>
-  /**
-   * Toggles the visibility of the developer tools panel.
-   */
   setIsOpenDevTools: CaseReducer<PlaygroundState, PayloadAction<boolean>>
-
-  /**
-   * Sets the identifier of the initialized editor.
-   */
-  setInitializedEditor: CaseReducer<PlaygroundState, PayloadAction<string>>
-
-  // biome-ignore lint/suspicious/noExplicitAny: This is a catch-all for any additional reducers that may be added in the future.
   [key: string]: CaseReducer<PlaygroundState, PayloadAction<any>>
 }

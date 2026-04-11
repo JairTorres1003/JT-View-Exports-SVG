@@ -1,6 +1,5 @@
-import { useSelector } from 'react-redux'
-
 import { RenderSvg } from '@/core/components/SVG/RenderSvg'
+import { useAppSelector } from '@/store/hooks'
 
 import { BoxPlaygroundCardSvg } from './PlaygroundCardSvg.style'
 
@@ -10,7 +9,7 @@ interface PlaygroundCardSvgProps {
 }
 
 const PlaygroundCardSvg: React.FC<PlaygroundCardSvgProps> = ({ bgColor, ref }) => {
-  const recentlySelected = useSelector((state) => state.playground.recentlySelected)
+  const recentlySelected = useAppSelector((state) => state.playground.recentlySelected)
 
   return (
     <BoxPlaygroundCardSvg bgColor={bgColor}>
