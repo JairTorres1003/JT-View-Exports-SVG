@@ -2,26 +2,16 @@ import Colorize from 'color'
 import { useEffect, useState } from 'react'
 import type { AnyColor, RgbaColor } from 'react-colorful'
 
-import type {
-  ColorizeOrderedList,
-  ColorizeParam,
-  ColorPickerHook,
-  ColorPickerHookProps,
-} from '@/core/types/components/vs/ColorPicker'
-import { getUnknownError } from '@/utils/errors'
+import type { ColorPickerHook, ColorPickerHookProps } from '@/core/types/components/vs/ColorPicker'
+import {
+  convertToStringColor,
+  determineTextColor,
+  normalizeColorAlpha,
+  ORDERED_LIST,
+} from '@/core/utils/vs/color'
 import isEmpty from '@/utils/is-empty'
 
 const INITIAL_COLOR = { r: 255, g: 255, b: 255, a: 1 }
-
-const ORDERED_LIST: ColorizeOrderedList = [
-  (color) =>
-    typeof color === 'object' && 'alpha' in color && color.alpha !== 1
-      ? Colorize(color).hexa()
-      : Colorize(color).hex(),
-  (color) => Colorize(color).hsl(),
-  (color) => Colorize(color).hwb(),
-  (color) => Colorize(color).rgb(),
-]
 
 export const useColorPicker = ({
   currentColor = INITIAL_COLOR,
@@ -37,38 +27,6 @@ export const useColorPicker = ({
   })
 
   /**
-   * Adjusts the color object to ensure it has the correct structure for the Colorize function.
-   * Specifically, if the color object contains an 'a' property (representing alpha), it renames it to 'alpha'.
-   *
-   * @param color - The color object to be fixed. It can be of any type that conforms to the AnyColor type.
-   * @returns The adjusted color object with the 'a' property renamed to 'alpha', if applicable.
-   */
-  const fixedColorize = (color: AnyColor): ColorizeParam => {
-    if (typeof color === 'object' && 'a' in color) {
-      const { a, ...rest } = color
-
-      return {
-        ...rest,
-        alpha: a < 1 ? parseFloat(a.toFixed(3)) : a,
-      }
-    }
-
-    return color
-  }
-
-  /**
-   * Converts a given color to its string representation in RGBA format.
-   *
-   * @param color - The color to be converted. It can be of any type that is compatible with the `Colorize` function.
-   * @returns The RGBA string representation of the given color.
-   */
-  const getStringColor = (color: AnyColor): string => {
-    const rgba = Colorize(fixedColorize(color)).rgb()
-
-    return rgba.string()
-  }
-
-  /**
    * Handles the change of hue in the color picker.
    *
    * @param {RgbaColor} color - The current RGBA color object.
@@ -76,7 +34,7 @@ export const useColorPicker = ({
    */
   const handleHueChange = (color: RgbaColor) => (_: Event, newHue: number | number[]) => {
     const valueHue = Array.isArray(newHue) ? newHue[0] : newHue
-    const newColor = Colorize(fixedColorize(color))
+    const newColor = Colorize(normalizeColorAlpha(color))
       .hue(valueHue * -1)
       .rgb()
 
@@ -97,7 +55,7 @@ export const useColorPicker = ({
    */
   const handleColorChange = (newColor: RgbaColor): void => {
     setColor(newColor)
-    onChangeCallback(newColor, getStringColor(newColor))
+    onChangeCallback(newColor, convertToStringColor(newColor))
   }
 
   /**
@@ -122,25 +80,13 @@ export const useColorPicker = ({
    * @throws Will log an error if an unknown error occurs during processing.
    */
   const handleTextColor = (color: AnyColor): void => {
-    try {
-      const fixedColor = fixedColorize(color)
-
-      const list = ORDERED_LIST[currentList] ?? ORDERED_LIST[0]
-      const isLight = Colorize(fixedColor).isLight()
-
-      setCurrentValueColor({
-        value: list(fixedColor).toString(),
-        isLight,
-      })
-    } catch (error) {
-      console.error(getUnknownError(error))
-    }
+    setCurrentValueColor(determineTextColor(color, currentList))
   }
 
   useEffect(() => {
     if (!isEmpty(currentColor)) {
-      const convertedColor = Colorize(fixedColorize(currentColor)).rgb()
-      const valueHue = Colorize(fixedColorize(currentColor)).hue()
+      const convertedColor = Colorize(normalizeColorAlpha(currentColor)).rgb()
+      const valueHue = Colorize(normalizeColorAlpha(currentColor)).hue()
 
       const newColor = {
         r: convertedColor.red(),
@@ -162,7 +108,6 @@ export const useColorPicker = ({
   return {
     oldColor,
     color,
-    getStringColor,
     currentHue,
     handleColorChange,
     applyOldColor,

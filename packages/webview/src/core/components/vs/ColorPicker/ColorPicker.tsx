@@ -5,6 +5,7 @@ import { RgbaColorPicker } from 'react-colorful'
 import IconMode from '@/assets/icons/indicators/mode'
 import { useColorPicker } from '@/core/hooks/vs/useColorPicker'
 import type { ColorPickerProps } from '@/core/types/components/vs/ColorPicker'
+import { convertToStringColor } from '@/core/utils/vs/color'
 
 import { colorPickerClasses } from './ColorPicker.classes'
 import { BoxInfoPickerColor, ColorPickerBox } from './ColorPicker.style'
@@ -16,7 +17,6 @@ const ColorPicker = forwardRef<HTMLDivElement, ColorPickerProps>(function ColorP
 ) {
   const {
     color,
-    getStringColor,
     currentHue,
     oldColor,
     handleColorChange,
@@ -31,7 +31,7 @@ const ColorPicker = forwardRef<HTMLDivElement, ColorPickerProps>(function ColorP
       <Box className={colorPickerClasses.header}>
         <BoxInfoPickerColor
           alpha={color.a}
-          bgColor={getStringColor(color)}
+          bgColor={convertToStringColor(color)}
           isLight={currentValueColor.isLight}
           onClick={handleChangeList}
           sx={{ width: 'calc(100% - 74px)' }}
@@ -48,7 +48,7 @@ const ColorPicker = forwardRef<HTMLDivElement, ColorPickerProps>(function ColorP
         <BoxInfoPickerColor
           sx={{ width: 74 }}
           onClick={applyOldColor}
-          bgColor={getStringColor(oldColor)}
+          bgColor={convertToStringColor(oldColor)}
         />
       </Box>
       <Box className={colorPickerClasses.body}>
@@ -61,7 +61,7 @@ const ColorPicker = forwardRef<HTMLDivElement, ColorPickerProps>(function ColorP
         <Box className={colorPickerClasses.sliders}>
           <VerticalPickerSlider
             variant='alpha'
-            alphaColor={getStringColor(color)}
+            alphaColor={convertToStringColor(color)}
             value={color.a * 100}
             onChange={(_, a) => {
               handleColorChange({ ...color, a: (Array.isArray(a) ? a[0] : a) / 100 })

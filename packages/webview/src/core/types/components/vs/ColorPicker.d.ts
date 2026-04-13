@@ -12,7 +12,6 @@ export type ColorizeOrderedList = Array<
 export interface ColorPickerHook {
   oldColor: RgbaColor
   color: RgbaColor
-  getStringColor: (color: AnyColor) => string
   currentHue: number
   handleColorChange: (newColor: RgbaColor) => void
   applyOldColor: VoidFunction
