@@ -14,6 +14,7 @@ import { viewExportStore } from '@/store/ViewExportStore'
 import { processFiles } from '@/utilities/files/processFiles'
 import { getUnknownError } from '@/utilities/misc'
 import { svgFileToUri } from '@/utilities/vscode/uri'
+
 import { BaseHandler } from '../BaseHandler'
 
 export class ReloadComponentHandler extends BaseHandler {
@@ -79,19 +80,17 @@ export class ReloadComponentHandler extends BaseHandler {
    * @returns A promise that resolves to an array of URIs corresponding to the given file identifiers.
    */
   private async getFilesUris(files: FileIdentifier[]): Promise<vsc.Uri[]> {
-    const cachedFiles = await this.viewExportCache?.get(this.identifierWorkspace)
+    const filesCache = getCache().get('files')
+    const uris: vsc.Uri[] = []
 
-    if (!cachedFiles) return []
-
-    return files.flatMap((fileId) => {
-      const cachedFile = cachedFiles.files[fileId]
-
-      if (cachedFile) {
-        return svgFileToUri(cachedFile)
+    for (const fileId of files) {
+      const file = await filesCache.getFile(this.identifierWorkspace, fileId)
+      if (file) {
+        uris.push(svgFileToUri(file))
       }
+    }
 
-      return []
-    })
+    return uris
   }
 
   async handle(files: FileIdentifier[]) {

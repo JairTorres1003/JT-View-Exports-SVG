@@ -1,4 +1,4 @@
-import { pathnames } from '@jt-view-exports-svg/core'
+import { type FileIdentifier, IconCollectionKind, pathnames } from '@jt-view-exports-svg/core'
 import * as vsc from 'vscode'
 
 import { CONFIG_KEY } from '@/constants/misc'
@@ -40,6 +40,24 @@ export const runClearCache = async (cache: CacheType = 'partial'): Promise<void>
       await getCache().clearAll()
     } else {
       await getCache().clear(['extensionTheme', 'viewExports'])
+
+      // Prune FilesCache: keep only IDs still referenced by icons
+      const workspace = vsc.workspace.workspaceFolders?.[0]
+      if (workspace) {
+        const filesCache = getCache().get('files')
+        const iconsCache = getCache().get('icons')
+
+        const referencedIds = new Set<FileIdentifier>()
+        for (const kind of Object.values(IconCollectionKind)) {
+          const entry = await iconsCache.get([workspace, kind])
+          if (!entry) continue
+          for (const id of Object.keys(entry.fileCounts) as FileIdentifier[]) {
+            referencedIds.add(id)
+          }
+        }
+
+        await filesCache.pruneUnreferenced(workspace, [...referencedIds])
+      }
     }
   })
 }
@@ -49,5 +67,15 @@ export const runClearCollectionCache = async (): Promise<void> => {
 
   await runBaseClearCache(message, async () => {
     await getCache().clear(['icons'])
+
+    // Prune FilesCache: keep only IDs still referenced by viewExports
+    const workspace = vsc.workspace.workspaceFolders?.[0]
+    if (workspace) {
+      const filesCache = getCache().get('files')
+      const viewExportCache = getCache().get('viewExports')
+      const viewExportEntry = await viewExportCache.get(workspace)
+      const referencedIds = Object.keys(viewExportEntry ?? {}) as FileIdentifier[]
+      await filesCache.pruneUnreferenced(workspace, referencedIds)
+    }
   })
 }

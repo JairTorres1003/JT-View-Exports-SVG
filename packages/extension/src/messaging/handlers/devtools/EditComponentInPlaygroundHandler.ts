@@ -5,8 +5,8 @@ import { REGEX_TAG_NAME } from '@/constants/regex'
 import type { WebviewMessenger } from '@/messaging/WebviewMessenger'
 import { getCache } from '@/services/cache/main'
 import { playgroundComponent } from '@/services/playgroundComponent'
-import { viewExportStore } from '@/store/ViewExportStore'
 import { getUnknownError } from '@/utilities/misc'
+
 import { BaseHandler } from '../BaseHandler'
 
 export class EditComponentInPlaygroundHandler extends BaseHandler {
@@ -18,7 +18,8 @@ export class EditComponentInPlaygroundHandler extends BaseHandler {
 
   async handle(icon: SVGPlayground) {
     try {
-      const fileList = viewExportStore.getFiles()
+      const fileCache = getCache().get('files')
+      const fileList = (await fileCache.get('global')) ?? {}
       const file = fileList[icon.location.id]
 
       if (!file) {
@@ -30,10 +31,11 @@ export class EditComponentInPlaygroundHandler extends BaseHandler {
       const cache = getCache().get('viewExports')
       const currentWorkspace = vsc.workspace.workspaceFolders?.[0] ?? 'global'
 
-      const entryCache = await cache.getByFile(currentWorkspace, file)
+      const entry = await cache.get(currentWorkspace)
+      const entryData = entry?.[file.id]
 
       const tagName = icon.value.match(REGEX_TAG_NAME)?.[1] ?? icon.name
-      const currentComponent = entryCache?.data.components.find((c) => c.name === tagName)
+      const currentComponent = entryData?.components.find((c) => c.name === tagName)
 
       if (!currentComponent) {
         throw new Error(

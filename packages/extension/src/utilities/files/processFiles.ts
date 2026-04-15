@@ -4,6 +4,7 @@ import * as vsc from 'vscode'
 
 import { REGEX_FILE } from '@/constants/regex'
 import { AssetsPathsController, ShowNotExportedIconsController } from '@/controllers/config'
+import type { FilesCache } from '@/services/cache/FilesCache'
 import { getCache } from '@/services/cache/main'
 import type { ViewExportSVGCache } from '@/services/cache/ViewExportSVGCache'
 import { componentDeclarationStore } from '@/store/ComponentDeclarationStore'
@@ -24,6 +25,8 @@ interface ProcessResult {
 interface ProcessFileItemOptions {
   isShowNoExports: boolean
   cacheItem: ViewExportSVGCache
+  filesCache: FilesCache
+  workspace: vsc.WorkspaceFolder | 'global'
 }
 
 /**
@@ -53,7 +56,7 @@ async function withConcurrency<T>(
  * Isolated logic for better testability and concurrency management.
  *
  * @param uri - The file URI to process.
- * @param isShowNoExports - Configuration flag to include non-exported components.
+ * @param options - Configuration and cache references.
  * @returns A promise that resolves to the process result or null if invalid/error.
  */
 async function processFileItem(
@@ -66,11 +69,14 @@ async function processFileItem(
     if (!REGEX_FILE.test(extname)) return null
 
     const file = await pathToSVGFile(getUriPath(uri))
-    const currentWorkspace = vsc.workspace.workspaceFolders?.[0] ?? 'global'
-    const currentItem = await options.cacheItem.getByFile(currentWorkspace, file)
+    const { cacheItem, filesCache, workspace } = options
 
-    if (currentItem) {
-      return { exportItem: currentItem.data, fileItem: file }
+    const isStale = await filesCache.isStale(workspace, file)
+
+    if (!isStale) {
+      const entry = await cacheItem.get(workspace)
+      const cached = entry?.[file.id]
+      if (cached) return { exportItem: cached, fileItem: file }
     }
 
     const { components, declarations } = await extractComponents(file, uri)
@@ -95,7 +101,8 @@ async function processFileItem(
       files: [file.id],
     }
 
-    await options.cacheItem.add(currentWorkspace, { file, data: exportItem })
+    await filesCache.upsert(workspace, file)
+    await cacheItem.add(workspace, file.id, exportItem)
     componentDeclarationStore.set(file.id, declarations)
 
     return { exportItem, fileItem: file }
@@ -127,13 +134,20 @@ export async function processFiles(
       const configShowNoExports = new ShowNotExportedIconsController()
       const isShowNoExports = configShowNoExports.isShow()
       const cacheItem = getCache().get('viewExports')
+      const filesCache = getCache().get('files')
+      const workspace = vsc.workspace.workspaceFolders?.[0] ?? 'global'
 
       const total = items.length
       let completed = 0
       const results: (ProcessResult | null)[] = new Array(total)
 
       await withConcurrency(items, CONCURRENCY_LIMIT, async (uri, index) => {
-        results[index] = await processFileItem(uri, { isShowNoExports, cacheItem })
+        results[index] = await processFileItem(uri, {
+          isShowNoExports,
+          cacheItem,
+          filesCache,
+          workspace,
+        })
 
         completed++
         progress.report({

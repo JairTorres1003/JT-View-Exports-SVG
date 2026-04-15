@@ -113,7 +113,6 @@ export async function processComponent({
 
     const isFavorite = currentWorkspace
       ? await cache.hasIcon(currentWorkspace, {
-          file,
           name,
           location,
           collection: IconCollectionKind.FAVORITE,

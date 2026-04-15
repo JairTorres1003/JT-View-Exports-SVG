@@ -3,6 +3,7 @@ import {
   IconCollectionKind,
   type SVGComponent,
   type SVGFile,
+  type SVGIconCollection,
   type ViewExportSVG,
 } from '@jt-view-exports-svg/core'
 import * as vsc from 'vscode'
@@ -10,7 +11,8 @@ import * as vsc from 'vscode'
 import { processFiles } from '@/utilities/files/processFiles'
 import { svgFileToUri } from '@/utilities/vscode/uri'
 
-import type { IconCollectionCacheEntry, IconEntry } from './cache/IconCollectionCache'
+import type { FilesCache } from './cache/FilesCache'
+import type { IconCollectionCacheEntry } from './cache/IconCollectionCache'
 import { getCache } from './cache/main'
 
 const fileCache = new Map<FileIdentifier, Promise<boolean>>()
@@ -47,7 +49,7 @@ const checkFileExists = (file: SVGFile): Promise<boolean> => {
  */
 function proccessNotFoundIcons(
   workspace: vsc.WorkspaceFolder,
-  notFoundIcons: IconEntry[],
+  notFoundIcons: SVGIconCollection[],
   fileIds: FileIdentifier[]
 ) {
   const iconsCache = getCache().get('icons')
@@ -57,71 +59,64 @@ function proccessNotFoundIcons(
   viewExportCache.removeByFileIds(workspace, fileIds)
 }
 
-/**
- * Detects which files need to be processed by comparing the icons in the collections
- * with the existing view export data, and checking for file existence.
- */
 async function detectFilesToProcess(
-  collectionEntries: Array<IconCollectionCacheEntry | undefined>,
-  viewExportData: Record<FileIdentifier, ViewExportSVG>
+  collectionEntries: (IconCollectionCacheEntry | undefined)[],
+  viewExportData: Record<FileIdentifier, ViewExportSVG>,
+  filesCache: FilesCache,
+  workspace: vsc.WorkspaceFolder
 ): Promise<Map<FileIdentifier, vsc.Uri>> {
   const toProcessMap = new Map<FileIdentifier, vsc.Uri>()
 
-  await Promise.all(
-    collectionEntries.map(async (entry) => {
-      if (!entry) return
+  for (const collection of collectionEntries) {
+    if (!collection) continue
 
-      await Promise.all(
-        entry.data.map(async (icon) => {
-          const file = entry.files[icon.location.id].file
+    for (const fileId of Object.keys(collection.fileCounts) as FileIdentifier[]) {
+      if (viewExportData[fileId]) continue
 
-          if (viewExportData[file.id]) return
+      const file = await filesCache.getFile(workspace, fileId)
+      if (!file) continue
 
-          const fileExist = await checkFileExists(file)
-          if (!fileExist) return
-
-          if (!toProcessMap.has(file.id)) {
-            toProcessMap.set(file.id, svgFileToUri(file))
-          }
-        })
-      )
-    })
-  )
+      if (!toProcessMap.has(fileId)) {
+        toProcessMap.set(fileId, svgFileToUri(file))
+      }
+    }
+  }
 
   return toProcessMap
 }
 
-/**
- * Fetches the SVG components for a given icon collection, checking for file existence and handling not found icons.
- */
-const getIconsComponents = async (
+async function getIconsComponents(
   workspace: vsc.WorkspaceFolder,
   collection: IconCollectionCacheEntry,
-  data: Record<FileIdentifier, ViewExportSVG>
-): Promise<IconsComponentsResult | null> => {
-  if (collection.data.length === 0) return null
-
-  const results: IconsComponentsResult = { files: {}, components: [] }
-  const notFoundIcons: IconEntry[] = []
+  viewExportData: Record<FileIdentifier, ViewExportSVG>,
+  filesCache: FilesCache
+): Promise<IconsComponentsResult | null> {
+  const notFoundIcons: SVGIconCollection[] = []
   const notFoundFileIds: FileIdentifier[] = []
 
-  for (const icon of collection.data) {
-    const file = collection.files[icon.location.id].file
-    const fileExist = await checkFileExists(file)
+  const results: IconsComponentsResult = { files: {}, components: [] }
 
-    if (!fileExist) {
-      notFoundIcons.push({ ...icon, file, collection: collection.name })
+  for (const icon of collection.data) {
+    const file = await filesCache.getFile(workspace, icon.location.id)
+
+    if (!file) {
+      notFoundFileIds.push(icon.location.id)
+      continue
+    }
+
+    const exists = await checkFileExists(file)
+
+    if (!exists) {
+      notFoundIcons.push({ ...icon, collection: collection.name })
       notFoundFileIds.push(file.id)
       continue
     }
 
-    const components = data[file.id]?.components ?? []
-    const component = components.find((c) => c.name === icon.name)
+    const data = viewExportData[file.id]
+    if (!data) continue
 
-    if (!component) {
-      notFoundIcons.push({ ...icon, file, collection: collection.name })
-      continue
-    }
+    const component = data.components.find((c) => c.name === icon.name)
+    if (!component) continue
 
     results.files[file.id] = file
     results.components.push(component)
@@ -146,22 +141,28 @@ export const getIconsCollection = async (): Promise<{
 
   const iconsCache = getCache().get('icons')
   const viewExportCache = getCache().get('viewExports')
+  const filesCache = getCache().get('files')
   const collectionList = Object.values(IconCollectionKind)
 
   // Phase 1: Load all collections and their viewExports cache
   const [collectionEntries, viewExportData] = await Promise.all([
     Promise.all(collectionList.map((c) => iconsCache.get([currentWorkspace, c]))),
-    viewExportCache.get(currentWorkspace).then((r) => r?.data ?? {}),
+    viewExportCache.get(currentWorkspace).then((r) => r ?? {}),
   ])
 
   // Phase 2: Detect all files that need processing
-  const toProcessMap = await detectFilesToProcess(collectionEntries, viewExportData)
+  const toProcessMap = await detectFilesToProcess(
+    collectionEntries,
+    viewExportData,
+    filesCache,
+    currentWorkspace
+  )
 
   if (toProcessMap.size > 0) {
     // Phase 3: A single processFiles command for all pending files
     await processFiles([...toProcessMap.values()])
 
-    const refreshed = (await viewExportCache.get(currentWorkspace))?.data ?? {}
+    const refreshed = (await viewExportCache.get(currentWorkspace)) ?? {}
     Object.assign(viewExportData, refreshed)
   }
 
@@ -176,7 +177,12 @@ export const getIconsCollection = async (): Promise<{
       const cacheEntry = collectionEntries[index]
       if (!cacheEntry) return
 
-      const components = await getIconsComponents(currentWorkspace, cacheEntry, viewExportData)
+      const components = await getIconsComponents(
+        currentWorkspace,
+        cacheEntry,
+        viewExportData,
+        filesCache
+      )
       if (!components) return
 
       Object.assign(results.files, components.files)

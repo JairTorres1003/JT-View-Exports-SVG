@@ -6,18 +6,20 @@ import {
 import * as vsc from 'vscode'
 
 import { getCache } from '@/services/cache/main'
-import { viewExportStore } from '@/store/ViewExportStore'
+
 import { BaseHandler } from '../BaseHandler'
 
 export class AddIconToCollectionHandler extends BaseHandler {
   readonly type = SVGReceiveMessage.AddIconToCollection
 
-  handle(icon: SVGIconCollection) {
-    const fileList = viewExportStore.getFiles()
-    const file = fileList[icon.location.id]
+  async handle(icon: SVGIconCollection) {
     const workspace = vsc.workspace.workspaceFolders?.[0]
+    if (!workspace) return
 
-    if (!file || !workspace) return
+    const filesCache = getCache().get('files')
+    const file = await filesCache.getFile(workspace, icon.location.id)
+
+    if (!file) return
 
     if (file.isTemporary) {
       vsc.window.showWarningMessage(
@@ -32,11 +34,11 @@ export class AddIconToCollectionHandler extends BaseHandler {
 
     const cache = getCache().get('icons')
 
-    cache.add(workspace, { ...icon, file })
+    await cache.add(workspace, icon)
 
     if (icon.collection === IconCollectionKind.FAVORITE) {
       const exportCache = getCache().get('viewExports')
-      exportCache.toggleIconFavorite(workspace, icon, true)
+      await exportCache.toggleIconFavorite(workspace, icon, true)
     }
   }
 }
