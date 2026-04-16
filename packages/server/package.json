@@ -17,11 +17,11 @@
     "typecheck": "tsc --noEmit"
   },
   "dependencies": {
-    "@codingame/monaco-vscode-configuration-service-override": "^30.0.0",
-    "@codingame/monaco-vscode-api": "^30.0.0",
-    "@codingame/monaco-vscode-files-service-override": "^30.0.0",
-    "@codingame/monaco-vscode-model-service-override": "^30.0.0",
-    "@codingame/monaco-vscode-theme-service-override": "^30.0.0",
+    "@codingame/monaco-vscode-configuration-service-override": "^30.0.1",
+    "@codingame/monaco-vscode-api": "^30.0.1",
+    "@codingame/monaco-vscode-files-service-override": "^30.0.1",
+    "@codingame/monaco-vscode-model-service-override": "^30.0.1",
+    "@codingame/monaco-vscode-theme-service-override": "^30.0.1",
     "@jt-view-exports-svg/core": "workspace:*",
     "@jt-view-exports-svg/extension-api": "workspace:*",
     "cors": "^2.8.6",
