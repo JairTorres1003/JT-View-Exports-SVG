@@ -1,8 +1,9 @@
 import type { FileIdentifier, ViewExportSVG } from '@jt-view-exports-svg/core'
-import { type FC, useState } from 'react'
+import { type FC, lazy, Suspense, useState } from 'react'
 
 import { OpenFileButton } from '@/core/components/Buttons/OpenFileButton'
-import { DialogFilesModal } from '@/core/components/modals/DialogFilesModal'
+
+const DialogFilesModal = lazy(() => import('@/core/components/modals/DialogFilesModal'))
 
 interface FilesActionProps {
   files: FileIdentifier[]
@@ -24,14 +25,18 @@ export const FilesAction: FC<FilesActionProps> = ({ files, groupKind }) => {
         }}
       />
 
-      <DialogFilesModal
-        open={open}
-        files={files}
-        groupKind={groupKind}
-        onClose={() => {
-          setOpen(false)
-        }}
-      />
+      {files.length > 1 && (
+        <Suspense>
+          <DialogFilesModal
+            open={open}
+            files={files}
+            groupKind={groupKind}
+            onClose={() => {
+              setOpen(false)
+            }}
+          />
+        </Suspense>
+      )}
     </>
   )
 }

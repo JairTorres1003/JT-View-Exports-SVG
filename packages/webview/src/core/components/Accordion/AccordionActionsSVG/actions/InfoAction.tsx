@@ -1,10 +1,11 @@
 import type { ViewExportSVG } from '@jt-view-exports-svg/core'
 import { IconButton, Tooltip } from '@mui/material'
-import { type FC, useState } from 'react'
+import { type FC, lazy, Suspense, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 
 import IconInfo from '@/assets/icons/indicators/info'
-import { DialogInfoModal } from '@/core/components/modals/DialogInfoModal'
+
+const DialogInfoModal = lazy(() => import('@/core/components/modals/DialogInfoModal'))
 
 interface InfoActionProps {
   data: ViewExportSVG
@@ -28,14 +29,16 @@ export const InfoAction: FC<InfoActionProps> = ({ data, isGrouped }) => {
         </IconButton>
       </Tooltip>
 
-      <DialogInfoModal
-        open={open}
-        data={data}
-        isGrouped={isGrouped}
-        onClose={() => {
-          setOpen(false)
-        }}
-      />
+      <Suspense>
+        <DialogInfoModal
+          open={open}
+          data={data}
+          isGrouped={isGrouped}
+          onClose={() => {
+            setOpen(false)
+          }}
+        />
+      </Suspense>
     </>
   )
 }

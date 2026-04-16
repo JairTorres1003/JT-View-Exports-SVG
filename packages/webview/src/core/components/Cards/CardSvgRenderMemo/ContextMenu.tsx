@@ -13,7 +13,7 @@ interface ContextMenuProps
   svgRef: React.RefObject<SVGElement | null>
 }
 
-export const ContextMenu: React.FC<ContextMenuProps> = ({
+const ContextMenu: React.FC<ContextMenuProps> = ({
   contextMenu,
   onClose = () => null,
   component,
@@ -62,3 +62,5 @@ export const ContextMenu: React.FC<ContextMenuProps> = ({
     </Menu>
   )
 }
+
+export default ContextMenu

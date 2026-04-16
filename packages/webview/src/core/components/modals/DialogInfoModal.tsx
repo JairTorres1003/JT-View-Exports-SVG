@@ -26,7 +26,7 @@ const commonSlotProps: ListItemTextProps['slotProps'] = {
   secondary: { noWrap: true, sx: { opacity: 0.8 } },
 }
 
-export const DialogInfoModal: React.FC<DialogInfoModalProps> = ({
+const DialogInfoModal: React.FC<DialogInfoModalProps> = ({
   data,
   onClose = () => null,
   slotProps,
@@ -170,3 +170,5 @@ export const DialogInfoModal: React.FC<DialogInfoModalProps> = ({
     </DialogModal>
   )
 }
+
+export default DialogInfoModal

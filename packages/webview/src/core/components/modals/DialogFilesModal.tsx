@@ -36,7 +36,7 @@ const iconTypes: Record<string, React.FC<Omit<IconBaseProps, 'color'>>> = {
   ts: IconTS,
 }
 
-export const DialogFilesModal: FC<DialogFilesModalProps> = ({
+const DialogFilesModal: FC<DialogFilesModalProps> = ({
   files,
   groupKind,
   onClose = () => null,
@@ -91,6 +91,8 @@ export const DialogFilesModal: FC<DialogFilesModalProps> = ({
     </DialogModal>
   )
 }
+
+export default DialogFilesModal
 
 const useDialogFilesModal = ({ files }: { files: FileIdentifier[] }) => {
   const filesComponents = useAppSelector((state) => state.svg.files)

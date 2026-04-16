@@ -1,10 +1,16 @@
-import { AccordionActionsSVG, AccordionMenuItem } from '@/core/components/Accordion'
+import { lazy, Suspense } from 'react'
+
+import { AccordionMenuItem } from '@/core/components/Accordion'
 import CardSvgRenderMemo from '@/core/components/Cards/CardSvgRenderMemo/CardSvgRenderMemo'
 import { useExpandedComponents } from '@/core/hooks/useExpandedComponents'
 import { useAppSelector } from '@/store/hooks'
 
 import { containerIconsClasses } from './ContainerIcons.classes'
 import { BoxContainerIcons } from './ContainerIcons.style'
+
+const AccordionActionsSVG = lazy(
+  () => import('@/core/components/Accordion/AccordionActionsSVG/AccordionActionsSVG')
+)
 
 const ContainerIcons = (): React.ReactNode => {
   const { isExpanded, handleToggle } = useExpandedComponents()
@@ -20,7 +26,9 @@ const ContainerIcons = (): React.ReactNode => {
           expanded={isExpanded.includes(item.groupKind.id)}
           className={containerIconsClasses.accordion}
           actions={
-            <AccordionActionsSVG data={item} hideRefresh key={item.groupKind.id} isGrouped />
+            <Suspense>
+              <AccordionActionsSVG data={item} hideRefresh key={item.groupKind.id} isGrouped />
+            </Suspense>
           }
           slotProps={{
             details: { className: containerIconsClasses.details },

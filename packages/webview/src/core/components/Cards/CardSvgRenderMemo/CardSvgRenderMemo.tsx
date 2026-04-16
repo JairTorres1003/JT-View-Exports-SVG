@@ -1,9 +1,9 @@
-import React, { useRef, useState } from 'react'
+import React, { lazy, Suspense, useRef, useState } from 'react'
 
 import { RenderSvg } from '../../SVG/RenderSvg'
 import CardSvg, { type CardSvgProps } from '../CardSvg/CardSvg'
 
-import { ContextMenu } from './ContextMenu'
+const ContextMenu = lazy(() => import('./ContextMenu'))
 
 const CardSvgRenderMemo = React.memo(({ component, ...props }: Omit<CardSvgProps, 'children'>) => {
   const [contextMenu, setContextMenu] = useState<{ mouseX: number; mouseY: number } | null>(null)
@@ -27,12 +27,15 @@ const CardSvgRenderMemo = React.memo(({ component, ...props }: Omit<CardSvgProps
       <CardSvg component={component} {...props} onContextMenu={handleContextMenu}>
         <RenderSvg {...component} ref={svgRef} showErrors={false} />
       </CardSvg>
-      <ContextMenu
-        svgRef={svgRef}
-        component={component}
-        onClose={handleClose}
-        contextMenu={contextMenu}
-      />
+
+      <Suspense>
+        <ContextMenu
+          svgRef={svgRef}
+          component={component}
+          onClose={handleClose}
+          contextMenu={contextMenu}
+        />
+      </Suspense>
     </>
   )
 })
