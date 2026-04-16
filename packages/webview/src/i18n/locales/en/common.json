@@ -1,0 +1,39 @@
+{
+  "yes": "Yes",
+  "no": "No",
+  "close": "Close",
+  "cancel": "Cancel",
+  "search": "Search",
+  "clear": "Clear",
+  "info": "Info",
+  "loading": "Loading...",
+  "refresh": "Refresh",
+  "errors": "Errors",
+  "open-file": "Open file",
+  "open-many-files": "Open many files",
+  "copy-name": "Copy name",
+  "copy-code-snippet": "Copy code snippet",
+  "clear-collection": "Clear collection",
+  "clear-collection-confirm": "Are you sure you want to clear this collection?",
+  "copied-to-clipboard": "Copied <b>{{value}}</b> to clipboard",
+  "list-of-associated-files-for": "List of associated files for \"{{name}}\"",
+  "pickers": {
+    "color": {
+      "title": "Select a color"
+    }
+  },
+  "modal-info": {
+    "title": "Info",
+    "file-name": "File name:",
+    "language": "Language:",
+    "is-temporary-file": "Is it a temporary file?:",
+    "includes-temporary-files": "Includes temporary files:",
+    "path": "Path:",
+    "show-no-exports": "Show non-exported components:",
+    "components-exported": "Total components exported:",
+    "components-not-exported": "Total non-exported components:",
+    "total-components": "Total components:",
+    "files-count": "Files count:",
+    "group-kind-name": "Group name:"
+  }
+}

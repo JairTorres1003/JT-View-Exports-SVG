@@ -1,0 +1,12 @@
+{
+  "extract-components": "Extract components",
+  "add-more-files": "Add more files",
+  "sort-files-by-name": "Sort files by name",
+  "sort-ascending": "Sort ascending",
+  "sort-descending": "Sort descending",
+  "delete-this-file": "Delete this file",
+  "no-files-selected": "No files selected",
+  "files-loaded_one": "{{count}} file loaded",
+  "files-loaded_other": "{{count}} files loaded",
+  "processing-files": "Processing {{count}} file(s)..."
+}

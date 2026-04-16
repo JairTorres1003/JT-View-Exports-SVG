@@ -1,0 +1,30 @@
+{
+  "title": "DevTools",
+  "playground": {
+    "title": "Playground",
+    "hide-code": "Hide code",
+    "show-code": "Show code",
+    "copy-code": "Copy code",
+    "reset-code": "Reset code",
+    "more-actions": "More actions...",
+    "open-in-editor": "Open in editor",
+    "copy-as-svg": "Copy as SVG",
+    "copy-as-png": "Copy as PNG",
+    "download-as-svg": "Download as SVG",
+    "download-as-png": "Download as PNG"
+  },
+  "info": {
+    "title": "Info component",
+    "component-name": "Component name:",
+    "type-declaration": "Type declaration:",
+    "is-exported": "Is exported?:",
+    "is-animated": "Is animated?:",
+    "is-favorite": "Is favorite?:"
+  },
+  "menu": {
+    "reload-playground": "Reload playground",
+    "reload-editor": "Reload editor",
+    "disable-word-wrap": "Disable word wrap",
+    "enable-word-wrap": "Enable word wrap"
+  }
+}
