@@ -36,7 +36,7 @@ const ContainerIcons = (): React.ReactNode => {
           }}
         >
           {item.components.map((c) => (
-            <CardSvgRenderMemo key={c.name} component={c} />
+            <CardSvgRenderMemo key={`${item.groupKind.id}-${c.name}`} component={c} />
           ))}
         </AccordionMenuItem>
       ))}

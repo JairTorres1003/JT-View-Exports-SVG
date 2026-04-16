@@ -74,9 +74,7 @@ export const useCardSvg = ({ favorite = false }: UseCardSvgProps): CardSvgHook =
    * @param component - The SVG component to toggle favorite status for.
    */
   const handleToggleFavorite = useCallback(
-    (component: SVGComponent) => (e: React.MouseEvent<HTMLButtonElement>) => {
-      e.stopPropagation()
-
+    (component: SVGComponent) => () => {
       const file = files[component.location.id]
 
       if (file && !file.isTemporary) {
