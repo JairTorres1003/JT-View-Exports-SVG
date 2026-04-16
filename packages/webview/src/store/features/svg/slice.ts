@@ -2,6 +2,7 @@ import { createSlice } from '@reduxjs/toolkit'
 
 import type { SVGReducers } from '@/store/types/svg'
 
+import { setRenderRoute } from '../global/slice'
 import initialState from './state'
 
 const reducers: SVGReducers = {
@@ -43,6 +44,11 @@ export const svgSlice = createSlice({
   name: 'svg',
   initialState,
   reducers,
+  extraReducers(builder) {
+    builder.addCase(setRenderRoute, () => {
+      return initialState
+    })
+  },
 })
 
 export const {
