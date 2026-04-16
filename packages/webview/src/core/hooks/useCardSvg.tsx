@@ -16,9 +16,8 @@ import { copyToClipboard } from '@/utils/clipboard'
 import { getUnknownError } from '@/utils/errors'
 
 interface CardSvgHook {
-  handleClick: (icon: SVGIcon) => void
   addRecentComponent: (component: SVGComponent) => void
-  toggleFavorite: (component: SVGComponent) => void
+  toggleFavorite: (component: SVGComponent) => (event: React.MouseEvent<HTMLButtonElement>) => void
   isFavorite: boolean
 }
 
@@ -37,26 +36,19 @@ export const useCardSvg = ({ favorite = false }: UseCardSvgProps): CardSvgHook =
   const [isFavorite, setIsFavorite] = React.useState(favorite)
 
   /**
-   * Handles the click event on an SVG icon.
+   * Copies the name of the SVG icon to the clipboard and shows a success or error message.
    */
-  const handleClick = (icon: SVGIcon): void => {
+  const onCopy = (icon: SVGIcon): void => {
     copyToClipboard(icon.name)
       .then(() => {
         onOpen(
           <Trans t={t} i18nKey='Copied {{value}} to clipboard' values={{ value: icon.name }} />,
-          {
-            severity: 'success',
-          }
+          { severity: 'success' }
         )
       })
       .catch((error) => {
         onOpen(getUnknownError(error), { severity: 'error' })
       })
-
-    vscode.postMessage(SVGReceiveMessage.AddIconToCollection, {
-      ...icon,
-      collection: IconCollectionKind.RECENT,
-    })
   }
 
   /**
@@ -66,6 +58,14 @@ export const useCardSvg = ({ favorite = false }: UseCardSvgProps): CardSvgHook =
    */
   const addRecentComponent = (component: SVGComponent): void => {
     dispatch(setRecentlySelected(component))
+
+    vscode.postMessage(SVGReceiveMessage.AddIconToCollection, {
+      name: component.name,
+      location: component.location,
+      collection: IconCollectionKind.RECENT,
+    })
+
+    onCopy({ name: component.name, location: component.location })
   }
 
   /**
@@ -73,25 +73,30 @@ export const useCardSvg = ({ favorite = false }: UseCardSvgProps): CardSvgHook =
    *
    * @param component - The SVG component to toggle favorite status for.
    */
-  const handleToggleFavorite = useCallback((component: SVGComponent): void => {
-    const file = files[component.location.id]
+  const handleToggleFavorite = useCallback(
+    (component: SVGComponent) => (e: React.MouseEvent<HTMLButtonElement>) => {
+      e.stopPropagation()
 
-    if (file && !file.isTemporary) {
-      setIsFavorite((prev) => !prev)
-    }
+      const file = files[component.location.id]
 
-    const payload: SVGIconCollection = {
-      collection: IconCollectionKind.FAVORITE,
-      name: component.name,
-      location: component.location,
-    }
+      if (file && !file.isTemporary) {
+        setIsFavorite((prev) => !prev)
+      }
 
-    if (component.isFavorite) {
-      vscode.postMessage(SVGReceiveMessage.RemoveIconFromCollection, payload)
-    } else {
-      vscode.postMessage(SVGReceiveMessage.AddIconToCollection, payload)
-    }
-  }, [])
+      const payload: SVGIconCollection = {
+        collection: IconCollectionKind.FAVORITE,
+        name: component.name,
+        location: component.location,
+      }
 
-  return { handleClick, addRecentComponent, toggleFavorite: handleToggleFavorite, isFavorite }
+      if (component.isFavorite) {
+        vscode.postMessage(SVGReceiveMessage.RemoveIconFromCollection, payload)
+      } else {
+        vscode.postMessage(SVGReceiveMessage.AddIconToCollection, payload)
+      }
+    },
+    [files]
+  )
+
+  return { addRecentComponent, toggleFavorite: handleToggleFavorite, isFavorite }
 }

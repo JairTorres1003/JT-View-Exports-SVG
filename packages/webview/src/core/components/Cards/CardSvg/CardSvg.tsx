@@ -22,7 +22,7 @@ const CardSvg: React.FC<Readonly<CardSvgProps>> = ({
   disableFavorite = false,
   ...props
 }) => {
-  const { handleClick, addRecentComponent, toggleFavorite, isFavorite } = useCardSvg({
+  const { addRecentComponent, toggleFavorite, isFavorite } = useCardSvg({
     favorite: component.isFavorite,
   })
 
@@ -33,19 +33,16 @@ const CardSvg: React.FC<Readonly<CardSvgProps>> = ({
       onClick={(...args) => {
         onClick(...args)
         addRecentComponent({ ...component, isFavorite })
-        handleClick({ name: component.name, location: component.location })
       }}
     >
       <Card className={cardSvgClasses.card}>
         {!disableFavorite && (
           <IconButton
             size='small'
+            onClick={toggleFavorite({ ...component, isFavorite })}
             className={cn(cardSvgClasses.favorite, {
               [cardSvgClasses.favoriteActive]: isFavorite,
             })}
-            onClick={() => {
-              toggleFavorite({ ...component, isFavorite })
-            }}
           >
             {isFavorite ? <IconStarFilled size={11} /> : <IconStarOutlined size={11} />}
           </IconButton>
