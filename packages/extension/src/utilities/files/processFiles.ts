@@ -96,7 +96,12 @@ async function processFileItem(
       totalExports,
       totalNoExports,
       totalSVG,
-      groupKind: { id: file.id, label: file.relativePath },
+      groupKind: {
+        id: file.id,
+        label: file.relativePath.includes(file.absolutePath)
+          ? file.absolutePath
+          : file.relativePath,
+      },
       isShowNoExports: options.isShowNoExports,
       files: [file.id],
     }
