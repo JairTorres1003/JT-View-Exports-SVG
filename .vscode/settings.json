@@ -96,8 +96,28 @@
       "url": "./schemas/nls.schema.json"
     },
     {
-      "fileMatch": ["/packages/webview/src/i18n/locales/*.json"],
-      "url": "./schemas/i18n.schema.json"
+      "fileMatch": ["/packages/webview/src/i18n/locales/*/common.json"],
+      "url": "./schemas/webview/common.schema.json"
+    },
+    {
+      "fileMatch": ["/packages/webview/src/i18n/locales/*/errors.json"],
+      "url": "./schemas/webview/errors.schema.json"
+    },
+    {
+      "fileMatch": ["/packages/webview/src/i18n/locales/*/home.json"],
+      "url": "./schemas/webview/home.schema.json"
+    },
+    {
+      "fileMatch": ["/packages/webview/src/i18n/locales/*/upload.json"],
+      "url": "./schemas/webview/upload.schema.json"
+    },
+    {
+      "fileMatch": ["/packages/webview/src/i18n/locales/*/dev-tools.json"],
+      "url": "./schemas/webview/dev-tools.schema.json"
+    },
+    {
+      "fileMatch": ["/packages/webview/src/i18n/locales/*/dev-tools.editor.json"],
+      "url": "./schemas/webview/dev-tools.editor.schema.json"
     },
     {
       "fileMatch": ["/packages/webview/src/assets/vs/userConfiguration/keybindings.json"],
