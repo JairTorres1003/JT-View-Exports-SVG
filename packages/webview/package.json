@@ -85,7 +85,7 @@
     "@vitejs/plugin-react": "^6.0.1",
     "@vitest/coverage-v8": "^4.1.4",
     "@vitest/ui": "^4.1.4",
-    "axios": "^1.13.5",
+    "axios": "^1.15.0",
     "babel-plugin-react-compiler": "^1.0.0",
     "jsdom": "^29.0.0",
     "typescript": "^5.9.3",
