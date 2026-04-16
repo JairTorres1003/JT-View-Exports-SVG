@@ -5,12 +5,12 @@ const Backend = {
   type: 'backend' as const,
   read: (
     language: string,
-    _namespace: string,
+    namespace: string,
     callback: (error: Error | null, translations: unknown) => void
   ) => {
-    import(`./locales/${language?.toLowerCase()}.json`)
+    import(`./locales/${language?.toLowerCase()}/${namespace}.json`)
       .then((translations) => {
-        callback(null, translations)
+        callback(null, translations?.default || translations)
       })
       .catch((error: Error) => {
         callback(error, null)
@@ -26,6 +26,8 @@ i18n
   .use(Backend)
   .use(initReactI18next)
   .init({
+    ns: ['common', 'errors', 'home', 'upload', 'dev-tools', 'dev-tools.editor'],
+    fallbackNS: ['common'],
     lng: window.ViewExportsSVG?.initConfiguration._LANGUAGE || 'en',
     fallbackLng: window.ViewExportsSVG?.initConfiguration._LANGUAGE || 'en',
     interpolation: {

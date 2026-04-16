@@ -7,7 +7,7 @@ import { type UseDropOptions, useDrop } from '@/core/hooks/useDrop'
 interface BackdropZoneProp extends UseDropOptions {}
 
 const BackdropZone: FC<BackdropZoneProp> = (props) => {
-  const { t } = useTranslation(undefined, { keyPrefix: 'DropZone' })
+  const { t } = useTranslation('home', { keyPrefix: 'drop-zone' })
 
   const { over } = useDrop(props)
 
@@ -18,7 +18,7 @@ const BackdropZone: FC<BackdropZoneProp> = (props) => {
         color='var(--JT-SVG-palette-text-primary, currentColor))'
         sx={{ fontSize: 24, fontWeight: 'bold', textAlign: 'center' }}
       >
-        {t('Let it go!')}
+        {t('let-it-go')}
       </Typography>
     </Backdrop>
   )

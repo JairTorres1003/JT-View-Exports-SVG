@@ -18,9 +18,9 @@ export const InfoAction: FC<InfoActionProps> = ({ data, isGrouped }) => {
 
   return (
     <>
-      <Tooltip title={t('labels.Info')} placement='top'>
+      <Tooltip title={t('info')} placement='top'>
         <IconButton
-          aria-label={t('labels.Info')}
+          aria-label={t('info')}
           onClick={() => {
             setOpen(true)
           }}

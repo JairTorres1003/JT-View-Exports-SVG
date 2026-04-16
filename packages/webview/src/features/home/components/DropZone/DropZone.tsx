@@ -13,7 +13,7 @@ import { BoxDropZone } from './DropZone.style'
 const BackdropZone = lazy(() => import('@/core/components/Backdrop/BackdropZone'))
 
 const DropZone = () => {
-  const { t } = useTranslation(undefined, { keyPrefix: 'DropZone' })
+  const { t } = useTranslation('home', { keyPrefix: 'drop-zone' })
 
   const { files, handleOpenDialog, onDrop, onUri } = useLoadFiles()
   const dispatch = useAppDispatch()
@@ -38,10 +38,10 @@ const DropZone = () => {
             onClick={handleOpenDialog}
             className={dropZoneClasses.button}
           >
-            {t('Select files')}
+            {t('select-files')}
           </Button>
           <Typography sx={{ textAlign: 'center' }} className={dropZoneClasses.text}>
-            {t('or drop the files here')}
+            {t('or-drop-files-here')}
           </Typography>
         </Box>
       </Box>

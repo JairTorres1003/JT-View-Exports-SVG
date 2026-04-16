@@ -45,9 +45,9 @@ export const DialogModal: React.FC<DialogModalProps> = ({
   return (
     <Dialog onClose={onClose} {...dialogProps} slotProps={moreSlotProps}>
       {!hideCloseButton && (
-        <Tooltip title={t('labels.Close')} placement='top'>
+        <Tooltip title={t('close')} placement='top'>
           <IconButton
-            aria-label={t('labels.Close')}
+            aria-label={t('close')}
             {...closeButton}
             style={{ position: 'absolute', right: 4, top: 4, ...closeButton?.style }}
             onClick={(e) => {

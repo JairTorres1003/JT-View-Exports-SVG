@@ -12,13 +12,13 @@ interface LoadingPageProps {
 }
 
 const LoadingPage: React.FC<LoadingPageProps> = ({ className, children }) => {
-  const { t } = useTranslation(undefined, { keyPrefix: 'labels' })
+  const { t } = useTranslation()
 
   return (
     <BoxLoadingPage className={className}>
       <Box className={loadingPageClasses.codePad}>
         <Typography className={loadingPageClasses.codePadContent}>
-          {isEmpty(children) ? t('Loading') : children}
+          {isEmpty(children) ? t('loading') : children}
         </Typography>
       </Box>
     </BoxLoadingPage>

@@ -26,9 +26,9 @@ export const RefreshAction: FC<RefreshActionProps> = ({ files, groupKind }) => {
   if (files.length === 0) return null
 
   return (
-    <Tooltip title={t('labels.Refresh')} placement='top'>
+    <Tooltip title={t('refresh')} placement='top'>
       <IconButton
-        aria-label={t('labels.Refresh')}
+        aria-label={t('refresh')}
         disabled={inRefresh.includes(groupKind.id)}
         onClick={() => {
           vscode.postMessage(SVGReceiveMessage.ReloadComponent, files)

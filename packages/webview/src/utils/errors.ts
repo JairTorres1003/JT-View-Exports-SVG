@@ -8,7 +8,7 @@ import isEmpty from './is-empty'
  * @returns The error message.
  */
 export const getUnknownError = (error: unknown): string => {
-  if (isEmpty(error)) return i18next.t('errors.UnknownError')
+  if (isEmpty(error)) return i18next.t('unknown', { ns: 'errors' })
 
   if (typeof error === 'string') {
     return error
@@ -32,5 +32,5 @@ export const getUnknownError = (error: unknown): string => {
     return getUnknownError(auxError?.message ?? auxError.data ?? auxError?.statusText)
   }
 
-  return i18next.t('errors.UnknownError')
+  return i18next.t('unknown', { ns: 'errors' })
 }

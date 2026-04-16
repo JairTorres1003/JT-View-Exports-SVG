@@ -27,30 +27,36 @@ const commonSlotProps: ListItemTextProps['slotProps'] = {
 const InfoComponent = () => {
   const recentlySelected = useAppSelector((state) => state.playground.recentlySelected)
 
-  const { t } = useTranslation()
+  const { t } = useTranslation(['dev-tools', 'common'])
 
   if (!recentlySelected) return null
 
   const infoList: Array<{ primary: string; secondary: string }> = [
     {
-      primary: t('DevTools.info.componentName'),
+      primary: t('info.component-name'),
       secondary: recentlySelected.name,
     },
     {
-      primary: t('DevTools.info.typeDeclaration'),
+      primary: t('info.type-declaration'),
       secondary: recentlySelected.declaration,
     },
     {
-      primary: t('DevTools.info.isExported'),
-      secondary: recentlySelected.isExported ? t('labels.Yes') : t('labels.No'),
+      primary: t('info.is-exported'),
+      secondary: recentlySelected.isExported
+        ? t('yes', { ns: 'common' })
+        : t('no', { ns: 'common' }),
     },
     {
-      primary: t('DevTools.info.isAnimated'),
-      secondary: recentlySelected.isAnimated ? t('labels.Yes') : t('labels.No'),
+      primary: t('info.is-animated'),
+      secondary: recentlySelected.isAnimated
+        ? t('yes', { ns: 'common' })
+        : t('no', { ns: 'common' }),
     },
     {
-      primary: t('DevTools.info.isFavorite'),
-      secondary: recentlySelected?.isFavorite ? t('labels.Yes') : t('labels.No'),
+      primary: t('info.is-favorite'),
+      secondary: recentlySelected?.isFavorite
+        ? t('yes', { ns: 'common' })
+        : t('no', { ns: 'common' }),
     },
   ]
 
@@ -85,12 +91,12 @@ const InfoComponent = () => {
             }}
           />
 
-          <Typography sx={{ fontWeight: 600 }}>{t('labels.Errors')}</Typography>
+          <Typography sx={{ fontWeight: 600 }}>{t('errors', { ns: 'common' })}</Typography>
 
           <Alert
             severity='error'
             action={
-              <Tooltip title={t('DevTools.playground.OpenInEditor')} placement='top'>
+              <Tooltip title={t('playground.open-in-editor')} placement='top'>
                 <IconButton
                   onClick={() => {
                     openFileInPosition(recentlySelected.location)

@@ -29,7 +29,7 @@ export const useCardSvg = ({ favorite = false }: UseCardSvgProps): CardSvgHook =
   const { onOpen } = useAlert()
 
   const files = useAppSelector((state) => state.svg.files)
-  const { t } = useTranslation(undefined, { keyPrefix: 'labels' })
+  const { t } = useTranslation()
 
   const dispatch = useAppDispatch()
 
@@ -41,10 +41,9 @@ export const useCardSvg = ({ favorite = false }: UseCardSvgProps): CardSvgHook =
   const onCopy = (icon: SVGIcon): void => {
     copyToClipboard(icon.name)
       .then(() => {
-        onOpen(
-          <Trans t={t} i18nKey='Copied {{value}} to clipboard' values={{ value: icon.name }} />,
-          { severity: 'success' }
-        )
+        onOpen(<Trans t={t} i18nKey='copied-to-clipboard' values={{ value: icon.name }} />, {
+          severity: 'success',
+        })
       })
       .catch((error) => {
         onOpen(getUnknownError(error), { severity: 'error' })

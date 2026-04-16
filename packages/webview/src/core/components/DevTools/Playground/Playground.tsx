@@ -20,7 +20,7 @@ interface PlaygroundProps {
 }
 
 const Playground: React.FC<PlaygroundProps> = ({ actionsId = 'playground-actions' }) => {
-  const { t } = useTranslation(undefined, { keyPrefix: 'DevTools' })
+  const { t } = useTranslation('dev-tools')
 
   const {
     backgroundColor,
@@ -54,21 +54,21 @@ const Playground: React.FC<PlaygroundProps> = ({ actionsId = 'playground-actions
             />
           </Grid>
           <Grid size='auto'>
-            <Tooltip title={expandedCode ? t('playground.HideCode') : t('playground.ShowCode')}>
+            <Tooltip title={expandedCode ? t('playground.hide-code') : t('playground.show-code')}>
               <IconButton onClick={handleExpand}>
                 <IconCodeTag size={16} />
               </IconButton>
             </Tooltip>
           </Grid>
           <Grid size='auto'>
-            <Tooltip title={t('playground.CopyCode')}>
+            <Tooltip title={t('playground.copy-code')}>
               <IconButton onClick={handleCopyCode}>
                 <IconCopy size={16} />
               </IconButton>
             </Tooltip>
           </Grid>
           <Grid size='auto'>
-            <Tooltip title={t('playground.ResetCode')}>
+            <Tooltip title={t('playground.reset-code')}>
               <IconButton onClick={handleResetCode}>
                 <IconRefresh size={16} sx={{ transform: 'rotate(90deg)' }} />
               </IconButton>

@@ -13,7 +13,7 @@ interface MenuToolsProps {
 }
 
 const MenuTools: React.FC<MenuToolsProps> = ({ containerId, editorRef, resetPlaygroundColor }) => {
-  const { t } = useTranslation(undefined, { keyPrefix: 'DevTools' })
+  const { t } = useTranslation('dev-tools')
 
   const {
     anchorEl,
@@ -30,7 +30,7 @@ const MenuTools: React.FC<MenuToolsProps> = ({ containerId, editorRef, resetPlay
   return (
     <>
       <Portal container={() => document.getElementById(containerId)}>
-        <Tooltip title={t('playground.MoreActions')} placement='bottom-end'>
+        <Tooltip title={t('playground.more-actions')} placement='bottom-end'>
           <IconButton
             sx={{ marginRight: '4px' }}
             id='playground-settings-button'
@@ -55,13 +55,13 @@ const MenuTools: React.FC<MenuToolsProps> = ({ containerId, editorRef, resetPlay
           list: { 'aria-labelledby': 'playground-settings-button' },
         }}
       >
-        <MenuItem onClick={onReloadPlayground}>{t('menu.ReloadPlayground')}</MenuItem>
+        <MenuItem onClick={onReloadPlayground}>{t('menu.reload-playground')}</MenuItem>
         <Show>
           <Show.When condition={hasEditor}>
             <MenuItem onClick={toggleWordWrap}>
-              {isWordWrap ? t('menu.DisableWordWrap') : t('menu.EnableWordWrap')}
+              {isWordWrap ? t('menu.disable-word-wrap') : t('menu.enable-word-wrap')}
             </MenuItem>
-            <MenuItem onClick={onReloadEditor}>{t('menu.ReloadEditor')}</MenuItem>
+            <MenuItem onClick={onReloadEditor}>{t('menu.reload-editor')}</MenuItem>
           </Show.When>
         </Show>
       </Menu>

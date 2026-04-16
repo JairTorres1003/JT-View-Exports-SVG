@@ -14,14 +14,14 @@ export const useUpload = () => {
   const { files, updateFiles, removeFile, ...restLoadFiles } = useLoadFiles()
 
   const dispatch = useAppDispatch()
-  const { t } = useTranslation()
+  const { t } = useTranslation('upload')
 
   /**
    * Handles the extraction of SVG components from the selected files.
    * Sends a message to VSCode to trigger the extraction process, passing the file paths.
    */
   const onExtractComponents = () => {
-    const messageEncoded = encodeURIComponent(t('Processing {0} file(s)...', { '0': files.length }))
+    const messageEncoded = encodeURIComponent(t('processing-files', { count: files.length }))
 
     dispatch(
       setRenderRoute({ path: `${pathnames.main}?load-message=${messageEncoded}`, options: {} })

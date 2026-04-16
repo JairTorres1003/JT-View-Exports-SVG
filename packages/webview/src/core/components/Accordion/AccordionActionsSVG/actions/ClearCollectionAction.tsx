@@ -22,8 +22,8 @@ const ClearCollectionAction: FC<ClearCollectionActionProps> = ({ collectionKind 
 
   return (
     <>
-      <Tooltip title={t('labels.ClearCollection')} placement='top'>
-        <IconButton aria-label={t('labels.ClearCollection')} onClick={() => setOpen(true)}>
+      <Tooltip title={t('clear-collection')} placement='top'>
+        <IconButton aria-label={t('clear-collection')} onClick={() => setOpen(true)}>
           <IconClear size={16} />
         </IconButton>
       </Tooltip>
@@ -31,20 +31,18 @@ const ClearCollectionAction: FC<ClearCollectionActionProps> = ({ collectionKind 
       <DialogModal
         open={open}
         onClose={() => setOpen(false)}
-        title={t('labels.ClearCollection')}
+        title={t('clear-collection')}
         slotProps={{
           paper: { sx: { maxWidth: 360 } },
           dialogContent: { sx: { p: '8px 16px 16px' } },
         }}
       >
-        <Typography sx={{ py: 1, textAlign: 'center' }}>
-          {t('labels.ClearCollectionConfirm')}
-        </Typography>
+        <Typography sx={{ py: 1, textAlign: 'center' }}>{t('clear-collection-confirm')}</Typography>
         <Button fullWidth variant='outlined' onClick={() => setOpen(false)} sx={{ mt: 1 }}>
-          {t('labels.Cancel')}
+          {t('cancel')}
         </Button>
         <Button fullWidth variant='contained' color='error' onClick={handleConfirm} sx={{ mt: 1 }}>
-          {t('labels.Yes')}
+          {t('yes')}
         </Button>
       </DialogModal>
     </>

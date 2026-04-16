@@ -11,7 +11,7 @@ interface MenuToolsProps {
 }
 
 const MenuMoreActions: React.FC<MenuToolsProps> = ({ svgRef }) => {
-  const { t } = useTranslation(undefined, { keyPrefix: 'DevTools' })
+  const { t } = useTranslation('dev-tools')
 
   const { anchorEl, handleClick, handleClose, open } = useMenu()
   const actions = useSVGActions({ svgRef })
@@ -22,7 +22,7 @@ const MenuMoreActions: React.FC<MenuToolsProps> = ({ svgRef }) => {
 
   return (
     <>
-      <Tooltip title={t('playground.MoreActions')} placement='bottom-end'>
+      <Tooltip title={t('playground.more-actions')} placement='bottom-end'>
         <IconButton
           id='playground-menu-actions-button'
           aria-controls={open ? 'playground-menu-actions-menu' : undefined}

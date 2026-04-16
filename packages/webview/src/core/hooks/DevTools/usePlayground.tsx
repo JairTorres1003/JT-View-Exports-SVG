@@ -42,7 +42,7 @@ const getInitialPlaygroundColor = () => {
 
   const ctx = canvas.getContext('2d')
   if (!ctx) {
-    throw new Error(i18next.t('errors.ErrorApplyingInitialColor'))
+    throw new Error(i18next.t('editor.failed-to-apply-color', { ns: 'errors' }))
   }
 
   ctx.fillStyle = mainColor || 'transparent'
@@ -69,7 +69,7 @@ export const usePlayground = (): PlaygroundHook => {
   const [initialColor, setInitialColor] = useState(backgroundColor)
   const [valueColor, setValueColor] = useState(backgroundColor)
 
-  const { t } = useTranslation(undefined, { keyPrefix: 'labels' })
+  const { t } = useTranslation()
   const dispatch = useAppDispatch()
   const { onOpen } = useAlert()
 
@@ -120,7 +120,10 @@ export const usePlayground = (): PlaygroundHook => {
       setValueColor(initial)
     } catch (error) {
       setInitialColor('#fff')
-      console.error(`${i18next.t('errors.ErrorApplyingInitialColor')}:`, getUnknownError(error))
+      console.error(
+        `${i18next.t('editor.failed-to-apply-color', { ns: 'errors' })}:`,
+        getUnknownError(error)
+      )
     }
   }, [])
 

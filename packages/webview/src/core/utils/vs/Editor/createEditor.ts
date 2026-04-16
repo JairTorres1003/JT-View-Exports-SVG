@@ -107,7 +107,7 @@ export class Editor {
       await updateUserConfiguration(JSON.stringify(this._userConfiguration))
     } catch (error) {
       console.error(
-        `${i18next.t('errors.FailedToUpdateUserConfiguration')}: ${getUnknownError(error)}`
+        `${i18next.t('editor.failed-to-update-configuration', { ns: 'errors' })}: ${getUnknownError(error)}`
       )
     }
 
@@ -115,7 +115,7 @@ export class Editor {
       await updateUserKeybindings(JSON.stringify(keybindings))
     } catch (error) {
       console.error(
-        `${i18next.t('errors.FailedToUpdateUserKeybindings')}: ${getUnknownError(error)}`
+        `${i18next.t('editor.failed-to-update-keybindings', { ns: 'errors' })}: ${getUnknownError(error)}`
       )
     }
   }
@@ -125,7 +125,7 @@ export class Editor {
    */
   private _create(): IStandaloneCodeEditor {
     if (!this._reference) {
-      throw new Error(i18next.t('errors.EditorReferenceIsNotAvailable'))
+      throw new Error(i18next.t('editor.reference-not-available', { ns: 'errors' }))
     }
 
     this._reference?.editorLoader?.().start(800, () => {
@@ -185,7 +185,7 @@ export class Editor {
     this._configurations.extensionTheme = config.extensionTheme
 
     if (!this._editorInstance) {
-      throw new Error(i18next.t('errors.EditorReferenceIsNotAvailable'))
+      throw new Error(i18next.t('editor.reference-not-available', { ns: 'errors' }))
     }
 
     this._reference?.editorLoader?.().start(800, () => {

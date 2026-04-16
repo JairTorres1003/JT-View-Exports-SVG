@@ -78,7 +78,7 @@ class VSCodeAPIWrapper {
     try {
       handler(data)
     } catch (error) {
-      console.error(i18next.t('errors.[VSCodeAPIWrapper]ErrorOccurredWhileHandlingMessage:'), error)
+      console.error(i18next.t('vscode-api.handling-error', { ns: 'errors' }), error)
     }
   }
 
@@ -117,7 +117,7 @@ class VSCodeAPIWrapper {
    */
   public postMessage: ReceiveMessageEmitter = (type, data = undefined) => {
     if (!this.vsCodeApi) {
-      console.warn(i18next.t('errors.VSCodeApiIsNotAvailable'), { type })
+      console.warn(i18next.t('vscode-api.not-available', { ns: 'errors' }), { type })
       return
     }
 

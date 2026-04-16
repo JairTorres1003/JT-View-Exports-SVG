@@ -41,11 +41,11 @@ const getChildKey = (child: SVGComponentProps): string => {
  * @returns The rendered SVG component.
  */
 const DynamicTagComponent = ({ component, className, rootId }: RenderSvgProps) => {
-  const { t } = useTranslation(undefined, { keyPrefix: 'errors' })
+  const { t } = useTranslation('errors')
   const prefersReducedMotion = useReducedMotion()
 
   if (isEmpty(component)) {
-    throw new Error(t('TheComponentIsEmpty'))
+    throw new Error(t('component-empty'))
   }
 
   const c = cn(className, component.props.className)

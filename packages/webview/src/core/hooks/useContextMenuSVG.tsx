@@ -10,19 +10,14 @@ import { type UseSVGActionsProps, type UseSVGActionsReturn, useSVGActions } from
 export const useContextMenuSVG = (options: UseSVGActionsProps): UseSVGActionsReturn => {
   const { onOpen } = useAlert()
   const actions = useSVGActions(options)
-  const { t } = useTranslation(undefined, { keyPrefix: 'labels' })
+  const { t } = useTranslation()
 
   const onCopy = (component: SVGComponent, value: string) => {
     copyToClipboard(value)
       .then(() => {
-        onOpen(
-          <Trans
-            t={t}
-            i18nKey='Copied {{value}} to clipboard'
-            values={{ value: component.name }}
-          />,
-          { severity: 'success' }
-        )
+        onOpen(<Trans t={t} i18nKey='copied-to-clipboard' values={{ value: component.name }} />, {
+          severity: 'success',
+        })
       })
       .catch((error) => {
         onOpen(getUnknownError(error), { severity: 'error' })
@@ -38,8 +33,8 @@ export const useContextMenuSVG = (options: UseSVGActionsProps): UseSVGActionsRet
   }
 
   return [
-    { id: 'copy-name', label: t('CopyName'), onClick: onCopyName },
-    { id: 'copy-snippet', label: t('CopyCodeSnippet'), onClick: onCopyFragment },
+    { id: 'copy-name', label: t('copy-name'), onClick: onCopyName },
+    { id: 'copy-snippet', label: t('copy-code-snippet'), onClick: onCopyFragment },
     { id: 'divider-copy-actions', isDivider: true },
     ...actions,
   ]

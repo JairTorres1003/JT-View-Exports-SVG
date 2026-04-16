@@ -13,7 +13,7 @@ import './services/fetch/main'
 const container = document.getElementById('root')
 
 if (!container) {
-  throw new Error(i18next.t('errors.FailedToFindTheRootElement'))
+  throw new Error(i18next.t('root-element-not-found', { ns: 'errors' }))
 }
 
 document.addEventListener('contextmenu', (e) => {

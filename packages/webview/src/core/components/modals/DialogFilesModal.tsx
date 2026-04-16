@@ -51,7 +51,7 @@ const DialogFilesModal: FC<DialogFilesModalProps> = ({
     <DialogModal
       onClose={onClose}
       {...dialogProps}
-      title={t('labels.ListOfAssociatedFilesFor', { name: groupKind.label?.split('/').pop() })}
+      title={t('list-of-associated-files-for', { name: groupKind.label?.split('/').pop() })}
     >
       <ClickAwayListener onClickAway={onCloseAway}>
         <List onKeyDown={onKeyDown} tabIndex={0}>

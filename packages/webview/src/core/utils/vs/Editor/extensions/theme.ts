@@ -34,7 +34,7 @@ async function activate(_themeConfig?: ExtensionManage) {
     const packageJSON = await fetch(`${baseUrl}/vs/extensions/theme/package.json`)
 
     if (!packageJSON.ok) {
-      throw new Error(i18next.t('errors.FailedToFetchExtensionTheme'))
+      throw new Error(i18next.t('editor.failed-to-fetch-theme', { ns: 'errors' }))
     }
 
     const {
@@ -54,7 +54,7 @@ async function activate(_themeConfig?: ExtensionManage) {
     })
   } catch (error) {
     console.error(
-      `${i18next.t('errors.FailedToActivateExtensionTheme')}: ${getUnknownError(error)}`
+      `${i18next.t('editor.failed-to-activate-theme', { ns: 'errors' })}: ${getUnknownError(error)}`
     )
   }
 }

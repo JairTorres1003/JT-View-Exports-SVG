@@ -15,8 +15,9 @@ const completionComponentsManager = (
   components: ViewExportSVG[],
   files: Record<FileIdentifier, SVGFile>
 ): monaco.languages.CompletionItemProvider => {
-  const { t } = i18next
-  const prefixT = 'DevTools.editor.suggestions.components'
+  const t = (key: string, options?: Record<string, unknown>) =>
+    i18next.t(key, { ns: 'dev-tools.editor', ...options })
+  const prefixT = 'suggestions.components'
 
   return {
     triggerCharacters: ['<'],
@@ -80,7 +81,7 @@ const completionComponentsManager = (
             },
             documentation: {
               value: t(
-                `${prefixT}.${c.withRestProps ? 'documentation_withRestProps' : 'documentation'}`,
+                `${prefixT}.${c.withRestProps ? 'documentation-with-rest-props' : 'documentation'}`,
                 { ...translationKeys, joinArrays: '\n' }
               ),
               isTrusted: true,

@@ -13,7 +13,7 @@ import { useAlert } from './useAlert'
 const ALLOWED_EXTENSIONS = ['.js', '.ts', '.jsx', '.tsx']
 
 export const useLoadFiles = () => {
-  const { t } = useTranslation()
+  const { t } = useTranslation('errors')
   const { onOpen } = useAlert()
 
   const [files, setFiles] = useState<IFile[]>([])
@@ -46,7 +46,7 @@ export const useLoadFiles = () => {
       onOpen(
         <Stack spacing={1}>
           <Typography variant='body2' color='error'>
-            {t('errors.TheFollowingFilesAreNotSupported')}
+            {t('unsupported-files')}
           </Typography>
           <List dense>
             {invalidFiles.map((fileName) => (
@@ -141,7 +141,7 @@ export const useLoadFiles = () => {
           }
 
           reader.onerror = (errorEvent) => {
-            console.error(t('errors.ErrorCreatingTemporaryFile', { name: file.name }), errorEvent)
+            console.error(t('failed-to-create-temporary-file', { name: file.name }), errorEvent)
             reject(new Error(`Error reading file: ${file.name}`))
           }
 

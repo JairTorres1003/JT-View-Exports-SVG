@@ -157,7 +157,9 @@ export const useEditor = ({
         isMounted.current = true
       })
       .catch((error) => {
-        console.error(`${i18next.t('errors.FailedToInitializeEditor')}: ${getUnknownError(error)}`)
+        console.error(
+          `${i18next.t('editor.failed-to-initialize', { ns: 'errors' })}: ${getUnknownError(error)}`
+        )
       })
   }, [editorRef, extensionTheme, isMounted])
 

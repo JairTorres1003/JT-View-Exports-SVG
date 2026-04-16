@@ -22,7 +22,7 @@ export type UseSVGActionsReturn = Array<
 >
 
 export const useSVGActions = ({ svgRef }: UseSVGActionsProps): UseSVGActionsReturn => {
-  const { t } = useTranslation(undefined, { keyPrefix: 'DevTools.playground' })
+  const { t } = useTranslation('dev-tools', { keyPrefix: 'playground' })
 
   /**
    * Downloads the current SVG as a `.svg` file.
@@ -113,12 +113,12 @@ export const useSVGActions = ({ svgRef }: UseSVGActionsProps): UseSVGActionsRetu
   }
 
   return [
-    { id: 'open-in-editor', label: t('OpenInEditor'), onClick: openInEditor },
+    { id: 'open-in-editor', label: t('open-in-editor'), onClick: openInEditor },
     { id: 'divider-open-copy', isDivider: true },
-    { id: 'copy-as-svg', label: t('CopyAsSVG'), onClick: copyAsSVG },
-    { id: 'copy-as-png', label: t('CopyAsPNG'), onClick: copyAsPNG },
+    { id: 'copy-as-svg', label: t('copy-as-svg'), onClick: copyAsSVG },
+    { id: 'copy-as-png', label: t('copy-as-png'), onClick: copyAsPNG },
     { id: 'divider-copy-download', isDivider: true },
-    { id: 'download-as-svg', label: t('DownloadAsSVG'), onClick: downloadAsSVG },
-    { id: 'download-as-png', label: t('DownloadAsPNG'), onClick: downloadAsPNG },
+    { id: 'download-as-svg', label: t('download-as-svg'), onClick: downloadAsSVG },
+    { id: 'download-as-png', label: t('download-as-png'), onClick: downloadAsPNG },
   ]
 }

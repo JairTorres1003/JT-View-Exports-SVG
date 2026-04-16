@@ -17,7 +17,7 @@ const DevTools: React.FC<{ id: string; onClose?: VoidFunction }> = ({
   id,
   onClose = () => null,
 }): React.ReactNode => {
-  const { t } = useTranslation()
+  const { t } = useTranslation(['dev-tools', 'common'])
   const { expanded, handleExpanded, ref, checkPanelExpanded } = useDevTools()
 
   const playgroundPanel = checkPanelExpanded('playground-panel')
@@ -26,13 +26,13 @@ const DevTools: React.FC<{ id: string; onClose?: VoidFunction }> = ({
   return (
     <BoxDevTools id={id}>
       <Box component='header' className={devToolsClasses.header}>
-        <Tooltip title={t('DevTools.title')}>
+        <Tooltip title={t('title')}>
           <Typography variant='h2' className={devToolsClasses.title}>
-            {t('DevTools.title')}
+            {t('title')}
           </Typography>
         </Tooltip>
         <Box className={devToolsClasses.buttonClose}>
-          <Tooltip title={t('labels.Close')}>
+          <Tooltip title={t('close', { ns: 'common' })}>
             <IconButton onClick={() => onClose()}>
               <IconClose size={16} />
             </IconButton>
@@ -52,7 +52,7 @@ const DevTools: React.FC<{ id: string; onClose?: VoidFunction }> = ({
               defaultExpanded
               enableEmptyActions
               hideActionsWhenCollapsed
-              label={t('DevTools.playground.title')}
+              label={t('playground.title')}
               className={devToolsClasses.accordion}
               expanded={playgroundPanel}
               onChange={handleExpanded('playground-panel')}
@@ -78,7 +78,7 @@ const DevTools: React.FC<{ id: string; onClose?: VoidFunction }> = ({
             <AccordionMenuItem
               enableEmptyActions
               hideActionsWhenCollapsed
-              label={t('DevTools.info.title')}
+              label={t('info.title')}
               expanded={infoPanel}
               onChange={handleExpanded('info-panel')}
               className={devToolsClasses.accordion}

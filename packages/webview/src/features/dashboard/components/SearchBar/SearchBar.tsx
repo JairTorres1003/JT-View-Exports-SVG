@@ -11,7 +11,7 @@ import { BoxSearchBar, LabelSearchBar } from './SearchBar.style'
 const SearchBar = (): React.ReactNode => {
   const { handleClear, handleSearch, search } = useSearchBar()
 
-  const { t } = useTranslation(undefined, { keyPrefix: 'labels' })
+  const { t } = useTranslation()
 
   return (
     <BoxSearchBar>
@@ -22,11 +22,11 @@ const SearchBar = (): React.ReactNode => {
         value={search}
         onChange={handleSearch}
         className={searchBarClasses.input}
-        label={<LabelSearchBar label={t('Search')} />}
+        label={<LabelSearchBar label={t('search')} />}
         slotProps={{
           input: {
             endAdornment: (
-              <Tooltip title={t('Clear')}>
+              <Tooltip title={t('clear')}>
                 <IconButton onClick={handleClear} className={searchBarClasses.clearButton}>
                   <IconClose size={16} />
                 </IconButton>

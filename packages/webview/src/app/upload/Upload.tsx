@@ -21,7 +21,7 @@ const UploadPage: React.FC = () => {
     onDrop,
     onUri,
   } = useUpload()
-  const { t } = useTranslation()
+  const { t } = useTranslation('upload')
 
   return (
     <Stack direction='row' sx={{ height: '100%', overflow: 'hidden', gap: 2 }}>
@@ -35,18 +35,16 @@ const UploadPage: React.FC = () => {
           variant={files.length === 0 ? 'outlined' : 'contained'}
           sx={{ maxWidth: 224, mx: 'auto', mb: 1 }}
         >
-          {t('labels.ExtractComponents')}
+          {t('extract-components')}
         </Button>
       </Stack>
 
       <Stack sx={{ gap: 2, p: '24px 16px 24px 0' }}>
-        <Tooltip title={t('labels.AddMoreFiles')} placement='left'>
+        <Tooltip title={t('add-more-files')} placement='left'>
           <Badge badgeContent={files.length} overlap='circular'>
             <IconButton
               onClick={handleOpenDialog}
-              aria-label={t(`labels.FilesLoaded${files.length > 1 ? '2' : ''}`, {
-                count: files.length,
-              })}
+              aria-label={t('files-loaded', { count: files.length })}
             >
               <IconPlus size={26} />
             </IconButton>
@@ -54,8 +52,11 @@ const UploadPage: React.FC = () => {
         </Tooltip>
 
         {files.length > 1 && (
-          <Tooltip title={t('labels.SortFilesByName')} placement='left'>
-            <IconButton onClick={onSortFiles(sorted === 'asc' ? 'desc' : 'asc')}>
+          <Tooltip title={t('sort-files-by-name')} placement='left'>
+            <IconButton
+              onClick={onSortFiles(sorted === 'asc' ? 'desc' : 'asc')}
+              aria-label={t(sorted === 'asc' ? 'sort-ascending' : 'sort-descending')}
+            >
               {sorted === 'asc' ? <IconSortAsc size={26} /> : <IconSortDesc size={26} />}
             </IconButton>
           </Tooltip>

@@ -27,19 +27,19 @@ const fileIconTypes: Record<string, React.FC<IconBaseProps>> = {
 }
 
 export const FileList: React.FC<FileListProps> = ({ files, onRemoveFile = () => null }) => {
-  const { t } = useTranslation()
+  const { t } = useTranslation(['upload', 'home'])
 
   if (files.length === 0) {
     return (
       <BoxFileList>
         <Stack sx={{ height: '100%', gap: 2 }}>
           <Typography variant='h1' sx={{ textAlign: 'center', fontSize: 14, maxWidth: 440 }}>
-            {t('DropZone.title')}
+            {t('drop-zone.title', { ns: 'home' })}
           </Typography>
           <Stack sx={{ alignItems: 'center', justifyContent: 'center', gap: 2, my: 'auto' }}>
             <IconEmptyBox size={200} sx={{ opacity: 0.5 }} />
             <Typography variant='body1' color='text.secondary' sx={{ textAlign: 'center' }}>
-              {t('labels.NoFilesSelected')}
+              {t('no-files-selected', { ns: 'upload' })}
             </Typography>
           </Stack>
         </Stack>
@@ -54,7 +54,7 @@ export const FileList: React.FC<FileListProps> = ({ files, onRemoveFile = () => 
 
         return (
           <Card key={file.name} className={fileListClasses.card}>
-            <Tooltip title={t('labels.DeleteThisFile')} placement='top'>
+            <Tooltip title={t('delete-this-file', { ns: 'upload' })} placement='top'>
               <IconButton
                 className={fileListClasses.removeButton}
                 size='small'

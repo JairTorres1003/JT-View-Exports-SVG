@@ -9,8 +9,9 @@ const tagParsingCache = new Map<string, { isInside: boolean; tagContent: string 
 const completionPropertiesManager = (
   component: SVGComponent
 ): monaco.languages.CompletionItemProvider => {
-  const { t } = i18next
-  const prefixT = 'DevTools.editor.suggestions.properties'
+  const t = (key: string, options?: Record<string, unknown>) =>
+    i18next.t(key, { ns: 'dev-tools.editor', ...options })
+  const prefixT = 'suggestions.properties'
 
   clearCompletionCache()
 

@@ -24,7 +24,7 @@ export const OpenFileButton: FC<OpenFileButtonProps> = ({
 }) => {
   const { t } = useTranslation()
 
-  const title = t(`labels.${multiple ? 'OpenManyFiles' : 'OpenFile'}`)
+  const title = t(multiple ? 'open-many-files' : 'open-file')
 
   return (
     <Tooltip placement='top' title={title} {...slotProps?.tooltip}>
