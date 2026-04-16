@@ -1,0 +1,54 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "DevTools editor translations for View Exports SVG webview",
+  "type": "object",
+  "properties": {
+    "suggestions": {
+      "type": "object",
+      "properties": {
+        "components": {
+          "type": "object",
+          "properties": {
+            "details": {
+              "type": "object",
+              "properties": {
+                "static": { "type": "string", "default": "SVG Component" },
+                "animated": { "type": "string", "default": "Animated SVG Component" },
+                "temporary-static": { "type": "string", "default": "(Temporary) SVG Component" },
+                "temporary-animated": {
+                  "type": "string",
+                  "default": "(Temporary) Animated SVG Component"
+                }
+              },
+              "required": ["static", "animated", "temporary-static", "temporary-animated"]
+            },
+            "documentation": {
+              "type": "array",
+              "items": { "type": "string" }
+            },
+            "documentation-with-rest-props": {
+              "type": "array",
+              "items": { "type": "string" }
+            }
+          },
+          "required": ["details", "documentation", "documentation-with-rest-props"]
+        },
+        "properties": {
+          "type": "object",
+          "properties": {
+            "details": {
+              "type": "object",
+              "properties": {
+                "static": { "type": "string", "default": "(property) {{name}}: {{type}}" }
+              },
+              "required": ["static"]
+            }
+          },
+          "required": ["details"]
+        }
+      },
+      "required": ["components", "properties"]
+    }
+  },
+  "required": ["suggestions"]
+}
