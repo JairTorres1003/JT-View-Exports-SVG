@@ -1,3 +1,4 @@
+import type { IconCollectionKind } from '@jt-view-exports-svg/core'
 import { lazy, Suspense } from 'react'
 
 import { AccordionMenuItem } from '@/core/components/Accordion'
@@ -10,6 +11,10 @@ import { BoxContainerIcons } from './ContainerIcons.style'
 
 const AccordionActionsSVG = lazy(
   () => import('@/core/components/Accordion/AccordionActionsSVG/AccordionActionsSVG')
+)
+
+const ClearCollectionAction = lazy(
+  () => import('@/core/components/Accordion/AccordionActionsSVG/actions/ClearCollectionAction')
 )
 
 const ContainerIcons = (): React.ReactNode => {
@@ -27,7 +32,9 @@ const ContainerIcons = (): React.ReactNode => {
           className={containerIconsClasses.accordion}
           actions={
             <Suspense>
-              <AccordionActionsSVG data={item} hideRefresh key={item.groupKind.id} isGrouped />
+              <AccordionActionsSVG data={item} hideRefresh key={item.groupKind.id} isGrouped>
+                <ClearCollectionAction collectionKind={item.groupKind.id as IconCollectionKind} />
+              </AccordionActionsSVG>
             </Suspense>
           }
           slotProps={{

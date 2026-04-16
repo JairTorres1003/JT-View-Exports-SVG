@@ -8,7 +8,7 @@ import { useAppDispatch } from '@/store/hooks'
 export const useHome = () => {
   const dispatch = useAppDispatch()
 
-  const handleRecentIcons = (data: ViewExportSVG[]) => {
+  const handleUserComponents = (data: ViewExportSVG[]) => {
     dispatch(setComponents(data))
 
     const ids = data.flatMap((component) => component.files)
@@ -19,7 +19,7 @@ export const useHome = () => {
 
   useEffect(() => {
     vscode.postMessage(SVGReceiveMessage.RequestUserComponents)
-    vscode.onMessage(SVGPostMessage.LoadUserComponents, handleRecentIcons)
+    vscode.onMessage(SVGPostMessage.LoadUserComponents, handleUserComponents)
     vscode.onMessage(SVGPostMessage.LoadFileMetadata, (files) => {
       dispatch(setFiles(files))
     })

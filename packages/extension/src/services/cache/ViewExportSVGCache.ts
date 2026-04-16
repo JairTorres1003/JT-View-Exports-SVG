@@ -75,4 +75,22 @@ export class ViewExportSVGCache extends BaseCache<
     entry[icon.location.id] = { ...dataEntry, components: updatedComponents }
     this.set(workspace, entry)
   }
+
+  /**
+   * Unmarks all icons as favorite in the cache for a given workspace.
+   */
+  async unmarkAllIconsAsFavorite(workspace: vsc.WorkspaceFolder): Promise<void> {
+    const entry = await this.get(workspace)
+    if (!entry) return
+
+    for (const fileId in entry) {
+      const dataEntry = entry[fileId as FileIdentifier]
+      const updatedComponents = dataEntry.components.map((component) =>
+        component.isFavorite ? { ...component, isFavorite: false } : component
+      )
+      entry[fileId as FileIdentifier] = { ...dataEntry, components: updatedComponents }
+    }
+
+    this.set(workspace, entry)
+  }
 }

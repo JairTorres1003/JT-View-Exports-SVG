@@ -12,7 +12,7 @@ export function createRouter(messenger: WebviewMessenger): MessageRouter {
   return new MessageRouter([
     new ChangeViewPathHandler(),
     ...createUIHandlers(messenger),
-    ...createIconsHandlers(),
+    ...createIconsHandlers(messenger),
     ...createDevtoolsHandlers(messenger),
     ...createEditorHandlers(messenger),
     ...createFileHandlers(messenger),

@@ -5,7 +5,7 @@ import {
   type SVGIconCollection,
   SVGReceiveMessage,
 } from '@jt-view-exports-svg/core'
-import React, { useCallback } from 'react'
+import React, { useCallback, useEffect } from 'react'
 import { Trans, useTranslation } from 'react-i18next'
 
 import { useAlert } from '@/core/hooks/useAlert'
@@ -33,7 +33,7 @@ export const useCardSvg = ({ favorite = false }: UseCardSvgProps): CardSvgHook =
 
   const dispatch = useAppDispatch()
 
-  const [isFavorite, setIsFavorite] = React.useState(favorite)
+  const [isFavorite, setIsFavorite] = React.useState(false)
 
   /**
    * Copies the name of the SVG icon to the clipboard and shows a success or error message.
@@ -95,6 +95,10 @@ export const useCardSvg = ({ favorite = false }: UseCardSvgProps): CardSvgHook =
     },
     [files]
   )
+
+  useEffect(() => {
+    setIsFavorite(favorite)
+  }, [favorite])
 
   return { addRecentComponent, toggleFavorite: handleToggleFavorite, isFavorite }
 }

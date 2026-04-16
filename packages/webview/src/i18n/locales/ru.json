@@ -43,7 +43,10 @@
     "NoFilesSelected": "Нет выбранных файлов",
     "Yes": "Да",
     "No": "Нет",
-    "Errors": "Ошибки"
+    "Errors": "Ошибки",
+    "ClearCollection": "Очистить коллекцию",
+    "ClearCollectionConfirm": "Вы уверены, что хотите очистить эту коллекцию?",
+    "Cancel": "Отмена"
   },
   "pickers": {
     "color": {

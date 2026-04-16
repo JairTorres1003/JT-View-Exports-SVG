@@ -43,7 +43,10 @@
     "NoFilesSelected": "未選擇任何文件",
     "Yes": "是",
     "No": "否",
-    "Errors": "錯誤"
+    "Errors": "錯誤",
+    "ClearCollection": "清空集合",
+    "ClearCollectionConfirm": "您確定要清空此集合嗎？",
+    "Cancel": "取消"
   },
   "pickers": {
     "color": {

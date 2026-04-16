@@ -43,7 +43,10 @@
     "NoFilesSelected": "Hiçbir dosya seçilmedi",
     "Yes": "Evet",
     "No": "Hayır",
-    "Errors": "Hatalar"
+    "Errors": "Hatalar",
+    "ClearCollection": "Koleksiyonu temizle",
+    "ClearCollectionConfirm": "Bu koleksiyonu temizlemek istediğinizden emin misiniz?",
+    "Cancel": "İptal"
   },
   "pickers": {
     "color": {

@@ -43,7 +43,10 @@
     "NoFilesSelected": "선택된 파일이 없습니다.",
     "Yes": "예",
     "No": "아니오",
-    "Errors": "오류"
+    "Errors": "오류",
+    "ClearCollection": "컬렉션 지우기",
+    "ClearCollectionConfirm": "이 컬렉션을 지우시겠습니까?",
+    "Cancel": "취소"
   },
   "pickers": {
     "color": {

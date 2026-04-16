@@ -43,7 +43,10 @@
     "NoFilesSelected": "ファイルが選択されていません",
     "Yes": "はい",
     "No": "いいえ",
-    "Errors": "エラー"
+    "Errors": "エラー",
+    "ClearCollection": "コレクションをクリア",
+    "ClearCollectionConfirm": "このコレクションをクリアしてもよろしいですか？",
+    "Cancel": "キャンセル"
   },
   "pickers": {
     "color": {

@@ -43,7 +43,10 @@
     "NoFilesSelected": "Žádné soubory nejsou vybrány",
     "Yes": "Ano",
     "No": "Ne",
-    "Errors": "Chyby"
+    "Errors": "Chyby",
+    "ClearCollection": "Vymazat kolekci",
+    "ClearCollectionConfirm": "Opravdu chcete vymazat tuto kolekci?",
+    "Cancel": "Zrušit"
   },
   "pickers": {
     "color": {

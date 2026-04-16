@@ -43,7 +43,10 @@
     "NoFilesSelected": "Aucun fichier sélectionné",
     "Yes": "Oui",
     "No": "Non",
-    "Errors": "Erreurs"
+    "Errors": "Erreurs",
+    "ClearCollection": "Vider la collection",
+    "ClearCollectionConfirm": "Êtes-vous sûr de vouloir vider cette collection ?",
+    "Cancel": "Annuler"
   },
   "pickers": {
     "color": {
