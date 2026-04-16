@@ -1,4 +1,4 @@
-import { pathnames, type SVGFile, type ViewExportSVG } from '@jt-view-exports-svg/core'
+import { pathnames, type ViewExportSVG } from '@jt-view-exports-svg/core'
 import * as vsc from 'vscode'
 
 import { PanelController } from '@/controllers/views/PanelController'
@@ -32,8 +32,8 @@ export const runScanningWorkspace = async (context: vsc.ExtensionContext): Promi
   const files = await allowedFilesInFolder(currentWorkspace.uri)
 
   if (files.length === 0) {
-    const { files, items } = await getIconsCollection()
-    viewExportStore.set(items, files)
+    const items = await getIconsCollection()
+    viewExportStore.set(items)
     PanelController.navigate(pathnames.home)
 
     vsc.window
@@ -42,8 +42,8 @@ export const runScanningWorkspace = async (context: vsc.ExtensionContext): Promi
     return
   }
 
-  const operation = (result: ViewExportSVG[], files: SVGFile[]): void => {
-    viewExportStore.set(result, files)
+  const operation = (result: ViewExportSVG[]): void => {
+    viewExportStore.set(result)
     PanelController.navigate(pathnames.dashboard)
   }
 

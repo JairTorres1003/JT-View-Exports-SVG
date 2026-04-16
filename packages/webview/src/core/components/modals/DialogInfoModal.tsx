@@ -33,11 +33,11 @@ const DialogInfoModal: React.FC<DialogInfoModalProps> = ({
   isGrouped = false,
   ...dialogProps
 }) => {
-  const filesComponents = useAppSelector((state) => state.svg.files)
+  const allFiles = useAppSelector((state) => state.svg.files)
 
   const fileList = useMemo(() => {
-    return data.files.map((fileId) => filesComponents[fileId]).filter((file) => file)
-  }, [data.files, filesComponents])
+    return data.files.map((id) => allFiles[id]).filter(Boolean)
+  }, [data.files, allFiles])
 
   const { t } = useTranslation()
 

@@ -24,7 +24,7 @@ export async function loadSVGComponents() {
     files.map(async (file) => svgFileToUri(await pathToSVGFile(file)))
   )
 
-  await processFiles(svgFiles, (results, files) => {
-    viewExportStore.set(results, files)
+  await processFiles(svgFiles, (results) => {
+    viewExportStore.set(results)
   })
 }

@@ -68,12 +68,12 @@ const DialogFilesModal: FC<DialogFilesModalProps> = ({
                     <ListItemText
                       primary={file.basename}
                       secondary={file.dirname}
+                      onClick={onSelected(index)}
                       sx={{ display: 'flex', gap: 1, alignItems: 'flex-end' }}
                       slotProps={{
                         primary: { sx: { whiteSpace: 'nowrap', fontSize: '.75rem' } },
                         secondary: { noWrap: true, sx: { opacity: 0.8, fontSize: '.7rem' } },
                       }}
-                      onClick={onSelected(index)}
                     />
                   </Tooltip>
                   <ListItemIcon
@@ -95,20 +95,20 @@ const DialogFilesModal: FC<DialogFilesModalProps> = ({
 export default DialogFilesModal
 
 const useDialogFilesModal = ({ files }: { files: FileIdentifier[] }) => {
-  const filesComponents = useAppSelector((state) => state.svg.files)
-
   const [selectedIndex, setSelectedIndex] = useState<number | false>(false)
 
+  const allFiles = useAppSelector((state) => state.svg.files)
+
   const fileList = useMemo(() => {
-    return files.map((fileId) => filesComponents[fileId]).filter((file) => file)
-  }, [files, filesComponents])
+    return files.map((id) => allFiles[id]).filter(Boolean)
+  }, [files, allFiles])
 
   /**
    * Handles keyboard navigation within the dialog.
    */
   const onKeyDown = (event: React.KeyboardEvent) => {
     if (event.key === 'ArrowDown') {
-      setSelectedIndex((prev) => (prev === false ? 0 : Math.min(prev + 1, files.length - 1)))
+      setSelectedIndex((prev) => (prev === false ? 0 : Math.min(prev + 1, fileList.length - 1)))
     } else if (event.key === 'ArrowUp') {
       setSelectedIndex((prev) => (prev === false ? 0 : Math.max(prev - 1, 0)))
     }

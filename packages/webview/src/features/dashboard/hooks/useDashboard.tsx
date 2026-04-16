@@ -1,7 +1,5 @@
 import {
-  type FileIdentifier,
   type SVGErrors,
-  type SVGFile,
   SVGPostMessage,
   SVGReceiveMessage,
   type ViewExportSVG,
@@ -24,15 +22,11 @@ export const useDashboard = () => {
     dispatch(setComponents(data))
     dispatch(setSearch(''))
     dispatch(setErrors())
-  }
 
-  /**
-   * Retrieves SVG file components from the provided data and dispatches an action to set the files.
-   *
-   * @param data - An array of SVGFile objects containing SVG file data.
-   */
-  const getFilesComponents = (data: Record<FileIdentifier, SVGFile>): void => {
-    dispatch(setFiles(data))
+    const ids = data.flatMap((component) => component.files)
+    if (ids.length > 0) {
+      vscode.postMessage(SVGReceiveMessage.RequestFileMetadata, ids)
+    }
   }
 
   /**
@@ -46,16 +40,17 @@ export const useDashboard = () => {
 
   useEffect(() => {
     vscode.postMessage(SVGReceiveMessage.RequestComponents)
-    vscode.postMessage(SVGReceiveMessage.RequestFilesComponents)
 
     vscode.onMessage(SVGPostMessage.LoadComponents, getSVGComponents)
-    vscode.onMessage(SVGPostMessage.LoadFilesComponents, getFilesComponents)
     vscode.onMessage(SVGPostMessage.OnErrorComponents, onErrorSVGComponents)
+    vscode.onMessage(SVGPostMessage.LoadFileMetadata, (files) => {
+      dispatch(setFiles(files))
+    })
 
     return () => {
       vscode.unregisterMessage(SVGPostMessage.LoadComponents)
-      vscode.unregisterMessage(SVGPostMessage.LoadFilesComponents)
+      vscode.unregisterMessage(SVGPostMessage.LoadFileMetadata)
       vscode.unregisterMessage(SVGPostMessage.OnErrorComponents)
     }
-  }, [])
+  }, [dispatch])
 }

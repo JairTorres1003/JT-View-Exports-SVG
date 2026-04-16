@@ -9,7 +9,6 @@ export const SVGPostMessage = {
   // UI-related messages
   LoadComponents: 'send/load-components',
   LoadUserComponents: 'send/load-user-components',
-  LoadFilesComponents: 'send/load-files-components',
   FilterComponents: 'send/filter-components',
   OnErrorComponents: 'send/error-components',
   OnReloadComponent: 'send/reload-component',
@@ -27,6 +26,7 @@ export const SVGPostMessage = {
 
   // File-related messages
   LoadOpenFiles: 'send/load-open-files',
+  LoadFileMetadata: 'send/load-file-metadata',
 
   // Fetch-related messages
   FetchVSCodeTheme: 'send/fetch-vscode-theme/<placeholder>',
@@ -50,7 +50,6 @@ export const SVGReceiveMessage = {
   // UI-related messages
   RequestComponents: 'ui/request-components',
   RequestUserComponents: 'ui/request-user-components',
-  RequestFilesComponents: 'ui/request-files-components',
   SearchComponents: 'ui/search-components',
   ReloadComponent: 'ui/reload-component',
   IsExpandComponents: 'ui/is-expand-components',
@@ -75,6 +74,7 @@ export const SVGReceiveMessage = {
   OpenFileInEditor: 'file/open-in-editor',
   OpenDialogFiles: 'file/open-dialog',
   CreateTempFiles: 'file/create-temp',
+  RequestFileMetadata: 'file/request-metadata',
 
   // fetch-related messages
   FetchVSCodeTheme: 'fetch/request-vscode-theme/<placeholder>',

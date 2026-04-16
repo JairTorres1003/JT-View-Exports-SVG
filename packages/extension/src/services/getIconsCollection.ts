@@ -132,12 +132,9 @@ async function getIconsComponents(
 /**
  * Retrieves the complete icons collection from the current workspace.
  */
-export const getIconsCollection = async (): Promise<{
-  items: ViewExportSVG[]
-  files: SVGFile[]
-}> => {
+export const getIconsCollection = async (): Promise<ViewExportSVG[]> => {
   const currentWorkspace = vsc.workspace.workspaceFolders?.[0]
-  if (!currentWorkspace) return { items: [], files: [] }
+  if (!currentWorkspace) return []
 
   const iconsCache = getCache().get('icons')
   const viewExportCache = getCache().get('viewExports')
@@ -204,8 +201,5 @@ export const getIconsCollection = async (): Promise<{
 
   fileCache.clear()
 
-  return {
-    items: results.items.filter((v): v is NonNullable<typeof v> => !!v),
-    files: Object.values(results.files),
-  }
+  return results.items.filter((v): v is NonNullable<typeof v> => !!v)
 }

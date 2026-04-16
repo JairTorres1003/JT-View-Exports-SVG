@@ -19,7 +19,6 @@ export type PostMessageMap = {
   [SVGPostMessage.Navigate]: { path: string }
   [SVGPostMessage.LoadComponents]: ViewExportSVG[]
   [SVGPostMessage.LoadUserComponents]: ViewExportSVG[]
-  [SVGPostMessage.LoadFilesComponents]: Record<FileIdentifier, SVGFile>
   [SVGPostMessage.FilterComponents]: ViewExportSVG[]
   [SVGPostMessage.OnErrorComponents]: SVGErrors
   [SVGPostMessage.OnReloadComponent]: ViewExportSVG[]
@@ -32,6 +31,7 @@ export type PostMessageMap = {
   [SVGPostMessage.LoadEditorStyles]: EditorStyles
   [SVGPostMessage.FetchVSCodeTheme]: FetchResponse<Record<string, unknown>>
   [SVGPostMessage.LoadOpenFiles]: string[]
+  [SVGPostMessage.LoadFileMetadata]: Record<FileIdentifier, SVGFile>
   [SVGPostMessage.FetchVsCodeThemePackage]: FetchResponse<Record<string, unknown>>
 }
 

@@ -120,7 +120,7 @@ async function processFileItem(
  */
 export async function processFiles(
   items: vsc.Uri[],
-  operation: (result: ViewExportSVG[], files: SVGFile[]) => void = () => null
+  operation: (result: ViewExportSVG[]) => void = () => null
 ): Promise<void> {
   try {
     const progressOptions: vsc.ProgressOptions = {
@@ -161,7 +161,7 @@ export async function processFiles(
       const fileList = validResults.map((r) => r.fileItem)
 
       if (!fileList.length) {
-        operation([], [])
+        operation([])
         return
       }
 
@@ -171,7 +171,7 @@ export async function processFiles(
 
       const grouped = groupIconsByPattern(exportItems)
 
-      operation(grouped, fileList)
+      operation(grouped)
     })
   } catch (error) {
     console.error(vsc.l10n.t('Error processing files'), error)

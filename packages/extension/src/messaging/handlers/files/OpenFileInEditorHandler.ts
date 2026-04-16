@@ -1,7 +1,7 @@
 import { type LocationIdentifier, SVGReceiveMessage } from '@jt-view-exports-svg/core'
-import { l10n, window } from 'vscode'
+import { l10n, window, workspace } from 'vscode'
 
-import { viewExportStore } from '@/store/ViewExportStore'
+import { getCache } from '@/services/cache/main'
 import { openFile } from '@/utilities/files/misc'
 
 import { BaseHandler } from '../BaseHandler'
@@ -9,10 +9,13 @@ import { BaseHandler } from '../BaseHandler'
 export class OpenFileInEditorHandler extends BaseHandler {
   readonly type = SVGReceiveMessage.OpenFileInEditor
 
-  handle(location: LocationIdentifier) {
-    const fileList = viewExportStore.getFiles()
+  async handle(location: LocationIdentifier) {
+    const filesCache = getCache().get('files')
+    const currentWorkspace = workspace.workspaceFolders?.[0] ?? 'global'
 
-    const file = fileList[location.id]
+    const file =
+      (await filesCache.getFile(currentWorkspace, location.id)) ??
+      (await filesCache.getFile('global', location.id))
 
     if (!file) return
 

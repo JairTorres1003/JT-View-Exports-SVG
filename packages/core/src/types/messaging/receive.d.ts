@@ -14,7 +14,6 @@ export type ReceiveMessageMap = {
   [SVGReceiveMessage.ChangeViewPath]: string
   [SVGReceiveMessage.RequestComponents]: undefined
   [SVGReceiveMessage.RequestUserComponents]: undefined
-  [SVGReceiveMessage.RequestFilesComponents]: undefined
   [SVGReceiveMessage.SearchComponents]: string
   [SVGReceiveMessage.ReloadComponent]: FileIdentifier[]
   [SVGReceiveMessage.IsExpandComponents]: boolean
@@ -31,6 +30,7 @@ export type ReceiveMessageMap = {
   [SVGReceiveMessage.OpenFileInEditor]: LocationIdentifier
   [SVGReceiveMessage.OpenDialogFiles]: undefined
   [SVGReceiveMessage.CreateTempFiles]: FileTemporary[]
+  [SVGReceiveMessage.RequestFileMetadata]: FileIdentifier[]
   [SVGReceiveMessage.FetchVSCodeTheme]: undefined
   [SVGReceiveMessage.FetchVsCodeThemePackage]: undefined
 }

@@ -29,6 +29,7 @@ const CardSvg: React.FC<Readonly<CardSvgProps>> = ({
   return (
     <BoxCardSvg
       {...props}
+      key={component.name}
       onClick={(...args) => {
         onClick(...args)
         addRecentComponent({ ...component, isFavorite })

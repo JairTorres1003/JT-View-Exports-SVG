@@ -1,6 +1,5 @@
 import {
   pathnames,
-  type SVGFile,
   SVGPostMessage,
   SVGReceiveMessage,
   type ViewExportSVG,
@@ -30,8 +29,8 @@ export class ProcessUploadedFilesHandler extends BaseHandler {
       const resolvedFiles = await Promise.all(files.map(pathToSVGFile))
       const uriFiles = resolvedFiles.map(svgFileToUri)
 
-      const operation = (result: ViewExportSVG[], files: SVGFile[]): void => {
-        viewExportStore.set(result, files)
+      const operation = (result: ViewExportSVG[]): void => {
+        viewExportStore.set(result)
         PanelController.navigate(pathnames.dashboard)
       }
 

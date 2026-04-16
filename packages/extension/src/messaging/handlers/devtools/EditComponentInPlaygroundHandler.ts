@@ -18,8 +18,10 @@ export class EditComponentInPlaygroundHandler extends BaseHandler {
 
   async handle(icon: SVGPlayground) {
     try {
+      const currentWorkspace = vsc.workspace.workspaceFolders?.[0] ?? 'global'
+
       const fileCache = getCache().get('files')
-      const fileList = (await fileCache.get('global')) ?? {}
+      const fileList = (await fileCache.get(currentWorkspace)) ?? {}
       const file = fileList[icon.location.id]
 
       if (!file) {
@@ -29,7 +31,6 @@ export class EditComponentInPlaygroundHandler extends BaseHandler {
       }
 
       const cache = getCache().get('viewExports')
-      const currentWorkspace = vsc.workspace.workspaceFolders?.[0] ?? 'global'
 
       const entry = await cache.get(currentWorkspace)
       const entryData = entry?.[file.id]

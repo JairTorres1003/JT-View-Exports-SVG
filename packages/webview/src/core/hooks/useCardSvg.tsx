@@ -5,7 +5,7 @@ import {
   type SVGIconCollection,
   SVGReceiveMessage,
 } from '@jt-view-exports-svg/core'
-import React from 'react'
+import React, { useCallback } from 'react'
 import { Trans, useTranslation } from 'react-i18next'
 
 import { useAlert } from '@/core/hooks/useAlert'
@@ -26,7 +26,7 @@ interface UseCardSvgProps {
   favorite?: boolean
 }
 
-export const useCardSvg = ({ favorite = false }: UseCardSvgProps = {}): CardSvgHook => {
+export const useCardSvg = ({ favorite = false }: UseCardSvgProps): CardSvgHook => {
   const { onOpen } = useAlert()
 
   const files = useAppSelector((state) => state.svg.files)
@@ -34,7 +34,7 @@ export const useCardSvg = ({ favorite = false }: UseCardSvgProps = {}): CardSvgH
 
   const dispatch = useAppDispatch()
 
-  const [isFavorite, setIsFavorite] = React.useState(false)
+  const [isFavorite, setIsFavorite] = React.useState(favorite)
 
   /**
    * Handles the click event on an SVG icon.
@@ -62,7 +62,7 @@ export const useCardSvg = ({ favorite = false }: UseCardSvgProps = {}): CardSvgH
   /**
    * Adds a recently selected SVG component to the state.
    *
-   * @param {SVGComponent} component - The SVG component to add to the state
+   * @param component - The SVG component to add to the state
    */
   const addRecentComponent = (component: SVGComponent): void => {
     dispatch(setRecentlySelected(component))
@@ -71,9 +71,9 @@ export const useCardSvg = ({ favorite = false }: UseCardSvgProps = {}): CardSvgH
   /**
    * Toggles the favorite status of an SVG component.
    *
-   * @param {SVGComponent} component - The SVG component to toggle favorite status for.
+   * @param component - The SVG component to toggle favorite status for.
    */
-  const handleToggleFavorite = (component: SVGComponent): void => {
+  const handleToggleFavorite = useCallback((component: SVGComponent): void => {
     const file = files[component.location.id]
 
     if (file && !file.isTemporary) {
@@ -91,11 +91,7 @@ export const useCardSvg = ({ favorite = false }: UseCardSvgProps = {}): CardSvgH
     } else {
       vscode.postMessage(SVGReceiveMessage.AddIconToCollection, payload)
     }
-  }
-
-  React.useEffect(() => {
-    setIsFavorite(favorite)
-  }, [favorite])
+  }, [])
 
   return { handleClick, addRecentComponent, toggleFavorite: handleToggleFavorite, isFavorite }
 }

@@ -1,4 +1,4 @@
-import { pathnames, type SVGFile, type ViewExportSVG } from '@jt-view-exports-svg/core'
+import { pathnames, type ViewExportSVG } from '@jt-view-exports-svg/core'
 import { type ExtensionContext, l10n, type Uri } from 'vscode'
 
 import { PanelController } from '@/controllers/views/PanelController'
@@ -35,14 +35,14 @@ export const showMenu = async (
   viewExportStore.clear()
 
   if (filesToProcess.length === 0) {
-    const { files, items } = await getIconsCollection()
-    viewExportStore.set(items, files)
+    const items = await getIconsCollection()
+    viewExportStore.set(items)
     PanelController.navigate(pathnames.home)
     return
   }
 
-  const operation = (result: ViewExportSVG[], files: SVGFile[]): void => {
-    viewExportStore.set(result, files)
+  const operation = (result: ViewExportSVG[]): void => {
+    viewExportStore.set(result)
     PanelController.navigate(pathnames.dashboard)
   }
 
