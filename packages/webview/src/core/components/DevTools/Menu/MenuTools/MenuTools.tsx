@@ -29,7 +29,7 @@ const MenuTools: React.FC<MenuToolsProps> = ({ containerId, editorRef, resetPlay
 
   return (
     <>
-      <Portal container={document.getElementById(containerId)}>
+      <Portal container={() => document.getElementById(containerId)}>
         <Tooltip title={t('playground.MoreActions')} placement='bottom-end'>
           <IconButton
             sx={{ marginRight: '4px' }}
