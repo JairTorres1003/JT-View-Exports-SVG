@@ -3,7 +3,6 @@ import 'dotenv/config'
 import './polyfill'
 
 import app from './app'
-import { loadViewExports } from './bootstrap/load-view-exports'
 import bootstrapVSCode from './core/vscode-setup'
 
 const PORT = process.env.PORT || 3000
@@ -13,9 +12,6 @@ async function start() {
     app.listen(PORT, async () => {
       console.log('⏳ Initializing VS Code services...')
       await bootstrapVSCode()
-
-      console.log('⏳ Loading SVG components...')
-      await loadViewExports()
 
       console.log('✅ VS Code Services ready')
       console.log(`🚀 Server running on http://localhost:${PORT}`)

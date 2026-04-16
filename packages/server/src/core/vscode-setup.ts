@@ -22,6 +22,7 @@ import initializeTemporaryWorkspace from './workspace'
  */
 async function bootstrapVSCode() {
   const tempWorkspaceUri = await initializeTemporaryWorkspace()
+  console.log('_TEMP WORKSPACE URI:', tempWorkspaceUri.path)
 
   await initialize(
     {
