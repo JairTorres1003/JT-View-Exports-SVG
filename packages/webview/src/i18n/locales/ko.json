@@ -46,7 +46,8 @@
     "Errors": "오류",
     "ClearCollection": "컬렉션 지우기",
     "ClearCollectionConfirm": "이 컬렉션을 지우시겠습니까?",
-    "Cancel": "취소"
+    "Cancel": "취소",
+    "ProcessingFiles": "{{count}} 파일 처리 중..."
   },
   "pickers": {
     "color": {

@@ -46,7 +46,8 @@
     "Errors": "エラー",
     "ClearCollection": "コレクションをクリア",
     "ClearCollectionConfirm": "このコレクションをクリアしてもよろしいですか？",
-    "Cancel": "キャンセル"
+    "Cancel": "キャンセル",
+    "ProcessingFiles": "{{count}} ファイルを処理中..."
   },
   "pickers": {
     "color": {

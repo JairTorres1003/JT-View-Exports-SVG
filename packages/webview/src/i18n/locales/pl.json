@@ -46,7 +46,8 @@
     "Errors": "Błędy",
     "ClearCollection": "Wyczyść kolekcję",
     "ClearCollectionConfirm": "Czy na pewno chcesz wyczyścić tę kolekcję?",
-    "Cancel": "Anuluj"
+    "Cancel": "Anuluj",
+    "ProcessingFiles": "Przetwarzanie {{count}} pliku(ów)..."
   },
   "pickers": {
     "color": {

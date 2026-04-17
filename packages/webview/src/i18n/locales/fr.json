@@ -46,7 +46,8 @@
     "Errors": "Erreurs",
     "ClearCollection": "Vider la collection",
     "ClearCollectionConfirm": "Êtes-vous sûr de vouloir vider cette collection ?",
-    "Cancel": "Annuler"
+    "Cancel": "Annuler",
+    "ProcessingFiles": "Traitement de {{count}} fichier(s)..."
   },
   "pickers": {
     "color": {

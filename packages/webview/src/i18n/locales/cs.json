@@ -46,7 +46,8 @@
     "Errors": "Chyby",
     "ClearCollection": "Vymazat kolekci",
     "ClearCollectionConfirm": "Opravdu chcete vymazat tuto kolekci?",
-    "Cancel": "Zrušit"
+    "Cancel": "Zrušit",
+    "ProcessingFiles": "Zpracovávám {{count}} soubor(ů)..."
   },
   "pickers": {
     "color": {

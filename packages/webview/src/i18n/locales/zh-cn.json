@@ -46,7 +46,8 @@
     "Errors": "错误",
     "ClearCollection": "清空集合",
     "ClearCollectionConfirm": "您确定要清空此集合吗？",
-    "Cancel": "取消"
+    "Cancel": "取消",
+    "ProcessingFiles": "正在处理 {{count}} 个文件..."
   },
   "pickers": {
     "color": {

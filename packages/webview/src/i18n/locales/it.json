@@ -46,7 +46,8 @@
     "Errors": "Errori",
     "ClearCollection": "Svuota collezione",
     "ClearCollectionConfirm": "Sei sicuro di voler svuotare questa collezione?",
-    "Cancel": "Annulla"
+    "Cancel": "Annulla",
+    "ProcessingFiles": "Elaborazione di {{count}} file in corso..."
   },
   "pickers": {
     "color": {

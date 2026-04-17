@@ -46,7 +46,8 @@
     "Errors": "Ошибки",
     "ClearCollection": "Очистить коллекцию",
     "ClearCollectionConfirm": "Вы уверены, что хотите очистить эту коллекцию?",
-    "Cancel": "Отмена"
+    "Cancel": "Отмена",
+    "ProcessingFiles": "Обработка {{count}} файла(ов)..."
   },
   "pickers": {
     "color": {

@@ -46,7 +46,8 @@
     "Errors": "Hatalar",
     "ClearCollection": "Koleksiyonu temizle",
     "ClearCollectionConfirm": "Bu koleksiyonu temizlemek istediğinizden emin misiniz?",
-    "Cancel": "İptal"
+    "Cancel": "İptal",
+    "ProcessingFiles": "{{count}} dosya işleniyor..."
   },
   "pickers": {
     "color": {
