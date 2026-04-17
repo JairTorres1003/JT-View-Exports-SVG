@@ -1,0 +1,39 @@
+{
+  "yes": "是",
+  "no": "否",
+  "close": "關閉",
+  "cancel": "取消",
+  "search": "搜索",
+  "clear": "清除",
+  "info": "信息",
+  "loading": "載入中...",
+  "refresh": "刷新",
+  "errors": "錯誤",
+  "open-file": "打開文件",
+  "open-many-files": "打開多個文件",
+  "copy-name": "複製名稱",
+  "copy-code-snippet": "複製代碼片段",
+  "clear-collection": "清空集合",
+  "clear-collection-confirm": "您確定要清空此集合嗎？",
+  "copied-to-clipboard": "已複製 <b>{{value}}</b> 到剪貼板",
+  "list-of-associated-files-for": "\"{{name}}\" 的關聯文件列表",
+  "pickers": {
+    "color": {
+      "title": "選擇顏色"
+    }
+  },
+  "modal-info": {
+    "title": "信息",
+    "file-name": "文件名:",
+    "language": "語言:",
+    "is-temporary-file": "是否為臨時文件?:",
+    "includes-temporary-files": "是否包含臨時文件:",
+    "path": "路徑:",
+    "show-no-exports": "顯示未導出組件:",
+    "components-exported": "已導出組件總數:",
+    "components-not-exported": "未導出組件總數:",
+    "total-components": "組件總數:",
+    "files-count": "文件數:",
+    "group-kind-name": "組別名稱:"
+  }
+}

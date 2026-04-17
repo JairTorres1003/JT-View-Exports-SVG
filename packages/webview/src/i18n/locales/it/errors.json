@@ -1,0 +1,20 @@
+{
+  "unknown": "Errore sconosciuto",
+  "root-element-not-found": "Impossibile trovare l'elemento radice",
+  "component-empty": "Il componente è vuoto",
+  "unsupported-files": "I seguenti file non sono supportati:",
+  "failed-to-create-temporary-file": "Errore durante la creazione del file temporaneo {{name}}",
+  "vscode-api": {
+    "not-available": "L'API VSCode non è disponibile",
+    "handling-error": "[VSCodeAPIWrapper] Si è verificato un errore durante la gestione del messaggio:"
+  },
+  "editor": {
+    "failed-to-update-configuration": "Impossibile aggiornare la configurazione utente",
+    "failed-to-update-keybindings": "Impossibile aggiornare le scorciatoie da tastiera dell'utente",
+    "reference-not-available": "Riferimento all'editor non disponibile",
+    "failed-to-activate-theme": "Impossibile attivare il tema dell'estensione",
+    "failed-to-fetch-theme": "Impossibile recuperare il tema dell'estensione",
+    "failed-to-initialize": "Impossibile inizializzare l'editor",
+    "failed-to-apply-color": "Errore durante l'applicazione del colore iniziale"
+  }
+}

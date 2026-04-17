@@ -1,0 +1,20 @@
+{
+  "unknown": "Неизвестная ошибка",
+  "root-element-not-found": "Не удалось найти корневой элемент",
+  "component-empty": "Компонент пуст",
+  "unsupported-files": "Следующие файлы не поддерживаются:",
+  "failed-to-create-temporary-file": "Ошибка создания временного файла {{name}}",
+  "vscode-api": {
+    "not-available": "API VSCode недоступен",
+    "handling-error": "[VSCodeAPIWrapper] Произошла ошибка при обработке сообщения:"
+  },
+  "editor": {
+    "failed-to-update-configuration": "Не удалось обновить конфигурацию пользователя",
+    "failed-to-update-keybindings": "Не удалось обновить сочетания клавиш пользователя",
+    "reference-not-available": "Ссылка на редактор недоступна",
+    "failed-to-activate-theme": "Не удалось активировать тему расширения",
+    "failed-to-fetch-theme": "Не удалось получить тему расширения",
+    "failed-to-initialize": "Не удалось инициализировать редактор",
+    "failed-to-apply-color": "Ошибка применения начального цвета"
+  }
+}

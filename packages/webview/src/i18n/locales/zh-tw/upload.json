@@ -1,0 +1,12 @@
+{
+  "extract-components": "提取組件",
+  "add-more-files": "添加更多文件",
+  "sort-files-by-name": "按名稱排序文件",
+  "sort-ascending": "升序排序",
+  "sort-descending": "降序排序",
+  "delete-this-file": "刪除此文件",
+  "no-files-selected": "未選擇任何文件",
+  "files-loaded_one": "{{count}} 個文件已加載",
+  "files-loaded_other": "{{count}} 個文件已加載",
+  "processing-files": "正在處理 {{count}} 個文件..."
+}

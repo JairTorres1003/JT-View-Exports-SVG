@@ -1,0 +1,30 @@
+{
+  "title": "開発者ツール",
+  "playground": {
+    "title": "プレイグラウンド",
+    "hide-code": "コードを隠す",
+    "show-code": "コードを表示",
+    "copy-code": "コードをコピー",
+    "reset-code": "コードをリセット",
+    "more-actions": "その他のアクション...",
+    "open-in-editor": "エディターで開く",
+    "copy-as-svg": "SVGとしてコピー",
+    "copy-as-png": "PNGとしてコピー",
+    "download-as-svg": "SVGとしてダウンロード",
+    "download-as-png": "PNGとしてダウンロード"
+  },
+  "info": {
+    "title": "情報コンポーネント",
+    "component-name": "コンポーネント名:",
+    "type-declaration": "型宣言:",
+    "is-exported": "エクスポートされていますか?:",
+    "is-animated": "アニメーション化されていますか?:",
+    "is-favorite": "お気に入りですか?:"
+  },
+  "menu": {
+    "reload-playground": "プレイグラウンドをリロード",
+    "reload-editor": "エディターをリロード",
+    "disable-word-wrap": "折り返しを無効にする",
+    "enable-word-wrap": "折り返しを有効にする"
+  }
+}

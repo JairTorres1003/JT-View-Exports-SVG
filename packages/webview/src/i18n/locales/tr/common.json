@@ -1,0 +1,39 @@
+{
+  "yes": "Evet",
+  "no": "Hayır",
+  "close": "Kapat",
+  "cancel": "İptal",
+  "search": "Ara",
+  "clear": "Temizle",
+  "info": "Bilgi",
+  "loading": "Yükleniyor...",
+  "refresh": "Yenile",
+  "errors": "Hatalar",
+  "open-file": "Dosyayı aç",
+  "open-many-files": "Birden fazla dosyayı aç",
+  "copy-name": "Adı kopyala",
+  "copy-code-snippet": "Kodu kopyala",
+  "clear-collection": "Koleksiyonu temizle",
+  "clear-collection-confirm": "Bu koleksiyonu temizlemek istediğinizden emin misiniz?",
+  "copied-to-clipboard": "<b>{{value}}</b> panoya kopyalandı",
+  "list-of-associated-files-for": "\"{{name}}\" için ilişkili dosyaların listesi",
+  "pickers": {
+    "color": {
+      "title": "Bir renk seç"
+    }
+  },
+  "modal-info": {
+    "title": "Bilgi",
+    "file-name": "Dosya adı:",
+    "language": "Dil:",
+    "is-temporary-file": "Geçici bir dosya mı?:",
+    "includes-temporary-files": "Geçici dosyaları içerir:",
+    "path": "Yol:",
+    "show-no-exports": "Dışa aktarılmayan bileşenleri göster:",
+    "components-exported": "Toplam dışa aktarılan bileşenler:",
+    "components-not-exported": "Toplam dışa aktarılmayan bileşenler:",
+    "total-components": "Toplam bileşenler:",
+    "files-count": "Dosya sayısı:",
+    "group-kind-name": "Grup adı:"
+  }
+}

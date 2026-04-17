@@ -1,0 +1,8 @@
+{
+  "drop-zone": {
+    "title": "Nahrajte své soubory JS, JSX, TS nebo TSX a snadno objevte komponenty SVG, které obsahují.",
+    "select-files": "Vyberte soubory",
+    "or-drop-files-here": "nebo sem přetáhněte soubory",
+    "let-it-go": "Pusťte to!"
+  }
+}

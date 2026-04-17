@@ -1,0 +1,30 @@
+{
+  "title": "Entwicklertools",
+  "playground": {
+    "title": "Spielplatz",
+    "hide-code": "Code ausblenden",
+    "show-code": "Code anzeigen",
+    "copy-code": "Code kopieren",
+    "reset-code": "Code zurücksetzen",
+    "more-actions": "Weitere Aktionen...",
+    "open-in-editor": "Im Editor öffnen",
+    "copy-as-svg": "Als SVG kopieren",
+    "copy-as-png": "Als PNG kopieren",
+    "download-as-svg": "Als SVG herunterladen",
+    "download-as-png": "Als PNG herunterladen"
+  },
+  "info": {
+    "title": "Info-Komponente",
+    "component-name": "Komponentenname:",
+    "type-declaration": "Typdeklaration:",
+    "is-exported": "Ist exportiert?:",
+    "is-animated": "Ist animiert?:",
+    "is-favorite": "Ist Favorit?:"
+  },
+  "menu": {
+    "reload-playground": "Spielplatz neu laden",
+    "reload-editor": "Editor neu laden",
+    "disable-word-wrap": "Zeilenumbruch deaktivieren",
+    "enable-word-wrap": "Zeilenumbruch aktivieren"
+  }
+}

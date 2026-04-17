@@ -1,0 +1,12 @@
+{
+  "extract-components": "Bileşenleri çıkar",
+  "add-more-files": "Daha fazla dosya ekle",
+  "sort-files-by-name": "Dosyaları isme göre sırala",
+  "sort-ascending": "Artan sırayla sırala",
+  "sort-descending": "Azalan sırayla sırala",
+  "delete-this-file": "Bu dosyayı sil",
+  "no-files-selected": "Hiçbir dosya seçilmedi",
+  "files-loaded_one": "{{count}} dosya yüklendi",
+  "files-loaded_other": "{{count}} dosya yüklendi",
+  "processing-files": "{{count}} dosya işleniyor..."
+}
