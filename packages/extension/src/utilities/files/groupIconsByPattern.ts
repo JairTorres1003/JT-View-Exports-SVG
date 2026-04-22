@@ -1,7 +1,7 @@
 import type { ViewExportSVG } from '@jt-view-exports-svg/core'
 import { minimatch } from 'minimatch'
 
-import { GroupPatternsController } from '@/controllers/config'
+import { getConfig } from '@/services/config'
 
 import { isEmpty } from '../misc'
 
@@ -56,7 +56,7 @@ function assignValues({ current, exportSVG, patternKey, auxPatternLabel }: Assig
  * @param SVGExports - The array of SVG exports to be grouped.
  */
 export function groupIconsByPattern(SVGExports: ViewExportSVG[]): ViewExportSVG[] {
-  const groupPatterns = new GroupPatternsController()._patternsArray
+  const groupPatterns = getConfig().get('groupPatterns').patternsArray
 
   if (groupPatterns.length === 0) return SVGExports
 
@@ -70,7 +70,7 @@ export function groupIconsByPattern(SVGExports: ViewExportSVG[]): ViewExportSVG[
       const auxPatternKey = patternKey === '*' ? '**' : patternKey
       const auxPatternLabel = isEmpty(patternLabel) ? auxPatternKey : patternLabel
 
-      if (minimatch(groupKind.id, auxPatternKey)) {
+      if (minimatch(groupKind.label, auxPatternKey)) {
         const current = groupedIcons.get(auxPatternLabel)
         const value = assignValues({ current, exportSVG, patternKey, auxPatternLabel })
         groupedIcons.set(auxPatternLabel, value)

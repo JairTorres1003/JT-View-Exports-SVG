@@ -3,10 +3,10 @@ import * as path from 'path'
 import * as vsc from 'vscode'
 
 import { REGEX_FILE } from '@/constants/regex'
-import { AssetsPathsController, ShowNotExportedIconsController } from '@/controllers/config'
 import type { FilesCache } from '@/services/cache/FilesCache'
 import { getCache } from '@/services/cache/main'
 import type { ViewExportSVGCache } from '@/services/cache/ViewExportSVGCache'
+import { getConfig } from '@/services/config'
 import { componentDeclarationStore } from '@/store/ComponentDeclarationStore'
 
 import { extractComponents } from '../svg/extracts'
@@ -76,7 +76,9 @@ async function processFileItem(
     if (!isStale) {
       const entry = await cacheItem.get(workspace)
       const cached = entry?.[file.id]
-      if (cached) return { exportItem: cached, fileItem: file }
+      if (cached && cached.isShowNoExports === options.isShowNoExports) {
+        return { exportItem: cached, fileItem: file }
+      }
     }
 
     const { components, declarations } = await extractComponents(file, uri)
@@ -135,9 +137,9 @@ export async function processFiles(
     }
 
     await vsc.window.withProgress(progressOptions, async (progress) => {
-      const configAssetsPath = new AssetsPathsController()
-      const configShowNoExports = new ShowNotExportedIconsController()
-      const isShowNoExports = configShowNoExports.isShow()
+      const registry = getConfig()
+      const configAssetsPath = registry.get('assetsPath')
+      const isShowNoExports = registry.get('showNotExportedIcons').getValue()
       const cacheItem = getCache().get('viewExports')
       const filesCache = getCache().get('files')
       const workspace = vsc.workspace.workspaceFolders?.[0] ?? 'global'

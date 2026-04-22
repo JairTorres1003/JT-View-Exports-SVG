@@ -3,7 +3,7 @@ import type { PropertyValue } from '@jt-view-exports-svg/core'
 import { camelCase } from 'lodash'
 
 import { REST_PROPS_KEY } from '@/constants/misc'
-import { DefaultIconPropertiesController } from '@/controllers/config'
+import { getConfig } from '@/services/config'
 
 import { isEmpty } from '../misc'
 
@@ -25,8 +25,7 @@ export function getPropertyValues(
     return
   }
 
-  const config = new DefaultIconPropertiesController()
-  const defaultProps = config.getAllProperties()
+  const defaultProps = getConfig().get('defaultIconProperties').getAllProperties()
 
   const restProps = (properties[REST_PROPS_KEY] ?? {}) as Record<string, unknown>
   let valueA: unknown

@@ -3,6 +3,7 @@ import * as vsc from 'vscode'
 
 import { PanelController } from '@/controllers/views/PanelController'
 import { allowedFilesInFolder } from '@/services/allowedFilesInFolder'
+import { getConfig } from '@/services/config'
 import { getIconsCollection } from '@/services/getIconsCollection'
 import { viewExportStore } from '@/store/ViewExportStore'
 import { processFiles } from '@/utilities/files/processFiles'
@@ -30,6 +31,8 @@ export const runScanningWorkspace = async (context: vsc.ExtensionContext): Promi
   PanelController.navigate(`${pathnames.main}?load-message=${messageEncoded}`)
 
   const files = await allowedFilesInFolder(currentWorkspace.uri)
+
+  getConfig().get('lastScanDate').updateDate().catch(console.error)
 
   if (files.length === 0) {
     const items = await getIconsCollection()

@@ -12,6 +12,7 @@ import {
 import { CONFIG_KEY } from './constants/misc'
 import { InMemoryFileSystemProvider } from './providers/InMemoryFileSystemProvider'
 import { initCache } from './services/cache/main'
+import { initConfig } from './services/config'
 import { initializeExtensionTheme } from './services/vscode/extensionTheme'
 
 /**
@@ -20,6 +21,7 @@ import { initializeExtensionTheme } from './services/vscode/extensionTheme'
  */
 export async function activate(context: ExtensionContext) {
   initCache(context)
+  initConfig(context)
   initializeExtensionTheme()
 
   const provider = new InMemoryFileSystemProvider()

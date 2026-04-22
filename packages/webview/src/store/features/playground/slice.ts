@@ -7,7 +7,6 @@ import initialState from './state'
 const reducers: PlaygroundReducers = {
   setRecentlySelected: (state, { payload }) => {
     state.recentlySelected = payload
-    state.isOpenDevTools = Boolean(payload)
   },
   setIsOpenDevTools: (state, { payload }) => {
     state.isOpenDevTools = payload

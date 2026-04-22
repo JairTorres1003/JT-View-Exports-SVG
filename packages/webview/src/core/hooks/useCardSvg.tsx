@@ -10,7 +10,7 @@ import { Trans, useTranslation } from 'react-i18next'
 
 import { useAlert } from '@/core/hooks/useAlert'
 import { vscode } from '@/services/vscode'
-import { setRecentlySelected } from '@/store/features/playground/slice'
+import { setIsOpenDevTools, setRecentlySelected } from '@/store/features/playground/slice'
 import { useAppDispatch, useAppSelector } from '@/store/hooks'
 import { copyToClipboard } from '@/utils/clipboard'
 import { getUnknownError } from '@/utils/errors'
@@ -29,6 +29,9 @@ export const useCardSvg = ({ favorite = false }: UseCardSvgProps): CardSvgHook =
   const { onOpen } = useAlert()
 
   const files = useAppSelector((state) => state.svg.files)
+  const shouldOpenDevTools = useAppSelector(
+    (state) => state.global.configuration.defaultClicToOpenDevTools
+  )
   const { t } = useTranslation()
 
   const dispatch = useAppDispatch()
@@ -57,6 +60,10 @@ export const useCardSvg = ({ favorite = false }: UseCardSvgProps): CardSvgHook =
    */
   const addRecentComponent = (component: SVGComponent): void => {
     dispatch(setRecentlySelected(component))
+
+    if (shouldOpenDevTools) {
+      dispatch(setIsOpenDevTools(true))
+    }
 
     vscode.postMessage(SVGReceiveMessage.AddIconToCollection, {
       name: component.name,

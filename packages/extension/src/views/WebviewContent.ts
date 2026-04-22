@@ -1,11 +1,7 @@
 import type { ManifestContent } from '@jt-view-exports-svg/core'
 import { type ExtensionContext, env, l10n, type Uri, type Webview, workspace } from 'vscode'
 
-import {
-  DefaultClickToOpenDevToolsController,
-  DefaultExpandAllController,
-  RecentIconsShowController,
-} from '@/controllers/config'
+import { getConfig } from '@/services/config'
 import { getNonce } from '@/utilities/files/nonce'
 import { getUri, uriParse } from '@/utilities/vscode/uri'
 
@@ -90,18 +86,16 @@ export class WebviewContent {
    *          object with the necessary initialization parameters.
    */
   private scriptConfiguration(): string {
-    const config = new DefaultExpandAllController()
-    const devConfig = new DefaultClickToOpenDevToolsController()
-    const recentConfig = new RecentIconsShowController()
+    const registry = getConfig()
 
     return /* html */ `
       <script nonce="${this._nonce}">
         window.ViewExportsSVG = {
           name: "${l10n.t('View Exports SVG')}",
           initConfiguration: {
-            _DEFAULT_EXPAND_ALL: ${config.isExpandAll()},
-            _DEFAULT_CLICK_TO_OPEN_DEV_TOOLS: ${devConfig.isDefaultOpen()},
-            _RECENT_ICONS_SHOW: ${recentConfig.isShow()},
+            _DEFAULT_EXPAND_ALL: ${registry.get('defaultExpandAll').getValue()},
+            _DEFAULT_CLICK_TO_OPEN_DEV_TOOLS: ${registry.get('defaultClickToOpenDevTools').getValue()},
+            _RECENT_ICONS_SHOW: ${registry.get('recentIconsShow').getValue()},
             _LANGUAGE: "${env.language ?? 'en'}",
           }
         };

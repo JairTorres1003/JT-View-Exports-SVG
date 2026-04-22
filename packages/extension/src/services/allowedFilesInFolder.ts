@@ -2,7 +2,7 @@ import * as path from 'path'
 import { FileType, l10n, Uri, workspace } from 'vscode'
 
 import { REGEX_FILE } from '@/constants/regex'
-import { IgnoreDirectoriesController } from '@/controllers/config'
+import { getConfig } from '@/services/config'
 import { matchesPattern } from '@/utilities/misc'
 
 const CONCURRENCY_LIMIT = 10
@@ -78,8 +78,7 @@ async function processWithConcurrency<T>(
 export async function allowedFilesInFolder(folder: Uri): Promise<Uri[]> {
   if (!folder?.fsPath) return []
 
-  const config = new IgnoreDirectoriesController()
-  const patterns = config._allDirectories
+  const patterns = getConfig().get('ignoreDirectories').allDirectories
 
   return collectFiles(folder, patterns, { count: 0 })
 }

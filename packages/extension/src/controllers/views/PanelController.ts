@@ -90,6 +90,18 @@ export class PanelController {
   }
 
   /**
+   * Reveal the panel and re-send the current path to trigger a webview refresh.
+   */
+  public static reload(): void {
+    const controller = PanelController.currentPanel
+
+    if (!controller) return
+
+    controller.viewPanel.reveal(vsc.ViewColumn.Active)
+    controller.messenger.postMessage(SVGPostMessage.Navigate, { path: controller.currentPath })
+  }
+
+  /**
    * Dispose of the panel and clean up resources.
    */
   public dispose(): void {
