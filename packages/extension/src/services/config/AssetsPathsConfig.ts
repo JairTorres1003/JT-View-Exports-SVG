@@ -69,6 +69,8 @@ export class AssetsPathsConfig extends ConfigManager<string[]> {
       const { ws, global } = this.inspectValues()
 
       for (const f of files) {
+        if (f.isTemporary) continue
+
         const filePath = this.getPath(f)
         const exists = this.existsInWorkspace(f)
 
