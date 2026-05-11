@@ -1,4 +1,4 @@
-import { minimatch } from 'minimatch'
+import micromatch from 'micromatch'
 import { l10n } from 'vscode'
 
 /**
@@ -118,5 +118,5 @@ export const formatDate = (
  * @returns `true` if the path matches any pattern, `false` otherwise.
  */
 export const matchesPattern = (patterns: string[], pathToCheck: string): boolean => {
-  return patterns.some((pattern) => minimatch(pathToCheck, pattern))
+  return micromatch.isMatch(pathToCheck.replace(/[\\/]+$/, ''), patterns)
 }

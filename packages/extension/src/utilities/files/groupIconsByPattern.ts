@@ -1,5 +1,5 @@
 import type { ViewExportSVG } from '@jt-view-exports-svg/core'
-import { minimatch } from 'minimatch'
+import micromatch from 'micromatch'
 
 import { getConfig } from '@/services/config'
 
@@ -67,10 +67,9 @@ export function groupIconsByPattern(SVGExports: ViewExportSVG[]): ViewExportSVG[
     let matchedGroup = false
 
     for (const [patternKey, patternLabel] of groupPatterns) {
-      const auxPatternKey = patternKey === '*' ? '**' : patternKey
-      const auxPatternLabel = isEmpty(patternLabel) ? auxPatternKey : patternLabel
+      const auxPatternLabel = isEmpty(patternLabel) ? patternKey : patternLabel
 
-      if (minimatch(groupKind.label, auxPatternKey)) {
+      if (micromatch.isMatch(groupKind.label, patternKey, { matchBase: true })) {
         const current = groupedIcons.get(auxPatternLabel)
         const value = assignValues({ current, exportSVG, patternKey, auxPatternLabel })
         groupedIcons.set(auxPatternLabel, value)

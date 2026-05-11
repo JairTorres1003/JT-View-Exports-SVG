@@ -9,6 +9,7 @@ import { Uri, window } from 'vscode'
 import {
   getFileTimestamp,
   getLanguageFromFile,
+  matchesPattern,
   openFile,
   pathToSVGFile,
 } from '@/utilities/files/misc'
@@ -104,5 +105,27 @@ suite('openFile Utility Function', () => {
     const editor = window.activeTextEditor
 
     assert.strictEqual(editor?.document.fileName, currentFile)
+  })
+})
+
+suite('matchesPattern Utility Function', () => {
+  test('returns true when path matches a ** glob pattern', () => {
+    assert.strictEqual(matchesPattern(['**/node_modules'], '/project/node_modules/'), true)
+  })
+
+  test('returns false when path does not match any pattern', () => {
+    assert.strictEqual(matchesPattern(['**/node_modules', '**/dist'], '/project/src/'), false)
+  })
+
+  test('returns true when path matches any of multiple patterns', () => {
+    assert.strictEqual(matchesPattern(['**/dist', '**/.git'], '/project/.git/'), true)
+  })
+
+  test('returns false for empty patterns array', () => {
+    assert.strictEqual(matchesPattern([], '/project/node_modules/'), false)
+  })
+
+  test('returns true with trailing path separator stripped', () => {
+    assert.strictEqual(matchesPattern(['**/coverage'], '/project/coverage/'), true)
   })
 })

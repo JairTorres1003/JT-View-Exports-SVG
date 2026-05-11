@@ -322,6 +322,7 @@
     "@esbuild-plugins/node-modules-polyfill": "^0.2.2",
     "@types/babel__traverse": "^7.28.0",
     "@types/lodash": "^4.17.23",
+    "@types/micromatch": "^4.0.10",
     "@types/mocha": "^10.0.10",
     "@types/node": "^25.3.3",
     "@types/sinon": "^21.0.0",
@@ -344,7 +345,7 @@
     "@babel/traverse": "^7.29.0",
     "@jt-view-exports-svg/core": "workspace:*",
     "lodash": "^4.18.1",
-    "minimatch": "^10.2.5",
+    "micromatch": "^4.0.8",
     "xxhashjs": "^0.2.2"
   },
   "badges": [
