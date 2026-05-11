@@ -18,7 +18,6 @@ export interface SnackbarAlertState {
 export interface GlobalConfigurationState {
   defaultExpandAll: boolean
   defaultClicToOpenDevTools: boolean
-  showRecentIcons: boolean
 }
 
 export interface RenderRouteState {

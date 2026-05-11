@@ -19,7 +19,6 @@ declare global {
       initConfiguration: {
         _DEFAULT_EXPAND_ALL: boolean
         _DEFAULT_CLICK_TO_OPEN_DEV_TOOLS: boolean
-        _RECENT_ICONS_SHOW: boolean
         _LANGUAGE: string
       }
     }

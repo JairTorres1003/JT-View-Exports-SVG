@@ -3,9 +3,9 @@ import { DefaultClickToOpenDevToolsConfig } from '../DefaultClickToOpenDevToolsC
 import { DefaultExpandAllConfig } from '../DefaultExpandAllConfig'
 import { DefaultIconPropertiesConfig } from '../DefaultIconPropertiesConfig'
 import { GroupPatternsConfig } from '../GroupPatternsConfig'
+import { IconCollectionConfig } from '../IconCollectionConfig'
 import { IgnoreDirectoriesConfig } from '../IgnoreDirectoriesConfig'
 import { LastScanDateConfig } from '../LastScanDateConfig'
-import { RecentIconsLimitConfig, RecentIconsShowConfig } from '../RecentIconsConfig'
 import { ShowNotExportedIconsConfig } from '../ShowNotExportedIconsConfig'
 
 import type { ConfigMap } from './ConfigRegistry'
@@ -17,10 +17,9 @@ export function createConfigs() {
     defaultExpandAll: new DefaultExpandAllConfig(),
     defaultIconProperties: new DefaultIconPropertiesConfig(),
     groupPatterns: new GroupPatternsConfig(),
+    iconCollection: new IconCollectionConfig(),
     ignoreDirectories: new IgnoreDirectoriesConfig(),
     lastScanDate: new LastScanDateConfig(),
-    recentIconsShow: new RecentIconsShowConfig(),
-    recentIconsLimit: new RecentIconsLimitConfig(),
     showNotExportedIcons: new ShowNotExportedIconsConfig(),
   } satisfies ConfigMap
 }

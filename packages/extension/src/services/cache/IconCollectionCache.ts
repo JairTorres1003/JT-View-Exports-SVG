@@ -4,7 +4,9 @@ import type {
   SVGIcon,
   SVGIconCollection,
 } from '@jt-view-exports-svg/core'
-import type * as vsc from 'vscode'
+import * as vsc from 'vscode'
+
+import { getConfig } from '@/services/config'
 
 import { BaseCache } from './BaseCache'
 
@@ -18,10 +20,7 @@ export class IconCollectionCache extends BaseCache<
   IconCollectionCacheEntry,
   [vsc.WorkspaceFolder, IconCollectionKind]
 > {
-  constructor(
-    ctx: vsc.ExtensionContext,
-    private readonly maxEntries: number = 0
-  ) {
+  constructor(ctx: vsc.ExtensionContext) {
     super(ctx, 'icon-collection')
   }
 
@@ -51,8 +50,10 @@ export class IconCollectionCache extends BaseCache<
   }
 
   private enforceLimit(entry: IconCollectionCacheEntry): void {
-    if (this.maxEntries <= 0 || entry.data.length <= this.maxEntries) return
-    const removed = entry.data.splice(this.maxEntries)
+    const limits = getConfig().get('iconCollection').getValue()
+    const max = limits[entry.name] ?? 0
+    if (max <= 0 || entry.data.length <= max) return
+    const removed = entry.data.splice(max)
     for (const icon of removed) {
       this.decrementFileCount(entry, icon.location.id)
     }
@@ -63,6 +64,19 @@ export class IconCollectionCache extends BaseCache<
       data: [],
       fileCounts: {},
       name: icon.collection,
+    }
+
+    if (icon.allowMoreIcons) {
+      const limits = getConfig().get('iconCollection').getValue()
+      const max = limits[entry.name] ?? 0
+      if (max > 0 && entry.data.length >= max) {
+        throw new Error(
+          vsc.l10n.t('Icon collection "{collection}" has reached its limit of {max} icons.', {
+            collection: entry.name,
+            max,
+          })
+        )
+      }
     }
 
     this.removeFromEntry(entry, icon)

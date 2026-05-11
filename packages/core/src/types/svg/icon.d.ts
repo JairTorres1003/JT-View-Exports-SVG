@@ -37,4 +37,6 @@ export interface SVGPlayground extends SVGIcon {
 export interface SVGIconCollection extends SVGIcon {
   /** The collection this icon belongs to (e.g., 'favorite', 'recent') */
   collection: IconCollectionKind
+  /** Optional flag to indicate if more icons can be added to the collection beyond the configured limit */
+  allowMoreIcons?: boolean
 }

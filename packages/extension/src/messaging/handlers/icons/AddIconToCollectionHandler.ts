@@ -34,11 +34,22 @@ export class AddIconToCollectionHandler extends BaseHandler {
 
     const cache = getCache().get('icons')
 
-    await cache.add(workspace, icon)
+    try {
+      await cache.add(workspace, {
+        ...icon,
+        allowMoreIcons: icon.collection === IconCollectionKind.FAVORITE,
+      })
 
-    if (icon.collection === IconCollectionKind.FAVORITE) {
-      const exportCache = getCache().get('viewExports')
-      await exportCache.toggleIconFavorite(workspace, icon, true)
+      if (icon.collection === IconCollectionKind.FAVORITE) {
+        const exportCache = getCache().get('viewExports')
+        await exportCache.toggleIconFavorite(workspace, icon, true)
+      }
+    } catch (error) {
+      vsc.window.showErrorMessage(
+        vsc.l10n.t('Failed to add icon to collection: {message}', {
+          message: error instanceof Error ? error.message : String(error),
+        })
+      )
     }
   }
 }

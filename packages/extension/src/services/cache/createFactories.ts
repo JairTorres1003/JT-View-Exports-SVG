@@ -13,6 +13,6 @@ export function createFactories(ctx: vsc.ExtensionContext) {
     extensionTheme: new ExtensionThemeCache(ctx),
     files: new FilesCache(ctx),
     viewExports: new ViewExportSVGCache(ctx),
-    icons: new IconCollectionCache(ctx, 10),
+    icons: new IconCollectionCache(ctx),
   } satisfies CacheFactoryMap
 }

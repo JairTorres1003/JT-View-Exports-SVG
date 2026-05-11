@@ -95,7 +95,6 @@ export class WebviewContent {
           initConfiguration: {
             _DEFAULT_EXPAND_ALL: ${registry.get('defaultExpandAll').getValue()},
             _DEFAULT_CLICK_TO_OPEN_DEV_TOOLS: ${registry.get('defaultClickToOpenDevTools').getValue()},
-            _RECENT_ICONS_SHOW: ${registry.get('recentIconsShow').getValue()},
             _LANGUAGE: "${env.language ?? 'en'}",
           }
         };

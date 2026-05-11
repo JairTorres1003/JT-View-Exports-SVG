@@ -8,6 +8,7 @@ import {
 } from '@jt-view-exports-svg/core'
 import * as vsc from 'vscode'
 
+import { getConfig } from '@/services/config'
 import { processFiles } from '@/utilities/files/processFiles'
 import { svgFileToUri } from '@/utilities/vscode/uri'
 
@@ -139,7 +140,8 @@ export const getIconsCollection = async (): Promise<ViewExportSVG[]> => {
   const iconsCache = getCache().get('icons')
   const viewExportCache = getCache().get('viewExports')
   const filesCache = getCache().get('files')
-  const collectionList = Object.values(IconCollectionKind)
+  const limits = getConfig().get('iconCollection').getValue()
+  const collectionList = Object.values(IconCollectionKind).filter((c) => (limits[c] ?? 0) > 0)
 
   // Phase 1: Load all collections and their viewExports cache
   const [collectionEntries, viewExportData] = await Promise.all([

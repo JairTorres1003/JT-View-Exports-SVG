@@ -27,8 +27,6 @@
   "extension.config.showNotExportedIcons.description": "İhracat edilmeyen simgelerin gösterilip gösterilmeyeceğini belirtir.",
   "extension.config.groupPatterns.title": "Gruplama Desenleri",
   "extension.config.groupPatterns.description": "Simge dosyalarını gruplamak için bir dizi desen. Her desen bir 'item' (desen) ve bir 'value' (grup adı) gerektirir.\nÖrnek:\n| item | value |\n| --- | --- |\n| ** | Tüm Simgeler |\n| **/Flag* | Bayraklar |\n| **/Symbol*.{js, jsx} | Semboller |",
-  "extension.config.recentIcons.showIcons.title": "Son Simgeleri Göster",
-  "extension.config.recentIcons.showIcons.description": "En son erişilen simgelerin gösterilip gösterilmeyeceğini belirtir.",
-  "extension.config.recentIcons.limitShowIcons.title": "Son Simgeleri Gösterimi Sınırla",
-  "extension.config.recentIcons.limitShowIcons.description": "Gösterilecek en fazla son simge sayısı."
+  "extension.config.iconCollection.title": "Simge Koleksiyonu Sınırları",
+  "extension.config.iconCollection.description": "Koleksiyon başına görüntülenecek maksimum simge sayısı. Koleksiyonu tamamen gizlemek için 0 olarak ayarlayın."
 }

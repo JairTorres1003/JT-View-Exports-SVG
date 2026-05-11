@@ -21,7 +21,6 @@ window.ViewExportsSVG = {
   initConfiguration: {
     _DEFAULT_EXPAND_ALL: true,
     _DEFAULT_CLICK_TO_OPEN_DEV_TOOLS: true,
-    _RECENT_ICONS_SHOW: true,
     _LANGUAGE: 'en',
   },
 }

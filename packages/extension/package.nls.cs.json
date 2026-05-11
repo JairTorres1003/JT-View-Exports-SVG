@@ -27,8 +27,6 @@
   "extension.config.showNotExportedIcons.description": "Určuje, zda se mají zobrazovat ikony, které se neexportují.",
   "extension.config.groupPatterns.title": "Seskupit vzory",
   "extension.config.groupPatterns.description": "Pole vzorů pro seskupení souborů ikon. Každý vzor vyžaduje „položku“ (vzor) a „hodnotu“ (název skupiny).\nPříklad:\n| položku | hodnotu |\n| --- | --- |\n| ** | Všechny ikony |\n| **/Flag* | Flagy |\n| **/Symbol*.{js, jsx} | Symboly |",
-  "extension.config.recentIcons.showIcons.title": "Zobrazit nedávné ikony",
-  "extension.config.recentIcons.showIcons.description": "Určuje, zda se mají zobrazovat nejnověji přístupné ikony.",
-  "extension.config.recentIcons.limitShowIcons.title": "Omezení zobrazení nedávných ikon",
-  "extension.config.recentIcons.limitShowIcons.description": "Maximální počet nedávných ikon, které se mají zobrazit."
+  "extension.config.iconCollection.title": "Limity kolekcí ikon",
+  "extension.config.iconCollection.description": "Maximální počet ikon k zobrazení na kolekci. Nastavte na 0 pro skrytí celé kolekce."
 }

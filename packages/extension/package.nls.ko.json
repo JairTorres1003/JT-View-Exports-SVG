@@ -27,8 +27,6 @@
   "extension.config.showNotExportedIcons.description": "미내보내기 아이콘을 표시할지 여부를 나타냅니다.",
   "extension.config.groupPatterns.title": "그룹 패턴",
   "extension.config.groupPatterns.description": "아이콘 파일을 그룹화하기 위한 패턴 배열입니다. 각 패턴에는 'item' (패턴)과 'value' (그룹 이름)가 필요합니다.\n예:\n| item | value |\n| --- | --- |\n| ** | 모든 아이콘 |\n| **/Flag* | 깃발 |\n| **/Symbol*.{js, jsx} | 기호 |",
-  "extension.config.recentIcons.showIcons.title": "최근 아이콘 표시",
-  "extension.config.recentIcons.showIcons.description": "가장 최근에 액세스한 아이콘을 표시할지 여부를 나타냅니다.",
-  "extension.config.recentIcons.limitShowIcons.title": "최근 아이콘 표시 제한",
-  "extension.config.recentIcons.limitShowIcons.description": "표시할 최근 아이콘의 최대 수입니다."
+  "extension.config.iconCollection.title": "아이콘 컬렉션 제한",
+  "extension.config.iconCollection.description": "컬렉션당 표시할 최대 아이콘 수. 0으로 설정하면 컬렉션이 완전히 숨겨집니다."
 }

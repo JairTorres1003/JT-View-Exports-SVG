@@ -27,8 +27,6 @@
   "extension.config.showNotExportedIcons.description": "指示是否顯示未導出的圖標。",
   "extension.config.groupPatterns.title": "分組模式",
   "extension.config.groupPatterns.description": "一個數組，用於分組圖標文件的模式。每個模式需要一個 'item'（模式）和一個 'value'（組名）。\n示例：\n| item | value |\n| --- | --- |\n| ** | 所有圖標 |\n| **/Flag* | 旗幟 |\n| **/Symbol*.{js, jsx} | 符號 |",
-  "extension.config.recentIcons.showIcons.title": "顯示最近圖標",
-  "extension.config.recentIcons.showIcons.description": "指示是否顯示最近訪問的圖標。",
-  "extension.config.recentIcons.limitShowIcons.title": "限制顯示最近圖標",
-  "extension.config.recentIcons.limitShowIcons.description": "要顯示的最近圖標的最大數量。"
+  "extension.config.iconCollection.title": "圖示集合限制",
+  "extension.config.iconCollection.description": "每個集合最多顯示的圖示數量。設為 0 可完全隱藏該集合。"
 }

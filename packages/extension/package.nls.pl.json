@@ -27,8 +27,6 @@
   "extension.config.showNotExportedIcons.description": "Określa, czy pokazywać ikony, które nie są eksportowane.",
   "extension.config.groupPatterns.title": "Wzorce grupowania",
   "extension.config.groupPatterns.description": "Tablica wzorców do grupowania plików ikon. Każdy wzorzec wymaga 'item' (wzorzec) i 'value' (nazwa grupy).\nPrzykład:\n| item | value |\n| --- | --- |\n| ** | Wszystkie ikony |\n| **/Flag* | Flagi |\n| **/Symbol*.{js, jsx} | Symbole |",
-  "extension.config.recentIcons.showIcons.title": "Pokaż ostatnie ikony",
-  "extension.config.recentIcons.showIcons.description": "Określa, czy pokazywać ostatnio używane ikony.",
-  "extension.config.recentIcons.limitShowIcons.title": "Limit wyświetlania ostatnich ikon",
-  "extension.config.recentIcons.limitShowIcons.description": "Maksymalna liczba ostatnich ikon do wyświetlenia."
+  "extension.config.iconCollection.title": "Limity kolekcji ikon",
+  "extension.config.iconCollection.description": "Maksymalna liczba ikon do wyświetlenia w kolekcji. Ustaw na 0, aby całkowicie ukryć kolekcję."
 }
