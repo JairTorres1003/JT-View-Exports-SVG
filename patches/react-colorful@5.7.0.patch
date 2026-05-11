@@ -1,6 +1,3 @@
-diff --git a/CHANGELOG.md b/CHANGELOG.md
-deleted file mode 100644
-index 8b77466d94e690326929a2fe4054c925db5819c3..0000000000000000000000000000000000000000
 diff --git a/dist/index.d.ts b/dist/index.d.ts
 index 7426a45ea7530c6db8e09053406e5b0ddb640742..d495eda81189cf48c719b1e58415418158b53c4d 100644
 --- a/dist/index.d.ts
