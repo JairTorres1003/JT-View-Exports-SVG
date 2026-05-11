@@ -39,13 +39,13 @@
     "format": "biome format --write"
   },
   "dependencies": {
-    "@docusaurus/core": "3.10.0",
-    "@docusaurus/plugin-content-blog": "^3.10.0",
-    "@docusaurus/plugin-content-docs": "^3.10.0",
-    "@docusaurus/plugin-ideal-image": "^3.10.0",
-    "@docusaurus/preset-classic": "3.10.0",
-    "@docusaurus/theme-common": "^3.10.0",
-    "@docusaurus/utils": "^3.10.0",
+    "@docusaurus/core": "3.10.1",
+    "@docusaurus/plugin-content-blog": "^3.10.1",
+    "@docusaurus/plugin-content-docs": "^3.10.1",
+    "@docusaurus/plugin-ideal-image": "^3.10.1",
+    "@docusaurus/preset-classic": "3.10.1",
+    "@docusaurus/theme-common": "^3.10.1",
+    "@docusaurus/utils": "^3.10.1",
     "@heroui/breadcrumbs": "^2.2.24",
     "@heroui/button": "^2.2.29",
     "@heroui/card": "^2.2.27",
@@ -78,9 +78,9 @@
     "unist-util-visit": "^5.1.0"
   },
   "devDependencies": {
-    "@docusaurus/module-type-aliases": "3.10.0",
-    "@docusaurus/tsconfig": "3.10.0",
-    "@docusaurus/types": "3.10.0",
+    "@docusaurus/module-type-aliases": "3.10.1",
+    "@docusaurus/tsconfig": "3.10.1",
+    "@docusaurus/types": "3.10.1",
     "@tailwindcss/postcss": "^4.1.18",
     "@types/estree": "^1.0.8",
     "@types/fs-extra": "^11.0.4",
