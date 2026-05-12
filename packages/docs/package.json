@@ -40,6 +40,7 @@
   },
   "dependencies": {
     "@docusaurus/core": "3.10.1",
+    "@docusaurus/faster": "^3.10.1",
     "@docusaurus/plugin-content-blog": "^3.10.1",
     "@docusaurus/plugin-content-docs": "^3.10.1",
     "@docusaurus/plugin-ideal-image": "^3.10.1",

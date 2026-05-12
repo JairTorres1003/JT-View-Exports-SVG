@@ -1,7 +1,6 @@
 import type {} from '@docusaurus/plugin-ideal-image'
 import type * as Preset from '@docusaurus/preset-classic'
 import type { Config } from '@docusaurus/types'
-import type {} from 'docusaurus-plugin-image-zoom'
 import { themes as prismThemes } from 'prism-react-renderer'
 import rehypeAdvancedTablePlugin from './src/plugins/rehype/table'
 import remarkAdvancedTablePlugin from './src/plugins/remark/table'
@@ -19,7 +18,8 @@ const config: Config = {
 
   // Future flags, see https://docusaurus.io/docs/api/docusaurus-config#future
   future: {
-    v4: true, // Improve compatibility with the upcoming Docusaurus v4
+    v4: true, // Improve compatibility with the upcoming Docusaurus v4,
+    faster: true,
   },
 
   // Set the production url of your site here
