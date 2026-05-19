@@ -1,8 +1,4 @@
-import {
-  generateDynamicMessage,
-  SVGPostMessage,
-  SVGReceiveMessage,
-} from '@jt-view-exports-svg/core'
+import { ExtensionMessage, generateDynamicMessage, WebviewMessage } from '@jt-view-exports-svg/core'
 import { handleVscodeMessageExchange } from '../exchanges/handleVscodeMessageExchange'
 import type { InterceptorHandler } from '../fetchInterceptorEngine'
 
@@ -14,8 +10,8 @@ export const themeHandler: InterceptorHandler = async (path) => {
   if (!match || path.endsWith('package.json')) return null
 
   const routeMatch = match[1]
-  const requestType = generateDynamicMessage(SVGReceiveMessage.FetchVSCodeTheme, routeMatch)
-  const responseType = generateDynamicMessage(SVGPostMessage.FetchVSCodeTheme, routeMatch)
+  const requestType = generateDynamicMessage(WebviewMessage.FetchVSCodeTheme, routeMatch)
+  const responseType = generateDynamicMessage(ExtensionMessage.FetchVSCodeTheme, routeMatch)
 
   return handleVscodeMessageExchange({ requestType, responseType })
 }

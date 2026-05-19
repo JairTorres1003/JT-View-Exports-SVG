@@ -1,11 +1,11 @@
-import type { SVGReceiveMessage } from '@jt-view-exports-svg/core'
+import type { WebviewMessage } from '@jt-view-exports-svg/core'
 import type { WebviewApi } from 'vscode-webview'
 import { getUnknownError } from '@/utils/errors'
 import isEmpty from '@/utils/is-empty'
 import { axiosInstance } from '../instance'
 
 interface VSCodeInternalAPIWrapperMessage {
-  type: SVGReceiveMessage
+  type: WebviewMessage
   data?: unknown
 }
 class VSCodeInternalAPIWrapper<T = unknown> implements WebviewApi<T> {

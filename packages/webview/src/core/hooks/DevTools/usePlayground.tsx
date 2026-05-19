@@ -1,4 +1,4 @@
-import { type ExtensionManage, SVGPostMessage, SVGReceiveMessage } from '@jt-view-exports-svg/core'
+import { type ExtensionManage, ExtensionMessage, WebviewMessage } from '@jt-view-exports-svg/core'
 import i18next from 'i18next'
 import { useCallback, useEffect, useRef, useState } from 'react'
 import { Trans, useTranslation } from 'react-i18next'
@@ -172,15 +172,15 @@ export const usePlayground = (): PlaygroundHook => {
   }
 
   useEffect(() => {
-    vscode.postMessage(SVGReceiveMessage.RequestEditorConfig)
-    vscode.postMessage(SVGReceiveMessage.RequestEditorExtensionTheme)
+    vscode.postMessage(WebviewMessage.RequestEditorConfig)
+    vscode.postMessage(WebviewMessage.RequestEditorExtensionTheme)
 
-    vscode.onMessage(SVGPostMessage.LoadEditorConfig, handleEditorConfig)
-    vscode.onMessage(SVGPostMessage.LoadExtensionTheme, handleExtensionTheme)
+    vscode.onMessage(ExtensionMessage.LoadEditorConfig, handleEditorConfig)
+    vscode.onMessage(ExtensionMessage.LoadExtensionTheme, handleExtensionTheme)
 
     return () => {
-      vscode.unregisterMessage(SVGPostMessage.LoadEditorConfig)
-      vscode.unregisterMessage(SVGPostMessage.LoadExtensionTheme)
+      vscode.unregisterMessage(ExtensionMessage.LoadEditorConfig)
+      vscode.unregisterMessage(ExtensionMessage.LoadExtensionTheme)
     }
   }, [])
 

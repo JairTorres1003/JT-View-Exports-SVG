@@ -1,4 +1,4 @@
-import { type LocationIdentifier, SVGReceiveMessage } from '@jt-view-exports-svg/core'
+import { type LocationIdentifier, WebviewMessage } from '@jt-view-exports-svg/core'
 import { l10n, window, workspace } from 'vscode'
 
 import { getCache } from '@/services/cache/main'
@@ -7,7 +7,7 @@ import { openFile } from '@/utilities/files/misc'
 import { BaseHandler } from '../BaseHandler'
 
 export class OpenFileInEditorHandler extends BaseHandler {
-  readonly type = SVGReceiveMessage.OpenFileInEditor
+  readonly type = WebviewMessage.OpenFileInEditor
 
   async handle(location: LocationIdentifier) {
     const filesCache = getCache().get('files')

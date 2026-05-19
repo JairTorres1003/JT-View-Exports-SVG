@@ -1,7 +1,7 @@
 import {
-  type PostMessageEmitter,
-  type ReceiveMessage,
-  SVGReceiveMessage,
+  type ExtensionMessageEmitter,
+  WebviewMessage,
+  type WebviewMessageData,
 } from '@jt-view-exports-svg/core'
 import * as vsc from 'vscode'
 import type { MessageRouter } from './MessageRouter'
@@ -32,7 +32,7 @@ export class WebviewMessenger {
   /**
    * Send message to webview safely
    */
-  public postMessage: PostMessageEmitter = (type, data) => {
+  public postMessage: ExtensionMessageEmitter = (type, data) => {
     if (!this._isReady) {
       this._queue.push({ type, data })
       return
@@ -44,8 +44,8 @@ export class WebviewMessenger {
   /**
    * Handle incoming messages
    */
-  private handleMessage(message: ReceiveMessage): void {
-    if (message?.type === SVGReceiveMessage.Ready) {
+  private handleMessage(message: WebviewMessageData): void {
+    if (message?.type === WebviewMessage.Ready) {
       this._isReady = true
       this.flushQueue()
       return

@@ -1,4 +1,4 @@
-import { pathnames, SVGReceiveMessage } from '@jt-view-exports-svg/core'
+import { pathnames, WebviewMessage } from '@jt-view-exports-svg/core'
 import { l10n } from 'vscode'
 
 import { toggleViewActions } from '@/commands/editorTitleActions'
@@ -7,7 +7,7 @@ import { getUnknownError } from '@/utilities/misc'
 import { BaseHandler } from './BaseHandler'
 
 export class ChangeViewPathHandler extends BaseHandler {
-  readonly type = SVGReceiveMessage.ChangeViewPath
+  readonly type = WebviewMessage.ChangeViewPath
 
   private readonly showingPaths: string[] = [pathnames.home, pathnames.dashboard]
 

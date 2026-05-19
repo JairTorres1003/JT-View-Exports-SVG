@@ -1,4 +1,4 @@
-import { SVGPostMessage, SVGReceiveMessage } from '@jt-view-exports-svg/core'
+import { ExtensionMessage, WebviewMessage } from '@jt-view-exports-svg/core'
 import { l10n } from 'vscode'
 
 import type { WebviewMessenger } from '@/messaging/WebviewMessenger'
@@ -7,7 +7,7 @@ import { viewExportStore } from '@/store/ViewExportStore'
 import { BaseHandler } from '../BaseHandler'
 
 export class RequestComponentsHandler extends BaseHandler {
-  readonly type = SVGReceiveMessage.RequestComponents
+  readonly type = WebviewMessage.RequestComponents
 
   constructor(private readonly messenger: WebviewMessenger) {
     super()
@@ -17,12 +17,12 @@ export class RequestComponentsHandler extends BaseHandler {
     const components = viewExportStore.getAll()
 
     if (!components.length) {
-      this.messenger.postMessage(SVGPostMessage.OnErrorComponents, {
+      this.messenger.postMessage(ExtensionMessage.OnErrorComponents, {
         message: l10n.t('No SVG components found...'),
       })
       return
     }
 
-    this.messenger.postMessage(SVGPostMessage.LoadComponents, components)
+    this.messenger.postMessage(ExtensionMessage.LoadComponents, components)
   }
 }

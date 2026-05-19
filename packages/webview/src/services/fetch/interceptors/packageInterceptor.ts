@@ -1,4 +1,4 @@
-import { SVGPostMessage, SVGReceiveMessage } from '@jt-view-exports-svg/core'
+import { ExtensionMessage, WebviewMessage } from '@jt-view-exports-svg/core'
 import { handleVscodeMessageExchange } from '../exchanges/handleVscodeMessageExchange'
 import type { InterceptorHandler } from '../fetchInterceptorEngine'
 
@@ -8,7 +8,7 @@ export const packageHandler: InterceptorHandler = async (path) => {
   if (!PACKAGE_REGEX.test(path)) return null
 
   return handleVscodeMessageExchange({
-    requestType: SVGReceiveMessage.FetchVsCodeThemePackage,
-    responseType: SVGPostMessage.FetchVsCodeThemePackage,
+    requestType: WebviewMessage.FetchVsCodeThemePackage,
+    responseType: ExtensionMessage.FetchVsCodeThemePackage,
   })
 }

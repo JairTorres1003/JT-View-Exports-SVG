@@ -1,4 +1,4 @@
-import { SVGPostMessage, SVGReceiveMessage, type ViewExportSVG } from '@jt-view-exports-svg/core'
+import { ExtensionMessage, type ViewExportSVG, WebviewMessage } from '@jt-view-exports-svg/core'
 import { useCallback, useEffect, useRef, useState } from 'react'
 
 import { vscode } from '@/services/vscode'
@@ -26,7 +26,7 @@ export const useExpandedComponents = (): ExpandedComponentsHook => {
   const expandAll = useCallback(
     (isExpanded: boolean) => {
       setExpandedItems(isExpanded ? components.map((c) => c.groupKind.id) : [])
-      vscode.postMessage(SVGReceiveMessage.IsExpandComponents, isExpanded)
+      vscode.postMessage(WebviewMessage.IsExpandComponents, isExpanded)
     },
     [components]
   )
@@ -46,9 +46,9 @@ export const useExpandedComponents = (): ExpandedComponentsHook => {
         const newState = expanded ? [...prev, panel] : prev.filter((item) => item !== panel)
 
         if (prev.length === 0 && newState.length > 0)
-          vscode.postMessage(SVGReceiveMessage.IsExpandComponents, true)
+          vscode.postMessage(WebviewMessage.IsExpandComponents, true)
         if (prev.length > 0 && newState.length === 0)
-          vscode.postMessage(SVGReceiveMessage.IsExpandComponents, false)
+          vscode.postMessage(WebviewMessage.IsExpandComponents, false)
 
         return newState
       })
@@ -79,12 +79,12 @@ export const useExpandedComponents = (): ExpandedComponentsHook => {
   }, [components.length, defaultExpandAll, expandAll])
 
   useEffect(() => {
-    vscode.onMessage(SVGPostMessage.ToggleExpandAllComponents, expandAll)
-    vscode.onMessage(SVGPostMessage.OnReloadComponent, handleRefresh)
+    vscode.onMessage(ExtensionMessage.ToggleExpandAllComponents, expandAll)
+    vscode.onMessage(ExtensionMessage.OnReloadComponent, handleRefresh)
 
     return () => {
-      vscode.unregisterMessage(SVGPostMessage.ToggleExpandAllComponents)
-      vscode.unregisterMessage(SVGPostMessage.OnReloadComponent)
+      vscode.unregisterMessage(ExtensionMessage.ToggleExpandAllComponents)
+      vscode.unregisterMessage(ExtensionMessage.OnReloadComponent)
     }
   }, [expandAll, handleRefresh])
 

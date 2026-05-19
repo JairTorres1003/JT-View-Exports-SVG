@@ -1,4 +1,4 @@
-import { SVGReceiveMessage } from '@jt-view-exports-svg/core'
+import { WebviewMessage } from '@jt-view-exports-svg/core'
 import * as vsc from 'vscode'
 
 import { CONFIG_KEY } from '@/constants/misc'
@@ -6,7 +6,7 @@ import { CONFIG_KEY } from '@/constants/misc'
 import { BaseHandler } from '../BaseHandler'
 
 export class ReloadEditorExtensionThemeHandler extends BaseHandler {
-  readonly type = SVGReceiveMessage.ReloadEditorExtensionTheme
+  readonly type = WebviewMessage.ReloadEditorExtensionTheme
 
   async handle() {
     try {

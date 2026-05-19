@@ -1,4 +1,4 @@
-import { SVGPostMessage } from '@jt-view-exports-svg/core'
+import { ExtensionMessage } from '@jt-view-exports-svg/core'
 import { useState } from 'react'
 
 import { useAppSelector } from '@/store/hooks'
@@ -30,7 +30,7 @@ const useNavigationDrawer = () => {
 
   const toggleExpanded = () => {
     setIsExpanded(!isExpanded)
-    window.postMessage({ type: SVGPostMessage.ToggleExpandAllComponents, data: !isExpanded }, '*')
+    window.postMessage({ type: ExtensionMessage.ToggleExpandAllComponents, data: !isExpanded }, '*')
   }
 
   return {

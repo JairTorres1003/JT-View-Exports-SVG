@@ -1,4 +1,4 @@
-import { SVGPostMessage, SVGReceiveMessage } from '@jt-view-exports-svg/core'
+import { ExtensionMessage, WebviewMessage } from '@jt-view-exports-svg/core'
 import { l10n } from 'vscode'
 
 import type { WebviewMessenger } from '@/messaging/WebviewMessenger'
@@ -9,7 +9,7 @@ import { getUnknownError } from '@/utilities/misc'
 import { BaseHandler } from '../BaseHandler'
 
 export class SearchComponentsHandler extends BaseHandler {
-  readonly type = SVGReceiveMessage.SearchComponents
+  readonly type = WebviewMessage.SearchComponents
 
   constructor(private readonly messenger: WebviewMessenger) {
     super()
@@ -47,9 +47,9 @@ export class SearchComponentsHandler extends BaseHandler {
       viewExportStore.clearSearch()
       const result = this.searchComponents(searchTerm)
 
-      this.messenger.postMessage(SVGPostMessage.FilterComponents, result)
+      this.messenger.postMessage(ExtensionMessage.FilterComponents, result)
     } catch (error) {
-      this.messenger.postMessage(SVGPostMessage.OnErrorComponents, {
+      this.messenger.postMessage(ExtensionMessage.OnErrorComponents, {
         message: getUnknownError(error),
       })
     }

@@ -16,7 +16,7 @@ const app = express()
 
 app.use(cors())
 app.use(express.json())
-app.use(limiter)
+app.use(limiter as unknown as express.RequestHandler)
 
 app.use(express.static('src/views'))
 

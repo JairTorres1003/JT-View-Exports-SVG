@@ -1,8 +1,8 @@
 import {
+  ExtensionMessage,
   type SVGComponent,
   type SVGErrors,
-  SVGPostMessage,
-  SVGReceiveMessage,
+  WebviewMessage,
 } from '@jt-view-exports-svg/core'
 import { useEffect, useState } from 'react'
 
@@ -95,18 +95,18 @@ export const useCodeEditor = (editorRef: React.RefObject<TypeEditorRef>) => {
       return
     }
 
-    vscode.postMessage(SVGReceiveMessage.EditComponentInPlayground, {
+    vscode.postMessage(WebviewMessage.EditComponentInPlayground, {
       value: debounceValue,
       name: recentlySelected?.name,
       location: recentlySelected?.location,
     })
 
-    vscode.onMessage(SVGPostMessage.ComponentEditedInPlayground, handleEditComponent)
-    vscode.onMessage(SVGPostMessage.ErrorEditingComponentInPlayground, handleErrorComponent)
+    vscode.onMessage(ExtensionMessage.ComponentEditedInPlayground, handleEditComponent)
+    vscode.onMessage(ExtensionMessage.ErrorEditingComponentInPlayground, handleErrorComponent)
 
     return () => {
-      vscode.unregisterMessage(SVGPostMessage.ComponentEditedInPlayground)
-      vscode.unregisterMessage(SVGPostMessage.ErrorEditingComponentInPlayground)
+      vscode.unregisterMessage(ExtensionMessage.ComponentEditedInPlayground)
+      vscode.unregisterMessage(ExtensionMessage.ErrorEditingComponentInPlayground)
     }
   }, [debounceValue])
 

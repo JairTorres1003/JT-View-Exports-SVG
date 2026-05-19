@@ -2,7 +2,7 @@
  * Post message types (Extension → Webview)
  * Messages sent from the extension to the webview
  */
-export const SVGPostMessage = {
+export const ExtensionMessage = {
   // root message types
   Navigate: 'send/navigate',
 
@@ -36,13 +36,13 @@ export const SVGPostMessage = {
 /**
  * Type representing possible post message values
  */
-export type SVGPostMessage = (typeof SVGPostMessage)[keyof typeof SVGPostMessage]
+export type ExtensionMessage = (typeof ExtensionMessage)[keyof typeof ExtensionMessage]
 
 /**
  * Receive message types (Webview → Extension)
  * Messages sent from the webview to the extension
  */
-export const SVGReceiveMessage = {
+export const WebviewMessage = {
   // root message types
   Ready: 'ready',
   ChangeViewPath: 'navigate/change-path',
@@ -84,4 +84,4 @@ export const SVGReceiveMessage = {
 /**
  * Type representing possible receive message values
  */
-export type SVGReceiveMessage = (typeof SVGReceiveMessage)[keyof typeof SVGReceiveMessage]
+export type WebviewMessage = (typeof WebviewMessage)[keyof typeof WebviewMessage]

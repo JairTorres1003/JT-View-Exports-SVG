@@ -1,4 +1,4 @@
-import { type IExtension, SVGPostMessage, SVGReceiveMessage } from '@jt-view-exports-svg/core'
+import { ExtensionMessage, type IExtension, WebviewMessage } from '@jt-view-exports-svg/core'
 import * as vsc from 'vscode'
 
 import type { WebviewMessenger } from '@/messaging/WebviewMessenger'
@@ -9,7 +9,7 @@ import { getUnknownError } from '@/utilities/misc'
 import { BaseHandler } from '../BaseHandler'
 
 export class FetchVsCodeThemePackageHandler extends BaseHandler {
-  readonly type = SVGReceiveMessage.FetchVsCodeThemePackage
+  readonly type = WebviewMessage.FetchVsCodeThemePackage
 
   constructor(private readonly messenger: WebviewMessenger) {
     super()
@@ -21,7 +21,7 @@ export class FetchVsCodeThemePackageHandler extends BaseHandler {
     const themeData = await cache?.get(CACHE_KEY)
 
     if (!themeData || themeData.id === '') {
-      this.messenger.postMessage(SVGPostMessage.FetchVsCodeThemePackage, {
+      this.messenger.postMessage(ExtensionMessage.FetchVsCodeThemePackage, {
         success: false,
         error: vsc.l10n.t('Theme package not found'),
       })
@@ -36,12 +36,12 @@ export class FetchVsCodeThemePackageHandler extends BaseHandler {
       const fileData = await vsc.workspace.fs.readFile(uriFile)
       const themeContent = new TextDecoder('utf-8').decode(fileData)
 
-      this.messenger.postMessage(SVGPostMessage.FetchVsCodeThemePackage, {
+      this.messenger.postMessage(ExtensionMessage.FetchVsCodeThemePackage, {
         success: true,
         data: JSON.parse(themeContent),
       })
     } catch (error) {
-      this.messenger.postMessage(SVGPostMessage.FetchVsCodeThemePackage, {
+      this.messenger.postMessage(ExtensionMessage.FetchVsCodeThemePackage, {
         success: false,
         error: vsc.l10n.t('Error reading theme package file: {error}', {
           error: getUnknownError(error),

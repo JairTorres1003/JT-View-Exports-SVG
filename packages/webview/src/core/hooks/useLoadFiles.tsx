@@ -1,4 +1,4 @@
-import { type FileTemporary, SVGPostMessage, SVGReceiveMessage } from '@jt-view-exports-svg/core'
+import { ExtensionMessage, type FileTemporary, WebviewMessage } from '@jt-view-exports-svg/core'
 import { List, ListItem, ListItemText, Stack, Typography } from '@mui/material'
 import { useEffect, useState } from 'react'
 import { useTranslation } from 'react-i18next'
@@ -112,7 +112,7 @@ export const useLoadFiles = () => {
    * This function sends a message to the VS Code extension to open the file dialog.
    */
   const handleOpenDialog = () => {
-    vscode.postMessage(SVGReceiveMessage.OpenDialogFiles)
+    vscode.postMessage(WebviewMessage.OpenDialogFiles)
   }
 
   /**
@@ -151,7 +151,7 @@ export const useLoadFiles = () => {
 
     Promise.all(filePromises)
       .then((filesData) => {
-        vscode.postMessage(SVGReceiveMessage.CreateTempFiles, filesData)
+        vscode.postMessage(WebviewMessage.CreateTempFiles, filesData)
       })
       .catch(console.error)
   }
@@ -166,10 +166,10 @@ export const useLoadFiles = () => {
   }
 
   useEffect(() => {
-    vscode.onMessage(SVGPostMessage.LoadOpenFiles, loadFiles)
+    vscode.onMessage(ExtensionMessage.LoadOpenFiles, loadFiles)
 
     return () => {
-      vscode.unregisterMessage(SVGPostMessage.LoadOpenFiles)
+      vscode.unregisterMessage(ExtensionMessage.LoadOpenFiles)
     }
   }, [])
 

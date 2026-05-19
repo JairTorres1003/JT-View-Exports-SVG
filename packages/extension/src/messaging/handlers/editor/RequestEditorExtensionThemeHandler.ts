@@ -1,4 +1,4 @@
-import { SVGPostMessage, SVGReceiveMessage } from '@jt-view-exports-svg/core'
+import { ExtensionMessage, WebviewMessage } from '@jt-view-exports-svg/core'
 import { l10n, window } from 'vscode'
 
 import type { WebviewMessenger } from '@/messaging/WebviewMessenger'
@@ -8,7 +8,7 @@ import { CACHE_KEY, initializeExtensionTheme } from '@/services/vscode/extension
 import { BaseHandler } from '../BaseHandler'
 
 export class RequestEditorExtensionThemeHandler extends BaseHandler {
-  readonly type = SVGReceiveMessage.RequestEditorExtensionTheme
+  readonly type = WebviewMessage.RequestEditorExtensionTheme
 
   constructor(private readonly messenger: WebviewMessenger) {
     super()
@@ -30,6 +30,6 @@ export class RequestEditorExtensionThemeHandler extends BaseHandler {
       return
     }
 
-    this.messenger.postMessage(SVGPostMessage.LoadExtensionTheme, theme)
+    this.messenger.postMessage(ExtensionMessage.LoadExtensionTheme, theme)
   }
 }

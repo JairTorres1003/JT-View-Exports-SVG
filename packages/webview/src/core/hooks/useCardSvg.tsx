@@ -3,7 +3,7 @@ import {
   type SVGComponent,
   type SVGIcon,
   type SVGIconCollection,
-  SVGReceiveMessage,
+  WebviewMessage,
 } from '@jt-view-exports-svg/core'
 import React, { useCallback, useEffect } from 'react'
 import { Trans, useTranslation } from 'react-i18next'
@@ -65,7 +65,7 @@ export const useCardSvg = ({ favorite = false }: UseCardSvgProps): CardSvgHook =
       dispatch(setIsOpenDevTools(true))
     }
 
-    vscode.postMessage(SVGReceiveMessage.AddIconToCollection, {
+    vscode.postMessage(WebviewMessage.AddIconToCollection, {
       name: component.name,
       location: component.location,
       collection: IconCollectionKind.RECENT,
@@ -94,9 +94,9 @@ export const useCardSvg = ({ favorite = false }: UseCardSvgProps): CardSvgHook =
       }
 
       if (component.isFavorite) {
-        vscode.postMessage(SVGReceiveMessage.RemoveIconFromCollection, payload)
+        vscode.postMessage(WebviewMessage.RemoveIconFromCollection, payload)
       } else {
-        vscode.postMessage(SVGReceiveMessage.AddIconToCollection, payload)
+        vscode.postMessage(WebviewMessage.AddIconToCollection, payload)
       }
     },
     [files]

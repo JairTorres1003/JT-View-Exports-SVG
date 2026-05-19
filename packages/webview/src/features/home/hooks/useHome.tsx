@@ -1,4 +1,4 @@
-import { SVGPostMessage, SVGReceiveMessage, type ViewExportSVG } from '@jt-view-exports-svg/core'
+import { ExtensionMessage, type ViewExportSVG, WebviewMessage } from '@jt-view-exports-svg/core'
 import { useEffect } from 'react'
 
 import { vscode } from '@/services/vscode'
@@ -13,20 +13,20 @@ export const useHome = () => {
 
     const ids = data.flatMap((component) => component.files)
     if (ids.length > 0) {
-      vscode.postMessage(SVGReceiveMessage.RequestFileMetadata, ids)
+      vscode.postMessage(WebviewMessage.RequestFileMetadata, ids)
     }
   }
 
   useEffect(() => {
-    vscode.postMessage(SVGReceiveMessage.RequestUserComponents)
-    vscode.onMessage(SVGPostMessage.LoadUserComponents, handleUserComponents)
-    vscode.onMessage(SVGPostMessage.LoadFileMetadata, (files) => {
+    vscode.postMessage(WebviewMessage.RequestUserComponents)
+    vscode.onMessage(ExtensionMessage.LoadUserComponents, handleUserComponents)
+    vscode.onMessage(ExtensionMessage.LoadFileMetadata, (files) => {
       dispatch(setFiles(files))
     })
 
     return () => {
-      vscode.unregisterMessage(SVGPostMessage.LoadUserComponents)
-      vscode.unregisterMessage(SVGPostMessage.LoadFileMetadata)
+      vscode.unregisterMessage(ExtensionMessage.LoadUserComponents)
+      vscode.unregisterMessage(ExtensionMessage.LoadFileMetadata)
     }
   }, [dispatch])
 }

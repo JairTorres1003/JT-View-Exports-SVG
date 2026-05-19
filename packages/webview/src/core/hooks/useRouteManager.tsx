@@ -1,4 +1,4 @@
-import { pathnames, SVGReceiveMessage } from '@jt-view-exports-svg/core'
+import { pathnames, WebviewMessage } from '@jt-view-exports-svg/core'
 import { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 
@@ -37,7 +37,7 @@ export const useRouteManager = () => {
 
     void navigate(route.path, route.options)
 
-    vscode.postMessage(SVGReceiveMessage.ChangeViewPath, route.path)
+    vscode.postMessage(WebviewMessage.ChangeViewPath, route.path)
   }
 
   const onOpen = () => {

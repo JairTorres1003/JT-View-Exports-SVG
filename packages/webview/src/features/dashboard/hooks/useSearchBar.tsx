@@ -1,4 +1,4 @@
-import { SVGPostMessage, SVGReceiveMessage, type ViewExportSVG } from '@jt-view-exports-svg/core'
+import { ExtensionMessage, type ViewExportSVG, WebviewMessage } from '@jt-view-exports-svg/core'
 import { useEffect, useRef } from 'react'
 
 import useDebounce from '@/core/hooks/useDebounce'
@@ -50,11 +50,11 @@ export const useSearchBar = (): SearchBarHook => {
   useEffect(() => {
     if (!mountedRef.current) return
 
-    vscode.postMessage(SVGReceiveMessage.SearchComponents, debouncedSearch)
-    vscode.onMessage(SVGPostMessage.FilterComponents, getSVGComponents)
+    vscode.postMessage(WebviewMessage.SearchComponents, debouncedSearch)
+    vscode.onMessage(ExtensionMessage.FilterComponents, getSVGComponents)
 
     return () => {
-      vscode.unregisterMessage(SVGPostMessage.FilterComponents)
+      vscode.unregisterMessage(ExtensionMessage.FilterComponents)
     }
   }, [debouncedSearch])
 

@@ -1,4 +1,4 @@
-import { SVGPostMessage } from '@jt-view-exports-svg/core'
+import { ExtensionMessage } from '@jt-view-exports-svg/core'
 import { l10n, window } from 'vscode'
 
 import { PanelController } from '@/controllers/views/PanelController'
@@ -20,10 +20,10 @@ export const runReloadTheme = async (): Promise<void> => {
   const config = getConfigurationEditor()
   const theme = await cache.get(CACHE_KEY)
 
-  PanelController.send(SVGPostMessage.LoadEditorConfig, config)
+  PanelController.send(ExtensionMessage.LoadEditorConfig, config)
 
   if (!isEmpty(theme)) {
-    PanelController.send(SVGPostMessage.LoadExtensionTheme, theme)
+    PanelController.send(ExtensionMessage.LoadExtensionTheme, theme)
   } else {
     window
       .showInformationMessage(l10n.t('No theme found for the current workspace'))

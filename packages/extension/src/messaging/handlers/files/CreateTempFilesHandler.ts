@@ -1,11 +1,11 @@
-import { type FileTemporary, SVGPostMessage, SVGReceiveMessage } from '@jt-view-exports-svg/core'
+import { ExtensionMessage, type FileTemporary, WebviewMessage } from '@jt-view-exports-svg/core'
 import * as vsc from 'vscode'
 import { CONFIG_KEY } from '@/constants/misc'
 import type { WebviewMessenger } from '@/messaging/WebviewMessenger'
 import { BaseHandler } from '../BaseHandler'
 
 export class CreateTempFilesHandler extends BaseHandler {
-  readonly type = SVGReceiveMessage.CreateTempFiles
+  readonly type = WebviewMessage.CreateTempFiles
 
   constructor(private readonly messenger: WebviewMessenger) {
     super()
@@ -28,7 +28,7 @@ export class CreateTempFilesHandler extends BaseHandler {
         })
       )
 
-      this.messenger.postMessage(SVGPostMessage.LoadOpenFiles, uris)
+      this.messenger.postMessage(ExtensionMessage.LoadOpenFiles, uris)
     } catch (error) {
       console.error(vsc.l10n.t('Error creating temporary files'), error)
     }

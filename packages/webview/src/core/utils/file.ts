@@ -1,4 +1,4 @@
-import { type LocationIdentifier, SVGReceiveMessage } from '@jt-view-exports-svg/core'
+import { type LocationIdentifier, WebviewMessage } from '@jt-view-exports-svg/core'
 
 import { vscode } from '@/services/vscode'
 
@@ -37,5 +37,5 @@ export const getFileName = (filePath: string): string => {
  * @param position - The position in the file to open (default is { column: 0, line: 0, index: 0 }).
  */
 export const openFileInPosition = (location: LocationIdentifier): void => {
-  vscode.postMessage(SVGReceiveMessage.OpenFileInEditor, location)
+  vscode.postMessage(WebviewMessage.OpenFileInEditor, location)
 }

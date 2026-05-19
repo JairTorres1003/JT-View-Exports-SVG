@@ -1,4 +1,4 @@
-import { SVGPostMessage, SVGReceiveMessage } from '@jt-view-exports-svg/core'
+import { ExtensionMessage, WebviewMessage } from '@jt-view-exports-svg/core'
 import { useEffect, useState } from 'react'
 import { type PanelProps, usePanelRef } from 'react-resizable-panels'
 
@@ -40,10 +40,10 @@ export const useViewPanels = () => {
    */
   const onResize: PanelProps['onResize'] = (size) => {
     if (size.inPixels < 200) {
-      vscode.postMessage(SVGReceiveMessage.IsOpenDevTools, false)
+      vscode.postMessage(WebviewMessage.IsOpenDevTools, false)
       dispatch(setIsOpenDevTools(false))
     } else if (size.inPixels >= 200 && !isOpenDevTools) {
-      vscode.postMessage(SVGReceiveMessage.IsOpenDevTools, true)
+      vscode.postMessage(WebviewMessage.IsOpenDevTools, true)
       dispatch(setIsOpenDevTools(true))
     }
   }
@@ -61,17 +61,17 @@ export const useViewPanels = () => {
   }
 
   useEffect(() => {
-    vscode.onMessage(SVGPostMessage.ToggleOpenDevTools, toggleSidePanel)
+    vscode.onMessage(ExtensionMessage.ToggleOpenDevTools, toggleSidePanel)
 
     return () => {
-      vscode.unregisterMessage(SVGPostMessage.ToggleOpenDevTools)
+      vscode.unregisterMessage(ExtensionMessage.ToggleOpenDevTools)
     }
   }, [])
 
   useEffect(() => {
     if (isOpenDevTools && sidePanelRef.current) {
       sidePanelRef.current.expand()
-      vscode.postMessage(SVGReceiveMessage.IsOpenDevTools, true)
+      vscode.postMessage(WebviewMessage.IsOpenDevTools, true)
     }
   }, [isOpenDevTools])
 

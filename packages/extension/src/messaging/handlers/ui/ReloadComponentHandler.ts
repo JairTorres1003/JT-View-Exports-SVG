@@ -1,8 +1,8 @@
 import {
+  ExtensionMessage,
   type FileIdentifier,
-  SVGPostMessage,
-  SVGReceiveMessage,
   type ViewExportSVG,
+  WebviewMessage,
 } from '@jt-view-exports-svg/core'
 import * as vsc from 'vscode'
 
@@ -18,7 +18,7 @@ import { svgFileToUri } from '@/utilities/vscode/uri'
 import { BaseHandler } from '../BaseHandler'
 
 export class ReloadComponentHandler extends BaseHandler {
-  readonly type = SVGReceiveMessage.ReloadComponent
+  readonly type = WebviewMessage.ReloadComponent
 
   private viewExportCache: ViewExportSVGCache | null = null
   private identifierWorkspace: vsc.WorkspaceFolder | 'global' = 'global'
@@ -109,10 +109,10 @@ export class ReloadComponentHandler extends BaseHandler {
         try {
           const filtered = this.applyFilter(result)
 
-          this.messenger.postMessage(SVGPostMessage.OnReloadComponent, filtered)
+          this.messenger.postMessage(ExtensionMessage.OnReloadComponent, filtered)
         } catch (error) {
-          this.messenger.postMessage(SVGPostMessage.OnReloadComponent, result)
-          this.messenger.postMessage(SVGPostMessage.OnErrorComponents, {
+          this.messenger.postMessage(ExtensionMessage.OnReloadComponent, result)
+          this.messenger.postMessage(ExtensionMessage.OnErrorComponents, {
             message: getUnknownError(error),
           })
         }

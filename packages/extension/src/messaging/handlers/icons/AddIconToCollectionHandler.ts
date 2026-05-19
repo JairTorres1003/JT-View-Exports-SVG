@@ -1,7 +1,7 @@
 import {
   IconCollectionKind,
   type SVGIconCollection,
-  SVGReceiveMessage,
+  WebviewMessage,
 } from '@jt-view-exports-svg/core'
 import * as vsc from 'vscode'
 
@@ -10,7 +10,7 @@ import { getCache } from '@/services/cache/main'
 import { BaseHandler } from '../BaseHandler'
 
 export class AddIconToCollectionHandler extends BaseHandler {
-  readonly type = SVGReceiveMessage.AddIconToCollection
+  readonly type = WebviewMessage.AddIconToCollection
 
   async handle(icon: SVGIconCollection) {
     const workspace = vsc.workspace.workspaceFolders?.[0]

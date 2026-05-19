@@ -1,4 +1,4 @@
-import { SVGPostMessage } from '@jt-view-exports-svg/core'
+import { ExtensionMessage } from '@jt-view-exports-svg/core'
 import { commands } from 'vscode'
 
 import { CONFIG_KEY } from '@/constants/misc'
@@ -23,5 +23,5 @@ export const expandedIcons = async (isExpanded = true): Promise<void> => {
 export const runToggleExpandIcon = async (isExpanded = true): Promise<void> => {
   await expandedIcons(isExpanded)
 
-  PanelController.send(SVGPostMessage.ToggleExpandAllComponents, isExpanded)
+  PanelController.send(ExtensionMessage.ToggleExpandAllComponents, isExpanded)
 }

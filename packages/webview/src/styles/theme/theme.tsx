@@ -1,4 +1,4 @@
-import { type EditorStyles, SVGPostMessage, SVGReceiveMessage } from '@jt-view-exports-svg/core'
+import { type EditorStyles, ExtensionMessage, WebviewMessage } from '@jt-view-exports-svg/core'
 import { createTheme, type Theme } from '@mui/material'
 import type {} from '@mui/material/themeCssVarsAugmentation'
 import { useEffect, useMemo } from 'react'
@@ -61,11 +61,11 @@ export const useCustomTheme = (): { theme: Theme } => {
   }
 
   useEffect(() => {
-    vscode.postMessage(SVGReceiveMessage.RequestEditorStyles)
-    vscode.onMessage(SVGPostMessage.LoadEditorStyles, handleStyles)
+    vscode.postMessage(WebviewMessage.RequestEditorStyles)
+    vscode.onMessage(ExtensionMessage.LoadEditorStyles, handleStyles)
 
     return () => {
-      vscode.unregisterMessage(SVGPostMessage.LoadEditorStyles)
+      vscode.unregisterMessage(ExtensionMessage.LoadEditorStyles)
     }
   }, [])
 

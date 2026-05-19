@@ -1,4 +1,4 @@
-import { SVGPostMessage, SVGReceiveMessage } from '@jt-view-exports-svg/core'
+import { ExtensionMessage, WebviewMessage } from '@jt-view-exports-svg/core'
 
 import type { WebviewMessenger } from '@/messaging/WebviewMessenger'
 import { getEditorStyles } from '@/services/vscode/styles'
@@ -6,7 +6,7 @@ import { getEditorStyles } from '@/services/vscode/styles'
 import { BaseHandler } from '../BaseHandler'
 
 export class RequestEditorStylesHandler extends BaseHandler {
-  readonly type = SVGReceiveMessage.RequestEditorStyles
+  readonly type = WebviewMessage.RequestEditorStyles
 
   constructor(private readonly messenger: WebviewMessenger) {
     super()
@@ -14,6 +14,6 @@ export class RequestEditorStylesHandler extends BaseHandler {
 
   handle() {
     const styles = getEditorStyles()
-    this.messenger.postMessage(SVGPostMessage.LoadEditorStyles, styles)
+    this.messenger.postMessage(ExtensionMessage.LoadEditorStyles, styles)
   }
 }

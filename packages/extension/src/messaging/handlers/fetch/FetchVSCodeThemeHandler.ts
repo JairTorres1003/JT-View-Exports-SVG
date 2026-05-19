@@ -1,8 +1,8 @@
 import {
+  ExtensionMessage,
   generateDynamicMessage,
   type IExtension,
-  SVGPostMessage,
-  SVGReceiveMessage,
+  WebviewMessage,
 } from '@jt-view-exports-svg/core'
 import * as vsc from 'vscode'
 
@@ -14,7 +14,7 @@ import { getUnknownError } from '@/utilities/misc'
 import { BaseHandler } from '../BaseHandler'
 
 export class FetchVSCodeThemeHandler extends BaseHandler {
-  readonly type = SVGReceiveMessage.FetchVSCodeTheme
+  readonly type = WebviewMessage.FetchVSCodeTheme
 
   constructor(private readonly messenger: WebviewMessenger) {
     super()
@@ -25,7 +25,7 @@ export class FetchVSCodeThemeHandler extends BaseHandler {
 
     const themeData = await cache?.get(CACHE_KEY)
 
-    const type = generateDynamicMessage(SVGPostMessage.FetchVSCodeTheme, path)
+    const type = generateDynamicMessage(ExtensionMessage.FetchVSCodeTheme, path)
 
     if (!themeData || themeData.id === '') {
       this.messenger.postMessage(type, {

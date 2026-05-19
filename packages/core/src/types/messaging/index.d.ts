@@ -1,3 +1,3 @@
 export * from './base'
-export * from './post'
-export * from './receive'
+export * from './extension'
+export * from './webview'

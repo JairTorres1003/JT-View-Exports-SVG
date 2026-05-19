@@ -1,8 +1,8 @@
 import {
+  ExtensionMessage,
   pathnames,
-  SVGPostMessage,
-  SVGReceiveMessage,
   type ViewExportSVG,
+  WebviewMessage,
 } from '@jt-view-exports-svg/core'
 import * as vsc from 'vscode'
 
@@ -16,7 +16,7 @@ import { svgFileToUri } from '@/utilities/vscode/uri'
 import { BaseHandler } from '../BaseHandler'
 
 export class ProcessUploadedFilesHandler extends BaseHandler {
-  readonly type = SVGReceiveMessage.ProcessUploadedFiles
+  readonly type = WebviewMessage.ProcessUploadedFiles
 
   constructor(private readonly messenger: WebviewMessenger) {
     super()
@@ -39,7 +39,7 @@ export class ProcessUploadedFilesHandler extends BaseHandler {
       const errorMessage = vsc.l10n.t('Error processing uploaded files')
       vsc.window.showErrorMessage(errorMessage).then(undefined, console.error)
       console.error(errorMessage, error)
-      this.messenger.postMessage(SVGPostMessage.LoadOpenFiles, files)
+      this.messenger.postMessage(ExtensionMessage.LoadOpenFiles, files)
     }
   }
 }

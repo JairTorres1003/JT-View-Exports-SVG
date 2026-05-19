@@ -1,10 +1,10 @@
 import {
+  ExtensionMessage,
   type FileIdentifier,
   type SVGErrors,
   type SVGFile,
-  SVGPostMessage,
-  SVGReceiveMessage,
   type ViewExportSVG,
+  WebviewMessage,
 } from '@jt-view-exports-svg/core'
 import { useEffect } from 'react'
 
@@ -27,7 +27,7 @@ export const useDashboard = () => {
 
     const ids = data.flatMap((component) => component.files)
     if (ids.length > 0) {
-      vscode.postMessage(SVGReceiveMessage.RequestFileMetadata, ids)
+      vscode.postMessage(WebviewMessage.RequestFileMetadata, ids)
     }
   }
 
@@ -50,16 +50,16 @@ export const useDashboard = () => {
   }
 
   useEffect(() => {
-    vscode.postMessage(SVGReceiveMessage.RequestComponents)
+    vscode.postMessage(WebviewMessage.RequestComponents)
 
-    vscode.onMessage(SVGPostMessage.LoadComponents, getSVGComponents)
-    vscode.onMessage(SVGPostMessage.OnErrorComponents, onErrorSVGComponents)
-    vscode.onMessage(SVGPostMessage.LoadFileMetadata, onLoadMetadata)
+    vscode.onMessage(ExtensionMessage.LoadComponents, getSVGComponents)
+    vscode.onMessage(ExtensionMessage.OnErrorComponents, onErrorSVGComponents)
+    vscode.onMessage(ExtensionMessage.LoadFileMetadata, onLoadMetadata)
 
     return () => {
-      vscode.unregisterMessage(SVGPostMessage.LoadComponents)
-      vscode.unregisterMessage(SVGPostMessage.LoadFileMetadata)
-      vscode.unregisterMessage(SVGPostMessage.OnErrorComponents)
+      vscode.unregisterMessage(ExtensionMessage.LoadComponents)
+      vscode.unregisterMessage(ExtensionMessage.LoadFileMetadata)
+      vscode.unregisterMessage(ExtensionMessage.OnErrorComponents)
     }
   }, [])
 }

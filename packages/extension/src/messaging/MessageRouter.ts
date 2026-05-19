@@ -1,7 +1,7 @@
 import {
   isDynamicMessage,
-  type ReceiveMessage,
   restoreDynamicMessage,
+  type WebviewMessageData,
 } from '@jt-view-exports-svg/core'
 import { l10n } from 'vscode'
 
@@ -21,7 +21,7 @@ export class MessageRouter {
    *
    * @param message - The message to be routed, containing a type identifier and optional data.
    */
-  public async route(message: ReceiveMessage): Promise<boolean> {
+  public async route(message: WebviewMessageData): Promise<boolean> {
     let type = message.type
     let data = Object.hasOwn(message, 'data') ? (message as { data: unknown }).data : undefined
 

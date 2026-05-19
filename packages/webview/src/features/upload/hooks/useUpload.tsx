@@ -1,4 +1,4 @@
-import { pathnames, SVGReceiveMessage } from '@jt-view-exports-svg/core'
+import { pathnames, WebviewMessage } from '@jt-view-exports-svg/core'
 import { useEffect } from 'react'
 import { useTranslation } from 'react-i18next'
 import { useLocation } from 'react-router-dom'
@@ -27,7 +27,7 @@ export const useUpload = () => {
       setRenderRoute({ path: `${pathnames.main}?load-message=${messageEncoded}`, options: {} })
     )
     vscode.postMessage(
-      SVGReceiveMessage.ProcessUploadedFiles,
+      WebviewMessage.ProcessUploadedFiles,
       files.map((file) => file.path)
     )
   }

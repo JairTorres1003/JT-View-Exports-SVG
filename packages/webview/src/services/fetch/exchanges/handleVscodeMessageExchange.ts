@@ -1,36 +1,38 @@
 import type {
+  ExtensionMessage,
+  ExtensionMessageMap,
+  ExtensionMessageSubscriber,
   FetchResponse,
-  PostMessageMap,
-  PostMessageSubscriber,
-  ReceiveMessageEmitter,
-  ReceiveMessageMap,
-  SVGPostMessage,
-  SVGReceiveMessage,
+  WebviewMessage,
+  WebviewMessageEmitter,
+  WebviewMessageMap,
 } from '@jt-view-exports-svg/core'
 
 import { vscode } from '@/services/vscode'
 
 interface PayloadBase<
-  TRequest extends SVGReceiveMessage,
-  TResponse extends SVGPostMessage,
+  TRequest extends WebviewMessage,
+  TResponse extends ExtensionMessage,
   TResponseData = Record<string, unknown>,
 > {
   requestType: TRequest
-  responseType: PostMessageMap[TResponse] extends FetchResponse<TResponseData> ? TResponse : never
+  responseType: ExtensionMessageMap[TResponse] extends FetchResponse<TResponseData>
+    ? TResponse
+    : never
 }
 
 interface PayloadWithData<
-  TRequest extends SVGReceiveMessage,
-  TResponse extends SVGPostMessage,
+  TRequest extends WebviewMessage,
+  TResponse extends ExtensionMessage,
   TData,
 > extends PayloadBase<TRequest, TResponse> {
   data: TData
 }
 
 export type VscodeMessageExchangePayload<
-  TRequest extends SVGReceiveMessage,
-  TResponse extends SVGPostMessage,
-  TData = ReceiveMessageMap[TRequest],
+  TRequest extends WebviewMessage,
+  TResponse extends ExtensionMessage,
+  TData = WebviewMessageMap[TRequest],
 > = TData extends undefined
   ? PayloadBase<TRequest, TResponse>
   : PayloadWithData<TRequest, TResponse, TData>
@@ -83,8 +85,8 @@ function createResponse(data: FetchResponse<unknown> | null): Response {
  * - Enforces a 10-second timeout and rejects if no response arrives
  * - Cleans up the registered listener on success, timeout, or failure
  *
- * @template TRequest - Request message type extending `SVGReceiveMessage`.
- * @template TResponse - Response message type extending `SVGPostMessage`.
+ * @template TRequest - Request message type extending `WebviewMessage`.
+ * @template TResponse - Response message type extending `ExtensionMessage`.
  * @param params - Exchange configuration containing:
  * - `requestType`: outbound message event name
  * - `responseType`: inbound message event name to wait for
@@ -94,8 +96,8 @@ function createResponse(data: FetchResponse<unknown> | null): Response {
  * @throws Re-throws any error that occurs while posting or subscribing to messages.
  */
 export async function handleVscodeMessageExchange<
-  TRequest extends SVGReceiveMessage = SVGReceiveMessage,
-  TResponse extends SVGPostMessage = SVGPostMessage,
+  TRequest extends WebviewMessage = WebviewMessage,
+  TResponse extends ExtensionMessage = ExtensionMessage,
 >({
   requestType,
   responseType,
@@ -115,10 +117,10 @@ export async function handleVscodeMessageExchange<
 
     try {
       vscode.postMessage(
-        ...([requestType, payload] as unknown as Parameters<ReceiveMessageEmitter>)
+        ...([requestType, payload] as unknown as Parameters<WebviewMessageEmitter>)
       )
       vscode.onMessage(
-        ...([responseType, onResponse] as unknown as Parameters<PostMessageSubscriber>)
+        ...([responseType, onResponse] as unknown as Parameters<ExtensionMessageSubscriber>)
       )
     } catch (error) {
       window.clearTimeout(timeoutId)

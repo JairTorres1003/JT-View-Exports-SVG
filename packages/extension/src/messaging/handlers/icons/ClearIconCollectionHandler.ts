@@ -1,4 +1,4 @@
-import { IconCollectionKind, SVGPostMessage, SVGReceiveMessage } from '@jt-view-exports-svg/core'
+import { ExtensionMessage, IconCollectionKind, WebviewMessage } from '@jt-view-exports-svg/core'
 import * as vsc from 'vscode'
 
 import type { WebviewMessenger } from '@/messaging/WebviewMessenger'
@@ -9,7 +9,7 @@ import { viewExportStore } from '@/store/ViewExportStore'
 import { BaseHandler } from '../BaseHandler'
 
 export class ClearIconCollectionHandler extends BaseHandler {
-  readonly type = SVGReceiveMessage.ClearIconCollection
+  readonly type = WebviewMessage.ClearIconCollection
 
   constructor(private readonly messenger: WebviewMessenger) {
     super()
@@ -31,6 +31,6 @@ export class ClearIconCollectionHandler extends BaseHandler {
 
     const items = await getIconsCollection()
     viewExportStore.set(items)
-    this.messenger.postMessage(SVGPostMessage.LoadUserComponents, items)
+    this.messenger.postMessage(ExtensionMessage.LoadUserComponents, items)
   }
 }

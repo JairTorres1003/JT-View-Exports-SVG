@@ -1,4 +1,4 @@
-import { SVGReceiveMessage } from '@jt-view-exports-svg/core'
+import { WebviewMessage } from '@jt-view-exports-svg/core'
 import { useState } from 'react'
 
 import type { TypeEditorRef } from '@/core/types/components/vs/Editor'
@@ -32,7 +32,7 @@ export const useMenuTools = ({
    * Handles the reload action for the editor.
    */
   const onReloadEditor = () => {
-    vscode.postMessage(SVGReceiveMessage.ReloadEditorExtensionTheme)
+    vscode.postMessage(WebviewMessage.ReloadEditorExtensionTheme)
     handleClose()
   }
 

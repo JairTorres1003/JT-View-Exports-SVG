@@ -1,8 +1,8 @@
 import {
+  ExtensionMessage,
   type FileIdentifier,
   type SVGFile,
-  SVGPostMessage,
-  SVGReceiveMessage,
+  WebviewMessage,
 } from '@jt-view-exports-svg/core'
 import { workspace } from 'vscode'
 
@@ -12,7 +12,7 @@ import { getCache } from '@/services/cache/main'
 import { BaseHandler } from '../BaseHandler'
 
 export class RequestFileMetadataHandler extends BaseHandler {
-  readonly type = SVGReceiveMessage.RequestFileMetadata
+  readonly type = WebviewMessage.RequestFileMetadata
 
   constructor(private readonly messenger: WebviewMessenger) {
     super()
@@ -33,6 +33,6 @@ export class RequestFileMetadataHandler extends BaseHandler {
       })
     )
 
-    this.messenger.postMessage(SVGPostMessage.LoadFileMetadata, result)
+    this.messenger.postMessage(ExtensionMessage.LoadFileMetadata, result)
   }
 }

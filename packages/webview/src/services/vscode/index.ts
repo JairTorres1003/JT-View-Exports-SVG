@@ -1,12 +1,12 @@
 import {
-  type HandlerPostMessage,
-  isValidSVGPostMessageType,
+  type ExtensionMessage,
+  type ExtensionMessageData,
+  type ExtensionMessageSubscriber,
+  type HandlerExtensionMessage,
+  isValidExtensionMessage,
   type OnMessagePosted,
-  type PostMessage,
-  type PostMessageSubscriber,
-  type ReceiveMessageEmitter,
-  type SVGPostMessage,
-  SVGReceiveMessage,
+  WebviewMessage,
+  type WebviewMessageEmitter,
 } from '@jt-view-exports-svg/core'
 
 import i18next from 'i18next'
@@ -20,12 +20,12 @@ class VSCodeAPIWrapper {
   /**
    * Registered message handlers
    */
-  private readonly messageHandlers: Partial<HandlerPostMessage> = {}
+  private readonly messageHandlers: Partial<HandlerExtensionMessage> = {}
 
   /**
    * Queue for messages received before handlers are registered
    */
-  private readonly messageQueue: PostMessage[] = []
+  private readonly messageQueue: ExtensionMessageData[] = []
 
   constructor() {
     this.vsCodeApi = this.resolveVSCodeAPI()
@@ -33,7 +33,7 @@ class VSCodeAPIWrapper {
     window.addEventListener('message', this.handleWindowMessage)
 
     window.addEventListener('DOMContentLoaded', () => {
-      this.postMessage(SVGReceiveMessage.Ready)
+      this.postMessage(WebviewMessage.Ready)
     })
   }
 
@@ -55,11 +55,11 @@ class VSCodeAPIWrapper {
   /**
    * Handle messages coming from the extension
    */
-  private handleWindowMessage = (event: MessageEvent<PostMessage>): void => {
+  private handleWindowMessage = (event: MessageEvent<ExtensionMessageData>): void => {
     const message = event.data
-    const type: SVGPostMessage = message.type
+    const type: ExtensionMessage = message.type
 
-    if (!isValidSVGPostMessageType(type)) return
+    if (!isValidExtensionMessage(type)) return
 
     const handler = this.messageHandlers[type] as OnMessagePosted
 
@@ -85,7 +85,7 @@ class VSCodeAPIWrapper {
   /**
    * Enqueue message when handler is not ready
    */
-  private enqueueMessage(message: PostMessage): void {
+  private enqueueMessage(message: ExtensionMessageData): void {
     this.messageQueue.push(message)
   }
 
@@ -95,7 +95,7 @@ class VSCodeAPIWrapper {
   private flushQueue(): void {
     if (this.messageQueue.length === 0) return
 
-    const remaining: PostMessage[] = []
+    const remaining: ExtensionMessageData[] = []
 
     for (const message of this.messageQueue) {
       const handler = this.messageHandlers[message.type] as OnMessagePosted
@@ -115,7 +115,7 @@ class VSCodeAPIWrapper {
   /**
    * Send message to extension
    */
-  public postMessage: ReceiveMessageEmitter = (type, data = undefined) => {
+  public postMessage: WebviewMessageEmitter = (type, data = undefined) => {
     if (!this.vsCodeApi) {
       console.warn(i18next.t('vscode-api.not-available', { ns: 'errors' }), { type })
       return
@@ -127,7 +127,7 @@ class VSCodeAPIWrapper {
   /**
    * Register message handler
    */
-  public onMessage: PostMessageSubscriber = (type, handler) => {
+  public onMessage: ExtensionMessageSubscriber = (type, handler) => {
     this.messageHandlers[type] = handler as OnMessagePosted
 
     this.flushQueue()
@@ -136,7 +136,7 @@ class VSCodeAPIWrapper {
   /**
    * Unregister message handler
    */
-  public unregisterMessage(type: SVGPostMessage): void {
+  public unregisterMessage(type: ExtensionMessage): void {
     this.messageHandlers[type] = undefined
   }
 

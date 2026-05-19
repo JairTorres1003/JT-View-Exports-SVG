@@ -1,4 +1,8 @@
-import { type PostMessageEmitter, pathnames, SVGPostMessage } from '@jt-view-exports-svg/core'
+import {
+  ExtensionMessage,
+  type ExtensionMessageEmitter,
+  pathnames,
+} from '@jt-view-exports-svg/core'
 import * as vsc from 'vscode'
 
 import { CONFIG_KEY } from '@/constants/misc'
@@ -73,19 +77,19 @@ export class PanelController {
     if (!controller || controller.currentPath === path) return
 
     controller.currentPath = path
-    controller.messenger.postMessage(SVGPostMessage.Navigate, { path })
+    controller.messenger.postMessage(ExtensionMessage.Navigate, { path })
   }
 
   /**
    * Wrapper around `messenger.postMessage`.
    *
-   * `PostMessageEmitter` is an intersection of overloads generated from `PostMessageMap`.
+   * `ExtensionMessageEmitter` is an intersection of overloads generated from `ExtensionMessageMap`.
    * TypeScript cannot correctly infer `(type, data)` when implementing this function
-   * directly, so the arguments are cast to `Parameters<PostMessageEmitter>` to preserve
+   * directly, so the arguments are cast to `Parameters<ExtensionMessageEmitter>` to preserve
    * the overload signatures and prevent incorrect type narrowing.
    */
-  public static send: PostMessageEmitter = (type, data) => {
-    const args = [type, data] as Parameters<PostMessageEmitter>
+  public static send: ExtensionMessageEmitter = (type, data) => {
+    const args = [type, data] as Parameters<ExtensionMessageEmitter>
     PanelController.currentPanel?.messenger.postMessage(...args)
   }
 
@@ -98,7 +102,7 @@ export class PanelController {
     if (!controller) return
 
     controller.viewPanel.reveal(vsc.ViewColumn.Active)
-    controller.messenger.postMessage(SVGPostMessage.Navigate, {
+    controller.messenger.postMessage(ExtensionMessage.Navigate, {
       path: controller.currentPath,
       options: { reload: true },
     })

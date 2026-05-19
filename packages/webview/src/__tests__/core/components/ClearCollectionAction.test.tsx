@@ -1,4 +1,4 @@
-import { IconCollectionKind, SVGReceiveMessage } from '@jt-view-exports-svg/core'
+import { IconCollectionKind, WebviewMessage } from '@jt-view-exports-svg/core'
 import { render, screen, waitFor } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
 import { beforeEach, describe, expect, test, vi } from 'vitest'
@@ -45,7 +45,7 @@ describe('ClearCollectionAction', () => {
     await userEvent.click(screen.getByText('Yes'))
 
     expect(mockPostMessage).toHaveBeenCalledWith(
-      SVGReceiveMessage.ClearIconCollection,
+      WebviewMessage.ClearIconCollection,
       IconCollectionKind.FAVORITE
     )
   })

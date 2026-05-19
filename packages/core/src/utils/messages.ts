@@ -1,4 +1,4 @@
-import { SVGPostMessage, type SVGReceiveMessage } from '../constants'
+import { ExtensionMessage, type WebviewMessage } from '../constants'
 
 /**
  * Replaces the `<placeholder>` in a message type template with a specific value.
@@ -7,7 +7,7 @@ import { SVGPostMessage, type SVGReceiveMessage } from '../constants'
  * @param value - The value to substitute for the placeholder
  * @returns The message type with placeholder replaced by `<value>`
  */
-export function generateDynamicMessage<T extends SVGPostMessage | SVGReceiveMessage>(
+export function generateDynamicMessage<T extends ExtensionMessage | WebviewMessage>(
   type: T,
   value: string
 ): T {
@@ -20,7 +20,7 @@ export function generateDynamicMessage<T extends SVGPostMessage | SVGReceiveMess
  * @param type - Dynamic message type (e.g., `response/theme/<dark>`)
  * @returns The message type with value replaced by `<placeholder>`
  */
-export function restoreDynamicMessage<T extends SVGPostMessage | SVGReceiveMessage>(type: T): T {
+export function restoreDynamicMessage<T extends ExtensionMessage | WebviewMessage>(type: T): T {
   return type.replace(/<[^>]+>/, '<placeholder>') as T
 }
 
@@ -42,12 +42,12 @@ export function isDynamicMessage(type: string): false | { baseType: string; dyna
 }
 
 /**
- * Validates if a message type is a valid SVGPostMessage, including dynamic types.
+ * Validates if a message type is a valid ExtensionMessage, including dynamic types.
  *
  * @param type - Message type to validate
- * @returns `true` if valid SVGPostMessage, `false` otherwise
+ * @returns `true` if valid ExtensionMessage, `false` otherwise
  */
-export function isValidSVGPostMessageType(type: unknown): type is SVGPostMessage {
+export function isValidExtensionMessage(type: unknown): type is ExtensionMessage {
   if (typeof type !== 'string') return false
 
   let typeAux = type
@@ -57,5 +57,5 @@ export function isValidSVGPostMessageType(type: unknown): type is SVGPostMessage
     typeAux = typeAux.replace(/<[^>]+>/, '<placeholder>') as typeof type
   }
 
-  return Object.values(SVGPostMessage).includes(typeAux as SVGPostMessage)
+  return Object.values(ExtensionMessage).includes(typeAux as ExtensionMessage)
 }

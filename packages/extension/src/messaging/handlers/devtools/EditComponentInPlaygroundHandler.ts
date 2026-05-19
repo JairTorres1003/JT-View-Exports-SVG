@@ -1,4 +1,4 @@
-import { type SVGPlayground, SVGPostMessage, SVGReceiveMessage } from '@jt-view-exports-svg/core'
+import { ExtensionMessage, type SVGPlayground, WebviewMessage } from '@jt-view-exports-svg/core'
 import * as vsc from 'vscode'
 
 import { REGEX_TAG_NAME } from '@/constants/regex'
@@ -10,7 +10,7 @@ import { getUnknownError } from '@/utilities/misc'
 import { BaseHandler } from '../BaseHandler'
 
 export class EditComponentInPlaygroundHandler extends BaseHandler {
-  readonly type = SVGReceiveMessage.EditComponentInPlayground
+  readonly type = WebviewMessage.EditComponentInPlayground
 
   constructor(private readonly messenger: WebviewMessenger) {
     super()
@@ -58,9 +58,9 @@ export class EditComponentInPlaygroundHandler extends BaseHandler {
         throw new Error(component.message)
       }
 
-      this.messenger.postMessage(SVGPostMessage.ComponentEditedInPlayground, component)
+      this.messenger.postMessage(ExtensionMessage.ComponentEditedInPlayground, component)
     } catch (error) {
-      this.messenger.postMessage(SVGPostMessage.ErrorEditingComponentInPlayground, {
+      this.messenger.postMessage(ExtensionMessage.ErrorEditingComponentInPlayground, {
         message: vsc.l10n.t('Error editing component: {error}', { error: getUnknownError(error) }),
       })
     }

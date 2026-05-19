@@ -1,4 +1,4 @@
-import { SVGPostMessage } from '@jt-view-exports-svg/core'
+import { ExtensionMessage } from '@jt-view-exports-svg/core'
 import { commands } from 'vscode'
 
 import { CONFIG_KEY } from '@/constants/misc'
@@ -23,5 +23,5 @@ export const toggleDevTools = async (open: boolean): Promise<void> => {
 export const runToggleDevTools = async (open: boolean): Promise<void> => {
   await toggleDevTools(open)
 
-  PanelController.send(SVGPostMessage.ToggleOpenDevTools, open)
+  PanelController.send(ExtensionMessage.ToggleOpenDevTools, open)
 }

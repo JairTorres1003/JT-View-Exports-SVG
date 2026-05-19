@@ -1,4 +1,4 @@
-import { type IconCollectionKind, SVGReceiveMessage } from '@jt-view-exports-svg/core'
+import { type IconCollectionKind, WebviewMessage } from '@jt-view-exports-svg/core'
 import { Button, IconButton, Tooltip, Typography } from '@mui/material'
 import { type FC, useState } from 'react'
 import { useTranslation } from 'react-i18next'
@@ -16,7 +16,7 @@ const ClearCollectionAction: FC<ClearCollectionActionProps> = ({ collectionKind 
   const [open, setOpen] = useState(false)
 
   const handleConfirm = () => {
-    vscode.postMessage(SVGReceiveMessage.ClearIconCollection, collectionKind)
+    vscode.postMessage(WebviewMessage.ClearIconCollection, collectionKind)
     setOpen(false)
   }
 
