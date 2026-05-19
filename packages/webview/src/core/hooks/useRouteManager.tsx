@@ -1,4 +1,4 @@
-import { SVGReceiveMessage } from '@jt-view-exports-svg/core'
+import { pathnames, SVGReceiveMessage } from '@jt-view-exports-svg/core'
 import { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 
@@ -30,6 +30,11 @@ export const useRouteManager = () => {
     dispatch(setRecentlySelected())
     dispatch(setIsOpenDevTools(false))
 
+    if (route.options?.reload) {
+      onReload(route)
+      return
+    }
+
     void navigate(route.path, route.options)
 
     vscode.postMessage(SVGReceiveMessage.ChangeViewPath, route.path)
@@ -45,6 +50,14 @@ export const useRouteManager = () => {
 
   const onSelect: DraggableSpeedDialProps<Route>['onSelected'] = (_, { path }) => {
     dispatch(setRenderRoute({ path }))
+  }
+
+  const onReload = (route: RenderRouteState) => {
+    void navigate(pathnames.main, route.options)
+
+    setTimeout(() => {
+      navigate(route.path, route.options)
+    }, 100)
   }
 
   useEffect(() => {

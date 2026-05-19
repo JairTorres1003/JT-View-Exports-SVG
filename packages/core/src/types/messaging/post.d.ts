@@ -16,7 +16,7 @@ import type {
  * Map of post message types to their data payloads
  */
 export type PostMessageMap = {
-  [SVGPostMessage.Navigate]: { path: string }
+  [SVGPostMessage.Navigate]: { path: string; options?: { reload?: boolean } }
   [SVGPostMessage.LoadComponents]: ViewExportSVG[]
   [SVGPostMessage.LoadUserComponents]: ViewExportSVG[]
   [SVGPostMessage.FilterComponents]: ViewExportSVG[]

@@ -22,7 +22,7 @@ export interface GlobalConfigurationState {
 
 export interface RenderRouteState {
   path: string
-  options?: NavigateOptions
+  options?: NavigateOptions & { reload?: boolean }
 }
 
 export interface GlobalState {

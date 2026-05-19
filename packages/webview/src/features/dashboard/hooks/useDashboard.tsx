@@ -1,5 +1,7 @@
 import {
+  type FileIdentifier,
   type SVGErrors,
+  type SVGFile,
   SVGPostMessage,
   SVGReceiveMessage,
   type ViewExportSVG,
@@ -38,19 +40,26 @@ export const useDashboard = () => {
     dispatch(setErrors(error))
   }
 
+  /**
+   * Handles the loading of file metadata.
+   *
+   * @param files - An object containing file metadata.
+   */
+  const onLoadMetadata = (files: Record<FileIdentifier, SVGFile>) => {
+    dispatch(setFiles(files))
+  }
+
   useEffect(() => {
     vscode.postMessage(SVGReceiveMessage.RequestComponents)
 
     vscode.onMessage(SVGPostMessage.LoadComponents, getSVGComponents)
     vscode.onMessage(SVGPostMessage.OnErrorComponents, onErrorSVGComponents)
-    vscode.onMessage(SVGPostMessage.LoadFileMetadata, (files) => {
-      dispatch(setFiles(files))
-    })
+    vscode.onMessage(SVGPostMessage.LoadFileMetadata, onLoadMetadata)
 
     return () => {
       vscode.unregisterMessage(SVGPostMessage.LoadComponents)
       vscode.unregisterMessage(SVGPostMessage.LoadFileMetadata)
       vscode.unregisterMessage(SVGPostMessage.OnErrorComponents)
     }
-  }, [dispatch])
+  }, [])
 }

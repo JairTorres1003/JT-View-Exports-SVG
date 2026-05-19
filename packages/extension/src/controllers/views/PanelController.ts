@@ -98,7 +98,10 @@ export class PanelController {
     if (!controller) return
 
     controller.viewPanel.reveal(vsc.ViewColumn.Active)
-    controller.messenger.postMessage(SVGPostMessage.Navigate, { path: controller.currentPath })
+    controller.messenger.postMessage(SVGPostMessage.Navigate, {
+      path: controller.currentPath,
+      options: { reload: true },
+    })
   }
 
   /**
