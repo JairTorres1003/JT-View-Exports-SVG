@@ -30,7 +30,7 @@ export const useCardSvg = ({ favorite = false }: UseCardSvgProps): CardSvgHook =
 
   const files = useAppSelector((state) => state.svg.files)
   const shouldOpenDevTools = useAppSelector(
-    (state) => state.global.configuration.defaultClicToOpenDevTools
+    (state) => state.global.configuration.defaultClickToOpenDevTools
   )
   const { t } = useTranslation()
 
