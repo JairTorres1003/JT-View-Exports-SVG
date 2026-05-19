@@ -9,8 +9,10 @@ import { ConfigManager } from './base/ConfigManager'
 export class IgnoreDirectoriesConfig extends ConfigManager<string[]> {
   readonly section = 'ignoreDirectories'
   readonly defaultValue = IGNORE_DIRECTORIES
-  readonly notification: ConfigNotification = {
-    message: l10n.t('Ignore directories changed. Reload the panel to apply.'),
+  override get notification(): ConfigNotification {
+    return {
+      message: l10n.t('Ignore directories changed. Reload the panel to apply.'),
+    }
   }
 
   get directories(): string[] {

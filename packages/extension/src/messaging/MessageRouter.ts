@@ -35,7 +35,7 @@ export class MessageRouter {
     const handler = this.handlers.get(type)
 
     if (!handler) {
-      console.warn(l10n.t('No handler found for message type: {0}', type))
+      console.warn(l10n.t('No handler found for message type: {type}', { type }))
       return false
     }
 

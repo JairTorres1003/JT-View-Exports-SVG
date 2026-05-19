@@ -6,8 +6,10 @@ import { ConfigManager } from './base/ConfigManager'
 export class GroupPatternsConfig extends ConfigManager<Record<string, string>> {
   readonly section = 'groupPatterns'
   readonly defaultValue: Record<string, string> = {}
-  readonly notification: ConfigNotification = {
-    message: l10n.t('Group patterns changed. Reload the panel to apply.'),
+  override get notification(): ConfigNotification {
+    return {
+      message: l10n.t('Group patterns changed. Reload the panel to apply.'),
+    }
   }
 
   get patterns(): string[] {

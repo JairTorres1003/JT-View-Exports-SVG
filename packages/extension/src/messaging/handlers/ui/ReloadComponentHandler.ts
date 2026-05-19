@@ -120,7 +120,11 @@ export class ReloadComponentHandler extends BaseHandler {
 
       await processFiles(uriFiles, operation)
     } catch (error) {
-      console.error(vsc.l10n.t('Error processing files for reload: {0}'), getUnknownError(error))
+      console.error(
+        vsc.l10n.t('Error processing files for reload: {error}', {
+          error: getUnknownError(error),
+        })
+      )
     }
   }
 }

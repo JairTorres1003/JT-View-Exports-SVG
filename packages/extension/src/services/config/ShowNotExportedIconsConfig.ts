@@ -6,7 +6,9 @@ import { ConfigManager } from './base/ConfigManager'
 export class ShowNotExportedIconsConfig extends ConfigManager<boolean> {
   readonly section = 'showNotExportedIcons'
   readonly defaultValue = false
-  readonly notification: ConfigNotification = {
-    message: l10n.t('The "Show not exported icons" setting changed. Reload the panel to apply.'),
+  override get notification(): ConfigNotification {
+    return {
+      message: l10n.t('The "Show not exported icons" setting changed. Reload the panel to apply.'),
+    }
   }
 }

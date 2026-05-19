@@ -10,7 +10,9 @@ export interface ConfigNotification {
 export abstract class ConfigManager<T> {
   abstract readonly section: string
   abstract readonly defaultValue: T
-  readonly notification?: ConfigNotification
+  get notification(): ConfigNotification | undefined {
+    return undefined
+  }
 
   getValue(): T {
     const cfg = workspace.getConfiguration(CONFIG_KEY)

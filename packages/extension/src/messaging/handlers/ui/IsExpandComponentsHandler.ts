@@ -11,7 +11,9 @@ export class IsExpandComponentsHandler extends BaseHandler {
 
   handle(isExpanded: boolean) {
     expandedIcons(isExpanded).catch((error) => {
-      console.error(l10n.t('Error toggling expanded icons: {0}', getUnknownError(error)))
+      console.error(
+        l10n.t('Error toggling expanded icons: {error}', { error: getUnknownError(error) })
+      )
     })
   }
 }

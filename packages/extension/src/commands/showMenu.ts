@@ -25,7 +25,7 @@ export const showMenu = async (
   const filesToProcess = !isEmpty(items) ? items : !isEmpty(item) ? [item] : []
 
   const loadMessage = filesToProcess.length
-    ? l10n.t('Processing {0} file(s)...', filesToProcess.length)
+    ? l10n.t('Processing {count} file(s)...', { count: filesToProcess.length })
     : l10n.t('Loading...')
 
   const messageEncoded = encodeURIComponent(loadMessage)

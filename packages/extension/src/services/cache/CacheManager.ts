@@ -52,7 +52,7 @@ export class CacheManager<TFactories extends CacheFactoryMap> {
     const cache = this.cacheMap.get(key as string)
 
     if (!cache) {
-      throw new Error(vsc.l10n.t('No cache found for key: {0}', key as string))
+      throw new Error(vsc.l10n.t('No cache found for key: {key}', { key: key as string }))
     }
 
     return cache as TFactories[K]

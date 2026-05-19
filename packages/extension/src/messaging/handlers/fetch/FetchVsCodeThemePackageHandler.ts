@@ -43,7 +43,9 @@ export class FetchVsCodeThemePackageHandler extends BaseHandler {
     } catch (error) {
       this.messenger.postMessage(SVGPostMessage.FetchVsCodeThemePackage, {
         success: false,
-        error: vsc.l10n.t('Error reading theme package file: {0}', getUnknownError(error)),
+        error: vsc.l10n.t('Error reading theme package file: {error}', {
+          error: getUnknownError(error),
+        }),
       })
     }
   }

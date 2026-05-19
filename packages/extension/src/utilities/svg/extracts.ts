@@ -180,7 +180,9 @@ export async function extractComponents(
 
     return { components: { exported, noExported }, declarations }
   } catch (error) {
-    console.error(vsc.l10n.t('Failed to extract SVG exports: {0}', getUnknownError(error)))
+    console.error(
+      vsc.l10n.t('Failed to extract SVG exports: {error}', { error: getUnknownError(error) })
+    )
     return { components: { exported: [], noExported: [] }, declarations: [] }
   }
 }

@@ -13,7 +13,9 @@ export class ChangeViewPathHandler extends BaseHandler {
 
   handle(path: string) {
     toggleViewActions(this.showingPaths.includes(path)).catch((error) => {
-      console.error(l10n.t('Error toggling view actions: {0}', getUnknownError(error)))
+      console.error(
+        l10n.t('Error toggling view actions: {error}', { error: getUnknownError(error) })
+      )
     })
   }
 }

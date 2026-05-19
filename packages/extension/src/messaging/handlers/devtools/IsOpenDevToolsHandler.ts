@@ -11,7 +11,9 @@ export class IsOpenDevToolsHandler extends BaseHandler {
 
   handle(isExpanded: boolean) {
     toggleDevTools(isExpanded).catch((error) => {
-      console.error(l10n.t('Error toggling developer tools: {0}', getUnknownError(error)))
+      console.error(
+        l10n.t('Error toggling developer tools: {error}', { error: getUnknownError(error) })
+      )
     })
   }
 }

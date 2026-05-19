@@ -30,7 +30,7 @@ export class FetchVSCodeThemeHandler extends BaseHandler {
     if (!themeData || themeData.id === '') {
       this.messenger.postMessage(type, {
         success: false,
-        error: vsc.l10n.t('Theme not found for path: {0}', path),
+        error: vsc.l10n.t('Theme not found for path: {path}', { path }),
       })
       return
     }
@@ -50,11 +50,10 @@ export class FetchVSCodeThemeHandler extends BaseHandler {
     } catch (error) {
       this.messenger.postMessage(type, {
         success: false,
-        error: vsc.l10n.t(
-          'Error reading theme file for path: {0} - {1}',
+        error: vsc.l10n.t('Error reading theme file: {path} — {error}', {
           path,
-          getUnknownError(error)
-        ),
+          error: getUnknownError(error),
+        }),
       })
     }
   }

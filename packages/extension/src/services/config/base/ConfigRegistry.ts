@@ -38,7 +38,7 @@ export class ConfigRegistry<TConfigs extends ConfigMap> {
     const config = this.configMap[key as string]
 
     if (!config) {
-      throw new Error(vsc.l10n.t(`No config found for key: ${String(key)}`))
+      throw new Error(vsc.l10n.t('No config found for key: {key}', { key: String(key) }))
     }
 
     return config as TConfigs[K]

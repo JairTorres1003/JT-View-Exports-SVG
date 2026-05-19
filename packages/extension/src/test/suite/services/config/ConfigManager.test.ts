@@ -12,7 +12,9 @@ class TestConfig extends ConfigManager<string> {
 class NotifiableConfig extends ConfigManager<boolean> {
   readonly section = 'notifiable'
   readonly defaultValue = false
-  readonly notification = { message: 'Changed!' }
+  override get notification() {
+    return { message: 'Changed!' }
+  }
 }
 
 function makeInspect(workspaceValue?: string, globalValue?: string) {

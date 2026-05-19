@@ -8,8 +8,10 @@ import { ConfigManager } from './base/ConfigManager'
 export class DefaultIconPropertiesConfig extends ConfigManager<Record<string, string>> {
   readonly section = 'defaultIconProperties'
   readonly defaultValue = DEFAULT_ICON_PROPERTIES
-  readonly notification: ConfigNotification = {
-    message: l10n.t('Default icon properties changed. Reload the panel to apply.'),
+  override get notification(): ConfigNotification {
+    return {
+      message: l10n.t('Default icon properties changed. Reload the panel to apply.'),
+    }
   }
 
   private currentProperties: Record<string, unknown> | null = null
