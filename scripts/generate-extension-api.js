@@ -52,3 +52,22 @@ fs.writeFileSync(
 )
 
 console.log(`Generated extension API package at ${extensionApiDir}`)
+
+const { main: _main, browser: _browser, ...manifest } = extensionPkg
+
+const distDir = path.join(extensionApiDir, 'dist')
+fs.mkdirSync(distDir, { recursive: true })
+fs.writeFileSync(
+  path.join(distDir, 'manifest.js'),
+  `export const manifest = ${JSON.stringify(manifest, null, 2)};\n`,
+  'utf8'
+)
+
+fs.writeFileSync(
+  path.join(distDir, 'manifest.d.ts'),
+  `import type { IExtensionManifest } from '@codingame/monaco-vscode-api/extensions'
+export declare const manifest: IExtensionManifest;\n`,
+  'utf8'
+)
+
+console.log(`Generated manifest.js in ${distDir}`)

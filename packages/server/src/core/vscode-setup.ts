@@ -1,5 +1,6 @@
 // import 'vscode/localExtensionHost'
 
+import { ExtensionHostKind, registerExtension } from '@codingame/monaco-vscode-api/extensions'
 import { initialize } from '@codingame/monaco-vscode-api/services'
 import getConfigurationServiceOverride from '@codingame/monaco-vscode-configuration-service-override'
 import getFileServiceOverride, {
@@ -7,7 +8,9 @@ import getFileServiceOverride, {
 } from '@codingame/monaco-vscode-files-service-override'
 import getModelServiceOverride from '@codingame/monaco-vscode-model-service-override'
 import getThemeServiceOverride from '@codingame/monaco-vscode-theme-service-override'
+import { manifest } from '@jt-view-exports-svg/extension-api/manifest'
 import { initCache } from '@jt-view-exports-svg/extension-api/services/cache/main'
+import { initConfig } from '@jt-view-exports-svg/extension-api/services/config/index'
 import { initializeExtensionTheme } from '@jt-view-exports-svg/extension-api/services/vscode/extensionTheme'
 
 import { HostFileSystemProvider } from '../providers/HostFileSystemProvider'
@@ -50,11 +53,14 @@ async function bootstrapVSCode() {
   // biome-ignore lint/suspicious/noExplicitAny: The API requires a specific type that is not compatible with the current implementation, so we need to use 'any' here.
   registerFileSystemOverlay(1, hostProvider as any)
 
+  registerExtension(manifest, ExtensionHostKind.LocalProcess)
+
   initializeWorkspaceSettings(tempWorkspaceUri)
 
   const context = createFileSystemContext(tempWorkspaceUri)
 
   initCache(context)
+  initConfig(context)
   initializeExtensionTheme()
 }
 
