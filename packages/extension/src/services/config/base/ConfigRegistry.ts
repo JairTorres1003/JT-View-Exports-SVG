@@ -50,7 +50,7 @@ export class ConfigRegistry<TConfigs extends ConfigMap> {
 
       config._invalidate()
 
-      if (config.notification) {
+      if (config.notification && PanelController.currentPanel) {
         const label = config.notification.actionLabel ?? vsc.l10n.t('Reload')
         vsc.window.showInformationMessage(config.notification.message, label).then((selection) => {
           if (selection === label) PanelController.reload()
