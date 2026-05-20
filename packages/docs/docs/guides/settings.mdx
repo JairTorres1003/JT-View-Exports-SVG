@@ -79,10 +79,7 @@ This does **not** limit scanning — it improves navigation.
 ### Ignore Directories
 
 ```json
-"JT-View-Exports-SVG.ignoreDirectories": [
-  "**/dist",
-  "**/node_modules"
-]
+"JT-View-Exports-SVG.ignoreDirectories": []
 ```
 
 Exclude folders from scanning to improve performance.
@@ -110,12 +107,18 @@ Defines fallback props applied **only when a component does not explicitly defin
 
 ```json
 "JT-View-Exports-SVG.defaultIconProperties": {
-  "width": "28",
-  "height": "28",
+  "className": "",
   "color": "#0a0a0a",
-  "stroke": "#0a0a0a",
   "fill": "#0a0a0a",
-  "strokeWidth": "0.2"
+  "height": "28",
+  "size": "28",
+  "state": "false",
+  "stroke": "#0a0a0a",
+  "strokeColor": "#0a0a0a",
+  "strokeWidth": "0.2",
+  "style": "{}",
+  "sx": "{}",
+  "width": "28"
 }
 ```
 
@@ -154,24 +157,27 @@ Patterns follow **glob syntax** and are evaluated in order.
 
 ---
 
-## 🕘 Recent Icons
+## 📦 Icon Collections
 
-### Show Recent Icons
-
-```json
-"JT-View-Exports-SVG.recentIcons.showIcons": true
-```
-
-Toggles the **Recent Icons** section in the panel.
-
-### Limit Recent Icons
+Controls how many icons are stored in each collection.
 
 ```json
-"JT-View-Exports-SVG.recentIcons.limitShowIcons": 10
+"JT-View-Exports-SVG.iconCollection": {
+  "recent": 10,
+  "favorite": 10
+}
 ```
 
-Controls how many recent icons are displayed
-(min: 1, max: 50).
+| Field | Type | Default | Range | Description |
+|-------|------|---------|-------|-------------|
+| `recent` | number | `10` | 0–100 | Max recent icons stored |
+| `favorite` | number | `10` | 0–100 | Max favorite icons stored |
+
+Both collections can be cleared independently from the **Command Palette** or the editor/title action menu.
+
+> This setting applies globally (application scope) — limits are shared across all workspaces.
+
+> Setting a value to `0` effectively disables that collection.
 
 ---
 

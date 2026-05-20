@@ -53,9 +53,14 @@ Each item shows:
 - Open the DevTools panel
 - Add to recent icons (configurable)
 
-### Favorites
-- Hover an icon
-- Click the ⭐ star to mark or unmark
+### Favorites & Recent Icons
+
+Icons are organized into two collections:
+
+- **Favorites** — hover an icon and click ⭐ to mark or unmark
+- **Recent** — automatically tracked as you open icons
+
+Both collections have configurable limits via [`JT-View-Exports-SVG.iconCollection`](/docs/guides/settings#-icon-collections).
 
 ### Context Menu
 Right-click an icon to:
@@ -99,6 +104,22 @@ in-memory versions for safe preview.
 
 <p className='ml-auto'>[Read more →](/docs/guides/troubleshooting#%EF%B8%8F-drag--drop-files-lose-original-path)</p>
 :::
+
+---
+
+## 🗑️ Cache Management
+
+The extension caches scanned files and component data to speed up repeated scans.
+
+Three clearing modes are available from the **Command Palette** (`Ctrl+Shift+P`) or the **editor/title action submenu** (toolbar icon):
+
+| Mode | What it clears |
+|------|----------------|
+| **Clear Cache** | Scanned file and component data. Collections are preserved. |
+| **Clear Collections Cache** | Recent and favorite icons only. File cache is preserved. |
+| **Clear All Cache** | Everything, including collections. |
+
+> Use **Clear Cache** after renaming or reorganizing your icon files. Use **Clear Collections Cache** to reset your recent/favorite history without triggering a full rescan.
 
 ---
 

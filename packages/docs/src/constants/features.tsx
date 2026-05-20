@@ -13,6 +13,7 @@ import {
   Star,
   SunMoon,
   Terminal,
+  Trash2,
 } from 'lucide-react'
 
 export const FeaturesWorkspace = [
@@ -37,7 +38,7 @@ export const FeaturesWorkspace = [
     icon: <DatabaseZap />,
     title: 'Smart Caching',
     description:
-      'Uses intelligent caching to skip previously scanned files, making repeated scans nearly instant.',
+      'Multi-layer cache (files, themes, components, collections) skips already-scanned data. Concurrent file processing makes large workspace scans significantly faster.',
   },
 ]
 
@@ -89,9 +90,19 @@ export const FeaturesProductivity = [
   },
   {
     icon: <Star />,
-    title: 'Favorites & Recents',
-    description: 'Quickly access your most used or recently opened icons from dedicated sections.',
-    className: 'md:translate-x-[50%]',
+    title: 'Icon Collections',
+    description:
+      'Dedicated Recent and Favorite collections with configurable per-collection limits. Clear each independently from the command palette.',
+  },
+  {
+    icon: <Trash2 />,
+    title: 'Cache Management',
+    description: (
+      <>
+        Three clearing modes — clear file cache, clear collections, or clear everything — available
+        from the Command Palette and editor/title action submenu.
+      </>
+    ),
   },
 ]
 
@@ -114,7 +125,8 @@ export const FeaturesThemeSupport = [
   },
   {
     icon: <Blocks />,
-    title: 'Seamless Integration',
-    description: 'Respects editor color tokens and system preferences for a natural, native feel.',
+    title: 'VS Code Web Compatible',
+    description:
+      'Theme resources load dynamically — no local file cloning. Works in both desktop and VS Code Web environments.',
   },
 ]
