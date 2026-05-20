@@ -1,5 +1,105 @@
 # View Exports SVG - Changelog
 
+## 5.0.0
+
+_May 20, 2026_
+
+#### ✨ Features
+
+- **Monorepo Architecture (pnpm workspaces):**
+  - Project migrated to a monorepo with pnpm workspaces.
+  - Packages: `core`, `extension`, `webview`, `server`, `docs`, `extension-api`.
+  - Shared logic centralized in `@jt-view-exports-svg/core`.
+  - Server migrated from Deno to Node.js.
+
+- **New Extension ↔ Webview Messaging System:**
+  - Complete redesign with `MessageRouter`, `WebviewMessenger`, and `PanelController`.
+  - Typed message maps (`PostMessageMap` / `ReceiveMessageMap`) for safe cross-boundary communication.
+  - Eliminates message loss on webview startup.
+  - New capabilities: component reload, global expand/collapse toggle, file open from editor, DevTools sync, UI ↔ extension state synchronization.
+
+- **Icon Collections System:**
+  - Replaced `recentIcons.*` settings with a unified `iconCollection` configuration.
+  - Separate limits for `recent` and `favorite` collections (range: 0–100, default: 10 each).
+  - Collections can be cleared independently or together.
+
+- **Cache Management — Three Clearing Modes:**
+  - Clear Cache: removes scanned file/component data, preserves collections.
+  - Clear Collections Cache: removes recent and favorite icons only.
+  - Clear All Cache: full cache wipe including collections.
+  - Available from the Command Palette and via a submenu in the editor/title action bar.
+
+- **Configuration Service Redesign:**
+  - Clearer, modular configuration architecture.
+  - Extension view reloads automatically when settings change.
+
+#### 🚀 Enhancements
+
+- **Vite 8 Migration:**
+  - Upgraded from `rolldown-vite@7` to `vite@8` for improved build performance and ESM compatibility.
+
+- **Pattern Matching — micromatch:**
+  - Replaced `minimatch` with `micromatch` for file grouping patterns.
+
+- **Dynamic Theme Loading:**
+  - VS Code theme resources now loaded dynamically via PostMessage interception.
+  - No longer clones theme files into extension assets.
+  - Smaller extension bundle, faster initial load, and full VS Code Web compatibility.
+
+- **Redux Store — Slice Architecture:**
+  - Webview state migrated to specialized Redux slices.
+  - Typed hooks (`useAppSelector`, `useAppDispatch`).
+  - Removed redundant computed states.
+
+- **i18n Improvements:**
+  - Reorganized translations for both extension (`package.nls.json`, `bundle.l10n.json`) and webview.
+  - Namespace-based organization, normalized keys, automated migration scripts.
+
+- **Cache Architecture Redesign:**
+  - Separated into `FilesCache`, theme cache, component export cache, and per-collection icon cache.
+  - Better control over partial/full invalidation and concurrency.
+
+#### 🐛 Bug Fixes
+
+- Fixed DevTools close (X) button not updating extension state when dismissed.
+- Fixed expand/collapse toggle requiring double-click in some scenarios.
+- Fixed component reload not respecting active search filter.
+
+#### 📈 Performance Improvements
+
+- **Concurrent Workspace Scanning:** File discovery now runs concurrently — significantly faster in large projects.
+- **Concurrent File Processing (AST):** Component extraction parallelized across files.
+- Reduced memory usage with AST cleanup and optimized SVG extraction.
+
+#### ⚠️ Breaking Changes
+
+- **Removed settings:**
+  - `JT-View-Exports-SVG.recentIcons.showIcons` — use `JT-View-Exports-SVG.iconCollection.recent` (set to `0` to hide)
+  - `JT-View-Exports-SVG.recentIcons.limitShowIcons` — use `JT-View-Exports-SVG.iconCollection` (`recent` field)
+- **Node.js:** Minimum version now `22.x`.
+- **Dev server:** Migrated from Deno to Node.js. Deno-based server scripts no longer work.
+- **Monorepo:** Project structure changed — contributors must use `pnpm` and run `pnpm setup` after cloning.
+
+#### 📝 Migration Guide
+
+**For Users:**
+Update the extension from the VS Code Marketplace. If you had `recentIcons.*` settings configured, replace them with:
+
+```json
+"JT-View-Exports-SVG.iconCollection": {
+  "recent": 10,
+  "favorite": 10
+}
+```
+
+**For Contributors:**
+
+- Run `pnpm setup` from the monorepo root.
+- Use `pnpm dev:webview` + `pnpm dev:extension` for development.
+- Minimum Node.js `22.x` required.
+
+---
+
 ## 4.1.0
 
 _Feb 18, 2026_
@@ -103,7 +203,6 @@ If upgrading from 4.0.x:
    - Build system now uses Vite - no breaking changes to source code.
    - Code formatting follows Biome rules - run `npm run biome:format` to auto-format.
    - VSCode minimum version updated to 1.109.0.
-
 
 ## 4.0.2
 

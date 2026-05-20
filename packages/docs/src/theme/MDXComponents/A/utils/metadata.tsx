@@ -61,7 +61,7 @@ const iconComponentCache = new Map<string, LazyExoticComponent<LucideIcon>>()
 function getLazyIconComponent(iconKey: string) {
   if (!iconComponentCache.has(iconKey)) {
     const iconComponent = lazy(async () => {
-      const mod = await import(`lucide-react/dist/esm/icons/${iconKey}.js`)
+      const mod = await import(`lucide-react/dist/esm/icons/${iconKey}.mjs`)
       return {
         default: (mod.default ||
           (mod as unknown as { [k: string]: LucideIcon })[iconKey]) as LucideIcon,
