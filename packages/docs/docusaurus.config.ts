@@ -71,7 +71,7 @@ const config: Config = {
         routeBasePath: '/changelog',
         showReadingTime: false,
         postsPerPage: 20,
-        archiveBasePath: null,
+        archiveBasePath: false,
         onInlineAuthors: 'warn',
         editUrl: 'https://github.com/JairTorres1003/JT-View-Exports-SVG/edit/main/CHANGELOG.md',
         feedOptions: {
@@ -89,6 +89,7 @@ const config: Config = {
     [
       'classic',
       {
+        blog: false,
         docs: {
           sidebarPath: './sidebars.ts',
           editUrl: 'https://github.com/JairTorres1003/JT-View-Exports-SVG/edit/main/docs',

@@ -86,7 +86,7 @@ export function replaceChangelogContent(content: string): string {
     .replace(
       /^([ \t]*)>\s*\*\*(.+?)\*\*\s*([\s\S]+?)(?=\n\1(?![ \t])|\n{2,}|$)/gm,
       (_, indent, title, body) =>
-        `${indent}:::[${title.replace(':', '').toLowerCase()}]\n` +
+        `${indent}:::${title.replace(':', '').toLowerCase()}\n` +
         `${indent}${body.trim()}\n` +
         `${indent}:::`
     )
