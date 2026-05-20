@@ -339,7 +339,7 @@ const renderPath = () => <path d='...' />
 export const Icon = () => <svg>{renderPath()}</svg>
 ```
 
-:::note Design Rule of Thumb
+:::note[Design Rule of Thumb]
 
 <p>If the SVG exists directly in JSX and all logic is inline, it will be detected.</p>
 <p className='mt-0'>If it relies on runtime state, helpers, or external variables, it will not.</p>

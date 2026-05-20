@@ -97,7 +97,7 @@ This workflow is useful when:
   <p className='mt-2 text-sm text-gray-600 dark:text-gray-400'>Drag & Drop files into the View Exports SVG panel to preview their SVG components.</p>
 </div>
 
-:::caution Security Limitation
+:::caution[Security Limitation]
 Due to VS Code's WebView sandbox restrictions, direct access to file paths is blocked.\
 When you drag and drop files into the panel, the extension reads their contents and creates temporary
 in-memory versions for safe preview.
@@ -109,15 +109,17 @@ in-memory versions for safe preview.
 
 ## 🗑️ Cache Management
 
+import Shortcut from '@site/src/components/Shortcut'
+
 The extension caches scanned files and component data to speed up repeated scans.
 
-Three clearing modes are available from the **Command Palette** (`Ctrl+Shift+P`) or the **editor/title action submenu** (toolbar icon):
+Three clearing modes are available from the **Command Palette** (<Shortcut mac={['command', 'shift']} windows={['ctrl', 'shift']}>P</Shortcut>) or the **editor/title action submenu** (toolbar icon):
 
-| Mode | What it clears |
-|------|----------------|
-| **Clear Cache** | Scanned file and component data. Collections are preserved. |
-| **Clear Collections Cache** | Recent and favorite icons only. File cache is preserved. |
-| **Clear All Cache** | Everything, including collections. |
+| Mode                        | What it clears                                              |
+| --------------------------- | ----------------------------------------------------------- |
+| **Clear Cache**             | Scanned file and component data. Collections are preserved. |
+| **Clear Collections Cache** | Recent and favorite icons only. File cache is preserved.    |
+| **Clear All Cache**         | Everything, including collections.                          |
 
 > Use **Clear Cache** after renaming or reorganizing your icon files. Use **Clear Collections Cache** to reset your recent/favorite history without triggering a full rescan.
 
