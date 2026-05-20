@@ -1,0 +1,39 @@
+{
+  "yes": "はい",
+  "no": "いいえ",
+  "close": "閉じる",
+  "cancel": "キャンセル",
+  "search": "検索",
+  "clear": "クリア",
+  "info": "情報",
+  "loading": "読み込み中...",
+  "refresh": "更新",
+  "errors": "エラー",
+  "open-file": "ファイルを開く",
+  "open-many-files": "複数のファイルを開く",
+  "copy-name": "名前をコピー",
+  "copy-code-snippet": "コードスニペットをコピー",
+  "clear-collection": "コレクションをクリア",
+  "clear-collection-confirm": "このコレクションをクリアしてもよろしいですか？",
+  "copied-to-clipboard": "<b>{{value}}</b> をクリップボードにコピーしました",
+  "list-of-associated-files-for": "\"{{name}}\" の関連ファイルのリスト",
+  "pickers": {
+    "color": {
+      "title": "色を選択"
+    }
+  },
+  "modal-info": {
+    "title": "情報",
+    "file-name": "ファイル名:",
+    "language": "言語:",
+    "is-temporary-file": "一時ファイルですか?:",
+    "includes-temporary-files": "一時ファイルを含みます:",
+    "path": "パス:",
+    "show-no-exports": "エクスポートされていないコンポーネントを表示:",
+    "components-exported": "エクスポートされたコンポーネントの合計:",
+    "components-not-exported": "エクスポートされていないコンポーネントの合計:",
+    "total-components": "合計コンポーネント:",
+    "files-count": "ファイル数:",
+    "group-kind-name": "グループ名:"
+  }
+}

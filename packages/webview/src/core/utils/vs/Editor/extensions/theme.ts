@@ -1,0 +1,62 @@
+import {
+  ExtensionHostKind,
+  type IExtensionManifest,
+  registerExtension,
+} from '@codingame/monaco-vscode-api/extensions'
+import { type ExtensionManage, sanitizePathStart } from '@jt-view-exports-svg/core'
+
+import i18next from '@/i18n'
+import { getUnknownError } from '@/utils/errors'
+
+import isExtensionAlreadyInstalled from './is-extension-already-installed.ts'
+
+/**
+ * Activates the theme extension by fetching its manifest and registering its themes.
+ *
+ * This function locates the base URL for the extension, fetches the `package.json` manifest,
+ * and registers each theme contributed by the extension. If any step fails, an error is logged.
+ *
+ * @async
+ * @throws Logs an error if the manifest cannot be fetched or processed.
+ */
+async function activate(_themeConfig?: ExtensionManage) {
+  try {
+    if (import.meta.env.DEV) {
+      const { default: devActivate } = await import('./theme.dev.ts')
+      await devActivate()
+      return
+    }
+
+    if (!_themeConfig?.isValid) return
+
+    const baseUrl = new URL(/* @vite-ignore */ '../assets', import.meta.url).href
+
+    const packageJSON = await fetch(`${baseUrl}/vs/extensions/theme/package.json`)
+
+    if (!packageJSON.ok) {
+      throw new Error(i18next.t('editor.failed-to-fetch-theme', { ns: 'errors' }))
+    }
+
+    const {
+      main: _main,
+      browser: _browser,
+      ...manifest
+    }: IExtensionManifest = await packageJSON.json()
+
+    const isAlreadyRegistered = isExtensionAlreadyInstalled(manifest)
+    if (isAlreadyRegistered) return
+
+    const { registerFileUrl } = registerExtension(manifest, ExtensionHostKind.LocalProcess)
+
+    manifest.contributes?.themes?.forEach((theme) => {
+      const themePath = sanitizePathStart(theme.path)
+      registerFileUrl(`/${themePath}`, `${baseUrl}/vs/extensions/theme/${themePath}`)
+    })
+  } catch (error) {
+    console.error(
+      `${i18next.t('editor.failed-to-activate-theme', { ns: 'errors' })}: ${getUnknownError(error)}`
+    )
+  }
+}
+
+export default activate

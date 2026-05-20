@@ -1,0 +1,49 @@
+{
+  "suggestions": {
+    "components": {
+      "details": {
+        "static": "SVG Bileşeni",
+        "animated": "Animasyonlu SVG Bileşeni",
+        "temporary-static": "(Geçici) SVG Bileşeni",
+        "temporary-animated": "(Geçici) Animasyonlu SVG Bileşeni"
+      },
+      "documentation": [
+        "---",
+        "**🧩 SVG Bileşeni Önizleme**\\",
+        "Bu dinamik bir SVG bileşenidir. Kodunu değiştirebilir ve sonucu anında önizleyebilirsiniz.\\",
+        "\\",
+        "**🎛️ Özelleştirme**\\",
+        "Bileşenin görünümünü veya davranışını değiştirmek için özellikler (props) geçirin.\\",
+        "\\",
+        "**Kullanım Örneği:**",
+        "```jsx",
+        "<{{name}} {{propertyValue}} />",
+        "```",
+        "\\",
+        "**🔍 Daha Fazla Bilgi:** [{{fileName}}]({{link}} \"file://{{filePath}}\")\\",
+        "Bileşenin üzerine gelin veya tam belgeler için dosyayı açın."
+      ],
+      "documentation-with-rest-props": [
+        "---",
+        "**🧩 SVG Bileşeni Önizleme**\\",
+        "Bu dinamik bir SVG bileşenidir. Kodunu değiştirebilir ve sonucu anında önizleyebilirsiniz.\\",
+        "\\",
+        "**🎛️ Özelleştirme**\\",
+        "Belirli özelliklerin yanı sıra *herhangi bir geçerli SVG özniteliği* (rest props) geçirerek bileşeni daha da özelleştirebilirsiniz.\\",
+        "\\",
+        "**Kullanım Örneği:**",
+        "```jsx",
+        "<{{name}} {{propertyValue}} />",
+        "```",
+        "\\",
+        "**🔍 Daha Fazla Bilgi:** [{{fileName}}]({{link}} \"file://{{filePath}}\")\\",
+        "Bileşenin üzerine gelin veya tam belgeler için dosyayı açın."
+      ]
+    },
+    "properties": {
+      "details": {
+        "static": "(mülk) {{name}}: {{type}}"
+      }
+    }
+  }
+}

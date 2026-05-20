@@ -1,0 +1,8 @@
+{
+  "drop-zone": {
+    "title": "上传您的 JS、JSX、TS 或 TSX 文件，轻松发现它们包含的 SVG 组件。",
+    "select-files": "选择文件",
+    "or-drop-files-here": "或将文件拖放到此处",
+    "let-it-go": "放手吧！"
+  }
+}

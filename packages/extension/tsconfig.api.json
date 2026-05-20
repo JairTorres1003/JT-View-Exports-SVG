@@ -1,0 +1,10 @@
+{
+  "extends": "./tsconfig.json",
+  "compilerOptions": {
+    "module": "ES2022",
+    "moduleResolution": "bundler",
+    "sourceMap": false,
+    "outDir": "../extension-api/dist"
+  },
+  "exclude": ["./src/test/**/*", "node_modules", "dist"]
+}

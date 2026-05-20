@@ -1,0 +1,47 @@
+{
+  "name": "@jt-view-exports-svg/extension-api",
+  "version": "4.1.0",
+  "description": "API surface of the JT View Exports SVG extension. Auto-generated from the extension build.",
+  "type": "module",
+  "private": false,
+  "license": "MIT",
+  "author": "Jair Torres",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/JairTorres1003/JT-View-Exports-SVG.git",
+    "directory": "packages/extension-api"
+  },
+  "main": "./dist/extension.js",
+  "types": "./dist/extension.d.ts",
+  "exports": {
+    ".": "./dist/extension.js",
+    "./*": "./dist/*.js"
+  },
+  "files": [
+    "dist"
+  ],
+  "keywords": [
+    "Extension",
+    "Icon assets",
+    "Icon management",
+    "Javascript",
+    "JSX",
+    "React",
+    "SVG icons",
+    "TSX",
+    "TypeScript",
+    "Visual Studio Code",
+    "VSCode",
+    "API",
+    "ESM"
+  ],
+  "scripts": {
+    "clean": "rimraf dist"
+  },
+  "dependencies": {
+    "@jt-view-exports-svg/core": "workspace:*"
+  },
+  "devDependencies": {
+    "typescript": "^5.9.3"
+  }
+}

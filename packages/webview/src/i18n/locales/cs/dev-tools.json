@@ -1,0 +1,30 @@
+{
+  "title": "Nástroje pro vývojáře",
+  "playground": {
+    "title": "Dětské hřiště",
+    "hide-code": "Skrýt kód",
+    "show-code": "Zobrazit kód",
+    "copy-code": "Kopírovat kód",
+    "reset-code": "Resetovat kód",
+    "more-actions": "Další akce...",
+    "open-in-editor": "Otevřít v editoru",
+    "copy-as-svg": "Kopírovat jako SVG",
+    "copy-as-png": "Kopírovat jako PNG",
+    "download-as-svg": "Stáhnout jako SVG",
+    "download-as-png": "Stáhnout jako PNG"
+  },
+  "info": {
+    "title": "Informační komponenta",
+    "component-name": "Název komponenty:",
+    "type-declaration": "Deklarace typu:",
+    "is-exported": "Je exportována?:",
+    "is-animated": "Je animovaná?:",
+    "is-favorite": "Je oblíbená?:"
+  },
+  "menu": {
+    "reload-playground": "Obnovit dětské hřiště",
+    "reload-editor": "Obnovit editor",
+    "disable-word-wrap": "Zakázat zalamování textu",
+    "enable-word-wrap": "Povolit zalamování textu"
+  }
+}

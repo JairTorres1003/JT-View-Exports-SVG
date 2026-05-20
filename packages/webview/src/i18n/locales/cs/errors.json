@@ -1,0 +1,20 @@
+{
+  "unknown": "Neznámá chyba",
+  "root-element-not-found": "Nepodařilo se najít kořenový element",
+  "component-empty": "Komponenta je prázdná",
+  "unsupported-files": "Následující soubory nejsou podporovány:",
+  "failed-to-create-temporary-file": "Chyba při vytváření dočasného souboru {{name}}",
+  "vscode-api": {
+    "not-available": "VSCode API není k dispozici",
+    "handling-error": "[VSCodeAPIWrapper] Došlo k chybě při zpracování zprávy:"
+  },
+  "editor": {
+    "failed-to-update-configuration": "Nepodařilo se aktualizovat uživatelskou konfiguraci",
+    "failed-to-update-keybindings": "Nepodařilo se aktualizovat uživatelské klávesové zkratky",
+    "reference-not-available": "Odkaz na editor není k dispozici",
+    "failed-to-activate-theme": "Nepodařilo se aktivovat téma rozšíření",
+    "failed-to-fetch-theme": "Nepodařilo se načíst téma rozšíření",
+    "failed-to-initialize": "Nepodařilo se inicializovat editor",
+    "failed-to-apply-color": "Chyba při aplikaci počáteční barvy"
+  }
+}

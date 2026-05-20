@@ -1,0 +1,39 @@
+{
+  "yes": "Oui",
+  "no": "Non",
+  "close": "Fermer",
+  "cancel": "Annuler",
+  "search": "Rechercher",
+  "clear": "Effacer",
+  "info": "Informations",
+  "loading": "Chargement...",
+  "refresh": "Actualiser",
+  "errors": "Erreurs",
+  "open-file": "Ouvrir le fichier",
+  "open-many-files": "Ouvrir plusieurs fichiers",
+  "copy-name": "Copier le nom",
+  "copy-code-snippet": "Copier le code",
+  "clear-collection": "Vider la collection",
+  "clear-collection-confirm": "Êtes-vous sûr de vouloir vider cette collection ?",
+  "copied-to-clipboard": "Copié <b>{{value}}</b> dans le presse-papiers",
+  "list-of-associated-files-for": "Liste des fichiers associés pour \"{{name}}\"",
+  "pickers": {
+    "color": {
+      "title": "Sélectionner une couleur"
+    }
+  },
+  "modal-info": {
+    "title": "Informations",
+    "file-name": "Nom du fichier:",
+    "language": "Langue:",
+    "is-temporary-file": "Est-ce un fichier temporaire?:",
+    "includes-temporary-files": "Inclut des fichiers temporaires:",
+    "path": "Chemin:",
+    "show-no-exports": "Afficher les composants non exportés:",
+    "components-exported": "Total des composants exportés:",
+    "components-not-exported": "Total des composants non exportés:",
+    "total-components": "Total des composants:",
+    "files-count": "Total des fichiers:",
+    "group-kind-name": "Nom du groupe:"
+  }
+}

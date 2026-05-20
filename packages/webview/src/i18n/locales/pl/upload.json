@@ -1,0 +1,10 @@
+{
+  "extract-components": "Wyodrębnij komponenty",
+  "add-more-files": "Dodaj więcej plików",
+  "sort-files-by-name": "Sortuj pliki według nazwy",
+  "delete-this-file": "Usuń ten plik",
+  "no-files-selected": "Nie wybrano plików",
+  "files-loaded_one": "{{count}} plik załadowany",
+  "files-loaded_other": "{{count}} pliki załadowane",
+  "processing-files": "Przetwarzanie {{count}} pliku(ów)..."
+}

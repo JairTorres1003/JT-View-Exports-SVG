@@ -1,0 +1,20 @@
+{
+  "unknown": "未知错误",
+  "root-element-not-found": "找不到根元素",
+  "component-empty": "组件为空",
+  "unsupported-files": "不支持以下文件：",
+  "failed-to-create-temporary-file": "创建临时文件 {{name}} 时出错",
+  "vscode-api": {
+    "not-available": "VSCode API 不可用",
+    "handling-error": "[VSCodeAPIWrapper] 处理消息时发生错误："
+  },
+  "editor": {
+    "failed-to-update-configuration": "无法更新用户配置",
+    "failed-to-update-keybindings": "无法更新用户按键绑定",
+    "reference-not-available": "编辑器参考不可用",
+    "failed-to-activate-theme": "无法激活扩展主题",
+    "failed-to-fetch-theme": "无法获取扩展主题",
+    "failed-to-initialize": "无法初始化编辑器",
+    "failed-to-apply-color": "应用初始颜色时出错"
+  }
+}

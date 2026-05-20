@@ -1,0 +1,49 @@
+{
+  "suggestions": {
+    "components": {
+      "details": {
+        "static": "SVG komponenta",
+        "animated": "Animovaná SVG komponenta",
+        "temporary-static": "(Dočasná) SVG komponenta",
+        "temporary-animated": "(Dočasná) Animovaná SVG komponenta"
+      },
+      "documentation": [
+        "---",
+        "**🧩 Náhled SVG komponenty**\\",
+        "Toto je dynamická SVG komponenta. Její kód můžete upravovat a okamžitě si prohlédnout náhled výsledku.\\",
+        "\\",
+        "**🎛️ Přizpůsobení**\\",
+        "Předávejte vlastnosti (props) pro změnu vzhledu nebo chování komponenty.\\",
+        "\\",
+        "**Příklad použití:**",
+        "```jsx",
+        "<{{name}} {{propertyValue}} />",
+        "```",
+        "\\",
+        "**🔍 Více informací:** [{{fileName}}]({{link}} \"file://{{filePath}}\")\\",
+        "Pro zobrazení kompletní dokumentace najeďte myší na komponentu nebo otevřete soubor."
+      ],
+      "documentation-with-rest-props": [
+        "---",
+        "**🧩 Náhled SVG komponenty**\\",
+        "Toto je dynamická SVG komponenta. Její kód můžete upravovat a okamžitě si prohlédnout náhled výsledku.\\",
+        "\\",
+        "**🎛️ Přizpůsobení**\\",
+        "Můžete předat konkrétní vlastnosti a také *jakékoli platné SVG atributy* (rest props) pro další přizpůsobení komponenty.\\",
+        "\\",
+        "**Příklad použití:**",
+        "```jsx",
+        "<{{name}} {{propertyValue}} />",
+        "```",
+        "\\",
+        "**🔍 Více informací:** [{{fileName}}]({{link}} \"file://{{filePath}}\")\\",
+        "Pro zobrazení kompletní dokumentace najeďte myší na komponentu nebo otevřete soubor."
+      ]
+    },
+    "properties": {
+      "details": {
+        "static": "(vlastnost) {{name}}: {{type}}"
+      }
+    }
+  }
+}
