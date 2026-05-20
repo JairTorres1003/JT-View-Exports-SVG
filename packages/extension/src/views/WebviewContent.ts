@@ -1,0 +1,134 @@
+import type { ManifestContent } from '@jt-view-exports-svg/core'
+import { type ExtensionContext, env, l10n, type Uri, type Webview, workspace } from 'vscode'
+
+import { getConfig } from '@/services/config'
+import { getNonce } from '@/utilities/files/nonce'
+import { getUri, uriParse } from '@/utilities/vscode/uri'
+
+export class WebviewContent {
+  private manifest?: ManifestContent
+  private readonly _nonce: string
+
+  public constructor(
+    private readonly webview: Webview,
+    private readonly context: ExtensionContext
+  ) {
+    this._nonce = getNonce()
+  }
+
+  public async render(): Promise<string> {
+    this.manifest = await this.getManifest()
+    return this.generateContent()
+  }
+
+  /**
+   * Constructs a URI for an asset within the extension.
+   *
+   * @param path - The path segments to append to the base URI.
+   * @returns The constructed URI for the specified asset.
+   */
+  private getAssetUri(...path: string[]): Uri {
+    return getUri(this.webview, this.context.extensionUri, ['dist/webview', ...path])
+  }
+
+  /**
+   * Retrieves the manifest content from the specified asset URI.
+   *
+   * @returns The parsed JSON content of the manifest file.
+   * @throws Will throw an error if the manifest file cannot be read or parsed.
+   */
+  private async getManifest(): Promise<ManifestContent> {
+    const path = uriParse(this.getAssetUri('manifest.json'))
+    const manifestBytes = await workspace.fs.readFile(path)
+    const manifestString = Buffer.from(manifestBytes).toString('utf8')
+    return JSON.parse(manifestString) as ManifestContent
+  }
+
+  /**
+   * Retrieves the URIs for the webview assets.
+   *
+   * This method retrieves the URIs for the 'index.html' file, 'favicon.ico' file,
+   * and CSS files from the manifest and returns them as an object.
+   *
+   * @returns An object containing the URIs for the webview assets.
+   */
+  private getWebviewAssets(): ManifestContent {
+    if (!this.manifest?.main || !this.manifest?.style || !this.manifest?.favicon) {
+      throw new Error(l10n.t('Invalid webview manifest'))
+    }
+
+    return {
+      main: this.getAssetUri(this.manifest.main).toString(),
+      favicon: this.getAssetUri(this.manifest.favicon).toString(),
+      style: this.getAssetUri(this.manifest.style).toString(),
+    }
+  }
+
+  private getCSP(): string {
+    return `
+      default-src 'none';
+      connect-src ${this.webview.cspSource} extension-file:;
+      style-src ${this.webview.cspSource} 'unsafe-inline';
+      font-src ${this.webview.cspSource};
+      img-src ${this.webview.cspSource} https: blob:;
+      script-src ${this.webview.cspSource} 'nonce-${this._nonce}' 'unsafe-eval';
+    `
+      .replace(/\s{2,}/g, ' ')
+      .trim()
+  }
+
+  /**
+   * Generates a script tag containing the initial configuration for the webview.
+   * The configuration includes localized view name and default settings for
+   * expanding all sections and opening developer tools.
+   *
+   * @returns An HTML script tag as a string, which sets up the `window.ViewExportsSVG`
+   *          object with the necessary initialization parameters.
+   */
+  private scriptConfiguration(): string {
+    const registry = getConfig()
+
+    return /* html */ `
+      <script nonce="${this._nonce}">
+        window.ViewExportsSVG = {
+          name: "${l10n.t('View Exports SVG')}",
+          initConfiguration: {
+            _DEFAULT_EXPAND_ALL: ${registry.get('defaultExpandAll').getValue()},
+            _DEFAULT_CLICK_TO_OPEN_DEV_TOOLS: ${registry.get('defaultClickToOpenDevTools').getValue()},
+            _LANGUAGE: "${env.language ?? 'en'}",
+          }
+        };
+      </script>
+    `
+  }
+
+  /**
+   * Generates the content for the webview.
+   */
+  private generateContent(): string {
+    const { main, favicon, style } = this.getWebviewAssets()
+    const script = this.scriptConfiguration()
+    const cspContent = this.getCSP()
+
+    return /* html */ `
+      <!DOCTYPE html>
+      <html lang="${env.language ?? 'en'}">
+        <head>
+          <meta charset="UTF-8" />
+          <meta http-equiv="Content-Security-Policy" content="${cspContent}" />
+          <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no" />
+          <link rel="icon" type="image/x-icon" href="${favicon}" />
+          <link rel="stylesheet" type="text/css" href="${style}" />
+          <title>${l10n.t('View Exports SVG')}</title>
+        </head>
+        <body>
+          <div id="root"></div>
+          <div id="overflow_widgets_dom_node" class="monaco-editor"></div>
+          <noscript>You need to enable JavaScript to run this app.</noscript>
+          ${script}
+          <script type="module" nonce="${this._nonce}" src="${main}"></script>
+        </body>
+      </html>
+    `
+  }
+}

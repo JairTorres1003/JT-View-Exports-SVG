@@ -1,0 +1,23 @@
+packages:
+  - packages/*
+
+allowBuilds:
+  '@heroui/shared-utils': true
+  '@playwright/browser-chromium': true
+  '@swc/core': true
+  core-js: true
+  esbuild: true
+  sharp: true
+
+onlyBuiltDependencies:
+  - '@heroui/shared-utils'
+  - '@playwright/browser-chromium'
+  - '@swc/core'
+  - core-js
+  - core-js-pure
+  - esbuild
+  - sharp
+
+patchedDependencies:
+  '@docusaurus/tsconfig': patches/@docusaurus__tsconfig.patch
+  react-colorful@5.7.0: patches/react-colorful@5.7.0.patch

@@ -1,0 +1,29 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Upload translations for View Exports SVG webview",
+  "type": "object",
+  "properties": {
+    "extract-components": { "type": "string", "default": "Extract components" },
+    "add-more-files": { "type": "string", "default": "Add more files" },
+    "sort-files-by-name": { "type": "string", "default": "Sort files by name" },
+    "sort-ascending": { "type": "string", "default": "Sort ascending" },
+    "sort-descending": { "type": "string", "default": "Sort descending" },
+    "delete-this-file": { "type": "string", "default": "Delete this file" },
+    "no-files-selected": { "type": "string", "default": "No files selected" },
+    "files-loaded_one": { "type": "string", "default": "{{count}} file loaded" },
+    "files-loaded_other": { "type": "string", "default": "{{count}} files loaded" },
+    "processing-files": { "type": "string", "default": "Processing {{count}} file(s)..." }
+  },
+  "required": [
+    "extract-components",
+    "add-more-files",
+    "sort-files-by-name",
+    "sort-ascending",
+    "sort-descending",
+    "delete-this-file",
+    "no-files-selected",
+    "files-loaded_one",
+    "files-loaded_other",
+    "processing-files"
+  ]
+}

@@ -1,0 +1,14 @@
+# Build Output
+node_modules/
+dist/
+
+# Testing
+.vscode-test/
+.vscode-test-web/
+
+# Logs & Artifacts
+*.tsbuildinfo
+*.log
+
+# OS
+.DS_Store

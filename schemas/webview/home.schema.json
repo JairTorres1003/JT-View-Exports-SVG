@@ -1,0 +1,21 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Home translations for View Exports SVG webview",
+  "type": "object",
+  "properties": {
+    "drop-zone": {
+      "type": "object",
+      "properties": {
+        "title": {
+          "type": "string",
+          "default": "Upload your JS, JSX, TS, or TSX files and easily discover the SVG components they contain."
+        },
+        "select-files": { "type": "string", "default": "Select files" },
+        "or-drop-files-here": { "type": "string", "default": "or drop the files here" },
+        "let-it-go": { "type": "string", "default": "Let it go!" }
+      },
+      "required": ["title", "select-files", "or-drop-files-here", "let-it-go"]
+    }
+  },
+  "required": ["drop-zone"]
+}

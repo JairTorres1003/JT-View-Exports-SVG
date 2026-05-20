@@ -1,0 +1,39 @@
+{
+  "yes": "예",
+  "no": "아니오",
+  "close": "닫기",
+  "cancel": "취소",
+  "search": "검색",
+  "clear": "지우기",
+  "info": "정보",
+  "loading": "로딩 중...",
+  "refresh": "새로 고침",
+  "errors": "오류",
+  "open-file": "파일 열기",
+  "open-many-files": "여러 파일 열기",
+  "copy-name": "이름 복사",
+  "copy-code-snippet": "코드 스니펫 복사",
+  "clear-collection": "컬렉션 지우기",
+  "clear-collection-confirm": "이 컬렉션을 지우시겠습니까?",
+  "copied-to-clipboard": "<b>{{value}}</b>를 클립보드에 복사했습니다.",
+  "list-of-associated-files-for": "\"{{name}}\"의 관련 파일 목록",
+  "pickers": {
+    "color": {
+      "title": "색상 선택"
+    }
+  },
+  "modal-info": {
+    "title": "정보",
+    "file-name": "파일 이름:",
+    "language": "언어:",
+    "is-temporary-file": "임시 파일인가요?:",
+    "includes-temporary-files": "임시 파일 포함:",
+    "path": "경로:",
+    "show-no-exports": "내보내지 않은 구성 요소 표시:",
+    "components-exported": "내보낸 구성 요소 수:",
+    "components-not-exported": "내보내지 않은 구성 요소 수:",
+    "total-components": "총 구성 요소:",
+    "files-count": "파일 수:",
+    "group-kind-name": "그룹 이름:"
+  }
+}

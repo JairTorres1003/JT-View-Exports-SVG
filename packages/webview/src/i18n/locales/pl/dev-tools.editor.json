@@ -1,0 +1,49 @@
+{
+  "suggestions": {
+    "components": {
+      "details": {
+        "static": "Komponent SVG",
+        "animated": "Animowany komponent SVG",
+        "temporary-static": "(Tymczasowy) komponent SVG",
+        "temporary-animated": "(Tymczasowy) animowany komponent SVG"
+      },
+      "documentation": [
+        "---",
+        "**🧩 Podgląd komponentu SVG**\\",
+        "To jest dynamiczny komponent SVG. Możesz modyfikować jego kod i natychmiast podglądać wynik.\\",
+        "\\",
+        "**🎛️ Dostosowywanie**\\",
+        "Przekaż właściwości (props), aby zmienić wygląd lub zachowanie komponentu.\\",
+        "\\",
+        "**Przykład użycia:**",
+        "```jsx",
+        "<{{name}} {{propertyValue}} />",
+        "```",
+        "\\",
+        "**🔍 Więcej informacji:** [{{fileName}}]({{link}} \"file://{{filePath}}\")\\",
+        "Najedź kursorem na komponent lub otwórz plik, aby zobaczyć pełną dokumentację."
+      ],
+      "documentation-with-rest-props": [
+        "---",
+        "**🧩 Podgląd komponentu SVG**\\",
+        "To jest dynamiczny komponent SVG. Możesz modyfikować jego kod i natychmiast podglądać wynik.\\",
+        "\\",
+        "**🎛️ Dostosowywanie**\\",
+        "Możesz przekazać konkretne właściwości, a także *wszystkie ważne atrybuty SVG* (rest props), aby jeszcze bardziej dostosować komponent.\\",
+        "\\",
+        "**Przykład użycia:**",
+        "```jsx",
+        "<{{name}} {{propertyValue}} />",
+        "```",
+        "\\",
+        "**🔍 Więcej informacji:** [{{fileName}}]({{link}} \"file://{{filePath}}\")\\",
+        "Najedź kursorem na komponent lub otwórz plik, aby zobaczyć pełną dokumentację."
+      ]
+    },
+    "properties": {
+      "details": {
+        "static": "(właściwość) {{name}}: {{type}}"
+      }
+    }
+  }
+}

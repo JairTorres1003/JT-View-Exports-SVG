@@ -1,0 +1,100 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Common translations for View Exports SVG webview",
+  "type": "object",
+  "properties": {
+    "yes": { "type": "string", "default": "Yes" },
+    "no": { "type": "string", "default": "No" },
+    "close": { "type": "string", "default": "Close" },
+    "cancel": { "type": "string", "default": "Cancel" },
+    "search": { "type": "string", "default": "Search" },
+    "clear": { "type": "string", "default": "Clear" },
+    "info": { "type": "string", "default": "Info" },
+    "loading": { "type": "string", "default": "Loading..." },
+    "refresh": { "type": "string", "default": "Refresh" },
+    "errors": { "type": "string", "default": "Errors" },
+    "open-file": { "type": "string", "default": "Open file" },
+    "open-many-files": { "type": "string", "default": "Open many files" },
+    "copy-name": { "type": "string", "default": "Copy name" },
+    "copy-code-snippet": { "type": "string", "default": "Copy code snippet" },
+    "clear-collection": { "type": "string", "default": "Clear collection" },
+    "clear-collection-confirm": {
+      "type": "string",
+      "default": "Are you sure you want to clear this collection?"
+    },
+    "copied-to-clipboard": { "type": "string", "default": "Copied <b>{{value}}</b> to clipboard" },
+    "list-of-associated-files-for": {
+      "type": "string",
+      "default": "List of associated files for \"{{name}}\""
+    },
+    "pickers": {
+      "type": "object",
+      "properties": {
+        "color": {
+          "type": "object",
+          "properties": {
+            "title": { "type": "string", "default": "Select a color" }
+          },
+          "required": ["title"]
+        }
+      },
+      "required": ["color"]
+    },
+    "modal-info": {
+      "type": "object",
+      "properties": {
+        "title": { "type": "string", "default": "Info" },
+        "file-name": { "type": "string", "default": "File name:" },
+        "language": { "type": "string", "default": "Language:" },
+        "is-temporary-file": { "type": "string", "default": "Is it a temporary file?:" },
+        "includes-temporary-files": { "type": "string", "default": "Includes temporary files:" },
+        "path": { "type": "string", "default": "Path:" },
+        "show-no-exports": { "type": "string", "default": "Show non-exported components:" },
+        "components-exported": { "type": "string", "default": "Total components exported:" },
+        "components-not-exported": {
+          "type": "string",
+          "default": "Total non-exported components:"
+        },
+        "total-components": { "type": "string", "default": "Total components:" },
+        "files-count": { "type": "string", "default": "Files count:" },
+        "group-kind-name": { "type": "string", "default": "Group name:" }
+      },
+      "required": [
+        "title",
+        "file-name",
+        "language",
+        "is-temporary-file",
+        "includes-temporary-files",
+        "path",
+        "show-no-exports",
+        "components-exported",
+        "components-not-exported",
+        "total-components",
+        "files-count",
+        "group-kind-name"
+      ]
+    }
+  },
+  "required": [
+    "yes",
+    "no",
+    "close",
+    "cancel",
+    "search",
+    "clear",
+    "info",
+    "loading",
+    "refresh",
+    "errors",
+    "open-file",
+    "open-many-files",
+    "copy-name",
+    "copy-code-snippet",
+    "clear-collection",
+    "clear-collection-confirm",
+    "copied-to-clipboard",
+    "list-of-associated-files-for",
+    "pickers",
+    "modal-info"
+  ]
+}

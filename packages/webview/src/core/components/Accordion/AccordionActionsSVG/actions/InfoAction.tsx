@@ -1,0 +1,44 @@
+import type { ViewExportSVG } from '@jt-view-exports-svg/core'
+import { IconButton, Tooltip } from '@mui/material'
+import { type FC, lazy, Suspense, useState } from 'react'
+import { useTranslation } from 'react-i18next'
+
+import IconInfo from '@/assets/icons/indicators/info'
+
+const DialogInfoModal = lazy(() => import('@/core/components/modals/DialogInfoModal'))
+
+interface InfoActionProps {
+  data: ViewExportSVG
+  isGrouped?: boolean
+}
+
+export const InfoAction: FC<InfoActionProps> = ({ data, isGrouped }) => {
+  const [open, setOpen] = useState(false)
+  const { t } = useTranslation()
+
+  return (
+    <>
+      <Tooltip title={t('info')} placement='top'>
+        <IconButton
+          aria-label={t('info')}
+          onClick={() => {
+            setOpen(true)
+          }}
+        >
+          <IconInfo size={16} />
+        </IconButton>
+      </Tooltip>
+
+      <Suspense>
+        <DialogInfoModal
+          open={open}
+          data={data}
+          isGrouped={isGrouped}
+          onClose={() => {
+            setOpen(false)
+          }}
+        />
+      </Suspense>
+    </>
+  )
+}

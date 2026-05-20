@@ -3,386 +3,455 @@
   "title": "JSON schema for l10n in the bundle View Exports SVG extension for Visual Studio Code",
   "type": "object",
   "properties": {
-    "View Exports SVG": {
+    "{kind} icons": {
       "type": "string",
-      "description": "The title of the extension",
-      "default": "View Exports SVG"
-    },
-    "No SVG components found...": {
-      "type": "string",
-      "description": "Message displayed when no SVG components are found in the file",
-      "default": "No SVG components found..."
-    },
-    "Error posting message to webview:": {
-      "type": "string",
-      "description": "Error message displayed when posting a message to the webview fails",
-      "default": "Error posting message to webview:"
-    },
-    "No handler found for event:": {
-      "type": "string",
-      "description": "Error message displayed when no handler is found for an event",
-      "default": "No handler found for event:"
-    },
-    "Error setting webview message listener": {
-      "type": "string",
-      "description": "Error message displayed when setting the webview message listener fails",
-      "default": "Error setting webview message listener"
-    },
-    "Error generating SVG playground {error}": {
-      "type": "string",
-      "description": "Error message displayed when generating the SVG playground fails",
-      "default": "Error generating SVG playground {error}",
-      "pattern": ".*\\{error\\}.*",
-      "patternErrorMessage": "The message must contain the variable {error}"
+      "default": "{kind} icons",
+      "pattern": ".*\\{kind\\}.*",
+      "patternErrorMessage": "The message must contain the variable {kind}",
+      "description": "A message with a variable {kind} that can be replaced with a specific kind of icons, e.g., 'favorite' or 'recent'."
     },
     "An unknown error occurred": {
       "type": "string",
-      "description": "Error message displayed when an unknown error occurs",
       "default": "An unknown error occurred"
-    },
-    "Declaration named {name} not found in file {file}": {
-      "type": "string",
-      "description": "Error message displayed when a declaration is not found in a file",
-      "default": "Declaration named {name} not found in file {file}",
-      "pattern": ".*\\{name\\}.*\\{file\\}.*|.*\\{file\\}.*\\{name\\}.*",
-      "patternErrorMessage": "The message must contain the variables {name} and {file}"
-    },
-    "SVG components not found in file {file}": {
-      "type": "string",
-      "description": "Error message displayed when no SVG components are found in a file",
-      "default": "SVG components not found in file {file}",
-      "pattern": ".*\\{file\\}.*",
-      "patternErrorMessage": "The message must contain the variable {file}"
-    },
-    "SVG component named {name} not found in file {file}": {
-      "type": "string",
-      "description": "Error message displayed when an SVG component is not found in a file",
-      "default": "SVG component named {name} not found in file {file}",
-      "pattern": ".*\\{name\\}.*\\{file\\}.*|.*\\{file\\}.*\\{name\\}.*",
-      "patternErrorMessage": "The message must contain the variables {name} and {file}"
-    },
-    "Error extracting SVG component: {name}": {
-      "type": "string",
-      "description": "Error message displayed when extracting an SVG component fails",
-      "default": "Error extracting SVG component: {name}",
-      "pattern": ".*\\{name\\}.*",
-      "patternErrorMessage": "The message must contain the variable {name}"
-    },
-    "Error generating SVG component: {error}": {
-      "type": "string",
-      "description": "Error message displayed when generating an SVG component fails",
-      "default": "Error generating SVG component: {error}",
-      "pattern": ".*\\{error\\}.*",
-      "patternErrorMessage": "The message must contain the variable {error}"
-    },
-    "Please enter at least 3 characters to search...": {
-      "type": "string",
-      "description": "Message displayed when the search query is too short",
-      "default": "Please enter at least 3 characters to search..."
-    },
-    "No results found...": {
-      "type": "string",
-      "description": "Message displayed when no search results are found",
-      "default": "No results found..."
-    },
-    "Error extracting SVG component: {error}": {
-      "type": "string",
-      "description": "Error message displayed when extracting an SVG component fails",
-      "default": "Error extracting SVG component: {error}",
-      "pattern": ".*\\{error\\}.*",
-      "patternErrorMessage": "The message must contain the variable {error}"
-    },
-    "Failed to extract SVG exports: {error}": {
-      "type": "string",
-      "description": "Error message displayed when extracting SVG exports fails",
-      "default": "Failed to extract SVG exports: {error}",
-      "pattern": ".*\\{error\\}.*",
-      "patternErrorMessage": "The message must contain the variable {error}"
-    },
-    "Invalid SVG tag: {tag}": {
-      "type": "string",
-      "description": "Error message displayed when an invalid SVG tag is encountered",
-      "default": "Invalid SVG tag: {tag}",
-      "pattern": ".*\\{tag\\}.*",
-      "patternErrorMessage": "The message must contain the variable {tag}"
-    },
-    "Error extracting icon component: {error}": {
-      "type": "string",
-      "description": "Error message displayed when extracting an icon component fails",
-      "default": "Error extracting icon component: {error}",
-      "pattern": ".*\\{error\\}.*",
-      "patternErrorMessage": "The message must contain the variable {error}"
-    },
-    "Error processing JSX expression container: {error}": {
-      "type": "string",
-      "description": "Error message displayed when processing a JSX expression container fails",
-      "default": "Error processing JSX expression container: {error}",
-      "pattern": ".*\\{error\\}.*",
-      "patternErrorMessage": "The message must contain the variable {error}"
-    },
-    "Invalid {attr} attribute, expected \"{expected}\" but got {actual}": {
-      "type": "string",
-      "description": "Error message displayed when an attribute has an invalid value",
-      "default": "Invalid {attr} attribute, expected \"{expected}\" but got {actual}",
-      "pattern": ".*\\{attr\\}.*\\{expected\\}.*\\{actual\\}.*|.*\\{attr\\}.*\\{actual\\}.*\\{expected\\}.*|.*\\{expected\\}.*\\{attr\\}.*\\{actual\\}.*|.*\\{expected\\}.*\\{actual\\}.*\\{attr\\}.*|.*\\{actual\\}.*\\{attr\\}.*\\{expected\\}.*|.*\\{actual\\}.*\\{expected\\}.*\\{attr\\}.*",
-      "patternErrorMessage": "The message must contain the variables {attr}, {expected}, and {actual}"
-    },
-    "Error scanning workspace: {error}": {
-      "type": "string",
-      "description": "Error message displayed when scanning the workspace fails",
-      "default": "Error scanning workspace: {error}",
-      "pattern": ".*\\{error\\}.*",
-      "patternErrorMessage": "The message must contain the variable {error}"
-    },
-    "Error scanning files: {error}": {
-      "type": "string",
-      "description": "Error message displayed when scanning files fails",
-      "default": "Error scanning files: {error}",
-      "pattern": ".*\\{error\\}.*",
-      "patternErrorMessage": "The message must contain the variable {error}"
-    },
-    "File saved successfully.": {
-      "type": "string",
-      "description": "Message displayed when a file is saved successfully",
-      "default": "File saved successfully."
-    },
-    "The file was saved successfully at: {filePath}": {
-      "type": "string",
-      "description": "Message displayed when a file is saved successfully",
-      "default": "The file was saved successfully at: {filePath}",
-      "pattern": ".*\\{filePath\\}.*",
-      "patternErrorMessage": "The message must contain the variable {filePath}"
-    },
-    "Error creating and saving the file. Try again.": {
-      "type": "string",
-      "description": "Error message displayed when creating and saving a file fails",
-      "default": "Error creating and saving the file. Try again."
-    },
-    "Icon extraction in progress...": {
-      "type": "string",
-      "description": "Message displayed when icon extraction is in progress",
-      "default": "Icon extraction in progress..."
-    },
-    "Error processing file \"{file}\"": {
-      "type": "string",
-      "description": "Error message displayed when processing a file fails",
-      "default": "Error processing file \"{file}\"",
-      "pattern": ".*\\{file\\}.*",
-      "patternErrorMessage": "The message must contain the variable {file}"
-    },
-    "Error setting assets path": {
-      "type": "string",
-      "description": "Error message displayed when setting the assets path fails",
-      "default": "Error setting assets path"
-    },
-    "Error processing files": {
-      "type": "string",
-      "description": "Error message displayed when processing files fails",
-      "default": "Error processing files"
-    },
-    "Error getting language from file: {error}": {
-      "type": "string",
-      "description": "Error message displayed when getting the language from a file fails",
-      "default": "Error getting language from file: {error}",
-      "pattern": ".*\\{error\\}.*",
-      "patternErrorMessage": "The message must contain the variable {error}"
-    },
-    "File does not exist: {file}": {
-      "type": "string",
-      "description": "Error message displayed when a file does not exist",
-      "default": "File does not exist: {file}",
-      "pattern": ".*\\{file\\}.*",
-      "patternErrorMessage": "The message must contain the variable {file}"
-    },
-    "Error opening file: {file}": {
-      "type": "string",
-      "description": "Error message displayed when opening a file fails",
-      "default": "Error opening file: {file}",
-      "pattern": ".*\\{file\\}.*",
-      "patternErrorMessage": "The message must contain the variable {file}"
-    },
-    "Error reading directory \"{file}\":": {
-      "type": "string",
-      "description": "Error message displayed when reading a directory fails",
-      "default": "Error reading directory \"{file}\":",
-      "pattern": ".*\\{file\\}.*",
-      "patternErrorMessage": "The message must contain the variable {file}"
-    },
-    "Error removing assets path: {error}": {
-      "type": "string",
-      "description": "Error message displayed when removing the assets path fails",
-      "default": "Error removing assets path: {error}",
-      "pattern": ".*\\{error\\}.*",
-      "patternErrorMessage": "The message must contain the variable {error}"
-    },
-    "Error getting assets path: {error}": {
-      "default": "Error getting assets path: {error}",
-      "description": "Error message displayed when getting the assets path fails",
-      "pattern": ".*\\{error\\}.*",
-      "patternErrorMessage": "The message must contain the variable {error}"
-    },
-    "Method not implemented": {
-      "type": "string",
-      "description": "Error message displayed when a method is not implemented",
-      "default": "Method not implemented"
-    },
-    "Error saving cache": {
-      "type": "string",
-      "description": "Error message displayed when saving the cache fails",
-      "default": "Error saving cache"
-    },
-    "Error loading cache": {
-      "type": "string",
-      "description": "Error message displayed when loading the cache fails",
-      "default": "Error loading cache"
     },
     "Cache cleared successfully!": {
       "type": "string",
-      "description": "Message displayed when the cache is cleared successfully",
       "default": "Cache cleared successfully!"
     },
-    "CacheManager has not been initialized": {
+    "CacheManager not initialized.": {
       "type": "string",
-      "description": "Error message displayed when the CacheManager has not been initialized",
-      "default": "CacheManager has not been initialized"
+      "default": "CacheManager not initialized."
     },
-    "Failed to initialize the extension theme": {
+    "Clearing cache...": {
       "type": "string",
-      "description": "Error message displayed when the extension theme fails to initialize",
-      "default": "Failed to initialize the extension theme"
+      "default": "Clearing cache..."
     },
-    "No theme found for the current workspace": {
+    "Clearing full cache...": {
       "type": "string",
-      "description": "Error message displayed when no theme is found for the current workspace",
-      "default": "No theme found for the current workspace"
+      "default": "Clearing full cache..."
     },
-    "{kind} icons": {
+    "Clearing icons collection cache...": {
       "type": "string",
-      "description": "Label for the icon type",
-      "default": "{kind} icons",
-      "pattern": ".*\\{kind\\}.*",
-      "patternErrorMessage": "The message must contain the variable {kind}"
+      "default": "Clearing icons collection cache..."
     },
-    "Favorite": {
+    "Component with name \"{name}\" not found in file \"{file}\"": {
       "type": "string",
-      "description": "Label for the favorite icon",
-      "default": "Favorite"
+      "default": "Component with name \"{name}\" not found in file \"{file}\"",
+      "pattern": ".*\\{name\\}.*\\{file\\}.*",
+      "patternErrorMessage": "The message must contain the variables {name} and {file}",
+      "description": "A message with variables {name} and {file} that can be replaced with the name of the component and the file where it is defined."
     },
-    "Recent": {
+    "ConfigRegistry not initialized. Call initConfig(context) first.": {
       "type": "string",
-      "description": "Label for the recent icon",
-      "default": "Recent"
+      "default": "ConfigRegistry not initialized. Call initConfig(context) first."
     },
-    "Select files": {
+    "Default icon properties changed. Reload the panel to apply.": {
       "type": "string",
-      "description": "Label for the file selection dialog",
-      "default": "Select files"
-    },
-    "Error creating temporary files": {
-      "type": "string",
-      "description": "Error message displayed when creating temporary files fails",
-      "default": "Error creating temporary files"
-    },
-    "Icons in the temp directory cannot be added to recent icons.": {
-      "type": "string",
-      "description": "Error message displayed when trying to add temporary icons to recent icons",
-      "default": "Icons in the temp directory cannot be added to recent icons."
-    },
-    "Icons in the temp directory cannot be added to favorites.": {
-      "type": "string",
-      "description": "Error message displayed when trying to add temporary icons to favorites",
-      "default": "Icons in the temp directory cannot be added to favorites."
-    },
-    "This file is temporary. Do you want to continue?": {
-      "type": "string",
-      "description": "Message displayed when trying to open a temporary file",
-      "default": "This file is temporary. Do you want to continue?"
-    },
-    "Reloading...": {
-      "type": "string",
-      "description": "Message displayed when reloading the webview",
-      "default": "Reloading..."
-    },
-    "Error toggling favorite status for icon {name}": {
-      "type": "string",
-      "description": "Error message displayed when toggling the favorite status for an icon fails",
-      "default": "Error toggling favorite status for icon {name}",
-      "pattern": ".*\\{name\\}.*",
-      "patternErrorMessage": "The message must contain the variable {name}"
-    },
-    "Error retrieving icons: {error}": {
-      "type": "string",
-      "description": "Error message displayed when retrieving icons fails",
-      "default": "Error retrieving icons: {error}",
-      "pattern": ".*\\{error\\}.*",
-      "patternErrorMessage": "The message must contain the variable {error}"
-    },
-    "Missing main file in manifest": {
-      "type": "string",
-      "description": "Error message displayed when the main file is missing in the manifest",
-      "default": "Missing main file in manifest"
+      "default": "Default icon properties changed. Reload the panel to apply."
     },
     "Empty opening element": {
       "type": "string",
-      "description": "Error message displayed when an opening element is empty",
       "default": "Empty opening element"
+    },
+    "Error creating and saving the file. Try again.": {
+      "type": "string",
+      "default": "Error creating and saving the file. Try again."
+    },
+    "Error creating temporary files": {
+      "type": "string",
+      "default": "Error creating temporary files"
+    },
+    "Error editing component: {error}": {
+      "type": "string",
+      "default": "Error editing component: {error}",
+      "pattern": ".*\\{error\\}.*",
+      "patternErrorMessage": "The message must contain the variable {error}",
+      "description": "A message with a variable {error} that can be replaced with the specific error message when editing a component fails."
+    },
+    "Error extracting SVG component: {error}": {
+      "type": "string",
+      "default": "Error extracting SVG component: {error}",
+      "pattern": ".*\\{error\\}.*",
+      "patternErrorMessage": "The message must contain the variable {error}",
+      "description": "A message with a variable {error} that can be replaced with the specific error message when extracting an SVG component fails."
+    },
+    "Error extracting icon component: {error}": {
+      "type": "string",
+      "default": "Error extracting icon component: {error}",
+      "pattern": ".*\\{error\\}.*",
+      "patternErrorMessage": "The message must contain the variable {error}",
+      "description": "A message with a variable {error} that can be replaced with the specific error message when extracting an icon component fails."
+    },
+    "Error generating SVG component in playground: {error}": {
+      "type": "string",
+      "default": "Error generating SVG component in playground: {error}",
+      "pattern": ".*\\{error\\}.*",
+      "patternErrorMessage": "The message must contain the variable {error}",
+      "description": "A message with a variable {error} that can be replaced with the specific error message when generating an SVG component in the playground fails."
+    },
+    "Error opening file: {file}": {
+      "type": "string",
+      "default": "Error opening file: {file}",
+      "pattern": ".*\\{file\\}.*",
+      "patternErrorMessage": "The message must contain the variable {file}",
+      "description": "A message with a variable {file} that can be replaced with the specific file path when opening a file fails."
+    },
+    "Error processing JSX expression container: {error}": {
+      "type": "string",
+      "default": "Error processing JSX expression container: {error}",
+      "pattern": ".*\\{error\\}.*",
+      "patternErrorMessage": "The message must contain the variable {error}",
+      "description": "A message with a variable {error} that can be replaced with the specific error message when processing a JSX expression container fails."
+    },
+    "Error processing SVG component in playground.": {
+      "type": "string",
+      "default": "Error processing SVG component in playground."
+    },
+    "Error processing file \"{file}\"": {
+      "type": "string",
+      "default": "Error processing file \"{file}\"",
+      "pattern": ".*\\{file\\}.*",
+      "patternErrorMessage": "The message must contain the variable {file}",
+      "description": "A message with a variable {file} that can be replaced with the specific file path when processing a file fails."
+    },
+    "Error processing files": {
+      "type": "string",
+      "default": "Error processing files"
+    },
+    "Error processing files for reload: {error}": {
+      "type": "string",
+      "default": "Error processing files for reload: {error}",
+      "pattern": ".*\\{error\\}.*",
+      "patternErrorMessage": "The message must contain the variable {error}",
+      "description": "A message with a variable {error} that can be replaced with the specific error message when processing files for reload fails."
+    },
+    "Error processing uploaded files": {
+      "type": "string",
+      "default": "Error processing uploaded files"
+    },
+    "Error reading directory \"{file}\":": {
+      "type": "string",
+      "default": "Error reading directory \"{file}\":",
+      "pattern": ".*\\{file\\}.*",
+      "patternErrorMessage": "The message must contain the variable {file}",
+      "description": "A message with a variable {file} that can be replaced with the specific directory path when reading a directory fails."
+    },
+    "Error reading theme file: {path} — {error}": {
+      "type": "string",
+      "default": "Error reading theme file: {path} — {error}",
+      "pattern": ".*\\{path\\}.*\\{error\\}.*",
+      "patternErrorMessage": "The message must contain the variables {path} and {error}",
+      "description": "A message with variables {path} and {error} that can be replaced with the specific theme file path and error message when reading a theme file fails."
+    },
+    "Error reading theme package file: {error}": {
+      "type": "string",
+      "default": "Error reading theme package file: {error}",
+      "pattern": ".*\\{error\\}.*",
+      "patternErrorMessage": "The message must contain the variable {error}",
+      "description": "A message with a variable {error} that can be replaced with the specific error message when reading a theme package file fails."
+    },
+    "Error reloading editor extension theme": {
+      "type": "string",
+      "default": "Error reloading editor extension theme"
+    },
+    "Error removing assets path: {error}": {
+      "type": "string",
+      "default": "Error removing assets path: {error}",
+      "pattern": ".*\\{error\\}.*",
+      "patternErrorMessage": "The message must contain the variable {error}",
+      "description": "A message with a variable {error} that can be replaced with the specific error message when removing the assets path fails."
+    },
+    "Error setting assets path": {
+      "type": "string",
+      "default": "Error setting assets path"
+    },
+    "Error toggling developer tools: {error}": {
+      "type": "string",
+      "default": "Error toggling developer tools: {error}",
+      "pattern": ".*\\{error\\}.*",
+      "patternErrorMessage": "The message must contain the variable {error}",
+      "description": "A message with a variable {error} that can be replaced with the specific error message when toggling developer tools fails."
+    },
+    "Error toggling expanded icons: {error}": {
+      "type": "string",
+      "default": "Error toggling expanded icons: {error}",
+      "pattern": ".*\\{error\\}.*",
+      "patternErrorMessage": "The message must contain the variable {error}",
+      "description": "A message with a variable {error} that can be replaced with the specific error message when toggling expanded icons fails."
+    },
+    "Error toggling view actions: {error}": {
+      "type": "string",
+      "default": "Error toggling view actions: {error}",
+      "pattern": ".*\\{error\\}.*",
+      "patternErrorMessage": "The message must contain the variable {error}",
+      "description": "A message with a variable {error} that can be replaced with the specific error message when toggling view actions fails."
+    },
+    "Failed to add icon to collection: {message}": {
+      "type": "string",
+      "default": "Failed to add icon to collection: {message}",
+      "pattern": ".*\\{message\\}.*",
+      "patternErrorMessage": "The message must contain the variable {message}",
+      "description": "A message with a variable {message} that can be replaced with the specific error message when adding an icon to a collection fails."
+    },
+    "Failed to extract SVG exports: {error}": {
+      "type": "string",
+      "default": "Failed to extract SVG exports: {error}",
+      "pattern": ".*\\{error\\}.*",
+      "patternErrorMessage": "The message must contain the variable {error}",
+      "description": "A message with a variable {error} that can be replaced with the specific error message when extracting SVG exports fails."
+    },
+    "Failed to initialize the extension theme": {
+      "type": "string",
+      "default": "Failed to initialize the extension theme"
+    },
+    "File does not exist: {file}": {
+      "type": "string",
+      "default": "File does not exist: {file}",
+      "pattern": ".*\\{file\\}.*",
+      "patternErrorMessage": "The message must contain the variable {file}",
+      "description": "A message with a variable {file} that can be replaced with the specific file path when a file does not exist."
+    },
+    "File with id {id} not found in cache.": {
+      "type": "string",
+      "default": "File with id {id} not found in cache.",
+      "pattern": ".*\\{id\\}.*",
+      "patternErrorMessage": "The message must contain the variable {id}",
+      "description": "A message with a variable {id} that can be replaced with the specific file id when a file with that id is not found in the cache."
+    },
+    "Group patterns changed. Reload the panel to apply.": {
+      "type": "string",
+      "default": "Group patterns changed. Reload the panel to apply."
+    },
+    "Icon collection \"{collection}\" has reached its limit of {max} icons.": {
+      "type": "string",
+      "default": "Icon collection \"{collection}\" has reached its limit of {max} icons.",
+      "pattern": ".*\\{collection\\}.*\\{max\\}.*",
+      "patternErrorMessage": "The message must contain the variables {collection} and {max}",
+      "description": "A message with variables {collection} and {max} that can be replaced with the specific collection name and the maximum number of icons when an icon collection has reached its limit of icons."
+    },
+    "Icon extraction in progress...": {
+      "type": "string",
+      "default": "Icon extraction in progress..."
+    },
+    "Icons in the temp directory cannot be added to the \"{collection}\" collection.": {
+      "type": "string",
+      "default": "Icons in the temp directory cannot be added to the \"{collection}\" collection.",
+      "pattern": ".*\\{collection\\}.*",
+      "patternErrorMessage": "The message must contain the variable {collection}",
+      "description": "A message with a variable {collection} that can be replaced with the specific collection name when icons in the temp directory cannot be added to that collection."
+    },
+    "Ignore directories changed. Reload the panel to apply.": {
+      "type": "string",
+      "default": "Ignore directories changed. Reload the panel to apply."
+    },
+    "Invalid SVG tag: {tag}": {
+      "type": "string",
+      "default": "Invalid SVG tag: {tag}",
+      "pattern": ".*\\{tag\\}.*",
+      "patternErrorMessage": "The message must contain the variable {tag}",
+      "description": "A message with a variable {tag} that can be replaced with the specific SVG tag when an invalid SVG tag is encountered."
+    },
+    "Invalid webview manifest": {
+      "type": "string",
+      "default": "Invalid webview manifest"
+    },
+    "Invalid {attr} attribute, expected \"{expected}\" but got {actual}": {
+      "type": "string",
+      "default": "Invalid {attr} attribute, expected \"{expected}\" but got {actual}",
+      "pattern": ".*\\{attr\\}.*\\{expected\\}.*\\{actual\\}.*",
+      "patternErrorMessage": "The message must contain the variables {attr}, {expected}, and {actual}",
+      "description": "A message with variables {attr}, {expected}, and {actual} that can be replaced with the specific attribute name, expected value, and actual value when an invalid attribute is encountered."
+    },
+    "Loading...": {
+      "type": "string",
+      "default": "Loading..."
+    },
+    "Message router not registered": {
+      "type": "string",
+      "default": "Message router not registered"
+    },
+    "Method not implemented": {
+      "type": "string",
+      "default": "Method not implemented"
+    },
+    "No": {
+      "type": "string",
+      "default": "No"
+    },
+    "No SVG components found...": {
+      "type": "string",
+      "default": "No SVG components found..."
+    },
+    "No cache found for key: {key}": {
+      "type": "string",
+      "default": "No cache found for key: {key}",
+      "pattern": ".*\\{key\\}.*",
+      "patternErrorMessage": "The message must contain the variable {key}",
+      "description": "A message with a variable {key} that can be replaced with the specific cache key when no cache is found for that key."
+    },
+    "No config found for key: {key}": {
+      "type": "string",
+      "default": "No config found for key: {key}",
+      "pattern": ".*\\{key\\}.*",
+      "patternErrorMessage": "The message must contain the variable {key}",
+      "description": "A message with a variable {key} that can be replaced with the specific config key when no config is found for that key."
+    },
+    "No files found in the workspace.": {
+      "type": "string",
+      "default": "No files found in the workspace."
+    },
+    "No handler found for message type: {type}": {
+      "type": "string",
+      "default": "No handler found for message type: {type}",
+      "pattern": ".*\\{type\\}.*",
+      "patternErrorMessage": "The message must contain the variable {type}",
+      "description": "A message with a variable {type} that can be replaced with the specific message type when no handler is found for that message type."
+    },
+    "No results found...": {
+      "type": "string",
+      "default": "No results found..."
+    },
+    "No theme found for the current workspace": {
+      "type": "string",
+      "default": "No theme found for the current workspace"
+    },
+    "Please enter at least 3 characters to search...": {
+      "type": "string",
+      "default": "Please enter at least 3 characters to search..."
+    },
+    "Processing {count} file(s)...": {
+      "type": "string",
+      "default": "Processing {count} file(s)...",
+      "pattern": ".*\\{count\\}.*",
+      "patternErrorMessage": "The message must contain the variable {count}",
+      "description": "A message with a variable {count} that can be replaced with the specific number of files being processed."
+    },
+    "Reload": {
+      "type": "string",
+      "default": "Reload"
+    },
+    "Scanning workspace...": {
+      "type": "string",
+      "default": "Scanning workspace..."
+    },
+    "Select files": {
+      "type": "string",
+      "default": "Select files"
+    },
+    "The \"Show not exported icons\" setting changed. Reload the panel to apply.": {
+      "type": "string",
+      "default": "The \"Show not exported icons\" setting changed. Reload the panel to apply."
+    },
+    "The file was saved successfully at: {filePath}": {
+      "type": "string",
+      "default": "The file was saved successfully at: {filePath}",
+      "pattern": ".*\\{filePath\\}.*",
+      "patternErrorMessage": "The message must contain the variable {filePath}",
+      "description": "A message with a variable {filePath} that can be replaced with the specific file path where the file was saved successfully."
+    },
+    "Theme not found for path: {path}": {
+      "type": "string",
+      "default": "Theme not found for path: {path}",
+      "pattern": ".*\\{path\\}.*",
+      "patternErrorMessage": "The message must contain the variable {path}",
+      "description": "A message with a variable {path} that can be replaced with the specific theme path when no theme is found for that path."
+    },
+    "Theme package not found": {
+      "type": "string",
+      "default": "Theme package not found"
+    },
+    "This file is temporary. Do you want to continue?": {
+      "type": "string",
+      "default": "This file is temporary. Do you want to continue?"
+    },
+    "View Exports SVG": {
+      "type": "string",
+      "default": "View Exports SVG"
+    },
+    "Yes": {
+      "type": "string",
+      "default": "Yes"
+    },
+    "favorite": {
+      "type": "string",
+      "default": "Favorite"
+    },
+    "recent": {
+      "type": "string",
+      "default": "Recent"
     }
   },
   "required": [
-    "View Exports SVG",
-    "No SVG components found...",
-    "Error posting message to webview:",
-    "No handler found for event:",
-    "Error setting webview message listener",
-    "Error generating SVG playground {error}",
-    "An unknown error occurred",
-    "Declaration named {name} not found in file {file}",
-    "SVG components not found in file {file}",
-    "SVG component named {name} not found in file {file}",
-    "Error extracting SVG component: {name}",
-    "Error generating SVG component: {error}",
-    "Please enter at least 3 characters to search...",
-    "No results found...",
-    "Error extracting SVG component: {error}",
-    "Failed to extract SVG exports: {error}",
-    "Invalid SVG tag: {tag}",
-    "Error extracting icon component: {error}",
-    "Error processing JSX expression container: {error}",
-    "Invalid {attr} attribute, expected \"{expected}\" but got {actual}",
-    "Error scanning workspace: {error}",
-    "Error scanning files: {error}",
-    "File saved successfully.",
-    "The file was saved successfully at: {filePath}",
-    "Error creating and saving the file. Try again.",
-    "Icon extraction in progress...",
-    "Error processing file \"{file}\"",
-    "Error setting assets path",
-    "Error processing files",
-    "Error getting language from file: {error}",
-    "File does not exist: {file}",
-    "Error opening file: {file}",
-    "Error reading directory \"{file}\":",
-    "Error getting assets path: {error}",
-    "Error removing assets path: {error}",
-    "Method not implemented",
-    "Error saving cache",
-    "Error loading cache",
-    "Cache cleared successfully!",
-    "CacheManager has not been initialized",
-    "Failed to initialize the extension theme",
-    "No theme found for the current workspace",
     "{kind} icons",
-    "Favorite",
-    "Recent",
-    "Select files",
+    "An unknown error occurred",
+    "Cache cleared successfully!",
+    "CacheManager not initialized.",
+    "Clearing cache...",
+    "Clearing full cache...",
+    "Clearing icons collection cache...",
+    "Component with name \"{name}\" not found in file \"{file}\"",
+    "ConfigRegistry not initialized. Call initConfig(context) first.",
+    "Default icon properties changed. Reload the panel to apply.",
+    "Empty opening element",
+    "Error creating and saving the file. Try again.",
     "Error creating temporary files",
-    "Icons in the temp directory cannot be added to recent icons.",
-    "Icons in the temp directory cannot be added to favorites.",
+    "Error editing component: {error}",
+    "Error extracting SVG component: {error}",
+    "Error extracting icon component: {error}",
+    "Error generating SVG component in playground: {error}",
+    "Error opening file: {file}",
+    "Error processing JSX expression container: {error}",
+    "Error processing SVG component in playground.",
+    "Error processing file \"{file}\"",
+    "Error processing files",
+    "Error processing files for reload: {error}",
+    "Error processing uploaded files",
+    "Error reading directory \"{file}\":",
+    "Error reading theme file: {path} — {error}",
+    "Error reading theme package file: {error}",
+    "Error reloading editor extension theme",
+    "Error removing assets path: {error}",
+    "Error setting assets path",
+    "Error toggling developer tools: {error}",
+    "Error toggling expanded icons: {error}",
+    "Error toggling view actions: {error}",
+    "Failed to add icon to collection: {message}",
+    "Failed to extract SVG exports: {error}",
+    "Failed to initialize the extension theme",
+    "File does not exist: {file}",
+    "File with id {id} not found in cache.",
+    "Group patterns changed. Reload the panel to apply.",
+    "Icon collection \"{collection}\" has reached its limit of {max} icons.",
+    "Icon extraction in progress...",
+    "Icons in the temp directory cannot be added to the \"{collection}\" collection.",
+    "Ignore directories changed. Reload the panel to apply.",
+    "Invalid SVG tag: {tag}",
+    "Invalid webview manifest",
+    "Invalid {attr} attribute, expected \"{expected}\" but got {actual}",
+    "Loading...",
+    "Message router not registered",
+    "Method not implemented",
+    "No",
+    "No SVG components found...",
+    "No cache found for key: {key}",
+    "No config found for key: {key}",
+    "No files found in the workspace.",
+    "No handler found for message type: {type}",
+    "No results found...",
+    "No theme found for the current workspace",
+    "Please enter at least 3 characters to search...",
+    "Processing {count} file(s)...",
+    "Reload",
+    "Scanning workspace...",
+    "Select files",
+    "The \"Show not exported icons\" setting changed. Reload the panel to apply.",
+    "The file was saved successfully at: {filePath}",
+    "Theme not found for path: {path}",
+    "Theme package not found",
     "This file is temporary. Do you want to continue?",
-    "Reloading...",
-    "Error toggling favorite status for icon {name}",
-    "Error retrieving icons: {error}",
-    "Missing main file in manifest",
-    "Empty opening element"
+    "View Exports SVG",
+    "Yes",
+    "favorite",
+    "recent"
   ]
 }

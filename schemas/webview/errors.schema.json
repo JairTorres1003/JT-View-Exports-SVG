@@ -1,0 +1,68 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Error translations for View Exports SVG webview",
+  "type": "object",
+  "properties": {
+    "unknown": { "type": "string", "default": "Unknown error" },
+    "root-element-not-found": { "type": "string", "default": "Failed to find the root element" },
+    "component-empty": { "type": "string", "default": "The component is empty" },
+    "unsupported-files": { "type": "string", "default": "The following files are not supported:" },
+    "failed-to-create-temporary-file": {
+      "type": "string",
+      "default": "Error creating temporary file {{name}}"
+    },
+    "vscode-api": {
+      "type": "object",
+      "properties": {
+        "not-available": { "type": "string", "default": "VSCode API is not available" },
+        "handling-error": {
+          "type": "string",
+          "default": "[VSCodeAPIWrapper] Error occurred while handling message:"
+        }
+      },
+      "required": ["not-available", "handling-error"]
+    },
+    "editor": {
+      "type": "object",
+      "properties": {
+        "failed-to-update-configuration": {
+          "type": "string",
+          "default": "Failed to update user configuration"
+        },
+        "failed-to-update-keybindings": {
+          "type": "string",
+          "default": "Failed to update user keybindings"
+        },
+        "reference-not-available": {
+          "type": "string",
+          "default": "Editor reference is not available"
+        },
+        "failed-to-activate-theme": {
+          "type": "string",
+          "default": "Failed to activate extension theme"
+        },
+        "failed-to-fetch-theme": { "type": "string", "default": "Failed to fetch extension theme" },
+        "failed-to-initialize": { "type": "string", "default": "Failed to initialize editor" },
+        "failed-to-apply-color": { "type": "string", "default": "Error applying initial color" }
+      },
+      "required": [
+        "failed-to-update-configuration",
+        "failed-to-update-keybindings",
+        "reference-not-available",
+        "failed-to-activate-theme",
+        "failed-to-fetch-theme",
+        "failed-to-initialize",
+        "failed-to-apply-color"
+      ]
+    }
+  },
+  "required": [
+    "unknown",
+    "root-element-not-found",
+    "component-empty",
+    "unsupported-files",
+    "failed-to-create-temporary-file",
+    "vscode-api",
+    "editor"
+  ]
+}

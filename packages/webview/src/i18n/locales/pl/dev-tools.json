@@ -1,0 +1,30 @@
+{
+  "title": "Narzędzia programistyczne",
+  "playground": {
+    "title": "Plac zabaw",
+    "hide-code": "Ukryj kod",
+    "show-code": "Pokaż kod",
+    "copy-code": "Kopiuj kod",
+    "reset-code": "Resetuj kod",
+    "more-actions": "Więcej akcji...",
+    "open-in-editor": "Otwórz w edytorze",
+    "copy-as-svg": "Kopiuj jako SVG",
+    "copy-as-png": "Kopiuj jako PNG",
+    "download-as-svg": "Pobierz jako SVG",
+    "download-as-png": "Pobierz jako PNG"
+  },
+  "info": {
+    "title": "Komponent Info",
+    "component-name": "Nazwa komponentu:",
+    "type-declaration": "Deklaracja typu:",
+    "is-exported": "Czy jest eksportowany?:",
+    "is-animated": "Czy jest animowany?:",
+    "is-favorite": "Czy jest ulubiony?:"
+  },
+  "menu": {
+    "reload-playground": "Odśwież plac zabaw",
+    "reload-editor": "Odśwież edytor",
+    "disable-word-wrap": "Wyłącz zawijanie wierszy",
+    "enable-word-wrap": "Włącz zawijanie wierszy"
+  }
+}

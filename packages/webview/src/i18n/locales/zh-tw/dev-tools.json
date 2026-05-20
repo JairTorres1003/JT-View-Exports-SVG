@@ -1,0 +1,30 @@
+{
+  "title": "開發者工具",
+  "playground": {
+    "title": "操場",
+    "hide-code": "隱藏代碼",
+    "show-code": "顯示代碼",
+    "copy-code": "複製代碼",
+    "reset-code": "重置代碼",
+    "more-actions": "更多操作...",
+    "open-in-editor": "在編輯器中打開",
+    "copy-as-svg": "複製為 SVG",
+    "copy-as-png": "複製為 PNG",
+    "download-as-svg": "下載為 SVG",
+    "download-as-png": "下載為 PNG"
+  },
+  "info": {
+    "title": "組件信息",
+    "component-name": "組件名稱:",
+    "type-declaration": "類型聲明:",
+    "is-exported": "是否已導出?:",
+    "is-animated": "是否動畫化?:",
+    "is-favorite": "是否為最愛?:"
+  },
+  "menu": {
+    "reload-playground": "重新載入操場",
+    "reload-editor": "重新載入編輯器",
+    "disable-word-wrap": "禁用換行",
+    "enable-word-wrap": "啟用換行"
+  }
+}
