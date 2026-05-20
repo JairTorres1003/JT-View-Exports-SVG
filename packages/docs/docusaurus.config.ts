@@ -4,7 +4,8 @@ import type { Config } from '@docusaurus/types'
 import { themes as prismThemes } from 'prism-react-renderer'
 import rehypeAdvancedTablePlugin from './src/plugins/rehype/table'
 import remarkAdvancedTablePlugin from './src/plugins/remark/table'
-import 'dotenv/config'
+
+import './src/config/environment'
 
 // This runs in Node.js - Don't use client-side code here (browser APIs, JSX...)
 
