@@ -1,4 +1,4 @@
-import type { SVGFile } from '@jt-view-exports-svg/core'
+import type { FileIdentifier, SVGFile } from '@jt-view-exports-svg/core'
 import * as assert from 'assert'
 import * as path from 'path'
 
@@ -6,7 +6,7 @@ import { Uri } from 'vscode'
 
 import { svgFileToUri } from '@/utilities/vscode/uri'
 
-import { testFolderUri } from '../../main.test'
+import { testFolderUri } from '../../../helpers'
 
 suite('URI Utility', () => {
   const basename = 'test-2.tsx'
@@ -14,6 +14,7 @@ suite('URI Utility', () => {
 
   test('it should convert an SVGFile to a Uri', () => {
     const svgFile: SVGFile = {
+      id: 'file-test' as FileIdentifier,
       uri: `file://${file}`,
       absolutePath: file,
       basename,
@@ -22,6 +23,7 @@ suite('URI Utility', () => {
       relativePath: path.relative(testFolderUri.fsPath, file),
       language: 'typescript',
       isTemporary: false,
+      lastModified: 0,
     }
 
     const result = svgFileToUri(svgFile)
@@ -31,6 +33,7 @@ suite('URI Utility', () => {
 
   test('it should convert an SVGFile to a Uri with a workspace path', () => {
     const svgFile: SVGFile = {
+      id: 'file-test' as FileIdentifier,
       uri: `file://${file}`,
       absolutePath: '',
       basename,
@@ -38,6 +41,7 @@ suite('URI Utility', () => {
       dirname: path.dirname(file),
       relativePath: path.relative(testFolderUri.fsPath, file),
       isTemporary: false,
+      lastModified: 0,
     }
 
     const result = svgFileToUri(svgFile)
@@ -47,6 +51,7 @@ suite('URI Utility', () => {
 
   test('it should convert an SVGFile to a Uri with a workspace path (no relative path)', () => {
     const svgFile: SVGFile = {
+      id: 'file-test' as FileIdentifier,
       uri: `file://${file}`,
       absolutePath: '',
       basename,
@@ -54,6 +59,7 @@ suite('URI Utility', () => {
       extension: 'tsx',
       relativePath: '',
       isTemporary: false,
+      lastModified: 0,
     }
 
     const result = svgFileToUri(svgFile)

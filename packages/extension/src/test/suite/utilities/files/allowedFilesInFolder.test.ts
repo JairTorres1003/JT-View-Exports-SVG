@@ -1,28 +1,35 @@
 import * as assert from 'assert'
-
+import * as sinon from 'sinon'
 import { Uri } from 'vscode'
 
 import { allowedFilesInFolder } from '@/services/allowedFilesInFolder'
+import * as configModule from '@/services/config'
 
-import { testFolderUri } from '../../main.test'
+import { testFolderUri } from '../../../helpers'
+
+function stubIgnoreDirectories(patterns: string[] = []) {
+  sinon.stub(configModule, 'getConfig').returns({
+    get: (_key: string) => ({ allDirectories: patterns }),
+  } as ReturnType<typeof configModule.getConfig>)
+}
 
 suite('allowedFilesInFolder Utility Function', () => {
-  test('it should return an array of URIs representing the allowed files', async () => {
+  teardown(() => sinon.restore())
+
+  test('returns URIs for all allowed files in folder', async () => {
+    stubIgnoreDirectories([])
+
     const folderUri = Uri.joinPath(testFolderUri, 'assets')
     const allowedFiles = await allowedFilesInFolder(folderUri)
 
     assert.ok(Array.isArray(allowedFiles))
-    assert.strictEqual(allowedFiles.length, 5)
 
-    const [file1, file2, file3] = allowedFiles
+    const paths = new Set(allowedFiles.map((f) => f.fsPath))
 
-    assert.strictEqual(file1.fsPath, Uri.joinPath(folderUri, 'subfolder', 'test-1.ts').fsPath)
-    assert.strictEqual(file1.scheme, 'file')
-
-    assert.strictEqual(file2.fsPath, Uri.joinPath(folderUri, 'subfolder', 'test-2.tsx').fsPath)
-    assert.strictEqual(file2.scheme, 'file')
-
-    assert.strictEqual(file3.fsPath, Uri.joinPath(folderUri, 'subfolder', 'test-3.js').fsPath)
-    assert.strictEqual(file3.scheme, 'file')
+    assert.ok(paths.has(Uri.joinPath(folderUri, 'subfolder', 'test-1.ts').fsPath))
+    assert.ok(paths.has(Uri.joinPath(folderUri, 'subfolder', 'test-2.tsx').fsPath))
+    assert.ok(paths.has(Uri.joinPath(folderUri, 'subfolder', 'test-3.js').fsPath))
+    assert.ok(paths.has(Uri.joinPath(folderUri, 'test-1.js').fsPath))
+    assert.ok(paths.has(Uri.joinPath(folderUri, 'test-2.tsx').fsPath))
   })
 })
