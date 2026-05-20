@@ -1,5 +1,5 @@
 <div align="center">
-  <img src="https://raw.githubusercontent.com/JairTorres1003/JT-View-Exports-SVG/main/assets/JT%20View%20Exports%20SVG%20-%20ICON.png" alt="Logo View Exports SVG" width="180" height="180">
+  <img src="https://raw.githubusercontent.com/JairTorres1003/JT-View-Exports-SVG/main/packages/extension/assets/JT%20View%20Exports%20SVG%20-%20ICON.png" alt="Logo View Exports SVG" width="180" height="180">
   <br>
   <h1>View Exports SVG</h1>
   <p>The ultimate VS Code extension to discover, preview, and manage your SVG component library directly inside your projects.</p>
