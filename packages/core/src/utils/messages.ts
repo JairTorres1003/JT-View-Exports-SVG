@@ -31,7 +31,7 @@ export function restoreDynamicMessage<T extends ExtensionMessage | WebviewMessag
  * @returns `false` if not dynamic, or `{ baseType, dynamicPart }` if dynamic
  */
 export function isDynamicMessage(type: string): false | { baseType: string; dynamicPart: string } {
-  const dynamicMatch = type.match(/^(.*\/)<([^>]+)>$/)
+  const dynamicMatch = type.match(/^([^<>]+\/)<([^<>]*)>$/)
 
   if (!dynamicMatch) return false
 
