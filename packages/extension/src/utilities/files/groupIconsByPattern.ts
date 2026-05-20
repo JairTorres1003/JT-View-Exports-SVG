@@ -69,7 +69,7 @@ export function groupIconsByPattern(SVGExports: ViewExportSVG[]): ViewExportSVG[
     for (const [patternKey, patternLabel] of groupPatterns) {
       const auxPatternLabel = isEmpty(patternLabel) ? patternKey : patternLabel
 
-      if (micromatch.isMatch(groupKind.label, patternKey, { matchBase: true })) {
+      if (micromatch.isMatch(groupKind.label, patternKey, { bash: true })) {
         const current = groupedIcons.get(auxPatternLabel)
         const value = assignValues({ current, exportSVG, patternKey, auxPatternLabel })
         groupedIcons.set(auxPatternLabel, value)
