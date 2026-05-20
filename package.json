@@ -35,10 +35,10 @@
   "scripts": {
     "prepare": "husky",
     "preinstall": "npx only-allow pnpm",
-    "typecheck": "pnpm -r --parallel typecheck",
+    "typecheck": "pnpm -r --parallel run typecheck",
     "lint": "biome check --write .",
     "format": "biome format --write .",
-    "clean": "pnpm -r --parallel clean",
+    "clean": "pnpm -r --parallel run clean",
     "build:core": "pnpm -F @jt-view-exports-svg/core run build",
     "test:extension": "pnpm -F jt-view-exports-svg run test",
     "test:web-extension": "pnpm -F jt-view-exports-svg run test:web",
