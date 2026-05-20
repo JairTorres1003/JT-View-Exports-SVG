@@ -1,0 +1,12 @@
+{
+  "extract-components": "Извлечь компоненты",
+  "add-more-files": "Добавить больше файлов",
+  "sort-files-by-name": "Сортировать файлы по имени",
+  "sort-ascending": "Сортировать по возрастанию",
+  "sort-descending": "Сортировать по убыванию",
+  "delete-this-file": "Удалить этот файл",
+  "no-files-selected": "Нет выбранных файлов",
+  "files-loaded_one": "{{count}} файл загружен",
+  "files-loaded_other": "{{count}} файлов загружено",
+  "processing-files": "Обработка {{count}} файла(ов)..."
+}

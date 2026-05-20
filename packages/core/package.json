@@ -1,0 +1,49 @@
+{
+  "name": "@jt-view-exports-svg/core",
+  "version": "2.0.0",
+  "description": "Core types, enums and utilities for JT View Exports SVG",
+  "license": "MIT",
+  "author": "Jair Torres",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/JairTorres1003/JT-View-Exports-SVG.git",
+    "directory": "packages/core"
+  },
+  "main": "./dist/cjs/index.js",
+  "module": "./dist/esm/index.js",
+  "types": "./dist/types/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/types/index.d.ts",
+      "require": "./dist/cjs/index.js",
+      "import": "./dist/esm/index.js"
+    },
+    "./constants": {
+      "types": "./dist/types/constants/index.d.ts",
+      "require": "./dist/cjs/constants/index.js",
+      "import": "./dist/esm/constants/index.js"
+    },
+    "./types": {
+      "types": "./dist/types/types/index.d.ts"
+    }
+  },
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "clean": "rimraf dist",
+    "lint": "biome check --write",
+    "format": "biome format --write",
+    "typecheck": "tsc --noEmit",
+    "build:esm": "tsc -p tsconfig.esm.json",
+    "build:cjs": "tsc -p tsconfig.cjs.json",
+    "build:types": "tsc -p tsconfig.types.json",
+    "copy:types": "cp -r src/types dist/types",
+    "build": "npm-run-all clean build:esm build:cjs build:types copy:types"
+  },
+  "devDependencies": {
+    "@babel/types": "^7.29.0",
+    "@types/node": "^25.3.3",
+    "typescript": "^5.9.3"
+  }
+}

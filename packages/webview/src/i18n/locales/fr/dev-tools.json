@@ -1,0 +1,30 @@
+{
+  "title": "Outils de développement",
+  "playground": {
+    "title": "Aire de jeux",
+    "hide-code": "Masquer le code",
+    "show-code": "Afficher le code",
+    "copy-code": "Copier le code",
+    "reset-code": "Réinitialiser le code",
+    "more-actions": "Plus d'actions...",
+    "open-in-editor": "Ouvrir dans l'éditeur",
+    "copy-as-svg": "Copier en tant que SVG",
+    "copy-as-png": "Copier en tant que PNG",
+    "download-as-svg": "Télécharger en tant que SVG",
+    "download-as-png": "Télécharger en tant que PNG"
+  },
+  "info": {
+    "title": "Composant d'information",
+    "component-name": "Nom du composant:",
+    "type-declaration": "Déclaration de type:",
+    "is-exported": "Est exporté?:",
+    "is-animated": "Est animé?:",
+    "is-favorite": "Est favori?:"
+  },
+  "menu": {
+    "reload-playground": "Recharger l'aire de jeux",
+    "reload-editor": "Recharger l'éditeur",
+    "disable-word-wrap": "Désactiver le retour à la ligne",
+    "enable-word-wrap": "Activer le retour à la ligne"
+  }
+}

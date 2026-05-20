@@ -1,0 +1,30 @@
+{
+  "title": "Инструменты разработчика",
+  "playground": {
+    "title": "Игровая площадка",
+    "hide-code": "Скрыть код",
+    "show-code": "Показать код",
+    "copy-code": "Скопировать код",
+    "reset-code": "Сбросить код",
+    "more-actions": "Другие действия...",
+    "open-in-editor": "Открыть в редакторе",
+    "copy-as-svg": "Скопировать как SVG",
+    "copy-as-png": "Скопировать как PNG",
+    "download-as-svg": "Скачать как SVG",
+    "download-as-png": "Скачать как PNG"
+  },
+  "info": {
+    "title": "Информация о компоненте",
+    "component-name": "Название компонента:",
+    "type-declaration": "Объявление типа:",
+    "is-exported": "Экспортирован?:",
+    "is-animated": "Анимирован?:",
+    "is-favorite": "Избранный?:"
+  },
+  "menu": {
+    "reload-playground": "Перезагрузить игровую площадку",
+    "reload-editor": "Перезагрузить редактор",
+    "disable-word-wrap": "Отключить перенос строк",
+    "enable-word-wrap": "Включить перенос строк"
+  }
+}

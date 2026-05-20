@@ -1,0 +1,30 @@
+import type { IconBaseProps } from '@/types/BaseProps'
+
+const IconExpand: React.FC<IconBaseProps> = ({
+  className = '',
+  color = 'currentcolor',
+  size = 32,
+  sx,
+}) => (
+  <svg
+    width={size}
+    height={size}
+    stroke={color}
+    fill={color}
+    style={sx}
+    className={className}
+    viewBox='0 0 16 16'
+    strokeWidth='0'
+    xmlns='http://www.w3.org/2000/svg'
+  >
+    <path d='M9 9H4v1h5V9z'></path>
+    <path d='M7 12V7H6v5h1z'></path>
+    <path
+      fillRule='evenodd'
+      clipRule='evenodd'
+      d='M5 3l1-1h7l1 1v7l-1 1h-2v2l-1 1H3l-1-1V6l1-1h2V3zm1 2h4l1 1v4h2V3H6v2zm4 1H3v7h7V6z'
+    ></path>
+  </svg>
+)
+
+export default IconExpand

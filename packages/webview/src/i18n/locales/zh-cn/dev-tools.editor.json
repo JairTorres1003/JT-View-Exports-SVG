@@ -1,0 +1,49 @@
+{
+  "suggestions": {
+    "components": {
+      "details": {
+        "static": "SVG 组件",
+        "animated": "动画 SVG 组件",
+        "temporary-static": "(临时) SVG 组件",
+        "temporary-animated": "(临时) 动画 SVG 组件"
+      },
+      "documentation": [
+        "---",
+        "**🧩 SVG 组件预览**\\",
+        "这是一个动态 SVG 组件。您可以修改其代码并立即预览结果。\\",
+        "\\",
+        "**🎛️ 自定义**\\",
+        "传递属性 (props) 以更改组件的外观或行为。\\",
+        "\\",
+        "**用法示例:**",
+        "```jsx",
+        "<{{name}} {{propertyValue}} />",
+        "```",
+        "\\",
+        "**🔍 更多信息:** [{{fileName}}]({{link}} \"file://{{filePath}}\")\\",
+        "将鼠标悬停在组件上或打开文件以获取完整文档。"
+      ],
+      "documentation-with-rest-props": [
+        "---",
+        "**🧩 SVG 组件预览**\\",
+        "这是一个动态 SVG 组件。您可以修改其代码并立即预览结果。\\",
+        "\\",
+        "**🎛️ 自定义**\\",
+        "您可以传递特定属性以及 *任何有效的 SVG 属性* (rest props) 以进一步自定义组件。\\",
+        "\\",
+        "**用法示例:**",
+        "```jsx",
+        "<{{name}} {{propertyValue}} />",
+        "```",
+        "\\",
+        "**🔍 更多信息:** [{{fileName}}]({{link}} \"file://{{filePath}}\")\\",
+        "将鼠标悬停在组件上或打开文件以获取完整文档。"
+      ]
+    },
+    "properties": {
+      "details": {
+        "static": "(属性) {{name}}: {{type}}"
+      }
+    }
+  }
+}

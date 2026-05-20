@@ -1,0 +1,30 @@
+{
+  "title": "Strumenti di sviluppo",
+  "playground": {
+    "title": "Parco giochi",
+    "hide-code": "Nascondi codice",
+    "show-code": "Mostra codice",
+    "copy-code": "Copia codice",
+    "reset-code": "Reimposta codice",
+    "more-actions": "Altre azioni...",
+    "open-in-editor": "Apri nell'editor",
+    "copy-as-svg": "Copia come SVG",
+    "copy-as-png": "Copia come PNG",
+    "download-as-svg": "Scarica come SVG",
+    "download-as-png": "Scarica come PNG"
+  },
+  "info": {
+    "title": "Componente Info",
+    "component-name": "Nome del componente:",
+    "type-declaration": "Dichiarazione del tipo:",
+    "is-exported": "È esportato?:",
+    "is-animated": "È animato?:",
+    "is-favorite": "È preferito?:"
+  },
+  "menu": {
+    "reload-playground": "Ricarica il parco giochi",
+    "reload-editor": "Ricarica l'editor",
+    "disable-word-wrap": "Disabilita il ritorno a capo",
+    "enable-word-wrap": "Abilita il ritorno a capo"
+  }
+}

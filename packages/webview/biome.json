@@ -1,0 +1,20 @@
+{
+  "$schema": "https://biomejs.dev/schemas/2.4.15/schema.json",
+  "root": false,
+  "extends": ["../../biome.json", "../../biome.react.json"],
+  "files": {
+    "includes": ["**", "!!**/dist"]
+  },
+  "overrides": [
+    {
+      "includes": ["./src/store/types/*.d.ts"],
+      "linter": {
+        "rules": {
+          "suspicious": {
+            "noExplicitAny": "off"
+          }
+        }
+      }
+    }
+  ]
+}

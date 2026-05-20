@@ -1,0 +1,39 @@
+{
+  "yes": "Да",
+  "no": "Нет",
+  "close": "Закрыть",
+  "cancel": "Отмена",
+  "search": "Поиск",
+  "clear": "Очистить",
+  "info": "Информация",
+  "loading": "Загрузка...",
+  "refresh": "Обновить",
+  "errors": "Ошибки",
+  "open-file": "Открыть файл",
+  "open-many-files": "Открыть несколько файлов",
+  "copy-name": "Копировать имя",
+  "copy-code-snippet": "Копировать фрагмент кода",
+  "clear-collection": "Очистить коллекцию",
+  "clear-collection-confirm": "Вы уверены, что хотите очистить эту коллекцию?",
+  "copied-to-clipboard": "Скопировано <b>{{value}}</b> в буфер обмена",
+  "list-of-associated-files-for": "Список связанных файлов для \"{{name}}\"",
+  "pickers": {
+    "color": {
+      "title": "Выбрать цвет"
+    }
+  },
+  "modal-info": {
+    "title": "Информация",
+    "file-name": "Имя файла:",
+    "language": "Язык:",
+    "is-temporary-file": "Это временный файл?:",
+    "includes-temporary-files": "Включает временные файлы:",
+    "path": "Путь:",
+    "show-no-exports": "Показать неэкспортированные компоненты:",
+    "components-exported": "Всего экспортированных компонентов:",
+    "components-not-exported": "Всего неэкспортированных компонентов:",
+    "total-components": "Всего компонентов:",
+    "files-count": "Количество файлов:",
+    "group-kind-name": "Название группы:"
+  }
+}

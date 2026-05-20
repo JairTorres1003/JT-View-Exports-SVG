@@ -1,0 +1,106 @@
+import { Box, IconButton, Tooltip, Typography } from '@mui/material'
+import { lazy, Suspense } from 'react'
+import { useTranslation } from 'react-i18next'
+import { Group, Panel, Separator } from 'react-resizable-panels'
+
+import IconClose from '@/assets/icons/functionalities/close'
+import { AccordionMenuItem } from '@/core/components/Accordion'
+import { useDevTools } from '@/core/hooks/DevTools/useDevTools'
+
+import { devToolsClasses } from './DevTools.classes'
+import { BoxDevTools } from './DevTools.style'
+
+const InfoComponent = lazy(() => import('./InfoComponent/InfoComponent'))
+const Playground = lazy(() => import('./Playground/Playground'))
+
+const DevTools: React.FC<{ id: string; onClose?: VoidFunction }> = ({
+  id,
+  onClose = () => null,
+}): React.ReactNode => {
+  const { t } = useTranslation(['dev-tools', 'common'])
+  const { expanded, handleExpanded, ref, checkPanelExpanded } = useDevTools()
+
+  const playgroundPanel = checkPanelExpanded('playground-panel')
+  const infoPanel = checkPanelExpanded('info-panel')
+
+  return (
+    <BoxDevTools id={id}>
+      <Box component='header' className={devToolsClasses.header}>
+        <Tooltip title={t('title')}>
+          <Typography variant='h2' className={devToolsClasses.title}>
+            {t('title')}
+          </Typography>
+        </Tooltip>
+        <Box className={devToolsClasses.buttonClose}>
+          <Tooltip title={t('close', { ns: 'common' })}>
+            <IconButton onClick={() => onClose()}>
+              <IconClose size={16} />
+            </IconButton>
+          </Tooltip>
+        </Box>
+      </Box>
+
+      <Box className={devToolsClasses.content}>
+        <Group orientation='vertical' disableCursor={expanded.length !== 2}>
+          <Panel
+            minSize={playgroundPanel ? 200 : 22}
+            id='playground-panel'
+            className={devToolsClasses.panel}
+            panelRef={ref.playground}
+          >
+            <AccordionMenuItem
+              defaultExpanded
+              enableEmptyActions
+              hideActionsWhenCollapsed
+              label={t('playground.title')}
+              className={devToolsClasses.accordion}
+              expanded={playgroundPanel}
+              onChange={handleExpanded('playground-panel')}
+              slotProps={{
+                tooltip: { placement: 'bottom-start', arrow: false },
+                actions: { id: `${id}-playground-actions` },
+              }}
+            >
+              <Suspense fallback={null}>
+                <Playground actionsId={`${id}-playground-actions`} />
+              </Suspense>
+            </AccordionMenuItem>
+          </Panel>
+
+          {expanded.length === 2 && <Separator className={devToolsClasses.separator} />}
+
+          <Panel
+            minSize={infoPanel ? 200 : 22}
+            id='info-panel'
+            className={devToolsClasses.panel}
+            panelRef={ref.info}
+          >
+            <AccordionMenuItem
+              enableEmptyActions
+              hideActionsWhenCollapsed
+              label={t('info.title')}
+              expanded={infoPanel}
+              onChange={handleExpanded('info-panel')}
+              className={devToolsClasses.accordion}
+              slotProps={{
+                tooltip: { placement: 'bottom-start', arrow: false },
+              }}
+            >
+              <Suspense fallback={null}>
+                <InfoComponent />
+              </Suspense>
+            </AccordionMenuItem>
+          </Panel>
+
+          <div
+            style={{
+              height: expanded.length === 0 ? 'calc(100% - 44px)' : 0,
+            }}
+          />
+        </Group>
+      </Box>
+    </BoxDevTools>
+  )
+}
+
+export default DevTools

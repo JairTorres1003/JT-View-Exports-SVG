@@ -1,0 +1,8 @@
+{
+  "drop-zone": {
+    "title": "Laden Sie Ihre JS-, JSX-, TS- oder TSX-Dateien hoch und entdecken Sie ganz einfach die darin enthaltenen SVG-Komponenten.",
+    "select-files": "Dateien auswählen",
+    "or-drop-files-here": "oder ziehen Sie die Dateien hierher",
+    "let-it-go": "Loslassen!"
+  }
+}

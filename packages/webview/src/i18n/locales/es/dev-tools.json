@@ -1,0 +1,30 @@
+{
+  "title": "Herramientas de desarrollo",
+  "playground": {
+    "title": "Área de pruebas",
+    "hide-code": "Ocultar código",
+    "show-code": "Mostrar código",
+    "copy-code": "Copiar código",
+    "reset-code": "Restablecer código",
+    "more-actions": "Más acciones...",
+    "open-in-editor": "Abrir en el editor",
+    "copy-as-svg": "Copiar como SVG",
+    "copy-as-png": "Copiar como PNG",
+    "download-as-svg": "Descargar como SVG",
+    "download-as-png": "Descargar como PNG"
+  },
+  "info": {
+    "title": "Información del componente",
+    "component-name": "Nombre del componente:",
+    "type-declaration": "Tipo de declaración:",
+    "is-exported": "¿Está exportado?:",
+    "is-animated": "¿Está animado?:",
+    "is-favorite": "¿Es favorito?:"
+  },
+  "menu": {
+    "reload-playground": "Recargar área de pruebas",
+    "reload-editor": "Recargar editor",
+    "disable-word-wrap": "Deshabilitar ajuste de línea",
+    "enable-word-wrap": "Habilitar ajuste de línea"
+  }
+}

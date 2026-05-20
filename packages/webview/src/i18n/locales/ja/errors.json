@@ -1,0 +1,20 @@
+{
+  "unknown": "不明なエラー",
+  "root-element-not-found": "ルート要素が見つかりませんでした",
+  "component-empty": "コンポーネントが空です",
+  "unsupported-files": "以下のファイルはサポートされていません:",
+  "failed-to-create-temporary-file": "一時ファイル {{name}} の作成中にエラーが発生しました",
+  "vscode-api": {
+    "not-available": "VSCode API が利用できません",
+    "handling-error": "[VSCodeAPIWrapper] メッセージの処理中にエラーが発生しました:"
+  },
+  "editor": {
+    "failed-to-update-configuration": "ユーザー設定の更新に失敗しました",
+    "failed-to-update-keybindings": "ユーザーのキーバインドの更新に失敗しました",
+    "reference-not-available": "エディター参照が利用できません",
+    "failed-to-activate-theme": "拡張機能テーマの有効化に失敗しました",
+    "failed-to-fetch-theme": "拡張機能テーマの取得に失敗しました",
+    "failed-to-initialize": "エディターの初期化に失敗しました",
+    "failed-to-apply-color": "初期色の適用中にエラーが発生しました"
+  }
+}

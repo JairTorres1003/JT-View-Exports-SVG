@@ -1,0 +1,20 @@
+{
+  "unknown": "Bilinmeyen hata",
+  "root-element-not-found": "Kök öğe bulunamadı",
+  "component-empty": "Bileşen boş",
+  "unsupported-files": "Aşağıdaki dosyalar desteklenmiyor:",
+  "failed-to-create-temporary-file": "Geçici dosya {{name}} oluşturulurken hata oluştu",
+  "vscode-api": {
+    "not-available": "VSCode API mevcut değil",
+    "handling-error": "[VSCodeAPIWrapper] Mesaj işlenirken hata oluştu:"
+  },
+  "editor": {
+    "failed-to-update-configuration": "Kullanıcı yapılandırması güncellenemedi",
+    "failed-to-update-keybindings": "Kullanıcı tuş atamaları güncellenemedi",
+    "reference-not-available": "Düzenleyici referansı mevcut değil",
+    "failed-to-activate-theme": "Uzantı teması etkinleştirilemedi",
+    "failed-to-fetch-theme": "Uzantı teması getirilemedi",
+    "failed-to-initialize": "Düzenleyici başlatılamadı",
+    "failed-to-apply-color": "İlk renk uygulanırken hata oluştu"
+  }
+}

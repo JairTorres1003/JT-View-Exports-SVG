@@ -1,0 +1,8 @@
+{
+  "drop-zone": {
+    "title": "JS、JSX、TS、または TSX ファイルをアップロードして、それらに含まれる SVG コンポーネントを簡単に発見できます。",
+    "select-files": "ファイルを選択",
+    "or-drop-files-here": "またはここにファイルをドロップ",
+    "let-it-go": "ドロップして解放!"
+  }
+}

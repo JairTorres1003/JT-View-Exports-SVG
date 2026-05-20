@@ -1,0 +1,8 @@
+{
+  "drop-zone": {
+    "title": "JS, JSX, TS veya TSX dosyalarınızı yükleyin ve içerdikleri SVG bileşenlerini kolayca keşfedin.",
+    "select-files": "Dosyaları seçin",
+    "or-drop-files-here": "veya dosyaları buraya bırakın",
+    "let-it-go": "Bırakın gitsin!"
+  }
+}

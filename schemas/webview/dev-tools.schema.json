@@ -1,0 +1,67 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "DevTools UI translations for View Exports SVG webview",
+  "type": "object",
+  "properties": {
+    "title": { "type": "string", "default": "DevTools" },
+    "playground": {
+      "type": "object",
+      "properties": {
+        "title": { "type": "string", "default": "Playground" },
+        "hide-code": { "type": "string", "default": "Hide code" },
+        "show-code": { "type": "string", "default": "Show code" },
+        "copy-code": { "type": "string", "default": "Copy code" },
+        "reset-code": { "type": "string", "default": "Reset code" },
+        "more-actions": { "type": "string", "default": "More actions..." },
+        "open-in-editor": { "type": "string", "default": "Open in editor" },
+        "copy-as-svg": { "type": "string", "default": "Copy as SVG" },
+        "copy-as-png": { "type": "string", "default": "Copy as PNG" },
+        "download-as-svg": { "type": "string", "default": "Download as SVG" },
+        "download-as-png": { "type": "string", "default": "Download as PNG" }
+      },
+      "required": [
+        "title",
+        "hide-code",
+        "show-code",
+        "copy-code",
+        "reset-code",
+        "more-actions",
+        "open-in-editor",
+        "copy-as-svg",
+        "copy-as-png",
+        "download-as-svg",
+        "download-as-png"
+      ]
+    },
+    "info": {
+      "type": "object",
+      "properties": {
+        "title": { "type": "string", "default": "Info component" },
+        "component-name": { "type": "string", "default": "Component name:" },
+        "type-declaration": { "type": "string", "default": "Type declaration:" },
+        "is-exported": { "type": "string", "default": "Is exported?:" },
+        "is-animated": { "type": "string", "default": "Is animated?:" },
+        "is-favorite": { "type": "string", "default": "Is favorite?:" }
+      },
+      "required": [
+        "title",
+        "component-name",
+        "type-declaration",
+        "is-exported",
+        "is-animated",
+        "is-favorite"
+      ]
+    },
+    "menu": {
+      "type": "object",
+      "properties": {
+        "reload-playground": { "type": "string", "default": "Reload playground" },
+        "reload-editor": { "type": "string", "default": "Reload editor" },
+        "disable-word-wrap": { "type": "string", "default": "Disable word wrap" },
+        "enable-word-wrap": { "type": "string", "default": "Enable word wrap" }
+      },
+      "required": ["reload-playground", "reload-editor", "disable-word-wrap", "enable-word-wrap"]
+    }
+  },
+  "required": ["title", "playground", "info", "menu"]
+}

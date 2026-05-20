@@ -1,0 +1,50 @@
+import {
+  ExtensionHostKind,
+  type IExtensionManifest,
+  type RegisterLocalProcessExtensionResult,
+  registerExtension,
+} from '@codingame/monaco-vscode-api/extensions'
+import type { LocationIdentifier, SVGComponent } from '@jt-view-exports-svg/core'
+
+import { openFileInPosition } from '@/core/utils/file'
+import { setRecentlySelected } from '@/store/features/playground/slice'
+import { store } from '@/store/store'
+
+const manifest: IExtensionManifest = {
+  name: `${__APP_NAME}-default`,
+  publisher: __APP_PUBLISHER,
+  version: __APP_VERSION,
+  engines: {
+    vscode: '*',
+  },
+}
+
+let extension: RegisterLocalProcessExtensionResult | undefined
+
+async function activate() {
+  if (extension) return
+
+  extension = registerExtension(manifest, ExtensionHostKind.LocalProcess)
+
+  await extension.setAsDefaultApi()
+
+  const api = await extension.getApi()
+
+  const { commands } = api
+
+  commands.registerCommand(
+    `${manifest.name}.action.triggerSuggestComponents`,
+    (component: SVGComponent) => {
+      store?.dispatch(setRecentlySelected(component))
+    }
+  )
+
+  commands.registerCommand(
+    `${manifest.name}.action.clicLinkDocumentation`,
+    ({ location }: { location: LocationIdentifier }) => {
+      openFileInPosition(location)
+    }
+  )
+}
+
+export default activate

@@ -1,0 +1,12 @@
+{
+  "extract-components": "コンポーネントを抽出",
+  "add-more-files": "さらにファイルを追加",
+  "sort-files-by-name": "ファイルを名前でソート",
+  "sort-ascending": "昇順でソート",
+  "sort-descending": "降順でソート",
+  "delete-this-file": "このファイルを削除",
+  "no-files-selected": "ファイルが選択されていません",
+  "files-loaded_one": "{{count}} ファイルが読み込まれました",
+  "files-loaded_other": "{{count}} ファイルが読み込まれました",
+  "processing-files": "{{count}} ファイルを処理中..."
+}
