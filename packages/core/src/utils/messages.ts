@@ -50,12 +50,9 @@ export function isDynamicMessage(type: string): false | { baseType: string; dyna
 export function isValidExtensionMessage(type: unknown): type is ExtensionMessage {
   if (typeof type !== 'string') return false
 
-  let typeAux = type
+  const dynamicMessage = isDynamicMessage(type)
 
-  const dynamicMatch = typeAux.match(/^(.*\/)<([^>]+)>$/)
-  if (dynamicMatch) {
-    typeAux = typeAux.replace(/<[^>]+>/, '<placeholder>') as typeof type
-  }
+  const normalizedType = dynamicMessage ? `${dynamicMessage.baseType}<placeholder>` : type
 
-  return Object.values(ExtensionMessage).includes(typeAux as ExtensionMessage)
+  return Object.values(ExtensionMessage).includes(normalizedType as ExtensionMessage)
 }
