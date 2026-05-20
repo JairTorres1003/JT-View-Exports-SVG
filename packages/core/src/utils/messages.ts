@@ -21,7 +21,7 @@ export function generateDynamicMessage<T extends ExtensionMessage | WebviewMessa
  * @returns The message type with value replaced by `<placeholder>`
  */
 export function restoreDynamicMessage<T extends ExtensionMessage | WebviewMessage>(type: T): T {
-  return type.replace(/<[^>]+>/, '<placeholder>') as T
+  return type.replace(/<[^<>]*>/g, '<placeholder>') as T
 }
 
 /**
