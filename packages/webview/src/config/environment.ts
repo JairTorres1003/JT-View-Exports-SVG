@@ -1,0 +1,28 @@
+import { z } from 'zod'
+
+/**
+ * This schema is used to validate the environment variables that are used by the client.
+ */
+const configSchema = z.object({
+  /**
+   * The URL of the API that the client will use to communicate with the server.
+   */
+  VITE_VSCODE_API_URL: z
+    .url()
+    .refine(
+      (value) => {
+        if (import.meta.env.DEV) {
+          return true
+        }
+        return value !== undefined
+      },
+      { message: 'VITE_VSCODE_API_URL is required in development' }
+    )
+    .refine((value) => !value.endsWith('/'), { message: 'URL must not end with a slash' }),
+})
+
+configSchema.parse(import.meta.env)
+
+declare global {
+  interface ImportMetaEnv extends z.infer<typeof configSchema> {}
+}

@@ -1,0 +1,12 @@
+{
+  "extract-components": "Extraer componentes",
+  "add-more-files": "Agregar más archivos",
+  "sort-files-by-name": "Ordenar archivos por nombre",
+  "sort-ascending": "Ordenar ascendente",
+  "sort-descending": "Ordenar descendente",
+  "delete-this-file": "Eliminar este archivo",
+  "no-files-selected": "No se seleccionaron archivos",
+  "files-loaded_one": "{{count}} archivo cargado",
+  "files-loaded_other": "{{count}} archivos cargados",
+  "processing-files": "Procesando {{count}} archivo(s)..."
+}

@@ -1,0 +1,39 @@
+{
+  "yes": "Ano",
+  "no": "Ne",
+  "close": "Zavřít",
+  "cancel": "Zrušit",
+  "search": "Hledat",
+  "clear": "Vymazat",
+  "info": "Informace",
+  "loading": "Načítání...",
+  "refresh": "Obnovit",
+  "errors": "Chyby",
+  "open-file": "Otevřít soubor",
+  "open-many-files": "Otevřít více souborů",
+  "copy-name": "Kopírovat název",
+  "copy-code-snippet": "Kopírovat kódový úryvek",
+  "clear-collection": "Vymazat kolekci",
+  "clear-collection-confirm": "Opravdu chcete vymazat tuto kolekci?",
+  "copied-to-clipboard": "Zkopírováno <b>{{value}}</b> do schránky",
+  "list-of-associated-files-for": "Seznam souvisejících souborů pro \"{{name}}\"",
+  "pickers": {
+    "color": {
+      "title": "Vyberte barvu"
+    }
+  },
+  "modal-info": {
+    "title": "Informace",
+    "file-name": "Název souboru:",
+    "language": "Jazyk:",
+    "is-temporary-file": "Je to dočasný soubor?:",
+    "includes-temporary-files": "Zahrnuje dočasné soubory:",
+    "path": "Cesta:",
+    "show-no-exports": "Zobrazit neexportované komponenty:",
+    "components-exported": "Celkový počet exportovaných komponent:",
+    "components-not-exported": "Celkový počet neexportovaných komponent:",
+    "total-components": "Celkový počet komponent:",
+    "files-count": "Počet souborů:",
+    "group-kind-name": "Název skupiny:"
+  }
+}

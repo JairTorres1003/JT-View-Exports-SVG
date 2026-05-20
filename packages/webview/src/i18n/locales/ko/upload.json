@@ -1,0 +1,12 @@
+{
+  "extract-components": "구성 요소 추출",
+  "add-more-files": "파일 추가",
+  "sort-files-by-name": "이름으로 파일 정렬",
+  "sort-ascending": "오름차순 정렬",
+  "sort-descending": "내림차순 정렬",
+  "delete-this-file": "이 파일 삭제",
+  "no-files-selected": "선택된 파일이 없습니다.",
+  "files-loaded_one": "{{count}} 파일이 로드되었습니다.",
+  "files-loaded_other": "{{count}} 파일이 로드되었습니다.",
+  "processing-files": "{{count}} 파일 처리 중..."
+}

@@ -1,0 +1,30 @@
+{
+  "title": "개발자 도구",
+  "playground": {
+    "title": "운동장",
+    "hide-code": "코드 숨기기",
+    "show-code": "코드 표시",
+    "copy-code": "코드 복사",
+    "reset-code": "코드 재설정",
+    "more-actions": "기타 작업...",
+    "open-in-editor": "편집기에서 열기",
+    "copy-as-svg": "SVG로 복사",
+    "copy-as-png": "PNG로 복사",
+    "download-as-svg": "SVG로 다운로드",
+    "download-as-png": "PNG로 다운로드"
+  },
+  "info": {
+    "title": "정보 구성 요소",
+    "component-name": "구성 요소 이름:",
+    "type-declaration": "유형 선언:",
+    "is-exported": "내보내기 여부:",
+    "is-animated": "애니메이션 여부:",
+    "is-favorite": "즐겨찾기 여부:"
+  },
+  "menu": {
+    "reload-playground": "운동장 새로 고침",
+    "reload-editor": "편집기 새로 고침",
+    "disable-word-wrap": "줄 바꿈 비활성화",
+    "enable-word-wrap": "줄 바꿈 활성화"
+  }
+}

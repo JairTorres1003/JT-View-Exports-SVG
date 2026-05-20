@@ -5,40 +5,42 @@
       "name": "Run Extension",
       "type": "extensionHost",
       "request": "launch",
-      "args": ["--extensionDevelopmentPath=${workspaceFolder}"],
-      "outFiles": ["${workspaceFolder}/out/cjs/**/*.js"]
+      "args": ["--extensionDevelopmentPath=${workspaceFolder}/packages/extension"],
+      "outFiles": ["${workspaceFolder}/packages/extension/dist/**/*.js"]
     },
     {
-      "name": "Extension Tests",
-      "type": "extensionHost",
-      "request": "launch",
-      "args": [
-        "--extensionDevelopmentPath=${workspaceFolder}",
-        "--extensionTestsPath=${workspaceFolder}/out/cjs/test/suite/index",
-        "${workspaceFolder}/workspaceTest.code-workspace"
-      ],
-      "outFiles": ["${workspaceFolder}/out/cjs/test/**/*.js"],
-      "preLaunchTask": "TaskTest"
-    },
-    {
-      "type": "node",
-      "request": "launch",
-      "name": "Launch Deno Program",
-      "program": "${workspaceFolder}/server/src/server.ts",
-      "cwd": "${workspaceFolder}/server",
-      "env": {},
-      "runtimeExecutable": "/Users/jairalexandretorrescaviedes/.deno/bin/deno",
-      "runtimeArgs": ["run", "-A", "--unstable-sloppy-imports", "--inspect-wait"],
-      "attachSimplePort": 9229
-    },
-    {
-      "name": "Run Web Extension in VS Code",
+      "name": "Run Web Extension",
       "type": "pwa-extensionHost",
       "debugWebWorkerHost": true,
       "request": "launch",
-      "args": ["--extensionDevelopmentPath=${workspaceFolder}", "--extensionDevelopmentKind=web"],
-      "outFiles": ["${workspaceFolder}/out/cjs/web/**/*.js"],
-      "preLaunchTask": "npm: watch:esbuild:web"
+      "args": [
+        "--extensionDevelopmentPath=${workspaceFolder}/packages/extension",
+        "--extensionDevelopmentKind=web"
+      ],
+      "outFiles": ["${workspaceFolder}/packages/extension/dist/web/**/*.js"]
+    },
+    {
+      "name": "Run Extension Tests",
+      "type": "extensionHost",
+      "request": "launch",
+      "args": [
+        "--extensionDevelopmentPath=${workspaceFolder}/packages/extension",
+        "--extensionTestsPath=${workspaceFolder}/packages/extension/dist/test/suite/index",
+        "${workspaceFolder}/packages/extension/workspaceTest.code-workspace"
+      ],
+      "outFiles": ["${workspaceFolder}/packages/extension/dist/test/**/*.js"]
+    },
+    {
+      "name": "Run Server",
+      "type": "node",
+      "request": "launch",
+      "envFile": "${workspaceFolder}/packages/server/.env",
+      "program": "${workspaceFolder}/packages/server/src/main.ts",
+      "runtimeExecutable": "${workspaceFolder}/packages/server/node_modules/.bin/tsx",
+      "console": "integratedTerminal",
+      "runtimeArgs": ["-r", "ignore-styles"],
+      "internalConsoleOptions": "neverOpen",
+      "preLaunchTask": "build:extension-api"
     }
   ]
 }

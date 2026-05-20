@@ -1,0 +1,30 @@
+{
+  "title": "Ferramentas de desenvolvimento",
+  "playground": {
+    "title": "Parque infantil",
+    "hide-code": "Ocultar código",
+    "show-code": "Mostrar código",
+    "copy-code": "Copiar código",
+    "reset-code": "Redefinir código",
+    "more-actions": "Mais ações...",
+    "open-in-editor": "Abrir no editor",
+    "copy-as-svg": "Copiar como SVG",
+    "copy-as-png": "Copiar como PNG",
+    "download-as-svg": "Baixar como SVG",
+    "download-as-png": "Baixar como PNG"
+  },
+  "info": {
+    "title": "Informações do componente",
+    "component-name": "Nome do componente:",
+    "type-declaration": "Declaração de tipo:",
+    "is-exported": "Está exportado?:",
+    "is-animated": "Está animado?:",
+    "is-favorite": "É favorito?:"
+  },
+  "menu": {
+    "reload-playground": "Recarregar playground",
+    "reload-editor": "Recarregar editor",
+    "disable-word-wrap": "Desativar quebra de linha",
+    "enable-word-wrap": "Ativar quebra de linha"
+  }
+}

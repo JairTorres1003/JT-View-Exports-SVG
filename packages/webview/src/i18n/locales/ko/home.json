@@ -1,0 +1,8 @@
+{
+  "drop-zone": {
+    "title": "JS, JSX, TS 또는 TSX 파일을 업로드하고 해당 파일에 포함된 SVG 구성 요소를 쉽게 찾아보세요.",
+    "select-files": "파일 선택",
+    "or-drop-files-here": "또는 여기에 파일을 드롭하세요.",
+    "let-it-go": "놓아주세요!"
+  }
+}

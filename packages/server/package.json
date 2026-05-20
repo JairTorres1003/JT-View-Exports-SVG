@@ -1,0 +1,42 @@
+{
+  "name": "@jt-view-exports-svg/server",
+  "version": "2.0.0",
+  "license": "MIT",
+  "author": "Jair Torres",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/JairTorres1003/JT-View-Exports-SVG.git",
+    "directory": "packages/server"
+  },
+  "scripts": {
+    "clean": "rimraf dist .cache",
+    "lint": "biome check --write",
+    "format": "biome format --write",
+    "dev": "tsx watch -r ignore-styles src/main.ts",
+    "start": "tsx -r ignore-styles src/main.ts",
+    "typecheck": "tsc --noEmit"
+  },
+  "dependencies": {
+    "@codingame/monaco-vscode-configuration-service-override": "^32.0.2",
+    "@codingame/monaco-vscode-api": "^32.0.2",
+    "@codingame/monaco-vscode-files-service-override": "^32.0.2",
+    "@codingame/monaco-vscode-model-service-override": "^32.0.2",
+    "@codingame/monaco-vscode-theme-service-override": "^32.0.2",
+    "@jt-view-exports-svg/core": "workspace:*",
+    "@jt-view-exports-svg/extension-api": "workspace:*",
+    "cors": "^2.8.6",
+    "dotenv": "^17.4.2",
+    "express": "^5.2.1",
+    "express-rate-limit": "^8.5.1",
+    "happy-dom": "^20.9.0",
+    "ignore-styles": "^5.0.1",
+    "vscode": "npm:@codingame/monaco-vscode-extension-api@^32.0.2"
+  },
+  "devDependencies": {
+    "@types/cors": "^2.8.19",
+    "@types/express": "^5.0.6",
+    "@types/node": "^25.3.3",
+    "tsx": "^4.21.0",
+    "typescript": "^5.9.3"
+  }
+}

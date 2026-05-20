@@ -1,0 +1,30 @@
+{
+  "title": "开发者工具",
+  "playground": {
+    "title": "游乐场",
+    "hide-code": "隐藏代码",
+    "show-code": "显示代码",
+    "copy-code": "复制代码",
+    "reset-code": "重置代码",
+    "more-actions": "更多操作...",
+    "open-in-editor": "在编辑器中打开",
+    "copy-as-svg": "复制为 SVG",
+    "copy-as-png": "复制为 PNG",
+    "download-as-svg": "下载为 SVG",
+    "download-as-png": "下载为 PNG"
+  },
+  "info": {
+    "title": "信息组件",
+    "component-name": "组件名称:",
+    "type-declaration": "类型声明:",
+    "is-exported": "是否导出?:",
+    "is-animated": "是否动画化?:",
+    "is-favorite": "是否为收藏?:"
+  },
+  "menu": {
+    "reload-playground": "重新加载游乐场",
+    "reload-editor": "重新加载编辑器",
+    "disable-word-wrap": "禁用换行",
+    "enable-word-wrap": "启用换行"
+  }
+}

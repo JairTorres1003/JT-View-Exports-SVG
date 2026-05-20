@@ -1,0 +1,12 @@
+{
+  "extract-components": "Extrahovat komponenty...",
+  "add-more-files": "Přidat další soubory",
+  "sort-files-by-name": "Třídit soubory podle názvu",
+  "sort-ascending": "Třídit vzestupně",
+  "sort-descending": "Třídit sestupně",
+  "delete-this-file": "Smazat tento soubor",
+  "no-files-selected": "Žádné soubory nejsou vybrány",
+  "files-loaded_one": "{{count}} soubor načten",
+  "files-loaded_other": "{{count}} soubory načteny",
+  "processing-files": "Zpracovávám {{count}} soubor(ů)..."
+}

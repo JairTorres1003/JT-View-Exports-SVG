@@ -1,0 +1,39 @@
+{
+  "yes": "Tak",
+  "no": "Nie",
+  "close": "Zamknij",
+  "cancel": "Anuluj",
+  "search": "Szukaj",
+  "clear": "Wyczyść",
+  "info": "Informacje",
+  "loading": "Ładowanie...",
+  "refresh": "Odśwież",
+  "errors": "Błędy",
+  "open-file": "Otwórz plik",
+  "open-many-files": "Otwórz wiele plików",
+  "copy-name": "Kopiuj nazwę",
+  "copy-code-snippet": "Kopiuj fragment kodu",
+  "clear-collection": "Wyczyść kolekcję",
+  "clear-collection-confirm": "Czy na pewno chcesz wyczyścić tę kolekcję?",
+  "copied-to-clipboard": "Skopiowano <b>{{value}}</b> do schowka",
+  "list-of-associated-files-for": "Lista powiązanych plików dla \"{{name}}\"",
+  "pickers": {
+    "color": {
+      "title": "Wybierz kolor"
+    }
+  },
+  "modal-info": {
+    "title": "Informacje",
+    "file-name": "Nazwa pliku:",
+    "language": "Język:",
+    "is-temporary-file": "Czy jest to plik tymczasowy?:",
+    "includes-temporary-files": "Zawiera pliki tymczasowe:",
+    "path": "Ścieżka:",
+    "show-no-exports": "Pokaż niewyeksportowane komponenty:",
+    "components-exported": "Łączna liczba wyeksportowanych komponentów:",
+    "components-not-exported": "Łączna liczba niewyeksportowanych komponentów:",
+    "total-components": "Łączna liczba komponentów:",
+    "files-count": "Łączna liczba plików:",
+    "group-kind-name": "Nazwa grupy:"
+  }
+}

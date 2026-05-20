@@ -1,0 +1,30 @@
+{
+  "title": "Geliştirici Araçları",
+  "playground": {
+    "title": "Oyun Alanı",
+    "hide-code": "Kodu Gizle",
+    "show-code": "Kodu Göster",
+    "copy-code": "Kodu Kopyala",
+    "reset-code": "Kodu Sıfırla",
+    "more-actions": "Diğer işlemler...",
+    "open-in-editor": "Düzenleyicide Aç",
+    "copy-as-svg": "SVG Olarak Kopyala",
+    "copy-as-png": "PNG Olarak Kopyala",
+    "download-as-svg": "SVG Olarak İndir",
+    "download-as-png": "PNG Olarak İndir"
+  },
+  "info": {
+    "title": "Bileşen Bilgisi",
+    "component-name": "Bileşen adı:",
+    "type-declaration": "Tür bildirimi:",
+    "is-exported": "Dışa aktarıldı mı?:",
+    "is-animated": "Animasyonlu mu?:",
+    "is-favorite": "Favori mi?:"
+  },
+  "menu": {
+    "reload-playground": "Oyun alanını yeniden yükle",
+    "reload-editor": "Düzenleyiciyi yeniden yükle",
+    "disable-word-wrap": "Satır kaydırmayı devre dışı bırak",
+    "enable-word-wrap": "Satır kaydırmayı etkinleştir"
+  }
+}
