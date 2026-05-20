@@ -28,7 +28,7 @@ pnpm -F @jt-view-exports-svg/core run build
 ## Minimal Usage
 
 ```ts
-import { SVGPostMessage } from '@jt-view-exports-svg/core/constants'
+import { ExtensionMessage } from '@jt-view-exports-svg/core/constants'
 import type { SVGComponent } from '@jt-view-exports-svg/core/types'
 ```
 
