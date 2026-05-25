@@ -2,6 +2,11 @@ import type { ViewExportSVG } from '@jt-view-exports-svg/core'
 import micromatch from 'micromatch'
 
 import { getConfig } from '@/services/config'
+import {
+  buildCaptureRegex,
+  isCapturePattern,
+  substituteCaptures,
+} from '@/utilities/files/capturePattern'
 
 import { isEmpty } from '../misc'
 
@@ -50,6 +55,10 @@ function assignValues({ current, exportSVG, patternKey, auxPatternLabel }: Assig
   }
 }
 
+type ProcessedPattern =
+  | { type: 'micromatch'; key: string; label: string }
+  | { type: 'capture'; key: string; label: string; regex: RegExp; captureMap: Map<number, number> }
+
 /**
  * Groups SVG exports by matching their groupKind with predefined patterns.
  *
@@ -60,19 +69,47 @@ export function groupIconsByPattern(SVGExports: ViewExportSVG[]): ViewExportSVG[
 
   if (groupPatterns.length === 0) return SVGExports
 
+  const processedPatterns: ProcessedPattern[] = groupPatterns.map(([key, label]) => {
+    const auxLabel = isEmpty(label) ? key : label
+    if (isCapturePattern(key)) {
+      const { regex, captureMap } = buildCaptureRegex(key)
+      return { type: 'capture', key, label: auxLabel, regex, captureMap }
+    }
+    return { type: 'micromatch', key, label: auxLabel }
+  })
+
   const groupedIcons = new Map<string, ViewExportSVG>()
 
   SVGExports.forEach((exportSVG) => {
     const { groupKind } = exportSVG
     let matchedGroup = false
 
-    for (const [patternKey, patternLabel] of groupPatterns) {
-      const auxPatternLabel = isEmpty(patternLabel) ? patternKey : patternLabel
+    for (const pattern of processedPatterns) {
+      if (pattern.type === 'capture') {
+        const match = groupKind.label.match(pattern.regex)
+        if (match) {
+          const resolvedLabel = substituteCaptures(pattern.label, match, pattern.captureMap)
+          const current = groupedIcons.get(resolvedLabel)
+          const value = assignValues({
+            current,
+            exportSVG,
+            patternKey: `${pattern.key} => ${resolvedLabel}`,
+            auxPatternLabel: resolvedLabel,
+          })
+          groupedIcons.set(resolvedLabel, value)
 
-      if (micromatch.isMatch(groupKind.label, patternKey, { bash: true })) {
-        const current = groupedIcons.get(auxPatternLabel)
-        const value = assignValues({ current, exportSVG, patternKey, auxPatternLabel })
-        groupedIcons.set(auxPatternLabel, value)
+          matchedGroup = true
+          break
+        }
+      } else if (micromatch.isMatch(groupKind.label, pattern.key, { bash: true })) {
+        const current = groupedIcons.get(pattern.label)
+        const value = assignValues({
+          current,
+          exportSVG,
+          patternKey: pattern.key,
+          auxPatternLabel: pattern.label,
+        })
+        groupedIcons.set(pattern.label, value)
 
         matchedGroup = true
         break
