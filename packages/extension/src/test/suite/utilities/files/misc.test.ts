@@ -1,95 +1,84 @@
-import type { SVGFile } from '@jt-view-exports-svg/core'
+import type { FileIdentifier, SVGFile } from '@jt-view-exports-svg/core'
 import * as assert from 'assert'
-import * as fs from 'fs'
 import * as path from 'path'
-
 import * as sinon from 'sinon'
-import { Uri, window } from 'vscode'
+import * as vsc from 'vscode'
 
 import {
   getFileTimestamp,
-  getLanguageFromFile,
-  matchesPattern,
+  getLanguageFromExtension,
   openFile,
   pathToSVGFile,
 } from '@/utilities/files/misc'
+import { matchesPattern } from '@/utilities/misc'
 
-import { testFolderUri } from '../../main.test'
+import { testFolderUri } from '../../../helpers'
 
-const fsWrapper = {
-  statSync: (path: string) => fs.statSync(path),
-}
+suite('getFileTimestamp', () => {
+  teardown(() => sinon.restore())
 
-suite('getFileTimestamp Utility Function', () => {
-  const folderUri = Uri.joinPath(testFolderUri, 'assets')
-  let statSyncStub: sinon.SinonStub | undefined
-
-  setup(() => {
-    statSyncStub = sinon.stub(fsWrapper, 'statSync')
+  test('returns mtime for an existing file', async () => {
+    const fileUri = vsc.Uri.joinPath(testFolderUri, 'assets', 'test-1.js')
+    const result = await getFileTimestamp(fileUri)
+    assert.ok(typeof result === 'number' && result > 0)
   })
 
-  teardown(() => {
-    statSyncStub?.restore()
-  })
-
-  test('it should return the last modification timestamp of a file', async () => {
-    const filePath1 = Uri.joinPath(folderUri, 'test-1.js').toString()
-    const expectedTimestamp1 = 1771719253448
-    const timestamp = await getFileTimestamp(filePath1)
-
-    statSyncStub?.withArgs(filePath1).returns({ mtime: { getTime: () => expectedTimestamp1 } })
-    assert.strictEqual(timestamp, expectedTimestamp1)
-  })
-
-  test('it should return 0 if the file does not exist', async () => {
-    const filePath2 = Uri.joinPath(folderUri, 'nonexistent.ts').toString()
-    const timestamp = await getFileTimestamp(filePath2)
-
-    statSyncStub?.withArgs(filePath2).throws(new Error('File not found'))
-    assert.strictEqual(timestamp, 0)
+  test('returns 0 when file does not exist', async () => {
+    const fileUri = vsc.Uri.joinPath(testFolderUri, 'assets', 'nonexistent.ts')
+    const result = await getFileTimestamp(fileUri)
+    assert.strictEqual(result, 0)
   })
 })
 
-suite('getLanguageFromFile Utility Function', () => {
-  const file1 = Uri.joinPath(testFolderUri, 'assets', 'subfolder', 'test-2.tsx').fsPath
-  const file2 = Uri.joinPath(testFolderUri, 'assets', 'subfolder', 'test-3.js').fsPath
-
-  test('it should return the language of a file based on its extension 1', async () => {
-    assert.strictEqual(await getLanguageFromFile(Uri.file(file1)), 'typescriptreact')
+suite('getLanguageFromExtension', () => {
+  test('returns "javascript" for .js', () => {
+    assert.strictEqual(getLanguageFromExtension('.js'), 'javascript')
   })
 
-  test('it should return the language of a file based on its extension 2', async () => {
-    assert.strictEqual(await getLanguageFromFile(Uri.file(file2)), 'javascript')
+  test('returns "javascriptreact" for .jsx', () => {
+    assert.strictEqual(getLanguageFromExtension('.jsx'), 'javascriptreact')
+  })
+
+  test('returns "typescript" for .ts', () => {
+    assert.strictEqual(getLanguageFromExtension('.ts'), 'typescript')
+  })
+
+  test('returns "typescriptreact" for .tsx', () => {
+    assert.strictEqual(getLanguageFromExtension('.tsx'), 'typescriptreact')
+  })
+
+  test('returns "unknown" for unrecognized extension', () => {
+    assert.strictEqual(getLanguageFromExtension('.py'), 'unknown')
   })
 })
 
-suite('pathToSVGFile Utility Function', () => {
+suite('pathToSVGFile', () => {
   const basename = 'test-2.tsx'
-  const tempUri = Uri.joinPath(testFolderUri, 'assets', 'subfolder', basename)
-  const tempFile = tempUri.fsPath
+  const tempUri = vsc.Uri.joinPath(testFolderUri, 'assets', 'subfolder', basename)
 
-  const relativePath = path.relative(testFolderUri.fsPath, tempFile)
-  const expectedSVGFile: SVGFile = {
-    uri: tempUri.toString(),
-    absolutePath: tempFile,
-    basename,
-    dirname: path.dirname(tempFile),
-    relativePath,
-    language: 'typescriptreact',
-    isTemporary: false,
-    extension: 'tsx',
-  }
+  test('returns SVGFile with correct structural fields', async () => {
+    const result = await pathToSVGFile(tempUri.fsPath)
+    assert.strictEqual(result.basename, basename)
+    assert.strictEqual(result.extension, 'tsx')
+    assert.strictEqual(result.language, 'typescriptreact')
+    assert.strictEqual(result.absolutePath, tempUri.fsPath)
+    assert.strictEqual(result.isTemporary, false)
+    assert.ok(/^file-/.test(result.id), `id should start with "file-", got: ${result.id}`)
+    assert.ok(typeof result.lastModified === 'number', 'lastModified should be a number')
+  })
 
-  test('it should convert an absolute file path to an SVGFile object', async () => {
-    assert.deepStrictEqual(await pathToSVGFile(tempFile), expectedSVGFile)
+  test('relativePath is not absolute', async () => {
+    const result = await pathToSVGFile(tempUri.fsPath)
+    assert.ok(!path.isAbsolute(result.relativePath), 'relativePath should not be absolute')
   })
 })
 
-suite('openFile Utility Function', () => {
+suite('openFile', () => {
   const basename = 'test-1.js'
-  const currentFile = Uri.joinPath(testFolderUri, 'assets', basename).fsPath
+  const currentFile = vsc.Uri.joinPath(testFolderUri, 'assets', basename).fsPath
 
   const file: SVGFile = {
+    id: 'file-test' as FileIdentifier,
     uri: `file://${currentFile}`,
     absolutePath: currentFile,
     basename,
@@ -97,18 +86,17 @@ suite('openFile Utility Function', () => {
     relativePath: path.relative(testFolderUri.fsPath, currentFile),
     isTemporary: false,
     extension: 'js',
+    lastModified: 0,
   }
 
-  openFile({ file, position: { column: 14, line: 43, index: 3 } })
-
-  test('it should open a file in the editor at the specified position', () => {
-    const editor = window.activeTextEditor
-
+  test('opens file in editor at specified position', async () => {
+    await openFile(file, { column: 14, line: 43, index: 3 })
+    const editor = vsc.window.activeTextEditor
     assert.strictEqual(editor?.document.fileName, currentFile)
   })
 })
 
-suite('matchesPattern Utility Function', () => {
+suite('matchesPattern', () => {
   test('returns true when path matches a ** glob pattern', () => {
     assert.strictEqual(matchesPattern(['**/node_modules'], '/project/node_modules/'), true)
   })

@@ -141,19 +141,38 @@ Defines fallback props applied **only when a component does not explicitly defin
   "**": "All Icons",
   "**/Flag*": "Flags",
   "**/Symbol*.{js,jsx}": "Symbols",
-  "**/icons/navigation/**": "Navigation Icons"
+  "**/icons/navigation/**": "Navigation Icons",
+  "**/icons/${0}/**": "Icons - ${0}",
+  "**/packages/${0}/src/${1}/**": "${0} / ${1}"
 }
 ```
 
-Group icons automatically based on file or folder patterns.
+Group icons automatically based on file or folder patterns. Patterns follow **glob syntax** and are evaluated in order.
 
 #### Example use cases:
 
 - Flag icon sets
 - Navigation vs action icons
 - Design system categorization
+- Dynamic groups based on path segments
 
-Patterns follow **glob syntax** and are evaluated in order.
+**Capture Patterns**
+
+Use `${N}` placeholders in the pattern key to capture a single path segment, then reference them in the label to generate **dynamic group names**.
+
+| Placeholder | Matches | Notes |
+|-------------|---------|-------|
+| `${N}` | One path segment (no `/`) | Zero-indexed; `${0}` = first, `${1}` = second, etc. |
+
+**Example:**
+
+| Path | Pattern | Label template | Result group |
+|------|---------|----------------|--------------|
+| `icons/flags/brazil.tsx` | `**/icons/${0}/**` | `Icons - ${0}` | `Icons - flags` |
+| `packages/webview/src/assets/ReactLogo.tsx` | `**/packages/${0}/src/${1}/**` | `${0} / ${1}` | `webview / assets` |
+
+> Captures match exactly one path segment — they do not cross `/` boundaries.
+> Unresolved `${N}` indices produce an empty string.
 
 ---
 
