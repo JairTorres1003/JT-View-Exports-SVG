@@ -1,5 +1,26 @@
 # View Exports SVG - Changelog
 
+## 5.0.1
+
+_May 25, 2026_
+
+#### ✨ Features
+
+- **Capture Pattern Grouping (`${N}`):**
+  - `groupPatterns` keys now support `${N}` placeholders to capture dynamic path segments.
+  - Labels can reference captured values with `${N}` to generate dynamic group names.
+  - Example: `"**/icons/${0}/**": "Icons - ${0}"` groups `icons/flags/brazil.tsx` under `Icons - flags`.
+
+#### 🐛 Bug Fixes
+
+- **Extension README logo:** Fixed logo not displaying correctly.
+- **Component grouping patterns:** Fixed `groupPatterns` not matching correctly due to incorrect micromatch options.
+
+#### 🚀 Enhancements
+
+- **Unit tests:** Re-enabled unit tests that were accidentally disabled.
+- **Webview environment validation:** Removed unnecessary environment variable validation — not required in production builds.
+
 ## 5.0.0
 
 _May 20, 2026_

@@ -1,3 +1,4 @@
+/* biome-ignore-all lint/suspicious/noTemplateCurlyInString: These strings are used as templates for dynamic group labels, not as literal strings. */
 import type { ViewExportSVG } from '@jt-view-exports-svg/core'
 import * as assert from 'assert'
 import * as sinon from 'sinon'
@@ -91,5 +92,55 @@ suite('groupIconsByPattern', () => {
     const result = groupIconsByPattern(input)
     assert.strictEqual(result.length, 1)
     assert.strictEqual(result[0].totalExports, 2)
+  })
+
+  test('single capture pattern creates one group per distinct captured segment', () => {
+    stubPatterns({ '**/icons/${0}/**': 'Icons (${0})' })
+    const input = [makeExport('icons/files/a.tsx'), makeExport('icons/actions/b.tsx')]
+    const result = groupIconsByPattern(input)
+    assert.strictEqual(result.length, 2)
+    const labels = result.map((r) => r.groupKind.label).sort()
+    assert.deepStrictEqual(labels, ['Icons (actions)', 'Icons (files)'])
+  })
+
+  test('multiple files with same captured value merge into one group', () => {
+    stubPatterns({ '**/icons/${0}/**': 'Icons (${0})' })
+    const input = [makeExport('icons/files/a.tsx'), makeExport('icons/files/b.tsx')]
+    const result = groupIconsByPattern(input)
+    assert.strictEqual(result.length, 1)
+    assert.strictEqual(result[0].groupKind.label, 'Icons (files)')
+    assert.strictEqual(result[0].totalExports, 2)
+  })
+
+  test('multi-capture pattern creates groups keyed by all captured segments', () => {
+    stubPatterns({ '**/packages/${0}/src/${1}/**': '${0}/${1}' })
+    const input = [
+      makeExport('packages/webview/src/assets/a.tsx'),
+      makeExport('packages/extension/src/test/b.tsx'),
+    ]
+    const result = groupIconsByPattern(input)
+    assert.strictEqual(result.length, 2)
+    const labels = result.map((r) => r.groupKind.label).sort()
+    assert.deepStrictEqual(labels, ['extension/test', 'webview/assets'])
+  })
+
+  test('file not matched by capture pattern passes through with original label', () => {
+    stubPatterns({ '**/icons/${0}/**': 'Icons (${0})' })
+    const input = [makeExport('other/path/file.tsx')]
+    const result = groupIconsByPattern(input)
+    assert.strictEqual(result.length, 1)
+    assert.strictEqual(result[0].groupKind.label, 'other/path/file.tsx')
+  })
+
+  test('capture and micromatch patterns coexist and both group correctly', () => {
+    stubPatterns({
+      '**/icons/${0}/**': 'Icons (${0})',
+      '*.tsx': 'TypeScript Icons',
+    })
+    const input = [makeExport('icons/files/a.tsx'), makeExport('root-level.tsx')]
+    const result = groupIconsByPattern(input)
+    assert.strictEqual(result.length, 2)
+    const labels = result.map((r) => r.groupKind.label).sort()
+    assert.deepStrictEqual(labels, ['Icons (files)', 'TypeScript Icons'])
   })
 })

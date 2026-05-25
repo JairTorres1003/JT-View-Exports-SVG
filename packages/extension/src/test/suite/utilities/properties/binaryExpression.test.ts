@@ -51,7 +51,7 @@ const operatorsTest: OperatorTest[] = [
 ]
 
 suite('Binary Expression Utility', () => {
-  test('it should perform a binary expression operation', (done) => {
+  test('it should perform a binary expression operation', () => {
     operatorsTest.forEach((test) => {
       const result = getBinaryExpression(test.operator, test.left, test.right)
 
@@ -61,7 +61,5 @@ suite('Binary Expression Utility', () => {
         `Expected ${String(test.result)} but got ${result} for operator (${test.operator})`
       )
     })
-
-    done()
   })
 })

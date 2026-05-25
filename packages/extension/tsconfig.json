@@ -20,6 +20,5 @@
       "@/*": ["./src/*"]
     }
   },
-  "include": ["src/**/*"],
-  "exclude": ["src/test/suite/utilities"]
+  "include": ["src/**/*"]
 }
