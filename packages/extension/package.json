@@ -332,7 +332,7 @@
     "@vscode/test-cli": "^0.0.12",
     "@vscode/test-electron": "^2.5.2",
     "@vscode/test-web": "^0.0.80",
-    "concurrently": "^9.2.1",
+    "concurrently": "^10.0.3",
     "esbuild": "^0.28.0",
     "glob": "^13.0.6",
     "mocha": "^11.7.5",
