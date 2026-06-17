@@ -35,6 +35,7 @@ const apiPkg = {
   },
   dependencies: {
     '@jt-view-exports-svg/core': 'workspace:*',
+    '@codingame/monaco-vscode-api': '^33.0.9',
   },
   devDependencies: {
     typescript: '^5.9.3',

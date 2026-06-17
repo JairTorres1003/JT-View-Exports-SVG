@@ -314,6 +314,9 @@ importers:
 
   packages/extension-api:
     dependencies:
+      '@codingame/monaco-vscode-api':
+        specifier: ^33.0.9
+        version: 33.0.9
       '@jt-view-exports-svg/core':
         specifier: workspace:*
         version: link:../core
