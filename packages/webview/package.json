@@ -69,7 +69,7 @@
     "zod": "^4.4.3"
   },
   "devDependencies": {
-    "@babel/core": "^7.29.0",
+    "@babel/core": "^8.0.1",
     "@codingame/esbuild-import-meta-url-plugin": "^1.0.3",
     "@rolldown/plugin-babel": "^0.2.3",
     "@testing-library/dom": "^10.4.1",
@@ -82,14 +82,14 @@
     "@types/react": "^19.2.5",
     "@types/react-dom": "^19.2.3",
     "@types/vscode-webview": "^1.57.5",
-    "@vitejs/plugin-react": "^6.0.1",
-    "@vitest/coverage-v8": "^4.1.6",
-    "@vitest/ui": "^4.1.6",
+    "@vitejs/plugin-react": "^6.0.2",
+    "@vitest/coverage-v8": "^4.1.9",
+    "@vitest/ui": "^4.1.9",
     "axios": "^1.16.0",
     "babel-plugin-react-compiler": "^1.0.0",
     "jsdom": "^29.0.0",
     "typescript": "^5.9.3",
-    "vite": "^8.0.12",
-    "vitest": "^4.1.6"
+    "vite": "^8.0.16",
+    "vitest": "^4.1.9"
   }
 }
