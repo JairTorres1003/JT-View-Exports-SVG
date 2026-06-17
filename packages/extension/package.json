@@ -335,7 +335,7 @@
     "concurrently": "^10.0.3",
     "esbuild": "^0.28.1",
     "glob": "^13.0.6",
-    "mocha": "^11.7.5",
+    "mocha": "^11.7.6",
     "sinon": "^22.0.0",
     "tsc-alias": "^1.8.16",
     "typescript": "^5.9.3"
