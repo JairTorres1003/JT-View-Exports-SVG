@@ -40,8 +40,8 @@ importers:
   packages/core:
     devDependencies:
       '@babel/types':
-        specifier: ^7.29.0
-        version: 7.29.0
+        specifier: ^8.0.0
+        version: 8.0.0
       '@types/node':
         specifier: ^25.3.3
         version: 25.7.0
@@ -227,11 +227,11 @@ importers:
   packages/extension:
     dependencies:
       '@babel/parser':
-        specifier: ^7.29.3
-        version: 7.29.3
+        specifier: ^8.0.0
+        version: 8.0.0
       '@babel/traverse':
-        specifier: ^7.29.0
-        version: 7.29.0
+        specifier: ^8.0.0
+        version: 8.0.0
       '@jt-view-exports-svg/core':
         specifier: workspace:*
         version: link:../core
@@ -246,8 +246,8 @@ importers:
         version: 0.2.2
     devDependencies:
       '@babel/types':
-        specifier: ^7.29.0
-        version: 7.29.0
+        specifier: ^8.0.0
+        version: 8.0.0
       '@esbuild-plugins/node-globals-polyfill':
         specifier: ^0.2.3
         version: 0.2.3(esbuild@0.28.1)

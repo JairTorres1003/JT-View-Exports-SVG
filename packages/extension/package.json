@@ -317,7 +317,7 @@
     "package": "vsce package --no-dependencies"
   },
   "devDependencies": {
-    "@babel/types": "^7.29.0",
+    "@babel/types": "^8.0.0",
     "@esbuild-plugins/node-globals-polyfill": "^0.2.3",
     "@esbuild-plugins/node-modules-polyfill": "^0.2.2",
     "@types/babel__traverse": "^7.28.0",
@@ -333,7 +333,7 @@
     "@vscode/test-electron": "^2.5.2",
     "@vscode/test-web": "^0.0.80",
     "concurrently": "^10.0.3",
-    "esbuild": "^0.28.0",
+    "esbuild": "^0.28.1",
     "glob": "^13.0.6",
     "mocha": "^11.7.5",
     "sinon": "^22.0.0",
@@ -341,8 +341,8 @@
     "typescript": "^5.9.3"
   },
   "dependencies": {
-    "@babel/parser": "^7.29.3",
-    "@babel/traverse": "^7.29.0",
+    "@babel/parser": "^8.0.0",
+    "@babel/traverse": "^8.0.0",
     "@jt-view-exports-svg/core": "workspace:*",
     "lodash": "^4.18.1",
     "micromatch": "^4.0.8",
