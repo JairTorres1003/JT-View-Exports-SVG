@@ -39,7 +39,8 @@
     "clean": "rimraf dist"
   },
   "dependencies": {
-    "@jt-view-exports-svg/core": "workspace:*"
+    "@jt-view-exports-svg/core": "workspace:*",
+    "@codingame/monaco-vscode-api": "^34.0.2"
   },
   "devDependencies": {
     "typescript": "^5.9.3"
