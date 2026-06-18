@@ -1,5 +1,6 @@
 import { runTests } from '@vscode/test-electron'
 import * as fs from 'fs'
+import * as os from 'os'
 import * as path from 'path'
 import { rimraf } from 'rimraf'
 
@@ -13,17 +14,22 @@ async function main(): Promise<void> {
     // Passed to --extensionTestsPath
     const extensionTestsPath = path.resolve(__dirname, './suite/index')
 
-    const mainUserDataDir = path.resolve(extensionDevelopmentPath, '.vscode-test/user-data')
+    const userDataDir = path.join(os.tmpdir(), `vscode-test-user-data-${Date.now()}`)
 
-    if (fs.existsSync(mainUserDataDir)) {
-      rimraf.sync(mainUserDataDir)
+    if (fs.existsSync(userDataDir)) {
+      rimraf.sync(userDataDir)
     }
+    fs.mkdirSync(userDataDir, { recursive: true })
 
     // Download VS Code, unzip it and run the integration test
     await runTests({
       extensionDevelopmentPath,
       extensionTestsPath,
-      launchArgs: [path.resolve(extensionDevelopmentPath, 'workspaceTest.code-workspace')],
+      launchArgs: [
+        path.resolve(extensionDevelopmentPath, 'workspaceTest.code-workspace'),
+        '--user-data-dir',
+        userDataDir,
+      ],
     })
   } catch (err) {
     console.error('Failed to run tests', err)
