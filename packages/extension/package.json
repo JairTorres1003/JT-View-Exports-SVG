@@ -19,7 +19,7 @@
   "license": "MIT",
   "author": "Jair Torres",
   "publisher": "JairTorres1003",
-  "version": "5.0.1",
+  "version": "5.0.2",
   "repository": {
     "type": "git",
     "url": "https://github.com/JairTorres1003/JT-View-Exports-SVG.git",
@@ -317,7 +317,7 @@
     "package": "vsce package --no-dependencies"
   },
   "devDependencies": {
-    "@babel/types": "^7.29.0",
+    "@babel/types": "^7.29.7",
     "@esbuild-plugins/node-globals-polyfill": "^0.2.3",
     "@esbuild-plugins/node-modules-polyfill": "^0.2.2",
     "@types/babel__traverse": "^7.28.0",
@@ -332,17 +332,17 @@
     "@vscode/test-cli": "^0.0.12",
     "@vscode/test-electron": "^2.5.2",
     "@vscode/test-web": "^0.0.80",
-    "concurrently": "^9.2.1",
-    "esbuild": "^0.28.0",
+    "concurrently": "^10.0.3",
+    "esbuild": "^0.28.1",
     "glob": "^13.0.6",
-    "mocha": "^11.7.5",
+    "mocha": "^11.7.6",
     "sinon": "^22.0.0",
     "tsc-alias": "^1.8.16",
     "typescript": "^5.9.3"
   },
   "dependencies": {
-    "@babel/parser": "^7.29.3",
-    "@babel/traverse": "^7.29.0",
+    "@babel/parser": "^7.29.7",
+    "@babel/traverse": "^7.29.7",
     "@jt-view-exports-svg/core": "workspace:*",
     "lodash": "^4.18.1",
     "micromatch": "^4.0.8",
