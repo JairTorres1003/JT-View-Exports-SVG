@@ -15,7 +15,7 @@
     "Visual Studio Code",
     "VSCode"
   ],
-  "version": "5.0.1",
+  "version": "5.0.2",
   "private": true,
   "license": "MIT",
   "author": "Jair Torres",
@@ -46,10 +46,8 @@
     "watch:extension": "pnpm -F jt-view-exports-svg run watch",
     "build:webview": "pnpm -F @jt-view-exports-svg/webview run build",
     "package:extension": "pnpm -F jt-view-exports-svg run package -o $(pwd)",
-    "prepare-readme": "node scripts/prepare-readme.js",
-    "prerelease": "npm-run-all lint prepare-readme",
+    "prerelease": "npm-run-all lint",
     "release": "npm-run-all clean build:core test:extension clean:extension build:webview package:extension",
-    "postrelease": "node scripts/prepare-readme.js --restore",
     "prebuild:extension-api": "node scripts/generate-extension-api.js",
     "build:extension-api": "pnpm -F jt-view-exports-svg run build:api",
     "dev:webview": "concurrently \"pnpm -F @jt-view-exports-svg/server run dev\" \"pnpm -F @jt-view-exports-svg/webview run dev\"",
@@ -58,9 +56,9 @@
     "setup": "pnpm install && npm-run-all clean build:core build:webview build:extension"
   },
   "devDependencies": {
-    "@biomejs/biome": "2.4.15",
+    "@biomejs/biome": "2.5.0",
     "@types/node": "^25.3.3",
-    "concurrently": "^9.2.1",
+    "concurrently": "^10.0.3",
     "glob": "^13.0.6",
     "husky": "^9.1.7",
     "npm-run-all": "^4.1.5",
