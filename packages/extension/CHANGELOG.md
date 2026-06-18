@@ -1,5 +1,18 @@
 # View Exports SVG - Changelog
 
+## 5.0.2
+
+_June 17, 2026_
+
+#### 🐛 Bug Fixes
+
+- **Linter Configuration:** Corrected linter rules configuration in `biome.json` to align with project standards.
+
+#### 🚀 Enhancements
+
+- **Code Structure:** Refactored the codebase for improved readability and maintainability.
+- **Dependency Updates:** Updated numerous dependencies to their latest versions, including `@babel/types`, `mocha`, `react-router-dom`, `dompurify`, `axios`, `@biomejs/biome`, and `@codingame/monaco-vscode-api`.
+
 ## 5.0.1
 
 _May 25, 2026_
