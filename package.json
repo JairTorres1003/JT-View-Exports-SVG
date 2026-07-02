@@ -50,6 +50,7 @@
     "release": "npm-run-all clean build:core test:extension clean:extension build:webview package:extension",
     "prebuild:extension-api": "node scripts/generate-extension-api.js",
     "build:extension-api": "pnpm -F jt-view-exports-svg run build:api",
+    "watch:extension-api": "pnpm -F jt-view-exports-svg run watch:api",
     "dev:webview": "concurrently \"pnpm -F @jt-view-exports-svg/server run dev\" \"pnpm -F @jt-view-exports-svg/webview run dev\"",
     "dev:extension": "pnpm -F jt-view-exports-svg run dev",
     "build:extension": "pnpm -F jt-view-exports-svg run compile",
