@@ -36,7 +36,6 @@ export function getPropertyValues(
     case 'BooleanLiteral':
     case 'NumericLiteral':
     case 'StringLiteral':
-    case 'DecimalLiteral':
       return value.value
     case 'JSXElement':
     case 'JSXFragment':
@@ -119,7 +118,7 @@ export function getPropertyValues(
 
       return valueAny
     case 'MemberExpression':
-      if (t.isIdentifier(value.property)) {
+      if (t.isIdentifier(value.property) && !t.isSuper(value.object)) {
         const objectValue = getPropertyValues(value.object, properties)
 
         if (typeof objectValue === 'object' && !isEmpty(objectValue)) {
