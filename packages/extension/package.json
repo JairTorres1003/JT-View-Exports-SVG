@@ -324,7 +324,7 @@
     "@types/lodash": "^4.17.24",
     "@types/micromatch": "^4.0.10",
     "@types/mocha": "^10.0.10",
-    "@types/node": "^25.3.3",
+    "@types/node": "^26.1.0",
     "@types/sinon": "^22.0.0",
     "@types/vscode": "^1.109.0",
     "@types/xxhashjs": "^0.2.4",

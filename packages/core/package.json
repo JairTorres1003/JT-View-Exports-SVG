@@ -43,7 +43,7 @@
   },
   "devDependencies": {
     "@babel/types": "^7.29.7",
-    "@types/node": "^25.3.3",
+    "@types/node": "^26.1.0",
     "typescript": "^5.9.3"
   }
 }
