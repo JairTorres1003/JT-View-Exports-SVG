@@ -51,6 +51,11 @@ export default defineConfig({
   resolve: {
     tsconfigPaths: true,
     dedupe: ['vscode', 'monaco-editor', ...localDependencies],
+    alias: {
+      // @vscode/diff only touches node:fs/promises behind a `process.versions?.node`
+      // guard that never runs in the webview; stub it to silence the externalization warning
+      'node:fs/promises': path.join(__dirname, 'stubs/node-fs-promises.ts'),
+    },
   },
   build: {
     target: 'es2022',
@@ -60,6 +65,10 @@ export default defineConfig({
     cssCodeSplit: false,
     assetsInlineLimit: 0,
     manifest: 'manifest.json',
+    // The monaco-vscode-api workbench bundle (~6.9 MB) is vendor code loaded lazily only
+    // when the playground editor opens; the webview loads from local disk, so the 500 kB
+    // web-oriented default doesn't apply. App chunks stay far below this limit.
+    chunkSizeWarningLimit: 7000,
     rolldownOptions: {
       output: {
         chunkFileNames: 'chunks/[hash].js',
