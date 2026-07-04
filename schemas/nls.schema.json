@@ -23,6 +23,11 @@
       "description": "The title of the command to start the scanning process",
       "default": "Start Scanning"
     },
+    "extension.commands.showAssets.title": {
+      "type": "string",
+      "description": "The title of the command to show the assets",
+      "default": "Show Assets"
+    },
     "extension.commands.collapseAll.title": {
       "type": "string",
       "description": "The title of the command to collapse all items",
@@ -159,6 +164,7 @@
     "extension.description",
     "extension.commands.showMenu.title",
     "extension.commands.scanning.title",
+    "extension.commands.showAssets.title",
     "extension.commands.collapseAll.title",
     "extension.commands.expandAll.title",
     "extension.commands.reloadTheme.title",

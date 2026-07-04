@@ -3,6 +3,7 @@
   "extension.description": "✨ 'Просмотр экспорта SVG' - это расширение Visual Studio Code, разработанное для упрощения процесса доступа и использования иконок SVG. С помощью этого расширения вы можете без усилий исследовать и искать иконки SVG в своем проекте, упрощая задачу их поиска и интеграции в проект.",
   "extension.commands.showMenu.title": "Просмотр экспорта SVG 🔍",
   "extension.commands.scanning.title": "Начать сканирование",
+  "extension.commands.showAssets.title": "Показать ресурсы",
   "extension.commands.collapseAll.title": "Свернуть все иконки",
   "extension.commands.expandAll.title": "Развернуть все иконки",
   "extension.commands.reloadTheme.title": "Перезагрузить встроенную тему редактора в песочнице",

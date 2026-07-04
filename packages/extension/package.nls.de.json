@@ -3,6 +3,7 @@
   "extension.description": "✨ 'Exporte SVG anzeigen' ist eine Visual Studio Code-Erweiterung, die entwickelt wurde, um den Zugriff auf SVG-Icons zu optimieren und deren Nutzung zu erleichtern. Mit dieser Erweiterung können Sie SVG-Icons in Ihrem Projekt mühelos durchsuchen und finden, was die Integration in Ihr Projekt vereinfacht.",
   "extension.commands.showMenu.title": "Exporte SVG anzeigen 🔍",
   "extension.commands.scanning.title": "Scannen starten",
+  "extension.commands.showAssets.title": "Assets anzeigen",
   "extension.commands.collapseAll.title": "Alle Icons minimieren",
   "extension.commands.expandAll.title": "Alle Icons erweitern",
   "extension.commands.reloadTheme.title": "Das integrierte Editor-Theme im Playground neu laden",

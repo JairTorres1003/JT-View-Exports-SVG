@@ -3,6 +3,7 @@
   "extension.description": "✨ 'İhracat SVG'yi görüntüle' Visual Studio Code uzantısı, SVG simgelerine erişim ve kullanım sürecini basitleştirmek için tasarlanmıştır. Bu uzantı ile projeniz içindeki SVG simgelerini zahmetsizce keşfedebilir ve arayabilirsiniz, böylece bunları bulma ve projeye entegre etme görevini basitleştirir.",
   "extension.commands.showMenu.title": "İhracat SVG'yi görüntüle 🔍",
   "extension.commands.scanning.title": "Tarama Başlat",
+  "extension.commands.showAssets.title": "Varlıkları Göster",
   "extension.commands.collapseAll.title": "Tüm Simgeleri Kapat",
   "extension.commands.expandAll.title": "Tüm Simgeleri Genişlet",
   "extension.commands.reloadTheme.title": "Oyun alanındaki yerleşik düzen temaını yeniden yükle",

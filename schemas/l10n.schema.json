@@ -10,9 +10,21 @@
       "patternErrorMessage": "The message must contain the variable {kind}",
       "description": "A message with a variable {kind} that can be replaced with a specific kind of icons, e.g., 'favorite' or 'recent'."
     },
+    "All assets": {
+      "type": "string",
+      "default": "All assets"
+    },
     "An unknown error occurred": {
       "type": "string",
       "default": "An unknown error occurred"
+    },
+    "Assets defined in the workspace and user settings": {
+      "type": "string",
+      "default": "Assets defined in the workspace and user settings"
+    },
+    "Assets defined in the workspace settings": {
+      "type": "string",
+      "default": "Assets defined in the workspace settings"
     },
     "Cache cleared successfully!": {
       "type": "string",
@@ -262,6 +274,10 @@
       "patternErrorMessage": "The message must contain the variables {attr}, {expected}, and {actual}",
       "description": "A message with variables {attr}, {expected}, and {actual} that can be replaced with the specific attribute name, expected value, and actual value when an invalid attribute is encountered."
     },
+    "Loading assets...": {
+      "type": "string",
+      "default": "Loading assets..."
+    },
     "Loading...": {
       "type": "string",
       "default": "Loading..."
@@ -281,6 +297,10 @@
     "No SVG components found...": {
       "type": "string",
       "default": "No SVG components found..."
+    },
+    "No assets found in the configuration. It is recommended to scan the workspace first to view the icons.": {
+      "type": "string",
+      "default": "No assets found in the configuration. It is recommended to scan the workspace first to view the icons."
     },
     "No cache found for key: {key}": {
       "type": "string",
@@ -315,6 +335,10 @@
       "type": "string",
       "default": "No theme found for the current workspace"
     },
+    "No workspace folder found. Please open a workspace and try again.": {
+      "type": "string",
+      "default": "No workspace folder found. Please open a workspace and try again."
+    },
     "Please enter at least 3 characters to search...": {
       "type": "string",
       "default": "Please enter at least 3 characters to search..."
@@ -330,6 +354,10 @@
       "type": "string",
       "default": "Reload"
     },
+    "Scan workspace": {
+      "type": "string",
+      "default": "Scan workspace"
+    },
     "Scanning workspace...": {
       "type": "string",
       "default": "Scanning workspace..."
@@ -337,6 +365,10 @@
     "Select files": {
       "type": "string",
       "default": "Select files"
+    },
+    "Select which assets to show": {
+      "type": "string",
+      "default": "Select which assets to show"
     },
     "The \"Show not exported icons\" setting changed. Reload the panel to apply.": {
       "type": "string",
@@ -368,6 +400,10 @@
       "type": "string",
       "default": "View Exports SVG"
     },
+    "Workspace only": {
+      "type": "string",
+      "default": "Workspace only"
+    },
     "Yes": {
       "type": "string",
       "default": "Yes"
@@ -383,7 +419,10 @@
   },
   "required": [
     "{kind} icons",
+    "All assets",
     "An unknown error occurred",
+    "Assets defined in the workspace and user settings",
+    "Assets defined in the workspace settings",
     "Cache cleared successfully!",
     "CacheManager not initialized.",
     "Clearing cache...",
@@ -428,28 +467,34 @@
     "Invalid SVG tag: {tag}",
     "Invalid webview manifest",
     "Invalid {attr} attribute, expected \"{expected}\" but got {actual}",
+    "Loading assets...",
     "Loading...",
     "Message router not registered",
     "Method not implemented",
     "No",
     "No SVG components found...",
+    "No assets found in the configuration. It is recommended to scan the workspace first to view the icons.",
     "No cache found for key: {key}",
     "No config found for key: {key}",
     "No files found in the workspace.",
     "No handler found for message type: {type}",
     "No results found...",
     "No theme found for the current workspace",
+    "No workspace folder found. Please open a workspace and try again.",
     "Please enter at least 3 characters to search...",
     "Processing {count} file(s)...",
     "Reload",
+    "Scan workspace",
     "Scanning workspace...",
     "Select files",
+    "Select which assets to show",
     "The \"Show not exported icons\" setting changed. Reload the panel to apply.",
     "The file was saved successfully at: {filePath}",
     "Theme not found for path: {path}",
     "Theme package not found",
     "This file is temporary. Do you want to continue?",
     "View Exports SVG",
+    "Workspace only",
     "Yes",
     "favorite",
     "recent"

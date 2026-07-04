@@ -5,6 +5,7 @@ import {
   runClearCollectionCache,
   runReloadTheme,
   runScanningWorkspace,
+  runShowAssets,
   runToggleDevTools,
   runToggleExpandIcon,
   showMenu,
@@ -33,6 +34,9 @@ export async function activate(context: ExtensionContext) {
     }),
     commands.registerCommand(`${CONFIG_KEY}.scanning`, async () => {
       await runScanningWorkspace(context)
+    }),
+    commands.registerCommand(`${CONFIG_KEY}.showAssets`, async () => {
+      await runShowAssets(context)
     }),
     commands.registerCommand(`${CONFIG_KEY}.collapseAll`, async () => {
       await runToggleExpandIcon(false)

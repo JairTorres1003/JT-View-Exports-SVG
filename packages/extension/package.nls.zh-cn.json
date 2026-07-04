@@ -3,6 +3,7 @@
   "extension.description": "✨ '查看出口SVG' 是一个 Visual Studio Code 扩展，旨在简化访问和使用 SVG 图标的过程。通过此扩展，您可以轻松地在项目中探索和搜索 SVG 图标，从而简化查找和将其集成到项目中的任务。",
   "extension.commands.showMenu.title": "查看出口SVG 🔍",
   "extension.commands.scanning.title": "开始扫描",
+  "extension.commands.showAssets.title": "显示资源",
   "extension.commands.collapseAll.title": "折叠所有图标",
   "extension.commands.expandAll.title": "展开所有图标",
   "extension.commands.reloadTheme.title": "重新加载游戏区内置编辑器主题",
