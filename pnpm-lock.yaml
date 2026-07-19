@@ -306,8 +306,8 @@ importers:
         specifier: ^22.0.0
         version: 22.0.0
       tsc-alias:
-        specifier: ^1.8.16
-        version: 1.8.17
+        specifier: ^1.9.1
+        version: 1.9.1
       typescript:
         specifier: ^5.9.3
         version: 5.9.3
@@ -9416,8 +9416,8 @@ packages:
   trough@2.2.0:
     resolution: {integrity: sha512-tmMpK00BjZiUyVyvrBK7knerNgmgvcV/KLVyuma/SC+TQN167GrMRciANTz09+k3zW8L8t60jWO1GpfkZdjTaw==}
 
-  tsc-alias@1.8.17:
-    resolution: {integrity: sha512-EIduCZHqbNwPm8BZYfq1aD7BQ697A4h6uSGMOFQfYGoQwfrYFTKwYfy9Bv42YxHkduVBcn9Zx0DkX111DKskyg==}
+  tsc-alias@1.9.1:
+    resolution: {integrity: sha512-sFZdVFthH8uvdplPJrOYGOHcxu6UPtcAcY678JPwEQiMzgLZYFO7Qc/rzELp7ingTc+OxtzH6n+8Pn2eVQep6w==}
     engines: {node: '>=16.20.2'}
     hasBin: true
 
@@ -21652,7 +21652,7 @@ snapshots:
 
   trough@2.2.0: {}
 
-  tsc-alias@1.8.17:
+  tsc-alias@1.9.1:
     dependencies:
       chokidar: 3.6.0
       commander: 9.5.0
