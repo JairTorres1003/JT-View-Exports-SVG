@@ -31,7 +31,7 @@
     "node": ">=22.0.0",
     "pnpm": ">=10.0.0"
   },
-  "packageManager": "pnpm@11.9.0",
+  "packageManager": "pnpm@11.14.0",
   "scripts": {
     "prepare": "husky",
     "preinstall": "npx only-allow pnpm",
@@ -57,7 +57,7 @@
     "setup": "pnpm install && npm-run-all clean build:core build:webview build:extension"
   },
   "devDependencies": {
-    "@biomejs/biome": "2.5.2",
+    "@biomejs/biome": "2.5.4",
     "@types/node": "^26.1.0",
     "concurrently": "^10.0.3",
     "glob": "^13.0.6",
