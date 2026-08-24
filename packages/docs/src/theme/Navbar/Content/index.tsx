@@ -1,6 +1,6 @@
 import { useThemeConfig } from '@docusaurus/theme-common'
 import { splitNavbarItems } from '@docusaurus/theme-common/internal'
-import { NavbarContent } from '@heroui/navbar'
+import NavbarContent from '@site/src/components/Navbar/NavbarContent'
 import NavbarLogo from '@theme/Navbar/Logo'
 import type { ReactNode } from 'react'
 

@@ -1,5 +1,5 @@
 import { BlogPostProvider } from '@docusaurus/plugin-content-blog/client'
-import { Card, CardBody } from '@heroui/card'
+import { Card } from '@heroui/react'
 import BlogPostItem from '@theme/BlogPostItem'
 import type { Props } from '@theme/BlogPostItems'
 import type { ReactNode } from 'react'
@@ -13,17 +13,16 @@ export default function BlogPostItems({
       {items.map(({ content: BlogPostContent }) => {
         return (
           <Card
-            shadow='none'
-            className='border-2 border-primary/20 p-2 [&_header_h2]:m-0 [&_footer]:m-0'
+            className='border-2 border-accent/20 p-2 [&_header_h2]:m-0 [&_footer]:m-0 rounded-md shadow-none'
             key={BlogPostContent.metadata.permalink}
           >
-            <CardBody className='p-2'>
+            <Card.Content className='p-2'>
               <BlogPostProvider key={BlogPostContent.metadata.permalink} content={BlogPostContent}>
                 <BlogPostItemComponent>
                   <BlogPostContent />
                 </BlogPostItemComponent>
               </BlogPostProvider>
-            </CardBody>
+            </Card.Content>
           </Card>
         )
       })}

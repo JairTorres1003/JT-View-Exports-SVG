@@ -3,7 +3,7 @@ import {
   useActiveDocContext,
   useLayoutDocsSidebar,
 } from '@docusaurus/plugin-content-docs/lib/client/index.js'
-import { NavbarItem as HeroNavbarItem } from '@heroui/navbar'
+import NavbarItem from '@site/src/components/Navbar/NavbarItem'
 
 import type { NavbarItemComponentProps } from './types'
 
@@ -16,8 +16,8 @@ export const NavbarItemLink: React.FC<NavbarItemComponentProps> = ({
   const sidebarLink = useLayoutDocsSidebar(sidebarId, docsPluginId).link
 
   return (
-    <HeroNavbarItem as={Link} to={sidebarLink?.path} isActive={activeDoc?.sidebar === sidebarId}>
+    <NavbarItem as={Link} to={sidebarLink?.path} isActive={activeDoc?.sidebar === sidebarId}>
       {label ?? sidebarLink?.label}
-    </HeroNavbarItem>
+    </NavbarItem>
   )
 }

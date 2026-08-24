@@ -12,7 +12,7 @@ export default function TOCCollapsibleCollapseButton({
   return (
     <button
       className={cn(
-        'w-full flex justify-between gap-2 items-center p-2 hover:bg-primary/5 rounded-md font-medium transition-colors text-sm',
+        'w-full flex justify-between gap-2 items-center p-2 hover:bg-accent/5 rounded-md font-medium transition-colors text-sm',
         className
       )}
       {...props}

@@ -20,4 +20,4 @@ onlyBuiltDependencies:
 
 patchedDependencies:
   '@docusaurus/tsconfig': patches/@docusaurus__tsconfig.patch
-  react-colorful@5.7.0: patches/react-colorful@5.7.0.patch
+  react-colorful@5.8.0: patches/react-colorful@5.8.0.patch

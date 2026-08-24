@@ -39,7 +39,7 @@ export default function TOCCollapsible({
         className={cn(
           'bg-foreground/3 rounded-lg mt-3 sticky top-[var(--header-height)] overflow-hidden z-30 transition-all duration-300',
           {
-            '-ml-4 w-[calc(100%+2rem)] rounded-none border-t border-b border-divider bg-background':
+            '-ml-4 w-[calc(100%+2rem)] rounded-none border-t border-b border-separator/15 bg-background':
               isSticky,
           },
           className

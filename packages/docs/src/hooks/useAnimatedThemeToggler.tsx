@@ -1,59 +1,33 @@
-import { useTheme } from '@heroui/use-theme'
-import { useCallback, useEffect, useState } from 'react'
+import { useColorMode } from '@docusaurus/theme-common'
+import { useCallback } from 'react'
 import { flushSync } from 'react-dom'
 
 export const useAnimatedThemeToggler = () => {
-  const [isDark, setIsDark] = useState(false)
-  const { setTheme } = useTheme()
-
-  useEffect(() => {
-    const updateTheme = () => {
-      const dataThemeIsDark = document.documentElement.getAttribute('data-theme') === 'dark'
-      const classContainsDark = document.documentElement.classList.contains('dark')
-      const actualIsDark = dataThemeIsDark || classContainsDark
-      setIsDark(actualIsDark)
-    }
-
-    updateTheme()
-
-    const observer = new MutationObserver(updateTheme)
-    observer.observe(document.documentElement, {
-      attributes: true,
-      attributeFilter: ['class'],
-    })
-
-    return () => observer.disconnect()
-  }, [])
+  const { colorMode, setColorMode } = useColorMode()
+  const isDark = colorMode === 'dark'
 
   /**
    * Toggles the application theme between light and dark modes with smooth view transition animation.
    *
-   * Uses the View Transitions API when available for a smooth visual transition between themes.
-   * Falls back to immediate theme change if View Transitions API is not supported.
-   *
-   * Updates the following:
-   * - React state (`isDark` and theme)
-   * - DOM class on the document root element
-   * - localStorage with the new theme preference
+   * The theme change must happen *inside* the `startViewTransition` callback, otherwise the browser
+   * captures the "new" snapshot before the theme is applied and no animation is visible.
    *
    * @returns A promise that resolves when the theme transition is complete
    */
   const toggleTheme = useCallback(async () => {
+    const applyTheme = () =>
+      flushSync(() => {
+        setColorMode(isDark ? 'light' : 'dark')
+        document.documentElement.classList.toggle('dark')
+      })
+
     if (!document.startViewTransition) {
-      setTheme(isDark ? 'light' : 'dark')
+      applyTheme()
       return
     }
 
-    await document.startViewTransition(() => {
-      flushSync(() => {
-        const newTheme = !isDark
-        setIsDark(newTheme)
-        setTheme(newTheme ? 'dark' : 'light')
-        document.documentElement.classList.toggle('dark')
-        localStorage.setItem('theme', newTheme ? 'dark' : 'light')
-      })
-    }).ready
-  }, [isDark, setTheme])
+    await document.startViewTransition(applyTheme).finished
+  }, [isDark, setColorMode])
 
   return { isDark, toggleTheme }
 }

@@ -93,7 +93,7 @@ const config: Config = {
         blog: false,
         docs: {
           sidebarPath: './sidebars.ts',
-          editUrl: 'https://github.com/JairTorres1003/JT-View-Exports-SVG/edit/main/docs',
+          editUrl: 'https://github.com/JairTorres1003/JT-View-Exports-SVG/edit/main/packages/docs',
           remarkPlugins: [remarkAdvancedTablePlugin],
           rehypePlugins: [rehypeAdvancedTablePlugin],
         },
@@ -143,7 +143,6 @@ const config: Config = {
         {
           type: 'custom-dark-mode-toggle',
           position: 'right',
-          placement: 'bottom-end',
           id: 'dark-mode-toggle',
         },
       ],

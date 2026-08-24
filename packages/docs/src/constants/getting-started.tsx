@@ -1,7 +1,8 @@
-import { Link } from '@heroui/link'
+import Link from '@docusaurus/Link'
+import { LinkIcon } from '@heroui/react'
 import CodeBlock from '@theme/CodeBlock'
 import CodeInline from '@theme/CodeInline'
-import { FolderCode, Terminal } from 'lucide-react'
+import { ExternalLinkIcon, FolderCode, Terminal } from 'lucide-react'
 
 import Shortcut from '../components/Shortcut'
 
@@ -48,6 +49,7 @@ export const ActivationMethods = [
 
 export const InstallationMethods = [
   {
+    id: 'vscode-marketplace',
     title: 'VS Code Marketplace',
     children: (
       <div className='Installation-instructions'>
@@ -74,18 +76,20 @@ export const InstallationMethods = [
         <p>
           You can also{' '}
           <Link
-            isExternal
-            showAnchorIcon
-            className='text-[#007acc]'
+            className='text-[#007acc] no-underline font-medium'
             href='https://marketplace.visualstudio.com/items?itemName=JairTorres1003.jt-view-exports-svg'
           >
             open the Marketplace page
+            <LinkIcon className='inline-block align-middle'>
+              <ExternalLinkIcon className='ml-1' size='1rem' />
+            </LinkIcon>
           </Link>
         </p>
       </div>
     ),
   },
   {
+    id: 'command-line',
     title: 'Command Line',
     children: (
       <CodeBlock language='bash-vscode' className='-m-4 [&_pre]:!border-0'>

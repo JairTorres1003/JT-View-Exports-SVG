@@ -1,6 +1,5 @@
 import Link from '@docusaurus/Link'
-import { Button } from '@heroui/button'
-import type { ButtonVariantProps } from '@heroui/theme'
+import { type ButtonVariants, buttonVariants } from '@heroui/styles'
 import { cn } from '@site/src/lib/utils'
 import Image from '@theme/IdealImage'
 import { ArrowRight, Download, ExternalLink } from 'lucide-react'
@@ -15,8 +14,7 @@ interface HeroSectionProps {
     href: string
     icon: 'arrow-right' | 'external-link' | 'download'
     iconPosition?: 'start' | 'end'
-    variant?: ButtonVariantProps['variant']
-    color?: ButtonVariantProps['color']
+    variant?: ButtonVariants['variant']
     iconClassName?: string
     /**
      * Defaults to '_self'
@@ -44,7 +42,7 @@ const HeroSection: React.FC<HeroSectionProps> = ({
       <div className='flex flex-col gap-6 items-center justify-center text-center'>
         <div className='flex flex-col items-center justify-center gap-6'>
           {logo && (
-            <div className='w-32 h-32 text-primary @[480px]:w-54 @[480px]:h-54'>
+            <div className='w-32 h-32 text-accent @[480px]:w-54 @[480px]:h-54'>
               <Image {...logo} />
             </div>
           )}
@@ -62,24 +60,25 @@ const HeroSection: React.FC<HeroSectionProps> = ({
         <div className='flex-wrap gap-3 flex justify-center mt-4 w-full'>
           {links?.map((link) => {
             const Icon = icons[link.icon]
+
             return (
-              <Button
+              <Link
                 key={link.label}
-                as={Link}
                 to={link.href}
                 target={link.target || '_self'}
-                variant={link.variant}
-                color={link.color}
-                size='lg'
-                className={cn('max-w-[200px] w-full', link.className)}
-                {...{
-                  [link.iconPosition === 'start' ? 'startContent' : 'endContent']: Icon ? (
-                    <Icon size='1rem' className={cn('min-w-4', link.iconClassName)} />
-                  ) : null,
-                }}
+                className={buttonVariants({
+                  size: 'lg',
+                  variant: link.variant,
+                  className: cn(
+                    'max-w-[200px] w-full',
+                    link.iconPosition === 'start' ? 'flex-row' : 'flex-row-reverse',
+                    link.className
+                  ),
+                })}
               >
+                {Icon && <Icon size='1rem' className={cn('min-w-4', link.iconClassName)} />}
                 <span className='truncate'>{link.label}</span>
-              </Button>
+              </Link>
             )
           })}
         </div>

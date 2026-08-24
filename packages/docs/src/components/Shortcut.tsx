@@ -1,12 +1,11 @@
-import { Kbd, type KbdProps } from '@heroui/kbd'
+import { Kbd, type KbdAbbrProps, type KbdProps } from '@heroui/react'
 import { memo, useEffect, useState } from 'react'
-
 import { cn } from '../lib/utils'
 
-export interface ShortcutProps extends Omit<KbdProps, 'keys'> {
-  mac: KbdProps['keys']
-  windows: KbdProps['keys']
-  linux?: KbdProps['keys']
+export interface ShortcutProps extends KbdProps {
+  mac: KbdAbbrProps['keyValue'][]
+  windows: KbdAbbrProps['keyValue'][]
+  linux?: KbdAbbrProps['keyValue'][]
   /**
    * The OS to use when rendering the shortcut.
    * @default 'mac'
@@ -25,6 +24,7 @@ function Shortcut({
   defaultOS = 'mac',
   valueOS,
   className,
+  children,
   ...props
 }: ShortcutProps) {
   const [os, setOS] = useState<'mac' | 'windows' | 'linux'>(defaultOS)
@@ -52,13 +52,17 @@ function Shortcut({
 
   return (
     <Kbd
-      keys={keys}
       {...props}
       className={cn(
-        'bg-primary/10 text-primary dark:bg-foreground/10 dark:text-foreground/80 px-2 py-1 gap-0.5',
+        'bg-accent/10 text-accent dark:bg-foreground/10 dark:text-foreground/80 px-2 py-1 gap-0.5 shadow-none rounded-xs h-auto',
         className
       )}
-    />
+    >
+      {keys.map((key) => (
+        <Kbd.Abbr keyValue={key} key={key} />
+      ))}
+      <Kbd.Content>{children}</Kbd.Content>
+    </Kbd>
   )
 }
 

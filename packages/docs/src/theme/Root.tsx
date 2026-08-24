@@ -1,7 +1,7 @@
 import { HtmlClassNameProvider } from '@docusaurus/theme-common'
 import { useEffect, useState } from 'react'
 
-export default function Root({ children }) {
+export default function Root({ children }: { children: React.ReactNode }) {
   const [theme, setTheme] = useState('light')
 
   useEffect(() => {

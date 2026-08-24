@@ -1,7 +1,7 @@
 import Link from '@docusaurus/Link'
 import { useThemeConfig } from '@docusaurus/theme-common'
 import useBaseUrl from '@docusaurus/useBaseUrl'
-import { NavbarBrand } from '@heroui/navbar'
+import NavbarBrand from '@site/src/components/Navbar/NavbarBrand'
 import { cn } from '@site/src/lib/utils'
 import Image from '@theme/IdealImage'
 import type { ReactNode } from 'react'

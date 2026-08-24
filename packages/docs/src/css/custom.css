@@ -2,23 +2,21 @@
 
 @import 'tw-animate-css';
 
-@config '../../tailwind.config.mts';
+@import '@heroui/styles';
 
-button {
-  cursor: pointer;
-}
+@import './theme.css' layer(theme);
 
 :root {
   --header-height: 4rem;
   --footer-height: 5.5rem;
-  --ifm-toc-border-color: hsl(var(--heroui-divider) / 0.15);
-  --ifm-color-primary: var(--primary);
-  --ifm-color-primary-dark: var(--primary);
-  --ifm-color-primary-darker: var(--primary);
-  --ifm-color-primary-darkest: var(--primary);
-  --ifm-color-primary-light: var(--primary);
-  --ifm-color-primary-lighter: var(--primary);
-  --ifm-color-primary-lightest: var(--primary);
+  --ifm-toc-border-color: hsl(var(--separator) / 0.15);
+  --ifm-color-primary: var(--accent);
+  --ifm-color-primary-dark: var(--accent);
+  --ifm-color-primary-darker: var(--accent);
+  --ifm-color-primary-darkest: var(--accent);
+  --ifm-color-primary-light: var(--accent);
+  --ifm-color-primary-lighter: var(--accent);
+  --ifm-color-primary-lightest: var(--accent);
 
   --ifm-navbar-height: calc(var(--header-height) + 1px);
   --ifm-background-color: var(--background);
@@ -31,7 +29,7 @@ button {
 
   --ifm-color-secondary: var(--secondary);
   --ifm-color-info: var(--accent);
-  --ifm-color-success: var(--primary);
+  --ifm-color-success: var(--accent);
   --ifm-color-danger: var(--destructive);
 }
 
@@ -41,6 +39,20 @@ button {
 
 html {
   scroll-behavior: smooth;
+}
+
+@media print {
+  * {
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+
+  .light,
+  .default,
+  [data-theme='light'],
+  [data-theme='default'] {
+    --background: #ffffff;
+  }
 }
 
 @layer base {
@@ -98,12 +110,12 @@ html {
   }
 
   ::view-transition-old(root),
-  .dark::view-transition-old(root) {
+  [data-theme='dark']::view-transition-old(root) {
     animation: none;
     animation-fill-mode: both;
     z-index: -1;
   }
-  .dark::view-transition-new(root) {
+  [data-theme='dark']::view-transition-new(root) {
     animation: scale 1s;
     animation-fill-mode: both;
   }
@@ -124,7 +136,7 @@ html {
      SearchBar
      ========================= */
   .searchbar-container {
-    @apply w-full max-w-[200px] md:max-w-[300px] rounded-md overflow-hidden bg-content1 border border-divider dark:border-none;
+    @apply w-full max-w-[200px] md:max-w-[300px] rounded-md overflow-hidden bg-surface border border-separator/15 dark:border-none;
   }
 
   .searchbar-container .DocSearch-Button {
@@ -136,12 +148,12 @@ html {
   }
 
   .searchbar-container .DocSearch-Button-Keys {
-    @apply rounded-sm px-2 py-1 gap-0.5 h-[28px] w-[43px] min-w-[43px] flex items-center justify-center bg-primary/10 dark:bg-foreground/10;
+    @apply rounded-sm px-2 py-1 gap-0.5 h-[28px] w-[43px] min-w-[43px] flex items-center justify-center bg-accent/10 dark:bg-foreground/10;
   }
 
   .searchbar-container .DocSearch-Button-Keys .DocSearch-Button-Key {
     --docsearch-key-pressed-shadow: none;
-    @apply bg-transparent text-primary dark:text-foreground/80 w-[12px] h-[12px] relative transition-all;
+    @apply bg-transparent text-accent dark:text-foreground/80 w-[12px] h-[12px] relative transition-all;
   }
 
   .searchbar-container .DocSearch-Button-Keys .DocSearch-Button-Key::before {
@@ -160,12 +172,12 @@ html {
   .searchbar-container
     .DocSearch-Button-Keys
     .DocSearch-Button-Key.DocSearch-Button-Key--pressed::before {
-    @apply bg-primary/20 dark:bg-foreground/20;
+    @apply bg-accent/20 dark:bg-foreground/20;
   }
 
   .DocSearch-Screen-Icon svg,
   .DocSearch-MagnifierLabel svg {
-    @apply text-primary [stroke:currentColor];
+    @apply text-accent [stroke:currentColor];
   }
 
   .searchbar-container .DocSearch-Button-Keys .DocSearch-Button-Key svg {
@@ -177,7 +189,7 @@ html {
      ========================= */
 
   .DocSearch-Modal {
-    @apply m-[60px_auto_auto] rounded-lg bg-content1 border border-divider dark:border-none shadow-xl;
+    @apply m-[60px_auto_auto] rounded-lg bg-surface border border-separator/15 dark:border-none shadow-xl;
   }
 
   @media screen and (max-width: 768px) {
@@ -187,7 +199,7 @@ html {
   }
 
   .DocSearch-SearchBar .DocSearch-Form {
-    @apply rounded-t-lg border-b border-divider px-4 py-3 bg-transparent gap-2;
+    @apply rounded-t-lg border-b border-separator/15 px-4 py-3 bg-transparent gap-2;
   }
 
   .DocSearch-Dropdown {
@@ -208,7 +220,7 @@ html {
 
   li.DocSearch-Hit a {
     --docsearch-hit-height: 52px;
-    @apply bg-primary/5 dark:bg-foreground/3 px-3 py-1 rounded-md;
+    @apply bg-accent/5 dark:bg-foreground/3 px-3 py-1 rounded-md;
   }
 
   li.DocSearch-Hit .DocSearch-Hit-Container {
@@ -220,11 +232,11 @@ html {
   }
 
   .DocSearch-Footer {
-    @apply rounded-b-lg border-t border-divider px-4 py-3 bg-transparent gap-2;
+    @apply rounded-b-lg border-t border-separator/15 px-4 py-3 bg-transparent gap-2;
   }
 
   .DocSearch-Footer .DocSearch-Commands .DocSearch-Commands-Key {
-    @apply bg-primary/10 text-primary dark:bg-foreground/10 dark:text-foreground/80 py-1 rounded-none w-fit;
+    @apply bg-accent/10 text-accent dark:bg-foreground/10 dark:text-foreground/80 py-1 rounded-none w-fit;
   }
 
   .DocSearch-Footer
@@ -246,5 +258,80 @@ html {
 
   .DocSearch-Footer .DocSearch-Commands .DocSearch-Label {
     @apply ml-2;
+  }
+
+  /* =========================
+     Tooltip
+     ========================= */
+  .tooltip {
+    @apply rounded-sm;
+  }
+
+  .tooltip [data-slot='tooltip-arrow'] svg {
+    stroke-width: 0.5;
+    @apply stroke-separator/15;
+  }
+
+  .tooltip [data-slot='tooltip-arrow']::after {
+    content: '';
+    position: absolute;
+    background: var(--overlay);
+    border-radius: 10px;
+  }
+
+  /* Vertical arrows */
+  .tooltip [data-slot='tooltip-arrow'][data-placement^='top']::after,
+  .tooltip [data-slot='tooltip-arrow'][data-placement^='bottom']::after {
+    height: 2px;
+    left: 0.6px;
+    right: 0.5px;
+  }
+
+  .tooltip [data-slot='tooltip-arrow'][data-placement^='top']::after {
+    top: -1.5px;
+  }
+
+  .tooltip [data-slot='tooltip-arrow'][data-placement^='bottom']::after {
+    bottom: -1.5px;
+  }
+
+  /* Horizontal arrows */
+  .tooltip [data-slot='tooltip-arrow'][data-placement^='left']::after,
+  .tooltip [data-slot='tooltip-arrow'][data-placement^='right']::after {
+    width: 2px;
+    top: 0.6px;
+    bottom: 0.5px;
+  }
+
+  .tooltip [data-slot='tooltip-arrow'][data-placement^='left']::after {
+    left: -1.5px;
+  }
+
+  .tooltip [data-slot='tooltip-arrow'][data-placement^='right']::after {
+    right: -1.5px;
+  }
+
+  /* =========================
+     Button
+     ========================= */
+
+  .button--lg {
+    @apply rounded-lg h-[48px] gap-3;
+  }
+
+  .button--md {
+    @apply rounded-md h-[40px] gap-2;
+  }
+
+  .button--sm {
+    @apply rounded-sm h-[32px] gap-1;
+  }
+
+  .button--outline {
+    @apply border-default border-2;
+  }
+
+  .button--ghost {
+    @apply hover:bg-gray-700/10 dark:hover:bg-foreground/15;
   }
 }

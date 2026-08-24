@@ -23,7 +23,7 @@ No additional dependencies or frameworks are required.
 
 ---
 
-import { Tabs, Tab } from '@heroui/tabs'
+import { Tabs } from '@heroui/react'
 import DocCard from '@site/src/components/DocCard'
 import { Steps, StepItem } from '@site/src/components/Steps'
 import { ActivationMethods, InstallationMethods } from '@site/src/constants/getting-started'
@@ -32,18 +32,24 @@ import { ActivationMethods, InstallationMethods } from '@site/src/constants/gett
   <StepItem>
     ## 🧩 Installation Methods
 
-    <div className='border-2 border-primary/20 rounded-md'>
-      <Tabs
-        items={InstallationMethods}
-        aria-label="Installation Methods"
-        variant="underlined"
-        classNames={{
-          tabList: 'pb-0',
-          tabContent: 'text-foreground/60 group-data-[selected=true]:text-foreground pb-2',
-          panel: 'p-4 border-t-2 border-primary/20 -mt-[2px] bg-content1 rounded-b-md',
-        }}
-      >
-        {(item) => (<Tab key={item.title} {...item} />)}
+    <div className='border-2 border-accent/20 rounded-md'>
+      <Tabs className="w-full gap-0" variant='secondary'>
+        <Tabs.ListContainer className="border-b-2 border-accent/20">
+          <Tabs.List aria-label="Installation Methods" className="p-0">
+            {InstallationMethods.map((item) => (
+              <Tabs.Tab id={item.id} key={item.id}>
+                {item.title}
+                <Tabs.Indicator className="bg-white" />
+              </Tabs.Tab>
+            ))}
+          </Tabs.List>
+        </Tabs.ListContainer>
+
+        {InstallationMethods.map((item) => (
+          <Tabs.Panel id={item.id} key={item.id} className="p-4 bg-surface rounded-b-md font-normal">
+            {item.children}
+          </Tabs.Panel>
+        ))}
       </Tabs>
     </div>
 

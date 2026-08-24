@@ -8,7 +8,7 @@ export default function FooterLayout({ links, logo, copyright }: Props): ReactNo
     <footer
       className={clsx(
         ThemeClassNames.layout.footer.container,
-        'footer bg-secondary-50 border-divider border-t'
+        'footer bg-background border-separator/15 border-t'
       )}
     >
       <div className='px-4 py-8 md:px-8 container mx-auto max-w-[1112px]'>

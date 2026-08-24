@@ -1,7 +1,6 @@
 import { translate } from '@docusaurus/Translate'
 import { useCodeBlockContext } from '@docusaurus/theme-common/internal'
-import { Button } from '@heroui/button'
-import { Tooltip } from '@heroui/tooltip'
+import { Button, Tooltip } from '@heroui/react'
 import { cn } from '@site/src/lib/utils'
 import type { Props } from '@theme/CodeBlock/Buttons/CopyButton'
 import { Check, Copy } from 'lucide-react'
@@ -54,7 +53,7 @@ export default function CopyButton({ className }: Props): ReactNode {
   const { copyCode, isCopied } = useCopyButton()
 
   return (
-    <Tooltip content={isCopied ? ariaLabel(true) : title()} placement='top' showArrow>
+    <Tooltip delay={0}>
       <Button
         isIconOnly
         onPress={copyCode}
@@ -80,6 +79,11 @@ export default function CopyButton({ className }: Props): ReactNode {
           )}
         />
       </Button>
+
+      <Tooltip.Content showArrow placement='top'>
+        <Tooltip.Arrow />
+        {isCopied ? ariaLabel(true) : title()}
+      </Tooltip.Content>
     </Tooltip>
   )
 }

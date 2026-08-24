@@ -13,20 +13,17 @@ const GridStagger: FC<React.PropsWithChildren<{ className?: string }>> = ({
         className
       )}
     >
-      {React.Children.map(
-        children,
-        (child: React.ReactElement<{ style?: React.CSSProperties }>, index) => {
-          if (!React.isValidElement(child)) return child
+      {React.Children.map(children, (child, index) => {
+        if (!React.isValidElement<{ style?: React.CSSProperties }>(child)) return child
 
-          return React.cloneElement(child, {
-            key: `grid-stagger-child-[${child.key || index}]`,
-            style: {
-              ...child.props.style,
-              gridArea: `${index + 1} / ${(index % 2) + 1} / ${index + 3} / ${(index % 2) + 2}`,
-            },
-          })
-        }
-      )}
+        return React.cloneElement(child, {
+          key: `grid-stagger-child-[${child.key || index}]`,
+          style: {
+            ...child.props.style,
+            gridArea: `${index + 1} / ${(index % 2) + 1} / ${index + 3} / ${(index % 2) + 2}`,
+          },
+        })
+      })}
     </div>
   )
 }

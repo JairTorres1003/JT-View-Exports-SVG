@@ -1,6 +1,6 @@
 import Link from '@docusaurus/Link'
 import Translate from '@docusaurus/Translate'
-import { Button } from '@heroui/button'
+import { buttonVariants } from '@heroui/react'
 import { cn } from '@site/src/lib/utils'
 import type { Props } from '@theme/NotFound/Content'
 import { Home } from 'lucide-react'
@@ -14,7 +14,7 @@ export default function NotFoundContent({ className }: Props): ReactNode {
         className
       )}
     >
-      <div className='absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-primary/10 rounded-full blur-[120px] pointer-events-none'></div>
+      <div className='absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-accent/10 rounded-full blur-[120px] pointer-events-none'></div>
       <div className='z-10 w-full max-w-2xl flex flex-col items-center text-center'>
         <h1 className='tracking-tighter text-[80px] md:text-[120px] font-bold leading-none select-none m-0'>
           404
@@ -31,14 +31,17 @@ export default function NotFoundContent({ className }: Props): ReactNode {
           </Translate>
         </p>
         <div className='flex flex-col sm:flex-row items-center gap-4 w-full justify-center'>
-          <Button as={Link} href='/' size='lg' color='primary' startContent={<Home />}>
-            <Translate
-              id='theme.NotFound.backToHome'
-              description='The label of the button that takes the user back to the home page'
-            >
-              Back to Home
-            </Translate>
-          </Button>
+          <Link to='/' color='accent' className={buttonVariants({ size: 'lg' })}>
+            <Home size='1rem' className={cn('min-w-4')} />
+            <span className='truncate'>
+              <Translate
+                id='theme.NotFound.backToHome'
+                description='The label of the button that takes the user back to the home page'
+              >
+                Back to Home
+              </Translate>
+            </span>
+          </Link>
         </div>
       </div>
     </main>

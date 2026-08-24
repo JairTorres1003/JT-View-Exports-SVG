@@ -1,8 +1,7 @@
 import Link from '@docusaurus/Link'
-import { Button } from '@heroui/button'
-import { Tooltip, type TooltipPlacement } from '@heroui/tooltip'
+import { Tooltip } from '@heroui/react'
+import { buttonVariants } from '@heroui/styles'
 import React, { type FC } from 'react'
-
 import { GithubIcon, LinkedInIcon, VsCodeIcon } from '../assets/icons/social'
 
 const SOCIAL_ICONS = {
@@ -17,30 +16,36 @@ interface SocialButtonProps {
     href: string
     label: string
     disabledTooltip?: boolean
-    placement?: TooltipPlacement
+    placement?: 'top' | 'bottom' | 'left' | 'right'
   }
 }
 
 const SocialButton: FC<SocialButtonProps> = ({ config }) => {
   return (
-    <Tooltip
-      content={config.label}
-      size='sm'
-      showArrow
-      isDisabled={config.disabledTooltip}
-      placement={config.placement}
-    >
-      <Button
-        isIconOnly
-        size='sm'
-        className='bg-transparent hover:bg-gray-700/10 dark:hover:bg-foreground/15'
-        aria-label={config.label}
-        as={Link}
-        to={config.href}
-        target='_blank'
-      >
-        {React.createElement(SOCIAL_ICONS[config.icon], { size: '1.25rem' })}
-      </Button>
+    <Tooltip delay={0} isDisabled={config.disabledTooltip}>
+      <Tooltip.Trigger aria-label={config.label}>
+        <Link
+          to={config.href}
+          target='_blank'
+          aria-label={config.label}
+          className={buttonVariants({
+            size: 'sm',
+            isIconOnly: true,
+            variant: 'ghost',
+            className: 'w-8 h-8',
+          })}
+        >
+          {React.createElement(SOCIAL_ICONS[config.icon], {
+            size: '1.25rem',
+            className: 'w-5 h-5 m-0',
+          })}
+        </Link>
+      </Tooltip.Trigger>
+
+      <Tooltip.Content showArrow placement={config.placement}>
+        <Tooltip.Arrow />
+        {config.label}
+      </Tooltip.Content>
     </Tooltip>
   )
 }

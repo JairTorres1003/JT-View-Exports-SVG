@@ -12,6 +12,8 @@ function TOCItemTree({ toc, className, linkClassName, isChild }: Props): ReactNo
     if (!ulRef.current || !spanRef.current) return
 
     const updateIndicator = () => {
+      if (!ulRef.current || !spanRef.current) return
+
       const activeLink = ulRef.current?.querySelector(
         '.table-of-contents__link--active'
       ) as HTMLElement | null
@@ -42,7 +44,7 @@ function TOCItemTree({ toc, className, linkClassName, isChild }: Props): ReactNo
   if (!toc.length) return null
 
   return (
-    <div className={!isChild ? 'relative border-divider border-l pl-1' : 'pl-4'}>
+    <div className={!isChild ? 'relative border-separator/15 border-l pl-1' : 'pl-4'}>
       {!isChild && (
         <span
           ref={spanRef}

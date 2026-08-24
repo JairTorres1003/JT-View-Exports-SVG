@@ -1,10 +1,9 @@
-import { Card, CardBody, CardHeader } from '@heroui/card'
+import { Card, CardHeader } from '@heroui/react'
 import { cn } from '@site/src/lib/utils'
 import type { Props } from '@theme/Admonition/Layout'
 import type { ReactNode } from 'react'
 
 const iconColors: Record<string, string> = {
-  caution: 'text-yellow-500 dark:text-yellow-400',
   danger: 'text-red-500 dark:text-red-400',
   info: 'text-blue-500 dark:text-blue-400',
   note: 'text-purple-500 dark:text-purple-400',
@@ -18,7 +17,7 @@ function AdmonitionHeading({ icon, title, type }: Pick<Props, 'icon' | 'title' |
       {icon ? (
         <div
           className={cn(
-            'min-w-10 w-10 h-10 flex items-center justify-center text-primary dark:text-foreground/80',
+            'min-w-10 w-10 h-10 flex items-center justify-center text-accent dark:text-foreground/80',
             iconColors[type] || ''
           )}
         >
@@ -38,9 +37,14 @@ export default function AdmonitionLayout({
   className,
 }: Props): ReactNode {
   return (
-    <Card as='article' className={cn('mt-4', className)}>
+    <Card
+      className={cn('mt-4 rounded-md p-3', className)}
+      render={(props) => <article {...props} />}
+    >
       {title || icon ? <AdmonitionHeading title={title} icon={icon} type={type} /> : null}
-      {children && <CardBody className='[&_>p:first-of-type]:m-0'>{children}</CardBody>}
+      {children && (
+        <Card.Content className='[&_>p:first-of-type]:m-0 text-foreground'>{children}</Card.Content>
+      )}
     </Card>
   )
 }

@@ -1,5 +1,4 @@
-import type { LucideIcon } from 'lucide-react'
-import { type LazyExoticComponent, lazy } from 'react'
+import { ArrowUpRight, ExternalLink } from 'lucide-react'
 
 /**
  * Parses a metadata string and extracts key-value pairs into an object.
@@ -30,89 +29,67 @@ function getMetaProps(metaString: string) {
   return metaProps
 }
 
-/**
- * Converts a camelCase or PascalCase icon name to kebab-case format.
- *
- * @param iconName - The icon name in camelCase or PascalCase format
- * @returns The icon name converted to kebab-case (lowercase with hyphens)
- *
- * @example
- * ```tsx
- * iconNameToKebabCase('ArrowRightCircle') // Returns: 'arrow-right-circle'
- * ```
- */
-function iconNameToKebabCase(iconName: string) {
-  return iconName
-    .replace(/([a-z0-9])([A-Z])/g, '$1-$2')
-    .replace(/([A-Z])([A-Z][a-z])/g, '$1-$2')
-    .toLowerCase()
+const icons = {
+  default: ArrowUpRight,
+  'external-link': ExternalLink,
 }
 
-const iconComponentCache = new Map<string, LazyExoticComponent<LucideIcon>>()
+interface MetaLinkData {
+  href: string
+  icon?: (typeof icons)[keyof typeof icons]
+  [key: string]: unknown
+}
 
 /**
- * Retrieves a lazy-loaded Lucide React icon component by its key name.
+ * Determines if a given URL is external relative to the current origin.
  *
- * Caches the lazy component after first load to avoid redundant dynamic imports.
- *
- * @param iconKey - The name of the icon to load (e.g., 'Heart', 'Star')
- * @returns A lazy React component for the specified Lucide icon
+ * @param url - The URL string to check.
+ * @returns `true` if the URL is external, `false` otherwise.
  */
-function getLazyIconComponent(iconKey: string) {
-  if (!iconComponentCache.has(iconKey)) {
-    const iconComponent = lazy(async () => {
-      const mod = await import(`lucide-react/dist/esm/icons/${iconKey}.mjs`)
-      return {
-        default: (mod.default ||
-          (mod as unknown as { [k: string]: LucideIcon })[iconKey]) as LucideIcon,
-      }
-    })
-    iconComponentCache.set(iconKey, iconComponent)
+const isExternalLink = (url: string) => {
+  try {
+    const parsedUrl = new URL(url, window.location.origin)
+    return parsedUrl.origin !== window.location.origin
+  } catch {
+    return false
   }
-
-  return iconComponentCache.get(iconKey)
 }
 
 /**
  * Extracts and processes metadata from URL query parameters.
  *
  * @param href - The URL string to parse for metadata properties
- * @returns An object containing the cleaned href and optional metaLink data
+ * @returns An object containing the cleaned href and optional meta data
  */
-export function getMetaLink(href: string) {
+export function getMetaLink(href: string): MetaLinkData {
   if (!href?.includes('meta-props=')) {
-    return { href, metaLink: null }
+    return { href }
   }
 
   try {
     if (typeof window === 'undefined') {
-      return { href, metaLink: null }
+      return { href }
     }
 
-    const url = new URL(href, href.startsWith('/') ? window.location.origin : undefined)
-    const metaLink = url.searchParams.get('meta-props')
+    const isExternal = isExternalLink(href)
+    const url = new URL(href, window.location.origin)
+    const meta = url.searchParams.get('meta-props')
 
-    if (!metaLink) {
-      return { href: url.toString(), metaLink: null }
+    if (!meta) {
+      return { href: url.toString() }
     }
 
     url.searchParams.delete('meta-props')
 
-    const props = getMetaProps(metaLink)
-
-    const iconKey =
-      props.anchorIcon && typeof props.anchorIcon === 'string'
-        ? iconNameToKebabCase(props.anchorIcon as string)
-        : null
+    const props = getMetaProps(meta)
 
     return {
-      href: url.toString(),
-      metaLink: {
-        ...props,
-        anchorIcon: iconKey ? getLazyIconComponent(iconKey) : undefined,
-      },
+      target: isExternal ? '_blank' : undefined,
+      ...props,
+      href: isExternal ? url.toString() : url.pathname + url.search + url.hash,
+      icon: props.icon ? (icons[props.icon as keyof typeof icons] ?? icons.default) : undefined,
     }
   } catch (_) {
-    return { href, metaLink: null }
+    return { href }
   }
 }

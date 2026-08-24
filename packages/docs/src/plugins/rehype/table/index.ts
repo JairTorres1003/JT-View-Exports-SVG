@@ -18,8 +18,9 @@ function rehypeAdvancedTablePlugin() {
         let newValue = value
 
         if (attr.name === 'rows') {
+          // Cells are converted to HAST here, so the row no longer matches `Row`
           newValue = (value as Row[]).map(({ key, ...rows }) => {
-            const newRow: Row = { key }
+            const newRow: Record<string, unknown> = { key }
 
             Object.entries(rows).forEach(([cellKey, cell]) => {
               newRow[cellKey] = mapToHastCell(cell)

@@ -51,7 +51,7 @@ const ChangelogPlugin: typeof pluginContentBlog = async function ChangelogPlugin
     blogAuthorsListComponent: '@theme/Blog/Pages/BlogAuthorsListPage',
     blogTagsListComponent: '@theme/BlogTagsListPage',
     blogTagsPostsComponent: '@theme/BlogTagsPostsPage',
-    admonitions: { keywords: ['note', 'tip', 'danger', 'info', 'caution', 'warning'] },
+    admonitions: { keywords: ['note', 'tip', 'danger', 'info', 'warning'] },
     processBlogPosts: async ({ blogPosts }) => {
       // Sort by date descending
       return blogPosts?.sort((a, b) => b.metadata.date.getTime() - a.metadata.date.getTime())

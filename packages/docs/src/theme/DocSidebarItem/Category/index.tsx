@@ -15,7 +15,6 @@ import {
 } from '@docusaurus/theme-common'
 import { isSamePath } from '@docusaurus/theme-common/internal'
 import useIsBrowser from '@docusaurus/useIsBrowser'
-import { Link as HeroLink } from '@heroui/link'
 import { cn } from '@site/src/lib/utils'
 import type { Props } from '@theme/DocSidebarItem/Category'
 import DocSidebarItemLink from '@theme/DocSidebarItem/Link'
@@ -190,7 +189,7 @@ function DocSidebarItemCategoryCollapsible({
         className={cn(
           'w-full px-2 py-1 rounded-md transition-all flex items-center justify-between gap-2 relative',
           {
-            'cursor-pointer hover:bg-primary/10': collapsible,
+            'cursor-pointer hover:bg-accent/10': collapsible,
           }
         )}
       >
@@ -199,18 +198,16 @@ function DocSidebarItemCategoryCollapsible({
             {isCurrentPage && (
               <span className='absolute top-0 bottom-0 my-1 w-0.5 bg-[#0d59f2] rounded-md -left-2 pointer-events-none'></span>
             )}
-            <HeroLink
-              as={Link}
+            <Link
               to={collapsible ? (hrefWithSSRFallback ?? '#') : hrefWithSSRFallback}
-              color={isCurrentPage ? 'primary' : 'foreground'}
-              className={cn('w-full px-2 py-1 -mx-2 -my-1 transition-all font-medium', {
+              className={cn('w-full px-2 py-1 -mx-2 -my-1 inline-flex transition-all font-medium', {
                 'text-[#0d59f2]': isCurrentPage,
               })}
               {...props}
               onClick={handleItemClick}
             >
               {label}
-            </HeroLink>
+            </Link>
           </>
         ) : (
           <p className='m-0 font-medium text-foreground leading-[1.5rem] text-[1rem]'>{label}</p>

@@ -1,5 +1,5 @@
 import { useNavbarMobileSidebar } from '@docusaurus/theme-common/internal'
-import { NavbarMenuToggle } from '@heroui/navbar'
+import { Button } from '@heroui/react'
 import { cn } from '@site/src/lib/utils'
 import { Menu, XIcon } from 'lucide-react'
 import { useEffect, useState } from 'react'
@@ -15,19 +15,23 @@ const MobileSidebarToggle = () => {
   if (mobileSidebar.disabled || isHomepage) return
 
   return (
-    <NavbarMenuToggle
-      className='[@media(min-width:997px)]:hidden'
-      icon={(isOpen) => (
-        <>
-          <Menu className={cn('transition-all', { 'rotate-90 opacity-0': isOpen })} />
-          <XIcon
-            className={cn('absolute transition-all opacity-0 -rotate-90', {
-              'rotate-0 opacity-100': isOpen,
-            })}
-          />
-        </>
-      )}
-    />
+    <Button
+      size='sm'
+      isIconOnly
+      variant='ghost'
+      onClick={mobileSidebar.toggle}
+      className='[@media(min-width:997px)]:hidden w-8 h-8'
+      aria-label={mobileSidebar.shown ? 'Close menu' : 'Open menu'}
+    >
+      <Menu
+        className={cn('transition-all w-6 h-6', { 'rotate-90 opacity-0': mobileSidebar.shown })}
+      />
+      <XIcon
+        className={cn('absolute transition-all opacity-0 -rotate-90 w-6 h-6', {
+          'rotate-0 opacity-100': mobileSidebar.shown,
+        })}
+      />
+    </Button>
   )
 }
 

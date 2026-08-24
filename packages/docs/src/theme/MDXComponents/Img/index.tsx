@@ -13,6 +13,10 @@ function decodeHTMLEntities(value: string) {
 }
 
 export default function MDXImg({ src, alt, className, ...props }: Props): ReactNode {
+  if (!src) {
+    throw new Error('MDXImg: "src" prop is required')
+  }
+
   return (
     <figure className='w-full m-0 text-center'>
       <Image

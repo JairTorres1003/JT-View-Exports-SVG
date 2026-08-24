@@ -1,4 +1,4 @@
-import { NavbarContent, type NavbarContentProps } from '@heroui/navbar'
+import NavbarContent, { type NavbarContentProps } from '@site/src/components/Navbar/NavbarContent'
 
 import { CustomComponent } from '../CustomComponent'
 import SearchBar from '../SearchBar/SearchBar'
@@ -15,7 +15,7 @@ const NavbarContentItems: React.FC<NavbarContentItemsProps> = ({ items, ...props
   return (
     <NavbarContent {...props}>
       {items.map((item) => {
-        if (item.type.startsWith('custom-')) {
+        if (item?.type?.startsWith('custom-')) {
           return <CustomComponent key={`${item.type}-${item.id}`} {...item} />
         }
 

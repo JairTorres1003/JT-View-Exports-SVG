@@ -1,10 +1,10 @@
 import { useDocsSidebar } from '@docusaurus/plugin-content-docs/client'
 import { useLocation } from '@docusaurus/router'
 import { prefersReducedMotion, ThemeClassNames } from '@docusaurus/theme-common'
+import { cn } from '@site/src/lib/utils'
 import type { Props } from '@theme/DocRoot/Layout/Sidebar'
 import ExpandButton from '@theme/DocRoot/Layout/Sidebar/ExpandButton'
 import DocSidebar from '@theme/DocSidebar'
-import clsx from 'clsx'
 import React, { type ReactNode, useCallback, useState } from 'react'
 
 import styles from './styles.module.css'
@@ -39,10 +39,11 @@ export default function DocRootLayoutSidebar({
 
   return (
     <aside
-      className={clsx(
+      className={cn(
         ThemeClassNames.docs.docSidebarContainer,
         styles.docSidebarContainer,
-        hiddenSidebarContainer && styles.docSidebarContainerHidden
+        hiddenSidebarContainer && styles.docSidebarContainerHidden,
+        'border-r border-separator/15'
       )}
       onTransitionEnd={(e) => {
         if (!e.currentTarget.classList.contains(styles.docSidebarContainer)) {
@@ -55,9 +56,7 @@ export default function DocRootLayoutSidebar({
       }}
     >
       <ResetOnSidebarChange>
-        <div
-          className={clsx(styles.sidebarViewport, hiddenSidebar && styles.sidebarViewportHidden)}
-        >
+        <div className={cn(styles.sidebarViewport, hiddenSidebar && styles.sidebarViewportHidden)}>
           <DocSidebar
             sidebar={sidebar}
             path={pathname}

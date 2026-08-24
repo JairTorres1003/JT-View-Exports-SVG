@@ -2,7 +2,7 @@ import type { Plugin } from 'unified'
 import { visit } from 'unist-util-visit'
 
 import type { NodeParent, NodeTable, Row } from './types'
-import { jsxAttr, parseRow, resolveRowColspans } from './utils'
+import { jsxAttr, parseRow, resolveRowColspan } from './utils'
 
 const remarkAdvancedTablePlugin: Plugin = () => {
   return (tree) => {
@@ -10,9 +10,9 @@ const remarkAdvancedTablePlugin: Plugin = () => {
       const [headerRow, ...bodyRows] = node.children
 
       const headerCells = parseRow(headerRow)
-      const columns = resolveRowColspans(headerCells, node.align)
+      const columns = resolveRowColspan(headerCells, node.align)
 
-      const rowsCells = bodyRows.map(parseRow).map((cell) => resolveRowColspans(cell, node.align))
+      const rowsCells = bodyRows.map(parseRow).map((cell) => resolveRowColspan(cell, node.align))
       const rows = rowsCells.map((cells, rowIndex) => {
         const rowObject: Row = { key: `row-${rowIndex}` }
 

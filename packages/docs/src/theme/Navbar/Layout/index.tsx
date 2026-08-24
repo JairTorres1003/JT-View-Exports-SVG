@@ -1,7 +1,7 @@
 import { translate } from '@docusaurus/Translate'
 import { useThemeConfig } from '@docusaurus/theme-common'
 import { useHideableNavbar, useNavbarMobileSidebar } from '@docusaurus/theme-common/internal'
-import { Navbar } from '@heroui/navbar'
+import Navbar from '@site/src/components/Navbar/Navbar'
 import { cn } from '@site/src/lib/utils'
 import type { Props } from '@theme/Navbar/Layout'
 import NavbarMobileSidebar from '@theme/Navbar/MobileSidebar'
@@ -17,11 +17,9 @@ export default function NavbarLayout({ children }: Props): ReactNode {
   return (
     <Navbar
       ref={navbarRef}
-      isMenuOpen={mobileSidebar.shown}
-      onMenuOpenChange={mobileSidebar.toggle}
       isBordered
+      isMenuOpen={mobileSidebar.shown}
       maxWidth='2xl'
-      shouldHideOnScroll={hideOnScroll}
       className={cn('navbar shadow-none overflow-hidden bg-background', {
         'navbar-sidebar--show': mobileSidebar.shown,
       })}

@@ -19,7 +19,7 @@ const Pre = React.forwardRef<HTMLPreElement, ComponentProps<'pre'>>((props, ref)
       className={clsx(
         props.className,
         styles.codeBlock,
-        'thin-scrollbar !bg-content1 rounded-md border-2 border-primary/20'
+        'thin-scrollbar !bg-surface rounded-md border-2 border-accent/20'
       )}
     />
   )
@@ -53,23 +53,34 @@ export default function CodeBlockContent({ className: classNameProp }: Props): R
 
   return (
     <Highlight prism={Prism} theme={prismTheme} code={code} language={language}>
-      {({ className, style, tokens: lines, getLineProps, getTokenProps }) => (
-        <Pre ref={wordWrap.codeBlockRef} className={clsx(classNameProp, className)} style={style}>
-          <Code>
-            {lines.map((line, i) => (
-              <Line
-                // biome-ignore lint/suspicious/noArrayIndexKey: It's fine in this case
-                key={`line-${i}`}
-                line={line}
-                getLineProps={getLineProps}
-                getTokenProps={getTokenProps}
-                classNames={lineClassNames[i]}
-                showLineNumbers={lineNumbersStart !== undefined}
-              />
-            ))}
-          </Code>
-        </Pre>
-      )}
+      {({ className, style, tokens: lines, getLineProps, getTokenProps }) => {
+        const getSafeTokenProps: typeof getTokenProps = (props) => {
+          const tokenProps = getTokenProps(props)
+
+          return {
+            ...tokenProps,
+            className: tokenProps.className?.replace(/\btag\b/g, 'prism-tag'),
+          }
+        }
+
+        return (
+          <Pre ref={wordWrap.codeBlockRef} className={clsx(classNameProp, className)} style={style}>
+            <Code>
+              {lines.map((line, i) => (
+                <Line
+                  // biome-ignore lint/suspicious/noArrayIndexKey: It's fine in this case
+                  key={`line-${i}`}
+                  line={line}
+                  getLineProps={getLineProps}
+                  getTokenProps={getSafeTokenProps}
+                  classNames={lineClassNames[i]}
+                  showLineNumbers={lineNumbersStart !== undefined}
+                />
+              ))}
+            </Code>
+          </Pre>
+        )
+      }}
     </Highlight>
   )
 }

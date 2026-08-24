@@ -1,16 +1,19 @@
 import Link from '@docusaurus/Link'
 import Translate, { translate } from '@docusaurus/Translate'
-import { Link as HeroLink, type LinkProps } from '@heroui/link'
+import { LinkIcon } from '@heroui/react'
+import { cn } from '@site/src/lib/utils'
 import type { Props } from '@theme/BlogPostItem/Footer/ReadMoreLink'
 import { ArrowRight } from 'lucide-react'
 import type { ReactNode } from 'react'
 
 export default function BlogPostItemFooterReadMoreLink({
   blogPostTitle,
-  ...linkProps
+  ...props
 }: Props): ReactNode {
   return (
-    <HeroLink
+    <Link
+      {...props}
+      className={cn('group', props.className)}
       aria-label={translate(
         {
           message: 'Read more about {title}',
@@ -19,14 +22,6 @@ export default function BlogPostItemFooterReadMoreLink({
         },
         { title: blogPostTitle }
       )}
-      {...(linkProps as LinkProps)}
-      color='foreground'
-      showAnchorIcon
-      className='group'
-      anchorIcon={
-        <ArrowRight size='1rem' className='ml-1 group-hover:translate-x-1 transition-transform' />
-      }
-      as={Link}
     >
       <b>
         <Translate
@@ -36,6 +31,9 @@ export default function BlogPostItemFooterReadMoreLink({
           Read more
         </Translate>
       </b>
-    </HeroLink>
+      <LinkIcon className='inline-block align-middle'>
+        <ArrowRight className='ml-1 group-hover:translate-x-1 transition-transform' size='1rem' />
+      </LinkIcon>
+    </Link>
   )
 }

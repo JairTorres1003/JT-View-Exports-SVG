@@ -45,6 +45,11 @@ const sidebars: SidebarsConfig = {
       collapsed: false,
       items: ['resources/features', 'resources/svg-support'],
     },
+    {
+      type: 'link',
+      label: 'Changelog',
+      href: '/changelog',
+    },
   ],
 }
 

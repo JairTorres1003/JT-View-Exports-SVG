@@ -2,12 +2,11 @@ import BrowserOnly from '@docusaurus/BrowserOnly'
 import { translate } from '@docusaurus/Translate'
 import type { ColorMode } from '@docusaurus/theme-common'
 import useIsBrowser from '@docusaurus/useIsBrowser'
-import { Button } from '@heroui/button'
-import { Tooltip, type TooltipPlacement } from '@heroui/tooltip'
+import { Button, Tooltip } from '@heroui/react'
 import { useAnimatedThemeToggler } from '@site/src/hooks/useAnimatedThemeToggler'
 import { cn } from '@site/src/lib/utils'
 import { Moon, Sun } from 'lucide-react'
-import React, { type FC, useEffect } from 'react'
+import React, { type FC } from 'react'
 
 function getColorModeLabel(colorMode: ColorMode | null): string {
   switch (colorMode) {
@@ -51,52 +50,49 @@ interface AnimatedThemeTogglerProps
   extends Omit<React.ComponentPropsWithoutRef<'button'>, 'onChange'> {
   onChange?: (value: ColorMode | null) => void
   config?: {
-    disableTooltip?: boolean
-    placement?: TooltipPlacement
+    disabledTooltip?: boolean
+    placement?: 'top' | 'bottom' | 'left' | 'right'
   }
 }
 
-const AnimatedThemeToggler: FC<AnimatedThemeTogglerProps> = ({
-  className,
-  onChange = () => null,
-  config,
-}) => {
+const AnimatedThemeToggler: FC<AnimatedThemeTogglerProps> = ({ className, config }) => {
   const { isDark, toggleTheme } = useAnimatedThemeToggler()
   const isBrowser = useIsBrowser()
 
-  useEffect(() => {
-    if (!isBrowser) return
-    onChange(isDark ? 'dark' : 'light')
-  }, [isBrowser, isDark, onChange])
+  const ariaLabel = getColorModeAriaLabel(isDark ? 'dark' : 'light')
 
   return (
-    <Tooltip
-      content={translate(
-        {
-          message: 'Toggle {mode} mode',
-          id: 'theme.colorToggle.tooltip',
-          description: 'The tooltip for the color mode toggle',
-        },
-        {
-          mode: isDark ? 'light' : 'dark',
-        }
-      )}
-      size='sm'
-      showArrow
-      isDisabled={config?.disableTooltip}
-      placement={config?.placement}
-    >
+    <Tooltip delay={0} isDisabled={config?.disabledTooltip}>
       <Button
         isIconOnly
         size='sm'
+        variant='ghost'
         onPress={toggleTheme}
-        disabled={!isBrowser}
-        className={cn('bg-transparent hover:bg-gray-700/10 dark:hover:bg-foreground/15', className)}
-        aria-label={getColorModeAriaLabel(isDark ? 'dark' : 'light')}
+        isDisabled={!isBrowser}
+        className={cn('text-foreground w-8 h-8', className)}
+        aria-label={ariaLabel}
       >
-        {isDark ? <Sun size='1.2rem' /> : <Moon size='1.2rem' />}
+        {isDark ? (
+          <Sun size='1.2rem' className='h-5 w-5' />
+        ) : (
+          <Moon size='1.2rem' className='h-5 w-5' />
+        )}
         <span className='sr-only'>{getColorModeLabel(isDark ? 'dark' : 'light')}</span>
       </Button>
+
+      <Tooltip.Content showArrow placement={config?.placement}>
+        <Tooltip.Arrow />
+        {translate(
+          {
+            message: 'Toggle {mode} mode',
+            id: 'theme.colorToggle.tooltip',
+            description: 'The tooltip for the color mode toggle',
+          },
+          {
+            mode: isDark ? 'light' : 'dark',
+          }
+        )}
+      </Tooltip.Content>
     </Tooltip>
   )
 }

@@ -2,7 +2,6 @@ import Link from '@docusaurus/Link'
 import { translate } from '@docusaurus/Translate'
 import { useAnchorTargetClassName } from '@docusaurus/theme-common'
 import useBrokenLinks from '@docusaurus/useBrokenLinks'
-import { Link as HeroLink } from '@heroui/link'
 import { cn } from '@site/src/lib/utils'
 import type { Props } from '@theme/Heading'
 import { LinkIcon } from 'lucide-react'
@@ -32,25 +31,20 @@ export default function Heading({ as: As, id, className, ...props }: Props): Rea
 
   return (
     <As {...props} className={cn('anchor', anchorTargetClassName, `text-${As}`, className)} id={id}>
-      <HeroLink
-        as={Link}
+      <Link
         to={`#${id}`}
         aria-label={anchorTitle}
         title={anchorTitle}
-        translate='no'
-        showAnchorIcon
-        className='group'
-        color='foreground'
-        anchorIcon={
-          <LinkIcon
-            className='ml-1 mt-1 opacity-0 group-hover:opacity-100 transition-opacity'
-            size='0.7em'
-          />
-        }
+        className='group no-underline'
         style={{ font: 'inherit' }}
       >
         {props.children}
-      </HeroLink>
+
+        <LinkIcon
+          className='ml-1 opacity-0 group-hover:opacity-100 transition-opacity inline-block'
+          size='0.7em'
+        />
+      </Link>
     </As>
   )
 }

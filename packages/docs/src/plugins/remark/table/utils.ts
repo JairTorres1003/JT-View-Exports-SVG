@@ -91,13 +91,13 @@ export function parseRow(node: NodeRow) {
 }
 
 /**
- * Resolves the colspans in a row of parsed cells and constructs the final cell representations.
+ * Resolves the colspan in a row of parsed cells and constructs the final cell representations.
  *
  * @param cells - An array of parsed cell objects for the row
  * @param aligns - An array of alignment values for the columns
- * @returns An array of cell objects with resolved colspans and styles
+ * @returns An array of cell objects with resolved colspan and styles
  */
-export function resolveRowColspans(cells: ParsedCell[], aligns: Align[]): Cell[] {
+export function resolveRowColspan(cells: ParsedCell[], aligns?: Align[]): Cell[] {
   const result: Cell[] = []
 
   let i = 0
